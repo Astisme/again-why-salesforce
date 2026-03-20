@@ -22,7 +22,7 @@ type ImportModule = {
 		mapping?: { label?: string; org?: string; url?: string },
 	) => unknown[];
 	readFile: (files: FileLike[] | FileLike) => Promise<void>;
-	readDropFiles: (event: {
+	readChangeOrDropFiles: (event: {
 		dataTransfer: { files: FileLike[] };
 		preventDefault: () => void;
 	}) => Promise<void>;
@@ -341,7 +341,7 @@ async function loadImportModule({
 			"getTabsFromJSON",
 			"makeValidTabs",
 			"readFile",
-			"readDropFiles",
+			"readChangeOrDropFiles",
 			"showFileImport",
 			"showTabSelectThenImport",
 		],
@@ -945,7 +945,7 @@ Deno.test("import attaches the drop reader directly", async () => {
 
 	try {
 		await fixture.module.createImportModal();
-		await fixture.module.readDropFiles({
+		await fixture.module.readChangeOrDropFiles({
 			dataTransfer: {
 				files: [
 					createFile(

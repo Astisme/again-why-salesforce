@@ -70,7 +70,6 @@ export async function systemColorSchemeListener(enable = true) {
 		);
 		systemColorListener = null;
 	}
-	return;
 }
 
 /**
