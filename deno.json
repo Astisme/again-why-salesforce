@@ -17,7 +17,7 @@
 		]
 	},
 	"tasks": {
-		"test": "deno task test-gen && deno task test-bg && deno task test-cmp && deno task test-sf",
+		"test": "deno test --allow-read --coverage --parallel --quiet tests",
 		"test-gen": "deno test --no-check --parallel --quiet --import=tests/mocks.ts ./tests/*.test.ts",
 		"test-bg": "deno test --no-check --parallel --quiet --import=tests/mocks.ts ./tests/background/",
 		"test-cmp": "deno test --no-check --parallel --quiet --import=tests/mocks.ts --import=tests/happydom-global.ts --allow-env ./tests/components/",

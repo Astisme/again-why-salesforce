@@ -1,5 +1,5 @@
 // deno-lint-ignore-file no-explicit-any
-import { mockStorage } from "../mocks.ts";
+import { mockStorage } from "../mocks.test.ts";
 
 const SETTINGS_KEY = "settings";
 const PERM_CHECK = "check-permission-granted";
@@ -39,6 +39,7 @@ function createElement(tagName: string) {
  * Installs a fresh document mock for a test invocation.
  *
  * @param {string} [existingCspContent] Optional CSP content to preload into the mock document.
+ * @param {boolean} [useDocumentElementOnly=false] When true, omit `document.head`.
  * @return {{
  *   head: ReturnType<typeof createElement>,
  *   documentElement: ReturnType<typeof createElement>,
@@ -46,14 +47,18 @@ function createElement(tagName: string) {
  *   querySelector: (selector: string) => any
  * }} The installed document mock bound to `globalThis.document`.
  */
-function installDocument(existingCspContent?: string) {
-	const head = createElement("head");
+function installDocument(
+	existingCspContent?: string,
+	useDocumentElementOnly = false,
+) {
+	const head = useDocumentElementOnly ? null : createElement("head");
 	const documentElement = createElement("html");
+	const appendTarget = head ?? documentElement;
 	if (existingCspContent != null) {
 		const meta = createElement("meta");
 		meta.setAttribute("http-equiv", "Content-Security-Policy");
 		meta.setAttribute("content", existingCspContent);
-		head.appendChild(meta);
+		appendTarget.appendChild(meta);
 	}
 	const documentMock = {
 		head,
@@ -63,7 +68,7 @@ function installDocument(existingCspContent?: string) {
 			if (selector !== 'meta[http-equiv="Content-Security-Policy"]') {
 				return null;
 			}
-			return head.children.find((child) =>
+			return appendTarget.children.find((child) =>
 				child.getAttribute?.("http-equiv") === "Content-Security-Policy"
 			) ?? null;
 		},
@@ -141,15 +146,15 @@ function setSettings(settings: any[]) {
  * @return {any} The appended image mock, if present.
  */
 function getBeaconImage(documentMock: any) {
-	return documentMock.head.children.find((child: any) =>
-		child.tagName === "img"
-	);
+	const appendTarget = documentMock.head ?? documentMock.documentElement;
+	return appendTarget.children.find((child: any) => child.tagName === "img");
 }
 
 type WorkerStep = {
 	existingCspContent?: string;
 	settingsBeforeCall?: any[];
 	silenceInfo?: boolean;
+	useDocumentElementOnly?: boolean;
 };
 
 type WorkerRequest = {
@@ -175,7 +180,7 @@ self.onmessage = async (event: MessageEvent<WorkerRequest>) => {
 
 	try {
 		const { checkInsertAnalytics } = await import(
-			`/salesforce/analytics.js?worker=${browserName}-${crypto.randomUUID()}`
+			"/salesforce/analytics.js"
 		);
 		const results = [];
 
@@ -183,7 +188,12 @@ self.onmessage = async (event: MessageEvent<WorkerRequest>) => {
 			if (step.settingsBeforeCall != null) {
 				setSettings(step.settingsBeforeCall);
 			}
-			const documentMock = installDocument(step.existingCspContent);
+			const documentMock = installDocument(
+				step.existingCspContent,
+				step.useDocumentElementOnly === true,
+			);
+			const appendTarget = documentMock.head ??
+				documentMock.documentElement;
 			const originalInfo = console.info;
 			if (step.silenceInfo) {
 				console.info = () => {};
@@ -195,7 +205,7 @@ self.onmessage = async (event: MessageEvent<WorkerRequest>) => {
 			}
 			const beacon = getBeaconImage(documentMock);
 			results.push({
-				headChildrenCount: documentMock.head.children.length,
+				headChildrenCount: appendTarget.children.length,
 				cspContent: documentMock.querySelector(
 					'meta[http-equiv="Content-Security-Policy"]',
 				)?.getAttribute("content") ?? null,

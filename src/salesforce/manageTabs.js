@@ -171,8 +171,9 @@ function getLastTr(tbody = null) {
  * @param {event} e - the event which had this function called
  * @param {Object} [param1={}] an object with the following keys
  * @param {TabContainer} param1.allTabs - the TabContainer instance
+ * @return Promise fulfilled when checkOpenAskConfirm is completed
  */
-export function handleActionButtonClick(e, {
+export async function handleActionButtonClick(e, {
 	allTabs,
 } = {}) {
 	e.preventDefault();
@@ -180,8 +181,7 @@ export function handleActionButtonClick(e, {
 	const btn = e.currentTarget;
 	const action = btn.dataset.action;
 	if (action === "open") {
-		checkOpenAskConfirm(e);
-		return;
+		return await checkOpenAskConfirm(e);
 	}
 	const tabIndex = Number.parseInt(btn.dataset.tabIndex);
 	const row = btn.closest("tr");
@@ -328,13 +328,13 @@ export function updateModalBodyOverflow(article = null) {
  * @param {Event} e - the event which is connected to this function
  * @return undefined
  */
-function checkRemoveTr(e) {
+async function checkRemoveTr(e) {
 	const parentTr = e.target.closest("tr");
 	const label = parentTr.querySelector(".label").value;
 	const url = parentTr.querySelector(".url").value;
 	const tabAppendElement = parentTr.closest("tbody");
 	if (label === "" && url === "") {
-		removeTr(tabAppendElement, parentTr, focusedIndex);
+		await removeTr(tabAppendElement, parentTr, focusedIndex);
 	}
 }
 /**
@@ -476,7 +476,7 @@ async function addTr(tabAppendElement = null) {
 			"click",
 			async (e) => {
 				e.preventDefault();
-				handleActionButtonClick(e, {
+				await handleActionButtonClick(e, {
 					allTabs: await ensureAllTabsAvailability(),
 				});
 			},
@@ -588,8 +588,9 @@ async function checkDuplicates({
  * @param {Object} [param0.inputObj=managedLoggers[focusedIndex].last_input] - the last_input object of the currently focused logger
  * @param {TbodyHTMLElement} [param0.tabAppendElement=null] - the tbody where to append or remove the tr
  * @throws Error when tabAppendElement == null
+ * @return Promise fulfilled when addTr or removeTr are completed
  */
-function checkAddRemoveLastTr({
+async function checkAddRemoveLastTr({
 	inputObj = managedLoggers[focusedIndex].last_input,
 	tabAppendElement,
 } = {}) {
@@ -601,13 +602,13 @@ function checkAddRemoveLastTr({
 		focusedIndex === (managedLoggers.length - 1) &&
 		(inputObj.label && inputObj.url)
 	) {
-		addTr(tabAppendElement);
+		await addTr(tabAppendElement);
 	} // if the user is on the previous-to-last td, remove the last tab if either one of the fields are empty
 	else if (
 		focusedIndex === (managedLoggers.length - 2) &&
 		(!inputObj.label || !inputObj.url)
 	) {
-		removeTr(tabAppendElement);
+		await removeTr(tabAppendElement);
 	}
 }
 
@@ -655,8 +656,9 @@ function performAfterChecks({
  * @param {TbodyHTMLElement} [param0.tabAppendElement=null] - the tbody where to append the tr
  * @param {string} [param0.type="label"]  - The type of input field ("label", "url" or "org").
  * @throws Error when tabAppendElement == null
+ * @return Promise fulfilled when the checkAddRemoveLastTr is completed
  */
-function trInputListener({
+async function trInputListener({
 	tabAppendElement = null,
 	type = "label",
 } = {}) {
@@ -713,7 +715,7 @@ function trInputListener({
 		});
 	}
 	inputObj[type] = element.value;
-	checkAddRemoveLastTr({
+	await checkAddRemoveLastTr({
 		inputObj,
 		tabAppendElement,
 	});
@@ -851,9 +853,9 @@ export async function createManageTabsModal() {
 			new CustomEvent(TUTORIAL_EVENT_CLOSE_MANAGE_TABS),
 		);
 	});
-	saveButton.addEventListener("click", (e) => {
+	saveButton.addEventListener("click", async (e) => {
 		e.preventDefault();
-		readManagedTabsAndSave({ tbody, allTabs });
+		await readManagedTabsAndSave({ tbody, allTabs });
 		closeButton.click();
 		managedLoggers.length = 0;
 	});
@@ -866,9 +868,9 @@ export async function createManageTabsModal() {
 	for (const btn of actionButtons) {
 		btn.addEventListener(
 			"click",
-			(e) => {
+			async (e) => {
 				e.preventDefault();
-				handleActionButtonClick(e, {
+				await handleActionButtonClick(e, {
 					allTabs,
 				});
 			},

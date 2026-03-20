@@ -1,4 +1,8 @@
-import { mockBrowser, mockStorage } from "./mocks.ts";
+import {
+	type InternalMessage,
+	mockBrowser,
+	mockStorage,
+} from "./mocks.test.ts";
 import { assert, assertEquals } from "@std/testing/asserts";
 import { WHY_KEY } from "/constants.js";
 import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
@@ -20,7 +24,7 @@ Deno.test("TabContainer - Concurrency Race", async (t) => {
 		const originalSendMessage = mockBrowser.runtime.sendMessage;
 		let callCount = 0;
 		mockBrowser.runtime.sendMessage = (
-			message: GetMessage,
+			message: InternalMessage,
 			callback?: (response: unknown) => void,
 		) => {
 			if (message.what === "get" && message.key === WHY_KEY) {
@@ -63,7 +67,7 @@ Deno.test("TabContainer - Concurrency Race", async (t) => {
 				resolveStorage = res
 			);
 			mockBrowser.runtime.sendMessage = (
-				message: GetMessage,
+				message: InternalMessage,
 				callback?: (response: unknown) => void,
 			) => {
 				if (message.what === "get" && message.key === WHY_KEY) {

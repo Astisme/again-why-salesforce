@@ -293,7 +293,7 @@ async function showTabSelectThenImport(files = [], importConfig = {}) {
 		},
 	);
 	getModalHanger().appendChild(modalParent);
-	saveButton.addEventListener("click", (e) => {
+	saveButton.addEventListener("click", async (e) => {
 		e.preventDefault();
 		const { tabs: pickedTabs, selectedAll } = getSelectedTabs();
 		if (pickedTabs.length === 0) {
@@ -306,7 +306,7 @@ async function showTabSelectThenImport(files = [], importConfig = {}) {
 				? 0
 				: fileTabs[0][TabContainer.keyPinnedTabsNo],
 		});
-		launchImport(selectedTabContainer, importConfig);
+		await launchImport(selectedTabContainer, importConfig);
 	});
 }
 
@@ -354,23 +354,17 @@ async function readFile(files) {
 
 /**
  * Handles file selection via input change event.
+ * Handles the drop event of files onto the drop area.
  * Prevents default behavior and reads the first selected file.
  *
  * @param {Event} event - The change event triggered by the file input.
+ * @return {Promise<void>} Promise resolved when the import flow settles.
  */
-function readChangeFiles(event) {
+function readChangeOrDropFiles(event) {
 	event.preventDefault();
-	readFile(event.target.files);
-}
-/**
- * Handles the drop event of files onto the drop area.
- * Prevents default behavior and reads all dropped files.
- *
- * @param {DragEvent} event - The drop event containing the dropped files.
- */
-function readDropFiles(event) {
-	event.preventDefault();
-	readFile(Array.from(event.dataTransfer.files));
+	return readFile(
+		event.target?.files ?? Array.from(event.dataTransfer?.files),
+	);
 }
 /**
  * Attaches event listeners to handle file uploads via both file selection and drag-and-drop.
@@ -383,8 +377,8 @@ function readDropFiles(event) {
  */
 function listenToFileUpload() {
 	const dropArea = document.getElementById(IMPORT_ID);
-	dropArea.addEventListener("change", readChangeFiles);
-	dropArea.addEventListener("drop", readDropFiles);
+	dropArea.addEventListener("change", readChangeOrDropFiles);
+	dropArea.addEventListener("drop", readChangeOrDropFiles);
 }
 
 /**

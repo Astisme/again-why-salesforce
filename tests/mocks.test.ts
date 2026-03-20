@@ -1,5 +1,5 @@
+/// <reference lib="dom" />
 // deno-lint-ignore-file no-explicit-any
-import Tab from "/tab.js";
 import manifest from "/manifest/template-manifest.json" with { type: "json" };
 enum StorageKeys {
 	WHY_KEY = "againWhySalesforce",
@@ -12,13 +12,24 @@ enum StorageKeys {
 }
 
 export interface MockStorage {
-	[StorageKeys.WHY_KEY]: Tab[];
-	[StorageKeys.SETTINGS_KEY]: object[];
-	[StorageKeys.GENERIC_TAB_STYLE_KEY]: object[] | undefined;
-	[StorageKeys.ORG_TAB_STYLE_KEY]: object[] | undefined;
-	[StorageKeys.GENERIC_PINNED_TAB_STYLE_KEY]: object[] | undefined;
-	[StorageKeys.ORG_PINNED_TAB_STYLE_KEY]: object[] | undefined;
+	[StorageKeys.WHY_KEY]:
+		| Array<Record<string, unknown>>
+		| Record<string, unknown>;
+	[StorageKeys.SETTINGS_KEY]: Array<Record<string, unknown>>;
+	[StorageKeys.GENERIC_TAB_STYLE_KEY]:
+		| Array<Record<string, unknown>>
+		| undefined;
+	[StorageKeys.ORG_TAB_STYLE_KEY]:
+		| Array<Record<string, unknown>>
+		| undefined;
+	[StorageKeys.GENERIC_PINNED_TAB_STYLE_KEY]:
+		| Array<Record<string, unknown>>
+		| undefined;
+	[StorageKeys.ORG_PINNED_TAB_STYLE_KEY]:
+		| Array<Record<string, unknown>>
+		| undefined;
 	[StorageKeys.LOCALE_KEY]: string;
+	[key: string]: unknown;
 }
 // Mock browser APIs
 export const mockStorage: MockStorage = {
@@ -30,6 +41,7 @@ export const mockStorage: MockStorage = {
 	[StorageKeys.GENERIC_PINNED_TAB_STYLE_KEY]: undefined,
 	[StorageKeys.ORG_PINNED_TAB_STYLE_KEY]: undefined,
 };
+const mockStorageMap = mockStorage as Record<string, any>;
 
 export interface InternalMessage {
 	what: string;
@@ -37,6 +49,8 @@ export interface InternalMessage {
 	set?: any;
 	key?: string | string[];
 	keys?: string | string[];
+	commands?: string | string[];
+	echo?: unknown;
 }
 
 mockStorage[StorageKeys.SETTINGS_KEY].push(
@@ -63,11 +77,18 @@ type Command = {
 	[key: string]: any;
 };
 type ContextMenu = {
-	name: string;
+	id?: string;
+	name?: string;
+	title?: string;
+	contexts?: string[];
+	parentId?: string;
+	[key: string]: unknown;
 };
 type Cookie = {
 	domain: string;
 	name: string;
+	value?: string;
+	[key: string]: unknown;
 };
 
 type OnClickedCallback = (info: ContextMenuClickInfo, tab: BrowserTab) => void;
@@ -91,32 +112,48 @@ type OnMessageCallback = (
 ) => boolean | void;
 type OnCommandCallback = (command: string) => void;
 type OnCommandChangedCallback = () => void;
-type PermissionMap = Record<string, true>;
 type PermissionObject = {
-	permissions: PermissionMap;
-	origins: PermissionMap;
+	permissions?: string[];
+	origins?: string[];
+};
+
+type DownloadsApi = {
+	download: (details: Record<string, unknown>) => Promise<number>;
+	onChanged: {
+		addListener: (
+			callback: (event: Record<string, unknown>) => void,
+		) => void;
+	};
 };
 
 export const mockBrowser = {
 	storage: {
 		sync: {
-			get: (keys: string[], callback): Promise<object> => {
-				const response = {};
+			get: (
+				keys: string[],
+				callback?: (response: Record<string, unknown>) => unknown,
+			): Promise<unknown> => {
+				const response: Record<string, unknown> = {};
 				for (const key of keys) {
 					response[key] = mockStorage[key];
 				}
 				if (callback == null) {
 					return Promise.resolve(response);
 				}
-				return callback(response);
+				return Promise.resolve(callback(response));
 			},
 			// deno-lint-ignore require-await
-			set: async (data: { tabs: any[] }): Promise<boolean> => {
+			set: async (
+				data: Record<string, unknown>,
+				callback?: () => void,
+			): Promise<boolean> => {
 				const validKeys = Object.values(StorageKeys);
-				const foundKey = validKeys.find((key) => data[key]);
+				const foundKey = validKeys.find((key) => data[key] != null);
 				if (foundKey) {
-					mockStorage[foundKey] = data[foundKey];
+					mockStorageMap[foundKey] = data[foundKey];
 				}
+				callback?.();
+				return true;
 			},
 		},
 		onChanged: {
@@ -125,6 +162,7 @@ export const mockBrowser = {
 	},
 
 	runtime: {
+		lastError: undefined as any,
 		sendMessage: (
 			message: InternalMessage,
 			callback?: (response?: any) => void,
@@ -139,12 +177,12 @@ export const mockBrowser = {
 					if (message.key == null) {
 						setError("Missing get key");
 					} else {
-						response = mockStorage[message.key];
+						response = mockStorageMap[message.key as string];
 					}
 					break;
 				case "set":
 					if (message.key != null && message.set != null) {
-						mockStorage[message.key] = message.set;
+						mockStorageMap[message.key as string] = message.set;
 						response = true;
 					} else {
 						setError("Set data is missing");
@@ -199,13 +237,15 @@ export const mockBrowser = {
 					const settings = Array.isArray(message.key)
 						? Object.fromEntries(
 							Object.entries(mockStorage).filter(([key]) =>
-								message.key.includes(key)
+								(message.key as string[]).includes(key)
 							),
 						)
-						: mockStorage[message.key];
+						: mockStorageMap[message.key as string];
 					if (
 						updatedKey &&
-						Object.values(settings).every((s) => s?.[1] == null)
+						Object.values(settings as Record<string, any>).every((
+							s,
+						) => s?.[1] == null)
 					) {
 						response = null;
 					} else if (message.keys == null || settings == null) {
@@ -214,9 +254,9 @@ export const mockBrowser = {
 						if (!Array.isArray(message.keys)) {
 							message.keys = [message.keys];
 						}
-						const requestedSettings = settings.filter((setting) =>
-							message.keys.includes(setting.id)
-						);
+						const requestedSettings = (settings as any[]).filter((
+							setting: any,
+						) => (message.keys as string[]).includes(setting.id));
 						response = message.keys.length > 1
 							? requestedSettings
 							: requestedSettings[0];
@@ -261,7 +301,7 @@ export const mockBrowser = {
 		getURL: (path: string): string => {
 			return path;
 		},
-		getManifest: (): object => {
+		getManifest: (): Record<string, unknown> => {
 			return manifest;
 		},
 		onStartup: {
@@ -309,8 +349,9 @@ export const mockBrowser = {
 			},
 		},
 		_contextMenus: [] as ContextMenu[],
-		removeAll(): void {
+		removeAll(): Promise<void> {
 			this._contextMenus = [] as ContextMenu[];
+			return Promise.resolve();
 		},
 		create(cm: ContextMenu): void {
 			this._contextMenus.push(cm);
@@ -365,7 +406,7 @@ export const mockBrowser = {
 		},
 		sendMessage(
 			_tabId: number,
-			_message: Message,
+			_message: unknown,
 			_options?: any,
 		): Promise<any> {
 			return Promise.resolve(true);
@@ -431,6 +472,8 @@ export const mockBrowser = {
 		},
 	},
 
+	downloads: undefined as DownloadsApi | undefined,
+
 	cookies: {
 		_cookies: [] as Cookie[],
 		getAll(which: Cookie): Promise<Cookie[]> {
@@ -446,7 +489,10 @@ export const mockBrowser = {
 	},
 
 	permissions: {
-		_permissions: {} as PermissionObject,
+		_permissions: {} as Record<
+			"permissions" | "origins",
+			Record<string, true>
+		>,
 		request(permissionObj: PermissionObject): Promise<boolean> {
 			for (const category of ["permissions", "origins"] as const) {
 				const source = permissionObj[category];
@@ -458,7 +504,12 @@ export const mockBrowser = {
 						this._permissions[category][key] = true;
 						// special case for downloads (enable BROWSER.downloads)
 						if (key === "downloads") {
-							globalThis.BROWSER.downloads = {}; //only need to not be null
+							globalThis.BROWSER.downloads = {
+								download: (_details) => Promise.resolve(0),
+								onChanged: {
+									addListener: () => {},
+								},
+							};
 						}
 					}
 				}
@@ -487,6 +538,7 @@ export const mockBrowser = {
 declare global {
 	var chrome: typeof mockBrowser;
 	var browser: typeof mockBrowser;
+	var BROWSER: typeof mockBrowser;
 }
 
 // Setup global objects that extension code expects
@@ -507,13 +559,16 @@ const mockElements = [
 	},
 ];
 globalThis.document = {
-	querySelectorAll: () => mockElements,
-};
+	querySelectorAll: () => mockElements as any,
+} as any;
 
 // Make global variables available
 globalThis.BROWSER = mockBrowser;
 // Mock translations object
-export const translations = {
+export const translations: Record<
+	string,
+	Record<string, { message: string }>
+> = {
 	"en": {
 		"hello": {
 			"message": "Hello",
@@ -562,7 +617,7 @@ export const translations = {
 
 const og_fetch = fetch;
 
-globalThis.fetch = (path: string) => ({
+globalThis.fetch = ((path: string) => ({
 	json: () => {
 		if (path.includes("locales")) {
 			// extract from `/_locales/${language}/messages.json`
@@ -580,4 +635,4 @@ globalThis.fetch = (path: string) => ({
 			return { language: "sf-lang-en" };
 		}
 	},
-});
+})) as any;

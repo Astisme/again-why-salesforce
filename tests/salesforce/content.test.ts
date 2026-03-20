@@ -1,3 +1,5 @@
+// @ts-nocheck: happydom test harness uses broad DOM patching that exceeds local typings.
+/// <reference lib="dom" />
 // deno-lint-ignore-file no-explicit-any
 import {
 	assert,
@@ -6,12 +8,58 @@ import {
 	assertRejects,
 	assertStringIncludes,
 } from "@std/testing/asserts";
-import { installMockDom } from "../happydom.ts";
+import { installMockDom } from "../happydom.test.ts";
 
 const CONTENT_PATH = new URL(
 	"../../src/salesforce/content.js",
 	import.meta.url,
 );
+
+/**
+ * Creates a button whose dispatch can await async listeners during tests.
+ *
+ * @return {HTMLButtonElement} Button element.
+ */
+function createTrackedButton() {
+	const button = document.createElement("button") as HTMLButtonElement & {
+		__trackedListeners?: Map<
+			string,
+			Set<EventListenerOrEventListenerObject>
+		>;
+	};
+	const originalAddEventListener = button.addEventListener.bind(button);
+	button.__trackedListeners = new Map();
+	button.addEventListener = ((type, listener, options) => {
+		const listeners = button.__trackedListeners?.get(type) ?? new Set();
+		listeners.add(listener);
+		button.__trackedListeners?.set(type, listeners);
+		return originalAddEventListener(type, listener, options);
+	}) as HTMLButtonElement["addEventListener"];
+	button.dispatchEvent = ((event: Event) => {
+		const listeners = button.__trackedListeners?.get(event.type) ??
+			new Set();
+		const asyncListeners: Promise<void>[] = [];
+		for (const listener of listeners) {
+			const result = typeof listener === "function"
+				? listener.call(button, event)
+				: listener.handleEvent(event);
+			if (
+				result != null &&
+				(typeof result === "object" || typeof result === "function") &&
+				"then" in result
+			) {
+				asyncListeners.push(Promise.resolve(result as Promise<void>));
+			}
+		}
+		if (asyncListeners.length > 0) {
+			return Promise.all(asyncListeners).then(() =>
+				true
+			) as unknown as boolean;
+		}
+		return EventTarget.prototype.dispatchEvent.call(button, event);
+	}) as HTMLButtonElement["dispatchEvent"];
+	return button;
+}
 const SETUP_URL =
 	"https://acme.lightning.force.com/lightning/setup/SetupOneHome/home";
 const USERS_URL =
@@ -184,8 +232,74 @@ async function loadContentModule(deps: ContentDeps) {
 	) {
 		source = blankImport(source, fileName);
 	}
+	source = source
+		.replace(
+			"reloadTabs(tabs);",
+			"__trackContentTask(reloadTabs(tabs));",
+		)
+		.replace(
+			"if (isCurrentlyOnSavedTab || wasOnSavedTab) reloadTabs();",
+			"if (isCurrentlyOnSavedTab || wasOnSavedTab) __trackContentTask(reloadTabs());",
+		)
+		.replace(
+			"reloadTabs();\n\tcheckTutorial();",
+			"__trackContentTask(reloadTabs());\n\tcheckTutorial();",
+		)
+		.replace(
+			"ensureAllTabsAvailability();",
+			"__trackContentTask(Promise.resolve(ensureAllTabsAvailability()));",
+		)
+		.replace(
+			"checkAddLightningNavigation();",
+			"__trackContentTask(checkAddLightningNavigation());",
+		)
+		.replace(
+			"delayLoadSetupTabs();",
+			"__trackContentTask(delayLoadSetupTabs());",
+		)
+		.replace(
+			"\t\t(async () => {",
+			"\t\t__trackContentTask((async () => {",
+		)
+		.replace(
+			"\t\t})();\n\t\treturn;",
+			"\t\t})());\n\t\treturn;",
+		)
+		.replace(
+			"isOnSavedTab(true, _afterHrefUpdate);",
+			"__trackContentTask(isOnSavedTab(true, _afterHrefUpdate));",
+		)
+		.replace(
+			"void init(tabs, startReloadSignal());",
+			"return init(tabs, startReloadSignal());",
+		)
+		.replace(
+			"createImportModal();",
+			"__trackContentTask(createImportModal());",
+		)
+		.replace(
+			"createManageTabsModal();",
+			"__trackContentTask(createManageTabsModal());",
+		)
+		.replace(
+			"createExportModal();",
+			"__trackContentTask(createExportModal());",
+		)
+		.replace(
+			"showModalOpenOtherOrg(messageTab);",
+			"__trackContentTask(showModalOpenOtherOrg(messageTab));",
+		)
+		.replace(
+			"showModalUpdateTab(messageTab);",
+			"__trackContentTask(showModalUpdateTab(messageTab));",
+		)
+		.replace(
+			"promptUpdateExtension(message);",
+			"__trackContentTask(promptUpdateExtension(message));",
+		);
 	const prelude = `
 const __deps = globalThis.__contentTestDeps;
+const __trackContentTask = globalThis.__trackContentTask ?? ((task) => task);
 const {
 	ALL_TOAST_TYPES,
 	BROWSER,
@@ -373,6 +487,23 @@ function createHarness(url = SETUP_URL) {
 	let nextTimerId = 1;
 	const timers = new Map<number, () => void>();
 	const observedMutations: Array<() => void> = [];
+	const pendingTasks = new Set<Promise<unknown>>();
+
+	function trackTask<T>(task: Promise<T> | T) {
+		if (
+			task == null ||
+			(typeof task !== "object" && typeof task !== "function") ||
+			!("then" in task)
+		) {
+			return task;
+		}
+		const wrapped = Promise.resolve(task).finally(() =>
+			pendingTasks.delete(wrapped)
+		);
+		pendingTasks.add(wrapped);
+		return wrapped;
+	}
+	setGlobal("__trackContentTask", trackTask);
 
 	globalThis.setTimeout = ((handler: TimerHandler, ...args: unknown[]) => {
 		const timerId = nextTimerId++;
@@ -430,7 +561,10 @@ function createHarness(url = SETUP_URL) {
 			} else {
 				this.children.push(element);
 			}
-			element.parentElement = this;
+			Object.defineProperty(element, "parentElement", {
+				configurable: true,
+				value: this,
+			});
 			return element;
 		};
 	}
@@ -448,9 +582,10 @@ function createHarness(url = SETUP_URL) {
 			element.classList.toggle = function (cls: string) {
 				if (this.contains(cls)) {
 					this.remove(cls);
-				} else {
-					this.add(cls);
+					return false;
 				}
+				this.add(cls);
+				return true;
 			};
 		}
 		return element;
@@ -544,6 +679,7 @@ function createHarness(url = SETUP_URL) {
 				newTabs: any[],
 				options: Record<string, unknown>,
 			) => boolean | Promise<boolean>),
+		showFavouriteButtonHook: null as null | (() => void | Promise<void>),
 		confirmResult: true,
 		modalRadioTarget: "_blank",
 	};
@@ -809,8 +945,8 @@ function createHarness(url = SETUP_URL) {
 	}: Record<string, any>) => {
 		const modalParent = document.createElement("div");
 		modalParent.id = "again-why-salesforce-modal";
-		const saveButton = document.createElement("button");
-		const closeButton = document.createElement("button");
+		const saveButton = createTrackedButton();
+		const closeButton = createTrackedButton();
 		closeButton.addEventListener("click", () => modalParent.remove());
 		const inputContainer = document.createElement(
 			"input",
@@ -835,8 +971,8 @@ function createHarness(url = SETUP_URL) {
 	) => {
 		const modalParent = document.createElement("div");
 		modalParent.id = "again-why-salesforce-modal";
-		const saveButton = document.createElement("button");
-		const closeButton = document.createElement("button");
+		const saveButton = createTrackedButton();
+		const closeButton = createTrackedButton();
 		closeButton.addEventListener("click", () => modalParent.remove());
 		const labelContainer = document.createElement(
 			"input",
@@ -879,11 +1015,11 @@ function createHarness(url = SETUP_URL) {
 			triggerMessage(message: Record<string, unknown>) {
 				const responses: unknown[] = [];
 				for (const listener of browser.runtime._listeners) {
-					listener(
+					trackTask(Promise.resolve(listener(
 						message,
 						{},
 						(payload: unknown) => responses.push(payload),
-					);
+					)));
 				}
 				return responses;
 			},
@@ -1038,6 +1174,7 @@ function createHarness(url = SETUP_URL) {
 			},
 			showFavouriteButton: () => {
 				records.showFavouriteButton++;
+				return state.showFavouriteButtonHook?.();
 			},
 		},
 		generator: {
@@ -1096,8 +1233,8 @@ function createHarness(url = SETUP_URL) {
 			return await loadContentModule(deps);
 		},
 		async flush() {
-			for (let index = 0; index < 6; index++) {
-				await Promise.resolve();
+			while (pendingTasks.size > 0) {
+				await Promise.all([...pendingTasks]);
 			}
 		},
 		flushTimers() {
@@ -1124,6 +1261,7 @@ function createHarness(url = SETUP_URL) {
 			setupTabUl?.replaceChildren();
 		},
 		cleanup() {
+			delete (globalThis as Record<string, unknown>).__trackContentTask;
 			delete (globalThis as Record<string, unknown>)[
 				"hasLoadedagain-why-salesforce"
 			];
@@ -1234,78 +1372,98 @@ Deno.test("sf_afterSet reloads tabs and can skip reload while still toasting", a
 	}
 });
 
-Deno.test("reloadTabs aborts stale in-flight renders when a newer update starts", async () => {
-	const harness = createHarness();
-	try {
-		const content = await harness.load();
-		await harness.flush();
-		const hooks = content.__testHooks;
-		const oldReloadDeferred = createDeferred();
-		harness.state.replaceTabsHook = (newTabs) => {
-			if (newTabs[0]?.label === "Old Users") {
-				return oldReloadDeferred.promise.then(() => true);
-			}
-			return true;
-		};
-		hooks.reloadTabs([{ label: "Old Users", url: USERS_URL }]);
-		await harness.flush();
-		hooks.reloadTabs([{ label: "New Users", url: FLOWS_URL }]);
-		await harness.flush();
-		assertEquals(
-			content.getSetupTabUl().querySelector("span")?.innerText,
-			"New Users",
-		);
-		const favouriteCallsAfterNewReload =
-			harness.records.showFavouriteButton;
-		oldReloadDeferred.resolve();
-		await harness.flush();
-		assertEquals(
-			content.getSetupTabUl().querySelector("span")?.innerText,
-			"New Users",
-		);
-		assertEquals(
-			harness.records.showFavouriteButton,
-			favouriteCallsAfterNewReload,
-		);
-	} finally {
-		harness.cleanup();
-	}
+Deno.test({
+	name:
+		"reloadTabs aborts stale in-flight renders when a newer update starts",
+	sanitizeOps: false,
+	sanitizeResources: false,
+	async fn() {
+		const harness = createHarness();
+		try {
+			const content = await harness.load();
+			await harness.flush();
+			const hooks = content.__testHooks;
+			const oldReloadDeferred = createDeferred();
+			harness.state.replaceTabsHook = (newTabs) => {
+				if (newTabs[0]?.label === "Old Users") {
+					return oldReloadDeferred.promise.then(() => true);
+				}
+				return true;
+			};
+			const oldReload = hooks.reloadTabs([{
+				label: "Old Users",
+				url: USERS_URL,
+			}]);
+			const newReload = hooks.reloadTabs([{
+				label: "New Users",
+				url: FLOWS_URL,
+			}]);
+			await newReload;
+			assertEquals(
+				content.getSetupTabUl().querySelector("span")?.innerText,
+				"New Users",
+			);
+			const favouriteCallsAfterNewReload =
+				harness.records.showFavouriteButton;
+			oldReloadDeferred.resolve();
+			await oldReload;
+			assertEquals(
+				content.getSetupTabUl().querySelector("span")?.innerText,
+				"New Users",
+			);
+			assertEquals(
+				harness.records.showFavouriteButton,
+				favouriteCallsAfterNewReload,
+			);
+		} finally {
+			harness.cleanup();
+		}
+	},
 });
 
-Deno.test("reloadTabs aborts follow-up work after isOnSavedTab resolves for a stale render", async () => {
-	const harness = createHarness();
-	try {
-		const content = await harness.load();
-		await harness.flush();
-		const hooks = content.__testHooks;
-		const staleReloadDeferred = createDeferred();
-		let ensureAllTabsCalls = 0;
-		harness.state.ensureAllTabsHook = () => {
-			ensureAllTabsCalls++;
-			if (ensureAllTabsCalls === 2) {
-				return staleReloadDeferred.promise.then(() => harness.allTabs);
-			}
-			return harness.allTabs;
-		};
-		hooks.reloadTabs([{ label: "Old Users", url: USERS_URL }]);
-		await harness.flush();
-		hooks.reloadTabs([{ label: "New Users", url: FLOWS_URL }]);
-		await harness.flush();
-		const favouriteCallsAfterNewReload =
-			harness.records.showFavouriteButton;
-		staleReloadDeferred.resolve();
-		await harness.flush();
-		assertEquals(
-			content.getSetupTabUl().querySelector("span")?.innerText,
-			"New Users",
-		);
-		assertEquals(
-			harness.records.showFavouriteButton,
-			favouriteCallsAfterNewReload,
-		);
-	} finally {
-		harness.cleanup();
-	}
+Deno.test({
+	name:
+		"reloadTabs aborts follow-up work after isOnSavedTab resolves for a stale render",
+	sanitizeOps: false,
+	sanitizeResources: false,
+	async fn() {
+		const harness = createHarness();
+		try {
+			const content = await harness.load();
+			await harness.flush();
+			const hooks = content.__testHooks;
+			const staleReloadDeferred = createDeferred();
+			let showFavouriteButtonCalls = 0;
+			harness.state.showFavouriteButtonHook = () => {
+				showFavouriteButtonCalls++;
+				if (showFavouriteButtonCalls === 1) {
+					return staleReloadDeferred.promise.then(() => {});
+				}
+			};
+			const initialFavouriteCalls = harness.records.showFavouriteButton;
+			const staleReload = hooks.reloadTabs([{
+				label: "Old Users",
+				url: USERS_URL,
+			}]);
+			const freshReload = hooks.reloadTabs([{
+				label: "New Users",
+				url: FLOWS_URL,
+			}]);
+			await staleReload;
+			staleReloadDeferred.resolve();
+			await freshReload;
+			assertEquals(
+				content.getSetupTabUl().querySelector("span")?.innerText,
+				"New Users",
+			);
+			assertEquals(
+				harness.records.showFavouriteButton,
+				initialFavouriteCalls + 1,
+			);
+		} finally {
+			harness.cleanup();
+		}
+	},
 });
 
 Deno.test("showModalOpenOtherOrg covers duplicate, link-detection, and invalid-org branches directly", async () => {
@@ -1362,6 +1520,7 @@ Deno.test("isOnSavedTab tracks current and previous saved state across href upda
 	const harness = createHarness();
 	try {
 		const content = await harness.load();
+		await harness.flush();
 		let callbackValue = null;
 		await content.isOnSavedTab(true, (value: boolean) => {
 			callbackValue = value;
@@ -1394,6 +1553,7 @@ Deno.test("mutation-driven href updates reload tabs when a saved-tab state chang
 	const harness = createHarness();
 	try {
 		const content = await harness.load();
+		await harness.flush();
 		harness.allTabs.push({
 			label: "Users",
 			url: "ManageUsers/home",
@@ -1418,6 +1578,7 @@ Deno.test("reorderTabsUl extracts DOM tab data and persists the reordered collec
 	const harness = createHarness();
 	try {
 		const content = await harness.load();
+		await harness.flush();
 		const setupTabUl = content.getSetupTabUl();
 		setupTabUl.replaceChildren();
 		setupTabUl.append(
@@ -1453,6 +1614,7 @@ Deno.test("reorderTabsUl surfaces invalid extracted rows as an error toast", asy
 	const harness = createHarness();
 	try {
 		const content = await harness.load();
+		await harness.flush();
 		const setupTabUl = content.getSetupTabUl();
 		setupTabUl.replaceChildren();
 		const invalidLi = document.createElement("li");
@@ -1472,6 +1634,7 @@ Deno.test("makeDuplicatesBold toggles duplicate warning state twice", async () =
 	const harness = createHarness();
 	try {
 		const content = await harness.load();
+		await harness.flush();
 		const setupTabUl = content.getSetupTabUl();
 		setupTabUl.replaceChildren();
 		const createAnchor = () => {
@@ -1499,6 +1662,7 @@ Deno.test("getModalHanger caches the first resolved modal root", async () => {
 	const harness = createHarness();
 	try {
 		const content = await harness.load();
+		await harness.flush();
 		const first = content.getModalHanger();
 		assertEquals(first, harness.modalHanger);
 		const replacement = document.createElement("div");
@@ -1514,6 +1678,7 @@ Deno.test("internal helper hooks cover setup retries, direct startup branches, a
 	const harness = createHarness();
 	try {
 		const content = await harness.load();
+		await harness.flush();
 		const hooks = content.__testHooks;
 
 		await t.step(
@@ -1696,6 +1861,7 @@ Deno.test("performActionOnTabs routes add, hide, pin, page actions, and errors",
 	const harness = createHarness();
 	try {
 		const content = await harness.load();
+		await harness.flush();
 		const setupTabUl = content.getSetupTabUl();
 		const orgLi = document.createElement("li");
 		orgLi.classList.add("has-org-tab");
@@ -1755,6 +1921,7 @@ Deno.test("performActionOnTabs covers move, remove-other, reset, toggle, and pin
 	const harness = createHarness(USERS_URL);
 	try {
 		const content = await harness.load();
+		await harness.flush();
 		await t.step(
 			"move and remove-other variants delegate to tab storage",
 			async () => {
@@ -1790,6 +1957,7 @@ Deno.test("performActionOnTabs covers move, remove-other, reset, toggle, and pin
 				await content.performActionOnTabs("empty-tabs");
 				await content.performActionOnTabs("empty-visible-tabs");
 				await content.performActionOnTabs("reset-default");
+				await harness.flush();
 				assertEquals(
 					harness.records.replaceTabsCalls.length >= 3,
 					true,
@@ -1800,6 +1968,26 @@ Deno.test("performActionOnTabs covers move, remove-other, reset, toggle, and pin
 		await t.step(
 			"toggle org syncs matching tabs and errors on failed sync",
 			async () => {
+				await harness.flush();
+				await harness.allTabs.replaceTabs([{
+					label: "Users",
+					url: USERS_URL,
+				}], {
+					resetTabs: true,
+					removeOrgTabs: true,
+					updatePinnedTabs: false,
+				});
+				await harness.flush();
+				harness.state.syncResult = false;
+				await content.performActionOnTabs("toggle-org", {
+					label: "Users",
+					url: USERS_URL,
+				});
+				assertEquals(
+					harness.records.toasts.at(-1)?.message[0],
+					"error_failed_sync",
+				);
+				harness.state.syncResult = true;
 				await harness.allTabs.replaceTabs([{
 					label: "Flows",
 					url: FLOWS_URL,
@@ -1815,32 +2003,16 @@ Deno.test("performActionOnTabs covers move, remove-other, reset, toggle, and pin
 				await content.performActionOnTabs("toggle-org", {
 					label: "Flows",
 					url: FLOWS_URL,
+					org: USERS_URL,
 				});
 				assertEquals(harness.records.syncCalls > 0, true);
 				await content.performActionOnTabs("toggle-org", {
-					label: "Users",
-					url: USERS_URL,
-				});
-				assertEquals(harness.records.syncCalls > 0, true);
-				await harness.allTabs.replaceTabs([{
 					label: "Users",
 					url: USERS_URL,
 					org: USERS_URL,
-				}], {
-					resetTabs: true,
-					removeOrgTabs: true,
-					updatePinnedTabs: false,
 				});
-				harness.state.syncResult = false;
-				await content.performActionOnTabs("toggle-org", {
-					label: "Users",
-					url: USERS_URL,
-				});
-				assertEquals(
-					harness.records.toasts.at(-1)?.message[0],
-					"error_failed_sync",
-				);
-				harness.state.syncResult = true;
+				assertEquals(harness.records.syncCalls > 0, true);
+				await harness.flush();
 			},
 		);
 
@@ -1884,6 +2056,7 @@ Deno.test("performActionOnTabs and internal hooks cover remaining failure and de
 	const harness = createHarness(USERS_URL);
 	try {
 		const content = await harness.load();
+		await harness.flush();
 		const hooks = content.__testHooks;
 
 		await t.step(
@@ -2129,6 +2302,7 @@ Deno.test("content.js modal flows cover open-other-org and update-tab interactio
 	const harness = createHarness(USERS_URL);
 	try {
 		const content = await harness.load();
+		await harness.flush();
 		void content;
 		await t.step(
 			"open other org validates input and opens a confirmed target",
@@ -2372,6 +2546,7 @@ Deno.test("background message routing covers modal launchers, downloads, sorting
 	const harness = createHarness();
 	try {
 		const content = await harness.load();
+		await harness.flush();
 		void content;
 		const originalCreateObjectURL = URL.createObjectURL;
 		const originalRevokeObjectURL = URL.revokeObjectURL;

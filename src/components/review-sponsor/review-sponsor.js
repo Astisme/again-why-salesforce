@@ -151,7 +151,36 @@ class ReviewSponsorAws extends HTMLElement {
 			},
 		);
 		this.shadowRoot.appendChild(linkEl);
-		this._showReviewOrSponsor(result);
+		this._reviewSponsorResult = result;
+		this._readyPromise = null;
+	}
+
+	/**
+	 * Starts the async initialization when the element is connected to the DOM.
+	 */
+	connectedCallback() {
+		this._ensureReadyPromise();
+	}
+
+	/**
+	 * Resolves when the component has finished loading its async metadata.
+	 * @return {Promise<void>} Promise resolved after async setup completes.
+	 */
+	async whenReady() {
+		return await this._ensureReadyPromise();
+	}
+
+	/**
+	 * Creates and memoizes the async initialization Promise.
+	 * @return {Promise<void>} Promise resolved after async setup completes.
+	 */
+	_ensureReadyPromise() {
+		if (this._readyPromise == null) {
+			this._readyPromise = this._showReviewOrSponsor(
+				this._reviewSponsorResult,
+			);
+		}
+		return this._readyPromise;
 	}
 
 	/**
