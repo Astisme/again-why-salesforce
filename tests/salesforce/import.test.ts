@@ -44,6 +44,11 @@ type FileLike = {
 };
 
 type ImportDependencies = {
+	BROWSER: {
+		runtime: {
+			getURL: (path: string) => string;
+		};
+	};
 	EXTENSION_NAME: string;
 	HIDDEN_CLASS: string;
 	MODAL_ID: string;
@@ -118,7 +123,10 @@ type ImportDependencies = {
 	getSetupTabUl: () => {
 		querySelector: (selector: string) => MockElement | null;
 	};
-	injectStyle: (id: string, options: { css: string }) => MockElement;
+	injectStyle: (
+		id: string,
+		options: { css?: string; link?: string },
+	) => MockElement;
 	showToast: (message: string | unknown[], status?: string) => void;
 };
 
@@ -130,6 +138,7 @@ type ImportFixture = {
 	fileCheckboxes: Record<string, MockElement>;
 	hangerChildren: MockElement[];
 	importCalls: { config: Record<string, boolean>; json: string }[];
+	injectStyleCalls: { id: string; options: { css?: string; link?: string } }[];
 	modalListCalls: Record<string, string>[];
 	module: ImportModule;
 	modalBuildCount: { value: number };
@@ -285,6 +294,10 @@ async function loadImportModule({
 	const appendCount = { value: 0 };
 	const closeClicks = { value: 0 };
 	const modalListCalls: Record<string, string>[] = [];
+	const injectStyleCalls: {
+		id: string;
+		options: { css?: string; link?: string };
+	}[] = [];
 	let modalPresent = false;
 	let modalBuildCount = 0;
 	let clearedInputModalParent = false;
@@ -356,6 +369,11 @@ async function loadImportModule({
 function __setInputModalParent(value) { inputModalParent = value; }
 function __getInputModalParent() { return inputModalParent; }`,
 		dependencies: {
+			BROWSER: {
+				runtime: {
+					getURL: (path) => `chrome-extension://unit${path}`,
+				},
+			},
 			EXTENSION_NAME: "again-why-salesforce",
 			HIDDEN_CLASS: "hidden",
 			MODAL_ID: "awsf-modal",
@@ -458,7 +476,10 @@ function __getInputModalParent() { return inputModalParent; }`,
 				querySelector: () =>
 					setupImportPresent ? new MockElement("div") : null,
 			}),
-			injectStyle: () => new MockElement("style"),
+			injectStyle: (id, options) => {
+				injectStyleCalls.push({ id, options });
+				return new MockElement("style");
+			},
 			showToast: (message, status) => {
 				toasts.push({ message, status });
 			},
@@ -483,6 +504,7 @@ function __getInputModalParent() { return inputModalParent; }`,
 		fileCheckboxes,
 		hangerChildren,
 		importCalls,
+		injectStyleCalls,
 		modalListCalls,
 		module,
 		modalBuildCount: {
@@ -545,6 +567,12 @@ Deno.test("import shows the file modal and imports valid JSON files directly", a
 	try {
 		await fixture.module.createImportModal();
 		assertEquals(fixture.hangerChildren.length, 1);
+		assertEquals(fixture.injectStyleCalls[0], {
+			id: "awsf-import-css",
+			options: {
+				link: "chrome-extension://unit/salesforce/css/import.css",
+			},
+		});
 
 		await fixture.changeTarget.dispatchEvent({
 			preventDefault() {},
@@ -1039,6 +1067,20 @@ Deno.test("import prevents default drag behavior over the drop area", async () =
 
 		assertEquals(defaultPrevented, true);
 		assertEquals(propagationStopped, true);
+		assertEquals(
+			fixture.changeTarget.classList.contains("awsf-import-drag-active"),
+			true,
+		);
+
+		await fixture.changeTarget.dispatchEvent({
+			preventDefault() {},
+			stopPropagation() {},
+			type: "dragleave",
+		} as unknown as Event);
+		assertEquals(
+			fixture.changeTarget.classList.contains("awsf-import-drag-active"),
+			false,
+		);
 	} finally {
 		fixture.cleanup();
 	}
