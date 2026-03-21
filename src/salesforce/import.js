@@ -392,7 +392,9 @@ async function readFile(files) {
  * @return {File[]} Collected files from all supported event shapes.
  */
 function getFilesFromChangeOrDropEvent(event) {
-	const targetFiles = normalizeFiles(event.target?.files ?? event.dataTransfer?.files);
+	const targetFiles = normalizeFiles(
+		event.target?.files ?? event.dataTransfer?.files,
+	);
 	if (targetFiles.length > 0) {
 		return targetFiles;
 	}
