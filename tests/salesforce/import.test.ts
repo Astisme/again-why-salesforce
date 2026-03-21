@@ -60,8 +60,7 @@ const {
 } = __deps.generator;
 const { getModalHanger, getSetupTabUl, showToast } = __deps.content;
 `;
-	const suffix =
-		"\nexport const __testHooks = { getTabsFromJSON };\n";
+	const suffix = "\nexport const __testHooks = { getTabsFromJSON };\n";
 
 	const allowedKeys = new Set([
 		"label",
@@ -101,26 +100,34 @@ const { getModalHanger, getSetupTabUl, showToast } = __deps.content;
 			}),
 		generator: {
 			generateCheckboxWithLabel: () => Promise.resolve({}),
-			generateSection: () => Promise.resolve({
-				section: {},
-				divParent: { style: {}, appendChild: () => {}, append: () => {} },
-			}),
-			generateSldsFileInput: () => Promise.resolve({
-				fileInputWrapper: { style: {} },
-				inputContainer: {},
-			}),
-			generateSldsModal: () => Promise.resolve({
-				modalParent: {},
-				article: { appendChild: () => {} },
-				saveButton: {},
-				closeButton: {},
-			}),
-			generateSldsModalWithTabList: () => Promise.resolve({
-				modalParent: {},
-				saveButton: { addEventListener: () => {} },
-				closeButton: { click: () => {} },
-				getSelectedTabs: () => ({ tabs: [], selectedAll: false }),
-			}),
+			generateSection: () =>
+				Promise.resolve({
+					section: {},
+					divParent: {
+						style: {},
+						appendChild: () => {},
+						append: () => {},
+					},
+				}),
+			generateSldsFileInput: () =>
+				Promise.resolve({
+					fileInputWrapper: { style: {} },
+					inputContainer: {},
+				}),
+			generateSldsModal: () =>
+				Promise.resolve({
+					modalParent: {},
+					article: { appendChild: () => {} },
+					saveButton: {},
+					closeButton: {},
+				}),
+			generateSldsModalWithTabList: () =>
+				Promise.resolve({
+					modalParent: {},
+					saveButton: { addEventListener: () => {} },
+					closeButton: { click: () => {} },
+					getSelectedTabs: () => ({ tabs: [], selectedAll: false }),
+				}),
 			MODAL_ID: "modal-id",
 		},
 		content: {
@@ -154,7 +161,11 @@ Deno.test("import compatibility maps legacy tabTitle and title keys", async () =
 	assertEquals(
 		getTabsFromJSON({
 			tabs: [
-				{ tabTitle: "Legacy Users", url: "legacy-users", org: "legacy" },
+				{
+					tabTitle: "Legacy Users",
+					url: "legacy-users",
+					org: "legacy",
+				},
 				{ tabTitle: "Legacy Flows", url: "legacy-flows" },
 			],
 		}),
@@ -167,13 +178,21 @@ Deno.test("import compatibility maps legacy tabTitle and title keys", async () =
 	assertEquals(
 		getTabsFromJSON({
 			bookmarks: [
-				{ title: "Navigator Users", url: "navigator-users", org: "ext" },
+				{
+					title: "Navigator Users",
+					url: "navigator-users",
+					org: "ext",
+				},
 				{ title: "Navigator Flows", url: "navigator-flows" },
 			],
 		}),
 		[
 			{ label: "Navigator Users", url: "navigator-users", org: "ext" },
-			{ label: "Navigator Flows", url: "navigator-flows", org: undefined },
+			{
+				label: "Navigator Flows",
+				url: "navigator-flows",
+				org: undefined,
+			},
 		],
 	);
 });

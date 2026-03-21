@@ -1,7 +1,13 @@
 #!/usr/bin/env -S deno run --allow-read
 
 const HTML_LIKE_EXTENSIONS = new Set([".html", ".js", ".ts", ".mjs", ".cjs"]);
-const INTERACTIVE_TAGS = new Set(["button", "a", "input", "select", "textarea"]);
+const INTERACTIVE_TAGS = new Set([
+	"button",
+	"a",
+	"input",
+	"select",
+	"textarea",
+]);
 const TEXT_LIKE_INPUT_TYPES = new Set([
 	"",
 	"text",
@@ -147,7 +153,8 @@ async function getLintableFiles(rootDir: string): Promise<string[]> {
  */
 function parseAttributes(rawAttributes: string): Record<string, string | null> {
 	const attributes: Record<string, string | null> = {};
-	const attributePattern = /([^\s=\/>]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+)))?/g;
+	const attributePattern =
+		/([^\s=\/>]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+)))?/g;
 	let match = attributePattern.exec(rawAttributes);
 	while (match !== null) {
 		const name = match[1].toLowerCase();
@@ -241,12 +248,12 @@ function parseTags(source: string): ParsedTag[] {
 	let match = tagPattern.exec(source);
 	while (match !== null) {
 		const [rawTag, rawName, rawAttributes = ""] = match;
-			const tagName = rawName.toLowerCase();
-			const startIndex = match.index;
-			const line = getLineNumber(source, startIndex);
-			const attributes = parseAttributes(rawAttributes);
-			const endIndex = startIndex + rawTag.length;
-			let innerText = "";
+		const tagName = rawName.toLowerCase();
+		const startIndex = match.index;
+		const line = getLineNumber(source, startIndex);
+		const attributes = parseAttributes(rawAttributes);
+		const endIndex = startIndex + rawTag.length;
+		let innerText = "";
 		if (
 			tagName === "button" ||
 			tagName === "a" ||
@@ -257,11 +264,20 @@ function parseTags(source: string): ParsedTag[] {
 			const contentStart = startIndex + rawTag.length;
 			const contentEnd = source.indexOf(closingTag, contentStart);
 			if (contentEnd >= 0) {
-				innerText = extractVisibleText(source.slice(contentStart, contentEnd));
+				innerText = extractVisibleText(
+					source.slice(contentStart, contentEnd),
+				);
 			}
 		}
-			tags.push({ tagName, attributes, line, innerText, startIndex, endIndex });
-			match = tagPattern.exec(source);
+		tags.push({
+			tagName,
+			attributes,
+			line,
+			innerText,
+			startIndex,
+			endIndex,
+		});
+		match = tagPattern.exec(source);
 	}
 	return tags;
 }
@@ -274,7 +290,8 @@ function parseTags(source: string): ParsedTag[] {
 function isCheckboxRelated(tag: ParsedTag): boolean {
 	const inputType = (tag.attributes["type"] ?? "").toLowerCase();
 	const role = (tag.attributes["role"] ?? "").toLowerCase();
-	return (tag.tagName === "input" && inputType === "checkbox") || role === "checkbox";
+	return (tag.tagName === "input" && inputType === "checkbox") ||
+		role === "checkbox";
 }
 
 /**
@@ -314,7 +331,10 @@ function requiresAccessibleName(tag: ParsedTag): boolean {
  * @param {Map<string, string>} labelsById - Label associations.
  * @returns {boolean} True when an accessible name is present.
  */
-function hasAccessibleName(tag: ParsedTag, labelsById: Map<string, string>): boolean {
+function hasAccessibleName(
+	tag: ParsedTag,
+	labelsById: Map<string, string>,
+): boolean {
 	const ariaLabel = (tag.attributes["aria-label"] ?? "").trim();
 	if (ariaLabel.length > 0) {
 		return true;
@@ -344,11 +364,17 @@ function hasAccessibleName(tag: ParsedTag, labelsById: Map<string, string>): boo
  * @returns {boolean} True when an implicit label is present.
  */
 function hasImplicitLabel(tag: ParsedTag, labelRanges: LabelRange[]): boolean {
-	if (tag.tagName !== "input" && tag.tagName !== "select" && tag.tagName !== "textarea") {
+	if (
+		tag.tagName !== "input" && tag.tagName !== "select" &&
+		tag.tagName !== "textarea"
+	) {
 		return false;
 	}
 	for (const range of labelRanges) {
-		if (tag.startIndex >= range.start && tag.endIndex <= range.end && range.text.length > 0) {
+		if (
+			tag.startIndex >= range.start && tag.endIndex <= range.end &&
+			range.text.length > 0
+		) {
 			return true;
 		}
 	}
@@ -393,7 +419,10 @@ function findInteractiveNameViolations(
  * @param {ParsedTag[]} tags - Parsed tags.
  * @returns {A11yViolation[]} Violations.
  */
-function findImageAltViolations(filePath: string, tags: ParsedTag[]): A11yViolation[] {
+function findImageAltViolations(
+	filePath: string,
+	tags: ParsedTag[],
+): A11yViolation[] {
 	const violations: A11yViolation[] = [];
 	for (const tag of tags) {
 		if (tag.tagName !== "img") {
@@ -427,7 +456,10 @@ function findImageAltViolations(filePath: string, tags: ParsedTag[]): A11yViolat
  * @param {ParsedTag[]} tags - Parsed tags.
  * @returns {A11yViolation[]} Violations.
  */
-function findAriaViolations(filePath: string, tags: ParsedTag[]): A11yViolation[] {
+function findAriaViolations(
+	filePath: string,
+	tags: ParsedTag[],
+): A11yViolation[] {
 	const violations: A11yViolation[] = [];
 	for (const tag of tags) {
 		if (isCheckboxRelated(tag)) {
@@ -469,12 +501,20 @@ function findAriaViolations(filePath: string, tags: ParsedTag[]): A11yViolation[
  * @param {string} source - File content.
  * @returns {A11yViolation[]} Violations.
  */
-export function analyzeSource(filePath: string, source: string): A11yViolation[] {
+export function analyzeSource(
+	filePath: string,
+	source: string,
+): A11yViolation[] {
 	const tags = parseTags(source);
 	const labelsById = getLabelsByForAttribute(source);
 	const labelRanges = getImplicitLabelRanges(source);
 	const violations = [
-		...findInteractiveNameViolations(filePath, tags, labelsById, labelRanges),
+		...findInteractiveNameViolations(
+			filePath,
+			tags,
+			labelsById,
+			labelRanges,
+		),
 		...findImageAltViolations(filePath, tags),
 		...findAriaViolations(filePath, tags),
 	];
@@ -491,7 +531,9 @@ export function analyzeSource(filePath: string, source: string): A11yViolation[]
  * @param {ScanOptions} options - Scan options.
  * @returns {Promise<A11yViolation[]>} Collected violations.
  */
-export async function analyzeDirectory(options: ScanOptions): Promise<A11yViolation[]> {
+export async function analyzeDirectory(
+	options: ScanOptions,
+): Promise<A11yViolation[]> {
 	const files = await getLintableFiles(options.rootDir);
 	const violations: A11yViolation[] = [];
 	for (const filePath of files) {

@@ -17,7 +17,9 @@ type FakeDirEntry = Pick<
  * @param {FakeDirEntry[]} entries - Entries to expose.
  * @returns {AsyncIterable<Deno.DirEntry>} Async iterable for readDir stubs.
  */
-function createReadDirResult(entries: FakeDirEntry[]): AsyncIterable<Deno.DirEntry> {
+function createReadDirResult(
+	entries: FakeDirEntry[],
+): AsyncIterable<Deno.DirEntry> {
 	return {
 		async *[Symbol.asyncIterator](): AsyncIterableIterator<Deno.DirEntry> {
 			for (const entry of entries) {
@@ -124,12 +126,32 @@ Deno.test("analyzeDirectory scans lintable files and sorts violations", async ()
 	const rootDir = "virtual-root";
 	const readDirByPath: Record<string, FakeDirEntry[]> = {
 		[rootDir]: [
-			{ name: "nested", isDirectory: true, isFile: false, isSymlink: false },
-			{ name: "b.html", isDirectory: false, isFile: true, isSymlink: false },
-			{ name: "ignore.txt", isDirectory: false, isFile: true, isSymlink: false },
+			{
+				name: "nested",
+				isDirectory: true,
+				isFile: false,
+				isSymlink: false,
+			},
+			{
+				name: "b.html",
+				isDirectory: false,
+				isFile: true,
+				isSymlink: false,
+			},
+			{
+				name: "ignore.txt",
+				isDirectory: false,
+				isFile: true,
+				isSymlink: false,
+			},
 		],
 		[`${rootDir}/nested`]: [
-			{ name: "a.js", isDirectory: false, isFile: true, isSymlink: false },
+			{
+				name: "a.js",
+				isDirectory: false,
+				isFile: true,
+				isSymlink: false,
+			},
 		],
 	};
 	const readTextByPath: Record<string, string> = {
