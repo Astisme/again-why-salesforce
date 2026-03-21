@@ -49,7 +49,6 @@
 	margin-bottom: 6px;
 	visibility: hidden;
 	opacity: 0;
-	transition: opacity 0.2s ease-in-out;
 	background-color: #253858;
 	color: var(--background-color, #ffffff);
 	padding: 8px;
