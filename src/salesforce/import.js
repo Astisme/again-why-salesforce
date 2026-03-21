@@ -66,7 +66,7 @@ async function generateSldsImport() {
 		".json,application/json",
 	);
 	divParent.appendChild(fileInputWrapper);
-    injectStyle(
+	injectStyle(
 		IMPORT_CSS_ID,
 		{ link: BROWSER.runtime.getURL("/salesforce/css/import.css") },
 	);
@@ -481,7 +481,7 @@ function handleDropAreaDragOver(event, dropArea) {
  */
 function handleDropAreaDragLeave(event, dropArea) {
 	preventDragDefaults(event);
-    clearDropAreaActiveState(dropArea);
+	clearDropAreaActiveState(dropArea);
 }
 
 /**

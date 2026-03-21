@@ -138,7 +138,10 @@ type ImportFixture = {
 	fileCheckboxes: Record<string, MockElement>;
 	hangerChildren: MockElement[];
 	importCalls: { config: Record<string, boolean>; json: string }[];
-	injectStyleCalls: { id: string; options: { css?: string; link?: string } }[];
+	injectStyleCalls: {
+		id: string;
+		options: { css?: string; link?: string };
+	}[];
 	modalListCalls: Record<string, string>[];
 	module: ImportModule;
 	modalBuildCount: { value: number };
@@ -271,7 +274,7 @@ async function loadImportModule({
 	const metadataId = `${importId}-metadata`;
 	const overwriteId = `${importId}-overwrite`;
 	const otherOrgId = `${importId}-other-org`;
-	const closeModalId = "again-why-salesforce-modal-close";
+	const closeModalId = `${importId}-modal-close`;
 	const fileCheckboxes: Record<string, MockElement> = {};
 	const modalParent = new MockElement("div") as MockElement & {
 		querySelector: (selector: string) => MockElement | null;
@@ -568,7 +571,7 @@ Deno.test("import shows the file modal and imports valid JSON files directly", a
 		await fixture.module.createImportModal();
 		assertEquals(fixture.hangerChildren.length, 1);
 		assertEquals(fixture.injectStyleCalls[0], {
-			id: "awsf-import-css",
+			id: "again-why-salesforce-import-css",
 			options: {
 				link: "chrome-extension://unit/salesforce/css/import.css",
 			},
@@ -1068,7 +1071,9 @@ Deno.test("import prevents default drag behavior over the drop area", async () =
 		assertEquals(defaultPrevented, true);
 		assertEquals(propagationStopped, true);
 		assertEquals(
-			fixture.changeTarget.classList.contains("awsf-import-drag-active"),
+			fixture.changeTarget.classList.contains(
+				"again-why-salesforce-import-drag-active",
+			),
 			true,
 		);
 
@@ -1078,7 +1083,9 @@ Deno.test("import prevents default drag behavior over the drop area", async () =
 			type: "dragleave",
 		} as unknown as Event);
 		assertEquals(
-			fixture.changeTarget.classList.contains("awsf-import-drag-active"),
+			fixture.changeTarget.classList.contains(
+				"again-why-salesforce-import-drag-active",
+			),
 			false,
 		);
 	} finally {
