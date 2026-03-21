@@ -166,7 +166,7 @@ async function generateFavouriteButton() {
 	slashedStar.classList.add(HIDDEN_CLASS);
 	span.appendChild(slashedStar);
 	const style = injectStyle(
-		"awsf-hidden",
+		"awsf-hidden-favman",
 		{ css: `.${HIDDEN_CLASS} { display: none; }` },
 	);
 	span.appendChild(style);

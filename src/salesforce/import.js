@@ -66,7 +66,7 @@ async function generateSldsImport() {
 	fileInputWrapper.style.marginBottom = "1rem";
 	divParent.appendChild(fileInputWrapper);
 	const style = injectStyle(
-		"awsf-hidden",
+		"awsf-hidden-import",
 		{ css: `.${HIDDEN_CLASS} { display: none; }` },
 	);
 	divParent.appendChild(style);
