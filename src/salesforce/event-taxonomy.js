@@ -44,7 +44,9 @@ function buildCdnEndpoint(httpsPrefix) {
  * @return {string} Canonical taxonomy event name.
  */
 function getEventName(isNewUser) {
-	return isNewUser ? ANALYTICS_EVENT_NAME_NEW_USER : ANALYTICS_EVENT_NAME_RETURNING_USER;
+	return isNewUser
+		? ANALYTICS_EVENT_NAME_NEW_USER
+		: ANALYTICS_EVENT_NAME_RETURNING_USER;
 }
 
 /**
@@ -54,7 +56,9 @@ function getEventName(isNewUser) {
  * @return {string} The beacon `path` query value.
  */
 function getEventPath(isNewUser) {
-	return isNewUser ? ANALYTICS_EVENT_PATH_NEW_USER : ANALYTICS_EVENT_PATH_RETURNING_USER;
+	return isNewUser
+		? ANALYTICS_EVENT_PATH_NEW_USER
+		: ANALYTICS_EVENT_PATH_RETURNING_USER;
 }
 
 /**
@@ -64,7 +68,9 @@ function getEventPath(isNewUser) {
  * @return {string} Canonical taxonomy event type.
  */
 function getEventType(isNewUser) {
-	return isNewUser ? ANALYTICS_EVENT_TYPE_INSTALL : ANALYTICS_EVENT_TYPE_USAGE;
+	return isNewUser
+		? ANALYTICS_EVENT_TYPE_INSTALL
+		: ANALYTICS_EVENT_TYPE_USAGE;
 }
 
 /**

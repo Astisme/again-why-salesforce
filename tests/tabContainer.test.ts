@@ -1599,45 +1599,48 @@ await Deno.test("TabContainer - Import", async (t) => {
 		assertEquals(container.length, 3);
 	});
 
-	await t.step("imports legacy array backups and triggers upgrade warning", async () => {
-		await container.setDefaultTabs();
-		assertEquals(container.length, 3);
-		const runtime = (globalThis.browser as unknown as {
-			runtime: {
-				sendMessage: (
-					message: { what?: string; message?: string },
-					callback?: (response?: unknown) => void,
-				) => unknown;
+	await t.step(
+		"imports legacy array backups and triggers upgrade warning",
+		async () => {
+			await container.setDefaultTabs();
+			assertEquals(container.length, 3);
+			const runtime = (globalThis.browser as unknown as {
+				runtime: {
+					sendMessage: (
+						message: { what?: string; message?: string },
+						callback?: (response?: unknown) => void,
+					) => unknown;
+				};
+			}).runtime;
+			const originalSendMessage = runtime.sendMessage;
+			const warningMessages: string[] = [];
+			runtime.sendMessage = (
+				message: { what?: string; message?: string },
+				callback?: (response?: unknown) => void,
+			) => {
+				if (message?.what === "warning") {
+					warningMessages.push(message.message ?? "");
+				}
+				return originalSendMessage.call(runtime, message, callback);
 			};
-		}).runtime;
-		const originalSendMessage = runtime.sendMessage;
-		const warningMessages: string[] = [];
-		runtime.sendMessage = (
-			message: { what?: string; message?: string },
-			callback?: (response?: unknown) => void,
-		) => {
-			if (message?.what === "warning") {
-				warningMessages.push(message.message ?? "");
+			try {
+				assertEquals(
+					await container.importTabs(
+						`[{"label":"legacy tab","url":"legacy-url"},{"label":"legacy org","url":"legacy-org-url","org":"legacy-org"}]`,
+						{ resetTabs: true, importMetadata: true },
+					),
+					2,
+				);
+			} finally {
+				runtime.sendMessage = originalSendMessage;
 			}
-			return originalSendMessage.call(runtime, message, callback);
-		};
-		try {
-			assertEquals(
-				await container.importTabs(
-					`[{"label":"legacy tab","url":"legacy-url"},{"label":"legacy org","url":"legacy-org-url","org":"legacy-org"}]`,
-					{ resetTabs: true, importMetadata: true },
-				),
-				2,
-			);
-		} finally {
-			runtime.sendMessage = originalSendMessage;
-		}
-		assertEquals(warningMessages, ["warn_upgrade_backup"]);
-		assertEquals(container.length, 2);
-		assertEquals(container[0].url, "legacy-url");
-		assertEquals(container[1].url, "legacy-org-url");
-		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
-	});
+			assertEquals(warningMessages, ["warn_upgrade_backup"]);
+			assertEquals(container.length, 2);
+			assertEquals(container[0].url, "legacy-url");
+			assertEquals(container[1].url, "legacy-org-url");
+			assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
+		},
+	);
 
 	await t.step(
 		"keeps metadata and pinned behavior stable across object and array payloads",

@@ -147,9 +147,9 @@ function getBeaconImage(documentMock: any) {
 	const containers = [documentMock.head, documentMock.documentElement].filter(
 		Boolean,
 	);
-	return containers.flatMap((container: any) => container.children).find((child: any) =>
-		child.tagName === "img"
-	);
+	return containers.flatMap((container: any) => container.children).find((
+		child: any,
+	) => child.tagName === "img");
 }
 
 /**
@@ -239,8 +239,9 @@ self.onmessage = async (event: MessageEvent<WorkerRequest>) => {
 			const beaconFields = readBeaconFields(beacon);
 			results.push({
 				headChildrenCount: documentMock.head?.children.length ?? 0,
-				documentElementChildrenCount: documentMock.documentElement.children
-					.length,
+				documentElementChildrenCount:
+					documentMock.documentElement.children
+						.length,
 				cspContent: documentMock.querySelector(
 					'meta[http-equiv="Content-Security-Policy"]',
 				)?.getAttribute("content") ?? null,
