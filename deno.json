@@ -18,10 +18,10 @@
 	},
 	"tasks": {
 		"test": "deno test --allow-read --coverage --parallel --quiet tests",
-		"test-gen": "deno test --no-check --parallel --quiet --import=tests/mocks.ts ./tests/*.test.ts",
-		"test-bg": "deno test --no-check --parallel --quiet --import=tests/mocks.ts ./tests/background/",
-		"test-cmp": "deno test --no-check --parallel --quiet --import=tests/mocks.ts --import=tests/happydom-global.ts --allow-env ./tests/components/",
-		"test-sf": "deno test --no-check --parallel --quiet --import=tests/mocks.ts --allow-read tests/salesforce/*.test.ts",
+		"test-gen": "deno test --allow-read --coverage --parallel --quiet tests/*.test.ts",
+		"test-bg": "deno test --allow-read --coverage --parallel --quiet tests/background/",
+		"test-cmp": "deno test --allow-read --coverage --parallel --quiet tests/components/",
+		"test-sf": "deno test --allow-read --coverage --parallel --quiet tests/salesforce/*.test.ts",
 
 		"fmt": "deno fmt",
 		"lint": "deno lint",
@@ -29,7 +29,7 @@
 		"locale-check": "deno --allow-read --allow-write bin/find-invalid-variables.ts && deno --allow-read --allow-write bin/missing-locales.ts",
 		"locales": "deno task locale-check && deno task sort",
 		"bundle": "deno run -A bin/build.ts",
-		"checks": "deno task fmt && deno task lint && deno task test && deno task locales && echo 'OK'",
+		"checks": "deno task fmt && deno task lint && deno task test && deno task locales && deno task dev-firefox",
 
 		"dev-firefox": "deno --allow-write src/manifest/build-manifest.mjs firefox && deno task bundle",
 		"dev-chrome": "deno --allow-write src/manifest/build-manifest.mjs chrome && deno task bundle",
