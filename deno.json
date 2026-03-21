@@ -25,11 +25,12 @@
 
 		"fmt": "deno fmt",
 		"lint": "deno lint",
+		"a11y-lint": "deno run --allow-read bin/a11y-lint.ts",
 		"sort": "deno --allow-read --allow-write bin/sort-locales.ts && git add src/_locales/*/messages.json",
 		"locale-check": "deno --allow-read --allow-write bin/find-invalid-variables.ts && deno --allow-read --allow-write bin/missing-locales.ts",
 		"locales": "deno task locale-check && deno task sort",
 		"bundle": "deno run -A bin/build.ts",
-		"checks": "deno task fmt && deno task lint && deno task test && deno task locales && echo 'OK'",
+		"checks": "deno task fmt && deno task lint && deno task a11y-lint && deno task test && deno task locales && echo 'OK'",
 
 		"dev-firefox": "deno --allow-write src/manifest/build-manifest.mjs firefox && deno task bundle",
 		"dev-chrome": "deno --allow-write src/manifest/build-manifest.mjs chrome && deno task bundle",
