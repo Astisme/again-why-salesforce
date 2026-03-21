@@ -20,6 +20,11 @@ Please remember that this project is entirely funded by **the support of its use
 
 1. Added `data_collection_permissions` for Firefox (#137) which made us bump its min-version to 140
 
+### Salesforce
+
+1. Allowed import by drag-and-drop on Firefox (#156)
+2. Extensively added assistive texts (#136)
+
 ### Settings
 
 1. Added theme change in settings (light/dark) which syncs with the popup (#129)
@@ -38,6 +43,15 @@ Please remember that this project is entirely funded by **the support of its use
 
 1. The review and sponsor images are now shown after 20 / 40 days of use even if the user does not have the required Tabs (#138)
 1. Moved Simple Analytics to its own file (`src/salesforce/analytics.js`)
+2. Created new file to guard against once-a-day functions (#145)
+
+## 🐛 Fixed
+
+### Salesforce
+
+1. Added queue for transactional messages from background page (#142)
+2. Fixed context menus sometimes not shown until browser tab switch (#148)
+3. Removed initalization race which could lead to losing Tabs sometimes (#141)
 
 ## 🧪 Tests
 
@@ -47,6 +61,7 @@ Please remember that this project is entirely funded by **the support of its use
 4. Added tests for the new tutorial
 5. Added tests for new global functions
 6. Added tests for new function in TabContainer
+7. Created tests for yet untested files (#155)
 
 # v2.2.0
 
