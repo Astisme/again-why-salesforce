@@ -1,0 +1,97 @@
+.hidden {
+	display: none !important;
+}
+
+#again-why-salesforce-import-container {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+#again-why-salesforce-import {
+	margin-bottom: 1rem;
+}
+
+.again-why-salesforce-import-duplicate-warning {
+	text-align: center;
+}
+
+.again-why-salesforce-import-drag-active
+	lightning-primitive-file-droppable-zone.slds-file-selector__dropzone {
+	--awsf-marching-ants-color: var(
+		--slds-g-color-border-base-4,
+		var(--lwc-colorBorder, rgb(229, 229, 229))
+	);
+	--awsf-marching-ants-width: var(--lwc-borderWidthThin, 1px);
+	--awsf-marching-ants-size: 7px;
+	--awsf-marching-ants-radius: var(--lwc-borderRadiusMedium, 0.25rem);
+	--awsf-marching-ants-fill-color: var(
+		--slds-g-color-neutral-base-100,
+		var(--lwc-colorBackgroundAlt, #fff)
+	);
+	animation: awsf-dropzone-marching-ants 0.6s linear infinite;
+	background-image:
+		linear-gradient(
+			var(--awsf-marching-ants-fill-color),
+			var(--awsf-marching-ants-fill-color)
+		),
+		linear-gradient(
+		90deg,
+		var(--awsf-marching-ants-color) 50%,
+		transparent 50%
+	),
+		linear-gradient(
+		90deg,
+		var(--awsf-marching-ants-color) 50%,
+		transparent 50%
+	),
+		linear-gradient(
+		0deg,
+		var(--awsf-marching-ants-color) 50%,
+		transparent 50%
+	),
+		linear-gradient(
+		0deg,
+		var(--awsf-marching-ants-color) 50%,
+		transparent 50%
+	);
+	background-origin:
+		padding-box,
+		border-box,
+		border-box,
+		border-box,
+		border-box;
+	background-clip:
+		padding-box,
+		border-box,
+		border-box,
+		border-box,
+		border-box;
+	background-repeat: no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
+	background-size:
+		100% 100%,
+		var(--awsf-marching-ants-size) var(--awsf-marching-ants-width),
+		var(--awsf-marching-ants-size) var(--awsf-marching-ants-width),
+		var(--awsf-marching-ants-width) var(--awsf-marching-ants-size),
+		var(--awsf-marching-ants-width) var(--awsf-marching-ants-size);
+	background-position: 0 0, 0 0, 0 100%, 100% 0, 0 0;
+	border: var(--awsf-marching-ants-width) solid transparent;
+	border-radius: var(--awsf-marching-ants-radius);
+	border-color: transparent !important;
+	overflow: hidden;
+}
+
+@keyframes awsf-dropzone-marching-ants {
+	from {
+		background-position: 0 0, 0 0, 0 100%, 100% 0, 0 0;
+	}
+	to {
+		background-position:
+			0 0,
+			var(--awsf-marching-ants-size) 0,
+			calc(0px - var(--awsf-marching-ants-size)) 100%,
+			100% var(--awsf-marching-ants-size),
+			0 calc(0px - var(--awsf-marching-ants-size));
+	}
+}
