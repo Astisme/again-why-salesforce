@@ -480,7 +480,7 @@ Deno.test("favourite-manager generates the button markup with shortcut labels", 
 		assert(slashedStar.classList.contains("hidden"));
 		assertEquals(fixture.injectStyleCalls, [{
 			css: ".hidden { display: none; }",
-			id: "awsf-hidden",
+			id: "awsf-hidden-favman",
 		}]);
 	} finally {
 		fixture.cleanup();

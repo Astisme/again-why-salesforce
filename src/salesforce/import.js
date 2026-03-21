@@ -1,5 +1,6 @@
 "use strict";
 import {
+	BROWSER,
 	EXTENSION_NAME,
 	HIDDEN_CLASS,
 	TOAST_ERROR,
@@ -26,7 +27,11 @@ const SELECT_TABS_ID = `${IMPORT_ID}-select-tabs`;
 const METADATA_ID = `${IMPORT_ID}-metadata`;
 const OVERWRITE_ID = `${IMPORT_ID}-overwrite`;
 const OTHER_ORG_ID = `${IMPORT_ID}-other-org`;
-const CLOSE_MODAL_ID = `${EXTENSION_NAME}-modal-close`;
+const CLOSE_MODAL_ID = `${IMPORT_ID}-modal-close`;
+const IMPORT_CSS_ID = `${IMPORT_ID}-css`;
+const IMPORT_CONTAINER_ID = `${IMPORT_ID}-container`;
+const IMPORT_DUPLICATE_WARNING_CLASS = `${IMPORT_ID}-duplicate-warning`;
+const IMPORT_DRAG_ACTIVE_CLASS = `${IMPORT_ID}-drag-active`;
 let inputModalParent;
 
 /**
@@ -53,34 +58,29 @@ async function generateSldsImport() {
 	inputModalParent = modalParent;
 	closeButton.id = CLOSE_MODAL_ID;
 	const { section, divParent } = await generateSection();
-	divParent.style.width = "100%"; // makes the elements inside have full width
-	divParent.style.display = "flex";
-	divParent.style.alignItems = "center";
-	divParent.style.flexDirection = "column";
+	divParent.id = IMPORT_CONTAINER_ID;
 	article.appendChild(section);
 	const { fileInputWrapper, inputContainer } = await generateSldsFileInput(
 		IMPORT_ID,
 		IMPORT_FILE_ID,
 		".json,application/json",
 	);
-	fileInputWrapper.style.marginBottom = "1rem";
 	divParent.appendChild(fileInputWrapper);
-	const style = injectStyle(
-		"awsf-hidden",
-		{ css: `.${HIDDEN_CLASS} { display: none; }` },
+	injectStyle(
+		IMPORT_CSS_ID,
+		{ link: BROWSER.runtime.getURL("/salesforce/css/import.css") },
 	);
-	divParent.appendChild(style);
 	const duplicateWarningPart0 = document.createElement("div");
 	duplicateWarningPart0.textContent = await translator.translate(
 		"import_duplicate_description_0",
 	);
-	duplicateWarningPart0.style.textAlign = "center";
+	duplicateWarningPart0.classList.add(IMPORT_DUPLICATE_WARNING_CLASS);
 	divParent.append(duplicateWarningPart0);
 	const duplicateWarningPart1 = document.createElement("div");
 	duplicateWarningPart1.textContent = await translator.translate(
 		"import_duplicate_description_1",
 	);
-	duplicateWarningPart1.style.textAlign = "center";
+	duplicateWarningPart1.classList.add(IMPORT_DUPLICATE_WARNING_CLASS);
 	divParent.append(duplicateWarningPart1);
 	const selectTabsCheckbox = await generateCheckboxWithLabel(
 		SELECT_TABS_ID,
@@ -311,23 +311,56 @@ async function showTabSelectThenImport(files = [], importConfig = {}) {
 }
 
 /**
+ * Normalizes file-like inputs into a plain array.
+ *
+ * @param {File|File[]|FileList|null|undefined} files - Input files.
+ * @return {File[]} Normalized list of files.
+ */
+function normalizeFiles(files) {
+	if (files == null) {
+		return [];
+	}
+	if (Array.isArray(files)) {
+		return files;
+	}
+	if (typeof files.length === "number") {
+		return Array.from(files);
+	}
+	return [files];
+}
+
+/**
+ * Returns true when the provided file can be treated as JSON.
+ *
+ * Firefox/Linux drops can provide empty MIME types, so fallback to extension.
+ *
+ * @param {File} file - The file to validate.
+ * @return {boolean} Whether the file should be accepted as JSON.
+ */
+function isJsonFile(file) {
+	const fileName = file?.name?.toLowerCase?.() ?? "";
+	return file?.type === "application/json" || fileName.endsWith(".json");
+}
+
+/**
  * Reads and processes JSON files using modern Promise-based API.
  *
  * @param {File|File[]} files - The file(s) to read and validate.
  * @return {Promise<void>}
  */
 async function readFile(files) {
-	const fileArray = Array.isArray(files) || files.length > 0
-		? files
-		: [files];
+	const fileArray = normalizeFiles(files);
 	const validFileArray = [];
 	// Validate all files first
 	for (const file of fileArray) {
-		if (file.type === "application/json") {
+		if (isJsonFile(file)) {
 			validFileArray.push(file);
 		} else {
 			showToast("import_invalid_file", TOAST_ERROR);
 		}
+	}
+	if (validFileArray.length === 0) {
+		return;
 	}
 	try {
 		const selectTabsPick =
@@ -353,6 +386,25 @@ async function readFile(files) {
 }
 
 /**
+ * Extracts files from a change or drop event.
+ *
+ * @param {Event} event - The source event.
+ * @return {File[]} Collected files from all supported event shapes.
+ */
+function getFilesFromChangeOrDropEvent(event) {
+	const targetFiles = normalizeFiles(
+		event.target?.files ?? event.dataTransfer?.files,
+	);
+	if (targetFiles.length > 0) {
+		return targetFiles;
+	}
+	const transferItems = normalizeFiles(event.dataTransfer?.items);
+	return transferItems
+		.map((item) => item?.getAsFile?.())
+		.filter((file) => file != null);
+}
+
+/**
  * Handles file selection via input change event.
  * Handles the drop event of files onto the drop area.
  * Prevents default behavior and reads the first selected file.
@@ -362,9 +414,87 @@ async function readFile(files) {
  */
 function readChangeOrDropFiles(event) {
 	event.preventDefault();
-	return readFile(
-		event.target?.files ?? Array.from(event.dataTransfer?.files),
-	);
+	return readFile(getFilesFromChangeOrDropEvent(event));
+}
+
+/**
+ * Prevents default drag-and-drop browser behavior.
+ *
+ * @param {Event} event - Drag event to neutralize.
+ * @return {void}
+ */
+function preventDragDefaults(event) {
+	event.preventDefault?.();
+	event.stopPropagation?.();
+}
+
+/**
+ * Marks the import drop area as active while files are dragged over it.
+ *
+ * @param {HTMLElement|null} dropArea - The file input wrapper/drop area.
+ * @return {void}
+ */
+function markDropAreaAsActive(dropArea) {
+	dropArea?.classList.add(IMPORT_DRAG_ACTIVE_CLASS);
+}
+
+/**
+ * Removes the active drag state from the import drop area.
+ *
+ * @param {HTMLElement|null} dropArea - The file input wrapper/drop area.
+ * @return {void}
+ */
+function clearDropAreaActiveState(dropArea) {
+	dropArea?.classList.remove(IMPORT_DRAG_ACTIVE_CLASS);
+}
+
+/**
+ * Handles drag-enter events on the import drop area.
+ *
+ * @param {Event} event - Drag event to handle.
+ * @param {HTMLElement|null} dropArea - The file input wrapper/drop area.
+ * @return {void}
+ */
+function handleDropAreaDragEnter(event, dropArea) {
+	preventDragDefaults(event);
+	markDropAreaAsActive(dropArea);
+}
+
+/**
+ * Handles drag-over events on the import drop area.
+ *
+ * @param {Event} event - Drag event to handle.
+ * @param {HTMLElement|null} dropArea - The file input wrapper/drop area.
+ * @return {void}
+ */
+function handleDropAreaDragOver(event, dropArea) {
+	preventDragDefaults(event);
+	markDropAreaAsActive(dropArea);
+}
+
+/**
+ * Handles drag-leave events on the import drop area.
+ *
+ * @param {Event} event - Drag event to handle.
+ * @param {HTMLElement|null} dropArea - The file input wrapper/drop area.
+ * @return {void}
+ */
+function handleDropAreaDragLeave(event, dropArea) {
+	preventDragDefaults(event);
+	clearDropAreaActiveState(dropArea);
+}
+
+/**
+ * Handles dropped files and clears the drop-area active state.
+ *
+ * @param {Event} event - Drop event triggered on the drop area.
+ * @param {HTMLElement|null} dropArea - The file input wrapper/drop area.
+ * @return {Promise<void>} Promise resolved when the import flow settles.
+ */
+function handleDropAreaDrop(event, dropArea) {
+	preventDragDefaults(event);
+	clearDropAreaActiveState(dropArea);
+	return readFile(getFilesFromChangeOrDropEvent(event));
 }
 /**
  * Attaches event listeners to handle file uploads via both file selection and drag-and-drop.
@@ -378,7 +508,22 @@ function readChangeOrDropFiles(event) {
 function listenToFileUpload() {
 	const dropArea = document.getElementById(IMPORT_ID);
 	dropArea.addEventListener("change", readChangeOrDropFiles);
-	dropArea.addEventListener("drop", readChangeOrDropFiles);
+	dropArea.addEventListener(
+		"dragenter",
+		(event) => handleDropAreaDragEnter(event, dropArea),
+	);
+	dropArea.addEventListener(
+		"dragover",
+		(event) => handleDropAreaDragOver(event, dropArea),
+	);
+	dropArea.addEventListener(
+		"dragleave",
+		(event) => handleDropAreaDragLeave(event, dropArea),
+	);
+	dropArea.addEventListener(
+		"drop",
+		(event) => handleDropAreaDrop(event, dropArea),
+	);
 }
 
 /**
