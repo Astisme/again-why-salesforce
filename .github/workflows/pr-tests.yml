@@ -64,7 +64,8 @@ jobs:
                     title:   "Linter Failed",
                     matchPattern: /Found [0-9]+ problem/,
                     stripPatterns: [
-                      /^Download https:\/\/.*\n/gm
+                      /^Download https:\/\/.*\n/gm,
+                      /^Initialize: .*\n/gm,
                     ]
                   });
 

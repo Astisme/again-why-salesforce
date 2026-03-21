@@ -18,7 +18,7 @@ import {
 	generateSldsModalWithTabList,
 	MODAL_ID,
 } from "./generator.js";
-import { getModalHanger, getSetupTabUl, sf_afterSet, showToast } from "./content.js";
+import { getModalHanger, getSetupTabUl, showToast } from "./content.js";
 
 const IMPORT_ID = `${EXTENSION_NAME}-import`;
 const IMPORT_FILE_ID = `${IMPORT_ID}-file`;
