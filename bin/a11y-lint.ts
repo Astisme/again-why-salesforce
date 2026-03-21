@@ -96,10 +96,18 @@ interface ParsedTag {
 	attributes: Record<string, string | null>;
 	line: number;
 	innerText: string;
+	startIndex: number;
+	endIndex: number;
 }
 
 interface ScanOptions {
 	rootDir: string;
+}
+
+interface LabelRange {
+	start: number;
+	end: number;
+	text: string;
 }
 
 /**
@@ -198,6 +206,31 @@ function getLabelsByForAttribute(source: string): Map<string, string> {
 }
 
 /**
+ * Extracts implicit label ranges where a form control is wrapped by <label>.
+ * @param {string} source - Source to scan.
+ * @returns {LabelRange[]} Label ranges with extracted text.
+ */
+function getImplicitLabelRanges(source: string): LabelRange[] {
+	const ranges: LabelRange[] = [];
+	const labelPattern = /<label\b[^>]*>([\s\S]*?)<\/label>/gi;
+	let match = labelPattern.exec(source);
+	while (match !== null) {
+		const fullMatch = match[0];
+		const content = match[1];
+		const openTagEnd = fullMatch.indexOf(">") + 1;
+		const start = match.index + openTagEnd;
+		const end = match.index + fullMatch.length - "</label>".length;
+		ranges.push({
+			start,
+			end,
+			text: extractVisibleText(content),
+		});
+		match = labelPattern.exec(source);
+	}
+	return ranges;
+}
+
+/**
  * Parses HTML-like tags from source.
  * @param {string} source - Source text.
  * @returns {ParsedTag[]} Parsed tag metadata.
@@ -208,11 +241,12 @@ function parseTags(source: string): ParsedTag[] {
 	let match = tagPattern.exec(source);
 	while (match !== null) {
 		const [rawTag, rawName, rawAttributes = ""] = match;
-		const tagName = rawName.toLowerCase();
-		const startIndex = match.index;
-		const line = getLineNumber(source, startIndex);
-		const attributes = parseAttributes(rawAttributes);
-		let innerText = "";
+			const tagName = rawName.toLowerCase();
+			const startIndex = match.index;
+			const line = getLineNumber(source, startIndex);
+			const attributes = parseAttributes(rawAttributes);
+			const endIndex = startIndex + rawTag.length;
+			let innerText = "";
 		if (
 			tagName === "button" ||
 			tagName === "a" ||
@@ -226,8 +260,8 @@ function parseTags(source: string): ParsedTag[] {
 				innerText = extractVisibleText(source.slice(contentStart, contentEnd));
 			}
 		}
-		tags.push({ tagName, attributes, line, innerText });
-		match = tagPattern.exec(source);
+			tags.push({ tagName, attributes, line, innerText, startIndex, endIndex });
+			match = tagPattern.exec(source);
 	}
 	return tags;
 }
@@ -304,6 +338,24 @@ function hasAccessibleName(tag: ParsedTag, labelsById: Map<string, string>): boo
 }
 
 /**
+ * Returns true when the control is wrapped by a text label.
+ * @param {ParsedTag} tag - Parsed element.
+ * @param {LabelRange[]} labelRanges - Parsed implicit label ranges.
+ * @returns {boolean} True when an implicit label is present.
+ */
+function hasImplicitLabel(tag: ParsedTag, labelRanges: LabelRange[]): boolean {
+	if (tag.tagName !== "input" && tag.tagName !== "select" && tag.tagName !== "textarea") {
+		return false;
+	}
+	for (const range of labelRanges) {
+		if (tag.startIndex >= range.start && tag.endIndex <= range.end && range.text.length > 0) {
+			return true;
+		}
+	}
+	return false;
+}
+
+/**
  * Finds missing accessible names for interactive elements.
  * @param {string} filePath - Source file path.
  * @param {ParsedTag[]} tags - Parsed tags.
@@ -314,10 +366,15 @@ function findInteractiveNameViolations(
 	filePath: string,
 	tags: ParsedTag[],
 	labelsById: Map<string, string>,
+	labelRanges: LabelRange[],
 ): A11yViolation[] {
 	const violations: A11yViolation[] = [];
 	for (const tag of tags) {
-		if (!requiresAccessibleName(tag) || hasAccessibleName(tag, labelsById)) {
+		if (
+			!requiresAccessibleName(tag) ||
+			hasAccessibleName(tag, labelsById) ||
+			hasImplicitLabel(tag, labelRanges)
+		) {
 			continue;
 		}
 		violations.push({
@@ -415,8 +472,9 @@ function findAriaViolations(filePath: string, tags: ParsedTag[]): A11yViolation[
 export function analyzeSource(filePath: string, source: string): A11yViolation[] {
 	const tags = parseTags(source);
 	const labelsById = getLabelsByForAttribute(source);
+	const labelRanges = getImplicitLabelRanges(source);
 	const violations = [
-		...findInteractiveNameViolations(filePath, tags, labelsById),
+		...findInteractiveNameViolations(filePath, tags, labelsById, labelRanges),
 		...findImageAltViolations(filePath, tags),
 		...findAriaViolations(filePath, tags),
 	];

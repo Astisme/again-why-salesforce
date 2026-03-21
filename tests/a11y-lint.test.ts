@@ -78,6 +78,9 @@ Deno.test("analyzeSource accepts elements with valid naming", () => {
 	const source = [
 		"<label for='search-box'>Search</label>",
 		"<input id='search-box' type='search'>",
+		"<label>Upload resume <input type='file'></label>",
+		"<label>SMS contact <input type='radio'></label>",
+		"<label>Given name <input type='text'></label>",
 		"<label for='resume'>Resume</label>",
 		"<input id='resume' type='file'>",
 		"<label for='contact-choice'>Contact by email</label>",
