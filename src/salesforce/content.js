@@ -974,189 +974,264 @@ function launchDownload(message) {
 }
 
 /**
+ * Promise chain that serializes background message handling.
+ */
+let backgroundMessageQueue = Promise.resolve();
+
+/**
+ * Enqueues a background message task so tasks are executed in receive order.
+ * The queue recovers from failures to avoid blocking following tasks.
+ *
+ * @param {() => Promise<void>} taskFactory Function that performs one message task.
+ * @return {Promise<void>} Promise that resolves when the queued task completes.
+ */
+function enqueueBackgroundMessageTask(taskFactory) {
+	const queuedTask = backgroundMessageQueue.then(taskFactory);
+	backgroundMessageQueue = queuedTask.catch(() => {});
+	return queuedTask;
+}
+
+const isQueuableBackgroundMessage = new Set([
+	CXM_MOVE_RIGHT,
+	CXM_MOVE_LAST,
+	CXM_MOVE_LEFT,
+	CXM_MOVE_FIRST,
+	CXM_REMOVE_OTHER_TABS,
+	CXM_REMOVE_LEFT_TABS,
+	CXM_REMOVE_RIGHT_TABS,
+	CXM_SORT_LABEL,
+	CXM_SORT_URL,
+	CXM_SORT_ORG,
+	CXM_SORT_CLICK_COUNT,
+	CXM_SORT_CLICK_DATE,
+	CXM_REMOVE_PIN_TABS,
+	CXM_REMOVE_UNPIN_TABS,
+	CXM_EMPTY_GENERIC_TABS,
+	CXM_EMPTY_TABS,
+	CXM_EMPTY_VISIBLE_TABS,
+	CXM_RESET_DEFAULT_TABS,
+	WHAT_TOGGLE_ORG,
+	CXM_PIN_TAB,
+	CXM_UNPIN_TAB,
+	CXM_REMOVE_TAB,
+	CXM_TMP_HIDE_ORG,
+	CXM_TMP_HIDE_NON_ORG,
+	WHAT_PAGE_SAVE_TAB,
+	WHAT_PAGE_REMOVE_TAB,
+]);
+/**
+ * Returns whether a background message should be handled through the serialized queue.
+ *
+ * @param {string} messageType Message type sent by the background script.
+ * @return {boolean} True when the message mutates or reorders tabs.
+ */
+function shouldQueueBackgroundMessage(messageType) {
+	return isQueuableBackgroundMessage.has(messageType);
+}
+
+/**
+ * Routes a single background message to the matching content-side action.
+ *
+ * @param {Object} message Message from background page.
+ * @return {Promise<void>} Resolves when message handling completes.
+ */
+async function routeBackgroundMessage(message) {
+	const messageTab = {
+		label: message.label,
+		url: message.tabUrl ?? message.url,
+		org: message.org,
+	};
+	try {
+		switch (message.what) {
+			// hot reload (from context-menus.js)
+			case WHAT_SAVED:
+			case WHAT_STARTUP:
+			case WHAT_INSTALLED:
+			case WHAT_ACTIVATE:
+			case WHAT_HIGHLIGHTED:
+			case WHAT_FOCUS_CHANGED:
+				sf_afterSet(message);
+				break;
+			case TOAST_WARNING:
+			case TOAST_ERROR:
+				showToast(message.message, message.what);
+				break;
+			case WHAT_SHOW_IMPORT:
+				await createImportModal();
+				break;
+			case CXM_MANAGE_TABS:
+				await createManageTabsModal();
+				break;
+			case WHAT_START_TUTORIAL:
+				await startTutorial();
+				break;
+			case WHAT_SHOW_EXPORT_MODAL:
+				await createExportModal();
+				break;
+			case WHAT_SHOW_OPEN_OTHER_ORG:
+				messageTab.url = message.linkTabUrl ?? messageTab.url;
+				await showModalOpenOtherOrg(messageTab);
+				break;
+			case WHAT_UPDATE_TAB:
+				await showModalUpdateTab(messageTab);
+				break;
+			case WHAT_UPDATE_EXTENSION:
+				await promptUpdateExtension(message);
+				break;
+			case WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP:
+				if (message.ok) {
+					showToast(
+						"req_downloads_open_popup",
+					);
+				} else {
+					showToast(
+						"error_req_downloads",
+						TOAST_ERROR,
+					);
+				}
+				break;
+			case WHAT_EXPORT_FROM_BG:
+				launchDownload(message);
+				break;
+			case CXM_MOVE_RIGHT:
+				await performActionOnTabs(ACTION_MOVE, messageTab, {
+					moveBefore: false,
+					fullMovement: false,
+				});
+				break;
+			case CXM_MOVE_LAST:
+				await performActionOnTabs(ACTION_MOVE, messageTab, {
+					moveBefore: false,
+					fullMovement: true,
+				});
+				break;
+			case CXM_MOVE_LEFT:
+				await performActionOnTabs(ACTION_MOVE, messageTab, {
+					moveBefore: true,
+					fullMovement: false,
+				});
+				break;
+			case CXM_MOVE_FIRST:
+				await performActionOnTabs(ACTION_MOVE, messageTab, {
+					moveBefore: true,
+					fullMovement: true,
+				});
+				break;
+			case CXM_REMOVE_OTHER_TABS:
+				await performActionOnTabs(ACTION_REMOVE_OTHER, messageTab);
+				break;
+			case CXM_REMOVE_LEFT_TABS:
+				await performActionOnTabs(ACTION_REMOVE_OTHER, messageTab, {
+					removeBefore: true,
+				});
+				break;
+			case CXM_REMOVE_RIGHT_TABS:
+				await performActionOnTabs(ACTION_REMOVE_OTHER, messageTab, {
+					removeBefore: false,
+				});
+				break;
+			case CXM_SORT_LABEL:
+				await performActionOnTabs(
+					ACTION_SORT,
+					undefined,
+					(await ensureAllTabsAvailability()).getSortOptions({
+						sortBy: "label",
+					}),
+				);
+				break;
+			case CXM_SORT_URL:
+				await performActionOnTabs(
+					ACTION_SORT,
+					undefined,
+					(await ensureAllTabsAvailability()).getSortOptions({
+						sortBy: "url",
+					}),
+				);
+				break;
+			case CXM_SORT_ORG:
+				await performActionOnTabs(
+					ACTION_SORT,
+					undefined,
+					(await ensureAllTabsAvailability()).getSortOptions({
+						sortBy: "org",
+					}),
+				);
+				break;
+			case CXM_SORT_CLICK_COUNT:
+				await performActionOnTabs(
+					ACTION_SORT,
+					undefined,
+					(await ensureAllTabsAvailability()).getSortOptions({
+						sortBy: Tab.keyClickCount,
+						standardSort: false,
+					}),
+				);
+				break;
+			case CXM_SORT_CLICK_DATE:
+				await performActionOnTabs(
+					ACTION_SORT,
+					undefined,
+					(await ensureAllTabsAvailability()).getSortOptions({
+						sortBy: Tab.keyClickDate,
+						standardSort: false,
+					}),
+				);
+				break;
+			case CXM_REMOVE_PIN_TABS:
+			case CXM_REMOVE_UNPIN_TABS:
+			case CXM_EMPTY_GENERIC_TABS:
+			case CXM_EMPTY_TABS:
+			case CXM_EMPTY_VISIBLE_TABS:
+			case CXM_RESET_DEFAULT_TABS:
+			case WHAT_TOGGLE_ORG:
+			case CXM_PIN_TAB:
+			case CXM_UNPIN_TAB:
+			case CXM_REMOVE_TAB:
+			case CXM_TMP_HIDE_ORG:
+			case CXM_TMP_HIDE_NON_ORG:
+			case WHAT_PAGE_SAVE_TAB:
+			case WHAT_PAGE_REMOVE_TAB:
+				await performActionOnTabs(message.what, messageTab);
+				break;
+			default:
+				if (message.what !== WHAT_THEME) {
+					showToast(
+						[
+							"error_unknown_message",
+							message.what,
+						],
+						TOAST_WARNING,
+					);
+				}
+				break;
+		}
+	} catch (error) {
+		showToast(error.message, TOAST_ERROR);
+	}
+}
+
+/**
  * Listens for messages from the background page and routes commands to appropriate handlers.
  * Supports tab management, notifications, modal dialogs, extension update prompts, and more.
  * Catches errors and displays them as toast notifications.
  */
 function listenToBackgroundPage() {
-	BROWSER.runtime.onMessage.addListener(async (message, _, sendResponse) => {
+	BROWSER.runtime.onMessage.addListener((message, _, sendResponse) => {
 		if (message?.what == null) {
 			return;
 		}
 		sendResponse(null);
-		const allTabs = await ensureAllTabsAvailability();
-		const messageTab = {
-			label: message.label,
-			url: message.tabUrl ?? message.url,
-			org: message.org,
-		};
-		try {
-			switch (message.what) {
-				// hot reload (from context-menus.js)
-				case WHAT_SAVED:
-				case WHAT_STARTUP:
-				case WHAT_INSTALLED:
-				case WHAT_ACTIVATE:
-				case WHAT_HIGHLIGHTED:
-				case WHAT_FOCUS_CHANGED:
-					sf_afterSet(message);
-					break;
-				case TOAST_WARNING:
-				case TOAST_ERROR:
-					showToast(message.message, message.what);
-					break;
-				case WHAT_SHOW_IMPORT:
-					createImportModal();
-					break;
-				case CXM_MANAGE_TABS:
-					createManageTabsModal();
-					break;
-				case WHAT_START_TUTORIAL:
-					startTutorial();
-					break;
-				case WHAT_SHOW_EXPORT_MODAL:
-					createExportModal();
-					break;
-				case WHAT_SHOW_OPEN_OTHER_ORG:
-					messageTab.url = message.linkTabUrl ?? messageTab.url;
-					showModalOpenOtherOrg(messageTab);
-					break;
-				case WHAT_UPDATE_TAB:
-					showModalUpdateTab(messageTab);
-					break;
-				case WHAT_UPDATE_EXTENSION:
-					promptUpdateExtension(message);
-					break;
-				case WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP:
-					if (message.ok) {
-						showToast(
-							"req_downloads_open_popup",
-						);
-					} else {
-						showToast(
-							"error_req_downloads",
-							TOAST_ERROR,
-						);
-					}
-					break;
-				case WHAT_EXPORT_FROM_BG:
-					launchDownload(message);
-					break;
-				case CXM_MOVE_RIGHT:
-					await performActionOnTabs(ACTION_MOVE, messageTab, {
-						moveBefore: false,
-						fullMovement: false,
-					});
-					break;
-				case CXM_MOVE_LAST:
-					await performActionOnTabs(ACTION_MOVE, messageTab, {
-						moveBefore: false,
-						fullMovement: true,
-					});
-					break;
-				case CXM_MOVE_LEFT:
-					await performActionOnTabs(ACTION_MOVE, messageTab, {
-						moveBefore: true,
-						fullMovement: false,
-					});
-					break;
-				case CXM_MOVE_FIRST:
-					await performActionOnTabs(ACTION_MOVE, messageTab, {
-						moveBefore: true,
-						fullMovement: true,
-					});
-					break;
-				case CXM_REMOVE_OTHER_TABS:
-					await performActionOnTabs(ACTION_REMOVE_OTHER, messageTab);
-					break;
-				case CXM_REMOVE_LEFT_TABS:
-					await performActionOnTabs(ACTION_REMOVE_OTHER, messageTab, {
-						removeBefore: true,
-					});
-					break;
-				case CXM_REMOVE_RIGHT_TABS:
-					await performActionOnTabs(ACTION_REMOVE_OTHER, messageTab, {
-						removeBefore: false,
-					});
-					break;
-				case CXM_SORT_LABEL:
-					await performActionOnTabs(
-						ACTION_SORT,
-						undefined,
-						allTabs.getSortOptions({
-							sortBy: "label",
-						}),
-					);
-					break;
-				case CXM_SORT_URL:
-					await performActionOnTabs(
-						ACTION_SORT,
-						undefined,
-						allTabs.getSortOptions({
-							sortBy: "url",
-						}),
-					);
-					break;
-				case CXM_SORT_ORG:
-					await performActionOnTabs(
-						ACTION_SORT,
-						undefined,
-						allTabs.getSortOptions({
-							sortBy: "org",
-						}),
-					);
-					break;
-				case CXM_SORT_CLICK_COUNT:
-					await performActionOnTabs(
-						ACTION_SORT,
-						undefined,
-						allTabs.getSortOptions({
-							sortBy: Tab.keyClickCount,
-							standardSort: false,
-						}),
-					);
-					break;
-				case CXM_SORT_CLICK_DATE:
-					await performActionOnTabs(
-						ACTION_SORT,
-						undefined,
-						allTabs.getSortOptions({
-							sortBy: Tab.keyClickDate,
-							standardSort: false,
-						}),
-					);
-					break;
-				case CXM_REMOVE_PIN_TABS:
-				case CXM_REMOVE_UNPIN_TABS:
-				case CXM_EMPTY_GENERIC_TABS:
-				case CXM_EMPTY_TABS:
-				case CXM_EMPTY_VISIBLE_TABS:
-				case CXM_RESET_DEFAULT_TABS:
-				case WHAT_TOGGLE_ORG:
-				case CXM_PIN_TAB:
-				case CXM_UNPIN_TAB:
-				case CXM_REMOVE_TAB:
-				case CXM_TMP_HIDE_ORG:
-				case CXM_TMP_HIDE_NON_ORG:
-				case WHAT_PAGE_SAVE_TAB:
-				case WHAT_PAGE_REMOVE_TAB:
-					await performActionOnTabs(message.what, messageTab);
-					break;
-				default:
-					if (message.what !== WHAT_THEME) {
-						showToast(
-							[
-								"error_unknown_message",
-								message.what,
-							],
-							TOAST_WARNING,
-						);
-					}
-					break;
-			}
-		} catch (error) {
-			showToast(error.message, TOAST_ERROR);
+		if (shouldQueueBackgroundMessage(message.what)) {
+			return enqueueBackgroundMessageTask(() =>
+				routeBackgroundMessage(message)
+			);
 		}
+		// this will ensure that new messages which need to be queued (above) will wait for this task to complete (less parallelism and speed)
+		const nonQueuedTask = routeBackgroundMessage(message);
+		backgroundMessageQueue = backgroundMessageQueue
+			.then(() => nonQueuedTask)
+			.catch(() => {});
+		return nonQueuedTask;
 	});
 }
 

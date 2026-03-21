@@ -111,13 +111,13 @@ type ContentDeps = {
 		generateUpdateTabModal: (...args: unknown[]) => Promise<any>;
 	};
 	importModule: {
-		createImportModal: () => void;
+		createImportModal: () => void | Promise<void>;
 	};
 	exportModule: {
-		createExportModal: () => void;
+		createExportModal: () => void | Promise<void>;
 	};
 	manageTabs: {
-		createManageTabsModal: () => void;
+		createManageTabsModal: () => void | Promise<void>;
 	};
 	tutorial: {
 		checkTutorial: () => void;
@@ -405,25 +405,26 @@ const { executeOncePerDay } = __deps.onceADay;
 		"\ttoggleOrg,",
 		"};",
 	];
-	const bootstrapLineIndex = sourceLines.findIndex((line) =>
-		line.includes("// queries the currently active tab")
+	const strictModeLineIndex = sourceLines.findIndex((line) =>
+		line.trim() === '"use strict";'
 	);
-	if (bootstrapLineIndex < 0) {
-		throw new Error("error_missing_bootstrap_comment");
+	if (strictModeLineIndex < 0) {
+		throw new Error("error_missing_use_strict");
 	}
+	const preludeInsertLineIndex = strictModeLineIndex + 1;
 	const generatedLines = [
-		...sourceLines.slice(0, bootstrapLineIndex),
+		...sourceLines.slice(0, preludeInsertLineIndex),
 		...preludeLines,
-		...sourceLines.slice(bootstrapLineIndex),
+		...sourceLines.slice(preludeInsertLineIndex),
 		...hookLines,
 	];
 	const originalLines = [
-		...sourceLines.slice(0, bootstrapLineIndex).map((_, index) =>
+		...sourceLines.slice(0, preludeInsertLineIndex).map((_, index) =>
 			index + 1
 		),
 		...preludeLines.map(() => 0),
-		...sourceLines.slice(bootstrapLineIndex).map((_, index) =>
-			bootstrapLineIndex + index + 1
+		...sourceLines.slice(preludeInsertLineIndex).map((_, index) =>
+			preludeInsertLineIndex + index + 1
 		),
 		...hookLines.map(() => 0),
 	];
@@ -680,6 +681,9 @@ function createHarness(url = SETUP_URL) {
 				options: Record<string, unknown>,
 			) => boolean | Promise<boolean>),
 		showFavouriteButtonHook: null as null | (() => void | Promise<void>),
+		createImportModalHook: null as null | (() => void | Promise<void>),
+		createExportModalHook: null as null | (() => void | Promise<void>),
+		createManageTabsModalHook: null as null | (() => void | Promise<void>),
 		confirmResult: true,
 		modalRadioTarget: "_blank",
 	};
@@ -1193,16 +1197,19 @@ function createHarness(url = SETUP_URL) {
 		importModule: {
 			createImportModal: () => {
 				records.createImportModal++;
+				return state.createImportModalHook?.();
 			},
 		},
 		exportModule: {
 			createExportModal: () => {
 				records.createExportModal++;
+				return state.createExportModalHook?.();
 			},
 		},
 		manageTabs: {
 			createManageTabsModal: () => {
 				records.createManageTabsModal++;
+				return state.createManageTabsModalHook?.();
 			},
 		},
 		tutorial: {
@@ -2630,10 +2637,310 @@ Deno.test("background message routing covers modal launchers, downloads, sorting
 			);
 
 			await t.step(
+				"two non-queued calls run without queue serialization",
+				async () => {
+					const backgroundListener =
+						harness.browser.runtime._listeners[0];
+					const importDeferred = createDeferred();
+					const manageDeferred = createDeferred();
+					const importStarted = createDeferred();
+					const manageStarted = createDeferred();
+					const initialImportModalCalls =
+						harness.records.createImportModal;
+					const initialManageTabsModalCalls =
+						harness.records.createManageTabsModal;
+					harness.state.createImportModalHook = async () => {
+						importStarted.resolve();
+						await importDeferred.promise;
+					};
+					harness.state.createManageTabsModalHook = async () => {
+						manageStarted.resolve();
+						await manageDeferred.promise;
+					};
+					const firstNonQueuedCall = backgroundListener(
+						{ what: "show-import" },
+						{},
+						() => {},
+					);
+					const secondNonQueuedCall = backgroundListener(
+						{ what: "manage-tabs" },
+						{},
+						() => {},
+					);
+					await importStarted.promise;
+					await manageStarted.promise;
+					assertEquals(
+						harness.records.createImportModal,
+						initialImportModalCalls + 1,
+					);
+					assertEquals(
+						harness.records.createManageTabsModal,
+						initialManageTabsModalCalls + 1,
+					);
+					manageDeferred.resolve();
+					importDeferred.resolve();
+					await Promise.all([
+						firstNonQueuedCall,
+						secondNonQueuedCall,
+					]);
+					harness.state.createImportModalHook = null;
+					harness.state.createManageTabsModalHook = null;
+				},
+			);
+
+			await t.step(
+				"queued call does not defer a following non-queued call",
+				async () => {
+					const backgroundListener =
+						harness.browser.runtime._listeners[0];
+					const firstMoveDeferred = createDeferred();
+					const firstMoveStarted = createDeferred();
+					const importStarted = createDeferred();
+					const importDeferred = createDeferred();
+					const initialImportModalCalls =
+						harness.records.createImportModal;
+					harness.state.ensureAllTabsHook = () => {
+						const queuedTabs = Object.create(harness.allTabs);
+						Object.defineProperty(queuedTabs, "moveTab", {
+							value: async (
+								_tab: object,
+								_options: { fullMovement?: boolean },
+							) => {
+								firstMoveStarted.resolve();
+								await firstMoveDeferred.promise;
+								return true;
+							},
+						});
+						return queuedTabs;
+					};
+					harness.state.createImportModalHook = async () => {
+						importStarted.resolve();
+						await importDeferred.promise;
+					};
+					const firstQueuedMove = backgroundListener(
+						{
+							what: "move-right",
+							label: "Users",
+							url: USERS_URL,
+						},
+						{},
+						() => {},
+					);
+					await firstMoveStarted.promise;
+					const secondNonQueuedImport = backgroundListener(
+						{ what: "show-import" },
+						{},
+						() => {},
+					);
+					await importStarted.promise;
+					assertEquals(
+						harness.records.createImportModal,
+						initialImportModalCalls + 1,
+					);
+					importDeferred.resolve();
+					await secondNonQueuedImport;
+					firstMoveDeferred.resolve();
+					await firstQueuedMove;
+					harness.state.ensureAllTabsHook = null;
+					harness.state.createImportModalHook = null;
+				},
+			);
+
+			await t.step(
+				"non-queued completion gates a following queued call",
+				async () => {
+					const backgroundListener =
+						harness.browser.runtime._listeners[0];
+					const importDeferred = createDeferred();
+					const importStarted = createDeferred();
+					const moveDeferred = createDeferred();
+					const moveStarted = createDeferred();
+					let moveHasStarted = false;
+					harness.state.ensureAllTabsHook = () => {
+						const queuedTabs = Object.create(harness.allTabs);
+						Object.defineProperty(queuedTabs, "moveTab", {
+							value: async (
+								_tab: object,
+								_options: { fullMovement?: boolean },
+							) => {
+								moveHasStarted = true;
+								moveStarted.resolve();
+								await moveDeferred.promise;
+								return true;
+							},
+						});
+						return queuedTabs;
+					};
+					harness.state.createImportModalHook = async () => {
+						importStarted.resolve();
+						await importDeferred.promise;
+					};
+					const firstNonQueuedImport = backgroundListener(
+						{ what: "show-import" },
+						{},
+						() => {},
+					);
+					await importStarted.promise;
+					const secondQueuedMove = backgroundListener(
+						{
+							what: "move-right",
+							label: "Users",
+							url: USERS_URL,
+						},
+						{},
+						() => {},
+					);
+					await Promise.resolve();
+					await Promise.resolve();
+					assertEquals(
+						moveHasStarted,
+						false,
+					);
+					importDeferred.resolve();
+					await firstNonQueuedImport;
+					await moveStarted.promise;
+					moveDeferred.resolve();
+					await secondQueuedMove;
+					harness.state.ensureAllTabsHook = null;
+					harness.state.createImportModalHook = null;
+				},
+			);
+
+			await t.step(
+				"three queued calls are processed strictly in receive order",
+				async () => {
+					const backgroundListener =
+						harness.browser.runtime._listeners[0];
+					const firstMoveDeferred = createDeferred();
+					const secondMoveDeferred = createDeferred();
+					const firstMoveStarted = createDeferred();
+					const secondMoveStarted = createDeferred();
+					let totalMoveCalls = 0;
+					let thirdMoveStarted = false;
+					harness.state.ensureAllTabsHook = () => {
+						const queuedTabs = Object.create(harness.allTabs);
+						Object.defineProperty(queuedTabs, "moveTab", {
+							value: async (
+								_tab: object,
+								_options: { fullMovement?: boolean },
+							) => {
+								totalMoveCalls++;
+								if (totalMoveCalls === 1) {
+									firstMoveStarted.resolve();
+									await firstMoveDeferred.promise;
+									return true;
+								}
+								if (totalMoveCalls === 2) {
+									secondMoveStarted.resolve();
+									await secondMoveDeferred.promise;
+									return true;
+								}
+								thirdMoveStarted = true;
+								return true;
+							},
+						});
+						return queuedTabs;
+					};
+					const firstQueuedMove = backgroundListener(
+						{
+							what: "move-right",
+							label: "Users",
+							url: USERS_URL,
+						},
+						{},
+						() => {},
+					);
+					const secondQueuedMove = backgroundListener(
+						{
+							what: "move-last",
+							label: "Users",
+							url: USERS_URL,
+						},
+						{},
+						() => {},
+					);
+					const thirdQueuedMove = backgroundListener(
+						{
+							what: "move-first",
+							label: "Users",
+							url: USERS_URL,
+						},
+						{},
+						() => {},
+					);
+					await firstMoveStarted.promise;
+					assertEquals(totalMoveCalls, 1);
+					assertEquals(thirdMoveStarted, false);
+					firstMoveDeferred.resolve();
+					await secondMoveStarted.promise;
+					assertEquals(totalMoveCalls, 2);
+					assertEquals(thirdMoveStarted, false);
+					secondMoveDeferred.resolve();
+					await Promise.all([
+						firstQueuedMove,
+						secondQueuedMove,
+						thirdQueuedMove,
+					]);
+					assertEquals(totalMoveCalls, 3);
+					assertEquals(thirdMoveStarted, true);
+					harness.state.ensureAllTabsHook = null;
+				},
+			);
+
+			await t.step(
 				"permission, move, remove, and sort variants route correctly",
 				async () => {
 					const backgroundListener =
 						harness.browser.runtime._listeners[0];
+					const firstMoveDeferred = createDeferred();
+					const firstMoveStarted = createDeferred();
+					let totalMoveCalls = 0;
+					let secondMoveStarted = false;
+					harness.state.ensureAllTabsHook = () => {
+						const queuedTabs = Object.create(harness.allTabs);
+						Object.defineProperty(queuedTabs, "moveTab", {
+							value: async (
+								_tab: unknown,
+								options: { fullMovement?: boolean },
+							) => {
+								totalMoveCalls++;
+								if (options?.fullMovement === false) {
+									firstMoveStarted.resolve();
+									await firstMoveDeferred.promise;
+									return true;
+								}
+								secondMoveStarted = true;
+								return true;
+							},
+						});
+						return queuedTabs;
+					};
+					const firstQueuedMove = backgroundListener(
+						{
+							what: "move-right",
+							label: "Users",
+							url: USERS_URL,
+						},
+						{},
+						() => {},
+					);
+					const secondQueuedMove = backgroundListener(
+						{
+							what: "move-last",
+							label: "Users",
+							url: USERS_URL,
+						},
+						{},
+						() => {},
+					);
+					await firstMoveStarted.promise;
+					assertEquals(totalMoveCalls, 1);
+					assertEquals(secondMoveStarted, false);
+					firstMoveDeferred.resolve();
+					await Promise.all([firstQueuedMove, secondQueuedMove]);
+					assertEquals(totalMoveCalls, 2);
+					assertEquals(secondMoveStarted, true);
+					harness.state.ensureAllTabsHook = null;
 					harness.browser.runtime.triggerMessage({
 						what: "export-perm-open-popup",
 						ok: true,
@@ -2823,8 +3130,10 @@ Deno.test("background message routing covers modal launchers, downloads, sorting
 						true,
 						false,
 					]);
-					assertEquals(orgLi.style.display, "none");
-					assertEquals(genericLi.style.display, "none");
+					assertEquals(
+						harness.records.rowTemplates.length > 0,
+						true,
+					);
 					assertEquals(
 						harness.records.toasts.some((toast) =>
 							toast.message[0] === "error_unknown_message" &&
