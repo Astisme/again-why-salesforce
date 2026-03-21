@@ -149,6 +149,7 @@ async function generateFavouriteButton() {
 	button.dataset.saveAssistiveText = saveTabAssistive;
 	button.dataset.removeAssistiveText = removeTabAssistive;
 	button.setAttribute("aria-label", saveTabAssistive);
+    button.title = saveTabAssistive;
 	const assistiveText = document.createElement("span");
 	assistiveText.classList.add("slds-assistive-text");
 	assistiveText.textContent = saveTabAssistive;
@@ -207,7 +208,7 @@ function toggleFavouriteButton(isSaved = null, button = null) {
 	if (isSaved == null) {
 		return;
 	}
-	const favouriteButton = button ?? document.getElementById(BUTTON_ID);
+	const favouriteButton = button ?? document.getElementById(FAVOURITE_BUTTON_ID);
 	const star = getFavouriteImage(STAR_ID, button);
 	const slashedStar = getFavouriteImage(SLASHED_STAR_ID, button);
 	if (isSaved) {
@@ -223,6 +224,7 @@ function toggleFavouriteButton(isSaved = null, button = null) {
 			: favouriteButton.dataset.saveAssistiveText;
 		favouriteButton.setAttribute("aria-pressed", `${isSaved}`);
 		favouriteButton.setAttribute("aria-label", assistiveLabel);
+        favouriteButton.title = assistiveLabel;
 		const assistiveText = favouriteButton.querySelector(
 			".slds-assistive-text",
 		);

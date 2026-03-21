@@ -23,8 +23,12 @@ type ImportModule = {
 	) => unknown[];
 	readFile: (files: FileLike[] | FileLike) => Promise<void>;
 	readChangeOrDropFiles: (event: {
-		dataTransfer: { files: FileLike[] };
+		dataTransfer?: {
+			files?: FileLike[];
+			items?: { getAsFile: () => FileLike | null }[];
+		};
 		preventDefault: () => void;
+		target?: { files?: FileLike[] };
 	}) => Promise<void>;
 	showFileImport: () => Promise<void>;
 	showTabSelectThenImport: (
@@ -34,6 +38,7 @@ type ImportModule = {
 };
 
 type FileLike = {
+	name?: string;
 	text: () => Promise<string>;
 	type: string;
 };
@@ -208,10 +213,12 @@ class MockTabContainer {
  *
  * @param {string} type Mime type.
  * @param {string} contents File contents.
+ * @param {string} [name=""] Optional file name.
  * @return {FileLike} File stub.
  */
-function createFile(type: string, contents: string): FileLike {
+function createFile(type: string, contents: string, name = ""): FileLike {
 	return {
+		name,
 		text: () => Promise.resolve(contents),
 		type,
 	};
@@ -626,11 +633,50 @@ Deno.test("import rejects non-JSON files and surfaces the validation toast", asy
 				message: "import_invalid_file",
 				status: "error",
 			},
-			{
-				message: ["import_successful", 0, "tabs"],
-				status: undefined,
-			},
 		]);
+	} finally {
+		fixture.cleanup();
+	}
+});
+
+Deno.test("import reads dropped files from dataTransfer.items when files is empty", async () => {
+	const fixture = await loadImportModule({});
+
+	try {
+		await fixture.module.createImportModal();
+		await fixture.module.readChangeOrDropFiles({
+			dataTransfer: {
+				files: [],
+				items: [
+					{
+						getAsFile: () =>
+							createFile(
+								"",
+								JSON.stringify([{
+									label: "ItemDrop",
+									url: "/item",
+									org: "org",
+								}]),
+								"item-drop.json",
+							),
+					},
+				],
+			},
+			preventDefault() {},
+		});
+
+		assertEquals(fixture.importCalls, [{
+			config: {
+				importMetadata: false,
+				preserveOtherOrg: false,
+				resetTabs: false,
+			},
+			json: JSON.stringify([{
+				label: "ItemDrop",
+				url: "/item",
+				org: "org",
+			}]),
+		}]);
 	} finally {
 		fixture.cleanup();
 	}
@@ -969,6 +1015,30 @@ Deno.test("import attaches the drop reader directly", async () => {
 			},
 			json: JSON.stringify([{ label: "Drop", url: "/drop", org: "org" }]),
 		}]);
+	} finally {
+		fixture.cleanup();
+	}
+});
+
+Deno.test("import prevents default drag behavior over the drop area", async () => {
+	const fixture = await loadImportModule({});
+
+	try {
+		await fixture.module.createImportModal();
+		let defaultPrevented = false;
+		let propagationStopped = false;
+		await fixture.changeTarget.dispatchEvent({
+			preventDefault() {
+				defaultPrevented = true;
+			},
+			stopPropagation() {
+				propagationStopped = true;
+			},
+			type: "dragover",
+		} as unknown as Event);
+
+		assertEquals(defaultPrevented, true);
+		assertEquals(propagationStopped, true);
 	} finally {
 		fixture.cleanup();
 	}

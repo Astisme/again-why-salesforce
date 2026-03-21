@@ -18,7 +18,7 @@ import {
 	generateSldsModalWithTabList,
 	MODAL_ID,
 } from "./generator.js";
-import { getModalHanger, getSetupTabUl, showToast } from "./content.js";
+import { getModalHanger, getSetupTabUl, sf_afterSet, showToast } from "./content.js";
 
 const IMPORT_ID = `${EXTENSION_NAME}-import`;
 const IMPORT_FILE_ID = `${IMPORT_ID}-file`;
@@ -311,23 +311,56 @@ async function showTabSelectThenImport(files = [], importConfig = {}) {
 }
 
 /**
+ * Normalizes file-like inputs into a plain array.
+ *
+ * @param {File|File[]|FileList|null|undefined} files - Input files.
+ * @return {File[]} Normalized list of files.
+ */
+function normalizeFiles(files) {
+	if (files == null) {
+		return [];
+	}
+	if (Array.isArray(files)) {
+		return files;
+	}
+	if (typeof files.length === "number") {
+		return Array.from(files);
+	}
+	return [files];
+}
+
+/**
+ * Returns true when the provided file can be treated as JSON.
+ *
+ * Firefox/Linux drops can provide empty MIME types, so fallback to extension.
+ *
+ * @param {File} file - The file to validate.
+ * @return {boolean} Whether the file should be accepted as JSON.
+ */
+function isJsonFile(file) {
+	const fileName = file?.name?.toLowerCase?.() ?? "";
+	return file?.type === "application/json" || fileName.endsWith(".json");
+}
+
+/**
  * Reads and processes JSON files using modern Promise-based API.
  *
  * @param {File|File[]} files - The file(s) to read and validate.
  * @return {Promise<void>}
  */
 async function readFile(files) {
-	const fileArray = Array.isArray(files) || files.length > 0
-		? files
-		: [files];
+	const fileArray = normalizeFiles(files);
 	const validFileArray = [];
 	// Validate all files first
 	for (const file of fileArray) {
-		if (file.type === "application/json") {
+		if (isJsonFile(file)) {
 			validFileArray.push(file);
 		} else {
 			showToast("import_invalid_file", TOAST_ERROR);
 		}
+	}
+	if (validFileArray.length === 0) {
+		return;
 	}
 	try {
 		const selectTabsPick =
@@ -353,6 +386,23 @@ async function readFile(files) {
 }
 
 /**
+ * Extracts files from a change or drop event.
+ *
+ * @param {Event} event - The source event.
+ * @return {File[]} Collected files from all supported event shapes.
+ */
+function getFilesFromChangeOrDropEvent(event) {
+	const targetFiles = normalizeFiles(event.target?.files ?? event.dataTransfer?.files);
+	if (targetFiles.length > 0) {
+		return targetFiles;
+	}
+	const transferItems = normalizeFiles(event.dataTransfer?.items);
+	return transferItems
+		.map((item) => item?.getAsFile?.())
+		.filter((file) => file != null);
+}
+
+/**
  * Handles file selection via input change event.
  * Handles the drop event of files onto the drop area.
  * Prevents default behavior and reads the first selected file.
@@ -362,9 +412,18 @@ async function readFile(files) {
  */
 function readChangeOrDropFiles(event) {
 	event.preventDefault();
-	return readFile(
-		event.target?.files ?? Array.from(event.dataTransfer?.files),
-	);
+	return readFile(getFilesFromChangeOrDropEvent(event));
+}
+
+/**
+ * Prevents default drag-and-drop browser behavior.
+ *
+ * @param {Event} event - Drag event to neutralize.
+ * @return {void}
+ */
+function preventDragDefaults(event) {
+	event.preventDefault();
+	event.stopPropagation();
 }
 /**
  * Attaches event listeners to handle file uploads via both file selection and drag-and-drop.
@@ -378,6 +437,8 @@ function readChangeOrDropFiles(event) {
 function listenToFileUpload() {
 	const dropArea = document.getElementById(IMPORT_ID);
 	dropArea.addEventListener("change", readChangeOrDropFiles);
+	dropArea.addEventListener("dragenter", preventDragDefaults);
+	dropArea.addEventListener("dragover", preventDragDefaults);
 	dropArea.addEventListener("drop", readChangeOrDropFiles);
 }
 
