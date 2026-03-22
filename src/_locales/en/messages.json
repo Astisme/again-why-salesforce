@@ -92,7 +92,7 @@
 		"description": "[command description] the user wants to import new $tabs. DO NOT USE PLACEHOLDERS"
 	},
 	"cmd_open_other_org": {
-		"message": "Show the modal to open the current page in another $org",
+		"message": "Show the modal to open the current page in another Org",
 		"description": "[command description] the user wants to open the current page in another $org. DO NOT USE PLACEHOLDERS"
 	},
 	"cmd_remove_tab": {
