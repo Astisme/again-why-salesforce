@@ -93,7 +93,7 @@
 	"commands": {
 		"cmd-save-as-tab": {
 			"suggested_key": {
-				"default": "Alt+Shift+E"
+				"default": "Alt+Shift+K"
 			},
 			"description": "__MSG_cmd_save_as_tab__"
 		},
