@@ -65,9 +65,7 @@ a.action-link {
 	}
 
 	& > svg {
-		width: 1.5rem;
-		height: 1.5rem;
-		fill: currentColor;
+		fill: var(--color);
 	}
 }
 
@@ -85,4 +83,15 @@ svg#open-settings {
 	flex-direction: row;
 	justify-content: space-evenly;
 	margin: 1rem;
+}
+
+button.warning {
+  background-color: var(--warning);
+  &:hover {
+    background-color: var(--warning-hover);
+  }
+}
+
+#import {
+  color: var(--color);
 }
