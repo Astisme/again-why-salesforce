@@ -128,6 +128,18 @@ type ImportDependencies = {
 		options: { css?: string; link?: string },
 	) => MockElement;
 	showToast: (message: string | unknown[], status?: string) => void;
+	sf_afterSet: (message: SfAfterSetPayload) => void;
+};
+
+type SfAfterSetPayload = {
+	shouldReload?: boolean;
+	tabs?: {
+		importTabs: (
+			json: string,
+			config: Record<string, boolean>,
+		) => Promise<number>;
+	} | null;
+	what?: string;
 };
 
 type ImportFixture = {
@@ -292,6 +304,7 @@ async function loadImportModule({
 	const modalHanger = new MockElement("div");
 	const changeTarget = new MockElement("div");
 	const toasts: { message: string | unknown[]; status?: string }[] = [];
+	const afterSetCalls: SfAfterSetPayload[] = [];
 	const importCalls: { config: Record<string, boolean>; json: string }[] = [];
 	const hangerChildren: MockElement[] = [];
 	const appendCount = { value: 0 };
@@ -485,6 +498,9 @@ function __getInputModalParent() { return inputModalParent; }`,
 			},
 			showToast: (message, status) => {
 				toasts.push({ message, status });
+			},
+			sf_afterSet: (message) => {
+				afterSetCalls.push(message);
 			},
 		},
 		importsToReplace: new Set([

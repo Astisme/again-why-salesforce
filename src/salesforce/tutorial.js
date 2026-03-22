@@ -566,6 +566,7 @@ class Tutorial {
 	/**
 	 * Sends a message to the background page with the tutorial progress passed as input
 	 * @param {number} [stepNo=this.currentStep] - the step at which the tutorial has arrived
+   * @param {boolean} [closedManually=false] - whether the user manually closed the tutorial
 	 * @throws TypeError if stepNo is not a number
 	 * @return Promise<void> the promise from sendExtensionMessage
 	 */
@@ -964,6 +965,7 @@ function redirectToHomeAndStart(tutorial = null) {
  * If the tutorial has not been completed before, prompts the user to start it.
  * Uses localStorage to track completion status.
  *
+ * @param {boolean} [fromPopup=false] - whether the user manually requested to start the tutorial
  * @return {Promise<void>} Resolves after checking and potentially starting the tutorial.
  */
 export async function checkTutorial(fromPopup = false) {

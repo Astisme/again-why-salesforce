@@ -19,7 +19,7 @@ import {
 	generateSldsModalWithTabList,
 	MODAL_ID,
 } from "./generator.js";
-import { getModalHanger, getSetupTabUl, showToast } from "./content.js";
+import { getModalHanger, getSetupTabUl, sf_afterSet, showToast } from "./content.js";
 
 const IMPORT_ID = `${EXTENSION_NAME}-import`;
 const IMPORT_FILE_ID = `${IMPORT_ID}-file`;
@@ -143,6 +143,10 @@ async function launchImport(tabs = [], importConfig = {}) {
 	// remove file import modal
 	document.getElementById(CLOSE_MODAL_ID)?.click();
 	showToast(["import_successful", importedNum, "tabs"]);
+  sf_afterSet({
+    what: "imported",
+    tabs: allTabs,
+  });
 }
 
 /**
