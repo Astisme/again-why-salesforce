@@ -566,7 +566,7 @@ class Tutorial {
 	/**
 	 * Sends a message to the background page with the tutorial progress passed as input
 	 * @param {number} [stepNo=this.currentStep] - the step at which the tutorial has arrived
-   * @param {boolean} [closedManually=false] - whether the user manually closed the tutorial
+	 * @param {boolean} [closedManually=false] - whether the user manually closed the tutorial
 	 * @throws TypeError if stepNo is not a number
 	 * @return Promise<void> the promise from sendExtensionMessage
 	 */
