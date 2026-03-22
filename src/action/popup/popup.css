@@ -1,5 +1,5 @@
 body {
-	width: 26rem;
+	width: 30rem;
 }
 
 body,
@@ -47,23 +47,26 @@ header {
 	}
 }
 
-div#theme-selector {
-	display: flex;
-	align-items: center;
-
-	& > a > svg {
-		& .primary {
-			fill: none;
-			stroke: var(--color);
-		}
-		& .secondary {
-			fill: var(--theme-fill);
-		}
-	}
-}
-
 svg {
 	height: 2rem;
+}
+
+a.action-link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--color);
+	text-decoration: none;
+
+	&:focus-visible {
+		outline: 2px solid var(--highlight);
+		outline-offset: 2px;
+		border-radius: 0.25rem;
+	}
+
+	& > svg {
+		fill: var(--color);
+	}
 }
 
 svg#open-settings {
@@ -80,4 +83,15 @@ svg#open-settings {
 	flex-direction: row;
 	justify-content: space-evenly;
 	margin: 1rem;
+}
+
+button.warning {
+	background-color: var(--warning);
+	&:hover {
+		background-color: var(--warning-hover);
+	}
+}
+
+#import {
+	color: var(--color);
 }

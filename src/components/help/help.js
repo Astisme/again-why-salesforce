@@ -1,5 +1,7 @@
-import { HIDDEN_CLASS } from "/constants.js";
+import { BROWSER, HIDDEN_CLASS } from "/constants.js";
+import { injectStyle } from "/functions.js";
 import { generateHelpWith_i_popup } from "/salesforce/generator.js";
+import ensureTranslatorAvailability from "/translator.js";
 
 /**
  * Class to take care of the Help button in the settings
@@ -32,9 +34,10 @@ class HelpAws extends HTMLElement {
 		this._anchor = anchor;
 		this._tooltip = tooltip;
 		this._linkTip = linkTip;
-		const linkEl = document.createElement("link");
-		linkEl.setAttribute("rel", "stylesheet");
-		linkEl.setAttribute("href", new URL("./help.css", import.meta.url));
+		const linkEl = injectStyle(
+			"awsf-help",
+			{ link: BROWSER.runtime.getURL("/components/help/help.css") },
+		);
 		this.shadowRoot.appendChild(linkEl);
 		this._tooltip.dataset.showRight = this.dataset.showRight ?? "false";
 		this._tooltip.dataset.showLeft = this.dataset.showLeft ?? "false";
@@ -52,9 +55,11 @@ class HelpAws extends HTMLElement {
 
 	/**
 	 * On first connect, sync any attributes already set on the host
+	 * @return Promise fulfilled when everything has been setup
 	 */
 	connectedCallback() {
 		this._syncLink();
+		return this._addAssistiveText();
 	}
 
 	/**
@@ -85,6 +90,16 @@ class HelpAws extends HTMLElement {
 		rel
 			? this._anchor.setAttribute("rel", rel)
 			: this._anchor.removeAttribute("rel");
+	}
+
+	/**
+	 * Ensures the icon-only anchor has an accessible name.
+	 */
+	async _addAssistiveText() {
+		const translator = await ensureTranslatorAvailability();
+		const helpMsg = await translator.translate("help");
+		this._anchor.title = helpMsg;
+		this._anchor.setAttribute("aria-label", helpMsg);
 	}
 }
 

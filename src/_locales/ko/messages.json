@@ -1,4 +1,8 @@
 {
+	"account": {
+		"message": "계정",
+		"description": "ObjectManager/Account/FieldsAndRelationships/view와 관련된 페이지"
+	},
 	"act_delete": {
 		"message": "🗑️ 삭제",
 		"description": "[Tab-관리] 행 삭제"
@@ -39,6 +43,10 @@
 		"message": "오름차순 (A-Z)",
 		"description": ""
 	},
+	"asset": {
+		"message": "자산",
+		"description": "ObjectManager/Asset/FieldsAndRelationships/view와 관련된 페이지"
+	},
 	"available": {
 		"message": "사용 가능",
 		"description": "추가할 수 있는 항목의 섹션 헤더"
@@ -46,6 +54,10 @@
 	"bold": {
 		"message": "굵게",
 		"description": "굵은 텍스트용 글꼴 스타일 옵션"
+	},
+	"campaign": {
+		"message": "캠페인",
+		"description": "ObjectManager/Campaign/FieldsAndRelationships/view와 관련된 페이지"
 	},
 	"cancel": {
 		"message": "취소",
@@ -55,9 +67,21 @@
 		"message": "취소하고 닫기",
 		"description": "모달 닫기 버튼의 제목 또는 textContent"
 	},
+	"case": {
+		"message": "사례",
+		"description": "ObjectManager/Case/FieldsAndRelationships/view와 관련된 페이지 이름"
+	},
 	"chosen": {
 		"message": "선택됨",
 		"description": "선택된 항목의 섹션 헤더"
+	},
+	"classic_email_templates": {
+		"message": "클래식 이메일 템플릿",
+		"description": "CommunicationTemplatesEmail/home과 관련된 페이지"
+	},
+	"close": {
+		"message": "닫기",
+		"description": "아무 일도 일어나지 않고 닫기"
 	},
 	"cmd_export_all": {
 		"message": "저장된 모든 Tab을 내보내기 위한 모달 표시",
@@ -87,6 +111,14 @@
 		"message": "현재 페이지를 업데이트하기 위한 모달 표시 (저장된 경우)",
 		"description": "[명령 설명] 사용자가 현재 페이지를 업데이트하고 싶어합니다"
 	},
+	"company_information": {
+		"message": "회사 정보",
+		"description": "CompanyProfileInfo/home과 관련된 페이지"
+	},
+	"confirm": {
+		"message": "확인",
+		"description": "사용자에게 계속하도록 요청하는 텍스트"
+	},
 	"confirm_another_org": {
 		"message": "이 링크 열기를 확인합니다.",
 		"description": "[다른_조직_열기_모달] 구성된 링크를 열도록 사용자에게 확인을 요청합니다."
@@ -94,6 +126,10 @@
 	"confirm_update_extension": {
 		"message": "$extension_label 의 새 버전을 지금 사용할 수 있습니다!",
 		"description": "수신기에서 알 수 없는 메시지를 받았습니다."
+	},
+	"contact": {
+		"message": "연락처",
+		"description": "ObjectManager/Contact/FieldsAndRelationships/view와 관련된 페이지"
 	},
 	"continue": {
 		"message": "계속",
@@ -555,6 +591,10 @@
 		"message": "번역기가 아직 초기화되지 않았습니다.",
 		"description": "[오류] TranslationService가 준비되지 않았습니다"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "튜토리얼을 초기화할 수 없습니다.",
+		"description": "[error] 튜토리얼이 초기화되지 않음"
+	},
 	"error_unknown_file_structure": {
 		"message": "가져오려는 파일을 인식할 수 없습니다\n문제가 지속되면 GitHub 이슈를 열어 공유해 주세요",
 		"description": "[가져오기] 사용자의 파일을 인식할 수 없습니다"
@@ -566,6 +606,10 @@
 	"error_unknown_request": {
 		"message": "알 수 없는 요청입니다.",
 		"description": "[오류] 인식되지 않은 메시지를 받은 후 발생하는 일반 오류"
+	},
+	"error_unknown_toast_type": {
+		"message": "요청된 알림 유형을 해석할 수 없습니다. 코드를 변경하십시오.",
+		"description": "[error] 알림 유형 설정 시 사용되는 일반 오류"
 	},
 	"error_unpin_tab": {
 		"message": "Tab 고정 해제 중 오류",
@@ -598,6 +642,10 @@
 	"extension_label": {
 		"message": "Again, Why Salesforce",
 		"description": "이 확장 프로그램의 이름"
+	},
+	"field_accessibility": {
+		"message": "필드 접근성",
+		"description": "FieldAccessibility/home과 관련된 페이지"
 	},
 	"file": {
 		"message": "파일",
@@ -783,13 +831,29 @@
 		"message": "레이블",
 		"description": "[key] Tab의 이름"
 	},
+	"lead": {
+		"message": "리드",
+		"description": "ObjectManager/Lead/FieldsAndRelationships/view와 관련된 페이지"
+	},
+	"learn_more_about_extension": {
+		"message": "$extension_label 에 대해 자세히 알아보기",
+		"description": "[popup][settings] 위키 도움말 버튼의 접근 가능한 제목 및 aria-label"
+	},
 	"lightning_navigation": {
 		"message": "Lightning Navigation",
 		"description": "Salesforce의 맞춤 탐색 기술"
 	},
+	"login_history": {
+		"message": "로그인 기록",
+		"description": "OrgLoginHistory/home과 관련된 페이지"
+	},
 	"login_to_salesforce": {
 		"message": "Salesforce에 로그인",
 		"description": "[Salesforce설정아님] 사용자를 Salesforce 로그인 페이지로 리디렉션하는 버튼의 클릭 유도문안"
+	},
+	"manage_connected_apps": {
+		"message": "연결된 앱 관리",
+		"description": "ConnectedApplication/home과 관련된 페이지"
 	},
 	"manage_tabs": {
 		"message": "$tabs 관리",
@@ -842,6 +906,10 @@
 	"open_setup": {
 		"message": "설정 열기",
 		"description": "[Salesforce설정아님] 사용자를 Salesforce 설정 페이지로 리디렉션하는 버튼의 클릭 유도문안"
+	},
+	"opportunity": {
+		"message": "기회",
+		"description": "ObjectManager/Opportunity/FieldsAndRelationships/view와 관련된 페이지"
 	},
 	"opt_add_tabs_as_org": {
 		"message": "새 Tab을 Org Tab으로 추가합니다.",
@@ -975,6 +1043,10 @@
 		"message": "권한이 허용되었습니다!",
 		"description": "[성공] 사용자가 권한을 요청하도록 했고 이를 수락함"
 	},
+	"permission_sets": {
+		"message": "권한 세트",
+		"description": "PermSets/home과 관련된 페이지"
+	},
 	"pinned": {
 		"message": "Pinned",
 		"description": "항상 목록 맨 앞에서 발견되는 사용자 Tab"
@@ -983,9 +1055,21 @@
 		"message": "다른 조직의 Tabs 보존.",
 		"description": "[레이블] 가져오기 프로세스 중 모든 조직별 Tabs 유지"
 	},
+	"pricebook2": {
+		"message": "가격표 2",
+		"description": "ObjectManager/Pricebook2/FieldsAndRelationships/view와 관련된 페이지"
+	},
+	"product2": {
+		"message": "제품 2",
+		"description": "ObjectManager/Product2/FieldsAndRelationships/view와 관련된 페이지"
+	},
 	"remove_tab": {
 		"message": "Tab 제거",
 		"description": "[alt] 그림이 작동하지 않을 때의 대체 텍스트"
+	},
+	"reports_and_dashboards_settings": {
+		"message": "보고서 및 대시보드 설정",
+		"description": "ReportUI/home과 관련된 페이지"
 	},
 	"req_downloads_open_popup": {
 		"message": "브라우저의 확장 프로그램 메뉴에서 확장 프로그램 팝업을 열어주세요.",
@@ -1066,6 +1150,10 @@
 	"send_tip": {
 		"message": "팁을 보내주세요 ❤️",
 		"description": "[popup] 팁 전송을 요청하는 svg의 제목"
+	},
+	"sessions": {
+		"message": "세션",
+		"description": "SecuritySession/home과 관련된 페이지"
 	},
 	"set_gen_preview": {
 		"message": "Tab 미리보기",
@@ -1327,9 +1415,17 @@
 		"message": "설정",
 		"description": "설정 메뉴 레이블"
 	},
+	"setup_audit_trail": {
+		"message": "설정 감사 추적",
+		"description": "SecurityEvents/home과 관련된 페이지"
+	},
 	"setup_page": {
 		"message": "설정 페이지",
 		"description": "[Salesforce설정아님] Salesforce 설정을 수정하는 데 사용되는 페이지"
+	},
+	"sharing_settings": {
+		"message": "공유 설정",
+		"description": "SecuritySharing/home과 관련된 페이지"
 	},
 	"show_all_tabs": {
 		"message": "모든 $tabs 보기",
@@ -1439,6 +1535,10 @@
 		"message": "Tabs가 저장되었습니다.",
 		"description": "[토스트] Tabs가 성공적으로 저장되었습니다."
 	},
+	"task": {
+		"message": "작업",
+		"description": "ObjectManager/Task/FieldsAndRelationships/view와 관련된 페이지"
+	},
 	"theme_dark": {
 		"message": "테마를 어둡게 변경",
 		"description": "[팝업] 테마 전환을 위한 달 아이콘 제목"
@@ -1446,6 +1546,94 @@
 	"theme_light": {
 		"message": "테마를 밝게 변경",
 		"description": "[팝업] 테마 전환을 위한 태양 아이콘 제목"
+	},
+	"tutorial": {
+		"message": "튜토리얼",
+		"description": "[popup] 튜토리얼 시작 버튼"
+	},
+	"tutorial_add_favourite": {
+		"message": "별을 클릭하여 이 페이지를 즐겨찾기에 추가하세요.",
+		"description": "[tutorial] 즐겨찾기 추가"
+	},
+	"tutorial_click_highlighted_tab": {
+		"message": "강조 표시된 $tab 을 클릭하여 해당 페이지로 이동하세요.",
+		"description": "[tutorial] 강조된 탭 클릭"
+	},
+	"tutorial_continue_prompt_body": {
+		"message": "$extension_label 을 위한 것이며, 중단된 부분부터 완료되지 않은 $tutorial 을 계속 진행합니다.",
+		"description": "[tutorial] 튜토리얼 계속하기 본문 텍스트"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "마지막 단계부터 $tutorial 을 계속하시겠습니까?",
+		"description": "[tutorial] 튜토리얼 계속하기 모달 제목"
+	},
+	"tutorial_drag_flows": {
+		"message": "강조 표시된 행을 (6개의 점 사용) 드래그하여 첫 번째 행(고정된 행) 앞에 놓으세요.",
+		"description": "[tutorial] 흐름 드래그"
+	},
+	"tutorial_end": {
+		"message": "$tutorial 이 완료되었습니다! 확장 프로그램을 즐겁게 사용하세요.",
+		"description": "[tutorial] 종료"
+	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "$tutorial 을 시작하는 데 사용할 수 있는 링크를 찾을 수 없습니다.\n$tabs 를 내보내고 $tutorial 을 다시 시작하세요.",
+		"description": "[tutorial] 시작 불가 오류 메시지"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "이것은 즐겨찾는 $tabs 이며 자주 사용하는 페이지에 빠르게 액세스하는 데 사용됩니다.",
+		"description": "[tutorial] 즐겨찾기 탭 강조"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "단축키를 눌러 확장 프로그램 동작을 변경하고 $tabs 의 스타일을 지정할 수 있는 $settings 페이지를 엽니다.",
+		"description": "[tutorial] 단축키"
+	},
+	"tutorial_manage_tabs": {
+		"message": "페이지(탭이 아님)를 마우스 오른쪽 버튼으로 클릭하고 $extension_label > $cxm_manage_tabs 를 선택하여 관리 모달을 엽니다.",
+		"description": "[tutorial] 탭 관리"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "이 화면에서 $tabs 를 관리할 수 있습니다. 자세한 내용을 보려면 여기를 클릭하세요.",
+		"description": "[tutorial] 탭 관리 링크"
+	},
+	"tutorial_pin_tab": {
+		"message": "강조 표시된 $tab 을 마우스 오른쪽 버튼으로 클릭하고 $extension_label > $cxm_move > $cxm_pin_tab 을 선택하여 고정하세요.",
+		"description": "[tutorial] 탭 고정"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "드래그한 행은 (현재 고정되어 있지 않기 때문에) 고정된 행 앞으로 이동할 수 없으므로 고정되지 않은 목록의 시작 부분으로 이동했습니다. 이 두 목록은 별도로 처리됩니다.",
+		"description": "[tutorial] 고정 설명"
+	},
+	"tutorial_pinned_tab": {
+		"message": "$tab 이 고정되어 제자리에 유지됩니다.",
+		"description": "[tutorial] 고정된 탭"
+	},
+	"tutorial_redirect_account": {
+		"message": "더 많은 내용을 보여드리기 위해 다른 페이지로 리디렉션합니다. 계속하려면 여기를 클릭하세요.",
+		"description": "[tutorial] 계정으로 리디렉션"
+	},
+	"tutorial_remove_favourite": {
+		"message": "취소선이 그어진 별을 클릭하여 즐겨찾기에서 이 페이지를 제거하세요. 팁: 이 단계가 완료된 후 별을 클릭하면 이 $tab 을 잃지 않을 수 있습니다.",
+		"description": "[tutorial] 즐겨찾기 제거"
+	},
+	"tutorial_restart": {
+		"message": "팝업의 버튼을 클릭하여 언제든지 $tutorial 을 다시 시작할 수 있습니다.",
+		"description": "[tutorial] 첫 번째 메시지"
+	},
+	"tutorial_restart_prompt": {
+		"message": "$tutorial 을 처음부터 시작하시겠습니까?",
+		"description": "[tutorial] 튜토리얼 다시 시작 프롬프트"
+	},
+	"tutorial_save_modal": {
+		"message": "$save 를 클릭하여 변경 사항을 적용하고 확인 메시지를 확인하세요.",
+		"description": "[tutorial] 모달 저장"
+	},
+	"tutorial_start_prompt_body": {
+		"message": "$extension_label 을 위한 것이며, 먼저 설정 홈 페이지로 이동한 다음 안내된 $tutorial 을 시작합니다.",
+		"description": "[tutorial] 튜토리얼 시작 본문 텍스트"
+	},
+	"tutorial_start_prompt_title": {
+		"message": "설정 홈에서 $tutorial 을 시작하시겠습니까?",
+		"description": "[tutorial] 튜토리얼 시작 모달 제목"
 	},
 	"underline": {
 		"message": "밑줄",
@@ -1490,6 +1678,10 @@
 	"where_to": {
 		"message": "어디로?",
 		"description": "[다른_조직_열기_모달] 모달의 대체 제목"
+	},
+	"wiki_label": {
+		"message": "$extension_label 에 대해 자세히 알아보기",
+		"description": "[popup][settings] 위키 도움말 버튼의 접근 가능한 제목 및 aria-label"
 	},
 	"write_review": {
 		"message": "리뷰를 작성해 주세요!",

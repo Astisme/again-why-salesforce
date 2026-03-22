@@ -1,4 +1,8 @@
 {
+	"account": {
+		"message": "Konto",
+		"description": "Sida relaterad till ObjectManager/Account/FieldsAndRelationships/view"
+	},
 	"act_delete": {
 		"message": "🗑️ Ta bort",
 		"description": "[hantera-Tab] ta bort en rad"
@@ -39,6 +43,10 @@
 		"message": "Stigande (A-Z)",
 		"description": ""
 	},
+	"asset": {
+		"message": "Tillgång",
+		"description": "Sida relaterad till ObjectManager/Asset/FieldsAndRelationships/view"
+	},
 	"available": {
 		"message": "Tillgänglig",
 		"description": "Avsnittsrubrik för objekt som kan läggas till"
@@ -46,6 +54,10 @@
 	"bold": {
 		"message": "Fet",
 		"description": "Teckensnittsalternativ för fet text"
+	},
+	"campaign": {
+		"message": "Kampanj",
+		"description": "Sida relaterad till ObjectManager/Campaign/FieldsAndRelationships/view"
 	},
 	"cancel": {
 		"message": "Avbryt",
@@ -55,9 +67,21 @@
 		"message": "Avbryt och stäng",
 		"description": "titel eller textinnehåll för stäng-knappen på modaler"
 	},
+	"case": {
+		"message": "Ärende",
+		"description": "Namnet på sidan relaterad till ObjectManager/Case/FieldsAndRelationships/view"
+	},
 	"chosen": {
 		"message": "Vald",
 		"description": "Avsnittsrubrik för objekt som har valts"
+	},
+	"classic_email_templates": {
+		"message": "Klassiska e-postmallar",
+		"description": "Sida relaterad till CommunicationTemplatesEmail/home"
+	},
+	"close": {
+		"message": "Stäng",
+		"description": "stäng utan att något händer"
 	},
 	"cmd_export_all": {
 		"message": "Visa modalen för att exportera alla sparade Tabs",
@@ -87,6 +111,14 @@
 		"message": "Visa modal för att uppdatera aktuell sida (om sparad)",
 		"description": "[kommandobeskrivning] användaren vill uppdatera aktuell sida"
 	},
+	"company_information": {
+		"message": "Företagsinformation",
+		"description": "Sida relaterad till CompanyProfileInfo/home"
+	},
+	"confirm": {
+		"message": "Bekräfta",
+		"description": "text för att be användaren fortsätta"
+	},
 	"confirm_another_org": {
 		"message": "Bekräfta att du vill öppna denna länk.",
 		"description": "[open-other-org-modal] begär bekräftelse från användaren att öppna den konstruerade länken."
@@ -94,6 +126,10 @@
 	"confirm_update_extension": {
 		"message": "En ny version av $extension_label är nu tillgänglig!",
 		"description": "ett okänt meddelande har tagits emot från en lyssnare"
+	},
+	"contact": {
+		"message": "Kontakt",
+		"description": "Sida relaterad till ObjectManager/Contact/FieldsAndRelationships/view"
 	},
 	"continue": {
 		"message": "Fortsätt",
@@ -555,6 +591,10 @@
 		"message": "översättaren var inte initialiserad än.",
 		"description": "[fel] TranslationService var inte redo"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "guiden kunde inte initieras.",
+		"description": "[error] Guiden initierades inte"
+	},
 	"error_unknown_file_structure": {
 		"message": "Vi kunde inte förstå en fil som du ville importera\nOm problemet kvarstår, dela det med oss genom att öppna ett GitHub-ärende",
 		"description": "[importera] användarens fil kändes inte igen"
@@ -566,6 +606,10 @@
 	"error_unknown_request": {
 		"message": "Okänt begäran.",
 		"description": "[fel] Allmänt fel efter att ha mottagit ett meddelande som inte kändes igen"
+	},
+	"error_unknown_toast_type": {
+		"message": "Begärd aviseringstyp kunde inte tolkas. Vänligen ändra din kod.",
+		"description": "[error] Generellt fel som används vid inställning av aviseringstyp (toast)"
 	},
 	"error_unpin_tab": {
 		"message": "Fel vid lossning av Tab",
@@ -598,6 +642,10 @@
 	"extension_label": {
 		"message": "Again, Why Salesforce",
 		"description": "Namnet på detta tillägg"
+	},
+	"field_accessibility": {
+		"message": "Fälttillgänglighet",
+		"description": "Sida relaterad till FieldAccessibility/home"
 	},
 	"file": {
 		"message": "fil",
@@ -783,13 +831,29 @@
 		"message": "Etikett",
 		"description": "[key] namnet på Tab"
 	},
+	"lead": {
+		"message": "Lead",
+		"description": "Sida relaterad till ObjectManager/Lead/FieldsAndRelationships/view"
+	},
+	"learn_more_about_extension": {
+		"message": "läs mer om $extension_label",
+		"description": "[popup][settings] tillgänglig titel och aria-label för wiki-hjälpknapp"
+	},
 	"lightning_navigation": {
 		"message": "Lightning-navigering",
 		"description": "Salesforces anpassade navigeringsteknik"
 	},
+	"login_history": {
+		"message": "Inloggningshistorik",
+		"description": "Sida relaterad till OrgLoginHistory/home"
+	},
 	"login_to_salesforce": {
 		"message": "Logga in på Salesforce",
 		"description": "[notSalesforceSetup] uppmaning på en knapp för att omdirigera användaren till Salesforce inloggningssida"
+	},
+	"manage_connected_apps": {
+		"message": "Hantera anslutna appar",
+		"description": "Sida relaterad till ConnectedApplication/home"
 	},
 	"manage_tabs": {
 		"message": "Hantera $tabs",
@@ -842,6 +906,10 @@
 	"open_setup": {
 		"message": "Öppna Setup",
 		"description": "[notSalesforceSetup] uppmaning på en knapp för att omdirigera användaren till Salesforce Setup-sidan"
+	},
+	"opportunity": {
+		"message": "Affärsmöjlighet",
+		"description": "Sida relaterad till ObjectManager/Opportunity/FieldsAndRelationships/view"
 	},
 	"opt_add_tabs_as_org": {
 		"message": "Lägg till nya Tab-bar som Org Tab-bar.",
@@ -975,6 +1043,10 @@
 		"message": "Tillståndet har beviljats!",
 		"description": "[framgång] användaren bad oss att begära ett tillstånd och de accepterade det"
 	},
+	"permission_sets": {
+		"message": "Behörighetsuppsättningar",
+		"description": "Sida relaterad till PermSets/home"
+	},
 	"pinned": {
 		"message": "Fäst",
 		"description": "Användarens Tab-ar som alltid finns i början av listan"
@@ -983,9 +1055,21 @@
 		"message": "Behåll Tabbar för andra organisationer.",
 		"description": "[label] behåll alla organisationsspecifika Tabbar vid import"
 	},
+	"pricebook2": {
+		"message": "Prislista 2",
+		"description": "Sida relaterad till ObjectManager/Pricebook2/FieldsAndRelationships/view"
+	},
+	"product2": {
+		"message": "Produkt 2",
+		"description": "Sida relaterad till ObjectManager/Product2/FieldsAndRelationships/view"
+	},
 	"remove_tab": {
 		"message": "Ta bort Tab",
 		"description": "[alt] alternativ text när bilder inte visas"
+	},
+	"reports_and_dashboards_settings": {
+		"message": "Inställningar för rapporter och instrumentpaneler",
+		"description": "Sida relaterad till ReportUI/home"
 	},
 	"req_downloads_open_popup": {
 		"message": "Vänligen öppna tilläggets popup från tilläggsmenyn i din webbläsare.",
@@ -1066,6 +1150,10 @@
 	"send_tip": {
 		"message": "Skicka oss ett tips ❤️",
 		"description": "[popup] titel för svg för att be om att skicka ett tips"
+	},
+	"sessions": {
+		"message": "Sessioner",
+		"description": "Sida relaterad till SecuritySession/home"
 	},
 	"set_gen_preview": {
 		"message": "Tab Förhandsgranskning",
@@ -1327,9 +1415,17 @@
 		"message": "Inställningar",
 		"description": "Etikett för inställningsmenyn"
 	},
+	"setup_audit_trail": {
+		"message": "Granskningslista för inställningar",
+		"description": "Sida relaterad till SecurityEvents/home"
+	},
 	"setup_page": {
 		"message": "Setup-sida",
 		"description": "[notSalesforceSetup] sidan för att ändra inställningarna i Salesforce"
+	},
+	"sharing_settings": {
+		"message": "Delningsinställningar",
+		"description": "Sida relaterad till SecuritySharing/home"
 	},
 	"show_all_tabs": {
 		"message": "Visa alla $tabs",
@@ -1439,6 +1535,10 @@
 		"message": "Tabbar sparade.",
 		"description": "[toast] Tabbar sparades framgångsrikt."
 	},
+	"task": {
+		"message": "Uppgift",
+		"description": "Sida relaterad till ObjectManager/Task/FieldsAndRelationships/view"
+	},
 	"theme_dark": {
 		"message": "Byt tema till mörkt",
 		"description": "[popup] rubrik för mån-ikonen för att byta tema"
@@ -1446,6 +1546,94 @@
 	"theme_light": {
 		"message": "Byt tema till ljust",
 		"description": "[popup] rubrik för sol-ikonen för att byta tema"
+	},
+	"tutorial": {
+		"message": "Guide",
+		"description": "[popup] knapp för att starta guide"
+	},
+	"tutorial_add_favourite": {
+		"message": "Klicka på stjärnan för att lägga till denna sida i favoriter.",
+		"description": "[tutorial] lägg till favorit"
+	},
+	"tutorial_click_highlighted_tab": {
+		"message": "Klicka på den markerade fliken $tab för att navigera till motsvarande sida.",
+		"description": "[tutorial] klicka på markerad flik"
+	},
+	"tutorial_continue_prompt_body": {
+		"message": "Detta är för $extension_label och kommer att fortsätta din oavslutade $tutorial där du slutade.",
+		"description": "[tutorial] text för att fortsätta guiden"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "Fortsätt $tutorial från det sista steget?",
+		"description": "[tutorial] modal titel för att fortsätta guiden"
+	},
+	"tutorial_drag_flows": {
+		"message": "Dra den markerade raden (med hjälp av de 6 punkterna) och släpp den före den första raden (som är fäst).",
+		"description": "[tutorial] dra flöden"
+	},
+	"tutorial_end": {
+		"message": "$tutorial klar! Ha så kul med tillägget.",
+		"description": "[tutorial] slut"
+	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "Vi hittade inga användbara länkar för att starta $tutorial\nVänligen exportera dina flikar $tabs och starta om $tutorial",
+		"description": "[tutorial] felmeddelande när det inte går att starta"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "Detta är dina favoritflikar $tabs och används för snabb åtkomst till ofta använda sidor.",
+		"description": "[tutorial] markera favoritflik"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "Tryck på kortkommandot för att öppna sidan $settings där du kan ändra tilläggets beteende och stajla dina flikar $tabs",
+		"description": "[tutorial] kortkommando"
+	},
+	"tutorial_manage_tabs": {
+		"message": "Högerklicka på sidan (inte på en flik) och välj $extension_label > $cxm_manage_tabs för att öppna hanteringsfönstret.",
+		"description": "[tutorial] hantera flik"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "Du kan hantera dina flikar $tabs från den här skärmen. Klicka här för mer information.",
+		"description": "[tutorial] länk för flikhantering"
+	},
+	"tutorial_pin_tab": {
+		"message": "Högerklicka på den markerade fliken $tab och välj $extension_label > $cxm_move > $cxm_pin_tab för att fästa den.",
+		"description": "[tutorial] fäst flik"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "Den dragna raden kunde inte flyttas före den fästa raden (eftersom den inte är fäst för tillfället), så den hamnade i början av listan över ofästa objekt. Dessa två listor behandlas separat.",
+		"description": "[tutorial] förklaring av fäst"
+	},
+	"tutorial_pinned_tab": {
+		"message": "Observera att fliken $tab nu är fäst och kommer att stanna på plats.",
+		"description": "[tutorial] fäst flik"
+	},
+	"tutorial_redirect_account": {
+		"message": "Vi kommer nu att omdirigera dig till en annan sida för att visa dig mer. Klicka här för att fortsätta.",
+		"description": "[tutorial] omdirigera till konto"
+	},
+	"tutorial_remove_favourite": {
+		"message": "Klicka på den överstrukna stjärnan för att ta bort den här sidan från favoriter. TIPS: du kan klicka på stjärnan efter att det här steget är klart för att undvika att förlora denna flik $tab",
+		"description": "[tutorial] ta bort favorit"
+	},
+	"tutorial_restart": {
+		"message": "Du kan när som helst starta om $tutorial genom att klicka på knappen i popup-fönstret.",
+		"description": "[tutorial] första meddelandet"
+	},
+	"tutorial_restart_prompt": {
+		"message": "Vill du starta $tutorial från början?",
+		"description": "[tutorial] uppmaning att starta om guiden"
+	},
+	"tutorial_save_modal": {
+		"message": "Klicka på $save för att tillämpa ändringarna och se bekreftelsemeddelandet.",
+		"description": "[tutorial] spara modal"
+	},
+	"tutorial_start_prompt_body": {
+		"message": "Detta är för $extension_label och kommer att ta dig till Setup Home-sidan först, sedan starta den guidade $tutorial",
+		"description": "[tutorial] text för att starta guiden"
+	},
+	"tutorial_start_prompt_title": {
+		"message": "Starta $tutorial från Setup Home?",
+		"description": "[tutorial] modal titel för att starta guiden"
 	},
 	"underline": {
 		"message": "Understruken",
@@ -1490,6 +1678,10 @@
 	"where_to": {
 		"message": "Vart?",
 		"description": "[open-other-org-modal] alternativ rubrik för modaldialogen"
+	},
+	"wiki_label": {
+		"message": "läs mer om $extension_label",
+		"description": "[popup][settings] tillgänglig titel och aria-label för wiki-hjälpknapp"
 	},
 	"write_review": {
 		"message": "Skriv en recension!",

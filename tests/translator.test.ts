@@ -1,12 +1,6 @@
-// deno-lint-ignore-file no-explicit-any
+/// <reference lib="dom" />
 import { assertEquals } from "@std/testing/asserts";
-import { mockBrowser, translations } from "./mocks.ts";
-declare global {
-	var chrome: typeof mockBrowser;
-	var browser: typeof mockBrowser;
-}
-// Setup global objects that extension code expects
-globalThis.chrome = mockBrowser as any;
+import { translations } from "./mocks.test.ts";
 import ensureTranslatorAvailability from "/translator.js";
 const translate_element_attribute = "data-i18n";
 
@@ -17,6 +11,8 @@ Deno.test("TranslationService - load user preference", async () => {
 		"fr",
 		"Should load language from storage",
 	);
+	assertEquals(service.translateAttributeDataset, "i18n");
+	assertEquals(service.separator, "+-+");
 });
 
 Deno.test("TranslationService - translate method", async () => {
@@ -74,9 +70,9 @@ Deno.test("TranslationService - updatePageTranslations", async (t) => {
 	await t.step("translates to french", async () => {
 		// Mock DOM elements
 		await service.updatePageTranslations("fr");
-		const mockEle = document.querySelectorAll(
+		const mockEle = Array.from(document.querySelectorAll(
 			`[${translate_element_attribute}]`,
-		);
+		)) as HTMLElement[];
 		assertEquals(
 			mockEle[0].textContent,
 			"Bonjour",
@@ -107,9 +103,9 @@ Deno.test("TranslationService - updatePageTranslations", async (t) => {
 	await t.step("translates to english", async () => {
 		// Mock DOM elements
 		await service.updatePageTranslations("en");
-		const mockEle = document.querySelectorAll(
+		const mockEle = Array.from(document.querySelectorAll(
 			`[${translate_element_attribute}]`,
-		);
+		)) as HTMLElement[];
 		assertEquals(
 			mockEle[0].textContent,
 			"Hello",
@@ -142,7 +138,9 @@ Deno.test("TranslationService - loadLanguageFile", async () => {
 	const service = await ensureTranslatorAvailability();
 	// Test loading a new language
 	// Add mock de to translations
-	const mockJson = { "test": "Test de" };
+	const mockJson: Record<string, { message: string }> = {
+		"test": { message: "Test de" },
+	};
 	translations.de = mockJson;
 	const result = await service.loadLanguageFile("de");
 	assertEquals(result, mockJson, "Should return loaded translations");
@@ -168,4 +166,23 @@ Deno.test("TranslationService - loadLanguageFile", async () => {
 		translations.en,
 		"Should return fallback language on error",
 	);
+	await service.loadLanguageFile("pt_BR");
+});
+
+Deno.test("TranslationService - edge cases", async () => {
+	const service = await ensureTranslatorAvailability();
+	assertEquals(
+		await service.translate("plain sentence key"),
+		"plain sentence key",
+		"Missing space-delimited keys should be returned as-is",
+	);
+
+	const originalDocument = globalThis.document;
+	Reflect.set(globalThis, "document", undefined);
+	assertEquals(
+		await service.updatePageTranslations("en"),
+		false,
+		"Should return false when no document is available",
+	);
+	Reflect.set(globalThis, "document", originalDocument);
 });

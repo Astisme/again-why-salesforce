@@ -12,3 +12,9 @@ safari-*/
 node_modules/
 package-lock.json
 images/palette.png
+tests/salesforce/browser-endpoint.txt
+tests/salesforce/chrome-profile/
+coverage
+
+# Nightshift plan artifacts (keep out of version control)
+.nightshift-plan 

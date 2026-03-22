@@ -1,5 +1,6 @@
-import { mockStorage } from "../mocks.ts";
+import { mockStorage } from "../mocks.test.ts";
 import { assert, assertEquals, assertFalse } from "@std/testing/asserts";
+import { waitForCondition } from "../async.test.ts";
 
 import {
 	bg_getCommandLinks,
@@ -10,16 +11,60 @@ import {
 } from "/background/background.js";
 import {
 	BROWSER,
+	CMD_EXPORT_ALL,
+	CXM_MANAGE_TABS,
 	GENERIC_TAB_STYLE_KEY,
 	LOCALE_KEY,
 	NO_RELEASE_NOTES,
 	ORG_TAB_STYLE_KEY,
+	PERM_CHECK,
 	SETTINGS_KEY,
 	TAB_ADD_FRONT,
+	TOAST_ERROR,
+	TOAST_WARNING,
 	USER_LANGUAGE,
+	WHAT_EXPORT,
+	WHAT_EXPORT_CHECK,
+	WHAT_GET,
+	WHAT_GET_BROWSER_TAB,
+	WHAT_GET_COMMANDS,
+	WHAT_GET_SETTINGS,
+	WHAT_GET_SF_LANG,
+	WHAT_GET_STYLE_SETTINGS,
+	WHAT_SAVED,
+	WHAT_SET,
+	WHAT_SHOW_EXPORT_MODAL,
+	WHAT_SHOW_IMPORT,
+	WHAT_START_TUTORIAL,
+	WHAT_THEME,
 	WHY_KEY,
 } from "/constants.js";
 import { getStyleSettings } from "/functions.js";
+
+type EnabledSetting = {
+	id: string;
+	enabled: boolean | string;
+};
+
+type CommandLink = {
+	name: string;
+	shortcut: string;
+};
+
+/**
+ * Narrows a retrieved setting to the shape used by these tests.
+ *
+ * @param setting Retrieved setting value.
+ * @return {asserts setting is EnabledSetting}
+ */
+function assertIsEnabledSetting(
+	setting: unknown,
+): asserts setting is EnabledSetting {
+	assert(setting != null);
+	assert(!Array.isArray(setting));
+	assert(typeof setting === "object");
+	assert("enabled" in setting);
+}
 
 const oldtabs = [
 	{ label: "a", url: "m", org: "o" },
@@ -49,7 +94,7 @@ await Deno.test("bg_getStorage behavior", async (t) => {
 		assertEquals(tabs.at(-1).label, "i");
 		const newtabs = await bg_getStorage(undefined, WHY_KEY);
 		assertEquals(newtabs, tabs);
-		bg_getStorage((calledtabs) => {
+		bg_getStorage((calledtabs: unknown) => {
 			assertEquals(calledtabs, tabs);
 		}, WHY_KEY);
 	});
@@ -98,14 +143,13 @@ await Deno.test("bg_getSettings behavior", async (t) => {
 		bg_getSettings(
 			undefined,
 			SETTINGS_KEY,
-			(calledsettings) => assertEquals(calledsettings, settings),
+			(calledsettings: unknown) => assertEquals(calledsettings, settings),
 		);
 	});
 
 	await t.step("get one specific setting", async () => {
 		const no_release = await bg_getSettings(NO_RELEASE_NOTES);
-		assert(no_release != null);
-		assertFalse(Array.isArray(no_release));
+		assertIsEnabledSetting(no_release);
 		assert(no_release.enabled);
 	});
 
@@ -163,7 +207,7 @@ await Deno.test("bg_setStorage behavior", async (t) => {
 		await bg_setStorage([oldtabs[0]], undefined, WHY_KEY);
 		const newtabs = await bg_getStorage();
 		assertEquals(newtabs, [oldtabs[0]]);
-		bg_setStorage(oldtabs, (calledtabs) => {
+		bg_setStorage(oldtabs, (calledtabs: unknown) => {
 			assertEquals(calledtabs, oldtabs);
 		}, WHY_KEY);
 	});
@@ -175,8 +219,7 @@ await Deno.test("bg_setStorage behavior", async (t) => {
 			SETTINGS_KEY,
 		);
 		const newset = await bg_getSettings("new_setting");
-		assert(newset != null);
-		assertFalse(Array.isArray(newset));
+		assertIsEnabledSetting(newset);
 		assert(newset.enabled);
 	});
 
@@ -242,6 +285,23 @@ await Deno.test("bg_getSalesforceLanguage behavior", async () => {
 	assertEquals(sflang, "sf-lang-en"); // only for tests, from Salesforce, we'll get the correct language
 });
 
+await Deno.test("bg_getSalesforceLanguage ignores lookalike non-Salesforce hosts", async () => {
+	mockStorage[LOCALE_KEY] = "fallback-locale";
+	BROWSER.tabs.setMockBrowserTabs([{
+		id: 0,
+		url: "https://mycustomorg.lightning.force.com.attacker.test",
+		active: true,
+		currentWindow: true,
+	}]);
+	BROWSER.cookies.setMockCookies([{
+		domain: "mycustomorg.my.salesforce.com.attacker.test",
+		name: "sid",
+		value: "bearer value",
+	}]);
+	const sflang = await bg_getSalesforceLanguage();
+	assertEquals(sflang, "fallback-locale");
+});
+
 await Deno.test("bg_getCommandLinks behavior", async (t) => {
 	BROWSER.commands.setMockCommands([
 		{ shortcut: "a", name: "l" },
@@ -256,7 +316,7 @@ await Deno.test("bg_getCommandLinks behavior", async (t) => {
 		assert(allcommands != null);
 		assert(Array.isArray(allcommands));
 		assertEquals(allcommands.length, 4); // should remove the one with no shortuct
-		bg_getCommandLinks(undefined, (calledcommands) => {
+		bg_getCommandLinks(undefined, (calledcommands: unknown) => {
 			assertEquals(calledcommands, allcommands);
 		});
 	});
@@ -266,7 +326,7 @@ await Deno.test("bg_getCommandLinks behavior", async (t) => {
 		assert(fcommands != null);
 		assert(Array.isArray(fcommands));
 		assertEquals(fcommands.length, 1);
-		bg_getCommandLinks("f", (calledcommands) => {
+		bg_getCommandLinks("f", (calledcommands: unknown) => {
 			assertEquals(calledcommands, fcommands);
 		});
 	});
@@ -277,7 +337,7 @@ await Deno.test("bg_getCommandLinks behavior", async (t) => {
 		assert(threecommands != null);
 		assert(Array.isArray(threecommands));
 		assertEquals(threecommands.length, 2); // should remove the one with no shortuct
-		bg_getCommandLinks(commandstoget, (calledcommands) => {
+		bg_getCommandLinks(commandstoget, (calledcommands: unknown) => {
 			assertEquals(calledcommands, threecommands);
 		});
 	});
@@ -289,8 +349,152 @@ await Deno.test("bg_getCommandLinks behavior", async (t) => {
 		assert(threecommands != null);
 		assert(Array.isArray(threecommands));
 		assertEquals(threecommands.length, 0); // there are no available commands
-		bg_getCommandLinks(commandstoget, (calledcommands) => {
+		bg_getCommandLinks(commandstoget, (calledcommands: unknown) => {
 			assertEquals(calledcommands, threecommands);
 		});
 	});
+});
+
+await Deno.test("background listeners handle runtime, command, and browser events", async () => {
+	const originalSetTimeout = globalThis.setTimeout;
+	const originalSendMessage = BROWSER.tabs.sendMessage;
+	const originalContains = BROWSER.permissions.contains;
+	const sentMessages: unknown[] = [];
+
+	globalThis.setTimeout = ((handler: TimerHandler) => {
+		if (typeof handler === "function") {
+			handler();
+		}
+		return 1;
+	}) as typeof setTimeout;
+	BROWSER.tabs.sendMessage = (_tabId: number, message: unknown) => {
+		sentMessages.push(message);
+		return Promise.resolve(true);
+	};
+	BROWSER.permissions.contains = () => Promise.resolve(true);
+	BROWSER.tabs.setMockBrowserTabs([{
+		id: 1,
+		url: "https://acme.lightning.force.com/lightning/setup/SetupOneHome/home",
+		active: true,
+		currentWindow: true,
+	}]);
+	mockStorage[NO_RELEASE_NOTES] = undefined;
+	mockStorage[SETTINGS_KEY] = [
+		{ enabled: "fr", id: USER_LANGUAGE },
+		{ enabled: false, id: NO_RELEASE_NOTES },
+		{ enabled: false, id: TAB_ADD_FRONT },
+	];
+
+	try {
+		let savedResponse: unknown;
+		BROWSER.runtime.onMessage.triggerMessage(
+			{ what: WHAT_SAVED, echo: "saved" },
+			"",
+			(response) => {
+				savedResponse = response;
+			},
+		);
+		assertEquals(savedResponse, null);
+
+		let permissionResponse: unknown;
+		BROWSER.runtime.onMessage.triggerMessage(
+			{ what: PERM_CHECK, contains: { permissions: ["tabs"] } },
+			"",
+			(response) => {
+				permissionResponse = response;
+			},
+		);
+		await waitForCondition(() => permissionResponse != null);
+		assertEquals(permissionResponse, true);
+
+		BROWSER.runtime.onMessage.triggerMessage(
+			{ what: WHAT_GET, key: WHY_KEY },
+			"",
+			() => {},
+		);
+		BROWSER.runtime.onMessage.triggerMessage(
+			{ what: WHAT_SET, key: WHY_KEY, set: [{ label: "A", url: "B" }] },
+			"",
+			() => {},
+		);
+		BROWSER.runtime.onMessage.triggerMessage(
+			{ what: WHAT_GET_SETTINGS, keys: USER_LANGUAGE },
+			"",
+			() => {},
+		);
+		BROWSER.runtime.onMessage.triggerMessage(
+			{ what: WHAT_GET_STYLE_SETTINGS, key: ORG_TAB_STYLE_KEY },
+			"",
+			() => {},
+		);
+		BROWSER.runtime.onMessage.triggerMessage(
+			{ what: WHAT_GET_COMMANDS, commands: [] },
+			"",
+			() => {},
+		);
+		BROWSER.runtime.onMessage.triggerMessage(
+			{ what: WHAT_GET_BROWSER_TAB },
+			"",
+			() => {},
+		);
+		BROWSER.runtime.onMessage.triggerMessage(
+			{ what: WHAT_GET_SF_LANG },
+			"",
+			() => {},
+		);
+		BROWSER.runtime.onMessage.triggerMessage(
+			{ what: WHAT_EXPORT_CHECK },
+			"",
+			() => {},
+		);
+		BROWSER.runtime.onMessage.triggerMessage(
+			{ what: WHAT_EXPORT, tabs: [{ label: "x", url: "y" }] },
+			"",
+			() => {},
+		);
+		for (
+			const what of [
+				WHAT_SHOW_IMPORT,
+				WHAT_THEME,
+				TOAST_ERROR,
+				TOAST_WARNING,
+				WHAT_SHOW_EXPORT_MODAL,
+				CXM_MANAGE_TABS,
+				WHAT_START_TUTORIAL,
+			]
+		) {
+			BROWSER.runtime.onMessage.triggerMessage({ what }, "", () => {});
+		}
+		BROWSER.runtime.onMessage.triggerMessage(
+			{ what: "unknown" },
+			"",
+			() => {},
+		);
+		BROWSER.runtime.onMessage.triggerMessage({}, "", () => {});
+
+		BROWSER.commands.onCommand.triggerCommand(CMD_EXPORT_ALL);
+		BROWSER.commands.onCommand.triggerCommand("unknown-command");
+		await waitForCondition(() => sentMessages.length > 0);
+		assert(sentMessages.length > 0);
+
+		BROWSER.runtime.onStartup.triggerStartup();
+		BROWSER.tabs.onActivated.triggerActivated({ tabId: 1, windowId: 1 });
+		BROWSER.tabs.onUpdated.triggerUpdated(
+			1,
+			{ status: "complete" },
+			{
+				id: 1,
+				url: "https://acme.lightning.force.com/lightning/setup/SetupOneHome/home",
+				active: true,
+				currentWindow: true,
+			},
+		);
+		BROWSER.windows.onFocusChanged.triggerFocusChanged(1);
+		BROWSER.commands.onChanged.triggerChanged();
+		assert(sentMessages.length > 0);
+	} finally {
+		globalThis.setTimeout = originalSetTimeout;
+		BROWSER.tabs.sendMessage = originalSendMessage;
+		BROWSER.permissions.contains = originalContains;
+	}
 });

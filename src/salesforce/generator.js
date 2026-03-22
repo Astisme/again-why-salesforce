@@ -20,6 +20,8 @@ import {
 	SETUP_LIGHTNING,
 	TAB_STYLE_HOVER,
 	TAB_STYLE_TOP,
+	TOAST_ERROR,
+	TOAST_SUCCESS,
 	USE_LIGHTNING_NAVIGATION,
 } from "/constants.js";
 import {
@@ -28,6 +30,8 @@ import {
 	getPinnedSpecificKey,
 	getSettings,
 	getStyleSettings,
+	injectStyle,
+	performLightningRedirect,
 } from "/functions.js";
 import Tab from "/tab.js";
 import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
@@ -83,7 +87,7 @@ export async function handleLightningLinkClick(e) {
 	const metaCtrl = { ctrlKey: e.ctrlKey, metaKey: e.metaKey };
 	const url = e.currentTarget.href;
 	if (url == null) {
-		showToast("error_redirect", false);
+		showToast("error_redirect", TOAST_ERROR);
 		return;
 	}
 	(await ensureAllTabsAvailability())
@@ -110,12 +114,7 @@ export async function handleLightningLinkClick(e) {
 	) {
 		open(url, target);
 	} else {
-		postMessage({
-			what: "lightningNavigation",
-			navigationType: "url",
-			url,
-			fallbackURL: url,
-		}, "*");
+		performLightningRedirect(url);
 	}
 }
 
@@ -163,18 +162,19 @@ function _getPseudoSelector(id) {
 	}
 }
 /**
- * Appends pseudo-selector rules to the style element.
- * @param {HTMLStyleElement} style - The style element to append to
- * @param {Array} pseudoRules - Array of pseudo rules to process
- * @param {boolean} isGeneric - Whether this is for generic Tab styles
- * @param {boolean} isPinned - Whether this is for pinned Tab styles
+ * Returns pseudo-selector rules for Tab styles.
+ * @param {Object} [param0={}] an object with the following keys
+ * @param {Array} [param0.pseudoRules=[]] - Array of pseudo rules to process
+ * @param {boolean} [param0.isGeneric=true] - Whether this is for generic Tab styles
+ * @param {boolean} [param0.isPinned=false] - Whether this is for pinned Tab styles
+ * @return {string} the css pseudo element rules
  */
-function _appendPseudoRules({
-	style,
+function _getPseudoRules({
 	pseudoRules = [],
 	isGeneric = true,
 	isPinned = false,
 } = {}) {
+	let result = "";
 	for (const rule of pseudoRules) {
 		const pseudoSelector = _getPseudoSelector(rule.id);
 		const selector = getCssSelector({
@@ -183,10 +183,9 @@ function _appendPseudoRules({
 			pseudoElement: pseudoSelector,
 			isPinned,
 		});
-		style.textContent += `${selector}{ ${
-			getCssRule(rule.id, rule.value)
-		} }`;
+		result += `${selector}{ ${getCssRule(rule.id, rule.value)} }`;
 	}
+	return result;
 }
 /**
  * Checks if a style ID requires pseudo-selector handling.
@@ -236,29 +235,6 @@ function _buildCssRules({
 }
 
 /**
- * Gets existing style element or creates a new one.
- * @param {boolean} isGeneric - Whether this is for generic Tab styles
- * @param {boolean} isPinned - Whether this is for pinned Tab styles
- * @return {HTMLStyleElement} The style element
- */
-function _getOrCreateStyleElement({
-	isGeneric = false,
-	isPinned = false,
-} = {}) {
-	const styleId = `${EXTENSION_NAME}-${
-		getPinnedSpecificKey({ isGeneric, isPinned })
-	}`;
-	const existingStyle = document.getElementById(styleId);
-	if (existingStyle != null) {
-		existingStyle.textContent = "";
-		return existingStyle;
-	}
-	const style = document.createElement("style");
-	style.id = styleId;
-	return style;
-}
-
-/**
  * Processes a style list by building CSS and appending to document head.
  *
  * @param {Object} [param0={}] - an object contains the following parameters
@@ -271,15 +247,18 @@ function _processStyleList({
 	isGeneric = false,
 	isPinned = false,
 } = {}) {
-	const style = _getOrCreateStyleElement({ isGeneric, isPinned });
 	const { activeCss, inactiveCss, pseudoRules } = _buildCssRules({
 		list,
 		isGeneric,
 		isPinned,
 	});
-	style.textContent = `${inactiveCss}${activeCss}`;
-	_appendPseudoRules({ style, pseudoRules, isGeneric, isPinned });
-	document.head.appendChild(style);
+	const cssRules = `${inactiveCss}${activeCss}${
+		_getPseudoRules({ pseudoRules, isGeneric, isPinned })
+	}`;
+	injectStyle(
+		`${EXTENSION_NAME}-${getPinnedSpecificKey({ isGeneric, isPinned })}`,
+		{ css: cssRules },
+	);
 }
 /**
  * Generates and injects CSS rules based on saved tab style settings.
@@ -347,7 +326,7 @@ export function generateRowTemplate(
 		hide = false,
 		isPinned = false,
 		index = 0,
-	},
+	} = {},
 ) {
 	const miniURL = Tab.minifyURL(url);
 	const expURL = Tab.expandURL(url, getCurrentHref());
@@ -399,22 +378,19 @@ export function generateRowTemplate(
  * Generates an SLDS-styled toast message with a specified message, success, and warning types.
  *
  * @param {string} message - The message to display in the toast.
- * @param {boolean} isSuccess - Flag indicating if the message is a success. If false, the message is an error.
- * @param {boolean} isWarning - Flag indicating if the message is a warning (if isSuccess=false) or it is an info (if isSuccess=true).
+ * @param {string} [status="success"]  - The toast type.
  * @throws {Error} Throws an error if required parameters are missing or invalid.
+ * @param {string} status - The toast type.
  * @return {HTMLElement} The generated toast container element.
  */
-export async function generateSldsToastMessage(message, isSuccess, isWarning) {
+export async function generateSldsToastMessage(
+	message,
+	status = TOAST_SUCCESS,
+) {
 	const translator = await ensureTranslatorAvailability();
-	if (
-		message == null || message === "" || isSuccess == null ||
-		isWarning == null
-	) {
+	if (message == null || message === "") {
 		throw new Error(await translator.translate("error_toast_generation")); // [en] "Unable to generate Toast Message."
 	}
-	const successType = isWarning ? "info" : "success";
-	const errorType = isWarning ? "warning" : "error";
-	const toastType = isSuccess ? successType : errorType;
 	const toastContainer = document.createElement("div");
 	const randomNumber10digits = getRng_n_digits(10);
 	toastContainer.id = `${TOAST_ID}-${randomNumber10digits}`;
@@ -428,10 +404,10 @@ export async function generateSldsToastMessage(message, isSuccess, isWarning) {
 	const toast = document.createElement("div");
 	toast.setAttribute("role", "alertdialog");
 	toast.setAttribute("aria-describedby", "toastDescription7382:0");
-	toast.setAttribute("aria-label", toastType);
-	toast.dataset.key = toastType;
+	toast.setAttribute("aria-label", status);
+	toast.dataset.key = status;
 	toast.classList.add(
-		`slds-theme--${toastType}`,
+		`slds-theme--${status}`,
 		"slds-notify--toast",
 		"slds-notify",
 		"slds-notify--toast",
@@ -439,9 +415,9 @@ export async function generateSldsToastMessage(message, isSuccess, isWarning) {
 	);
 	toast.dataset.auraClass = "forceToastMessage";
 	const iconContainer = document.createElement("lightning-icon");
-	iconContainer.setAttribute("icon-name", `utility:${toastType}`);
+	iconContainer.setAttribute("icon-name", `utility:${status}`);
 	iconContainer.classList.add(
-		`slds-icon-utility-${toastType}`,
+		`slds-icon-utility-${status}`,
 		"toastIcon",
 		"slds-m-right--small",
 		"slds-no-flex",
@@ -459,7 +435,7 @@ export async function generateSldsToastMessage(message, isSuccess, isWarning) {
 	const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 	svg.classList.add("slds-icon", "slds-icon_small");
 	svg.setAttribute("focusable", "false");
-	svg.dataset.key = toastType;
+	svg.dataset.key = status;
 	svg.setAttribute("aria-hidden", "true");
 	svg.setAttribute("viewBox", "0 0 520 520");
 	svg.setAttribute("part", "icon");
@@ -467,7 +443,7 @@ export async function generateSldsToastMessage(message, isSuccess, isWarning) {
 	const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
 	path.setAttribute(
 		"d",
-		isSuccess
+		status === "success" || status === "info"
 			? "M260 20a240 240 0 100 480 240 240 0 100-480zm134 180L241 355c-6 6-16 6-22 0l-84-85c-6-6-6-16 0-22l22-22c6-6 16-6 22 0l44 45a10 10 0 0015 0l112-116c6-6 16-6 22 0l22 22c7 6 7 16 0 23z"
 			: "M260 20C128 20 20 128 20 260s108 240 240 240 240-108 240-240S392 20 260 20zM80 260a180 180 0 01284-147L113 364a176 176 0 01-33-104zm180 180c-39 0-75-12-104-33l251-251a180 180 0 01-147 284z",
 	);
@@ -479,7 +455,7 @@ export async function generateSldsToastMessage(message, isSuccess, isWarning) {
 	iconContainer.appendChild(boundarySpan);
 	const assistiveText = document.createElement("span");
 	assistiveText.classList.add("slds-assistive-text");
-	assistiveText.textContent = toastType;
+	assistiveText.textContent = status;
 	iconContainer.appendChild(assistiveText);
 	const toastContent = document.createElement("div");
 	toastContent.classList.add("toastContent", "slds-notify__content");
@@ -802,22 +778,23 @@ export async function generateSection(sectionTitle = null) {
 }
 
 /**
- * Generates a Salesforce Lightning Design System (SLDS)-styled modal dialog.
+ * Builds the shared SLDS modal shell used by Salesforce-style dialogs.
  *
- * @param {string} modalTitle - The title of the modal.
- * @param {string} [saveButtonLabel="continue"] The text to translate to use for the submit button
- * @return {Object} An object containing key elements of the modal:
- * - modalParent: The main modal container element.
- * - article: The content area within the modal.
- * - saveButton: The save button element for user actions.
- * - closeButton: The close button element for closing the modal.
- * - buttonContainer: The container for the footer of the modal
+ * @param {Object} [options={}] - Modal configuration.
+ * @param {string} [options.modalTitle=""] - Already translated modal title.
+ * @param {string} [options.closeButtonLabel=""] - Already translated close button title.
+ * @param {string} [options.cancelButtonLabel=""] - Already translated cancel button label.
+ * @param {string} [options.confirmButtonLabel=""] - Already translated confirm button label.
+ * @param {boolean} [options.showRequiredInfo=true] - Whether to render the required legend container.
+ * @return {Object} Core modal elements that callers can customize further.
  */
-export async function generateSldsModal({
+function createSldsModalShell({
 	modalTitle = "",
-	saveButtonLabel = "continue",
+	closeButtonLabel = "",
+	cancelButtonLabel = "",
+	confirmButtonLabel = "",
+	showRequiredInfo = true,
 } = {}) {
-	const translator = await ensureTranslatorAvailability();
 	const modalParent = document.createElement("div");
 	modalParent.id = MODAL_ID;
 	modalParent.classList.add(
@@ -834,9 +811,12 @@ export async function generateSldsModal({
 	modalParent.setAttribute("aria-hidden", "false");
 	modalParent.style.display = "block";
 	modalParent.style.zIndex = "9001";
-	const awsfStyle = document.createElement("style");
-	awsfStyle.textContent =
-		`.${HIDDEN_CLASS} { display:none; visibility:hidden; } .again-why-salesforce :is([disabled=true], td[data-draggable=false]) { cursor: not-allowed !important; pointer-events: painted; }`;
+	const awsfStyle = injectStyle(
+		"awsf-modal-style",
+		{
+			css: `.${HIDDEN_CLASS} { display:none; visibility:hidden; } .${EXTENSION_NAME} :is([disabled=true], td[data-draggable=false]) { cursor: not-allowed !important; pointer-events: painted; }`,
+		},
+	);
 	modalParent.appendChild(awsfStyle);
 	const backdropDiv = document.createElement("div");
 	backdropDiv.setAttribute("tabindex", "-1");
@@ -874,8 +854,7 @@ export async function generateSldsModal({
 	modalContainer.appendChild(modalHeader);
 	const closeButton = document.createElement("button");
 	closeButton.setAttribute("type", "button");
-	const msg_cancelClose = await translator.translate("cancel_close");
-	closeButton.setAttribute("title", msg_cancelClose);
+	closeButton.setAttribute("title", closeButtonLabel);
 	closeButton.classList.add(
 		"slds-button",
 		"slds-button_icon",
@@ -914,10 +893,10 @@ export async function generateSldsModal({
 	closeGroupElement.appendChild(closePath);
 	const assistiveText = document.createElement("span");
 	assistiveText.classList.add("slds-assistive-text");
-	assistiveText.textContent = msg_cancelClose;
+	assistiveText.textContent = closeButtonLabel;
 	closeButton.appendChild(assistiveText);
 	const modalBody = document.createElement("div");
-	modalBody.id = "content_1099:0";
+	modalBody.id = `${MODAL_ID}-content`;
 	modalBody.classList.add(
 		"modal-body",
 		"scrollable",
@@ -961,7 +940,7 @@ export async function generateSldsModal({
 	fieldContainerDiv.dataset.auraClass = "forceDetailPanelDesktop";
 	actionBodyDiv.appendChild(fieldContainerDiv);
 	const article = document.createElement("article");
-	article.setAttribute("aria-labelledby", MODAL_ID);
+	article.setAttribute("aria-describedby", modalBody.id);
 	fieldContainerDiv.appendChild(article);
 	const titleContainer = document.createElement("div");
 	titleContainer.classList.add(
@@ -975,23 +954,28 @@ export async function generateSldsModal({
 	modalHeader.appendChild(titleContainer);
 	const awsIcon = document.createElement("img");
 	awsIcon.src = BROWSER.runtime.getURL("assets/icons/awsf-128.png");
+	awsIcon.alt = EXTENSION_LABEL;
 	awsIcon.style.height = "2rem";
 	titleContainer.appendChild(awsIcon);
 	const heading = document.createElement("h2");
+	heading.id = `${MODAL_ID}-title`;
 	heading.textContent = modalTitle;
 	heading.style.marginLeft = "0.5rem";
 	titleContainer.appendChild(heading);
-	const legend = document.createElement("div");
-	legend.classList.add(
-		"required-legend",
-		"slds-p-top--none",
-	);
-	article.appendChild(legend);
-	const abbr = document.createElement("abbr");
-	abbr.classList.add("slds-required");
-	abbr.textContent = "*";
-	legend.appendChild(abbr);
-	legend.append(await translator.translate("required_info"));
+	article.setAttribute("aria-labelledby", heading.id);
+	let legend = null;
+	if (showRequiredInfo) {
+		legend = document.createElement("div");
+		legend.classList.add(
+			"required-legend",
+			"slds-p-top--none",
+		);
+		article.appendChild(legend);
+		const abbr = document.createElement("abbr");
+		abbr.classList.add("slds-required");
+		abbr.textContent = "*";
+		legend.appendChild(abbr);
+	}
 	const footerContainer = document.createElement("div");
 	footerContainer.classList.add("inlineFooter");
 	footerContainer.style.borderTop =
@@ -1021,8 +1005,7 @@ export async function generateSldsModal({
 	);
 	cancelButton.setAttribute("aria-live", "off");
 	cancelButton.setAttribute("type", "button");
-	const msg_cancel = await translator.translate("cancel");
-	cancelButton.setAttribute("title", msg_cancel);
+	cancelButton.setAttribute("title", cancelButtonLabel);
 	cancelButton.setAttribute("aria-label", "");
 	cancelButton.dataset.auraClass = "uiButton forceActionButton";
 	buttonContainerInnerDiv.appendChild(cancelButton);
@@ -1030,10 +1013,10 @@ export async function generateSldsModal({
 	const cancelSpan = document.createElement("span");
 	cancelSpan.classList.add("label", "bBody");
 	cancelSpan.setAttribute("dir", "ltr");
-	cancelSpan.textContent = msg_cancel;
+	cancelSpan.textContent = cancelButtonLabel;
 	cancelButton.appendChild(cancelSpan);
 	const saveButton = document.createElement("button");
-	saveButton.id = MODAL_CONFIRM_ID;
+	saveButton.id = `${MODAL_ID}-save-btn`;
 	saveButton.classList.add(
 		"slds-button",
 		"slds-button_neutral",
@@ -1043,21 +1026,19 @@ export async function generateSldsModal({
 	);
 	saveButton.setAttribute("aria-live", "off");
 	saveButton.setAttribute("type", "submit");
-	const msg_continue = await translator.translate(saveButtonLabel);
-	saveButton.setAttribute("title", msg_continue);
+	saveButton.setAttribute("title", confirmButtonLabel);
 	saveButton.setAttribute("aria-label", "");
 	saveButton.dataset.auraClass = "uiButton forceActionButton";
 	buttonContainerInnerDiv.appendChild(saveButton);
 	const saveSpan = document.createElement("span");
 	saveSpan.classList.add("label", "bBody");
 	saveSpan.setAttribute("dir", "ltr");
-	saveSpan.textContent = msg_continue;
+	saveSpan.textContent = confirmButtonLabel;
 	saveButton.appendChild(saveSpan);
 	/**
 	 * Handles the keydown event and triggers specific actions based on the key pressed.
 	 *
 	 * @param {KeyboardEvent} event - The keydown event object.
-	 * @return {void}
 	 */
 	function keyDownListener(event) {
 		switch (event.key) {
@@ -1078,7 +1059,110 @@ export async function generateSldsModal({
 		article,
 		saveButton,
 		closeButton,
+		cancelButton,
 		buttonContainer: buttonContainerInnerDiv,
+		modalBody,
+		legend,
+	};
+}
+
+/**
+ * Generates a Salesforce Lightning Design System (SLDS)-styled modal dialog.
+ *
+ * @param {string} modalTitle - The title of the modal.
+ * @param {string} [saveButtonLabel="continue"] The text to translate to use for the submit button
+ * @return {Object} An object containing key elements of the modal:
+ * - modalParent: The main modal container element.
+ * - article: The content area within the modal.
+ * - saveButton: The save button element for user actions.
+ * - closeButton: The close button element for closing the modal.
+ * - buttonContainer: The container for the footer of the modal
+ */
+export async function generateSldsModal({
+	modalTitle = "",
+	saveButtonLabel = "continue",
+} = {}) {
+	const translator = await ensureTranslatorAvailability();
+	const msg_cancelClose = await translator.translate("cancel_close");
+	const msg_cancel = await translator.translate("cancel");
+	const msg_continue = await translator.translate(saveButtonLabel);
+	const {
+		modalParent,
+		article,
+		saveButton,
+		closeButton,
+		buttonContainer,
+		legend,
+	} = createSldsModalShell({
+		modalTitle,
+		closeButtonLabel: msg_cancelClose,
+		cancelButtonLabel: msg_cancel,
+		confirmButtonLabel: msg_continue,
+	});
+	legend?.append(await translator.translate("required_info"));
+	return {
+		modalParent,
+		article,
+		saveButton,
+		closeButton,
+		buttonContainer,
+	};
+}
+
+/**
+ * Generates a synchronous Salesforce-style prompt modal with translated text
+ * already provided by the caller.
+ *
+ * @param {Object} [options={}] - Prompt configuration.
+ * @param {string} [options.modalTitle=""] - Already translated modal title.
+ * @param {string} [options.bodyText=""] - Already translated modal body.
+ * @param {string} [options.confirmButtonLabel=""] - Already translated confirm button label.
+ * @param {string} [options.cancelButtonLabel=""] - Already translated cancel button label.
+ * @param {string} [options.closeButtonLabel=""] - Already translated close button label.
+ * @return {Object} Prompt modal elements.
+ */
+function generateSldsPromptModal({
+	modalTitle = "",
+	bodyText = "",
+	confirmButtonLabel = "",
+	cancelButtonLabel = "",
+	closeButtonLabel = "",
+} = {}) {
+	const {
+		modalParent,
+		article,
+		saveButton,
+		closeButton,
+		cancelButton,
+		buttonContainer,
+		modalBody,
+	} = createSldsModalShell({
+		modalTitle,
+		closeButtonLabel,
+		cancelButtonLabel,
+		confirmButtonLabel,
+		showRequiredInfo: false,
+	});
+	saveButton.setAttribute("type", "button");
+	modalBody.setAttribute("aria-label", bodyText);
+	const bodyParagraph = document.createElement("p");
+	bodyParagraph.classList.add(
+		"slds-text-body_regular",
+		"slds-text-align_center",
+	);
+	bodyParagraph.style.margin = "0";
+	bodyParagraph.textContent = bodyText;
+	article.appendChild(bodyParagraph);
+	article.style.padding = "1em";
+	return {
+		modalParent,
+		article,
+		modalBody,
+		bodyParagraph,
+		saveButton,
+		closeButton,
+		cancelButton,
+		buttonContainer,
 	};
 }
 
@@ -1299,6 +1383,10 @@ export async function generateSldsFileInput(
 	innerDiv.appendChild(cardBodyDiv);
 	const msg_file = await translator.translate("file");
 	const msg_files = await translator.translate("files");
+	const msg_upload = await translator.translate("upload");
+	const uploadAssistive = `${msg_upload} ${
+		singleFile ? msg_file : msg_files
+	}`;
 	if (preventFileSelection && allowDrop) {
 		const fileSelectorDiv = document.createElement("div");
 		fileSelectorDiv.classList.add(
@@ -1389,6 +1477,7 @@ export async function generateSldsFileInput(
 		"slds-form-element__label",
 		"slds-assistive-text",
 	);
+	formLabelSpan.textContent = uploadAssistive;
 	primitiveInputFile.appendChild(formLabelSpan);
 	const controlDiv = document.createElement("div");
 	controlDiv.classList.add("slds-form-element__control");
@@ -1419,6 +1508,7 @@ export async function generateSldsFileInput(
 	inputContainer.setAttribute("part", "input");
 	inputContainer.setAttribute("multiple", "");
 	inputContainer.setAttribute("name", "fileInput");
+	inputContainer.setAttribute("aria-label", uploadAssistive);
 	slot.appendChild(inputContainer);
 	const fileSelectorLabel = document.createElement("label");
 	fileSelectorLabel.classList.add("slds-file-selector__body");
@@ -1435,7 +1525,6 @@ export async function generateSldsFileInput(
 	const buttonIcon = document.createElement("lightning-primitive-icon");
 	buttonIcon.setAttribute("variant", "bare");
 	fileSelectorButtonSpan.appendChild(buttonIcon);
-	const msg_upload = await translator.translate("upload");
 	fileSelectorButtonSpan.append(
 		`${msg_upload} ${singleFile ? msg_file : msg_files}`,
 	);
@@ -1597,10 +1686,10 @@ export function generateHelpWith_i_popup({
 } = {}) {
 	const wasCalledWithParams = text != null || link != null;
 	const root = document.createElement("div");
-	root.className = "help-icon";
+	root.classList.add("help-icon");
 	const anchor = document.createElement("a");
 	root.append(anchor);
-	anchor.className = "button";
+	anchor.classList.add("button");
 	anchor.setAttribute("aria-describedby", "tooltip");
 	const isLinkAvailable = link != null && link !== "";
 	if (wasCalledWithParams && isLinkAvailable) anchor.href = link;
@@ -1621,11 +1710,11 @@ export function generateHelpWith_i_popup({
 	);
 	const assistive = document.createElement("span");
 	anchor.append(assistive);
-	assistive.className = "assistive";
+	assistive.classList.add("assistive");
 	assistive.hidden = true;
 	const tooltip = document.createElement("div");
 	root.append(tooltip);
-	tooltip.className = "tooltip";
+	tooltip.classList.add("tooltip");
 	tooltip.setAttribute("role", "tooltip");
 	let slot;
 	const linkTip = document.createElement("div");
@@ -1642,15 +1731,10 @@ export function generateHelpWith_i_popup({
 			linkTip.classList.add(HIDDEN_CLASS);
 		}
 		// add help.css
-		const linkid = `${EXTENSION_NAME}-helpcss`;
-		if (!document.getElementById(linkid)) {
-			const linkEl = document.createElement("link");
-			linkEl.id = linkid;
-			linkEl.rel = "stylesheet";
-			linkEl.type = "text/css";
-			linkEl.href = BROWSER.runtime.getURL("/components/help/help.css");
-			document.head.appendChild(linkEl);
-		}
+		injectStyle(
+			`${EXTENSION_NAME}-helpcss`,
+			{ link: BROWSER.runtime.getURL("/components/help/help.css") },
+		);
 	} else {
 		slot = document.createElement("slot");
 		slot.name = "text";
@@ -1689,7 +1773,7 @@ function createTableHeader(
 	const th = document.createElement("th");
 	th.scope = "col";
 	th.classList.add(...classList);
-	th.setAttribute("aria-label", ariaLabel);
+	th.setAttribute("aria-label", ariaLabel || label);
 	const div = document.createElement("div");
 	th.append(div);
 	div.textContent = label;
@@ -1744,9 +1828,10 @@ function createTable(headers = []) {
  * Creates a checkbox cell for a table row
  * @param {number} [tabIndex=0] The index of the checkbox (for later retrieval)
  * @param {boolean} [checked=false] if the checkbox should be checked by default
+ * @param {string} [ariaLabel=""] The assistive label for the checkbox
  * @return {HTMLTableCellElement} The created td element with checkbox
  */
-function createCheckboxCell(tabIndex = 0, checked = false) {
+function createCheckboxCell(tabIndex = 0, checked = false, ariaLabel = "") {
 	const td = document.createElement("td");
 	td.classList.add(
 		"visualEditorSelectableTable",
@@ -1761,6 +1846,7 @@ function createCheckboxCell(tabIndex = 0, checked = false) {
 	checkbox.name = "assignmentTableCheckbox";
 	checkbox.checked = checked;
 	checkbox.dataset.tabIndex = tabIndex;
+	checkbox.setAttribute("aria-label", ariaLabel);
 	return { td, checkbox };
 }
 
@@ -1790,14 +1876,21 @@ function createTextCell(text = "", title = "") {
  * @param {string} [tab.url=null] The Tab Url
  * @param {string|undefined} [tab.org=null] The Tab Org (for org-specific Tabs)
  * @param {number} [index=0] the index of the current row
+ * @param {string} [checkboxPrefix=""] The translated prefix used in checkbox aria-label
  * @return {HTMLTableRowElement} The created tr element
  */
 function createTableRow(
 	{ label = null, url = null, org = null } = {},
 	index = 0,
+	checkboxPrefix = "",
 ) {
 	const tr = document.createElement("tr");
-	const { td, checkbox } = createCheckboxCell(index, true);
+	const rowLabel = label ?? url ?? `${index + 1}`;
+	const { td, checkbox } = createCheckboxCell(
+		index,
+		true,
+		`${checkboxPrefix}: ${rowLabel}`,
+	);
 	tr.appendChild(td);
 	tr.appendChild(createTextCell(label));
 	tr.appendChild(createTextCell(url));
@@ -1810,19 +1903,22 @@ function createTableRow(
  * @param {any[]} [tabs=[]] The Tabs to show in the Table
  * @param {Object{label,ariaLabel,classList[]}[]} [headers=[]] What should be displayed inside the each `th`
  * @param {() => void} [changeListener=() => {}] change listener to all checkboxes to update button states
- * @return Object{checkboxes:HTMLInputElement[],table:HTMLTableElement} all checkboxes created and the table generated
+ * @return {Promise<Object{checkboxes:HTMLInputElement[],table:HTMLTableElement}>}
+ * all checkboxes created and the table generated
  */
-function generateTableWithCheckboxes(
+async function generateTableWithCheckboxes(
 	tabs = [],
 	headers = [],
 	changeListener = () => {},
 ) {
+	const translator = await ensureTranslatorAvailability();
+	const msg_tabLabel = await translator.translate("tab_label");
 	const res = {
 		checkboxes: [],
 	};
 	const { table, tbody } = createTable(headers);
 	for (const i in tabs) {
-		const { tr, checkbox } = createTableRow(tabs[i], i);
+		const { tr, checkbox } = createTableRow(tabs[i], i, msg_tabLabel);
 		tr.addEventListener("click", (e) => {
 			if (
 				e.target.tagName !== "INPUT" ||
@@ -1923,6 +2019,7 @@ function createTableCell({
 	input.className = className;
 	input.value = value ?? "";
 	input.placeholder = placeholder;
+	input.setAttribute("aria-label", placeholder);
 	input.style.width = "100%";
 	input.style.padding = "0.25rem";
 	if (wordBreak) {
@@ -2073,6 +2170,8 @@ function createDragHandle(draggable = false) {
 	svg.setAttribute("width", "20");
 	svg.setAttribute("height", "20");
 	svg.setAttribute("fill", "currentColor");
+	svg.setAttribute("focusable", "false");
+	svg.setAttribute("aria-hidden", "true");
 	svg.dataset.draggable = draggable;
 	// Six dots on two columns
 	const rect1 = document.createElementNS(
@@ -2266,7 +2365,9 @@ export async function createManageTabRow({
 	}
 	dropdownButton.style.position = "relative";
 	dropdownButton.textContent = `▼`; // downward arrow
-	dropdownButton.title = await translator.translate("actions");
+	const msg_actions = await translator.translate("actions");
+	dropdownButton.title = msg_actions;
+	dropdownButton.setAttribute("aria-label", msg_actions);
 	dropdownButton.dataset.name = "dropdownButton";
 	// Dropdown menu container
 	const dropdownMenu = document.createElement("div");
@@ -2556,7 +2657,7 @@ export function generateReviewSponsorSvgs() {
 	const reviewLink = document.createElement("a");
 	reviewLink.href = "#";
 	reviewSponsorContainer.appendChild(reviewLink);
-	reviewLink.dataset.i18n = "write_review+-+title";
+	reviewLink.dataset.i18n = "write_review+-+title+-+ariaLabel";
 	const reviewSvg = document.createElementNS(
 		"http://www.w3.org/2000/svg",
 		"svg",
@@ -2600,7 +2701,7 @@ export function generateReviewSponsorSvgs() {
 	const sponsorLink = document.createElement("a");
 	sponsorLink.href = "#";
 	reviewSponsorContainer.appendChild(sponsorLink);
-	sponsorLink.dataset.i18n = "send_tip+-+title";
+	sponsorLink.dataset.i18n = "send_tip+-+title+-+ariaLabel";
 	const sponsorSvg = document.createElementNS(
 		"http://www.w3.org/2000/svg",
 		"svg",
@@ -2627,4 +2728,181 @@ export function generateReviewSponsorSvgs() {
 		reviewLink,
 		sponsorLink,
 	};
+}
+
+/**
+ * blueprint grid card with corner brackets and dashed dividers.
+ * @return {{
+ *   messageBox: HTMLDivElement, // the element to add to the document
+ *   segments:   HTMLDivElement, // where to put the new textContent
+ *   confirmBtn: HTMLButtonElement, // to continue the tutorial
+ *   btnsParent: HTMLDivElement, // where the buttons are located
+ * }} as described
+ */
+async function generateMessageBox() {
+	injectStyle(
+		"tut-v7-style",
+		{ link: BROWSER.runtime.getURL("/salesforce/css/tutorial.css") },
+	);
+	const messageBox = document.createElement("div");
+	messageBox.classList.add("tut-v7");
+	messageBox.style.position = "fixed";
+	for (const pos of ["tl", "tr", "bl", "br"]) {
+		const c = document.createElement("div");
+		c.classList.add(
+			"tut-v7-corner",
+			`tut-v7-corner-${pos}`,
+		);
+		messageBox.appendChild(c);
+	}
+	const header = document.createElement("div");
+	header.classList.add("tut-v7-header");
+	const tag = document.createElement("div");
+	tag.classList.add("tut-v7-tag");
+	tag.textContent = "Tutorial";
+	const dash = document.createElement("div");
+	dash.classList.add("tut-v7-dash");
+	header.append(tag, dash);
+	const segments = document.createElement("div");
+	segments.classList.add("tut-v7-segments");
+	const actions = document.createElement("div");
+	actions.classList.add("tut-v7-actions");
+	const translator = await ensureTranslatorAvailability();
+	const confirmBtn = document.createElement("button");
+	confirmBtn.classList.add(
+		"slds-button",
+		"slds-button_brand",
+	);
+	confirmBtn.textContent = await translator.translate("confirm");
+	actions.append(confirmBtn);
+	const closeBtn = document.createElement("button");
+	closeBtn.classList.add(
+		"slds-button",
+		"slds-button_neutral",
+	);
+	closeBtn.textContent = await translator.translate("close");
+	actions.append(closeBtn);
+	messageBox.append(header, segments, actions);
+	return {
+		messageBox,
+		segments,
+		confirmBtn,
+		closeBtn,
+		btnsParent: actions,
+	};
+}
+
+/**
+ * Generates the HTML elements required for the tutorial overlay system.
+ * Creates an overlay that covers the entire page, a message box for displaying tutorial text,
+ * and a highlight box for emphasizing specific elements on the page.
+ *
+ * @return {Object} An object containing the generated HTML elements:
+ * - {HTMLElement} overlay: A semi-transparent overlay covering the entire viewport
+ * - {HTMLElement} messageBox: A positioned box for displaying tutorial messages and buttons
+ * - {HTMLElement} highlightBox: A box used to highlight specific elements on the page
+ */
+export async function generateTutorialElements() {
+	const overlay = document.createElement("div");
+	overlay.style.position = "fixed";
+	overlay.style.top = "0";
+	overlay.style.left = "0";
+	overlay.style.width = "100%";
+	overlay.style.height = "100%";
+	overlay.style.backgroundColor = "rgba(0,0,0,0.5)";
+	overlay.style.zIndex = "10000";
+	overlay.style.pointerEvents = "none";
+	// Spinner element
+	const spinner = document.createElement("div");
+	spinner.classList.add("slds-spinner_container", HIDDEN_CLASS); // Hidden by default
+	spinner.style.position = "fixed";
+	spinner.style.top = "0";
+	spinner.style.left = "0";
+	spinner.style.width = "100%";
+	spinner.style.height = "100%";
+	spinner.style.zIndex = "10002"; // Higher than messageBox
+	const spinnerInner = document.createElement("div");
+	spinnerInner.setAttribute("role", "status");
+	spinnerInner.classList.add(
+		"slds-spinner",
+		"slds-spinner_medium",
+		"slds-spinner_brand",
+	);
+	spinner.appendChild(spinnerInner);
+	const assistiveText = document.createElement("span");
+	assistiveText.classList.add("slds-assistive-text");
+	assistiveText.textContent = "Loading...";
+	spinnerInner.appendChild(assistiveText);
+	const dotA = document.createElement("div");
+	dotA.classList.add("slds-spinner__dot-a");
+	spinnerInner.appendChild(dotA);
+	const dotB = document.createElement("div");
+	dotB.classList.add("slds-spinner__dot-b");
+	spinnerInner.appendChild(dotB);
+	return {
+		overlay,
+		spinner,
+		...await generateMessageBox(),
+	};
+}
+
+/**
+ * Shows a Salesforce-styled confirm prompt and resolves with the user's choice.
+ *
+ * @param {Object} options - Prompt configuration.
+ * @param {string} options.title - Already translated modal title.
+ * @param {string} options.body - Already translated modal body.
+ * @param {string} options.confirmLabel - Already translated confirm button label.
+ * @param {string} options.cancelLabel - Already translated cancel button label.
+ * @param {string} options.closeLabel - Already translated close button label.
+ * @return {Promise<boolean>} `true` when the user confirms the prompt.
+ */
+export function sldsConfirm({
+	title,
+	body,
+	confirmLabel,
+	cancelLabel,
+	closeLabel,
+}) {
+	document.getElementById(MODAL_CONFIRM_ID)?.remove(); // remove itself
+	const {
+		modalParent,
+		saveButton,
+		cancelButton,
+		closeButton,
+	} = generateSldsPromptModal({
+		modalTitle: title,
+		bodyText: body,
+		confirmButtonLabel: confirmLabel,
+		cancelButtonLabel: cancelLabel,
+		closeButtonLabel: closeLabel,
+	});
+	modalParent.id = MODAL_CONFIRM_ID;
+	document.body.appendChild(modalParent);
+	saveButton.focus();
+	return new Promise((resolve) => {
+		let isResolved = false;
+		/**
+		 * Completes the current prompt only once.
+		 *
+		 * @param {boolean} value - The user selection.
+		 */
+		function finish(value) {
+			if (isResolved) {
+				return;
+			}
+			isResolved = true;
+			modalParent.remove();
+			resolve(value);
+		}
+		saveButton.addEventListener("click", (event) => {
+			event.preventDefault();
+			finish(true);
+		});
+		cancelButton.addEventListener("click", (event) => {
+			event.preventDefault();
+			finish(false);
+		});
+		closeButton.addEventListener("click", () => finish(false));
+	});
 }

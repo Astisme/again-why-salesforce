@@ -35,6 +35,7 @@ import {
 	TAB_STYLE_UNDERLINE,
 	USE_LIGHTNING_NAVIGATION,
 	USER_LANGUAGE,
+	WHAT_SET,
 } from "/constants.js";
 import {
 	areFramePatternsAllowed,
@@ -43,6 +44,7 @@ import {
 	getPinnedSpecificKey,
 	getSettings,
 	getStyleSettings,
+	injectStyle,
 	isExportAllowed,
 	isGenericKey,
 	isPinnedKey,
@@ -53,11 +55,32 @@ import {
 	sendExtensionMessage,
 } from "/functions.js";
 import ensureTranslatorAvailability from "/translator.js";
+import "/components/theme-selector/theme-selector.js";
 
 // no need to await as we do not need to call the translator
 // we only need it to translate the text on the screen and it may take the time it needs to do so
 ensureTranslatorAvailability();
 const invisible = "invisible";
+const html = document.documentElement;
+const themeTransitionClass = "theme-transitioning";
+const themeTransitionDuration = 500;
+let themeTransitionTimeout = null;
+
+/**
+ * Applies a temporary class so native controls can animate smoothly during theme changes.
+ */
+function startThemeTransition() {
+	clearTimeout(themeTransitionTimeout);
+	html.classList.add(themeTransitionClass);
+	themeTransitionTimeout = setTimeout(() => {
+		html.classList.remove(themeTransitionClass);
+	}, themeTransitionDuration);
+}
+
+document.querySelector("theme-selector-aws").addEventListener(
+	"before-theme-toggle",
+	startThemeTransition,
+);
 
 /**
  * Creates the object used to update the settings
@@ -76,7 +99,7 @@ function getObjectToSet({
 		throw new Error("error_required_params");
 	}
 	return {
-		what: "set",
+		what: WHAT_SET,
 		key,
 		set,
 	};
@@ -709,27 +732,6 @@ const allOrgDecorations = {
 };
 
 /**
- * Updates or removes a style element in the document head
- * @param {string} styleId - ID of the style element to update or remove
- * @param {string|null} newStyle - CSS content to add, or null to only remove existing style
- */
-function updateStyle(styleId, newStyle = null) {
-	// Remove any previous style for this element
-	const oldStyle = document.getElementById(styleId);
-	if (oldStyle != null) {
-		oldStyle.remove();
-	}
-	if (newStyle == null) {
-		return;
-	}
-	// Create new style element
-	const style = document.createElement("style");
-	style.id = styleId;
-	style.textContent = newStyle;
-	document.head.appendChild(style);
-}
-
-/**
  * Extracts element references from configuration based on tab state and type.
  * Handles both input elements and decoration list containers.
  * @param {Object} config - Style configuration object containing element mappings
@@ -885,7 +887,7 @@ function setPreviewAndInputValue(
 		wasPicked,
 		isPinned,
 	});
-	updateStyle(styleId, cssRule);
+	injectStyle(styleId, { css: cssRule });
 	// Update UI elements if requested
 	if (updateViews) {
 		_updateUIElements(elements, setting.value);

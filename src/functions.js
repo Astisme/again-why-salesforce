@@ -15,6 +15,7 @@ import {
 	PREVENT_DEFAULT_OVERRIDE,
 	SETUP_LIGHTNING_PATTERN,
 	SLDS_ACTIVE,
+	SUPPORTED_SALESFORCE_URLS,
 	TAB_STYLE_BACKGROUND,
 	TAB_STYLE_BOLD,
 	TAB_STYLE_BORDER,
@@ -24,6 +25,9 @@ import {
 	TAB_STYLE_SHADOW,
 	TAB_STYLE_TOP,
 	TAB_STYLE_UNDERLINE,
+	WHAT_GET_BROWSER_TAB,
+	WHAT_GET_SETTINGS,
+	WHAT_GET_STYLE_SETTINGS,
 } from "/constants.js";
 
 /**
@@ -64,13 +68,27 @@ export function sendExtensionMessage(message, callback = null) {
 	sendMessage(message, callback);
 }
 /**
+ * Sends an array of messages to the background script with the specified message.
+ *
+ * @param {Object[]} messages - The messages to send.
+ * @param {function} callback - The callback to execute after sending all the messages.
+ * @return {Promise} promise resolving when all messages have been processed
+ */
+export async function sendExtensionMessages(messages = [], callback = null) {
+	const responses = await Promise.all(messages.map(
+		(mess) => sendExtensionMessage(mess),
+	));
+	callback?.(responses);
+	return responses;
+}
+/**
  * Retrieves extension settings for the specified keys.
  *
- * @param {string[] | null} [keys=null] - An array of setting keys to retrieve. If null, all settings will be returned.
+ * @param {string|string[]|null} [keys=null] - One or more setting keys to retrieve. If null, all settings will be returned.
  * @return {Promise<Object>} A promise that resolves to an object containing the requested settings.
  */
 export async function getSettings(keys = null) {
-	return await sendExtensionMessage({ what: "get-settings", keys });
+	return await sendExtensionMessage({ what: WHAT_GET_SETTINGS, keys });
 }
 /**
  * Retrieves saved style settings for the specified key.
@@ -79,7 +97,7 @@ export async function getSettings(keys = null) {
  * @return {Promise<Object|null>} The retrieved style settings or null if none exist.
  */
 export async function getStyleSettings(key = null) {
-	return await sendExtensionMessage({ what: "get-style-settings", key });
+	return await sendExtensionMessage({ what: WHAT_GET_STYLE_SETTINGS, key });
 }
 const GENERIC_STYLE_KEYS = new Set([
 	GENERIC_TAB_STYLE_KEY,
@@ -157,9 +175,11 @@ const HAS_PIN_TAB = `:has(.${PIN_TAB_CLASS})`;
 /**
  * Constructs a CSS selector string based on tab state, type, and optional pseudo-element.
  *
- * @param {boolean} [isInactive=true] - Whether the selector targets inactive tabs.
- * @param {boolean} [isGeneric=true] - Whether the selector targets generic tabs.
- * @param {string} [pseudoElement=""] - Optional pseudo-element or pseudo-class to append.
+ * @param {Object} [param0={}] Selector options.
+ * @param {boolean} [param0.isInactive=true] - Whether the selector targets inactive tabs.
+ * @param {boolean} [param0.isGeneric=true] - Whether the selector targets generic tabs.
+ * @param {boolean} [param0.isPinned=false] - Whether the selector targets pinned tabs.
+ * @param {string} [param0.pseudoElement=""] - Optional pseudo-element or pseudo-class to append.
  * @return {string} The constructed CSS selector.
  */
 export function getCssSelector({
@@ -182,7 +202,7 @@ export function getCssSelector({
  * @param {string|null} [value=null] - Value to apply in the CSS rule if needed.
  * @return {string} The corresponding CSS rule or an empty string if invalid.
  */
-export function getCssRule(styleId, value = null) {
+export function getCssRule(styleId = "", value = null) {
 	switch (styleId) {
 		case TAB_STYLE_BACKGROUND:
 		case TAB_STYLE_HOVER:
@@ -260,7 +280,9 @@ export function requestCookiesPermission() {
  * @return {Promise<{ ison: boolean, url: string>}>} whether the user is on Salesforce Setup
  */
 export async function isOnSalesforceSetup() {
-	const browserTab = await sendExtensionMessage({ what: "browser-tab" });
+	const browserTab = await sendExtensionMessage({
+		what: WHAT_GET_BROWSER_TAB,
+	});
 	return {
 		ison: SETUP_LIGHTNING_PATTERN.test(browserTab?.url),
 		url: browserTab?.url,
@@ -286,4 +308,99 @@ export async function areFramePatternsAllowed() {
 		new URL(globalThis.location.href).searchParams.get(
 				DO_NOT_REQUEST_FRAME_PERMISSION,
 			) === "true";
+}
+/**
+ * Calculates the estimated time (in milliseconds) it takes to read a given message.
+ *
+ * @param {string} message - The message to calculate the reading time for.
+ * @return {number} - The estimated reading time in milliseconds.
+ */
+export function calculateReadingTime(message) {
+	const words = message.split(/\s+/).filter((word) => word.length > 0);
+	const wordsPerMinute = 200; // Average reading speed
+	const readingTimeMinutes = words.length / wordsPerMinute;
+	const readingTimeSeconds = Math.ceil(readingTimeMinutes * 60);
+	return (readingTimeSeconds + 2) * 1000;
+}
+/**
+ * Performs a lightning redirect using Salesforce own redirect
+ * @param {string} [url=""] where you'll get redirected to
+ */
+export function performLightningRedirect(url = "") {
+	postMessage({
+		what: "lightningNavigation",
+		navigationType: "url",
+		url,
+		fallbackURL: url,
+	}, "*");
+}
+/**
+ * Returns the value from the given selector
+ * @param {Object} [param0={}] an object with the following keys
+ * @param {HTMLElement} [param0.parentElement=null] - the tr where to selector is located
+ * @param {string} [param0.field=""] - the field to get from the queried inner element
+ * @param {string} [param0.selector=""] - the selector to be used inside the query to find the element with a value
+ * @return the trimmed field value OR undefined (when the value is null or "")
+ */
+export function getInnerElementFieldBySelector({
+	parentElement = null,
+	field = "",
+	selector = "",
+} = {}) {
+	let value = parentElement?.querySelector(selector);
+	for (const part of field.split(".")) {
+		value = value?.[part];
+	}
+	value = value?.trim();
+	return value == null || value === "" ? undefined : value;
+}
+/**
+ * Injects a <style> or <link> tag into <head> if it hasn't been injected yet.
+ * @param {string} id   - Unique ID for the style tag, prevents duplicates.
+ * @param {Object} [param1={}] an object with one of the following keys
+ * @param {string|null} [param1.css=null] - the CSS rule to inject. if the style element already exists, the rule is overwritten with this
+ * @param {string|null} [param1.link=null] - The link which contains the CSS string to inject.
+ * @throws Error if the id was not passed or if both css and link are != null
+ * @return the existing/created style/link element
+ */
+export function injectStyle(id, {
+	css = null,
+	link = null,
+} = {}) {
+	const workingWithCss = css != null;
+	if (
+		(id == null || id === "") ||
+		(workingWithCss && link != null)
+	) {
+		throw new Error("error_required_params");
+	}
+	const existingStyle = document.getElementById(id);
+	if (existingStyle) {
+		if (workingWithCss) {
+			existingStyle.textContent = css;
+		}
+		return existingStyle;
+	}
+	const tag = document.createElement(workingWithCss ? "style" : "link");
+	tag.id = id;
+	if (workingWithCss) {
+		tag.textContent = css;
+	} else {
+		tag.rel = "stylesheet";
+		tag.type = "text/css";
+		tag.href = link;
+	}
+	document.head.appendChild(tag);
+	return tag;
+}
+/**
+ * Returns whether a hostname belongs to a Salesforce domain handled by the extension.
+ *
+ * @param {URL} [url=new URL()] - the URL with the hostname to validate
+ * @return {boolean} True when the hostname ends with a supported Salesforce suffix.
+ */
+export function isSalesforceHostname(url = new URL()) {
+	return SUPPORTED_SALESFORCE_URLS.some((pattern) =>
+		url.hostname.endsWith(pattern)
+	);
 }

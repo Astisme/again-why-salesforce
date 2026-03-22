@@ -1,4 +1,8 @@
 {
+	"account": {
+		"message": "حساب",
+		"description": "صفحه مربوط به ObjectManager/Account/FieldsAndRelationships/view"
+	},
 	"act_delete": {
 		"message": "🗑️ حذف",
 		"description": "[مدیریت-Tab] حذف یک ردیف"
@@ -39,6 +43,10 @@
 		"message": "صعودی (A-Z)",
 		"description": ""
 	},
+	"asset": {
+		"message": "دارایی",
+		"description": "صفحه مربوط به ObjectManager/Asset/FieldsAndRelationships/view"
+	},
 	"available": {
 		"message": "در دسترس",
 		"description": "سربرگ بخشی برای آیتم‌هایی که می‌توان اضافه کرد"
@@ -46,6 +54,10 @@
 	"bold": {
 		"message": "بولد",
 		"description": "گزینه سبک قلم برای متن بولد"
+	},
+	"campaign": {
+		"message": "کمپین",
+		"description": "صفحه مربوط به ObjectManager/Campaign/FieldsAndRelationships/view"
 	},
 	"cancel": {
 		"message": "لغو",
@@ -55,9 +67,21 @@
 		"message": "لغو و بستن",
 		"description": "عنوان یا محتوای متنی برای دکمه بستن مودال‌ها"
 	},
+	"case": {
+		"message": "مورد",
+		"description": "نام صفحه مربوط به ObjectManager/Case/FieldsAndRelationships/view"
+	},
 	"chosen": {
 		"message": "انتخاب‌شده",
 		"description": "سربرگ بخشی برای آیتم‌هایی که انتخاب شده‌اند"
+	},
+	"classic_email_templates": {
+		"message": "قالب‌های ایمیل کلاسیک",
+		"description": "صفحه مربوط به CommunicationTemplatesEmail/home"
+	},
+	"close": {
+		"message": "بستن",
+		"description": "بستن بدون رخ دادن هیچ اتفاقی"
 	},
 	"cmd_export_all": {
 		"message": "نمایش مودال برای صدور همه‌ی Tabs ذخیره‌شده",
@@ -87,6 +111,14 @@
 		"message": "نمایش مودال برای به‌روزرسانی صفحه‌ی جاری (در صورت ذخیره‌شده بودن)",
 		"description": "[command description] کاربر می‌خواهد صفحه‌ی جاری را به‌روزرسانی کند"
 	},
+	"company_information": {
+		"message": "اطلاعات شرکت",
+		"description": "صفحه مربوط به CompanyProfileInfo/home"
+	},
+	"confirm": {
+		"message": "تأیید",
+		"description": "متنی برای درخواست از کاربر برای ادامه"
+	},
 	"confirm_another_org": {
 		"message": "باز کردن این لینک را تأیید کنید.",
 		"description": "[مودال_بازکردن_سازمان_دیگر] درخواست تأیید از کاربر برای باز کردن لینک ساخته شده."
@@ -94,6 +126,10 @@
 	"confirm_update_extension": {
 		"message": "نسخه جدیدی از $extension_label اکنون در دسترس است!",
 		"description": "یک پیام ناشناس از یک شنونده دریافت شده است"
+	},
+	"contact": {
+		"message": "مخاطب",
+		"description": "صفحه مربوط به ObjectManager/Contact/FieldsAndRelationships/view"
 	},
 	"continue": {
 		"message": "ادامه",
@@ -555,6 +591,10 @@
 		"message": "translator هنوز مقداردهی اولیه نشده است.",
 		"description": "[error] سرویس ترجمه (TranslationService) آماده نبود"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "آموزش قابل راه‌اندازی نبود.",
+		"description": "[خطا] آموزش راه‌اندازی نشد"
+	},
 	"error_unknown_file_structure": {
 		"message": "ما متوجه فایلی که می‌خواستید وارد کنید نشدیم\nاگر مشکل همچنان ادامه داشت، لطفاً با باز کردن یک گزارش در GitHub آن را با ما در میان بگذارید",
 		"description": "[وارد کردن] فایل کاربر شناسایی نشد"
@@ -566,6 +606,10 @@
 	"error_unknown_request": {
 		"message": "درخواست ناشناخته.",
 		"description": "[error] خطای عمومی پس از دریافت پیام ناشناخته"
+	},
+	"error_unknown_toast_type": {
+		"message": "نوع اعلان درخواستی قابل تفسیر نبود. لطفاً کد خود را تغییر دهید.",
+		"description": "[خطا] خطای عمومی استفاده شده هنگام تنظیم نوع اعلان"
 	},
 	"error_unpin_tab": {
 		"message": "خطا هنگام برداشتن پین Tab",
@@ -598,6 +642,10 @@
 	"extension_label": {
 		"message": "Again, Why Salesforce",
 		"description": "نام این افزونه"
+	},
+	"field_accessibility": {
+		"message": "دسترسی فیلد",
+		"description": "صفحه مربوط به FieldAccessibility/home"
 	},
 	"file": {
 		"message": "فایل",
@@ -783,13 +831,29 @@
 		"message": "برچسب",
 		"description": "[key] نام Tab"
 	},
+	"lead": {
+		"message": "سرنخ",
+		"description": "صفحه مربوط به ObjectManager/Lead/FieldsAndRelationships/view"
+	},
+	"learn_more_about_extension": {
+		"message": "درباره $extension_label بیشتر بدانید",
+		"description": "[popup][settings] عنوان قابل دسترس و aria-label برای دکمه راهنمای ویکی"
+	},
 	"lightning_navigation": {
 		"message": "Lightning Navigation",
 		"description": "فناوری ناوبری سفارشی Salesforce"
 	},
+	"login_history": {
+		"message": "تاریخچه ورود",
+		"description": "صفحه مربوط به OrgLoginHistory/home"
+	},
 	"login_to_salesforce": {
 		"message": "ورود به Salesforce",
 		"description": "[نه_صفحه_تنظیمات_Salesforce] فراخوانی برای اقدام روی دکمه برای هدایت کاربر به صفحه ورود Salesforce"
+	},
+	"manage_connected_apps": {
+		"message": "مدیریت برنامه‌های متصل",
+		"description": "صفحه مربوط به ConnectedApplication/home"
 	},
 	"manage_tabs": {
 		"message": "مدیریت $tabs",
@@ -842,6 +906,10 @@
 	"open_setup": {
 		"message": "باز کردن تنظیمات",
 		"description": "[نه_صفحه_تنظیمات_Salesforce] فراخوانی برای اقدام روی دکمه برای هدایت کاربر به صفحه تنظیمات Salesforce"
+	},
+	"opportunity": {
+		"message": "فرصت",
+		"description": "صفحه مربوط به ObjectManager/Opportunity/FieldsAndRelationships/view"
 	},
 	"opt_add_tabs_as_org": {
 		"message": "اضافه کردن Tabs جدید به عنوان Org Tabs.",
@@ -975,6 +1043,10 @@
 		"message": "مجوز داده شد!",
 		"description": "[موفقیت] کاربر از ما خواست تا از او مجوز بخواهیم و او آن را پذیرفت"
 	},
+	"permission_sets": {
+		"message": "مجموعه‌های مجوز",
+		"description": "صفحه مربوط به PermSets/home"
+	},
 	"pinned": {
 		"message": "پین شده",
 		"description": "Tab های کاربر که همیشه در ابتدای لیست یافت می‌شوند"
@@ -983,9 +1055,21 @@
 		"message": "حفظ Tabs برای سازمان‌های دیگر.",
 		"description": "[برچسب] حفظ همه Tabs مخصوص سازمان در طول فرآیند ورود"
 	},
+	"pricebook2": {
+		"message": "دفترچه قیمت ۲",
+		"description": "صفحه مربوط به ObjectManager/Pricebook2/FieldsAndRelationships/view"
+	},
+	"product2": {
+		"message": "محصول ۲",
+		"description": "صفحه مربوط به ObjectManager/Product2/FieldsAndRelationships/view"
+	},
 	"remove_tab": {
 		"message": "حذف Tab",
 		"description": "[متن_جایگزین] متن جایگزین زمانی که تصاویر کار نمی‌کنند"
+	},
+	"reports_and_dashboards_settings": {
+		"message": "تنظیمات گزارش‌ها و داشبوردها",
+		"description": "صفحه مربوط به ReportUI/home"
 	},
 	"req_downloads_open_popup": {
 		"message": "لطفاً پنجره بازشوی افزونه را از منوی افزونه‌های مرورگر خود باز کنید.",
@@ -1066,6 +1150,10 @@
 	"send_tip": {
 		"message": "یک نکته برای ما ارسال کنید ❤️",
 		"description": "[popup] عنوان برای svg برای درخواست ارسال یک نکته"
+	},
+	"sessions": {
+		"message": "نشست‌ها",
+		"description": "صفحه مربوط به SecuritySession/home"
 	},
 	"set_gen_preview": {
 		"message": "پیش‌نمایش Tab",
@@ -1327,9 +1415,17 @@
 		"message": "تنظیمات",
 		"description": "برچسب برای منوی تنظیمات"
 	},
+	"setup_audit_trail": {
+		"message": "تنظیم دنباله حسابرسی",
+		"description": "صفحه مربوط به SecurityEvents/home"
+	},
 	"setup_page": {
 		"message": "صفحه تنظیمات",
 		"description": "[نه_صفحه_تنظیمات_Salesforce] صفحه‌ای که برای تغییر تنظیمات Salesforce استفاده می‌شود"
+	},
+	"sharing_settings": {
+		"message": "تنظیمات اشتراک‌گذاری",
+		"description": "صفحه مربوط به SecuritySharing/home"
 	},
 	"show_all_tabs": {
 		"message": "نمایش همه $tabs",
@@ -1439,6 +1535,10 @@
 		"message": "Tabs ذخیره شد.",
 		"description": "[اعلان_کوتاه] Tabs با موفقیت ذخیره شدند."
 	},
+	"task": {
+		"message": "وظیفه",
+		"description": "صفحه مربوط به ObjectManager/Task/FieldsAndRelationships/view"
+	},
 	"theme_dark": {
 		"message": "تغییر پوسته به تیره",
 		"description": "[پنجره_بازشو] عنوان روی ماه برای تغییر پوسته"
@@ -1446,6 +1546,94 @@
 	"theme_light": {
 		"message": "تغییر پوسته به روشن",
 		"description": "[پنجره_بازشو] عنوان روی خورشید برای تغییر پوسته"
+	},
+	"tutorial": {
+		"message": "آموزش",
+		"description": "[popup] دکمه‌ای برای شروع آموزش"
+	},
+	"tutorial_add_favourite": {
+		"message": "برای افزودن این صفحه به موارد دلخواه، روی ستاره کلیک کنید.",
+		"description": "[tutorial] افزودن به موارد دلخواه"
+	},
+	"tutorial_click_highlighted_tab": {
+		"message": "برای رفتن به صفحه مربوطه، روی $tab برجسته شده کلیک کنید.",
+		"description": "[tutorial] کلیک روی Tab برجسته شده"
+	},
+	"tutorial_continue_prompt_body": {
+		"message": "این برای $extension_label است و $tutorial ناتمام شما را از جایی که رها کردید ادامه می‌دهد.",
+		"description": "[tutorial] متن اصلی برای ادامه آموزش"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "ادامه $tutorial از آخرین مرحله؟",
+		"description": "[tutorial] عنوان مودال برای ادامه آموزش"
+	},
+	"tutorial_drag_flows": {
+		"message": "ردیف برجسته شده را (با استفاده از ۶ نقطه) بکشید و قبل از ردیف اول (که پین شده است) رها کنید.",
+		"description": "[tutorial] کشیدن جریان‌ها"
+	},
+	"tutorial_end": {
+		"message": " $tutorial به پایان رسید! از استفاده از افزونه لذت ببرید.",
+		"description": "[tutorial] پایان"
+	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "ما نتوانستیم پیوندهای قابل استفاده برای شروع $tutorial پیدا کنیم\nلطفاً $tabs خود را صادر کرده و $tutorial را دوباره راه‌اندازی کنید",
+		"description": "[tutorial] پیام خطا: امکان شروع وجود نداشت"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "این‌ها $tabs دلخواه شما هستند و برای دسترسی سریع به صفحاتی که مکرراً استفاده می‌شوند، به کار می‌روند.",
+		"description": "[tutorial] برجسته کردن Tab‌های دلخواه"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "میانبر صفحه‌کلید را فشار دهید تا صفحه $settings باز شود، جایی که می‌توانید رفتار افزونه را تغییر دهید و به $tabs خود استایل دهید",
+		"description": "[tutorial] میانبر صفحه‌کلید"
+	},
+	"tutorial_manage_tabs": {
+		"message": "روی صفحه راست‌کلیک کنید (نه روی یک Tab) و $extension_label > $cxm_manage_tabs را برای باز کردن مودال مدیریت انتخاب کنید.",
+		"description": "[tutorial] مدیریت Tab"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "شما می‌توانید $tabs خود را از این صفحه مدیریت کنید. برای اطلاعات بیشتر اینجا کلیک کنید.",
+		"description": "[tutorial] پیوند مدیریت Tab"
+	},
+	"tutorial_pin_tab": {
+		"message": "روی $tab برجسته شده راست‌کلیک کنید و $extension_label > $cxm_move > $cxm_pin_tab را برای پین کردن آن انتخاب کنید.",
+		"description": "[tutorial] پین کردن Tab"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "ردیف کشیده شده نمی‌توانست قبل از ردیف پین شده قرار گیرد (زیرا در حال حاضر پین نشده است)، بنابراین به ابتدای لیست پین نشده رفت. این دو لیست به طور جداگانه در نظر گرفته می‌شوند.",
+		"description": "[tutorial] توضیح پین شده"
+	},
+	"tutorial_pinned_tab": {
+		"message": "توجه داشته باشید که $tab اکنون پین شده است و در جای خود باقی خواهد ماند.",
+		"description": "[tutorial] Tab پین شده"
+	},
+	"tutorial_redirect_account": {
+		"message": "ما اکنون شما را به صفحه دیگری هدایت می‌کنیم تا موارد بیشتری را به شما نشان دهیم. برای ادامه اینجا کلیک کنید.",
+		"description": "[tutorial] هدایت به حساب"
+	},
+	"tutorial_remove_favourite": {
+		"message": "برای حذف این صفحه از موارد دلخواه، روی ستاره خط خورده کلیک کنید. نکته: می‌توانید پس از اتمام این مرحله روی ستاره کلیک کنید تا از گم شدن این $tab جلوگیری کنید",
+		"description": "[tutorial] حذف از موارد دلخواه"
+	},
+	"tutorial_restart": {
+		"message": "شما می‌توانید در هر زمان با کلیک بر روی دکمه در پنجره بازشو، $tutorial را دوباره راه‌اندازی کنید.",
+		"description": "[tutorial] اولین پیام"
+	},
+	"tutorial_restart_prompt": {
+		"message": "آیا می‌خواهید $tutorial را از ابتدا شروع کنید؟",
+		"description": "[tutorial] درخواست برای شروع مجدد آموزش"
+	},
+	"tutorial_save_modal": {
+		"message": "برای اعمال تغییرات و مشاهده پیام تأیید، روی $save کلیک کنید.",
+		"description": "[tutorial] ذخیره مودال"
+	},
+	"tutorial_start_prompt_body": {
+		"message": "این برای $extension_label است و شما را ابتدا به صفحه اصلی تنظیمات می‌برد، سپس $tutorial هدایت شده را شروع می‌کند",
+		"description": "[tutorial] متن اصلی برای شروع آموزش"
+	},
+	"tutorial_start_prompt_title": {
+		"message": "شروع $tutorial از صفحه اصلی تنظیمات؟",
+		"description": "[tutorial] عنوان مودال برای شروع آموزش"
 	},
 	"underline": {
 		"message": "زیرخط",
@@ -1490,6 +1678,10 @@
 	"where_to": {
 		"message": "کجا؟",
 		"description": "[مودال_بازکردن_سازمان_دیگر] عنوان جایگزین برای مودال"
+	},
+	"wiki_label": {
+		"message": "درباره $extension_label بیشتر بدانید",
+		"description": "[popup][settings] عنوان قابل دسترس و aria-label برای دکمه راهنمای ویکی"
 	},
 	"write_review": {
 		"message": "یک نقد بنویسید!",

@@ -42,6 +42,7 @@ html[data-theme="light"] {
 	--button-background-color-hover: var(--midgray);
 	--theme-fill: var(--lightblue);
 	--warning: var(--dirtyyellow);
+	--warning-hover: var(--darkyellow);
 }
 
 html[data-theme="dark"] {
@@ -62,4 +63,5 @@ html[data-theme="dark"] {
 	--button-background-color-hover: var(--darkgray);
 	--theme-fill: var(--darklightblue);
 	--warning: var(--darkyellow);
+	--warning-hover: var(--dirtyyellow);
 }

@@ -1,4 +1,8 @@
 {
+	"account": {
+		"message": "Account",
+		"description": "Ang pahinang may kaugnayan sa ObjectManager/Account/FieldsAndRelationships/view"
+	},
 	"act_delete": {
 		"message": "🗑️ I-delete",
 		"description": "[pamahalaan-ang-Tab] i-delete ang isang row"
@@ -39,6 +43,10 @@
 		"message": "Pataas (A-Z)",
 		"description": ""
 	},
+	"asset": {
+		"message": "Asset",
+		"description": "Ang pahinang may kaugnayan sa ObjectManager/Asset/FieldsAndRelationships/view"
+	},
 	"available": {
 		"message": "Magagamit",
 		"description": "Pamagat ng seksyon para sa mga item na maaaring idagdag"
@@ -46,6 +54,10 @@
 	"bold": {
 		"message": "Bold",
 		"description": "Pagpipilian ng estilo ng font para sa bold na teksto"
+	},
+	"campaign": {
+		"message": "Kampanya",
+		"description": "Ang pahinang may kaugnayan sa ObjectManager/Campaign/FieldsAndRelationships/view"
 	},
 	"cancel": {
 		"message": "Kanselahin",
@@ -55,9 +67,21 @@
 		"message": "Kanselahin at isara",
 		"description": "pamagat o textContent para sa close button ng mga modal"
 	},
+	"case": {
+		"message": "Kaso",
+		"description": "Ang pangalan ng pahinang may kaugnayan sa ObjectManager/Case/FieldsAndRelationships/view"
+	},
 	"chosen": {
 		"message": "Napili",
 		"description": "Pamagat ng seksyon para sa mga napiling item"
+	},
+	"classic_email_templates": {
+		"message": "Classic na Template ng Email",
+		"description": "Ang pahinang may kaugnayan sa CommunicationTemplatesEmail/home"
+	},
+	"close": {
+		"message": "Isara",
+		"description": "isara nang walang nangyayari"
 	},
 	"cmd_export_all": {
 		"message": "Ipakita ang modal para i-export ang lahat ng naka-save na Tabs",
@@ -87,6 +111,14 @@
 		"message": "Ipakita ang modal para i-update ang kasalukuyang pahina (kung naka-save)",
 		"description": "[command description] gustong i-update ng user ang kasalukuyang pahina"
 	},
+	"company_information": {
+		"message": "Impormasyon ng Kumpanya",
+		"description": "Ang pahinang may kaugnayan sa CompanyProfileInfo/home"
+	},
+	"confirm": {
+		"message": "Kumpirmahin",
+		"description": "text para udyukin ang user na magpatuloy"
+	},
 	"confirm_another_org": {
 		"message": "Kumpirmahin ang pagbubukas ng link na ito.",
 		"description": "[open-other-org-modal] humiling ng kumpirmasyon sa user upang buksan ang binuong link."
@@ -94,6 +126,10 @@
 	"confirm_update_extension": {
 		"message": "Available na ngayon ang bagong bersyon ng $extension_label",
 		"description": "isang hindi kilalang mensahe ang natanggap mula sa isang listener"
+	},
+	"contact": {
+		"message": "Contact",
+		"description": "Ang pahinang may kaugnayan sa ObjectManager/Contact/FieldsAndRelationships/view"
 	},
 	"continue": {
 		"message": "Magpatuloy",
@@ -555,6 +591,10 @@
 		"message": "hindi pa na-initialize ang translator.",
 		"description": "[error] Hindi pa handa ang TranslationService"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "hindi ma-initialize ang tutorial.",
+		"description": "[error] Hindi na-initialize ang Tutorial"
+	},
 	"error_unknown_file_structure": {
 		"message": "Hindi namin maunawaan ang file na gusto mong i-import\nKung magpapatuloy ang isyu, pakibahagi ito sa amin sa pamamagitan ng pagbubukas ng GitHub issue",
 		"description": "[i-import] hindi kinilala ang file ng user"
@@ -566,6 +606,10 @@
 	"error_unknown_request": {
 		"message": "Hindi kilalang kahilingan.",
 		"description": "[error] Pangkalahatang error pagkatapos makatanggap ng hindi kilalang mensahe"
+	},
+	"error_unknown_toast_type": {
+		"message": "Hindi ma-interpret ang hiniling na uri ng toast. Pakibago ang iyong code.",
+		"description": "[error] Generic na error na ginagamit kapag nagtatakda ng uri ng toast"
 	},
 	"error_unpin_tab": {
 		"message": "Error habang nag-uunpin ng Tab",
@@ -598,6 +642,10 @@
 	"extension_label": {
 		"message": "Again, Why Salesforce",
 		"description": "Ang pangalan ng extension na ito"
+	},
+	"field_accessibility": {
+		"message": "Field Accessibility",
+		"description": "Ang pahinang may kaugnayan sa FieldAccessibility/home"
 	},
 	"file": {
 		"message": "file",
@@ -783,13 +831,29 @@
 		"message": "Label",
 		"description": "[key] ang pangalan ng Tab"
 	},
+	"lead": {
+		"message": "Lead",
+		"description": "Ang pahinang may kaugnayan sa ObjectManager/Lead/FieldsAndRelationships/view"
+	},
+	"learn_more_about_extension": {
+		"message": "matuto pa tungkol sa $extension_label",
+		"description": "[popup][settings] accessible na pamagat at aria-label para sa wiki help button"
+	},
 	"lightning_navigation": {
 		"message": "Lightning Navigation",
 		"description": "Pasadyang teknolohiya ng pag-navigate ng Salesforce"
 	},
+	"login_history": {
+		"message": "Kasaysayan ng Pag-login",
+		"description": "Ang pahinang may kaugnayan sa OrgLoginHistory/home"
+	},
 	"login_to_salesforce": {
 		"message": "Mag-login sa Salesforce",
 		"description": "[notSalesforceSetup] call to action sa isang button para i-redirect ang user sa isang Salesforce login page"
+	},
+	"manage_connected_apps": {
+		"message": "Pamahalaan ang mga Nakakonektang App",
+		"description": "Ang pahinang may kaugnayan sa ConnectedApplication/home"
 	},
 	"manage_tabs": {
 		"message": "Pamahalaan ang $tabs",
@@ -842,6 +906,10 @@
 	"open_setup": {
 		"message": "Buksan ang Setup",
 		"description": "[notSalesforceSetup] call to action sa isang button para i-redirect ang user sa isang Salesforce Setup page"
+	},
+	"opportunity": {
+		"message": "Oportunidad",
+		"description": "Ang pahinang may kaugnayan sa ObjectManager/Opportunity/FieldsAndRelationships/view"
 	},
 	"opt_add_tabs_as_org": {
 		"message": "Magdagdag ng mga bagong Tabs bilang Org Tabs.",
@@ -975,6 +1043,10 @@
 		"message": "Pinayagan na ang pahintulot!",
 		"description": "[success] hiniling sa amin ng gumagamit na hilingin sa kanila ang isang pahintulot at tinanggap nila ito"
 	},
+	"permission_sets": {
+		"message": "Mga Set ng Pahintulot",
+		"description": "Ang pahinang may kaugnayan sa PermSets/home"
+	},
 	"pinned": {
 		"message": "Naka-pin",
 		"description": "Mga Tab ng user na laging matatagpuan sa simula ng listahan"
@@ -983,9 +1055,21 @@
 		"message": "Panatilihin ang mga Tabs para sa ibang mga Org.",
 		"description": "[label] panatilihin lahat ng Org-specific na Tabs sa proseso ng pag-import"
 	},
+	"pricebook2": {
+		"message": "Pricebook2",
+		"description": "Ang pahinang may kaugnayan sa ObjectManager/Pricebook2/FieldsAndRelationships/view"
+	},
+	"product2": {
+		"message": "Produkto2",
+		"description": "Ang pahinang may kaugnayan sa ObjectManager/Product2/FieldsAndRelationships/view"
+	},
 	"remove_tab": {
 		"message": "Alisin ang Tab",
 		"description": "[alt] alternatibong teksto kapag hindi gumagana ang mga larawan"
+	},
+	"reports_and_dashboards_settings": {
+		"message": "Mga Setting ng Mga Report at Dashboard",
+		"description": "Ang pahinang may kaugnayan sa ReportUI/home"
 	},
 	"req_downloads_open_popup": {
 		"message": "Paki-buksan ang popup ng extension mula sa menu ng extensions ng iyong browser.",
@@ -1066,6 +1150,10 @@
 	"send_tip": {
 		"message": "Magpadala sa amin ng tip ❤️",
 		"description": "[popup] pamagat para sa svg upang mag-prompt ng pagpapadala ng isang tip"
+	},
+	"sessions": {
+		"message": "Mga Session",
+		"description": "Ang pahinang may kaugnayan sa SecuritySession/home"
 	},
 	"set_gen_preview": {
 		"message": "Paunang‑tanaw ng Tab",
@@ -1327,9 +1415,17 @@
 		"message": "Mga Setting",
 		"description": "Label para sa menu ng setting"
 	},
+	"setup_audit_trail": {
+		"message": "Setup Audit Trail",
+		"description": "Ang pahinang may kaugnayan sa SecurityEvents/home"
+	},
 	"setup_page": {
 		"message": "Pahina ng Setup",
 		"description": "[notSalesforceSetup] ang page na ginagamit para baguhin ang mga setting ng Salesforce"
+	},
+	"sharing_settings": {
+		"message": "Mga Setting ng Pagbabahagi",
+		"description": "Ang pahinang may kaugnayan sa SecuritySharing/home"
 	},
 	"show_all_tabs": {
 		"message": "Ipakita ang lahat ng $tabs",
@@ -1439,6 +1535,10 @@
 		"message": "Nai-save ang mga Tabs.",
 		"description": "[toast] Matagumpay na naimbak ang mga Tabs."
 	},
+	"task": {
+		"message": "Gawain",
+		"description": "Ang pahinang may kaugnayan sa ObjectManager/Task/FieldsAndRelationships/view"
+	},
 	"theme_dark": {
 		"message": "Palitan ang Tema sa Madilim",
 		"description": "[popup] pamagat sa buwan para palitan ang tema"
@@ -1446,6 +1546,94 @@
 	"theme_light": {
 		"message": "Palitan ang Tema sa Maliwanag",
 		"description": "[popup] pamagat sa araw para palitan ang tema"
+	},
+	"tutorial": {
+		"message": "Tutorial",
+		"description": "[popup] button para simulan ang tutorial"
+	},
+	"tutorial_add_favourite": {
+		"message": "I-click ang bituin para idagdag ang pahinang ito sa mga paborito.",
+		"description": "[tutorial] magdagdag ng paborito"
+	},
+	"tutorial_click_highlighted_tab": {
+		"message": "I-click ang naka-highlight na $tab para mag-navigate sa kaukulang pahina.",
+		"description": "[tutorial] i-click ang naka-highlight na Tab"
+	},
+	"tutorial_continue_prompt_body": {
+		"message": "Ito ay para sa $extension_label at ipagpapatuloy nito ang iyong hindi natapos na $tutorial mula sa kung saan ka tumigil.",
+		"description": "[tutorial] body text para ipagpatuloy ang tutorial"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "Ipagpatuloy ang $tutorial mula sa huling hakbang?",
+		"description": "[tutorial] modal title para ipagpatuloy ang tutorial"
+	},
+	"tutorial_drag_flows": {
+		"message": "I-drag ang naka-highlight na row (gamit ang 6 na tuldok) at i-drop ito bago ang unang row (na naka-pin).",
+		"description": "[tutorial] i-drag ang mga flow"
+	},
+	"tutorial_end": {
+		"message": "Tapos na ang $tutorial ! Masiyahan sa paggamit ng extension.",
+		"description": "[tutorial] wakas"
+	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "Hindi kami makahanap ng mga magagamit na link para simulan ang $tutorial \nPakieksport ang iyong mga $tabs at i-restart ang $tutorial",
+		"description": "[tutorial] hindi masimulang mensahe ng error"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "Ito ang iyong mga paboritong $tabs at ginagamit ang mga ito para sa mabilis na pag-access sa mga madalas gamiting pahina.",
+		"description": "[tutorial] i-highlight ang paboritong Tab"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "Pindutin ang keyboard shortcut para buksan ang pahina ng $settings kung saan mo mababago ang gawi ng extension at mai-style ang iyong mga $tabs",
+		"description": "[tutorial] keyboard shortcut"
+	},
+	"tutorial_manage_tabs": {
+		"message": "I-right click ang pahina (hindi sa isang Tab) at piliin ang $extension_label > $cxm_manage_tabs para buksan ang management modal.",
+		"description": "[tutorial] pamahalaan ang Tab"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "Maaari mong pamahalaan ang iyong mga $tabs mula sa screen na ito. I-click dito para sa karagdagang impormasyon.",
+		"description": "[tutorial] link sa pamamahala ng Tab"
+	},
+	"tutorial_pin_tab": {
+		"message": "I-right click ang naka-highlight na $tab at piliin ang $extension_label > $cxm_move > $cxm_pin_tab para i-pin ito.",
+		"description": "[tutorial] i-pin ang Tab"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "Hindi mailipat ang na-drag na row bago ang naka-pin na row (dahil kasalukuyan itong hindi naka-pin), kaya napunta ito sa simula ng listahan ng mga hindi naka-pin. Ang dalawang listahang ito ay itinuturing nang magkahiwalay.",
+		"description": "[tutorial] paliwanag sa naka-pin"
+	},
+	"tutorial_pinned_tab": {
+		"message": "Pansinin na ang $tab ay naka-pin na ngayon at mananatili sa pwesto nito.",
+		"description": "[tutorial] naka-pin na Tab"
+	},
+	"tutorial_redirect_account": {
+		"message": "Ire-redirect ka namin ngayon sa ibang pahina para ipakita sa iyo ang higit pa. I-click dito para magpatuloy.",
+		"description": "[tutorial] i-redirect sa account"
+	},
+	"tutorial_remove_favourite": {
+		"message": "I-click ang bituin na may guhit para alisin ang pahinang ito sa mga paborito. TIP: maaari mong i-click ang bituin pagkatapos makumpleto ang hakbang na ito para maiwasang mawala ang $tab na ito",
+		"description": "[tutorial] alisin ang paborito"
+	},
+	"tutorial_restart": {
+		"message": "Maaari mong i-restart ang $tutorial anumang oras sa pamamagitan ng pag-click sa button sa popup.",
+		"description": "[tutorial] unang mensahe"
+	},
+	"tutorial_restart_prompt": {
+		"message": "Gusto mo bang simulan ang $tutorial mula sa simula?",
+		"description": "[tutorial] prompt para i-restart ang tutorial"
+	},
+	"tutorial_save_modal": {
+		"message": "I-click ang $save para ilapat ang mga pagbabago at makita ang mensahe ng kumpirmasyon.",
+		"description": "[tutorial] i-save ang modal"
+	},
+	"tutorial_start_prompt_body": {
+		"message": "Ito ay para sa $extension_label at dadalhin ka muna nito sa Setup Home page, pagkatapos ay sisimulan ang ginabayang $tutorial",
+		"description": "[tutorial] body text para simulan ang tutorial"
+	},
+	"tutorial_start_prompt_title": {
+		"message": "Simulan ang $tutorial mula sa Setup Home?",
+		"description": "[tutorial] modal title para simulan ang tutorial"
 	},
 	"underline": {
 		"message": "Underline",
@@ -1490,6 +1678,10 @@
 	"where_to": {
 		"message": "Saan papunta?",
 		"description": "[open-other-org-modal] fallback na pamagat para sa modal"
+	},
+	"wiki_label": {
+		"message": "Matuto pa tungkol sa $extension_label",
+		"description": "[popup][settings] accessible na pamagat at aria-label para sa wiki help button"
 	},
 	"write_review": {
 		"message": "Sumulat ng isang review!",

@@ -1,4 +1,8 @@
 {
+	"account": {
+		"message": "Λογαριασμός",
+		"description": "Η σελίδα που σχετίζεται με το ObjectManager/Account/FieldsAndRelationships/view"
+	},
 	"act_delete": {
 		"message": "🗑️ Διαγραφή",
 		"description": "[διαχείριση-Tab] διαγραφή σειράς"
@@ -39,6 +43,10 @@
 		"message": "Αύξουσα (A-Z)",
 		"description": ""
 	},
+	"asset": {
+		"message": "Περιουσιακό στοιχείο",
+		"description": "Η σελίδα που σχετίζεται με το ObjectManager/Asset/FieldsAndRelationships/view"
+	},
 	"available": {
 		"message": "Διαθέσιμο",
 		"description": "Επικεφαλίδα ενότητας για στοιχεία που μπορούν να προστεθούν"
@@ -46,6 +54,10 @@
 	"bold": {
 		"message": "Έντονα",
 		"description": "Επιλογή στυλ γραμματοσειράς για έντονο κείμενο"
+	},
+	"campaign": {
+		"message": "Εκστρατεία",
+		"description": "Η σελίδα που σχετίζεται με το ObjectManager/Campaign/FieldsAndRelationships/view"
 	},
 	"cancel": {
 		"message": "Ακύρωση",
@@ -55,9 +67,21 @@
 		"message": "Ακύρωση και κλείσιμο",
 		"description": "τίτλος ή περιεχόμενο κειμένου για το κουμπί κλεισίματος διαλόγων"
 	},
+	"case": {
+		"message": "Υπόθεση",
+		"description": "Το όνομα της σελίδας που σχετίζεται με το ObjectManager/Case/FieldsAndRelationships/view"
+	},
 	"chosen": {
 		"message": "Επιλεγμένο",
 		"description": "Επικεφαλίδα ενότητας για στοιχεία που έχουν επιλεγεί"
+	},
+	"classic_email_templates": {
+		"message": "Κλασικά πρότυπα email",
+		"description": "Η σελίδα που σχετίζεται με το CommunicationTemplatesEmail/home"
+	},
+	"close": {
+		"message": "Κλείσιμο",
+		"description": "κλείσιμο χωρίς να συμβεί τίποτα"
 	},
 	"cmd_export_all": {
 		"message": "Εμφάνιση παραθύρου για εξαγωγή όλων των αποθηκευμένων Tabs",
@@ -87,6 +111,14 @@
 		"message": "Εμφάνιση παραθύρου για ενημέρωση της τρέχουσας σελίδας (εάν έχει αποθηκευτεί)",
 		"description": "[command description] ο χρήστης θέλει να ενημερώσει την τρέχουσα σελίδα"
 	},
+	"company_information": {
+		"message": "Πληροφορίες εταιρείας",
+		"description": "Η σελίδα που σχετίζεται με το CompanyProfileInfo/home"
+	},
+	"confirm": {
+		"message": "Επιβεβαίωση",
+		"description": "κείμενο που ζητά από τον χρήστη να συνεχίσει"
+	},
 	"confirm_another_org": {
 		"message": "Επιβεβαιώστε το άνοιγμα αυτού του συνδέσμου.",
 		"description": "[διάλογος-άνοιγμα-άλλης-οργάνωσης] αίτημα επιβεβαίωσης προς τον χρήστη για το άνοιγμα του συνδέσμου που δημιουργήθηκε."
@@ -94,6 +126,10 @@
 	"confirm_update_extension": {
 		"message": "Μια νέα έκδοση του $extension_label είναι τώρα διαθέσιμη!",
 		"description": "ένα άγνωστο μήνυμα ελήφθη από έναν ακροατή"
+	},
+	"contact": {
+		"message": "Επαφή",
+		"description": "Η σελίδα που σχετίζεται με το ObjectManager/Contact/FieldsAndRelationships/view"
 	},
 	"continue": {
 		"message": "Συνέχεια",
@@ -555,6 +591,10 @@
 		"message": "ο μεταφραστής δεν έχει αρχικοποιηθεί ακόμη.",
 		"description": "[error] Η υπηρεσία μετάφρασης δεν ήταν έτοιμη"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "δεν ήταν δυνατή η προετοιμασία του σεμιναρίου.",
+		"description": "[error] Το Σεμινάριο δεν προετοιμάστηκε"
+	},
 	"error_unknown_file_structure": {
 		"message": "Δεν μπορέσαμε να κατανοήσουμε ένα αρχείο που θέλατε να εισαγάγετε\nΕάν το πρόβλημα επιμένει, μοιραστείτε το μαζί μας ανοίγοντας ένα ζήτημα στο GitHub",
 		"description": "[εισαγωγή] το αρχείο του χρήστη δεν αναγνωρίστηκε"
@@ -566,6 +606,10 @@
 	"error_unknown_request": {
 		"message": "Άγνωστο αίτημα.",
 		"description": "[error] Γενικό σφάλμα μετά τη λήψη άγνωστου μηνύματος"
+	},
+	"error_unknown_toast_type": {
+		"message": "Δεν ήταν δυνατή η ερμηνεία του ζητούμενου τύπου ειδοποίησης. Παρακαλώ αλλάξτε τον κώδικά σας.",
+		"description": "[error] Γενικό σφάλμα που χρησιμοποιείται κατά τη ρύθμιση του τύπου ειδοποίησης"
 	},
 	"error_unpin_tab": {
 		"message": "Σφάλμα κατά το ξεκαρφίτσωμα Tab",
@@ -598,6 +642,10 @@
 	"extension_label": {
 		"message": "Again, Why Salesforce",
 		"description": "Το όνομα αυτής της επέκτασης"
+	},
+	"field_accessibility": {
+		"message": "Προσβασιμότητα πεδίων",
+		"description": "Η σελίδα που σχετίζεται με το FieldAccessibility/home"
 	},
 	"file": {
 		"message": "αρχείο",
@@ -783,13 +831,29 @@
 		"message": "Ετικέτα",
 		"description": "[key] το όνομα του Tab"
 	},
+	"lead": {
+		"message": "Υποψήφιος πελάτης",
+		"description": "Η σελίδα που σχετίζεται με το ObjectManager/Lead/FieldsAndRelationships/view"
+	},
+	"learn_more_about_extension": {
+		"message": "μάθετε περισσότερα για το $extension_label",
+		"description": "[popup][settings] προσβάσιμος τίτλος και aria-label για το κουμπί βοήθειας wiki"
+	},
 	"lightning_navigation": {
 		"message": "Πλοήγηση Lightning",
 		"description": "Προσαρμοσμένη τεχνολογία πλοήγησης της Salesforce"
 	},
+	"login_history": {
+		"message": "Ιστορικό σύνδεσης",
+		"description": "Η σελίδα που σχετίζεται με το OrgLoginHistory/home"
+	},
 	"login_to_salesforce": {
 		"message": "Σύνδεση στο Salesforce",
 		"description": "[όχιSalesforceSetup] πρόσκληση σε κουμπί για ανακατεύθυνση του χρήστη στη σελίδα σύνδεσης του Salesforce"
+	},
+	"manage_connected_apps": {
+		"message": "Διαχείριση συνδεδεμένων εφαρμογών",
+		"description": "Η σελίδα που σχετίζεται με το ConnectedApplication/home"
 	},
 	"manage_tabs": {
 		"message": "Διαχείριση $tabs",
@@ -842,6 +906,10 @@
 	"open_setup": {
 		"message": "Άνοιγμα Setup",
 		"description": "[όχιSalesforceSetup] πρόσκληση σε κουμπί για ανακατεύθυνση του χρήστη σε σελίδα Salesforce Setup"
+	},
+	"opportunity": {
+		"message": "Ευκαιρία",
+		"description": "Η σελίδα που σχετίζεται με το ObjectManager/Opportunity/FieldsAndRelationships/view"
 	},
 	"opt_add_tabs_as_org": {
 		"message": "Προσθήκη νέων Tabs ως Org Tabs.",
@@ -975,6 +1043,10 @@
 		"message": "Η άδεια επιτράπηκε!",
 		"description": "[επιτυχία] ο χρήστης μας ζήτησε να του ζητήσουμε μια άδεια και την αποδέχτηκε"
 	},
+	"permission_sets": {
+		"message": "Σύνολα αδειών",
+		"description": "Η σελίδα που σχετίζεται με το PermSets/home"
+	},
 	"pinned": {
 		"message": "Καρφιτσωμένο",
 		"description": "Οι Tab καρτέλες του χρήστη που βρίσκονται πάντα στην αρχή της λίστας"
@@ -983,9 +1055,21 @@
 		"message": "Διατήρηση Tab για άλλες οργάνωσεις.",
 		"description": "[ετικέτα] διατήρηση όλων των οργάνως συγκεκριμένων Tab κατά τη διαδικασία εισαγωγής"
 	},
+	"pricebook2": {
+		"message": "Τιμοκατάλογος2",
+		"description": "Η σελίδα που σχετίζεται με το ObjectManager/Pricebook2/FieldsAndRelationships/view"
+	},
+	"product2": {
+		"message": "Προϊόν2",
+		"description": "Η σελίδα που σχετίζεται με το ObjectManager/Product2/FieldsAndRelationships/view"
+	},
 	"remove_tab": {
 		"message": "Αφαίρεση Tab",
 		"description": "[εναλλακτικό-κείμενο] εναλλακτικό κείμενο όταν οι εικόνες δεν λειτουργούν"
+	},
+	"reports_and_dashboards_settings": {
+		"message": "Ρυθμίσεις αναφορών και πινάκων ελέγχου",
+		"description": "Η σελίδα που σχετίζεται με το ReportUI/home"
 	},
 	"req_downloads_open_popup": {
 		"message": "Παρακαλώ ανοίξτε το αναδυόμενο παράθυρο της επέκτασης από το μενού επεκτάσεων του προγράμματος περιήγησής σας.",
@@ -1066,6 +1150,10 @@
 	"send_tip": {
 		"message": "Στείλτε μας μια συμβουλή ❤️",
 		"description": "[popup] τίτλος για το svg για να ζητήσει την αποστολή μιας συμβουλής"
+	},
+	"sessions": {
+		"message": "Συνεδρίες",
+		"description": "Η σελίδα που σχετίζεται με το SecuritySession/home"
 	},
 	"set_gen_preview": {
 		"message": "Tab Προεπισκόπηση",
@@ -1327,9 +1415,17 @@
 		"message": "Ρυθμίσεις",
 		"description": "Ετικέτα για το μενού ρυθμίσεων"
 	},
+	"setup_audit_trail": {
+		"message": "Ρύθμιση διαδρομής ελέγχου",
+		"description": "Η σελίδα που σχετίζεται με το SecurityEvents/home"
+	},
 	"setup_page": {
 		"message": "Σελίδα Setup",
 		"description": "[όχιSalesforceSetup] η σελίδα που χρησιμοποιείται για την τροποποίηση των ρυθμίσεων του Salesforce"
+	},
+	"sharing_settings": {
+		"message": "Ρυθμίσεις κοινής χρήσης",
+		"description": "Η σελίδα που σχετίζεται με το SecuritySharing/home"
 	},
 	"show_all_tabs": {
 		"message": "Εμφάνιση όλων των $tabs",
@@ -1439,6 +1535,10 @@
 		"message": "Τα Tab αποθηκεύτηκαν.",
 		"description": "[σημείωμα] Τα Tab αποθηκεύτηκαν με επιτυχία."
 	},
+	"task": {
+		"message": "Εργασία",
+		"description": "Η σελίδα που σχετίζεται με το ObjectManager/Task/FieldsAndRelationships/view"
+	},
 	"theme_dark": {
 		"message": "Αλλαγή Θέματος σε Σκοτεινό",
 		"description": "[αναδυόμενο-παράθυρο] τίτλος στο φεγγάρι για αλλαγή θέματος"
@@ -1446,6 +1546,94 @@
 	"theme_light": {
 		"message": "Αλλαγή Θέματος σε Φωτεινό",
 		"description": "[αναδυόμενο-παράθυρο] τίτλος στον ήλιο για αλλαγή θέματος"
+	},
+	"tutorial": {
+		"message": "Σεμινάριο",
+		"description": "[popup] κουμπί για την έναρξη του σεμιναρίου"
+	},
+	"tutorial_add_favourite": {
+		"message": "Κάντε κλικ στο αστέρι για να προσθέσετε αυτήν τη σελίδα στα αγαπημένα.",
+		"description": "[tutorial] προσθήκη αγαπημένου"
+	},
+	"tutorial_click_highlighted_tab": {
+		"message": "Κάντε κλικ στην επισημασμένη $tab για να μεταβείτε στην αντίστοιχη σελίδα.",
+		"description": "[tutorial] κάντε κλικ στην επισημασμένη Tab"
+	},
+	"tutorial_continue_prompt_body": {
+		"message": "Αυτό είναι για το $extension_label και θα συνεχίσει το ημιτελές $tutorial από εκεί που σταματήσατε.",
+		"description": "[tutorial] κείμενο σώματος για τη συνέχιση του σεμιναρίου"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "Συνέχεια του $tutorial από το τελευταίο βήμα;",
+		"description": "[tutorial] τίτλος παραθύρου για τη συνέχιση του σεμιναρίου"
+	},
+	"tutorial_drag_flows": {
+		"message": "Σύρετε την επισημασμένη σειρά (χρησιμοποιώντας τις 6 τελείες) και αφήστε την πριν από την πρώτη σειρά (η οποία είναι καρφιτσωμένη).",
+		"description": "[tutorial] σύρσιμο ροών"
+	},
+	"tutorial_end": {
+		"message": "$tutorial ολοκληρώθηκε! Καλή διασκέδαση με τη χρήση της επέκτασης.",
+		"description": "[tutorial] τέλος"
+	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "Δεν μπορέσαμε να βρούμε χρησιμοποιήσιμους συνδέσμους για την έναρξη του $tutorial \nΠαρακαλούμε εξάγετε τις $tabs σας και επανεκκινήστε το $tutorial",
+		"description": "[tutorial] μήνυμα σφάλματος αδυναμίας έναρξης"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "Αυτές είναι οι αγαπημένες σας $tabs και χρησιμοποιούνται για γρήγορη πρόσβαση σε σελίδες που χρησιμοποιούνται συχνά.",
+		"description": "[tutorial] επισήμανση αγαπημένων Tab"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "Πατήστε τη συντόμευση πληκτρολογίου για να ανοίξετε τη σελίδα $settings όπου μπορείτε να αλλάξετε τη συμπεριφορά της επέκτασης και να διαμορφώσετε τις $tabs σας",
+		"description": "[tutorial] συντόμευση πληκτρολογίου"
+	},
+	"tutorial_manage_tabs": {
+		"message": "Κάντε δεξί κλικ στη σελίδα (όχι σε μια Tab) και επιλέξτε $extension_label > $cxm_manage_tabs για να ανοίξετε το παράθυρο διαχείρισης.",
+		"description": "[tutorial] διαχείριση Tab"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "Μπορείτε να διαχειριστείτε τις $tabs σας από αυτήν την οθόνη. Κάντε κλικ εδώ για περισσότερες πληροφορίες.",
+		"description": "[tutorial] σύνδεσμος διαχείρισης Tab"
+	},
+	"tutorial_pin_tab": {
+		"message": "Κάντε δεξί κλικ στην επισημασμένη $tab και επιλέξτε $extension_label > $cxm_move > $cxm_pin_tab για να την καρφιτσώσετε.",
+		"description": "[tutorial] καρφίτσωμα Tab"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "Η σειρά που σύρθηκε δεν μπορούσε να μετακινηθεί πριν από την καρφιτσωμένη σειρά (επειδή δεν είναι επί του παρόντος καρφιτσωμένη), επομένως πήγε στην αρχή της λίστας των μη καρφιτσωμένων. Αυτές οι δύο λίστες αντιμετωπίζονται ξεχωριστά.",
+		"description": "[tutorial] εξήγηση καρφιτσωμένων"
+	},
+	"tutorial_pinned_tab": {
+		"message": "Παρατηρήστε ότι η $tab είναι τώρα καρφιτσωμένη και θα παραμείνει στη θέση της.",
+		"description": "[tutorial] καρφιτσωμένη Tab"
+	},
+	"tutorial_redirect_account": {
+		"message": "Τώρα θα σας ανακατευθύνουμε σε μια άλλη σελίδα για να σας δείξουμε περισσότερα. Κάντε κλικ εδώ για να συνεχίσετε.",
+		"description": "[tutorial] ανακατεύθυνση στον λογαριασμό"
+	},
+	"tutorial_remove_favourite": {
+		"message": "Κάντε κλικ στο διαγραμμένο αστέρι για να αφαιρέσετε αυτήν τη σελίδα από τα αγαπημένα. ΣΥΜΒΟΥΛΗ: μπορείτε να κάνετε κλικ στο αστέρι αφού ολοκληρωθεί αυτό το βήμα για να αποφύγετε την απώλεια αυτής της $tab",
+		"description": "[tutorial] αφαίρεση αγαπημένου"
+	},
+	"tutorial_restart": {
+		"message": "Μπορείτε να επανεκκινήσετε το $tutorial ανά πάσα στιγμή κάνοντας κλικ στο κουμπί στο αναδυόμενο παράθυρο.",
+		"description": "[tutorial] πρώτο μήνυμα"
+	},
+	"tutorial_restart_prompt": {
+		"message": "Θέλετε να ξεκινήσετε το $tutorial από την αρχή;",
+		"description": "[tutorial] προτροπή για επανεκκίνηση του σεμιναρίου"
+	},
+	"tutorial_save_modal": {
+		"message": "Κάντε κλικ στο $save για να εφαρμόσετε τις αλλαγές και να δείτε το μήνυμα επιβεβαίωσης.",
+		"description": "[tutorial] αποθήκευση παραθύρου"
+	},
+	"tutorial_start_prompt_body": {
+		"message": "Αυτό είναι για το $extension_label και θα σας μεταφέρει πρώτα στην αρχική σελίδα ρύθμισης και μετά θα ξεκινήσει το καθοδηγούμενο $tutorial",
+		"description": "[tutorial] κείμενο σώματος για την έναρξη του σεμιναρίου"
+	},
+	"tutorial_start_prompt_title": {
+		"message": "Έναρξη του $tutorial από την Αρχική σελίδα ρύθμισης;",
+		"description": "[tutorial] τίτλος παραθύρου για την έναρξη του σεμιναρίου"
 	},
 	"underline": {
 		"message": "Υπογράμμιση",
@@ -1490,6 +1678,10 @@
 	"where_to": {
 		"message": "Που;",
 		"description": "[διάλογος-άνοιγμα-άλλης-οργάνωσης] εναλλακτικός τίτλος για το παράθυρο διαλόγου"
+	},
+	"wiki_label": {
+		"message": "Μάθετε περισσότερα για το $extension_label",
+		"description": "[popup][settings] προσβάσιμος τίτλος και aria-label για το κουμπί βοήθειας wiki"
 	},
 	"write_review": {
 		"message": "Γράψτε μια κριτική!",

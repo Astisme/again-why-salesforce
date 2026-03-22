@@ -1,4 +1,8 @@
 {
+	"account": {
+		"message": "അക്കൗണ്ട്",
+		"description": "ObjectManager/Account/FieldsAndRelationships/view സംബന്ധിച്ച പേജ്"
+	},
 	"act_delete": {
 		"message": "🗑️ ഇല്ലാതാക്കുക",
 		"description": "[Tab-നിയന്ത്രിക്കുക] ഒരു വരി ഇല്ലാതാക്കുക"
@@ -39,6 +43,10 @@
 		"message": "ആരോഹണക്രമത്തിൽ (A-Z)",
 		"description": ""
 	},
+	"asset": {
+		"message": "അസറ്റ്",
+		"description": "ObjectManager/Asset/FieldsAndRelationships/view സംബന്ധിച്ച പേജ്"
+	},
 	"available": {
 		"message": "ലഭ്യമാണ്",
 		"description": "ചേർക്കാവുന്ന आइറ്റങ്ങൾക്കുള്ള വിഭാഗം ശീർഷകം"
@@ -46,6 +54,10 @@
 	"bold": {
 		"message": "ബോൾഡ്",
 		"description": "ടെക്സ്റ്റ് ദൊജി ഷൈലി ഓപ്‌ഷൻ"
+	},
+	"campaign": {
+		"message": "ക്യാമ്പെയ്‌ൻ",
+		"description": "ObjectManager/Campaign/FieldsAndRelationships/view സംബന്ധിച്ച പേജ്"
 	},
 	"cancel": {
 		"message": "റദ്ദാക്കുക",
@@ -55,9 +67,21 @@
 		"message": "റദ്ദാക്കുക, അടയ്ക്കുക",
 		"description": "മോഡലിന്റെ അടയ്ക്കുന്ന ബട്ടണിന് തലക്കെട്ടോ ടെക്സ്റ്റ് ഉള്ളടക്കമോ"
 	},
+	"case": {
+		"message": "കേസ്",
+		"description": "ObjectManager/Case/FieldsAndRelationships/view സംബന്ധിച്ച പേജിന്റെ പേര്"
+	},
 	"chosen": {
 		"message": "തിരഞ്ഞെടുക്കപ്പെട്ടത്",
 		"description": "തിരഞ്ഞെടുക്കപ്പെട്ട आइറ്റങ്ങൾക്കുള്ള വിഭാഗം ശീർഷകം"
+	},
+	"classic_email_templates": {
+		"message": "ക്ലാസിക് ഇമെയിൽ ടെംപ്ലേറ്റുകൾ",
+		"description": "CommunicationTemplatesEmail/home സംബന്ധിച്ച പേജ്"
+	},
+	"close": {
+		"message": "അടയ്ക്കുക",
+		"description": "ഒന്നും സംഭവിക്കാതെ അടയ്ക്കുക"
 	},
 	"cmd_export_all": {
 		"message": "സംരക്ഷിച്ച എല്ലാ Tab-കളും экспорт ചെയ്യാനുള്ള Модал കാണിക്കുക",
@@ -87,6 +111,14 @@
 		"message": "നിലവിലെ പേജ് അപ്ഡേറ്റ് ചെയ്യാനുള്ള മോഡൽ കാണിക്കുക (സംരക്ഷിച്ചിട്ടുണ്ടെങ്കിൽ)",
 		"description": "[കമാൻഡ് വിവരണം] നിലവിലെ പേജ് അപ്ഡേറ്റ് ചെയ്യാൻ ഉപയോക്താവ് ആഗ്രഹിക്കുന്നു"
 	},
+	"company_information": {
+		"message": "കമ്പനി വിവരങ്ങൾ",
+		"description": "CompanyProfileInfo/home സംബന്ധിച്ച പേജ്"
+	},
+	"confirm": {
+		"message": "സ്ഥിരീകരിക്കുക",
+		"description": "തുടരാൻ ഉപയോക്താവിനോട് ആവശ്യപ്പെടുന്ന ടെക്സ്റ്റ്"
+	},
 	"confirm_another_org": {
 		"message": "ഈ ലിങ്ക് തുറക്കുന്നത് സ്ഥിരീകരിക്കുക.",
 		"description": "[open-other-org-modal] നിര്‍മ്മിച്ച ലിങ്ക് തുറക്കുന്നതിന് ഉപയോക്താവിന്റെ സ്ഥിരീകരണം ആവശ്യപ്പെടുക."
@@ -94,6 +126,10 @@
 	"confirm_update_extension": {
 		"message": "$extension_label ന്റെ ഒരു പുതിയ പതിപ്പ് ഇപ്പോൾ ലഭ്യമാണ്",
 		"description": "ഒരു ലിസണറിൽ നിന്ന് ഒരു അജ്ഞാത സന്ദേശം ലഭിച്ചു"
+	},
+	"contact": {
+		"message": "കോൺടാക്റ്റ്",
+		"description": "ObjectManager/Contact/FieldsAndRelationships/view സംബന്ധിച്ച പേജ്"
 	},
 	"continue": {
 		"message": "തുടരുക",
@@ -554,6 +590,10 @@
 		"message": "ട്രാൻസ്ലേറ്റർ ഇതുവരെ ആരംഭിച്ചിട്ടില്ല.",
 		"description": "[പിശക്] TranslationService തയ്യാറായിരുന്നില്ല"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "ട്യൂട്ടോറിയൽ ആരംഭിക്കാൻ കഴിഞ്ഞില്ല.",
+		"description": "[error] ട്യൂട്ടോറിയൽ ആരംഭിച്ചിട്ടില്ല"
+	},
 	"error_unknown_file_structure": {
 		"message": "നിങ്ങൾ ഇറക്കുമതി ചെയ്യാൻ ആഗ്രഹിച്ച ഒരു ഫയൽ ഞങ്ങൾക്ക് മനസ്സിലാക്കാൻ കഴിഞ്ഞില്ല\nപ്രശ്നം നിലനിൽക്കുകയാണെങ്കിൽ, ഒരു GitHub ഇഷ്യൂ തുറന്ന് അത് ഞങ്ങളുമായി പങ്കിടുക",
 		"description": "[ഇറക്കുമതി] ഉപയോക്താവിന്റെ ഫയൽ തിരിച്ചറിഞ്ഞില്ല"
@@ -565,6 +605,10 @@
 	"error_unknown_request": {
 		"message": "അജ്ഞാതമായ അഭ്യർത്ഥന.",
 		"description": "[പിശക്] തിരിച്ചറിയാൻ കഴിയാത്ത ഒരു സന്ദേശം ലഭിച്ചതിനു ശേഷമുള്ള സാധാരണ പിശക്"
+	},
+	"error_unknown_toast_type": {
+		"message": "ആവശ്യപ്പെട്ട ടോസ്റ്റ് തരം തിരിച്ചറിയാൻ കഴിഞ്ഞില്ല. ദയവായി നിങ്ങളുടെ കോഡ് മാറ്റുക.",
+		"description": "[error] ടോസ്റ്റ് തരം സെറ്റ് ചെയ്യുമ്പോൾ ഉപയോഗിക്കുന്ന പൊതുവായ പിശക്"
 	},
 	"error_unpin_tab": {
 		"message": "Tab Pin നീക്കം ചെയ്യുന്നതിൽ പിശക്",
@@ -597,6 +641,10 @@
 	"extension_label": {
 		"message": "Again, Why Salesforce",
 		"description": "ഈ എക്‌സ്റ്റന്‍ഷന്റെ പേര്"
+	},
+	"field_accessibility": {
+		"message": "ഫീൽഡ് ആക്സസിബിലിറ്റി",
+		"description": "FieldAccessibility/home സംബന്ധിച്ച പേജ്"
 	},
 	"file": {
 		"message": "ഫയല്‍",
@@ -782,13 +830,29 @@
 		"message": "ലേബൽ",
 		"description": "[key] Tab-ന്റെ പേര്"
 	},
+	"lead": {
+		"message": "ലീഡ്",
+		"description": "ObjectManager/Lead/FieldsAndRelationships/view സംബന്ധിച്ച പേജ്"
+	},
+	"learn_more_about_extension": {
+		"message": "$extension_label നെക്കുറിച്ച് കൂടുതൽ അറിയുക",
+		"description": "[popup][settings] വിക്കി സഹായ ബട്ടണിനായുള്ള ആക്സസ് ചെയ്യാവുന്ന ശീർഷകവും ഏരിയ-ലേബലും"
+	},
 	"lightning_navigation": {
 		"message": "ലൈറ്റ്‌നിംഗ് നാവിഗേഷൻ",
 		"description": "സെയിൽസ്ഫോഴ്സിന്റെ കസ്റ്റം നാവിഗേഷൻ സാങ്കേതികവിദ്യ"
 	},
+	"login_history": {
+		"message": "ലോഗിൻ ചരിത്രം",
+		"description": "OrgLoginHistory/home സംബന്ധിച്ച പേജ്"
+	},
 	"login_to_salesforce": {
 		"message": "Salesforce-ലേക്ക് ലോഗിന്‍ ചെയ്യുക",
 		"description": "[notSalesforceSetup] Salesforce ലോഗിന്‍ പേജിലേക്ക് തിരിച്ചയക്കാനുള്ള വിളി"
+	},
+	"manage_connected_apps": {
+		"message": "കണക്റ്റുചെയ്‌ത ആപ്പുകൾ നിയന്ത്രിക്കുക",
+		"description": "ConnectedApplication/home സംബന്ധിച്ച പേജ്"
 	},
 	"manage_tabs": {
 		"message": "$tabs മാനേജ് ചെയ്യുക",
@@ -841,6 +905,10 @@
 	"open_setup": {
 		"message": "സെറ്റപ്പ് തുറക്കുക",
 		"description": "[notSalesforceSetup] Salesforce സെറ്റപ്പ് പേജിലേക്ക് തിരിച്ചയക്കാനുള്ള വിളി"
+	},
+	"opportunity": {
+		"message": "അവസരം",
+		"description": "ObjectManager/Opportunity/FieldsAndRelationships/view സംബന്ധിച്ച പേജ്"
 	},
 	"opt_add_tabs_as_org": {
 		"message": "പുതിയ Tab-കൾ Org Tab-കളായി ചേർക്കുക.",
@@ -974,6 +1042,10 @@
 		"message": "അനുമതി അനുവദിച്ചു!",
 		"description": "[വിജയം] ഒരു അനുമതി അഭ്യർത്ഥിക്കാൻ ഉപയോക്താവ് ഞങ്ങളോട് ആവശ്യപ്പെട്ടു, അവർ അത് സ്വീകരിച്ചു"
 	},
+	"permission_sets": {
+		"message": "പെർമിഷൻ സെറ്റുകൾ",
+		"description": "PermSets/home സംബന്ധിച്ച പേജ്"
+	},
 	"pinned": {
 		"message": "Pinned",
 		"description": "എപ്പോഴും ലിസ്റ്റിന്റെ തുടക്കത്തിൽ കാണുന്ന ഉപയോക്താവിൻ്റെ Tab-കൾ"
@@ -982,9 +1054,21 @@
 		"message": "മറ്റ് ഓര്‍ഗനൈസേഷനിലെ Tabs നിലനിര്‍ത്തുക.",
 		"description": "[label] ഇറക്കുമതി പ്രക്രിയയില്‍ ഓര്‍ഗ-വിശേഷ Tabs നിലനിര്‍ത്താന്‍"
 	},
+	"pricebook2": {
+		"message": "പ്രൈസ് ബുക്ക് 2",
+		"description": "ObjectManager/Pricebook2/FieldsAndRelationships/view സംബന്ധിച്ച പേജ്"
+	},
+	"product2": {
+		"message": "ഉൽപ്പന്നം 2",
+		"description": "ObjectManager/Product2/FieldsAndRelationships/view സംബന്ധിച്ച പേജ്"
+	},
 	"remove_tab": {
 		"message": "Tab നീക്കുക",
 		"description": "[alt] ചിത്രങ്ങള്‍ പ്രവര്‍ത്തിക്കാതെ പോയാല്‍ ബദല്‍ ടെക്സ്റ്റ്"
+	},
+	"reports_and_dashboards_settings": {
+		"message": "റിപ്പോർട്ടുകളും ഡാഷ്‌ബോർഡ് ക്രമീകരണങ്ങളും",
+		"description": "ReportUI/home സംബന്ധിച്ച പേജ്"
 	},
 	"req_downloads_open_popup": {
 		"message": "നിങ്ങളുടെ ബ്രൗസറിന്റെ വിപുലീകരണ മെനുവിൽ നിന്ന് വിപുലീകരണ പോപ്പ്അപ്പ് തുറക്കുക.",
@@ -1065,6 +1149,10 @@
 	"send_tip": {
 		"message": "ഞങ്ങൾക്ക് ഒരു നുറുങ്ങ് അയക്കുക ❤️",
 		"description": "[popup] ഒരു നുറുങ്ങ് അയക്കാൻ ആവശ്യപ്പെടുന്നതിനുള്ള svg-ന്റെ തലക്കെട്ട്"
+	},
+	"sessions": {
+		"message": "സെഷനുകൾ",
+		"description": "SecuritySession/home സംബന്ധിച്ച പേജ്"
 	},
 	"set_gen_preview": {
 		"message": "Tab മുൻനിര ദൃശ്യം",
@@ -1326,9 +1414,17 @@
 		"message": "സെറ്റിംഗ്സ്",
 		"description": "സെറ്റിംഗ്സ് മെനുവിന് ലേബൽ"
 	},
+	"setup_audit_trail": {
+		"message": "സെറ്റപ്പ് ഓഡിറ്റ് ട്രയൽ",
+		"description": "SecurityEvents/home സംബന്ധിച്ച പേജ്"
+	},
 	"setup_page": {
 		"message": "സെറ്റപ്പ് പേജ്",
 		"description": "[notSalesforceSetup] Salesforce ക്രമീകരണങ്ങള്‍ മാറ്റാനുള്ള പേജ്"
+	},
+	"sharing_settings": {
+		"message": "പങ്കിടൽ ക്രമീകരണങ്ങൾ",
+		"description": "SecuritySharing/home സംബന്ധിച്ച പേജ്"
 	},
 	"show_all_tabs": {
 		"message": "എല്ലാ $tabs കാണിക്കുക",
@@ -1438,6 +1534,10 @@
 		"message": "Tabs സംരക്ഷിച്ചു.",
 		"description": "[toast] Tabs വിജയകരമായി സംഗ്രഹിച്ചു"
 	},
+	"task": {
+		"message": "ടാസ്ക്",
+		"description": "ObjectManager/Task/FieldsAndRelationships/view സംബന്ധിച്ച പേജ്"
+	},
 	"theme_dark": {
 		"message": "ഡാര്‍ക്ക് തീമിലേക്ക് മാറ്റുക",
 		"description": "[popup] തീം മാറ്റാന്‍ ചന്ദ്രന്റെ ഇമേജ് ഉള്ള തലക്കെട്ട്"
@@ -1445,6 +1545,94 @@
 	"theme_light": {
 		"message": "ലൈറ്റ് തീമിലേക്ക് മാറ്റുക",
 		"description": "[popup] തീം മാറ്റാന്‍ സൂര്യന്റെ ഇമേജ് ഉള്ള തലക്കെട്ട്"
+	},
+	"tutorial": {
+		"message": "ട്യൂട്ടോറിയൽ",
+		"description": "[popup] ട്യൂട്ടോറിയൽ ആരംഭിക്കാനുള്ള ബട്ടൺ"
+	},
+	"tutorial_add_favourite": {
+		"message": "ഈ പേജ് പ്രിയപ്പെട്ടവയിലേക്ക് ചേർക്കാൻ നക്ഷത്ര ചിഹ്നത്തിൽ ക്ലിക്ക് ചെയ്യുക.",
+		"description": "[tutorial] പ്രിയപ്പെട്ടവ ചേർക്കുക"
+	},
+	"tutorial_click_highlighted_tab": {
+		"message": "അതതു പേജിലേക്ക് പോകുന്നതിനായി ഹൈലൈറ്റ് ചെയ്ത $tab ക്ലിക്ക് ചെയ്യുക.",
+		"description": "[tutorial] ഹൈലൈറ്റ് ചെയ്ത ടാബ് ക്ലിക്ക് ചെയ്യുക"
+	},
+	"tutorial_continue_prompt_body": {
+		"message": "ഇത് $extension_label നായുള്ളതാണ്, നിങ്ങൾ നിർത്തിയിടത്തുനിന്ന് പൂർത്തിയാകാത്ത $tutorial ഇത് പുനരാരംഭിക്കും.",
+		"description": "[tutorial] ട്യൂട്ടോറിയൽ തുടരുന്നതിനുള്ള ബോഡി ടെക്സ്റ്റ്"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "അവസാന ഘട്ടത്തിൽ നിന്ന് $tutorial തുടരണോ?",
+		"description": "[tutorial] ട്യൂട്ടോറിയൽ തുടരാനുള്ള മോഡൽ ടൈറ്റിൽ"
+	},
+	"tutorial_drag_flows": {
+		"message": "ഹൈലൈറ്റ് ചെയ്ത വരി ഡ്രാഗ് ചെയ്ത് (6 ഡോട്ട് ഉപയോഗിച്ച്) ആദ്യ വരിക്ക് (പിൻ ചെയ്തത്) മുമ്പായി ഇടുക.",
+		"description": "[tutorial] ഫ്ലോകൾ ഡ്രാഗ് ചെയ്യുക"
+	},
+	"tutorial_end": {
+		"message": "$tutorial പൂർത്തിയായി! എക്സ്റ്റൻഷൻ ഉപയോഗിക്കുന്നത് ആസ്വദിക്കൂ.",
+		"description": "[tutorial] അവസാനം"
+	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "$tutorial ആരംഭിക്കാൻ ഉപയോഗപ്രദമായ ലിങ്കുകളൊന്നും കണ്ടെത്താനായില്ല\nദയവായി നിങ്ങളുടെ $tabs എക്സ്‌പോർട്ട് ചെയ്‌ത് $tutorial പുനരാരംഭിക്കുക",
+		"description": "[tutorial] ആരംഭിക്കാൻ കഴിയില്ലെന്ന പിശക് സന്ദേശം"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "ഇവ നിങ്ങളുടെ പ്രിയപ്പെട്ട $tabs ആണ്, പതിവായി ഉപയോഗിക്കുന്ന പേജുകളിലേക്ക് വേഗത്തിൽ പ്രവേശിക്കാൻ ഇവ ഉപയോഗിക്കുന്നു.",
+		"description": "[tutorial] പ്രിയപ്പെട്ട ടാബ് ഹൈലൈറ്റ് ചെയ്യുക"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "എക്സ്റ്റൻഷൻ പെരുമാറ്റം മാറ്റാനും $tabs സ്റ്റൈൽ ചെയ്യാനും കഴിയുന്ന $settings പേജ് തുറക്കാൻ കീബോർഡ് ഷോർട്ട്‌കട്ട് അമർത്തുക",
+		"description": "[tutorial] കീബോർഡ് ഷോർട്ട്‌കട്ട്"
+	},
+	"tutorial_manage_tabs": {
+		"message": "പേജിൽ (ടാബിലല്ല) റൈറ്റ് ക്ലിക്ക് ചെയ്ത് മാനേജ്‌മെന്റ് മോഡൽ തുറക്കാൻ $extension_label > $cxm_manage_tabs തിരഞ്ഞെടുക്കുക.",
+		"description": "[tutorial] ടാബുകൾ നിയന്ത്രിക്കുക"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "ഈ സ്ക്രീനിൽ നിന്ന് നിങ്ങളുടെ $tabs നിയന്ത്രിക്കാം. കൂടുതൽ വിവരങ്ങൾക്ക് ഇവിടെ ക്ലിക്ക് ചെയ്യുക.",
+		"description": "[tutorial] ടാബ് നിയന്ത്രിക്കാനുള്ള ലിങ്ക്"
+	},
+	"tutorial_pin_tab": {
+		"message": "ഹൈലൈറ്റ് ചെയ്ത $tab -ൽ റൈറ്റ് ക്ലിക്ക് ചെയ്ത് അത് പിൻ ചെയ്യുന്നതിനായി $extension_label > $cxm_move > $cxm_pin_tab തിരഞ്ഞെടുക്കുക.",
+		"description": "[tutorial] ടാബ് പിൻ ചെയ്യുക"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "ഡ്രാഗ് ചെയ്ത വരി പിൻ ചെയ്ത വരിക്ക് മുമ്പായി നീക്കാൻ കഴിഞ്ഞില്ല (അത് നിലവിൽ പിൻ ചെയ്യാത്തതിനാൽ), അതിനാൽ അത് പിൻ ചെയ്യാത്ത ലിസ്റ്റിന്റെ തുടക്കത്തിലേക്ക് മാറി. ഈ രണ്ട് ലിസ്റ്റുകളും വ്യത്യസ്തമായാണ് പരിഗണിക്കുന്നത്.",
+		"description": "[tutorial] പിൻ ചെയ്തതിനെക്കുറിച്ചുള്ള വിശദീകരണം"
+	},
+	"tutorial_pinned_tab": {
+		"message": "$tab ഇപ്പോൾ പിൻ ചെയ്‌തുവെന്നും അത് അവിടെ തന്നെ തുടരുമെന്നും ശ്രദ്ധിക്കുക.",
+		"description": "[tutorial] പിൻ ചെയ്ത ടാബ്"
+	},
+	"tutorial_redirect_account": {
+		"message": "കൂടുതൽ കാര്യങ്ങൾ കാണിക്കുന്നതിനായി ഞങ്ങൾ നിങ്ങളെ മറ്റൊരു പേജിലേക്ക് റീഡയറക്ട് ചെയ്യും. തുടരാൻ ഇവിടെ ക്ലിക്ക് ചെയ്യുക.",
+		"description": "[tutorial] അക്കൗണ്ടിലേക്ക് റീഡയറക്ട് ചെയ്യുക"
+	},
+	"tutorial_remove_favourite": {
+		"message": "ഈ പേജ് പ്രിയപ്പെട്ടവയിൽ നിന്ന് ഒഴിവാക്കാൻ വെട്ടിയ നക്ഷത്ര ചിഹ്നത്തിൽ ക്ലിക്ക് ചെയ്യുക. സൂചന: ഈ ഘട്ടം കഴിഞ്ഞാലുടൻ നക്ഷത്രത്തിൽ ക്ലിക്ക് ചെയ്താൽ ഈ $tab നഷ്ടപ്പെടുന്നത് ഒഴിവാക്കാം",
+		"description": "[tutorial] പ്രിയപ്പെട്ടവ ഒഴിവാക്കുക"
+	},
+	"tutorial_restart": {
+		"message": "പോപ്പപ്പിലെ ബട്ടൺ ക്ലിക്ക് ചെയ്ത് നിങ്ങൾക്ക് എപ്പോൾ വേണമെങ്കിലും $tutorial പുനരാരംഭിക്കാം.",
+		"description": "[tutorial] ആദ്യ സന്ദേശം"
+	},
+	"tutorial_restart_prompt": {
+		"message": "നിങ്ങൾക്ക് ആദ്യമേ തന്നെ $tutorial ആരംഭിക്കണോ?",
+		"description": "[tutorial] ട്യൂട്ടോറിയൽ പുനരാരംഭിക്കാനുള്ള പ്രോംപ്റ്റ്"
+	},
+	"tutorial_save_modal": {
+		"message": "മാറ്റങ്ങൾ വരുത്താനും സ്ഥിരീകരണ സന്ദേശം കാണാനും $save ക്ലിക്ക് ചെയ്യുക.",
+		"description": "[tutorial] മോഡൽ സേവ് ചെയ്യുക"
+	},
+	"tutorial_start_prompt_body": {
+		"message": "ഇത് $extension_label നായുള്ളതാണ്, ഇത് നിങ്ങളെ ആദ്യം സെറ്റപ്പ് ഹോം പേജിലേക്ക് കൊണ്ടുപോകും, തുടർന്ന് ഗൈഡഡ് $tutorial ആരംഭിക്കും.",
+		"description": "[tutorial] ട്യൂട്ടോറിയൽ ആരംഭിക്കുന്നതിനുള്ള ബോഡി ടെക്സ്റ്റ്"
+	},
+	"tutorial_start_prompt_title": {
+		"message": "സെറ്റപ്പ് ഹോമിൽ നിന്ന് $tutorial ആരംഭിക്കണോ?",
+		"description": "[tutorial] ട്യൂട്ടോറിയൽ ആരംഭിക്കാനുള്ള മോഡൽ ടൈറ്റിൽ"
 	},
 	"underline": {
 		"message": "അടിവര രേഖ",
@@ -1489,6 +1677,10 @@
 	"where_to": {
 		"message": "എവിടേക്ക്?",
 		"description": "[open-other-org-modal] മോഡലിനുള്ള ബാക്കപ്പിലുള്ള തലക്കെട്ട്"
+	},
+	"wiki_label": {
+		"message": "$extension_label നെക്കുറിച്ച് കൂടുതൽ അറിയുക",
+		"description": "[popup][settings] വിക്കി സഹായ ബട്ടണിനായുള്ള ആക്സസ് ചെയ്യാവുന്ന ശീർഷകവും ഏരിയ-ലേബലും"
 	},
 	"write_review": {
 		"message": "ഒരു അവലോകനം എഴുതുക!",

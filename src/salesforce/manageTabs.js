@@ -5,7 +5,13 @@ import {
 	CXM_UNPIN_TAB,
 	HIDDEN_CLASS,
 	PIN_TAB_CLASS,
+	TOAST_ERROR,
+	TOAST_WARNING,
+	TUTORIAL_EVENT_CLOSE_MANAGE_TABS,
+	TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL,
+	TUTORIAL_EVENT_REORDERED_TABS_TABLE,
 } from "/constants.js";
+import { getInnerElementFieldBySelector, injectStyle } from "/functions.js";
 import Tab from "/tab.js";
 import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
 import ensureTranslatorAvailability from "/translator.js";
@@ -22,6 +28,7 @@ import {
 	getModalHanger,
 	makeDuplicatesBold,
 	reorderTabsUl,
+	sf_afterSet,
 	showToast,
 } from "./content.js";
 
@@ -164,8 +171,9 @@ function getLastTr(tbody = null) {
  * @param {event} e - the event which had this function called
  * @param {Object} [param1={}] an object with the following keys
  * @param {TabContainer} param1.allTabs - the TabContainer instance
+ * @return Promise fulfilled when checkOpenAskConfirm is completed
  */
-function handleActionButtonClick(e, {
+export async function handleActionButtonClick(e, {
 	allTabs,
 } = {}) {
 	e.preventDefault();
@@ -173,8 +181,7 @@ function handleActionButtonClick(e, {
 	const btn = e.currentTarget;
 	const action = btn.dataset.action;
 	if (action === "open") {
-		checkOpenAskConfirm(e);
-		return;
+		return await checkOpenAskConfirm(e);
 	}
 	const tabIndex = Number.parseInt(btn.dataset.tabIndex);
 	const row = btn.closest("tr");
@@ -321,13 +328,13 @@ export function updateModalBodyOverflow(article = null) {
  * @param {Event} e - the event which is connected to this function
  * @return undefined
  */
-function checkRemoveTr(e) {
+async function checkRemoveTr(e) {
 	const parentTr = e.target.closest("tr");
 	const label = parentTr.querySelector(".label").value;
 	const url = parentTr.querySelector(".url").value;
 	const tabAppendElement = parentTr.closest("tbody");
 	if (label === "" && url === "") {
-		removeTr(tabAppendElement, parentTr, focusedIndex);
+		await removeTr(tabAppendElement, parentTr, focusedIndex);
 	}
 }
 /**
@@ -469,7 +476,7 @@ async function addTr(tabAppendElement = null) {
 			"click",
 			async (e) => {
 				e.preventDefault();
-				handleActionButtonClick(e, {
+				await handleActionButtonClick(e, {
 					allTabs: await ensureAllTabsAvailability(),
 				});
 			},
@@ -522,15 +529,11 @@ async function removeTr(
  * @param {TbodyHTMLElement} tabAppendElement - the tbody element where to append the style
  */
 function checkAddDuplicateStyle(tabAppendElement) {
-	const styleId = "awsf-warning";
-	const style = tabAppendElement.querySelector(`#${styleId}`);
-	if (style == null) {
-		const newStyle = document.createElement("style");
-		newStyle.id = styleId;
-		newStyle.textContent =
-			".duplicate { background-color: #dd7a01 !important; }";
-		tabAppendElement.appendChild(newStyle);
-	}
+	const styleEl = injectStyle(
+		"awsf-warning",
+		{ css: ".duplicate { background-color: #dd7a01 !important; }" },
+	);
+	tabAppendElement.appendChild(styleEl);
 }
 
 /**
@@ -552,7 +555,7 @@ async function checkDuplicates({
 		return;
 	}
 	// show warning in salesforce
-	showToast("error_tab_url_saved", false, true);
+	showToast("error_tab_url_saved", TOAST_WARNING);
 	makeDuplicatesBold(url);
 	// highlight all duplicated rows and scroll to the first one
 	checkAddDuplicateStyle(tabAppendElement);
@@ -585,8 +588,9 @@ async function checkDuplicates({
  * @param {Object} [param0.inputObj=managedLoggers[focusedIndex].last_input] - the last_input object of the currently focused logger
  * @param {TbodyHTMLElement} [param0.tabAppendElement=null] - the tbody where to append or remove the tr
  * @throws Error when tabAppendElement == null
+ * @return Promise fulfilled when addTr or removeTr are completed
  */
-function checkAddRemoveLastTr({
+async function checkAddRemoveLastTr({
 	inputObj = managedLoggers[focusedIndex].last_input,
 	tabAppendElement,
 } = {}) {
@@ -598,13 +602,13 @@ function checkAddRemoveLastTr({
 		focusedIndex === (managedLoggers.length - 1) &&
 		(inputObj.label && inputObj.url)
 	) {
-		addTr(tabAppendElement);
+		await addTr(tabAppendElement);
 	} // if the user is on the previous-to-last td, remove the last tab if either one of the fields are empty
 	else if (
 		focusedIndex === (managedLoggers.length - 2) &&
 		(!inputObj.label || !inputObj.url)
 	) {
-		removeTr(tabAppendElement);
+		await removeTr(tabAppendElement);
 	}
 }
 
@@ -652,8 +656,9 @@ function performAfterChecks({
  * @param {TbodyHTMLElement} [param0.tabAppendElement=null] - the tbody where to append the tr
  * @param {string} [param0.type="label"]  - The type of input field ("label", "url" or "org").
  * @throws Error when tabAppendElement == null
+ * @return Promise fulfilled when the checkAddRemoveLastTr is completed
  */
-function trInputListener({
+async function trInputListener({
 	tabAppendElement = null,
 	type = "label",
 } = {}) {
@@ -710,7 +715,7 @@ function trInputListener({
 		});
 	}
 	inputObj[type] = element.value;
-	checkAddRemoveLastTr({
+	await checkAddRemoveLastTr({
 		inputObj,
 		tabAppendElement,
 	});
@@ -748,21 +753,9 @@ function reorderTabsTable({
 	);
 	manage_InvalidateSort = true;
 	wasSomethingUpdated = true;
-}
-
-/**
- * Returns the value from the given selector
- * @param {Object} [param0={}] an object with the following keys
- * @param {TrHTMLElement} [param0.tr=null] - the tr where to selector is located
- * @param {string} [param0.selector=""] - the selector to be used inside the query to find the element with a value
- * @return undefined (when the value is null or "") or the trimmed value
- */
-function getInputValue({
-	tr = null,
-	selector = "",
-} = {}) {
-	const value = tr?.querySelector(selector).value.trim();
-	return value == null || value === "" ? undefined : value;
+	document.dispatchEvent(
+		new CustomEvent(TUTORIAL_EVENT_REORDERED_TABS_TABLE),
+	);
 }
 
 /**
@@ -781,20 +774,40 @@ async function readManagedTabsAndSave({
 	for (const tr of tbody.querySelectorAll("tr")) {
 		if (tr !== lastTr) { // lastChild is always empty
 			tableTabs.push(Tab.create({
-				label: getInputValue({ tr, selector: "input.label" }),
-				url: getInputValue({ tr, selector: "input.url" }),
-				org: getInputValue({ tr, selector: "input.org" }),
+				label: getInnerElementFieldBySelector({
+					parentElement: tr,
+					field: "value",
+					selector: "input.label",
+				}),
+				url: getInnerElementFieldBySelector({
+					parentElement: tr,
+					field: "value",
+					selector: "input.url",
+				}),
+				org: getInnerElementFieldBySelector({
+					parentElement: tr,
+					field: "value",
+					selector: "input.org",
+				}),
 			}));
 		}
 	}
 	allTabs = allTabs ?? await ensureAllTabsAvailability();
 	// send message to save the Tabs as they were read
-	await allTabs.replaceTabs(tableTabs, {
-		resetTabs: true,
-		removeOrgTabs: true,
-		updatePinnedTabs: false,
-		invalidateSort: manage_InvalidateSort,
-	});
+	if (
+		await allTabs.replaceTabs(tableTabs, {
+			resetTabs: true,
+			removeOrgTabs: true,
+			updatePinnedTabs: false,
+			invalidateSort: manage_InvalidateSort,
+		})
+	) {
+		sf_afterSet({
+			tabs: allTabs,
+		});
+	} else {
+		showToast("error_processing_tabs", TOAST_ERROR);
+	}
 }
 
 /**
@@ -805,7 +818,7 @@ async function readManagedTabsAndSave({
  */
 export async function createManageTabsModal() {
 	if (document.getElementById(MODAL_ID) != null) {
-		return showToast("error_close_other_modal", false);
+		return showToast("error_close_other_modal", TOAST_ERROR);
 	}
 	const allTabs = await ensureAllTabsAvailability({ reset: true });
 	const {
@@ -836,10 +849,13 @@ export async function createManageTabsModal() {
 	setupDragForTable(reorderTabsTable);
 	closeButton.addEventListener("click", (_) => {
 		setupDragForUl(reorderTabsUl);
+		document.dispatchEvent(
+			new CustomEvent(TUTORIAL_EVENT_CLOSE_MANAGE_TABS),
+		);
 	});
-	saveButton.addEventListener("click", (e) => {
+	saveButton.addEventListener("click", async (e) => {
 		e.preventDefault();
-		readManagedTabsAndSave({ tbody, allTabs });
+		await readManagedTabsAndSave({ tbody, allTabs });
 		closeButton.click();
 		managedLoggers.length = 0;
 	});
@@ -852,9 +868,9 @@ export async function createManageTabsModal() {
 	for (const btn of actionButtons) {
 		btn.addEventListener(
 			"click",
-			(e) => {
+			async (e) => {
 				e.preventDefault();
-				handleActionButtonClick(e, {
+				await handleActionButtonClick(e, {
 					allTabs,
 				});
 			},
@@ -895,4 +911,7 @@ export async function createManageTabsModal() {
 		}
 		deleteAllButton.setAttribute("disabled", true);
 	});
+	document.dispatchEvent(
+		new CustomEvent(TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL),
+	);
 }

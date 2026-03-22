@@ -1,4 +1,8 @@
 {
+	"account": {
+		"message": "取引先",
+		"description": "ObjectManager/Account/FieldsAndRelationships/view に関連するページ"
+	},
 	"act_delete": {
 		"message": "🗑️ 削除",
 		"description": "[Tabを管理] 行を削除する"
@@ -39,6 +43,10 @@
 		"message": "昇順（A-Z）",
 		"description": ""
 	},
+	"asset": {
+		"message": "納入商品",
+		"description": "ObjectManager/Asset/FieldsAndRelationships/view に関連するページ"
+	},
 	"available": {
 		"message": "利用可能",
 		"description": "追加できる項目のセクション見出し"
@@ -46,6 +54,10 @@
 	"bold": {
 		"message": "太字",
 		"description": "太字テキスト用のフォントスタイルオプション"
+	},
+	"campaign": {
+		"message": "キャンペーン",
+		"description": "ObjectManager/Campaign/FieldsAndRelationships/view に関連するページ"
 	},
 	"cancel": {
 		"message": "キャンセル",
@@ -55,9 +67,21 @@
 		"message": "キャンセルして閉じる",
 		"description": "モーダルの閉じるボタンのタイトルまたはtextContent"
 	},
+	"case": {
+		"message": "ケース",
+		"description": "ObjectManager/Case/FieldsAndRelationships/view に関連するページ名"
+	},
 	"chosen": {
 		"message": "選択済み",
 		"description": "選択された項目のセクション見出し"
+	},
+	"classic_email_templates": {
+		"message": "Classic メールテンプレート",
+		"description": "CommunicationTemplatesEmail/home に関連するページ"
+	},
+	"close": {
+		"message": "閉じる",
+		"description": "何も起こさずに閉じる"
 	},
 	"cmd_export_all": {
 		"message": "保存されているすべての Tabs をエクスポートするモーダルを表示する",
@@ -87,6 +111,14 @@
 		"message": "現在のページを更新するモーダルを表示する（保存されている場合）",
 		"description": "[コマンド説明] ユーザーは現在のページを更新したいと考えています"
 	},
+	"company_information": {
+		"message": "組織情報",
+		"description": "CompanyProfileInfo/home に関連するページ"
+	},
+	"confirm": {
+		"message": "確認",
+		"description": "ユーザーに続行を促すテキスト"
+	},
 	"confirm_another_org": {
 		"message": "このリンクを開くことを確認してください。",
 		"description": "[open-other-org-modal] 作成されたリンクを開くためにユーザーに確認を求めます"
@@ -94,6 +126,10 @@
 	"confirm_update_extension": {
 		"message": "$extension_label の新しいバージョンが利用可能になりました！",
 		"description": "リスナーから不明なメッセージを受信しました"
+	},
+	"contact": {
+		"message": "取引先責任者",
+		"description": "ObjectManager/Contact/FieldsAndRelationships/view に関連するページ"
 	},
 	"continue": {
 		"message": "続行",
@@ -554,6 +590,10 @@
 		"message": "翻訳ツールはまだ初期化されていません。",
 		"description": "[エラー] TranslationService が準備できていませんでした"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "チュートリアルを初期化できませんでした。",
+		"description": "[error] チュートリアルが初期化されませんでした"
+	},
 	"error_unknown_file_structure": {
 		"message": "インポートしようとしたファイルを認識できませんでした\n問題が解決しない場合は、GitHubイシューを作成して共有してください",
 		"description": "[インポート] ユーザーのファイルが認識されませんでした"
@@ -565,6 +605,10 @@
 	"error_unknown_request": {
 		"message": "不明なリクエスト。",
 		"description": "[エラー] 認識されなかったメッセージを受信した後の一般的なエラー"
+	},
+	"error_unknown_toast_type": {
+		"message": "要求されたトーストタイプを解釈できませんでした。コードを変更してください。",
+		"description": "[error] トーストタイプを設定する際に使用される一般的なエラー"
 	},
 	"error_unpin_tab": {
 		"message": "Tabのピン留め解除中にエラーが発生しました",
@@ -597,6 +641,10 @@
 	"extension_label": {
 		"message": "Again, Why Salesforce",
 		"description": "[manifest] この拡張機能の名前"
+	},
+	"field_accessibility": {
+		"message": "項目のアクセシビリティ",
+		"description": "FieldAccessibility/home に関連するページ"
 	},
 	"file": {
 		"message": "ファイル",
@@ -782,13 +830,29 @@
 		"message": "ラベル",
 		"description": "[key] Tabの名前"
 	},
+	"lead": {
+		"message": "リード",
+		"description": "ObjectManager/Lead/FieldsAndRelationships/view に関連するページ"
+	},
+	"learn_more_about_extension": {
+		"message": "$extension_label について詳しく知る",
+		"description": "[popup][settings] wiki ヘルプボタンのアクセシブルなタイトルと aria-label"
+	},
 	"lightning_navigation": {
 		"message": "Lightning Navigation",
 		"description": "Salesforceのカスタムナビゲーション技術"
 	},
+	"login_history": {
+		"message": "ログイン履歴",
+		"description": "OrgLoginHistory/home に関連するページ"
+	},
 	"login_to_salesforce": {
 		"message": "Salesforce にログインする",
 		"description": "[notSalesforceSetup] Salesforce ログインページにリダイレクトするための呼びかけ"
+	},
+	"manage_connected_apps": {
+		"message": "接続されたアプリを管理する",
+		"description": "ConnectedApplication/home に関連するページ"
 	},
 	"manage_tabs": {
 		"message": "$tabs を管理",
@@ -841,6 +905,10 @@
 	"open_setup": {
 		"message": "Setup を開く",
 		"description": "[notSalesforceSetup] Salesforce Setup ページに移動するための呼びかけ"
+	},
+	"opportunity": {
+		"message": "商談",
+		"description": "ObjectManager/Opportunity/FieldsAndRelationships/view に関連するページ"
 	},
 	"opt_add_tabs_as_org": {
 		"message": "新しいTabsをOrg Tabsとして追加します。",
@@ -974,6 +1042,10 @@
 		"message": "権限が許可されました！",
 		"description": "[成功] ユーザーから権限のリクエストを求められ、承認されました"
 	},
+	"permission_sets": {
+		"message": "権限セット",
+		"description": "PermSets/home に関連するページ"
+	},
 	"pinned": {
 		"message": "Pinned",
 		"description": "常にリストの最初に見つかるユーザーのTab"
@@ -982,9 +1054,21 @@
 		"message": "他の Org の Tabs を保持する。",
 		"description": "[label] インポート中に Org 固有の Tabs を保持する"
 	},
+	"pricebook2": {
+		"message": "価格表 2",
+		"description": "ObjectManager/Pricebook2/FieldsAndRelationships/view に関連するページ"
+	},
+	"product2": {
+		"message": "商品 2",
+		"description": "ObjectManager/Product2/FieldsAndRelationships/view に関連するページ"
+	},
 	"remove_tab": {
 		"message": "Tab を削除する",
 		"description": "[alt] 画像が表示されない場合の代替テキスト"
+	},
+	"reports_and_dashboards_settings": {
+		"message": "レポートおよびダッシュボードの設定",
+		"description": "ReportUI/home に関連するページ"
 	},
 	"req_downloads_open_popup": {
 		"message": "ブラウザの拡張機能メニューから拡張機能のポップアップを開いてください。",
@@ -1065,6 +1149,10 @@
 	"send_tip": {
 		"message": "チップを送る ❤️",
 		"description": "[popup] チップを送るよう促すためのSVGタイトル"
+	},
+	"sessions": {
+		"message": "セッション",
+		"description": "SecuritySession/home に関連するページ"
 	},
 	"set_gen_preview": {
 		"message": "Tab プレビュー",
@@ -1326,9 +1414,17 @@
 		"message": "設定",
 		"description": "設定メニューのラベル"
 	},
+	"setup_audit_trail": {
+		"message": "設定変更履歴の参照",
+		"description": "SecurityEvents/home に関連するページ"
+	},
 	"setup_page": {
 		"message": "Setup ページ",
 		"description": "[notSalesforceSetup] Salesforce の設定を変更するためのページ"
+	},
+	"sharing_settings": {
+		"message": "共有設定",
+		"description": "SecuritySharing/home に関連するページ"
 	},
 	"show_all_tabs": {
 		"message": "すべての $tabs を表示",
@@ -1438,6 +1534,10 @@
 		"message": "Tabs が保存されました。",
 		"description": "[toast] Tabs が正常に保存されました。"
 	},
+	"task": {
+		"message": "ToDo",
+		"description": "ObjectManager/Task/FieldsAndRelationships/view に関連するページ"
+	},
 	"theme_dark": {
 		"message": "ダークテーマに変更する",
 		"description": "[popup] テーマ変更用に月の上にあるタイトル"
@@ -1445,6 +1545,94 @@
 	"theme_light": {
 		"message": "ライトテーマに変更する",
 		"description": "[popup] テーマ変更用に太陽の上にあるタイトル"
+	},
+	"tutorial": {
+		"message": "チュートリアル",
+		"description": "[popup] チュートリアルを開始するボタン"
+	},
+	"tutorial_add_favourite": {
+		"message": "星をクリックして、このページをお気に入りに追加します。",
+		"description": "[tutorial] お気に入りに追加"
+	},
+	"tutorial_click_highlighted_tab": {
+		"message": "ハイライトされた $tab をクリックして、対応するページに移動します。",
+		"description": "[tutorial] ハイライトされたタブをクリック"
+	},
+	"tutorial_continue_prompt_body": {
+		"message": "これは $extension_label 用です。未完了の $tutorial を中断したところから再開します。",
+		"description": "[tutorial] チュートリアル続行の本文テキスト"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "最後のステップから $tutorial を続行しますか？",
+		"description": "[tutorial] チュートリアル続行のモーダルタイトル"
+	},
+	"tutorial_drag_flows": {
+		"message": "ハイライトされた行を（6つの点を使用して）ドラッグし、最初の行（固定されている行）の前にドロップします。",
+		"description": "[tutorial] フローをドラッグ"
+	},
+	"tutorial_end": {
+		"message": "$tutorial が完了しました。拡張機能をお楽しみください。",
+		"description": "[tutorial] 終了"
+	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "$tutorial を開始するために使用できるリンクが見つかりませんでした。\n$tabs をエクスポートして $tutorial を再起動してください。",
+		"description": "[tutorial] 開始できないときのエラーメッセージ"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "これらはお気に入りの $tabs であり、頻繁に使用するページに素早くアクセスするために使用されます。",
+		"description": "[tutorial] お気に入りタブをハイライト"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "キーボードショートカットを押して $settings ページを開くと、拡張機能の動作を変更したり $tabs のスタイルを設定したりできます。",
+		"description": "[tutorial] キーボードショートカット"
+	},
+	"tutorial_manage_tabs": {
+		"message": "ページ上（タブ上ではなく）で右クリックし、 $extension_label > $cxm_manage_tabs を選択して管理モーダルを開きます。",
+		"description": "[tutorial] タブを管理"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "この画面から $tabs を管理できます。詳細については、ここをクリックしてください。",
+		"description": "[tutorial] タブ管理リンク"
+	},
+	"tutorial_pin_tab": {
+		"message": "ハイライトされた $tab を右クリックし、 $extension_label > $cxm_move > $cxm_pin_tab を選択して固定します。",
+		"description": "[tutorial] タブを固定"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "ドラッグされた行は（現在は固定されていないため）固定された行の前に移動できず、固定されていないリストの先頭に移動しました。これら2つのリストは個別に扱われます。",
+		"description": "[tutorial] 固定の説明"
+	},
+	"tutorial_pinned_tab": {
+		"message": "$tab が固定され、その場に留まるようになったことに注目してください。",
+		"description": "[tutorial] 固定されたタブ"
+	},
+	"tutorial_redirect_account": {
+		"message": "さらに詳しく説明するために、別のページにリダイレクトします。続行するには、ここをクリックしてください。",
+		"description": "[tutorial] 取引先にリダイレクト"
+	},
+	"tutorial_remove_favourite": {
+		"message": "取り消し線の付いた星をクリックして、このページをお気に入りから削除します。ヒント：このステップが完了した後に星をクリックすると、この $tab を失うのを防ぐことができます。",
+		"description": "[tutorial] お気に入りを削除"
+	},
+	"tutorial_restart": {
+		"message": "ポップアップのボタンをクリックすることで、いつでも $tutorial を再起動できます。",
+		"description": "[tutorial] 最初のメッセージ"
+	},
+	"tutorial_restart_prompt": {
+		"message": "$tutorial を最初から開始しますか？",
+		"description": "[tutorial] チュートリアル再起動のプロンプト"
+	},
+	"tutorial_save_modal": {
+		"message": "$save をクリックして変更を適用し、確認メッセージを表示します。",
+		"description": "[tutorial] モーダルを保存"
+	},
+	"tutorial_start_prompt_body": {
+		"message": "これは $extension_label 用です。最初に設定ホームページに移動し、ガイド付きの $tutorial を開始します。",
+		"description": "[tutorial] チュートリアル開始の本文テキスト"
+	},
+	"tutorial_start_prompt_title": {
+		"message": "設定ホームから $tutorial を開始しますか？",
+		"description": "[tutorial] チュートリアル開始のモーダルタイトル"
 	},
 	"underline": {
 		"message": "下線",
@@ -1489,6 +1677,10 @@
 	"where_to": {
 		"message": "どこへ？",
 		"description": "[open-other-org-modal] モーダルの代替タイトル"
+	},
+	"wiki_label": {
+		"message": "$extension_label について詳しく知る",
+		"description": "[popup][settings] wiki ヘルプボタンのアクセシブルなタイトルと aria-label"
 	},
 	"write_review": {
 		"message": "レビューを書く！",

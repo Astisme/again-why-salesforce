@@ -1,4 +1,8 @@
 {
+	"account": {
+		"message": "Акаунт",
+		"description": "Страницата, свързана с ObjectManager/Account/FieldsAndRelationships/view"
+	},
 	"act_delete": {
 		"message": "🗑️ Изтриване",
 		"description": "[управление-на-Tab] изтриване на ред"
@@ -39,6 +43,10 @@
 		"message": "Възходящ (А-Я)",
 		"description": ""
 	},
+	"asset": {
+		"message": "Актив",
+		"description": "Страницата, свързана с ObjectManager/Asset/FieldsAndRelationships/view"
+	},
 	"available": {
 		"message": "Налично",
 		"description": "Заглавие на секция за елементи, които могат да бъдат добавени"
@@ -46,6 +54,10 @@
 	"bold": {
 		"message": "Получер",
 		"description": "Опция за стил на шрифта за получер текст"
+	},
+	"campaign": {
+		"message": "Кампания",
+		"description": "Страницата, свързана с ObjectManager/Campaign/FieldsAndRelationships/view"
 	},
 	"cancel": {
 		"message": "Отказ",
@@ -55,9 +67,21 @@
 		"message": "Отказ и затваряне",
 		"description": "заглавие или текст за бутона, който затваря модалните прозорци"
 	},
+	"case": {
+		"message": "Случай",
+		"description": "Името на страницата, свързана с ObjectManager/Case/FieldsAndRelationships/view"
+	},
 	"chosen": {
 		"message": "Избрано",
 		"description": "Заглавие на секция за елементи, които са избрани"
+	},
+	"classic_email_templates": {
+		"message": "Класически имейл шаблони",
+		"description": "Страницата, свързана с CommunicationTemplatesEmail/home"
+	},
+	"close": {
+		"message": "Затвори",
+		"description": "затваряне без нищо да се случи"
 	},
 	"cmd_export_all": {
 		"message": "Покажи модал за експортиране на всички запазени Tabs",
@@ -87,6 +111,14 @@
 		"message": "Покажи модал за обновяване на текущата страница (ако е запазена)",
 		"description": "[command description] потребителят иска да обнови текущата страница"
 	},
+	"company_information": {
+		"message": "Информация за компанията",
+		"description": "Страницата, свързана с CompanyProfileInfo/home"
+	},
+	"confirm": {
+		"message": "Потвърди",
+		"description": "текст за подкана на потребителя да продължи"
+	},
 	"confirm_another_org": {
 		"message": "Потвърдете отварянето на този линк.",
 		"description": "[open-other-org-modal] заявка за потвърждение от потребителя за отваряне на конструирания линк."
@@ -94,6 +126,10 @@
 	"confirm_update_extension": {
 		"message": "Нова версия на $extension_label е налична!",
 		"description": "получено е неизвестно съобщение от слушател"
+	},
+	"contact": {
+		"message": "Контакт",
+		"description": "Страницата, свързана с ObjectManager/Contact/FieldsAndRelationships/view"
 	},
 	"continue": {
 		"message": "Продължи",
@@ -555,6 +591,10 @@
 		"message": "translator все още не е инициализиран.",
 		"description": "[error] TranslationService не е бил готов"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "ръководството не можа да бъде инициализирано.",
+		"description": "[error] Ръководството не беше инициализирано"
+	},
 	"error_unknown_file_structure": {
 		"message": "Не успяхме да разберем файл, който искахте да импортирате\nАко проблемът продължи, моля, споделете го с нас, като отворите проблем в GitHub",
 		"description": "[импортиране] файлът на потребителя не беше разпознат"
@@ -566,6 +606,10 @@
 	"error_unknown_request": {
 		"message": "Непознато запитване.",
 		"description": "[error] Общa грешка след получаване на непознато съобщение"
+	},
+	"error_unknown_toast_type": {
+		"message": "Заявеният тип известие не можа да бъде интерпретиран. Моля, променете кода си.",
+		"description": "[error] Обща грешка, използвана при задаване на типа известие"
 	},
 	"error_unpin_tab": {
 		"message": "Грешка при откачане на Tab",
@@ -598,6 +642,10 @@
 	"extension_label": {
 		"message": "Again, Why Salesforce",
 		"description": "Името на това разширение"
+	},
+	"field_accessibility": {
+		"message": "Достъпност на полетата",
+		"description": "Страницата, свързана с FieldAccessibility/home"
 	},
 	"file": {
 		"message": "файл",
@@ -783,13 +831,29 @@
 		"message": "Етикет",
 		"description": "[key] името на Tab"
 	},
+	"lead": {
+		"message": "Потенциален клиент",
+		"description": "Страницата, свързана с ObjectManager/Lead/FieldsAndRelationships/view"
+	},
+	"learn_more_about_extension": {
+		"message": "научете повече за $extension_label",
+		"description": "[popup][settings] достъпно заглавие и aria-label за бутона за помощ на уикито"
+	},
 	"lightning_navigation": {
 		"message": "Lightning навигация",
 		"description": "Персонализирана навигационна технология на Salesforce"
 	},
+	"login_history": {
+		"message": "История на влизанията",
+		"description": "Страницата, свързана с OrgLoginHistory/home"
+	},
 	"login_to_salesforce": {
 		"message": "Влез в Salesforce",
 		"description": "[notSalesforceSetup] повикване към действие на бутон за пренасочване на потребителя към страницата за вход на Salesforce"
+	},
+	"manage_connected_apps": {
+		"message": "Управление на свързани приложения",
+		"description": "Страницата, свързана с ConnectedApplication/home"
 	},
 	"manage_tabs": {
 		"message": "Управление на $tabs",
@@ -842,6 +906,10 @@
 	"open_setup": {
 		"message": "Отвори Setup",
 		"description": "[notSalesforceSetup] повикване към действие на бутон за пренасочване на потребителя към Salesforce Setup страницата"
+	},
+	"opportunity": {
+		"message": "Възможност",
+		"description": "Страницата, свързана с ObjectManager/Opportunity/FieldsAndRelationships/view"
 	},
 	"opt_add_tabs_as_org": {
 		"message": "Добавяне на нови Tabs като Org Tabs.",
@@ -975,6 +1043,10 @@
 		"message": "Разрешението беше позволено!",
 		"description": "[успех] потребителят ни помоли да поискаме разрешение и той го прие"
 	},
+	"permission_sets": {
+		"message": "Набори от разрешения",
+		"description": "Страницата, свързана с PermSets/home"
+	},
 	"pinned": {
 		"message": "Закачен",
 		"description": "Tabове на потребителя, които винаги се намират в началото на списъка"
@@ -983,9 +1055,21 @@
 		"message": "Запази Tab за други организации",
 		"description": "[label] запази всички организационно-специфични Tab при импортиране"
 	},
+	"pricebook2": {
+		"message": "Pricebook2",
+		"description": "Страницата, свързана с ObjectManager/Pricebook2/FieldsAndRelationships/view"
+	},
+	"product2": {
+		"message": "Продукт2",
+		"description": "Страницата, свързана с ObjectManager/Product2/FieldsAndRelationships/view"
+	},
 	"remove_tab": {
 		"message": "Премахни Tab",
 		"description": "[alt] алтернативен текст когато изображенията не се показват"
+	},
+	"reports_and_dashboards_settings": {
+		"message": "Настройки на отчети и табла",
+		"description": "Страницата, свързана с ReportUI/home"
 	},
 	"req_downloads_open_popup": {
 		"message": "Моля, отворете изскачащия прозорец на разширението от менюто за разширения на вашия браузър.",
@@ -1066,6 +1150,10 @@
 	"send_tip": {
 		"message": "Изпратете ни бакшиш ❤️",
 		"description": "[popup] заглавие на svg за подкана за изпращане на бакшиш"
+	},
+	"sessions": {
+		"message": "Сесии",
+		"description": "Страницата, свързана с SecuritySession/home"
 	},
 	"set_gen_preview": {
 		"message": "Tab Преглед",
@@ -1327,9 +1415,17 @@
 		"message": "Настройки",
 		"description": "Етикет за менюто с настройки"
 	},
+	"setup_audit_trail": {
+		"message": "Настройка на одитна пътека",
+		"description": "Страницата, свързана с SecurityEvents/home"
+	},
 	"setup_page": {
 		"message": "Setup страница",
 		"description": "[notSalesforceSetup] страницата за редактиране на настройките в Salesforce"
+	},
+	"sharing_settings": {
+		"message": "Настройки за споделяне",
+		"description": "Страницата, свързана с SecuritySharing/home"
 	},
 	"show_all_tabs": {
 		"message": "Показване на всички $tabs",
@@ -1439,6 +1535,10 @@
 		"message": "Tab са запазени.",
 		"description": "[toast] Tab са успешно запазени."
 	},
+	"task": {
+		"message": "Задача",
+		"description": "Страницата, свързана с ObjectManager/Task/FieldsAndRelationships/view"
+	},
 	"theme_dark": {
 		"message": "Смени темата на тъмна",
 		"description": "[popup] заглавие за иконата на луната за смяна на темата"
@@ -1446,6 +1546,94 @@
 	"theme_light": {
 		"message": "Смени темата на светла",
 		"description": "[popup] заглавие за иконата на слънцето за смяна на темата"
+	},
+	"tutorial": {
+		"message": "Ръководство",
+		"description": "[popup] бутон за стартиране на ръководство"
+	},
+	"tutorial_add_favourite": {
+		"message": "Кликнете върху звездата, за да добавите тази страница към любими.",
+		"description": "[tutorial] добавяне на любими"
+	},
+	"tutorial_click_highlighted_tab": {
+		"message": "Кликнете върху подчертания $tab , за да отидете на съответната страница.",
+		"description": "[tutorial] кликнете върху подчертания Tab"
+	},
+	"tutorial_continue_prompt_body": {
+		"message": "Това е за $extension_label и ще възобнови недовършеното $tutorial от мястото, където сте спрели.",
+		"description": "[tutorial] основен текст за продължаване на ръководството"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "Продължаване на $tutorial от последната стъпка?",
+		"description": "[tutorial] заглавие на модален прозорец за продължаване на ръководството"
+	},
+	"tutorial_drag_flows": {
+		"message": "Плъзнете маркирания ред (използвайки 6-те точки) и го пуснете преди първия ред (който е закачен).",
+		"description": "[tutorial] влачене на потоци"
+	},
+	"tutorial_end": {
+		"message": "$tutorial завършено! Приятно използване на разширението.",
+		"description": "[tutorial] край"
+	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "Не можахме да намерим използваеми връзки за стартиране на $tutorial \nМоля, експортирайте вашите $tabs и рестартирайте $tutorial",
+		"description": "[tutorial] съобщение за грешка при невъзможност за стартиране"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "Това са вашите любими $tabs и те се използват за бърз достъп до често използвани страници.",
+		"description": "[tutorial] подчертаване на любими Tab"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "Натиснете клавишната комбинация, за да отворите страницата $settings , където можете да промените поведението на разширението и да стилизирате вашите $tabs",
+		"description": "[tutorial] клавишна комбинация"
+	},
+	"tutorial_manage_tabs": {
+		"message": "Кликнете с десния бутон върху страницата (не върху Tab) и изберете $extension_label > $cxm_manage_tabs , за да отворите модалния прозорец за управление.",
+		"description": "[tutorial] управление на Tab"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "Можете да управлявате вашите $tabs от този екран. Кликнете тук за повече информация.",
+		"description": "[tutorial] връзка за управление на Tab"
+	},
+	"tutorial_pin_tab": {
+		"message": "Кликнете с десния бутон върху подчертания $tab и изберете $extension_label > $cxm_move > $cxm_pin_tab , за да го закачите.",
+		"description": "[tutorial] закачане на Tab"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "Влаченият ред не можа да бъде преместен преди закачения ред (тъй като в момента е откачен), затова отиде в началото на списъка с откачени елементи. Тези два списъка се третират отделно.",
+		"description": "[tutorial] обяснение за закачени елементи"
+	},
+	"tutorial_pinned_tab": {
+		"message": "Забележете, че $tab сега е закачен и ще остане на мястото си.",
+		"description": "[tutorial] закачен Tab"
+	},
+	"tutorial_redirect_account": {
+		"message": "Сега ще ви пренасочим към друга страница, за да ви покажем повече. Кликнете тук, за да продължите.",
+		"description": "[tutorial] пренасочване към акаунт"
+	},
+	"tutorial_remove_favourite": {
+		"message": "Кликнете върху зачеркнатата звезда, за да премахнете тази страница от любими. СЪВЕТ: можете да кликнете върху звездата, след като тази стъпка бъде завършена, за да избегнете загубата на този $tab",
+		"description": "[tutorial] премахване на любими"
+	},
+	"tutorial_restart": {
+		"message": "Можете да рестартирате $tutorial по всяко време, като кликнете върху бутона в изскачащия прозорец.",
+		"description": "[tutorial] първо съобщение"
+	},
+	"tutorial_restart_prompt": {
+		"message": "Искате ли да стартирате $tutorial отначало?",
+		"description": "[tutorial] подкана за рестартиране на ръководството"
+	},
+	"tutorial_save_modal": {
+		"message": "Кликнете върху $save , за да приложите промените и да видите съобщението за потвърждение.",
+		"description": "[tutorial] запазване в модален прозорец"
+	},
+	"tutorial_start_prompt_body": {
+		"message": "Това е за $extension_label и ще ви отведе първо до началната страница на Setup, след което ще стартира насоченото $tutorial",
+		"description": "[tutorial] основен текст за стартиране на ръководството"
+	},
+	"tutorial_start_prompt_title": {
+		"message": "Стартиране на $tutorial от Setup Home?",
+		"description": "[tutorial] заглавие на модален прозорец за стартиране на ръководството"
 	},
 	"underline": {
 		"message": "Подчертаване",
@@ -1490,6 +1678,10 @@
 	"where_to": {
 		"message": "Към къде?",
 		"description": "[open-other-org-modal] алтернативно заглавие за модалния прозорец"
+	},
+	"wiki_label": {
+		"message": "Научете повече за $extension_label",
+		"description": "[popup][settings] достъпно заглавие и aria-label за бутона за помощ на уикито"
 	},
 	"write_review": {
 		"message": "Напишете отзив!",

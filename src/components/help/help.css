@@ -1,3 +1,20 @@
+:host {
+	--help-transition-duration: var(--transition-duration, 500ms);
+	--help-transition-timing-function: var(
+		--transition-timing-function,
+		ease-in-out
+	);
+}
+
+:host,
+.help-icon .button,
+.help-icon .button .slds-button__icon,
+.help-icon .tooltip::after,
+.link-tip {
+	transition-duration: var(--help-transition-duration);
+	transition-timing-function: var(--help-transition-timing-function);
+}
+
 .help-icon {
 	position: relative;
 	display: inline-block;
@@ -13,6 +30,7 @@
 	min-width: unset;
 	min-height: unset;
 	width: fit-content;
+	transition-property: color, background-color, border-color, box-shadow;
 }
 .help-icon .button:focus .slds-button__icon,
 .help-icon .button:hover .slds-button__icon {
@@ -22,6 +40,7 @@
 	width: 1rem;
 	height: 1rem;
 	fill: var(--color, #000000);
+	transition-property: fill, stroke, color;
 }
 .help-icon .tooltip {
 	position: absolute;
@@ -30,7 +49,6 @@
 	margin-bottom: 6px;
 	visibility: hidden;
 	opacity: 0;
-	transition: opacity 0.2s ease-in-out;
 	background-color: #253858;
 	color: var(--background-color, #ffffff);
 	padding: 8px;
@@ -44,6 +62,14 @@
 	top: auto;
 	z-index: 2;
 	display: block;
+	transition:
+		opacity 0.2s ease-in-out,
+		background-color var(--help-transition-duration)
+		var(--help-transition-timing-function),
+		border-color var(--help-transition-duration)
+		var(--help-transition-timing-function),
+		color var(--help-transition-duration)
+		var(--help-transition-timing-function);
 }
 
 .help-icon .tooltip::after {
@@ -55,6 +81,7 @@
 	border-width: 6px;
 	border-style: solid;
 	border-color: #253858 transparent transparent transparent;
+	transition-property: border-color;
 }
 
 .tooltip[data-show-bottom="true"]:not(
@@ -117,6 +144,7 @@
 .link-tip {
 	font-style: italic;
 	color: var(--warning, #b76501);
+	transition-property: color;
 }
 
 .hidden {

@@ -1,4 +1,8 @@
 {
+	"account": {
+		"message": "ఖాతా",
+		"description": "ObjectManager/Account/FieldsAndRelationships/view కి సంబంధించిన పేజీ"
+	},
 	"act_delete": {
 		"message": "🗑️ తొలగించు",
 		"description": "[Tab-నిర్వహించు] ఒక వరుసను తొలగించు"
@@ -39,6 +43,10 @@
 		"message": "ఆరోహణ (A-Z)",
 		"description": ""
 	},
+	"asset": {
+		"message": "ఆస్తి",
+		"description": "ObjectManager/Asset/FieldsAndRelationships/view కి సంబంధించిన పేజీ"
+	},
 	"available": {
 		"message": "అందుబాటులో ఉన్నవి",
 		"description": "జోడించగల అంశాల కోసం విభాగ శీర్షిక"
@@ -46,6 +54,10 @@
 	"bold": {
 		"message": "బోల్డ్",
 		"description": "బోల్డ్ టెక్స్ట్ కోసం ఫాంట్ స్టైల్ ఎంపిక"
+	},
+	"campaign": {
+		"message": "ప్రచారం",
+		"description": "ObjectManager/Campaign/FieldsAndRelationships/view కి సంబంధించిన పేజీ"
 	},
 	"cancel": {
 		"message": "రద్దు చేయి",
@@ -55,9 +67,21 @@
 		"message": "రద్దు చేసి మూసివేయి",
 		"description": "మోడల్స్ యొక్క మూసివేయి బటన్ కోసం శీర్షిక లేదా టెక్స్ట్ కంటెంట్"
 	},
+	"case": {
+		"message": "కేసు",
+		"description": "ObjectManager/Case/FieldsAndRelationships/view కి సంబంధించిన పేజీ పేరు"
+	},
 	"chosen": {
 		"message": "ఎంచుకున్నవి",
 		"description": "ఎంచుకున్న అంశాల కోసం విభాగ శీర్షిక"
+	},
+	"classic_email_templates": {
+		"message": "క్లాసిక్ ఇమెయిల్ టెంప్లేట్‌లు",
+		"description": "CommunicationTemplatesEmail/home కి సంబంధించిన పేజీ"
+	},
+	"close": {
+		"message": "మూసివేయి",
+		"description": "ఏ చర్య లేకుండా మూసివేయి"
 	},
 	"cmd_export_all": {
 		"message": "సేవ్ చేసిన అన్ని Tabs ను экспорт చేయడానికి మోడల్ చూపించు",
@@ -87,6 +111,14 @@
 		"message": "ప్రస్తుత పేజీని అప్‌డేట్ చేయడానికి మోడల్ చూపించు (సేవ్ చేయబడితే)",
 		"description": "[కమాండ్ వివరణ] వినియోగదారు ప్రస్తుత పేజీని అప్‌డేట్ చేయాలనుకుంటున్నారు"
 	},
+	"company_information": {
+		"message": "కంపెనీ సమాచారం",
+		"description": "CompanyProfileInfo/home కి సంబంధించిన పేజీ"
+	},
+	"confirm": {
+		"message": "ధృవీకరించు",
+		"description": "వినియోగదారుని కొనసాగించమని కోరే టెక్స్ట్"
+	},
 	"confirm_another_org": {
 		"message": "ఈ లింక్ ని తెరవడాన్ని నిర్ధారించండి.",
 		"description": "[open-other-org-modal] రూపొందించిన లింక్ తెరవడానికి వినియోగదారుని నిర్ధారణ కోరుతుంది"
@@ -94,6 +126,10 @@
 	"confirm_update_extension": {
 		"message": "$extension_label యొక్క క్రొత్త సంస్కరణ ఇప్పుడు అందుబాటులో ఉంది!",
 		"description": "వినేవారి నుండి తెలియని సందేశం అందింది"
+	},
+	"contact": {
+		"message": "కాంటాక్ట్",
+		"description": "ObjectManager/Contact/FieldsAndRelationships/view కి సంబంధించిన పేజీ"
 	},
 	"continue": {
 		"message": "కొనసాగించు",
@@ -554,6 +590,10 @@
 		"message": "అనువాదకుడు ఇంకా ప్రారంభించబడలేదు.",
 		"description": "[లోపం] TranslationService సిద్ధంగా లేదు"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "ట్యుటోరియల్ ప్రారంభించబడలేదు.",
+		"description": "[error] ట్యుటోరియల్ ప్రారంభించబడలేదు"
+	},
 	"error_unknown_file_structure": {
 		"message": "మీరు దిగుమతి చేయాలనుకున్న ఫైల్‌ను మేము అర్థం చేసుకోలేకపోయాము\nసమస్య కొనసాగితే, దయచేసి GitHub ఇష్యూను తెరవడం ద్వారా దానిని మాతో పంచుకోండి",
 		"description": "[దిగుమతి] వినియోగదారు ఫైల్ గుర్తించబడలేదు"
@@ -565,6 +605,10 @@
 	"error_unknown_request": {
 		"message": "తెలియని అభ్యర్థన.",
 		"description": "[లోపం] గుర్తించబడని సందేశాన్ని పొందిన తర్వాత సాధారణ లోపం"
+	},
+	"error_unknown_toast_type": {
+		"message": "అభ్యర్థించిన నోటిఫికేషన్ రకాన్ని అర్థం చేసుకోలేకపోయాము. దయచేసి మీ కోడ్‌ని మార్చండి.",
+		"description": "[error] నోటిఫికేషన్ రకాన్ని (toast) సెట్ చేసేటప్పుడు ఉపయోగించే సాధారణ లోపం"
 	},
 	"error_unpin_tab": {
 		"message": "Tab-ను అన్‌పిన్ చేస్తున్నప్పుడు లోపం",
@@ -597,6 +641,10 @@
 	"extension_label": {
 		"message": "Again, Why Salesforce",
 		"description": "[manifest] ఈ ఎక్స్‌టెన్షన్ పేరును"
+	},
+	"field_accessibility": {
+		"message": "ఫీల్డ్ యాక్సెసిబిలిటీ",
+		"description": "FieldAccessibility/home కి సంబంధించిన పేజీ"
 	},
 	"file": {
 		"message": "ఫైల్",
@@ -782,13 +830,29 @@
 		"message": "లేబుల్",
 		"description": "[key] Tab పేరు"
 	},
+	"lead": {
+		"message": "లీడ్ (Lead)",
+		"description": "ObjectManager/Lead/FieldsAndRelationships/view కి సంబంధించిన పేజీ"
+	},
+	"learn_more_about_extension": {
+		"message": "$extension_label గురించి మరింత తెలుసుకోండి",
+		"description": "[popup][settings] వికీ సహాయ బటన్ కోసం యాక్సెస్ చేయగల శీర్షిక మరియు ఆరియా-లేబుల్"
+	},
 	"lightning_navigation": {
 		"message": "లైట్నింగ్ నావిగేషన్",
 		"description": "Salesforce యొక్క అనుకూల నావిగేషన్ సాంకేతికత"
 	},
+	"login_history": {
+		"message": "లాగిన్ చరిత్ర",
+		"description": "OrgLoginHistory/home కి సంబంధించిన పేజీ"
+	},
 	"login_to_salesforce": {
 		"message": "Salesforceలో లాగిన్ అవ్వండి",
 		"description": "[notSalesforceSetup] Salesforceలో లాగిన్ పేజీకి రీడైరెక్ట్ చేయడానికి కాల్-టు-యాక్షన్"
+	},
+	"manage_connected_apps": {
+		"message": "కనెక్ట్ చేయబడిన యాప్‌లను నిర్వహించండి",
+		"description": "ConnectedApplication/home కి సంబంధించిన పేజీ"
 	},
 	"manage_tabs": {
 		"message": "$tabs నిర్వహించండి",
@@ -841,6 +905,10 @@
 	"open_setup": {
 		"message": "Setupని తెరవండి",
 		"description": "[notSalesforceSetup] Salesforce Setup పేజీకి రీడైరెక్ట్ చేయడానికి కాల్-టు-యాక్షన్"
+	},
+	"opportunity": {
+		"message": "అవకాశం",
+		"description": "ObjectManager/Opportunity/FieldsAndRelationships/view కి సంబంధించిన పేజీ"
 	},
 	"opt_add_tabs_as_org": {
 		"message": "కొత్త Tab-లను Org Tab-లుగా జోడించు.",
@@ -974,6 +1042,10 @@
 		"message": "అనుమతి లభించింది!",
 		"description": "[విజయం] వినియోగదారు మమ్మల్ని అనుమతి కోరమని అడిగారు మరియు వారు దానిని అంగీకరించారు"
 	},
+	"permission_sets": {
+		"message": "అనుమతి సెట్లు",
+		"description": "PermSets/home కి సంబంధించిన పేజీ"
+	},
 	"pinned": {
 		"message": "పిన్ చేయబడింది",
 		"description": "జాబితా ప్రారంభంలో ఎల్లప్పుడూ కనుగొనబడే వినియోగదారు యొక్క Tab-లు"
@@ -982,9 +1054,21 @@
 		"message": "ఇతర Orgల కోసం Tabs ని పరిరక్షించండి",
 		"description": "[label] దిగుమతి సమయంలో Org-ప్రత్యేక Tabs ని ఉంచుతుంది"
 	},
+	"pricebook2": {
+		"message": "ధరల పుస్తకం 2",
+		"description": "ObjectManager/Pricebook2/FieldsAndRelationships/view కి సంబంధించిన పేజీ"
+	},
+	"product2": {
+		"message": "ఉత్పత్తి 2",
+		"description": "ObjectManager/Product2/FieldsAndRelationships/view కి సంబంధించిన పేజీ"
+	},
 	"remove_tab": {
 		"message": "Tab తొలగించండి",
 		"description": "[alt] చిత్రాలు చూపించకపోతే ప్రత్యామ్నాయ టెక్స్ట్"
+	},
+	"reports_and_dashboards_settings": {
+		"message": "నివేదికలు మరియు డాష్‌బోర్డ్ సెట్టింగ్‌లు",
+		"description": "ReportUI/home కి సంబంధించిన పేజీ"
 	},
 	"req_downloads_open_popup": {
 		"message": "దయచేసి మీ బ్రౌజర్ యొక్క పొడిగింపుల మెను నుండి పొడిగింపు పాపప్‌ను తెరవండి.",
@@ -1065,6 +1149,10 @@
 	"send_tip": {
 		"message": "మాకు ఒక చిట్కా పంపండి ❤️",
 		"description": "[popup] ఒక చిట్కా పంపమని ప్రేరేపించడానికి svg కోసం శీర్షిక"
+	},
+	"sessions": {
+		"message": "సెషన్లు",
+		"description": "SecuritySession/home కి సంబంధించిన పేజీ"
 	},
 	"set_gen_preview": {
 		"message": "Tab ప్రివ్యూ",
@@ -1326,9 +1414,17 @@
 		"message": "సెట్టింగులు",
 		"description": "సెట్టింగుల మెనూ కోసం లేబుల్"
 	},
+	"setup_audit_trail": {
+		"message": "సెటప్ ఆడిట్ ట్రైల్",
+		"description": "SecurityEvents/home కి సంబంధించిన పేజీ"
+	},
 	"setup_page": {
 		"message": "Setup పేజీ",
 		"description": "[notSalesforceSetup] Salesforce సెట్టింగ్స్ మార్చడానికి ఉపయోగించే పేజీ"
+	},
+	"sharing_settings": {
+		"message": "భాగస్వామ్య సెట్టింగ్‌లు",
+		"description": "SecuritySharing/home కి సంబంధించిన పేజీ"
 	},
 	"show_all_tabs": {
 		"message": "అన్ని $tabs చూపించు",
@@ -1438,6 +1534,10 @@
 		"message": "Tabs సేవ్ అయ్యాయి",
 		"description": "[toast] Tabs విజయవంతంగా సేవ్ అయ్యాయి."
 	},
+	"task": {
+		"message": "టాస్క్",
+		"description": "ObjectManager/Task/FieldsAndRelationships/view కి సంబంధించిన పేజీ"
+	},
 	"theme_dark": {
 		"message": "డార్క్ థీమ్‌కు మార్చండి",
 		"description": "[popup] థీమ్ మార్చటానికి చంద్రుడిపై టైటిల్"
@@ -1445,6 +1545,94 @@
 	"theme_light": {
 		"message": "లైట్ థీమ్‌కు మార్చండి",
 		"description": "[popup] థీమ్ మార్చటానికి సూర్యుడిపై టైటిల్"
+	},
+	"tutorial": {
+		"message": "ట్యుటోరియల్",
+		"description": "[popup] ట్యుటోరియల్ ప్రారంభించడానికి బటన్"
+	},
+	"tutorial_add_favourite": {
+		"message": "ఈ పేజీని ఇష్టమైన వాటిలో చేర్చడానికి నక్షత్రంపై క్లిక్ చేయండి.",
+		"description": "[tutorial] ఇష్టమైనవి జోడించు"
+	},
+	"tutorial_click_highlighted_tab": {
+		"message": "సంబంధిత పేజీకి వెళ్లడానికి హైలైట్ చేయబడిన $tab ట్యాబ్‌పై క్లిక్ చేయండి.",
+		"description": "[tutorial] హైలైట్ చేసిన ట్యాబ్‌ను క్లిక్ చేయండి"
+	},
+	"tutorial_continue_prompt_body": {
+		"message": "ఇది $extension_label కోసం మరియు మీరు ఎక్కడ ఆపారో అక్కడి నుండి అసంపూర్ణ ట్యుటోరియల్ $tutorial కొనసాగుతుంది.",
+		"description": "[tutorial] ట్యుటోరియల్ కొనసాగించడానికి టెక్స్ట్"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "చివరి దశ నుండి ట్యుటోరియల్ $tutorial కొనసాగించాలా?",
+		"description": "[tutorial] ట్యుటోరియల్ కొనసాగించడానికి మోడల్ శీర్షిక"
+	},
+	"tutorial_drag_flows": {
+		"message": "హైలైట్ చేసిన అడ్డు వరుసను (6 చుక్కలను ఉపయోగించి) లాగి, మొదటి అడ్డు వరుసకు (పిన్ చేయబడింది) ముందు వదలండి.",
+		"description": "[tutorial] లాగడం మరియు వదలడం"
+	},
+	"tutorial_end": {
+		"message": "ట్యుటోరియల్ $tutorial పూర్తయింది! ఎక్స్‌టెన్షన్‌ను ఉపయోగించి ఆనందించండి.",
+		"description": "[tutorial] ముగింపు"
+	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "ట్యుటోరియల్ $tutorial ప్రారంభించడానికి ఉపయోగకరమైన లింక్‌లు ఏవీ కనుగొనబడలేదు\nదయచేసి మీ ట్యాబ్‌లను $tabs ఎగుమతి చేసి ట్యుటోరియల్ $tutorial ని మళ్లీ ప్రారంభించండి",
+		"description": "[tutorial] ప్రారంభించలేనప్పుడు లోపం సందేశం"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "ఇవి మీకు ఇష్టమైన ట్యాబ్‌లు $tabs మరియు తరచుగా ఉపయోగించే పేజీలను త్వరగా యాక్సెస్ చేయడానికి ఉపయోగపడతాయి.",
+		"description": "[tutorial] ఇష్టమైన ట్యాబ్‌ను హైలైట్ చేయండి"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "ఎక్స్‌టెన్షన్ ప్రవర్తనను మార్చడానికి మరియు ట్యాబ్‌లను $tabs స్టైల్ చేయడానికి కీబోర్డ్ షార్ట్‌కట్‌ని నొక్కి $settings పేజీని తెరవండి",
+		"description": "[tutorial] కీబోర్డ్ షార్ట్‌కట్"
+	},
+	"tutorial_manage_tabs": {
+		"message": "పేజీపై (ట్యాబ్‌పై కాదు) కుడి క్లిక్ చేసి, మేనేజ్‌మెంట్ విండోను తెరవడానికి $extension_label > $cxm_manage_tabs ని ఎంచుకోండి.",
+		"description": "[tutorial] ట్యాబ్‌ని నిర్వహించండి"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "మీరు ఈ స్క్రీన్ నుండి మీ ట్యాబ్‌లను $tabs నిర్వహించవచ్చు. మరింత సమాచారం కోసం ఇక్కడ క్లిక్ చేయండి.",
+		"description": "[tutorial] ట్యాబ్ మేనేజ్‌మెంట్ లింక్"
+	},
+	"tutorial_pin_tab": {
+		"message": "హైలైట్ చేసిన ట్యాబ్ $tab పై కుడి క్లిక్ చేసి, దానిని పిన్ చేయడానికి $extension_label > $cxm_move > $cxm_pin_tab ని ఎంచుకోండి.",
+		"description": "[tutorial] ట్యాబ్‌ను పిన్ చేయండి"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "లాగిన అడ్డు వరుస పిన్ చేసిన అడ్డు వరుస కంటే ముందుకు వెళ్లలేదు (ఎందుకంటే అది ప్రస్తుతం పిన్ చేయబడలేదు), కాబట్టి అది పిన్ చేయని జాబితా ప్రారంభానికి వెళ్ళింది. ఈ రెండు జాబితాలు విడివిడిగా పరిగణించబడతాయి.",
+		"description": "[tutorial] పిన్ చేయడం గురించి వివరణ"
+	},
+	"tutorial_pinned_tab": {
+		"message": "ట్యాబ్ $tab ఇప్పుడు పిన్ చేయబడింది మరియు దాని స్థానంలోనే ఉంటుంది.",
+		"description": "[tutorial] పిన్ చేసిన ట్యాబ్"
+	},
+	"tutorial_redirect_account": {
+		"message": "మరిన్ని వివరాలను చూపించడానికి ఇప్పుడు మేము మిమ్మల్ని వేరే పేజీకి మళ్ళిస్తాము. కొనసాగించడానికి ఇక్కడ క్లిక్ చేయండి.",
+		"description": "[tutorial] ఖాతాకు మళ్ళించండి"
+	},
+	"tutorial_remove_favourite": {
+		"message": "ఈ పేజీని ఇష్టమైన వాటి నుండి తొలగించడానికి నక్షత్రంపై క్లిక్ చేయండి. సూచన: ఈ ట్యాబ్ $tab కోల్పోకుండా ఉండటానికి, ఈ దశ పూర్తయిన తర్వాత మీరు నక్షత్రంపై మళ్లీ క్లిక్ చేయవచ్చు.",
+		"description": "[tutorial] ఇష్టమైన వాటి నుండి తొలగించు"
+	},
+	"tutorial_restart": {
+		"message": "పాప్-అప్‌లోని బటన్‌ను క్లిక్ చేయడం ద్వారా మీరు ఎప్పుడైనా ట్యుటోరియల్ $tutorial ని మళ్లీ ప్రారంభించవచ్చు.",
+		"description": "[tutorial] మొదటి సందేశం"
+	},
+	"tutorial_restart_prompt": {
+		"message": "ట్యుటోరియల్ $tutorial ని మొదటి నుండి ప్రారంభించాలనుకుంటున్నారా?",
+		"description": "[tutorial] ట్యుటోరియల్ మళ్లీ ప్రారంభించడానికి ప్రాంప్ట్"
+	},
+	"tutorial_save_modal": {
+		"message": "మార్పులను వర్తింపజేయడానికి మరియు నిర్ధారణ సందేశాన్ని చూడటానికి $save క్లిక్ చేయండి.",
+		"description": "[tutorial] మోడల్ సేవ్"
+	},
+	"tutorial_start_prompt_body": {
+		"message": "ఇది $extension_label కోసం మరియు మిమ్మల్ని మొదట సెటప్ హోమ్ పేజీకి తీసుకెళ్తుంది, ఆపై గైడెడ్ ట్యుటోరియల్ $tutorial ని ప్రారంభిస్తుంది",
+		"description": "[tutorial] ట్యుటోరియల్ ప్రారంభించడానికి టెక్స్ట్"
+	},
+	"tutorial_start_prompt_title": {
+		"message": "సెటప్ హోమ్ నుండి ట్యుటోరియల్ $tutorial ని ప్రారంభించాలా?",
+		"description": "[tutorial] ట్యుటోరియల్ ప్రారంభించడానికి మోడల్ శీర్షిక"
 	},
 	"underline": {
 		"message": "అండర్‌లైన్",
@@ -1489,6 +1677,10 @@
 	"where_to": {
 		"message": "ఎక్కడ?",
 		"description": "[open-other-org-modal] modal కోసం ప్రత్యామ్నాయ శీర్షిక"
+	},
+	"wiki_label": {
+		"message": "$extension_label గురించి మరింత తెలుసుకోండి",
+		"description": "[popup][settings] వికీ సహాయ బటన్ కోసం యాక్సెస్ చేయగల శీర్షిక మరియు ఆరియా-లేబుల్"
 	},
 	"write_review": {
 		"message": "ఒక సమీక్ష రాయండి!",

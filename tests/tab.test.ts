@@ -1,3 +1,4 @@
+import "./mocks.test.ts";
 import {
 	assert,
 	assertEquals,
@@ -235,6 +236,7 @@ await Deno.test("Tab Creation - Object Style", async (t) => {
 							url: "https://example.com",
 						},
 						undefined,
+						// @ts-expect-error intentional invalid object-style overload usage
 						123,
 					);
 				},
@@ -296,6 +298,7 @@ await Deno.test("Tab Creation - Error Cases", async (t) => {
 	await t.step("throws error when org is not a string", () => {
 		assertThrows(
 			() => {
+				// @ts-expect-error intentional invalid org type
 				Tab.create("Test", "https://example.com", 123);
 			},
 			Error,
@@ -316,6 +319,7 @@ await Deno.test("Tab Creation - Error Cases", async (t) => {
 	await t.step("throws error when click-count is not a number", () => {
 		assertThrows(
 			() => {
+				// @ts-expect-error intentional invalid click-count type
 				Tab.create("Test", "https://example.com", undefined, "123");
 			},
 			Error,
@@ -341,6 +345,7 @@ await Deno.test("Tab Creation - Error Cases", async (t) => {
 					"https://example.com",
 					undefined,
 					undefined,
+					// @ts-expect-error intentional invalid click-date type
 					"123",
 				);
 			},
@@ -378,6 +383,7 @@ await Deno.test("Tab Constructor Protection", () => {
 				"Test",
 				"https://example.com",
 				undefined,
+				// @ts-expect-error intentional invalid constructor secret
 				Symbol("fake"),
 			);
 		},
@@ -457,6 +463,18 @@ await Deno.test("Utility methods", async (t) => {
     "${Tab.keyClickCount}": 9
 }`,
 		);
+	});
+
+	await t.step("hashCode and handleClick", () => {
+		const clickable = Tab.create("Click", "/lightning/setup/Click/home");
+		assertEquals(clickable.hashCode(), "Click/home@undefined");
+		clickable.handleClick();
+		assertEquals(clickable[Tab.keyClickCount], 1);
+		assert(typeof clickable[Tab.keyClickDate] === "number");
+		const firstClickDate = clickable[Tab.keyClickDate] as number;
+		clickable.handleClick();
+		assertEquals(clickable[Tab.keyClickCount], 2);
+		assert((clickable[Tab.keyClickDate] as number) >= firstClickDate);
 	});
 
 	await t.step("equals", () => {
@@ -745,6 +763,86 @@ await Deno.test("URL manipulation", async (t) => {
 			"https://myotherorgdomain.my.salesforce-setup.com/lightning/setup/SetupOneHome/home",
 			"updates the org in the link",
 		);
+		assertEquals(
+			Tab.expandURL(
+				"https://example.com/?target=https://myorgdomain.lightning.force.com",
+				"https://myorgdomain.sandbox.my.salesforce-setup.com/",
+			),
+			"https://example.com/?target=https://myorgdomain.lightning.force.com",
+			"keeps non-Salesforce absolute links unchanged even when their query contains a Salesforce hostname",
+		);
+		assertEquals(
+			Tab.expandURL(
+				"https://myorgdomain.sandbox.example.com/path?org=myorgdomain.sandbox",
+				"https://myorgdomain.sandbox.my.salesforce-setup.com/",
+				"myotherorgdomain",
+			),
+			"https://myotherorgdomain.example.com/path?org=myorgdomain.sandbox",
+			"updates absolute non-Salesforce links when an org override is provided",
+		);
+		assertThrows(
+			() =>
+				Tab.expandURL(
+					"",
+					"https://myorgdomain.sandbox.my.salesforce-setup.com/",
+				),
+			Error,
+			"error_expand_url",
+		);
+		assertEquals(
+			Tab.expandURL(
+				"https://myorgdomain.lightning.force.com/lightning/setup/SetupOneHome/home",
+				"https://myorgdomain.sandbox.my.salesforce-setup.com/",
+			),
+			"https://myorgdomain.sandbox.my.salesforce-setup.com/lightning/setup/SetupOneHome/home",
+			"normalizes lightning.force.com urls using the provided setup base",
+		);
+		assertEquals(
+			Tab.expandURL(
+				"/",
+				"https://myorgdomain.sandbox.my.salesforce-setup.com/",
+			),
+			"https://myorgdomain.sandbox.my.salesforce-setup.com/",
+			"keeps root-only links as base origin",
+		);
+	});
+
+	await t.step("extractOrgName and update edge cases", () => {
+		assertThrows(
+			() => Tab.extractOrgName(),
+			Error,
+			"error_extract_empty_url",
+		);
+		assertEquals(
+			Tab.extractOrgName(
+				"https://myorg.lightning.force.com/lightning/setup/SetupOneHome/home",
+			),
+			"myorg",
+		);
+		assertEquals(
+			Tab.extractOrgName(
+				"https://myorg.my.salesforce.com/services/oauth2",
+			),
+			"myorg",
+		);
+		const tab = Tab.create("Edge", "SetupOneHome/home", "myorg");
+		assertEquals(
+			tab.update(),
+			tab,
+			"returns same instance on empty update",
+		);
+		tab.update({
+			org: "",
+		});
+		tab.update({ [Tab.keyClickCount]: "" } as unknown as {
+			[key: string]: string;
+		});
+		tab.update({ [Tab.keyClickDate]: "" } as unknown as {
+			[key: string]: string;
+		});
+		assertEquals(tab.org, undefined);
+		assertEquals(tab[Tab.keyClickCount], undefined);
+		assertEquals(tab[Tab.keyClickDate], undefined);
 	});
 
 	await t.step("containsSalesforceId", () => {

@@ -1,4 +1,4 @@
-import { mockStorage } from "./mocks.ts";
+import { mockStorage } from "./mocks.test.ts";
 import {
 	assert,
 	assertEquals,
@@ -11,29 +11,85 @@ import Tab from "/tab.js";
 import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
 const currentDate = Date.now();
 
+type TabInput = {
+	label: string;
+	url: string;
+	org?: string;
+	[Tab.keyClickCount]?: number;
+	[Tab.keyClickDate]?: number;
+};
+
+/**
+ * Returns tabs persisted in mock storage regardless of legacy array/object shape.
+ *
+ * @return {TabInput[]} Persisted tabs.
+ */
+function getStoredTabs() {
+	const whyEntry = mockStorage[WHY_KEY] as
+		| TabInput[]
+		| { [TabContainer.keyTabs]: TabInput[] };
+	if (Array.isArray(whyEntry)) {
+		return whyEntry;
+	}
+	return whyEntry[TabContainer.keyTabs];
+}
+
 function matchStorageToContainer(container: TabContainer) {
+	const storedTabs = getStoredTabs();
 	if (
-		mockStorage[WHY_KEY][TabContainer.keyTabs].length !==
-			container.length
+		storedTabs.length !== container.length
 	) {
 		console.log(
 			"match",
-			mockStorage[WHY_KEY][TabContainer.keyTabs],
+			storedTabs,
 			container,
 		);
 	}
 	assertEquals(
-		mockStorage[WHY_KEY][TabContainer.keyTabs].length,
+		storedTabs.length,
 		container.length,
 		"lenghts should be the same",
 	);
 	for (const i in container) {
 		assertEquals(
-			mockStorage[WHY_KEY][TabContainer.keyTabs][i].url,
+			storedTabs[Number(i)].url,
 			container[i].url,
 			"each item should be the same",
 		);
 	}
+}
+
+async function resetToUnsortedContainer(container: TabContainer) {
+	await container.setDefaultTabs();
+	assertEquals(container.length, 3);
+	assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
+	assertEquals(container[0].label, "⚡");
+	assertEquals(container[1].label, "flows");
+	assertEquals(container[2].label, "users");
+	assert(container.isSorted, "should detect is alredy sorted");
+	assert(
+		container.isSortedBy === "label" || container.isSortedBy === "url",
+	);
+	assert(container.isSortedAsc);
+	assertFalse(container.isSortedDesc);
+	// update to invalidate sort
+	assert(
+		await container.addTab({
+			label: "mylabel",
+			url: "/myurl",
+			org: "myorg",
+			[Tab.keyClickCount]: 4,
+			[Tab.keyClickDate]: 4,
+		}),
+	);
+	assert(
+		await container.updateTab(container[0], {
+			org: "myorg",
+			[Tab.keyClickCount]: 4,
+			[Tab.keyClickDate]: 4,
+		}),
+	);
+	assertFalse(container.isSorted, container.isSortedBy);
 }
 
 const container = await ensureAllTabsAvailability();
@@ -118,10 +174,10 @@ await Deno.test("TabContainer - Initialization", async (t) => {
 			assertEquals(container[1].label, "flows");
 			assertEquals(container[2].label, "users");
 			// reset container
-			mockStorage[WHY_KEY] = [false];
+			mockStorage[WHY_KEY] = [{}];
 			assertRejects(async () => await TabContainer._reset());
 			// reset container
-			mockStorage[WHY_KEY] = [null];
+			mockStorage[WHY_KEY] = [{ label: "missing-url" }];
 			assertRejects(async () => await TabContainer._reset());
 		},
 	);
@@ -233,23 +289,23 @@ await Deno.test("TabContainer - Organization Filtering", async (t) => {
 			]),
 		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
-		const org1Tabs = container.getTabsByOrg("org1");
+		const org1Tabs = container.getTabsByOrg("org1") as Tab[];
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 		assertEquals(org1Tabs.length, 1);
 		assertEquals(org1Tabs[0].label, "Org1 Tab");
-		const org2Tabs = container.getTabsByOrg("org1", false);
+		const org2Tabs = container.getTabsByOrg("org1", false) as Tab[];
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 		assertEquals(org2Tabs.length, 2);
 		assertEquals(org2Tabs[0].label, "Org2 Tab");
 		assertEquals(org2Tabs[1].label, "Org2 Tab2");
-		const noOrgTabs = container.getTabsWithOrg(false);
+		const noOrgTabs = container.getTabsWithOrg(false) as Tab[];
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 		assertEquals(noOrgTabs.length, 4);
-		assertEquals(noOrgTabs.at(-1).label, "No Org Tab");
-		const onlyOrgTabs = container.getTabsWithOrg();
+		assertEquals(noOrgTabs.at(-1)?.label, "No Org Tab");
+		const onlyOrgTabs = container.getTabsWithOrg() as Tab[];
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 		assertEquals(onlyOrgTabs.length, 3);
-		assertEquals(onlyOrgTabs.at(-1).label, "Org2 Tab2");
+		assertEquals(onlyOrgTabs.at(-1)?.label, "Org2 Tab2");
 	});
 });
 
@@ -355,7 +411,7 @@ await Deno.test("TabContainer - replaceTabs edge cases", async (t) => {
 	await t.step("adds tabs without removing any", async () => {
 		const container = await setupContainer();
 		await container.replaceTabs([
-			{ label: "Tab B", url: "url2", org: "test-org" },
+			Tab.create({ label: "Tab B", url: "url2", org: "test-org" }),
 		], {
 			resetTabs: false,
 			removeOrgTabs: false,
@@ -570,18 +626,18 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 		assertEquals(container.length, 3);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 		assertEquals(
-			container.filter((tab) => tab.label === "flows").length,
+			container.filter((tab: Tab) => tab.label === "flows").length,
 			1,
 		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 		assertEquals(container.length, 3);
 		assertEquals(
-			container.filter((tab) => tab.label !== "flows").length,
+			container.filter((tab: Tab) => tab.label !== "flows").length,
 			2,
 		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 		assertEquals(container.length, 3);
-		assertEquals(container.filter((tab) => tab.org == null).length, 3);
+		assertEquals(container.filter((tab: Tab) => tab.org == null).length, 3);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 		assertEquals(container.length, 3);
 	});
@@ -1021,7 +1077,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 		await container.setDefaultTabs();
 		assertEquals(container.length, 3);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
-		const newContainer = container.map((_) => "I'm a string!");
+		const newContainer = container.map((_tab: Tab) => "I'm a string!");
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 		assertEquals(container.length, 3);
 		assertEquals(newContainer.length, 3);
@@ -1044,6 +1100,210 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 		assertEquals(container[1].url, "/lightning/app/standard__FlowsApp");
 		assertEquals(container[2].url, "ManageUsers/home");
 	});
+
+	await t.step("getSortOptions", async () => {
+		await resetToUnsortedContainer(container);
+		// now ready to check the method
+		assertThrows(() => {
+			container.getSortOptions({ sortBy: "notafield" });
+		});
+		// standart sort = true
+		assertEquals(
+			container.getSortOptions(),
+			{
+				sortBy: "label",
+				sortAsc: true,
+			},
+		);
+		assertEquals(
+			container.getSortOptions({
+				sortBy: "url",
+			}),
+			{
+				sortBy: "url",
+				sortAsc: true,
+			},
+		);
+		assertEquals(
+			container.getSortOptions({
+				sortBy: "org",
+			}),
+			{
+				sortBy: "org",
+				sortAsc: true,
+			},
+		);
+		assertEquals(
+			container.getSortOptions({
+				sortBy: Tab.keyClickCount,
+			}),
+			{
+				sortBy: Tab.keyClickCount,
+				sortAsc: true,
+			},
+		);
+		assertEquals(
+			container.getSortOptions({
+				sortBy: Tab.keyClickDate,
+			}),
+			{
+				sortBy: Tab.keyClickDate,
+				sortAsc: true,
+			},
+		);
+		// standard sort = false
+		assertEquals(
+			container.getSortOptions({
+				standardSort: false,
+			}),
+			{
+				sortBy: "label",
+				sortAsc: false,
+			},
+		);
+		assertEquals(
+			container.getSortOptions({
+				sortBy: "url",
+				standardSort: false,
+			}),
+			{
+				sortBy: "url",
+				sortAsc: false,
+			},
+		);
+		assertEquals(
+			container.getSortOptions({
+				sortBy: "org",
+				standardSort: false,
+			}),
+			{
+				sortBy: "org",
+				sortAsc: false,
+			},
+		);
+		assertEquals(
+			container.getSortOptions({
+				sortBy: Tab.keyClickCount,
+				standardSort: false,
+			}),
+			{
+				sortBy: Tab.keyClickCount,
+				sortAsc: false,
+			},
+		);
+		assertEquals(
+			container.getSortOptions({
+				sortBy: Tab.keyClickDate,
+				standardSort: false,
+			}),
+			{
+				sortBy: Tab.keyClickDate,
+				sortAsc: false,
+			},
+		);
+		// now retry with sorted container by label asc
+		await container.sort({ sortBy: "label", sortAsc: true });
+		assert(container.isSortedAsc);
+		assertEquals(container.isSortedBy, "label");
+		assertEquals(
+			container.getSortOptions(),
+			{
+				sortBy: "label",
+				sortAsc: false,
+			},
+			"the container is already sorted by label asc so now we should sort it by label desc",
+		);
+		assert(container.isSortedAsc);
+		assertEquals(container.isSortedBy, "label");
+		assertEquals(
+			container.getSortOptions({
+				sortBy: "url",
+			}),
+			{
+				sortBy: "url",
+				sortAsc: true,
+			},
+			"the container is sorted but by another field",
+		);
+		assert(container.isSortedAsc);
+		assertEquals(container.isSortedBy, "label");
+		assertEquals(
+			container.getSortOptions({
+				standardSort: false,
+			}),
+			{
+				sortBy: "label",
+				sortAsc: false,
+			},
+			"we requested not standart sort so we should get to sort desc",
+		);
+		assert(container.isSortedAsc);
+		assertEquals(container.isSortedBy, "label");
+		assertEquals(
+			container.getSortOptions({
+				sortBy: "url",
+				standardSort: false,
+			}),
+			{
+				sortBy: "url",
+				sortAsc: false,
+			},
+			"the container is sorted by another field and we requested inverted sort",
+		);
+		assert(container.isSortedAsc);
+		assertEquals(container.isSortedBy, "label");
+		// now retry with sorted container by label desc
+		await container.sort({ sortBy: "label", sortAsc: false });
+		assert(container.isSortedDesc);
+		assertEquals(container.isSortedBy, "label");
+		assertEquals(
+			container.getSortOptions(),
+			{
+				sortBy: "label",
+				sortAsc: true,
+			},
+			"the container is already sorted by label desc so now we should sort it by label asc",
+		);
+		assert(container.isSortedDesc);
+		assertEquals(container.isSortedBy, "label");
+		assertEquals(
+			container.getSortOptions({
+				sortBy: "url",
+			}),
+			{
+				sortBy: "url",
+				sortAsc: true,
+			},
+			"the container is sorted but by another field",
+		);
+		assert(container.isSortedDesc);
+		assertEquals(container.isSortedBy, "label");
+		assertEquals(
+			container.getSortOptions({
+				standardSort: false,
+			}),
+			{
+				sortBy: "label",
+				sortAsc: true,
+			},
+			"we requested not standart sort so we should get to sort asc",
+		);
+		assert(container.isSortedDesc);
+		assertEquals(container.isSortedBy, "label");
+		assertEquals(
+			container.getSortOptions({
+				sortBy: "url",
+				standardSort: false,
+			}),
+			{
+				sortBy: "url",
+				sortAsc: false,
+			},
+			"the container is sorted by another field and we requested inverted sort",
+		);
+		assert(container.isSortedDesc);
+		assertEquals(container.isSortedBy, "label");
+	});
 });
 
 await Deno.test("TabContainer - Synchronization", async (t) => {
@@ -1051,10 +1311,7 @@ await Deno.test("TabContainer - Synchronization", async (t) => {
 		await container.setDefaultTabs();
 		assertEquals(container.length, 3);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
-		assertEquals(
-			mockStorage[WHY_KEY][TabContainer.keyTabs].length,
-			3,
-		);
+		assertEquals(getStoredTabs().length, 3);
 		assert(
 			await container.addTab(
 				{ label: "Sync Test", url: "sync-url" },
@@ -1062,17 +1319,11 @@ await Deno.test("TabContainer - Synchronization", async (t) => {
 			),
 		);
 		assertEquals(container.length, 4);
-		assertEquals(
-			mockStorage[WHY_KEY][TabContainer.keyTabs].length,
-			3,
-		);
+		assertEquals(getStoredTabs().length, 3);
 		assert(await container.syncTabs());
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 		assertEquals(container.length, 4);
-		assertEquals(
-			mockStorage[WHY_KEY][TabContainer.keyTabs].length,
-			4,
-		);
+		assertEquals(getStoredTabs().length, 4);
 	});
 });
 
@@ -1407,10 +1658,10 @@ await Deno.test("TabContainer - Move Tab", async (t) => {
 		assertEquals(container[6].url, "url3");
 		matchStorageToContainer(container);
 		await container.replaceTabs([
-			{ label: "Org Tab", url: "url", org: "test-org1" },
-			{ label: "Org Tab2", url: "urll", org: "test-org1" },
-			{ label: "Org Tab3", url: "url3", org: "test-org1" },
-			{ label: "Normal Tab", url: "normal-url" },
+			Tab.create({ label: "Org Tab", url: "url", org: "test-org1" }),
+			Tab.create({ label: "Org Tab2", url: "urll", org: "test-org1" }),
+			Tab.create({ label: "Org Tab3", url: "url3", org: "test-org1" }),
+			Tab.create({ label: "Normal Tab", url: "normal-url" }),
 		], {
 			resetTabs: true,
 			removeOrgTabs: true,
@@ -1668,7 +1919,15 @@ await Deno.test("TabContainer - Remove Tab(s)", async (t) => {
 		assertEquals(container[0].url, "/lightning");
 		assertEquals(container[1].url, "/lightning/app/standard__FlowsApp");
 		assertEquals(container[2].url, "ManageUsers/home");
-		assert(await container.remove({ url: "ManageUsers/home" }));
+		assert(
+			await container.remove(
+				{ label: "users", url: "ManageUsers/home" } as {
+					label: string;
+					org: string;
+					url: string;
+				},
+			),
+		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 		assertEquals(container.length, 2);
 		assertEquals(container[0].url, "/lightning");
@@ -1680,7 +1939,14 @@ await Deno.test("TabContainer - Remove Tab(s)", async (t) => {
 		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 		assertRejects(
-			async () => await container.remove({ org: "test-org" }),
+			async () =>
+				await container.remove(
+					{ org: "test-org" } as {
+						label: string;
+						org: string;
+						url: string;
+					},
+				),
 			Error,
 		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
@@ -1696,7 +1962,13 @@ await Deno.test("TabContainer - Remove Tab(s)", async (t) => {
 		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 1);
 		assertEquals(container.length, 2);
-		assert(await container.remove({ url: "orgurl6" }));
+		assert(
+			await container.remove({
+				label: "orglabel",
+				org: "orgorg",
+				url: "orgurl6",
+			}),
+		);
 		assertEquals(
 			container[TabContainer.keyPinnedTabsNo],
 			1,
@@ -1704,7 +1976,15 @@ await Deno.test("TabContainer - Remove Tab(s)", async (t) => {
 		);
 		assertEquals(container.length, 1);
 		assertEquals(container[0].url, "nice-url6");
-		assert(await container.remove({ url: "nice-url6" }));
+		assert(
+			await container.remove(
+				{ label: "hello", url: "nice-url6" } as {
+					label: string;
+					org: string;
+					url: string;
+				},
+			),
+		);
 		assertEquals(
 			container[TabContainer.keyPinnedTabsNo],
 			0,
@@ -1773,12 +2053,12 @@ await Deno.test("TabContainer - Remove Tab(s)", async (t) => {
 		assertEquals(container[0].url, "/lightning/app/standard__FlowsApp");
 		assertEquals(container[1].url, "ManageUsers/home");
 		await container.replaceTabs([
-			{ label: "Org Tab2", url: "url3" },
-			{ label: "Org Tab", url: "url", org: "test-org1" },
-			{ label: "Org Tab2", url: "urll", org: "test-org" },
-			{ label: "Org Tab3", url: "urll", org: "test-org1" },
-			{ label: "Normal Tab", url: "normal-url" },
-			{ label: "Org Tab2", url: "url3", org: "test-org" },
+			Tab.create({ label: "Org Tab2", url: "url3" }),
+			Tab.create({ label: "Org Tab", url: "url", org: "test-org1" }),
+			Tab.create({ label: "Org Tab2", url: "urll", org: "test-org" }),
+			Tab.create({ label: "Org Tab3", url: "urll", org: "test-org1" }),
+			Tab.create({ label: "Normal Tab", url: "normal-url" }),
+			Tab.create({ label: "Org Tab2", url: "url3", org: "test-org" }),
 		], {
 			resetTabs: true,
 			removeOrgTabs: true,
@@ -1871,12 +2151,12 @@ await Deno.test("TabContainer - Remove Tab(s)", async (t) => {
 		assertEquals(container[0].url, "/lightning");
 		assertEquals(container[1].url, "/lightning/app/standard__FlowsApp");
 		await container.replaceTabs([
-			{ label: "Org Tab2", url: "url3" },
-			{ label: "Org Tab", url: "url", org: "test-org1" },
-			{ label: "Org Tab2", url: "urll", org: "test-org" },
-			{ label: "Org Tab3", url: "urll", org: "test-org1" },
-			{ label: "Normal Tab", url: "normal-url" },
-			{ label: "Org Tab2", url: "url3", org: "test-org" },
+			Tab.create({ label: "Org Tab2", url: "url3" }),
+			Tab.create({ label: "Org Tab", url: "url", org: "test-org1" }),
+			Tab.create({ label: "Org Tab2", url: "urll", org: "test-org" }),
+			Tab.create({ label: "Org Tab3", url: "urll", org: "test-org1" }),
+			Tab.create({ label: "Normal Tab", url: "normal-url" }),
+			Tab.create({ label: "Org Tab2", url: "url3", org: "test-org" }),
 		], {
 			resetTabs: true,
 			removeOrgTabs: true,

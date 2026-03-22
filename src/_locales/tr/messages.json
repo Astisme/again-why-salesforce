@@ -1,4 +1,8 @@
 {
+	"account": {
+		"message": "Hesap",
+		"description": "ObjectManager/Account/FieldsAndRelationships/view ile ilgili sayfa"
+	},
 	"act_delete": {
 		"message": "🗑️ Sil",
 		"description": "[Tab-yönet] bir satırı sil"
@@ -39,6 +43,10 @@
 		"message": "Artan (A-Z)",
 		"description": ""
 	},
+	"asset": {
+		"message": "Varlık",
+		"description": "ObjectManager/Asset/FieldsAndRelationships/view ile ilgili sayfa"
+	},
 	"available": {
 		"message": "Mevcut",
 		"description": "Eklenebilecek öğeler için bölüm başlığı"
@@ -46,6 +54,10 @@
 	"bold": {
 		"message": "Kalın",
 		"description": "Kalın metin için yazı tipi stili seçeneği"
+	},
+	"campaign": {
+		"message": "Kampanya",
+		"description": "ObjectManager/Campaign/FieldsAndRelationships/view ile ilgili sayfa"
 	},
 	"cancel": {
 		"message": "İptal",
@@ -55,9 +67,21 @@
 		"message": "İptal et ve kapat",
 		"description": "modalların kapatma düğmesi için başlık veya textContent"
 	},
+	"case": {
+		"message": "Vaka",
+		"description": "ObjectManager/Case/FieldsAndRelationships/view ile ilgili sayfanın adı"
+	},
 	"chosen": {
 		"message": "Seçildi",
 		"description": "Seçilen öğeler için bölüm başlığı"
+	},
+	"classic_email_templates": {
+		"message": "Klasik E-posta Şablonları",
+		"description": "CommunicationTemplatesEmail/home ile ilgili sayfa"
+	},
+	"close": {
+		"message": "Kapat",
+		"description": "herhangi bir işlem yapmadan kapat"
 	},
 	"cmd_export_all": {
 		"message": "Kaydedilmiş tüm Tabs'ı dışa aktarmak için modalı göster",
@@ -87,6 +111,14 @@
 		"message": "Mevcut sayfayı güncellemek için modalı göster (kaydedilmişse)",
 		"description": "[komut açıklaması] kullanıcı mevcut sayfayı güncellemek istiyor"
 	},
+	"company_information": {
+		"message": "Şirket Bilgileri",
+		"description": "CompanyProfileInfo/home ile ilgili sayfa"
+	},
+	"confirm": {
+		"message": "Onayla",
+		"description": "kullanıcıdan devam etmesini isteyen metin"
+	},
 	"confirm_another_org": {
 		"message": "Bu bağlantının açılmasını onaylayın.",
 		"description": "[başka-kuruluş-aç-modal] oluşturulan bağlantıyı açmak için kullanıcıdan onay isteyin."
@@ -94,6 +126,10 @@
 	"confirm_update_extension": {
 		"message": "$extension_label uygulamasının yeni bir sürümü şimdi mevcut!",
 		"description": "bir dinleyiciden bilinmeyen bir mesaj alındı"
+	},
+	"contact": {
+		"message": "Kişi",
+		"description": "ObjectManager/Contact/FieldsAndRelationships/view ile ilgili sayfa"
 	},
 	"continue": {
 		"message": "Devam",
@@ -555,6 +591,10 @@
 		"message": "çevirmen henüz başlatılmadı.",
 		"description": "[hata] TranslationService hazır değildi"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "öğretici başlatılamadı.",
+		"description": "[error] Öğretici başlatılmadı"
+	},
 	"error_unknown_file_structure": {
 		"message": "İçe aktarmak istediğiniz bir dosyayı anlayamadık\nSorun devam ederse, lütfen bir GitHub sorunu açarak bunu bizimle paylaşın",
 		"description": "[içe aktar] kullanıcının dosyası tanınmadı"
@@ -566,6 +606,10 @@
 	"error_unknown_request": {
 		"message": "Bilinmeyen istek.",
 		"description": "[hata] Tanınmayan bir mesaj alındıktan sonra genel hata"
+	},
+	"error_unknown_toast_type": {
+		"message": "İstenen bildirim türü yorumlanamadı. Lütfen kodunuzu değiştirin.",
+		"description": "[error] Bildirim türü (toast) ayarlanırken kullanılan genel hata"
 	},
 	"error_unpin_tab": {
 		"message": "Tab sabitlemesi kaldırılırken hata oluştu",
@@ -598,6 +642,10 @@
 	"extension_label": {
 		"message": "Again, Why Salesforce",
 		"description": "Bu uzantının adı"
+	},
+	"field_accessibility": {
+		"message": "Alan Erişilebilirliği",
+		"description": "FieldAccessibility/home ile ilgili sayfa"
 	},
 	"file": {
 		"message": "dosya",
@@ -783,13 +831,29 @@
 		"message": "Etiket",
 		"description": "[key] Tab'ın adı"
 	},
+	"lead": {
+		"message": "Aday Müşteri",
+		"description": "ObjectManager/Lead/FieldsAndRelationships/view ile ilgili sayfa"
+	},
+	"learn_more_about_extension": {
+		"message": "$extension_label hakkında daha fazla bilgi edinin",
+		"description": "[popup][settings] wiki yardım düğmesi için erişilebilir başlık ve aria-etiketi"
+	},
 	"lightning_navigation": {
 		"message": "Lightning Navigation",
 		"description": "Salesforce'un özel gezinme teknolojisi"
 	},
+	"login_history": {
+		"message": "Giriş Geçmişi",
+		"description": "OrgLoginHistory/home ile ilgili sayfa"
+	},
 	"login_to_salesforce": {
 		"message": "Salesforce'a Giriş Yap",
 		"description": "[SalesforceKurulumuDeğil] kullanıcıyı bir Salesforce giriş sayfasına yönlendirmek için bir düğme üzerindeki eylem çağrısı"
+	},
+	"manage_connected_apps": {
+		"message": "Bağlı Uygulamaları Yönet",
+		"description": "ConnectedApplication/home ile ilgili sayfa"
 	},
 	"manage_tabs": {
 		"message": "$tabs Yönet",
@@ -842,6 +906,10 @@
 	"open_setup": {
 		"message": "Kurulumu Aç",
 		"description": "[SalesforceKurulumuDeğil] kullanıcıyı bir Salesforce Kurulum sayfasına yönlendirmek için bir düğme üzerindeki eylem çağrısı"
+	},
+	"opportunity": {
+		"message": "Fırsat",
+		"description": "ObjectManager/Opportunity/FieldsAndRelationships/view ile ilgili sayfa"
 	},
 	"opt_add_tabs_as_org": {
 		"message": "Yeni Tab-leri Org Tab-leri olarak ekle.",
@@ -975,6 +1043,10 @@
 		"message": "İzin verildi!",
 		"description": "[başarı] kullanıcı bizden bir izin istememizi talep etti ve kabul etti"
 	},
+	"permission_sets": {
+		"message": "İzin Setleri",
+		"description": "PermSets/home ile ilgili sayfa"
+	},
 	"pinned": {
 		"message": "Sabitlenmiş",
 		"description": "Kullanıcının her zaman listenin başında bulunan Tab-ları"
@@ -983,9 +1055,21 @@
 		"message": "Diğer kuruluşlar için Tabs koru.",
 		"description": "[etiket] içe aktarma işlemi sırasında tüm kuruluşa özgü Tabs tut"
 	},
+	"pricebook2": {
+		"message": "Fiyat Listesi 2",
+		"description": "ObjectManager/Pricebook2/FieldsAndRelationships/view ile ilgili sayfa"
+	},
+	"product2": {
+		"message": "Ürün 2",
+		"description": "ObjectManager/Product2/FieldsAndRelationships/view ile ilgili sayfa"
+	},
 	"remove_tab": {
 		"message": "Tab Kaldır",
 		"description": "[alt] resimler çalışmadığında alternatif metin"
+	},
+	"reports_and_dashboards_settings": {
+		"message": "Raporlar ve Gösterge Tabloları Ayarları",
+		"description": "ReportUI/home ile ilgili sayfa"
 	},
 	"req_downloads_open_popup": {
 		"message": "Lütfen uzantı açılır penceresini tarayıcınızın uzantılar menüsünden açın.",
@@ -1066,6 +1150,10 @@
 	"send_tip": {
 		"message": "Bize bir bahşiş gönderin ❤️",
 		"description": "[popup] bahşiş gönderme uyarısı için svg başlığı"
+	},
+	"sessions": {
+		"message": "Oturumlar",
+		"description": "SecuritySession/home ile ilgili sayfa"
 	},
 	"set_gen_preview": {
 		"message": "Sekme Önizleme",
@@ -1327,9 +1415,17 @@
 		"message": "Ayarlar",
 		"description": "Ayarlar menüsü etiketi"
 	},
+	"setup_audit_trail": {
+		"message": "Kurulum Denetim İzi",
+		"description": "SecurityEvents/home ile ilgili sayfa"
+	},
 	"setup_page": {
 		"message": "Kurulum Sayfası",
 		"description": "[SalesforceKurulumuDeğil] Salesforce ayarlarını değiştirmek için kullanılan sayfa"
+	},
+	"sharing_settings": {
+		"message": "Paylaşım Ayarları",
+		"description": "SecuritySharing/home ile ilgili sayfa"
 	},
 	"show_all_tabs": {
 		"message": "Tüm $tabs nesnelerini göster",
@@ -1439,6 +1535,10 @@
 		"message": "Tabs kaydedildi.",
 		"description": "[bildirim] Tabs başarıyla saklandı."
 	},
+	"task": {
+		"message": "Görev",
+		"description": "ObjectManager/Task/FieldsAndRelationships/view ile ilgili sayfa"
+	},
 	"theme_dark": {
 		"message": "Temayı Koyu Olarak Değiştir",
 		"description": "[açılır-pencere] temayı değiştirmek için ay üzerindeki başlık"
@@ -1446,6 +1546,94 @@
 	"theme_light": {
 		"message": "Temayı Açık Olarak Değiştir",
 		"description": "[açılır-pencere] temayı değiştirmek için güneş üzerindeki başlık"
+	},
+	"tutorial": {
+		"message": "Öğretici",
+		"description": "[popup] öğreticiyi başlatmak için düğme"
+	},
+	"tutorial_add_favourite": {
+		"message": "Bu sayfayı favorilere eklemek için yıldıza tıklayın.",
+		"description": "[tutorial] favori ekle"
+	},
+	"tutorial_click_highlighted_tab": {
+		"message": "İlgili sayfaya gitmek için vurgulanan $tab sekmesine tıklayın.",
+		"description": "[tutorial] vurgulanan sekmeye tıkla"
+	},
+	"tutorial_continue_prompt_body": {
+		"message": "Bu $extension_label içindir ve yarım kalan $tutorial öğreticinize kaldığınız yerden devam edecektir.",
+		"description": "[tutorial] öğreticiye devam etmek için metin"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "$tutorial öğreticisine son adımdan devam edilsin mi?",
+		"description": "[tutorial] öğreticiye devam etmek için modal başlığı"
+	},
+	"tutorial_drag_flows": {
+		"message": "Vurgulanan satırı (6 noktayı kullanarak) sürükleyin ve ilk satırın (sabitlenmiş olan) önüne bırakın.",
+		"description": "[tutorial] akışları sürükle"
+	},
+	"tutorial_end": {
+		"message": "$tutorial tamamlandı! Uzantıyı kullanırken iyi eğlenceler.",
+		"description": "[tutorial] son"
+	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "$tutorial öğreticisini başlatmak için kullanışlı bir bağlantı bulamadık\nLütfen $tabs sekmelerinizi dışa aktarın ve $tutorial öğreticisini yeniden başlatın",
+		"description": "[tutorial] başlatılamadığında hata mesajı"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "Bunlar favori $tabs sekmelerinizdir ve sık kullanılan sayfalara hızlı erişim için kullanılır.",
+		"description": "[tutorial] favori sekmeyi vurgula"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "Uzantı davranışını değiştirebileceğiniz ve $tabs sekmelerinizi şekillendirebileceğiniz $settings sayfasını açmak için klavye kısayoluna basın",
+		"description": "[tutorial] klavye kısayolu"
+	},
+	"tutorial_manage_tabs": {
+		"message": "Sayfaya sağ tıklayın (bir sekmeye değil) ve yönetim modalını açmak için $extension_label > $cxm_manage_tabs seçeneğini belirleyin.",
+		"description": "[tutorial] sekmeyi yönet"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "Bu ekrandan $tabs sekmelerinizi yönetebilirsiniz. Daha fazla bilgi için buraya tıklayın.",
+		"description": "[tutorial] sekme yönetimi bağlantısı"
+	},
+	"tutorial_pin_tab": {
+		"message": "Vurgulanan $tab sekmesine sağ tıklayın ve sabitlemek için $extension_label > $cxm_move > $cxm_pin_tab seçeneğini belirleyin.",
+		"description": "[tutorial] sekmeyi sabitle"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "Sürüklenen satır, sabitlenmiş satırın önüne taşınamadı (çünkü şu anda sabitlenmiş değil), bu nedenle sabitlenmemiş listenin başına gitti. Bu iki liste ayrı ayrı ele alınır.",
+		"description": "[tutorial] sabitleme açıklaması"
+	},
+	"tutorial_pinned_tab": {
+		"message": "$tab sekmesinin artık sabitlendiğini ve yerinde kalacağını unutmayın.",
+		"description": "[tutorial] sabitlenmiş sekme"
+	},
+	"tutorial_redirect_account": {
+		"message": "Size daha fazlasını göstermek için şimdi sizi başka bir sayfaya yönlendireceğiz. Devam etmek için buraya tıklayın.",
+		"description": "[tutorial] hesaba yönlendir"
+	},
+	"tutorial_remove_favourite": {
+		"message": "Bu sayfayı favorilerden kaldırmak için üstü çizili yıldıza tıklayın. İPUCU: Bu $tab sekmesini kaybetmemek için bu adım tamamlandıktan sonra yıldıza tıklayabilirsiniz.",
+		"description": "[tutorial] favoriyi kaldır"
+	},
+	"tutorial_restart": {
+		"message": "Açılır penceredeki düğmeye tıklayarak $tutorial öğreticisini istediğiniz zaman yeniden başlatabilirsiniz.",
+		"description": "[tutorial] ilk mesaj"
+	},
+	"tutorial_restart_prompt": {
+		"message": "$tutorial öğreticisini baştan başlatmak ister misiniz?",
+		"description": "[tutorial] öğreticiyi yeniden başlatma uyarısı"
+	},
+	"tutorial_save_modal": {
+		"message": "Değişiklikleri uygulamak ve onay mesajını görmek için $save düğmesine tıklayın.",
+		"description": "[tutorial] modalı kaydet"
+	},
+	"tutorial_start_prompt_body": {
+		"message": "Bu $extension_label içindir ve sizi önce Kurulum Ana Sayfasına götürecek, ardından rehberli $tutorial öğreticisini başlatacaktır",
+		"description": "[tutorial] öğreticiyi başlatmak için metin"
+	},
+	"tutorial_start_prompt_title": {
+		"message": "$tutorial öğreticisi Kurulum Ana Sayfasından başlatılsın mı?",
+		"description": "[tutorial] öğreticiyi başlatmak için modal başlığı"
 	},
 	"underline": {
 		"message": "Altı Çizili",
@@ -1490,6 +1678,10 @@
 	"where_to": {
 		"message": "Nereye?",
 		"description": "[başka-kuruluş-aç-modal] modal için geri dönüş başlığı"
+	},
+	"wiki_label": {
+		"message": "$extension_label hakkında daha fazla bilgi edinin",
+		"description": "[popup][settings] wiki yardım düğmesi için erişilebilir başlık ve aria-etiketi"
 	},
 	"write_review": {
 		"message": "Bir inceleme yazın!",

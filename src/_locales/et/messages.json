@@ -1,4 +1,8 @@
 {
+	"account": {
+		"message": "Konto",
+		"description": "Leht, mis on seotud ObjectManager/Account/FieldsAndRelationships/view"
+	},
 	"act_delete": {
 		"message": "🗑️ Kustuta",
 		"description": "[halda-Tab] kustuta rida"
@@ -39,6 +43,10 @@
 		"message": "Kasvav (A-Z)",
 		"description": ""
 	},
+	"asset": {
+		"message": "Vara",
+		"description": "Leht, mis on seotud ObjectManager/Asset/FieldsAndRelationships/view"
+	},
 	"available": {
 		"message": "Saadaval",
 		"description": "Jaotise pealkiri elementidele, mida saab lisada"
@@ -46,6 +54,10 @@
 	"bold": {
 		"message": "Paks",
 		"description": "Fondi stiili valik paksu teksti jaoks"
+	},
+	"campaign": {
+		"message": "Kampaania",
+		"description": "Leht, mis on seotud ObjectManager/Campaign/FieldsAndRelationships/view"
 	},
 	"cancel": {
 		"message": "Tühista",
@@ -55,9 +67,21 @@
 		"message": "Tühista ja sulge",
 		"description": "modaalide sulgemisnupu pealkiri või textContent"
 	},
+	"case": {
+		"message": "Juhtum",
+		"description": "Lehe nimi, mis on seotud ObjectManager/Case/FieldsAndRelationships/view"
+	},
 	"chosen": {
 		"message": "Valitud",
 		"description": "Jaotise pealkiri elementidele, mis on valitud"
+	},
+	"classic_email_templates": {
+		"message": "Klassikalised e-posti mallid",
+		"description": "Leht, mis on seotud CommunicationTemplatesEmail/home"
+	},
+	"close": {
+		"message": "Sulge",
+		"description": "sulgege ilma midagi tegemata"
 	},
 	"cmd_export_all": {
 		"message": "Kuva dialoog kõigi salvestatud Tabside eksportimiseks",
@@ -87,6 +111,14 @@
 		"message": "Kuva dialoog praeguse lehe värskendamiseks (kui salvestatud)",
 		"description": "[command description] kasutaja soovib värskendada praegust lehte"
 	},
+	"company_information": {
+		"message": "Ettevõtte teave",
+		"description": "Leht, mis on seotud CompanyProfileInfo/home"
+	},
+	"confirm": {
+		"message": "Kinnita",
+		"description": "tekst, mis palub kasutajal jätkata"
+	},
 	"confirm_another_org": {
 		"message": "Kinnita selle lingi avamine.",
 		"description": "[ava_teine_org_modaal] küsi kasutajalt kinnitust konstrueeritud lingi avamiseks."
@@ -94,6 +126,10 @@
 	"confirm_update_extension": {
 		"message": "$extension_label uus versioon on nüüd saadaval!",
 		"description": "kuulajalt on saadud tundmatu teade"
+	},
+	"contact": {
+		"message": "Kontakt",
+		"description": "Leht, mis on seotud ObjectManager/Contact/FieldsAndRelationships/view"
 	},
 	"continue": {
 		"message": "Jätka",
@@ -555,6 +591,10 @@
 		"message": "translator pole veel initsialiseeritud.",
 		"description": "[error] TranslationService ei olnud veel valmis"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "õpetust ei saanud algatada.",
+		"description": "[error] Õpetust ei algatatud"
+	},
 	"error_unknown_file_structure": {
 		"message": "Me ei saanud aru failist, mida soovite importida\nKui probleem püsib, jagage seda meiega, avades GitHubi probleemi",
 		"description": "[import] kasutaja faili ei tuvastatud"
@@ -566,6 +606,10 @@
 	"error_unknown_request": {
 		"message": "Tundmatu päring.",
 		"description": "[error] Üldine viga pärast tundmatu sõnumi vastuvõttu"
+	},
+	"error_unknown_toast_type": {
+		"message": "Taotletud teate tüüpi ei saanud tõlgendada. Palun muutke oma koodi.",
+		"description": "[error] Üldine viga, mida kasutatakse teate tüübi määramisel"
 	},
 	"error_unpin_tab": {
 		"message": "Viga Tabi kinnitamise tühistamisel",
@@ -598,6 +642,10 @@
 	"extension_label": {
 		"message": "Again, Why Salesforce",
 		"description": "Selle laienduse nimi"
+	},
+	"field_accessibility": {
+		"message": "Väljade kättesaadavus",
+		"description": "Leht, mis on seotud FieldAccessibility/home"
 	},
 	"file": {
 		"message": "fail",
@@ -783,13 +831,29 @@
 		"message": "Silt",
 		"description": "[key] Tab'i nimi"
 	},
+	"lead": {
+		"message": "Müügivihje",
+		"description": "Leht, mis on seotud ObjectManager/Lead/FieldsAndRelationships/view"
+	},
+	"learn_more_about_extension": {
+		"message": "loe lähemalt $extension_label kohta",
+		"description": "[popup][settings] kättesaadav pealkiri ja aria-label viki abi nupu jaoks"
+	},
 	"lightning_navigation": {
 		"message": "Lightningi navigeerimine",
 		"description": "Salesforce’i kohandatud navigeerimistehnoloogia"
 	},
+	"login_history": {
+		"message": "Sisselogimise ajalugu",
+		"description": "Leht, mis on seotud OrgLoginHistory/home"
+	},
 	"login_to_salesforce": {
 		"message": "Logi sisse Salesforce'i",
 		"description": "[poleSalesforceSeadistus] kutse tegevusele nupul kasutaja suunamiseks Salesforce'i sisselogimislehele"
+	},
+	"manage_connected_apps": {
+		"message": "Halda ühendatud rakendusi",
+		"description": "Leht, mis on seotud ConnectedApplication/home"
 	},
 	"manage_tabs": {
 		"message": "Halda $tabs",
@@ -842,6 +906,10 @@
 	"open_setup": {
 		"message": "Ava Seadistus",
 		"description": "[poleSalesforceSeadistus] kutse tegevusele nupul kasutaja suunamiseks Salesforce'i seadistuslehele"
+	},
+	"opportunity": {
+		"message": "Müügivõimalus",
+		"description": "Leht, mis on seotud ObjectManager/Opportunity/FieldsAndRelationships/view"
 	},
 	"opt_add_tabs_as_org": {
 		"message": "Lisa uued Tabs Org Tabs-idena.",
@@ -975,6 +1043,10 @@
 		"message": "Luba on antud!",
 		"description": "[edu] kasutaja palus meil luba küsida ja ta nõustus sellega"
 	},
+	"permission_sets": {
+		"message": "Loakomplektid",
+		"description": "Leht, mis on seotud PermSets/home"
+	},
 	"pinned": {
 		"message": "Kinnitatud",
 		"description": "Kasutaja Tabid, mis asuvad alati nimekirja alguses"
@@ -983,9 +1055,21 @@
 		"message": "Säilita Tabs teiste Org'ide jaoks.",
 		"description": "[silt] säilita kõik Org-spetsiifilised Tabs importimisprotsessi käigus"
 	},
+	"pricebook2": {
+		"message": "Hinnakiri 2",
+		"description": "Leht, mis on seotud ObjectManager/Pricebook2/FieldsAndRelationships/view"
+	},
+	"product2": {
+		"message": "Toode 2",
+		"description": "Leht, mis on seotud ObjectManager/Product2/FieldsAndRelationships/view"
+	},
 	"remove_tab": {
 		"message": "Eemalda Tab",
 		"description": "[alt] alternatiivtekst, kui pildid ei tööta"
+	},
+	"reports_and_dashboards_settings": {
+		"message": "Aruannete ja töölaudade seaded",
+		"description": "Leht, mis on seotud ReportUI/home"
 	},
 	"req_downloads_open_popup": {
 		"message": "Palun avage laienduse hüpikaken oma brauseri laienduste menüüst.",
@@ -1066,6 +1150,10 @@
 	"send_tip": {
 		"message": "Saada meile jootraha ❤️",
 		"description": "[popup] svg-i pealkiri jootraha saatmise küsimiseks"
+	},
+	"sessions": {
+		"message": "Seansid",
+		"description": "Leht, mis on seotud SecuritySession/home"
 	},
 	"set_gen_preview": {
 		"message": "Tab eelvaade",
@@ -1327,9 +1415,17 @@
 		"message": "Seaded",
 		"description": "Silt seadete menüü jaoks"
 	},
+	"setup_audit_trail": {
+		"message": "Seadistamise auditeerimisjälg",
+		"description": "Leht, mis on seotud SecurityEvents/home"
+	},
 	"setup_page": {
 		"message": "Seadistusleht",
 		"description": "[poleSalesforceSeadistus] leht, mida kasutatakse Salesforce'i seadete muutmiseks"
+	},
+	"sharing_settings": {
+		"message": "Jagamise seaded",
+		"description": "Leht, mis on seotud SecuritySharing/home"
 	},
 	"show_all_tabs": {
 		"message": "Kuva kõik $tabs",
@@ -1439,6 +1535,10 @@
 		"message": "Tabs salvestatud.",
 		"description": "[teavitus] Tabs salvestati edukalt."
 	},
+	"task": {
+		"message": "Ülesanne",
+		"description": "Leht, mis on seotud ObjectManager/Task/FieldsAndRelationships/view"
+	},
 	"theme_dark": {
 		"message": "Muuda teema tumedaks",
 		"description": "[hüpikaken] pealkiri kuul teema vahetamiseks"
@@ -1446,6 +1546,94 @@
 	"theme_light": {
 		"message": "Muuda teema heledaks",
 		"description": "[hüpikaken] pealkiri päikesel teema vahetamiseks"
+	},
+	"tutorial": {
+		"message": "Õpetus",
+		"description": "[popup] nupp õpetuse alustamiseks"
+	},
+	"tutorial_add_favourite": {
+		"message": "Selle lehe lemmikutesse lisamiseks klõpsake tärnil.",
+		"description": "[tutorial] lisa lemmik"
+	},
+	"tutorial_click_highlighted_tab": {
+		"message": "Vastavale lehele liikumiseks klõpsake esiletõstetud $tab peal.",
+		"description": "[tutorial] klõpsake esiletõstetud Tab peal"
+	},
+	"tutorial_continue_prompt_body": {
+		"message": "See on $extension_label jaoks ja see jätkab teie lõpetamata $tutorial sealt, kus pooleli jäite.",
+		"description": "[tutorial] põhitekst õpetuse jätkamiseks"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "Kas jätkata $tutorial viimasest sammust?",
+		"description": "[tutorial] modaalpealkiri õpetuse jätkamiseks"
+	},
+	"tutorial_drag_flows": {
+		"message": "Lohistage esiletõstetud rida (kasutades 6 punkti) ja laske see lahti enne esimest rida (mis on kinnitatud).",
+		"description": "[tutorial] lohistage voogusid"
+	},
+	"tutorial_end": {
+		"message": "$tutorial lõpetatud! Nautige laienduse kasutamist.",
+		"description": "[tutorial] lõpp"
+	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "Me ei leidnud õpetuse $tutorial alustamiseks kasutatavaid linke\nPalun eksportige oma $tabs ja taaskäivitage $tutorial",
+		"description": "[tutorial] veateade: ei saanud alustada"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "Need on teie lemmik $tabs ja neid kasutatakse korduvalt kasutatavatele lehtedele kiireks juurdepääsuks.",
+		"description": "[tutorial] tõstke esile lemmik Tab"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "Vajutage klaviatuuri lühiteed, et avada leht $settings , kus saate muuta laienduse käitumist ja kujundada oma $tabs",
+		"description": "[tutorial] klaviatuuri lühitee"
+	},
+	"tutorial_manage_tabs": {
+		"message": "Paremklõpsake lehel (mitte Tab peal) ja valige haldusmodaali avamiseks $extension_label > $cxm_manage_tabs .",
+		"description": "[tutorial] halda Tab"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "Saate oma $tabs sellelt ekraanilt hallata. Lisateabe saamiseks klõpsake siia.",
+		"description": "[tutorial] Tab haldamise link"
+	},
+	"tutorial_pin_tab": {
+		"message": "Paremklõpsake esiletõstetud $tab peal ja valige selle kinnitamiseks $extension_label > $cxm_move > $cxm_pin_tab .",
+		"description": "[tutorial] kinnita Tab"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "Lohistatud rida ei saanud liigutada kinnitatud rea ette (kuna see on hetkel kinnitamata), seega läks see kinnitamata loendi algusesse. Neid kahte loendit käsitletakse eraldi.",
+		"description": "[tutorial] kinnitatud selgitus"
+	},
+	"tutorial_pinned_tab": {
+		"message": "Pange tähele, et $tab on nüüd kinnitatud ja jääb paigale.",
+		"description": "[tutorial] kinnitatud Tab"
+	},
+	"tutorial_redirect_account": {
+		"message": "Nüüd suuname teid teisele lehele, et teile rohkem näidata. Jätkamiseks klõpsake siia.",
+		"description": "[tutorial] ümbersuunamine kontole"
+	},
+	"tutorial_remove_favourite": {
+		"message": "Selle lehe lemmikutest eemaldamiseks klõpsake läbikriipsutatud tärnil. NIPP: saate klõpsata tärnil pärast selle sammu lõpetamist, et vältida selle $tab kaotamist",
+		"description": "[tutorial] eemalda lemmik"
+	},
+	"tutorial_restart": {
+		"message": "Saate $tutorial igal ajal taaskäivitada, klõpsates hüpikaknas oleval nupul.",
+		"description": "[tutorial] esimene teade"
+	},
+	"tutorial_restart_prompt": {
+		"message": "Kas soovite alustada õpetust $tutorial algusest?",
+		"description": "[tutorial] viip õpetuse taaskäivitamiseks"
+	},
+	"tutorial_save_modal": {
+		"message": "Klõpsake nuppu $save , et rakendada muudatused ja näha kinnitusteadet.",
+		"description": "[tutorial] salvesta modaal"
+	},
+	"tutorial_start_prompt_body": {
+		"message": "See on $extension_label jaoks ja see viib teid esmalt seadistamise kodulehele, seejärel alustab juhendatud $tutorial",
+		"description": "[tutorial] põhitekst õpetuse alustamiseks"
+	},
+	"tutorial_start_prompt_title": {
+		"message": "Kas alustada $tutorial seadistamise kodulehelt?",
+		"description": "[tutorial] modaalpealkiri õpetuse alustamiseks"
 	},
 	"underline": {
 		"message": "Allajoonitud",
@@ -1490,6 +1678,10 @@
 	"where_to": {
 		"message": "Kuhu?",
 		"description": "[ava_teine_org_modaal] varupealkiri modaali jaoks"
+	},
+	"wiki_label": {
+		"message": "Lugege lähemalt $extension_label kohta",
+		"description": "[popup][settings] kättesaadav pealkiri ja aria-label viki abi nupu jaoks"
 	},
 	"write_review": {
 		"message": "Kirjuta arvustus!",

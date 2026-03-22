@@ -24,6 +24,7 @@ import { bg_getSettings, bg_getStorage, bg_setStorage } from "./background.js";
  * @param {Function} callback - A function to handle the retrieved tab once it is found.
  * @param {number} [count=0] - A counter used to track the number of retries. Defaults to 0.
  * @throws {Error} Throws an error if the current tab cannot be found after 5 retries.
+ * @return Promise the browser tab which was found
  */
 async function _queryTabs(callback, count = 0) {
 	const queryParams = { active: true, currentWindow: true };
@@ -33,13 +34,14 @@ async function _queryTabs(callback, count = 0) {
 	const browserTabs = await BROWSER.tabs.query(queryParams);
 	if (
 		BROWSER.runtime.lastError || browserTabs == null ||
-		browserTabs == [] || browserTabs[0] == null
+		browserTabs.length === 0 || browserTabs[0] == null
 	) {
 		if (count > 5) {
 			throw new Error("error_no_browser_tab");
 		}
-		await _queryTabs(callback, count + 1);
-	} else callback(browserTabs[0]);
+		return await _queryTabs(callback, count + 1);
+	}
+	return callback(browserTabs[0]);
 }
 /**
  * Retrieves the current active browser tab based on the given parameters.
@@ -60,7 +62,7 @@ export function bg_getCurrentBrowserTab(callback = null) {
 				.catch((e) => reject(e));
 		});
 	}
-	_queryTabs(callback);
+	return _queryTabs(callback);
 }
 /**
  * Sends the same message back to other parts of the extension.
@@ -156,7 +158,7 @@ function requestExportPermission() {
  * Checks whether downloads permission is already granted and launches the export handler.
  * If not, it triggers a notification prompting the user to open a popup to grant permission.
  *
- * @param {object[]|null} [tabs=null] Optional array of Tab objects to pass through to the export handler.
+ * @param {object[]|object|null} [tabs=null] Optional array of Tab objects or a serialized TabContainer payload to pass through to the export handler.
  * @param {boolean} [checkOnly=false] Whether to check only or launch the export if allowed
  * @return {boolean} whether the export of Tabs is allowed
  */
@@ -260,10 +262,10 @@ export async function checkForUpdates() {
 			.sort((a, b) => {
 				return new Date(b.created_at) - new Date(a.created_at);
 			})
-			?.[0].tag_name.replace(/^.*(-)?v/, "");
+			?.[0]?.tag_name?.replace(/^.*(-)?v/, "");
 		// Compare versions and open homepage if update is available
 		if (latestVersion != null) {
-			bg_notify({
+			await bg_notify({
 				what: WHAT_UPDATE_EXTENSION,
 				oldversion: EXTENSION_VERSION,
 				version: latestVersion,

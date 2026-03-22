@@ -1,4 +1,12 @@
-import { BROWSER, PERSIST_SORT, SETTINGS_KEY, WHY_KEY } from "/constants.js";
+import {
+	BROWSER,
+	PERSIST_SORT,
+	SETTINGS_KEY,
+	TOAST_WARNING,
+	WHAT_GET,
+	WHAT_SET,
+	WHY_KEY,
+} from "/constants.js";
 import { getSettings, sendExtensionMessage } from "/functions.js";
 import Tab from "./tab.js";
 import ensureTranslatorAvailability from "/translator.js";
@@ -69,7 +77,9 @@ export class TabContainer extends Array {
 		this.#pinnedTabs = Math.max(0, Math.min(this.length, pinnedTabs));
 	}
 
+	/** @type {"pinned"} */
 	static keyPinnedTabsNo = "pinned";
+	/** @type {"tabs"} */
 	static keyTabs = "tabs";
 	/**
 	 * All the keys which express data about a TabContainer.
@@ -114,26 +124,27 @@ export class TabContainer extends Array {
 	/**
 	 * Initializes the `TabContainer` by adding tabs, either from the saved tabs or provided as an argument. Called by the constructor.
 	 *
+	 * @param {TabContainer} instance - The TabContainer instance to be initialized.
 	 * @return {Promise<boolean>} - A promise that resolves to `true` if initialization is successful, otherwise `false`.
 	 * @private
 	 */
-	static async #initialize() {
-		if (singletonAllTabs == null) {
+	static async #initialize(instance) {
+		if (instance == null) {
 			throw new Error("error_tabcont_initialize");
 		}
 		const {
 			[TabContainer.keyTabs]: savedTabs,
 			[TabContainer.keyPinnedTabsNo]: pinnedTabs,
-		} = await singletonAllTabs.getSavedTabs(false);
+		} = await instance.getSavedTabs(false);
 		return (
 			Array.isArray(savedTabs) &&
 			savedTabs.length > 0 &&
-			await (singletonAllTabs.addTabs(savedTabs, false)) &&
+			await (instance.addTabs(savedTabs, false)) &&
 			Boolean(
-				(singletonAllTabs[TabContainer.keyPinnedTabsNo] = pinnedTabs) ||
+				(instance[TabContainer.keyPinnedTabsNo] = pinnedTabs) ||
 					true,
 			) // set pinned number based on storage (if pinned === 0, do not fail (with true))
-		) || await singletonAllTabs.setDefaultTabs();
+		) || await instance.setDefaultTabs();
 	}
 
 	/**
@@ -160,18 +171,24 @@ export class TabContainer extends Array {
 	 */
 	static async create() {
 		if (singletonAllTabs != null) {
-			return singletonAllTabs;
+			return (singletonAllTabs instanceof Promise)
+				? await singletonAllTabs
+				: singletonAllTabs;
 		}
-		singletonAllTabs = new TabContainer(_tabContainerSecret);
-		translator = await ensureTranslatorAvailability();
-		if (!await TabContainer.#initialize()) {
-			throw new Error(
-				await translator.translate([
-					"error_tabcont_initialize",
-				]),
-			);
-		}
-		return singletonAllTabs;
+		singletonAllTabs = (async () => {
+			const instance = new TabContainer(_tabContainerSecret);
+			translator = await ensureTranslatorAvailability();
+			if (!await TabContainer.#initialize(instance)) {
+				throw new Error(
+					await translator.translate([
+						"error_tabcont_initialize",
+					]),
+				);
+			}
+			singletonAllTabs = instance;
+			return instance;
+		})();
+		return await singletonAllTabs;
 	}
 
 	/**
@@ -367,7 +384,7 @@ export class TabContainer extends Array {
 	 */
 	async getSavedTabs(replace = true) {
 		const res = this.#getTabContainerFromObj(
-			await sendExtensionMessage({ what: "get", key: WHY_KEY }),
+			await sendExtensionMessage({ what: WHAT_GET, key: WHY_KEY }),
 		);
 		if (replace) {
 			res[TabContainer.keyTabs] = await this.replaceTabs(
@@ -406,7 +423,9 @@ export class TabContainer extends Array {
 	 * Adds a new tab to the `TabContainer` if it is valid and does not already exist.
 	 *
 	 * @param {Object} tab - The tab object to be added.
-	 * @param {boolean} [sync=true] - A flag indicating whether to synchronize the tabs after adding. Defaults to `true`.
+	 * @param {Object} [param1={}] - Add options.
+	 * @param {boolean} [param1.sync=true] - Whether to synchronize the tabs after adding.
+	 * @param {boolean} [param1.addInFront=false] - Whether to insert the tab after the pinned segment instead of at the end.
 	 * @throws {Error} - Throws an error if the tab object is invalid or if the tab already exists.
 	 * @return {Promise<boolean>} - A promise that resolves to `true` if the tab is added and synchronized (if `sync` is `true`), otherwise `true` if not synchronized.
 	 */
@@ -622,7 +641,8 @@ export class TabContainer extends Array {
 	/**
 	 * Checks if a tab with the specified data (label, url, and organization) exists in the container.
 	 *
-	 * @param {Object} [tab={}] - An object containing the tab data to check for. The object can include `url` and `org` properties. Defaults to an empty object.
+	 * @param {Object} [tab={}] - An object containing the tab data to check for. The object can include `label`, `url`, and `org` properties. Defaults to an empty object.
+	 * @param {string} [tab.label=null] - Optional label ignored by existence checks.
 	 * @param {string} [tab.url=null] - The URL of the tab to check for.
 	 * @param {string} [tab.org=null] - The organization associated with the tab to check for.
 	 * @param {boolean} [checkDuplicate=false] - Whether to check for duplicates (true) or for equality (false)
@@ -675,8 +695,8 @@ export class TabContainer extends Array {
 	 * When `resetTabs=true` and `removeOrgTabs=false`, removes only non-org-specific Tabs (Tabs with `org == null`), sparing org-specific Tabs.
 	 * When `resetTabs=false` and `removeOrgTabs=false`, does nothing.
 	 * @param {boolean} [param1.sync=true] - Whether to perform a sync operation
-	 * @param {boolean} [param1.keepTabsNotThisOrg=null] - Whether to keep the org-specific Tabs which are not of this Org
-	 * @param {string} [param1.removeThisOrgTabs=null] - The Org for which to remove the Org Tabs
+	 * @param {string|null} [param1.keepTabsNotThisOrg=null] - Org-specific tabs outside this org are preserved when set.
+	 * @param {string|null} [param1.removeThisOrgTabs=null] - The org for which to remove the org tabs.
 	 * @param {boolean} [param1.updatePinnedTabs=true] - Wheter to update the currently pinned Tabs number
 	 * @param {boolean} [param1.invalidateSort=false] - Wheter the function was called from an invalidate sort action
 	 *
@@ -817,8 +837,10 @@ export class TabContainer extends Array {
 	/**
 	 * Import tabs from JSON
 	 * @param {string} jsonString - JSON string of tabs
-	 * @param {boolean} [resetTabs=false] - Whether the imported array should overwrite the currently saved tabs
-	 * @param {boolean} [preserveOtherOrg=true] - Whether the org-specific tabs should be preserved
+	 * @param {Object} [param1={}] - Import options.
+	 * @param {boolean} [param1.resetTabs=false] - Whether the imported array should overwrite the currently saved tabs.
+	 * @param {boolean} [param1.preserveOtherOrg=true] - Whether the org-specific tabs should be preserved.
+	 * @param {boolean} [param1.importMetadata=false] - Whether pinned-tab metadata should also be restored.
 	 * @return {number} - Number of tabs successfully imported
 	 */
 	async importTabs(jsonString, {
@@ -831,7 +853,7 @@ export class TabContainer extends Array {
 		if (metadata.isUsingOldVersion) {
 			// tell the user to upgrade their backups
 			sendExtensionMessage({
-				what: "warning",
+				what: TOAST_WARNING,
 				message: "warn_upgrade_backup",
 			});
 		}
@@ -979,9 +1001,9 @@ export class TabContainer extends Array {
 		// replace tabs already checks the tabs
 		await this.checkSetSorted(fromSortFunction, fromInvalidateSortFunction);
 		await sendExtensionMessage({
-			what: "set",
-			set: this.toJSON(),
+			what: WHAT_SET,
 			key: WHY_KEY,
+			set: this.toJSON(),
 		});
 		if (BROWSER.runtime.lastError) {
 			throw new Error(BROWSER.runtime.lastError);
@@ -1316,7 +1338,7 @@ export class TabContainer extends Array {
 	#invalidateSort() {
 		// Update the sort setting persisted (do not wait for response)
 		sendExtensionMessage({
-			what: "set",
+			what: WHAT_SET,
 			key: SETTINGS_KEY,
 			set: [{
 				id: PERSIST_SORT,
@@ -1419,8 +1441,8 @@ export class TabContainer extends Array {
 	/**
 	 * Takes care of updating a single Tab and synchronize the Array
 	 *
-	 * @param {Tab} [tabToUpdate={label: undefined, url: undefined, org: undefined}] - the Tab that has to be updated; it MUST be a Tab which is already present in the Array
-	 * @param {{ label: undefined; url: undefined; org: undefined; }} [updateTo={label: undefined, url: undefined, org: undefined}] - an Object which contains the keys that have to be updated
+	 * @param {{ label?: string; url?: string; org?: string; }} [tabToUpdate={label: undefined, url: undefined, org: undefined}] - The tab lookup data for the tab that has to be updated.
+	 * @param {{ label?: string; url?: string; org?: string; [Tab.keyClickCount]?: number; [Tab.keyClickDate]?: number; }} [updateTo={label: undefined, url: undefined, org: undefined}] - An object which contains the keys that have to be updated.
 	 *
 	 * @return {boolean} whether the Tab was updated AND the array was synced
 	 */
@@ -1455,12 +1477,18 @@ export class TabContainer extends Array {
 
 	/**
 	 * Resets the singleton and returns a new instance. Only for use in tests!
-	 *
 	 * @return {Promise<TabContainer>} the new instance
 	 */
 	static async _reset() {
 		singletonAllTabs = null;
 		return await ensureAllTabsAvailability();
+	}
+
+	/**
+	 * Clears the singleton instance. Only for use in tests!
+	 */
+	static _clear() {
+		singletonAllTabs = null;
 	}
 
 	/**
@@ -1510,6 +1538,30 @@ export class TabContainer extends Array {
 		return await this.syncTabs({
 			fromInvalidateSortFunction: isPin ? undefined : true,
 		});
+	}
+
+	/**
+	 * Return the option object used to sort the Tabs
+	 * @param {Object} [param0={}] - an object with the following keys
+	 * @param {string} [param0.sortBy="label"] the Tab field to sort by
+	 * @param {boolean} [param0.standardSort=true] whether to follow the ascending-then-descending sort or the reverse (descending-then-ascending)
+	 * @throws Error when sortBy is not a key allowed by Tab
+	 * @return {Object} ready to be used by the TabContainer
+	 */
+	getSortOptions({
+		sortBy = "label",
+		standardSort = true,
+	} = {}) {
+		if (!Tab.allowedKeys.has(sortBy)) {
+			throw new Error("error_tab_unexpected_keys");
+		}
+		return {
+			sortBy,
+			sortAsc: (standardSort &&
+				(this.isSortedBy !== sortBy || !this.isSortedAsc)) ||
+				(!standardSort &&
+					(this.isSortedBy === sortBy && !this.isSortedAsc)),
+		};
 	}
 }
 
