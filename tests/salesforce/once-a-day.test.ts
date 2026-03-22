@@ -1,6 +1,6 @@
 import { assert, assertEquals } from "@std/testing/asserts";
 import { mockStorage } from "../mocks.test.ts";
-import { PREVENT_ANALYTICS, SETTINGS_KEY } from "/constants.js";
+import { PREVENT_ANALYTICS, SETTINGS_KEY } from "/core/constants.js";
 import { executeOncePerDay, getTodayDateKey } from "/salesforce/once-a-day.js";
 
 /**

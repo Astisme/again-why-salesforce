@@ -1,7 +1,7 @@
 /// <reference lib="dom" />
 import { assertEquals } from "@std/testing/asserts";
 import { translations } from "./mocks.test.ts";
-import ensureTranslatorAvailability from "/translator.js";
+import ensureTranslatorAvailability from "/core/translator.js";
 const translate_element_attribute = "data-i18n";
 
 Deno.test("TranslationService - load user preference", async () => {

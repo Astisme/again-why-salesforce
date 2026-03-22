@@ -63,7 +63,7 @@ async function loadLogoModule() {
 			},
 		},
 		importsToReplace: new Set([
-			"/constants.js",
+			"/core/constants.js",
 			"../themeHandler.js",
 		]),
 	});

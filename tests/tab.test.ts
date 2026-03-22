@@ -5,7 +5,7 @@ import {
 	assertFalse,
 	assertThrows,
 } from "@std/testing/asserts";
-import Tab from "/tab.js";
+import Tab from "/core/tab.js";
 const currentDate = Date.now();
 
 await Deno.test("Tab Creation - Basic Usage", async (t) => {

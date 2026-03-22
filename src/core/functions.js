@@ -28,7 +28,7 @@ import {
 	WHAT_GET_BROWSER_TAB,
 	WHAT_GET_SETTINGS,
 	WHAT_GET_STYLE_SETTINGS,
-} from "/constants.js";
+} from "/core/constants.js";
 
 /**
  * Invoke the runtime to send the message

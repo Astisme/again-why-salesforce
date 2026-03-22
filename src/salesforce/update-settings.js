@@ -3,8 +3,8 @@ import {
 	EXTENSION_LAST_ACTIVE_DAY,
 	EXTENSION_USAGE_DAYS,
 	SETTINGS_KEY,
-} from "/constants.js";
-import { getSettings, sendExtensionMessage } from "/functions.js";
+} from "/core/constants.js";
+import { getSettings, sendExtensionMessage } from "/core/functions.js";
 import { getTodayDateKey } from "./once-a-day.js";
 
 /**

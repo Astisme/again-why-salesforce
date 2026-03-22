@@ -54,7 +54,7 @@ self.onmessage = async (event: MessageEvent<WorkerRequest>) => {
 		writable: true,
 	});
 	try {
-		const module = await import("/constants.js");
+		const module = await import("/core/constants.js");
 		self.postMessage(
 			{
 				browserName: module.BROWSER_NAME as string | undefined,

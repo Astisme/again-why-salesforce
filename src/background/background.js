@@ -48,9 +48,9 @@ import {
 	WHAT_STARTUP,
 	WHAT_THEME,
 	WHY_KEY,
-} from "/constants.js";
-import { isSalesforceHostname, openSettingsPage } from "/functions.js";
-import Tab from "/tab.js";
+} from "/core/constants.js";
+import { isSalesforceHostname, openSettingsPage } from "/core/functions.js";
+import Tab from "/core/tab.js";
 import {
 	bg_getCurrentBrowserTab,
 	bg_notify,

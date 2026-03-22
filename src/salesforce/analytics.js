@@ -6,8 +6,8 @@ import {
 	PERM_CHECK,
 	PREVENT_ANALYTICS,
 	SETTINGS_KEY,
-} from "/constants.js";
-import { getSettings, sendExtensionMessage } from "/functions.js";
+} from "/core/constants.js";
+import { getSettings, sendExtensionMessage } from "/core/functions.js";
 
 /**
  * Determines whether the analytics beacon has already been sent today.

@@ -38,8 +38,8 @@ import {
 	WHAT_START_TUTORIAL,
 	WHAT_THEME,
 	WHY_KEY,
-} from "/constants.js";
-import { getStyleSettings } from "/functions.js";
+} from "/core/constants.js";
+import { getStyleSettings } from "/core/functions.js";
 
 type EnabledSetting = {
 	id: string;

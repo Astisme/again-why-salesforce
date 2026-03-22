@@ -153,9 +153,9 @@ async function loadPermissionsModule(url: string) {
 			},
 		},
 		importsToReplace: new Set([
-			"/constants.js",
-			"/functions.js",
-			"/translator.js",
+			"/core/constants.js",
+			"/core/functions.js",
+			"/core/translator.js",
 			"../themeHandler.js",
 		]),
 	});

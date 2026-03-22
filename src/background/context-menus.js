@@ -47,10 +47,10 @@ import {
 	SETTINGS_KEY,
 	TOAST_WARNING,
 	USER_LANGUAGE,
-} from "/constants.js";
-import { openSettingsPage } from "/functions.js";
-import Tab from "/tab.js";
-import ensureTranslatorAvailability from "/translator.js";
+} from "/core/constants.js";
+import { openSettingsPage } from "/core/functions.js";
+import Tab from "/core/tab.js";
+import ensureTranslatorAvailability from "/core/translator.js";
 import {
 	bg_getCurrentBrowserTab,
 	bg_notify,

@@ -1,6 +1,6 @@
 import "../mocks.test.ts";
 import { assertEquals } from "@std/testing/asserts";
-import { SETTINGS_KEY } from "/constants.js";
+import { SETTINGS_KEY } from "/core/constants.js";
 import { getTodayDateKey } from "/salesforce/once-a-day.js";
 import {
 	getUsageDaysUpdate,

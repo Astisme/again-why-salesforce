@@ -6,9 +6,9 @@ import {
 	assertRejects,
 	assertThrows,
 } from "@std/testing/asserts";
-import { WHY_KEY } from "/constants.js";
-import Tab from "/tab.js";
-import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
+import { WHY_KEY } from "/core/constants.js";
+import Tab from "/core/tab.js";
+import { ensureAllTabsAvailability, TabContainer } from "/core/tabContainer.js";
 const currentDate = Date.now();
 
 type TabInput = {

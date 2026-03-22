@@ -1,5 +1,5 @@
 "use strict";
-import { BROWSER, WHAT_THEME } from "/constants.js";
+import { BROWSER, WHAT_THEME } from "/core/constants.js";
 import { initTheme } from "../themeHandler.js";
 initTheme();
 

@@ -1,5 +1,5 @@
 "use strict";
-import { EXTENSION_NAME } from "/constants.js";
+import { EXTENSION_NAME } from "/core/constants.js";
 import { checkInsertAnalytics } from "./analytics.js";
 import { updateExtensionUsageDays } from "./update-settings.js";
 

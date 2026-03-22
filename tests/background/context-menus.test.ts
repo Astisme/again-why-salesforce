@@ -25,7 +25,7 @@ import {
 	CXM_OPEN_OTHER_ORG,
 	CXM_PAGE_REMOVE_TAB,
 	CXM_PAGE_SAVE_TAB,
-} from "/constants.js";
+} from "/core/constants.js";
 
 /**
  * Sets the active mocked browser tab used by the background tests.

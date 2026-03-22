@@ -152,8 +152,8 @@ async function loadThemeHandler(
 				: () => mediaQueryList,
 		},
 		importsToReplace: new Set([
-			"/constants.js",
-			"/functions.js",
+			"/core/constants.js",
+			"/core/functions.js",
 		]),
 	});
 	await module.initThemePromise;

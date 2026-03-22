@@ -292,8 +292,8 @@ async function loadDragHandler({
 			},
 		},
 		importsToReplace: new Set([
-			"/constants.js",
-			"/tabContainer.js",
+			"/core/constants.js",
+			"/core/tabContainer.js",
 		]),
 		transformSource,
 	});
