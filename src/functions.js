@@ -68,6 +68,20 @@ export function sendExtensionMessage(message, callback = null) {
 	sendMessage(message, callback);
 }
 /**
+ * Sends an array of messages to the background script with the specified message.
+ *
+ * @param {Object[]} messages - The messages to send.
+ * @param {function} callback - The callback to execute after sending all the messages.
+ * @return {Promise} promise resolving when all messages have been processed
+ */
+export async function sendExtensionMessages(messages = [], callback = null) {
+	const responses = await Promise.all(messages.map(
+		(mess) => sendExtensionMessage(mess),
+	));
+	callback?.(responses);
+	return responses;
+}
+/**
  * Retrieves extension settings for the specified keys.
  *
  * @param {string|string[]|null} [keys=null] - One or more setting keys to retrieve. If null, all settings will be returned.

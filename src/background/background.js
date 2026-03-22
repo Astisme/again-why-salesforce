@@ -26,6 +26,7 @@ import {
 	TAB_STYLE_BOLD,
 	TOAST_ERROR,
 	TOAST_WARNING,
+	TUTORIAL_CLOSE_EVENT,
 	TUTORIAL_KEY,
 	WHAT_ACTIVATE,
 	WHAT_EXPORT,
@@ -313,6 +314,7 @@ export async function bg_setStorage(tobeset, callback = null, key = WHY_KEY) {
 		case WHY_KEY:
 		case LOCALE_KEY:
 		case TUTORIAL_KEY:
+		case TUTORIAL_CLOSE_EVENT:
 			if (changedToArray) {
 				tobeset = tobeset[0];
 			}

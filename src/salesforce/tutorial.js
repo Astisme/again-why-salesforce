@@ -7,6 +7,7 @@ import {
 	SALESFORCE_SETUP_HOME_MINI,
 	SETUP_LIGHTNING,
 	TOAST_WARNING,
+	TUTORIAL_CLOSE_EVENT,
 	TUTORIAL_EVENT_ACTION_FAVOURITE,
 	TUTORIAL_EVENT_ACTION_UNFAVOURITE,
 	TUTORIAL_EVENT_CLOSE_MANAGE_TABS,
@@ -19,7 +20,11 @@ import {
 	WHAT_GET_COMMANDS,
 	WHAT_SET,
 } from "/constants.js";
-import { performLightningRedirect, sendExtensionMessage } from "/functions.js";
+import {
+	performLightningRedirect,
+	sendExtensionMessage,
+	sendExtensionMessages,
+} from "/functions.js";
 import ensureTranslatorAvailability from "/translator.js";
 import Tab from "/tab.js";
 import {
@@ -41,6 +46,7 @@ import { ensureAllTabsAvailability, TabContainer } from "../tabContainer.js";
 import { handleActionButtonClick } from "./manageTabs.js";
 
 const TUTORIAL_HIGHLIGHT_CLASS = "awsf-tutorial-highlight";
+
 /**
  * The pages which could be used if the user does not have any in-setup Tabs
  * The `label` should be a string found inside the locales files
@@ -523,7 +529,10 @@ class Tutorial {
 		this.closeBtn = elements.closeBtn;
 		this.closeBtn.addEventListener(
 			"click",
-			() => this.end(true, this.currentStep),
+			() =>
+				this.end({
+					closedManually: true,
+				}), // will count as if the tutorial was completed
 		);
 		this.btnsParent = elements.btnsParent;
 		// append elements to the page
@@ -531,7 +540,12 @@ class Tutorial {
 		document.body.appendChild(this.messageBox);
 		document.body.appendChild(this.spinner);
 		document.addEventListener("keydown", (e) => {
-			if (e.key === "Escape") this.end(true, this.currentStep);
+			if (e.key === "Escape") {
+				this.end({
+					shouldSaveProgress: true,
+					stepToSave: this.currentStep,
+				});
+			}
 		});
 	}
 
@@ -555,15 +569,27 @@ class Tutorial {
 	 * @throws TypeError if stepNo is not a number
 	 * @return Promise<void> the promise from sendExtensionMessage
 	 */
-	persistTutorialProgress(stepNo = this.currentStep) {
+	persistTutorialProgress(
+		stepNo = this.currentStep,
+		closedManually = false,
+	) {
 		if (typeof stepNo !== "number") {
 			throw new TypeError("stepNo should be a number");
 		}
-		return sendExtensionMessage({
-			what: WHAT_SET,
-			key: TUTORIAL_KEY,
-			set: stepNo < this.steps.length - 1 ? stepNo : this.steps.length, // if the user got to the last step, save it as soon as they get to it (without waiting for the confirmation)
-		});
+		return sendExtensionMessages([
+			{
+				what: WHAT_SET,
+				key: TUTORIAL_KEY,
+				set: stepNo < this.steps.length - 1
+					? stepNo
+					: this.steps.length, // if the user got to the last step, save it as soon as they get to it (without waiting for the confirmation)
+			},
+			{
+				what: WHAT_SET,
+				key: TUTORIAL_CLOSE_EVENT,
+				set: closedManually ? "user" : "auto",
+			},
+		]);
 	}
 
 	/**
@@ -800,7 +826,8 @@ class Tutorial {
 	 * @param {Function} [step.onConfirm] - Optional callback to execute on confirmation.
 	 */
 	showConfirm() {
-		this.messageBox.addEventListener("click", () => {
+		this.messageBox.addEventListener("click", (event) => {
+			if (event.target === this.closeBtn) return;
 			const step = this.steps[this.currentStep];
 			step.onConfirm?.();
 			if (step.action !== ACTION.confirm) {
@@ -834,14 +861,18 @@ class Tutorial {
 	 * @param {boolean} [shouldSaveProgress=true] - Whether to save the tutorial's completion status.
 	 * @param {number} [stepToSave=this.steps.length] - The number of completed steps to save
 	 */
-	end(shouldSaveProgress = true, stepToSave = this.steps.length) {
+	end({
+		shouldSaveProgress = true,
+		stepToSave = this.steps.length,
+		closedManually = false,
+	} = {}) {
 		this.isActive = false;
 		this.overlay?.remove();
 		this.messageBox?.remove();
 		this.spinner?.remove();
 		this.highlightedElement?.classList.remove(TUTORIAL_HIGHLIGHT_CLASS);
 		if (shouldSaveProgress) {
-			this.persistTutorialProgress(stepToSave);
+			this.persistTutorialProgress(stepToSave, closedManually);
 		}
 	}
 
@@ -935,11 +966,16 @@ function redirectToHomeAndStart(tutorial = null) {
  *
  * @return {Promise<void>} Resolves after checking and potentially starting the tutorial.
  */
-export async function checkTutorial() {
-	const tutorialProgress = await sendExtensionMessage({
+export async function checkTutorial(fromPopup = false) {
+	const {
+		[TUTORIAL_KEY]: tutorialProgress,
+		[TUTORIAL_CLOSE_EVENT]: tutorialCloseEvent,
+	} = await sendExtensionMessage({
 		what: WHAT_GET,
-		key: TUTORIAL_KEY,
+		key: [TUTORIAL_KEY, TUTORIAL_CLOSE_EVENT],
 	});
+	// check if the user closed the tutorial before (if yes, do not prompt because maybe they got annoied)
+	if (!fromPopup && tutorialCloseEvent === "user") return;
 	const translator = await ensureTranslatorAvailability();
 	const confirmLabel = await translator.translate("confirm");
 	const cancelLabel = await translator.translate("cancel");
@@ -979,18 +1015,11 @@ export async function checkTutorial() {
 		})
 	) {
 		await tutorial.start(tutorialProgress - 1); // because nextStep adds 1 when it starts
+	} else if (fromPopup) {
+		// restart the tutorial from the beginning
+		tutorial.start();
 	} else {
 		// set the tutorial as completed
 		Tutorial.setTutorialAsCompleted(tutorial);
 	}
-}
-
-/**
- * Starts the tutorial manually, typically called from the popup button.
- * Creates a new Tutorial instance and begins the guided tour.
- *
- * @return {Promise<void>} Resolves when the tutorial has started.
- */
-export function startTutorial() {
-	return new Tutorial().start();
 }

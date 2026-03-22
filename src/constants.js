@@ -79,6 +79,7 @@ export const EXTENSION_GITHUB_WIKI_LINK = `${EXTENSION_GITHUB_LINK}/wiki`;
 export const EXTENSION_OPTIONAL_HOST_PERM = MANIFEST.optional_host_permissions;
 // SETTINGS
 export const TUTORIAL_KEY = "tutorial-progress"; // Added for tutorial progress saving
+export const TUTORIAL_CLOSE_EVENT = `${TUTORIAL_KEY}-close-event`;
 export const SETTINGS_KEY = "settings";
 export const LINK_NEW_BROWSER = "link_new_browser";
 export const SKIP_LINK_DETECTION = "skip_link_detection";

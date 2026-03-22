@@ -82,7 +82,7 @@ import {
 import { createImportModal } from "./import.js";
 import { createExportModal } from "./export.js";
 import { createManageTabsModal } from "./manageTabs.js";
-import { checkTutorial, startTutorial } from "./tutorial.js";
+import { checkTutorial } from "./tutorial.js";
 import { executeOncePerDay } from "./once-a-day.js";
 
 /**
@@ -1063,7 +1063,7 @@ async function routeBackgroundMessage(message) {
 				await createManageTabsModal();
 				break;
 			case WHAT_START_TUTORIAL:
-				await startTutorial();
+				await checkTutorial(true);
 				break;
 			case WHAT_SHOW_EXPORT_MODAL:
 				await createExportModal();

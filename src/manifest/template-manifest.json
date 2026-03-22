@@ -1,7 +1,7 @@
 {
 	"manifest_version": 3,
 	"name": "__MSG_extension_label__",
-	"version": "2.2.2",
+	"version": "2.2.3",
 	"default_locale": "en",
 	"description": "__MSG_extension_description__",
 	"permissions": [
@@ -93,7 +93,7 @@
 	"commands": {
 		"cmd-save-as-tab": {
 			"suggested_key": {
-				"default": "Alt+Shift+P"
+				"default": "Alt+Shift+E"
 			},
 			"description": "__MSG_cmd_save_as_tab__"
 		},

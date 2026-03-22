@@ -44,6 +44,7 @@ import {
 	isGenericKey,
 	isOnSalesforceSetup,
 	isPinnedKey,
+	isSalesforceHostname,
 	isStyleKey,
 	openSettingsPage,
 	performLightningRedirect,
@@ -51,6 +52,7 @@ import {
 	requestExportPermission,
 	requestFramePatternsPermission,
 	sendExtensionMessage,
+	sendExtensionMessages,
 } from "/functions.js";
 import { installMockDom } from "./happydom.test.ts";
 
@@ -76,6 +78,19 @@ Deno.test("sendExtensionMessage rejects on runtime error", async () => {
 		sendExtensionMessage({ what: "eco", echo: "bar" })
 	);
 	BROWSER.runtime.lastError = originalError;
+});
+
+Deno.test("sendExtensionMessages resolves batched responses and forwards callback results", async () => {
+	const callbackResponses: string[][] = [];
+	const responses = await sendExtensionMessages([
+		{ what: "echo", echo: "first" },
+		{ what: "echo", echo: "second" },
+	], (receivedResponses) => {
+		callbackResponses.push(receivedResponses);
+	});
+
+	assertEquals(responses, ["first", "second"]);
+	assertEquals(callbackResponses, [["first", "second"]]);
 });
 
 Deno.test("getSettings", async (t) => {
@@ -674,6 +689,18 @@ Deno.test("requestPermissions", async (t) => {
 		assert(await BROWSER.permissions.contains(framePatternsPermObj));
 		assert(await areFramePatternsAllowed());
 	});
+
+	await t.step(
+		"frame pattern permission checks accept the query-string opt-out flag",
+		async () => {
+			localStorage.setItem(DO_NOT_REQUEST_FRAME_PERMISSION, "false");
+			globalThis.location = {
+				href:
+					`https://example.test/?${DO_NOT_REQUEST_FRAME_PERMISSION}=true`,
+			};
+			assert(await areFramePatternsAllowed());
+		},
+	);
 	await t.step("request cookies permissions", async () => {
 		const cookiesPermObj = {
 			permissions: ["cookies"],
@@ -691,6 +718,52 @@ Deno.test("checks for extensionsion functionality", async (t) => {
 		assert(isonSFsetup.ison);
 		assert(isonSFsetup.url != null);
 	});
+
+	await t.step(
+		"is not on salesforce setup when the browser tab url is outside setup",
+		async () => {
+			const originalSendMessage = BROWSER.runtime.sendMessage;
+			try {
+				BROWSER.runtime.sendMessage = (message, callback) => {
+					if (message?.what === "get-browser-tab") {
+						callback?.({
+							url: "https://example.test/lightning/page/home",
+						});
+						return;
+					}
+					return originalSendMessage.call(
+						BROWSER.runtime,
+						message,
+						callback,
+					);
+				};
+				const isonSFsetup = await isOnSalesforceSetup();
+				assertFalse(isonSFsetup.ison);
+				assertEquals(
+					isonSFsetup.url,
+					"https://example.test/lightning/page/home",
+				);
+			} finally {
+				BROWSER.runtime.sendMessage = originalSendMessage;
+			}
+		},
+	);
+});
+
+Deno.test("isSalesforceHostname matches only supported Salesforce hostnames", () => {
+	assert(
+		isSalesforceHostname(
+			new URL("https://acme.my.salesforce-setup.com/lightning/setup"),
+		),
+	);
+	assert(
+		isSalesforceHostname(
+			new URL("https://acme.lightning.force.com/lightning/page/home"),
+		),
+	);
+	assertFalse(
+		isSalesforceHostname(new URL("https://example.test/lightning/setup")),
+	);
 });
 
 class MockElement {
