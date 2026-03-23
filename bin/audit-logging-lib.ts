@@ -175,10 +175,15 @@ export function parseArgs(args: string[]): AuditOptions {
  * @param {string} flag Flag name for error reporting.
  * @returns {void}
  */
-function assertSeverityGate(value: string, flag: string): asserts value is SeverityGate {
+function assertSeverityGate(
+	value: string,
+	flag: string,
+): asserts value is SeverityGate {
 	if (!SEVERITIES.includes(value as SeverityGate)) {
 		throw new Error(
-			`Invalid value for --${flag}: ${value}. Allowed values: ${SEVERITIES.join(", ")}`,
+			`Invalid value for --${flag}: ${value}. Allowed values: ${
+				SEVERITIES.join(", ")
+			}`,
 		);
 	}
 }
@@ -303,8 +308,10 @@ export function auditFile(
 			}
 		}
 
-		if ((call.level === "warn" || call.level === "error") &&
-			!hasContextPayload(contextArgs)) {
+		if (
+			(call.level === "warn" || call.level === "error") &&
+			!hasContextPayload(contextArgs)
+		) {
 			findings.push(createFinding(filePath, call, {
 				code: "MISSING_CONTEXT_PAYLOAD",
 				severity: "error",
@@ -426,7 +433,11 @@ function hasContextPayload(args: string[]): boolean {
 		if (/[A-Z][A-Za-z0-9_]*Error\b/.test(trimmed)) {
 			return true;
 		}
-		if (/\b(err|error|exception|context|payload|details|meta|data)\b/i.test(trimmed)) {
+		if (
+			/\b(err|error|exception|context|payload|details|meta|data)\b/i.test(
+				trimmed,
+			)
+		) {
 			return true;
 		}
 	}
@@ -711,9 +722,14 @@ export function sortFindings(findings: Finding[]): Finding[] {
  * @param {BaselineFile} baseline Baseline file content.
  * @returns {Finding[]} New findings not present in baseline.
  */
-export function getNewFindings(findings: Finding[], baseline: BaselineFile): Finding[] {
+export function getNewFindings(
+	findings: Finding[],
+	baseline: BaselineFile,
+): Finding[] {
 	const baselineSet = new Set(baseline.fingerprints);
-	return findings.filter((finding) => !baselineSet.has(getFindingFingerprint(finding)));
+	return findings.filter((finding) =>
+		!baselineSet.has(getFindingFingerprint(finding))
+	);
 }
 
 /**
@@ -722,7 +738,9 @@ export function getNewFindings(findings: Finding[], baseline: BaselineFile): Fin
  * @param {string} baselineFile Baseline file path.
  * @returns {Promise<BaselineFile>} Baseline payload.
  */
-export async function loadBaseline(baselineFile: string): Promise<BaselineFile> {
+export async function loadBaseline(
+	baselineFile: string,
+): Promise<BaselineFile> {
 	try {
 		const raw = await Deno.readTextFile(baselineFile);
 		const parsed = JSON.parse(raw) as BaselineFile;
@@ -758,7 +776,10 @@ export async function writeBaseline(
 		version: 1,
 		fingerprints: [...new Set(fingerprints)].sort(),
 	};
-	await Deno.writeTextFile(baselineFile, `${JSON.stringify(payload, null, 2)}\n`);
+	await Deno.writeTextFile(
+		baselineFile,
+		`${JSON.stringify(payload, null, 2)}\n`,
+	);
 }
 
 /**
@@ -811,8 +832,14 @@ function buildSummary(
  * @param {AuditReport} report Report payload.
  * @returns {Promise<void>}
  */
-export async function writeReport(reportFile: string, report: AuditReport): Promise<void> {
-	await Deno.writeTextFile(reportFile, `${JSON.stringify(report, null, 2)}\n`);
+export async function writeReport(
+	reportFile: string,
+	report: AuditReport,
+): Promise<void> {
+	await Deno.writeTextFile(
+		reportFile,
+		`${JSON.stringify(report, null, 2)}\n`,
+	);
 }
 
 /**
@@ -846,7 +873,12 @@ export async function runAuditCli(options: AuditOptions): Promise<CliResult> {
 		version: 1,
 		generatedAt: new Date().toISOString(),
 		findings,
-		summary: buildSummary(findings, files.length, callsitesScanned, newFindings.length),
+		summary: buildSummary(
+			findings,
+			files.length,
+			callsitesScanned,
+			newFindings.length,
+		),
 	};
 
 	await writeReport(options.reportFile, report);

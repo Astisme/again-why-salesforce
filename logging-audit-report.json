@@ -1,1053 +1,1053 @@
 {
-  "version": 1,
-  "generatedAt": "2026-03-23T20:11:54.077Z",
-  "findings": [
-    {
-      "file": "src/action/notSalesforceSetup/notSalesforceSetup.js",
-      "line": 49,
-      "level": "warn",
-      "severity": "error",
-      "code": "MISSING_CONTEXT_PAYLOAD",
-      "message": "warn/error logs must include context payload (object literal or error/context argument).",
-      "messageRef": null,
-      "suggestedFix": "Pass an object or error as an additional argument with actionable context."
-    },
-    {
-      "file": "src/action/notSalesforceSetup/notSalesforceSetup.js",
-      "line": 49,
-      "level": "warn",
-      "severity": "error",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/background/background.js",
-      "line": 123,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_CONTEXT_PAYLOAD",
-      "message": "warn/error logs must include context payload (object literal or error/context argument).",
-      "messageRef": null,
-      "suggestedFix": "Pass an object or error as an additional argument with actionable context."
-    },
-    {
-      "file": "src/background/background.js",
-      "line": 123,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/background/background.js",
-      "line": 204,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_CONTEXT_PAYLOAD",
-      "message": "warn/error logs must include context payload (object literal or error/context argument).",
-      "messageRef": null,
-      "suggestedFix": "Pass an object or error as an additional argument with actionable context."
-    },
-    {
-      "file": "src/background/background.js",
-      "line": 204,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/background/background.js",
-      "line": 258,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_CONTEXT_PAYLOAD",
-      "message": "warn/error logs must include context payload (object literal or error/context argument).",
-      "messageRef": null,
-      "suggestedFix": "Pass an object or error as an additional argument with actionable context."
-    },
-    {
-      "file": "src/background/background.js",
-      "line": 258,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/background/bundledBackground.js",
-      "line": 592,
-      "level": "info",
-      "severity": "warning",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/background/bundledBackground.js",
-      "line": 825,
-      "level": "trace",
-      "severity": "info",
-      "code": "EMPTY_LOG",
-      "message": "Log call has no arguments.",
-      "messageRef": null,
-      "suggestedFix": "Provide a locale message key as first argument and include useful context payload."
-    },
-    {
-      "file": "src/background/bundledBackground.js",
-      "line": 841,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_CONTEXT_PAYLOAD",
-      "message": "warn/error logs must include context payload (object literal or error/context argument).",
-      "messageRef": null,
-      "suggestedFix": "Pass an object or error as an additional argument with actionable context."
-    },
-    {
-      "file": "src/background/bundledBackground.js",
-      "line": 841,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/background/bundledBackground.js",
-      "line": 962,
-      "level": "info",
-      "severity": "warning",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/background/bundledBackground.js",
-      "line": 978,
-      "level": "info",
-      "severity": "warning",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/background/bundledBackground.js",
-      "line": 1052,
-      "level": "info",
-      "severity": "warning",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/background/bundledBackground.js",
-      "line": 1151,
-      "level": "trace",
-      "severity": "info",
-      "code": "EMPTY_LOG",
-      "message": "Log call has no arguments.",
-      "messageRef": null,
-      "suggestedFix": "Provide a locale message key as first argument and include useful context payload."
-    },
-    {
-      "file": "src/background/bundledBackground.js",
-      "line": 1573,
-      "level": "info",
-      "severity": "warning",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/background/bundledBackground.js",
-      "line": 1829,
-      "level": "info",
-      "severity": "warning",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/background/bundledBackground.js",
-      "line": 2423,
-      "level": "info",
-      "severity": "warning",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/background/bundledBackground.js",
-      "line": 2554,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_CONTEXT_PAYLOAD",
-      "message": "warn/error logs must include context payload (object literal or error/context argument).",
-      "messageRef": "error_failed_to_fetch",
-      "suggestedFix": "Pass an object or error as an additional argument with actionable context."
-    },
-    {
-      "file": "src/background/bundledBackground.js",
-      "line": 2919,
-      "level": "trace",
-      "severity": "info",
-      "code": "EMPTY_LOG",
-      "message": "Log call has no arguments.",
-      "messageRef": null,
-      "suggestedFix": "Provide a locale message key as first argument and include useful context payload."
-    },
-    {
-      "file": "src/background/bundledBackground.js",
-      "line": 2927,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/background/bundledBackground.js",
-      "line": 2947,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/background/bundledBackground.js",
-      "line": 2951,
-      "level": "trace",
-      "severity": "info",
-      "code": "EMPTY_LOG",
-      "message": "Log call has no arguments.",
-      "messageRef": null,
-      "suggestedFix": "Provide a locale message key as first argument and include useful context payload."
-    },
-    {
-      "file": "src/background/bundledBackground.js",
-      "line": 2957,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/background/bundledBackground.js",
-      "line": 3400,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_CONTEXT_PAYLOAD",
-      "message": "warn/error logs must include context payload (object literal or error/context argument).",
-      "messageRef": null,
-      "suggestedFix": "Pass an object or error as an additional argument with actionable context."
-    },
-    {
-      "file": "src/background/bundledBackground.js",
-      "line": 3400,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/background/bundledBackground.js",
-      "line": 3445,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_CONTEXT_PAYLOAD",
-      "message": "warn/error logs must include context payload (object literal or error/context argument).",
-      "messageRef": null,
-      "suggestedFix": "Pass an object or error as an additional argument with actionable context."
-    },
-    {
-      "file": "src/background/bundledBackground.js",
-      "line": 3445,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/background/bundledBackground.js",
-      "line": 3500,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_CONTEXT_PAYLOAD",
-      "message": "warn/error logs must include context payload (object literal or error/context argument).",
-      "messageRef": null,
-      "suggestedFix": "Pass an object or error as an additional argument with actionable context."
-    },
-    {
-      "file": "src/background/bundledBackground.js",
-      "line": 3500,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/background/context-menus.js",
-      "line": 455,
-      "level": "trace",
-      "severity": "info",
-      "code": "EMPTY_LOG",
-      "message": "Log call has no arguments.",
-      "messageRef": null,
-      "suggestedFix": "Provide a locale message key as first argument and include useful context payload."
-    },
-    {
-      "file": "src/background/context-menus.js",
-      "line": 463,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/background/context-menus.js",
-      "line": 509,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/background/context-menus.js",
-      "line": 520,
-      "level": "trace",
-      "severity": "info",
-      "code": "EMPTY_LOG",
-      "message": "Log call has no arguments.",
-      "messageRef": null,
-      "suggestedFix": "Provide a locale message key as first argument and include useful context payload."
-    },
-    {
-      "file": "src/background/context-menus.js",
-      "line": 526,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/background/utils.js",
-      "line": 249,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_CONTEXT_PAYLOAD",
-      "message": "warn/error logs must include context payload (object literal or error/context argument).",
-      "messageRef": "error_failed_to_fetch",
-      "suggestedFix": "Pass an object or error as an additional argument with actionable context."
-    },
-    {
-      "file": "src/core/functions.js",
-      "line": 226,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_CONTEXT_PAYLOAD",
-      "message": "warn/error logs must include context payload (object literal or error/context argument).",
-      "messageRef": null,
-      "suggestedFix": "Pass an object or error as an additional argument with actionable context."
-    },
-    {
-      "file": "src/core/functions.js",
-      "line": 226,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/core/models/tab-container/import-service.js",
-      "line": 91,
-      "level": "info",
-      "severity": "warning",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/core/models/tab-container/queries.js",
-      "line": 117,
-      "level": "info",
-      "severity": "warning",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/core/models/tabContainerModel.js",
-      "line": 168,
-      "level": "trace",
-      "severity": "info",
-      "code": "EMPTY_LOG",
-      "message": "Log call has no arguments.",
-      "messageRef": null,
-      "suggestedFix": "Provide a locale message key as first argument and include useful context payload."
-    },
-    {
-      "file": "src/core/models/tabContainerModel.js",
-      "line": 1123,
-      "level": "info",
-      "severity": "warning",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/core/tab.js",
-      "line": 344,
-      "level": "info",
-      "severity": "warning",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/core/translator.js",
-      "line": 149,
-      "level": "trace",
-      "severity": "info",
-      "code": "EMPTY_LOG",
-      "message": "Log call has no arguments.",
-      "messageRef": null,
-      "suggestedFix": "Provide a locale message key as first argument and include useful context payload."
-    },
-    {
-      "file": "src/core/translator.js",
-      "line": 165,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_CONTEXT_PAYLOAD",
-      "message": "warn/error logs must include context payload (object literal or error/context argument).",
-      "messageRef": null,
-      "suggestedFix": "Pass an object or error as an additional argument with actionable context."
-    },
-    {
-      "file": "src/core/translator.js",
-      "line": 165,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/core/translator.js",
-      "line": 305,
-      "level": "info",
-      "severity": "warning",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/core/translator.js",
-      "line": 325,
-      "level": "info",
-      "severity": "warning",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/core/translator.js",
-      "line": 428,
-      "level": "info",
-      "severity": "warning",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/salesforce/analytics.js",
-      "line": 58,
-      "level": "info",
-      "severity": "warning",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/salesforce/bundledContent.js",
-      "line": 296,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_CONTEXT_PAYLOAD",
-      "message": "warn/error logs must include context payload (object literal or error/context argument).",
-      "messageRef": null,
-      "suggestedFix": "Pass an object or error as an additional argument with actionable context."
-    },
-    {
-      "file": "src/salesforce/bundledContent.js",
-      "line": 296,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/salesforce/bundledContent.js",
-      "line": 645,
-      "level": "info",
-      "severity": "warning",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/salesforce/bundledContent.js",
-      "line": 878,
-      "level": "trace",
-      "severity": "info",
-      "code": "EMPTY_LOG",
-      "message": "Log call has no arguments.",
-      "messageRef": null,
-      "suggestedFix": "Provide a locale message key as first argument and include useful context payload."
-    },
-    {
-      "file": "src/salesforce/bundledContent.js",
-      "line": 894,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_CONTEXT_PAYLOAD",
-      "message": "warn/error logs must include context payload (object literal or error/context argument).",
-      "messageRef": null,
-      "suggestedFix": "Pass an object or error as an additional argument with actionable context."
-    },
-    {
-      "file": "src/salesforce/bundledContent.js",
-      "line": 894,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/salesforce/bundledContent.js",
-      "line": 1015,
-      "level": "info",
-      "severity": "warning",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/salesforce/bundledContent.js",
-      "line": 1031,
-      "level": "info",
-      "severity": "warning",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/salesforce/bundledContent.js",
-      "line": 1105,
-      "level": "info",
-      "severity": "warning",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/salesforce/bundledContent.js",
-      "line": 1204,
-      "level": "trace",
-      "severity": "info",
-      "code": "EMPTY_LOG",
-      "message": "Log call has no arguments.",
-      "messageRef": null,
-      "suggestedFix": "Provide a locale message key as first argument and include useful context payload."
-    },
-    {
-      "file": "src/salesforce/bundledContent.js",
-      "line": 1626,
-      "level": "info",
-      "severity": "warning",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/salesforce/bundledContent.js",
-      "line": 1882,
-      "level": "info",
-      "severity": "warning",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/salesforce/bundledContent.js",
-      "line": 2476,
-      "level": "info",
-      "severity": "warning",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/salesforce/bundledContent.js",
-      "line": 2744,
-      "level": "warn",
-      "severity": "error",
-      "code": "MISSING_CONTEXT_PAYLOAD",
-      "message": "warn/error logs must include context payload (object literal or error/context argument).",
-      "messageRef": null,
-      "suggestedFix": "Pass an object or error as an additional argument with actionable context."
-    },
-    {
-      "file": "src/salesforce/bundledContent.js",
-      "line": 2744,
-      "level": "warn",
-      "severity": "error",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/salesforce/bundledContent.js",
-      "line": 2761,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_CONTEXT_PAYLOAD",
-      "message": "warn/error logs must include context payload (object literal or error/context argument).",
-      "messageRef": null,
-      "suggestedFix": "Pass an object or error as an additional argument with actionable context."
-    },
-    {
-      "file": "src/salesforce/bundledContent.js",
-      "line": 2761,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/salesforce/bundledContent.js",
-      "line": 3874,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_CONTEXT_PAYLOAD",
-      "message": "warn/error logs must include context payload (object literal or error/context argument).",
-      "messageRef": "error_tutorial_not_initialized",
-      "suggestedFix": "Pass an object or error as an additional argument with actionable context."
-    },
-    {
-      "file": "src/salesforce/bundledContent.js",
-      "line": 4339,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_CONTEXT_PAYLOAD",
-      "message": "warn/error logs must include context payload (object literal or error/context argument).",
-      "messageRef": "error_tutorial_not_initialized",
-      "suggestedFix": "Pass an object or error as an additional argument with actionable context."
-    },
-    {
-      "file": "src/salesforce/bundledContent.js",
-      "line": 4383,
-      "level": "info",
-      "severity": "warning",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/salesforce/bundledContent.js",
-      "line": 4592,
-      "level": "trace",
-      "severity": "info",
-      "code": "EMPTY_LOG",
-      "message": "Log call has no arguments.",
-      "messageRef": null,
-      "suggestedFix": "Provide a locale message key as first argument and include useful context payload."
-    },
-    {
-      "file": "src/salesforce/bundledContent.js",
-      "line": 4596,
-      "level": "trace",
-      "severity": "info",
-      "code": "EMPTY_LOG",
-      "message": "Log call has no arguments.",
-      "messageRef": null,
-      "suggestedFix": "Provide a locale message key as first argument and include useful context payload."
-    },
-    {
-      "file": "src/salesforce/bundledContent.js",
-      "line": 4709,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_CONTEXT_PAYLOAD",
-      "message": "warn/error logs must include context payload (object literal or error/context argument).",
-      "messageRef": null,
-      "suggestedFix": "Pass an object or error as an additional argument with actionable context."
-    },
-    {
-      "file": "src/salesforce/bundledContent.js",
-      "line": 4709,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/salesforce/bundledContent.js",
-      "line": 4824,
-      "level": "info",
-      "severity": "warning",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/salesforce/bundledContent.js",
-      "line": 4998,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_CONTEXT_PAYLOAD",
-      "message": "warn/error logs must include context payload (object literal or error/context argument).",
-      "messageRef": null,
-      "suggestedFix": "Pass an object or error as an additional argument with actionable context."
-    },
-    {
-      "file": "src/salesforce/bundledContent.js",
-      "line": 4998,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/salesforce/bundledContent.js",
-      "line": 5003,
-      "level": "warn",
-      "severity": "error",
-      "code": "MISSING_CONTEXT_PAYLOAD",
-      "message": "warn/error logs must include context payload (object literal or error/context argument).",
-      "messageRef": null,
-      "suggestedFix": "Pass an object or error as an additional argument with actionable context."
-    },
-    {
-      "file": "src/salesforce/bundledContent.js",
-      "line": 5003,
-      "level": "warn",
-      "severity": "error",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/salesforce/content.js",
-      "line": 236,
-      "level": "trace",
-      "severity": "info",
-      "code": "EMPTY_LOG",
-      "message": "Log call has no arguments.",
-      "messageRef": null,
-      "suggestedFix": "Provide a locale message key as first argument and include useful context payload."
-    },
-    {
-      "file": "src/salesforce/content.js",
-      "line": 240,
-      "level": "trace",
-      "severity": "info",
-      "code": "EMPTY_LOG",
-      "message": "Log call has no arguments.",
-      "messageRef": null,
-      "suggestedFix": "Provide a locale message key as first argument and include useful context payload."
-    },
-    {
-      "file": "src/salesforce/content.js",
-      "line": 421,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_CONTEXT_PAYLOAD",
-      "message": "warn/error logs must include context payload (object literal or error/context argument).",
-      "messageRef": null,
-      "suggestedFix": "Pass an object or error as an additional argument with actionable context."
-    },
-    {
-      "file": "src/salesforce/content.js",
-      "line": 421,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/salesforce/content.js",
-      "line": 607,
-      "level": "info",
-      "severity": "warning",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/salesforce/content.js",
-      "line": 810,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_CONTEXT_PAYLOAD",
-      "message": "warn/error logs must include context payload (object literal or error/context argument).",
-      "messageRef": null,
-      "suggestedFix": "Pass an object or error as an additional argument with actionable context."
-    },
-    {
-      "file": "src/salesforce/content.js",
-      "line": 810,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/salesforce/content.js",
-      "line": 815,
-      "level": "warn",
-      "severity": "error",
-      "code": "MISSING_CONTEXT_PAYLOAD",
-      "message": "warn/error logs must include context payload (object literal or error/context argument).",
-      "messageRef": null,
-      "suggestedFix": "Pass an object or error as an additional argument with actionable context."
-    },
-    {
-      "file": "src/salesforce/content.js",
-      "line": 815,
-      "level": "warn",
-      "severity": "error",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/salesforce/favourite-manager.js",
-      "line": 306,
-      "level": "warn",
-      "severity": "error",
-      "code": "MISSING_CONTEXT_PAYLOAD",
-      "message": "warn/error logs must include context payload (object literal or error/context argument).",
-      "messageRef": null,
-      "suggestedFix": "Pass an object or error as an additional argument with actionable context."
-    },
-    {
-      "file": "src/salesforce/favourite-manager.js",
-      "line": 306,
-      "level": "warn",
-      "severity": "error",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/salesforce/favourite-manager.js",
-      "line": 334,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_CONTEXT_PAYLOAD",
-      "message": "warn/error logs must include context payload (object literal or error/context argument).",
-      "messageRef": null,
-      "suggestedFix": "Pass an object or error as an additional argument with actionable context."
-    },
-    {
-      "file": "src/salesforce/favourite-manager.js",
-      "line": 334,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/salesforce/lightning-navigation.js",
-      "line": 29,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_CONTEXT_PAYLOAD",
-      "message": "warn/error logs must include context payload (object literal or error/context argument).",
-      "messageRef": "Invalid navigation type",
-      "suggestedFix": "Pass an object or error as an additional argument with actionable context."
-    },
-    {
-      "file": "src/salesforce/lightning-navigation.js",
-      "line": 29,
-      "level": "error",
-      "severity": "error",
-      "code": "UNKNOWN_LOCALE_KEY",
-      "message": "Log message literal does not match any key in src/_locales/en/messages.json.",
-      "messageRef": "Invalid navigation type",
-      "suggestedFix": "Add the key to english locale messages or replace it with an existing key."
-    },
-    {
-      "file": "src/salesforce/lightning-navigation.js",
-      "line": 33,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_CONTEXT_PAYLOAD",
-      "message": "warn/error logs must include context payload (object literal or error/context argument).",
-      "messageRef": null,
-      "suggestedFix": "Pass an object or error as an additional argument with actionable context."
-    },
-    {
-      "file": "src/salesforce/lightning-navigation.js",
-      "line": 33,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/salesforce/tutorial.js",
-      "line": 498,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_CONTEXT_PAYLOAD",
-      "message": "warn/error logs must include context payload (object literal or error/context argument).",
-      "messageRef": "error_tutorial_not_initialized",
-      "suggestedFix": "Pass an object or error as an additional argument with actionable context."
-    },
-    {
-      "file": "src/salesforce/tutorial.js",
-      "line": 1006,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_CONTEXT_PAYLOAD",
-      "message": "warn/error logs must include context payload (object literal or error/context argument).",
-      "messageRef": "error_tutorial_not_initialized",
-      "suggestedFix": "Pass an object or error as an additional argument with actionable context."
-    },
-    {
-      "file": "src/settings/options.js",
-      "line": 868,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_CONTEXT_PAYLOAD",
-      "message": "warn/error logs must include context payload (object literal or error/context argument).",
-      "messageRef": null,
-      "suggestedFix": "Pass an object or error as an additional argument with actionable context."
-    },
-    {
-      "file": "src/settings/options.js",
-      "line": 868,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    },
-    {
-      "file": "src/settings/options.js",
-      "line": 952,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_CONTEXT_PAYLOAD",
-      "message": "warn/error logs must include context payload (object literal or error/context argument).",
-      "messageRef": null,
-      "suggestedFix": "Pass an object or error as an additional argument with actionable context."
-    },
-    {
-      "file": "src/settings/options.js",
-      "line": 952,
-      "level": "error",
-      "severity": "error",
-      "code": "MISSING_MESSAGE_KEY",
-      "message": "First argument is not a string literal locale key, message key cannot be validated.",
-      "messageRef": null,
-      "suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
-    }
-  ],
-  "summary": {
-    "filesScanned": 45,
-    "callsitesScanned": 79,
-    "findingsBySeverity": {
-      "info": 14,
-      "warning": 25,
-      "error": 64
-    },
-    "findingsByCode": {
-      "EMPTY_LOG": 14,
-      "MISSING_CONTEXT_PAYLOAD": 32,
-      "MISSING_MESSAGE_KEY": 56,
-      "UNKNOWN_LOCALE_KEY": 1
-    },
-    "totalFindings": 103,
-    "newFindings": 0
-  }
+	"version": 1,
+	"generatedAt": "2026-03-23T20:11:54.077Z",
+	"findings": [
+		{
+			"file": "src/action/notSalesforceSetup/notSalesforceSetup.js",
+			"line": 49,
+			"level": "warn",
+			"severity": "error",
+			"code": "MISSING_CONTEXT_PAYLOAD",
+			"message": "warn/error logs must include context payload (object literal or error/context argument).",
+			"messageRef": null,
+			"suggestedFix": "Pass an object or error as an additional argument with actionable context."
+		},
+		{
+			"file": "src/action/notSalesforceSetup/notSalesforceSetup.js",
+			"line": 49,
+			"level": "warn",
+			"severity": "error",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/background/background.js",
+			"line": 123,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_CONTEXT_PAYLOAD",
+			"message": "warn/error logs must include context payload (object literal or error/context argument).",
+			"messageRef": null,
+			"suggestedFix": "Pass an object or error as an additional argument with actionable context."
+		},
+		{
+			"file": "src/background/background.js",
+			"line": 123,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/background/background.js",
+			"line": 204,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_CONTEXT_PAYLOAD",
+			"message": "warn/error logs must include context payload (object literal or error/context argument).",
+			"messageRef": null,
+			"suggestedFix": "Pass an object or error as an additional argument with actionable context."
+		},
+		{
+			"file": "src/background/background.js",
+			"line": 204,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/background/background.js",
+			"line": 258,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_CONTEXT_PAYLOAD",
+			"message": "warn/error logs must include context payload (object literal or error/context argument).",
+			"messageRef": null,
+			"suggestedFix": "Pass an object or error as an additional argument with actionable context."
+		},
+		{
+			"file": "src/background/background.js",
+			"line": 258,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/background/bundledBackground.js",
+			"line": 592,
+			"level": "info",
+			"severity": "warning",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/background/bundledBackground.js",
+			"line": 825,
+			"level": "trace",
+			"severity": "info",
+			"code": "EMPTY_LOG",
+			"message": "Log call has no arguments.",
+			"messageRef": null,
+			"suggestedFix": "Provide a locale message key as first argument and include useful context payload."
+		},
+		{
+			"file": "src/background/bundledBackground.js",
+			"line": 841,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_CONTEXT_PAYLOAD",
+			"message": "warn/error logs must include context payload (object literal or error/context argument).",
+			"messageRef": null,
+			"suggestedFix": "Pass an object or error as an additional argument with actionable context."
+		},
+		{
+			"file": "src/background/bundledBackground.js",
+			"line": 841,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/background/bundledBackground.js",
+			"line": 962,
+			"level": "info",
+			"severity": "warning",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/background/bundledBackground.js",
+			"line": 978,
+			"level": "info",
+			"severity": "warning",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/background/bundledBackground.js",
+			"line": 1052,
+			"level": "info",
+			"severity": "warning",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/background/bundledBackground.js",
+			"line": 1151,
+			"level": "trace",
+			"severity": "info",
+			"code": "EMPTY_LOG",
+			"message": "Log call has no arguments.",
+			"messageRef": null,
+			"suggestedFix": "Provide a locale message key as first argument and include useful context payload."
+		},
+		{
+			"file": "src/background/bundledBackground.js",
+			"line": 1573,
+			"level": "info",
+			"severity": "warning",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/background/bundledBackground.js",
+			"line": 1829,
+			"level": "info",
+			"severity": "warning",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/background/bundledBackground.js",
+			"line": 2423,
+			"level": "info",
+			"severity": "warning",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/background/bundledBackground.js",
+			"line": 2554,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_CONTEXT_PAYLOAD",
+			"message": "warn/error logs must include context payload (object literal or error/context argument).",
+			"messageRef": "error_failed_to_fetch",
+			"suggestedFix": "Pass an object or error as an additional argument with actionable context."
+		},
+		{
+			"file": "src/background/bundledBackground.js",
+			"line": 2919,
+			"level": "trace",
+			"severity": "info",
+			"code": "EMPTY_LOG",
+			"message": "Log call has no arguments.",
+			"messageRef": null,
+			"suggestedFix": "Provide a locale message key as first argument and include useful context payload."
+		},
+		{
+			"file": "src/background/bundledBackground.js",
+			"line": 2927,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/background/bundledBackground.js",
+			"line": 2947,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/background/bundledBackground.js",
+			"line": 2951,
+			"level": "trace",
+			"severity": "info",
+			"code": "EMPTY_LOG",
+			"message": "Log call has no arguments.",
+			"messageRef": null,
+			"suggestedFix": "Provide a locale message key as first argument and include useful context payload."
+		},
+		{
+			"file": "src/background/bundledBackground.js",
+			"line": 2957,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/background/bundledBackground.js",
+			"line": 3400,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_CONTEXT_PAYLOAD",
+			"message": "warn/error logs must include context payload (object literal or error/context argument).",
+			"messageRef": null,
+			"suggestedFix": "Pass an object or error as an additional argument with actionable context."
+		},
+		{
+			"file": "src/background/bundledBackground.js",
+			"line": 3400,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/background/bundledBackground.js",
+			"line": 3445,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_CONTEXT_PAYLOAD",
+			"message": "warn/error logs must include context payload (object literal or error/context argument).",
+			"messageRef": null,
+			"suggestedFix": "Pass an object or error as an additional argument with actionable context."
+		},
+		{
+			"file": "src/background/bundledBackground.js",
+			"line": 3445,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/background/bundledBackground.js",
+			"line": 3500,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_CONTEXT_PAYLOAD",
+			"message": "warn/error logs must include context payload (object literal or error/context argument).",
+			"messageRef": null,
+			"suggestedFix": "Pass an object or error as an additional argument with actionable context."
+		},
+		{
+			"file": "src/background/bundledBackground.js",
+			"line": 3500,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/background/context-menus.js",
+			"line": 455,
+			"level": "trace",
+			"severity": "info",
+			"code": "EMPTY_LOG",
+			"message": "Log call has no arguments.",
+			"messageRef": null,
+			"suggestedFix": "Provide a locale message key as first argument and include useful context payload."
+		},
+		{
+			"file": "src/background/context-menus.js",
+			"line": 463,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/background/context-menus.js",
+			"line": 509,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/background/context-menus.js",
+			"line": 520,
+			"level": "trace",
+			"severity": "info",
+			"code": "EMPTY_LOG",
+			"message": "Log call has no arguments.",
+			"messageRef": null,
+			"suggestedFix": "Provide a locale message key as first argument and include useful context payload."
+		},
+		{
+			"file": "src/background/context-menus.js",
+			"line": 526,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/background/utils.js",
+			"line": 249,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_CONTEXT_PAYLOAD",
+			"message": "warn/error logs must include context payload (object literal or error/context argument).",
+			"messageRef": "error_failed_to_fetch",
+			"suggestedFix": "Pass an object or error as an additional argument with actionable context."
+		},
+		{
+			"file": "src/core/functions.js",
+			"line": 226,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_CONTEXT_PAYLOAD",
+			"message": "warn/error logs must include context payload (object literal or error/context argument).",
+			"messageRef": null,
+			"suggestedFix": "Pass an object or error as an additional argument with actionable context."
+		},
+		{
+			"file": "src/core/functions.js",
+			"line": 226,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/core/models/tab-container/import-service.js",
+			"line": 91,
+			"level": "info",
+			"severity": "warning",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/core/models/tab-container/queries.js",
+			"line": 117,
+			"level": "info",
+			"severity": "warning",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/core/models/tabContainerModel.js",
+			"line": 168,
+			"level": "trace",
+			"severity": "info",
+			"code": "EMPTY_LOG",
+			"message": "Log call has no arguments.",
+			"messageRef": null,
+			"suggestedFix": "Provide a locale message key as first argument and include useful context payload."
+		},
+		{
+			"file": "src/core/models/tabContainerModel.js",
+			"line": 1123,
+			"level": "info",
+			"severity": "warning",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/core/tab.js",
+			"line": 344,
+			"level": "info",
+			"severity": "warning",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/core/translator.js",
+			"line": 149,
+			"level": "trace",
+			"severity": "info",
+			"code": "EMPTY_LOG",
+			"message": "Log call has no arguments.",
+			"messageRef": null,
+			"suggestedFix": "Provide a locale message key as first argument and include useful context payload."
+		},
+		{
+			"file": "src/core/translator.js",
+			"line": 165,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_CONTEXT_PAYLOAD",
+			"message": "warn/error logs must include context payload (object literal or error/context argument).",
+			"messageRef": null,
+			"suggestedFix": "Pass an object or error as an additional argument with actionable context."
+		},
+		{
+			"file": "src/core/translator.js",
+			"line": 165,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/core/translator.js",
+			"line": 305,
+			"level": "info",
+			"severity": "warning",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/core/translator.js",
+			"line": 325,
+			"level": "info",
+			"severity": "warning",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/core/translator.js",
+			"line": 428,
+			"level": "info",
+			"severity": "warning",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/salesforce/analytics.js",
+			"line": 58,
+			"level": "info",
+			"severity": "warning",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/salesforce/bundledContent.js",
+			"line": 296,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_CONTEXT_PAYLOAD",
+			"message": "warn/error logs must include context payload (object literal or error/context argument).",
+			"messageRef": null,
+			"suggestedFix": "Pass an object or error as an additional argument with actionable context."
+		},
+		{
+			"file": "src/salesforce/bundledContent.js",
+			"line": 296,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/salesforce/bundledContent.js",
+			"line": 645,
+			"level": "info",
+			"severity": "warning",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/salesforce/bundledContent.js",
+			"line": 878,
+			"level": "trace",
+			"severity": "info",
+			"code": "EMPTY_LOG",
+			"message": "Log call has no arguments.",
+			"messageRef": null,
+			"suggestedFix": "Provide a locale message key as first argument and include useful context payload."
+		},
+		{
+			"file": "src/salesforce/bundledContent.js",
+			"line": 894,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_CONTEXT_PAYLOAD",
+			"message": "warn/error logs must include context payload (object literal or error/context argument).",
+			"messageRef": null,
+			"suggestedFix": "Pass an object or error as an additional argument with actionable context."
+		},
+		{
+			"file": "src/salesforce/bundledContent.js",
+			"line": 894,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/salesforce/bundledContent.js",
+			"line": 1015,
+			"level": "info",
+			"severity": "warning",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/salesforce/bundledContent.js",
+			"line": 1031,
+			"level": "info",
+			"severity": "warning",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/salesforce/bundledContent.js",
+			"line": 1105,
+			"level": "info",
+			"severity": "warning",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/salesforce/bundledContent.js",
+			"line": 1204,
+			"level": "trace",
+			"severity": "info",
+			"code": "EMPTY_LOG",
+			"message": "Log call has no arguments.",
+			"messageRef": null,
+			"suggestedFix": "Provide a locale message key as first argument and include useful context payload."
+		},
+		{
+			"file": "src/salesforce/bundledContent.js",
+			"line": 1626,
+			"level": "info",
+			"severity": "warning",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/salesforce/bundledContent.js",
+			"line": 1882,
+			"level": "info",
+			"severity": "warning",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/salesforce/bundledContent.js",
+			"line": 2476,
+			"level": "info",
+			"severity": "warning",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/salesforce/bundledContent.js",
+			"line": 2744,
+			"level": "warn",
+			"severity": "error",
+			"code": "MISSING_CONTEXT_PAYLOAD",
+			"message": "warn/error logs must include context payload (object literal or error/context argument).",
+			"messageRef": null,
+			"suggestedFix": "Pass an object or error as an additional argument with actionable context."
+		},
+		{
+			"file": "src/salesforce/bundledContent.js",
+			"line": 2744,
+			"level": "warn",
+			"severity": "error",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/salesforce/bundledContent.js",
+			"line": 2761,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_CONTEXT_PAYLOAD",
+			"message": "warn/error logs must include context payload (object literal or error/context argument).",
+			"messageRef": null,
+			"suggestedFix": "Pass an object or error as an additional argument with actionable context."
+		},
+		{
+			"file": "src/salesforce/bundledContent.js",
+			"line": 2761,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/salesforce/bundledContent.js",
+			"line": 3874,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_CONTEXT_PAYLOAD",
+			"message": "warn/error logs must include context payload (object literal or error/context argument).",
+			"messageRef": "error_tutorial_not_initialized",
+			"suggestedFix": "Pass an object or error as an additional argument with actionable context."
+		},
+		{
+			"file": "src/salesforce/bundledContent.js",
+			"line": 4339,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_CONTEXT_PAYLOAD",
+			"message": "warn/error logs must include context payload (object literal or error/context argument).",
+			"messageRef": "error_tutorial_not_initialized",
+			"suggestedFix": "Pass an object or error as an additional argument with actionable context."
+		},
+		{
+			"file": "src/salesforce/bundledContent.js",
+			"line": 4383,
+			"level": "info",
+			"severity": "warning",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/salesforce/bundledContent.js",
+			"line": 4592,
+			"level": "trace",
+			"severity": "info",
+			"code": "EMPTY_LOG",
+			"message": "Log call has no arguments.",
+			"messageRef": null,
+			"suggestedFix": "Provide a locale message key as first argument and include useful context payload."
+		},
+		{
+			"file": "src/salesforce/bundledContent.js",
+			"line": 4596,
+			"level": "trace",
+			"severity": "info",
+			"code": "EMPTY_LOG",
+			"message": "Log call has no arguments.",
+			"messageRef": null,
+			"suggestedFix": "Provide a locale message key as first argument and include useful context payload."
+		},
+		{
+			"file": "src/salesforce/bundledContent.js",
+			"line": 4709,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_CONTEXT_PAYLOAD",
+			"message": "warn/error logs must include context payload (object literal or error/context argument).",
+			"messageRef": null,
+			"suggestedFix": "Pass an object or error as an additional argument with actionable context."
+		},
+		{
+			"file": "src/salesforce/bundledContent.js",
+			"line": 4709,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/salesforce/bundledContent.js",
+			"line": 4824,
+			"level": "info",
+			"severity": "warning",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/salesforce/bundledContent.js",
+			"line": 4998,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_CONTEXT_PAYLOAD",
+			"message": "warn/error logs must include context payload (object literal or error/context argument).",
+			"messageRef": null,
+			"suggestedFix": "Pass an object or error as an additional argument with actionable context."
+		},
+		{
+			"file": "src/salesforce/bundledContent.js",
+			"line": 4998,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/salesforce/bundledContent.js",
+			"line": 5003,
+			"level": "warn",
+			"severity": "error",
+			"code": "MISSING_CONTEXT_PAYLOAD",
+			"message": "warn/error logs must include context payload (object literal or error/context argument).",
+			"messageRef": null,
+			"suggestedFix": "Pass an object or error as an additional argument with actionable context."
+		},
+		{
+			"file": "src/salesforce/bundledContent.js",
+			"line": 5003,
+			"level": "warn",
+			"severity": "error",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/salesforce/content.js",
+			"line": 236,
+			"level": "trace",
+			"severity": "info",
+			"code": "EMPTY_LOG",
+			"message": "Log call has no arguments.",
+			"messageRef": null,
+			"suggestedFix": "Provide a locale message key as first argument and include useful context payload."
+		},
+		{
+			"file": "src/salesforce/content.js",
+			"line": 240,
+			"level": "trace",
+			"severity": "info",
+			"code": "EMPTY_LOG",
+			"message": "Log call has no arguments.",
+			"messageRef": null,
+			"suggestedFix": "Provide a locale message key as first argument and include useful context payload."
+		},
+		{
+			"file": "src/salesforce/content.js",
+			"line": 421,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_CONTEXT_PAYLOAD",
+			"message": "warn/error logs must include context payload (object literal or error/context argument).",
+			"messageRef": null,
+			"suggestedFix": "Pass an object or error as an additional argument with actionable context."
+		},
+		{
+			"file": "src/salesforce/content.js",
+			"line": 421,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/salesforce/content.js",
+			"line": 607,
+			"level": "info",
+			"severity": "warning",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/salesforce/content.js",
+			"line": 810,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_CONTEXT_PAYLOAD",
+			"message": "warn/error logs must include context payload (object literal or error/context argument).",
+			"messageRef": null,
+			"suggestedFix": "Pass an object or error as an additional argument with actionable context."
+		},
+		{
+			"file": "src/salesforce/content.js",
+			"line": 810,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/salesforce/content.js",
+			"line": 815,
+			"level": "warn",
+			"severity": "error",
+			"code": "MISSING_CONTEXT_PAYLOAD",
+			"message": "warn/error logs must include context payload (object literal or error/context argument).",
+			"messageRef": null,
+			"suggestedFix": "Pass an object or error as an additional argument with actionable context."
+		},
+		{
+			"file": "src/salesforce/content.js",
+			"line": 815,
+			"level": "warn",
+			"severity": "error",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/salesforce/favourite-manager.js",
+			"line": 306,
+			"level": "warn",
+			"severity": "error",
+			"code": "MISSING_CONTEXT_PAYLOAD",
+			"message": "warn/error logs must include context payload (object literal or error/context argument).",
+			"messageRef": null,
+			"suggestedFix": "Pass an object or error as an additional argument with actionable context."
+		},
+		{
+			"file": "src/salesforce/favourite-manager.js",
+			"line": 306,
+			"level": "warn",
+			"severity": "error",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/salesforce/favourite-manager.js",
+			"line": 334,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_CONTEXT_PAYLOAD",
+			"message": "warn/error logs must include context payload (object literal or error/context argument).",
+			"messageRef": null,
+			"suggestedFix": "Pass an object or error as an additional argument with actionable context."
+		},
+		{
+			"file": "src/salesforce/favourite-manager.js",
+			"line": 334,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/salesforce/lightning-navigation.js",
+			"line": 29,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_CONTEXT_PAYLOAD",
+			"message": "warn/error logs must include context payload (object literal or error/context argument).",
+			"messageRef": "Invalid navigation type",
+			"suggestedFix": "Pass an object or error as an additional argument with actionable context."
+		},
+		{
+			"file": "src/salesforce/lightning-navigation.js",
+			"line": 29,
+			"level": "error",
+			"severity": "error",
+			"code": "UNKNOWN_LOCALE_KEY",
+			"message": "Log message literal does not match any key in src/_locales/en/messages.json.",
+			"messageRef": "Invalid navigation type",
+			"suggestedFix": "Add the key to english locale messages or replace it with an existing key."
+		},
+		{
+			"file": "src/salesforce/lightning-navigation.js",
+			"line": 33,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_CONTEXT_PAYLOAD",
+			"message": "warn/error logs must include context payload (object literal or error/context argument).",
+			"messageRef": null,
+			"suggestedFix": "Pass an object or error as an additional argument with actionable context."
+		},
+		{
+			"file": "src/salesforce/lightning-navigation.js",
+			"line": 33,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/salesforce/tutorial.js",
+			"line": 498,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_CONTEXT_PAYLOAD",
+			"message": "warn/error logs must include context payload (object literal or error/context argument).",
+			"messageRef": "error_tutorial_not_initialized",
+			"suggestedFix": "Pass an object or error as an additional argument with actionable context."
+		},
+		{
+			"file": "src/salesforce/tutorial.js",
+			"line": 1006,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_CONTEXT_PAYLOAD",
+			"message": "warn/error logs must include context payload (object literal or error/context argument).",
+			"messageRef": "error_tutorial_not_initialized",
+			"suggestedFix": "Pass an object or error as an additional argument with actionable context."
+		},
+		{
+			"file": "src/settings/options.js",
+			"line": 868,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_CONTEXT_PAYLOAD",
+			"message": "warn/error logs must include context payload (object literal or error/context argument).",
+			"messageRef": null,
+			"suggestedFix": "Pass an object or error as an additional argument with actionable context."
+		},
+		{
+			"file": "src/settings/options.js",
+			"line": 868,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		},
+		{
+			"file": "src/settings/options.js",
+			"line": 952,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_CONTEXT_PAYLOAD",
+			"message": "warn/error logs must include context payload (object literal or error/context argument).",
+			"messageRef": null,
+			"suggestedFix": "Pass an object or error as an additional argument with actionable context."
+		},
+		{
+			"file": "src/settings/options.js",
+			"line": 952,
+			"level": "error",
+			"severity": "error",
+			"code": "MISSING_MESSAGE_KEY",
+			"message": "First argument is not a string literal locale key, message key cannot be validated.",
+			"messageRef": null,
+			"suggestedFix": "Use a literal locale key string from src/_locales/en/messages.json as first argument."
+		}
+	],
+	"summary": {
+		"filesScanned": 45,
+		"callsitesScanned": 79,
+		"findingsBySeverity": {
+			"info": 14,
+			"warning": 25,
+			"error": 64
+		},
+		"findingsByCode": {
+			"EMPTY_LOG": 14,
+			"MISSING_CONTEXT_PAYLOAD": 32,
+			"MISSING_MESSAGE_KEY": 56,
+			"UNKNOWN_LOCALE_KEY": 1
+		},
+		"totalFindings": 103,
+		"newFindings": 0
+	}
 }

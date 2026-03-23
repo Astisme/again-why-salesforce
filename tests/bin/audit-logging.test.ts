@@ -35,7 +35,10 @@ async function createTempDirectory(): Promise<string> {
  * @returns {Promise<boolean>} `true` when write permission is granted.
  */
 async function canWriteFileSystem(): Promise<boolean> {
-	const permission = await Deno.permissions.query({ name: "write", path: "." });
+	const permission = await Deno.permissions.query({
+		name: "write",
+		path: ".",
+	});
 	return permission.state === "granted";
 }
 
@@ -252,7 +255,11 @@ Deno.test("runAuditCli writes deterministic report and honors baseline-gated exi
 	const reportRaw = await Deno.readTextFile(reportPath);
 	const report = JSON.parse(reportRaw) as {
 		findings: Array<{ code: string; file: string }>;
-		summary: { filesScanned: number; callsitesScanned: number; totalFindings: number };
+		summary: {
+			filesScanned: number;
+			callsitesScanned: number;
+			totalFindings: number;
+		};
 	};
 	assertEquals(report.findings[0].code, "MISSING_CONTEXT_PAYLOAD");
 	assertEquals(report.findings[0].file, filePath);
@@ -308,7 +315,7 @@ Deno.test("writeReport serializes provided payload", async () => {
 		},
 	});
 	const raw = await Deno.readTextFile(reportPath);
-	assert(raw.includes("\"generatedAt\": \"2026-03-23T00:00:00.000Z\""));
+	assert(raw.includes('"generatedAt": "2026-03-23T00:00:00.000Z"'));
 });
 
 Deno.test("listJavaScriptFiles walks directories recursively and sorts output", async () => {
@@ -353,7 +360,7 @@ Deno.test("auditFile catches empty log, empty key, noisy key and warning severit
 		"console.log();",
 		"console.warn();",
 		"console.error(runtimeMessage);",
-		"console.log(\"\");",
+		'console.log("");',
 		"console.log( , { injected: true });",
 		"console.info('debug.trace');",
 		"console.log(messageRefVar);",
@@ -371,7 +378,8 @@ Deno.test("auditFile catches empty log, empty key, noisy key and warning severit
 	assert(codes.includes("MISSING_MESSAGE_KEY"));
 	assertEquals(
 		result.findings.some((finding) =>
-			finding.code === "MISSING_CONTEXT_PAYLOAD" && finding.messageRef === "known.error"
+			finding.code === "MISSING_CONTEXT_PAYLOAD" &&
+			finding.messageRef === "known.error"
 		),
 		false,
 	);
@@ -381,7 +389,7 @@ Deno.test("parseConsoleCalls matches comment text and skips broken calls", () =>
 	const source = [
 		"// console.error('ignored.comment');",
 		"/* console.warn('ignored.block'); */",
-		"console.log(`templated,key`, { value: \")\" });",
+		'console.log(`templated,key`, { value: ")" });',
 		"console.warn('ok', { x: 1 });",
 		"console.log('line.comment', // comment\n{ x: 1 });",
 		"console.log('block.comment', /* comment */ { y: 2 });",
@@ -395,8 +403,8 @@ Deno.test("parseConsoleCalls matches comment text and skips broken calls", () =>
 
 Deno.test("splitArguments handles empty input and template expressions", () => {
 	assertEquals(splitArguments("   "), []);
-	const args = splitArguments("`k:${value}` , { x: 1 }, \"quoted\"");
-	assertEquals(args, ["`k:${value}`", "{ x: 1 }", "\"quoted\""]);
+	const args = splitArguments('`k:${value}` , { x: 1 }, "quoted"');
+	assertEquals(args, ["`k:${value}`", "{ x: 1 }", '"quoted"']);
 });
 
 Deno.test("sortFindings uses level, code and messageRef tie-breakers", () => {
