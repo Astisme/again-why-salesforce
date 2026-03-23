@@ -1,14 +1,14 @@
 import { join } from "@std/path";
 import {
+	type AuditReport,
+	type BaselineDiff,
 	buildBaseline,
 	defaultProjectRoot,
 	diffAgainstBaseline,
+	type FindingSeverity,
 	loadBaseline,
 	runAudit,
-	type AuditReport,
-	type BaselineDiff,
 	shouldFail,
-	type FindingSeverity,
 } from "./audit-logging-lib.ts";
 
 /**
@@ -65,7 +65,8 @@ export async function main(args: string[]): Promise<number> {
 
 	await writeJson(options.reportFile, report);
 
-	const exitCode = shouldFail(report.findings, options.failSeverity, baselineDiff) ? 1 : 0;
+	const exitCode =
+		shouldFail(report.findings, options.failSeverity, baselineDiff) ? 1 : 0;
 	const summary = buildSummaryLine(report, baselineDiff, exitCode);
 	console.log(summary);
 	return exitCode;
@@ -94,24 +95,39 @@ export function parseArgs(args: string[], projectRoot: string): CliOptions {
 			continue;
 		}
 		if (arg.startsWith("--src-dir=")) {
-			parsed.srcDir = resolvePath(projectRoot, arg.slice("--src-dir=".length));
+			parsed.srcDir = resolvePath(
+				projectRoot,
+				arg.slice("--src-dir=".length),
+			);
 			continue;
 		}
 		if (arg.startsWith("--locale-file=")) {
-			parsed.localeFile = resolvePath(projectRoot, arg.slice("--locale-file=".length));
+			parsed.localeFile = resolvePath(
+				projectRoot,
+				arg.slice("--locale-file=".length),
+			);
 			continue;
 		}
 		if (arg.startsWith("--report-file=")) {
-			parsed.reportFile = resolvePath(projectRoot, arg.slice("--report-file=".length));
+			parsed.reportFile = resolvePath(
+				projectRoot,
+				arg.slice("--report-file=".length),
+			);
 			continue;
 		}
 		if (arg.startsWith("--baseline-file=")) {
-			parsed.baselineFile = resolvePath(projectRoot, arg.slice("--baseline-file=".length));
+			parsed.baselineFile = resolvePath(
+				projectRoot,
+				arg.slice("--baseline-file=".length),
+			);
 			continue;
 		}
 		if (arg.startsWith("--fail-severity=")) {
 			const severity = arg.slice("--fail-severity=".length);
-			if (severity === "info" || severity === "warn" || severity === "error") {
+			if (
+				severity === "info" || severity === "warn" ||
+				severity === "error"
+			) {
 				parsed.failSeverity = severity;
 				continue;
 			}
@@ -157,7 +173,11 @@ async function writeJson(path: string, data: unknown): Promise<void> {
 /**
  * Produces a concise terminal summary.
  */
-function buildSummaryLine(report: AuditReport, baselineDiff: BaselineDiff | undefined, exitCode: number): string {
+function buildSummaryLine(
+	report: AuditReport,
+	baselineDiff: BaselineDiff | undefined,
+	exitCode: number,
+): string {
 	const base = `logging-audit findings=${report.summary.totalFindings}`;
 	if (!baselineDiff) {
 		return `${base} fail=${exitCode}`;

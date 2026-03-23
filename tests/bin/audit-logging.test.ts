@@ -6,6 +6,8 @@ import {
 } from "@std/testing/asserts";
 import { stub } from "@std/testing/mock";
 import {
+	type AuditFinding,
+	type AuditReport,
 	buildBaseline,
 	buildFindings,
 	computeLineNumber,
@@ -19,14 +21,12 @@ import {
 	isNoisyLiteral,
 	listFilesRecursive,
 	loadBaseline,
+	type LogCallSite,
 	severityRank,
 	shouldFail,
 	sortFindings,
 	splitTopLevelArgs,
 	summarizeFindings,
-	type AuditFinding,
-	type LogCallSite,
-	type AuditReport,
 } from "../../bin/audit-logging-lib.ts";
 import { main, parseArgs } from "../../bin/audit-logging.ts";
 
@@ -56,20 +56,28 @@ function createNotFoundError(): Error {
 }
 
 Deno.test("splitTopLevelArgs handles nested values and strings", () => {
-	const args = splitTopLevelArgs(`"a", fn(1, 2), { b: [1, 2] }, 'c,d', ` + "`x,y`");
-	assertEquals(args, ["\"a\"", "fn(1, 2)", "{ b: [1, 2] }", "'c,d'", "`x,y`"]);
-	assertEquals(splitTopLevelArgs("'a\\\\\\'b', \"x\\\\\\\"y\""), ["'a\\\\\\'b'", "\"x\\\\\\\"y\""]);
+	const args = splitTopLevelArgs(
+		`"a", fn(1, 2), { b: [1, 2] }, 'c,d', ` + "`x,y`",
+	);
+	assertEquals(args, ['"a"', "fn(1, 2)", "{ b: [1, 2] }", "'c,d'", "`x,y`"]);
+	assertEquals(splitTopLevelArgs("'a\\\\\\'b', \"x\\\\\\\"y\""), [
+		"'a\\\\\\'b'",
+		'"x\\\\\\"y"',
+	]);
 	assertEquals(splitTopLevelArgs(""), []);
 });
 
 Deno.test("findClosingParenIndex and computeLineNumber work for escaped strings", () => {
-	const source = "line1\nconsole.log(\"x\\\"y\", fn(1, 2))\nline3";
+	const source = 'line1\nconsole.log("x\\"y", fn(1, 2))\nline3';
 	const start = source.indexOf("console.log(") + "console.log(".length;
 	const end = findClosingParenIndex(source, start);
 	assert(end > start);
 	assertEquals(source[end], ")");
 	assertEquals(computeLineNumber(source, source.indexOf("console.log(")), 2);
-	assertEquals(findClosingParenIndex("console.log(\"x\"", "console.log(".length), -1);
+	assertEquals(
+		findClosingParenIndex('console.log("x"', "console.log(".length),
+		-1,
+	);
 });
 
 Deno.test("findConsoleCallSites returns sorted callsites with parsed args", () => {
@@ -89,10 +97,17 @@ Deno.test("findConsoleCallSites returns sorted callsites with parsed args", () =
 		"src/file.js",
 		"console.warn('a');console.error('b');console.error('a')",
 	);
-	assertEquals(sameLine.map((site) => site.logLevel), ["error", "error", "warn"]);
+	assertEquals(sameLine.map((site) => site.logLevel), [
+		"error",
+		"error",
+		"warn",
+	]);
 	assertEquals(sameLine.map((site) => site.argsText), ["'a'", "'b'", "'a'"]);
 
-	const incomplete = findConsoleCallSites("src/file.js", "console.warn('oops'");
+	const incomplete = findConsoleCallSites(
+		"src/file.js",
+		"console.warn('oops'",
+	);
 	assertEquals(incomplete.length, 0);
 });
 
@@ -118,16 +133,76 @@ Deno.test("hasContextPayload detects object, errors, and context-like identifier
 Deno.test("buildFindings emits issue coverage including trace pairing logic", () => {
 	const localeKeys = new Set(["log.good", "log.error"]);
 	const callSites = [
-		{ file: "src/trace-only.js", line: 1, logLevel: "trace", argsText: "", args: [] },
-		{ file: "src/noisy.js", line: 1, logLevel: "log", argsText: "'debug'", args: ["'debug'"] },
-		{ file: "src/empty-literal.js", line: 1, logLevel: "log", argsText: "''", args: ["''"] },
-		{ file: "src/empty.js", line: 1, logLevel: "log", argsText: "", args: [] },
-		{ file: "src/non-key.js", line: 1, logLevel: "info", argsText: "'hello world'", args: ["'hello world'"] },
-		{ file: "src/missing.js", line: 1, logLevel: "log", argsText: "'missing.key'", args: ["'missing.key'"] },
-		{ file: "src/critical-missing-key.js", line: 1, logLevel: "warn", argsText: "userMessage", args: ["userMessage"] },
-		{ file: "src/critical-missing-context.js", line: 2, logLevel: "error", argsText: "'log.error'", args: ["'log.error'"] },
-		{ file: "src/trace-paired.js", line: 1, logLevel: "trace", argsText: "'log.good'", args: ["'log.good'"] },
-		{ file: "src/trace-paired.js", line: 2, logLevel: "warn", argsText: "'log.error', { id: 1 }", args: ["'log.error'", "{ id: 1 }"] },
+		{
+			file: "src/trace-only.js",
+			line: 1,
+			logLevel: "trace",
+			argsText: "",
+			args: [],
+		},
+		{
+			file: "src/noisy.js",
+			line: 1,
+			logLevel: "log",
+			argsText: "'debug'",
+			args: ["'debug'"],
+		},
+		{
+			file: "src/empty-literal.js",
+			line: 1,
+			logLevel: "log",
+			argsText: "''",
+			args: ["''"],
+		},
+		{
+			file: "src/empty.js",
+			line: 1,
+			logLevel: "log",
+			argsText: "",
+			args: [],
+		},
+		{
+			file: "src/non-key.js",
+			line: 1,
+			logLevel: "info",
+			argsText: "'hello world'",
+			args: ["'hello world'"],
+		},
+		{
+			file: "src/missing.js",
+			line: 1,
+			logLevel: "log",
+			argsText: "'missing.key'",
+			args: ["'missing.key'"],
+		},
+		{
+			file: "src/critical-missing-key.js",
+			line: 1,
+			logLevel: "warn",
+			argsText: "userMessage",
+			args: ["userMessage"],
+		},
+		{
+			file: "src/critical-missing-context.js",
+			line: 2,
+			logLevel: "error",
+			argsText: "'log.error'",
+			args: ["'log.error'"],
+		},
+		{
+			file: "src/trace-paired.js",
+			line: 1,
+			logLevel: "trace",
+			argsText: "'log.good'",
+			args: ["'log.good'"],
+		},
+		{
+			file: "src/trace-paired.js",
+			line: 2,
+			logLevel: "warn",
+			argsText: "'log.error', { id: 1 }",
+			args: ["'log.error'", "{ id: 1 }"],
+		},
 	] as LogCallSite[];
 	const findings = buildFindings([...callSites], localeKeys);
 	const codes = new Set(findings.map((finding) => finding.issueCode));
@@ -138,19 +213,62 @@ Deno.test("buildFindings emits issue coverage including trace pairing logic", ()
 	assert(codes.has("MISSING_LOCALE_KEY"));
 	assert(codes.has("MISSING_KEY_FOR_CRITICAL_LOG"));
 	assert(codes.has("MISSING_CONTEXT_FOR_CRITICAL_LOG"));
-	assertEquals(findings.some((finding) => finding.file === "src/trace-paired.js" && finding.issueCode === "TRACE_WITHOUT_WARN_OR_ERROR"), false);
+	assertEquals(
+		findings.some((finding) =>
+			finding.file === "src/trace-paired.js" &&
+			finding.issueCode === "TRACE_WITHOUT_WARN_OR_ERROR"
+		),
+		false,
+	);
 });
 
 Deno.test("sortFindings and summarizeFindings produce deterministic counts", () => {
 	const unsorted = [
-		createFinding({ file: "src/z.js", line: 2, severity: "info", issueCode: "NOISY_LOG", fingerprint: "z2" }),
-		createFinding({ file: "src/a.js", line: 1, severity: "error", issueCode: "MISSING_LOCALE_KEY", fingerprint: "a1" }),
-		createFinding({ file: "src/a.js", line: 1, severity: "warn", issueCode: "EMPTY_LOG", fingerprint: "a2" }),
-		createFinding({ file: "src/a.js", line: 1, severity: "warn", issueCode: "EMPTY_LOG", fingerprint: "a0" }),
-		createFinding({ file: "src/a.js", line: 1, logLevel: "error", severity: "warn", issueCode: "EMPTY_LOG", fingerprint: "a3" }),
+		createFinding({
+			file: "src/z.js",
+			line: 2,
+			severity: "info",
+			issueCode: "NOISY_LOG",
+			fingerprint: "z2",
+		}),
+		createFinding({
+			file: "src/a.js",
+			line: 1,
+			severity: "error",
+			issueCode: "MISSING_LOCALE_KEY",
+			fingerprint: "a1",
+		}),
+		createFinding({
+			file: "src/a.js",
+			line: 1,
+			severity: "warn",
+			issueCode: "EMPTY_LOG",
+			fingerprint: "a2",
+		}),
+		createFinding({
+			file: "src/a.js",
+			line: 1,
+			severity: "warn",
+			issueCode: "EMPTY_LOG",
+			fingerprint: "a0",
+		}),
+		createFinding({
+			file: "src/a.js",
+			line: 1,
+			logLevel: "error",
+			severity: "warn",
+			issueCode: "EMPTY_LOG",
+			fingerprint: "a3",
+		}),
 	];
 	const sorted = sortFindings(unsorted);
-	assertEquals(sorted.map((finding) => finding.fingerprint), ["a3", "a0", "a2", "a1", "z2"]);
+	assertEquals(sorted.map((finding) => finding.fingerprint), [
+		"a3",
+		"a0",
+		"a2",
+		"a1",
+		"z2",
+	]);
 	const summary = summarizeFindings(sorted);
 	assertEquals(summary.totalFindings, 5);
 	assertEquals(summary.bySeverity.error, 1);
@@ -164,35 +282,59 @@ Deno.test("sortFindings and summarizeFindings produce deterministic counts", () 
 Deno.test("baseline helpers load, diff and validate schema", async () => {
 	const baselinePath = "/tmp/baseline-valid.json";
 	const invalidPath = "/tmp/baseline-invalid.json";
-	const readTextFileStub = stub(Deno, "readTextFile", (path: string | URL): Promise<string> => {
-		const normalizedPath = String(path);
-		if (normalizedPath === baselinePath) {
-			return Promise.resolve(JSON.stringify({ version: 1, fingerprints: ["b", "a"] }));
-		}
-		if (normalizedPath === invalidPath) {
-			return Promise.resolve(JSON.stringify({ version: 2, fingerprints: [] }));
-		}
-		return Promise.reject(createNotFoundError());
-	});
+	const readTextFileStub = stub(
+		Deno,
+		"readTextFile",
+		(path: string | URL): Promise<string> => {
+			const normalizedPath = String(path);
+			if (normalizedPath === baselinePath) {
+				return Promise.resolve(
+					JSON.stringify({ version: 1, fingerprints: ["b", "a"] }),
+				);
+			}
+			if (normalizedPath === invalidPath) {
+				return Promise.resolve(
+					JSON.stringify({ version: 2, fingerprints: [] }),
+				);
+			}
+			return Promise.reject(createNotFoundError());
+		},
+	);
 
 	try {
 		const loaded = await loadBaseline(baselinePath);
 		assertEquals(loaded.fingerprints, ["a", "b"]);
-		await assertRejects(() => loadBaseline(invalidPath), Error, "Invalid baseline schema");
+		await assertRejects(
+			() => loadBaseline(invalidPath),
+			Error,
+			"Invalid baseline schema",
+		);
 	} finally {
 		readTextFileStub.restore();
 	}
 
 	const findings = [
 		createFinding({ fingerprint: "a" }),
-		createFinding({ fingerprint: "c", severity: "error", issueCode: "MISSING_LOCALE_KEY" }),
+		createFinding({
+			fingerprint: "c",
+			severity: "error",
+			issueCode: "MISSING_LOCALE_KEY",
+		}),
 	];
-	const baseline = buildBaseline([createFinding({ fingerprint: "a" }), createFinding({ fingerprint: "a" })]);
+	const baseline = buildBaseline([
+		createFinding({ fingerprint: "a" }),
+		createFinding({ fingerprint: "a" }),
+	]);
 	assertEquals(baseline.fingerprints, ["a"]);
-	const diff = diffAgainstBaseline(findings, { version: 1, fingerprints: ["a", "b"] });
+	const diff = diffAgainstBaseline(findings, {
+		version: 1,
+		fingerprints: ["a", "b"],
+	});
 	assertEquals(diff.newFindings.map((finding) => finding.fingerprint), ["c"]);
 	assertEquals(diff.resolvedFingerprints, ["b"]);
-	assertEquals(diff.persistedFindings.map((finding) => finding.fingerprint), ["a"]);
+	assertEquals(diff.persistedFindings.map((finding) => finding.fingerprint), [
+		"a",
+	]);
 });
 
 Deno.test("severity and fail gating follow threshold and baseline behavior", () => {
@@ -209,7 +351,9 @@ Deno.test("severity and fail gating follow threshold and baseline behavior", () 
 	assertEquals(shouldFail(findings, "info"), true);
 	assertEquals(
 		shouldFail(findings, "warn", {
-			newFindings: [createFinding({ severity: "info", fingerprint: "n1" })],
+			newFindings: [
+				createFinding({ severity: "info", fingerprint: "n1" }),
+			],
 			resolvedFingerprints: [],
 			persistedFindings: [],
 		}),
@@ -242,8 +386,14 @@ Deno.test("parseArgs parses known args and rejects invalid ones", () => {
 	assertEquals(parsed.failSeverity, "error");
 	assertEquals(parsed.updateBaseline, true);
 
-	assertThrowsParse(() => parseArgs(["--unknown=x"], projectRoot), "Unknown argument");
-	assertThrowsParse(() => parseArgs(["--fail-severity=critical"], projectRoot), "Invalid --fail-severity value");
+	assertThrowsParse(
+		() => parseArgs(["--unknown=x"], projectRoot),
+		"Unknown argument",
+	);
+	assertThrowsParse(
+		() => parseArgs(["--fail-severity=critical"], projectRoot),
+		"Invalid --fail-severity value",
+	);
 });
 
 Deno.test("main writes report and uses baseline diff for exit code", async () => {
@@ -253,17 +403,29 @@ Deno.test("main writes report and uses baseline diff for exit code", async () =>
 	const writes = new Map<string, string>();
 	const originalReadTextFile = Deno.readTextFile;
 
-	const readTextFileStub = stub(Deno, "readTextFile", (path: string | URL): Promise<string> => {
-		const normalizedPath = String(path);
-		if (normalizedPath === baselinePath) {
-			return Promise.resolve(JSON.stringify({ version: 1, fingerprints: ["never-match"] }));
-		}
-		return originalReadTextFile(path);
-	});
+	const readTextFileStub = stub(
+		Deno,
+		"readTextFile",
+		(path: string | URL): Promise<string> => {
+			const normalizedPath = String(path);
+			if (normalizedPath === baselinePath) {
+				return Promise.resolve(
+					JSON.stringify({
+						version: 1,
+						fingerprints: ["never-match"],
+					}),
+				);
+			}
+			return originalReadTextFile(path);
+		},
+	);
 	const writeTextFileStub = stub(
 		Deno,
 		"writeTextFile",
-		(path: string | URL, data: string | ReadableStream<string>): Promise<void> => {
+		(
+			path: string | URL,
+			data: string | ReadableStream<string>,
+		): Promise<void> => {
 			assert(typeof data === "string");
 			writes.set(String(path), data);
 			return Promise.resolve();
@@ -279,10 +441,15 @@ Deno.test("main writes report and uses baseline diff for exit code", async () =>
 			"--fail-severity=error",
 		]);
 		assertEquals(writes.has(reportPath), true);
-		const report = JSON.parse(writes.get(reportPath) ?? "{}") as AuditReport;
+		const report = JSON.parse(
+			writes.get(reportPath) ?? "{}",
+		) as AuditReport;
 		assertStringIncludes(report.rootDir, ".");
 		assert(report.summary.totalFindings >= 0);
-		assertEquals(report.baseline?.newFindings, report.summary.totalFindings);
+		assertEquals(
+			report.baseline?.newFindings,
+			report.summary.totalFindings,
+		);
 		assertEquals(exitCode, report.summary.bySeverity.error > 0 ? 1 : 0);
 	} finally {
 		readTextFileStub.restore();
@@ -297,17 +464,24 @@ Deno.test("main updates baseline and handles missing baseline file", async () =>
 	const writes = new Map<string, string>();
 	const originalReadTextFile = Deno.readTextFile;
 
-	const readTextFileStub = stub(Deno, "readTextFile", (path: string | URL): Promise<string> => {
-		const normalizedPath = String(path);
-		if (normalizedPath === baselinePath) {
-			return Promise.reject(createNotFoundError());
-		}
-		return originalReadTextFile(path);
-	});
+	const readTextFileStub = stub(
+		Deno,
+		"readTextFile",
+		(path: string | URL): Promise<string> => {
+			const normalizedPath = String(path);
+			if (normalizedPath === baselinePath) {
+				return Promise.reject(createNotFoundError());
+			}
+			return originalReadTextFile(path);
+		},
+	);
 	const writeTextFileStub = stub(
 		Deno,
 		"writeTextFile",
-		(path: string | URL, data: string | ReadableStream<string>): Promise<void> => {
+		(
+			path: string | URL,
+			data: string | ReadableStream<string>,
+		): Promise<void> => {
 			assert(typeof data === "string");
 			writes.set(String(path), data);
 			return Promise.resolve();
@@ -325,7 +499,10 @@ Deno.test("main updates baseline and handles missing baseline file", async () =>
 		]);
 		assertEquals(writes.has(reportPath), true);
 		assertEquals(writes.has(baselinePath), true);
-		const baseline = JSON.parse(writes.get(baselinePath) ?? "{}") as { version: number; fingerprints: string[] };
+		const baseline = JSON.parse(writes.get(baselinePath) ?? "{}") as {
+			version: number;
+			fingerprints: string[];
+		};
 		assertEquals(baseline.version, 1);
 		assert(Array.isArray(baseline.fingerprints));
 		assert(exitCode === 0 || exitCode === 1);

@@ -99,8 +99,21 @@ export interface BaselineDiff {
 	persistedFindings: AuditFinding[];
 }
 
-const CONSOLE_LEVELS: readonly LogLevel[] = ["log", "info", "warn", "error", "trace"];
-const NOISY_PATTERNS = [/^debug$/i, /^test$/i, /^todo$/i, /^here$/i, /^log$/i, /^tmp$/i];
+const CONSOLE_LEVELS: readonly LogLevel[] = [
+	"log",
+	"info",
+	"warn",
+	"error",
+	"trace",
+];
+const NOISY_PATTERNS = [
+	/^debug$/i,
+	/^test$/i,
+	/^todo$/i,
+	/^here$/i,
+	/^log$/i,
+	/^tmp$/i,
+];
 
 /**
  * Returns true when the provided path points to a JavaScript source file.
@@ -133,14 +146,20 @@ export async function listFilesRecursive(directory: string): Promise<string[]> {
  */
 export async function loadLocaleKeys(localeFile: string): Promise<Set<string>> {
 	const rawContent = await Deno.readTextFile(localeFile);
-	const parsed = JSON.parse(rawContent) as Record<string, { message?: string }>;
+	const parsed = JSON.parse(rawContent) as Record<
+		string,
+		{ message?: string }
+	>;
 	return new Set(Object.keys(parsed));
 }
 
 /**
  * Finds all logging callsites in file content.
  */
-export function findConsoleCallSites(file: string, content: string): LogCallSite[] {
+export function findConsoleCallSites(
+	file: string,
+	content: string,
+): LogCallSite[] {
 	const sites: LogCallSite[] = [];
 	for (const level of CONSOLE_LEVELS) {
 		const token = `console.${level}(`;
@@ -175,7 +194,10 @@ export function findConsoleCallSites(file: string, content: string): LogCallSite
 /**
  * Locates the index of the matching closing parenthesis.
  */
-export function findClosingParenIndex(content: string, argsStart: number): number {
+export function findClosingParenIndex(
+	content: string,
+	argsStart: number,
+): number {
 	let depth = 1;
 	let inSingle = false;
 	let inDouble = false;
@@ -354,7 +376,10 @@ export function splitTopLevelArgs(argsText: string): string[] {
 			continue;
 		}
 
-		if (char === "," && parenDepth === 0 && braceDepth === 0 && bracketDepth === 0) {
+		if (
+			char === "," && parenDepth === 0 && braceDepth === 0 &&
+			bracketDepth === 0
+		) {
 			const trimmed = buffer.trim();
 			if (trimmed) {
 				args.push(trimmed);
@@ -377,14 +402,19 @@ export function splitTopLevelArgs(argsText: string): string[] {
 /**
  * Runs the logging quality audit over the configured source directory.
  */
-export async function runAudit(options: AuditOptions): Promise<{ report: AuditReport; }> {
+export async function runAudit(
+	options: AuditOptions,
+): Promise<{ report: AuditReport }> {
 	const localeKeys = await loadLocaleKeys(options.localeFile);
 	const files = await listFilesRecursive(options.srcDir);
 	const findings: AuditFinding[] = [];
 
 	for (const file of files) {
 		const content = await Deno.readTextFile(file);
-		const callSites = findConsoleCallSites(relative(options.projectRoot, file), content);
+		const callSites = findConsoleCallSites(
+			relative(options.projectRoot, file),
+			content,
+		);
 		findings.push(...buildFindings(callSites, localeKeys));
 	}
 
@@ -403,7 +433,10 @@ export async function runAudit(options: AuditOptions): Promise<{ report: AuditRe
 /**
  * Builds findings for callsites from a single file or mixed set.
  */
-export function buildFindings(callSites: LogCallSite[], localeKeys: Set<string>): AuditFinding[] {
+export function buildFindings(
+	callSites: LogCallSite[],
+	localeKeys: Set<string>,
+): AuditFinding[] {
 	const findings: AuditFinding[] = [];
 	const filesWithWarnOrError = new Set<string>();
 	const traceByFile = new Map<string, LogCallSite[]>();
@@ -428,10 +461,14 @@ export function buildFindings(callSites: LogCallSite[], localeKeys: Set<string>)
 
 		if (unquotedPrimary !== null) {
 			if (unquotedPrimary.trim().length === 0) {
-				findings.push(createFinding(site, "EMPTY_LOG", unquotedPrimary));
+				findings.push(
+					createFinding(site, "EMPTY_LOG", unquotedPrimary),
+				);
 			}
 			if (isNoisyLiteral(unquotedPrimary)) {
-				findings.push(createFinding(site, "NOISY_LOG", unquotedPrimary));
+				findings.push(
+					createFinding(site, "NOISY_LOG", unquotedPrimary),
+				);
 			}
 			if (!localeKeys.has(unquotedPrimary)) {
 				const issueCode = isKeyLike(unquotedPrimary)
@@ -442,12 +479,25 @@ export function buildFindings(callSites: LogCallSite[], localeKeys: Set<string>)
 		}
 
 		if (site.logLevel === "warn" || site.logLevel === "error") {
-			const hasValidKey = unquotedPrimary !== null && localeKeys.has(unquotedPrimary);
+			const hasValidKey = unquotedPrimary !== null &&
+				localeKeys.has(unquotedPrimary);
 			if (!hasValidKey) {
-				findings.push(createFinding(site, "MISSING_KEY_FOR_CRITICAL_LOG", unquotedPrimary));
+				findings.push(
+					createFinding(
+						site,
+						"MISSING_KEY_FOR_CRITICAL_LOG",
+						unquotedPrimary,
+					),
+				);
 			}
 			if (!hasContextPayload(site.args)) {
-				findings.push(createFinding(site, "MISSING_CONTEXT_FOR_CRITICAL_LOG", unquotedPrimary));
+				findings.push(
+					createFinding(
+						site,
+						"MISSING_CONTEXT_FOR_CRITICAL_LOG",
+						unquotedPrimary,
+					),
+				);
 			}
 		}
 	}
@@ -457,7 +507,9 @@ export function buildFindings(callSites: LogCallSite[], localeKeys: Set<string>)
 			continue;
 		}
 		for (const traceSite of traces) {
-			findings.push(createFinding(traceSite, "TRACE_WITHOUT_WARN_OR_ERROR", null));
+			findings.push(
+				createFinding(traceSite, "TRACE_WITHOUT_WARN_OR_ERROR", null),
+			);
 		}
 	}
 
@@ -487,8 +539,10 @@ export function extractLiteralString(arg: string): string | null {
 	if (trimmed.length < 2) {
 		return null;
 	}
-	const startsWithSingleQuote = trimmed.startsWith("'") && trimmed.endsWith("'");
-	const startsWithDoubleQuote = trimmed.startsWith('"') && trimmed.endsWith('"');
+	const startsWithSingleQuote = trimmed.startsWith("'") &&
+		trimmed.endsWith("'");
+	const startsWithDoubleQuote = trimmed.startsWith('"') &&
+		trimmed.endsWith('"');
 	if (!startsWithSingleQuote && !startsWithDoubleQuote) {
 		return null;
 	}
@@ -587,19 +641,32 @@ export async function loadBaseline(path: string): Promise<AuditBaseline> {
 export function buildBaseline(findings: AuditFinding[]): AuditBaseline {
 	return {
 		version: 1,
-		fingerprints: [...new Set(findings.map((finding) => finding.fingerprint))].sort(),
+		fingerprints: [
+			...new Set(findings.map((finding) => finding.fingerprint)),
+		].sort(),
 	};
 }
 
 /**
  * Computes differences between current findings and baseline fingerprints.
  */
-export function diffAgainstBaseline(findings: AuditFinding[], baseline: AuditBaseline): BaselineDiff {
+export function diffAgainstBaseline(
+	findings: AuditFinding[],
+	baseline: AuditBaseline,
+): BaselineDiff {
 	const baselineSet = new Set(baseline.fingerprints);
-	const currentFingerprints = new Set(findings.map((finding) => finding.fingerprint));
-	const newFindings = findings.filter((finding) => !baselineSet.has(finding.fingerprint));
-	const persistedFindings = findings.filter((finding) => baselineSet.has(finding.fingerprint));
-	const resolvedFingerprints = baseline.fingerprints.filter((fingerprint) => !currentFingerprints.has(fingerprint));
+	const currentFingerprints = new Set(
+		findings.map((finding) => finding.fingerprint),
+	);
+	const newFindings = findings.filter((finding) =>
+		!baselineSet.has(finding.fingerprint)
+	);
+	const persistedFindings = findings.filter((finding) =>
+		baselineSet.has(finding.fingerprint)
+	);
+	const resolvedFingerprints = baseline.fingerprints.filter((fingerprint) =>
+		!currentFingerprints.has(fingerprint)
+	);
 
 	return {
 		newFindings: sortFindings(newFindings),
@@ -625,7 +692,9 @@ export function shouldFail(
 ): boolean {
 	const candidates = baselineDiff ? baselineDiff.newFindings : findings;
 	const minimumRank = severityRank(minimumSeverity);
-	return candidates.some((finding) => severityRank(finding.severity) >= minimumRank);
+	return candidates.some((finding) =>
+		severityRank(finding.severity) >= minimumRank
+	);
 }
 
 /**
@@ -644,11 +713,21 @@ export function severityRank(severity: FindingSeverity): number {
 /**
  * Generates a single finding object from a callsite and issue code.
  */
-function createFinding(site: LogCallSite, issueCode: IssueCode, messageValue: string | null): AuditFinding {
+function createFinding(
+	site: LogCallSite,
+	issueCode: IssueCode,
+	messageValue: string | null,
+): AuditFinding {
 	const severity = issueSeverity(issueCode);
 	const message = issueMessage(issueCode);
 	const suggestedFix = issueSuggestedFix(issueCode);
-	const fingerprint = [site.file, String(site.line), site.logLevel, issueCode, messageValue ?? ""].join("|");
+	const fingerprint = [
+		site.file,
+		String(site.line),
+		site.logLevel,
+		issueCode,
+		messageValue ?? "",
+	].join("|");
 	return {
 		file: site.file,
 		line: site.line,
