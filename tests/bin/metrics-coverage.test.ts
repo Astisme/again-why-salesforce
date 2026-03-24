@@ -36,7 +36,7 @@ function buildCoveredSourceFixtures() {
 			"function getTechnicalAndInteractionConsent() {}",
 			"function setDateForPingToday() {}",
 			"function sendPingToAnalytics() {",
-			"\tconst apiUrl = new URL(\"noscript.gif\", \"https://queue.simpleanalyticscdn.com\");",
+			'\tconst apiUrl = new URL("noscript.gif", "https://queue.simpleanalyticscdn.com");',
 			"\tsetDateForPingToday();",
 			"}",
 			"async function checkInsertAnalytics() {",
@@ -46,8 +46,8 @@ function buildCoveredSourceFixtures() {
 			"}",
 		].join("\n"),
 		"src/salesforce/update-settings.js": [
-			"export function getUsageDaysUpdate(settings = [], today = \"2026-03-11\") {",
-			"\tconst lastActiveDay = \"2026-03-10\";",
+			'export function getUsageDaysUpdate(settings = [], today = "2026-03-11") {',
+			'\tconst lastActiveDay = "2026-03-10";',
 			"\tif (lastActiveDay !== today) {",
 			"\t\treturn { usageDays: 2, set: [] };",
 			"\t}",
@@ -57,13 +57,13 @@ function buildCoveredSourceFixtures() {
 			"export async function updateExtensionUsageDays() {",
 			"\tconst usageSettings = [];",
 			"\tconst calculated = getUsageDaysUpdate(usageSettings);",
-			"\tawait sendExtensionMessage({ what: \"set\", set: calculated.set });",
+			'\tawait sendExtensionMessage({ what: "set", set: calculated.set });',
 			"\treturn calculated.usageDays;",
 			"}",
 		].join("\n"),
 		"src/salesforce/once-a-day.js": [
 			"export function executeOncePerDay() {",
-			"\tconst today = \"2026-03-11\";",
+			'\tconst today = "2026-03-11";',
 			"\tif (wasCalledToday(today)) {",
 			"\t\treturn;",
 			"\t}",
@@ -100,7 +100,7 @@ function buildTestFixtures(
 		const selectedTitles = titleOverrides[path] ?? titles;
 		files[path] = selectedTitles
 			.map((title) =>
-				`Deno.test("${title}", () => {\n\t// static metrics fixture\n});`,
+				`Deno.test("${title}", () => {\n\t// static metrics fixture\n});`
 			)
 			.join("\n\n");
 	}
@@ -120,7 +120,10 @@ function buildCoveredReader() {
 }
 
 Deno.test("analyzeMetricsCoverage reports covered status when all rule expectations are present", async () => {
-	const report = await analyzeMetricsCoverage("/virtual", buildCoveredReader());
+	const report = await analyzeMetricsCoverage(
+		"/virtual",
+		buildCoveredReader(),
+	);
 	assertEquals(report.totals.targets, 5);
 	assertEquals(report.totals.covered, 5);
 	assertEquals(report.totals.partial, 0);
@@ -155,8 +158,8 @@ Deno.test("analyzeMetricsCoverage reports partial status when some validating te
 	);
 	assertEquals(beaconTarget?.status, "partial");
 	assertEquals(consentTarget?.status, "partial");
-	assertGreater((beaconTarget?.missingTestTitles.length ?? 0), 0);
-	assertGreater((consentTarget?.missingTestTitles.length ?? 0), 0);
+	assertGreater(beaconTarget?.missingTestTitles.length ?? 0, 0);
+	assertGreater(consentTarget?.missingTestTitles.length ?? 0, 0);
 	assertGreater(report.totals.partial, 0);
 });
 
@@ -175,12 +178,15 @@ Deno.test("analyzeMetricsCoverage reports uncovered status when source or test f
 });
 
 Deno.test("serializeMetricsCoverageReport stays deterministic for identical inputs", async () => {
-	const report = await analyzeMetricsCoverage("/virtual", buildCoveredReader());
+	const report = await analyzeMetricsCoverage(
+		"/virtual",
+		buildCoveredReader(),
+	);
 	const prettyOne = serializeMetricsCoverageReport(report, true);
 	const prettyTwo = serializeMetricsCoverageReport(report, true);
 	const compact = serializeMetricsCoverageReport(report, false);
 	assertEquals(prettyOne, prettyTwo);
-	assertStringIncludes(prettyOne, "\n\t\"totals\"");
+	assertStringIncludes(prettyOne, '\n\t"totals"');
 	assertEquals(compact.includes("\n"), false);
 });
 
@@ -197,7 +203,10 @@ Deno.test("runCliWithDependencies supports help and compact output flags", async
 
 	const helpCode = await runCliWithDependencies(["--help"], { analyze, log });
 	assertEquals(helpCode, 0);
-	assertStringIncludes(outputs[0], "Usage: deno run --allow-read bin/metrics-coverage.ts");
+	assertStringIncludes(
+		outputs[0],
+		"Usage: deno run --allow-read bin/metrics-coverage.ts",
+	);
 
 	outputs.length = 0;
 	const compactCode = await runCliWithDependencies(
@@ -225,7 +234,8 @@ Deno.test("runCli supports help without explicit dependency injection", async ()
 
 Deno.test("analyzeMetricsCoverage rethrows injected read errors", async () => {
 	let errorThrown = false;
-	const brokenReader = () => Promise.reject(new Error("unexpected read failure"));
+	const brokenReader = () =>
+		Promise.reject(new Error("unexpected read failure"));
 	try {
 		await analyzeMetricsCoverage("/virtual", brokenReader);
 	} catch (error) {
@@ -261,7 +271,10 @@ Deno.test("analyzeMetricsCoverage sorts source locations deterministically for s
 });
 
 Deno.test("readTextIfExistsStrict returns null for missing files", async () => {
-	const content = await readTextIfExistsStrict(Deno.cwd(), "path/that/does/not/exist.js");
+	const content = await readTextIfExistsStrict(
+		Deno.cwd(),
+		"path/that/does/not/exist.js",
+	);
 	assertEquals(content, null);
 });
 
@@ -300,6 +313,6 @@ Deno.test("metrics coverage CLI entrypoint emits JSON when run directly", async 
 	const result = await command.output();
 	const stdout = new TextDecoder().decode(result.stdout);
 	assertEquals(result.code, 0);
-	assertStringIncludes(stdout, "\"totals\"");
-	assertStringIncludes(stdout, "\"matrix\"");
+	assertStringIncludes(stdout, '"totals"');
+	assertStringIncludes(stdout, '"matrix"');
 });

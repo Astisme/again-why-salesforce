@@ -134,7 +134,8 @@ export function getInstrumentationRules(): InstrumentationTargetRule[] {
 				matchers: [
 					{
 						id: "consent-check",
-						description: "technical and interaction consent is read",
+						description:
+							"technical and interaction consent is read",
 						pattern: /getTechnicalAndInteractionConsent\s*\(\)/,
 					},
 					{
@@ -144,8 +145,10 @@ export function getInstrumentationRules(): InstrumentationTargetRule[] {
 					},
 					{
 						id: "opt-out-sync",
-						description: "PREVENT_ANALYTICS enabled flag is synchronized",
-						pattern: /id:\s*PREVENT_ANALYTICS[\s\S]*enabled:\s*shouldPreventAnalytics/,
+						description:
+							"PREVENT_ANALYTICS enabled flag is synchronized",
+						pattern:
+							/id:\s*PREVENT_ANALYTICS[\s\S]*enabled:\s*shouldPreventAnalytics/,
 					},
 				],
 			},
@@ -168,18 +171,22 @@ export function getInstrumentationRules(): InstrumentationTargetRule[] {
 				matchers: [
 					{
 						id: "update-function",
-						description: "updateExtensionUsageDays entrypoint exists",
-						pattern: /export\s+async\s+function\s+updateExtensionUsageDays/,
+						description:
+							"updateExtensionUsageDays entrypoint exists",
+						pattern:
+							/export\s+async\s+function\s+updateExtensionUsageDays/,
 					},
 					{
 						id: "usage-calculation-call",
-						description: "getUsageDaysUpdate is called from updater",
+						description:
+							"getUsageDaysUpdate is called from updater",
 						pattern: /getUsageDaysUpdate\s*\(\s*usageSettings\s*\)/,
 					},
 					{
 						id: "settings-write",
 						description: "updated usage telemetry is persisted",
-						pattern: /sendExtensionMessage\s*\([\s\S]*what:\s*"set"/,
+						pattern:
+							/sendExtensionMessage\s*\([\s\S]*what:\s*"set"/,
 					},
 				],
 			},
@@ -315,7 +322,10 @@ function toLineNumber(content: string, index: number): number {
  * @param {string} content - Raw test file content.
  * @return {TestLocation[]} Parsed test definitions.
  */
-function extractTestLocations(filePath: string, content: string): TestLocation[] {
+function extractTestLocations(
+	filePath: string,
+	content: string,
+): TestLocation[] {
 	const results: TestLocation[] = [];
 	const pattern = /Deno\.test\(\s*["'`]([^"'`]+)["'`]/g;
 	let match = pattern.exec(content);
@@ -364,7 +374,9 @@ function evaluateSourceRule(
 		});
 	}
 
-	locations.sort((a, b) => a.line - b.line || a.matcherId.localeCompare(b.matcherId));
+	locations.sort((a, b) =>
+		a.line - b.line || a.matcherId.localeCompare(b.matcherId)
+	);
 	return { locations, missingMatcherIds };
 }
 
@@ -396,7 +408,10 @@ function evaluateTestRule(
 
 	const unique = new Map<string, TestLocation>();
 	for (const testCase of validatingTests) {
-		unique.set(`${testCase.path}:${testCase.line}:${testCase.title}`, testCase);
+		unique.set(
+			`${testCase.path}:${testCase.line}:${testCase.title}`,
+			testCase,
+		);
 	}
 	const uniqueTests = [...unique.values()];
 	uniqueTests.sort((a, b) => a.line - b.line);
@@ -447,13 +462,18 @@ export async function analyzeMetricsCoverage(
 
 	const sourceContentByPath = new Map<string, string | null>();
 	for (const sourcePath of sourcePaths) {
-		sourceContentByPath.set(sourcePath, await readText(rootDir, sourcePath));
+		sourceContentByPath.set(
+			sourcePath,
+			await readText(rootDir, sourcePath),
+		);
 	}
 
 	const testCasesByPath = new Map<string, TestLocation[]>();
 	for (const testPath of testPaths) {
 		const testContent = await readText(rootDir, testPath);
-		const testCases = testContent == null ? [] : extractTestLocations(testPath, testContent);
+		const testCases = testContent == null
+			? []
+			: extractTestLocations(testPath, testContent);
 		testCasesByPath.set(testPath, testCases);
 	}
 
