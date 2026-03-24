@@ -11,7 +11,10 @@ import {
 	TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL,
 	TUTORIAL_EVENT_REORDERED_TABS_TABLE,
 } from "/core/constants.js";
-import { getInnerElementFieldBySelector, injectStyle } from "/core/functions.js";
+import {
+	getInnerElementFieldBySelector,
+	injectStyle,
+} from "/core/functions.js";
 import Tab from "/core/tab.js";
 import { ensureAllTabsAvailability, TabContainer } from "/core/tabContainer.js";
 import ensureTranslatorAvailability from "/core/translator.js";
