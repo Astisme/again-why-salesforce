@@ -540,12 +540,30 @@ function parseArgs(
 			continue;
 		}
 		if (arg === "--root") {
-			options.rootDir = args[index + 1] ?? options.rootDir;
-			index += 1;
+			const rootValue = getFlagValue(args, index);
+			if (rootValue != null) {
+				options.rootDir = rootValue;
+				index += 1;
+			}
 			continue;
 		}
 	}
 	return options;
+}
+
+/**
+ * Returns the next CLI token when it is a value and not another flag.
+ *
+ * @param {string[]} args - Full command-line argument list.
+ * @param {number} index - Current index of the option flag.
+ * @return {string|null} Value token when present, otherwise null.
+ */
+function getFlagValue(args: string[], index: number): string | null {
+	const value = args[index + 1];
+	if (value == null || value.startsWith("--")) {
+		return null;
+	}
+	return value;
 }
 
 /**

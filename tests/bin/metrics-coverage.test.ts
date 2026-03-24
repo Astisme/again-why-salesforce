@@ -216,6 +216,16 @@ Deno.test("runCliWithDependencies supports help and compact output flags", async
 	});
 	assertEquals(missingRootValueCode, 0);
 	assertEquals(outputs.length, 1);
+
+	outputs.length = 0;
+	const rootFollowedByFlagCode = await runCliWithDependencies(
+		["--root", "--compact"],
+		{ analyze, log },
+	);
+	assertEquals(rootFollowedByFlagCode, 0);
+	assertEquals(outputs.length, 1);
+	assertEquals(outputs[0].includes("\n"), false);
+	assertEquals(calls.includes(Deno.cwd()), true);
 });
 
 Deno.test("runCli supports help without explicit dependency injection", async () => {
