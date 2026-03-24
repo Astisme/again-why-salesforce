@@ -69,6 +69,14 @@ type MetricsCoverageReport = {
 	matrix: CoverageTargetResult[];
 };
 
+type TextFileReader = (
+	rootDir: string,
+	relativePath: string,
+) => Promise<string | null>;
+
+type CliAnalyzer = (rootDir: string) => Promise<MetricsCoverageReport>;
+type CliLogger = (message: string) => void;
+
 const SCOPE_ASSUMPTIONS = [
 	"Metrics instrumentation scope is limited to analytics beacon and usage-day tracking flows.",
 	"Analyzer is static and pattern-based; runtime behavior is not executed.",
@@ -276,6 +284,20 @@ async function readTextIfExists(
 }
 
 /**
+ * Reads a file as UTF-8 text and rethrows non-NotFound failures.
+ *
+ * @param {string} rootDir - Root directory for relative file resolution.
+ * @param {string} relativePath - Path to read relative to rootDir.
+ * @return {Promise<string|null>} File content when found, otherwise null.
+ */
+export async function readTextIfExistsStrict(
+	rootDir: string,
+	relativePath: string,
+): Promise<string | null> {
+	return await readTextIfExists(rootDir, relativePath);
+}
+
+/**
  * Converts a character index into a 1-based line number.
  *
  * @param {string} content - File text content.
@@ -417,6 +439,7 @@ function resolveStatus(
  */
 export async function analyzeMetricsCoverage(
 	rootDir = Deno.cwd(),
+	readText: TextFileReader = readTextIfExists,
 ): Promise<MetricsCoverageReport> {
 	const rules = getInstrumentationRules();
 	const sourcePaths = [...new Set(rules.map((rule) => rule.source.path))];
@@ -424,12 +447,12 @@ export async function analyzeMetricsCoverage(
 
 	const sourceContentByPath = new Map<string, string | null>();
 	for (const sourcePath of sourcePaths) {
-		sourceContentByPath.set(sourcePath, await readTextIfExists(rootDir, sourcePath));
+		sourceContentByPath.set(sourcePath, await readText(rootDir, sourcePath));
 	}
 
 	const testCasesByPath = new Map<string, TestLocation[]>();
 	for (const testPath of testPaths) {
-		const testContent = await readTextIfExists(rootDir, testPath);
+		const testContent = await readText(rootDir, testPath);
 		const testCases = testContent == null ? [] : extractTestLocations(testPath, testContent);
 		testCasesByPath.set(testPath, testCases);
 	}
@@ -548,13 +571,29 @@ function getUsage() {
  * @return {Promise<number>} Process exit code.
  */
 export async function runCli(args: string[] = Deno.args): Promise<number> {
+	return await runCliWithDependencies(args);
+}
+
+/**
+ * Executes the CLI entrypoint with injected dependencies for deterministic tests.
+ *
+ * @param {string[]} args - Command-line arguments.
+ * @param {{ analyze?: CliAnalyzer; log?: CliLogger }} [dependencies={}] - Optional dependency overrides.
+ * @return {Promise<number>} Process exit code.
+ */
+export async function runCliWithDependencies(
+	args: string[],
+	dependencies: { analyze?: CliAnalyzer; log?: CliLogger } = {},
+): Promise<number> {
+	const analyze = dependencies.analyze ?? analyzeMetricsCoverage;
+	const log = dependencies.log ?? console.log;
 	const options = parseArgs(args);
 	if (options.help) {
-		console.log(getUsage());
+		log(getUsage());
 		return 0;
 	}
-	const report = await analyzeMetricsCoverage(options.rootDir);
-	console.log(serializeMetricsCoverageReport(report, options.pretty));
+	const report = await analyze(options.rootDir);
+	log(serializeMetricsCoverageReport(report, options.pretty));
 	return 0;
 }
 
