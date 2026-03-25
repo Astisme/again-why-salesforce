@@ -1,41 +1,13 @@
 "use strict";
 import {
+	EXTENSION_LAST_ACTIVE_DAY,
 	EXTENSION_VERSION,
 	HTTPS,
 	ISFIREFOX,
 	PERM_CHECK,
 	PREVENT_ANALYTICS,
-	SETTINGS_KEY,
 } from "/constants.js";
-import { getSettings, sendExtensionMessage } from "/functions.js";
-
-/**
- * Determines whether the analytics beacon has already been sent today.
- *
- * @param {string | undefined} date - the date of the last time a ping was sent
- * @return {boolean} Whether the analytics beacon has already been sent today.
- */
-function hasSentAnalyticsToday(date) {
-	return date != null &&
-		Math.floor(
-				(Date.now() - new Date(date)) /
-					(1000 * 60 * 60 * 24),
-			) <= 0; // the date difference is less than a day
-}
-
-/**
- * Persists analytics settings without waiting for storage to finish.
- *
- * @param {{ id: string, enabled?: boolean, date?: string }} setting - The setting payload to store.
- * @return {Promise} the same from sendExtensionMessage
- */
-function syncAnalyticsSetting(setting) {
-	return sendExtensionMessage({
-		what: "set",
-		key: SETTINGS_KEY,
-		set: [setting],
-	});
-}
+import { getSettings, sendExtensionMessage, setSettings } from "/functions.js";
 
 const technicalAndInteraction = "technicalAndInteraction";
 /**
@@ -58,18 +30,6 @@ async function getTechnicalAndInteractionConsent() {
 		console.info(e);
 		return null;
 	}
-}
-
-/**
- * Updates the PREVENT_ANALYTICS setting to today as the last successful ping
- */
-function setDateForPingToday() {
-	const today = new Date();
-	today.setUTCHours(0, 0, 0, 0);
-	syncAnalyticsSetting({
-		id: PREVENT_ANALYTICS,
-		date: today.toJSON(),
-	});
 }
 
 const analyticscdnhost = "simpleanalyticscdn.com";
@@ -112,7 +72,6 @@ function sendPingToAnalytics(isNewUser) {
 	img.alt = "";
 	img.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
 	whereToAppend.appendChild(img);
-	setDateForPingToday();
 }
 
 /**
@@ -121,12 +80,21 @@ function sendPingToAnalytics(isNewUser) {
  * Modifies Content-Security-Policy meta tag to allow the analytics domains.
  * https://github.com/simpleanalytics
  *
+ * @param {boolean|null} [isNewUser=null] - whether the user has no persisted active day yet
  * @return {Promise<void>} Resolves once analytics insertion is completed or skipped.
  */
-export async function checkInsertAnalytics() {
-	const preventAnalytics = await getSettings(PREVENT_ANALYTICS);
-	const isNewUser = preventAnalytics?.date == null;
-	const consentGranted = await getTechnicalAndInteractionConsent();
+export async function checkInsertAnalytics({
+	isNewUser = null,
+} = {}) {
+	const [preventAnalytics, consentGranted, lastActiveDay] = await Promise.all(
+		[
+			getSettings(PREVENT_ANALYTICS),
+			getTechnicalAndInteractionConsent(),
+			isNewUser == null
+				? getSettings(EXTENSION_LAST_ACTIVE_DAY)
+				: Promise.resolve(null),
+		],
+	);
 	const shouldPreventAnalytics = consentGranted == null
 		? preventAnalytics?.enabled === true // the user does not want to send analytics call
 		: !consentGranted;
@@ -136,16 +104,16 @@ export async function checkInsertAnalytics() {
 		preventAnalytics?.enabled !== shouldPreventAnalytics
 	) {
 		// this await is needed to make sure the next one does not race this call
-		await syncAnalyticsSetting({
+		await setSettings({
 			id: PREVENT_ANALYTICS,
 			enabled: shouldPreventAnalytics,
 		});
 	}
-	if (
-		shouldPreventAnalytics ||
-		hasSentAnalyticsToday(preventAnalytics?.date)
-	) {
+	if (shouldPreventAnalytics) {
 		return;
+	}
+	if (isNewUser == null) {
+		isNewUser = lastActiveDay == null;
 	}
 	sendPingToAnalytics(isNewUser);
 }

@@ -13,6 +13,7 @@ import {
 	ORG_TAB_STYLE_KEY,
 	PIN_TAB_CLASS,
 	PREVENT_DEFAULT_OVERRIDE,
+	SETTINGS_KEY,
 	SETUP_LIGHTNING_PATTERN,
 	SLDS_ACTIVE,
 	SUPPORTED_SALESFORCE_URLS,
@@ -28,6 +29,7 @@ import {
 	WHAT_GET_BROWSER_TAB,
 	WHAT_GET_SETTINGS,
 	WHAT_GET_STYLE_SETTINGS,
+	WHAT_SET,
 } from "/constants.js";
 
 /**
@@ -87,8 +89,21 @@ export async function sendExtensionMessages(messages = [], callback = null) {
  * @param {string|string[]|null} [keys=null] - One or more setting keys to retrieve. If null, all settings will be returned.
  * @return {Promise<Object>} A promise that resolves to an object containing the requested settings.
  */
-export async function getSettings(keys = null) {
-	return await sendExtensionMessage({ what: WHAT_GET_SETTINGS, keys });
+export function getSettings(keys = null) {
+	return sendExtensionMessage({ what: WHAT_GET_SETTINGS, keys });
+}
+/**
+ * Persists the once-per-day settings update.
+ *
+ * @param {Object|Object[]} set - the settings payload to store
+ * @return {Promise<void>} Resolves when the settings have been stored.
+ */
+export function setSettings(set) {
+	return sendExtensionMessage({
+		what: WHAT_SET,
+		key: SETTINGS_KEY,
+		set: Array.isArray(set) ? set : [set],
+	});
 }
 /**
  * Retrieves saved style settings for the specified key.
@@ -96,8 +111,8 @@ export async function getSettings(keys = null) {
  * @param {string} [key=null] - Key identifying which style settings to fetch. When null finds all style settings
  * @return {Promise<Object|null>} The retrieved style settings or null if none exist.
  */
-export async function getStyleSettings(key = null) {
-	return await sendExtensionMessage({ what: WHAT_GET_STYLE_SETTINGS, key });
+export function getStyleSettings(key = null) {
+	return sendExtensionMessage({ what: WHAT_GET_STYLE_SETTINGS, key });
 }
 const GENERIC_STYLE_KEYS = new Set([
 	GENERIC_TAB_STYLE_KEY,
@@ -403,4 +418,16 @@ export function isSalesforceHostname(url = new URL()) {
 	return SUPPORTED_SALESFORCE_URLS.some((pattern) =>
 		url.hostname.endsWith(pattern)
 	);
+}
+/**
+ * Builds a stable local date key for comparing one usage day against another.
+ * @param {Date} [today=new Date()] - the date to serialize
+ * @return {String} local date formatted as YYYY-MM-DD
+ */
+export function getTodayDateKey(today = new Date()) {
+	return [
+		today.getFullYear(),
+		String(today.getMonth() + 1).padStart(2, "0"),
+		String(today.getDate()).padStart(2, "0"),
+	].join("-");
 }

@@ -416,8 +416,10 @@ function delayLoadSetupTabs(count = 0) {
 		// write error in the console
 		(async () => {
 			const translator = await ensureTranslatorAvailability();
-			const label = await translator.translate("extension_label");
-			const fail = await translator.translate("error_no_setup_tab");
+			const [label, fail] = await Promise.all([
+				translator.translate("extension_label"),
+				translator.translate("error_no_setup_tab"),
+			]);
 			console.error(`${label} - ${fail}`);
 			setTimeout(delayLoadSetupTabs, 5000);
 		})();
@@ -621,8 +623,6 @@ async function showModalOpenOtherOrg(
 			TOAST_WARNING,
 		);
 	}
-	const translator = await ensureTranslatorAvailability();
-	const whereTo = await translator.translate("where_to");
 	const {
 		modalParent,
 		saveButton,
@@ -630,7 +630,7 @@ async function showModalOpenOtherOrg(
 		inputContainer,
 		getSelectedRadioButtonValue,
 	} = await generateOpenOtherOrgModal({
-		label: label ?? whereTo,
+		label,
 		url, // if the url is "", we may still open the link in another Org without any issue
 		org,
 	});
@@ -679,6 +679,7 @@ async function showModalOpenOtherOrg(
 				url.startsWith("/") ? "" : SETUP_LIGHTNING
 			}${url}`,
 		);
+		const translator = await ensureTranslatorAvailability();
 		const confirm_msg = await translator.translate([
 			"confirm_another_org",
 			targetUrl,
@@ -1248,7 +1249,7 @@ function main() {
 	checkAddLightningNavigation();
 	listenToBackgroundPage();
 	delayLoadSetupTabs();
-	executeOncePerDay();
+	void executeOncePerDay();
 }
 
 // queries the currently active tab of the current active window

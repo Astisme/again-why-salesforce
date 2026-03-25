@@ -4,61 +4,14 @@ import {
 	assertStringIncludes,
 } from "@std/testing/asserts";
 
+const EXTENSION_LAST_ACTIVE_DAY = "extension_last_active_day";
 const PREVENT_ANALYTICS = "prevent_analytics";
 const QUEUE_ANALYTICS = "https://queue.simpleanalyticscdn.com";
 const ANALYTICS_CDN = "https://simpleanalyticscdn.com";
 
-/**
- * Returns the ISO string for the current UTC day at midnight.
- *
- * @return {string} Today's UTC start-of-day timestamp.
- */
-function startOfTodayIso() {
-	const today = new Date();
-	today.setUTCHours(0, 0, 0, 0);
-	return today.toJSON();
-}
-
-/**
- * Returns the ISO string for the previous UTC day at midnight.
- *
- * @return {string} Yesterday's UTC start-of-day timestamp.
- */
-function startOfYesterdayIso() {
-	const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000);
-	yesterday.setUTCHours(0, 0, 0, 0);
-	return yesterday.toJSON();
-}
-
-/**
- * Runs the real analytics module inside a fresh worker after setting the target browser UA.
- *
- * @param {{
- *   browserName: "firefox" | "chrome",
- *   consent?: boolean | null,
- *   consentError?: boolean,
- *   initialSettings: any[],
- *   steps: Array<{
- *     existingCspContent?: string,
- *     settingsBeforeCall?: any[],
- *     silenceInfo?: boolean,
- *     useDocumentElementOnly?: boolean
- *   }>
- * }} scenario Worker setup and per-invocation steps to execute.
- * @return {Promise<{
- *   messages: any[],
- *   finalSettings: any[],
- *   results: Array<{
- *     headChildrenCount: number,
- *     cspContent: string | null,
- *     beaconPath: string | null
- *   }>
- * }>} The worker's recorded runtime messages and DOM results.
- */
 type AnalyticsSetting = {
 	id: string;
-	enabled?: boolean;
-	date?: string;
+	enabled?: boolean | string;
 };
 
 type AnalyticsMessage = {
@@ -76,6 +29,23 @@ type AnalyticsWorkerResult = {
 	}>;
 };
 
+/**
+ * Runs the real analytics module inside a fresh worker after setting the target browser UA.
+ *
+ * @param {{
+ *   browserName: "firefox" | "chrome",
+ *   consent?: boolean | null,
+ *   consentError?: boolean,
+ *   initialSettings: AnalyticsSetting[],
+ *   steps: Array<{
+ *     existingCspContent?: string,
+ *     settingsBeforeCall?: AnalyticsSetting[],
+ *     silenceInfo?: boolean,
+ *     useDocumentElementOnly?: boolean
+ *   }>
+ * }} scenario Worker setup and per-invocation steps to execute.
+ * @return {Promise<AnalyticsWorkerResult>} The worker's recorded runtime messages and DOM results.
+ */
 async function runAnalyticsWorker(scenario: {
 	browserName: "firefox" | "chrome";
 	consent?: boolean | null;
@@ -127,11 +97,12 @@ Deno.test("checkInsertAnalytics syncs opt-out on Firefox consent denial", async 
 	assertEquals(result.messages.map((message) => message.what), [
 		"get-settings",
 		"check-permission-granted",
+		"get-settings",
 		"set",
 	]);
 });
 
-Deno.test("checkInsertAnalytics inserts beacon for a new Firefox user with consent", async () => {
+Deno.test("checkInsertAnalytics inserts a new-user beacon on Firefox when no active day exists", async () => {
 	const result = await runAnalyticsWorker({
 		browserName: "firefox",
 		consent: true,
@@ -153,42 +124,29 @@ Deno.test("checkInsertAnalytics inserts beacon for a new Firefox user with conse
 				): message is AnalyticsMessage & { set: AnalyticsSetting[] } =>
 					message.what === "set" && message.set != null,
 			)
-			.map((message) => message.set[0].enabled ?? "date"),
-		[false, "date"],
+			.map((message) => message.set[0].enabled),
+		[false],
 	);
-	assertEquals(result.finalSettings[0].id, PREVENT_ANALYTICS);
-	assertEquals(typeof result.finalSettings[0].date, "string");
-});
-
-Deno.test("checkInsertAnalytics skips a second beacon on the same day", async () => {
-	const result = await runAnalyticsWorker({
-		browserName: "firefox",
-		consent: true,
-		initialSettings: [{
-			id: PREVENT_ANALYTICS,
-			enabled: false,
-			date: startOfTodayIso(),
-		}],
-		steps: [{}],
-	});
-
-	assertEquals(result.results[0].headChildrenCount, 0);
+	assertEquals(result.finalSettings, [{
+		id: PREVENT_ANALYTICS,
+		enabled: false,
+	}]);
 	assertEquals(result.messages.map((message) => message.what), [
 		"get-settings",
 		"check-permission-granted",
+		"get-settings",
+		"set",
 	]);
-	assertEquals(result.finalSettings[0].date, startOfTodayIso());
 });
 
-Deno.test("checkInsertAnalytics appends analytics domains to an existing CSP", async () => {
+Deno.test("checkInsertAnalytics appends analytics domains to an existing CSP for returning users", async () => {
 	const result = await runAnalyticsWorker({
 		browserName: "firefox",
 		consent: true,
-		initialSettings: [{
-			id: PREVENT_ANALYTICS,
-			enabled: false,
-			date: startOfYesterdayIso(),
-		}],
+		initialSettings: [
+			{ id: PREVENT_ANALYTICS, enabled: false },
+			{ id: EXTENSION_LAST_ACTIVE_DAY, enabled: "2026-03-24" },
+		],
 		steps: [{
 			existingCspContent: "default-src 'self'; img-src 'self';",
 		}],
@@ -201,7 +159,7 @@ Deno.test("checkInsertAnalytics appends analytics domains to an existing CSP", a
 	assertEquals(result.messages.map((message) => message.what), [
 		"get-settings",
 		"check-permission-granted",
-		"set",
+		"get-settings",
 	]);
 });
 
@@ -219,6 +177,7 @@ Deno.test("checkInsertAnalytics falls back to the local opt-out if Firefox conse
 	assertEquals(result.messages.map((message) => message.what), [
 		"get-settings",
 		"check-permission-granted",
+		"get-settings",
 	]);
 	assertEquals(result.finalSettings, [{
 		id: PREVENT_ANALYTICS,
@@ -236,117 +195,26 @@ Deno.test("checkInsertAnalytics on Chrome skips Firefox consent checks", async (
 
 	assertEquals(result.messages.map((message) => message.what), [
 		"get-settings",
-		"set",
+		"get-settings",
 	]);
 	assertEquals(result.results[0].headChildrenCount, 2);
 	assertEquals(result.results[0].beaconPath, "/new-user");
 });
 
-Deno.test("checkInsertAnalytics repeated Chrome calls go from new user to standard user", async () => {
-	// First call starts from an empty setting, so the beacon should use /new-user.
-	// We then simulate the next day and call again; the second beacon should use /
-	// because the stored analytics setting now identifies a standard user.
-	const result = await runAnalyticsWorker({
-		browserName: "chrome",
-		consent: true,
-		initialSettings: [],
-		steps: [
-			{},
-			{
-				settingsBeforeCall: [{
-					id: PREVENT_ANALYTICS,
-					enabled: false,
-					date: startOfYesterdayIso(),
-				}],
-			},
-		],
-	});
-
-	assertEquals(result.results.map((step) => step.beaconPath), [
-		"/new-user",
-		"/",
-	]);
-	assertEquals(result.messages.map((message) => message.what), [
-		"get-settings",
-		"set",
-		"get-settings",
-		"set",
-	]);
-});
-
-Deno.test("checkInsertAnalytics repeated Chrome calls on the same day stop after the first new-user beacon", async () => {
-	// The first call should create the new-user beacon and persist today's date.
-	// A second invocation on the same day should see that stored date and skip entirely.
-	const result = await runAnalyticsWorker({
-		browserName: "chrome",
-		consent: true,
-		initialSettings: [],
-		steps: [{}, {}],
-	});
-
-	assertEquals(result.results.map((step) => step.beaconPath), [
-		"/new-user",
-		null,
-	]);
-	assertEquals(result.results[1].headChildrenCount, 0);
-	assertEquals(result.messages.map((message) => message.what), [
-		"get-settings",
-		"set",
-		"get-settings",
-	]);
-});
-
-Deno.test("checkInsertAnalytics repeated Chrome calls keep standard user beacons standard", async () => {
-	// Both calls start from a stored analytics date in the past, so both invocations
-	// represent returning users and should emit the standard / beacon path.
+Deno.test("checkInsertAnalytics infers returning users from EXTENSION_LAST_ACTIVE_DAY on Chrome", async () => {
 	const result = await runAnalyticsWorker({
 		browserName: "chrome",
 		consent: true,
 		initialSettings: [{
-			id: PREVENT_ANALYTICS,
-			enabled: false,
-			date: startOfYesterdayIso(),
+			id: EXTENSION_LAST_ACTIVE_DAY,
+			enabled: "2026-03-24",
 		}],
-		steps: [
-			{},
-			{
-				settingsBeforeCall: [{
-					id: PREVENT_ANALYTICS,
-					enabled: false,
-					date: startOfYesterdayIso(),
-				}],
-			},
-		],
+		steps: [{}],
 	});
 
-	assertEquals(result.results.map((step) => step.beaconPath), ["/", "/"]);
+	assertEquals(result.results.map((step) => step.beaconPath), ["/"]);
 	assertEquals(result.messages.map((message) => message.what), [
 		"get-settings",
-		"set",
-		"get-settings",
-		"set",
-	]);
-});
-
-Deno.test("checkInsertAnalytics repeated Chrome calls on the same day stop after the first standard-user beacon", async () => {
-	// A returning user from a previous day should emit the standard beacon once.
-	// After that first call updates the stored date to today, the second same-day call should skip.
-	const result = await runAnalyticsWorker({
-		browserName: "chrome",
-		consent: true,
-		initialSettings: [{
-			id: PREVENT_ANALYTICS,
-			enabled: false,
-			date: startOfYesterdayIso(),
-		}],
-		steps: [{}, {}],
-	});
-
-	assertEquals(result.results.map((step) => step.beaconPath), ["/", null]);
-	assertEquals(result.results[1].headChildrenCount, 0);
-	assertEquals(result.messages.map((message) => message.what), [
-		"get-settings",
-		"set",
 		"get-settings",
 	]);
 });

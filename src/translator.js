@@ -254,6 +254,7 @@ class TranslationService {
 	 * @return {Promise<string>} Resolves to the fully translated string or the original key on failure.
 	 */
 	async translate(key, connector = " ") {
+		if (key == null) return null;
 		// get all inner translations
 		const cacheMessage = this.#getMessageFromCache(key);
 		if (

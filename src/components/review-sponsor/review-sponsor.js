@@ -166,8 +166,8 @@ class ReviewSponsorAws extends HTMLElement {
 	 * Resolves when the component has finished loading its async metadata.
 	 * @return {Promise<void>} Promise resolved after async setup completes.
 	 */
-	async whenReady() {
-		return await this._ensureReadyPromise();
+	whenReady() {
+		return this._ensureReadyPromise();
 	}
 
 	/**

@@ -70,8 +70,8 @@ function _sliceBeforeSeparator(i18n) {
  * @param {string} shortcut - The keyboard shortcut to display in parentheses after the translated text.
  * @return {Promise<string>} A promise that resolves to the translated text combined with the shortcut hint.
  */
-async function addShortcutText(button, shortcut) {
-	return await translator.translate([
+function addShortcutText(button, shortcut) {
+	return translator.translate([
 		_sliceBeforeSeparator(
 			button.dataset[translator.translateAttributeDataset],
 		),

@@ -136,8 +136,8 @@ class DragContainer {
 	 * @param {DragEventLike} event Event object.
 	 * @return {Promise<boolean | void>} Listener result.
 	 */
-	async dispatch(type: string, event: DragEventLike) {
-		return await this.#listeners.get(type)?.call(this, event);
+	dispatch(type: string, event: DragEventLike) {
+		return this.#listeners.get(type)?.call(this, event);
 	}
 
 	/**

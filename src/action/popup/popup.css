@@ -86,12 +86,12 @@ svg#open-settings {
 }
 
 button.warning {
-  background-color: var(--warning);
-  &:hover {
-    background-color: var(--warning-hover);
-  }
+	background-color: var(--warning);
+	&:hover {
+		background-color: var(--warning-hover);
+	}
 }
 
 #import {
-  color: var(--color);
+	color: var(--color);
 }

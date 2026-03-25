@@ -298,26 +298,22 @@ async function mergeSettings(newsettings, key = SETTINGS_KEY) {
  */
 export async function bg_setStorage(tobeset, callback = null, key = WHY_KEY) {
 	const set = {};
-	const changedToArray = !Array.isArray(tobeset);
-	if (changedToArray) {
-		tobeset = [tobeset];
-	}
 	switch (key) {
 		case SETTINGS_KEY:
 		case GENERIC_TAB_STYLE_KEY:
 		case ORG_TAB_STYLE_KEY:
 		case GENERIC_PINNED_TAB_STYLE_KEY:
 		case ORG_PINNED_TAB_STYLE_KEY: {
-			set[key] = await mergeSettings(tobeset, key);
+			set[key] = await mergeSettings(
+				Array.isArray(tobeset) ? tobeset : [tobeset],
+				key,
+			);
 			break;
 		}
 		case WHY_KEY:
 		case LOCALE_KEY:
 		case TUTORIAL_KEY:
 		case TUTORIAL_CLOSE_EVENT:
-			if (changedToArray) {
-				tobeset = tobeset[0];
-			}
 			set[key] = tobeset;
 			break;
 		default:
@@ -712,9 +708,9 @@ function setExtensionBrowserListeners() {
 		() => checkAddRemoveContextMenus(WHAT_ACTIVATE),
 	);
 	// when the active tab changes
-	BROWSER.tabs.onActivated.addListener(() =>
-		debouncedCheckMenus(WHAT_HIGHLIGHTED, checkForUpdates)
-	);
+	BROWSER.tabs.onActivated.addListener(() => {
+		debouncedCheckMenus(WHAT_HIGHLIGHTED, checkForUpdates);
+	});
 	//BROWSER.tabs.onHighlighted.addListener(() => checkAddRemoveContextMenus(WHAT_HIGHLIGHTED));
 	// when the current tab URL changes without switching tabs
 	BROWSER.tabs.onUpdated?.addListener((_, changeInfo, tab) => {

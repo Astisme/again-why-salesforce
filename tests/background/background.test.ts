@@ -479,6 +479,8 @@ await Deno.test("background listeners handle runtime, command, and browser event
 
 		BROWSER.runtime.onStartup.triggerStartup();
 		BROWSER.tabs.onActivated.triggerActivated({ tabId: 1, windowId: 1 });
+		await Promise.resolve();
+		await Promise.resolve();
 		BROWSER.tabs.onUpdated.triggerUpdated(
 			1,
 			{ status: "complete" },
@@ -496,5 +498,48 @@ await Deno.test("background listeners handle runtime, command, and browser event
 		globalThis.setTimeout = originalSetTimeout;
 		BROWSER.tabs.sendMessage = originalSendMessage;
 		BROWSER.permissions.contains = originalContains;
+	}
+});
+
+await Deno.test("background skips update checks on tab activation for development installs", async () => {
+	const originalSetTimeout = globalThis.setTimeout;
+	const originalFetch = globalThis.fetch;
+	const browserWithManagement = BROWSER as typeof BROWSER & {
+		management?: {
+			getSelf: () => Promise<{ installType: string }>;
+		};
+	};
+	const originalManagement = browserWithManagement.management;
+	let fetchCalls = 0;
+
+	globalThis.setTimeout = ((handler: TimerHandler) => {
+		if (typeof handler === "function") {
+			handler();
+		}
+		return 1;
+	}) as typeof setTimeout;
+	globalThis.fetch = (() => {
+		fetchCalls++;
+		return Promise.reject(new Error("fetch should not be called"));
+	}) as typeof fetch;
+	browserWithManagement.management = {
+		getSelf: () => Promise.resolve({ installType: "development" }),
+	};
+	BROWSER.tabs.setMockBrowserTabs([{
+		id: 1,
+		url: "https://acme.lightning.force.com/lightning/setup/SetupOneHome/home",
+		active: true,
+		currentWindow: true,
+	}]);
+
+	try {
+		BROWSER.tabs.onActivated.triggerActivated({ tabId: 1, windowId: 1 });
+		await Promise.resolve();
+		await Promise.resolve();
+		assertEquals(fetchCalls, 0);
+	} finally {
+		globalThis.setTimeout = originalSetTimeout;
+		globalThis.fetch = originalFetch;
+		browserWithManagement.management = originalManagement;
 	}
 });

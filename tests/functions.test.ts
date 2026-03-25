@@ -39,6 +39,7 @@ import {
 	getPinnedSpecificKey,
 	getSettings,
 	getStyleSettings,
+	getTodayDateKey,
 	injectStyle,
 	isExportAllowed,
 	isGenericKey,
@@ -97,10 +98,13 @@ Deno.test("getSettings", async (t) => {
 	await t.step(
 		"getSettings equals sendExtensionMessage in specific case",
 		async () => {
-			const resultWithGetSettings = await getSettings();
-			const resultWithSendExtensionMessage = await sendExtensionMessage({
-				what: "get-settings",
-			});
+			const [resultWithGetSettings, resultWithSendExtensionMessage] =
+				await Promise.all([
+					getSettings(),
+					sendExtensionMessage({
+						what: "get-settings",
+					}),
+				]);
 			assertEquals(resultWithGetSettings, resultWithSendExtensionMessage);
 		},
 	);
@@ -153,14 +157,6 @@ Deno.test("getSettings", async (t) => {
 			assertEquals(undefined, result);
 		},
 	);
-});
-
-Deno.test("getSettings equals sendExtensionMessage in specific case", async () => {
-	const resultWithGetSettings = await getSettings();
-	const resultWithSendExtensionMessage = await sendExtensionMessage({
-		what: "get-settings",
-	});
-	assertEquals(resultWithGetSettings, resultWithSendExtensionMessage);
 });
 
 Deno.test("getStyleSettings sends correct message", async (t) => {
@@ -875,4 +871,15 @@ Deno.test("test inner element field by selector", async (t) => {
 			lookedValue,
 		);
 	});
+});
+
+Deno.test("getTodayDateKey formats the local calendar day", () => {
+	assertEquals(
+		getTodayDateKey(new Date(2026, 2, 12, 0, 30, 0, 0)),
+		"2026-03-12",
+	);
+	assertEquals(
+		getTodayDateKey(new Date(2026, 10, 2, 23, 59, 59, 999)),
+		"2026-11-02",
+	);
 });

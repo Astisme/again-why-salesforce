@@ -435,17 +435,21 @@ async function createMenuItems(force = false) {
 		return;
 	}
 	const translator = await ensureTranslatorAvailability();
-	await updateCommandLinks();
 	try {
-		await removeMenuItems(true);
+		const [userLanguage, sfLanguage, _] = await Promise.all([
+			bg_getSettings(USER_LANGUAGE),
+			bg_getSalesforceLanguage(),
+			updateCommandLinks(),
+			removeMenuItems(true),
+		]);
 		// load the user picked language
 		if (
 			!await translator.loadNewLanguage(
-				(await bg_getSettings(USER_LANGUAGE))?.enabled,
+				userLanguage?.enabled,
 			)
 		) {
 			// load the language in which salesforce is currently set
-			await translator.loadNewLanguage(await bg_getSalesforceLanguage());
+			await translator.loadNewLanguage(sfLanguage);
 		}
 		const menuItems = getMenuItemsClone();
 		for (const item of menuItems) {
@@ -467,18 +471,53 @@ async function createMenuItems(force = false) {
 }
 
 /**
+ * Runs a single context-menu create/refresh operation and reports any failure.
+ *
+ * @param {Object} [param0={}] - operation configuration
+ * @param {string|null} [param0.what=null] - optional notification message to send after creation
+ * @param {Function|null} [param0.callback=null] - optional callback invoked after creation succeeds
+ * @param {boolean} [param0.force=false] - whether to force rebuilding the context menu tree
+ * @return {Promise<void>} Resolves when the operation has finished.
+ */
+async function innerContextMenuOperation({
+	what = null,
+	callback = null,
+	force = false,
+} = {}) {
+	try {
+		await createMenuItems(force);
+		if (what != null) {
+			bg_notify({ what });
+		}
+		callback?.();
+	} catch (error) {
+		await logContextMenuError(error);
+	}
+}
+
+/**
  * Serializes context menu mutations so create/remove/refresh flows do not overlap.
  *
  * @param {Function} operation - The async menu operation to run.
  * @return {Promise<unknown>} A promise that resolves when the queued operation completes.
  */
-function queueContextMenuOperation(operation) {
+function queueContextMenuOperation({
+	what = null,
+	callback = null,
+	force = false,
+} = {}) {
 	if (pendingContextMenuOperation == null) {
 		pendingContextMenuOperation = Promise.resolve();
 	}
 	pendingContextMenuOperation = pendingContextMenuOperation
 		.catch(() => undefined)
-		.then(operation);
+		.then(() =>
+			innerContextMenuOperation({
+				what,
+				callback,
+				force,
+			})
+		);
 	return pendingContextMenuOperation;
 }
 
@@ -535,17 +574,7 @@ async function logContextMenuError(error) {
  * @return {Promise} the promise with the queued operation
  */
 export function checkAddRemoveContextMenus(what, callback = null) {
-	return queueContextMenuOperation(async () => {
-		try {
-			await createMenuItems();
-			if (what != null) {
-				bg_notify({ what });
-			}
-			callback?.();
-		} catch (error) {
-			await logContextMenuError(error);
-		}
-	});
+	return queueContextMenuOperation({ what, callback });
 }
 
 /**
@@ -556,16 +585,7 @@ export function checkAddRemoveContextMenus(what, callback = null) {
  * @return {Promise} the promise with the queued operation
  */
 export function refreshContextMenus(what) {
-	return queueContextMenuOperation(async () => {
-		try {
-			await createMenuItems(true);
-			if (what != null) {
-				bg_notify({ what });
-			}
-		} catch (error) {
-			await logContextMenuError(error);
-		}
-	});
+	return queueContextMenuOperation({ what, force: true });
 }
 
 /**

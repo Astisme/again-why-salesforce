@@ -1,7 +1,14 @@
 import { assert, assertEquals } from "@std/testing/asserts";
 import { mockStorage } from "../mocks.test.ts";
-import { PREVENT_ANALYTICS, SETTINGS_KEY } from "/constants.js";
-import { executeOncePerDay, getTodayDateKey } from "/salesforce/once-a-day.js";
+import {
+	EXTENSION_LAST_ACTIVE_DAY,
+	PREVENT_ANALYTICS,
+	SETTINGS_KEY,
+} from "/constants.js";
+import { getTodayDateKey } from "/functions.js";
+import { executeOncePerDay } from "/salesforce/once-a-day.js";
+
+const todayStorageKey = "again-why-salesforce-today";
 
 /**
  * Creates a minimal in-memory sessionStorage mock for tests.
@@ -60,41 +67,77 @@ function flushAsyncWork() {
 	return new Promise((resolve) => setTimeout(resolve, 0));
 }
 
-Deno.test("getTodayDateKey formats the local calendar day", () => {
-	assertEquals(
-		getTodayDateKey(new Date(2026, 2, 12, 0, 30, 0, 0)),
-		"2026-03-12",
-	);
-	assertEquals(
-		getTodayDateKey(new Date(2026, 10, 2, 23, 59, 59, 999)),
-		"2026-11-02",
-	);
-});
+/**
+ * Replaces the global sessionStorage with a test double.
+ *
+ * @param {Storage} storage - the storage implementation to expose globally
+ */
+function setGlobalSessionStorage(storage: Storage) {
+	Object.defineProperty(globalThis, "sessionStorage", {
+		configurable: true,
+		value: storage,
+		writable: true,
+	});
+}
 
 Deno.test("executeOncePerDay runs the first time but not the second", async () => {
 	const originalSettings = structuredClone(mockStorage[SETTINGS_KEY]);
 	const originalSessionStorage = globalThis.sessionStorage;
 	const sessionStorageMock = createSessionStorageMock();
 	const runtimeRecorder = installRuntimeRecorder();
+	const today = getTodayDateKey();
 	try {
-		globalThis.sessionStorage = sessionStorageMock as Storage;
+		setGlobalSessionStorage(sessionStorageMock as Storage);
 		mockStorage[SETTINGS_KEY] = [{
 			id: PREVENT_ANALYTICS,
 			enabled: true,
 		}];
 
-		executeOncePerDay();
+		await executeOncePerDay();
 		await flushAsyncWork();
 		const firstCallMessageCount = runtimeRecorder.messages.length;
-		executeOncePerDay();
+		await executeOncePerDay();
 		await flushAsyncWork();
 		const secondCallMessageCount = runtimeRecorder.messages.length;
 
 		assert(firstCallMessageCount > 0);
 		assertEquals(secondCallMessageCount, firstCallMessageCount);
+		assertEquals(sessionStorageMock.getItem(todayStorageKey), today);
+		assertEquals(
+			mockStorage[SETTINGS_KEY].find((setting) =>
+				setting.id === EXTENSION_LAST_ACTIVE_DAY
+			)?.enabled,
+			today,
+		);
 	} finally {
 		runtimeRecorder.restore();
 		mockStorage[SETTINGS_KEY] = originalSettings;
-		globalThis.sessionStorage = originalSessionStorage;
+		setGlobalSessionStorage(originalSessionStorage);
+	}
+});
+
+Deno.test("executeOncePerDay skips persisted same-day calls and backfills sessionStorage", async () => {
+	const originalSettings = structuredClone(mockStorage[SETTINGS_KEY]);
+	const originalSessionStorage = globalThis.sessionStorage;
+	const sessionStorageMock = createSessionStorageMock();
+	const runtimeRecorder = installRuntimeRecorder();
+	const today = getTodayDateKey();
+	try {
+		setGlobalSessionStorage(sessionStorageMock as Storage);
+		mockStorage[SETTINGS_KEY] = [
+			{ id: PREVENT_ANALYTICS, enabled: false },
+			{ id: EXTENSION_LAST_ACTIVE_DAY, enabled: today },
+		];
+
+		await executeOncePerDay();
+		await flushAsyncWork();
+
+		assertEquals(runtimeRecorder.messages.length, 1);
+		assertEquals(runtimeRecorder.messages[0]?.what, "get-settings");
+		assertEquals(sessionStorageMock.getItem(todayStorageKey), today);
+	} finally {
+		runtimeRecorder.restore();
+		mockStorage[SETTINGS_KEY] = originalSettings;
+		setGlobalSessionStorage(originalSessionStorage);
 	}
 });

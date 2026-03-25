@@ -3,6 +3,7 @@ import {
 	assert,
 	assertEquals,
 	assertExists,
+	assertRejects,
 	assertThrows,
 } from "@std/testing/asserts";
 import { installMockDom } from "../happydom.test.ts";
@@ -1717,10 +1718,10 @@ tutorialTest(
 
 			const failedStartTutorial = new tutorialModule.Tutorial();
 			failedStartTutorial.initSteps = () => Promise.resolve(false);
-			await failedStartTutorial.start();
-			assertEquals(
-				errorCalls.includes("error_tutorial_not_initialized"),
-				true,
+			await assertRejects(
+				() => failedStartTutorial.start(),
+				Error,
+				"error_tutorial_not_initialized",
 			);
 
 			const invalidStartTutorial = new tutorialModule.Tutorial();
@@ -1757,10 +1758,10 @@ tutorialTest(
 
 			tutorialModule.Tutorial.prototype.initSteps = () =>
 				Promise.resolve(false);
-			await tutorialModule.checkTutorial();
-			assertEquals(
-				errorCalls.includes("error_tutorial_not_initialized"),
-				true,
+			await assertRejects(
+				() => tutorialModule.checkTutorial(),
+				Error,
+				"error_tutorial_not_initialized",
 			);
 		} finally {
 			console.error = originalConsoleError;
