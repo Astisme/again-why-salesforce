@@ -121,12 +121,12 @@ async function generateFavouriteButton() {
 	span.setAttribute("dir", "ltr");
 	button.appendChild(span);
 	const [connectedCommands, translator] = await Promise.all([
-      sendExtensionMessage({
-          what: WHAT_GET_COMMANDS,
-          commands: [CMD_SAVE_AS_TAB, CMD_REMOVE_TAB],
-      }),
-      ensureTranslatorAvailability(),
-    ]);
+		sendExtensionMessage({
+			what: WHAT_GET_COMMANDS,
+			commands: [CMD_SAVE_AS_TAB, CMD_REMOVE_TAB],
+		}),
+		ensureTranslatorAvailability(),
+	]);
 	let starCmd = null;
 	let slashedStarCmd = null;
 	for (const cc of connectedCommands) {
@@ -141,10 +141,10 @@ async function generateFavouriteButton() {
 				break;
 		}
 	}
-    const [save_tab, remove_tab] = await Promise.all([
-      translator.translate("save_tab"),
-      translator.translate("remove_tab"),
-    ]);
+	const [save_tab, remove_tab] = await Promise.all([
+		translator.translate("save_tab"),
+		translator.translate("remove_tab"),
+	]);
 	const saveTabAssistive = `${save_tab}${
 		starCmd == null ? "" : ` (${starCmd})`
 	}`;

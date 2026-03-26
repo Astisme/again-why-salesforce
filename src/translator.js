@@ -393,7 +393,7 @@ class TranslationService {
  * @async
  */
 function getTranslator_async() {
-  return singletonTranslator ?? TranslationService.create();
+	return singletonTranslator ?? TranslationService.create();
 }
 
 /**

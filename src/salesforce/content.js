@@ -1,4 +1,4 @@
-"usn strict";
+"use strict";
 import {
 	ALL_TOAST_TYPES,
 	BROWSER,
@@ -597,10 +597,10 @@ async function showModalOpenOtherOrg(
 	if (document.getElementById(MODAL_ID) != null) {
 		return showToast("error_close_other_modal", TOAST_ERROR);
 	}
-	const [allTabs, skip_link_detection]  = await Promise.all([
-      ensureAllTabsAvailability(),
-      getSettings("skip_link_detection"),
-    ]);
+	const [allTabs, skip_link_detection] = await Promise.all([
+		ensureAllTabsAvailability(),
+		getSettings("skip_link_detection"),
+	]);
 	const href = getCurrentHref();
 	if (label == null && url == null) {
 		const minyURL = Tab.minifyURL(href);

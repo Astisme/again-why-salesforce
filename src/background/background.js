@@ -636,12 +636,13 @@ async function setDefaultOrgStyle() {
 		{ id: TAB_STYLE_BACKGROUND, forActive: true, value: "#FFE4E1" },
 	];
 	if (availableStyles[ORG_PINNED_TAB_STYLE_KEY] == null) {
-		availableStyles[ORG_PINNED_TAB_STYLE_KEY] = await _createDefaultStyleWrapper(
-			availableStyles,
-			ORG_TAB_STYLE_KEY,
-			ORG_PINNED_TAB_STYLE_KEY,
-			...pinnedStyles,
-		);
+		availableStyles[ORG_PINNED_TAB_STYLE_KEY] =
+			await _createDefaultStyleWrapper(
+				availableStyles,
+				ORG_TAB_STYLE_KEY,
+				ORG_PINNED_TAB_STYLE_KEY,
+				...pinnedStyles,
+			);
 	}
 	if (availableStyles[GENERIC_PINNED_TAB_STYLE_KEY] == null) {
 		availableStyles[GENERIC_PINNED_TAB_STYLE_KEY] =

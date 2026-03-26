@@ -210,10 +210,10 @@ class ReviewSponsorAws extends HTMLElement {
 			usageDays,
 		}));
 		// add accessible names to icon-only links
-      const [reviewMsg, sponsorMsg] = await Promise.all([
-        translator.translate("write_review"),
-        translator.translate("send_tip"),
-      ]);
+		const [reviewMsg, sponsorMsg] = await Promise.all([
+			translator.translate("write_review"),
+			translator.translate("send_tip"),
+		]);
 		result.reviewLink.title = reviewMsg;
 		result.reviewLink.setAttribute("aria-label", reviewMsg);
 		result.reviewSvg.setAttribute("focusable", "false");

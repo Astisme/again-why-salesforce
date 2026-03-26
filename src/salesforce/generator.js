@@ -90,13 +90,13 @@ export async function handleLightningLinkClick(e) {
 		showToast("error_redirect", TOAST_ERROR);
 		return;
 	}
-    const [allTabs, settings] = await Promise.all([
-      ensureAllTabsAvailability(),
-      getSettings([
-          LINK_NEW_BROWSER,
-          USE_LIGHTNING_NAVIGATION,
-      ]),
-    ]);
+	const [allTabs, settings] = await Promise.all([
+		ensureAllTabsAvailability(),
+		getSettings([
+			LINK_NEW_BROWSER,
+			USE_LIGHTNING_NAVIGATION,
+		]),
+	]);
 	allTabs.handleClickTabByData({ url: Tab.minifyURL(url) });
 	const fallbackTarget = currentTarget === ""
 		? _getLinkTarget(metaCtrl, url)
@@ -2619,7 +2619,7 @@ export async function generateManageTabsModal(tabs = [], {
 		"hide_other_org_tabs",
 	);
 	hideOtherOrgTabsButton.textContent = hide_other_org_tabs;
-    buttonContainer.prepend(hideOtherOrgTabsButton);
+	buttonContainer.prepend(hideOtherOrgTabsButton);
 	showAllTabsButton.addEventListener("click", () => {
 		for (
 			const otherOrgTr of tbody.querySelectorAll(
@@ -2656,7 +2656,7 @@ export async function generateManageTabsModal(tabs = [], {
 		"slds-button_small",
 	);
 	deleteAllTabsButton.textContent = delete_all;
-    buttonContainer.prepend(deleteAllTabsButton);
+	buttonContainer.prepend(deleteAllTabsButton);
 	const loggers = []; // track input changes
 	// Create rows for all existing tabs
 	const allDropMenus = [];
