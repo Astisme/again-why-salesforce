@@ -103,7 +103,7 @@ function createStarSvg({
  * - The button contains a span for the label and image elements for the star icons.
  * - If the image fails to load, it falls back to displaying the text label.
  *
- * @return {HTMLButtonElement} The generated button element with its child elements (star images and styles).
+ * @return {Promise<HTMLButtonElement>} The generated button element with its child elements (star images and styles).
  */
 async function generateFavouriteButton() {
 	const button = document.createElement("button");
@@ -120,11 +120,13 @@ async function generateFavouriteButton() {
 	span.classList.add("label", "bBody");
 	span.setAttribute("dir", "ltr");
 	button.appendChild(span);
-	const commands = [CMD_SAVE_AS_TAB, CMD_REMOVE_TAB];
-	const connectedCommands = await sendExtensionMessage({
-		what: WHAT_GET_COMMANDS,
-		commands,
-	});
+	const [connectedCommands, translator] = await Promise.all([
+      sendExtensionMessage({
+          what: WHAT_GET_COMMANDS,
+          commands: [CMD_SAVE_AS_TAB, CMD_REMOVE_TAB],
+      }),
+      ensureTranslatorAvailability(),
+    ]);
 	let starCmd = null;
 	let slashedStarCmd = null;
 	for (const cc of connectedCommands) {
@@ -139,11 +141,14 @@ async function generateFavouriteButton() {
 				break;
 		}
 	}
-	const translator = await ensureTranslatorAvailability();
-	const saveTabAssistive = `${await translator.translate("save_tab")}${
+    const [save_tab, remove_tab] = await Promise.all([
+      translator.translate("save_tab"),
+      translator.translate("remove_tab"),
+    ]);
+	const saveTabAssistive = `${save_tab}${
 		starCmd == null ? "" : ` (${starCmd})`
 	}`;
-	const removeTabAssistive = `${await translator.translate("remove_tab")}${
+	const removeTabAssistive = `${remove_tab}${
 		slashedStarCmd == null ? "" : ` (${slashedStarCmd})`
 	}`;
 	button.dataset.saveAssistiveText = saveTabAssistive;

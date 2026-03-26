@@ -429,6 +429,7 @@ function getMenuItemsClone() {
  *
  * @param {boolean} [force=false] - Whether to rebuild the menu tree even when
  * it is already marked as visible.
+ * @return {Promise<void>}
  */
 async function createMenuItems(force = false) {
 	if (areMenuItemsVisible && !force) {
@@ -436,7 +437,7 @@ async function createMenuItems(force = false) {
 	}
 	const translator = await ensureTranslatorAvailability();
 	try {
-		const [userLanguage, sfLanguage, _] = await Promise.all([
+		const [userLanguage, sfLanguage] = await Promise.all([
 			bg_getSettings(USER_LANGUAGE),
 			bg_getSalesforceLanguage(),
 			updateCommandLinks(),
@@ -499,7 +500,7 @@ async function innerContextMenuOperation({
  * Serializes context menu mutations so create/remove/refresh flows do not overlap.
  *
  * @param {Function} operation - The async menu operation to run.
- * @return {Promise<unknown>} A promise that resolves when the queued operation completes.
+ * @return {Promise} A promise that resolves when the queued operation completes.
  */
 function queueContextMenuOperation({
 	what = null,

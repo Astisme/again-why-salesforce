@@ -145,7 +145,7 @@ export async function bg_getSettings(
  * If a style is found with a non-compliant value, it is updated to Hexadecimal
  * @param {string|string[]} styleKey - the key related to the current style settings
  * @param {Array|Object<string,Array>} styleSettings - the result from bg_getSettings (for style settings)
- * @return styleSettings, updated with Hexadecimal values
+ * @return {Promise} styleSettings, updated with Hexadecimal values
  */
 async function checkStyleSettingsHex(styleKey, styleSettings) {
 	if (styleKey == null || styleSettings == null) {
@@ -236,7 +236,7 @@ async function bg_getStyleSettings(
  * @param {Array} newsettings - The settings to be stored
  * @param {string} [key=SETTINGS_KEY]  - The key of the settings where to merge and store the newsettings array
  *
- * @return the merged settings
+ * @return {Promise} the merged settings
  */
 async function mergeSettings(newsettings, key = SETTINGS_KEY) {
 	// get the settings array
@@ -448,7 +448,7 @@ export async function bg_getCommandLinks(commands = null, callback = null) {
  * Checks whether the object passed as contains is contained in the granted permissions
  * @param {Object} contains - the permission object to be checked
  * @param {function} callback - the function to call to send the response back
- * @return {boolean} the response from the API
+ * @return {Promise<boolean>} the response from the API
  */
 async function bg_isPermissionGranted(contains, callback) {
 	const response = await BROWSER.permissions.contains(contains);
@@ -636,7 +636,7 @@ async function setDefaultOrgStyle() {
 		{ id: TAB_STYLE_BACKGROUND, forActive: true, value: "#FFE4E1" },
 	];
 	if (availableStyles[ORG_PINNED_TAB_STYLE_KEY] == null) {
-		availableStyles[ORG_PINNED_TAB_STYLE_KEY] = _createDefaultStyleWrapper(
+		availableStyles[ORG_PINNED_TAB_STYLE_KEY] = await _createDefaultStyleWrapper(
 			availableStyles,
 			ORG_TAB_STYLE_KEY,
 			ORG_PINNED_TAB_STYLE_KEY,
@@ -645,7 +645,7 @@ async function setDefaultOrgStyle() {
 	}
 	if (availableStyles[GENERIC_PINNED_TAB_STYLE_KEY] == null) {
 		availableStyles[GENERIC_PINNED_TAB_STYLE_KEY] =
-			_createDefaultStyleWrapper(
+			await _createDefaultStyleWrapper(
 				availableStyles,
 				GENERIC_TAB_STYLE_KEY,
 				GENERIC_PINNED_TAB_STYLE_KEY,

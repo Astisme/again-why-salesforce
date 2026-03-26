@@ -1,4 +1,4 @@
-"use strict";
+"usn strict";
 import {
 	ALL_TOAST_TYPES,
 	BROWSER,
@@ -597,7 +597,10 @@ async function showModalOpenOtherOrg(
 	if (document.getElementById(MODAL_ID) != null) {
 		return showToast("error_close_other_modal", TOAST_ERROR);
 	}
-	const allTabs = await ensureAllTabsAvailability();
+	const [allTabs, skip_link_detection]  = await Promise.all([
+      ensureAllTabsAvailability(),
+      getSettings("skip_link_detection"),
+    ]);
 	const href = getCurrentHref();
 	if (label == null && url == null) {
 		const minyURL = Tab.minifyURL(href);
@@ -613,7 +616,6 @@ async function showModalOpenOtherOrg(
 	if (org == null) {
 		org = Tab.extractOrgName(href);
 	}
-	const skip_link_detection = await getSettings("skip_link_detection");
 	if (
 		skip_link_detection != null && !skip_link_detection.enabled &&
 		Tab.containsSalesforceId(url)
@@ -705,7 +707,7 @@ const ACTION_SORT = "sort";
  * @param {string} action - The action to perform on the tab.
  * @param {Tab} tab - The tab on which the action should be performed.
  * @param {Object} options - Options that influence the behavior of the action (e.g., filters or specific conditions).
- * @return undefined
+ * @return {Promise<void>}
  */
 export async function performActionOnTabs(
 	action,
@@ -864,7 +866,7 @@ async function toggleOrg({ label = null, url = null, org = null } = {}) {
  * @param {string} tab.label - The label of the Tab to update
  * @param {string} tab.url - The Url of the Tab to update
  * @param {string} tab.org - The Org of the Tab to update
- * @return undefined
+ * @return {Promise<void>}
  */
 async function showModalUpdateTab(
 	{ label = null, url = null, org = null } = {},

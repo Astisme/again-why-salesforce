@@ -281,7 +281,7 @@ class Tutorial {
 
 	/**
 	 * Shows the favourite button and finds the stars container
-	 * @return HTMLElement - the element from getStarsContainer
+	 * @return {Promise<HTMLElement>} - the element from getStarsContainer
 	 */
 	async #showStarsContainerAndReturnIt() {
 		await showFavouriteButton();
@@ -567,7 +567,7 @@ class Tutorial {
 	 * @param {number} [stepNo=this.currentStep] - the step at which the tutorial has arrived
 	 * @param {boolean} [closedManually=false] - whether the user manually closed the tutorial
 	 * @throws TypeError if stepNo is not a number
-	 * @return Promise<void> the promise from sendExtensionMessage
+	 * @return {Promise<void>} the promise from sendExtensionMessage
 	 */
 	persistTutorialProgress(
 		stepNo = this.currentStep,
@@ -620,7 +620,7 @@ class Tutorial {
 	 * Finds the element from step.element or creates a fake element after 5 retries
 	 * @param {Object} step - the current step
 	 * @param {function} callback - the function to call if the element was not found
-	 * @return HTMLElement - the element from the step
+	 * @return {Promise<HTMLElement>} - the element from the step
 	 */
 	async getElementNowOrLater(step, callback) {
 		const el = await step.element();

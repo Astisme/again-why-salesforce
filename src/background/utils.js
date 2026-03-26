@@ -24,7 +24,7 @@ import { bg_getSettings, bg_getStorage, bg_setStorage } from "./background.js";
  * @param {Function} callback - A function to handle the retrieved tab once it is found.
  * @param {number} [count=0] - A counter used to track the number of retries. Defaults to 0.
  * @throws {Error} Throws an error if the current tab cannot be found after 5 retries.
- * @return Promise the browser tab which was found
+ * @return {Promise} the browser tab which was found
  */
 async function _queryTabs(callback, count = 0) {
 	const queryParams = { active: true, currentWindow: true };
@@ -39,7 +39,7 @@ async function _queryTabs(callback, count = 0) {
 		if (count > 5) {
 			throw new Error("error_no_browser_tab");
 		}
-		return await _queryTabs(callback, count + 1);
+		return _queryTabs(callback, count + 1);
 	}
 	return callback(browserTabs[0]);
 }
@@ -52,7 +52,7 @@ async function _queryTabs(callback, count = 0) {
  * @param {Function} [callback] - A callback function to handle the retrieved tab. If not provided, a promise is returned.
  * @param {boolean} [fromPopup=false] - A flag indicating whether the function was called from a popup. If true, queries all tabs in the current window.
  * @throws {Error} Throws an error if the current tab cannot be found after 5 retries.
- * @return {Promise|undefined} A promise that resolves to the current tab if no callback is provided; undefined if a callback is provided.
+ * @return {Promise} A promise that resolves to the current tab if no callback is provided; undefined if a callback is provided.
  */
 export function bg_getCurrentBrowserTab(callback = null) {
 	if (callback == null) {

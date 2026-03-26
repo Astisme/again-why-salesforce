@@ -90,12 +90,14 @@ export async function handleLightningLinkClick(e) {
 		showToast("error_redirect", TOAST_ERROR);
 		return;
 	}
-	(await ensureAllTabsAvailability())
-		.handleClickTabByData({ url: Tab.minifyURL(url) });
-	const settings = await getSettings([
-		LINK_NEW_BROWSER,
-		USE_LIGHTNING_NAVIGATION,
-	]);
+    const [allTabs, settings] = await Promise.all([
+      ensureAllTabsAvailability(),
+      getSettings([
+          LINK_NEW_BROWSER,
+          USE_LIGHTNING_NAVIGATION,
+      ]),
+    ]);
+	allTabs.handleClickTabByData({ url: Tab.minifyURL(url) });
 	const fallbackTarget = currentTarget === ""
 		? _getLinkTarget(metaCtrl, url)
 		: currentTarget;
@@ -381,7 +383,7 @@ export function generateRowTemplate(
  * @param {string} [status="success"]  - The toast type.
  * @throws {Error} Throws an error if required parameters are missing or invalid.
  * @param {string} status - The toast type.
- * @return {HTMLElement} The generated toast container element.
+ * @return {Promise<HTMLElement>} The generated toast container element.
  */
 export async function generateSldsToastMessage(
 	message,
@@ -494,7 +496,7 @@ export async function generateSldsToastMessage(
  * sets the "title" attribute to "required" and the "part" attribute to "required",
  * and sets its text content to an asterisk ("*").
  *
- * @return {HTMLElement} The <abbr> element representing the required indicator.
+ * @return {Promise<HTMLElement>} The <abbr> element representing the required indicator.
  */
 async function generateRequired() {
 	const translator = await ensureTranslatorAvailability();
@@ -531,7 +533,7 @@ async function generateRequired() {
  * @param {boolean} [translateConfig.translatePlaceholder=true] - True to translate the placeholder
  * @param {boolean} [translateConfig.translateTitle=true] - True to translate the title
  *
- * @return {HTMLInputElement} The created input element.
+ * @return {Promise<HTMLInputElement>} The created input element.
  */
 async function createInputElement(
 	{
@@ -612,7 +614,7 @@ async function createInputElement(
  * @param {boolean} [translateConfig.translatePlaceholder=true] - True to translate the placeholder
  * @param {boolean} [translateConfig.translateTitle=true] - True to translate the title
  *
- * @return {Object} - An object containing:
+ * @return {Promise<Object>} - An object containing:
  *   - `inputParent`: The parent `div` containing the entire input structure.
  *   - `inputContainer`: The main input element.
  */
@@ -699,7 +701,7 @@ async function generateInput({
  *
  * @param {string} sectionTitle - The title of the section to be displayed.
  *
- * @return {Object} - An object containing:
+ * @return {Promise<Object>} - An object containing:
  *   - `section`: The root `records-record-layout-section` element that wraps the section.
  *   - `divParent`: A container div element for additional content inside the section.
  *
@@ -1071,7 +1073,7 @@ function createSldsModalShell({
  *
  * @param {string} modalTitle - The title of the modal.
  * @param {string} [saveButtonLabel="continue"] The text to translate to use for the submit button
- * @return {Object} An object containing key elements of the modal:
+ * @return {Promise<Object>} An object containing key elements of the modal:
  * - modalParent: The main modal container element.
  * - article: The content area within the modal.
  * - saveButton: The save button element for user actions.
@@ -1252,7 +1254,7 @@ export function generateRadioButtons(name, {
  * @param {string|null} [options.label=null] - The label for the modal. Defaults to a label fetched from saved tabs if not provided.
  * @param {string|null} [options.url=null] - The URL for the page to open in another organization.
  * @param {string|null} [options.org=null] - The org of the current page.
- * @return {Object} An object containing key elements of the modal:
+ * @return {Promise<Object>} An object containing key elements of the modal:
  * - modalParent: The main modal container element.
  * - saveButton: The save button element for user actions.
  * - closeButton: The close button element for closing the modal.
@@ -1350,7 +1352,7 @@ export async function generateOpenOtherOrgModal(
  * @param {boolean} [required=true] - Flag indicating if the file input is required.
  * @throws {Error} Throws an error if both `allowDrop` is false and `preventFileSelection` is true.
  * @throws {Error} Throws an error if required parameters are missing.
- * @return {{ fileInputWrapper: HTMLElement, inputContainer: HTMLInputElement }} An object containing:
+ * @return {Promise<{ fileInputWrapper: HTMLElement, inputContainer: HTMLInputElement }>} An object containing:
  *   - fileInputWrapper: The wrapper element for the entire file input component.
  *   - inputContainer: The actual file input element.
  */
@@ -1589,7 +1591,7 @@ export async function generateSldsFileInput(
  * @param {string} id - The unique identifier for the checkbox.
  * @param {string} label - The text to display next to the checkbox.
  * @param {boolean} [checked=false] - Whether the checkbox should be initially checked.
- * @return {HTMLLabelElement} The label element containing the checkbox input and its text.
+ * @return {Promise<HTMLLabelElement>} The label element containing the checkbox input and its text.
  */
 export async function generateCheckboxWithLabel(id, label, checked = false) {
 	const translator = await ensureTranslatorAvailability();
@@ -1615,7 +1617,7 @@ export async function generateCheckboxWithLabel(id, label, checked = false) {
  * @param {string} label - The title of the modal tab.
  * @param {string} url - A partial URL for the target org.
  * @param {string} org - The Org to which the Tab points to.
- * @return {Object} An object containing key elements of the modal:
+ * @return {Promise<Object>} An object containing key elements of the modal:
  * - modalParent: The main modal container element.
  * - saveButton: The save button element for user actions.
  * - closeButton: The close button element for closing the modal.
@@ -1961,23 +1963,6 @@ async function generateTableWithCheckboxes(
 }
 
 /**
- * Generates a modal dialog for exporting selected Tabs.
- * This function creates a modal that displays all available Tabs with checkboxes,
- * allowing users to select which Tabs to export. It includes a "Select All" / "Unselect All" button
- * for convenience.
- *
- * @param {Array} tabs - An array of Tab objects to display in the export modal.
- * @param {Object} [param1={}] object with the following keys
- * @param {string} [param1.title="export_tabs"] the title of the modal
- * @param {string} [param1.saveButtonLabel="export"] the label for the submit button
- * @param {string} [param1.explainer="select_tabs_export"] the text used to explain what to do with this modal
- * @return {Object} An object containing key elements of the modal:
- * - modalParent: The main modal container element.
- * - saveButton: The button element for confirming the selected Tabs.
- * - closeButton: The close button element for closing the modal.
- * - getSelectedTabs: A function that returns an array of selected Tab objects.
- */
-/**
  * Helper function to add title and explainer to a modal article.
  * Creates and prepends a centered explainer span with translated text.
  *
@@ -2061,7 +2046,7 @@ function createTableCell({
  * @param {string} [param1.title="export_tabs"] the title so that the modal can be recognized
  * @param {string} [param1.saveButtonLabel="export"] the label used for the submit button
  * @param {string} [param1.explainer="select_tabs_export"] a brief explanation of what the modal is supposed to do
- * @return {Object} with these keys
+ * @return {Promise<Object>} with these keys
  *  - modalParent: containing the element to append to show the modal,
  *  - saveButton: the submit button on which to add related submit logic,
  *  - closeButton: the cancel button which removes the modal,
@@ -2633,8 +2618,8 @@ export async function generateManageTabsModal(tabs = [], {
 		"slds-button_small",
 		"hide_other_org_tabs",
 	);
-	hideOtherOrgTabsButton.textContent = hide_other_org_tabs,
-		buttonContainer.prepend(hideOtherOrgTabsButton);
+	hideOtherOrgTabsButton.textContent = hide_other_org_tabs;
+    buttonContainer.prepend(hideOtherOrgTabsButton);
 	showAllTabsButton.addEventListener("click", () => {
 		for (
 			const otherOrgTr of tbody.querySelectorAll(
@@ -2670,8 +2655,8 @@ export async function generateManageTabsModal(tabs = [], {
 		"slds-button_neutral",
 		"slds-button_small",
 	);
-	deleteAllTabsButton.textContent = delete_all,
-		buttonContainer.prepend(deleteAllTabsButton);
+	deleteAllTabsButton.textContent = delete_all;
+    buttonContainer.prepend(deleteAllTabsButton);
 	const loggers = []; // track input changes
 	// Create rows for all existing tabs
 	const allDropMenus = [];
@@ -2816,12 +2801,12 @@ export function generateReviewSponsorSvgs() {
 
 /**
  * blueprint grid card with corner brackets and dashed dividers.
- * @return {{
+ * @return {Promise<{
  *   messageBox: HTMLDivElement, // the element to add to the document
  *   segments:   HTMLDivElement, // where to put the new textContent
  *   confirmBtn: HTMLButtonElement, // to continue the tutorial
  *   btnsParent: HTMLDivElement, // where the buttons are located
- * }} as described
+ * }>} as described
  */
 async function generateMessageBox() {
 	injectStyle(
@@ -2885,7 +2870,7 @@ async function generateMessageBox() {
  * Creates an overlay that covers the entire page, a message box for displaying tutorial text,
  * and a highlight box for emphasizing specific elements on the page.
  *
- * @return {Object} An object containing the generated HTML elements:
+ * @return {Promise<Object>} An object containing the generated HTML elements:
  * - {HTMLElement} overlay: A semi-transparent overlay covering the entire viewport
  * - {HTMLElement} messageBox: A positioned box for displaying tutorial messages and buttons
  * - {HTMLElement} highlightBox: A box used to highlight specific elements on the page

@@ -185,7 +185,7 @@ class ReviewSponsorAws extends HTMLElement {
 
 	/**
 	 * Retrieves the EXTENSION_USAGE_DAYS setting to find the number of days the extension has been actively used
-	 * @return {number} the number of days the extension has been actively used
+	 * @return {Promise<number>} the number of days the extension has been actively used
 	 */
 	async _getExtensionUsageDays() {
 		const usageSettings = await getSettings([
@@ -210,11 +210,13 @@ class ReviewSponsorAws extends HTMLElement {
 			usageDays,
 		}));
 		// add accessible names to icon-only links
-		const reviewMsg = await translator.translate("write_review");
+      const [reviewMsg, sponsorMsg] = await Promise.all([
+        translator.translate("write_review"),
+        translator.translate("send_tip"),
+      ]);
 		result.reviewLink.title = reviewMsg;
 		result.reviewLink.setAttribute("aria-label", reviewMsg);
 		result.reviewSvg.setAttribute("focusable", "false");
-		const sponsorMsg = await translator.translate("send_tip");
 		result.sponsorLink.title = sponsorMsg;
 		result.sponsorLink.setAttribute("aria-label", sponsorMsg);
 		result.sponsorSvg.setAttribute("focusable", "false");

@@ -23,6 +23,10 @@ function wasCalledToday(today = getTodayDateKey()) {
 	return sessionStorage.getItem(today_key) === today;
 }
 
+/**
+ * Retrieves the extension's last active day from the background
+ * @return {Promise<string>} last active date formatted as YYYY-MM-DD
+ */
 async function getSavedLastActiveDay() {
 	const last_active_day = await getSettings(EXTENSION_LAST_ACTIVE_DAY);
 	return last_active_day?.enabled;

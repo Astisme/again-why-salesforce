@@ -8,7 +8,7 @@ import { getModalHanger, showToast } from "./content.js";
 /**
  * Displays the export modal if there are no other open modals.
  * If a modal is already open, shows a toast notification to close the other modal first.
- * @return undefined
+ * @return {Promise<void>}
  */
 async function showExportModal() {
 	if (document.getElementById(MODAL_ID) != null) {

@@ -257,14 +257,14 @@ export function openSettingsPage() {
 /**
  * Uses the permission API to request new optional permissions
  * @param {{}} [permissionObj={}] the object with the new permissions to request
- * @return Promise from browser.permissions.request
+ * @return {Promise} from browser.permissions.request
  */
 function requestPermissions(permissionObj = {}) {
 	return BROWSER.permissions.request(permissionObj);
 }
 /**
  * Requests permissions to download files (used to export the Tabs)
- * @return Promise from browser.permissions.request
+ * @return {Promise} from browser.permissions.request
  */
 export function requestExportPermission() {
 	return requestPermissions({
@@ -273,7 +273,7 @@ export function requestExportPermission() {
 }
 /**
  * Requests permission to access the Salesforce Setup pages without having the user click on the popup on every new visit
- * @return Promise from browser.permissions.request
+ * @return {Promise} from browser.permissions.request
  */
 export function requestFramePatternsPermission() {
 	return requestPermissions({
@@ -282,7 +282,7 @@ export function requestFramePatternsPermission() {
 }
 /**
  * Requests permission to access the user's cookies so that the extension can follow the language in which Salesforce is set
- * @return Promise from browser.permissions.request
+ * @return {Promise} from browser.permissions.request
  */
 export function requestCookiesPermission() {
 	return requestPermissions({
@@ -312,7 +312,7 @@ export function isExportAllowed() {
 }
 /**
  * Checks if the extension can access Salesforce Setup pages without having the user click on the popup on every new visit
- * @return {boolean} true if the extension is allowed
+ * @return {Promise<boolean>} true if the extension is allowed
  */
 export async function areFramePatternsAllowed() {
 	const permissionsAvailable = await BROWSER.permissions.contains({
@@ -355,7 +355,7 @@ export function performLightningRedirect(url = "") {
  * @param {HTMLElement} [param0.parentElement=null] - the tr where to selector is located
  * @param {string} [param0.field=""] - the field to get from the queried inner element
  * @param {string} [param0.selector=""] - the selector to be used inside the query to find the element with a value
- * @return the trimmed field value OR undefined (when the value is null or "")
+ * @return {string} the trimmed field value OR undefined (when the value is null or "")
  */
 export function getInnerElementFieldBySelector({
 	parentElement = null,
@@ -376,7 +376,7 @@ export function getInnerElementFieldBySelector({
  * @param {string|null} [param1.css=null] - the CSS rule to inject. if the style element already exists, the rule is overwritten with this
  * @param {string|null} [param1.link=null] - The link which contains the CSS string to inject.
  * @throws Error if the id was not passed or if both css and link are != null
- * @return the existing/created style/link element
+ * @return {HTMLLinkElement} the existing/created style/link element
  */
 export function injectStyle(id, {
 	css = null,
@@ -422,7 +422,7 @@ export function isSalesforceHostname(url = new URL()) {
 /**
  * Builds a stable local date key for comparing one usage day against another.
  * @param {Date} [today=new Date()] - the date to serialize
- * @return {String} local date formatted as YYYY-MM-DD
+ * @return {string} local date formatted as YYYY-MM-DD
  */
 export function getTodayDateKey(today = new Date()) {
 	return [

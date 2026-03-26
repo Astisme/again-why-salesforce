@@ -390,14 +390,10 @@ class TranslationService {
  * If initialization is already in progress (i.e., `singletonTranslator` is a Promise), it waits for it to complete.
  *
  * @return {Promise<TranslationService>} A promise that resolves to the translator instance.
+ * @async
  */
-async function getTranslator_async() {
-	if (singletonTranslator == null) {
-		singletonTranslator = await TranslationService.create();
-	} else if (singletonTranslator instanceof Promise) {
-		await singletonTranslator;
-	}
-	return singletonTranslator;
+function getTranslator_async() {
+  return singletonTranslator ?? TranslationService.create();
 }
 
 /**
@@ -421,12 +417,13 @@ function getTranslator() {
  * Returns the initialized translator if available, otherwise attempts to initialize and return it.
  *
  * @return {Promise<TranslationService>} A promise that resolves to the translator instance.
+ * @async
  */
-export default async function ensureTranslatorAvailability() {
+export default function ensureTranslatorAvailability() {
 	try {
 		return getTranslator();
 	} catch (e) {
 		console.info(e);
-		return await getTranslator_async();
+		return getTranslator_async();
 	}
 }

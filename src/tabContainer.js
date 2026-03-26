@@ -843,7 +843,7 @@ export class TabContainer extends Array {
 	 * @param {boolean} [param1.resetTabs=false] - Whether the imported array should overwrite the currently saved tabs.
 	 * @param {boolean} [param1.preserveOtherOrg=true] - Whether the org-specific tabs should be preserved.
 	 * @param {boolean} [param1.importMetadata=false] - Whether pinned-tab metadata should also be restored.
-	 * @return {number} - Number of tabs successfully imported
+	 * @return {Promise<number>} - Number of tabs successfully imported
 	 */
 	async importTabs(jsonString, {
 		resetTabs = false,
@@ -1144,7 +1144,7 @@ export class TabContainer extends Array {
 	 * @param {string} tab.label - the label of the Tab to remove
 	 * @param {string} tab.url - the url of the Tab to remove
 	 * @param {string} tab.org - the org of the Tab to remove
-	 * @return {boolean} - Whether a tab was removed
+	 * @return {Promise<boolean>} - Whether a tab was removed
 	 */
 	async remove({ label = null, url = null, org = null } = {}) {
 		const tab = { label, url, org };
@@ -1179,7 +1179,7 @@ export class TabContainer extends Array {
 	 * @throws when rmPinned is null
 	 * @throws when rmPinned is true but there are currently no pinned Tabs
 	 * @throws when rmPinned is false but there are currently no unpinned Tabs
-	 * @return {boolean} whether the Tabs where removed and synced
+	 * @return {Promise<boolean>} whether the Tabs where removed and synced
 	 * @async
 	 */
 	removePinned(rmPinned = null) {
@@ -1393,7 +1393,7 @@ export class TabContainer extends Array {
 	 *
 	 * @param {boolean} [fromSortFunction=false] - Whether the function was called from the sort function.
 	 * @param {boolean} [fromInvalidateSortFunction=false] - Whether the function was called from a user action which invalidates the sorting function
-	 * @return {boolean} whether the tabs in input are sorted or not.
+	 * @return {Promise<boolean>} whether the tabs in input are sorted or not.
 	 */
 	async checkSetSorted(
 		fromSortFunction = false,
@@ -1427,7 +1427,7 @@ export class TabContainer extends Array {
 	/**
 	 * Retrieves the extension settings to know if the user wants to keep their Tabs sorted.
 	 * If the setting is retrieved, proceeds to sort the array by the specified field and in the specified direction.
-	 * @return {boolean} whether the TabContainer is sorted
+	 * @return {Promise<boolean>} whether the TabContainer is sorted
 	 */
 	async #checkShouldKeepSorted() {
 		const persistSort = await getSettings(PERSIST_SORT);
@@ -1447,7 +1447,7 @@ export class TabContainer extends Array {
 	 * @param {{ label?: string; url?: string; org?: string; }} [tabToUpdate={label: undefined, url: undefined, org: undefined}] - The tab lookup data for the tab that has to be updated.
 	 * @param {{ label?: string; url?: string; org?: string; [Tab.keyClickCount]?: number; [Tab.keyClickDate]?: number; }} [updateTo={label: undefined, url: undefined, org: undefined}] - An object which contains the keys that have to be updated.
 	 *
-	 * @return {boolean} whether the Tab was updated AND the array was synced
+	 * @return {Promise<boolean>} whether the Tab was updated AND the array was synced
 	 * @async
 	 */
 	updateTab(
@@ -1500,7 +1500,7 @@ export class TabContainer extends Array {
 	 * Invoked when a Tab is clicked. Finds the clicked Tab and calls its click handler
 	 *
 	 * @param {Object} [tabData={}] - data used to identify the clicked Tab
-	 * @return {boolean} whether the data was updated and synced
+	 * @return {Promise<boolean>} whether the data was updated and synced
 	 * @async
 	 */
 	handleClickTabByData(tabData = {}) {
@@ -1516,7 +1516,7 @@ export class TabContainer extends Array {
 	 * @param {boolean} [isPin=null] - whether the user wants to pin (true) or unpin (false)
 	 * @throws when isPin is null
 	 * @throws when the Tab is not yet pinned
-	 * @return {boolean} - whether the Tab was pinned/unpinned and synced
+	 * @return {Promise<boolean>} - whether the Tab was pinned/unpinned and synced
 	 */
 	async pinOrUnpin(tabData = {}, isPin = null) {
 		if (isPin == null) {
