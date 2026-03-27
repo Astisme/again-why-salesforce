@@ -3,18 +3,6 @@ import { EXTENSION_LAST_ACTIVE_DAY, EXTENSION_USAGE_DAYS } from "/constants.js";
 import { getSettings, getTodayDateKey, setSettings } from "/functions.js";
 
 /**
- * Retrieves the stored usage-day settings used by the daily gate.
- *
- * @return {Promise<Object[]|Object|null>} The usage tracking settings.
- */
-export function getDailyUsageSettings() {
-	return getSettings([
-		EXTENSION_USAGE_DAYS,
-		EXTENSION_LAST_ACTIVE_DAY,
-	]);
-}
-
-/**
  * Builds the object that will be saved in settings
  *
  * @param {Object} [param0={}] - an object with the following keys
@@ -75,7 +63,10 @@ export function getUsageDaysUpdate(
  * @return {Promise<number>} the number of distinct days the user has used the extension
  */
 export async function updateExtensionUsageDays() {
-	const usageSettings = await getDailyUsageSettings();
+	const usageSettings = await getSettings([
+		EXTENSION_USAGE_DAYS,
+		EXTENSION_LAST_ACTIVE_DAY,
+	]);
 	const { usageDays, set } = getUsageDaysUpdate(usageSettings);
 	if (set != null) {
 		await setSettings(set);

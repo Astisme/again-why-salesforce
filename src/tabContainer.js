@@ -1,5 +1,4 @@
 import {
-	BROWSER,
 	PERSIST_SORT,
 	TOAST_WARNING,
 	WHAT_GET,
@@ -1000,18 +999,13 @@ export class TabContainer extends Array {
 			fromInvalidateSortFunction = false,
 		} = {},
 	) {
-		// replace tabs already checks the tabs
-		await Promise.all([
-			this.checkSetSorted(fromSortFunction, fromInvalidateSortFunction),
-			sendExtensionMessage({
-				what: WHAT_SET,
-				key: WHY_KEY,
-				set: this.toJSON(),
-			}),
-		]);
-		if (BROWSER.runtime.lastError) {
-			throw new Error(BROWSER.runtime.lastError);
-		}
+		// Always compute the final tab order before serializing and persisting.
+		await this.checkSetSorted(fromSortFunction, fromInvalidateSortFunction);
+		await sendExtensionMessage({
+			what: WHAT_SET,
+			key: WHY_KEY,
+			set: this.toJSON(),
+		});
 		return true;
 	}
 
@@ -1341,10 +1335,11 @@ export class TabContainer extends Array {
 
 	/**
 	 * Handles the invalidation of sort function by updating persisted settings
+	 * @return {Promise} when the sorting has been invalidated
 	 */
 	#invalidateSort() {
 		// Update the sort setting persisted (do not wait for response)
-		setSettings({
+		return setSettings({
 			id: PERSIST_SORT,
 			enabled: false,
 		});
@@ -1404,7 +1399,7 @@ export class TabContainer extends Array {
 			return true;
 		}
 		if (fromInvalidateSortFunction) {
-			this.#invalidateSort();
+			await this.#invalidateSort();
 			// check if, out of luck, the array is still sorted (do not return)
 		}
 		// Check if the user wants to keep the Tabs always sorted

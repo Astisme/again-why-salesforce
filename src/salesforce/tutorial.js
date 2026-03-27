@@ -694,15 +694,12 @@ class Tutorial {
 	 * @async
 	 */
 	#getElementFromStep(step) {
-		const canFakeElement = step.fakeElement;
-		if (canFakeElement) {
-			return this.getElementNowOrLater(
+		return step.fakeElement
+			? this.getElementNowOrLater(
 				step,
 				this.executeStep.bind(this),
-			);
-		} else {
-			return step.element();
-		}
+			)
+			: step.element();
 	}
 
 	/**

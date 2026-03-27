@@ -48,6 +48,7 @@ function sendMessage(message, callback) {
  * @param {Object} message - The message to send.
  * @param {function} callback - The callback to execute after sending the message.
  * @return {Promise} promise resolving based on sendMessage
+ * @async
  */
 export function sendExtensionMessage(message, callback = null) {
 	if (message == null) {
@@ -110,6 +111,7 @@ export function setSettings(set) {
  * @async
  * @param {string} [key=null] - Key identifying which style settings to fetch. When null finds all style settings
  * @return {Promise<Object|null>} The retrieved style settings or null if none exist.
+ * @async
  */
 export function getStyleSettings(key = null) {
 	return sendExtensionMessage({ what: WHAT_GET_STYLE_SETTINGS, key });
