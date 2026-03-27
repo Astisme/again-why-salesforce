@@ -45,7 +45,7 @@ function handleSystemColorSchemeChange(e) {
  */
 export function systemColorSchemeListener(enable = true) {
 	if (
-		globalThis.matchMedia == null || enable == null ||
+		globalThis.matchMedia == null ||
 		(enable && systemColorListener != null) ||
 		(!enable && systemColorListener == null)
 	) {

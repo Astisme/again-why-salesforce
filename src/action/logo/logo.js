@@ -13,8 +13,7 @@ const html = document.documentElement;
  * @param {*} _ - Unused sender parameter.
  * @param {Function} sendResponse - Callback to respond to the sender.
  */
-function readThemeMessage(mess, _, sendResponse) {
-	const message = mess.message;
+function readThemeMessage(message, _, sendResponse) {
 	if (
 		message?.what !== WHAT_THEME ||
 		message?.theme == null
