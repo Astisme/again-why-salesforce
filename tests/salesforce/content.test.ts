@@ -2885,8 +2885,11 @@ Deno.test(
 							{},
 							() => {},
 						);
-						await Promise.resolve();
-						await Promise.resolve();
+						let secondQueuedMoveCompleted = false;
+						void secondQueuedMove.then(() => {
+							secondQueuedMoveCompleted = true;
+						});
+						assertEquals(secondQueuedMoveCompleted, false);
 						assertEquals(
 							moveHasStarted,
 							false,

@@ -478,9 +478,11 @@ await Deno.test("background listeners handle runtime, command, and browser event
 		assert(sentMessages.length > 0);
 
 		BROWSER.runtime.onStartup.triggerStartup();
+		const sentMessagesBeforeActivation = sentMessages.length;
 		BROWSER.tabs.onActivated.triggerActivated({ tabId: 1, windowId: 1 });
-		await Promise.resolve();
-		await Promise.resolve();
+		await waitForCondition(
+			() => sentMessages.length > sentMessagesBeforeActivation,
+		);
 		BROWSER.tabs.onUpdated.triggerUpdated(
 			1,
 			{ status: "complete" },
@@ -504,6 +506,7 @@ await Deno.test("background listeners handle runtime, command, and browser event
 await Deno.test("background skips update checks on tab activation for development installs", async () => {
 	const originalSetTimeout = globalThis.setTimeout;
 	const originalFetch = globalThis.fetch;
+	const originalSendMessage = BROWSER.tabs.sendMessage;
 	const browserWithManagement = BROWSER as typeof BROWSER & {
 		management?: {
 			getSelf: () => Promise<{ installType: string }>;
@@ -511,6 +514,7 @@ await Deno.test("background skips update checks on tab activation for developmen
 	};
 	const originalManagement = browserWithManagement.management;
 	let fetchCalls = 0;
+	const sentMessages: unknown[] = [];
 
 	globalThis.setTimeout = ((handler: TimerHandler) => {
 		if (typeof handler === "function") {
@@ -522,6 +526,10 @@ await Deno.test("background skips update checks on tab activation for developmen
 		fetchCalls++;
 		return Promise.reject(new Error("fetch should not be called"));
 	}) as typeof fetch;
+	BROWSER.tabs.sendMessage = (_tabId: number, message: unknown) => {
+		sentMessages.push(message);
+		return Promise.resolve(true);
+	};
 	browserWithManagement.management = {
 		getSelf: () => Promise.resolve({ installType: "development" }),
 	};
@@ -534,12 +542,12 @@ await Deno.test("background skips update checks on tab activation for developmen
 
 	try {
 		BROWSER.tabs.onActivated.triggerActivated({ tabId: 1, windowId: 1 });
-		await Promise.resolve();
-		await Promise.resolve();
+		await waitForCondition(() => sentMessages.length > 0);
 		assertEquals(fetchCalls, 0);
 	} finally {
 		globalThis.setTimeout = originalSetTimeout;
 		globalThis.fetch = originalFetch;
+		BROWSER.tabs.sendMessage = originalSendMessage;
 		browserWithManagement.management = originalManagement;
 	}
 });
