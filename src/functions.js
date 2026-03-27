@@ -50,25 +50,22 @@ function sendMessage(message, callback) {
  * @return {Promise} promise resolving based on sendMessage
  * @async
  */
-export function sendExtensionMessage(message, callback = null) {
-	if (message == null) {
+export function sendExtensionMessage(message) {
+	if (message?.what == null) {
 		return;
 	}
-	if (callback == null) {
-		return new Promise((resolve, reject) => {
-			sendMessage(
-				message,
-				(response) => {
-					if (BROWSER.runtime.lastError) {
-						reject(BROWSER.runtime.lastError);
-					} else {
-						resolve(response);
-					}
-				},
-			);
-		});
-	}
-	sendMessage(message, callback);
+	return new Promise((resolve, reject) => {
+		sendMessage(
+			message,
+			(response) => {
+				if (BROWSER.runtime.lastError) {
+					reject(BROWSER.runtime.lastError);
+				} else {
+					resolve(response);
+				}
+			},
+		);
+	});
 }
 /**
  * Sends an array of messages to the background script with the specified message.
@@ -76,13 +73,12 @@ export function sendExtensionMessage(message, callback = null) {
  * @param {Object[]} messages - The messages to send.
  * @param {function} callback - The callback to execute after sending all the messages.
  * @return {Promise} promise resolving when all messages have been processed
+ * @async
  */
-export async function sendExtensionMessages(messages = [], callback = null) {
-	const responses = await Promise.all(messages.map(
+export function sendExtensionMessages(messages = []) {
+	return Promise.all(messages.map(
 		(mess) => sendExtensionMessage(mess),
 	));
-	callback?.(responses);
-	return responses;
 }
 /**
  * Retrieves extension settings for the specified keys.

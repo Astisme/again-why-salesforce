@@ -46,12 +46,11 @@ const translator = await ensureTranslatorAvailability();
 
 /**
  * Sends a message that will start the export procedure.
+ * @param {Object} message - the message to send somewhere else
  */
-function pop_exportHandler() {
-	sendExtensionMessage({
-		what: WHAT_EXPORT_CHECK,
-	});
-	setTimeout(close, 100);
+async function pop_sendMessageAndClose(message) {
+	await sendExtensionMessage(message);
+	close();
 }
 
 /**
@@ -85,10 +84,13 @@ const importBtn = document.getElementById("import");
  */
 importBtn.addEventListener(
 	"click",
-	() => sendExtensionMessage({ what: WHAT_SHOW_IMPORT }, close),
+	() => pop_sendMessageAndClose({ what: WHAT_SHOW_IMPORT }),
 );
 const exportBtn = document.getElementById("export");
-exportBtn.addEventListener("click", pop_exportHandler);
+exportBtn.addEventListener(
+	"click",
+	() => pop_sendMessageAndClose({ what: WHAT_EXPORT_CHECK }),
+);
 const settingsBtn = document.getElementById("open-settings");
 settingsBtn.addEventListener(
 	"click",
@@ -125,7 +127,7 @@ const manageTabsBtn = document.getElementById("manage-tabs");
  */
 manageTabsBtn.addEventListener(
 	"click",
-	() => sendExtensionMessage({ what: CXM_MANAGE_TABS }, close),
+	() => pop_sendMessageAndClose({ what: CXM_MANAGE_TABS }),
 );
 
 const tutorialBtn = document.getElementById("tutorial");
@@ -134,5 +136,5 @@ const tutorialBtn = document.getElementById("tutorial");
  */
 tutorialBtn.addEventListener(
 	"click",
-	() => sendExtensionMessage({ what: WHAT_START_TUTORIAL }, close),
+	() => pop_sendMessageAndClose({ what: WHAT_START_TUTORIAL }),
 );

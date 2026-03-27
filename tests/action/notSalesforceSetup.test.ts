@@ -1,4 +1,4 @@
-import { assertEquals, assertRejects } from "@std/testing/asserts";
+import { assertEquals } from "@std/testing/asserts";
 import {
 	createMockWindow,
 	MockDocument,
@@ -43,8 +43,7 @@ type NotSalesforceSetupDependencies = {
 	getSettings: (keys: string[]) => Promise<Setting[]>;
 	sendExtensionMessage: (
 		message: { what: string },
-		callback: (tab: BrowserTab | null) => void,
-	) => void;
+	) => Promise<BrowserTab | null>;
 };
 
 /**
@@ -147,9 +146,9 @@ async function loadNotSalesforceSetupModule({
 				return Promise.resolve();
 			},
 			getSettings: () => Promise.resolve(settings),
-			sendExtensionMessage: (message, callback) => {
+			sendExtensionMessage: (message) => {
 				sendMessages.push(message);
-				callback(remainingResponses.shift() ?? null);
+				return Promise.resolve(remainingResponses.shift() ?? null);
 			},
 		},
 		globals: {
@@ -256,17 +255,76 @@ Deno.test("notSalesforceSetup shows the invalid URL state when the query URL can
 	}
 });
 
+Deno.test("notSalesforceSetup retries browser tab lookup until a tab is available", async () => {
+	const fixture = await loadNotSalesforceSetupModule({
+		browserTabResponses: [null, null, { id: 9, index: 1 }],
+		settings: [
+			{ enabled: true, id: "popup_open_login" },
+			{ enabled: false, id: "popup_login_new_tab" },
+		],
+	});
+
+	try {
+		assertEquals(fixture.sendMessages, [
+			{ what: "get-browser-tab" },
+			{ what: "get-browser-tab" },
+			{ what: "get-browser-tab" },
+		]);
+		assertEquals(fixture.creates, [{
+			index: 2,
+			openerTabId: 9,
+			url: "https://login.salesforce.com/",
+		}]);
+		assertEquals(fixture.counters.closeCalls, 1);
+		assertEquals(fixture.counters.translatorCalls, 0);
+	} finally {
+		fixture.cleanup();
+	}
+});
+
 Deno.test("notSalesforceSetup throws when the browser tab lookup never returns a tab", async () => {
-	await assertRejects(
-		() =>
-			loadNotSalesforceSetupModule({
-				browserTabResponses: [null, null, null, null, null, null],
-				settings: [
-					{ enabled: true, id: "popup_open_login" },
-					{ enabled: false, id: "popup_login_new_tab" },
-				],
-			}),
-		Error,
-		"error_no_browser_tab",
-	);
+	const errorPromise = new Promise<Error>((resolve, reject) => {
+		const timeoutId = setTimeout(() => {
+			globalThis.removeEventListener(
+				"unhandledrejection",
+				onUnhandledRejection,
+			);
+			reject(new Error("expected_unhandled_rejection"));
+		}, 1000);
+		function onUnhandledRejection(event: PromiseRejectionEvent) {
+			if (
+				event.reason instanceof Error &&
+				event.reason.message === "error_no_browser_tab"
+			) {
+				event.preventDefault();
+				clearTimeout(timeoutId);
+				globalThis.removeEventListener(
+					"unhandledrejection",
+					onUnhandledRejection,
+				);
+				resolve(event.reason);
+			}
+		}
+		globalThis.addEventListener("unhandledrejection", onUnhandledRejection);
+	});
+
+	const fixture = await loadNotSalesforceSetupModule({
+		browserTabResponses: [null, null, null, null, null, null],
+		settings: [
+			{ enabled: true, id: "popup_open_login" },
+			{ enabled: false, id: "popup_login_new_tab" },
+		],
+	});
+
+	try {
+		const thrownError = await errorPromise;
+		assertEquals(thrownError.message, "error_no_browser_tab");
+		assertEquals(fixture.sendMessages.length, 7);
+		for (const message of fixture.sendMessages) {
+			assertEquals(message, { what: "get-browser-tab" });
+		}
+		assertEquals(fixture.counters.closeCalls, 1);
+	} finally {
+		fixture.cleanup();
+	}
 });

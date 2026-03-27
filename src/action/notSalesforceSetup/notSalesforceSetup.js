@@ -60,16 +60,12 @@ let openPageInSameTab = false;
  * @param {function} callback - the function to call when the current tab is found.
  * @param {string} url - the url to pass to the callback function
  */
-function nss_getCurrentBrowserTab(callback, url) {
-	sendExtensionMessage(
+async function nss_getCurrentBrowserTab(callback, url) {
+	const browserTab = await sendExtensionMessage(
 		{ what: WHAT_GET_BROWSER_TAB },
-		(browserTab) => {
-			currentTab = browserTab;
-			if (callback != null) {
-				callback(url);
-			}
-		},
 	);
+	currentTab = browserTab;
+	callback?.(url);
 }
 
 /**

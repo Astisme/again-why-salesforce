@@ -62,14 +62,12 @@ Deno.test("sendExtensionMessage returns promise if no callback", async () => {
 	assertEquals(result, "bar");
 });
 
-Deno.test("sendExtensionMessage supports callback usage", () => {
-	sendExtensionMessage({ what: "echo", echo: "bar" }, (response) => {
-		assertEquals(response, "bar");
-	});
-});
-
 Deno.test("sendExtensionMessage ignores null messages", () => {
 	assertEquals(sendExtensionMessage(null), undefined);
+});
+
+Deno.test("sendExtensionMessage ignores null what", () => {
+	assertEquals(sendExtensionMessage({ what: null }), undefined);
 });
 
 Deno.test("sendExtensionMessage rejects on runtime error", async () => {
@@ -81,17 +79,13 @@ Deno.test("sendExtensionMessage rejects on runtime error", async () => {
 	BROWSER.runtime.lastError = originalError;
 });
 
-Deno.test("sendExtensionMessages resolves batched responses and forwards callback results", async () => {
-	const callbackResponses: string[][] = [];
+Deno.test("sendExtensionMessages resolves batched responses", async () => {
 	const responses = await sendExtensionMessages([
 		{ what: "echo", echo: "first" },
 		{ what: "echo", echo: "second" },
-	], (receivedResponses) => {
-		callbackResponses.push(receivedResponses);
-	});
+	]);
 
 	assertEquals(responses, ["first", "second"]);
-	assertEquals(callbackResponses, [["first", "second"]]);
 });
 
 Deno.test("getSettings", async (t) => {
