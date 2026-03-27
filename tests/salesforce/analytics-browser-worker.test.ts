@@ -155,6 +155,7 @@ type WorkerStep = {
 	settingsBeforeCall?: any[];
 	silenceInfo?: boolean;
 	useDocumentElementOnly?: boolean;
+	isNewUser?: boolean | null;
 };
 
 type WorkerRequest = {
@@ -182,6 +183,9 @@ self.onmessage = async (event: MessageEvent<WorkerRequest>) => {
 		const { checkInsertAnalytics } = await import(
 			"/salesforce/analytics.js"
 		);
+		const checkInsertAnalyticsWithNullableParam = checkInsertAnalytics as (
+			options?: { isNewUser?: boolean | null },
+		) => Promise<void>;
 		const results = [];
 
 		for (const step of steps) {
@@ -199,7 +203,9 @@ self.onmessage = async (event: MessageEvent<WorkerRequest>) => {
 				console.info = () => {};
 			}
 			try {
-				await checkInsertAnalytics();
+				await checkInsertAnalyticsWithNullableParam({
+					isNewUser: step.isNewUser,
+				});
 			} finally {
 				console.info = originalInfo;
 			}

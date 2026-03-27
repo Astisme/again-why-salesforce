@@ -3,10 +3,8 @@ import { loadIsolatedModule } from "../load-isolated-module.test.ts";
 
 type RuntimeListener = (
 	message: {
-		message?: {
-			theme?: string | null;
-			what?: string;
-		};
+		theme?: string | null;
+		what?: string;
 	},
 	sender: unknown,
 	sendResponse: (response: null) => void,
@@ -81,10 +79,8 @@ Deno.test("logo initializes theme handling and reacts only to theme messages", a
 
 		registeredListener(
 			{
-				message: {
-					what: "not-theme",
-					theme: "dark",
-				},
+				what: "not-theme",
+				theme: "dark",
 			},
 			null,
 			(response) => {
@@ -96,10 +92,8 @@ Deno.test("logo initializes theme handling and reacts only to theme messages", a
 
 		registeredListener(
 			{
-				message: {
-					what: "theme",
-					theme: "dark",
-				},
+				what: "theme",
+				theme: "dark",
 			},
 			null,
 			(response) => {
@@ -111,10 +105,8 @@ Deno.test("logo initializes theme handling and reacts only to theme messages", a
 
 		registeredListener(
 			{
-				message: {
-					what: "theme",
-					theme: null,
-				},
+				what: "theme",
+				theme: null,
 			},
 			null,
 			(response) => {

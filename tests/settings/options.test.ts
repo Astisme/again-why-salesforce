@@ -499,6 +499,8 @@ function __getState() {
 			USE_LIGHTNING_NAVIGATION: "use-lightning-navigation",
 			USER_LANGUAGE: "user-language",
 			WHAT_SET: "what-set",
+			EXTENSION_USAGE_DAYS: "extension_usage_days",
+			EXTENSION_LAST_ACTIVE_DAY: "extension_last_active_day",
 			areFramePatternsAllowed: () =>
 				Promise.resolve(areFramePatternsAllowedResult.value),
 			ensureTranslatorAvailability: () =>

@@ -1,5 +1,5 @@
 import {
-EXTENSION_LAST_ACTIVE_DAY,
+	EXTENSION_LAST_ACTIVE_DAY,
 	EXTENSION_NAME,
 	EXTENSION_USAGE_DAYS,
 	FOLLOW_SF_LANG,
@@ -950,10 +950,10 @@ function setCurrentChoice(setting) {
 			}
 			break;
 		}
-        case EXTENSION_USAGE_DAYS:
-        case EXTENSION_LAST_ACTIVE_DAY:
-            // no-op
-            break;
+		case EXTENSION_USAGE_DAYS:
+		case EXTENSION_LAST_ACTIVE_DAY:
+			// no-op
+			break;
 		default:
 			console.error(`Unmatched setting id: ${setting.id}`);
 			break;

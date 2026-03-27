@@ -1,6 +1,5 @@
 "use strict";
 import {
-	EXTENSION_LAST_ACTIVE_DAY,
 	EXTENSION_VERSION,
 	HTTPS,
 	ISFIREFOX,
@@ -37,9 +36,9 @@ const queueanalytics = `${HTTPS}queue.${analyticscdnhost}`;
 const analyticscdn = `${HTTPS}${analyticscdnhost}`;
 /**
  * Adds Simple Analytics to the CSP and adds the ping image to the DOM
- * @param {boolean} isNewUser - whether the user has just installed the extension
+ * @param {boolean} [isNewUser=false] - whether the user has just installed the extension
  */
-function sendPingToAnalytics(isNewUser) {
+function sendPingToAnalytics(isNewUser = false) {
 	const whereToAppend = document.head || document.documentElement;
 	const cspMeta = document.querySelector(
 		'meta[http-equiv="Content-Security-Policy"]',
@@ -80,19 +79,17 @@ function sendPingToAnalytics(isNewUser) {
  * Modifies Content-Security-Policy meta tag to allow the analytics domains.
  * https://github.com/simpleanalytics
  *
- * @param {boolean|null} [isNewUser=null] - whether the user has no persisted active day yet
+ * @param {Object} [param0={}] an object with the following keys
+ * @param {boolean} [param0.isNewUser=false] - whether the user has no persisted active day yet
  * @return {Promise<void>} Resolves once analytics insertion is completed or skipped.
  */
 export async function checkInsertAnalytics({
-	isNewUser = null,
+	isNewUser = false,
 } = {}) {
-	const [preventAnalytics, consentGranted, lastActiveDay] = await Promise.all(
+	const [preventAnalytics, consentGranted] = await Promise.all(
 		[
 			getSettings(PREVENT_ANALYTICS),
 			getTechnicalAndInteractionConsent(),
-			isNewUser == null
-				? getSettings(EXTENSION_LAST_ACTIVE_DAY)
-				: Promise.resolve(null),
 		],
 	);
 	const shouldPreventAnalytics = consentGranted == null
@@ -111,9 +108,6 @@ export async function checkInsertAnalytics({
 	}
 	if (shouldPreventAnalytics) {
 		return;
-	}
-	if (isNewUser == null) {
-		isNewUser = lastActiveDay == null;
 	}
 	sendPingToAnalytics(isNewUser);
 }
