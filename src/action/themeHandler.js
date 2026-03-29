@@ -25,13 +25,14 @@ function messageAndUpdateTheme(theme, updateUserTheme = false) {
  *
  * @param {MediaQueryListEvent} e - The event triggered when the system color scheme changes.
  * @return {Promise<void>} Promise resolved when the theme update (if needed) has been applied.
+ * @async
  */
-async function handleSystemColorSchemeChange(e) {
+function handleSystemColorSchemeChange(e) {
 	// check if theme has to be changed
 	const systemThemeValue = e.matches ? "dark" : "light";
 	const htmlThemeValue = html.dataset.theme;
 	if (systemThemeValue !== htmlThemeValue) {
-		return await messageAndUpdateTheme(systemThemeValue);
+		return messageAndUpdateTheme(systemThemeValue);
 	}
 }
 
@@ -40,10 +41,11 @@ async function handleSystemColorSchemeChange(e) {
  *
  * @param {boolean} enable - A flag to enable or disable the system color scheme listener.
  * @return {Promise<void>} Promise resolved when listener and initial update logic are completed.
+ * @async
  */
-export async function systemColorSchemeListener(enable = true) {
+export function systemColorSchemeListener(enable = true) {
 	if (
-		globalThis.matchMedia == null || enable == null ||
+		globalThis.matchMedia == null ||
 		(enable && systemColorListener != null) ||
 		(!enable && systemColorListener == null)
 	) {
@@ -61,7 +63,7 @@ export async function systemColorSchemeListener(enable = true) {
 			handleSystemColorSchemeChange,
 		);
 		// Initial check for the current color scheme
-		await handleSystemColorSchemeChange(systemColorListener);
+		return handleSystemColorSchemeChange(systemColorListener);
 	} else {
 		// If disabling, remove the systemColorListener
 		systemColorListener.removeEventListener(
@@ -85,14 +87,15 @@ export function handleSwitchColorTheme() {
  * Initializes the theme by checking the user preference stored in localStorage and applying the correct theme.
  * Also listens for system color scheme changes if necessary.
  * @return {Promise<void>} Promise resolved when initialization has completed.
+ * @async
  */
-export async function initTheme() {
+export function initTheme() {
 	html.dataset.usertheme = localStorage.getItem("userTheme") ?? "system";
 	html.dataset.theme = html.dataset.usertheme === "system"
 		? null
 		: html.dataset.usertheme;
 	// call other function to match system theme
-	await systemColorSchemeListener(html.dataset.usertheme === "system");
+	return systemColorSchemeListener(html.dataset.usertheme === "system");
 }
 
 // exported for tests

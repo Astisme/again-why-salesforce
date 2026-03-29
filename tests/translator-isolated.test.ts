@@ -129,8 +129,8 @@ async function loadTranslatorFixture() {
 		],
 		transformSource: (source) =>
 			source.replace(
-				"export default async function ensureTranslatorAvailability() {",
-				"async function ensureTranslatorAvailability() {",
+				"export default function ensureTranslatorAvailability() {",
+				"function ensureTranslatorAvailability() {",
 			),
 		dependencies: {
 			BROWSER: {

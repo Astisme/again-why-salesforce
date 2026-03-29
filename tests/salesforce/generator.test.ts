@@ -1391,6 +1391,15 @@ Deno.test("generator covers open-other-org, update-tab, and help popup builders"
 			".lightning.force.com/setup/home",
 		);
 
+		const nullLabelModal = await fixture.module.generateOpenOtherOrgModal({
+			org: "sandbox",
+			url: "Users/home",
+		});
+		assertStringIncludes(
+			nullLabelModal.modalParent.textContent ?? "",
+			"translated:where_to",
+		);
+
 		const updateTabModal = await fixture.module.generateUpdateTabModal(
 			null,
 			null,

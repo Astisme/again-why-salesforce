@@ -1,5 +1,7 @@
 import {
+	EXTENSION_LAST_ACTIVE_DAY,
 	EXTENSION_NAME,
+	EXTENSION_USAGE_DAYS,
 	FOLLOW_SF_LANG,
 	GENERIC_PINNED_TAB_STYLE_KEY,
 	GENERIC_TAB_STYLE_KEY,
@@ -948,6 +950,10 @@ function setCurrentChoice(setting) {
 			}
 			break;
 		}
+		case EXTENSION_USAGE_DAYS:
+		case EXTENSION_LAST_ACTIVE_DAY:
+			// no-op
+			break;
 		default:
 			console.error(`Unmatched setting id: ${setting.id}`);
 			break;

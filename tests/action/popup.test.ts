@@ -35,7 +35,6 @@ type PopupDependencies = {
 	openSettingsPage: () => void;
 	sendExtensionMessage: (
 		message: Record<string, unknown>,
-		callback?: () => void,
 	) => Promise<Command[] | undefined> | undefined;
 };
 
@@ -133,12 +132,11 @@ async function loadPopupModule({
 			openSettingsPage: () => {
 				counters.openSettingsCalls++;
 			},
-			sendExtensionMessage: (message, callback) => {
+			sendExtensionMessage: (message) => {
 				messages.push(message);
 				if (message.what === "get-commands") {
 					return Promise.resolve(availableCommands);
 				}
-				callback?.();
 				return Promise.resolve(undefined);
 			},
 		},
@@ -243,11 +241,11 @@ Deno.test("popup wires command titles and action buttons in the normal setup flo
 		assertEquals(fixture.exportButton.title, "popup_export (Ctrl+E)");
 		assertEquals(fixture.settingsButton.title, "popup_settings (Ctrl+S)");
 
-		fixture.importButton.click();
-		fixture.exportButton.click();
-		fixture.settingsButton.click();
-		fixture.manageTabsButton.click();
-		fixture.tutorialButton.click();
+		await fixture.importButton.click();
+		await fixture.exportButton.click();
+		await fixture.settingsButton.click();
+		await fixture.manageTabsButton.click();
+		await fixture.tutorialButton.click();
 
 		assertEquals(fixture.messages, [
 			{

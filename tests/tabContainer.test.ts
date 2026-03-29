@@ -6,7 +6,7 @@ import {
 	assertRejects,
 	assertThrows,
 } from "@std/testing/asserts";
-import { WHY_KEY } from "/constants.js";
+import { PERSIST_SORT, WHY_KEY } from "/constants.js";
 import Tab from "/tab.js";
 import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
 const currentDate = Date.now();
@@ -1324,6 +1324,43 @@ await Deno.test("TabContainer - Synchronization", async (t) => {
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 		assertEquals(container.length, 4);
 		assertEquals(getStoredTabs().length, 4);
+	});
+
+	await t.step("persists tabs after keep-sorted reorder", async () => {
+		const originalSettings = structuredClone(mockStorage.settings);
+		try {
+			mockStorage.settings = [
+				...originalSettings.filter((setting) =>
+					setting.id !== PERSIST_SORT
+				),
+				{
+					id: PERSIST_SORT,
+					enabled: "label",
+					ascending: true,
+				},
+			];
+			container.length = 0;
+			container[TabContainer.keyPinnedTabsNo] = 0;
+			container.push(
+				{ label: "b", url: "/2" },
+				{ label: "a", url: "/1" },
+			);
+			assertEquals(
+				Array.from(container, (tab: Tab) => tab.label),
+				["b", "a"],
+			);
+			assert(await container.syncTabs());
+			assertEquals(
+				Array.from(container, (tab: Tab) => tab.label),
+				["a", "b"],
+			);
+			assertEquals(
+				getStoredTabs().map((tab) => tab.label),
+				["a", "b"],
+			);
+		} finally {
+			mockStorage.settings = originalSettings;
+		}
 	});
 });
 

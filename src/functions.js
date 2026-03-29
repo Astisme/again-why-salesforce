@@ -13,6 +13,7 @@ import {
 	ORG_TAB_STYLE_KEY,
 	PIN_TAB_CLASS,
 	PREVENT_DEFAULT_OVERRIDE,
+	SETTINGS_KEY,
 	SETUP_LIGHTNING_PATTERN,
 	SLDS_ACTIVE,
 	SUPPORTED_SALESFORCE_URLS,
@@ -28,6 +29,7 @@ import {
 	WHAT_GET_BROWSER_TAB,
 	WHAT_GET_SETTINGS,
 	WHAT_GET_STYLE_SETTINGS,
+	WHAT_SET,
 } from "/constants.js";
 
 /**
@@ -46,26 +48,24 @@ function sendMessage(message, callback) {
  * @param {Object} message - The message to send.
  * @param {function} callback - The callback to execute after sending the message.
  * @return {Promise} promise resolving based on sendMessage
+ * @async
  */
-export function sendExtensionMessage(message, callback = null) {
-	if (message == null) {
+export function sendExtensionMessage(message) {
+	if (message?.what == null) {
 		return;
 	}
-	if (callback == null) {
-		return new Promise((resolve, reject) => {
-			sendMessage(
-				message,
-				(response) => {
-					if (BROWSER.runtime.lastError) {
-						reject(BROWSER.runtime.lastError);
-					} else {
-						resolve(response);
-					}
-				},
-			);
-		});
-	}
-	sendMessage(message, callback);
+	return new Promise((resolve, reject) => {
+		sendMessage(
+			message,
+			(response) => {
+				if (BROWSER.runtime.lastError) {
+					reject(BROWSER.runtime.lastError);
+				} else {
+					resolve(response);
+				}
+			},
+		);
+	});
 }
 /**
  * Sends an array of messages to the background script with the specified message.
@@ -73,13 +73,12 @@ export function sendExtensionMessage(message, callback = null) {
  * @param {Object[]} messages - The messages to send.
  * @param {function} callback - The callback to execute after sending all the messages.
  * @return {Promise} promise resolving when all messages have been processed
+ * @async
  */
-export async function sendExtensionMessages(messages = [], callback = null) {
-	const responses = await Promise.all(messages.map(
+export function sendExtensionMessages(messages = []) {
+	return Promise.all(messages.map(
 		(mess) => sendExtensionMessage(mess),
 	));
-	callback?.(responses);
-	return responses;
 }
 /**
  * Retrieves extension settings for the specified keys.
@@ -87,17 +86,31 @@ export async function sendExtensionMessages(messages = [], callback = null) {
  * @param {string|string[]|null} [keys=null] - One or more setting keys to retrieve. If null, all settings will be returned.
  * @return {Promise<Object>} A promise that resolves to an object containing the requested settings.
  */
-export async function getSettings(keys = null) {
-	return await sendExtensionMessage({ what: WHAT_GET_SETTINGS, keys });
+export function getSettings(keys = null) {
+	return sendExtensionMessage({ what: WHAT_GET_SETTINGS, keys });
+}
+/**
+ * Persists the once-per-day settings update.
+ *
+ * @param {Object|Object[]} set - the settings payload to store
+ * @return {Promise<void>} Resolves when the settings have been stored.
+ */
+export function setSettings(set) {
+	return sendExtensionMessage({
+		what: WHAT_SET,
+		key: SETTINGS_KEY,
+		set: Array.isArray(set) ? set : [set],
+	});
 }
 /**
  * Retrieves saved style settings for the specified key.
  * @async
  * @param {string} [key=null] - Key identifying which style settings to fetch. When null finds all style settings
  * @return {Promise<Object|null>} The retrieved style settings or null if none exist.
+ * @async
  */
-export async function getStyleSettings(key = null) {
-	return await sendExtensionMessage({ what: WHAT_GET_STYLE_SETTINGS, key });
+export function getStyleSettings(key = null) {
+	return sendExtensionMessage({ what: WHAT_GET_STYLE_SETTINGS, key });
 }
 const GENERIC_STYLE_KEYS = new Set([
 	GENERIC_TAB_STYLE_KEY,
@@ -242,14 +255,14 @@ export function openSettingsPage() {
 /**
  * Uses the permission API to request new optional permissions
  * @param {{}} [permissionObj={}] the object with the new permissions to request
- * @return Promise from browser.permissions.request
+ * @return {Promise} from browser.permissions.request
  */
 function requestPermissions(permissionObj = {}) {
 	return BROWSER.permissions.request(permissionObj);
 }
 /**
  * Requests permissions to download files (used to export the Tabs)
- * @return Promise from browser.permissions.request
+ * @return {Promise} from browser.permissions.request
  */
 export function requestExportPermission() {
 	return requestPermissions({
@@ -258,7 +271,7 @@ export function requestExportPermission() {
 }
 /**
  * Requests permission to access the Salesforce Setup pages without having the user click on the popup on every new visit
- * @return Promise from browser.permissions.request
+ * @return {Promise} from browser.permissions.request
  */
 export function requestFramePatternsPermission() {
 	return requestPermissions({
@@ -267,7 +280,7 @@ export function requestFramePatternsPermission() {
 }
 /**
  * Requests permission to access the user's cookies so that the extension can follow the language in which Salesforce is set
- * @return Promise from browser.permissions.request
+ * @return {Promise} from browser.permissions.request
  */
 export function requestCookiesPermission() {
 	return requestPermissions({
@@ -297,7 +310,7 @@ export function isExportAllowed() {
 }
 /**
  * Checks if the extension can access Salesforce Setup pages without having the user click on the popup on every new visit
- * @return {boolean} true if the extension is allowed
+ * @return {Promise<boolean>} true if the extension is allowed
  */
 export async function areFramePatternsAllowed() {
 	const permissionsAvailable = await BROWSER.permissions.contains({
@@ -340,7 +353,7 @@ export function performLightningRedirect(url = "") {
  * @param {HTMLElement} [param0.parentElement=null] - the tr where to selector is located
  * @param {string} [param0.field=""] - the field to get from the queried inner element
  * @param {string} [param0.selector=""] - the selector to be used inside the query to find the element with a value
- * @return the trimmed field value OR undefined (when the value is null or "")
+ * @return {string} the trimmed field value OR undefined (when the value is null or "")
  */
 export function getInnerElementFieldBySelector({
 	parentElement = null,
@@ -361,7 +374,7 @@ export function getInnerElementFieldBySelector({
  * @param {string|null} [param1.css=null] - the CSS rule to inject. if the style element already exists, the rule is overwritten with this
  * @param {string|null} [param1.link=null] - The link which contains the CSS string to inject.
  * @throws Error if the id was not passed or if both css and link are != null
- * @return the existing/created style/link element
+ * @return {HTMLLinkElement} the existing/created style/link element
  */
 export function injectStyle(id, {
 	css = null,
@@ -403,4 +416,16 @@ export function isSalesforceHostname(url = new URL()) {
 	return SUPPORTED_SALESFORCE_URLS.some((pattern) =>
 		url.hostname.endsWith(pattern)
 	);
+}
+/**
+ * Builds a stable local date key for comparing one usage day against another.
+ * @param {Date} [today=new Date()] - the date to serialize
+ * @return {string} local date formatted as YYYY-MM-DD
+ */
+export function getTodayDateKey(today = new Date()) {
+	return [
+		today.getFullYear(),
+		String(today.getMonth() + 1).padStart(2, "0"),
+		String(today.getDate()).padStart(2, "0"),
+	].join("-");
 }

@@ -281,7 +281,7 @@ class Tutorial {
 
 	/**
 	 * Shows the favourite button and finds the stars container
-	 * @return HTMLElement - the element from getStarsContainer
+	 * @return {Promise<HTMLElement>} - the element from getStarsContainer
 	 */
 	async #showStarsContainerAndReturnIt() {
 		await showFavouriteButton();
@@ -307,13 +307,13 @@ class Tutorial {
 			return false;
 		}
 		this.translator = await ensureTranslatorAvailability();
-		this.firstRedirectElement.label = await this.translator.translate(
-			this.firstRedirectElement.label,
-		);
-		this.secondRedirectElement.label = await this.translator.translate(
-			this.secondRedirectElement.label,
-		);
-		const settingsShortcut = await this.getSettingsShortcut();
+		const [firstLabel, secondLabel, settingsShortcut] = await Promise.all([
+			this.translator.translate(this.firstRedirectElement.label),
+			this.translator.translate(this.secondRedirectElement.label),
+			this.getSettingsShortcut(),
+		]);
+		this.firstRedirectElement.label = firstLabel;
+		this.secondRedirectElement.label = secondLabel;
 		this.steps = [
 			{
 				message: "tutorial_restart",
@@ -495,8 +495,7 @@ class Tutorial {
 	async start(startStep = 0) {
 		if (this.isActive) return;
 		if (this.steps?.length < 1 && !(await this.initSteps())) {
-			console.error("error_tutorial_not_initialized");
-			return;
+			throw new Error("error_tutorial_not_initialized");
 		}
 		this.isActive = true;
 		// Set the starting step, either from parameter or default 0
@@ -568,7 +567,7 @@ class Tutorial {
 	 * @param {number} [stepNo=this.currentStep] - the step at which the tutorial has arrived
 	 * @param {boolean} [closedManually=false] - whether the user manually closed the tutorial
 	 * @throws TypeError if stepNo is not a number
-	 * @return Promise<void> the promise from sendExtensionMessage
+	 * @return {Promise<void>} the promise from sendExtensionMessage
 	 */
 	persistTutorialProgress(
 		stepNo = this.currentStep,
@@ -621,7 +620,7 @@ class Tutorial {
 	 * Finds the element from step.element or creates a fake element after 5 retries
 	 * @param {Object} step - the current step
 	 * @param {function} callback - the function to call if the element was not found
-	 * @return HTMLElement - the element from the step
+	 * @return {Promise<HTMLElement>} - the element from the step
 	 */
 	async getElementNowOrLater(step, callback) {
 		const el = await step.element();
@@ -692,17 +691,15 @@ class Tutorial {
 	 * @param {function} step.element - the async function which returns the step's element
 	 * @param {function} step.fakeElement - the async function which creates and returns the step's fake element
 	 * @return HTMLElement the step's element or fake element
+	 * @async
 	 */
-	async #getElementFromStep(step) {
-		const canFakeElement = step.fakeElement;
-		if (canFakeElement) {
-			return await this.getElementNowOrLater(
+	#getElementFromStep(step) {
+		return step.fakeElement
+			? this.getElementNowOrLater(
 				step,
 				this.executeStep.bind(this),
-			);
-		} else {
-			return await step.element();
-		}
+			)
+			: step.element();
 	}
 
 	/**
@@ -979,16 +976,28 @@ export async function checkTutorial(fromPopup = false) {
 	// check if the user closed the tutorial before (if yes, do not prompt because maybe they got annoied)
 	if (!fromPopup && tutorialCloseEvent === "user") return;
 	const translator = await ensureTranslatorAvailability();
-	const confirmLabel = await translator.translate("confirm");
-	const cancelLabel = await translator.translate("cancel");
-	const closeLabel = await translator.translate("cancel_close");
+	const [
+		confirmLabel,
+		cancelLabel,
+		closeLabel,
+		start_title,
+		start_body,
+		continue_title,
+		continue_body,
+	] = await Promise.all([
+		translator.translate("confirm"),
+		translator.translate("cancel"),
+		translator.translate("cancel_close"),
+		translator.translate("tutorial_start_prompt_title"),
+		translator.translate("tutorial_start_prompt_body"),
+		translator.translate("tutorial_continue_prompt_title"),
+		translator.translate("tutorial_continue_prompt_body"),
+	]);
 	if (tutorialProgress == null) {
 		if (
 			await sldsConfirm({
-				title: await translator.translate(
-					"tutorial_start_prompt_title",
-				),
-				body: await translator.translate("tutorial_start_prompt_body"),
+				title: start_title,
+				body: start_body,
 				confirmLabel,
 				cancelLabel,
 				closeLabel,
@@ -1003,14 +1012,13 @@ export async function checkTutorial(fromPopup = false) {
 	}
 	const tutorial = new Tutorial();
 	if (!await tutorial.initSteps()) { // Initialize steps to get their properties
-		console.error("error_tutorial_not_initialized");
-		return;
+		throw new Error("error_tutorial_not_initialized");
 	}
 	if (
 		tutorialProgress < tutorial.steps.length &&
 		await sldsConfirm({
-			title: await translator.translate("tutorial_continue_prompt_title"),
-			body: await translator.translate("tutorial_continue_prompt_body"),
+			title: continue_title,
+			body: continue_body,
 			confirmLabel,
 			cancelLabel,
 			closeLabel,

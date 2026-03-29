@@ -1,7 +1,7 @@
 import "../mocks.test.ts";
 import { assertEquals } from "@std/testing/asserts";
 import { SETTINGS_KEY } from "/constants.js";
-import { getTodayDateKey } from "/salesforce/once-a-day.js";
+import { getTodayDateKey } from "/functions.js";
 import {
 	getUsageDaysUpdate,
 	updateExtensionUsageDays,
@@ -24,6 +24,7 @@ Deno.test("getUsageDaysUpdate initializes missing usage tracking at zero", () =>
 	assertEquals(
 		getUsageDaysUpdate([], today),
 		{
+			lastActiveDay: null,
 			usageDays: 0,
 			set: [
 				{ id: "extension_usage_days", enabled: 0 },
@@ -40,6 +41,7 @@ Deno.test("getUsageDaysUpdate does not increment twice on the same day", () => {
 			{ id: "extension_last_active_day", enabled: today },
 		], today),
 		{
+			lastActiveDay: today,
 			usageDays: 7,
 			set: null,
 		},
@@ -53,6 +55,7 @@ Deno.test("getUsageDaysUpdate increments usage days on a new day", () => {
 			{ id: "extension_last_active_day", enabled: yesterday },
 		], today),
 		{
+			lastActiveDay: yesterday,
 			usageDays: 8,
 			set: [
 				{ id: "extension_usage_days", enabled: 8 },
@@ -69,6 +72,7 @@ Deno.test("getUsageDaysUpdate normalizes non-array settings input", () => {
 			today,
 		),
 		{
+			lastActiveDay: null,
 			usageDays: 2,
 			set: [
 				{ id: "extension_usage_days", enabled: 2 },
@@ -82,6 +86,7 @@ Deno.test("getUsageDaysUpdate handles null settings input", () => {
 	assertEquals(
 		getUsageDaysUpdate(null, today),
 		{
+			lastActiveDay: null,
 			usageDays: 0,
 			set: [
 				{ id: "extension_usage_days", enabled: 0 },
