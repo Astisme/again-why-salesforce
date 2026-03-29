@@ -214,11 +214,11 @@ async function loadContentModule(deps: ContentDeps) {
 	let source = await Deno.readTextFile(CONTENT_PATH);
 	for (
 		const fileName of [
-			"/constants.js",
-			"/functions.js",
-			"/translator.js",
-			"/tab.js",
-			"/tabContainer.js",
+			"/core/constants.js",
+			"/core/functions.js",
+			"/core/translator.js",
+			"/core/tab.js",
+			"/core/tabContainer.js",
 			"./dragHandler.js",
 			"./favourite-manager.js",
 			"./generator.js",

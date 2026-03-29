@@ -13,7 +13,7 @@ import {
 	HIDDEN_CLASS,
 	SETTINGS_KEY,
 	WHY_KEY,
-} from "/constants.js";
+} from "/core/constants.js";
 
 const CHROME_REVIEW_LINK =
 	"https://chromewebstore.google.com/detail/again-why-salesforce/bceeoimjhgjbihanbiifgpndmkklajbi/reviews";
@@ -297,10 +297,10 @@ async function loadReviewSponsorBranchModule(
 			},
 		},
 		importsToReplace: new Set([
-			"/constants.js",
-			"/functions.js",
-			"/tabContainer.js",
-			"/translator.js",
+			"/core/constants.js",
+			"/core/functions.js",
+			"/core/tabContainer.js",
+			"/core/translator.js",
 			"/salesforce/generator.js",
 		]),
 	});
@@ -705,10 +705,10 @@ Deno.test("ReviewSponsorAws loads async metadata and opens the expected links in
 			},
 		},
 		importsToReplace: new Set([
-			"/constants.js",
-			"/functions.js",
-			"/tabContainer.js",
-			"/translator.js",
+			"/core/constants.js",
+			"/core/functions.js",
+			"/core/tabContainer.js",
+			"/core/translator.js",
 			"/salesforce/generator.js",
 		]),
 	});

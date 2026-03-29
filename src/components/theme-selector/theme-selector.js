@@ -1,4 +1,4 @@
-import { HIDDEN_CLASS } from "/constants.js";
+import { HIDDEN_CLASS } from "/core/constants.js";
 import { handleSwitchColorTheme } from "/action/themeHandler.js";
 
 const html = document.documentElement;

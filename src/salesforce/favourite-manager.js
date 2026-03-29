@@ -16,11 +16,11 @@ import {
 	TUTORIAL_EVENT_ACTION_UNFAVOURITE,
 	WHAT_ADD,
 	WHAT_GET_COMMANDS,
-} from "/constants.js";
-import { getSettings, injectStyle, sendExtensionMessage } from "/functions.js";
-import Tab from "/tab.js";
-import { ensureAllTabsAvailability } from "/tabContainer.js";
-import ensureTranslatorAvailability from "/translator.js";
+} from "/core/constants.js";
+import { getSettings, injectStyle, sendExtensionMessage } from "/core/functions.js";
+import Tab from "/core/tab.js";
+import { ensureAllTabsAvailability } from "/core/tabContainer.js";
+import ensureTranslatorAvailability from "/core/translator.js";
 
 import {
 	getCurrentHref,

@@ -9,14 +9,14 @@ import {
 	WHAT_GET_COMMANDS,
 	WHAT_SHOW_IMPORT,
 	WHAT_START_TUTORIAL,
-} from "/constants.js";
+} from "/core/constants.js";
 import {
 	areFramePatternsAllowed,
 	isOnSalesforceSetup,
 	openSettingsPage,
 	sendExtensionMessage,
-} from "/functions.js";
-import ensureTranslatorAvailability from "/translator.js";
+} from "/core/functions.js";
+import ensureTranslatorAvailability from "/core/translator.js";
 import "/components/theme-selector/theme-selector.js";
 
 {

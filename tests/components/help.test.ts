@@ -99,10 +99,10 @@ Deno.test("help component syncs link attributes and accessibility text in isolat
 			},
 		},
 		importsToReplace: new Set([
-			"/constants.js",
-			"/functions.js",
+			"/core/constants.js",
+			"/core/functions.js",
 			"/salesforce/generator.js",
-			"/translator.js",
+			"/core/translator.js",
 		]),
 	});
 

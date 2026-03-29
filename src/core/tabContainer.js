@@ -4,10 +4,14 @@ import {
 	WHAT_GET,
 	WHAT_SET,
 	WHY_KEY,
-} from "/constants.js";
-import { getSettings, sendExtensionMessage, setSettings } from "/functions.js";
+} from "/core/constants.js";
+import {
+	getSettings,
+	sendExtensionMessage,
+	setSettings,
+} from "/core/functions.js";
 import Tab from "./tab.js";
-import ensureTranslatorAvailability from "/translator.js";
+import ensureTranslatorAvailability from "/core/translator.js";
 
 let translator = null;
 let singletonAllTabs = null;

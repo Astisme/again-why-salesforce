@@ -152,9 +152,9 @@ async function loadPopupModule({
 			},
 		},
 		importsToReplace: new Set([
-			"/constants.js",
-			"/functions.js",
-			"/translator.js",
+			"/core/constants.js",
+			"/core/functions.js",
+			"/core/translator.js",
 			"/components/theme-selector/theme-selector.js",
 		]),
 	});

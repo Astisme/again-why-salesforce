@@ -4,8 +4,8 @@ import {
 	EXTENSION_LAST_ACTIVE_DAY,
 	PREVENT_ANALYTICS,
 	SETTINGS_KEY,
-} from "/constants.js";
-import { getTodayDateKey } from "/functions.js";
+} from "/core/constants.js";
+import { getTodayDateKey } from "/core/functions.js";
 import { executeOncePerDay } from "/salesforce/once-a-day.js";
 
 const todayStorageKey = "again-why-salesforce-today";

@@ -30,7 +30,7 @@ import {
 	WHAT_GET_SETTINGS,
 	WHAT_GET_STYLE_SETTINGS,
 	WHAT_SET,
-} from "/constants.js";
+} from "/core/constants.js";
 
 /**
  * Invoke the runtime to send the message

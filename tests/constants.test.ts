@@ -73,7 +73,7 @@ function loadConstants(
 	homepageUrl = "https://github.com/acme/repo",
 ) {
 	return loadIsolatedModule<ConstantsModule, ConstantsDependencies>({
-		modulePath: new URL("../src/constants.js", import.meta.url),
+		modulePath: new URL("../src/core/constants.js", import.meta.url),
 		dependencies: {
 			browser: createBrowser("browser", homepageUrl),
 			chrome: createBrowser("chrome", homepageUrl),

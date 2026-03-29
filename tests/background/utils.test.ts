@@ -15,13 +15,13 @@ import {
 	checkForUpdates,
 	checkLaunchExport,
 } from "/background/utils.js";
-import { ensureAllTabsAvailability } from "/tabContainer.js";
+import { ensureAllTabsAvailability } from "/core/tabContainer.js";
 import {
 	BROWSER,
 	EXTENSION_VERSION,
 	NO_UPDATE_NOTIFICATION,
 	SETTINGS_KEY,
-} from "/constants.js";
+} from "/core/constants.js";
 
 const NativeURL = globalThis.URL;
 
@@ -229,9 +229,9 @@ async function loadBackgroundUtilsModule(
 				}),
 		},
 		importsToReplace: new Set([
-			"/constants.js",
-			"/functions.js",
-			"/tabContainer.js",
+			"/core/constants.js",
+			"/core/functions.js",
+			"/core/tabContainer.js",
 			"./background.js",
 		]),
 		sourceMapLineMap,

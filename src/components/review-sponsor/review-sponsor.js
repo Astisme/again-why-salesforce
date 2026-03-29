@@ -6,10 +6,10 @@ import {
 	ISEDGE,
 	ISFIREFOX,
 	ISSAFARI,
-} from "/constants.js";
-import { getSettings, injectStyle } from "/functions.js";
-import { ensureAllTabsAvailability } from "/tabContainer.js";
-import ensureTranslatorAvailability from "/translator.js";
+} from "/core/constants.js";
+import { getSettings, injectStyle } from "/core/functions.js";
+import { ensureAllTabsAvailability } from "/core/tabContainer.js";
+import ensureTranslatorAvailability from "/core/translator.js";
 import { generateReviewSponsorSvgs } from "/salesforce/generator.js";
 
 const REVIEW_TAB_THRESHOLD = 8;

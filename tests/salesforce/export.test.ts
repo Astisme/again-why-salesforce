@@ -138,9 +138,9 @@ async function loadExportModule({
 			},
 		},
 		importsToReplace: new Set([
-			"/constants.js",
-			"/functions.js",
-			"/tabContainer.js",
+			"/core/constants.js",
+			"/core/functions.js",
+			"/core/tabContainer.js",
 			"./generator.js",
 			"./content.js",
 		]),

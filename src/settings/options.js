@@ -38,7 +38,7 @@ import {
 	USE_LIGHTNING_NAVIGATION,
 	USER_LANGUAGE,
 	WHAT_SET,
-} from "/constants.js";
+} from "/core/constants.js";
 import {
 	areFramePatternsAllowed,
 	getCssRule,
@@ -55,8 +55,8 @@ import {
 	requestExportPermission,
 	requestFramePatternsPermission,
 	sendExtensionMessage,
-} from "/functions.js";
-import ensureTranslatorAvailability from "/translator.js";
+} from "/core/functions.js";
+import ensureTranslatorAvailability from "/core/translator.js";
 import "/components/theme-selector/theme-selector.js";
 
 // no need to await as we do not need to call the translator

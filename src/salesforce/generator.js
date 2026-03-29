@@ -23,7 +23,7 @@ import {
 	TOAST_ERROR,
 	TOAST_SUCCESS,
 	USE_LIGHTNING_NAVIGATION,
-} from "/constants.js";
+} from "/core/constants.js";
 import {
 	getCssRule,
 	getCssSelector,
@@ -32,10 +32,10 @@ import {
 	getStyleSettings,
 	injectStyle,
 	performLightningRedirect,
-} from "/functions.js";
-import Tab from "/tab.js";
-import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
-import ensureTranslatorAvailability from "/translator.js";
+} from "/core/functions.js";
+import Tab from "/core/tab.js";
+import { ensureAllTabsAvailability, TabContainer } from "/core/tabContainer.js";
+import ensureTranslatorAvailability from "/core/translator.js";
 
 import { getCurrentHref, showToast } from "./content.js";
 import { updateModalBodyOverflow } from "./manageTabs.js";
