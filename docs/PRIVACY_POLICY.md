@@ -19,8 +19,9 @@ _Last updated: June 2025_
 
 ## 2. Local Storage
 
-- We use the browser’s `localStorage` solely to save your **theme preferences** for faster load times.
-- Such preferences are currently used by the popup linked to the extension icon.
+- We use the browser’s `localStorage` only for local UI preferences and permission-prompt behavior.
+- Theme preferences are saved under `usingTheme` and `userTheme` (used by popup/settings theme toggles).
+- If you choose not to be asked again for optional setup-page access, we store `noPerm` to remember that choice.
 - No other personal data or browsing history is stored.
 - You can clear this by deleting browser history; the extension will continue to function after a page reload.
 
