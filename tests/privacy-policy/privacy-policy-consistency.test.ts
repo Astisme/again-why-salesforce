@@ -4,17 +4,17 @@ import {
 	assertEquals,
 } from "@std/testing/asserts";
 import {
+	type CheckerReport,
 	DEFAULT_CHECKER_FILE_PATHS,
 	extractCodeSignals,
 	extractPolicySection,
 	extractPolicySignals,
 	getReportExitCode,
 	parseManifestPermissions,
-	resolveLocalStorageArgument,
 	renderReport,
+	resolveLocalStorageArgument,
 	runPrivacyPolicyConsistencyChecker,
 	runPrivacyPolicyConsistencyCli,
-	type CheckerReport,
 } from "../../bin/privacy-policy-consistency-check.ts";
 
 const CHECKER_PATH_ORDER = [
@@ -68,8 +68,8 @@ function createPassingFixtureByPath(): Record<string, string> {
 		"- Optional permissions are requested at the moment you interact with the feature.",
 	].join("\n");
 	const analytics = [
-		"import { PREVENT_ANALYTICS } from \"/core/constants.js\";",
-		"const analyticscdnhost = \"simpleanalyticscdn.com\";",
+		'import { PREVENT_ANALYTICS } from "/core/constants.js";',
+		'const analyticscdnhost = "simpleanalyticscdn.com";',
 		"const queueanalytics = `https://queue.${analyticscdnhost}`;",
 		"function hasSentAnalyticsToday(date) {",
 		"\treturn date != null && Math.floor((Date.now() - new Date(date)) / (1000 * 60 * 60 * 24)) <= 0;",
@@ -82,8 +82,8 @@ function createPassingFixtureByPath(): Record<string, string> {
 		"\t\treturn;",
 		"\t}",
 		"\tconst apiUrl = new URL(`${queueanalytics}/noscript.gif`);",
-		"\tapiUrl.searchParams.set(\"hostname\", \"extension.again.whysalesforce\");",
-		"\tapiUrl.searchParams.set(\"path\", isNewUser ? \"/new-user\" : \"/\");",
+		'\tapiUrl.searchParams.set("hostname", "extension.again.whysalesforce");',
+		'\tapiUrl.searchParams.set("path", isNewUser ? "/new-user" : "/");',
 		"}",
 	].join("\n");
 	return {
@@ -202,35 +202,41 @@ Deno.test("runPrivacyPolicyConsistencyChecker fails each scoped claim when evide
 		{
 			id: "analytics_ping_cadence_and_path",
 			mutate: (fixtureByPath) => {
-				fixtureByPath[DEFAULT_CHECKER_FILE_PATHS.analytics] = fixtureByPath[
-					DEFAULT_CHECKER_FILE_PATHS.analytics
-				].replace('"/new-user"', '"/install"');
+				fixtureByPath[DEFAULT_CHECKER_FILE_PATHS.analytics] =
+					fixtureByPath[
+						DEFAULT_CHECKER_FILE_PATHS.analytics
+					].replace('"/new-user"', '"/install"');
 			},
 		},
 		{
 			id: "analytics_endpoint_and_domain",
 			mutate: (fixtureByPath) => {
-				fixtureByPath[DEFAULT_CHECKER_FILE_PATHS.analytics] = fixtureByPath[
-					DEFAULT_CHECKER_FILE_PATHS.analytics
-				].replace("simpleanalyticscdn.com", "example.com");
+				fixtureByPath[DEFAULT_CHECKER_FILE_PATHS.analytics] =
+					fixtureByPath[
+						DEFAULT_CHECKER_FILE_PATHS.analytics
+					].replace("simpleanalyticscdn.com", "example.com");
 			},
 		},
 		{
 			id: "storage_locations_and_keys",
 			mutate: (fixtureByPath) => {
-				fixtureByPath[DEFAULT_CHECKER_FILE_PATHS.policy] = fixtureByPath[
-					DEFAULT_CHECKER_FILE_PATHS.policy
-				].replace("`noPerm`", "`differentKey`");
+				fixtureByPath[DEFAULT_CHECKER_FILE_PATHS.policy] =
+					fixtureByPath[
+						DEFAULT_CHECKER_FILE_PATHS.policy
+					].replace("`noPerm`", "`differentKey`");
 			},
 		},
 		{
 			id: "cookie_permission_usage_boundaries",
 			mutate: (fixtureByPath) => {
-				fixtureByPath[DEFAULT_CHECKER_FILE_PATHS.manifest] = JSON.stringify({
-					permissions: ["storage", "cookies"],
-					optional_permissions: ["downloads"],
-					optional_host_permissions: ["*://*.my.salesforce.com/*"],
-				});
+				fixtureByPath[DEFAULT_CHECKER_FILE_PATHS.manifest] = JSON
+					.stringify({
+						permissions: ["storage", "cookies"],
+						optional_permissions: ["downloads"],
+						optional_host_permissions: [
+							"*://*.my.salesforce.com/*",
+						],
+					});
 			},
 		},
 	];
@@ -299,12 +305,18 @@ Deno.test("runPrivacyPolicyConsistencyChecker keeps load_errors deterministic by
 			}
 			if (path === DEFAULT_CHECKER_FILE_PATHS.analytics) {
 				return new Promise((_resolve, reject) => {
-					setTimeout(() => reject(new Error(`missing fixture for ${path}`)), 5);
+					setTimeout(
+						() => reject(new Error(`missing fixture for ${path}`)),
+						5,
+					);
 				});
 			}
 			if (path === DEFAULT_CHECKER_FILE_PATHS.manifest) {
 				return new Promise((_resolve, reject) => {
-					setTimeout(() => reject(new Error(`missing fixture for ${path}`)), 0);
+					setTimeout(
+						() => reject(new Error(`missing fixture for ${path}`)),
+						0,
+					);
 				});
 			}
 			return Promise.reject(new Error(`missing fixture for ${path}`));
@@ -340,13 +352,22 @@ Deno.test("helper functions cover parse and resolution branches", () => {
 		["DO_NOT_REQUEST_FRAME_PERMISSION", "noPerm"],
 		["EMPTY_VALUE", undefined as unknown as string],
 	]);
-	assertEquals(resolveLocalStorageArgument('"usingTheme"', constantMap), "usingTheme");
 	assertEquals(
-		resolveLocalStorageArgument("DO_NOT_REQUEST_FRAME_PERMISSION", constantMap),
+		resolveLocalStorageArgument('"usingTheme"', constantMap),
+		"usingTheme",
+	);
+	assertEquals(
+		resolveLocalStorageArgument(
+			"DO_NOT_REQUEST_FRAME_PERMISSION",
+			constantMap,
+		),
 		"noPerm",
 	);
 	assertEquals(resolveLocalStorageArgument("EMPTY_VALUE", constantMap), null);
-	assertEquals(resolveLocalStorageArgument("computeKey()", constantMap), null);
+	assertEquals(
+		resolveLocalStorageArgument("computeKey()", constantMap),
+		null,
+	);
 
 	const codeSignals = extractCodeSignals({
 		policy: "",
@@ -360,8 +381,14 @@ Deno.test("helper functions cover parse and resolution branches", () => {
 		permissionsPage: "",
 		settingsOptions: "",
 	});
-	assertEquals(codeSignals.constantKeyMap.get("GENERIC_TAB_STYLE_KEY"), undefined);
-	assertEquals(codeSignals.constantKeyMap.get("ORG_TAB_STYLE_KEY"), undefined);
+	assertEquals(
+		codeSignals.constantKeyMap.get("GENERIC_TAB_STYLE_KEY"),
+		undefined,
+	);
+	assertEquals(
+		codeSignals.constantKeyMap.get("ORG_TAB_STYLE_KEY"),
+		undefined,
+	);
 });
 
 Deno.test("policy helpers cover fallback section and alternate cadence wording", () => {

@@ -218,7 +218,9 @@ export async function loadCheckerInputs(
 			} catch (err) {
 				return {
 					value: "",
-					error: `unable_to_read:${key}:${path}:${getErrorMessage(err)}`,
+					error: `unable_to_read:${key}:${path}:${
+						getErrorMessage(err)
+					}`,
 				};
 			}
 		}),
@@ -263,7 +265,10 @@ export async function loadCheckerInputs(
  * @param {number} sectionNumber - Section number to extract.
  * @return {string} Section text (or empty string).
  */
-export function extractPolicySection(markdown: string, sectionNumber: number): string {
+export function extractPolicySection(
+	markdown: string,
+	sectionNumber: number,
+): string {
 	const pattern = new RegExp(
 		`##\\s+${sectionNumber}\\.\\s+[\\s\\S]*?(?=\\n##\\s+\\d+\\.|$)`,
 		"i",
@@ -297,7 +302,9 @@ export function extractBacktickValues(text: string): string[] {
  * @param {string} policyText - Full privacy policy text.
  * @return {Map<string, string>} Map from variable names to key values.
  */
-export function extractPolicyStorageKeyMap(policyText: string): Map<string, string> {
+export function extractPolicyStorageKeyMap(
+	policyText: string,
+): Map<string, string> {
 	const keyMap = new Map<string, string>();
 	const tablePattern = /\|\s*`([^`]+)`\s*\|\s*`([^`]+)`\s*\|/g;
 	let match = tablePattern.exec(policyText);
@@ -332,14 +339,16 @@ export function extractPolicySignals(policyText: string): PolicySignals {
 	return {
 		hasAnalyticsOptOutClaim: /opt-?out/.test(normalized) &&
 			/settings/.test(normalized) && /analytics/.test(normalized),
-		hasAnalyticsDailyPingClaim:
-			/1 ping per day/.test(normalized) || /one ping per day/.test(normalized),
-		hasAnalyticsInstallPingClaim:
-			/special ping/.test(normalized) && /install/.test(normalized),
+		hasAnalyticsDailyPingClaim: /1 ping per day/.test(normalized) ||
+			/one ping per day/.test(normalized),
+		hasAnalyticsInstallPingClaim: /special ping/.test(normalized) &&
+			/install/.test(normalized),
 		hasSimpleAnalyticsClaim: /simple analytics/.test(normalized),
-		hasStorageClaim: /localstorage/.test(normalized) && /theme/.test(normalized),
+		hasStorageClaim: /localstorage/.test(normalized) &&
+			/theme/.test(normalized),
 		hasLeastPrivilegeClaim: /least-privilege/.test(normalized),
-		hasInteractionPermissionClaim: /requested at the moment you interact/.test(normalized),
+		hasInteractionPermissionClaim: /requested at the moment you interact/
+			.test(normalized),
 		storagePolicyKeyMap: extractPolicyStorageKeyMap(policyText),
 		localStoragePolicyKeys,
 	};
@@ -403,7 +412,8 @@ export function extractLocalStorageKeysFromSource(
 	constantMap: Map<string, string>,
 ): Set<string> {
 	const keys = new Set<string>();
-	const pattern = /localStorage\.(?:getItem|setItem)\(\s*([^,\)\n]+)[^\)]*\)/g;
+	const pattern =
+		/localStorage\.(?:getItem|setItem)\(\s*([^,\)\n]+)[^\)]*\)/g;
 	let match = pattern.exec(sourceText);
 	while (match != null) {
 		const resolvedKey = resolveLocalStorageArgument(match[1], constantMap);
@@ -436,9 +446,10 @@ export function parseManifestPermissions(manifestText: string): {
 			optional_permissions: Array.isArray(manifest.optional_permissions)
 				? manifest.optional_permissions
 				: [],
-			optional_host_permissions: Array.isArray(manifest.optional_host_permissions)
-				? manifest.optional_host_permissions
-				: [],
+			optional_host_permissions:
+				Array.isArray(manifest.optional_host_permissions)
+					? manifest.optional_host_permissions
+					: [],
 		};
 	} catch {
 		return {
@@ -514,30 +525,33 @@ export function extractCodeSignals(inputs: CheckerInputTexts): CodeSignals {
 		hasAnalyticsPreventSetting: /getSettings\(PREVENT_ANALYTICS\)/.test(
 			analytics,
 		),
-		hasAnalyticsPreventGuard:
-			/shouldPreventAnalytics/.test(analytics) &&
+		hasAnalyticsPreventGuard: /shouldPreventAnalytics/.test(analytics) &&
 			/if\s*\([\s\S]*shouldPreventAnalytics[\s\S]*\)\s*\{\s*return;/.test(
 				analytics,
 			),
-		hasAnalyticsDailyGuard:
-			/hasSentAnalyticsToday/.test(analytics) &&
+		hasAnalyticsDailyGuard: /hasSentAnalyticsToday/.test(analytics) &&
 			/Math\.floor\(/.test(analytics),
-		hasAnalyticsInstallPath: /isNewUser\s*\?\s*"\/new-user"\s*:\s*"\/"/.test(
-			analytics,
-		),
+		hasAnalyticsInstallPath: /isNewUser\s*\?\s*"\/new-user"\s*:\s*"\/"/
+			.test(
+				analytics,
+			),
 		hasAnalyticsSimpleHost: /simpleanalyticscdn\.com/.test(analytics),
 		hasAnalyticsQueuePath: /noscript\.gif/.test(analytics),
 		hasAnalyticsHostname: /extension\.again\.whysalesforce/.test(analytics),
-		hasAnalyticsSettingsToggle: /\[PREVENT_ANALYTICS\]/.test(settingsOptions),
-		hasOncePerDayGuard:
-			/wasCalledToday\(today\)/.test(oncePerDay) &&
+		hasAnalyticsSettingsToggle: /\[PREVENT_ANALYTICS\]/.test(
+			settingsOptions,
+		),
+		hasOncePerDayGuard: /wasCalledToday\(today\)/.test(oncePerDay) &&
 			/checkInsertAnalytics\(\)/.test(oncePerDay),
 		hasStoragePermission: manifest.permissions.includes("storage"),
-		hasCookiesInOptionalPermissions:
-			manifest.optional_permissions.includes("cookies"),
-		hasCookiesInRequiredPermissions: manifest.permissions.includes("cookies"),
-		hasOptionalSalesforceHostPermission:
-			manifest.optional_host_permissions.includes("*://*.my.salesforce.com/*"),
+		hasCookiesInOptionalPermissions: manifest.optional_permissions.includes(
+			"cookies",
+		),
+		hasCookiesInRequiredPermissions: manifest.permissions.includes(
+			"cookies",
+		),
+		hasOptionalSalesforceHostPermission: manifest.optional_host_permissions
+			.includes("*://*.my.salesforce.com/*"),
 		hasCookiePermissionRequestBoundary:
 			/function\s+requestCookiesPermission\(\)/.test(functions) &&
 			/permissions:\s*\["cookies"\]/.test(functions) &&
@@ -584,8 +598,12 @@ export function createClaimResult(
 	codeChecks: RuleCheck[],
 ): ClaimResult {
 	const failures = [
-		...policyChecks.filter((check) => !check.ok).map((check) => check.evidence),
-		...codeChecks.filter((check) => !check.ok).map((check) => check.evidence),
+		...policyChecks.filter((check) => !check.ok).map((check) =>
+			check.evidence
+		),
+		...codeChecks.filter((check) => !check.ok).map((check) =>
+			check.evidence
+		),
 	];
 	return {
 		id,
@@ -723,16 +741,18 @@ export function evaluateStorageClaim(
 	policy: PolicySignals,
 	code: CodeSignals,
 ): ClaimResult {
-	const keyChecks: RuleCheck[] = STORAGE_VARIABLE_NAMES.map((variableName) => {
-		const policyValue = policy.storagePolicyKeyMap.get(variableName);
-		const codeValue = code.constantKeyMap.get(variableName);
-		const isMatch = policyValue != null && codeValue != null &&
-			policyValue === codeValue;
-		return createRuleCheck(
-			isMatch,
-			`policy/code key match for ${variableName}`,
-		);
-	});
+	const keyChecks: RuleCheck[] = STORAGE_VARIABLE_NAMES.map(
+		(variableName) => {
+			const policyValue = policy.storagePolicyKeyMap.get(variableName);
+			const codeValue = code.constantKeyMap.get(variableName);
+			const isMatch = policyValue != null && codeValue != null &&
+				policyValue === codeValue;
+			return createRuleCheck(
+				isMatch,
+				`policy/code key match for ${variableName}`,
+			);
+		},
+	);
 	const localStorageCoverageChecks = [
 		...code.localStorageKeysInCode,
 	].map((keyName) =>
