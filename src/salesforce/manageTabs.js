@@ -171,9 +171,10 @@ function getLastTr(tbody = null) {
  * @param {event} e - the event which had this function called
  * @param {Object} [param1={}] an object with the following keys
  * @param {TabContainer} param1.allTabs - the TabContainer instance
- * @return Promise fulfilled when checkOpenAskConfirm is completed
+ * @return {Promise} fulfilled when checkOpenAskConfirm is completed
+ * @async
  */
-export async function handleActionButtonClick(e, {
+export function handleActionButtonClick(e, {
 	allTabs,
 } = {}) {
 	e.preventDefault();
@@ -181,7 +182,7 @@ export async function handleActionButtonClick(e, {
 	const btn = e.currentTarget;
 	const action = btn.dataset.action;
 	if (action === "open") {
-		return await checkOpenAskConfirm(e);
+		return checkOpenAskConfirm(e);
 	}
 	const tabIndex = Number.parseInt(btn.dataset.tabIndex);
 	const row = btn.closest("tr");
@@ -326,15 +327,16 @@ export function updateModalBodyOverflow(article = null) {
 /**
  * Checks if both the label and URL fields are empty, and if so, calls the `removeTr` function.
  * @param {Event} e - the event which is connected to this function
- * @return undefined
+ * @return {Promise<void>} undefined
+ * @async
  */
-async function checkRemoveTr(e) {
+function checkRemoveTr(e) {
 	const parentTr = e.target.closest("tr");
 	const label = parentTr.querySelector(".label").value;
 	const url = parentTr.querySelector(".url").value;
 	const tabAppendElement = parentTr.closest("tbody");
 	if (label === "" && url === "") {
-		await removeTr(tabAppendElement, parentTr, focusedIndex);
+		return removeTr(tabAppendElement, parentTr, focusedIndex);
 	}
 }
 /**
@@ -365,7 +367,7 @@ function setInfoForDrag(element, listener, index) {
  * Only for TDs; hides all non-hidden dropdowns except the one that's being clicked
  * @param {event} e - the click event
  * @param {HTMLButtonElement} button - the button which is the one being clicked
- * @return undefined - nothing
+ * @return {void} - nothing
  */
 function closeDropdownOnTrClick(e, button) {
 	if (
@@ -387,7 +389,7 @@ function closeDropdownOnTrClick(e, button) {
  * Only for BUTTONs; hides all non-hidden dropdowns except the one that's being clicked
  * @param {event} e - the click event
  * @param {HTMLButtonElement} button - the button which is the one being clicked
- * @return undefined - nothing
+ * @return {void} - nothing
  */
 function closeDropdownOnBtnClick(e, button) {
 	e.preventDefault();
@@ -588,9 +590,10 @@ async function checkDuplicates({
  * @param {Object} [param0.inputObj=managedLoggers[focusedIndex].last_input] - the last_input object of the currently focused logger
  * @param {TbodyHTMLElement} [param0.tabAppendElement=null] - the tbody where to append or remove the tr
  * @throws Error when tabAppendElement == null
- * @return Promise fulfilled when addTr or removeTr are completed
+ * @return {Promise<void>} fulfilled when addTr or removeTr are completed
+ * @async
  */
-async function checkAddRemoveLastTr({
+function checkAddRemoveLastTr({
 	inputObj = managedLoggers[focusedIndex].last_input,
 	tabAppendElement,
 } = {}) {
@@ -602,13 +605,13 @@ async function checkAddRemoveLastTr({
 		focusedIndex === (managedLoggers.length - 1) &&
 		(inputObj.label && inputObj.url)
 	) {
-		await addTr(tabAppendElement);
+		return addTr(tabAppendElement);
 	} // if the user is on the previous-to-last td, remove the last tab if either one of the fields are empty
 	else if (
 		focusedIndex === (managedLoggers.length - 2) &&
 		(!inputObj.label || !inputObj.url)
 	) {
-		await removeTr(tabAppendElement);
+		return removeTr(tabAppendElement);
 	}
 }
 
@@ -656,9 +659,10 @@ function performAfterChecks({
  * @param {TbodyHTMLElement} [param0.tabAppendElement=null] - the tbody where to append the tr
  * @param {string} [param0.type="label"]  - The type of input field ("label", "url" or "org").
  * @throws Error when tabAppendElement == null
- * @return Promise fulfilled when the checkAddRemoveLastTr is completed
+ * @return {Promise<void>} fulfilled when the checkAddRemoveLastTr is completed
+ * @async
  */
-async function trInputListener({
+function trInputListener({
 	tabAppendElement = null,
 	type = "label",
 } = {}) {
@@ -715,7 +719,7 @@ async function trInputListener({
 		});
 	}
 	inputObj[type] = element.value;
-	await checkAddRemoveLastTr({
+	return checkAddRemoveLastTr({
 		inputObj,
 		tabAppendElement,
 	});

@@ -145,7 +145,7 @@ export async function bg_getSettings(
  * If a style is found with a non-compliant value, it is updated to Hexadecimal
  * @param {string|string[]} styleKey - the key related to the current style settings
  * @param {Array|Object<string,Array>} styleSettings - the result from bg_getSettings (for style settings)
- * @return styleSettings, updated with Hexadecimal values
+ * @return {Promise} styleSettings, updated with Hexadecimal values
  */
 async function checkStyleSettingsHex(styleKey, styleSettings) {
 	if (styleKey == null || styleSettings == null) {
@@ -236,7 +236,7 @@ async function bg_getStyleSettings(
  * @param {Array} newsettings - The settings to be stored
  * @param {string} [key=SETTINGS_KEY]  - The key of the settings where to merge and store the newsettings array
  *
- * @return the merged settings
+ * @return {Promise} the merged settings
  */
 async function mergeSettings(newsettings, key = SETTINGS_KEY) {
 	// get the settings array
@@ -298,26 +298,22 @@ async function mergeSettings(newsettings, key = SETTINGS_KEY) {
  */
 export async function bg_setStorage(tobeset, callback = null, key = WHY_KEY) {
 	const set = {};
-	const changedToArray = !Array.isArray(tobeset);
-	if (changedToArray) {
-		tobeset = [tobeset];
-	}
 	switch (key) {
 		case SETTINGS_KEY:
 		case GENERIC_TAB_STYLE_KEY:
 		case ORG_TAB_STYLE_KEY:
 		case GENERIC_PINNED_TAB_STYLE_KEY:
 		case ORG_PINNED_TAB_STYLE_KEY: {
-			set[key] = await mergeSettings(tobeset, key);
+			set[key] = await mergeSettings(
+				Array.isArray(tobeset) ? tobeset : [tobeset],
+				key,
+			);
 			break;
 		}
 		case WHY_KEY:
 		case LOCALE_KEY:
 		case TUTORIAL_KEY:
 		case TUTORIAL_CLOSE_EVENT:
-			if (changedToArray) {
-				tobeset = tobeset[0];
-			}
 			set[key] = tobeset;
 			break;
 		default:
@@ -452,7 +448,7 @@ export async function bg_getCommandLinks(commands = null, callback = null) {
  * Checks whether the object passed as contains is contained in the granted permissions
  * @param {Object} contains - the permission object to be checked
  * @param {function} callback - the function to call to send the response back
- * @return {boolean} the response from the API
+ * @return {Promise<boolean>} the response from the API
  */
 async function bg_isPermissionGranted(contains, callback) {
 	const response = await BROWSER.permissions.contains(contains);
@@ -640,16 +636,17 @@ async function setDefaultOrgStyle() {
 		{ id: TAB_STYLE_BACKGROUND, forActive: true, value: "#FFE4E1" },
 	];
 	if (availableStyles[ORG_PINNED_TAB_STYLE_KEY] == null) {
-		availableStyles[ORG_PINNED_TAB_STYLE_KEY] = _createDefaultStyleWrapper(
-			availableStyles,
-			ORG_TAB_STYLE_KEY,
-			ORG_PINNED_TAB_STYLE_KEY,
-			...pinnedStyles,
-		);
+		availableStyles[ORG_PINNED_TAB_STYLE_KEY] =
+			await _createDefaultStyleWrapper(
+				availableStyles,
+				ORG_TAB_STYLE_KEY,
+				ORG_PINNED_TAB_STYLE_KEY,
+				...pinnedStyles,
+			);
 	}
 	if (availableStyles[GENERIC_PINNED_TAB_STYLE_KEY] == null) {
 		availableStyles[GENERIC_PINNED_TAB_STYLE_KEY] =
-			_createDefaultStyleWrapper(
+			await _createDefaultStyleWrapper(
 				availableStyles,
 				GENERIC_TAB_STYLE_KEY,
 				GENERIC_PINNED_TAB_STYLE_KEY,
@@ -712,9 +709,9 @@ function setExtensionBrowserListeners() {
 		() => checkAddRemoveContextMenus(WHAT_ACTIVATE),
 	);
 	// when the active tab changes
-	BROWSER.tabs.onActivated.addListener(() =>
-		debouncedCheckMenus(WHAT_HIGHLIGHTED, checkForUpdates)
-	);
+	BROWSER.tabs.onActivated.addListener(() => {
+		debouncedCheckMenus(WHAT_HIGHLIGHTED, checkForUpdates);
+	});
 	//BROWSER.tabs.onHighlighted.addListener(() => checkAddRemoveContextMenus(WHAT_HIGHLIGHTED));
 	// when the current tab URL changes without switching tabs
 	BROWSER.tabs.onUpdated?.addListener((_, changeInfo, tab) => {

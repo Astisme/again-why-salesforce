@@ -1231,8 +1231,8 @@ function createHarness(url = SETUP_URL) {
 		setupShell,
 		tabsParent,
 		browser,
-		async load() {
-			return await loadContentModule(deps);
+		load() {
+			return loadContentModule(deps);
 		},
 		async flush() {
 			while (pendingTasks.size > 0) {
@@ -2410,7 +2410,7 @@ Deno.test(
 						"error_close_other_modal",
 					);
 					input.value = "";
-					saveButton.dispatchEvent(
+					await saveButton.dispatchEvent(
 						new Event("click", { bubbles: true, cancelable: true }),
 					);
 					await harness.flush();
@@ -2419,7 +2419,7 @@ Deno.test(
 						"insert_another",
 					);
 					input.value = "acme";
-					saveButton.dispatchEvent(
+					await saveButton.dispatchEvent(
 						new Event("click", { bubbles: true, cancelable: true }),
 					);
 					await harness.flush();
@@ -2428,14 +2428,15 @@ Deno.test(
 						"insert_another_org",
 					);
 					input.value = "other-org";
-					saveButton.dispatchEvent(
+					await saveButton.dispatchEvent(
 						new Event("click", { bubbles: true, cancelable: true }),
 					);
 					await harness.flush();
 					const openedUrl = harness.records.openCalls.at(-1)?.[0];
-					assert(openedUrl instanceof URL);
+					assertExists(openedUrl);
+					const resolvedOpenedUrl = new URL(String(openedUrl));
 					assertEquals(
-						openedUrl.hostname,
+						resolvedOpenedUrl.hostname,
 						"other-org.lightning.force.com",
 					);
 				},
@@ -2533,7 +2534,7 @@ Deno.test(
 					input.dispatchEvent(new Event("input"));
 					assertEquals(input.value, "new-target");
 					input.value = "bad_org";
-					saveButton.dispatchEvent(
+					await saveButton.dispatchEvent(
 						new Event("click", { bubbles: true, cancelable: true }),
 					);
 					await harness.flush();
@@ -2542,7 +2543,7 @@ Deno.test(
 						"insert_valid_org",
 					);
 					input.value = "other-org";
-					saveButton.dispatchEvent(
+					await saveButton.dispatchEvent(
 						new Event("click", { bubbles: true, cancelable: true }),
 					);
 					await harness.flush();
@@ -2553,7 +2554,7 @@ Deno.test(
 					harness.state.confirmResult = true;
 					harness.browser.runtime.triggerMessage({
 						what: "show-open-other-org",
-						linkTabUrl: "/lightning/page/home",
+						url: "/lightning/page/home",
 					});
 					await harness.flush();
 					const slashModal = document.getElementById(
@@ -2562,7 +2563,9 @@ Deno.test(
 					assertExists(slashModal);
 					(slashModal.querySelector("input") as HTMLInputElement)
 						.value = "other-org";
-					(slashModal.querySelector("button") as HTMLButtonElement)
+					await (slashModal.querySelector(
+						"button",
+					) as HTMLButtonElement)
 						.dispatchEvent(
 							new Event("click", {
 								bubbles: true,
@@ -2571,9 +2574,10 @@ Deno.test(
 						);
 					await harness.flush();
 					const openedUrl = harness.records.openCalls.at(-1)?.[0];
-					assert(openedUrl instanceof URL);
+					assertExists(openedUrl);
+					const resolvedOpenedUrl = new URL(String(openedUrl));
 					assertEquals(
-						openedUrl.pathname,
+						resolvedOpenedUrl.pathname,
 						"/lightning/page/home",
 					);
 				},
@@ -2881,8 +2885,11 @@ Deno.test(
 							{},
 							() => {},
 						);
-						await Promise.resolve();
-						await Promise.resolve();
+						let secondQueuedMoveCompleted = false;
+						void secondQueuedMove.then(() => {
+							secondQueuedMoveCompleted = true;
+						});
+						assertEquals(secondQueuedMoveCompleted, false);
 						assertEquals(
 							moveHasStarted,
 							false,

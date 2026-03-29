@@ -416,8 +416,10 @@ function delayLoadSetupTabs(count = 0) {
 		// write error in the console
 		(async () => {
 			const translator = await ensureTranslatorAvailability();
-			const label = await translator.translate("extension_label");
-			const fail = await translator.translate("error_no_setup_tab");
+			const [label, fail] = await Promise.all([
+				translator.translate("extension_label"),
+				translator.translate("error_no_setup_tab"),
+			]);
 			console.error(`${label} - ${fail}`);
 			setTimeout(delayLoadSetupTabs, 5000);
 		})();
@@ -595,7 +597,10 @@ async function showModalOpenOtherOrg(
 	if (document.getElementById(MODAL_ID) != null) {
 		return showToast("error_close_other_modal", TOAST_ERROR);
 	}
-	const allTabs = await ensureAllTabsAvailability();
+	const [allTabs, skip_link_detection] = await Promise.all([
+		ensureAllTabsAvailability(),
+		getSettings("skip_link_detection"),
+	]);
 	const href = getCurrentHref();
 	if (label == null && url == null) {
 		const minyURL = Tab.minifyURL(href);
@@ -611,7 +616,6 @@ async function showModalOpenOtherOrg(
 	if (org == null) {
 		org = Tab.extractOrgName(href);
 	}
-	const skip_link_detection = await getSettings("skip_link_detection");
 	if (
 		skip_link_detection != null && !skip_link_detection.enabled &&
 		Tab.containsSalesforceId(url)
@@ -621,8 +625,6 @@ async function showModalOpenOtherOrg(
 			TOAST_WARNING,
 		);
 	}
-	const translator = await ensureTranslatorAvailability();
-	const whereTo = await translator.translate("where_to");
 	const {
 		modalParent,
 		saveButton,
@@ -630,7 +632,7 @@ async function showModalOpenOtherOrg(
 		inputContainer,
 		getSelectedRadioButtonValue,
 	} = await generateOpenOtherOrgModal({
-		label: label ?? whereTo,
+		label,
 		url, // if the url is "", we may still open the link in another Org without any issue
 		org,
 	});
@@ -679,6 +681,7 @@ async function showModalOpenOtherOrg(
 				url.startsWith("/") ? "" : SETUP_LIGHTNING
 			}${url}`,
 		);
+		const translator = await ensureTranslatorAvailability();
 		const confirm_msg = await translator.translate([
 			"confirm_another_org",
 			targetUrl,
@@ -704,7 +707,7 @@ const ACTION_SORT = "sort";
  * @param {string} action - The action to perform on the tab.
  * @param {Tab} tab - The tab on which the action should be performed.
  * @param {Object} options - Options that influence the behavior of the action (e.g., filters or specific conditions).
- * @return undefined
+ * @return {Promise<void>}
  */
 export async function performActionOnTabs(
 	action,
@@ -863,7 +866,7 @@ async function toggleOrg({ label = null, url = null, org = null } = {}) {
  * @param {string} tab.label - The label of the Tab to update
  * @param {string} tab.url - The Url of the Tab to update
  * @param {string} tab.org - The Org of the Tab to update
- * @return undefined
+ * @return {Promise<void>}
  */
 async function showModalUpdateTab(
 	{ label = null, url = null, org = null } = {},
@@ -1248,7 +1251,7 @@ function main() {
 	checkAddLightningNavigation();
 	listenToBackgroundPage();
 	delayLoadSetupTabs();
-	executeOncePerDay();
+	void executeOncePerDay();
 }
 
 // queries the currently active tab of the current active window

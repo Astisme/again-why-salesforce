@@ -1,11 +1,6 @@
 "use strict";
-import {
-	EXTENSION_LAST_ACTIVE_DAY,
-	EXTENSION_USAGE_DAYS,
-	SETTINGS_KEY,
-} from "/constants.js";
-import { getSettings, sendExtensionMessage } from "/functions.js";
-import { getTodayDateKey } from "./once-a-day.js";
+import { EXTENSION_LAST_ACTIVE_DAY, EXTENSION_USAGE_DAYS } from "/constants.js";
+import { getSettings, getTodayDateKey, setSettings } from "/functions.js";
 
 /**
  * Builds the object that will be saved in settings
@@ -29,7 +24,7 @@ function getSetArrayForUsageDays({
  * Determines whether today's extension use should update the persisted usage-day tracker.
  * @param {Object[]|Object|null} [settings=[]] - retrieved settings entries for the usage tracker
  * @param {string} [today=getTodayDateKey()] - local date formatted as YYYY-MM-DD
- * @return {{usageDays: number, set: Object[]|null}} the effective usage-day count and pending settings updates
+ * @return {{lastActiveDay: string|null, usageDays: number, set: Object[]|null}} the effective usage-day count and pending settings updates
  * @exports for tests
  */
 export function getUsageDaysUpdate(
@@ -48,7 +43,7 @@ export function getUsageDaysUpdate(
 		settingsMap.get(EXTENSION_USAGE_DAYS)?.enabled ?? 0,
 	);
 	const lastActiveDay = settingsMap.get(EXTENSION_LAST_ACTIVE_DAY)
-		?.enabled;
+		?.enabled ?? null;
 	let updatedUsageDays = usageDays;
 	let set = null;
 	if (
@@ -60,7 +55,7 @@ export function getUsageDaysUpdate(
 		updatedUsageDays += 1;
 		set = getSetArrayForUsageDays({ usageDays: updatedUsageDays, today });
 	}
-	return { usageDays: updatedUsageDays, set };
+	return { lastActiveDay, usageDays: updatedUsageDays, set };
 }
 
 /**
@@ -74,11 +69,7 @@ export async function updateExtensionUsageDays() {
 	]);
 	const { usageDays, set } = getUsageDaysUpdate(usageSettings);
 	if (set != null) {
-		await sendExtensionMessage({
-			what: "set",
-			key: SETTINGS_KEY,
-			set,
-		});
+		await setSettings(set);
 	}
 	return usageDays;
 }

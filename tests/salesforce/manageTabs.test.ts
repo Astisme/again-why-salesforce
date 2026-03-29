@@ -1686,7 +1686,7 @@ Deno.test("manageTabs checks duplicates, updates links, and handles input bookke
 			"Fresh label",
 		);
 
-		await assertRejects(
+		assertThrows(
 			() => fixture.module.checkAddRemoveLastTr(),
 			Error,
 			"error_required_params",
