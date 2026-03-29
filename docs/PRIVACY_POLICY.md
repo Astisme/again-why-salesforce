@@ -1,6 +1,6 @@
 # Again, Why Salesforce – Privacy Policy
 
-_Last updated: June 2025_
+_Last updated: March 2026_
 
 **Again, Why Salesforce** is a browser extension that communicates directly between your web browser and the Salesforce page (and Salesforce servers when using the extension in the same language as your Salesforce account). We do **not** collect or store any personal or identifiable information.
 
@@ -19,10 +19,12 @@ _Last updated: June 2025_
 
 ## 2. Local Storage
 
-- We use the browser’s `localStorage` solely to save your **theme preferences** for faster load times.
-- Such preferences are currently used by the popup linked to the extension icon.
-- No other personal data or browsing history is stored.
-- You can clear this by deleting browser history; the extension will continue to function after a page reload.
+- We use the browser’s `localStorage` only for lightweight UI and permission-prompt preferences:
+  - `usingTheme`: current popup theme rendering helper.
+  - `userTheme`: your selected theme preference (`light`, `dark`, or `system`).
+  - `noPerm`: remembers if you dismissed a non-core optional permission prompt.
+- No Salesforce Tab payloads, records, or browsing history are stored in `localStorage`.
+- You can clear these values by deleting browser history/site data; the extension will continue to function after a page reload.
 
 ---
 
@@ -37,11 +39,11 @@ _Last updated: June 2025_
 
 ---
 
-## 4. Tab Data (In-Memory)
+## 4. Tab Data (Browser Storage Sync)
 
-- While running, the extension keeps your **Tab** data in memory (key: `againWhySalesforce`, variable: `WHY_KEY`).
+- Your **Tab** data is stored in browser **sync storage** (key: `againWhySalesforce`, variable: `WHY_KEY`).
 - This powers the Lightning Setup page sidebar, showing your custom Tabs alongside the standard "Home" and "Object Manager".
-- Nothing is persisted here beyond your current session (everything is automatically deleted when you reload the page or when you close your browser tab/window).
+- Data persists across sessions and can sync across devices according to your browser account sync settings.
 
 ---
 

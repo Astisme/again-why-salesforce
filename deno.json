@@ -28,6 +28,7 @@
 		"sort": "deno --allow-read --allow-write bin/sort-locales.ts && git add src/_locales/*/messages.json",
 		"locale-check": "deno --allow-read --allow-write bin/find-invalid-variables.ts && deno --allow-read --allow-write bin/missing-locales.ts",
 		"locales": "deno task locale-check && deno task sort",
+		"privacy-policy-check": "deno run --allow-read bin/privacy-policy-consistency-check-run.ts",
 		"bundle": "deno run -A bin/build.ts",
 		"checks": "deno task fmt && deno task lint && deno task test && deno task locales && deno task dev-firefox",
 
