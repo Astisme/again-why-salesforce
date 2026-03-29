@@ -17,7 +17,11 @@ import {
 	WHAT_ADD,
 	WHAT_GET_COMMANDS,
 } from "/core/constants.js";
-import { getSettings, injectStyle, sendExtensionMessage } from "/core/functions.js";
+import {
+	getSettings,
+	injectStyle,
+	sendExtensionMessage,
+} from "/core/functions.js";
 import Tab from "/core/tab.js";
 import { ensureAllTabsAvailability } from "/core/tabContainer.js";
 import ensureTranslatorAvailability from "/core/translator.js";
