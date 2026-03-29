@@ -14,6 +14,18 @@ Please remember that this project is entirely funded by **the support of its use
 ## 🧪 Tests
 -->
 
+# v2.2.4
+
+## 🛠 Changed
+1. Improved parallel tasks for faster responsiveness
+2. Better use of Promises all around the extension
+
+## 💥 Removed
+1. Removed use of Analytics Date due to previous version use of a standalone setting (EXTENSION_LAST_ACTIVE_DAY)
+
+## 🧪 Tests
+1. Added tests for this new functionality
+
 # v2.2.3
 
 ## 🚀 Added
