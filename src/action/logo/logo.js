@@ -9,7 +9,7 @@ const html = document.documentElement;
  * Listener for runtime messages related to theme updates.
  * Listens for messages with `what: WHAT_THEME` and a valid `theme` property.
  *
- * @param {Object} mess - The incoming message object.
+ * @param {Object} message - The incoming message object.
  * @param {*} _ - Unused sender parameter.
  * @param {Function} sendResponse - Callback to respond to the sender.
  */
