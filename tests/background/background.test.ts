@@ -33,11 +33,11 @@ import {
 	WHAT_GET_SETTINGS,
 	WHAT_GET_SF_LANG,
 	WHAT_GET_STYLE_SETTINGS,
+	WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
 	WHAT_SAVED,
 	WHAT_SET,
 	WHAT_SHOW_EXPORT_MODAL,
 	WHAT_SHOW_IMPORT,
-	WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
 	WHAT_START_TUTORIAL,
 	WHAT_THEME,
 	WHY_KEY,
@@ -600,10 +600,13 @@ await Deno.test("background listeners handle runtime, command, and browser event
 		BROWSER.downloads = undefined;
 		BROWSER.commands.onCommand.triggerCommand(CMD_EXPORT_ALL);
 		await waitForCondition(() =>
-			(sentMessages.slice(blockedExportMessages) as Array<{ what?: string }>)
+			(sentMessages.slice(blockedExportMessages) as Array<
+				{ what?: string }
+			>)
 				.some((message) =>
-				message.what === WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP
-			)
+					message.what ===
+						WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP
+				)
 		);
 		BROWSER.downloads = downloadsApi;
 		BROWSER.commands.onCommand.triggerCommand(CMD_OPEN_SETTINGS);
@@ -617,7 +620,10 @@ await Deno.test("background listeners handle runtime, command, and browser event
 			temporary: false,
 		});
 		await waitForCondition(() => openedTabs.length > 0);
-		assertEquals(openedTabs[0].url, `${EXTENSION_GITHUB_LINK}/tree/main/docs/CHANGELOG.md`);
+		assertEquals(
+			openedTabs[0].url,
+			`${EXTENSION_GITHUB_LINK}/tree/main/docs/CHANGELOG.md`,
+		);
 		BROWSER.runtime.onInstalled.triggerInstalled({
 			reason: "install",
 			temporary: false,

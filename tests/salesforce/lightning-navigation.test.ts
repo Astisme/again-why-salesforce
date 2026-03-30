@@ -211,7 +211,9 @@ Deno.test("lightning-navigation falls back to open when the Salesforce event API
 		await loadLightningNavigationWithFailingAura();
 
 	try {
-		const registeredListener = listener as LightningNavigationListener | null;
+		const registeredListener = listener as
+			| LightningNavigationListener
+			| null;
 		assertExists(registeredListener);
 		registeredListener({
 			data: {
@@ -238,7 +240,9 @@ Deno.test("lightning-navigation reports failures without opening when no fallbac
 		await loadLightningNavigationWithFailingAura();
 
 	try {
-		const registeredListener = listener as LightningNavigationListener | null;
+		const registeredListener = listener as
+			| LightningNavigationListener
+			| null;
 		assertExists(registeredListener);
 		registeredListener({
 			data: {
