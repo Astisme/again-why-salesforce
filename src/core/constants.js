@@ -5,6 +5,9 @@
  */
 function detectBrowser() {
 	const userAgent = navigator.userAgent.toLowerCase();
+	// Why this exists: detection order is significant because modern user agents
+	// often include multiple browser tokens (for example, Chrome includes
+	// "safari", and Edge can include Chromium markers).
 	// Firefox detection (including Firefox-based browsers)
 	if (userAgent.includes("firefox")) {
 		return "firefox";
@@ -27,6 +30,9 @@ export const ISEDGE = BROWSER_NAME === "edge";
 export const ISCHROME = BROWSER_NAME === "chrome" || ISEDGE;
 export const ISFIREFOX = BROWSER_NAME === "firefox";
 export const ISSAFARI = BROWSER_NAME === "safari";
+// Why this exists: extension APIs are exposed as `chrome` in Chromium-based
+// browsers and as `browser` in Firefox; selecting once keeps the codebase
+// branch-free for API calls.
 export const BROWSER = ISCHROME ? chrome : browser;
 export const EXTENSION_LABEL = BROWSER.i18n.getMessage("extension_label");
 export const EXTENSION_NAME = "again-why-salesforce";

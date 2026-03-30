@@ -1,6 +1,6 @@
 import { mockStorage } from "../mocks.test.ts";
 import { assert, assertEquals, assertFalse } from "@std/testing/asserts";
-import { waitForCondition } from "../async.test.ts";
+import { waitForCondition, waitForNextTask } from "../async.test.ts";
 
 import {
 	bg_getCommandLinks,
@@ -12,6 +12,7 @@ import {
 import {
 	BROWSER,
 	CMD_EXPORT_ALL,
+	CMD_OPEN_SETTINGS,
 	CXM_MANAGE_TABS,
 	GENERIC_TAB_STYLE_KEY,
 	LOCALE_KEY,
@@ -285,6 +286,22 @@ await Deno.test("bg_getSalesforceLanguage behavior", async () => {
 	assertEquals(sflang, "sf-lang-en"); // only for tests, from Salesforce, we'll get the correct language
 });
 
+await Deno.test("bg_getSalesforceLanguage maps setup hosts to my.salesforce.com cookies", async () => {
+	BROWSER.tabs.setMockBrowserTabs([{
+		id: 0,
+		url: "https://mycustomorg.my.salesforce-setup.com/lightning/setup/SetupOneHome/home",
+		active: true,
+		currentWindow: true,
+	}]);
+	BROWSER.cookies.setMockCookies([{
+		domain: "mycustomorg.my.salesforce.com",
+		name: "sid",
+		value: "bearer value", // only for tests
+	}]);
+	const sflang = await bg_getSalesforceLanguage();
+	assertEquals(sflang, "sf-lang-en");
+});
+
 await Deno.test("bg_getSalesforceLanguage ignores lookalike non-Salesforce hosts", async () => {
 	mockStorage[LOCALE_KEY] = "fallback-locale";
 	BROWSER.tabs.setMockBrowserTabs([{
@@ -496,5 +513,143 @@ await Deno.test("background listeners handle runtime, command, and browser event
 		globalThis.setTimeout = originalSetTimeout;
 		BROWSER.tabs.sendMessage = originalSendMessage;
 		BROWSER.permissions.contains = originalContains;
+	}
+});
+
+await Deno.test("background listeners cover setup gating and install/update side branches", async () => {
+	type SentMessage = {
+		what?: string;
+	};
+	type RuntimeWithOpenOptions = typeof BROWSER.runtime & {
+		openOptionsPage?: () => void;
+	};
+	type TabsWithCreate = typeof BROWSER.tabs & {
+		create?: (details: { url: string }) => Promise<{ id: number }>;
+	};
+
+	const originalSendMessage = BROWSER.tabs.sendMessage;
+	const runtimeWithOpenOptions = BROWSER.runtime as RuntimeWithOpenOptions;
+	const tabsWithCreate = BROWSER.tabs as TabsWithCreate;
+	const originalOpenOptionsPage = runtimeWithOpenOptions.openOptionsPage;
+	const originalCreate = tabsWithCreate.create;
+	const originalDownloads = BROWSER.downloads;
+	const sentMessages: SentMessage[] = [];
+	const createdTabs: Array<{ url: string }> = [];
+	let openedSettingsCount = 0;
+
+	BROWSER.tabs.sendMessage = (_tabId: number, message: object) => {
+		sentMessages.push(message as SentMessage);
+		return Promise.resolve(true);
+	};
+	runtimeWithOpenOptions.openOptionsPage = () => {
+		openedSettingsCount += 1;
+	};
+	tabsWithCreate.create = (details: { url: string }) => {
+		createdTabs.push(details);
+		return Promise.resolve({ id: 77 });
+	};
+	BROWSER.downloads = {
+		download: () => Promise.resolve(0),
+		onChanged: {
+			addListener: () => {},
+		},
+	};
+	mockStorage[SETTINGS_KEY] = [
+		{ enabled: "fr", id: USER_LANGUAGE },
+		{ enabled: false, id: NO_RELEASE_NOTES },
+		{ enabled: false, id: TAB_ADD_FRONT },
+	];
+
+	try {
+		let exportCheckResponse: null | "pending" = "pending";
+		const exportCheckStart = sentMessages.length;
+		BROWSER.runtime.onMessage.triggerMessage(
+			{ what: WHAT_EXPORT_CHECK },
+			"",
+			(response) => {
+				if (response === null) {
+					exportCheckResponse = response;
+				}
+			},
+		);
+		await waitForCondition(() => exportCheckResponse === null);
+		await waitForCondition(() =>
+			sentMessages.slice(exportCheckStart).some((message) =>
+				message.what === WHAT_SHOW_EXPORT_MODAL
+			)
+		);
+
+		BROWSER.tabs.setMockBrowserTabs([{
+			id: 1,
+			url: "https://example.test/not-salesforce",
+			active: true,
+			currentWindow: true,
+		}]);
+		const nonSetupMessageCount = sentMessages.length;
+		BROWSER.commands.onCommand.triggerCommand(CMD_EXPORT_ALL);
+		await waitForNextTask();
+		assertEquals(sentMessages.length, nonSetupMessageCount);
+
+		BROWSER.tabs.setMockBrowserTabs([{
+			id: 1,
+			url: "https://acme.lightning.force.com/lightning/setup/SetupOneHome/home",
+			active: true,
+			currentWindow: true,
+		}]);
+		BROWSER.commands.onCommand.triggerCommand(CMD_OPEN_SETTINGS);
+		await waitForCondition(() => openedSettingsCount === 1);
+
+		const exportCommandStart = sentMessages.length;
+		BROWSER.commands.onCommand.triggerCommand(CMD_EXPORT_ALL);
+		await waitForCondition(() => sentMessages.length > exportCommandStart);
+
+		BROWSER.runtime.onInstalled.triggerInstalled({
+			reason: "update",
+			temporary: true,
+		});
+		BROWSER.runtime.onInstalled.triggerInstalled({ reason: "update" });
+		await waitForCondition(() => createdTabs.length === 1);
+
+		mockStorage[SETTINGS_KEY] = [
+			{ enabled: "fr", id: USER_LANGUAGE },
+			{ enabled: true, id: NO_RELEASE_NOTES },
+			{ enabled: false, id: TAB_ADD_FRONT },
+		];
+		BROWSER.runtime.onInstalled.triggerInstalled({ reason: "update" });
+		await waitForNextTask();
+		assertEquals(createdTabs.length, 1);
+
+		const inactiveUpdateStart = sentMessages.length;
+		BROWSER.tabs.onUpdated.triggerUpdated(
+			1,
+			{ status: "loading" },
+			{
+				id: 1,
+				url: "https://acme.lightning.force.com/lightning/setup/SetupOneHome/home",
+				active: false,
+				currentWindow: true,
+			},
+		);
+		await waitForNextTask();
+		assertEquals(sentMessages.length, inactiveUpdateStart);
+
+		const incompleteUpdateStart = sentMessages.length;
+		BROWSER.tabs.onUpdated.triggerUpdated(
+			1,
+			{ status: "loading" },
+			{
+				id: 1,
+				url: "https://acme.lightning.force.com/lightning/setup/SetupOneHome/home",
+				active: true,
+				currentWindow: true,
+			},
+		);
+		await waitForNextTask();
+		assertEquals(sentMessages.length, incompleteUpdateStart);
+	} finally {
+		BROWSER.tabs.sendMessage = originalSendMessage;
+		runtimeWithOpenOptions.openOptionsPage = originalOpenOptionsPage;
+		tabsWithCreate.create = originalCreate;
+		BROWSER.downloads = originalDownloads;
 	}
 });
