@@ -9,6 +9,8 @@ function detectBrowser() {
 	if (userAgent.includes("firefox")) {
 		return "firefox";
 	}
+	// Why this exists: Edge user agents include the `chrome` token,
+	// so we must detect Edge before the Chromium branch below.
 	if (userAgent.includes("edg")) {
 		return "edge";
 	}
@@ -27,6 +29,8 @@ export const ISEDGE = BROWSER_NAME === "edge";
 export const ISCHROME = BROWSER_NAME === "chrome" || ISEDGE;
 export const ISFIREFOX = BROWSER_NAME === "firefox";
 export const ISSAFARI = BROWSER_NAME === "safari";
+// Why this exists: Chromium browsers expose extension APIs via `chrome`,
+// while Firefox exposes them via `browser`; this normalizes API access.
 export const BROWSER = ISCHROME ? chrome : browser;
 export const EXTENSION_LABEL = BROWSER.i18n.getMessage("extension_label");
 export const EXTENSION_NAME = "again-why-salesforce";

@@ -145,8 +145,10 @@ Deno.test("constants prefers the browser API for Firefox and exposes manifest da
 	}
 });
 
-Deno.test("constants detect Edge and still use the chrome API", async () => {
-	const fixture = await loadConstants("Mozilla/5.0 Edg/120.0");
+Deno.test("constants detect Edge before the Chrome token and still use the chrome API", async () => {
+	const fixture = await loadConstants(
+		"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0",
+	);
 	try {
 		const module = fixture.module;
 

@@ -1,4 +1,8 @@
-// This script is injected in Salesforce context and does not share the context with the rest of the scripts in this direcory.
+// Why this exists: this file is injected into the Salesforce page context so
+// it can call Aura APIs (`$A`) that are not reachable from extension scripts.
+// It only accepts explicit same-window postMessage requests from the extension.
+
+const LIGHTNING_NAVIGATION = "lightningNavigation";
 
 /**
  * Handles Lightning navigation based on the provided details.
@@ -31,6 +35,8 @@ function doLightningNavigation(details) {
 		}
 	} catch (error) {
 		console.error(`Navigation failed: ${error.message}`); // do not translate as this will be sent from inside Salesforce
+		// Why this exists: when Aura navigation fails, fallback URL navigation
+		// keeps the extension action usable for the current user flow.
 		if (details.fallbackURL) {
 			open(details.fallbackURL, "_top");
 		}
@@ -43,7 +49,7 @@ addEventListener("message", (e) => {
 		return;
 	}
 	const what = e.data.what;
-	if (what === "lightningNavigation") {
+	if (what === LIGHTNING_NAVIGATION) {
 		doLightningNavigation(e.data);
 	}
 });

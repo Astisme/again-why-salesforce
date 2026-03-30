@@ -330,15 +330,14 @@ export async function bg_setStorage(tobeset, callback = null, key = WHY_KEY) {
 }
 
 /**
- * Determines the Salesforce API host and constructs authorization headers based on the current URL.
- * - Validates the URL against supported Salesforce domains.
- * - Normalizes certain Salesforce subdomains to the main domain.
- * - Retrieves the session ID cookie ("sid") for authentication.
- * - Returns the API host origin and headers needed for authorized requests.
+ * Resolves the Salesforce API host and auth headers for the active org URL.
  *
- * @param {string} currentUrl - The current Salesforce URL.
- * @return {Promise<[string, Object]>|undefined} A promise resolving to a tuple of the API host origin and headers, or undefined if URL is unsupported.
- * @throws {Error} Throws if required authentication cookies are not found.
+ * Why this exists: users navigate on lightning.force.com and
+ * my.salesforce-setup.com, but Salesforce session cookies are scoped to
+ * my.salesforce.com; API calls fail unless we bridge to that host family.
+ *
+ * @param {string} currentUrl - Active Salesforce URL.
+ * @return {Promise<[string, Record<string, string>]|undefined>} API host and headers or undefined for unsupported hosts.
  */
 async function _getAPIHostAndHeaders(currentUrl) {
 	const url = new URL(currentUrl);
@@ -346,6 +345,8 @@ async function _getAPIHostAndHeaders(currentUrl) {
 	if (!isSalesforceHostname(url)) {
 		return;
 	}
+	// Why this exists: REST calls and sid cookie lookup must use
+	// the my.salesforce.com host family even when browsing setup/lightning.
 	if (url.hostname.endsWith(LIGHTNING_FORCE_COM)) {
 		origin = url.origin.replace(LIGHTNING_FORCE_COM, MY_SALESFORCE_COM);
 	} else if (url.hostname.endsWith(MY_SALESFORCE_SETUP_COM)) {
