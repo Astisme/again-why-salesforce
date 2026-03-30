@@ -27,7 +27,7 @@
 				"*://*.lightning.force.com/lightning/setup/*"
 			],
 			"js": [
-				"salesforce/bundledContent.js"
+				"generated/bundledContent.js"
 			],
 			"run_at": "document_start",
 			"all_frames": false
@@ -67,9 +67,9 @@
 		"default_popup": "action/popup/popup.html"
 	},
 	"background": {
-		"service_worker": "background/bundledBackground.js",
+		"service_worker": "generated/bundledBackground.js",
 		"scripts": [
-			"background/bundledBackground.js"
+			"generated/bundledBackground.js"
 		],
 		"type": "module"
 	},

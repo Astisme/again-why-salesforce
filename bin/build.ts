@@ -4,9 +4,9 @@ import { denoPlugins } from "@luca/esbuild-deno-loader";
 await esbuild.build({
 	plugins: [...denoPlugins()],
 	entryPoints: [
-		"./src/salesforce/import.js",
+		"./src/entrypoints/content.js",
 	],
-	outfile: "./src/salesforce/bundledContent.js",
+	outfile: "./src/generated/bundledContent.js",
 	bundle: true,
 	minify: false,
 });
@@ -14,9 +14,9 @@ await esbuild.build({
 await esbuild.build({
 	plugins: [...denoPlugins()],
 	entryPoints: [
-		"./src/background/background.js",
+		"./src/entrypoints/background.js",
 	],
-	outfile: "./src/background/bundledBackground.js",
+	outfile: "./src/generated/bundledBackground.js",
 	bundle: true,
 	minify: false,
 });

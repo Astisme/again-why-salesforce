@@ -38,7 +38,7 @@ import { ensureAllTabsAvailability, TabContainer } from "/core/tabContainer.js";
 import ensureTranslatorAvailability from "/core/translator.js";
 
 import { getCurrentHref, showToast } from "./content.js";
-import { updateModalBodyOverflow } from "./manageTabs.js";
+import { updateModalBodyOverflow } from "./modal-layout.js";
 
 const TOAST_ID = `${EXTENSION_NAME}-toast`;
 export const MODAL_ID = `${EXTENSION_NAME}-modal`;

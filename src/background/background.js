@@ -7,27 +7,12 @@ import {
 	CMD_EXPORT_ALL,
 	CMD_OPEN_SETTINGS,
 	CXM_MANAGE_TABS,
-	DECORATION_COLORS,
 	EXTENSION_GITHUB_LINK,
-	GENERIC_PINNED_TAB_STYLE_KEY,
-	GENERIC_TAB_STYLE_KEY,
-	LIGHTNING_FORCE_COM,
-	LOCALE_KEY,
-	MY_SALESFORCE_COM,
-	MY_SALESFORCE_SETUP_COM,
 	NO_RELEASE_NOTES,
-	ORG_PINNED_TAB_STYLE_KEY,
-	ORG_TAB_STYLE_KEY,
 	PERM_CHECK,
-	PREVENT_DEFAULT_OVERRIDE,
-	SETTINGS_KEY,
 	SETUP_LIGHTNING_PATTERN,
-	TAB_STYLE_BACKGROUND,
-	TAB_STYLE_BOLD,
 	TOAST_ERROR,
 	TOAST_WARNING,
-	TUTORIAL_CLOSE_EVENT,
-	TUTORIAL_KEY,
 	WHAT_ACTIVATE,
 	WHAT_EXPORT,
 	WHAT_EXPORT_CHECK,
@@ -47,9 +32,8 @@ import {
 	WHAT_START_TUTORIAL,
 	WHAT_STARTUP,
 	WHAT_THEME,
-	WHY_KEY,
 } from "/core/constants.js";
-import { isSalesforceHostname, openSettingsPage } from "/core/functions.js";
+import { openSettingsPage } from "/core/functions.js";
 import Tab from "/core/tab.js";
 import {
 	bg_getCurrentBrowserTab,
@@ -61,336 +45,17 @@ import {
 	checkAddRemoveContextMenus,
 	refreshContextMenus,
 } from "./context-menus.js";
-import cssColorNames from "./css-color-names.json" with { type: "json" };
+import {
+	bg_getSettings,
+	bg_getStorage,
+	bg_getStyleSettings,
+	bg_setStorage,
+} from "./storage.js";
+import { bg_getSalesforceLanguage as _bg_getSalesforceLanguage } from "./salesforce-language.js";
+import { bg_getCommandLinks as _bg_getCommandLinks } from "./commands.js";
+import { setDefaultOrgStyle } from "./default-styles.js";
 
-/**
- * Invoke the runtime to send the message
- *
- * @param {string|string[]} key - the key (or keys) for which we should retrieve the persisted data
- * @param {function} callback - The callback to execute after sending the message
- * @return {Promise} containing the requested info for the given key
- */
-function _getFromStorage(key, callback) {
-	return BROWSER.storage.sync.get(
-		Array.isArray(key) ? key : [key],
-		(items) => callback(Array.isArray(key) ? items : items[key]),
-	);
-}
-/**
- * Retrieves data from browser storage under the specified key.
- *
- * Supports both callback and Promise-based usage.
- *
- * @param {function} [callback] - Optional callback to handle the retrieved data.
- * @param {string} [key=WHY_KEY] - The storage key to retrieve data from.
- * @return {Promise<any>|void} Returns a Promise if no callback is provided, otherwise void.
- */
-export function bg_getStorage(callback, key = WHY_KEY) {
-	if (callback == null) {
-		return new Promise((resolve, reject) => {
-			_getFromStorage(
-				key,
-				(response) => {
-					if (BROWSER.runtime.lastError) {
-						reject(BROWSER.runtime.lastError);
-					} else {
-						resolve(response);
-					}
-				},
-			);
-		});
-	}
-	_getFromStorage(key, callback);
-}
-
-/**
- * Retrieves settings from background storage based on specified keys.
- * If `settingKeys` is null, returns all settings.
- * Supports optional callback usage or returns a Promise with the result.
- *
- * @param {string|string[]|null} [settingKeys=null] - Single key or array of keys to retrieve. If null, all settings are returned.
- * @param {string|string[]} [key=SETTINGS_KEY] - The storage key namespace to retrieve settings from.
- * @param {Function|null} [callback=null] - Optional callback to handle the retrieved settings.
- * @return {Promise<Object|Object[]>|void} A Promise resolving to the requested settings, or void if a callback is provided.
- */
-export async function bg_getSettings(
-	settingKeys = null,
-	key = SETTINGS_KEY,
-	callback = null,
-) {
-	const settings = await bg_getStorage(null, key);
-	if (settingKeys == null || settings == null) {
-		if (callback == null) {
-			return settings;
-		}
-		return callback(settings);
-	}
-	if (!Array.isArray(settingKeys)) {
-		settingKeys = [settingKeys];
-	}
-	const requestedSettings = settings.filter((setting) =>
-		settingKeys.includes(setting.id)
-	);
-	const response = settingKeys.length === 1 && key === SETTINGS_KEY
-		? requestedSettings[0]
-		: requestedSettings;
-	if (callback == null) {
-		return response;
-	}
-	callback(response);
-}
-
-/**
- * Checks that the value of every style setting is in Hexadecimal (#FFFFFF) format.
- * If a style is found with a non-compliant value, it is updated to Hexadecimal
- * @param {string|string[]} styleKey - the key related to the current style settings
- * @param {Array|Object<string,Array>} styleSettings - the result from bg_getSettings (for style settings)
- * @return {Promise} styleSettings, updated with Hexadecimal values
- */
-async function checkStyleSettingsHex(styleKey, styleSettings) {
-	if (styleKey == null || styleSettings == null) {
-		return styleSettings;
-	}
-	if (!Array.isArray(styleKey)) {
-		styleKey = [styleKey];
-	}
-	const wasArray = Array.isArray(styleSettings);
-	if (wasArray) {
-		styleSettings = Object.fromEntries(
-			styleKey.map(
-				(key) => [key, styleSettings],
-			),
-		);
-	}
-	const updateKeys = new Map();
-	for (const [key, styleArray] of Object.entries(styleSettings)) {
-		for (
-			const styleByKey of styleArray
-				.filter(({ id, value }) =>
-					DECORATION_COLORS.has(id) &&
-					cssColorNames[value.toLowerCase()] != null
-				)
-		) {
-			styleByKey.value = cssColorNames[styleByKey.value.toLowerCase()];
-			if (!updateKeys.has(key)) {
-				updateKeys.set(key, []);
-			}
-			updateKeys.get(key).push(styleByKey);
-		}
-	}
-	if (updateKeys.size > 0) {
-		await Promise.all(
-			Array.from(
-				updateKeys,
-				([key, value]) => bg_setStorage(value, undefined, key),
-			),
-		);
-	}
-	return wasArray ? Object.values(styleSettings).flat() : styleSettings;
-}
-
-/**
- * Finds the style settings currently persisted, given a key. If not key is requested, returns all available styles
- *
- * @param {String} [key=null] - the key for which to find the persisted styles
- * @param {Function} [callback=null] - a callback to call when the styles have been retrieved
- * @return {Promise[Object]} the style settings for the requested key
- */
-async function bg_getStyleSettings(
-	key = null,
-	callback = null,
-) {
-	if (key == null) {
-		key = [
-			GENERIC_TAB_STYLE_KEY,
-			ORG_TAB_STYLE_KEY,
-			GENERIC_PINNED_TAB_STYLE_KEY,
-			ORG_PINNED_TAB_STYLE_KEY,
-		];
-	}
-	let settings = await bg_getSettings(
-		undefined,
-		key,
-	);
-	if (
-		settings == null ||
-		Object.values(settings).every(
-			(sett) =>
-				sett == null ||
-				!Object.values(sett).some(Boolean),
-		)
-	) {
-		settings = null;
-	} else {
-		settings = await checkStyleSettingsHex(key, settings);
-	}
-	if (callback != null) {
-		return callback(settings);
-	}
-	return settings;
-}
-
-/**
- * Finds the already stored settings and merges them with the new ones passed as input by matching them with the id field
- *
- * @param {Array} newsettings - The settings to be stored
- * @param {string} [key=SETTINGS_KEY]  - The key of the settings where to merge and store the newsettings array
- *
- * @return {Promise} the merged settings
- */
-async function mergeSettings(newsettings, key = SETTINGS_KEY) {
-	// get the settings array
-	const isStyleKey = key === GENERIC_TAB_STYLE_KEY ||
-		key === ORG_TAB_STYLE_KEY ||
-		key === GENERIC_PINNED_TAB_STYLE_KEY ||
-		key === ORG_PINNED_TAB_STYLE_KEY;
-	const settingsArray = await bg_getSettings(
-		...(isStyleKey ? [null, key] : []),
-	);
-	if (settingsArray == null) {
-		return newsettings;
-	}
-	for (const item of newsettings) {
-		// check if the item.id is already present
-		const existingItems = settingsArray.filter((setting) =>
-			setting.id === item.id &&
-			(
-				!isStyleKey ||
-				(
-					setting.forActive == null ||
-					setting.forActive === item.forActive
-				)
-			)
-		);
-		if (existingItems.length <= 0) {
-			// add the new setting
-			settingsArray.push(item);
-			continue;
-		}
-		for (const existing of existingItems) {
-			if (isStyleKey) {
-				if (item.value == null || item.value === "") {
-					// the item has been removed
-					const index = settingsArray.indexOf(existing);
-					if (index >= 0) {
-						settingsArray.splice(index, 1);
-					}
-				} else {
-					// the item has been updated
-					existing.value = item.value;
-				}
-			} else {
-				// update the object reference (inside the settingsArray)
-				Object.assign(existing, item);
-			}
-		}
-	}
-	return settingsArray;
-}
-
-/**
- * Stores the provided tabs data in the browser's storage and invokes the callback.
- *
- * @param {Array|Object|string} tobeset - The data to be stored.
- * @param {function|null} [callback=null] - The callback to execute after storing the data.
- * @param {string} [key=WHY_KEY] - The key of the map where to store the tobeset array
- * @return {Promise} the promise from BROWSER.storage.sync.set
- */
-export async function bg_setStorage(tobeset, callback = null, key = WHY_KEY) {
-	const set = {};
-	switch (key) {
-		case SETTINGS_KEY:
-		case GENERIC_TAB_STYLE_KEY:
-		case ORG_TAB_STYLE_KEY:
-		case GENERIC_PINNED_TAB_STYLE_KEY:
-		case ORG_PINNED_TAB_STYLE_KEY: {
-			set[key] = await mergeSettings(
-				Array.isArray(tobeset) ? tobeset : [tobeset],
-				key,
-			);
-			break;
-		}
-		case WHY_KEY:
-		case LOCALE_KEY:
-		case TUTORIAL_KEY:
-		case TUTORIAL_CLOSE_EVENT:
-			set[key] = tobeset;
-			break;
-		default:
-			throw new Error("error_unknown_request", key);
-	}
-	if (callback == null) {
-		return BROWSER.storage.sync.set(set);
-	}
-	return BROWSER.storage.sync.set(set, () => callback(set[key]));
-}
-
-/**
- * Determines the Salesforce API host and constructs authorization headers based on the current URL.
- * - Validates the URL against supported Salesforce domains.
- * - Normalizes certain Salesforce subdomains to the main domain.
- * - Retrieves the session ID cookie ("sid") for authentication.
- * - Returns the API host origin and headers needed for authorized requests.
- *
- * @param {string} currentUrl - The current Salesforce URL.
- * @return {Promise<[string, Object]>|undefined} A promise resolving to a tuple of the API host origin and headers, or undefined if URL is unsupported.
- * @throws {Error} Throws if required authentication cookies are not found.
- */
-async function _getAPIHostAndHeaders(currentUrl) {
-	const url = new URL(currentUrl);
-	let origin = url.origin;
-	if (!isSalesforceHostname(url)) {
-		return;
-	}
-	if (url.hostname.endsWith(LIGHTNING_FORCE_COM)) {
-		origin = url.origin.replace(LIGHTNING_FORCE_COM, MY_SALESFORCE_COM);
-	} else if (url.hostname.endsWith(MY_SALESFORCE_SETUP_COM)) {
-		origin = url.origin.replace(
-			MY_SALESFORCE_SETUP_COM,
-			MY_SALESFORCE_COM,
-		);
-	}
-	const cookies = await BROWSER.cookies?.getAll({
-		domain: origin.replace("https://", ""),
-		name: "sid",
-	});
-	if (cookies == null || cookies.length === 0) {
-		throw new Error("error_no_cookies");
-	}
-	return [
-		origin,
-		{
-			Authorization: `Bearer ${cookies[0].value}`,
-			"Content-Type": "application/json",
-		},
-	];
-}
-/**
- * Retrieves current user information from the Salesforce userinfo API.
- * Determines the API host and authorization headers based on the provided URL,
- * fetches the user info, and returns it as JSON.
- * courtesy of derroman/salesforce-user-language-switcher
- *
- * @param {string} currentUrl - The current Salesforce URL.
- * @return {Promise<Object|undefined>} A promise resolving to the user info object or undefined on error.
- */
-async function getCurrentUserInfo(currentUrl) {
-	try {
-		const apiHostAndHeaders = await _getAPIHostAndHeaders(currentUrl);
-		if (apiHostAndHeaders == null) {
-			return;
-		}
-		const [apiHost, headers] = apiHostAndHeaders;
-		const retrievedRows = await fetch(
-			`${apiHost}/services/oauth2/userinfo`,
-			{ headers },
-		);
-		return await retrievedRows.json();
-	} catch (error) {
-		console.error(error);
-		return;
-	}
-}
+export { bg_getSettings, bg_getStorage, bg_setStorage };
 
 /**
  * Retrieves the Salesforce language setting for the current user.
@@ -400,15 +65,8 @@ async function getCurrentUserInfo(currentUrl) {
  * @param {Function|null} [callback=null] - Optional callback to receive the language.
  * @return {Promise<string|any>|void} The language code or nothing if callback is provided.
  */
-export async function bg_getSalesforceLanguage(callback = null) {
-	const currentUrl = (await bg_getCurrentBrowserTab())?.url;
-	const language = (await getCurrentUserInfo(currentUrl))?.language;
-	if (language == null) {
-		return bg_getStorage(callback, LOCALE_KEY);
-	} else {
-		bg_setStorage(language, callback, LOCALE_KEY);
-		return language;
-	}
+export function bg_getSalesforceLanguage(callback = null) {
+	return _bg_getSalesforceLanguage(BROWSER, callback);
 }
 
 /**
@@ -420,35 +78,16 @@ export async function bg_getSalesforceLanguage(callback = null) {
  * @param {Function|null} [callback=null] - Optional callback to receive the commands.
  * @return {Promise<Array<Object>>|void} Promise resolving to command objects or void if callback is provided.
  */
-export async function bg_getCommandLinks(commands = null, callback = null) {
-	const allCommands = await BROWSER.commands.getAll();
-	const availableCommands = allCommands.filter((singleCommand) =>
-		singleCommand.shortcut !== ""
-	);
-	if (commands == null) {
-		if (callback == null) {
-			return availableCommands;
-		}
-		callback(availableCommands);
-		return;
-	}
-	if (!Array.isArray(commands)) {
-		commands = [commands];
-	}
-	const requestedCommands = availableCommands.filter((ac) =>
-		commands.includes(ac.name)
-	);
-	if (callback == null) {
-		return requestedCommands;
-	}
-	callback(requestedCommands);
+export function bg_getCommandLinks(commands = null, callback = null) {
+	return _bg_getCommandLinks(BROWSER, commands, callback);
 }
 
 /**
- * Checks whether the object passed as contains is contained in the granted permissions
- * @param {Object} contains - the permission object to be checked
- * @param {function} callback - the function to call to send the response back
- * @return {Promise<boolean>} the response from the API
+ * Checks whether the object passed as contains is contained in the granted permissions.
+ *
+ * @param {Object} contains - the permission object to be checked.
+ * @param {function} callback - the function to call to send the response back.
+ * @return {Promise<boolean>} the response from the API.
  */
 async function bg_isPermissionGranted(contains, callback) {
 	const response = await BROWSER.permissions.contains(contains);
@@ -558,101 +197,13 @@ function listenToExtensionCommands() {
 			default:
 				if (!ALL_CMD_KEYS.has(command)) {
 					message.what = TOAST_WARNING;
+					message.what = TOAST_WARNING;
 					message.message = `Received unknown command: ${command}`;
 				}
 				break;
 		}
 		bg_notify(message);
 	});
-}
-
-/**
- * Persists the styles for the given key
- *
- * @param {string} [key=ORG_TAB_STYLE_KEY] - the key for which we want to create the style
- * @param {...Array[Object]} styles - the new styles to apply for the key
- * @return {Promise[Array[Object]]} the created styles
- */
-async function _createDefaultStyle(key = ORG_TAB_STYLE_KEY, ...styles) {
-	await bg_setStorage(
-		styles.filter(Boolean),
-		undefined,
-		key,
-	);
-	return styles;
-}
-
-/**
- * Wrapper function for _createDefaultStyle; filters the availableStyles before calling it
- *
- * @param {Object} availableStyles - the currently saved styles which are in use
- * @param {string} [key=ORG_TAB_STYLE_KEY] - the key for which the function should inherit the styles from
- * @param {string} [newKey=ORG_PINNED_TAB_STYLE_KEY] - the key for which we want to create the style
- * @param {...Array[Object]} styles - the new styles to apply for the newKey
- * @return {Promise[Array[Object]]} the created styles
- */
-async function _createDefaultStyleWrapper(
-	availableStyles,
-	key = ORG_TAB_STYLE_KEY,
-	newKey = ORG_PINNED_TAB_STYLE_KEY,
-	...styles
-) {
-	const filteredStyles = availableStyles[key]
-		?.filter((el) =>
-			el.id !== PREVENT_DEFAULT_OVERRIDE &&
-			// override user-set background
-			el.id !== TAB_STYLE_BACKGROUND
-		) ?? [];
-	return await _createDefaultStyle(
-		newKey,
-		...filteredStyles,
-		...styles,
-	);
-}
-
-/**
- * Ensures default organizational style settings exist;
- * if none are found, creates and saves default styles for org-specific tabs.
- */
-async function setDefaultOrgStyle() {
-	const availableStyles = (await bg_getStyleSettings()) ?? {};
-	// if no style settings have been found,
-	// create the default style for org-specific Tabs & send it to the background.
-	// same goes for org-specific pinned Tabs
-	const boldStyle = [
-		{ id: TAB_STYLE_BOLD, forActive: false, value: TAB_STYLE_BOLD },
-		{ id: TAB_STYLE_BOLD, forActive: true, value: TAB_STYLE_BOLD },
-	];
-	if (availableStyles[ORG_TAB_STYLE_KEY] == null) {
-		availableStyles[ORG_TAB_STYLE_KEY] = await _createDefaultStyle(
-			ORG_TAB_STYLE_KEY,
-			...boldStyle,
-		);
-	}
-	// for pinned Tabs, assign the same current styles used for the unpinned counterparts
-	// but change the color of the background to the default one
-	const pinnedStyles = [
-		{ id: TAB_STYLE_BACKGROUND, forActive: false, value: "#FFE4E1" },
-		{ id: TAB_STYLE_BACKGROUND, forActive: true, value: "#FFE4E1" },
-	];
-	if (availableStyles[ORG_PINNED_TAB_STYLE_KEY] == null) {
-		availableStyles[ORG_PINNED_TAB_STYLE_KEY] =
-			await _createDefaultStyleWrapper(
-				availableStyles,
-				ORG_TAB_STYLE_KEY,
-				ORG_PINNED_TAB_STYLE_KEY,
-				...pinnedStyles,
-			);
-	}
-	if (availableStyles[GENERIC_PINNED_TAB_STYLE_KEY] == null) {
-		availableStyles[GENERIC_PINNED_TAB_STYLE_KEY] =
-			await _createDefaultStyleWrapper(
-				availableStyles,
-				GENERIC_TAB_STYLE_KEY,
-				GENERIC_PINNED_TAB_STYLE_KEY,
-				...pinnedStyles,
-			);
-	}
 }
 
 /**
@@ -671,6 +222,7 @@ function _debounce(fn, delay = 150) {
 		timeout = setTimeout(() => fn(...args), delay);
 	};
 }
+
 /**
  * Sets up various browser event listeners for the extension, including:
  * - Debounced context menu checks on tab/window changes
