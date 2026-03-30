@@ -1,6 +1,6 @@
 import { mockStorage } from "../mocks.test.ts";
 import { assert, assertEquals, assertFalse } from "@std/testing/asserts";
-import { waitForCondition } from "../async.test.ts";
+import { waitForCondition, waitForNextTask } from "../async.test.ts";
 
 import {
 	bg_getCommandLinks,
@@ -12,7 +12,9 @@ import {
 import {
 	BROWSER,
 	CMD_EXPORT_ALL,
+	CMD_OPEN_SETTINGS,
 	CXM_MANAGE_TABS,
+	EXTENSION_GITHUB_LINK,
 	GENERIC_TAB_STYLE_KEY,
 	LOCALE_KEY,
 	NO_RELEASE_NOTES,
@@ -35,6 +37,7 @@ import {
 	WHAT_SET,
 	WHAT_SHOW_EXPORT_MODAL,
 	WHAT_SHOW_IMPORT,
+	WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
 	WHAT_START_TUTORIAL,
 	WHAT_THEME,
 	WHY_KEY,
@@ -49,6 +52,14 @@ type EnabledSetting = {
 type CommandLink = {
 	name: string;
 	shortcut: string;
+};
+
+type BrowserTabsWithCreate = typeof BROWSER.tabs & {
+	create?: (details: { url: string }) => Promise<boolean>;
+};
+
+type BrowserRuntimeWithOptionsPage = typeof BROWSER.runtime & {
+	openOptionsPage?: () => void;
 };
 
 /**
@@ -285,6 +296,65 @@ await Deno.test("bg_getSalesforceLanguage behavior", async () => {
 	assertEquals(sflang, "sf-lang-en"); // only for tests, from Salesforce, we'll get the correct language
 });
 
+await Deno.test("bg_getSalesforceLanguage rewrites Salesforce setup hosts for cookie and API access", async () => {
+	const originalFetch = globalThis.fetch;
+	const originalGetAllCookies = BROWSER.cookies.getAll;
+	const cookieRequests: Array<{ domain: string; name: string }> = [];
+	const requestedApiUrls: string[] = [];
+
+	BROWSER.tabs.setMockBrowserTabs([{
+		id: 0,
+		url: "https://mycustomorg.my.salesforce-setup.com/lightning/setup/SetupOneHome/home",
+		active: true,
+		currentWindow: true,
+	}]);
+	BROWSER.cookies.getAll = (which: { domain: string; name: string }) => {
+		cookieRequests.push({ domain: which.domain, name: which.name });
+		return Promise.resolve([{
+			domain: which.domain,
+			name: which.name,
+			value: "setup-sid",
+		}]);
+	};
+	globalThis.fetch = ((path: string | URL) => {
+		requestedApiUrls.push(String(path));
+		return Promise.resolve(
+			new Response(
+				JSON.stringify({ language: "sf-lang-from-setup" }),
+				{ headers: { "Content-Type": "application/json" } },
+			),
+		);
+	}) as typeof fetch;
+
+	try {
+		const language = await bg_getSalesforceLanguage();
+		assertEquals(language, "sf-lang-from-setup");
+		assertEquals(cookieRequests, [{
+			domain: "mycustomorg.my.salesforce.com",
+			name: "sid",
+		}]);
+		assertEquals(requestedApiUrls, [
+			"https://mycustomorg.my.salesforce.com/services/oauth2/userinfo",
+		]);
+	} finally {
+		globalThis.fetch = originalFetch;
+		BROWSER.cookies.getAll = originalGetAllCookies;
+	}
+});
+
+await Deno.test("bg_getSalesforceLanguage falls back to the stored locale when Salesforce cookies are unavailable", async () => {
+	mockStorage[LOCALE_KEY] = "fallback-locale-missing-cookie";
+	BROWSER.tabs.setMockBrowserTabs([{
+		id: 0,
+		url: "https://mycustomorg--sandbox.lightning.force.com",
+		active: true,
+		currentWindow: true,
+	}]);
+	BROWSER.cookies.setMockCookies([]);
+	const sflang = await bg_getSalesforceLanguage();
+	assertEquals(sflang, "fallback-locale-missing-cookie");
+});
+
 await Deno.test("bg_getSalesforceLanguage ignores lookalike non-Salesforce hosts", async () => {
 	mockStorage[LOCALE_KEY] = "fallback-locale";
 	BROWSER.tabs.setMockBrowserTabs([{
@@ -356,10 +426,32 @@ await Deno.test("bg_getCommandLinks behavior", async (t) => {
 });
 
 await Deno.test("background listeners handle runtime, command, and browser events", async () => {
+	const browserTabs = BROWSER.tabs as BrowserTabsWithCreate;
+	const browserRuntime = BROWSER.runtime as BrowserRuntimeWithOptionsPage;
 	const originalSetTimeout = globalThis.setTimeout;
 	const originalSendMessage = BROWSER.tabs.sendMessage;
+	const originalTabsCreate = browserTabs.create;
 	const originalContains = BROWSER.permissions.contains;
+	const originalOpenOptionsPage = browserRuntime.openOptionsPage;
+	const originalDownloads = BROWSER.downloads;
 	const sentMessages: unknown[] = [];
+	const openedTabs: Array<{ url: string }> = [];
+	const downloadsApi = {
+		download: () => Promise.resolve(0),
+		onChanged: {
+			addListener: () => {},
+		},
+	};
+	const settingsWithoutReleaseNotes = [
+		{ enabled: "fr", id: USER_LANGUAGE },
+		{ enabled: false, id: NO_RELEASE_NOTES },
+		{ enabled: false, id: TAB_ADD_FRONT },
+	];
+	const settingsWithReleaseNotesDisabled = [
+		{ enabled: "fr", id: USER_LANGUAGE },
+		{ enabled: true, id: NO_RELEASE_NOTES },
+		{ enabled: false, id: TAB_ADD_FRONT },
+	];
 
 	globalThis.setTimeout = ((handler: TimerHandler) => {
 		if (typeof handler === "function") {
@@ -371,7 +463,13 @@ await Deno.test("background listeners handle runtime, command, and browser event
 		sentMessages.push(message);
 		return Promise.resolve(true);
 	};
+	browserTabs.create = (details: { url: string }) => {
+		openedTabs.push(details);
+		return Promise.resolve(true);
+	};
 	BROWSER.permissions.contains = () => Promise.resolve(true);
+	browserRuntime.openOptionsPage = () => {};
+	BROWSER.downloads = downloadsApi;
 	BROWSER.tabs.setMockBrowserTabs([{
 		id: 1,
 		url: "https://acme.lightning.force.com/lightning/setup/SetupOneHome/home",
@@ -379,11 +477,7 @@ await Deno.test("background listeners handle runtime, command, and browser event
 		currentWindow: true,
 	}]);
 	mockStorage[NO_RELEASE_NOTES] = undefined;
-	mockStorage[SETTINGS_KEY] = [
-		{ enabled: "fr", id: USER_LANGUAGE },
-		{ enabled: false, id: NO_RELEASE_NOTES },
-		{ enabled: false, id: TAB_ADD_FRONT },
-	];
+	mockStorage[SETTINGS_KEY] = settingsWithoutReleaseNotes;
 
 	try {
 		let savedResponse: unknown;
@@ -442,11 +536,27 @@ await Deno.test("background listeners handle runtime, command, and browser event
 			"",
 			() => {},
 		);
+		let exportCheckResponse: null | string | undefined = undefined;
+		BROWSER.runtime.onMessage.triggerMessage(
+			{ what: WHAT_EXPORT_CHECK },
+			"",
+			(response) => {
+				exportCheckResponse = response;
+			},
+		);
+		assertEquals(exportCheckResponse, null);
 		BROWSER.runtime.onMessage.triggerMessage(
 			{ what: WHAT_EXPORT_CHECK },
 			"",
 			() => {},
 		);
+		BROWSER.downloads = undefined;
+		BROWSER.runtime.onMessage.triggerMessage(
+			{ what: WHAT_EXPORT_CHECK },
+			"",
+			() => {},
+		);
+		BROWSER.downloads = downloadsApi;
 		BROWSER.runtime.onMessage.triggerMessage(
 			{ what: WHAT_EXPORT, tabs: [{ label: "x", url: "y" }] },
 			"",
@@ -472,10 +582,62 @@ await Deno.test("background listeners handle runtime, command, and browser event
 		);
 		BROWSER.runtime.onMessage.triggerMessage({}, "", () => {});
 
+		BROWSER.tabs.setMockBrowserTabs([{
+			id: 2,
+			url: "https://example.com/not-setup",
+			active: true,
+			currentWindow: true,
+		}]);
+		BROWSER.commands.onCommand.triggerCommand(CMD_EXPORT_ALL);
+
+		BROWSER.tabs.setMockBrowserTabs([{
+			id: 1,
+			url: "https://acme.lightning.force.com/lightning/setup/SetupOneHome/home",
+			active: true,
+			currentWindow: true,
+		}]);
+		const blockedExportMessages = sentMessages.length;
+		BROWSER.downloads = undefined;
+		BROWSER.commands.onCommand.triggerCommand(CMD_EXPORT_ALL);
+		await waitForCondition(() =>
+			(sentMessages.slice(blockedExportMessages) as Array<{ what?: string }>)
+				.some((message) =>
+				message.what === WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP
+			)
+		);
+		BROWSER.downloads = downloadsApi;
+		BROWSER.commands.onCommand.triggerCommand(CMD_OPEN_SETTINGS);
 		BROWSER.commands.onCommand.triggerCommand(CMD_EXPORT_ALL);
 		BROWSER.commands.onCommand.triggerCommand("unknown-command");
 		await waitForCondition(() => sentMessages.length > 0);
 		assert(sentMessages.length > 0);
+
+		BROWSER.runtime.onInstalled.triggerInstalled({
+			reason: "update",
+			temporary: false,
+		});
+		await waitForCondition(() => openedTabs.length > 0);
+		assertEquals(openedTabs[0].url, `${EXTENSION_GITHUB_LINK}/tree/main/docs/CHANGELOG.md`);
+		BROWSER.runtime.onInstalled.triggerInstalled({
+			reason: "install",
+			temporary: false,
+		});
+		BROWSER.runtime.onInstalled.triggerInstalled({
+			reason: "update",
+			temporary: true,
+		});
+		const originalCreateTab = browserTabs.create;
+		browserTabs.create = () => {
+			throw new Error("should_not_open_changelog");
+		};
+		mockStorage[SETTINGS_KEY] = settingsWithReleaseNotesDisabled;
+		BROWSER.runtime.onInstalled.triggerInstalled({
+			reason: "update",
+			temporary: false,
+		});
+		await waitForNextTask();
+		browserTabs.create = originalCreateTab;
+		mockStorage[SETTINGS_KEY] = settingsWithoutReleaseNotes;
 
 		BROWSER.runtime.onStartup.triggerStartup();
 		BROWSER.tabs.onActivated.triggerActivated({ tabId: 1, windowId: 1 });
@@ -489,12 +651,35 @@ await Deno.test("background listeners handle runtime, command, and browser event
 				currentWindow: true,
 			},
 		);
+		BROWSER.tabs.onUpdated.triggerUpdated(
+			1,
+			{ status: "loading" },
+			{
+				id: 1,
+				url: "https://acme.lightning.force.com/lightning/setup/SetupOneHome/home",
+				active: true,
+				currentWindow: true,
+			},
+		);
+		BROWSER.tabs.onUpdated.triggerUpdated(
+			1,
+			{ status: "complete" },
+			{
+				id: 1,
+				url: "https://acme.lightning.force.com/lightning/setup/SetupOneHome/home",
+				active: false,
+				currentWindow: true,
+			},
+		);
 		BROWSER.windows.onFocusChanged.triggerFocusChanged(1);
 		BROWSER.commands.onChanged.triggerChanged();
 		assert(sentMessages.length > 0);
 	} finally {
 		globalThis.setTimeout = originalSetTimeout;
 		BROWSER.tabs.sendMessage = originalSendMessage;
+		browserTabs.create = originalTabsCreate;
 		BROWSER.permissions.contains = originalContains;
+		browserRuntime.openOptionsPage = originalOpenOptionsPage;
+		BROWSER.downloads = originalDownloads;
 	}
 });

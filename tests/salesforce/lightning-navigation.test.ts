@@ -88,6 +88,47 @@ async function loadLightningNavigation() {
 	return { cleanup, errors, listener, opens, records };
 }
 
+/**
+ * Loads the lightning navigation script with a failing Aura API stub.
+ *
+ * @return {Promise<{ cleanup: () => void; errors: string[]; listener: LightningNavigationListener | null; opens: { target: string; url: string; }[]; }>} Listener and captured side effects.
+ */
+async function loadLightningNavigationWithFailingAura() {
+	const errors: string[] = [];
+	const opens: { target: string; url: string }[] = [];
+	let listener: LightningNavigationListener | null = null;
+
+	const { cleanup } = await loadIsolatedModule<
+		Record<string, never>,
+		LightningNavigationDependencies
+	>({
+		modulePath: new URL(
+			"../../src/salesforce/lightning-navigation.js",
+			import.meta.url,
+		),
+		dependencies: {
+			$A: {
+				get: () => {
+					throw new Error("boom");
+				},
+			},
+			addEventListener: (_type, registeredListener) => {
+				listener = registeredListener;
+			},
+			console: {
+				error: (message) => {
+					errors.push(message);
+				},
+			},
+			open: (url, target) => {
+				opens.push({ target, url });
+			},
+		},
+	});
+
+	return { cleanup, errors, listener, opens };
+}
+
 Deno.test("lightning-navigation handles record and URL navigation messages", async () => {
 	const { cleanup, listener, records } = await loadLightningNavigation();
 	const registeredListener = listener as LightningNavigationListener | null;
@@ -166,42 +207,11 @@ Deno.test("lightning-navigation ignores foreign sources and reports invalid type
 });
 
 Deno.test("lightning-navigation falls back to open when the Salesforce event API throws", async () => {
-	const errors: string[] = [];
-	const opens: { target: string; url: string }[] = [];
-	let listener: LightningNavigationListener | null = null;
-
-	const { cleanup } = await loadIsolatedModule<
-		Record<string, never>,
-		LightningNavigationDependencies
-	>({
-		modulePath: new URL(
-			"../../src/salesforce/lightning-navigation.js",
-			import.meta.url,
-		),
-		dependencies: {
-			$A: {
-				get: () => {
-					throw new Error("boom");
-				},
-			},
-			addEventListener: (_type, registeredListener) => {
-				listener = registeredListener;
-			},
-			console: {
-				error: (message) => {
-					errors.push(message);
-				},
-			},
-			open: (url, target) => {
-				opens.push({ target, url });
-			},
-		},
-	});
+	const { cleanup, errors, listener, opens } =
+		await loadLightningNavigationWithFailingAura();
 
 	try {
-		const registeredListener = listener as
-			| LightningNavigationListener
-			| null;
+		const registeredListener = listener as LightningNavigationListener | null;
 		assertExists(registeredListener);
 		registeredListener({
 			data: {
@@ -217,6 +227,29 @@ Deno.test("lightning-navigation falls back to open when the Salesforce event API
 			target: "_top",
 			url: "https://example.com/fallback",
 		}]);
+		assertEquals(errors, ["Navigation failed: boom"]);
+	} finally {
+		cleanup();
+	}
+});
+
+Deno.test("lightning-navigation reports failures without opening when no fallback URL is provided", async () => {
+	const { cleanup, errors, listener, opens } =
+		await loadLightningNavigationWithFailingAura();
+
+	try {
+		const registeredListener = listener as LightningNavigationListener | null;
+		assertExists(registeredListener);
+		registeredListener({
+			data: {
+				navigationType: "url",
+				url: "/broken",
+				what: "lightningNavigation",
+			},
+			source: globalThis,
+		});
+
+		assertEquals(opens, []);
 		assertEquals(errors, ["Navigation failed: boom"]);
 	} finally {
 		cleanup();
