@@ -79,7 +79,10 @@ async function loadTranslatorFixture() {
 	let sfLanguage: string | null = "en";
 	const changeListeners: Array<(changes: Record<string, unknown>) => void> =
 		[];
-	const modulePath = new URL("../../../src/core/translator.js", import.meta.url);
+	const modulePath = new URL(
+		"../../../src/core/translator.js",
+		import.meta.url,
+	);
 	const sourceMapLineMap = (await Deno.readTextFile(modulePath))
 		.split("\n")
 		.map((_, index) => index + 1);

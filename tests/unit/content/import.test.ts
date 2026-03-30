@@ -368,7 +368,10 @@ async function loadImportModule({
 		ImportModule,
 		ImportDependencies
 	>({
-		modulePath: new URL("../../../src/salesforce/import.js", import.meta.url),
+		modulePath: new URL(
+			"../../../src/salesforce/import.js",
+			import.meta.url,
+		),
 		additionalExports: [
 			"__setInputModalParent",
 			"__getInputModalParent",

@@ -86,7 +86,10 @@ async function loadExportModule({
 		ExportModule,
 		ExportDependencies
 	>({
-		modulePath: new URL("../../../src/salesforce/export.js", import.meta.url),
+		modulePath: new URL(
+			"../../../src/salesforce/export.js",
+			import.meta.url,
+		),
 		dependencies: {
 			MODAL_ID: "awsf-modal",
 			TOAST_ERROR: "error",

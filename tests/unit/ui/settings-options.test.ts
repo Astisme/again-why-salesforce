@@ -407,7 +407,10 @@ async function loadOptions(
 		OptionsModule,
 		Record<string, unknown>
 	>({
-		modulePath: new URL("../../../src/settings/options.js", import.meta.url),
+		modulePath: new URL(
+			"../../../src/settings/options.js",
+			import.meta.url,
+		),
 		additionalExports: [
 			"_buildCssRule",
 			"_flipSelected",

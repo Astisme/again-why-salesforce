@@ -98,7 +98,10 @@ async function loadPopupModule({
 		Record<string, never>,
 		PopupDependencies
 	>({
-		modulePath: new URL("../../../src/action/popup/popup.js", import.meta.url),
+		modulePath: new URL(
+			"../../../src/action/popup/popup.js",
+			import.meta.url,
+		),
 		dependencies: {
 			BROWSER: {
 				runtime: {

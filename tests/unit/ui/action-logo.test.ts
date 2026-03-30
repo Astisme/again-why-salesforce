@@ -39,7 +39,10 @@ async function loadLogoModule() {
 		Record<string, never>,
 		LogoDependencies
 	>({
-		modulePath: new URL("../../../src/action/logo/logo.js", import.meta.url),
+		modulePath: new URL(
+			"../../../src/action/logo/logo.js",
+			import.meta.url,
+		),
 		dependencies: {
 			BROWSER: {
 				runtime: {
