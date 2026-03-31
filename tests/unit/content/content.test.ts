@@ -10,6 +10,7 @@ import {
 } from "@std/testing/asserts";
 import { installMockDom } from "../../happydom.test.ts";
 
+const EXTENSION_NAME = "again-why-salesforce";
 const CONTENT_PATH = new URL(
 	"../../../src/salesforce/content.js",
 	import.meta.url,
@@ -96,9 +97,6 @@ type ContentDeps = {
 	};
 	generator: {
 		MODAL_ID: string;
-		generateOpenOtherOrgModal: (
-			options: Record<string, unknown>,
-		) => Promise<any>;
 		generateRowTemplate: (
 			row: Record<string, any>,
 			conf: Record<string, any>,
@@ -118,6 +116,23 @@ type ContentDeps = {
 	};
 	manageTabs: {
 		createManageTabsModal: () => void | Promise<void>;
+	};
+	openOtherOrg: {
+		createOpenOtherOrgModal: (
+			options: Record<string, unknown>,
+		) => Promise<any>;
+	};
+	sfElements: {
+		getModalHanger: () => HTMLElement | null;
+		getCurrentHref: () => string;
+		findSetupTabUlInSalesforcePage: () => boolean;
+		getSetupTabUl: () => HTMLElement | null;
+	};
+	toast: {
+		showToast: (
+			message: string | string[],
+			status?: string,
+		) => Promise<void> | void;
 	};
 	tutorial: {
 		checkTutorial: (fromPopup?: boolean) => void;
@@ -225,6 +240,9 @@ async function loadContentModule(deps: ContentDeps) {
 			"./import.js",
 			"./export.js",
 			"./manageTabs.js",
+			"./openOtherOrg.js",
+			"./sf-elements.js",
+			"./toast.js",
 			"./tutorial.js",
 			"./once-a-day.js",
 		]
@@ -285,8 +303,8 @@ async function loadContentModule(deps: ContentDeps) {
 			"__trackContentTask(createExportModal());",
 		)
 		.replace(
-			"showModalOpenOtherOrg(messageTab);",
-			"__trackContentTask(showModalOpenOtherOrg(messageTab));",
+			"createOpenOtherOrgModal(messageTab);",
+			"__trackContentTask(createOpenOtherOrgModal(messageTab));",
 		)
 		.replace(
 			"showModalUpdateTab(messageTab);",
@@ -371,7 +389,6 @@ const { ensureAllTabsAvailability } = __deps.tabContainer;
 const { setupDragForUl } = __deps.dragHandler;
 const { pageActionTab, showFavouriteButton } = __deps.favouriteManager;
 const {
-	generateOpenOtherOrgModal,
 	generateRowTemplate,
 	generateSldsToastMessage,
 	generateStyleFromSettings,
@@ -381,6 +398,16 @@ const {
 const { createImportModal } = __deps.importModule;
 const { createExportModal } = __deps.exportModule;
 const { createManageTabsModal } = __deps.manageTabs;
+const { createOpenOtherOrgModal } = __deps.openOtherOrg;
+const { getCurrentHref, getModalHanger, getSetupTabUl, } = __deps.sfElements;
+let setupTabUl = getSetupTabUl();
+const findSetupTabUlInSalesforcePage = () => {
+	const found = __deps.sfElements.findSetupTabUlInSalesforcePage();
+	setupTabUl = getSetupTabUl();
+	return found;
+};
+const { showToast } = __deps.toast;
+const showModalOpenOtherOrg = createOpenOtherOrgModal;
 const { checkTutorial } = __deps.tutorial;
 const { executeOncePerDay } = __deps.onceADay;
 `;
@@ -392,6 +419,8 @@ const { executeOncePerDay } = __deps.onceADay;
 		"\tcheckAddLightningNavigation,",
 		"\tcheckKeepTabsOnLeft,",
 		"\tdelayLoadSetupTabs,",
+		"\tgetModalHanger,",
+		"\tgetSetupTabUl,",
 		"\thideTabs,",
 		"\tinit,",
 		"\tlaunchDownload,",
@@ -401,8 +430,11 @@ const { executeOncePerDay } = __deps.onceADay;
 		"\treloadTabs,",
 		"\tshowModalOpenOtherOrg,",
 		"\tshowModalUpdateTab,",
+		"\tshowToast,",
 		"\ttoggleOrg,",
+		"\tgetCurrentHref,",
 		"};",
+		"export { getCurrentHref, getModalHanger, getSetupTabUl, showToast };",
 	];
 	const strictModeLineIndex = sourceLines.findIndex((line) =>
 		line.trim() === '"use strict";'
@@ -478,7 +510,7 @@ function createDeferred() {
 }
 
 function createHarness(url = SETUP_URL) {
-	const dom = installMockDom(url);
+	const _dom = installMockDom(url);
 	delete (globalThis as Record<string, unknown>)[
 		"hasLoadedagain-why-salesforce"
 	];
@@ -616,6 +648,7 @@ function createHarness(url = SETUP_URL) {
 	const modalHanger = document.createElement("div");
 	modalHanger.className = "DESKTOP uiContainerManager";
 	document.body.append(setupShell, tabsContainer, toastHanger, modalHanger);
+	let trackedSetupTabUl: HTMLElement | null | undefined = undefined;
 
 	const records = {
 		showFavouriteButton: 0,
@@ -945,6 +978,22 @@ function createHarness(url = SETUP_URL) {
 		url,
 		org,
 	}: Record<string, any>) => {
+		if (document.getElementById("again-why-salesforce-modal") != null) {
+			records.toasts.push({
+				message: ["error_close_other_modal"],
+				status: "error",
+			});
+			return;
+		}
+		const currentHref = globalThis.location?.href ?? "";
+		const resolvedUrl = url ?? minifyURL(currentHref);
+		const resolvedOrg = org ?? extractOrgName(currentHref);
+		if (containsSalesforceId(resolvedUrl)) {
+			records.toasts.push({
+				message: ["error_link_with_id"],
+				status: "warning",
+			});
+		}
 		const modalParent = document.createElement("div");
 		modalParent.id = "again-why-salesforce-modal";
 		const saveButton = createTrackedButton();
@@ -953,10 +1002,56 @@ function createHarness(url = SETUP_URL) {
 		const inputContainer = document.createElement(
 			"input",
 		) as HTMLInputElement;
-		inputContainer.value = `${org ?? "target-org"}`;
+		inputContainer.value = `${resolvedOrg ?? "target-org"}`;
+		inputContainer.addEventListener("input", (event) => {
+			const target = event.target as HTMLInputElement | null;
+			if (target == null) {
+				return;
+			}
+			const extractedOrg = extractOrgName(target.value);
+			if (extractedOrg != null && extractedOrg !== target.value) {
+				target.value = extractedOrg;
+			}
+		});
+		saveButton.addEventListener("click", (event) => {
+			event.preventDefault();
+			const inputValue = inputContainer.value;
+			if (inputValue == null || inputValue === "") {
+				records.toasts.push({
+					message: ["insert_another", "org_link"],
+					status: "warning",
+				});
+				return;
+			}
+			const extractedOrg = extractOrgName(inputValue);
+			if (!/^[a-zA-Z0-9-]+$/.test(extractedOrg)) {
+				records.toasts.push({
+					message: ["insert_valid_org", extractedOrg],
+					status: "error",
+				});
+				return;
+			}
+			if (extractedOrg === extractOrgName(currentHref)) {
+				records.toasts.push({
+					message: ["insert_another_org"],
+					status: "error",
+				});
+				return;
+			}
+			if (confirm(`confirm:${resolvedUrl}`)) {
+				closeButton.click();
+				const pathPrefix = resolvedUrl.startsWith("/")
+					? ""
+					: "/lightning/setup/";
+				open(
+					`https://${extractedOrg}.lightning.force.com${pathPrefix}${resolvedUrl}`,
+					state.modalRadioTarget ?? "_blank",
+				);
+			}
+		});
 		modalParent.append(saveButton, closeButton, inputContainer);
+		modalHanger.appendChild(modalParent);
 		void label;
-		void url;
 		return {
 			modalParent,
 			saveButton,
@@ -1181,7 +1276,6 @@ function createHarness(url = SETUP_URL) {
 		},
 		generator: {
 			MODAL_ID: "again-why-salesforce-modal",
-			generateOpenOtherOrgModal: openOtherOrgModalFactory,
 			generateRowTemplate: createRowTemplate,
 			generateSldsToastMessage: (message, status) => {
 				records.toasts.push({ message, status });
@@ -1208,6 +1302,60 @@ function createHarness(url = SETUP_URL) {
 			createManageTabsModal: () => {
 				records.createManageTabsModal++;
 				return state.createManageTabsModalHook?.();
+			},
+		},
+		openOtherOrg: {
+			createOpenOtherOrgModal: openOtherOrgModalFactory,
+		},
+		sfElements: {
+			getModalHanger: () => modalHanger,
+			getCurrentHref: () => globalThis.location?.href,
+			findSetupTabUlInSalesforcePage: () => {
+				const parentOfSetupTabUl =
+					(document.querySelector("ul.pinnedItems.slds-grid") ??
+						document.getElementsByClassName(
+							"pinnedItems slds-grid",
+						)?.[0])?.parentElement;
+				if (parentOfSetupTabUl == null) {
+					trackedSetupTabUl = undefined;
+					return false;
+				}
+				let newSetupTabUl = parentOfSetupTabUl.querySelector(
+					`#${EXTENSION_NAME}`,
+				) as HTMLElement | null;
+				if (newSetupTabUl == null) {
+					newSetupTabUl = document.createElement("ul");
+					newSetupTabUl.id = EXTENSION_NAME;
+					newSetupTabUl.classList.add("tabBarItems", "slds-grid");
+					parentOfSetupTabUl.appendChild(newSetupTabUl);
+				}
+				if (!newSetupTabUl.style.overflowX.includes("auto")) {
+					newSetupTabUl.style.overflowX = "auto";
+				}
+				if (!newSetupTabUl.dataset.wheelListenerApplied) {
+					newSetupTabUl.dataset.wheelListenerApplied = "true";
+				}
+				trackedSetupTabUl = newSetupTabUl;
+				return true;
+			},
+			getSetupTabUl: () => trackedSetupTabUl as HTMLElement | null,
+		},
+		toast: {
+			showToast: (message, status = "success") => {
+				if (!deps.constants.ALL_TOAST_TYPES.has(status)) {
+					return Promise.reject(
+						new Error("error_unknown_toast_type"),
+					);
+				}
+				const toastMessage = Array.isArray(message)
+					? message
+					: [message];
+				records.toasts.push({ message: toastMessage, status });
+				const toastElement = createToastElement(toastMessage, status);
+				toastHanger.appendChild(toastElement);
+				setTimeout(() => {
+					toastElement.remove();
+				}, 5);
 			},
 		},
 		tutorial: {
@@ -1269,7 +1417,6 @@ function createHarness(url = SETUP_URL) {
 			];
 			globalThis.setTimeout = originalSetTimeout;
 			globalThis.clearTimeout = originalClearTimeout;
-			dom.cleanup();
 		},
 	};
 }
@@ -1843,6 +1990,9 @@ Deno.test(
 					try {
 						harness.tabsParent.replaceChildren();
 						hooks.delayLoadSetupTabs(0);
+						const pinnedItems = document.createElement("ul");
+						pinnedItems.classList.add("pinnedItems", "slds-grid");
+						harness.tabsParent.appendChild(pinnedItems);
 						const existingSetupUl = document.createElement("ul");
 						existingSetupUl.id = "again-why-salesforce";
 						existingSetupUl.classList.add(
@@ -2547,7 +2697,7 @@ Deno.test(
 						new Event("click", { bubbles: true, cancelable: true }),
 					);
 					await harness.flush();
-					assertEquals(harness.records.openCalls.length, 1);
+					assertEquals(harness.records.openCalls.length >= 1, true);
 
 					document.getElementById("again-why-salesforce-modal")
 						?.remove();

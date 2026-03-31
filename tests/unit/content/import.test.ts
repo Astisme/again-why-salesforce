@@ -514,6 +514,8 @@ function __getInputModalParent() { return inputModalParent; }`,
 			"/core/translator.js",
 			"./generator.js",
 			"./content.js",
+			"./toast.js",
+			"./sf-elements.js",
 		]),
 	});
 	setInputModalParent = module.__setInputModalParent;

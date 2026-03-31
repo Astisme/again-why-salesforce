@@ -79,13 +79,11 @@ type TutorialDeps = {
 		minifyURL: (url: string) => string;
 	};
 	content: {
-		getCurrentHref: () => string;
 		getSetupTabUl: () => HTMLUListElement;
 		performActionOnTabs: (
 			action: string,
 			redirectElement: { url: string },
 		) => void;
-		showToast: (message: string, status: string) => void;
 	};
 	favouriteManager: {
 		FAVOURITE_BUTTON_ID: string;
@@ -120,6 +118,12 @@ type TutorialDeps = {
 			preventDefault: () => void;
 			stopPropagation: () => void;
 		}) => void;
+	};
+	sfElements: {
+		getCurrentHref: () => string;
+	};
+	toast: {
+		showToast: (message: string, status: string) => void;
 	};
 };
 
@@ -251,6 +255,8 @@ async function loadTutorialModule(deps: TutorialDeps) {
 		...deps.generator,
 		...deps.manageTabs,
 		...deps.tabContainer,
+		...deps.sfElements,
+		...deps.toast,
 		Tab: deps.Tab,
 		ensureTranslatorAvailability: deps.ensureTranslatorAvailability,
 	};
@@ -271,6 +277,8 @@ async function loadTutorialModule(deps: TutorialDeps) {
 			"./generator.js",
 			"/core/tabContainer.js",
 			"./manageTabs.js",
+			"./sf-elements.js",
+			"./toast.js",
 		]),
 	});
 }
@@ -639,16 +647,12 @@ function createHarness(options: {
 				url.replace(/^https?:\/\/[^/]+\/lightning\/setup\//, ""),
 		},
 		content: {
-			getCurrentHref: () => globalThis.location.href,
 			getSetupTabUl: () => setupTabUl,
 			performActionOnTabs: (_action, redirectElement) => {
 				if (!state.savedTabUrls.includes(redirectElement.url)) {
 					state.savedTabUrls.push(redirectElement.url);
 				}
 				renderSetupTabs();
-			},
-			showToast: (message, status) => {
-				records.toasts.push({ message, status });
 			},
 		},
 		favouriteManager: {
@@ -809,6 +813,14 @@ function createHarness(options: {
 				event.preventDefault();
 				event.stopPropagation();
 				records.actionButtonClicks++;
+			},
+		},
+		sfElements: {
+			getCurrentHref: () => globalThis.location.href,
+		},
+		toast: {
+			showToast: (message, status) => {
+				records.toasts.push({ message, status });
 			},
 		},
 	};

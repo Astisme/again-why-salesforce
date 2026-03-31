@@ -329,6 +329,8 @@ async function loadFavouriteManagerFixture(
 			"/core/tabContainer.js",
 			"/core/translator.js",
 			"./content.js",
+			"./toast.js",
+			"./sf-elements.js",
 		]),
 		sourceMapLineMap: MODULE_SOURCE_LINE_MAP,
 	});

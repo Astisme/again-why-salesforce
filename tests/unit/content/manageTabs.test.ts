@@ -932,6 +932,8 @@ function __getState() {
 			"./dragHandler.js",
 			"./generator.js",
 			"./content.js",
+			"./toast.js",
+			"./sf-elements.js",
 			"./modal-layout.js",
 		]),
 	});

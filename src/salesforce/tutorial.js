@@ -27,12 +27,9 @@ import {
 } from "/core/functions.js";
 import ensureTranslatorAvailability from "/core/translator.js";
 import Tab from "/core/tab.js";
-import {
-	getCurrentHref,
-	getSetupTabUl,
-	performActionOnTabs,
-	showToast,
-} from "./content.js";
+import { performActionOnTabs } from "./content.js";
+import { showToast } from "./toast.js";
+import { getSetupTabUl, getCurrentHref } from "./sf-elements.js";
 import {
 	FAVOURITE_BUTTON_ID,
 	showFavouriteButton,

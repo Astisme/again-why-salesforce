@@ -145,7 +145,8 @@ async function loadExportModule({
 			"/core/functions.js",
 			"/core/tabContainer.js",
 			"./generator.js",
-			"./content.js",
+			"./toast.js",
+			"./sf-elements.js",
 		]),
 	});
 

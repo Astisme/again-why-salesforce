@@ -3,7 +3,8 @@ import { TOAST_ERROR, TOAST_WARNING, WHAT_EXPORT } from "/core/constants.js";
 import { sendExtensionMessage } from "/core/functions.js";
 import { ensureAllTabsAvailability, TabContainer } from "/core/tabContainer.js";
 import { generateSldsModalWithTabList, MODAL_ID } from "./generator.js";
-import { getModalHanger, showToast } from "./content.js";
+import { showToast } from "./toast.js";
+import { getModalHanger } from "./sf-elements.js";
 
 /**
  * Displays the export modal if there are no other open modals.

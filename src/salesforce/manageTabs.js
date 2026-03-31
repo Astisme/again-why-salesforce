@@ -26,14 +26,9 @@ import {
 	handleLightningLinkClick,
 	MODAL_ID,
 } from "./generator.js";
-import {
-	getCurrentHref,
-	getModalHanger,
-	makeDuplicatesBold,
-	reorderTabsUl,
-	sf_afterSet,
-	showToast,
-} from "./content.js";
+import { makeDuplicatesBold, reorderTabsUl, sf_afterSet } from "./content.js";
+import { showToast } from "./toast.js";
+import { getCurrentHref, getModalHanger } from "./sf-elements.js";
 import { updateModalBodyOverflow } from "./modal-layout.js";
 
 export { updateModalBodyOverflow };

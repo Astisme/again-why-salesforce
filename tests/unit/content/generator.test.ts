@@ -685,7 +685,8 @@ async function loadGeneratorFixture({
 			"/core/tab.js",
 			"/core/tabContainer.js",
 			"/core/translator.js",
-			"./content.js",
+			"./toast.js",
+			"./sf-elements.js",
 			"./modal-layout.js",
 		]),
 	});

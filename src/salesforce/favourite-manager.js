@@ -27,13 +27,13 @@ import { ensureAllTabsAvailability } from "/core/tabContainer.js";
 import ensureTranslatorAvailability from "/core/translator.js";
 
 import {
-	getCurrentHref,
 	getIsCurrentlyOnSavedTab,
 	getWasOnSavedTab,
 	isOnSavedTab,
 	performActionOnTabs,
-	showToast,
 } from "./content.js";
+import { showToast } from "./toast.js";
+import { getCurrentHref } from "./sf-elements.js";
 
 export const FAVOURITE_BUTTON_ID = `${EXTENSION_NAME}-button`;
 export const STAR_ID = `${EXTENSION_NAME}-star`;

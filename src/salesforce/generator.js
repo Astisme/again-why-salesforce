@@ -37,7 +37,8 @@ import Tab from "/core/tab.js";
 import { ensureAllTabsAvailability, TabContainer } from "/core/tabContainer.js";
 import ensureTranslatorAvailability from "/core/translator.js";
 
-import { getCurrentHref, showToast } from "./content.js";
+import { showToast } from "./toast.js";
+import { getCurrentHref } from "./sf-elements.js";
 import { updateModalBodyOverflow } from "./modal-layout.js";
 
 const TOAST_ID = `${EXTENSION_NAME}-toast`;
