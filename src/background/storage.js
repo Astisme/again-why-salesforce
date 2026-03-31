@@ -178,11 +178,10 @@ export async function bg_getStyleSettings(
 
 /**
  * Returns whether a stored setting matches a candidate item,
- * delegating to {@link isSameStyleItem} for style keys.
  * @param {Object} setting - An existing setting from the stored array.
  * @param {Object} item - The new setting item to match against.
  * @param {boolean} isStyleKey - Whether the current settings key is a style key.
- * @return {boolean}
+ * @return {boolean} whether setting and item are equal
  */
 function isSameItem(setting, item, isStyleKey) {
 	return setting.id === item.id &&
@@ -209,15 +208,15 @@ function mergeExistingItems(settingsArray, existingItems, item, isStyleKey) {
 	for (const existing of existingItems) {
 		if (isStyleKey) {
 			if (item.value == null || item.value === "") {
-        // the item has been removed
+				// the item has been removed
 				const index = settingsArray.indexOf(existing);
 				if (index >= 0) settingsArray.splice(index, 1);
 			} else {
-        // the item has been updated
+				// the item has been updated
 				existing.value = item.value;
 			}
 		} else {
-      // update the object reference (inside the settingsArray)
+			// update the object reference (inside the settingsArray)
 			Object.assign(existing, item);
 		}
 	}
@@ -232,18 +231,18 @@ function mergeExistingItems(settingsArray, existingItems, item, isStyleKey) {
  */
 async function mergeSettings(newsettings, key = SETTINGS_KEY) {
 	const isStyleKey = STYLE_KEYS.has(key);
-  // get the settings array
+	// get the settings array
 	const settingsArray = await bg_getSettings(
 		...(isStyleKey ? [null, key] : []),
 	);
 	if (settingsArray == null) return newsettings;
 	for (const item of newsettings) {
-    // check if the item.id is already present
+		// check if the item.id is already present
 		const existingItems = settingsArray.filter((s) =>
 			isSameItem(s, item, isStyleKey)
 		);
 		if (existingItems.length <= 0) {
-      // add the new setting
+			// add the new setting
 			settingsArray.push(item);
 			continue;
 		}

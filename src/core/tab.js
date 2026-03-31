@@ -79,6 +79,7 @@ export default class Tab {
 	}
 
 	/**
+	 * Performs validation for the parameters used to create a new Tab instance
 	 * @param {string} label - The label of the Tab, or an object representing a Tab (with `label`, `url`, and optional `org` properties).
 	 * @param {string} url - The URL of the Tab. Ignored if `labelOrTab` is an object.
 	 * @param {string|null} org - The optional organization associated with the Tab. Ignored if `labelOrTab` is an object.
@@ -107,6 +108,7 @@ export default class Tab {
 	}
 
 	/**
+	 * Creates a new Tab instance from the parameters passed
 	 * @param {string} label - The label of the Tab, or an object representing a Tab (with `label`, `url`, and optional `org` properties).
 	 * @param {string} url - The URL of the Tab. Ignored if `labelOrTab` is an object.
 	 * @param {string|null} org - The optional organization associated with the Tab. Ignored if `labelOrTab` is an object.
@@ -118,7 +120,7 @@ export default class Tab {
 	static #createFromPrimitives(label, url, org, clickCount, clickDate) {
 		Tab.#validatePrimitiveArgs(label, url, org, clickCount, clickDate);
 		const miniURL = Tab.minifyURL(url);
-		const orgName = org != null ? Tab.extractOrgName(org) : undefined;
+		const orgName = org == null ? undefined : Tab.extractOrgName(org);
 		// Create instance of Tab
 		return new Tab(
 			label,
@@ -131,6 +133,7 @@ export default class Tab {
 	}
 
 	/**
+	 * Creates a new Tab instance from the `tab` parameter; the others must be unpopulated
 	 * @param {Object} [tab] - The label of the Tab, or an object representing a Tab (with `label`, `url`, and optional `org` properties).
 	 * @param {undefined} [url] - Unpopulated or an error will be thrown
 	 * @param {undefined} [org] - Unpopulated or an error will be thrown

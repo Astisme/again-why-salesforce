@@ -843,17 +843,18 @@ function hideTabs(hideOrgTabs = true) {
  * @throws when it fails to sync the Tabs.
  */
 async function toggleOrg({ label = null, url = null, org = null } = {}) {
+	const allTabs = await ensureAllTabsAvailability();
 	const inputTab = { label, url, org };
+	const currentHref = getCurrentHref();
 	if (inputTab.url == null) {
-		inputTab.url = Tab.minifyURL(getCurrentHref());
+		inputTab.url = Tab.minifyURL(currentHref);
 	}
 	if (inputTab.org == null) {
-		inputTab.org = Tab.extractOrgName(getCurrentHref());
+		inputTab.org = Tab.extractOrgName(currentHref);
 	}
-	const allTabs = await ensureAllTabsAvailability();
 	const matchingTab = allTabs.getSingleTabByData(inputTab);
 	matchingTab.update({
-		org: matchingTab.org == null ? getCurrentHref() : "",
+		org: matchingTab.org == null ? currentHref : "",
 	});
 	if (!await allTabs.syncTabs()) {
 		throw new Error("error_failed_sync");
@@ -879,11 +880,12 @@ async function showModalUpdateTab(
 	const allTabs = await ensureAllTabsAvailability();
 	let matchingTab = null;
 	try {
+		const currentHref = getCurrentHref();
 		matchingTab = allTabs.getSingleTabByData(
 			tabIsEmpty
 				? {
-					url: Tab.minifyURL(getCurrentHref()),
-					org: Tab.extractOrgName(getCurrentHref()),
+					url: Tab.minifyURL(currentHref),
+					org: Tab.extractOrgName(currentHref),
 				}
 				: tab,
 		);

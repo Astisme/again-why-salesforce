@@ -345,7 +345,7 @@ export function performLightningRedirect(url = "") {
 		navigationType: "url",
 		url,
 		fallbackURL: url,
-	}, "*");
+	}, globalThis.location?.origin ?? "*");
 }
 /**
  * Returns the value from the given selector
