@@ -21,7 +21,7 @@ import {
 } from "./generator.js";
 import { sf_afterSet } from "./content.js";
 import { showToast } from "./toast.js";
-import { getSetupTabUl, getModalHanger } from "./sf-elements.js";
+import { getModalHanger, getSetupTabUl } from "./sf-elements.js";
 
 const IMPORT_ID = `${EXTENSION_NAME}-import`;
 const IMPORT_FILE_ID = `${IMPORT_ID}-file`;

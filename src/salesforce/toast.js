@@ -15,13 +15,19 @@ import { generateSldsToastMessage } from "./generator.js";
  */
 let toastHanger = null;
 
+/**
+ * Retrieves the toast hanger element, caching it for future use.
+ * - If the `toastHanger` is already set, it returns the cached value.
+ * - Otherwise, it finds it in the page.
+ * @return {HTMLElement|null} The toast hanger element if found, otherwise null.
+ */
 function getToastHanger() {
 	if (toastHanger != null) {
 		return toastHanger;
 	}
 	toastHanger = document.getElementsByClassName(
 		"oneConsoleTabset navexConsoleTabset",
-	)[0];
+	)?.[0];
 	return toastHanger;
 }
 

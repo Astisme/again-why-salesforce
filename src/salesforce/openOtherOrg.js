@@ -103,9 +103,7 @@ export async function createOpenOtherOrgModal(
 		if (lastExtracted === newTarget) return; // could be called more than once
 		lastExtracted = newTarget;
 		if (
-			!newTarget.match(
-				SALESFORCE_URL_PATTERN,
-			)
+			!SALESFORCE_URL_PATTERN.test(newTarget)
 		) {
 			return showToast(["insert_valid_org", newTarget], TOAST_ERROR);
 		}
