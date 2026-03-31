@@ -179,7 +179,11 @@ function parseNonNegativeNumber(rawValue: string, optionName: string): number {
 /**
  * Reads the next argument as an option value.
  */
-function getOptionValue(args: string[], index: number, optionName: string): string {
+function getOptionValue(
+	args: string[],
+	index: number,
+	optionName: string,
+): string {
 	const value = args[index + 1];
 	if (!value || value.startsWith("--")) {
 		throwOptionError(`${optionName} requires a value.`);
@@ -226,22 +230,34 @@ function parseCliArgs(args: string[]): CliOptions | { help: true } {
 				break;
 			}
 			case "--scope-increase-threshold-pct": {
-				scopeIncreaseThresholdPct = parseNonNegativeNumber(getOptionValue(args, index, arg), arg);
+				scopeIncreaseThresholdPct = parseNonNegativeNumber(
+					getOptionValue(args, index, arg),
+					arg,
+				);
 				index += 1;
 				break;
 			}
 			case "--max-creep-findings": {
-				maxCreepFindings = parseNonNegativeNumber(getOptionValue(args, index, arg), arg);
+				maxCreepFindings = parseNonNegativeNumber(
+					getOptionValue(args, index, arg),
+					arg,
+				);
 				index += 1;
 				break;
 			}
 			case "--max-drift-findings": {
-				maxDriftFindings = parseNonNegativeNumber(getOptionValue(args, index, arg), arg);
+				maxDriftFindings = parseNonNegativeNumber(
+					getOptionValue(args, index, arg),
+					arg,
+				);
 				index += 1;
 				break;
 			}
 			case "--max-entropy-score": {
-				maxEntropyScore = parseNonNegativeNumber(getOptionValue(args, index, arg), arg);
+				maxEntropyScore = parseNonNegativeNumber(
+					getOptionValue(args, index, arg),
+					arg,
+				);
 				index += 1;
 				break;
 			}
@@ -304,7 +320,10 @@ function toEpochDays(value: string, fieldName: string): number {
 /**
  * Casts a JSON value to a string-keyed object.
  */
-function asObject(value: JsonValue, fieldName: string): { [key: string]: JsonValue } {
+function asObject(
+	value: JsonValue,
+	fieldName: string,
+): { [key: string]: JsonValue } {
 	if (typeof value !== "object" || value === null || Array.isArray(value)) {
 		throw new Error(`${fieldName} must be an object.`);
 	}
@@ -315,7 +334,10 @@ function asObject(value: JsonValue, fieldName: string): { [key: string]: JsonVal
 /**
  * Reads and parses JSON content from disk.
  */
-async function readJsonFile(path: string, readTextFile: (path: string) => Promise<string>): Promise<JsonValue> {
+async function readJsonFile(
+	path: string,
+	readTextFile: (path: string) => Promise<string>,
+): Promise<JsonValue> {
 	const rawText = await readTextFile(path);
 	try {
 		return JSON.parse(rawText) as JsonValue;
@@ -327,7 +349,10 @@ async function readJsonFile(path: string, readTextFile: (path: string) => Promis
 /**
  * Validates that the provided value is a valid roadmap snapshot.
  */
-function validateSnapshot(value: JsonValue, label: "baseline" | "current"): RoadmapSnapshot {
+function validateSnapshot(
+	value: JsonValue,
+	label: "baseline" | "current",
+): RoadmapSnapshot {
 	const snapshotObject = asObject(value, `${label} snapshot`);
 	const itemsValue = snapshotObject.items;
 
@@ -342,7 +367,9 @@ function validateSnapshot(value: JsonValue, label: "baseline" | "current"): Road
 	const uniqueIds = new Set<string>();
 	for (const item of items) {
 		if (uniqueIds.has(item.id)) {
-			throw new Error(`${label} snapshot has duplicate item id '${item.id}'.`);
+			throw new Error(
+				`${label} snapshot has duplicate item id '${item.id}'.`,
+			);
 		}
 		uniqueIds.add(item.id);
 	}
@@ -353,25 +380,41 @@ function validateSnapshot(value: JsonValue, label: "baseline" | "current"): Road
 /**
  * Validates and normalizes a snapshot item.
  */
-function validateItem(value: JsonValue, label: "baseline" | "current", index: number): RoadmapItem {
-	const itemObject = asObject(value, `${label} snapshot item at index ${index}`);
+function validateItem(
+	value: JsonValue,
+	label: "baseline" | "current",
+	index: number,
+): RoadmapItem {
+	const itemObject = asObject(
+		value,
+		`${label} snapshot item at index ${index}`,
+	);
 
 	const id = itemObject.id;
 	if (typeof id !== "string" || id.trim() === "") {
-		throw new Error(`${label} snapshot item at index ${index} must have a non-empty id.`);
+		throw new Error(
+			`${label} snapshot item at index ${index} must have a non-empty id.`,
+		);
 	}
 
 	const status = itemObject.status;
 	if (typeof status !== "string" || status.trim() === "") {
-		throw new Error(`${label} snapshot item '${id}' must have a non-empty status.`);
+		throw new Error(
+			`${label} snapshot item '${id}' must have a non-empty status.`,
+		);
 	}
 
 	const targetDate = itemObject.targetDate;
 	if (typeof targetDate !== "string") {
-		throw new Error(`${label} snapshot item '${id}' must have a targetDate string.`);
+		throw new Error(
+			`${label} snapshot item '${id}' must have a targetDate string.`,
+		);
 	}
 
-	const targetDateEpochDays = toEpochDays(targetDate, `${label} snapshot item '${id}' targetDate`);
+	const targetDateEpochDays = toEpochDays(
+		targetDate,
+		`${label} snapshot item '${id}' targetDate`,
+	);
 	const scopeSize = getScopeSize(itemObject, label, id);
 
 	return {
@@ -386,11 +429,17 @@ function validateItem(value: JsonValue, label: "baseline" | "current", index: nu
 /**
  * Resolves scope size from scopePoints or tasks.length.
  */
-function getScopeSize(itemObject: { [key: string]: JsonValue }, label: "baseline" | "current", id: string): number {
+function getScopeSize(
+	itemObject: { [key: string]: JsonValue },
+	label: "baseline" | "current",
+	id: string,
+): number {
 	const scopePoints = itemObject.scopePoints;
 	if (typeof scopePoints === "number") {
 		if (!Number.isFinite(scopePoints) || scopePoints < 0) {
-			throw new Error(`${label} snapshot item '${id}' scopePoints must be a non-negative number.`);
+			throw new Error(
+				`${label} snapshot item '${id}' scopePoints must be a non-negative number.`,
+			);
 		}
 		return scopePoints;
 	}
@@ -399,13 +448,17 @@ function getScopeSize(itemObject: { [key: string]: JsonValue }, label: "baseline
 	if (Array.isArray(tasks)) {
 		for (const task of tasks) {
 			if (typeof task !== "string") {
-				throw new Error(`${label} snapshot item '${id}' tasks must contain only strings.`);
+				throw new Error(
+					`${label} snapshot item '${id}' tasks must contain only strings.`,
+				);
 			}
 		}
 		return tasks.length;
 	}
 
-	throw new Error(`${label} snapshot item '${id}' must include scopePoints or tasks.`);
+	throw new Error(
+		`${label} snapshot item '${id}' must include scopePoints or tasks.`,
+	);
 }
 
 /**
@@ -434,7 +487,9 @@ function getIncreasePct(baselineScope: number, currentScope: number): number {
 		return currentScope > 0 ? 100 : 0;
 	}
 
-	return Number((((currentScope - baselineScope) / baselineScope) * 100).toFixed(2));
+	return Number(
+		(((currentScope - baselineScope) / baselineScope) * 100).toFixed(2),
+	);
 }
 
 /**
@@ -486,9 +541,16 @@ function detectRoadmapEntropy(
 				totalScopeIncrease += currentItem.scopeSize;
 			}
 		} else {
-			const increasePoints = currentItem.scopeSize - baselineItem.scopeSize;
-			const increasePct = getIncreasePct(baselineItem.scopeSize, currentItem.scopeSize);
-			if (increasePoints > 0 && increasePct > options.scopeIncreaseThresholdPct) {
+			const increasePoints = currentItem.scopeSize -
+				baselineItem.scopeSize;
+			const increasePct = getIncreasePct(
+				baselineItem.scopeSize,
+				currentItem.scopeSize,
+			);
+			if (
+				increasePoints > 0 &&
+				increasePct > options.scopeIncreaseThresholdPct
+			) {
 				creepFindings.push({
 					type: "scope_creep",
 					id: currentItem.id,
@@ -502,10 +564,15 @@ function detectRoadmapEntropy(
 			}
 		}
 
-		const baselineTargetEpochDays = baselineItem?.targetDateEpochDays ?? currentItem.targetDateEpochDays;
+		const baselineTargetEpochDays = baselineItem?.targetDateEpochDays ??
+			currentItem.targetDateEpochDays;
 		const baselineTargetDate = baselineItem?.targetDate ?? null;
-		const slipDays = getSlipDays(baselineTargetEpochDays, currentItem.targetDateEpochDays);
-		const overdue = isIncompleteStatus(currentItem.status) && todayEpochDays > currentItem.targetDateEpochDays;
+		const slipDays = getSlipDays(
+			baselineTargetEpochDays,
+			currentItem.targetDateEpochDays,
+		);
+		const overdue = isIncompleteStatus(currentItem.status) &&
+			todayEpochDays > currentItem.targetDateEpochDays;
 
 		if (slipDays > 0 || overdue) {
 			driftFindings.push({
@@ -531,7 +598,8 @@ function detectRoadmapEntropy(
 	}
 
 	const entropyScore = Number(
-		(creepFindings.length * 5 + driftFindings.length * 5 + totalSlipDays + totalScopeIncrease).toFixed(2),
+		(creepFindings.length * 5 + driftFindings.length * 5 + totalSlipDays +
+			totalScopeIncrease).toFixed(2),
 	);
 
 	const exceeded: ThresholdEvaluation = {
@@ -540,9 +608,10 @@ function detectRoadmapEntropy(
 		entropy: entropyScore > options.maxEntropyScore,
 	};
 
-	const status: DetectorResult["status"] = exceeded.creep || exceeded.drift || exceeded.entropy
-		? "alert"
-		: "healthy";
+	const status: DetectorResult["status"] =
+		exceeded.creep || exceeded.drift || exceeded.entropy
+			? "alert"
+			: "healthy";
 
 	const metrics: RoadmapMetrics = {
 		baselineItemCount: baseline.items.length,
@@ -581,7 +650,10 @@ function detectRoadmapEntropy(
  * Returns CLI exit code for the detector result.
  */
 function getExitCode(result: DetectorResult): number {
-	return result.exceeded.creep || result.exceeded.drift || result.exceeded.entropy ? 2 : 0;
+	return result.exceeded.creep || result.exceeded.drift ||
+			result.exceeded.entropy
+		? 2
+		: 0;
 }
 
 /**
@@ -600,11 +672,21 @@ export async function runRoadmapEntropyDetectorCli(
 			};
 		}
 
-		const baselineValue = await readJsonFile(parsedArgs.baselinePath, readTextFile);
-		const currentValue = await readJsonFile(parsedArgs.currentPath, readTextFile);
+		const baselineValue = await readJsonFile(
+			parsedArgs.baselinePath,
+			readTextFile,
+		);
+		const currentValue = await readJsonFile(
+			parsedArgs.currentPath,
+			readTextFile,
+		);
 		const baselineSnapshot = validateSnapshot(baselineValue, "baseline");
 		const currentSnapshot = validateSnapshot(currentValue, "current");
-		const result = detectRoadmapEntropy(baselineSnapshot, currentSnapshot, parsedArgs);
+		const result = detectRoadmapEntropy(
+			baselineSnapshot,
+			currentSnapshot,
+			parsedArgs,
+		);
 
 		return {
 			exitCode: getExitCode(result),
@@ -622,12 +704,19 @@ export async function runRoadmapEntropyDetectorCli(
 /**
  * Executes CLI behavior when module runs as an entrypoint.
  */
-export async function maybeRunMain(isMain: boolean, args: string[], dependencies: CliDependencies): Promise<void> {
+export async function maybeRunMain(
+	isMain: boolean,
+	args: string[],
+	dependencies: CliDependencies,
+): Promise<void> {
 	if (!isMain) {
 		return;
 	}
 
-	const runResult = await runRoadmapEntropyDetectorCli(args, dependencies.readTextFile);
+	const runResult = await runRoadmapEntropyDetectorCli(
+		args,
+		dependencies.readTextFile,
+	);
 	if (runResult.output) {
 		dependencies.writeStdout(runResult.output);
 	}

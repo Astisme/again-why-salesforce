@@ -14,24 +14,25 @@ Both `--baseline` and `--current` must point to JSON files with this shape:
 
 ```json
 {
-  "items": [
-    {
-      "id": "ROADMAP-123",
-      "status": "in_progress",
-      "targetDate": "2026-05-15",
-      "scopePoints": 8
-    },
-    {
-      "id": "ROADMAP-456",
-      "status": "done",
-      "targetDate": "2026-04-02",
-      "tasks": ["task-1", "task-2"]
-    }
-  ]
+	"items": [
+		{
+			"id": "ROADMAP-123",
+			"status": "in_progress",
+			"targetDate": "2026-05-15",
+			"scopePoints": 8
+		},
+		{
+			"id": "ROADMAP-456",
+			"status": "done",
+			"targetDate": "2026-04-02",
+			"tasks": ["task-1", "task-2"]
+		}
+	]
 }
 ```
 
 Rules:
+
 - `id` must be unique per snapshot.
 - `targetDate` must use `YYYY-MM-DD`.
 - Scope is resolved from `scopePoints` when present, otherwise from `tasks.length`.
@@ -40,10 +41,12 @@ Rules:
 ## Detection Rules
 
 Scope creep:
+
 - Existing item scope increases above `--scope-increase-threshold-pct`.
 - New current-only items are treated as scope creep (`reason: "new_item"`) when they exceed the same threshold.
 
 Schedule drift:
+
 - `current.targetDate` slips later than `baseline.targetDate`.
 - Item is incomplete and the detector `today` date is after `current.targetDate`.
 
@@ -54,6 +57,7 @@ Schedule drift:
 - `2`: threshold breach.
 
 Threshold checks are strict `>` comparisons:
+
 - `--max-creep-findings` (default `0`)
 - `--max-drift-findings` (default `0`)
 - `--max-entropy-score` (default `0`)
@@ -73,36 +77,36 @@ Threshold checks are strict `>` comparisons:
 
 ```json
 {
-  "status": "alert",
-  "metadata": {
-    "today": "2026-03-31"
-  },
-  "thresholds": {
-    "scopeIncreaseThresholdPct": 0,
-    "maxCreepFindings": 0,
-    "maxDriftFindings": 0,
-    "maxEntropyScore": 0
-  },
-  "exceeded": {
-    "creep": true,
-    "drift": true,
-    "entropy": true
-  },
-  "metrics": {
-    "baselineItemCount": 1,
-    "currentItemCount": 2,
-    "addedItemCount": 1,
-    "removedItemCount": 0,
-    "creepCount": 2,
-    "driftCount": 2,
-    "totalScopeIncrease": 4,
-    "totalSlipDays": 9,
-    "overdueCount": 2,
-    "entropyScore": 33
-  },
-  "findings": {
-    "creep": [],
-    "drift": []
-  }
+	"status": "alert",
+	"metadata": {
+		"today": "2026-03-31"
+	},
+	"thresholds": {
+		"scopeIncreaseThresholdPct": 0,
+		"maxCreepFindings": 0,
+		"maxDriftFindings": 0,
+		"maxEntropyScore": 0
+	},
+	"exceeded": {
+		"creep": true,
+		"drift": true,
+		"entropy": true
+	},
+	"metrics": {
+		"baselineItemCount": 1,
+		"currentItemCount": 2,
+		"addedItemCount": 1,
+		"removedItemCount": 0,
+		"creepCount": 2,
+		"driftCount": 2,
+		"totalScopeIncrease": 4,
+		"totalSlipDays": 9,
+		"overdueCount": 2,
+		"entropyScore": 33
+	},
+	"findings": {
+		"creep": [],
+		"drift": []
+	}
 }
 ```
