@@ -41,6 +41,7 @@
 		"build-edge": "deno task dev-edge && bash bin/zip-extension.bash edge",
 		"build-safari": "deno task dev-safari && bash bin/zip-extension.bash safari && bash bin/convert-to-safari-app-extension.bash",
 
+		"roadmap-entropy": "deno run --allow-read bin/roadmap-entropy-detector.ts",
 		"release": "deno --allow-read --allow-run --allow-env bin/build-releases.ts"
 	},
 	"imports": {
