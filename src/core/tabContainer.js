@@ -138,14 +138,16 @@ export class TabContainer extends Array {
 			[TabContainer.keyTabs]: savedTabs,
 			[TabContainer.keyPinnedTabsNo]: pinnedTabs,
 		} = await instance.getSavedTabs(false);
+		// set pinned number based on storage (if pinned === 0, do not fail (with true))
+		const setPinned = (n) => {
+			instance[TabContainer.keyPinnedTabsNo] = n;
+			return true;
+		};
 		return (
 			Array.isArray(savedTabs) &&
 			savedTabs.length > 0 &&
 			await (instance.addTabs(savedTabs, false)) &&
-			Boolean(
-				(instance[TabContainer.keyPinnedTabsNo] = pinnedTabs) ||
-					true,
-			) // set pinned number based on storage (if pinned === 0, do not fail (with true))
+			setPinned(pinnedTabs)
 		) || await instance.setDefaultTabs();
 	}
 

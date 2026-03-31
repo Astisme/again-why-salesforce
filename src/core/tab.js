@@ -46,7 +46,7 @@ export default class Tab {
 	 * @param {string|undefined} [org=undefined] - The optional organization associated with the Tab.
 	 * @param {number|undefined} [clickCount=undefined] - The number of times the Tab was clicked.
 	 * @param {number|undefined} [clickDate=undefined] - The date in which the Tab was clicked last.
-	 * @param {string} secret - A secret value required to initialize the tab. Must match `_tabSecret`.
+	 * @param {symbol} secret - A secret value required to initialize the tab. Must match `_tabSecret`.
 	 * @throws {Error} - Throws an error if the `secret` does not match `_tabSecret` or if `Tab.create()` is not used.
 	 */
 	constructor(
@@ -79,6 +79,85 @@ export default class Tab {
 	}
 
 	/**
+	 * @param {string} label - The label of the Tab, or an object representing a Tab (with `label`, `url`, and optional `org` properties).
+	 * @param {string} url - The URL of the Tab. Ignored if `labelOrTab` is an object.
+	 * @param {string|null} org - The optional organization associated with the Tab. Ignored if `labelOrTab` is an object.
+	 * @param {number|null} clickCount - The number of times the Tab was clicked. Ignored if `labelOrTab` is an object.
+	 * @param {number|null} clickDate - The date in which the Tab was clicked last. Ignored if `labelOrTab` is an object.
+	 * @throws {Error} based on which parameter does not conform to the requested format
+	 */
+	static #validatePrimitiveArgs(label, url, org, clickCount, clickDate) {
+		if (typeof label !== "string" || label.trim() === "") {
+			throw new Error("error_tab_label");
+		}
+		if (typeof url !== "string" || url.trim() === "") {
+			throw new Error("error_tab_url");
+		}
+		if (typeof org !== "string" && org != null) {
+			throw new Error("error_tab_org");
+		}
+		if (
+			clickCount != null &&
+			(typeof clickCount !== "number" || clickCount < 0)
+		) throw new Error("error_tab_click_count");
+		if (
+			clickDate != null &&
+			(typeof clickDate !== "number" || clickDate > Date.now())
+		) throw new Error("error_tab_click_date");
+	}
+
+	/**
+	 * @param {string} label - The label of the Tab, or an object representing a Tab (with `label`, `url`, and optional `org` properties).
+	 * @param {string} url - The URL of the Tab. Ignored if `labelOrTab` is an object.
+	 * @param {string|null} org - The optional organization associated with the Tab. Ignored if `labelOrTab` is an object.
+	 * @param {number|null} clickCount - The number of times the Tab was clicked. Ignored if `labelOrTab` is an object.
+	 * @param {number|null} clickDate - The date in which the Tab was clicked last. Ignored if `labelOrTab` is an object.
+	 * @throws {Error} - Throws an error if the parameters are invalid.
+	 * @return {Tab} - A new instance of the `Tab` class.
+	 */
+	static #createFromPrimitives(label, url, org, clickCount, clickDate) {
+		Tab.#validatePrimitiveArgs(label, url, org, clickCount, clickDate);
+		const miniURL = Tab.minifyURL(url);
+		const orgName = org != null ? Tab.extractOrgName(org) : undefined;
+		// Create instance of Tab
+		return new Tab(
+			label,
+			miniURL,
+			orgName,
+			clickCount,
+			clickDate,
+			_tabSecret,
+		);
+	}
+
+	/**
+	 * @param {Object} [tab] - The label of the Tab, or an object representing a Tab (with `label`, `url`, and optional `org` properties).
+	 * @param {undefined} [url] - Unpopulated or an error will be thrown
+	 * @param {undefined} [org] - Unpopulated or an error will be thrown
+	 * @param {undefined} [clickCount] - Unpopulated or an error will be thrown
+	 * @param {undefined} [clickDate] - Unpopulated or an error will be thrown
+	 * @throws {Error} - Throws an error if the url, org, clickCount or clickDate are populated, or if unexpected keys are found in the tab.
+	 * @return {Tab} - A new instance of the `Tab` class.
+	 */
+	static #createFromObject(tab, url, org, clickCount, clickDate) {
+		if (url || org || clickCount || clickDate) {
+			throw new Error("error_tab_object_creation");
+		}
+		// Check for unexpected keys
+		if (Tab.hasUnexpectedKeys(tab)) {
+			throw new Error("error_tab_unexpected_keys");
+		}
+		// Original method signature (label, url, org, clickCount, clickDate)
+		return Tab.#createFromPrimitives(
+			tab.label,
+			tab.url,
+			tab.org,
+			tab[Tab.keyClickCount],
+			tab[Tab.keyClickDate],
+		);
+	}
+
+	/**
 	 * Creates a new `Tab` instance. Can be called with either individual parameters (label, url, org) or an object-style argument.
 	 *
 	 * @param {string|Object} labelOrTab - The label of the Tab, or an object representing a Tab (with `label`, `url`, and optional `org` properties).
@@ -96,69 +175,12 @@ export default class Tab {
 		clickCount = undefined,
 		clickDate = undefined,
 	) {
-		if (Tab.isTab(labelOrTab)) {
-			return labelOrTab;
-		}
+		if (Tab.isTab(labelOrTab)) return labelOrTab;
 		// Check if first argument is an object (for object-style creation)
-		if (labelOrTab && typeof labelOrTab === "object") {
-			if (url || org || clickCount || clickDate) {
-				throw new Error(
-					"error_tab_object_creation",
-				);
-			}
-			const tab = labelOrTab;
-			// Check for unexpected keys
-			if (Tab.hasUnexpectedKeys(tab)) {
-				throw new Error(
-					"error_tab_unexpected_keys",
-				);
-			}
-			return Tab.create(
-				tab.label,
-				tab.url,
-				tab.org,
-				tab[Tab.keyClickCount],
-				tab[Tab.keyClickDate],
-			);
-		}
-		// Original method signature (label, url, org, clickCount, clickDate)
-		const label = labelOrTab;
-		// Check types of parameters
-		if (typeof label !== "string" || label.trim() === "") {
-			throw new Error("error_tab_label");
-		}
-		if (typeof url !== "string" || url.trim() === "") {
-			throw new Error("error_tab_url");
-		}
-		if (typeof org !== "string" && org != null) {
-			throw new Error("error_tab_org");
-		}
-		const miniURL = Tab.minifyURL(url);
-		let orgName;
-		if (org != null) {
-			orgName = Tab.extractOrgName(org);
-		}
-		if (
-			clickCount != null &&
-			(typeof clickCount !== "number" || clickCount < 0)
-		) {
-			throw new Error("error_tab_click_count");
-		}
-		if (
-			clickDate != null &&
-			(typeof clickDate !== "number" || clickDate > Date.now())
-		) {
-			throw new Error("error_tab_click_date");
-		}
-		// Create instance of Tab
-		return new Tab(
-			label,
-			miniURL,
-			orgName,
-			clickCount,
-			clickDate,
-			_tabSecret,
-		);
+		const createFn = labelOrTab && typeof labelOrTab === "object"
+			? Tab.#createFromObject
+			: Tab.#createFromPrimitives;
+		return createFn(labelOrTab, url, org, clickCount, clickDate);
 	}
 
 	/**

@@ -2,12 +2,9 @@
 import {
 	BROWSER,
 	DECORATION_COLORS,
-	GENERIC_PINNED_TAB_STYLE_KEY,
-	GENERIC_TAB_STYLE_KEY,
 	LOCALE_KEY,
-	ORG_PINNED_TAB_STYLE_KEY,
-	ORG_TAB_STYLE_KEY,
 	SETTINGS_KEY,
+	STYLE_KEYS,
 	TUTORIAL_CLOSE_EVENT,
 	TUTORIAL_KEY,
 	WHY_KEY,
@@ -154,10 +151,7 @@ export async function bg_getStyleSettings(
 ) {
 	if (key == null) {
 		key = [
-			GENERIC_TAB_STYLE_KEY,
-			ORG_TAB_STYLE_KEY,
-			GENERIC_PINNED_TAB_STYLE_KEY,
-			ORG_PINNED_TAB_STYLE_KEY,
+			...STYLE_KEYS,
 		];
 	}
 	let settings = await bg_getSettings(
@@ -183,63 +177,87 @@ export async function bg_getStyleSettings(
 }
 
 /**
+ * Returns whether a stored setting matches a candidate item,
+ * delegating to {@link isSameStyleItem} for style keys.
+ * @param {Object} setting - An existing setting from the stored array.
+ * @param {Object} item - The new setting item to match against.
+ * @param {boolean} isStyleKey - Whether the current settings key is a style key.
+ * @return {boolean}
+ */
+function isSameItem(setting, item, isStyleKey) {
+	return setting.id === item.id &&
+		(
+			!isStyleKey ||
+			(
+				setting.forActive == null ||
+				item.forActive == null ||
+				setting.forActive === item.forActive
+			)
+		);
+}
+
+/**
+ * Applies a new setting item onto each matched existing item in the array.
+ * For style keys, updates or removes based on value; otherwise merges all fields.
+ * @param {Array} settingsArray - The full settings array, mutated in place.
+ * @param {Object[]} existingItems - The subset of items that matched the new item.
+ * @param {Object} item - The new setting to merge in.
+ * @param {boolean} isStyleKey - Whether the current settings key is a style key.
+ * @return {void}
+ */
+function mergeExistingItems(settingsArray, existingItems, item, isStyleKey) {
+	for (const existing of existingItems) {
+		if (isStyleKey) {
+			if (item.value == null || item.value === "") {
+        // the item has been removed
+				const index = settingsArray.indexOf(existing);
+				if (index >= 0) settingsArray.splice(index, 1);
+			} else {
+        // the item has been updated
+				existing.value = item.value;
+			}
+		} else {
+      // update the object reference (inside the settingsArray)
+			Object.assign(existing, item);
+		}
+	}
+}
+
+/**
  * Finds the already stored settings and merges them with the new ones passed as input by matching them with the id field.
  *
  * @param {Array} newsettings - The settings to be stored.
  * @param {string} [key=SETTINGS_KEY]  - The key of the settings where to merge and store the newsettings array.
- * @return {Promise} the merged settings.
+ * @return {Promise<Array>} the merged settings.
  */
 async function mergeSettings(newsettings, key = SETTINGS_KEY) {
-	// get the settings array
-	const isStyleKey = key === GENERIC_TAB_STYLE_KEY ||
-		key === ORG_TAB_STYLE_KEY ||
-		key === GENERIC_PINNED_TAB_STYLE_KEY ||
-		key === ORG_PINNED_TAB_STYLE_KEY;
+	const isStyleKey = STYLE_KEYS.has(key);
+  // get the settings array
 	const settingsArray = await bg_getSettings(
 		...(isStyleKey ? [null, key] : []),
 	);
-	if (settingsArray == null) {
-		return newsettings;
-	}
+	if (settingsArray == null) return newsettings;
 	for (const item of newsettings) {
-		// check if the item.id is already present
-		const existingItems = settingsArray.filter((setting) =>
-			setting.id === item.id &&
-			(
-				!isStyleKey ||
-				(
-					setting.forActive == null ||
-					setting.forActive == null ||
-					setting.forActive === item.forActive
-				)
-			)
+    // check if the item.id is already present
+		const existingItems = settingsArray.filter((s) =>
+			isSameItem(s, item, isStyleKey)
 		);
 		if (existingItems.length <= 0) {
-			// add the new setting
+      // add the new setting
 			settingsArray.push(item);
 			continue;
 		}
-		for (const existing of existingItems) {
-			if (isStyleKey) {
-				if (item.value == null || item.value === "") {
-					// the item has been removed
-					const index = settingsArray.indexOf(existing);
-					if (index >= 0) {
-						settingsArray.splice(index, 1);
-					}
-				} else {
-					// the item has been updated
-					existing.value = item.value;
-				}
-			} else {
-				// update the object reference (inside the settingsArray)
-				Object.assign(existing, item);
-			}
-		}
+		mergeExistingItems(settingsArray, existingItems, item, isStyleKey);
 	}
 	return settingsArray;
 }
 
+const directKeys = new Set([
+	WHY_KEY,
+	LOCALE_KEY,
+	TUTORIAL_KEY,
+	TUTORIAL_CLOSE_EVENT,
+]);
 /**
  * Stores the provided tabs data in the browser's storage and invokes the callback.
  *
@@ -250,27 +268,15 @@ async function mergeSettings(newsettings, key = SETTINGS_KEY) {
  */
 export async function bg_setStorage(tobeset, callback = null, key = WHY_KEY) {
 	const set = {};
-	switch (key) {
-		case SETTINGS_KEY:
-		case GENERIC_TAB_STYLE_KEY:
-		case ORG_TAB_STYLE_KEY:
-		case GENERIC_PINNED_TAB_STYLE_KEY:
-		case ORG_PINNED_TAB_STYLE_KEY: {
-			set[key] = await mergeSettings(
-				Array.isArray(tobeset) ? tobeset : [tobeset],
-				key,
-			);
-			break;
-		}
-		case WHY_KEY:
-		case LOCALE_KEY:
-		case TUTORIAL_KEY:
-		case TUTORIAL_CLOSE_EVENT:
-			set[key] = tobeset;
-			break;
-		default:
-			throw new Error("error_unknown_request", key);
+	if (key === SETTINGS_KEY || STYLE_KEYS.has(key)) {
+		tobeset = await mergeSettings(
+			Array.isArray(tobeset) ? tobeset : [tobeset],
+			key,
+		);
+	} else if (!directKeys.has(key)) {
+		throw new Error("error_unknown_request", key);
 	}
+	set[key] = tobeset;
 	if (callback == null) {
 		return BROWSER.storage.sync.set(set);
 	}

@@ -88,7 +88,7 @@ function createKeySignature(keys: string[]): string {
 
 /**
  * Gets all locale directories from the locales directory (excluding English and Spanish 419)
- * @returns {Promise<string[]>} Array of locale directory names
+ * @return {Promise<string[]>} Array of locale directory names
  */
 async function getLocaleDirectories() {
 	const entries = [];
