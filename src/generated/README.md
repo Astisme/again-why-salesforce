@@ -7,5 +7,7 @@ Generated files:
 
 - `bundledContent.js`: bundled content-script output.
 - `bundledBackground.js`: bundled background-script output.
+- `bundledPopup.js`: bundled popup page modules.
+- `bundledOptions.js`: bundled options page modules.
 
 Authored source files should stay outside this folder.

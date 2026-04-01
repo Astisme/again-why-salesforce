@@ -1754,6 +1754,7 @@ export function generateHelpWith_i_popup({
 		tooltip.dataset.showLeft = showLeft;
 		slot = document.createElement("span");
 		slot.textContent = text;
+		slot.classList.add("slot");
 		if (!isLinkAvailable) {
 			linkTip.classList.add(HIDDEN_CLASS);
 		}
@@ -1766,6 +1767,7 @@ export function generateHelpWith_i_popup({
 		slot = document.createElement("slot");
 		slot.name = "text";
 		slot.textContent = "Nothing to see here...";
+		slot.classList.add("slot");
 	}
 	tooltip.append(slot);
 	tooltip.append(linkTip);

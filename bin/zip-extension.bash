@@ -25,7 +25,7 @@ ls src/manifest.json >/dev/null 2>&1 || { echo "manifest.json not found!"; exit 
 
 # Zip $BROWSER extension
 cd src
-zip -r "../bin/$ZIP_NAME" _locales action assets/icons assets/svgs generated/bundledBackground.js components generated/bundledContent.js salesforce/lightning-navigation.js salesforce/css settings core manifest.json -x "*/README.md" >/dev/null 2>&1
+zip -r "../bin/$ZIP_NAME" _locales action assets/icons assets/svgs generated/bundled*.js components salesforce/lightning-navigation.js salesforce/css settings core manifest.json -x "*/README.md" "action/popup/popup.js" "settings/options.js" "components/*/*.js" >/dev/null 2>&1
 cd ..
 zip "bin/$ZIP_NAME" LICENSE README.md 
 echo "Created $ZIP_NAME"

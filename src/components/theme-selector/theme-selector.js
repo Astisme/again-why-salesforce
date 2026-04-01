@@ -22,7 +22,10 @@ function ensureStyles() {
 	}
 	const link = document.createElement("link");
 	link.rel = "stylesheet";
-	link.href = new URL("./theme-selector.css", import.meta.url);
+	link.href = new URL(
+		"../components/theme-selector/theme-selector.css",
+		import.meta.url,
+	);
 	link.dataset.awsfThemeSelector = "true";
 	document.head?.append(link);
 	styleInjected = true;

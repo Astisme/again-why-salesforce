@@ -191,7 +191,7 @@ class ReviewSponsorAws extends HTMLElement {
 		const usageSettings = await getSettings([
 			EXTENSION_USAGE_DAYS,
 		]);
-		return usageSettings.enabled;
+		return usageSettings?.enabled;
 	}
 
 	/**
