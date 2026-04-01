@@ -23,7 +23,7 @@ function ensureStyles() {
 	const link = document.createElement("link");
 	link.rel = "stylesheet";
 	link.href = new URL(
-		"../components/theme-selector/theme-selector.css",
+		"../components/theme-selector/theme-selector.css", // this path takes into consideration that this will be called from ../../generated/
 		import.meta.url,
 	);
 	link.dataset.awsfThemeSelector = "true";
