@@ -57,7 +57,7 @@ import {
 	sendExtensionMessage,
 } from "../core/functions.js";
 import ensureTranslatorAvailability from "../core/translator.js";
-import "/components/theme-selector/theme-selector.js";
+import "../components/theme-selector/theme-selector.js";
 
 // no need to await as we do not need to call the translator
 // we only need it to translate the text on the screen and it may take the time it needs to do so

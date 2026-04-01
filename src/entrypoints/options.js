@@ -1,2 +1,2 @@
 "use strict";
-import "/settings/options.js";
+import "../settings/options.js";

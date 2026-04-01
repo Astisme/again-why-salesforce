@@ -1,2 +1,2 @@
 "use strict";
-import "/salesforce/content.js";
+import "../salesforce/content.js";

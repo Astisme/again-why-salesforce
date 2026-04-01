@@ -1,2 +1,2 @@
 "use strict";
-import "/action/popup/popup.js";
+import "../action/popup/popup.js";
