@@ -34,8 +34,6 @@ import { showToast } from "./toast.js";
 import { getCurrentHref, getModalHanger } from "./sf-elements.js";
 import { updateModalBodyOverflow } from "./modal-layout.js";
 
-export { updateModalBodyOverflow };
-
 let focusedIndex = 0;
 const managedLoggers = [];
 const manageTabsButtons = {};

@@ -14,7 +14,7 @@ import {
 } from "../core/constants.js";
 import { isExportAllowed } from "../core/functions.js";
 import { TabContainer } from "../core/tabContainer.js";
-import { bg_getSettings, bg_getStorage, bg_setStorage } from "./background.js";
+import { bg_getSettings, bg_getStorage, bg_setStorage } from "./storage.js";
 
 /**
  * Queries the browser for the current active tab in the current window.

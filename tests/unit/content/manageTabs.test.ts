@@ -95,7 +95,6 @@ type ManageTabsModule = {
 		fromIndex?: number | null,
 		toIndex?: number | null,
 	) => void;
-	updateModalBodyOverflow: (article?: ManageElement | null) => void;
 	updateTabAttributes: (options?: {
 		enable?: boolean;
 		tabAppendElement?: ManageElement | null;
@@ -1099,7 +1098,7 @@ Deno.test("manageTabs moves rows to the pinned boundary and refreshes row indexe
 	}
 });
 
-Deno.test("manageTabs updates action attributes and delegates modal overflow", async () => {
+Deno.test("manageTabs updates action attributes", async () => {
 	const fixture = await loadManageTabs();
 	const { dragIconCell, dropdownButton, row } = createRow(0);
 	const actionButton0 = new ManageElement("a");
@@ -1110,7 +1109,6 @@ Deno.test("manageTabs updates action attributes and delegates modal overflow", a
 	row.setQueryResult("td button[data-name=dropdownButton]", dropdownButton);
 	const tbody = new ManageTbody();
 	tbody.appendChild(row);
-	const article = new ManageElement("article");
 
 	try {
 		assertThrows(
@@ -1133,17 +1131,6 @@ Deno.test("manageTabs updates action attributes and delegates modal overflow", a
 		assertEquals(actionButton0.attributes.has("disabled"), false);
 		assertEquals(row.attributes.get("draggable"), "true");
 		assertEquals(dragIconCell.dataset.draggable, true as unknown as string);
-
-		assertThrows(
-			() => fixture.module.updateModalBodyOverflow(),
-			Error,
-			"error_required_params",
-		);
-		assertEquals(fixture.updateModalBodyOverflowCalls.length, 1);
-
-		fixture.module.updateModalBodyOverflow(article);
-		assertEquals(fixture.updateModalBodyOverflowCalls.length, 2);
-		assertEquals(fixture.updateModalBodyOverflowCalls[1], article);
 	} finally {
 		fixture.cleanup();
 	}

@@ -5,10 +5,12 @@ import { waitForCondition } from "../../async.test.ts";
 import {
 	bg_getCommandLinks,
 	bg_getSalesforceLanguage,
+} from "../../../src/background/background.js";
+import {
 	bg_getSettings,
 	bg_getStorage,
 	bg_setStorage,
-} from "../../../src/background/background.js";
+} from "../../../src/background/storage.js";
 import {
 	BROWSER,
 	CMD_EXPORT_ALL,

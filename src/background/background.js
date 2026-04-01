@@ -55,8 +55,6 @@ import { bg_getSalesforceLanguage as _bg_getSalesforceLanguage } from "./salesfo
 import { bg_getCommandLinks as _bg_getCommandLinks } from "./commands.js";
 import { setDefaultOrgStyle } from "./default-styles.js";
 
-export { bg_getSettings, bg_getStorage, bg_setStorage };
-
 /**
  * Retrieves the Salesforce language setting for the current user.
  * Attempts to fetch language info from Salesforce user data and stores it;

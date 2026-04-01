@@ -232,7 +232,7 @@ async function loadBackgroundUtilsModule(
 			"/core/constants.js",
 			"/core/functions.js",
 			"/core/tabContainer.js",
-			"./background.js",
+			"./storage.js",
 		]),
 		sourceMapLineMap,
 	});
