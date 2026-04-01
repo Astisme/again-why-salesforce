@@ -1,6 +1,6 @@
 "use strict";
 import {
-    BROWSER,
+	BROWSER,
 	LIGHTNING_FORCE_COM,
 	LOCALE_KEY,
 	MY_SALESFORCE_COM,

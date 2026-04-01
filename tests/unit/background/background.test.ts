@@ -2,10 +2,9 @@ import { mockStorage } from "../../mocks.test.ts";
 import { assert, assertEquals, assertFalse } from "@std/testing/asserts";
 import { waitForCondition } from "../../async.test.ts";
 
-import {
-	bg_getCommandLinks,
-	bg_getSalesforceLanguage,
-} from "../../../src/background/background.js";
+import "../../../src/background/background.js";
+import { bg_getCommandLinks } from "../../../src/background/commands.js";
+import { bg_getSalesforceLanguage } from "../../../src/background/salesforce-language.js";
 import {
 	bg_getSettings,
 	bg_getStorage,

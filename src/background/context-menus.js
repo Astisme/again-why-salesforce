@@ -57,7 +57,8 @@ import {
 	checkLaunchExport,
 } from "./utils.js";
 import { bg_getSettings } from "./storage.js";
-import { bg_getCommandLinks, bg_getSalesforceLanguage } from "./background.js";
+import { bg_getCommandLinks } from "./commands.js";
+import { bg_getSalesforceLanguage } from "./salesforce-language.js";
 
 let areMenuItemsVisible = false;
 

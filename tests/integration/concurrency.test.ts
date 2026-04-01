@@ -2,13 +2,13 @@ import {
 	type InternalMessage,
 	mockBrowser,
 	mockStorage,
-} from "../../mocks.test.ts";
+} from "../mocks.test.ts";
 import { assert, assertEquals } from "@std/testing/asserts";
-import { WHY_KEY } from "../../../src/core/constants.js";
+import { WHY_KEY } from "../../src/core/constants.js";
 import {
 	ensureAllTabsAvailability,
 	TabContainer,
-} from "../../../src/core/tabContainer.js";
+} from "../../src/core/tabContainer.js";
 
 type SendMessage = typeof mockBrowser.runtime.sendMessage;
 
