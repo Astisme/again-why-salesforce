@@ -22,6 +22,7 @@
 		"test-bg": "deno test --allow-read --coverage --parallel --quiet tests/background/",
 		"test-cmp": "deno test --allow-read --coverage --parallel --quiet tests/components/",
 		"test-sf": "deno test --allow-read --coverage --parallel --quiet tests/salesforce/*.test.ts",
+		"test-flakiness": "deno run --allow-run --allow-read --allow-write bin/analyze-test-flakiness.ts",
 
 		"fmt": "deno fmt",
 		"lint": "deno lint",
