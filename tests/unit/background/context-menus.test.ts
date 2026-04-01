@@ -10,7 +10,7 @@ import {
 	checkAddRemoveContextMenus,
 	refreshContextMenus,
 	resetContextMenuStateForTests,
-} from "/background/context-menus.js";
+} from "../../../src/background/context-menus.js";
 import {
 	BROWSER,
 	CMD_EXPORT_ALL,
@@ -25,7 +25,7 @@ import {
 	CXM_OPEN_OTHER_ORG,
 	CXM_PAGE_REMOVE_TAB,
 	CXM_PAGE_SAVE_TAB,
-} from "/core/constants.js";
+} from "../../../src/core/constants.js";
 
 /**
  * Sets the active mocked browser tab used by the background tests.

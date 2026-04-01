@@ -23,7 +23,7 @@ import {
 	TOAST_ERROR,
 	TOAST_SUCCESS,
 	USE_LIGHTNING_NAVIGATION,
-} from "/core/constants.js";
+} from "../core/constants.js";
 import {
 	getCssRule,
 	getCssSelector,
@@ -32,10 +32,13 @@ import {
 	getStyleSettings,
 	injectStyle,
 	performLightningRedirect,
-} from "/core/functions.js";
-import Tab from "/core/tab.js";
-import { ensureAllTabsAvailability, TabContainer } from "/core/tabContainer.js";
-import ensureTranslatorAvailability from "/core/translator.js";
+} from "../core/functions.js";
+import Tab from "../core/tab.js";
+import {
+	ensureAllTabsAvailability,
+	TabContainer,
+} from "../core/tabContainer.js";
+import ensureTranslatorAvailability from "../core/translator.js";
 
 import { showToast } from "./toast.js";
 import { getCurrentHref } from "./sf-elements.js";

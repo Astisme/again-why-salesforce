@@ -11,9 +11,9 @@ import {
 	WHAT_EXPORT_FROM_BG,
 	WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
 	WHAT_UPDATE_EXTENSION,
-} from "/core/constants.js";
-import { isExportAllowed } from "/core/functions.js";
-import { TabContainer } from "/core/tabContainer.js";
+} from "../core/constants.js";
+import { isExportAllowed } from "../core/functions.js";
+import { TabContainer } from "../core/tabContainer.js";
 import { bg_getSettings, bg_getStorage, bg_setStorage } from "./background.js";
 
 /**

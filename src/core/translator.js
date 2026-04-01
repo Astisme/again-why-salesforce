@@ -5,8 +5,8 @@ import {
 	USER_LANGUAGE,
 	WHAT_GET_SETTINGS,
 	WHAT_GET_SF_LANG,
-} from "/core/constants.js";
-import { sendExtensionMessage } from "/core/functions.js";
+} from "./constants.js";
+import { sendExtensionMessage } from "./functions.js";
 const _translationSecret = Symbol("translationSecret");
 let singletonTranslator = null;
 

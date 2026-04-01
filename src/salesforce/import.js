@@ -5,11 +5,14 @@ import {
 	HIDDEN_CLASS,
 	TOAST_ERROR,
 	TOAST_WARNING,
-} from "/core/constants.js";
-import { injectStyle } from "/core/functions.js";
-import Tab from "/core/tab.js";
-import { ensureAllTabsAvailability, TabContainer } from "/core/tabContainer.js";
-import ensureTranslatorAvailability from "/core/translator.js";
+} from "../core/constants.js";
+import { injectStyle } from "../core/functions.js";
+import Tab from "../core/tab.js";
+import {
+	ensureAllTabsAvailability,
+	TabContainer,
+} from "../core/tabContainer.js";
+import ensureTranslatorAvailability from "../core/translator.js";
 
 import {
 	generateCheckboxWithLabel,

@@ -53,14 +53,14 @@ import {
 	WHAT_TOGGLE_ORG,
 	WHAT_UPDATE_EXTENSION,
 	WHAT_UPDATE_TAB,
-} from "/core/constants.js";
+} from "../core/constants.js";
 import {
 	getInnerElementFieldBySelector,
 	getSettings,
-} from "/core/functions.js";
-import ensureTranslatorAvailability from "/core/translator.js";
-import Tab from "/core/tab.js";
-import { ensureAllTabsAvailability } from "/core/tabContainer.js";
+} from "../core/functions.js";
+import ensureTranslatorAvailability from "../core/translator.js";
+import Tab from "../core/tab.js";
+import { ensureAllTabsAvailability } from "../core/tabContainer.js";
 import { setupDragForUl } from "./dragHandler.js";
 
 import { showToast } from "./toast.js";

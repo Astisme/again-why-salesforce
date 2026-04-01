@@ -1,5 +1,5 @@
-import { WHAT_THEME } from "/core/constants.js";
-import { sendExtensionMessage } from "/core/functions.js";
+import { WHAT_THEME } from "../core/constants.js";
+import { sendExtensionMessage } from "../core/functions.js";
 const html = document.documentElement;
 let systemColorListener = null;
 

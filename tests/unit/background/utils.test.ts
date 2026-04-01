@@ -14,14 +14,14 @@ import {
 	bg_notify,
 	checkForUpdates,
 	checkLaunchExport,
-} from "/background/utils.js";
-import { ensureAllTabsAvailability } from "/core/tabContainer.js";
+} from "../../../src/background/utils.js";
+import { ensureAllTabsAvailability } from "../../../src/core/tabContainer.js";
 import {
 	BROWSER,
 	EXTENSION_VERSION,
 	NO_UPDATE_NOTIFICATION,
 	SETTINGS_KEY,
-} from "/core/constants.js";
+} from "../../../src/core/constants.js";
 
 const NativeURL = globalThis.URL;
 

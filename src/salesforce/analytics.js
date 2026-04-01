@@ -5,12 +5,12 @@ import {
 	ISFIREFOX,
 	PERM_CHECK,
 	PREVENT_ANALYTICS,
-} from "/core/constants.js";
+} from "../core/constants.js";
 import {
 	getSettings,
 	sendExtensionMessage,
 	setSettings,
-} from "/core/functions.js";
+} from "../core/functions.js";
 
 const technicalAndInteraction = "technicalAndInteraction";
 /**

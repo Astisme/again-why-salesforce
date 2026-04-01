@@ -181,7 +181,7 @@ self.onmessage = async (event: MessageEvent<WorkerRequest>) => {
 
 	try {
 		const { checkInsertAnalytics } = await import(
-			"/salesforce/analytics.js"
+			"../../../src/salesforce/analytics.js"
 		);
 		const checkInsertAnalyticsWithNullableParam = checkInsertAnalytics as (
 			options?: { isNewUser?: boolean | null },

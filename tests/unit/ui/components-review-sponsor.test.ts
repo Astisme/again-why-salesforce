@@ -13,7 +13,7 @@ import {
 	HIDDEN_CLASS,
 	SETTINGS_KEY,
 	WHY_KEY,
-} from "/core/constants.js";
+} from "../../../src/core/constants.js";
 
 const CHROME_REVIEW_LINK =
 	"https://chromewebstore.google.com/detail/again-why-salesforce/bceeoimjhgjbihanbiifgpndmkklajbi/reviews";

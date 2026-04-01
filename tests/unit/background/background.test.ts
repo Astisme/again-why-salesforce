@@ -8,7 +8,7 @@ import {
 	bg_getSettings,
 	bg_getStorage,
 	bg_setStorage,
-} from "/background/background.js";
+} from "../../../src/background/background.js";
 import {
 	BROWSER,
 	CMD_EXPORT_ALL,
@@ -38,8 +38,8 @@ import {
 	WHAT_START_TUTORIAL,
 	WHAT_THEME,
 	WHY_KEY,
-} from "/core/constants.js";
-import { getStyleSettings } from "/core/functions.js";
+} from "../../../src/core/constants.js";
+import { getStyleSettings } from "../../../src/core/functions.js";
 
 type EnabledSetting = {
 	id: string;

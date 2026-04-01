@@ -4,8 +4,8 @@ import {
 	LOCALE_KEY,
 	MY_SALESFORCE_COM,
 	MY_SALESFORCE_SETUP_COM,
-} from "/core/constants.js";
-import { isSalesforceHostname } from "/core/functions.js";
+} from "../core/constants.js";
+import { isSalesforceHostname } from "../core/functions.js";
 import { bg_getCurrentBrowserTab } from "./utils.js";
 import { bg_getStorage, bg_setStorage } from "./storage.js";
 

@@ -4,8 +4,11 @@ import {
 	mockStorage,
 } from "../../mocks.test.ts";
 import { assert, assertEquals } from "@std/testing/asserts";
-import { WHY_KEY } from "/core/constants.js";
-import { ensureAllTabsAvailability, TabContainer } from "/core/tabContainer.js";
+import { WHY_KEY } from "../../../src/core/constants.js";
+import {
+	ensureAllTabsAvailability,
+	TabContainer,
+} from "../../../src/core/tabContainer.js";
 
 type SendMessage = typeof mockBrowser.runtime.sendMessage;
 

@@ -129,7 +129,7 @@ Deno.test("ThemeSelectorAws", async (t) => {
 	const testLocalStorage = createLocalStorageMock();
 	globalThis.localStorage = testLocalStorage;
 	installCustomElementsRegistry(document);
-	await import("/components/theme-selector/theme-selector.js");
+	await import("../../../src/components/theme-selector/theme-selector.js");
 
 	const restoreGlobals = () => {
 		globalThis.setTimeout = originalSetTimeout;

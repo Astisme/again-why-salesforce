@@ -6,7 +6,7 @@ import {
 	MY_SALESFORCE_SETUP_COM,
 	SALESFORCE_ID_PATTERN,
 	SETUP_LIGHTNING,
-} from "/core/constants.js";
+} from "./constants.js";
 
 const _tabSecret = Symbol("tabSecret");
 

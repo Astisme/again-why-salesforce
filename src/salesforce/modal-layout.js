@@ -1,5 +1,5 @@
 "use strict";
-import { HIDDEN_CLASS } from "/core/constants.js";
+import { HIDDEN_CLASS } from "../core/constants.js";
 
 const MODAL_BODY_SELECTOR =
 	".modal-body.scrollable.slds-modal__content.slds-p-around_medium";

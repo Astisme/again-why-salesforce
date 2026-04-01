@@ -121,7 +121,9 @@ Deno.test("ThemeSelectorAws reuses an existing stylesheet link", async () => {
 		existingLink.setAttribute("data-awsf-theme-selector", "true");
 		document.head.append(existingLink);
 
-		await import("/components/theme-selector/theme-selector.js");
+		await import(
+			"../../../src/components/theme-selector/theme-selector.js"
+		);
 
 		const component = document.createElement(
 			"theme-selector-aws",

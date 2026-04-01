@@ -6,11 +6,11 @@ import {
 	ISEDGE,
 	ISFIREFOX,
 	ISSAFARI,
-} from "/core/constants.js";
-import { getSettings, injectStyle } from "/core/functions.js";
-import { ensureAllTabsAvailability } from "/core/tabContainer.js";
-import ensureTranslatorAvailability from "/core/translator.js";
-import { generateReviewSponsorSvgs } from "/salesforce/generator.js";
+} from "../../core/constants.js";
+import { getSettings, injectStyle } from "../../core/functions.js";
+import { ensureAllTabsAvailability } from "../../core/tabContainer.js";
+import ensureTranslatorAvailability from "../../core/translator.js";
+import { generateReviewSponsorSvgs } from "../../salesforce/generator.js";
 
 const REVIEW_TAB_THRESHOLD = 8;
 const SPONSOR_TAB_THRESHOLD = 16;

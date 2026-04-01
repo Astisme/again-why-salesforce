@@ -308,7 +308,7 @@ Deno.test("themeHandler direct module coverage", async () => {
 	);
 	const originalMatchMedia = globalThis.matchMedia;
 	try {
-		const module = await import("/action/themeHandler.js");
+		const module = await import("../../../src/action/themeHandler.js");
 		const media = new MockMediaQueryList(false);
 		globalThis.matchMedia = () => media as unknown as MediaQueryList;
 		localStorage.setItem("userTheme", "system");

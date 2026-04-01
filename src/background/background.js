@@ -32,9 +32,9 @@ import {
 	WHAT_START_TUTORIAL,
 	WHAT_STARTUP,
 	WHAT_THEME,
-} from "/core/constants.js";
-import { openSettingsPage } from "/core/functions.js";
-import Tab from "/core/tab.js";
+} from "../core/constants.js";
+import { openSettingsPage } from "../core/functions.js";
+import Tab from "../core/tab.js";
 import {
 	bg_getCurrentBrowserTab,
 	bg_notify,

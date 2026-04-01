@@ -9,9 +9,9 @@ import {
 	SALESFORCE_SETUP_HOME_MINI,
 	SETUP_LIGHTNING,
 	WHAT_GET_BROWSER_TAB,
-} from "/core/constants.js";
-import { getSettings, sendExtensionMessage } from "/core/functions.js";
-import ensureTranslatorAvailability from "/core/translator.js";
+} from "../../core/constants.js";
+import { getSettings, sendExtensionMessage } from "../../core/functions.js";
+import ensureTranslatorAvailability from "../../core/translator.js";
 import "../themeHandler.js";
 
 /**

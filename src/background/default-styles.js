@@ -7,7 +7,7 @@ import {
 	PREVENT_DEFAULT_OVERRIDE,
 	TAB_STYLE_BACKGROUND,
 	TAB_STYLE_BOLD,
-} from "/core/constants.js";
+} from "../core/constants.js";
 import { bg_getStyleSettings, bg_setStorage } from "./storage.js";
 
 /**

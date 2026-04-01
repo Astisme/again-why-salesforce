@@ -29,7 +29,7 @@ import {
 	TAB_STYLE_TOP,
 	TAB_STYLE_UNDERLINE,
 	USE_LIGHTNING_NAVIGATION,
-} from "/core/constants.js";
+} from "../../../src/core/constants.js";
 import {
 	areFramePatternsAllowed,
 	calculateReadingTime,
@@ -54,7 +54,7 @@ import {
 	requestFramePatternsPermission,
 	sendExtensionMessage,
 	sendExtensionMessages,
-} from "/core/functions.js";
+} from "../../../src/core/functions.js";
 import { installMockDom } from "../../happydom.test.ts";
 
 Deno.test("sendExtensionMessage returns promise if no callback", async () => {

@@ -1,5 +1,5 @@
-import { HIDDEN_CLASS } from "/core/constants.js";
-import { handleSwitchColorTheme } from "/action/themeHandler.js";
+import { HIDDEN_CLASS } from "../../core/constants.js";
+import { handleSwitchColorTheme } from "../../action/themeHandler.js";
 
 const html = document.documentElement;
 const invisible = "invisible";

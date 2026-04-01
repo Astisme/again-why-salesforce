@@ -8,7 +8,7 @@ import {
 	TUTORIAL_CLOSE_EVENT,
 	TUTORIAL_KEY,
 	WHY_KEY,
-} from "/core/constants.js";
+} from "../core/constants.js";
 import cssColorNames from "./css-color-names.json" with { type: "json" };
 
 /**
