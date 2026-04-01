@@ -1,4 +1,5 @@
 "use strict";
+import { BROWSER } from "../core/constants.js";
 
 /**
  * Retrieves all or specified command shortcuts available in the browser extension.
@@ -11,11 +12,10 @@
  * @return {Promise<Array<Object>>|void} Promise resolving to command objects or void if callback is provided.
  */
 export async function bg_getCommandLinks(
-	browserApi,
 	commands = null,
 	callback = null,
 ) {
-	const allCommands = await browserApi.commands.getAll();
+	const allCommands = await BROWSER.commands.getAll();
 	const availableCommands = allCommands.filter((singleCommand) =>
 		singleCommand.shortcut !== ""
 	);

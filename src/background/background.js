@@ -51,34 +51,9 @@ import {
 	bg_getStyleSettings,
 	bg_setStorage,
 } from "./storage.js";
-import { bg_getSalesforceLanguage as _bg_getSalesforceLanguage } from "./salesforce-language.js";
-import { bg_getCommandLinks as _bg_getCommandLinks } from "./commands.js";
+import { bg_getSalesforceLanguage } from "./salesforce-language.js";
+import { bg_getCommandLinks } from "./commands.js";
 import { setDefaultOrgStyle } from "./default-styles.js";
-
-/**
- * Retrieves the Salesforce language setting for the current user.
- * Attempts to fetch language info from Salesforce user data and stores it;
- * falls back to stored locale if unavailable.
- *
- * @param {Function|null} [callback=null] - Optional callback to receive the language.
- * @return {Promise<string|any>|void} The language code or nothing if callback is provided.
- */
-export function bg_getSalesforceLanguage(callback = null) {
-	return _bg_getSalesforceLanguage(BROWSER, callback);
-}
-
-/**
- * Retrieves all or specified command shortcuts available in the browser extension.
- * Filters commands to those that have assigned shortcuts.
- * Supports optional callback or returns a Promise.
- *
- * @param {string|string[]|null} [commands=null] - One or more command names to filter. If null, returns all commands with shortcuts.
- * @param {Function|null} [callback=null] - Optional callback to receive the commands.
- * @return {Promise<Array<Object>>|void} Promise resolving to command objects or void if callback is provided.
- */
-export function bg_getCommandLinks(commands = null, callback = null) {
-	return _bg_getCommandLinks(BROWSER, commands, callback);
-}
 
 /**
  * Checks whether the object passed as contains is contained in the granted permissions.

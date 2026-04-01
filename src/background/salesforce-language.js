@@ -1,5 +1,6 @@
 "use strict";
 import {
+    BROWSER,
 	LIGHTNING_FORCE_COM,
 	LOCALE_KEY,
 	MY_SALESFORCE_COM,
@@ -91,11 +92,10 @@ async function getCurrentUserInfo(browserApi, currentUrl) {
  * @return {Promise<string|any>|void} The language code or nothing if callback is provided.
  */
 export async function bg_getSalesforceLanguage(
-	browserApi,
 	callback = null,
 ) {
 	const currentUrl = (await bg_getCurrentBrowserTab())?.url;
-	const language = (await getCurrentUserInfo(browserApi, currentUrl))
+	const language = (await getCurrentUserInfo(BROWSER, currentUrl))
 		?.language;
 	if (language == null) {
 		return bg_getStorage(callback, LOCALE_KEY);
