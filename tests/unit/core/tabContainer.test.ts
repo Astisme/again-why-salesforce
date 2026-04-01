@@ -2349,6 +2349,19 @@ await Deno.test("TabContainer - Update Tab", async () => {
 });
 
 await Deno.test("TabContainer - Sort Tabs", async (t) => {
+	await t.step(
+		"invalid sort key throws translatable error message",
+		async () => {
+			await container.setDefaultTabs();
+			const invalidSortBy = "not_valid_sort_key";
+			assertThrows(
+				() => container.sort({ sortBy: invalidSortBy }, false),
+				Error,
+				`error_tab_unexpected_keys ${invalidSortBy}`,
+			);
+		},
+	);
+
 	await t.step("By label ascending", async () => {
 		await container.setDefaultTabs();
 		assertEquals(container.length, 3);

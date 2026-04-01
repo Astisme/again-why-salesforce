@@ -264,7 +264,7 @@ class TranslationService {
 			return cacheMessage;
 		}
 		if (
-			key.includes(" ") &&
+			key.includes(connector) &&
 			cacheMessage == null
 		) {
 			const translation = await this.translate(key.split(/\s+/));

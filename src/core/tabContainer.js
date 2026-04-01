@@ -128,7 +128,7 @@ export class TabContainer extends Array {
 	 */
 	static async #initialize(instance) {
 		if (instance == null) {
-			throw new Error("error_tabcont_initialize");
+			throw new Error("error_tabcont_not_initialized");
 		}
 		const {
 			[TabContainer.keyTabs]: savedTabs,
@@ -179,9 +179,9 @@ export class TabContainer extends Array {
 			translator = await ensureTranslatorAvailability();
 			if (!await TabContainer.#initialize(instance)) {
 				throw new Error(
-					await translator.translate([
-						"error_tabcont_initialize",
-					]),
+					await translator.translate(
+						"error_tabcont_not_initialized",
+					),
 				);
 			}
 			singletonAllTabs = instance;
@@ -445,9 +445,9 @@ export class TabContainer extends Array {
 		if (this.length <= initialLength) {
 			// nothing was added
 			const { msg } = this.#validateItem(tab);
-			throw new Error(`${await translator.translate([
+			throw new Error(`${await translator.translate(
 				msg,
-			])} ${JSON.stringify(tab)}`);
+			)} ${JSON.stringify(tab)}`);
 		}
 		return sync ? this.syncTabs() : this.checkSetSorted();
 	}
@@ -1309,7 +1309,7 @@ export class TabContainer extends Array {
 		// Check for unexpected keys
 		if (!Tab.allowedKeys.has(sortBy)) {
 			throw new Error(
-				["error_tab_unexpected_keys", sortBy],
+				`error_tab_unexpected_keys ${sortBy}`,
 			);
 		}
 		// backup pinned Tabs (do not sort them)
@@ -1586,7 +1586,7 @@ function getAllTabs_async() {
  */
 function getAllTabs() {
 	if (singletonAllTabs == null || singletonAllTabs instanceof Promise) {
-		throw new Error(["singleton", "error_not_initilized"]);
+		throw new Error("error_tabcont_not_initialized");
 	}
 	return singletonAllTabs;
 }
