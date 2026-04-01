@@ -1,6 +1,8 @@
 /// <reference lib="dom" />
 // deno-lint-ignore-file no-explicit-any
-import manifest from "/manifest/template-manifest.json" with { type: "json" };
+import manifest from "../src/manifest/template-manifest.json" with {
+	type: "json",
+};
 enum StorageKeys {
 	WHY_KEY = "againWhySalesforce",
 	LOCALE_KEY = "_locale",

@@ -571,13 +571,13 @@
 		"message": "En Tab med denna URL har redan sparats!",
 		"description": "[fel] Användaren försökte spara en redan favoriterad Tab"
 	},
-	"error_tabcont_initialize": {
-		"message": "Kan inte initialiseras med",
-		"description": ""
-	},
 	"error_tabcont_invalid_tabs": {
 		"message": "Ogiltiga Tabbar upptäcktes.\nFörsta förekomsten:",
 		"description": "[error] ogiltiga Tabbar skickades in"
+	},
+	"error_tabcont_not_initialized": {
+		"message": "tabContainer har inte initierats ännu.",
+		"description": "[fel] TabContainer var inte redo"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "Använd TabContainer.create() istället för new TabContainer() för att använda klassen TabContainer",

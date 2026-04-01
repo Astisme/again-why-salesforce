@@ -5,11 +5,14 @@ import {
 	HIDDEN_CLASS,
 	TOAST_ERROR,
 	TOAST_WARNING,
-} from "/constants.js";
-import { injectStyle } from "/functions.js";
-import Tab from "/tab.js";
-import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
-import ensureTranslatorAvailability from "/translator.js";
+} from "../core/constants.js";
+import { injectStyle } from "../core/functions.js";
+import Tab from "../core/tab.js";
+import {
+	ensureAllTabsAvailability,
+	TabContainer,
+} from "../core/tabContainer.js";
+import ensureTranslatorAvailability from "../core/translator.js";
 
 import {
 	generateCheckboxWithLabel,
@@ -19,12 +22,9 @@ import {
 	generateSldsModalWithTabList,
 	MODAL_ID,
 } from "./generator.js";
-import {
-	getModalHanger,
-	getSetupTabUl,
-	sf_afterSet,
-	showToast,
-} from "./content.js";
+import { sf_afterSet } from "./content.js";
+import { showToast } from "./toast.js";
+import { getModalHanger, getSetupTabUl } from "./sf-elements.js";
 
 const IMPORT_ID = `${EXTENSION_NAME}-import`;
 const IMPORT_FILE_ID = `${IMPORT_ID}-file`;

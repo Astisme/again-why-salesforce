@@ -16,20 +16,24 @@ import {
 	TUTORIAL_EVENT_ACTION_UNFAVOURITE,
 	WHAT_ADD,
 	WHAT_GET_COMMANDS,
-} from "/constants.js";
-import { getSettings, injectStyle, sendExtensionMessage } from "/functions.js";
-import Tab from "/tab.js";
-import { ensureAllTabsAvailability } from "/tabContainer.js";
-import ensureTranslatorAvailability from "/translator.js";
+} from "../core/constants.js";
+import {
+	getSettings,
+	injectStyle,
+	sendExtensionMessage,
+} from "../core/functions.js";
+import Tab from "../core/tab.js";
+import { ensureAllTabsAvailability } from "../core/tabContainer.js";
+import ensureTranslatorAvailability from "../core/translator.js";
 
 import {
-	getCurrentHref,
 	getIsCurrentlyOnSavedTab,
 	getWasOnSavedTab,
 	isOnSavedTab,
 	performActionOnTabs,
-	showToast,
 } from "./content.js";
+import { showToast } from "./toast.js";
+import { getCurrentHref } from "./sf-elements.js";
 
 export const FAVOURITE_BUTTON_ID = `${EXTENSION_NAME}-button`;
 export const STAR_ID = `${EXTENSION_NAME}-star`;

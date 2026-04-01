@@ -571,13 +571,13 @@
 		"message": "આ URL સાથેનું Tab પહેલેથી જ સંગ્રહિત છે!",
 		"description": "[error] વપરાશકર્તાએ પહેલેથી જ સંગ્રહિત Tab સંગ્રહિત કરવાનો પ્રયાસ કર્યો"
 	},
-	"error_tabcont_initialize": {
-		"message": "સાથે આરંભી શકાતું નથી",
-		"description": ""
-	},
 	"error_tabcont_invalid_tabs": {
 		"message": "અમાન્ય Tab(ઓ) શોધવામાં આવ્યા.\nપ્રથમ ઘટનાનું દર્શન:",
 		"description": "[error] અમાન્ય Tab ને મોકલવામાં આવ્યા"
+	},
+	"error_tabcont_not_initialized": {
+		"message": "tabContainer હજી પ્રારંભ કરવામાં આવ્યું નથી.",
+		"description": "[ભૂલ] TabContainer તૈયાર નહોતું"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "new TabContainer() ની જગ્યાએ TabContainer.create() નો ઉપયોગ કરો",

@@ -571,12 +571,13 @@
 		"message": "この URL を持つ Tab は既に保存されています！",
 		"description": "[エラー] ユーザーが既にブックマークされている Tab を保存しようとしました"
 	},
-	"error_tabcont_initialize": {
-		"message": "これでは初期化できません："
-	},
 	"error_tabcont_invalid_tabs": {
 		"message": "無効な Tabs が検出されました。\n最初の出現：",
 		"description": "[error] 無効な Tabs が渡されました。"
+	},
+	"error_tabcont_not_initialized": {
+		"message": "tabContainer はまだ初期化されていませんでした。",
+		"description": "[エラー] TabContainer の準備ができていませんでした"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "新しい TabContainer() の代わりに TabContainer.create() を使用してください",

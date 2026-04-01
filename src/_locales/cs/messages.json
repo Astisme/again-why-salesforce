@@ -571,13 +571,13 @@
 		"message": "Tab s touto URL je již uložen!",
 		"description": "[error] Uživatel se pokusil uložit již uložený Tab"
 	},
-	"error_tabcont_initialize": {
-		"message": "Nelze inicializovat s",
-		"description": ""
-	},
 	"error_tabcont_invalid_tabs": {
 		"message": "Byly nalezeny neplatné Tab(y).\nPrvní výskyt:",
 		"description": "[error] byly předány neplatné Taby"
+	},
+	"error_tabcont_not_initialized": {
+		"message": "tabContainer ještě nebyl inicializován.",
+		"description": "[chyba] TabContainer nebyl připraven"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "Použijte TabContainer.create() místo new TabContainer()",

@@ -88,15 +88,67 @@ function getLocalImportNames(clause: string) {
 }
 
 /**
+ * Normalizes an import specifier to a stable matching key for replacement rules.
+ * Relative specifiers that resolve under `src/` become slash-prefixed specifiers.
+ *
+ * @param {string} specifier Raw import specifier from source code or test options.
+ * @param {URL} modulePath Source file path used to resolve relative imports.
+ * @return {string} Normalized import key.
+ */
+function normalizeImportSpecifier(specifier: string, modulePath: URL) {
+	if (specifier.startsWith("/")) {
+		return specifier;
+	}
+	if (!specifier.startsWith(".")) {
+		return specifier;
+	}
+	const resolvedUrl = new URL(specifier, modulePath);
+	const sourceRootMarker = "/src/";
+	const sourceRootIndex = resolvedUrl.pathname.indexOf(sourceRootMarker);
+	if (sourceRootIndex === -1) {
+		return resolvedUrl.href;
+	}
+	const sourceRelativePath = resolvedUrl.pathname.slice(
+		sourceRootIndex + sourceRootMarker.length,
+	);
+	return `/${sourceRelativePath}`;
+}
+
+/**
+ * Expands replacement specifiers to include their normalized equivalents.
+ *
+ * @param {Set<string> | null} importsToReplace Explicit specifiers to replace.
+ * @param {URL} modulePath Source file path used to resolve relative imports.
+ * @return {Set<string> | null} Expanded replacement set.
+ */
+function normalizeImportsToReplace(
+	importsToReplace: Set<string> | null,
+	modulePath: URL,
+) {
+	if (importsToReplace == null) {
+		return null;
+	}
+	const normalizedImportsToReplace = new Set<string>(importsToReplace);
+	for (const specifier of importsToReplace) {
+		normalizedImportsToReplace.add(
+			normalizeImportSpecifier(specifier, modulePath),
+		);
+	}
+	return normalizedImportsToReplace;
+}
+
+/**
  * Replaces matching import statements with whitespace while preserving the original layout.
  *
  * @param {string} source Module source code.
  * @param {Set<string> | null} importsToReplace Import specifiers to replace. When omitted, all imports are replaced.
+ * @param {URL} modulePath Source file path used to resolve relative imports.
  * @return {{ importedNames: Set<string>; source: string; }} Transformed source and the imported local names that were replaced.
  */
 function replaceImports(
 	source: string,
 	importsToReplace: Set<string> | null,
+	modulePath: URL,
 ) {
 	const importedNames = new Set<string>();
 	const importExpression =
@@ -110,9 +162,19 @@ function replaceImports(
 			sideEffectSpecifier: string | undefined,
 		) => {
 			const specifier = fromSpecifier ?? sideEffectSpecifier;
+			const normalizedSpecifier = specifier == null
+				? null
+				: normalizeImportSpecifier(specifier, modulePath);
 			if (
 				specifier == null ||
-				(importsToReplace != null && !importsToReplace.has(specifier))
+				(
+					importsToReplace != null &&
+					!importsToReplace.has(specifier) &&
+					(
+						normalizedSpecifier == null ||
+						!importsToReplace.has(normalizedSpecifier)
+					)
+				)
 			) {
 				return match;
 			}
@@ -357,10 +419,15 @@ export async function loadIsolatedModule<
 	const source = transformSource == null
 		? rawSource
 		: transformSource(rawSource);
+	const normalizedImportsToReplace = normalizeImportsToReplace(
+		importsToReplace ?? null,
+		modulePath,
+	);
 	const dependencyMap = dependencies ?? {} as TDependencies;
 	const { importedNames, source: sourceWithoutImports } = replaceImports(
 		source,
-		importsToReplace ?? null,
+		normalizedImportsToReplace,
+		modulePath,
 	);
 	const { exportedNames, source: sourceWithoutExports } = stripExports(
 		sourceWithoutImports,

@@ -21,13 +21,18 @@ Please remember that this project is entirely funded by **the support of its use
 1. Improved parallel tasks for faster responsiveness
 2. Better use of Promises all around the extension
 
+## 🐛 Fixed
+
+1. Settings and Popup now use bundled js files for direct comparison between development environment and production environment
+
 ## 💥 Removed
 
 1. Removed use of Analytics Date due to previous version use of a standalone setting (EXTENSION_LAST_ACTIVE_DAY)
 
 ## 🧪 Tests
 
-1. Added tests for this new functionality
+1. Added tests for removal of analytics date
+2. Added tests for build step
 
 # v2.2.3
 

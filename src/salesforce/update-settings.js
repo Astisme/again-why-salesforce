@@ -1,6 +1,13 @@
 "use strict";
-import { EXTENSION_LAST_ACTIVE_DAY, EXTENSION_USAGE_DAYS } from "/constants.js";
-import { getSettings, getTodayDateKey, setSettings } from "/functions.js";
+import {
+	EXTENSION_LAST_ACTIVE_DAY,
+	EXTENSION_USAGE_DAYS,
+} from "../core/constants.js";
+import {
+	getSettings,
+	getTodayDateKey,
+	setSettings,
+} from "../core/functions.js";
 
 /**
  * Builds the object that will be saved in settings
