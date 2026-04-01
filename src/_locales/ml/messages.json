@@ -571,12 +571,13 @@
 		"message": "ഈ URL ഉള്ള ഒരു Tab ഇതിനകം സംരക്ഷിച്ചിട്ടുണ്ട്!",
 		"description": "[പിശക്] ഉപയോക്താവ് ഇതിനകം ഇഷ്ടപ്പെട്ട ഒരു Tab സംരക്ഷിക്കാൻ ശ്രമിച്ചു"
 	},
-	"error_tabcont_initialize": {
-		"message": "ഇത് കൊണ്ടു ആരംഭിക്കാന്‍ കഴിയില്ല"
-	},
 	"error_tabcont_invalid_tabs": {
 		"message": "അസാധുവായ Tab(കള്‍) കണ്ടെത്തി.\nആദ്യ സംഭവനം:",
 		"description": "[error] അസാധുവായ Tabs നല്‍കിയിട്ടുണ്ട്"
+	},
+	"error_tabcont_not_initialized": {
+		"message": "tabContainer ഇതുവരെ സജ്ജീകരിച്ചിട്ടില്ല.",
+		"description": "[പിശക്] TabContainer തയ്യാറായിരുന്നില്ല"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "TabContainer ക്ലാസ് ഉപയോഗിക്കുന്നതിന് new TabContainer() ന് പകരം TabContainer.create() ഉപയോഗിക്കുക",

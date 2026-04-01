@@ -571,13 +571,13 @@
 		"message": "En Tab med denne URL er allerede gemt!",
 		"description": "[fejl] Brugeren forsøgte at gemme en allerede gemt Tab"
 	},
-	"error_tabcont_initialize": {
-		"message": "Kan ikke initialiseres med",
-		"description": ""
-	},
 	"error_tabcont_invalid_tabs": {
 		"message": "Ugyldige Tab(s) fundet.\nFørste forekomst:",
 		"description": "[error] ugyldige Tabs blev modtaget"
+	},
+	"error_tabcont_not_initialized": {
+		"message": "tabContainer var endnu ikke initialiseret.",
+		"description": "[fejl] TabContainer var ikke klar"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "Brug TabContainer.create() i stedet for new TabContainer()",

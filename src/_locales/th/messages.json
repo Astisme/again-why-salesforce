@@ -571,13 +571,13 @@
 		"message": "Tab ที่มี URL นี้ได้ถูกบันทึกแล้ว!",
 		"description": "[ข้อผิดพลาด] ผู้ใช้พยายามบันทึก Tab ที่ชื่นชอบแล้ว"
 	},
-	"error_tabcont_initialize": {
-		"message": "ไม่สามารถเริ่มต้นด้วย",
-		"description": ""
-	},
 	"error_tabcont_invalid_tabs": {
 		"message": "พบ Tab ที่ไม่ถูกต้อง.\nการเกิดขึ้นครั้งแรก:",
 		"description": "[error] ส่ง Tab ที่ไม่ถูกต้องมา"
+	},
+	"error_tabcont_not_initialized": {
+		"message": "ยังไม่ได้เริ่มต้น tabContainer",
+		"description": "[ข้อผิดพลาด] TabContainer ยังไม่พร้อมใช้งาน"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "ใช้ TabContainer.create() แทน new TabContainer() เพื่อใช้คลาส TabContainer",

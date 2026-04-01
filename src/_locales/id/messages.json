@@ -571,12 +571,13 @@
 		"message": "Tab dengan URL ini sudah disimpan!",
 		"description": "[error] Pengguna mencoba menyimpan Tab yang sudah disimpan"
 	},
-	"error_tabcont_initialize": {
-		"message": "Tidak dapat menginisialisasi dengan"
-	},
 	"error_tabcont_invalid_tabs": {
 		"message": "Tabs tidak valid terdeteksi.\nKejadian pertama:",
 		"description": "[error] Tabs yang tidak valid dikirim."
+	},
+	"error_tabcont_not_initialized": {
+		"message": "tabContainer belum diinisialisasi.",
+		"description": "[kesalahan] TabContainer belum siap"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "Gunakan TabContainer.create() alih-alih new TabContainer()",

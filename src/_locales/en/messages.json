@@ -571,13 +571,13 @@
 		"message": "A $tab with this $url has already been saved!",
 		"description": "[error] The user tried to save an already favourited $tab"
 	},
-	"error_tabcont_initialize": {
-		"message": "Cannot initialize with",
-		"description": "[error] the TabContainer could not be initialized due to an internal error"
-	},
 	"error_tabcont_invalid_tabs": {
 		"message": "Invalid Tab(s) detected.\nFirst occurrence:",
 		"description": "[error] invalid $tabs were passed"
+	},
+	"error_tabcont_not_initialized": {
+		"message": "tabContainer was not yet initialized.",
+		"description": "[error] the TabContainer was not ready"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "Use TabContainer.create() instead of new TabContainer()",
