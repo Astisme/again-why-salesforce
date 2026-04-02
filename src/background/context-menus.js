@@ -453,7 +453,7 @@ async function createMenuItems(force = false) {
 		const menuItems = getMenuItemsClone();
 		for (const item of menuItems) {
 			item.title = await translator.translate(item.title);
-			await BROWSER.contextMenus.create(item);
+			BROWSER.contextMenus.create(item);
 			if (BROWSER.runtime.lastError) {
 				console.trace();
 				throw new Error(BROWSER.runtime.lastError.message);
