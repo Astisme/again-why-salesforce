@@ -132,7 +132,7 @@ async function loadNotSalesforceSetupModule({
 			POPUP_OPEN_SETUP: "popup_open_setup",
 			POPUP_SETUP_NEW_TAB: "popup_setup_new_tab",
 			SALESFORCE_LIGHTNING_PATTERN:
-				/^https:\/\/[a-z0-9.-]+\.lightning\.force\.com.*$/i,
+				/^https:\/\/[a-z0-9.-]+\.lightning\.force\.com(?::\d+)?(?:\/|$).*/i,
 			SALESFORCE_SETUP_HOME_MINI: "SetupOneHome/home",
 			SETUP_LIGHTNING: "/lightning/setup/",
 			WHAT_GET_BROWSER_TAB: "get-browser-tab",
@@ -234,6 +234,22 @@ Deno.test("notSalesforceSetup updates the current tab when configured to reuse i
 		assertEquals(fixture.creates, []);
 		assertEquals(fixture.sendMessages, []);
 		assertEquals(fixture.counters.closeCalls, 1);
+	} finally {
+		fixture.cleanup();
+	}
+});
+
+Deno.test("notSalesforceSetup keeps login flow for lightning.force.com lookalike domains", async () => {
+	const fixture = await loadNotSalesforceSetupModule({
+		pageUrl:
+			"https://acme.lightning.force.com.attacker.test/lightning/page/home",
+		settings: [],
+	});
+
+	try {
+		assertEquals(fixture.login.classList.contains("hidden"), false);
+		assertEquals(fixture.setup.href, "#");
+		assertEquals(fixture.counters.translatorCalls, 1);
 	} finally {
 		fixture.cleanup();
 	}
