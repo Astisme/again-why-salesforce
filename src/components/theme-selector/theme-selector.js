@@ -1,5 +1,5 @@
-import { HIDDEN_CLASS } from "/core/constants.js";
-import { handleSwitchColorTheme } from "/action/themeHandler.js";
+import { HIDDEN_CLASS } from "../../core/constants.js";
+import { handleSwitchColorTheme } from "../../action/themeHandler.js";
 
 const html = document.documentElement;
 const invisible = "invisible";
@@ -22,7 +22,10 @@ function ensureStyles() {
 	}
 	const link = document.createElement("link");
 	link.rel = "stylesheet";
-	link.href = new URL("./theme-selector.css", import.meta.url);
+	link.href = new URL(
+		"../components/theme-selector/theme-selector.css", // this path takes into consideration that this will be called from ../../generated/
+		import.meta.url,
+	);
 	link.dataset.awsfThemeSelector = "true";
 	document.head?.append(link);
 	styleInjected = true;

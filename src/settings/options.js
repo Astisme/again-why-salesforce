@@ -1,5 +1,7 @@
 import {
+	EXTENSION_LAST_ACTIVE_DAY,
 	EXTENSION_NAME,
+	EXTENSION_USAGE_DAYS,
 	FOLLOW_SF_LANG,
 	GENERIC_PINNED_TAB_STYLE_KEY,
 	GENERIC_TAB_STYLE_KEY,
@@ -36,7 +38,7 @@ import {
 	USE_LIGHTNING_NAVIGATION,
 	USER_LANGUAGE,
 	WHAT_SET,
-} from "/core/constants.js";
+} from "../core/constants.js";
 import {
 	areFramePatternsAllowed,
 	getCssRule,
@@ -53,9 +55,9 @@ import {
 	requestExportPermission,
 	requestFramePatternsPermission,
 	sendExtensionMessage,
-} from "/core/functions.js";
-import ensureTranslatorAvailability from "/core/translator.js";
-import "/components/theme-selector/theme-selector.js";
+} from "../core/functions.js";
+import ensureTranslatorAvailability from "../core/translator.js";
+import "../components/theme-selector/theme-selector.js";
 
 // no need to await as we do not need to call the translator
 // we only need it to translate the text on the screen and it may take the time it needs to do so
@@ -948,6 +950,10 @@ function setCurrentChoice(setting) {
 			}
 			break;
 		}
+		case EXTENSION_USAGE_DAYS:
+		case EXTENSION_LAST_ACTIVE_DAY:
+			// no-op
+			break;
 		default:
 			console.error(`Unmatched setting id: ${setting.id}`);
 			break;

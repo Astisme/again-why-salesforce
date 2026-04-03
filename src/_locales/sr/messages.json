@@ -571,13 +571,13 @@
 		"message": "Tab са овим URL-ом је већ сачуван!",
 		"description": "[грешка] Корисник је покушао да сачува Tab који је већ био омиљен"
 	},
-	"error_tabcont_initialize": {
-		"message": "Ne može se inicijalizovati sa",
-		"description": ""
-	},
 	"error_tabcont_invalid_tabs": {
 		"message": "Pronađeni su nevažeći Tab(ovi).\nPrvi slučaj:",
 		"description": "[error] prosleđeni su nevažeći Tabovi"
+	},
+	"error_tabcont_not_initialized": {
+		"message": "tabContainer још није иницијализован.",
+		"description": "[грешка] TabContainer није био спреман"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "Користите TabContainer.create() уместо new TabContainer() да бисте користили класу TabContainer",

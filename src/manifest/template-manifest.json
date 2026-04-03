@@ -1,7 +1,7 @@
 {
 	"manifest_version": 3,
 	"name": "__MSG_extension_label__",
-	"version": "2.2.3",
+	"version": "2.2.4.0",
 	"default_locale": "en",
 	"description": "__MSG_extension_description__",
 	"permissions": [
@@ -27,7 +27,7 @@
 				"*://*.lightning.force.com/lightning/setup/*"
 			],
 			"js": [
-				"salesforce/bundledContent.js"
+				"generated/bundledContent.js"
 			],
 			"run_at": "document_start",
 			"all_frames": false
@@ -67,9 +67,9 @@
 		"default_popup": "action/popup/popup.html"
 	},
 	"background": {
-		"service_worker": "background/bundledBackground.js",
+		"service_worker": "generated/bundledBackground.js",
 		"scripts": [
-			"background/bundledBackground.js"
+			"generated/bundledBackground.js"
 		],
 		"type": "module"
 	},
@@ -79,9 +79,9 @@
 			"id": "again@why.salesforce",
 			"strict_min_version": "140.0",
 			"data_collection_permissions": {
-                "required": [
-                  "none"
-                ],
+				"required": [
+					"none"
+				],
 				"optional": [
 					"technicalAndInteraction"
 				]

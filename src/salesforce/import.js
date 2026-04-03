@@ -5,11 +5,14 @@ import {
 	HIDDEN_CLASS,
 	TOAST_ERROR,
 	TOAST_WARNING,
-} from "/core/constants.js";
-import { injectStyle } from "/core/functions.js";
-import Tab from "/core/tab.js";
-import { ensureAllTabsAvailability, TabContainer } from "/core/tabContainer.js";
-import ensureTranslatorAvailability from "/core/translator.js";
+} from "../core/constants.js";
+import { injectStyle } from "../core/functions.js";
+import Tab from "../core/tab.js";
+import {
+	ensureAllTabsAvailability,
+	TabContainer,
+} from "../core/tabContainer.js";
+import ensureTranslatorAvailability from "../core/translator.js";
 
 import {
 	generateCheckboxWithLabel,
@@ -19,12 +22,9 @@ import {
 	generateSldsModalWithTabList,
 	MODAL_ID,
 } from "./generator.js";
-import {
-	getModalHanger,
-	getSetupTabUl,
-	sf_afterSet,
-	showToast,
-} from "./content.js";
+import { sf_afterSet } from "./content.js";
+import { showToast } from "./toast.js";
+import { getModalHanger, getSetupTabUl } from "./sf-elements.js";
 
 const IMPORT_ID = `${EXTENSION_NAME}-import`;
 const IMPORT_FILE_ID = `${IMPORT_ID}-file`;
@@ -48,11 +48,11 @@ let inputModalParent;
  * "Overwrite saved tabs." and "Preserve tabs for other orgs."
  * Additionally, it assigns an ID to the close button using CLOSE_MODAL_ID.
  *
- * @return {{
+ * @return {Promise<{
  *   saveButton: HTMLElement,
  *   closeButton: HTMLElement,
  *   inputContainer: HTMLInputElement
- * }} An object containing the modal's parent element, the save button, the close button, and the file input element.
+ * }>} An object containing the modal's parent element, the save button, the close button, and the file input element.
  */
 async function generateSldsImport() {
 	const translator = await ensureTranslatorAvailability();
@@ -126,7 +126,7 @@ async function generateSldsImport() {
  * @param {boolean} [importConfig.resetTabs=false] whether to reset the Tabs with the ones imported
  * @param {boolean} [importConfig.preserveOtherOrg=false] whether to preserve the Tabs used in other Orgs
  * @param {boolean} [importConfig.importMetadata=false] whether to import the metadata from the file
- * @return undefined - nothing
+ * @return {Promise<void>} - nothing
  */
 async function launchImport(tabs = [], importConfig = {}) {
 	const allTabs = await ensureAllTabsAvailability();
@@ -261,7 +261,7 @@ function showToastBrokenImportFile() {
  * @param {boolean} [importConfig.resetTabs=false] whether to reset the Tabs with the ones imported
  * @param {boolean} [importConfig.preserveOtherOrg=false] whether to preserve the Tabs used in other Orgs
  * @param {boolean} [importConfig.importMetadata=false] whether to import the metadata from the file
- * @return undefined - nothing
+ * @return {Promise<void>} - nothing
  */
 async function showTabSelectThenImport(files = [], importConfig = {}) {
 	if (document.getElementById(MODAL_ID) != null) {
@@ -538,7 +538,7 @@ function listenToFileUpload() {
 /**
  * Displays the file import modal if there are no other open modals.
  * If a modal is already open, shows a toast notification to close the other modal first.
- * @return undefined
+ * @return {Promise<void>}
  */
 async function showFileImport() {
 	if (

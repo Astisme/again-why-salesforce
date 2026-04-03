@@ -571,13 +571,13 @@
 		"message": "已保存此 URL 的 Tab！",
 		"description": "[错误] 用户尝试保存已收藏的 Tab"
 	},
-	"error_tabcont_initialize": {
-		"message": "无法初始化：",
-		"description": "[错误] Tab 容器初始化失败"
-	},
 	"error_tabcont_invalid_tabs": {
 		"message": "检测到无效的 Tab(s)。\n首次出现：",
 		"description": "[错误] 传递了无效的 Tabs"
+	},
+	"error_tabcont_not_initialized": {
+		"message": "tabContainer 尚未初始化。",
+		"description": "[错误] TabContainer 尚未就绪"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "请使用 TabContainer.create() 而不是 new TabContainer() 来使用 TabContainer 类",

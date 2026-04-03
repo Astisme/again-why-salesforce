@@ -23,7 +23,7 @@ import {
 	TOAST_ERROR,
 	TOAST_SUCCESS,
 	USE_LIGHTNING_NAVIGATION,
-} from "/core/constants.js";
+} from "../core/constants.js";
 import {
 	getCssRule,
 	getCssSelector,
@@ -32,13 +32,17 @@ import {
 	getStyleSettings,
 	injectStyle,
 	performLightningRedirect,
-} from "/core/functions.js";
-import Tab from "/core/tab.js";
-import { ensureAllTabsAvailability, TabContainer } from "/core/tabContainer.js";
-import ensureTranslatorAvailability from "/core/translator.js";
+} from "../core/functions.js";
+import Tab from "../core/tab.js";
+import {
+	ensureAllTabsAvailability,
+	TabContainer,
+} from "../core/tabContainer.js";
+import ensureTranslatorAvailability from "../core/translator.js";
 
-import { getCurrentHref, showToast } from "./content.js";
-import { updateModalBodyOverflow } from "./manageTabs.js";
+import { showToast } from "./toast.js";
+import { getCurrentHref } from "./sf-elements.js";
+import { updateModalBodyOverflow } from "./modal-layout.js";
 
 const TOAST_ID = `${EXTENSION_NAME}-toast`;
 export const MODAL_ID = `${EXTENSION_NAME}-modal`;
@@ -90,12 +94,14 @@ export async function handleLightningLinkClick(e) {
 		showToast("error_redirect", TOAST_ERROR);
 		return;
 	}
-	(await ensureAllTabsAvailability())
-		.handleClickTabByData({ url: Tab.minifyURL(url) });
-	const settings = await getSettings([
-		LINK_NEW_BROWSER,
-		USE_LIGHTNING_NAVIGATION,
+	const [allTabs, settings] = await Promise.all([
+		ensureAllTabsAvailability(),
+		getSettings([
+			LINK_NEW_BROWSER,
+			USE_LIGHTNING_NAVIGATION,
+		]),
 	]);
+	allTabs.handleClickTabByData({ url: Tab.minifyURL(url) });
 	const fallbackTarget = currentTarget === ""
 		? _getLinkTarget(metaCtrl, url)
 		: currentTarget;
@@ -381,7 +387,7 @@ export function generateRowTemplate(
  * @param {string} [status="success"]  - The toast type.
  * @throws {Error} Throws an error if required parameters are missing or invalid.
  * @param {string} status - The toast type.
- * @return {HTMLElement} The generated toast container element.
+ * @return {Promise<HTMLElement>} The generated toast container element.
  */
 export async function generateSldsToastMessage(
 	message,
@@ -494,7 +500,7 @@ export async function generateSldsToastMessage(
  * sets the "title" attribute to "required" and the "part" attribute to "required",
  * and sets its text content to an asterisk ("*").
  *
- * @return {HTMLElement} The <abbr> element representing the required indicator.
+ * @return {Promise<HTMLElement>} The <abbr> element representing the required indicator.
  */
 async function generateRequired() {
 	const translator = await ensureTranslatorAvailability();
@@ -531,7 +537,7 @@ async function generateRequired() {
  * @param {boolean} [translateConfig.translatePlaceholder=true] - True to translate the placeholder
  * @param {boolean} [translateConfig.translateTitle=true] - True to translate the title
  *
- * @return {HTMLInputElement} The created input element.
+ * @return {Promise<HTMLInputElement>} The created input element.
  */
 async function createInputElement(
 	{
@@ -554,24 +560,28 @@ async function createInputElement(
 	} = {},
 ) {
 	const translator = await ensureTranslatorAvailability();
+	const [msg_tranLabel, msg_tranPlaceholder, msg_tranTitle] = await Promise
+		.all([
+			translateLabel
+				? translator.translate(label)
+				: Promise.resolve(label),
+			translatePlaceholder
+				? translator.translate(placeholder)
+				: Promise.resolve(placeholder),
+			translateTitle
+				? translator.translate(title)
+				: Promise.resolve(title),
+		]);
 	const input = document.createElement(isTextArea ? "textarea" : "input");
 	input.classList.add("slds-input");
 	input.setAttribute("part", "input");
 	input.setAttribute("maxlength", "255");
 	id && (input.id = id);
 	if (label) {
-		let msg_tranLabel = label;
-		if (translateLabel) {
-			msg_tranLabel = await translator.translate(label);
-		}
 		input.setAttribute("name", msg_tranLabel);
 	}
 	type && input.setAttribute("type", type);
 	if (placeholder) {
-		let msg_tranPlaceholder = placeholder;
-		if (translatePlaceholder) {
-			msg_tranPlaceholder = await translator.translate(placeholder);
-		}
 		input.setAttribute("placeholder", msg_tranPlaceholder);
 	}
 	required && input.setAttribute("required", true);
@@ -579,10 +589,6 @@ async function createInputElement(
 	style && (input.style = style);
 	value && (input.value = value);
 	if (title) {
-		let msg_tranTitle = title;
-		if (translateTitle) {
-			msg_tranTitle = await translator.translate(title);
-		}
 		input.setAttribute("title", msg_tranTitle);
 	}
 	return input;
@@ -612,7 +618,7 @@ async function createInputElement(
  * @param {boolean} [translateConfig.translatePlaceholder=true] - True to translate the placeholder
  * @param {boolean} [translateConfig.translateTitle=true] - True to translate the title
  *
- * @return {Object} - An object containing:
+ * @return {Promise<Object>} - An object containing:
  *   - `inputParent`: The parent `div` containing the entire input structure.
  *   - `inputContainer`: The main input element.
  */
@@ -699,7 +705,7 @@ async function generateInput({
  *
  * @param {string} sectionTitle - The title of the section to be displayed.
  *
- * @return {Object} - An object containing:
+ * @return {Promise<Object>} - An object containing:
  *   - `section`: The root `records-record-layout-section` element that wraps the section.
  *   - `divParent`: A container div element for additional content inside the section.
  *
@@ -1071,7 +1077,7 @@ function createSldsModalShell({
  *
  * @param {string} modalTitle - The title of the modal.
  * @param {string} [saveButtonLabel="continue"] The text to translate to use for the submit button
- * @return {Object} An object containing key elements of the modal:
+ * @return {Promise<Object>} An object containing key elements of the modal:
  * - modalParent: The main modal container element.
  * - article: The content area within the modal.
  * - saveButton: The save button element for user actions.
@@ -1083,9 +1089,13 @@ export async function generateSldsModal({
 	saveButtonLabel = "continue",
 } = {}) {
 	const translator = await ensureTranslatorAvailability();
-	const msg_cancelClose = await translator.translate("cancel_close");
-	const msg_cancel = await translator.translate("cancel");
-	const msg_continue = await translator.translate(saveButtonLabel);
+	const [msg_cancelClose, msg_cancel, msg_continue, req_info] = await Promise
+		.all([
+			translator.translate("cancel_close"),
+			translator.translate("cancel"),
+			translator.translate(saveButtonLabel),
+			translator.translate("required_info"),
+		]);
 	const {
 		modalParent,
 		article,
@@ -1099,7 +1109,7 @@ export async function generateSldsModal({
 		cancelButtonLabel: msg_cancel,
 		confirmButtonLabel: msg_continue,
 	});
-	legend?.append(await translator.translate("required_info"));
+	legend?.append(req_info);
 	return {
 		modalParent,
 		article,
@@ -1248,7 +1258,7 @@ export function generateRadioButtons(name, {
  * @param {string|null} [options.label=null] - The label for the modal. Defaults to a label fetched from saved tabs if not provided.
  * @param {string|null} [options.url=null] - The URL for the page to open in another organization.
  * @param {string|null} [options.org=null] - The org of the current page.
- * @return {Object} An object containing key elements of the modal:
+ * @return {Promise<Object>} An object containing key elements of the modal:
  * - modalParent: The main modal container element.
  * - saveButton: The save button element for user actions.
  * - closeButton: The close button element for closing the modal.
@@ -1257,11 +1267,32 @@ export function generateRadioButtons(name, {
 export async function generateOpenOtherOrgModal(
 	{ label = null, url = null, org = null } = {},
 ) {
-	const { modalParent, article, saveButton, closeButton } =
-		await generateSldsModal({
-			modalTitle: label,
-		});
-	const { section, divParent } = await generateSection("other_org_info");
+	const translator = await ensureTranslatorAvailability();
+	const [modalTitle, open_here, open_new_tab] = await Promise.all([
+		label ?? translator.translate("where_to"),
+		translator.translate("open_here"),
+		translator.translate("open_new_tab"),
+	]);
+	const [
+		{ modalParent, article, saveButton, closeButton },
+		{ section, divParent },
+		{ inputParent, inputContainer },
+	] = await Promise.all([
+		generateSldsModal({
+			modalTitle,
+		}),
+		generateSection("other_org_info"),
+		generateInput({
+			label: "org_link",
+			type: "text",
+			required: true,
+			placeholder: "other_org_placeholder",
+			style:
+				"width: 100%; height: 3em; resize: horizontal; word-break: break-all; overflow-y: hidden; white-space: nowrap;",
+			isTextArea: true,
+			value: org,
+		}),
+	]);
 	divParent.style.width = "100%"; // makes the elements inside have full width
 	divParent.style.display = "flex";
 	divParent.style.alignItems = "center";
@@ -1270,16 +1301,6 @@ export async function generateOpenOtherOrgModal(
 	httpsSpan.append(HTTPS);
 	httpsSpan.style.height = "1.5em";
 	divParent.appendChild(httpsSpan);
-	const { inputParent, inputContainer } = await generateInput({
-		label: "org_link",
-		type: "text",
-		required: true,
-		placeholder: "other_org_placeholder",
-		style:
-			"width: 100%; height: 3em; resize: horizontal; word-break: break-all; overflow-y: hidden; white-space: nowrap;",
-		isTextArea: true,
-		value: org,
-	});
 	divParent.appendChild(inputParent);
 	const linkEnd = document.createElement("span");
 	linkEnd.append(
@@ -1293,18 +1314,17 @@ export async function generateOpenOtherOrgModal(
 	linkEnd.style.overflow = "hidden";
 	divParent.appendChild(linkEnd);
 	// create radio button to let the user pick where to open the link
-	const translator = await ensureTranslatorAvailability();
 	const { radioGroup, getSelectedRadioButtonValue } = generateRadioButtons(
 		`${EXTENSION_NAME}-where-open-link`,
 		{
 			id: `${EXTENSION_NAME}-radio-top`,
 			value: "_top",
-			label: await translator.translate("open_here"),
+			label: open_here,
 		},
 		{
 			id: `${EXTENSION_NAME}-radio-blank`,
 			value: "_blank",
-			label: await translator.translate("open_new_tab"),
+			label: open_new_tab,
 			checked: true,
 		},
 	);
@@ -1336,7 +1356,7 @@ export async function generateOpenOtherOrgModal(
  * @param {boolean} [required=true] - Flag indicating if the file input is required.
  * @throws {Error} Throws an error if both `allowDrop` is false and `preventFileSelection` is true.
  * @throws {Error} Throws an error if required parameters are missing.
- * @return {{ fileInputWrapper: HTMLElement, inputContainer: HTMLInputElement }} An object containing:
+ * @return {Promise<{ fileInputWrapper: HTMLElement, inputContainer: HTMLInputElement }>} An object containing:
  *   - fileInputWrapper: The wrapper element for the entire file input component.
  *   - inputContainer: The actual file input element.
  */
@@ -1361,6 +1381,14 @@ export async function generateSldsFileInput(
 		);
 	}
 	const translator = await ensureTranslatorAvailability();
+	const [msg_file, msg_files, msg_upload, msg_drop, msg_or_drop] =
+		await Promise.all([
+			translator.translate("file"),
+			translator.translate("files"),
+			translator.translate("upload"),
+			translator.translate("drop"),
+			translator.translate("or_drop"),
+		]);
 	const fileInputWrapper = document.createElement("div");
 	fileInputWrapper.id = wrapperId;
 	fileInputWrapper.classList.add(
@@ -1381,9 +1409,6 @@ export async function generateSldsFileInput(
 	cardBodyDiv.dataset.auraClass =
 		"forceContentFileDroppableZone forceContentRelatedListPreviewFileList";
 	innerDiv.appendChild(cardBodyDiv);
-	const msg_file = await translator.translate("file");
-	const msg_files = await translator.translate("files");
-	const msg_upload = await translator.translate("upload");
 	const uploadAssistive = `${msg_upload} ${
 		singleFile ? msg_file : msg_files
 	}`;
@@ -1455,7 +1480,6 @@ export async function generateSldsFileInput(
 			"slds-text-heading--medium",
 			"slds-text-align--center",
 		);
-		const msg_drop = await translator.translate("drop");
 		dropFilesSpan.textContent = `${msg_drop} ${
 			singleFile ? msg_file : msg_files
 		}`;
@@ -1557,7 +1581,6 @@ export async function generateSldsFileInput(
 			"slds-file-selector__text",
 			"slds-medium-show",
 		);
-		const msg_or_drop = await translator.translate("or_drop");
 		orDropFilesSpan.textContent = `${msg_or_drop} ${
 			singleFile ? msg_file : msg_files
 		}`;
@@ -1572,7 +1595,7 @@ export async function generateSldsFileInput(
  * @param {string} id - The unique identifier for the checkbox.
  * @param {string} label - The text to display next to the checkbox.
  * @param {boolean} [checked=false] - Whether the checkbox should be initially checked.
- * @return {HTMLLabelElement} The label element containing the checkbox input and its text.
+ * @return {Promise<HTMLLabelElement>} The label element containing the checkbox input and its text.
  */
 export async function generateCheckboxWithLabel(id, label, checked = false) {
 	const translator = await ensureTranslatorAvailability();
@@ -1598,7 +1621,7 @@ export async function generateCheckboxWithLabel(id, label, checked = false) {
  * @param {string} label - The title of the modal tab.
  * @param {string} url - A partial URL for the target org.
  * @param {string} org - The Org to which the Tab points to.
- * @return {Object} An object containing key elements of the modal:
+ * @return {Promise<Object>} An object containing key elements of the modal:
  * - modalParent: The main modal container element.
  * - saveButton: The save button element for user actions.
  * - closeButton: The close button element for closing the modal.
@@ -1607,17 +1630,18 @@ export async function generateCheckboxWithLabel(id, label, checked = false) {
  * - orgContainer: The container element for the org input field.
  */
 export async function generateUpdateTabModal(label, url, org) {
-	const { modalParent, article, saveButton, closeButton } =
-		await generateSldsModal({
+	const [
+		{ modalParent, article, saveButton, closeButton },
+		{ section, divParent },
+		{ inputParent: labelParent, inputContainer: labelContainer },
+		{ inputParent: urlParent, inputContainer: urlContainer },
+		{ inputParent: orgParent, inputContainer: orgContainer },
+	] = await Promise.all([
+		generateSldsModal({
 			modalTitle: label,
-		});
-	const { section, divParent } = await generateSection("tab_information");
-	divParent.style.width = "100%";
-	divParent.style.display = "flex";
-	divParent.style.alignItems = "center";
-	article.appendChild(section);
-	const { inputParent: labelParent, inputContainer: labelContainer } =
-		await generateInput({
+		}),
+		generateSection("tab_information"),
+		generateInput({
 			label: "tab_label",
 			type: "text",
 			required: true,
@@ -1627,10 +1651,8 @@ export async function generateUpdateTabModal(label, url, org) {
 			title: "table_row_label",
 		}, {
 			translatePlaceholder: label == null,
-		});
-	divParent.appendChild(labelParent);
-	const { inputParent: urlParent, inputContainer: urlContainer } =
-		await generateInput({
+		}),
+		generateInput({
 			label: "tab_url",
 			type: "text",
 			required: true,
@@ -1640,10 +1662,8 @@ export async function generateUpdateTabModal(label, url, org) {
 			title: "table_row_url",
 		}, {
 			translatePlaceholder: false,
-		});
-	divParent.appendChild(urlParent);
-	const { inputParent: orgParent, inputContainer: orgContainer } =
-		await generateInput({
+		}),
+		generateInput({
 			label: "tab_org",
 			type: "text",
 			required: false,
@@ -1653,7 +1673,14 @@ export async function generateUpdateTabModal(label, url, org) {
 			title: "table_row_org_name",
 		}, {
 			translatePlaceholder: org == null,
-		});
+		}),
+	]);
+	divParent.style.width = "100%";
+	divParent.style.display = "flex";
+	divParent.style.alignItems = "center";
+	article.appendChild(section);
+	divParent.appendChild(labelParent);
+	divParent.appendChild(urlParent);
 	divParent.appendChild(orgParent);
 	return {
 		modalParent,
@@ -1727,6 +1754,7 @@ export function generateHelpWith_i_popup({
 		tooltip.dataset.showLeft = showLeft;
 		slot = document.createElement("span");
 		slot.textContent = text;
+		slot.classList.add("slot");
 		if (!isLinkAvailable) {
 			linkTip.classList.add(HIDDEN_CLASS);
 		}
@@ -1739,13 +1767,18 @@ export function generateHelpWith_i_popup({
 		slot = document.createElement("slot");
 		slot.name = "text";
 		slot.textContent = "Nothing to see here...";
+		slot.classList.add("slot");
 	}
 	tooltip.append(slot);
 	tooltip.append(linkTip);
 	(async () => {
 		const translator = await ensureTranslatorAvailability();
-		assistive.textContent = await translator.translate("help");
-		linkTip.textContent = await translator.translate("help_tip_click_link");
+		const [help_assistive, help_link] = await Promise.all([
+			translator.translate("help"),
+			translator.translate("help_tip_click_link"),
+		]);
+		assistive.textContent = help_assistive;
+		linkTip.textContent = help_link;
 	})();
 	return {
 		root,
@@ -1936,23 +1969,6 @@ async function generateTableWithCheckboxes(
 }
 
 /**
- * Generates a modal dialog for exporting selected Tabs.
- * This function creates a modal that displays all available Tabs with checkboxes,
- * allowing users to select which Tabs to export. It includes a "Select All" / "Unselect All" button
- * for convenience.
- *
- * @param {Array} tabs - An array of Tab objects to display in the export modal.
- * @param {Object} [param1={}] object with the following keys
- * @param {string} [param1.title="export_tabs"] the title of the modal
- * @param {string} [param1.saveButtonLabel="export"] the label for the submit button
- * @param {string} [param1.explainer="select_tabs_export"] the text used to explain what to do with this modal
- * @return {Object} An object containing key elements of the modal:
- * - modalParent: The main modal container element.
- * - saveButton: The button element for confirming the selected Tabs.
- * - closeButton: The close button element for closing the modal.
- * - getSelectedTabs: A function that returns an array of selected Tab objects.
- */
-/**
  * Helper function to add title and explainer to a modal article.
  * Creates and prepends a centered explainer span with translated text.
  *
@@ -2036,7 +2052,7 @@ function createTableCell({
  * @param {string} [param1.title="export_tabs"] the title so that the modal can be recognized
  * @param {string} [param1.saveButtonLabel="export"] the label used for the submit button
  * @param {string} [param1.explainer="select_tabs_export"] a brief explanation of what the modal is supposed to do
- * @return {Object} with these keys
+ * @return {Promise<Object>} with these keys
  *  - modalParent: containing the element to append to show the modal,
  *  - saveButton: the submit button on which to add related submit logic,
  *  - closeButton: the cancel button which removes the modal,
@@ -2048,31 +2064,6 @@ export async function generateSldsModalWithTabList(tabs = [], {
 	explainer = "select_tabs_export",
 } = {}) {
 	const translator = await ensureTranslatorAvailability();
-	const { modalParent, article, saveButton, closeButton, buttonContainer } =
-		await generateSldsModal({
-			modalTitle: await translator.translate(title),
-			saveButtonLabel: await translator.translate(saveButtonLabel),
-		});
-	await addModalExplainer(article, explainer);
-	// counter for how many Tabs are selected
-	const tabConterOpen = document.createElement("span");
-	tabConterOpen.innerHTML = "&nbsp;(";
-	saveButton.appendChild(tabConterOpen);
-	const tabCounter = document.createElement("span");
-	tabCounter.textContent = tabs.length;
-	saveButton.appendChild(tabCounter);
-	const tabCounterClose = document.createElement("span");
-	tabCounterClose.textContent = ")";
-	saveButton.appendChild(tabCounterClose);
-	// Create checkboxes for each Tab
-	const headers = [
-		{ label: "" },
-		{ label: await translator.translate("tab_label") },
-		{ label: await translator.translate("tab_url") },
-		{ label: await translator.translate("tab_org") },
-	];
-	const selectAllButton = document.createElement("button");
-	const unselectAllButton = document.createElement("button");
 	/**
 	 * Function to update select all button text based on checkbox states
 	 */
@@ -2096,12 +2087,51 @@ export async function generateSldsModalWithTabList(tabs = [], {
 			saveButton.removeAttribute("disabled");
 		}
 	}
-	const { checkboxes, table: tabsListTable } =
-		await generateTableWithCheckboxes(
+	const [
+		select_all,
+		unselect_all,
+		{
+			modalParent,
+			article,
+			saveButton,
+			closeButton,
+			buttonContainer,
+		},
+		{
+			checkboxes,
+			table: tabsListTable,
+		},
+	] = await Promise.all([
+		translator.translate("select_all"),
+		translator.translate("unselect_all"),
+		generateSldsModal({
+			modalTitle: await translator.translate(title),
+			saveButtonLabel: await translator.translate(saveButtonLabel),
+		}),
+		generateTableWithCheckboxes(
 			tabs,
-			headers,
+			(await Promise.all([
+				Promise.resolve(""),
+				translator.translate("tab_label"),
+				translator.translate("tab_url"),
+				translator.translate("tab_org"),
+			])).map((label) => ({ label })),
 			updateSelectAllButtonText,
-		);
+		),
+	]);
+	await addModalExplainer(article, explainer);
+	// counter for how many Tabs are selected
+	const tabConterOpen = document.createElement("span");
+	tabConterOpen.innerHTML = "&nbsp;(";
+	saveButton.appendChild(tabConterOpen);
+	const tabCounter = document.createElement("span");
+	tabCounter.textContent = tabs.length;
+	saveButton.appendChild(tabCounter);
+	const tabCounterClose = document.createElement("span");
+	tabCounterClose.textContent = ")";
+	saveButton.appendChild(tabCounterClose);
+	const selectAllButton = document.createElement("button");
+	const unselectAllButton = document.createElement("button");
 	// Add Tabs list container
 	const divParent = createModalContentContainer(article);
 	divParent.appendChild(tabsListTable);
@@ -2113,7 +2143,7 @@ export async function generateSldsModalWithTabList(tabs = [], {
 		"slds-button_neutral",
 		"slds-button_small",
 	);
-	selectAllButton.textContent = await translator.translate("select_all");
+	selectAllButton.textContent = select_all;
 	buttonContainer.prepend(selectAllButton);
 	// Create Unselect All button
 	unselectAllButton.classList.add(
@@ -2121,7 +2151,7 @@ export async function generateSldsModalWithTabList(tabs = [], {
 		"slds-button_neutral",
 		"slds-button_small",
 	);
-	unselectAllButton.textContent = await translator.translate("unselect_all");
+	unselectAllButton.textContent = unselect_all;
 	buttonContainer.prepend(unselectAllButton);
 	selectAllButton.addEventListener("click", () => {
 		for (const checkbox of checkboxes) {
@@ -2296,6 +2326,25 @@ export async function createManageTabRow({
 	isThisOrgTab = true,
 } = {}) {
 	const translator = await ensureTranslatorAvailability();
+	const [
+		tab_label,
+		tab_url,
+		tab_org,
+		msg_actions,
+		act_open,
+		cxm_pin_tab,
+		cxm_unpin_tab,
+		act_delete,
+	] = await Promise.all([
+		translator.translate("tab_label"),
+		translator.translate("tab_url"),
+		translator.translate("tab_org"),
+		translator.translate("actions"),
+		translator.translate("act_open"),
+		translator.translate("cxm_pin_tab"),
+		translator.translate("cxm_unpin_tab"),
+		translator.translate("act_delete"),
+	]);
 	const draggable = !disabled;
 	const tr = document.createElement("tr");
 	tr.dataset.rowIndex = index;
@@ -2322,14 +2371,14 @@ export async function createManageTabRow({
 	// Label cell with input
 	const { td: labelTd, input: labelInput } = createTableCell({
 		value: label,
-		placeholder: await translator.translate("tab_label"),
+		placeholder: tab_label,
 		className: "label",
 	});
 	tr.appendChild(labelTd);
 	// URL cell with input
 	const { td: urlTd, input: urlInput } = createTableCell({
 		value: url,
-		placeholder: await translator.translate("tab_url"),
+		placeholder: tab_url,
 		className: "url",
 		wordBreak: true,
 	});
@@ -2337,7 +2386,7 @@ export async function createManageTabRow({
 	// Org cell with input
 	const { td: orgTd, input: orgInput } = createTableCell({
 		value: org,
-		placeholder: await translator.translate("tab_org"),
+		placeholder: tab_org,
 		className: "org",
 	});
 	tr.appendChild(orgTd);
@@ -2365,7 +2414,6 @@ export async function createManageTabRow({
 	}
 	dropdownButton.style.position = "relative";
 	dropdownButton.textContent = `▼`; // downward arrow
-	const msg_actions = await translator.translate("actions");
 	dropdownButton.title = msg_actions;
 	dropdownButton.setAttribute("aria-label", msg_actions);
 	dropdownButton.dataset.name = "dropdownButton";
@@ -2390,7 +2438,7 @@ export async function createManageTabRow({
 	dropdownMenu.style.flexDirection = "column";
 	// Open button
 	const openBtn = createStyledButton(
-		await translator.translate("act_open"),
+		act_open,
 		{ action: "open", tabIndex: index },
 	);
 	if (url) {
@@ -2399,7 +2447,7 @@ export async function createManageTabRow({
 	dropdownMenu.appendChild(openBtn);
 	// Pin/Unpin button (toggle - only show one at a time)
 	const pinBtn = createStyledButton(
-		await translator.translate("cxm_pin_tab"),
+		cxm_pin_tab,
 		{ action: CXM_PIN_TAB, tabIndex: index },
 	);
 	pinBtn.classList.add("pin-btn");
@@ -2409,7 +2457,7 @@ export async function createManageTabRow({
 	}
 	dropdownMenu.appendChild(pinBtn);
 	const unpinBtn = createStyledButton(
-		await translator.translate("cxm_unpin_tab"),
+		cxm_unpin_tab,
 		{ action: CXM_UNPIN_TAB, tabIndex: index },
 	);
 	unpinBtn.classList.add("unpin-btn");
@@ -2419,7 +2467,7 @@ export async function createManageTabRow({
 	dropdownMenu.appendChild(unpinBtn);
 	// Delete button
 	const deleteBtn = createStyledButton(
-		await translator.translate("act_delete"),
+		act_delete,
 		{ action: CXM_REMOVE_TAB, tabIndex: index },
 	);
 	deleteBtn.classList.add("delete-btn");
@@ -2466,6 +2514,37 @@ export async function generateManageTabsModal(tabs = [], {
 	explainer = "manage_tabs_explainer",
 } = {}) {
 	const translator = await ensureTranslatorAvailability();
+	const [
+		mod_title,
+		mod_savBtn,
+		help_drag_tabs,
+		tab_label,
+		help_tab_label,
+		tab_url,
+		help_tab_url,
+		tab_org,
+		help_tab_org,
+		msg_actions,
+		help_tab_actions,
+		show_all_tabs,
+		hide_other_org_tabs,
+		delete_all,
+	] = await Promise.all([
+		translator.translate(title),
+		translator.translate(saveButtonLabel),
+		translator.translate("help_drag_tabs"),
+		translator.translate("tab_label"),
+		translator.translate("help_tab_label"),
+		translator.translate("tab_url"),
+		translator.translate("help_tab_url"),
+		translator.translate("tab_org"),
+		translator.translate("help_tab_org"),
+		translator.translate("actions"),
+		translator.translate("help_tab_actions"),
+		translator.translate("show_all_tabs"),
+		translator.translate("hide_other_org_tabs"),
+		translator.translate("delete_all"),
+	]);
 	const {
 		modalParent,
 		article,
@@ -2473,8 +2552,8 @@ export async function generateManageTabsModal(tabs = [], {
 		saveButton,
 		buttonContainer,
 	} = await generateSldsModal({
-		modalTitle: await translator.translate(title),
-		saveButtonLabel: await translator.translate(saveButtonLabel),
+		modalTitle: mod_title,
+		saveButtonLabel: mod_savBtn,
 	});
 	await addModalExplainer(article, explainer);
 	// Create a table-like structure for tabs
@@ -2485,39 +2564,39 @@ export async function generateManageTabsModal(tabs = [], {
 		{
 			label: "",
 			info: {
-				text: await translator.translate("help_drag_tabs"),
+				text: help_drag_tabs,
 				link: "",
 				showRight: true,
 			},
 		}, // drag handle column
 		{
-			label: await translator.translate("tab_label"),
+			label: tab_label,
 			info: {
-				text: await translator.translate("help_tab_label"),
+				text: help_tab_label,
 				link: `${wikiLinkTab}#Label`,
 				showBottom: true,
 			},
 		},
 		{
-			label: await translator.translate("tab_url"),
+			label: tab_url,
 			info: {
-				text: await translator.translate("help_tab_url"),
+				text: help_tab_url,
 				link: `${wikiLinkTab}#Url`,
 				showBottom: true,
 			},
 		},
 		{
-			label: await translator.translate("tab_org"),
+			label: tab_org,
 			info: {
-				text: await translator.translate("help_tab_org"),
+				text: help_tab_org,
 				link: `${wikiLinkTab}#Org`,
 				showBottom: true,
 			},
 		},
 		{
-			label: await translator.translate("actions"),
+			label: msg_actions,
 			info: {
-				text: await translator.translate("help_tab_actions"),
+				text: help_tab_actions,
 				link: "",
 				showLeft: true,
 			},
@@ -2534,7 +2613,7 @@ export async function generateManageTabsModal(tabs = [], {
 		"slds-button_small",
 		"show_all_tabs",
 	);
-	showAllTabsButton.textContent = await translator.translate("show_all_tabs");
+	showAllTabsButton.textContent = show_all_tabs;
 	buttonContainer.prepend(showAllTabsButton);
 	// Create Unselect All button
 	const hideOtherOrgTabsButton = document.createElement("button");
@@ -2545,9 +2624,7 @@ export async function generateManageTabsModal(tabs = [], {
 		"slds-button_small",
 		"hide_other_org_tabs",
 	);
-	hideOtherOrgTabsButton.textContent = await translator.translate(
-		"hide_other_org_tabs",
-	);
+	hideOtherOrgTabsButton.textContent = hide_other_org_tabs;
 	buttonContainer.prepend(hideOtherOrgTabsButton);
 	showAllTabsButton.addEventListener("click", () => {
 		for (
@@ -2584,9 +2661,7 @@ export async function generateManageTabsModal(tabs = [], {
 		"slds-button_neutral",
 		"slds-button_small",
 	);
-	deleteAllTabsButton.textContent = await translator.translate(
-		"delete_all",
-	);
+	deleteAllTabsButton.textContent = delete_all;
 	buttonContainer.prepend(deleteAllTabsButton);
 	const loggers = []; // track input changes
 	// Create rows for all existing tabs
@@ -2732,12 +2807,12 @@ export function generateReviewSponsorSvgs() {
 
 /**
  * blueprint grid card with corner brackets and dashed dividers.
- * @return {{
+ * @return {Promise<{
  *   messageBox: HTMLDivElement, // the element to add to the document
  *   segments:   HTMLDivElement, // where to put the new textContent
  *   confirmBtn: HTMLButtonElement, // to continue the tutorial
  *   btnsParent: HTMLDivElement, // where the buttons are located
- * }} as described
+ * }>} as described
  */
 async function generateMessageBox() {
 	injectStyle(
@@ -2768,19 +2843,23 @@ async function generateMessageBox() {
 	const actions = document.createElement("div");
 	actions.classList.add("tut-v7-actions");
 	const translator = await ensureTranslatorAvailability();
+	const [confirmBtnText, closeBtnText] = await Promise.all([
+		translator.translate("confirm"),
+		translator.translate("close"),
+	]);
 	const confirmBtn = document.createElement("button");
 	confirmBtn.classList.add(
 		"slds-button",
 		"slds-button_brand",
 	);
-	confirmBtn.textContent = await translator.translate("confirm");
+	confirmBtn.textContent = confirmBtnText;
 	actions.append(confirmBtn);
 	const closeBtn = document.createElement("button");
 	closeBtn.classList.add(
 		"slds-button",
 		"slds-button_neutral",
 	);
-	closeBtn.textContent = await translator.translate("close");
+	closeBtn.textContent = closeBtnText;
 	actions.append(closeBtn);
 	messageBox.append(header, segments, actions);
 	return {
@@ -2797,7 +2876,7 @@ async function generateMessageBox() {
  * Creates an overlay that covers the entire page, a message box for displaying tutorial text,
  * and a highlight box for emphasizing specific elements on the page.
  *
- * @return {Object} An object containing the generated HTML elements:
+ * @return {Promise<Object>} An object containing the generated HTML elements:
  * - {HTMLElement} overlay: A semi-transparent overlay covering the entire viewport
  * - {HTMLElement} messageBox: A positioned box for displaying tutorial messages and buttons
  * - {HTMLElement} highlightBox: A box used to highlight specific elements on the page

@@ -571,13 +571,13 @@
 		"message": "Ezzel az URL-lel rendelkező Tab már el van mentve!",
 		"description": "[error] A felhasználó már elmentett Tab mentésével próbálkozott"
 	},
-	"error_tabcont_initialize": {
-		"message": "Nem lehet inicializálni a következővel",
-		"description": ""
-	},
 	"error_tabcont_invalid_tabs": {
 		"message": "Érvénytelen Tab(ok) találhatók.\nElső előfordulás:",
 		"description": "[error] érvénytelen Tabok kerültek megadásra"
+	},
+	"error_tabcont_not_initialized": {
+		"message": "A tabContainer még nem lett inicializálva.",
+		"description": "[hiba] a TabContainer nem állt készen"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "Használd a TabContainer.create() metódust a new TabContainer() helyett",

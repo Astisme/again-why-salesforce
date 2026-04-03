@@ -571,13 +571,13 @@
 		"message": "Tab s tem URL-jem je že shranjen!",
 		"description": "[napaka] Uporabnik je poskusil shraniti že priljubljen Tab"
 	},
-	"error_tabcont_initialize": {
-		"message": "Ni mogoče inicializirati z",
-		"description": "[napaka] inicializacija vsebnika Tab ni uspela"
-	},
 	"error_tabcont_invalid_tabs": {
 		"message": "Zaznan(i) neveljaven(i) Tab(i).\nPrva pojavitev:",
 		"description": "[napaka] posredovani so bili neveljavni Tabs"
+	},
+	"error_tabcont_not_initialized": {
+		"message": "tabContainer še ni bil inicializiran.",
+		"description": "[napaka] TabContainer ni bil pripravljen"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "Uporabite TabContainer.create() namesto new TabContainer() za uporabo razreda TabContainer",

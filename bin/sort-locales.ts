@@ -49,7 +49,7 @@ async function* findLocaleMessageFiles(
  * Logs success or failure for each file and exits with code 1 if any file fails to process.
  *
  * @async
- * @returns {Promise<void>}
+ * @return {Promise<void>}
  */
 async function main() {
 	const baseDir = "src/_locales";

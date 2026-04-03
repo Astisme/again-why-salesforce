@@ -571,13 +571,13 @@
 		"message": "Ένα Tab με αυτό το URL έχει ήδη αποθηκευτεί!",
 		"description": "[error] Ο χρήστης προσπάθησε να αποθηκεύσει ένα ήδη αποθηκευμένο Tab"
 	},
-	"error_tabcont_initialize": {
-		"message": "Δεν μπορεί να αρχικοποιηθεί με",
-		"description": ""
-	},
 	"error_tabcont_invalid_tabs": {
 		"message": "Εντοπίστηκαν μη έγκυρα Tab(s).\nΠρώτη εμφάνιση:",
 		"description": "[σφάλμα] εντοπίστηκαν μη έγκυρα Tab που ελήφθησαν"
+	},
+	"error_tabcont_not_initialized": {
+		"message": "Το tabContainer δεν είχε αρχικοποιηθεί ακόμα.",
+		"description": "[σφάλμα] το TabContainer δεν ήταν έτοιμο"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "Χρησιμοποιήστε TabContainer.create() αντί για new TabContainer()",

@@ -9,9 +9,9 @@ import {
 	SALESFORCE_SETUP_HOME_MINI,
 	SETUP_LIGHTNING,
 	WHAT_GET_BROWSER_TAB,
-} from "/core/constants.js";
-import { getSettings, sendExtensionMessage } from "/core/functions.js";
-import ensureTranslatorAvailability from "/core/translator.js";
+} from "../../core/constants.js";
+import { getSettings, sendExtensionMessage } from "../../core/functions.js";
+import ensureTranslatorAvailability from "../../core/translator.js";
 import "../themeHandler.js";
 
 /**
@@ -60,16 +60,12 @@ let openPageInSameTab = false;
  * @param {function} callback - the function to call when the current tab is found.
  * @param {string} url - the url to pass to the callback function
  */
-function nss_getCurrentBrowserTab(callback, url) {
-	sendExtensionMessage(
+async function nss_getCurrentBrowserTab(callback, url) {
+	const browserTab = await sendExtensionMessage(
 		{ what: WHAT_GET_BROWSER_TAB },
-		(browserTab) => {
-			currentTab = browserTab;
-			if (callback != null) {
-				callback(url);
-			}
-		},
 	);
+	currentTab = browserTab;
+	callback?.(url);
 }
 
 /**

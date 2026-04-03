@@ -571,13 +571,13 @@
 		"message": "Tab s ovim URL-om već je spremljen!",
 		"description": "[error] Korisnik je pokušao spremiti već spremljeni Tab"
 	},
-	"error_tabcont_initialize": {
-		"message": "Ne može se inicijalizirati sa",
-		"description": ""
-	},
 	"error_tabcont_invalid_tabs": {
 		"message": "Pronađeni su nevažeći Tab(ovi).\nPrvi slučaj:",
 		"description": "[error] dostavljeni su nevažeći Tabovi"
+	},
+	"error_tabcont_not_initialized": {
+		"message": "tabContainer još nije inicijaliziran.",
+		"description": "[pogreška] TabContainer nije bio spreman"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "Upotrijebite TabContainer.create() umjesto new TabContainer()",

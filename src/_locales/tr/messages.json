@@ -571,13 +571,13 @@
 		"message": "Bu URL ile bir Tab zaten kaydedildi!",
 		"description": "[hata] Kullanıcı zaten favorilere eklenmiş bir Tab kaydetmeye çalıştı"
 	},
-	"error_tabcont_initialize": {
-		"message": "Şununla başlatılamıyor:",
-		"description": "[hata] Tab konteyneri başlatılamadı"
-	},
 	"error_tabcont_invalid_tabs": {
 		"message": "Geçersiz Tab(lar) algılandı.\nİlk oluşum:",
 		"description": "[hata] geçersiz Tabs iletildi"
+	},
+	"error_tabcont_not_initialized": {
+		"message": "tabContainer henüz başlatılmadı.",
+		"description": "[hata] TabContainer hazır değildi"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "TabContainer sınıfını kullanmak için new TabContainer() yerine TabContainer.create() kullanın",
