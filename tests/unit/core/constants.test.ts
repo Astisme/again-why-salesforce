@@ -226,6 +226,12 @@ Deno.test("constants worker detects Edge and Safari and rejects invalid homepage
 	assertEquals(edgeResult.browserName, "edge");
 	assertEquals(edgeResult.errorMessage, null);
 
+	const chromeResult = await runConstantsWorker({
+		userAgent: "Mozilla/5.0 Chrome/120.0 Safari/537.36",
+	});
+	assertEquals(chromeResult.browserName, "chrome");
+	assertEquals(chromeResult.errorMessage, null);
+
 	const safariResult = await runConstantsWorker({
 		userAgent: "Mozilla/5.0 Version/17.0 Safari/605.1.15",
 	});
