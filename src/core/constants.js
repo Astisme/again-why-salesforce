@@ -70,8 +70,19 @@ export const CONTEXT_MENU_PATTERNS = FRAME_PATTERNS.map((item) =>
 export const CONTEXT_MENU_PATTERNS_REGEX = CONTEXT_MENU_PATTERNS.map((item) =>
 	item.replaceAll("*", ".*")
 );
+/**
+ * Escapes regex metacharacters in a literal string.
+ *
+ * @param {string} [value=""] - The string to escape for safe regex interpolation.
+ * @return {string} Escaped string where regex metacharacters are literal.
+ */
+function escapeRegex(value = "") {
+	return value.replaceAll(/[.*+?^${}()|[\]\\]/g, String.raw`\$&`);
+}
 export const SALESFORCE_LIGHTNING_PATTERN = new RegExp(
-	`^${HTTPS}[a-zA-Z0-9.-]+${LIGHTNING_FORCE_COM}.*$`,
+	String.raw`^${HTTPS}[a-zA-Z0-9.-]+${
+		escapeRegex(LIGHTNING_FORCE_COM)
+	}(?::\d+)?(?:/|$).*`,
 );
 export const SETUP_LIGHTNING_PATTERN = new RegExp(`.*${SETUP_LIGHTNING}.*`);
 const MANIFEST = BROWSER.runtime.getManifest();

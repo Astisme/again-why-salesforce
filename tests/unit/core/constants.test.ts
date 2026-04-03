@@ -18,6 +18,7 @@ type ConstantsModule = {
 	BROWSER: BrowserLike;
 	BROWSER_NAME: string | undefined;
 	CONTEXT_MENU_PATTERNS: string[];
+	CONTEXT_MENU_PATTERNS_REGEX: string[];
 	EXTENSION_GITHUB_LINK: string;
 	EXTENSION_LABEL: string;
 	EXTENSION_OPTIONAL_HOST_PERM: string[];
@@ -26,6 +27,7 @@ type ConstantsModule = {
 	ISEDGE: boolean;
 	ISFIREFOX: boolean;
 	ISSAFARI: boolean;
+	SALESFORCE_LIGHTNING_PATTERN: RegExp;
 };
 
 type ConstantsDependencies = {
@@ -140,6 +142,10 @@ Deno.test("constants prefers the browser API for Firefox and exposes manifest da
 			"https://*.my.salesforce-setup.com/lightning/setup/*",
 			"https://*.lightning.force.com/lightning/setup/*",
 		]);
+		assertEquals(module.CONTEXT_MENU_PATTERNS_REGEX, [
+			"https://.*.my.salesforce-setup.com/lightning/setup/.*",
+			"https://.*.lightning.force.com/lightning/setup/.*",
+		]);
 	} finally {
 		fixture.cleanup();
 	}
@@ -243,4 +249,37 @@ Deno.test("constants worker detects Edge and Safari and rejects invalid homepage
 		homepageUrl: "https://example.com/not-github",
 	});
 	assertEquals(invalidHomepageResult.errorMessage, "no_manifest_github");
+});
+
+Deno.test("constants expose escaped Salesforce host patterns and reject lookalike lightning domains", async () => {
+	const fixture = await loadConstants("Mozilla/5.0 Firefox/140.0");
+	try {
+		const module = fixture.module;
+		assertEquals(
+			module.SALESFORCE_LIGHTNING_PATTERN.test(
+				"https://acme.lightning.force.com/lightning/page/home",
+			),
+			true,
+		);
+		assertEquals(
+			module.SALESFORCE_LIGHTNING_PATTERN.test(
+				"https://acme.lightning.force.com:8443/lightning/page/home",
+			),
+			true,
+		);
+		assertEquals(
+			module.SALESFORCE_LIGHTNING_PATTERN.test(
+				"https://acme.lightning.force.com.attacker.test/lightning/page/home",
+			),
+			false,
+		);
+		assertEquals(
+			module.SALESFORCE_LIGHTNING_PATTERN.test(
+				"https://acme.lightning-force.com/lightning/page/home",
+			),
+			false,
+		);
+	} finally {
+		fixture.cleanup();
+	}
 });

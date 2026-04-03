@@ -9,3 +9,5 @@ when creating a new branch, start from `stag` unless explicitly told otherwise
 always write tests for new changes; make sure the coverage is 100/100/100 (do not change src code to achieve this)
 Tests do not use: --allow-env, --no-check, --quiet, unknown or any types, await Promise.resolve(), unnecessary wrappers for Deno.test
 test command: deno task test
+use replaceAll instead of replace if possible
+use String.raw instead of double escape
