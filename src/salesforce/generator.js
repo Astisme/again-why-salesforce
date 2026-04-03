@@ -23,7 +23,7 @@ import {
 	TOAST_ERROR,
 	TOAST_SUCCESS,
 	USE_LIGHTNING_NAVIGATION,
-} from "/constants.js";
+} from "../core/constants.js";
 import {
 	getCssRule,
 	getCssSelector,
@@ -32,13 +32,17 @@ import {
 	getStyleSettings,
 	injectStyle,
 	performLightningRedirect,
-} from "/functions.js";
-import Tab from "/tab.js";
-import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
-import ensureTranslatorAvailability from "/translator.js";
+} from "../core/functions.js";
+import Tab from "../core/tab.js";
+import {
+	ensureAllTabsAvailability,
+	TabContainer,
+} from "../core/tabContainer.js";
+import ensureTranslatorAvailability from "../core/translator.js";
 
-import { getCurrentHref, showToast } from "./content.js";
-import { updateModalBodyOverflow } from "./manageTabs.js";
+import { showToast } from "./toast.js";
+import { getCurrentHref } from "./sf-elements.js";
+import { updateModalBodyOverflow } from "./modal-layout.js";
 
 const TOAST_ID = `${EXTENSION_NAME}-toast`;
 export const MODAL_ID = `${EXTENSION_NAME}-modal`;
@@ -1750,6 +1754,7 @@ export function generateHelpWith_i_popup({
 		tooltip.dataset.showLeft = showLeft;
 		slot = document.createElement("span");
 		slot.textContent = text;
+		slot.classList.add("slot");
 		if (!isLinkAvailable) {
 			linkTip.classList.add(HIDDEN_CLASS);
 		}
@@ -1762,6 +1767,7 @@ export function generateHelpWith_i_popup({
 		slot = document.createElement("slot");
 		slot.name = "text";
 		slot.textContent = "Nothing to see here...";
+		slot.classList.add("slot");
 	}
 	tooltip.append(slot);
 	tooltip.append(linkTip);

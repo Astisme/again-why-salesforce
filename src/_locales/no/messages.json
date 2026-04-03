@@ -571,13 +571,13 @@
 		"message": "En Tab med denne URL-en er allerede lagret!",
 		"description": "[feil] Brukeren prøvde å lagre en allerede favoritt Tab"
 	},
-	"error_tabcont_initialize": {
-		"message": "Kan ikke initialiseres med",
-		"description": ""
-	},
 	"error_tabcont_invalid_tabs": {
 		"message": "Ugyldige Tab(ber) funnet.\nFørste forekomst:",
 		"description": "[error] ugyldige Tab ble sendt inn"
+	},
+	"error_tabcont_not_initialized": {
+		"message": "tabContainer ble ikke initialisert ennå.",
+		"description": "[feil] TabContainer var ikke klar"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "Bruk TabContainer.create() i stedet for new TabContainer() for å bruke TabContainer-klassen",

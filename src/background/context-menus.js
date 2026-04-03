@@ -47,20 +47,18 @@ import {
 	SETTINGS_KEY,
 	TOAST_WARNING,
 	USER_LANGUAGE,
-} from "/constants.js";
-import { openSettingsPage } from "/functions.js";
-import Tab from "/tab.js";
-import ensureTranslatorAvailability from "/translator.js";
+} from "../core/constants.js";
+import { openSettingsPage } from "../core/functions.js";
+import Tab from "../core/tab.js";
+import ensureTranslatorAvailability from "../core/translator.js";
 import {
 	bg_getCurrentBrowserTab,
 	bg_notify,
 	checkLaunchExport,
 } from "./utils.js";
-import {
-	bg_getCommandLinks,
-	bg_getSalesforceLanguage,
-	bg_getSettings,
-} from "./background.js";
+import { bg_getSettings } from "./storage.js";
+import { bg_getCommandLinks } from "./commands.js";
+import { bg_getSalesforceLanguage } from "./salesforce-language.js";
 
 let areMenuItemsVisible = false;
 
@@ -455,7 +453,7 @@ async function createMenuItems(force = false) {
 		const menuItems = getMenuItemsClone();
 		for (const item of menuItems) {
 			item.title = await translator.translate(item.title);
-			await BROWSER.contextMenus.create(item);
+			BROWSER.contextMenus.create(item);
 			if (BROWSER.runtime.lastError) {
 				console.trace();
 				throw new Error(BROWSER.runtime.lastError.message);

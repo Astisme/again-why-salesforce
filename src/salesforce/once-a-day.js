@@ -1,6 +1,9 @@
 "use strict";
-import { EXTENSION_LAST_ACTIVE_DAY, EXTENSION_NAME } from "/constants.js";
-import { getSettings, getTodayDateKey } from "/functions.js";
+import {
+	EXTENSION_LAST_ACTIVE_DAY,
+	EXTENSION_NAME,
+} from "../core/constants.js";
+import { getSettings, getTodayDateKey } from "../core/functions.js";
 import { checkInsertAnalytics } from "./analytics.js";
 import { updateExtensionUsageDays } from "./update-settings.js";
 

@@ -19,20 +19,17 @@ import {
 	WHAT_GET,
 	WHAT_GET_COMMANDS,
 	WHAT_SET,
-} from "/constants.js";
+} from "../core/constants.js";
 import {
 	performLightningRedirect,
 	sendExtensionMessage,
 	sendExtensionMessages,
-} from "/functions.js";
-import ensureTranslatorAvailability from "/translator.js";
-import Tab from "/tab.js";
-import {
-	getCurrentHref,
-	getSetupTabUl,
-	performActionOnTabs,
-	showToast,
-} from "./content.js";
+} from "../core/functions.js";
+import ensureTranslatorAvailability from "../core/translator.js";
+import Tab from "../core/tab.js";
+import { performActionOnTabs } from "./content.js";
+import { showToast } from "./toast.js";
+import { getCurrentHref, getSetupTabUl } from "./sf-elements.js";
 import {
 	FAVOURITE_BUTTON_ID,
 	showFavouriteButton,
@@ -42,7 +39,10 @@ import {
 	MODAL_ID,
 	sldsConfirm,
 } from "./generator.js";
-import { ensureAllTabsAvailability, TabContainer } from "../tabContainer.js";
+import {
+	ensureAllTabsAvailability,
+	TabContainer,
+} from "../core/tabContainer.js";
 import { handleActionButtonClick } from "./manageTabs.js";
 
 const TUTORIAL_HIGHLIGHT_CLASS = "awsf-tutorial-highlight";

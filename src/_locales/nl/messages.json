@@ -571,13 +571,13 @@
 		"message": "Een Tab met deze URL is al opgeslagen!",
 		"description": "[fout] De gebruiker probeerde een reeds favoriete Tab op te slaan"
 	},
-	"error_tabcont_initialize": {
-		"message": "Kan niet initialiseren met",
-		"description": "[fout] initialisatie van Tab-container mislukt"
-	},
 	"error_tabcont_invalid_tabs": {
 		"message": "Ongeldige Tab(s) gedetecteerd.\nEerste voorkomen:",
 		"description": "[fout] ongeldige Tabs doorgegeven"
+	},
+	"error_tabcont_not_initialized": {
+		"message": "tabContainer was nog niet geïnitialiseerd.",
+		"description": "[fout] de TabContainer was niet gereed"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "Gebruik TabContainer.create() in plaats van new TabContainer() om de TabContainer klasse te gebruiken",

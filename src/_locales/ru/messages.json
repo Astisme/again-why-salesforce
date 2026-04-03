@@ -571,12 +571,13 @@
 		"message": "Tab с этим URL уже сохранен!",
 		"description": "[ошибка] Пользователь попытался сохранить уже добавленный в избранное Tab"
 	},
-	"error_tabcont_initialize": {
-		"message": "Невозможно инициализировать с"
-	},
 	"error_tabcont_invalid_tabs": {
 		"message": "Обнаружены некорректные Tabs.\nПервое вхождение:",
 		"description": "[error] Были переданы некорректные Tabs"
+	},
+	"error_tabcont_not_initialized": {
+		"message": "tabContainer еще не был инициализирован.",
+		"description": "[ошибка] TabContainer не был готов"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "Используйте TabContainer.create() вместо new TabContainer() для использования класса TabContainer",

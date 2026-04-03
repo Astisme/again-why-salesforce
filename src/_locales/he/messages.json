@@ -571,13 +571,13 @@
 		"message": "Tab עם כתובת URL זו כבר שמור!",
 		"description": "[error] המשתמש ניסה לשמור Tab שכבר נשמר"
 	},
-	"error_tabcont_initialize": {
-		"message": "לא ניתן לאתחל עם",
-		"description": ""
-	},
 	"error_tabcont_invalid_tabs": {
 		"message": "נמצאו Tab(s) לא תקינים.\nהמופע הראשון:",
 		"description": "[error] Tab לא תקינים סופקו"
+	},
+	"error_tabcont_not_initialized": {
+		"message": "tabContainer טרם אותחל.",
+		"description": "[שגיאה] ה- TabContainer לא היה מוכן"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "השתמש ב-TabContainer.create() במקום new TabContainer()",

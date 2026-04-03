@@ -571,12 +571,13 @@
 		"message": "Một Tab với URL này đã được lưu!",
 		"description": "[lỗi] Người dùng đã cố gắng lưu một Tab đã được yêu thích"
 	},
-	"error_tabcont_initialize": {
-		"message": "Không thể khởi tạo với"
-	},
 	"error_tabcont_invalid_tabs": {
 		"message": "Phát hiện các Tabs không hợp lệ.\nLần xuất hiện đầu tiên:",
 		"description": "[error] Các Tabs không hợp lệ đã được cung cấp."
+	},
+	"error_tabcont_not_initialized": {
+		"message": "tabContainer vẫn chưa được khởi tạo.",
+		"description": "[lỗi] TabContainer chưa sẵn sàng"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "Sử dụng TabContainer.create() thay vì new TabContainer() để sử dụng lớp TabContainer",

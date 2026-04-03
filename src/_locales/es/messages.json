@@ -571,12 +571,13 @@
 		"message": "¡Una Tab con esta URL ya está guardada!",
 		"description": "[error] el usuario intentó guardar una Tab ya guardada"
 	},
-	"error_tabcont_initialize": {
-		"message": "No se puede inicializar con"
-	},
 	"error_tabcont_invalid_tabs": {
 		"message": "Se detectaron Tabs inválidos.\nPrimera aparición:",
 		"description": "[error] Se pasaron Tabs inválidos."
+	},
+	"error_tabcont_not_initialized": {
+		"message": "tabContainer aún no se ha inicializado.",
+		"description": "[error] el TabContainer no estaba listo"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "Utiliza TabContainer.create() en lugar de new TabContainer()",

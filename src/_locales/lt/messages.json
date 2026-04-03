@@ -571,13 +571,13 @@
 		"message": "Tab su šiuo URL jau buvo išsaugotas!",
 		"description": "[klaida] Vartotojas bandė išsaugoti jau mėgstamą Tab"
 	},
-	"error_tabcont_initialize": {
-		"message": "Negalima inicijuoti su",
-		"description": "[klaida] nepavyko inicijuoti Tab konteinerio"
-	},
 	"error_tabcont_invalid_tabs": {
 		"message": "Aptikta neteisingų Tab(s).\nPirmas pasitaikymas:",
 		"description": "[klaida] perduoti neteisingi Tabs"
+	},
+	"error_tabcont_not_initialized": {
+		"message": "tabContainer dar nebuvo inicijuotas.",
+		"description": "[klaida] TabContainer nebuvo paruoštas"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "Naudokite TabContainer.create() vietoj new TabContainer()",

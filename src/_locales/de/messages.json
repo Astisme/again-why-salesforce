@@ -571,12 +571,13 @@
 		"message": "Ein Tab mit dieser URL wurde bereits gespeichert!",
 		"description": "[error] Benutzer hat versucht, einen bereits gespeicherten Tab zu speichern"
 	},
-	"error_tabcont_initialize": {
-		"message": "Kann nicht initialisiert werden mit"
-	},
 	"error_tabcont_invalid_tabs": {
 		"message": "Ungültige Tabs erkannt.\nErstes Vorkommen:",
 		"description": "[error] Es wurden ungültige Tabs übergeben."
+	},
+	"error_tabcont_not_initialized": {
+		"message": "tabContainer wurde noch nicht initialisiert.",
+		"description": "[Fehler] der TabContainer war nicht bereit"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "Verwende TabContainer.create() anstelle von new TabContainer()",
