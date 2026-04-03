@@ -636,7 +636,7 @@
 		"description": "[popup] 匯出按鈕的標題"
 	},
 	"extension_description": {
-        "message": "在 Salesforce Lightning Setup 頁面可用的空間中建立並管理自訂 Tab",
+		"message": "在 Salesforce Lightning Setup 頁面可用的空間中建立並管理自訂 Tab",
 		"description": "[manifest] 此擴充功能的描述"
 	},
 	"extension_label": {
