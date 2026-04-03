@@ -71,12 +71,12 @@ export const CONTEXT_MENU_PATTERNS_REGEX = CONTEXT_MENU_PATTERNS.map((item) =>
  * @return {string} Escaped string where regex metacharacters are literal.
  */
 function escapeRegex(value = "") {
-	return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+	return value.replaceAll(/[.*+?^${}()|[\]\\]/g, String.raw`\$&`);
 }
 export const SALESFORCE_LIGHTNING_PATTERN = new RegExp(
-	`^${HTTPS}[a-zA-Z0-9.-]+${
+	String.raw`^${HTTPS}[a-zA-Z0-9.-]+${
 		escapeRegex(LIGHTNING_FORCE_COM)
-	}(?::\\d+)?(?:/|$).*`,
+	}(?::\d+)?(?:/|$).*`,
 );
 export const SETUP_LIGHTNING_PATTERN = new RegExp(`.*${SETUP_LIGHTNING}.*`);
 const MANIFEST = BROWSER.runtime.getManifest();

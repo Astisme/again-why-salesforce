@@ -18,6 +18,7 @@ type ConstantsModule = {
 	BROWSER: BrowserLike;
 	BROWSER_NAME: string | undefined;
 	CONTEXT_MENU_PATTERNS: string[];
+	CONTEXT_MENU_PATTERNS_REGEX: string[];
 	EXTENSION_GITHUB_LINK: string;
 	EXTENSION_LABEL: string;
 	EXTENSION_OPTIONAL_HOST_PERM: string[];
@@ -141,6 +142,10 @@ Deno.test("constants prefers the browser API for Firefox and exposes manifest da
 			"https://*.my.salesforce-setup.com/lightning/setup/*",
 			"https://*.lightning.force.com/lightning/setup/*",
 		]);
+		assertEquals(module.CONTEXT_MENU_PATTERNS_REGEX, [
+			"https://.*.my.salesforce-setup.com/lightning/setup/.*",
+			"https://.*.lightning.force.com/lightning/setup/.*",
+		]);
 	} finally {
 		fixture.cleanup();
 	}
@@ -247,6 +252,12 @@ Deno.test("constants expose escaped Salesforce host patterns and reject lookalik
 		assertEquals(
 			module.SALESFORCE_LIGHTNING_PATTERN.test(
 				"https://acme.lightning.force.com/lightning/page/home",
+			),
+			true,
+		);
+		assertEquals(
+			module.SALESFORCE_LIGHTNING_PATTERN.test(
+				"https://acme.lightning.force.com:8443/lightning/page/home",
 			),
 			true,
 		);
