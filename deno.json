@@ -11,24 +11,29 @@
 			"*bundled*"
 		]
 	},
-	"lint": {
-		"exclude": [
-			"./tests/salesforce/with-browser/*"
-		]
+	"test": {
+		"permissions": {
+			"read": true
+		}
 	},
 	"tasks": {
-		"test": "deno test --allow-read --coverage --parallel --quiet tests",
-		"test-gen": "deno test --allow-read --coverage --parallel --quiet tests/*.test.ts",
-		"test-bg": "deno test --allow-read --coverage --parallel --quiet tests/background/",
-		"test-cmp": "deno test --allow-read --coverage --parallel --quiet tests/components/",
-		"test-sf": "deno test --allow-read --coverage --parallel --quiet tests/salesforce/*.test.ts",
-		"test-flakiness": "deno run --allow-run --allow-read --allow-write bin/analyze-test-flakiness.ts",
+		"test": "deno test -P --coverage --parallel --quiet tests/*",
+		"test-unit": "deno test -P --coverage --parallel --quiet tests/unit/*",
+		"test-int": "deno test -P --coverage --parallel --quiet tests/integration/*",
+		"test-bg": "deno test -P --coverage --parallel --quiet tests/unit/background/*",
+		"test-bd": "deno test -P --coverage --parallel --quiet tests/unit/build/*",
+		"test-man": "deno test -P --coverage --parallel --quiet tests/unit/manifest/*",
+		"test-sf": "deno test -P --coverage --parallel --quiet tests/unit/content/*",
+		"test-core": "deno test -P --coverage --parallel --quiet tests/unit/core/*",
+		"test-ui": "deno test -P --coverage --parallel --quiet tests/unit/ui/*",
+		"test-bin": "deno test -P --coverage --parallel --quiet tests/bin/*",
 
 		"fmt": "deno fmt",
 		"lint": "deno lint",
 		"sort": "deno --allow-read --allow-write bin/sort-locales.ts && git add src/_locales/*/messages.json",
 		"locale-check": "deno --allow-read --allow-write bin/find-invalid-variables.ts && deno --allow-read --allow-write bin/missing-locales.ts",
 		"locales": "deno task locale-check && deno task sort",
+		"audit-logging": "deno run --allow-read --allow-write bin/audit-logging.ts",
 		"bundle": "deno run -A bin/build.ts",
 		"checks": "deno task fmt && deno task lint && deno task test && deno task locales && deno task dev-firefox",
 
@@ -50,6 +55,7 @@
 		"@luca/esbuild-deno-loader": "jsr:@luca/esbuild-deno-loader@^0.11.1",
 		"esbuild": "npm:esbuild@^0.25.0",
 		"puppeteer": "npm:puppeteer@^24.17.0",
+		"@std/path": "jsr:@std/path@^1.1.2",
 		"@std/testing/asserts": "https://deno.land/std/testing/asserts.ts",
 		"@std/testing/mock": "https://deno.land/std/testing/mock.ts",
 		"happydom": "npm:happy-dom/lib/window/Window.js"

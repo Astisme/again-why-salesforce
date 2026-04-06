@@ -150,3 +150,7 @@
 .hidden {
 	display: none !important;
 }
+
+.slot {
+	color: var(--white);
+}

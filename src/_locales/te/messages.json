@@ -571,12 +571,13 @@
 		"message": "ఈ URL తో కూడిన Tab ఇప్పటికే సేవ్ చేయబడింది!",
 		"description": "[లోపం] వినియోగదారు ఇప్పటికే ఇష్టపడిన Tab ను సేవ్ చేయడానికి ప్రయత్నించారు"
 	},
-	"error_tabcont_initialize": {
-		"message": "దీనితో ఆరంభించలేము"
-	},
 	"error_tabcont_invalid_tabs": {
 		"message": "చెల్లని Tabs కనిపించాయి.\nమొదటి సారి:",
 		"description": "[error] చెల్లని Tabs పంపబడ్డాయి"
+	},
+	"error_tabcont_not_initialized": {
+		"message": "tabContainer ఇంకా ప్రారంభించబడలేదు.",
+		"description": "[లోపం] TabContainer సిద్ధంగా లేదు"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "TabContainer క్లాస్‌ను ఉపయోగించడానికి new TabContainer() కు బదులుగా TabContainer.create() ఉపయోగించండి",

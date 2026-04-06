@@ -571,13 +571,13 @@
 		"message": "இந்த URL உடன் ஒரு Tab ஏற்கனவே சேமிக்கப்பட்டுள்ளது!",
 		"description": "[பிழை] பயனர் ஏற்கனவே விரும்பிய Tab ஐ சேமிக்க முயன்றார்"
 	},
-	"error_tabcont_initialize": {
-		"message": "இதனுடன் தொடங்க முடியாது:",
-		"description": "[பிழை] Tab கொள்கலன் தொடக்கம் தோல்வியடைந்தது"
-	},
 	"error_tabcont_invalid_tabs": {
 		"message": "செல்லாத Tab(கள்) கண்டறியப்பட்டது.\nமுதல் நிகழ்வு:",
 		"description": "[பிழை] செல்லாத Tabs அனுப்பப்பட்டன"
+	},
+	"error_tabcont_not_initialized": {
+		"message": "tabContainer இன்னும் துவக்கப்படவில்லை.",
+		"description": "[பிழை] TabContainer தயாராக இல்லை"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "TabContainer வகுப்பைப் பயன்படுத்த new TabContainer() பதிலாக TabContainer.create() ஐப் பயன்படுத்தவும்",

@@ -1,6 +1,5 @@
 "use strict";
 import {
-	ALL_TOAST_TYPES,
 	BROWSER,
 	CXM_EMPTY_GENERIC_TABS,
 	CXM_EMPTY_TABS,
@@ -28,15 +27,10 @@ import {
 	CXM_UNPIN_TAB,
 	EXTENSION_NAME,
 	HAS_ORG_TAB,
-	HTTPS,
-	LIGHTNING_FORCE_COM,
 	LINK_NEW_BROWSER,
-	SALESFORCE_URL_PATTERN,
 	SETUP_LIGHTNING,
 	TAB_ON_LEFT,
 	TOAST_ERROR,
-	TOAST_INFO,
-	TOAST_SUCCESS,
 	TOAST_WARNING,
 	TUTORIAL_EVENT_PIN_TAB,
 	USE_LIGHTNING_NAVIGATION,
@@ -59,22 +53,20 @@ import {
 	WHAT_TOGGLE_ORG,
 	WHAT_UPDATE_EXTENSION,
 	WHAT_UPDATE_TAB,
-} from "/core/constants.js";
+} from "../core/constants.js";
 import {
-	calculateReadingTime,
 	getInnerElementFieldBySelector,
 	getSettings,
-} from "/core/functions.js";
-import ensureTranslatorAvailability from "/core/translator.js";
-import Tab from "/core/tab.js";
-import { ensureAllTabsAvailability } from "/core/tabContainer.js";
+} from "../core/functions.js";
+import ensureTranslatorAvailability from "../core/translator.js";
+import Tab from "../core/tab.js";
+import { ensureAllTabsAvailability } from "../core/tabContainer.js";
 import { setupDragForUl } from "./dragHandler.js";
 
+import { showToast } from "./toast.js";
 import { pageActionTab, showFavouriteButton } from "./favourite-manager.js";
 import {
-	generateOpenOtherOrgModal,
 	generateRowTemplate,
-	generateSldsToastMessage,
 	generateStyleFromSettings,
 	generateUpdateTabModal,
 	MODAL_ID,
@@ -82,26 +74,14 @@ import {
 import { createImportModal } from "./import.js";
 import { createExportModal } from "./export.js";
 import { createManageTabsModal } from "./manageTabs.js";
+import { createOpenOtherOrgModal } from "./openOtherOrg.js";
 import { checkTutorial } from "./tutorial.js";
 import { executeOncePerDay } from "./once-a-day.js";
-
-/**
- * The main UL on Salesforce Setup
- */
-let setupTabUl;
-/**
- * Returns the main UL element in Salesforce Setup.
- *
- * @return {HTMLElement} The main UL element in Salesforce Setup.
- */
-export function getSetupTabUl() {
-	return setupTabUl;
-}
-
-/**
- * Where modals should be inserted in Salesforce Setup
- */
-let modalHanger;
+import {
+	findSetupTabUlInSalesforcePage,
+	getCurrentHref,
+	getSetupTabUl,
+} from "./sf-elements.js";
 
 /**
  * Abort controller for the latest reload operation.
@@ -111,15 +91,7 @@ let reloadController = null;
 /**
  * Contains the current href, always up-to-date
  */
-let href = globalThis.location?.href;
-/**
- * Returns the current href string, always up-to-date.
- *
- * @return {string} The current page href.
- */
-export function getCurrentHref() {
-	return globalThis.location?.href;
-}
+let href = getCurrentHref();
 
 /**
  * Whether the user was previously on a saved tab.
@@ -188,7 +160,7 @@ export function sf_afterSet({
 	tabs = null,
 	shouldReload = true,
 } = {}) {
-	if (setupTabUl == null) {
+	if (getSetupTabUl() == null) {
 		return;
 	}
 	if (what === WHAT_SAVED) {
@@ -197,53 +169,6 @@ export function sf_afterSet({
 	if (shouldReload) {
 		reloadTabs(tabs);
 	}
-}
-
-/**
- * Displays a toast message on the UI with the provided message and styling options.
- * - The toast message is appended to the DOM and automatically removed after an estimated reading time.
- * - The message is logged to the console with an appropriate log level based on success, warning, or error.
- *
- * @param {string} message - The message to display in the toast.
- * @param {string} [status="success"]  - The toast type.
- */
-export async function showToast(message, status = TOAST_SUCCESS) {
-	if (
-		!ALL_TOAST_TYPES.has(status)
-	) {
-		throw new Error("error_unknown_toast_type");
-	}
-	const hanger = document.getElementsByClassName(
-		"oneConsoleTabset navexConsoleTabset",
-	)[0];
-	const toastElement = await generateSldsToastMessage(
-		Array.isArray(message) ? message : [message],
-		status,
-	);
-	hanger.appendChild(toastElement);
-	setTimeout(() => {
-		toastElement.remove();
-	}, calculateReadingTime(toastElement.textContent));
-	let logFn = null;
-	switch (status) {
-		case TOAST_SUCCESS:
-			logFn = console.log;
-			break;
-		case TOAST_INFO:
-			logFn = console.info;
-			break;
-		case TOAST_ERROR:
-			console.trace();
-			logFn = console.error;
-			break;
-		case TOAST_WARNING:
-			console.trace();
-			logFn = console.warn;
-			break;
-		default:
-			break;
-	}
-	logFn?.(message);
 }
 
 /**
@@ -303,7 +228,7 @@ async function init(tabs = null, signal = null) {
 		if (shouldAbortReload(signal)) {
 			return;
 		}
-		setupTabUl.replaceChildren(frag);
+		getSetupTabUl().replaceChildren(frag);
 	}
 	await isOnSavedTab();
 	if (shouldAbortReload(signal)) {
@@ -376,7 +301,7 @@ async function _afterHrefUpdate(isCurrentlyOnSavedTab) {
  * Handles the update of the current URL, reloading tabs if necessary.
  */
 function onHrefUpdate() {
-	const newRef = globalThis.location.href;
+	const newRef = getCurrentHref();
 	if (newRef === href) {
 		return;
 	}
@@ -396,6 +321,7 @@ async function checkKeepTabsOnLeft() {
 	const beforeOrAfter = keep_tabs_on_left?.enabled
 		? "afterbegin"
 		: "beforeend";
+	const setupTabUl = getSetupTabUl();
 	setupTabUl.parentElement.insertAdjacentElement(
 		beforeOrAfter,
 		setupTabUl,
@@ -416,26 +342,17 @@ function delayLoadSetupTabs(count = 0) {
 		// write error in the console
 		(async () => {
 			const translator = await ensureTranslatorAvailability();
-			const label = await translator.translate("extension_label");
-			const fail = await translator.translate("error_no_setup_tab");
+			const [label, fail] = await Promise.all([
+				translator.translate("extension_label"),
+				translator.translate("error_no_setup_tab"),
+			]);
 			console.error(`${label} - ${fail}`);
 			setTimeout(delayLoadSetupTabs, 5000);
 		})();
 		return;
 	}
-	const parentOfSetupTabUl =
-		(document.querySelector("ul.pinnedItems.slds-grid") ??
-			document.getElementsByClassName("pinnedItems slds-grid")?.[0])
-			?.parentElement;
-	if (parentOfSetupTabUl == null) {
+	if (!findSetupTabUlInSalesforcePage()) {
 		return setTimeout(() => delayLoadSetupTabs(count + 1), 500);
-	}
-	setupTabUl = parentOfSetupTabUl.querySelector(`#${EXTENSION_NAME}`);
-	if (setupTabUl == null) {
-		setupTabUl = document.createElement("ul");
-		setupTabUl.id = EXTENSION_NAME;
-		setupTabUl.classList.add("tabBarItems", "slds-grid");
-		parentOfSetupTabUl.appendChild(setupTabUl);
 	}
 	checkKeepTabsOnLeft();
 	// Start observing changes to the DOM to then check for URL change
@@ -445,23 +362,6 @@ function delayLoadSetupTabs(count = 0) {
 			childList: true,
 			subtree: true,
 		});
-	// Add overflow scroll behavior only if not already present
-	if (!setupTabUl.style.overflowX.includes("auto")) {
-		setupTabUl.setAttribute(
-			"style",
-			`overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; ${
-				setupTabUl.getAttribute("style") ?? ""
-			}`,
-		);
-	}
-	// Listen to mouse wheel to easily move left & right
-	if (!setupTabUl.dataset.wheelListenerApplied) {
-		setupTabUl.addEventListener("wheel", (e) => {
-			e.preventDefault();
-			setupTabUl.scrollLeft += e.deltaY;
-		});
-		setupTabUl.dataset.wheelListenerApplied = true;
-	}
 	// initialize
 	setupDragForUl(reorderTabsUl);
 	reloadTabs();
@@ -560,136 +460,6 @@ export function makeDuplicatesBold(miniURL) {
 	);
 }
 
-/**
- * Retrieves the modal hanger element, caching it for future use.
- * - If the `modalHanger` is already set, it returns the cached value.
- * - Otherwise, it finds it in the page.
- *
- * @return {HTMLElement|null} The modal hanger element if found, otherwise null.
- */
-export function getModalHanger() {
-	if (modalHanger != null) {
-		return modalHanger;
-	}
-	modalHanger = document.querySelector("div.DESKTOP.uiContainerManager");
-	return modalHanger;
-}
-
-/**
- * Displays a modal for opening a page in another Salesforce organization.
- * - If a modal is already open, shows a toast to prompt the user to close the existing modal first.
- * - If the current page contains a Salesforce ID, shows a warning toast indicating the page cannot exist in another Org.
- * - Generates the modal with an input field for the user to specify the organization URL.
- * - If the user enters a valid Salesforce Org URL, the modal provides a confirmation prompt before opening the page in a new tab.
- * - The modal includes event listeners for user input and for saving the new organization link.
- *
- * @param {Object} options - An object containing optional parameters:
- * @param {string|null} [options.label=null] - The label for the modal. Defaults to a label fetched from saved tabs if not provided.
- * @param {string|null} [options.url=null] - The URL for the page to open in another organization.
- * @param {string|null} [options.org=null] - The org of the current page.
- * @return {Promise<void>} A promise that resolves once the modal has been displayed and the user interacts with it.
- */
-async function showModalOpenOtherOrg(
-	{ label = null, url = null, org = null } = {},
-) {
-	if (document.getElementById(MODAL_ID) != null) {
-		return showToast("error_close_other_modal", TOAST_ERROR);
-	}
-	const allTabs = await ensureAllTabsAvailability();
-	const href = getCurrentHref();
-	if (label == null && url == null) {
-		const minyURL = Tab.minifyURL(href);
-		try {
-			const matchingTab = allTabs.getSingleTabByData({ url: minyURL });
-			label = matchingTab.label;
-			url = matchingTab.url;
-		} catch (e) {
-			console.info(e);
-			url = minyURL;
-		}
-	}
-	if (org == null) {
-		org = Tab.extractOrgName(href);
-	}
-	const skip_link_detection = await getSettings("skip_link_detection");
-	if (
-		skip_link_detection != null && !skip_link_detection.enabled &&
-		Tab.containsSalesforceId(url)
-	) {
-		showToast(
-			"error_link_with_id",
-			TOAST_WARNING,
-		);
-	}
-	const translator = await ensureTranslatorAvailability();
-	const whereTo = await translator.translate("where_to");
-	const {
-		modalParent,
-		saveButton,
-		closeButton,
-		inputContainer,
-		getSelectedRadioButtonValue,
-	} = await generateOpenOtherOrgModal({
-		label: label ?? whereTo,
-		url, // if the url is "", we may still open the link in another Org without any issue
-		org,
-	});
-	getModalHanger().appendChild(modalParent);
-	let lastInput = "";
-	inputContainer.addEventListener("input", (e) => {
-		const target = e.target;
-		const value = target.value;
-		const delta = value.length - lastInput.length;
-		if (delta > 2) {
-			const newTarget = Tab.extractOrgName(value);
-			if (newTarget != null && newTarget !== value) {
-				target.value = newTarget;
-				lastInput = newTarget;
-			}
-			return;
-		}
-		lastInput = value;
-	});
-	let lastExtracted = null;
-	saveButton.addEventListener("click", async (e) => {
-		e.preventDefault();
-		const linkTarget = getSelectedRadioButtonValue();
-		const inputVal = inputContainer.value;
-		if (inputVal == null || inputVal === "") {
-			return showToast(["insert_another", "org_link"], TOAST_WARNING);
-		}
-		const newTarget = Tab.extractOrgName(inputVal);
-		if (lastExtracted === newTarget) return; // could be called more than once
-		lastExtracted = newTarget;
-		if (
-			!newTarget.match(
-				SALESFORCE_URL_PATTERN,
-			)
-		) {
-			return showToast(["insert_valid_org", newTarget], TOAST_ERROR);
-		}
-		if (newTarget === Tab.extractOrgName(getCurrentHref())) {
-			return showToast(
-				"insert_another_org",
-				TOAST_ERROR,
-			);
-		}
-		const targetUrl = new URL(
-			`${HTTPS}${newTarget}${LIGHTNING_FORCE_COM}${
-				url.startsWith("/") ? "" : SETUP_LIGHTNING
-			}${url}`,
-		);
-		const confirm_msg = await translator.translate([
-			"confirm_another_org",
-			targetUrl,
-		], "\n");
-		if (confirm(confirm_msg)) {
-			closeButton.click();
-			open(targetUrl, linkTarget ?? "_blank");
-		}
-	});
-}
-
 const ACTION_MOVE = "move";
 const ACTION_REMOVE_OTHER = "remove-other";
 const ACTION_SORT = "sort";
@@ -704,7 +474,7 @@ const ACTION_SORT = "sort";
  * @param {string} action - The action to perform on the tab.
  * @param {Tab} tab - The tab on which the action should be performed.
  * @param {Object} options - Options that influence the behavior of the action (e.g., filters or specific conditions).
- * @return undefined
+ * @return {Promise<void>}
  */
 export async function performActionOnTabs(
 	action,
@@ -840,17 +610,18 @@ function hideTabs(hideOrgTabs = true) {
  * @throws when it fails to sync the Tabs.
  */
 async function toggleOrg({ label = null, url = null, org = null } = {}) {
+	const allTabs = await ensureAllTabsAvailability();
 	const inputTab = { label, url, org };
+	const currentHref = getCurrentHref();
 	if (inputTab.url == null) {
-		inputTab.url = Tab.minifyURL(getCurrentHref());
+		inputTab.url = Tab.minifyURL(currentHref);
 	}
 	if (inputTab.org == null) {
-		inputTab.org = Tab.extractOrgName(getCurrentHref());
+		inputTab.org = Tab.extractOrgName(currentHref);
 	}
-	const allTabs = await ensureAllTabsAvailability();
 	const matchingTab = allTabs.getSingleTabByData(inputTab);
 	matchingTab.update({
-		org: matchingTab.org == null ? getCurrentHref() : "",
+		org: matchingTab.org == null ? currentHref : "",
 	});
 	if (!await allTabs.syncTabs()) {
 		throw new Error("error_failed_sync");
@@ -863,7 +634,7 @@ async function toggleOrg({ label = null, url = null, org = null } = {}) {
  * @param {string} tab.label - The label of the Tab to update
  * @param {string} tab.url - The Url of the Tab to update
  * @param {string} tab.org - The Org of the Tab to update
- * @return undefined
+ * @return {Promise<void>}
  */
 async function showModalUpdateTab(
 	{ label = null, url = null, org = null } = {},
@@ -876,11 +647,12 @@ async function showModalUpdateTab(
 	const allTabs = await ensureAllTabsAvailability();
 	let matchingTab = null;
 	try {
+		const currentHref = getCurrentHref();
 		matchingTab = allTabs.getSingleTabByData(
 			tabIsEmpty
 				? {
-					url: Tab.minifyURL(getCurrentHref()),
-					org: Tab.extractOrgName(getCurrentHref()),
+					url: Tab.minifyURL(currentHref),
+					org: Tab.extractOrgName(currentHref),
 				}
 				: tab,
 		);
@@ -1070,7 +842,7 @@ async function routeBackgroundMessage(message) {
 				break;
 			case WHAT_SHOW_OPEN_OTHER_ORG:
 				messageTab.url = message.linkTabUrl ?? messageTab.url;
-				await showModalOpenOtherOrg(messageTab);
+				await createOpenOtherOrgModal(messageTab);
 				break;
 			case WHAT_UPDATE_TAB:
 				await showModalUpdateTab(messageTab);
@@ -1248,7 +1020,7 @@ function main() {
 	checkAddLightningNavigation();
 	listenToBackgroundPage();
 	delayLoadSetupTabs();
-	executeOncePerDay();
+	void executeOncePerDay();
 }
 
 // queries the currently active tab of the current active window

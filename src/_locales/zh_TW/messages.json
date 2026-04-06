@@ -571,13 +571,13 @@
 		"message": "此 URL 的 Tab 已儲存！",
 		"description": "[錯誤] 使用者嘗試儲存已收藏的 Tab"
 	},
-	"error_tabcont_initialize": {
-		"message": "無法以以下內容初始化",
-		"description": ""
-	},
 	"error_tabcont_invalid_tabs": {
 		"message": "檢測到無效的 Tab(s).\n首次出現：",
 		"description": "[error] 傳入了無效的 Tab"
+	},
+	"error_tabcont_not_initialized": {
+		"message": "tabContainer 尚未初始化。",
+		"description": "[錯誤] TabContainer 尚未就緒"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "請使用 TabContainer.create() 而不是 new TabContainer() 來使用 TabContainer 類別",
@@ -636,7 +636,7 @@
 		"description": "[popup] 匯出按鈕的標題"
 	},
 	"extension_description": {
-		"message": "Create and manage custom Tab in the available space on Salesforce Lightning Setup page.",
+		"message": "在 Salesforce Lightning Setup 頁面可用的空間中建立並管理自訂 Tab",
 		"description": "[manifest] 此擴充功能的描述"
 	},
 	"extension_label": {

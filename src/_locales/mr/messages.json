@@ -571,12 +571,13 @@
 		"message": "या URL सह एक Tab आधीच जतन केला आहे!",
 		"description": "[त्रुटी] वापरकर्त्याने आधीच पसंदीदा केलेला Tab जतन करण्याचा प्रयत्न केला"
 	},
-	"error_tabcont_initialize": {
-		"message": "या सह प्रारंभ करता येणार नाही"
-	},
 	"error_tabcont_invalid_tabs": {
 		"message": "अवैध Tabs आढळले.\nपहिले प्रकट:",
 		"description": "[error] अवैध Tabs पुरवले गेले."
+	},
+	"error_tabcont_not_initialized": {
+		"message": "tabContainer अद्याप इनिशियलाइझ केले गेले नाही.",
+		"description": "[त्रुटी] TabContainer तयार नव्हते"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "TabContainer क्लास वापरण्यासाठी new TabContainer() ऐवजी TabContainer.create() वापरा",

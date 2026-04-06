@@ -24,7 +24,7 @@ interface InvalidLocalesReport {
 
 /**
  * Gets all locale directories from the locales directory.
- * @returns {Promise<string[]>} Array of locale directory names.
+ * @return {Promise<string[]>} Array of locale directory names.
  */
 async function getLocales(): Promise<string[]> {
 	const entries: string[] = [];
@@ -39,7 +39,7 @@ async function getLocales(): Promise<string[]> {
 /**
  * Checks if a file exists.
  * @param {string} filePath - Path to check.
- * @returns {Promise<boolean>} True if file exists.
+ * @return {Promise<boolean>} True if file exists.
  */
 async function fileExists(filePath: string): Promise<boolean> {
 	try {
@@ -53,7 +53,7 @@ async function fileExists(filePath: string): Promise<boolean> {
 /**
  * Reads and parses a locale file.
  * @param {string} filePath - Locale file path.
- * @returns {Promise<LocaleFile>} Parsed locale file.
+ * @return {Promise<LocaleFile>} Parsed locale file.
  */
 async function readLocaleFile(filePath: string): Promise<LocaleFile> {
 	return JSON.parse(await Deno.readTextFile(filePath));
@@ -62,7 +62,7 @@ async function readLocaleFile(filePath: string): Promise<LocaleFile> {
 /**
  * Gets the locale keys whose messages contain invalid variables.
  * @param {LocaleFile} localeFile - Locale file to inspect.
- * @returns {string[]} Invalid locale keys.
+ * @return {string[]} Invalid locale keys.
  */
 function getInvalidLocaleKeys(localeFile: LocaleFile): string[] {
 	const invalidKeys: string[] = [];
@@ -82,7 +82,7 @@ function getInvalidLocaleKeys(localeFile: LocaleFile): string[] {
  * Builds the report payload for invalid locale keys.
  * @param {LocaleFile} localeFile - Locale file containing invalid keys.
  * @param {string[]} invalidKeys - Keys to include in the report.
- * @returns {LocaleFile} Report entry for the locale.
+ * @return {LocaleFile} Report entry for the locale.
  */
 function buildLocaleReportEntry(
 	localeFile: LocaleFile,
@@ -99,7 +99,7 @@ function buildLocaleReportEntry(
  * Removes keys from a locale file.
  * @param {LocaleFile} localeFile - Locale file to update.
  * @param {string[]} keysToRemove - Keys to remove.
- * @returns {LocaleFile} Locale file without the removed keys.
+ * @return {LocaleFile} Locale file without the removed keys.
  */
 function removeLocaleKeys(
 	localeFile: LocaleFile,
@@ -119,7 +119,7 @@ function removeLocaleKeys(
  * Writes a locale file back to disk.
  * @param {string} filePath - Locale file path.
  * @param {LocaleFile} localeFile - Locale file contents.
- * @returns {Promise<void>}
+ * @return {Promise<void>}
  */
 async function writeLocaleFile(
 	filePath: string,
@@ -133,7 +133,7 @@ async function writeLocaleFile(
 
 /**
  * Processes all locale files, removes invalid locale keys, and builds a report.
- * @returns {Promise<InvalidLocalesReport>} Invalid locale report.
+ * @return {Promise<InvalidLocalesReport>} Invalid locale report.
  */
 async function removeInvalidLocales(): Promise<InvalidLocalesReport> {
 	const locales = await getLocales();
@@ -157,7 +157,7 @@ async function removeInvalidLocales(): Promise<InvalidLocalesReport> {
 
 /**
  * Main execution.
- * @returns {Promise<void>}
+ * @return {Promise<void>}
  */
 async function main(): Promise<void> {
 	const result = await removeInvalidLocales();

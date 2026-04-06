@@ -6,11 +6,11 @@ import {
 	ISEDGE,
 	ISFIREFOX,
 	ISSAFARI,
-} from "/core/constants.js";
-import { getSettings, injectStyle } from "/core/functions.js";
-import { ensureAllTabsAvailability } from "/core/tabContainer.js";
-import ensureTranslatorAvailability from "/core/translator.js";
-import { generateReviewSponsorSvgs } from "/salesforce/generator.js";
+} from "../../core/constants.js";
+import { getSettings, injectStyle } from "../../core/functions.js";
+import { ensureAllTabsAvailability } from "../../core/tabContainer.js";
+import ensureTranslatorAvailability from "../../core/translator.js";
+import { generateReviewSponsorSvgs } from "../../salesforce/generator.js";
 
 const REVIEW_TAB_THRESHOLD = 8;
 const SPONSOR_TAB_THRESHOLD = 16;
@@ -166,8 +166,8 @@ class ReviewSponsorAws extends HTMLElement {
 	 * Resolves when the component has finished loading its async metadata.
 	 * @return {Promise<void>} Promise resolved after async setup completes.
 	 */
-	async whenReady() {
-		return await this._ensureReadyPromise();
+	whenReady() {
+		return this._ensureReadyPromise();
 	}
 
 	/**
@@ -185,13 +185,13 @@ class ReviewSponsorAws extends HTMLElement {
 
 	/**
 	 * Retrieves the EXTENSION_USAGE_DAYS setting to find the number of days the extension has been actively used
-	 * @return {number} the number of days the extension has been actively used
+	 * @return {Promise<number>} the number of days the extension has been actively used
 	 */
 	async _getExtensionUsageDays() {
 		const usageSettings = await getSettings([
 			EXTENSION_USAGE_DAYS,
 		]);
-		return usageSettings.enabled;
+		return usageSettings?.enabled;
 	}
 
 	/**
@@ -210,11 +210,13 @@ class ReviewSponsorAws extends HTMLElement {
 			usageDays,
 		}));
 		// add accessible names to icon-only links
-		const reviewMsg = await translator.translate("write_review");
+		const [reviewMsg, sponsorMsg] = await Promise.all([
+			translator.translate("write_review"),
+			translator.translate("send_tip"),
+		]);
 		result.reviewLink.title = reviewMsg;
 		result.reviewLink.setAttribute("aria-label", reviewMsg);
 		result.reviewSvg.setAttribute("focusable", "false");
-		const sponsorMsg = await translator.translate("send_tip");
 		result.sponsorLink.title = sponsorMsg;
 		result.sponsorLink.setAttribute("aria-label", sponsorMsg);
 		result.sponsorSvg.setAttribute("focusable", "false");

@@ -5,8 +5,8 @@ import {
 	USER_LANGUAGE,
 	WHAT_GET_SETTINGS,
 	WHAT_GET_SF_LANG,
-} from "/core/constants.js";
-import { sendExtensionMessage } from "/core/functions.js";
+} from "./constants.js";
+import { sendExtensionMessage } from "./functions.js";
 const _translationSecret = Symbol("translationSecret");
 let singletonTranslator = null;
 
@@ -254,6 +254,7 @@ class TranslationService {
 	 * @return {Promise<string>} Resolves to the fully translated string or the original key on failure.
 	 */
 	async translate(key, connector = " ") {
+		if (key == null) return null;
 		// get all inner translations
 		const cacheMessage = this.#getMessageFromCache(key);
 		if (
@@ -263,7 +264,7 @@ class TranslationService {
 			return cacheMessage;
 		}
 		if (
-			key.includes(" ") &&
+			key.includes(connector) &&
 			cacheMessage == null
 		) {
 			const translation = await this.translate(key.split(/\s+/));
@@ -389,14 +390,10 @@ class TranslationService {
  * If initialization is already in progress (i.e., `singletonTranslator` is a Promise), it waits for it to complete.
  *
  * @return {Promise<TranslationService>} A promise that resolves to the translator instance.
+ * @async
  */
-async function getTranslator_async() {
-	if (singletonTranslator == null) {
-		singletonTranslator = await TranslationService.create();
-	} else if (singletonTranslator instanceof Promise) {
-		await singletonTranslator;
-	}
-	return singletonTranslator;
+function getTranslator_async() {
+	return singletonTranslator ?? TranslationService.create();
 }
 
 /**
@@ -420,12 +417,13 @@ function getTranslator() {
  * Returns the initialized translator if available, otherwise attempts to initialize and return it.
  *
  * @return {Promise<TranslationService>} A promise that resolves to the translator instance.
+ * @async
  */
-export default async function ensureTranslatorAvailability() {
+export default function ensureTranslatorAvailability() {
 	try {
 		return getTranslator();
 	} catch (e) {
 		console.info(e);
-		return await getTranslator_async();
+		return getTranslator_async();
 	}
 }

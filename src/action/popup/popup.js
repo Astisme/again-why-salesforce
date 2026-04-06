@@ -9,14 +9,14 @@ import {
 	WHAT_GET_COMMANDS,
 	WHAT_SHOW_IMPORT,
 	WHAT_START_TUTORIAL,
-} from "/core/constants.js";
+} from "../../core/constants.js";
 import {
 	areFramePatternsAllowed,
 	isOnSalesforceSetup,
 	openSettingsPage,
 	sendExtensionMessage,
-} from "/core/functions.js";
-import ensureTranslatorAvailability from "/core/translator.js";
+} from "../../core/functions.js";
+import ensureTranslatorAvailability from "../../core/translator.js";
 import "/components/theme-selector/theme-selector.js";
 
 {
@@ -46,12 +46,11 @@ const translator = await ensureTranslatorAvailability();
 
 /**
  * Sends a message that will start the export procedure.
+ * @param {Object} message - the message to send somewhere else
  */
-function pop_exportHandler() {
-	sendExtensionMessage({
-		what: WHAT_EXPORT_CHECK,
-	});
-	setTimeout(close, 100);
+async function pop_sendMessageAndClose(message) {
+	await sendExtensionMessage(message);
+	close();
 }
 
 /**
@@ -70,8 +69,8 @@ function _sliceBeforeSeparator(i18n) {
  * @param {string} shortcut - The keyboard shortcut to display in parentheses after the translated text.
  * @return {Promise<string>} A promise that resolves to the translated text combined with the shortcut hint.
  */
-async function addShortcutText(button, shortcut) {
-	return await translator.translate([
+function addShortcutText(button, shortcut) {
+	return translator.translate([
 		_sliceBeforeSeparator(
 			button.dataset[translator.translateAttributeDataset],
 		),
@@ -85,10 +84,13 @@ const importBtn = document.getElementById("import");
  */
 importBtn.addEventListener(
 	"click",
-	() => sendExtensionMessage({ what: WHAT_SHOW_IMPORT }, close),
+	() => pop_sendMessageAndClose({ what: WHAT_SHOW_IMPORT }),
 );
 const exportBtn = document.getElementById("export");
-exportBtn.addEventListener("click", pop_exportHandler);
+exportBtn.addEventListener(
+	"click",
+	() => pop_sendMessageAndClose({ what: WHAT_EXPORT_CHECK }),
+);
 const settingsBtn = document.getElementById("open-settings");
 settingsBtn.addEventListener(
 	"click",
@@ -125,7 +127,7 @@ const manageTabsBtn = document.getElementById("manage-tabs");
  */
 manageTabsBtn.addEventListener(
 	"click",
-	() => sendExtensionMessage({ what: CXM_MANAGE_TABS }, close),
+	() => pop_sendMessageAndClose({ what: CXM_MANAGE_TABS }),
 );
 
 const tutorialBtn = document.getElementById("tutorial");
@@ -134,5 +136,5 @@ const tutorialBtn = document.getElementById("tutorial");
  */
 tutorialBtn.addEventListener(
 	"click",
-	() => sendExtensionMessage({ what: WHAT_START_TUTORIAL }, close),
+	() => pop_sendMessageAndClose({ what: WHAT_START_TUTORIAL }),
 );

@@ -5,6 +5,9 @@
  */
 function detectBrowser() {
 	const userAgent = navigator.userAgent.toLowerCase();
+	// Why this exists: detection order is significant because modern user agents
+	// often include multiple browser tokens (for example, Chrome includes
+	// "safari", and Edge can include Chromium markers).
 	// Firefox detection (including Firefox-based browsers)
 	if (userAgent.includes("firefox")) {
 		return "firefox";
@@ -27,6 +30,9 @@ export const ISEDGE = BROWSER_NAME === "edge";
 export const ISCHROME = BROWSER_NAME === "chrome" || ISEDGE;
 export const ISFIREFOX = BROWSER_NAME === "firefox";
 export const ISSAFARI = BROWSER_NAME === "safari";
+// Why this exists: extension APIs are exposed as `chrome` in Chromium-based
+// browsers and as `browser` in Firefox; selecting once keeps the codebase
+// branch-free for API calls.
 export const BROWSER = ISCHROME ? chrome : browser;
 export const EXTENSION_LABEL = BROWSER.i18n.getMessage("extension_label");
 export const EXTENSION_NAME = "again-why-salesforce";
@@ -64,8 +70,19 @@ export const CONTEXT_MENU_PATTERNS = FRAME_PATTERNS.map((item) =>
 export const CONTEXT_MENU_PATTERNS_REGEX = CONTEXT_MENU_PATTERNS.map((item) =>
 	item.replaceAll("*", ".*")
 );
+/**
+ * Escapes regex metacharacters in a literal string.
+ *
+ * @param {string} [value=""] - The string to escape for safe regex interpolation.
+ * @return {string} Escaped string where regex metacharacters are literal.
+ */
+function escapeRegex(value = "") {
+	return value.replaceAll(/[.*+?^${}()|[\]\\]/g, String.raw`\$&`);
+}
 export const SALESFORCE_LIGHTNING_PATTERN = new RegExp(
-	`^${HTTPS}[a-zA-Z0-9.-]+${LIGHTNING_FORCE_COM}.*$`,
+	String.raw`^${HTTPS}[a-zA-Z0-9.-]+${
+		escapeRegex(LIGHTNING_FORCE_COM)
+	}(?::\d+)?(?:/|$).*`,
 );
 export const SETUP_LIGHTNING_PATTERN = new RegExp(`.*${SETUP_LIGHTNING}.*`);
 const MANIFEST = BROWSER.runtime.getManifest();
@@ -107,6 +124,13 @@ export const TAB_ORG_STYLE = "tab_org_style";
 export const ORG_TAB_STYLE_KEY = `${SETTINGS_KEY}-${TAB_ORG_STYLE}`;
 export const ORG_PINNED_TAB_STYLE_KEY =
 	`${SETTINGS_KEY}-${TAB_ORG_STYLE}-${PINNED}`;
+/** @type {Set<string>} Keys that correspond to style settings. */
+export const STYLE_KEYS = new Set([
+	GENERIC_TAB_STYLE_KEY,
+	ORG_TAB_STYLE_KEY,
+	GENERIC_PINNED_TAB_STYLE_KEY,
+	ORG_PINNED_TAB_STYLE_KEY,
+]);
 export const TAB_STYLE_BACKGROUND = "background";
 export const TAB_STYLE_COLOR = "color";
 export const TAB_STYLE_BORDER = "border";

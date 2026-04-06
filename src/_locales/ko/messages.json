@@ -571,13 +571,13 @@
 		"message": "이 URL을 가진 Tab은 이미 저장되었습니다!",
 		"description": "[오류] 사용자가 이미 즐겨찾기에 추가된 Tab을 저장하려고 했습니다"
 	},
-	"error_tabcont_initialize": {
-		"message": "다음으로 초기화할 수 없습니다.",
-		"description": "[오류] Tab 컨테이너 초기화 실패"
-	},
 	"error_tabcont_invalid_tabs": {
 		"message": "잘못된 Tab(들)이 감지되었습니다.\n첫 번째 발생:",
 		"description": "[오류] 잘못된 Tabs가 전달되었습니다."
+	},
+	"error_tabcont_not_initialized": {
+		"message": "tabContainer가 아직 초기화되지 않았습니다.",
+		"description": "[오류] TabContainer가 준비되지 않았습니다"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "새로운 TabContainer() 대신 TabContainer.create()를 사용하세요",

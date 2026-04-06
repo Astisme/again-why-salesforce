@@ -2,12 +2,12 @@ import {
 	BROWSER,
 	DO_NOT_REQUEST_FRAME_PERMISSION,
 	HIDDEN_CLASS,
-} from "/core/constants.js";
+} from "../../core/constants.js";
 import {
 	requestExportPermission,
 	requestFramePatternsPermission,
-} from "/core/functions.js";
-import ensureTranslatorAvailability from "/core/translator.js";
+} from "../../core/functions.js";
+import ensureTranslatorAvailability from "../../core/translator.js";
 import "../themeHandler.js";
 await ensureTranslatorAvailability();
 

@@ -1,7 +1,7 @@
-import { BROWSER, HIDDEN_CLASS } from "/core/constants.js";
-import { injectStyle } from "/core/functions.js";
-import { generateHelpWith_i_popup } from "/salesforce/generator.js";
-import ensureTranslatorAvailability from "/core/translator.js";
+import { BROWSER, HIDDEN_CLASS } from "../../core/constants.js";
+import { injectStyle } from "../../core/functions.js";
+import { generateHelpWith_i_popup } from "../../salesforce/generator.js";
+import ensureTranslatorAvailability from "../../core/translator.js";
 
 /**
  * Class to take care of the Help button in the settings
