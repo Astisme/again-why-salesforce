@@ -50,7 +50,10 @@ import {
 } from "../core/constants.js";
 import { openSettingsPage } from "../core/functions.js";
 import Tab from "../core/tab.js";
-import ensureTranslatorAvailability from "../core/translator.js";
+import {
+	ensureTranslatorAvailability,
+	getTranslations,
+} from "../core/translator.js";
 import {
 	bg_getCurrentBrowserTab,
 	bg_notify,
@@ -452,7 +455,7 @@ async function createMenuItems(force = false) {
 		}
 		const menuItems = getMenuItemsClone();
 		for (const item of menuItems) {
-			item.title = await translator.translate(item.title);
+			item.title = await getTranslations(item.title);
 			BROWSER.contextMenus.create(item);
 			if (BROWSER.runtime.lastError) {
 				console.trace();
@@ -462,7 +465,7 @@ async function createMenuItems(force = false) {
 		areMenuItemsVisible = true;
 	} catch (error) {
 		areMenuItemsVisible = false;
-		const msg = await translator.translate("error_cxm_create");
+		const msg = await getTranslations("error_cxm_create");
 		console.error(msg, error);
 		await removeMenuItems(true);
 	}
@@ -542,8 +545,7 @@ async function removeMenuItems(force = false) {
 		await BROWSER.contextMenus.removeAll();
 		areMenuItemsVisible = false;
 	} catch (error) {
-		const translator = await ensureTranslatorAvailability();
-		const msg = await translator.translate("error_cxm_remove");
+		const msg = await getTranslations("error_cxm_remove");
 		console.error(msg, error);
 	}
 }
@@ -559,8 +561,7 @@ async function logContextMenuError(error) {
 	if (error == null || error.message === "") {
 		return;
 	}
-	const translator = await ensureTranslatorAvailability();
-	const msg = await translator.translate("error_cxm_check");
+	const msg = await getTranslations("error_cxm_check");
 	console.error(msg, error.message);
 }
 

@@ -25,7 +25,7 @@ import {
 	sendExtensionMessage,
 	sendExtensionMessages,
 } from "../core/functions.js";
-import ensureTranslatorAvailability from "../core/translator.js";
+import { getTranslations } from "../core/translator.js";
 import Tab from "../core/tab.js";
 import { performActionOnTabs } from "./content.js";
 import { showToast } from "./toast.js";
@@ -306,12 +306,15 @@ class Tutorial {
 			showToast("tutorial_export_and_reset_for_tutorial", TOAST_WARNING);
 			return false;
 		}
-		this.translator = await ensureTranslatorAvailability();
-		const [firstLabel, secondLabel, settingsShortcut] = await Promise.all([
-			this.translator.translate(this.firstRedirectElement.label),
-			this.translator.translate(this.secondRedirectElement.label),
-			this.getSettingsShortcut(),
-		]);
+		const [[firstLabel, secondLabel], settingsShortcut] = await Promise.all(
+			[
+				getTranslations([
+					this.firstRedirectElement.label,
+					this.secondRedirectElement.label,
+				]),
+				this.getSettingsShortcut(),
+			],
+		);
 		this.firstRedirectElement.label = firstLabel;
 		this.secondRedirectElement.label = secondLabel;
 		this.steps = [
@@ -804,7 +807,7 @@ class Tutorial {
 	 * @return {Promise<void>} Resolves when the message has been translated and displayed.
 	 */
 	async showMessage(step) {
-		let message = await this.translator.translate(step.message);
+		let message = await getTranslations(step.message);
 		if (step.link && !message.includes(step.link)) {
 			message += `\n\n${step.link}`;
 		}
@@ -975,7 +978,6 @@ export async function checkTutorial(fromPopup = false) {
 	});
 	// check if the user closed the tutorial before (if yes, do not prompt because maybe they got annoied)
 	if (!fromPopup && tutorialCloseEvent === "user") return;
-	const translator = await ensureTranslatorAvailability();
 	const [
 		confirmLabel,
 		cancelLabel,
@@ -984,14 +986,14 @@ export async function checkTutorial(fromPopup = false) {
 		start_body,
 		continue_title,
 		continue_body,
-	] = await Promise.all([
-		translator.translate("confirm"),
-		translator.translate("cancel"),
-		translator.translate("cancel_close"),
-		translator.translate("tutorial_start_prompt_title"),
-		translator.translate("tutorial_start_prompt_body"),
-		translator.translate("tutorial_continue_prompt_title"),
-		translator.translate("tutorial_continue_prompt_body"),
+	] = await getTranslations([
+		"confirm",
+		"cancel",
+		"cancel_close",
+		"tutorial_start_prompt_title",
+		"tutorial_start_prompt_body",
+		"tutorial_continue_prompt_title",
+		"tutorial_continue_prompt_body",
 	]);
 	if (tutorialProgress == null) {
 		if (

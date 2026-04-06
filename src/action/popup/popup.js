@@ -16,7 +16,7 @@ import {
 	openSettingsPage,
 	sendExtensionMessage,
 } from "../../core/functions.js";
-import ensureTranslatorAvailability from "../../core/translator.js";
+import { getTranslations, TranslationService } from "../../core/translator.js";
 import "/components/theme-selector/theme-selector.js";
 
 {
@@ -42,8 +42,6 @@ import "/components/theme-selector/theme-selector.js";
 	}
 }
 
-const translator = await ensureTranslatorAvailability();
-
 /**
  * Sends a message that will start the export procedure.
  * @param {Object} message - the message to send somewhere else
@@ -60,7 +58,7 @@ async function pop_sendMessageAndClose(message) {
  * @return {string} The substring before the separator, or the whole string if the separator is not found.
  */
 function _sliceBeforeSeparator(i18n) {
-	return i18n.slice(0, i18n.indexOf(translator.separator));
+	return i18n.slice(0, i18n.indexOf(TranslationService.TRANSLATE_SEPARATOR));
 }
 /**
  * Translates and appends a keyboard shortcut hint to a button’s localized text.
@@ -70,9 +68,9 @@ function _sliceBeforeSeparator(i18n) {
  * @return {Promise<string>} A promise that resolves to the translated text combined with the shortcut hint.
  */
 function addShortcutText(button, shortcut) {
-	return translator.translate([
+	return getTranslations([
 		_sliceBeforeSeparator(
-			button.dataset[translator.translateAttributeDataset],
+			button.dataset[TranslationService.TRANSLATE_DATASET],
 		),
 		`(${shortcut})`,
 	]);

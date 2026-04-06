@@ -8,7 +8,7 @@ import {
 	TOAST_WARNING,
 } from "../core/constants.js";
 import { getSettings } from "../core/functions.js";
-import ensureTranslatorAvailability from "../core/translator.js";
+import { getTranslations } from "../core/translator.js";
 import Tab from "../core/tab.js";
 import { ensureAllTabsAvailability } from "../core/tabContainer.js";
 
@@ -118,10 +118,11 @@ export async function createOpenOtherOrgModal(
 				url.startsWith("/") ? "" : SETUP_LIGHTNING
 			}${url}`,
 		);
-		const translator = await ensureTranslatorAvailability();
-		const confirm_msg = await translator.translate([
-			"confirm_another_org",
-			targetUrl,
+		const confirm_msg = await getTranslations([
+			[
+				"confirm_another_org",
+				targetUrl,
+			],
 		], "\n");
 		if (confirm(confirm_msg)) {
 			closeButton.click();

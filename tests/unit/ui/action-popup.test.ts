@@ -25,12 +25,24 @@ type PopupDependencies = {
 	WHAT_GET_COMMANDS: string;
 	WHAT_SHOW_IMPORT: string;
 	WHAT_START_TUTORIAL: string;
+	TranslationService: {
+		TRANSLATE_DATASET: string;
+		TRANSLATE_SEPARATOR: string;
+	};
 	areFramePatternsAllowed: () => Promise<boolean>;
 	ensureTranslatorAvailability: () => Promise<{
 		separator: string;
-		translate: (message: string | string[]) => Promise<string>;
+		translate: (
+			message: string | string[],
+			connector?: string,
+		) => Promise<string>;
 		translateAttributeDataset: string;
 	}>;
+	getTranslations: (
+		message: string | string[],
+		connector?: string,
+	) => Promise<string | string[]>;
+	getTranslatorAttribute: (attribute: string) => string | null;
 	isOnSalesforceSetup: () => Promise<{ ison: boolean; url?: string | null }>;
 	openSettingsPage: () => void;
 	sendExtensionMessage: (
@@ -93,6 +105,32 @@ async function loadPopupModule({
 		translatorCalls: 0,
 	};
 	const messages: Record<string, unknown>[] = [];
+	let translatorInstance:
+		| Promise<{
+			separator: string;
+			translate: (
+				message: string | string[],
+				connector?: string,
+			) => Promise<string>;
+			translateAttributeDataset: string;
+		}>
+		| null = null;
+	const ensureTranslatorAvailability = () => {
+		if (translatorInstance == null) {
+			counters.translatorCalls++;
+			translatorInstance = Promise.resolve({
+				separator: "+-+",
+				translate: (message, connector = " ") =>
+					Promise.resolve(
+						Array.isArray(message)
+							? message.join(connector)
+							: `translated:${message}`,
+					),
+				translateAttributeDataset: "i18n",
+			});
+		}
+		return translatorInstance;
+	};
 
 	const { cleanup } = await loadIsolatedModule<
 		Record<string, never>,
@@ -116,20 +154,28 @@ async function loadPopupModule({
 			WHAT_GET_COMMANDS: "get-commands",
 			WHAT_SHOW_IMPORT: "show-import",
 			WHAT_START_TUTORIAL: "start-tutorial",
+			TranslationService: {
+				TRANSLATE_DATASET: "i18n",
+				TRANSLATE_SEPARATOR: "+-+",
+			},
 			areFramePatternsAllowed: () =>
 				Promise.resolve(framePatternsAllowed),
-			ensureTranslatorAvailability: () => {
-				counters.translatorCalls++;
-				return Promise.resolve({
-					separator: "+-+",
-					translate: (message) =>
-						Promise.resolve(
-							Array.isArray(message)
-								? message.join(" ")
-								: `translated:${message}`,
-						),
-					translateAttributeDataset: "i18n",
-				});
+			ensureTranslatorAvailability,
+			getTranslations: (message, _connector = " ") => {
+				if (Array.isArray(message)) {
+					return Promise.resolve(message);
+				}
+				return Promise.resolve(message);
+			},
+			getTranslatorAttribute: (attribute) => {
+				switch (attribute) {
+					case "separator":
+						return "+-+";
+					case "translateAttributeDataset":
+						return "i18n";
+					default:
+						return null;
+				}
 			},
 			isOnSalesforceSetup: () => Promise.resolve(salesforceState),
 			openSettingsPage: () => {
@@ -239,10 +285,19 @@ Deno.test("popup wires command titles and action buttons in the normal setup flo
 	});
 
 	try {
-		assertEquals(fixture.counters.translatorCalls, 1);
-		assertEquals(fixture.importButton.title, "popup_import (Ctrl+I)");
-		assertEquals(fixture.exportButton.title, "popup_export (Ctrl+E)");
-		assertEquals(fixture.settingsButton.title, "popup_settings (Ctrl+S)");
+		assertEquals(fixture.counters.translatorCalls, 0);
+		assertEquals(
+			String(fixture.importButton.title),
+			"popup_import,(Ctrl+I)",
+		);
+		assertEquals(
+			String(fixture.exportButton.title),
+			"popup_export,(Ctrl+E)",
+		);
+		assertEquals(
+			String(fixture.settingsButton.title),
+			"popup_settings,(Ctrl+S)",
+		);
 
 		await fixture.importButton.click();
 		await fixture.exportButton.click();

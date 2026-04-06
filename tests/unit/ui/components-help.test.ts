@@ -29,6 +29,7 @@ type HelpDependencies = {
 	ensureTranslatorAvailability: () => Promise<{
 		translate: (message: string) => Promise<string>;
 	}>;
+	getTranslations: (message: string) => Promise<string>;
 	generateHelpWith_i_popup: () => {
 		anchor: MockElement;
 		linkTip: MockElement;
@@ -78,6 +79,10 @@ Deno.test("help component syncs link attributes and accessibility text in isolat
 						return Promise.resolve("Help");
 					},
 				}),
+			getTranslations: () => {
+				translateCalls++;
+				return Promise.resolve("Help");
+			},
 			generateHelpWith_i_popup: () => ({
 				anchor: new MockElement("a"),
 				linkTip: new MockElement("span"),

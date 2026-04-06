@@ -16,9 +16,14 @@ Please remember that this project is entirely funded by **the support of its use
 
 # v2.2.5
 
+## 🛠 Changed
+
+1. Changed how the translations are returned, not requiring to get the translation instance everytime
+
 ## 🧪 Tests
 
 1. Added Logging Auditor & tests
+2. Added tests for new exports of translator file
 
 # v2.2.4
 

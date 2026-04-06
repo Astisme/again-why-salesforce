@@ -24,7 +24,7 @@ import {
 } from "../core/functions.js";
 import Tab from "../core/tab.js";
 import { ensureAllTabsAvailability } from "../core/tabContainer.js";
-import ensureTranslatorAvailability from "../core/translator.js";
+import { getTranslations } from "../core/translator.js";
 
 import {
 	getIsCurrentlyOnSavedTab,
@@ -124,12 +124,15 @@ async function generateFavouriteButton() {
 	span.classList.add("label", "bBody");
 	span.setAttribute("dir", "ltr");
 	button.appendChild(span);
-	const [connectedCommands, translator] = await Promise.all([
+	const [connectedCommands, [save_tab, remove_tab]] = await Promise.all([
 		sendExtensionMessage({
 			what: WHAT_GET_COMMANDS,
 			commands: [CMD_SAVE_AS_TAB, CMD_REMOVE_TAB],
 		}),
-		ensureTranslatorAvailability(),
+		getTranslations([
+			"save_tab",
+			"remove_tab",
+		]),
 	]);
 	let starCmd = null;
 	let slashedStarCmd = null;
@@ -145,10 +148,6 @@ async function generateFavouriteButton() {
 				break;
 		}
 	}
-	const [save_tab, remove_tab] = await Promise.all([
-		translator.translate("save_tab"),
-		translator.translate("remove_tab"),
-	]);
 	const saveTabAssistive = `${save_tab}${
 		starCmd == null ? "" : ` (${starCmd})`
 	}`;
@@ -338,8 +337,7 @@ async function actionFavourite() {
  */
 export async function showFavouriteButton(count = 0) {
 	if (count > 5) {
-		const translator = await ensureTranslatorAvailability();
-		const failHead = await translator.translate("error_no_headers");
+		const failHead = await getTranslations("error_no_headers");
 		console.error(`${EXTENSION_LABEL} - ${failHead}`);
 		return setTimeout(() => showFavouriteButton(), 5000);
 	}

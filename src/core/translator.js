@@ -14,7 +14,7 @@ let singletonTranslator = null;
  * Service for handling text translations in a browser extension.
  * Uses language-specific caches to improve performance.
  */
-class TranslationService {
+export class TranslationService {
 	static FALLBACK_LANGUAGE = "en";
 	static TRANSLATE_DATASET = "i18n";
 	/**
@@ -165,7 +165,7 @@ class TranslationService {
 			console.error(`Failed to load language file for ${language}`, e);
 			const index = language.indexOf("_");
 			if (index > 0) {
-				this.loadLanguageFile(language.substring(0, index));
+				return this.loadLanguageFile(language.substring(0, index));
 			} else {
 				this.currentLanguage = TranslationService.FALLBACK_LANGUAGE;
 				return this.caches[TranslationService.FALLBACK_LANGUAGE];
@@ -419,11 +419,49 @@ function getTranslator() {
  * @return {Promise<TranslationService>} A promise that resolves to the translator instance.
  * @async
  */
-export default function ensureTranslatorAvailability() {
+export function ensureTranslatorAvailability() {
 	try {
 		return getTranslator();
 	} catch (e) {
 		console.info(e);
 		return getTranslator_async();
 	}
+}
+
+/**
+ * Returns one or more translated messages.
+ *
+ * When `translations` is a string, this returns a single translated string.
+ * When `translations` is an array, this returns an array of translated strings in the same order.
+ *
+ * @param {string[]|string} [translations=[]] - Translation key(s) to resolve.
+ * @param {string|null} [connector=null] - the connector used to join the elements
+ * @return {Promise<string[]|string>} Translated result matching the input shape.
+ */
+export async function getTranslations(translations = [], connector = null) {
+	const isArrayInput = Array.isArray(translations);
+	const translationKeys = isArrayInput ? translations : [translations];
+	if (translationKeys.length === 0) {
+		return translations;
+	}
+	const translator = await ensureTranslatorAvailability();
+	const translated = await Promise.all(
+		translationKeys.map((item) => translator.translate(item, connector)),
+	);
+	return isArrayInput ? translated : translated[0];
+}
+
+/**
+ * Returns a translator attribute when available.
+ *
+ * This helper is synchronous on purpose so callers can read static translator
+ * attributes without awaiting service initialization.
+ *
+ * @param {string|null} [attribute=null] - The attribute to read.
+ * @return {Promise<string|null>} The requested attribute value or null.
+ */
+export async function getTranslatorAttribute(attribute = null) {
+	if (attribute == null) return null;
+	const translator = await ensureTranslatorAvailability();
+	return translator?.[attribute] ?? null;
 }
