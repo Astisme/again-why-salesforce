@@ -127,7 +127,10 @@ Deno.test("parseCliArgs supports defaults and options", () => {
 	assertEquals(defaults.kind, "ok");
 	if (defaults.kind === "ok") {
 		assertEquals(defaults.config, createDefaultConfig());
-		assertEquals(defaults.config.command, "deno test -P --allow-write tests/*");
+		assertEquals(
+			defaults.config.command,
+			"deno test -P --allow-write tests/*",
+		);
 	}
 
 	const parsed = parseCliArgs([
