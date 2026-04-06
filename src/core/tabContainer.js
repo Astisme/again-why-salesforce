@@ -111,7 +111,6 @@ export class TabContainer extends Array {
 	 */
 	constructor(secret) {
 		if (secret !== _tabContainerSecret) {
-			console.trace();
 			throw new Error(
 				"error_tabcontainer_constructor",
 			);
