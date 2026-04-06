@@ -84,6 +84,10 @@ type ContentDeps = {
 			join?: string,
 		) => Promise<string>;
 	}>;
+	getTranslations: (
+		message: string | string[],
+		join?: string,
+	) => Promise<string | string[]>;
 	Tab: any;
 	tabContainer: {
 		ensureAllTabsAvailability: () => Promise<any[]>;
@@ -384,6 +388,7 @@ const {
 	getSettings,
 } = __deps.functions;
 const ensureTranslatorAvailability = __deps.ensureTranslatorAvailability;
+const getTranslations = __deps.getTranslations;
 const Tab = __deps.Tab;
 const { ensureAllTabsAvailability } = __deps.tabContainer;
 const { setupDragForUl } = __deps.dragHandler;
@@ -1248,6 +1253,14 @@ function createHarness(url = SETUP_URL) {
 			translate: (message: string | string[], join = " ") =>
 				Array.isArray(message) ? message.join(join) : message,
 		}),
+		getTranslations: (message: string | string[], join = " ") => {
+			if (Array.isArray(message)) {
+				return Promise.resolve(
+					join == null ? message : message.join(join),
+				);
+			}
+			return Promise.resolve(message);
+		},
 		Tab: {
 			keyClickCount: "click-count",
 			keyClickDate: "click-date",

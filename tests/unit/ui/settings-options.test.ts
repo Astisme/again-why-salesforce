@@ -510,6 +510,8 @@ function __getState() {
 				Promise.resolve({
 					translate: (key: string) => Promise.resolve(key),
 				}),
+			getTranslations: (key: string | string[]) =>
+				Promise.resolve(Array.isArray(key) ? key.join(" ") : key),
 			getCssRule: (id: string, value: string) => {
 				cssRuleCalls.push({ id, value });
 				return `${id}:${value};`;

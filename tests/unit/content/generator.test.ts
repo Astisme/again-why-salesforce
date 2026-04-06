@@ -398,6 +398,10 @@ type GeneratorDependencies = {
 			join?: string,
 		) => Promise<string>;
 	}>;
+	getTranslations: (
+		key: string | string[],
+		connector?: string,
+	) => Promise<string | string[]>;
 	getCssRule: (id: string, value: string) => string;
 	getCssSelector: (options: {
 		isGeneric?: boolean;
@@ -630,6 +634,21 @@ async function loadGeneratorFixture({
 						);
 					},
 				}),
+			getTranslations: (key, connector = " ") => {
+				if (Array.isArray(key)) {
+					key.forEach((entry) => translationCalls.push(entry));
+					return Promise.resolve(
+						key.map((entry) =>
+							translations[entry] ?? `translated:${entry}`
+						),
+					);
+				}
+				void connector;
+				translationCalls.push(key);
+				return Promise.resolve(
+					translations[key] ?? `translated:${key}`,
+				);
+			},
 			getCssRule: (id, value) => `${id}:${value};`,
 			getCssSelector: ({
 				isGeneric = false,

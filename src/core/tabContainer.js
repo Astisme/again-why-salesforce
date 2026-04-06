@@ -7,9 +7,8 @@ import {
 } from "./constants.js";
 import { getSettings, sendExtensionMessage, setSettings } from "./functions.js";
 import Tab from "./tab.js";
-import ensureTranslatorAvailability from "./translator.js";
+import { getTranslations } from "./translator.js";
 
-let translator = null;
 let singletonAllTabs = null;
 
 const _tabContainerSecret = Symbol("tabContainerSecret");
@@ -175,10 +174,9 @@ export class TabContainer extends Array {
 		}
 		singletonAllTabs = (async () => {
 			const instance = new TabContainer(_tabContainerSecret);
-			translator = await ensureTranslatorAvailability();
 			if (!await TabContainer.#initialize(instance)) {
 				throw new Error(
-					await translator.translate(
+					await getTranslations(
 						"error_tabcont_not_initialized",
 					),
 				);
@@ -406,9 +404,9 @@ export class TabContainer extends Array {
 	 * @return {Promise<void>} - A promise that resolves once the default tabs are successfully set.
 	 */
 	async setDefaultTabs() {
-		const [flows, users] = await Promise.all([
-			translator.translate("flows"),
-			translator.translate("users"),
+		const [flows, users] = await getTranslations([
+			"flows",
+			"users",
 		]);
 		this.length = 0;
 		this[TabContainer.keyPinnedTabsNo] = 0;
@@ -444,7 +442,7 @@ export class TabContainer extends Array {
 		if (this.length <= initialLength) {
 			// nothing was added
 			const { msg } = this.#validateItem(tab);
-			throw new Error(`${await translator.translate(
+			throw new Error(`${await getTranslations(
 				msg,
 			)} ${JSON.stringify(tab)}`);
 		}
@@ -1144,7 +1142,7 @@ export class TabContainer extends Array {
 	async remove({ label = null, url = null, org = null } = {}) {
 		const tab = { label, url, org };
 		if (tab.label == null && tab.url == null && tab.org == null) {
-			const msg = await translator.translate("error_no_data");
+			const msg = await getTranslations("error_no_data");
 			throw new Error(msg);
 		}
 		const index = this.getTabIndex(this.getSingleTabByData(tab));

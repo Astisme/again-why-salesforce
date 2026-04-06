@@ -38,7 +38,7 @@ import {
 	ensureAllTabsAvailability,
 	TabContainer,
 } from "../core/tabContainer.js";
-import ensureTranslatorAvailability from "../core/translator.js";
+import { getTranslations } from "../core/translator.js";
 
 import { showToast } from "./toast.js";
 import { getCurrentHref } from "./sf-elements.js";
@@ -393,9 +393,8 @@ export async function generateSldsToastMessage(
 	message,
 	status = TOAST_SUCCESS,
 ) {
-	const translator = await ensureTranslatorAvailability();
 	if (message == null || message === "") {
-		throw new Error(await translator.translate("error_toast_generation")); // [en] "Unable to generate Toast Message."
+		throw new Error(await getTranslations("error_toast_generation")); // [en] "Unable to generate Toast Message."
 	}
 	const toastContainer = document.createElement("div");
 	const randomNumber10digits = getRng_n_digits(10);
@@ -469,7 +468,7 @@ export async function generateSldsToastMessage(
 	contentInner.classList.add("slds-align-middle", "slds-hyphenate");
 	const descriptionDiv = document.createElement("div");
 	descriptionDiv.id = "toastDescription7382:0";
-	const translatedMessageSplit = (await translator.translate(message)).split(
+	const translatedMessageSplit = (await getTranslations(message)).split(
 		"\n",
 	);
 	for (const msg_split of translatedMessageSplit) {
@@ -503,12 +502,11 @@ export async function generateSldsToastMessage(
  * @return {Promise<HTMLElement>} The <abbr> element representing the required indicator.
  */
 async function generateRequired() {
-	const translator = await ensureTranslatorAvailability();
 	const requiredElement = document.createElement("abbr");
 	requiredElement.classList.add("slds-required");
 	requiredElement.setAttribute(
 		"title",
-		await translator.translate("required"),
+		await getTranslations("required"),
 	);
 	requiredElement.setAttribute("part", "required");
 	requiredElement.textContent = "*";
@@ -559,18 +557,13 @@ async function createInputElement(
 		//translateValue = true
 	} = {},
 ) {
-	const translator = await ensureTranslatorAvailability();
 	const [msg_tranLabel, msg_tranPlaceholder, msg_tranTitle] = await Promise
 		.all([
-			translateLabel
-				? translator.translate(label)
-				: Promise.resolve(label),
+			translateLabel ? getTranslations(label) : Promise.resolve(label),
 			translatePlaceholder
-				? translator.translate(placeholder)
+				? getTranslations(placeholder)
 				: Promise.resolve(placeholder),
-			translateTitle
-				? translator.translate(title)
-				: Promise.resolve(title),
+			translateTitle ? getTranslations(title) : Promise.resolve(title),
 		]);
 	const input = document.createElement(isTextArea ? "textarea" : "input");
 	input.classList.add("slds-input");
@@ -639,7 +632,6 @@ async function generateInput({
 	translateTitle = true,
 	//translateValue = true
 } = {}) {
-	const translator = await ensureTranslatorAvailability();
 	const options = { translateLabel, translatePlaceholder, translateTitle };
 	const inputParent = document.createElement("div");
 	inputParent.setAttribute("name", "input");
@@ -669,7 +661,7 @@ async function generateInput({
 	}
 	let msg_label = label;
 	if (translateLabel) {
-		msg_label = await translator.translate(label);
+		msg_label = await getTranslations(label);
 	}
 	labelElement.append(msg_label);
 	const inputWrapper = document.createElement("div");
@@ -715,7 +707,6 @@ async function generateInput({
  * - Adds empty slots (`divParent` and cloned `borderSpacer`) for future customization or dynamic content injection.
  */
 export async function generateSection(sectionTitle = null) {
-	const translator = await ensureTranslatorAvailability();
 	const section = document.createElement("records-record-layout-section");
 	section.setAttribute("lwc-692i7qiai51-host", "");
 	if (sectionTitle != null) {
@@ -744,7 +735,7 @@ export async function generateSection(sectionTitle = null) {
 		const span = document.createElement("span");
 		span.setAttribute("lwc-mlenr16lk9", "");
 		span.classList.add("slds-truncate");
-		const tranSectionTitle = await translator.translate(sectionTitle);
+		const tranSectionTitle = await getTranslations(sectionTitle);
 		span.setAttribute("title", tranSectionTitle);
 		span.textContent = tranSectionTitle;
 		h3.appendChild(span);
@@ -1088,13 +1079,12 @@ export async function generateSldsModal({
 	modalTitle = "",
 	saveButtonLabel = "continue",
 } = {}) {
-	const translator = await ensureTranslatorAvailability();
-	const [msg_cancelClose, msg_cancel, msg_continue, req_info] = await Promise
-		.all([
-			translator.translate("cancel_close"),
-			translator.translate("cancel"),
-			translator.translate(saveButtonLabel),
-			translator.translate("required_info"),
+	const [msg_cancelClose, msg_cancel, msg_continue, req_info] =
+		await getTranslations([
+			"cancel_close",
+			"cancel",
+			saveButtonLabel,
+			"required_info",
 		]);
 	const {
 		modalParent,
@@ -1267,11 +1257,10 @@ export function generateRadioButtons(name, {
 export async function generateOpenOtherOrgModal(
 	{ label = null, url = null, org = null } = {},
 ) {
-	const translator = await ensureTranslatorAvailability();
-	const [modalTitle, open_here, open_new_tab] = await Promise.all([
-		label ?? translator.translate("where_to"),
-		translator.translate("open_here"),
-		translator.translate("open_new_tab"),
+	const [modalTitle, open_here, open_new_tab] = await getTranslations([
+		label ?? "where_to",
+		"open_here",
+		"open_new_tab",
 	]);
 	const [
 		{ modalParent, article, saveButton, closeButton },
@@ -1380,14 +1369,13 @@ export async function generateSldsFileInput(
 			"error_required_params",
 		);
 	}
-	const translator = await ensureTranslatorAvailability();
 	const [msg_file, msg_files, msg_upload, msg_drop, msg_or_drop] =
-		await Promise.all([
-			translator.translate("file"),
-			translator.translate("files"),
-			translator.translate("upload"),
-			translator.translate("drop"),
-			translator.translate("or_drop"),
+		await getTranslations([
+			"file",
+			"files",
+			"upload",
+			"drop",
+			"or_drop",
 		]);
 	const fileInputWrapper = document.createElement("div");
 	fileInputWrapper.id = wrapperId;
@@ -1598,8 +1586,7 @@ export async function generateSldsFileInput(
  * @return {Promise<HTMLLabelElement>} The label element containing the checkbox input and its text.
  */
 export async function generateCheckboxWithLabel(id, label, checked = false) {
-	const translator = await ensureTranslatorAvailability();
-	const msg_label = await translator.translate(label);
+	const msg_label = await getTranslations(label);
 	const checkboxLabel = document.createElement("label");
 	checkboxLabel.for = id;
 	const checkbox = document.createElement("input");
@@ -1772,10 +1759,9 @@ export function generateHelpWith_i_popup({
 	tooltip.append(slot);
 	tooltip.append(linkTip);
 	(async () => {
-		const translator = await ensureTranslatorAvailability();
-		const [help_assistive, help_link] = await Promise.all([
-			translator.translate("help"),
-			translator.translate("help_tip_click_link"),
+		const [help_assistive, help_link] = await getTranslations([
+			"help",
+			"help_tip_click_link",
 		]);
 		assistive.textContent = help_assistive;
 		linkTip.textContent = help_link;
@@ -1944,8 +1930,7 @@ async function generateTableWithCheckboxes(
 	headers = [],
 	changeListener = () => {},
 ) {
-	const translator = await ensureTranslatorAvailability();
-	const msg_tabLabel = await translator.translate("tab_label");
+	const msg_tabLabel = await getTranslations("tab_label");
 	const res = {
 		checkboxes: [],
 	};
@@ -1977,9 +1962,8 @@ async function generateTableWithCheckboxes(
  * @return {Promise<HTMLElement>} The explainer element
  */
 async function addModalExplainer(article, explainerKey) {
-	const translator = await ensureTranslatorAvailability();
 	const explainerEl = document.createElement("span");
-	explainerEl.textContent = await translator.translate(explainerKey);
+	explainerEl.textContent = await getTranslations(explainerKey);
 	explainerEl.style.display = "flex";
 	explainerEl.style.justifyContent = "center";
 	explainerEl.style.textAlign = "center";
@@ -2063,7 +2047,6 @@ export async function generateSldsModalWithTabList(tabs = [], {
 	saveButtonLabel = "export",
 	explainer = "select_tabs_export",
 } = {}) {
-	const translator = await ensureTranslatorAvailability();
 	/**
 	 * Function to update select all button text based on checkbox states
 	 */
@@ -2088,8 +2071,7 @@ export async function generateSldsModalWithTabList(tabs = [], {
 		}
 	}
 	const [
-		select_all,
-		unselect_all,
+		[select_all, unselect_all],
 		{
 			modalParent,
 			article,
@@ -2102,19 +2084,21 @@ export async function generateSldsModalWithTabList(tabs = [], {
 			table: tabsListTable,
 		},
 	] = await Promise.all([
-		translator.translate("select_all"),
-		translator.translate("unselect_all"),
+		getTranslations([
+			"select_all",
+			"unselect_all",
+		]),
 		generateSldsModal({
-			modalTitle: await translator.translate(title),
-			saveButtonLabel: await translator.translate(saveButtonLabel),
+			modalTitle: await getTranslations(title),
+			saveButtonLabel: await getTranslations(saveButtonLabel),
 		}),
 		generateTableWithCheckboxes(
 			tabs,
-			(await Promise.all([
-				Promise.resolve(""),
-				translator.translate("tab_label"),
-				translator.translate("tab_url"),
-				translator.translate("tab_org"),
+			(await getTranslations([
+				"",
+				"tab_label",
+				"tab_url",
+				"tab_org",
 			])).map((label) => ({ label })),
 			updateSelectAllButtonText,
 		),
@@ -2325,7 +2309,6 @@ export async function createManageTabRow({
 	disabled = true,
 	isThisOrgTab = true,
 } = {}) {
-	const translator = await ensureTranslatorAvailability();
 	const [
 		tab_label,
 		tab_url,
@@ -2335,15 +2318,15 @@ export async function createManageTabRow({
 		cxm_pin_tab,
 		cxm_unpin_tab,
 		act_delete,
-	] = await Promise.all([
-		translator.translate("tab_label"),
-		translator.translate("tab_url"),
-		translator.translate("tab_org"),
-		translator.translate("actions"),
-		translator.translate("act_open"),
-		translator.translate("cxm_pin_tab"),
-		translator.translate("cxm_unpin_tab"),
-		translator.translate("act_delete"),
+	] = await getTranslations([
+		"tab_label",
+		"tab_url",
+		"tab_org",
+		"actions",
+		"act_open",
+		"cxm_pin_tab",
+		"cxm_unpin_tab",
+		"act_delete",
 	]);
 	const draggable = !disabled;
 	const tr = document.createElement("tr");
@@ -2513,7 +2496,6 @@ export async function generateManageTabsModal(tabs = [], {
 	saveButtonLabel = "save",
 	explainer = "manage_tabs_explainer",
 } = {}) {
-	const translator = await ensureTranslatorAvailability();
 	const [
 		mod_title,
 		mod_savBtn,
@@ -2529,21 +2511,21 @@ export async function generateManageTabsModal(tabs = [], {
 		show_all_tabs,
 		hide_other_org_tabs,
 		delete_all,
-	] = await Promise.all([
-		translator.translate(title),
-		translator.translate(saveButtonLabel),
-		translator.translate("help_drag_tabs"),
-		translator.translate("tab_label"),
-		translator.translate("help_tab_label"),
-		translator.translate("tab_url"),
-		translator.translate("help_tab_url"),
-		translator.translate("tab_org"),
-		translator.translate("help_tab_org"),
-		translator.translate("actions"),
-		translator.translate("help_tab_actions"),
-		translator.translate("show_all_tabs"),
-		translator.translate("hide_other_org_tabs"),
-		translator.translate("delete_all"),
+	] = await getTranslations([
+		title,
+		saveButtonLabel,
+		"help_drag_tabs",
+		"tab_label",
+		"help_tab_label",
+		"tab_url",
+		"help_tab_url",
+		"tab_org",
+		"help_tab_org",
+		"actions",
+		"help_tab_actions",
+		"show_all_tabs",
+		"hide_other_org_tabs",
+		"delete_all",
 	]);
 	const {
 		modalParent,
@@ -2842,10 +2824,9 @@ async function generateMessageBox() {
 	segments.classList.add("tut-v7-segments");
 	const actions = document.createElement("div");
 	actions.classList.add("tut-v7-actions");
-	const translator = await ensureTranslatorAvailability();
-	const [confirmBtnText, closeBtnText] = await Promise.all([
-		translator.translate("confirm"),
-		translator.translate("close"),
+	const [confirmBtnText, closeBtnText] = await getTranslations([
+		"confirm",
+		"close",
 	]);
 	const confirmBtn = document.createElement("button");
 	confirmBtn.classList.add(

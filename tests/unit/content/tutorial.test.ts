@@ -75,6 +75,10 @@ type TutorialDeps = {
 		) => Promise<TutorialStorageValue[]>;
 	};
 	ensureTranslatorAvailability: () => Promise<Translator>;
+	getTranslations: (
+		keys: string | string[],
+		connector?: string,
+	) => Promise<string | string[]>;
 	Tab: {
 		minifyURL: (url: string) => string;
 	};
@@ -259,6 +263,7 @@ async function loadTutorialModule(deps: TutorialDeps) {
 		...deps.toast,
 		Tab: deps.Tab,
 		ensureTranslatorAvailability: deps.ensureTranslatorAvailability,
+		getTranslations: deps.getTranslations,
 	};
 	return await loadIsolatedModule<
 		TutorialModule,
@@ -280,26 +285,6 @@ async function loadTutorialModule(deps: TutorialDeps) {
 			"./sf-elements.js",
 			"./toast.js",
 		]),
-	});
-}
-
-/**
- * Registers a tutorial test with the read permission required by isolated-module loading.
- *
- * @param name Test name.
- * @param fn Test body.
- * @return {void}
- */
-function tutorialTest(
-	name: string,
-	fn: () => Promise<void> | void,
-) {
-	Deno.test({
-		name,
-		permissions: {
-			read: true,
-		},
-		fn,
 	});
 }
 
@@ -642,6 +627,17 @@ function createHarness(options: {
 				),
 		},
 		ensureTranslatorAvailability: () => Promise.resolve(translator),
+		getTranslations: async (keys, connector = " ") => {
+			const translateSingle = async (key: string) =>
+				await Promise.resolve(translator.translate(key));
+			if (!Array.isArray(keys)) {
+				return translateSingle(keys);
+			}
+			const translated = await Promise.all(
+				keys.map((key) => translateSingle(key)),
+			);
+			return connector == null ? translated : translated.join(connector);
+		},
 		Tab: {
 			minifyURL: (url) =>
 				url.replace(/^https?:\/\/[^/]+\/lightning\/setup\//, ""),
@@ -852,7 +848,7 @@ function createHarness(options: {
 	};
 }
 
-tutorialTest(
+Deno.test(
 	"checkTutorial starts the tutorial without a browser",
 	async () => {
 		const harness = createHarness({ tutorialProgress: null });
@@ -885,7 +881,7 @@ tutorialTest(
 	},
 );
 
-tutorialTest("executeStep advances on tutorial custom events", async () => {
+Deno.test("executeStep advances on tutorial custom events", async () => {
 	const harness = createHarness();
 	try {
 		const tutorialModule = await harness.load();
@@ -928,7 +924,7 @@ tutorialTest("executeStep advances on tutorial custom events", async () => {
 	}
 });
 
-tutorialTest(
+Deno.test(
 	"executeStep listens for Lightning navigation without a browser",
 	async () => {
 		const harness = createHarness();
@@ -973,7 +969,7 @@ tutorialTest(
 	},
 );
 
-tutorialTest(
+Deno.test(
 	"tutorial runs end to end and persists completion without a browser",
 	async () => {
 		const harness = createHarness();
@@ -1076,7 +1072,7 @@ tutorialTest(
 	},
 );
 
-tutorialTest(
+Deno.test(
 	"checkTutorial resumes from stored progress without a browser",
 	async () => {
 		const harness = createHarness({ tutorialProgress: 6 });
@@ -1104,7 +1100,7 @@ tutorialTest(
 	},
 );
 
-tutorialTest(
+Deno.test(
 	"executeStep resets to the nearest starting block when a required element is missing",
 	async () => {
 		const harness = createHarness();
@@ -1146,7 +1142,7 @@ tutorialTest(
 	},
 );
 
-tutorialTest(
+Deno.test(
 	"initSteps returns false and shows a toast when no redirect links are available",
 	async () => {
 		const harness = createHarness({
@@ -1170,7 +1166,7 @@ tutorialTest(
 	},
 );
 
-tutorialTest(
+Deno.test(
 	"persistTutorialProgress validates input and clamps the last step to completion",
 	async () => {
 		const harness = createHarness();
@@ -1206,7 +1202,7 @@ tutorialTest(
 	},
 );
 
-tutorialTest(
+Deno.test(
 	"showMessage appends link and shortcut only when they are not already present",
 	async () => {
 		const harness = createHarness();
@@ -1214,13 +1210,11 @@ tutorialTest(
 			const tutorialModule = await harness.load();
 			const tutorial = new tutorialModule.Tutorial();
 			await tutorial.createOverlay();
-			tutorial.translator = {
-				translate: (key: string) => {
-					if (key === "already_complete") {
-						return "Message with https://docs.test and Shortcut: Alt+K";
-					}
-					return "Base message";
-				},
+			harness.translator.translate = (key: string) => {
+				if (key === "already_complete") {
+					return "Message with https://docs.test and Shortcut: Alt+K";
+				}
+				return "Base message";
 			};
 
 			tutorial.showSpinner();
@@ -1255,7 +1249,7 @@ tutorialTest(
 	},
 );
 
-tutorialTest(
+Deno.test(
 	"getElementNowOrLater creates a fake element after enough retries",
 	async () => {
 		const harness = createHarness();
@@ -1283,7 +1277,7 @@ tutorialTest(
 	},
 );
 
-tutorialTest(
+Deno.test(
 	"getElementNowOrLater schedules a retry when the element is still missing",
 	async () => {
 		const harness = createHarness();
@@ -1331,7 +1325,7 @@ tutorialTest(
 	},
 );
 
-tutorialTest(
+Deno.test(
 	"end(false) cleans up the UI without overwriting stored progress",
 	async () => {
 		const harness = createHarness({ tutorialProgress: 4 });
@@ -1358,7 +1352,7 @@ tutorialTest(
 	},
 );
 
-tutorialTest(
+Deno.test(
 	"checkTutorial marks the tutorial completed when the user declines the first prompt",
 	async () => {
 		const harness = createHarness({ tutorialProgress: null });
@@ -1380,7 +1374,7 @@ tutorialTest(
 	},
 );
 
-tutorialTest(
+Deno.test(
 	"checkTutorial marks the tutorial completed when the user declines to continue",
 	async () => {
 		const harness = createHarness({ tutorialProgress: 3 });
@@ -1401,7 +1395,7 @@ tutorialTest(
 	},
 );
 
-tutorialTest(
+Deno.test(
 	"nextStep configures the ending step and triggers confetti",
 	async () => {
 		const harness = createHarness();
@@ -1441,7 +1435,7 @@ tutorialTest(
 	},
 );
 
-tutorialTest(
+Deno.test(
 	"tutorial initSteps covers fallback redirect elements and fake-element helpers",
 	async () => {
 		const harness = createHarness({
@@ -1554,7 +1548,7 @@ tutorialTest(
 	},
 );
 
-tutorialTest(
+Deno.test(
 	"tutorial fake favourite lookup can return undefined when no visible star exists",
 	async () => {
 		const harness = createHarness();
@@ -1580,7 +1574,7 @@ tutorialTest(
 	},
 );
 
-tutorialTest(
+Deno.test(
 	"tutorial overlay handlers cover close button, escape, default event waiters, and popstate redirects",
 	async () => {
 		const harness = createHarness();
@@ -1715,7 +1709,7 @@ tutorialTest(
 	},
 );
 
-tutorialTest(
+Deno.test(
 	"tutorial start branches cover failed initialization, invalid start steps, manual start, and failed resume",
 	async () => {
 		const harness = createHarness({ tutorialProgress: 2 });
@@ -1783,7 +1777,7 @@ tutorialTest(
 	},
 );
 
-tutorialTest(
+Deno.test(
 	"checkTutorial does not prompt again after a manual close outside the popup",
 	async () => {
 		const harness = createHarness({ tutorialProgress: 3 });
@@ -1803,7 +1797,7 @@ tutorialTest(
 	},
 );
 
-tutorialTest(
+Deno.test(
 	"checkTutorial from the popup still prompts after a manual close and can continue",
 	async () => {
 		const harness = createHarness({ tutorialProgress: 3 });
@@ -1837,7 +1831,7 @@ tutorialTest(
 	},
 );
 
-tutorialTest(
+Deno.test(
 	"checkTutorial from the popup restarts from the beginning when the user declines to continue",
 	async () => {
 		const harness = createHarness({ tutorialProgress: 3 });

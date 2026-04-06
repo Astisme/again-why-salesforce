@@ -92,6 +92,10 @@ type FavouriteManagerDependencies = {
 	ensureTranslatorAvailability: () => Promise<{
 		translate: (key: string) => Promise<string>;
 	}>;
+	getTranslations: (
+		keys: string | string[],
+		connector?: string,
+	) => Promise<string | string[]>;
 	getCurrentHref: () => string;
 	getIsCurrentlyOnSavedTab: () => boolean | null;
 	getSettings: (keys: string[]) => Promise<SettingsEntry[] | null>;
@@ -294,6 +298,17 @@ async function loadFavouriteManagerFixture(
 						return Promise.resolve(`translated:${key}`);
 					},
 				}),
+			getTranslations: (keys, connector = " ") => {
+				if (Array.isArray(keys)) {
+					keys.forEach((key) => translationCalls.push(key));
+					return Promise.resolve(
+						keys.map((key) => `translated:${key}`),
+					);
+				}
+				translationCalls.push(keys);
+				void connector;
+				return Promise.resolve(`translated:${keys}`);
+			},
 			getCurrentHref: () => currentHref,
 			getIsCurrentlyOnSavedTab: () => isCurrentlyOnSavedTab,
 			getSettings: (_keys) => Promise.resolve(settings),

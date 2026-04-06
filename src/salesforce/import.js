@@ -12,7 +12,7 @@ import {
 	ensureAllTabsAvailability,
 	TabContainer,
 } from "../core/tabContainer.js";
-import ensureTranslatorAvailability from "../core/translator.js";
+import { getTranslations } from "../core/translator.js";
 
 import {
 	generateCheckboxWithLabel,
@@ -55,10 +55,14 @@ let inputModalParent;
  * }>} An object containing the modal's parent element, the save button, the close button, and the file input element.
  */
 async function generateSldsImport() {
-	const translator = await ensureTranslatorAvailability();
+	const [modalTitle, dup_desc_0, dup_desc_1] = await getTranslations([
+		"import_tabs",
+		"import_duplicate_description_0",
+		"import_duplicate_description_1",
+	]);
 	const { modalParent, article, saveButton, closeButton } =
 		await generateSldsModal({
-			modalTitle: await translator.translate("import_tabs"),
+			modalTitle,
 		});
 	inputModalParent = modalParent;
 	closeButton.id = CLOSE_MODAL_ID;
@@ -76,15 +80,11 @@ async function generateSldsImport() {
 		{ link: BROWSER.runtime.getURL("/salesforce/css/import.css") },
 	);
 	const duplicateWarningPart0 = document.createElement("div");
-	duplicateWarningPart0.textContent = await translator.translate(
-		"import_duplicate_description_0",
-	);
+	duplicateWarningPart0.textContent = dup_desc_0;
 	duplicateWarningPart0.classList.add(IMPORT_DUPLICATE_WARNING_CLASS);
 	divParent.append(duplicateWarningPart0);
 	const duplicateWarningPart1 = document.createElement("div");
-	duplicateWarningPart1.textContent = await translator.translate(
-		"import_duplicate_description_1",
-	);
+	duplicateWarningPart1.textContent = dup_desc_1;
 	duplicateWarningPart1.classList.add(IMPORT_DUPLICATE_WARNING_CLASS);
 	divParent.append(duplicateWarningPart1);
 	const selectTabsCheckbox = await generateCheckboxWithLabel(

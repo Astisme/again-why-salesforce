@@ -58,7 +58,7 @@ import {
 	getInnerElementFieldBySelector,
 	getSettings,
 } from "../core/functions.js";
-import ensureTranslatorAvailability from "../core/translator.js";
+import { getTranslations } from "../core/translator.js";
 import Tab from "../core/tab.js";
 import { ensureAllTabsAvailability } from "../core/tabContainer.js";
 import { setupDragForUl } from "./dragHandler.js";
@@ -341,10 +341,9 @@ function delayLoadSetupTabs(count = 0) {
 	if (count > 5) {
 		// write error in the console
 		(async () => {
-			const translator = await ensureTranslatorAvailability();
-			const [label, fail] = await Promise.all([
-				translator.translate("extension_label"),
-				translator.translate("error_no_setup_tab"),
+			const [label, fail] = await getTranslations([
+				"extension_label",
+				"error_no_setup_tab",
 			]);
 			console.error(`${label} - ${fail}`);
 			setTimeout(delayLoadSetupTabs, 5000);
@@ -575,8 +574,7 @@ export async function performActionOnTabs(
 				pageActionTab(action === WHAT_PAGE_SAVE_TAB);
 				break;
 			default: {
-				const translator = await ensureTranslatorAvailability();
-				const noMatch = await translator.translate("no_match");
+				const noMatch = await getTranslations("no_match");
 				return console.error(noMatch, action);
 			}
 		}
@@ -710,8 +708,7 @@ async function showModalUpdateTab(
  * @return {Promise<void>} Resolves after the prompt and possible navigation.
  */
 async function promptUpdateExtension({ version, link, oldversion } = {}) {
-	const translator = await ensureTranslatorAvailability();
-	const confirm_msg = await translator.translate([
+	const confirm_msg = await getTranslations([
 		`${oldversion} → ${version}`,
 		"confirm_update_extension",
 		link,

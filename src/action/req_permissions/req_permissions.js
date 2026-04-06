@@ -7,7 +7,7 @@ import {
 	requestExportPermission,
 	requestFramePatternsPermission,
 } from "../../core/functions.js";
-import ensureTranslatorAvailability from "../../core/translator.js";
+import { ensureTranslatorAvailability } from "../../core/translator.js";
 import "../themeHandler.js";
 await ensureTranslatorAvailability();
 

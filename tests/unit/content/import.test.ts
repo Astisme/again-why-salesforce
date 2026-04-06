@@ -83,6 +83,7 @@ type ImportDependencies = {
 	ensureTranslatorAvailability: () => Promise<{
 		translate: (message: string) => Promise<string>;
 	}>;
+	getTranslations: (message: string | string[]) => Promise<string | string[]>;
 	generateCheckboxWithLabel: (
 		id: string,
 		label: string,
@@ -436,6 +437,12 @@ function __getInputModalParent() { return inputModalParent; }`,
 					translate: (message) =>
 						Promise.resolve(`translated:${message}`),
 				}),
+			getTranslations: (message) =>
+				Promise.resolve(
+					Array.isArray(message)
+						? message.map((item) => `translated:${item}`)
+						: `translated:${message}`,
+				),
 			generateCheckboxWithLabel: (id, _label, checked) => {
 				const existingCheckbox = fileCheckboxes[id];
 				if (existingCheckbox != null) {

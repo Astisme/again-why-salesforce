@@ -28,9 +28,17 @@ type PopupDependencies = {
 	areFramePatternsAllowed: () => Promise<boolean>;
 	ensureTranslatorAvailability: () => Promise<{
 		separator: string;
-		translate: (message: string | string[]) => Promise<string>;
+		translate: (
+			message: string | string[],
+			connector?: string,
+		) => Promise<string>;
 		translateAttributeDataset: string;
 	}>;
+	getTranslations: (
+		message: string | string[],
+		connector?: string,
+	) => Promise<string>;
+	getTranslatorAttribute: (attribute: string) => string | null;
 	isOnSalesforceSetup: () => Promise<{ ison: boolean; url?: string | null }>;
 	openSettingsPage: () => void;
 	sendExtensionMessage: (
@@ -93,6 +101,32 @@ async function loadPopupModule({
 		translatorCalls: 0,
 	};
 	const messages: Record<string, unknown>[] = [];
+	let translatorInstance:
+		| Promise<{
+			separator: string;
+			translate: (
+				message: string | string[],
+				connector?: string,
+			) => Promise<string>;
+			translateAttributeDataset: string;
+		}>
+		| null = null;
+	const ensureTranslatorAvailability = () => {
+		if (translatorInstance == null) {
+			counters.translatorCalls++;
+			translatorInstance = Promise.resolve({
+				separator: "+-+",
+				translate: (message, connector = " ") =>
+					Promise.resolve(
+						Array.isArray(message)
+							? message.join(connector)
+							: `translated:${message}`,
+					),
+				translateAttributeDataset: "i18n",
+			});
+		}
+		return translatorInstance;
+	};
 
 	const { cleanup } = await loadIsolatedModule<
 		Record<string, never>,
@@ -118,18 +152,20 @@ async function loadPopupModule({
 			WHAT_START_TUTORIAL: "start-tutorial",
 			areFramePatternsAllowed: () =>
 				Promise.resolve(framePatternsAllowed),
-			ensureTranslatorAvailability: () => {
-				counters.translatorCalls++;
-				return Promise.resolve({
-					separator: "+-+",
-					translate: (message) =>
-						Promise.resolve(
-							Array.isArray(message)
-								? message.join(" ")
-								: `translated:${message}`,
-						),
-					translateAttributeDataset: "i18n",
-				});
+			ensureTranslatorAvailability,
+			getTranslations: async (message, connector = " ") => {
+				const translator = await ensureTranslatorAvailability();
+				return translator.translate(message, connector);
+			},
+			getTranslatorAttribute: (attribute) => {
+				switch (attribute) {
+					case "separator":
+						return "+-+";
+					case "translateAttributeDataset":
+						return "i18n";
+					default:
+						return null;
+				}
 			},
 			isOnSalesforceSetup: () => Promise.resolve(salesforceState),
 			openSettingsPage: () => {

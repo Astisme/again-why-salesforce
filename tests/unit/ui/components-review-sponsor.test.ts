@@ -48,6 +48,8 @@ type ReviewSponsorDependencies = {
 		currentLanguage: string;
 		translate: (message: string) => Promise<string>;
 	}>;
+	getTranslations: (message: string) => Promise<string>;
+	getTranslatorAttribute: (attribute: string) => string | null;
 	generateReviewSponsorSvgs: () => ReviewSponsorResult;
 	getSettings: (keys: string[]) => Promise<{ enabled: number }>;
 	injectStyle: (
@@ -187,6 +189,7 @@ function isReviewSponsorClass(
  *     reviewSvg?: HTMLElement;
  *     sponsorLink?: HTMLElement;
  *     sponsorSvg?: HTMLElement;
+ *     translatorLanguage?: string | null;
  *     translator?: { currentLanguage?: string } | null;
  *     usageDays?: number;
  *   }) => void;
@@ -215,6 +218,7 @@ async function loadReviewSponsorBranchModule(
 				reviewSvg?: HTMLElement;
 				sponsorLink?: HTMLElement;
 				sponsorSvg?: HTMLElement;
+				translatorLanguage?: string | null;
 				translator?: { currentLanguage?: string } | null;
 				usageDays?: number;
 			}) => void;
@@ -243,6 +247,9 @@ async function loadReviewSponsorBranchModule(
 					currentLanguage: "en",
 					translate: (message) => Promise.resolve(message),
 				}),
+			getTranslations: (message) => Promise.resolve(message),
+			getTranslatorAttribute: (attribute) =>
+				attribute === "currentLanguage" ? "en" : null,
 			generateReviewSponsorSvgs: () => {
 				const root = document.createElement("div");
 				const reviewLink = document.createElement("a");
@@ -379,7 +386,7 @@ Deno.test("show review or sponsor block", async (t) => {
 			openCalls.length = 0;
 			showReviewOrSponsor({
 				allTabs: Array(16),
-				translator,
+				translatorLanguage: translator.currentLanguage,
 				reviewSvg,
 				sponsorSvg,
 				reviewLink,
@@ -686,6 +693,12 @@ Deno.test("ReviewSponsorAws loads async metadata and opens the expected links in
 						return Promise.resolve(`translated:${message}`);
 					},
 				}),
+			getTranslations: (message) => {
+				translateCalls.push(message);
+				return Promise.resolve(`translated:${message}`);
+			},
+			getTranslatorAttribute: (attribute) =>
+				attribute === "currentLanguage" ? "fr" : null,
 			generateReviewSponsorSvgs: () => generated,
 			getSettings: (keys) => {
 				settingsCalls.push(keys);

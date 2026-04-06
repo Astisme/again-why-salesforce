@@ -175,6 +175,7 @@ type ManageTabsDependencies = {
 	ensureTranslatorAvailability: () => Promise<{
 		translate: (key: string) => Promise<string>;
 	}>;
+	getTranslations: (key: string | string[]) => Promise<string | string[]>;
 	generateManageTabsModal: (allTabs: ManageAllTabs) => Promise<{
 		closeButton: ManageElement;
 		deleteAllTabsButton: ManageElement;
@@ -856,6 +857,12 @@ function __getState() {
 				Promise.resolve({
 					translate: () => Promise.resolve("translated"),
 				}),
+			getTranslations: (key) =>
+				Promise.resolve(
+					Array.isArray(key)
+						? key.map(() => "translated")
+						: "translated",
+				),
 			generateManageTabsModal: (tabs) =>
 				generateManageTabsModalResult.current(tabs),
 			getCurrentHref: () => currentHref.value,

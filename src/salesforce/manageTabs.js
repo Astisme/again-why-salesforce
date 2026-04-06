@@ -20,7 +20,7 @@ import {
 	ensureAllTabsAvailability,
 	TabContainer,
 } from "../core/tabContainer.js";
-import ensureTranslatorAvailability from "../core/translator.js";
+import { getTranslations } from "../core/translator.js";
 
 import { setupDragForTable, setupDragForUl } from "./dragHandler.js";
 import {
@@ -149,10 +149,9 @@ function moveTrToGivenIndex({
  * @param {event} e - the event which had this function called
  */
 async function checkOpenAskConfirm(e) {
-	const translator = await ensureTranslatorAvailability();
 	if (
 		!wasSomethingUpdated ||
-		confirm(await translator.translate("unsaved_changes_confirm"))
+		confirm(await getTranslations("unsaved_changes_confirm"))
 	) {
 		handleLightningLinkClick(e);
 		closeButton.click();

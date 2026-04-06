@@ -56,7 +56,10 @@ import {
 	requestFramePatternsPermission,
 	sendExtensionMessage,
 } from "../core/functions.js";
-import ensureTranslatorAvailability from "../core/translator.js";
+import {
+	ensureTranslatorAvailability,
+	getTranslations,
+} from "../core/translator.js";
 import "../components/theme-selector/theme-selector.js";
 
 // no need to await as we do not need to call the translator
@@ -1012,12 +1015,11 @@ const errorToast = document.getElementById("toast-display-error");
  * @param {boolean} [isSuccess=true] - whether the action concluded with a positive outcome
  */
 async function showToast(message, isSuccess = true) {
-	const translator = await ensureTranslatorAvailability();
 	const toast = isSuccess ? successToast : errorToast;
 	const messageDiv = toast.querySelector(
 		"div.toastMessage.slds-text-heading--small.forceActionsText",
 	);
-	messageDiv.innerText = await translator.translate(message);
+	messageDiv.innerText = await getTranslations(message);
 	showThenHideToast(toast);
 }
 
