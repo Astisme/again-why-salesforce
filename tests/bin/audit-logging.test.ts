@@ -3,6 +3,7 @@ import {
 	assertEquals,
 	assertStringIncludes,
 } from "@std/testing/asserts";
+import { dirname, fromFileUrl, join } from "@std/path";
 import {
 	type AuditFinding,
 	buildFindings,
@@ -280,7 +281,8 @@ Deno.test("severity and fail gating follow threshold behavior", () => {
 
 Deno.test("defaultProjectRoot and listFilesRecursive return expected values", async () => {
 	const root = defaultProjectRoot();
-	assert(root.endsWith("awsf-ana-date"));
+	const expectedRoot = join(dirname(fromFileUrl(import.meta.url)), "..", "..");
+	assertEquals(root, expectedRoot);
 	const files = await listFilesRecursive(`${root}/src`);
 	assert(files.length > 0);
 	assert(files.every((file) => file.endsWith(".js")));
