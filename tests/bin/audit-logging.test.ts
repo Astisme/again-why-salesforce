@@ -281,7 +281,11 @@ Deno.test("severity and fail gating follow threshold behavior", () => {
 
 Deno.test("defaultProjectRoot and listFilesRecursive return expected values", async () => {
 	const root = defaultProjectRoot();
-	const expectedRoot = join(dirname(fromFileUrl(import.meta.url)), "..", "..");
+	const expectedRoot = join(
+		dirname(fromFileUrl(import.meta.url)),
+		"..",
+		"..",
+	);
 	assertEquals(root, expectedRoot);
 	const files = await listFilesRecursive(`${root}/src`);
 	assert(files.length > 0);

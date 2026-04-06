@@ -17,6 +17,7 @@ Please remember that this project is entirely funded by **the support of its use
 # v2.2.5
 
 ## 🧪 Tests
+
 1. Added Logging Auditor & tests
 
 # v2.2.4
