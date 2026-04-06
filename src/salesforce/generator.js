@@ -1078,13 +1078,15 @@ function createSldsModalShell({
 export async function generateSldsModal({
 	modalTitle = "",
 	saveButtonLabel = "continue",
+	explainer = null,
 } = {}) {
-	const [msg_cancelClose, msg_cancel, msg_continue, req_info] =
+	const [msg_cancelClose, msg_cancel, msg_continue, req_info, explainerKey] =
 		await getTranslations([
 			"cancel_close",
 			"cancel",
 			saveButtonLabel,
 			"required_info",
+			explainer,
 		]);
 	const {
 		modalParent,
@@ -1099,6 +1101,18 @@ export async function generateSldsModal({
 		cancelButtonLabel: msg_cancel,
 		confirmButtonLabel: msg_continue,
 	});
+	if (explainer != null) {
+		const explainerEl = document.createElement("span");
+		explainerEl.textContent = explainerKey;
+		explainerEl.style.display = "flex";
+		explainerEl.style.justifyContent = "center";
+		explainerEl.style.textAlign = "center";
+		explainerEl.classList.add(
+			"slds-p-around_medium",
+			"slds-p-bottom--none",
+		);
+		article.prepend(explainerEl);
+	}
 	legend?.append(req_info);
 	return {
 		modalParent,
@@ -1954,28 +1968,6 @@ async function generateTableWithCheckboxes(
 }
 
 /**
- * Helper function to add title and explainer to a modal article.
- * Creates and prepends a centered explainer span with translated text.
- *
- * @param {HTMLElement} article - The modal article element
- * @param {string} explainerKey - The i18n key for the explainer text
- * @return {Promise<HTMLElement>} The explainer element
- */
-async function addModalExplainer(article, explainerKey) {
-	const explainerEl = document.createElement("span");
-	explainerEl.textContent = await getTranslations(explainerKey);
-	explainerEl.style.display = "flex";
-	explainerEl.style.justifyContent = "center";
-	explainerEl.style.textAlign = "center";
-	explainerEl.classList.add(
-		"slds-p-around_medium",
-		"slds-p-bottom--none",
-	);
-	article.prepend(explainerEl);
-	return explainerEl;
-}
-
-/**
  * Helper function to create and append a modal content container (divParent).
  * Applies standard SLDS styling for modal content areas.
  *
@@ -2091,6 +2083,7 @@ export async function generateSldsModalWithTabList(tabs = [], {
 		generateSldsModal({
 			modalTitle: await getTranslations(title),
 			saveButtonLabel: await getTranslations(saveButtonLabel),
+			explainer,
 		}),
 		generateTableWithCheckboxes(
 			tabs,
@@ -2103,7 +2096,6 @@ export async function generateSldsModalWithTabList(tabs = [], {
 			updateSelectAllButtonText,
 		),
 	]);
-	await addModalExplainer(article, explainer);
 	// counter for how many Tabs are selected
 	const tabConterOpen = document.createElement("span");
 	tabConterOpen.innerHTML = "&nbsp;(";
@@ -2536,8 +2528,8 @@ export async function generateManageTabsModal(tabs = [], {
 	} = await generateSldsModal({
 		modalTitle: mod_title,
 		saveButtonLabel: mod_savBtn,
+		explainer,
 	});
-	await addModalExplainer(article, explainer);
 	// Create a table-like structure for tabs
 	const divParent = createModalContentContainer(article);
 	const wikiLinkTab = `${EXTENSION_GITHUB_LINK}/wiki/What-is-a-Tab`;
