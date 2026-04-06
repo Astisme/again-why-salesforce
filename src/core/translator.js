@@ -458,7 +458,7 @@ export async function getTranslations(translations = [], connector = null) {
  * attributes without awaiting service initialization.
  *
  * @param {string|null} [attribute=null] - The attribute to read.
- * @return {string|null} The requested attribute value or null.
+ * @return {Promise<string|null>} The requested attribute value or null.
  */
 export async function getTranslatorAttribute(attribute = null) {
 	if (attribute == null) return null;
