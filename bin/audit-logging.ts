@@ -34,8 +34,9 @@ export async function main(args: string[]): Promise<number> {
 		projectRoot,
 		localeFile: options.localeFile,
 	});
-    if(report.findings.length > 0)
-      await writeJson(options.reportFile, report);
+	if (report.findings.length > 0) {
+		await writeJson(options.reportFile, report);
+	}
 	return shouldFail(report.findings, options.failSeverity) ? 1 : 0;
 }
 
