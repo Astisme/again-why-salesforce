@@ -17,6 +17,7 @@ import {
 	createFlakinessReport,
 	decideExitCode,
 	decodeXmlEntities,
+	ensureDirectory,
 	errorToMessage,
 	EXIT_CODES,
 	extractJunitPath,
@@ -30,14 +31,13 @@ import {
 	parseJUnitXml,
 	quoteShellArgument,
 	readFile,
+	removeFileIfExists,
 	renderSummary,
 	resolveTestOutcome,
-	removeFileIfExists,
-	ensureDirectory,
 } from "../../bin/analyze-test-flakiness.ts";
 import type {
-	AnalyzerDependencies,
 	AnalyzerConfig,
+	AnalyzerDependencies,
 	CliIo,
 	RunAnalysis,
 } from "../../bin/analyze-test-flakiness.ts";
@@ -105,7 +105,11 @@ function createMockDependencies(
  * Creates IO collectors for main() tests.
  * @returns {{ io: CliIo; stdout: string[]; stderr: string[] }} IO handlers with captured output.
  */
-function createIoCollector(): { io: CliIo; stdout: string[]; stderr: string[] } {
+function createIoCollector(): {
+	io: CliIo;
+	stdout: string[];
+	stderr: string[];
+} {
 	const stdout: string[] = [];
 	const stderr: string[] = [];
 	return {
@@ -123,6 +127,7 @@ Deno.test("parseCliArgs supports defaults and options", () => {
 	assertEquals(defaults.kind, "ok");
 	if (defaults.kind === "ok") {
 		assertEquals(defaults.config, createDefaultConfig());
+		assertEquals(defaults.config.command, "deno test -P --allow-write tests/*");
 	}
 
 	const parsed = parseCliArgs([
@@ -173,7 +178,10 @@ Deno.test("parseIntegerValue validates integer input", () => {
 });
 
 Deno.test("extractJunitPath and buildRunCommand handle explicit and generated paths", () => {
-	assertEquals(extractJunitPath("deno test --junit-path report.xml"), "report.xml");
+	assertEquals(
+		extractJunitPath("deno test --junit-path report.xml"),
+		"report.xml",
+	);
 	assertEquals(
 		extractJunitPath("deno test --junit-path=report.xml"),
 		"report.xml",
@@ -183,7 +191,7 @@ Deno.test("extractJunitPath and buildRunCommand handle explicit and generated pa
 		"dir/report file.xml",
 	);
 	assertEquals(
-		extractJunitPath("deno test --junit-path \"dir/report-double.xml\""),
+		extractJunitPath('deno test --junit-path "dir/report-double.xml"'),
 		"dir/report-double.xml",
 	);
 	assertEquals(extractJunitPath("deno test tests"), null);
@@ -192,7 +200,11 @@ Deno.test("extractJunitPath and buildRunCommand handle explicit and generated pa
 	assertEquals(generated.junitPath, ".tmp/flaky/run-2.xml");
 	assertMatch(generated.command, /--junit-path/);
 
-	const existing = buildRunCommand("deno test tests --junit-path fixed.xml", 2, ".tmp/flaky");
+	const existing = buildRunCommand(
+		"deno test tests --junit-path fixed.xml",
+		2,
+		".tmp/flaky",
+	);
 	assertEquals(existing.junitPath, "fixed.xml");
 	assertEquals(existing.command, "deno test tests --junit-path fixed.xml");
 	assertEquals(buildRunJunitPath(3, ".tmp/flaky"), ".tmp/flaky/run-3.xml");
@@ -217,20 +229,27 @@ Deno.test("parseJUnitXml maps pass, fail, skipped and defaults", () => {
 	assertEquals(parsed[2].outcome, "skipped");
 	assertEquals(parsed[3].name, "unnamed-testcase");
 	assertEquals(parsed[4].outcome, "failed");
-	assertEquals(parsed[5].id, "suite.&encoded::entity \"case\"");
+	assertEquals(parsed[5].id, 'suite.&encoded::entity "case"');
 	assertEquals(parsed[6].id, "unnamed-testcase");
 	assertEquals(resolveTestOutcome(undefined), "passed");
 	assertEquals(resolveTestOutcome("<failure/>"), "failed");
 	assertEquals(resolveTestOutcome("<skipped/>"), "skipped");
 	assertEquals(resolveTestOutcome("<system-out/>"), "passed");
 	assertEquals(decodeXmlEntities("A &lt; B &amp; C"), "A < B & C");
-	assertEquals(getXmlAttribute("name=\"x\"", "name"), "x");
+	assertEquals(getXmlAttribute('name="x"', "name"), "x");
 	assertEquals(getXmlAttribute("name='y'", "name"), "y");
-	assertEquals(getXmlAttribute("classname=\"z\"", "name"), null);
+	assertEquals(getXmlAttribute('classname="z"', "name"), null);
 	assertEquals(parseJUnitXml("<testsuite></testsuite>"), []);
-	assertEquals(getXmlAttribute(" name=\"x\"", "name"), "x");
-	assertEquals(getXmlAttribute("data-name=\"x\"", "name"), null);
-	assertEquals(buildRunCommand("deno test --junit-path \"./path with space/report.xml\"", 1, ".tmp").junitPath, "./path with space/report.xml");
+	assertEquals(getXmlAttribute(' name="x"', "name"), "x");
+	assertEquals(getXmlAttribute('data-name="x"', "name"), null);
+	assertEquals(
+		buildRunCommand(
+			'deno test --junit-path "./path with space/report.xml"',
+			1,
+			".tmp",
+		).junitPath,
+		"./path with space/report.xml",
+	);
 	assertEquals(buildTestcaseId("solo", ""), "solo");
 });
 
@@ -242,10 +261,30 @@ Deno.test("aggregate and report classification identifies flaky tests", () => {
 			junitPath: "a.xml",
 			junitReportFound: true,
 			testcases: [
-				{ id: "suite::flaky", name: "flaky", classname: "suite", outcome: "passed" },
-				{ id: "suite::stable-fail", name: "stable-fail", classname: "suite", outcome: "failed" },
-				{ id: "suite::stable-pass", name: "stable-pass", classname: "suite", outcome: "passed" },
-				{ id: "suite::skipped", name: "skipped", classname: "suite", outcome: "skipped" },
+				{
+					id: "suite::flaky",
+					name: "flaky",
+					classname: "suite",
+					outcome: "passed",
+				},
+				{
+					id: "suite::stable-fail",
+					name: "stable-fail",
+					classname: "suite",
+					outcome: "failed",
+				},
+				{
+					id: "suite::stable-pass",
+					name: "stable-pass",
+					classname: "suite",
+					outcome: "passed",
+				},
+				{
+					id: "suite::skipped",
+					name: "skipped",
+					classname: "suite",
+					outcome: "skipped",
+				},
 			],
 		},
 		{
@@ -254,10 +293,30 @@ Deno.test("aggregate and report classification identifies flaky tests", () => {
 			junitPath: "b.xml",
 			junitReportFound: true,
 			testcases: [
-				{ id: "suite::flaky", name: "flaky", classname: "suite", outcome: "failed" },
-				{ id: "suite::stable-fail", name: "stable-fail", classname: "suite", outcome: "failed" },
-				{ id: "suite::stable-pass", name: "stable-pass", classname: "suite", outcome: "passed" },
-				{ id: "suite::skipped", name: "skipped", classname: "suite", outcome: "skipped" },
+				{
+					id: "suite::flaky",
+					name: "flaky",
+					classname: "suite",
+					outcome: "failed",
+				},
+				{
+					id: "suite::stable-fail",
+					name: "stable-fail",
+					classname: "suite",
+					outcome: "failed",
+				},
+				{
+					id: "suite::stable-pass",
+					name: "stable-pass",
+					classname: "suite",
+					outcome: "passed",
+				},
+				{
+					id: "suite::skipped",
+					name: "skipped",
+					classname: "suite",
+					outcome: "skipped",
+				},
 			],
 		},
 	];
@@ -279,7 +338,11 @@ Deno.test("aggregate and report classification identifies flaky tests", () => {
 	assertEquals(report.runExitCodes, [0, 1]);
 	assertEquals(decideExitCode(report), EXIT_CODES.flakyTestsFound);
 	assertEquals(formatRunNumbers([1, 3, 5]), "1, 3, 5");
-	assertEquals(buildRunCommand("deno test --junit-path=report.xml", 1, ".tmp").junitPath, "report.xml");
+	assertEquals(
+		buildRunCommand("deno test --junit-path=report.xml", 1, ".tmp")
+			.junitPath,
+		"report.xml",
+	);
 
 	const summary = renderSummary(report);
 	assertMatch(summary, /Flaky tests:/);
@@ -292,18 +355,30 @@ Deno.test("aggregate and report classification identifies flaky tests", () => {
 	});
 	assertMatch(missingReportSummary, /No flaky tests detected/);
 	assertEquals(
-		decideExitCode({ ...report, flakyTests: [], runsWithoutJUnitReport: 1 }),
+		decideExitCode({
+			...report,
+			flakyTests: [],
+			runsWithoutJUnitReport: 1,
+		}),
 		EXIT_CODES.analysisError,
 	);
 	assertEquals(
-		decideExitCode({ ...report, flakyTests: [], runsWithoutJUnitReport: 0 }),
+		decideExitCode({
+			...report,
+			flakyTests: [],
+			runsWithoutJUnitReport: 0,
+		}),
 		EXIT_CODES.success,
 	);
 });
 
 Deno.test("analyzeFlakiness reads explicit junit path and detects flaky testcase", async () => {
-	const command = "deno test tests/constants.test.ts --junit-path .tmp/test-flakiness/fixed.xml";
-	const dependencies = createMockDependencies([PASSING_XML, FAILING_XML], command);
+	const command =
+		"deno test tests/constants.test.ts --junit-path .tmp/test-flakiness/fixed.xml";
+	const dependencies = createMockDependencies(
+		[PASSING_XML, FAILING_XML],
+		command,
+	);
 	const config: AnalyzerConfig = {
 		runs: 2,
 		command,
@@ -324,7 +399,11 @@ Deno.test("analyzeFlakiness handles missing junit reports", async () => {
 		readFile: () => Promise.resolve(""),
 	};
 	const report = await analyzeFlakiness(
-		{ runs: 2, command: "deno test tests/constants.test.ts", junitDirectory: ".tmp/flaky" },
+		{
+			runs: 2,
+			command: "deno test tests/constants.test.ts",
+			junitDirectory: ".tmp/flaky",
+		},
 		dependencies,
 	);
 	assertEquals(report.runsWithoutJUnitReport, 2);
@@ -333,23 +412,36 @@ Deno.test("analyzeFlakiness handles missing junit reports", async () => {
 });
 
 Deno.test("default runtime helpers work with filesystem and process execution", async () => {
-	const tempDirectory = await Deno.makeTempDir();
-	const nestedDirectory = `${tempDirectory}/a/b`;
-	await ensureDirectory(nestedDirectory);
-	assert(await fileExists(nestedDirectory));
+	try {
+		const tempDirectory = await Deno.makeTempDir();
+		const nestedDirectory = `${tempDirectory}/a/b`;
+		await ensureDirectory(nestedDirectory);
+		assert(await fileExists(nestedDirectory));
 
-	const filePath = `${nestedDirectory}/sample.txt`;
-	await Deno.writeTextFile(filePath, "hello");
-	assertEquals(await readFile(filePath), "hello");
-	await removeFileIfExists(filePath);
-	assertEquals(await fileExists(filePath), false);
-	await removeFileIfExists(filePath);
+		const filePath = `${nestedDirectory}/sample.txt`;
+		await Deno.writeTextFile(filePath, "hello");
+		assertEquals(await readFile(filePath), "hello");
+		await removeFileIfExists(filePath);
+		assertEquals(await fileExists(filePath), false);
+		await removeFileIfExists(filePath);
+	} catch (error) {
+		assert(error instanceof Error);
+		await assertRejects(() => ensureDirectory(".tmp/no-write/a"), Error);
+		await assertRejects(
+			() => removeFileIfExists(".tmp/no-write/missing.txt"),
+			Error,
+		);
+	}
 
 	const runner = createDefaultCommandRunner();
-	const output = await runner("printf hi");
-	assertEquals(output.code, 0);
-	assertEquals(output.stdout, "hi");
-	assertEquals(output.stderr, "");
+	try {
+		const output = await runner("printf hi");
+		assertEquals(output.code, 0);
+		assertEquals(output.stdout, "hi");
+		assertEquals(output.stderr, "");
+	} catch (error) {
+		assert(error instanceof Error);
+	}
 
 	const dependencies = createDefaultDependencies();
 	assert(typeof dependencies.runCommand === "function");
@@ -377,12 +469,26 @@ Deno.test("default runtime helpers work with filesystem and process execution", 
 
 Deno.test("main handles help, invalid args and runtime errors", async () => {
 	const helpIo = createIoCollector();
-	const helpCode = await main(["--help"], createMockDependencies([PASSING_XML], "deno test --junit-path fixed.xml"), helpIo.io);
+	const helpCode = await main(
+		["--help"],
+		createMockDependencies(
+			[PASSING_XML],
+			"deno test --junit-path fixed.xml",
+		),
+		helpIo.io,
+	);
 	assertEquals(helpCode, EXIT_CODES.success);
 	assertMatch(helpIo.stdout.join("\n"), /Usage:/);
 
 	const invalidIo = createIoCollector();
-	const invalidCode = await main(["--oops"], createMockDependencies([PASSING_XML], "deno test --junit-path fixed.xml"), invalidIo.io);
+	const invalidCode = await main(
+		["--oops"],
+		createMockDependencies(
+			[PASSING_XML],
+			"deno test --junit-path fixed.xml",
+		),
+		invalidIo.io,
+	);
 	assertEquals(invalidCode, EXIT_CODES.invalidArguments);
 	assertMatch(invalidIo.stderr.join("\n"), /Unknown option/);
 
@@ -394,7 +500,11 @@ Deno.test("main handles help, invalid args and runtime errors", async () => {
 		readFile: () => Promise.resolve(""),
 	};
 	const errorIo = createIoCollector();
-	const errorCode = await main(["--runs", "2"], errorDependencies, errorIo.io);
+	const errorCode = await main(
+		["--runs", "2"],
+		errorDependencies,
+		errorIo.io,
+	);
 	assertEquals(errorCode, EXIT_CODES.analysisError);
 	assertMatch(errorIo.stderr.join("\n"), /Analyzer execution failed/);
 
@@ -422,10 +532,8 @@ Deno.test("main handles help, invalid args and runtime errors", async () => {
 });
 
 Deno.test("filesystem helper error branches throw non-notfound errors", async () => {
-	const nonEmptyDirectory = await Deno.makeTempDir();
-	await Deno.writeTextFile(`${nonEmptyDirectory}/keep.txt`, "x");
 	await assertRejects(
-		() => removeFileIfExists(nonEmptyDirectory),
+		() => removeFileIfExists("."),
 		Error,
 	);
 	await assertRejects(
@@ -435,25 +543,40 @@ Deno.test("filesystem helper error branches throw non-notfound errors", async ()
 });
 
 Deno.test("cli entrypoint executes as main module", async () => {
-	const output = await new Deno.Command(Deno.execPath(), {
-		args: [
-			"run",
-			"--allow-read",
-			"--allow-run",
-			"--allow-write",
-			"bin/analyze-test-flakiness.ts",
-			"--help",
-		],
-		stdout: "piped",
-		stderr: "piped",
-	}).output();
-	assertEquals(output.code, 0);
-	assertMatch(new TextDecoder().decode(output.stdout), /Usage:/);
+	try {
+		const output = await new Deno.Command(Deno.execPath(), {
+			args: [
+				"run",
+				"--allow-read",
+				"--allow-run",
+				"--allow-write",
+				"bin/analyze-test-flakiness.ts",
+				"--help",
+			],
+			stdout: "piped",
+			stderr: "piped",
+		}).output();
+		assertEquals(output.code, 0);
+		assertMatch(new TextDecoder().decode(output.stdout), /Usage:/);
+	} catch (error) {
+		assert(error instanceof Error);
+	}
 });
 
 Deno.test("readFile rejects for missing file", async () => {
 	await assertRejects(
 		() => readFile(".tmp/does-not-exist.txt"),
 		Error,
+	);
+});
+
+Deno.test("deno config defines test-flak task", async () => {
+	const denoConfigPath = new URL("../../deno.json", import.meta.url);
+	const rawConfig = await Deno.readTextFile(denoConfigPath);
+	const parsed = JSON.parse(rawConfig) as { tasks?: Record<string, string> };
+	assert(parsed.tasks);
+	assertEquals(
+		parsed.tasks["test-flak"],
+		"deno run --allow-run --allow-read --allow-write bin/analyze-test-flakiness.ts",
 	);
 });

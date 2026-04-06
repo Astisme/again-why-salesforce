@@ -1,6 +1,11 @@
 #!/usr/bin/env -S deno run --allow-run --allow-read --allow-write
 
 /**
+ * Repeats a test command, parses JUnit reports for each run, and reports flaky
+ * testcases that both pass and fail across runs.
+ */
+
+/**
  * Flakiness analyzer configuration.
  */
 export interface AnalyzerConfig {
@@ -127,7 +132,7 @@ export type CliParseResult = CliParseSuccess | CliParseHelp | CliParseError;
 const TEXT_DECODER = new TextDecoder();
 const DEFAULT_RUN_COUNT = 10;
 const MINIMUM_RUN_COUNT = 2;
-const DEFAULT_TEST_COMMAND = "deno test tests";
+const DEFAULT_TEST_COMMAND = "deno test -P --allow-write tests/*";
 const DEFAULT_JUNIT_DIRECTORY = ".tmp/test-flakiness";
 const DEFAULT_JUNIT_FILE_PREFIX = "run";
 const DEFAULT_JUNIT_FILE_EXTENSION = "xml";
@@ -137,7 +142,8 @@ const OPTION_COMMAND = "--command";
 const OPTION_JUNIT_DIRECTORY = "--junit-dir";
 const OPTION_HELP = "--help";
 const OPTION_HELP_SHORT = "-h";
-const XML_TESTCASE_PATTERN = /<testcase\b([^>]*?)(?:\/>|>([\s\S]*?)<\/testcase>)/g;
+const XML_TESTCASE_PATTERN =
+	/<testcase\b([^>]*?)(?:\/>|>([\s\S]*?)<\/testcase>)/g;
 const XML_FAILURE_PATTERN = /<(?:failure|error)\b/;
 const XML_SKIPPED_PATTERN = /<skipped\b/;
 const JUNIT_PATH_PATTERN =
@@ -222,13 +228,17 @@ export function parseCliArgs(args: string[]): CliParseResult {
 		if (argument === OPTION_RUNS) {
 			const value = args[index + 1];
 			if (!value) {
-				return { kind: "error", message: `${OPTION_RUNS} requires a value.` };
+				return {
+					kind: "error",
+					message: `${OPTION_RUNS} requires a value.`,
+				};
 			}
 			const parsedRuns = parseIntegerValue(value);
 			if (parsedRuns === null || parsedRuns < MINIMUM_RUN_COUNT) {
 				return {
 					kind: "error",
-					message: `${OPTION_RUNS} must be an integer >= ${MINIMUM_RUN_COUNT}.`,
+					message:
+						`${OPTION_RUNS} must be an integer >= ${MINIMUM_RUN_COUNT}.`,
 				};
 			}
 			config.runs = parsedRuns;
@@ -238,7 +248,10 @@ export function parseCliArgs(args: string[]): CliParseResult {
 		if (argument === OPTION_COMMAND) {
 			const value = args[index + 1];
 			if (!value) {
-				return { kind: "error", message: `${OPTION_COMMAND} requires a value.` };
+				return {
+					kind: "error",
+					message: `${OPTION_COMMAND} requires a value.`,
+				};
 			}
 			config.command = value;
 			index += 1;
@@ -337,7 +350,10 @@ export function escapeRegexPattern(value: string): string {
  * @param {string} key Attribute name.
  * @returns {string | null} Attribute value if found.
  */
-export function getXmlAttribute(attributes: string, key: string): string | null {
+export function getXmlAttribute(
+	attributes: string,
+	key: string,
+): string | null {
 	const escapedKey = escapeRegexPattern(key);
 	const pattern = new RegExp(
 		`(?:^|\\s)${escapedKey}\\s*=\\s*(?:"([^"]*)"|'([^']*)')`,
@@ -404,7 +420,8 @@ export function parseJUnitXml(xml: string): ParsedTestCaseOutcome[] {
 	for (const match of xml.matchAll(XML_TESTCASE_PATTERN)) {
 		const attributes = match[1] as string;
 		const body = match[2];
-		const rawName = getXmlAttribute(attributes, "name") ?? DEFAULT_TESTCASE_NAME;
+		const rawName = getXmlAttribute(attributes, "name") ??
+			DEFAULT_TESTCASE_NAME;
 		const rawClassname = getXmlAttribute(attributes, "classname") ?? "";
 		const name = decodeXmlEntities(rawName);
 		const classname = decodeXmlEntities(rawClassname);
@@ -441,7 +458,9 @@ export function createEmptyAggregate(
  * @param {RunAnalysis[]} runs Run analysis list.
  * @returns {AggregatedTestcaseResult[]} Aggregated outcomes.
  */
-export function aggregateRunOutcomes(runs: RunAnalysis[]): AggregatedTestcaseResult[] {
+export function aggregateRunOutcomes(
+	runs: RunAnalysis[],
+): AggregatedTestcaseResult[] {
 	const aggregates = new Map<string, AggregatedTestcaseResult>();
 	for (const run of runs) {
 		for (const testcase of run.testcases) {
@@ -482,7 +501,8 @@ export function createFlakinessReport(
 	const stablePassingTests = aggregates.filter((testcase) =>
 		testcase.passedRuns.length > 0 && testcase.failedRuns.length === 0
 	);
-	const runsWithoutJUnitReport = runs.filter((run) => !run.junitReportFound).length;
+	const runsWithoutJUnitReport =
+		runs.filter((run) => !run.junitReportFound).length;
 	return {
 		totalRuns,
 		totalObservedTestcases: aggregates.length,
@@ -524,7 +544,9 @@ export function renderSummary(report: FlakinessReport): string {
 		lines.push(SUMMARY_LABELS.flakySection);
 		for (const testcase of report.flakyTests) {
 			lines.push(
-				`- ${testcase.id} (pass: ${formatRunNumbers(testcase.passedRuns)}; fail: ${formatRunNumbers(testcase.failedRuns)})`,
+				`- ${testcase.id} (pass: ${
+					formatRunNumbers(testcase.passedRuns)
+				}; fail: ${formatRunNumbers(testcase.failedRuns)})`,
 			);
 		}
 	}
@@ -532,7 +554,9 @@ export function renderSummary(report: FlakinessReport): string {
 		lines.push(SUMMARY_LABELS.stableFailingSection);
 		for (const testcase of report.stableFailingTests) {
 			lines.push(
-				`- ${testcase.id} (fail: ${formatRunNumbers(testcase.failedRuns)})`,
+				`- ${testcase.id} (fail: ${
+					formatRunNumbers(testcase.failedRuns)
+				})`,
 			);
 		}
 	}
@@ -669,7 +693,9 @@ export async function analyzeFlakiness(
 		);
 		await dependencies.removeFile(runCommand.junitPath);
 		const commandResult = await dependencies.runCommand(runCommand.command);
-		const junitReportFound = await dependencies.fileExists(runCommand.junitPath);
+		const junitReportFound = await dependencies.fileExists(
+			runCommand.junitPath,
+		);
 		const testcases = junitReportFound
 			? parseJUnitXml(await dependencies.readFile(runCommand.junitPath))
 			: [];

@@ -27,6 +27,7 @@
 		"test-core": "deno test -P --coverage --parallel --quiet tests/unit/core/*",
 		"test-ui": "deno test -P --coverage --parallel --quiet tests/unit/ui/*",
 		"test-bin": "deno test -P --coverage --parallel --quiet tests/bin/*",
+		"test-flak": "deno run --allow-run --allow-read --allow-write bin/analyze-test-flakiness.ts",
 
 		"fmt": "deno fmt",
 		"lint": "deno lint",
