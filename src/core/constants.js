@@ -107,6 +107,13 @@ export const TAB_ORG_STYLE = "tab_org_style";
 export const ORG_TAB_STYLE_KEY = `${SETTINGS_KEY}-${TAB_ORG_STYLE}`;
 export const ORG_PINNED_TAB_STYLE_KEY =
 	`${SETTINGS_KEY}-${TAB_ORG_STYLE}-${PINNED}`;
+/** @type {Set<string>} Keys that correspond to style settings. */
+export const STYLE_KEYS = new Set([
+	GENERIC_TAB_STYLE_KEY,
+	ORG_TAB_STYLE_KEY,
+	GENERIC_PINNED_TAB_STYLE_KEY,
+	ORG_PINNED_TAB_STYLE_KEY,
+]);
 export const TAB_STYLE_BACKGROUND = "background";
 export const TAB_STYLE_COLOR = "color";
 export const TAB_STYLE_BORDER = "border";

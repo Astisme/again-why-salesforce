@@ -1,14 +1,18 @@
 "use strict";
-import { TOAST_ERROR, TOAST_WARNING, WHAT_EXPORT } from "/core/constants.js";
-import { sendExtensionMessage } from "/core/functions.js";
-import { ensureAllTabsAvailability, TabContainer } from "/core/tabContainer.js";
+import { TOAST_ERROR, TOAST_WARNING, WHAT_EXPORT } from "../core/constants.js";
+import { sendExtensionMessage } from "../core/functions.js";
+import {
+	ensureAllTabsAvailability,
+	TabContainer,
+} from "../core/tabContainer.js";
 import { generateSldsModalWithTabList, MODAL_ID } from "./generator.js";
-import { getModalHanger, showToast } from "./content.js";
+import { showToast } from "./toast.js";
+import { getModalHanger } from "./sf-elements.js";
 
 /**
  * Displays the export modal if there are no other open modals.
  * If a modal is already open, shows a toast notification to close the other modal first.
- * @return undefined
+ * @return {Promise<void>}
  */
 async function showExportModal() {
 	if (document.getElementById(MODAL_ID) != null) {

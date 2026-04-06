@@ -571,13 +571,13 @@
 		"message": "Un Tab cu acest URL a fost deja salvat!",
 		"description": "[eroare] Utilizatorul a încercat să salveze un Tab deja preferat"
 	},
-	"error_tabcont_initialize": {
-		"message": "Nu se poate inițializa cu",
-		"description": "[eroare] inițializarea containerului Tab a eșuat"
-	},
 	"error_tabcont_invalid_tabs": {
 		"message": "Tab(uri) invalid(e) detectat(e).\nPrima apariție:",
 		"description": "[eroare] s-au transmis Tabs invalide"
+	},
+	"error_tabcont_not_initialized": {
+		"message": "tabContainer nu a fost încă inițializat.",
+		"description": "[eroare] TabContainer nu a fost gata"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "Folosiți TabContainer.create() în loc de new TabContainer() pentru a utiliza clasa TabContainer",

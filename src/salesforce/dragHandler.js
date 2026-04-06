@@ -1,5 +1,8 @@
-import { EXTENSION_NAME } from "/core/constants.js";
-import { ensureAllTabsAvailability, TabContainer } from "/core/tabContainer.js";
+import { EXTENSION_NAME } from "../core/constants.js";
+import {
+	ensureAllTabsAvailability,
+	TabContainer,
+} from "../core/tabContainer.js";
 
 let table;
 let ul;
@@ -49,7 +52,7 @@ function handleDragOver(e) {
  * It swaps the positions of the dragged row and the target row within the parent element (typically a table body).
  *
  * @param {Event} e - The drop event that is triggered when the user drops an item.
- * @return {boolean} - Returns `false` if the drop operation is not valid, preventing further action.
+ * @return {Promise<boolean>} - Returns `false` if the drop operation is not valid, preventing further action.
  */
 async function handleDrop(e) {
 	e.stopPropagation();

@@ -571,12 +571,13 @@
 		"message": "এই URL সহ Tab ইতিমধ্যে সংরক্ষণ করা হয়েছে!",
 		"description": "[error] ব্যবহারকারী পূর্বে সংরক্ষিত Tab সংরক্ষণের চেষ্টা করেছে"
 	},
-	"error_tabcont_initialize": {
-		"message": "এসথাপনা করা যাবে না:"
-	},
 	"error_tabcont_invalid_tabs": {
 		"message": "অবৈধ Tabs সনাক্ত হয়েছে।\nপ্রথমবার দেখানো:",
 		"description": "[error] অবৈধ Tabs প্রদান করা হয়েছে"
+	},
+	"error_tabcont_not_initialized": {
+		"message": "tabContainer এখনও শুরু করা হয়নি।",
+		"description": "[ত্রুটি] TabContainer প্রস্তুত ছিল না"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "new TabContainer() এর পরিবর্তে TabContainer.create() ব্যবহার করুন",

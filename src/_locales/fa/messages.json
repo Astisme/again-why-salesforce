@@ -571,13 +571,13 @@
 		"message": "Tab ای با این URL قبلاً ذخیره شده است!",
 		"description": "[error] کاربر تلاش کرد Tab ای که قبلاً ذخیره شده بود را ذخیره کند"
 	},
-	"error_tabcont_initialize": {
-		"message": "نمی‌توان با این مقداردهی اولیه کرد:",
-		"description": "[خطا] مقداردهی اولیه نگهدارنده Tab ناموفق بود"
-	},
 	"error_tabcont_invalid_tabs": {
 		"message": "Tab(های) نامعتبر شناسایی شد.\nاولین وقوع:",
 		"description": "[خطا] Tabs نامعتبر ارسال شد"
+	},
+	"error_tabcont_not_initialized": {
+		"message": "tabContainer هنوز مقداردهی اولیه نشده است.",
+		"description": "[خطا] TabContainer آماده نبود"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "به‌جای new TabContainer() از TabContainer.create() استفاده کنید",

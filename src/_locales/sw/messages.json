@@ -571,13 +571,13 @@
 		"message": "Tab yenye URL hii tayari imehifadhiwa!",
 		"description": "[hitilafu] Mtumiaji alijaribu kuhifadhi Tab ambayo tayari imependwa"
 	},
-	"error_tabcont_initialize": {
-		"message": "Haiwezi kuanzisha na",
-		"description": "[hitilafu] kuanzishwa kwa kontena la Tab kumeshindwa"
-	},
 	"error_tabcont_invalid_tabs": {
 		"message": "Tab(s) zisizo sahihi zimegunduliwa.\nTukio la kwanza:",
 		"description": "[hitilafu] Tabs zisizo sahihi zilipitishwa"
+	},
+	"error_tabcont_not_initialized": {
+		"message": "tabContainer ilikuwa bado haijaanzishwa.",
+		"description": "[kosa] TabContainer haikuwa tayari"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "Tumia TabContainer.create() badala ya new TabContainer() kutumia darasa la TabContainer",

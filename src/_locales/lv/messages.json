@@ -571,13 +571,13 @@
 		"message": "Tab ar šo URL jau ir saglabāts!",
 		"description": "[kļūda] Lietotājs mēģināja saglabāt jau izlasei pievienotu Tab"
 	},
-	"error_tabcont_initialize": {
-		"message": "Nevar inicializēt ar",
-		"description": "[kļūda] Tab konteinera inicializācija neizdevās"
-	},
 	"error_tabcont_invalid_tabs": {
 		"message": "Konstatēts(-i) nederīgs(-i) Tab(s).\nPirmā sastopamība:",
 		"description": "[kļūda] tika nodoti nederīgi Tabs"
+	},
+	"error_tabcont_not_initialized": {
+		"message": "tabContainer vēl nebija inicializēts.",
+		"description": "[kļūda] TabContainer nebija gatavs"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "Izmantojiet TabContainer.create() jaunā TabContainer() vietā",

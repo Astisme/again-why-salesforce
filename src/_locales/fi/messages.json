@@ -571,13 +571,13 @@
 		"message": "Tällä URLilla oleva Tab on jo tallennettu!",
 		"description": "[error] Käyttäjä yritti tallentaa jo tallennetun Tabin"
 	},
-	"error_tabcont_initialize": {
-		"message": "Ei voi alustaa seuraavilla",
-		"description": ""
-	},
 	"error_tabcont_invalid_tabs": {
 		"message": "Virheellisiä Tabeja havaittu.\nEnsimmäinen tapaus:",
 		"description": "[error] virheelliset Tabit on toimitettu"
+	},
+	"error_tabcont_not_initialized": {
+		"message": "tabContainer-oliota ei ole vielä alustettu.",
+		"description": "[virhe] TabContainer ei ollut valmis"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "Käytä TabContainer.create() sen sijaan, että käyttäisit new TabContainer()",

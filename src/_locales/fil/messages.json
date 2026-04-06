@@ -571,13 +571,13 @@
 		"message": "Isang Tab na may URL na ito ay naka-save na!",
 		"description": "[error] Sinubukang i-save ng user ang isang Tab na naka-save na"
 	},
-	"error_tabcont_initialize": {
-		"message": "Hindi ma-initialize gamit ang",
-		"description": "[error] nabigo ang pag-initialize ng container ng Tab"
-	},
 	"error_tabcont_invalid_tabs": {
 		"message": "Nakakita ng hindi balido(ng) Tab(s).\nUnang paglitaw:",
 		"description": "[error] naipasa ang mga hindi balidong Tabs"
+	},
+	"error_tabcont_not_initialized": {
+		"message": "hindi pa na-initialize ang tabContainer.",
+		"description": "[error] hindi pa handa ang TabContainer"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "Gamitin ang TabContainer.create() sa halip na new TabContainer()",

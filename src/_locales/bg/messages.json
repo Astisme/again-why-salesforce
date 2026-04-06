@@ -571,13 +571,13 @@
 		"message": "Tab с този URL вече е запазен!",
 		"description": "[error] Потребителят се опита да запази вече запазен Tab"
 	},
-	"error_tabcont_initialize": {
-		"message": "Не може да се инициализира с",
-		"description": ""
-	},
 	"error_tabcont_invalid_tabs": {
 		"message": "Открити са невалидни Tab(ове).\nПърво срещане:",
 		"description": "[error] подадени са невалидни Tab"
+	},
+	"error_tabcont_not_initialized": {
+		"message": "tabContainer още не е инициализиран.",
+		"description": "[грешка] TabContainer не беше готов"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "Използвайте TabContainer.create() вместо new TabContainer()",
