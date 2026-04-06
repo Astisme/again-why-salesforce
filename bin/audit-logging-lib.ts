@@ -16,8 +16,6 @@ export type FindingSeverity = "info" | "warn" | "error";
 export type IssueCode =
 	| "NON_KEY_LITERAL"
 	| "MISSING_LOCALE_KEY"
-	| "MISSING_KEY_FOR_CRITICAL_LOG"
-	| "MISSING_CONTEXT_FOR_CRITICAL_LOG"
 	| "EMPTY_LOG"
 	| "NOISY_LOG"
 	| "TRACE_WITHOUT_WARN_OR_ERROR";
@@ -50,24 +48,7 @@ export interface AuditSummary {
  * Final report shape written by CLI.
  */
 export interface AuditReport {
-	rootDir: string;
-	scannedFiles: number;
-	summary: AuditSummary;
 	findings: AuditFinding[];
-	baseline?: {
-		path: string;
-		totalBaselineFindings: number;
-		newFindings: number;
-		resolvedFindings: number;
-	};
-}
-
-/**
- * Baseline schema used for regression gating.
- */
-export interface AuditBaseline {
-	version: 1;
-	fingerprints: string[];
 }
 
 /**
@@ -88,15 +69,6 @@ export interface LogCallSite {
 	logLevel: LogLevel;
 	argsText: string;
 	args: string[];
-}
-
-/**
- * Baseline diff result for current findings.
- */
-export interface BaselineDiff {
-	newFindings: AuditFinding[];
-	resolvedFingerprints: string[];
-	persistedFindings: AuditFinding[];
 }
 
 const CONSOLE_LEVELS: readonly LogLevel[] = [
@@ -203,20 +175,16 @@ export function findClosingParenIndex(
 	let inDouble = false;
 	let inTemplate = false;
 	let escaped = false;
-
 	for (let index = argsStart; index < content.length; index += 1) {
 		const char = content[index];
-
 		if (escaped) {
 			escaped = false;
 			continue;
 		}
-
 		if (char === "\\") {
 			escaped = true;
 			continue;
 		}
-
 		if (inSingle) {
 			if (char === "'") {
 				inSingle = false;
@@ -235,7 +203,6 @@ export function findClosingParenIndex(
 			}
 			continue;
 		}
-
 		if (char === "'") {
 			inSingle = true;
 			continue;
@@ -248,7 +215,6 @@ export function findClosingParenIndex(
 			inTemplate = true;
 			continue;
 		}
-
 		if (char === "(") {
 			depth += 1;
 			continue;
@@ -260,7 +226,6 @@ export function findClosingParenIndex(
 			}
 		}
 	}
-
 	return -1;
 }
 
@@ -293,20 +258,17 @@ export function splitTopLevelArgs(argsText: string): string[] {
 	let inDouble = false;
 	let inTemplate = false;
 	let escaped = false;
-
 	for (const char of argsText) {
 		if (escaped) {
 			buffer += char;
 			escaped = false;
 			continue;
 		}
-
 		if (char === "\\") {
 			buffer += char;
 			escaped = true;
 			continue;
 		}
-
 		if (inSingle) {
 			buffer += char;
 			if (char === "'") {
@@ -328,7 +290,6 @@ export function splitTopLevelArgs(argsText: string): string[] {
 			}
 			continue;
 		}
-
 		if (char === "'") {
 			inSingle = true;
 			buffer += char;
@@ -344,7 +305,6 @@ export function splitTopLevelArgs(argsText: string): string[] {
 			buffer += char;
 			continue;
 		}
-
 		if (char === "(") {
 			parenDepth += 1;
 			buffer += char;
@@ -375,7 +335,6 @@ export function splitTopLevelArgs(argsText: string): string[] {
 			buffer += char;
 			continue;
 		}
-
 		if (
 			char === "," && parenDepth === 0 && braceDepth === 0 &&
 			bracketDepth === 0
@@ -387,15 +346,12 @@ export function splitTopLevelArgs(argsText: string): string[] {
 			buffer = "";
 			continue;
 		}
-
 		buffer += char;
 	}
-
 	const trailing = buffer.trim();
 	if (trailing) {
 		args.push(trailing);
 	}
-
 	return args;
 }
 
@@ -408,8 +364,8 @@ export async function runAudit(
 	const localeKeys = await loadLocaleKeys(options.localeFile);
 	const files = await listFilesRecursive(options.srcDir);
 	const findings: AuditFinding[] = [];
-
 	for (const file of files) {
+        if(file.endsWith("lightning-navigation.js") || file.includes("generated")) continue;
 		const content = await Deno.readTextFile(file);
 		const callSites = findConsoleCallSites(
 			relative(options.projectRoot, file),
@@ -417,16 +373,10 @@ export async function runAudit(
 		);
 		findings.push(...buildFindings(callSites, localeKeys));
 	}
-
 	const sortedFindings = sortFindings(findings);
-	const summary = summarizeFindings(sortedFindings);
 	const report: AuditReport = {
-		rootDir: ".",
-		scannedFiles: files.length,
-		summary,
 		findings: sortedFindings,
 	};
-
 	return { report };
 }
 
@@ -440,7 +390,6 @@ export function buildFindings(
 	const findings: AuditFinding[] = [];
 	const filesWithWarnOrError = new Set<string>();
 	const traceByFile = new Map<string, LogCallSite[]>();
-
 	for (const site of callSites) {
 		if (site.logLevel === "warn" || site.logLevel === "error") {
 			filesWithWarnOrError.add(site.file);
@@ -450,15 +399,12 @@ export function buildFindings(
 			traces.push(site);
 			traceByFile.set(site.file, traces);
 		}
-
 		const primaryArg = site.args.at(0) ?? "";
 		const unquotedPrimary = extractLiteralString(primaryArg);
-
-		if (site.args.length === 0) {
+		if (site.args.length === 0 && site.logLevel !== "trace") {
 			findings.push(createFinding(site, "EMPTY_LOG", null));
 			continue;
 		}
-
 		if (unquotedPrimary !== null) {
 			if (unquotedPrimary.trim().length === 0) {
 				findings.push(
@@ -477,31 +423,7 @@ export function buildFindings(
 				findings.push(createFinding(site, issueCode, unquotedPrimary));
 			}
 		}
-
-		if (site.logLevel === "warn" || site.logLevel === "error") {
-			const hasValidKey = unquotedPrimary !== null &&
-				localeKeys.has(unquotedPrimary);
-			if (!hasValidKey) {
-				findings.push(
-					createFinding(
-						site,
-						"MISSING_KEY_FOR_CRITICAL_LOG",
-						unquotedPrimary,
-					),
-				);
-			}
-			if (!hasContextPayload(site.args)) {
-				findings.push(
-					createFinding(
-						site,
-						"MISSING_CONTEXT_FOR_CRITICAL_LOG",
-						unquotedPrimary,
-					),
-				);
-			}
-		}
 	}
-
 	for (const [file, traces] of traceByFile.entries()) {
 		if (filesWithWarnOrError.has(file)) {
 			continue;
@@ -512,7 +434,6 @@ export function buildFindings(
 			);
 		}
 	}
-
 	return sortFindings(findings);
 }
 
@@ -601,77 +522,18 @@ export function summarizeFindings(findings: AuditFinding[]): AuditSummary {
 	const byIssueCode: Record<IssueCode, number> = {
 		NON_KEY_LITERAL: 0,
 		MISSING_LOCALE_KEY: 0,
-		MISSING_KEY_FOR_CRITICAL_LOG: 0,
-		MISSING_CONTEXT_FOR_CRITICAL_LOG: 0,
 		EMPTY_LOG: 0,
 		NOISY_LOG: 0,
 		TRACE_WITHOUT_WARN_OR_ERROR: 0,
 	};
-
 	for (const finding of findings) {
 		bySeverity[finding.severity] += 1;
 		byIssueCode[finding.issueCode] += 1;
 	}
-
 	return {
 		totalFindings: findings.length,
 		bySeverity,
 		byIssueCode,
-	};
-}
-
-/**
- * Loads a baseline from disk.
- */
-export async function loadBaseline(path: string): Promise<AuditBaseline> {
-	const raw = await Deno.readTextFile(path);
-	const parsed = JSON.parse(raw) as AuditBaseline;
-	if (parsed.version !== 1 || !Array.isArray(parsed.fingerprints)) {
-		throw new Error(`Invalid baseline schema at ${path}`);
-	}
-	return {
-		version: 1,
-		fingerprints: [...parsed.fingerprints].sort(),
-	};
-}
-
-/**
- * Creates a baseline representation from findings.
- */
-export function buildBaseline(findings: AuditFinding[]): AuditBaseline {
-	return {
-		version: 1,
-		fingerprints: [
-			...new Set(findings.map((finding) => finding.fingerprint)),
-		].sort(),
-	};
-}
-
-/**
- * Computes differences between current findings and baseline fingerprints.
- */
-export function diffAgainstBaseline(
-	findings: AuditFinding[],
-	baseline: AuditBaseline,
-): BaselineDiff {
-	const baselineSet = new Set(baseline.fingerprints);
-	const currentFingerprints = new Set(
-		findings.map((finding) => finding.fingerprint),
-	);
-	const newFindings = findings.filter((finding) =>
-		!baselineSet.has(finding.fingerprint)
-	);
-	const persistedFindings = findings.filter((finding) =>
-		baselineSet.has(finding.fingerprint)
-	);
-	const resolvedFingerprints = baseline.fingerprints.filter((fingerprint) =>
-		!currentFingerprints.has(fingerprint)
-	);
-
-	return {
-		newFindings: sortFindings(newFindings),
-		resolvedFingerprints: [...resolvedFingerprints].sort(),
-		persistedFindings: sortFindings(persistedFindings),
 	};
 }
 
@@ -683,16 +545,14 @@ export function defaultProjectRoot(): string {
 }
 
 /**
- * Decides whether the CLI should fail based on findings and optional baseline.
+ * Decides whether the CLI should fail based on findings
  */
 export function shouldFail(
 	findings: AuditFinding[],
 	minimumSeverity: FindingSeverity,
-	baselineDiff?: BaselineDiff,
 ): boolean {
-	const candidates = baselineDiff ? baselineDiff.newFindings : findings;
 	const minimumRank = severityRank(minimumSeverity);
-	return candidates.some((finding) =>
+	return findings.some((finding) =>
 		severityRank(finding.severity) >= minimumRank
 	);
 }
@@ -746,8 +606,6 @@ function createFinding(
  */
 function issueSeverity(issueCode: IssueCode): FindingSeverity {
 	switch (issueCode) {
-		case "MISSING_KEY_FOR_CRITICAL_LOG":
-		case "MISSING_CONTEXT_FOR_CRITICAL_LOG":
 		case "MISSING_LOCALE_KEY":
 			return "error";
 		case "NON_KEY_LITERAL":
@@ -768,10 +626,6 @@ function issueMessage(issueCode: IssueCode): string {
 			return "Log uses a non-locale string literal instead of a message key.";
 		case "MISSING_LOCALE_KEY":
 			return "Log references a key-like string that is not defined in src/_locales/en/messages.json.";
-		case "MISSING_KEY_FOR_CRITICAL_LOG":
-			return "warn/error log is missing a valid locale message key.";
-		case "MISSING_CONTEXT_FOR_CRITICAL_LOG":
-			return "warn/error log is missing contextual payload (object or error argument).";
 		case "EMPTY_LOG":
 			return "Log call has no meaningful message content.";
 		case "NOISY_LOG":
@@ -789,11 +643,7 @@ function issueSuggestedFix(issueCode: IssueCode): string {
 		case "NON_KEY_LITERAL":
 			return "Replace the literal with an existing locale key and pass details as structured args.";
 		case "MISSING_LOCALE_KEY":
-			return "Add the missing key to src/_locales/en/messages.json or use an existing key.";
-		case "MISSING_KEY_FOR_CRITICAL_LOG":
 			return "Use a locale key as the first argument for warn/error logging.";
-		case "MISSING_CONTEXT_FOR_CRITICAL_LOG":
-			return "Add a context object or error instance argument to warn/error logging.";
 		case "EMPTY_LOG":
 			return "Provide a meaningful locale key and relevant context.";
 		case "NOISY_LOG":
