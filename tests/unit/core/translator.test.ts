@@ -1,7 +1,11 @@
 /// <reference lib="dom" />
 import { assertEquals } from "@std/testing/asserts";
 import { translations } from "../../mocks.test.ts";
-import { ensureTranslatorAvailability } from "../../../src/core/translator.js";
+import {
+	ensureTranslatorAvailability,
+	getTranslations,
+	getTranslatorAttribute,
+} from "../../../src/core/translator.js";
 const translate_element_attribute = "data-i18n";
 
 Deno.test("TranslationService - load user preference", async () => {
@@ -185,4 +189,23 @@ Deno.test("TranslationService - edge cases", async () => {
 		"Should return false when no document is available",
 	);
 	Reflect.set(globalThis, "document", originalDocument);
+});
+
+Deno.test("TranslationService - public translator helpers", async () => {
+	const service = await ensureTranslatorAvailability();
+	await service.loadLanguageFile("fr");
+
+	assertEquals(await getTranslations("hello"), "Bonjour");
+	assertEquals(
+		await getTranslations(["hello", "goodbye"]),
+		["Bonjour", "Goodbye"],
+	);
+	assertEquals(await getTranslations([]), []);
+
+	assertEquals(
+		await getTranslatorAttribute("translateAttributeDataset"),
+		"i18n",
+	);
+	assertEquals(await getTranslatorAttribute("missingAttribute"), null);
+	assertEquals(await getTranslatorAttribute(null), null);
 });

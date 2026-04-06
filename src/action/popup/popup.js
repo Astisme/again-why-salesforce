@@ -16,10 +16,7 @@ import {
 	openSettingsPage,
 	sendExtensionMessage,
 } from "../../core/functions.js";
-import {
-	getTranslations,
-	getTranslatorAttribute,
-} from "../../core/translator.js";
+import { getTranslations, TranslationService } from "../../core/translator.js";
 import "/components/theme-selector/theme-selector.js";
 
 {
@@ -61,7 +58,7 @@ async function pop_sendMessageAndClose(message) {
  * @return {string} The substring before the separator, or the whole string if the separator is not found.
  */
 function _sliceBeforeSeparator(i18n) {
-	return i18n.slice(0, i18n.indexOf(getTranslatorAttribute("separator")));
+	return i18n.slice(0, i18n.indexOf(TranslationService.TRANSLATE_SEPARATOR));
 }
 /**
  * Translates and appends a keyboard shortcut hint to a button’s localized text.
@@ -73,7 +70,7 @@ function _sliceBeforeSeparator(i18n) {
 function addShortcutText(button, shortcut) {
 	return getTranslations([
 		_sliceBeforeSeparator(
-			button.dataset[getTranslatorAttribute("translateAttributeDataset")],
+			button.dataset[TranslationService.TRANSLATE_DATASET],
 		),
 		`(${shortcut})`,
 	]);

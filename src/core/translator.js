@@ -14,7 +14,7 @@ let singletonTranslator = null;
  * Service for handling text translations in a browser extension.
  * Uses language-specific caches to improve performance.
  */
-class TranslationService {
+export class TranslationService {
 	static FALLBACK_LANGUAGE = "en";
 	static TRANSLATE_DATASET = "i18n";
 	/**
