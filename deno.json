@@ -26,6 +26,7 @@
 		"test-sf": "deno test -P --coverage --parallel --quiet tests/unit/content/*",
 		"test-core": "deno test -P --coverage --parallel --quiet tests/unit/core/*",
 		"test-ui": "deno test -P --coverage --parallel --quiet tests/unit/ui/*",
+		"test-bin": "deno test -P --coverage --parallel --quiet tests/bin/*",
 
 		"fmt": "deno fmt",
 		"lint": "deno lint",

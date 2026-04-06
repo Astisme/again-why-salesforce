@@ -365,7 +365,10 @@ export async function runAudit(
 	const files = await listFilesRecursive(options.srcDir);
 	const findings: AuditFinding[] = [];
 	for (const file of files) {
-        if(file.endsWith("lightning-navigation.js") || file.includes("generated")) continue;
+		if (
+			file.endsWith("lightning-navigation.js") ||
+			file.includes("generated")
+		) continue;
 		const content = await Deno.readTextFile(file);
 		const callSites = findConsoleCallSites(
 			relative(options.projectRoot, file),
