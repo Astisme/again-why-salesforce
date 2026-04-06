@@ -149,3 +149,20 @@ jobs:
 
             - name: Run formatter
               run: .github/scripts/task-and-push-when-diff.sh fmt
+
+            - name: Run Logging Audit
+              continue-on-error: true
+              run: deno task audit-logging
+
+            - name: Comment on PR if logging audit fails
+              uses: action/github-script@v7
+              with:
+                script: |
+                  const handler = require("./.github/scripts/comment-on-pr.cjs");
+                  await handler({
+                    github,
+                    context,
+                    core,
+                    logFile: "logging-audit-report.json",
+                    title:   "Logging Audit Failed (not blocking)",
+                  });
