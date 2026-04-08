@@ -1,5 +1,5 @@
 import { assertEquals, assertThrows } from "@std/testing/asserts";
-import { loadIsolatedModule } from "../../load-isolated-module.test.ts";
+import { createModalLayoutModule } from "../../../src/salesforce/modal-layout-runtime.js";
 
 type ModalLayoutModule = {
 	updateModalBodyOverflow: (article?: LayoutElement | null) => void;
@@ -70,46 +70,19 @@ class LayoutElement {
 	}
 }
 
-/**
- * Loads the modal-layout module with isolated constants.
- *
- * @return {Promise<{ cleanup: () => void; module: ModalLayoutModule; }>} Fixture.
- */
-async function loadModalLayoutFixture() {
-	const { cleanup, module } = await loadIsolatedModule<
-		ModalLayoutModule,
-		{ HIDDEN_CLASS: string }
-	>({
-		modulePath: new URL(
-			"../../../src/salesforce/modal-layout.js",
-			import.meta.url,
-		),
-		dependencies: {
-			HIDDEN_CLASS: "hidden",
-		},
-		importsToReplace: new Set([
-			"/core/constants.js",
-		]),
-	});
-	return { cleanup, module };
-}
+const fixture = {
+	module: createModalLayoutModule({ hiddenClass: "hidden" }) as ModalLayoutModule,
+};
 
-Deno.test("modal-layout validates required article parameter", async () => {
-	const fixture = await loadModalLayoutFixture();
-
-	try {
-		assertThrows(
-			() => fixture.module.updateModalBodyOverflow(),
-			Error,
-			"error_required_params",
-		);
-	} finally {
-		fixture.cleanup();
-	}
+Deno.test("modal-layout validates required article parameter", () => {
+	assertThrows(
+		() => fixture.module.updateModalBodyOverflow(),
+		Error,
+		"error_required_params",
+	);
 });
 
-Deno.test("modal-layout toggles overflow and scrolls when content fits", async () => {
-	const fixture = await loadModalLayoutFixture();
+Deno.test("modal-layout toggles overflow and scrolls when content fits", () => {
 	const article = new LayoutElement();
 	const modalBody = new LayoutElement();
 	const wrapper = new LayoutElement();
@@ -132,20 +105,16 @@ Deno.test("modal-layout toggles overflow and scrolls when content fits", async (
 	article.setQueryResult("#sortable-table", table);
 	table.setQueryResult("tr:nth-child(1)", firstRow);
 
-	try {
-		fixture.module.updateModalBodyOverflow(article);
-		assertEquals(modalBody.style.overflowY, "auto");
-		assertEquals(article.scrollCalls.length, 0);
+	fixture.module.updateModalBodyOverflow(article);
+	assertEquals(modalBody.style.overflowY, "auto");
+	assertEquals(article.scrollCalls.length, 0);
 
-		table.clientHeight = 80;
-		fixture.module.updateModalBodyOverflow(article);
-		assertEquals(modalBody.style.overflowY, "hidden");
-		assertEquals(article.scrollCalls.length, 1);
-		assertEquals(article.scrollCalls[0], {
-			behavior: "smooth",
-			block: "center",
-		});
-	} finally {
-		fixture.cleanup();
-	}
+	table.clientHeight = 80;
+	fixture.module.updateModalBodyOverflow(article);
+	assertEquals(modalBody.style.overflowY, "hidden");
+	assertEquals(article.scrollCalls.length, 1);
+	assertEquals(article.scrollCalls[0], {
+		behavior: "smooth",
+		block: "center",
+	});
 });

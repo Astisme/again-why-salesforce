@@ -1,49 +1,91 @@
 "use strict";
 import {
-	CMD_OPEN_SETTINGS,
-	CXM_UNPIN_TAB,
-	EXTENSION_GITHUB_LINK,
-	HIDDEN_CLASS,
-	SALESFORCE_SETUP_HOME_MINI,
-	SETUP_LIGHTNING,
-	TOAST_WARNING,
-	TUTORIAL_CLOSE_EVENT,
-	TUTORIAL_EVENT_ACTION_FAVOURITE,
-	TUTORIAL_EVENT_ACTION_UNFAVOURITE,
-	TUTORIAL_EVENT_CLOSE_MANAGE_TABS,
-	TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL,
-	TUTORIAL_EVENT_PIN_TAB,
-	TUTORIAL_EVENT_REORDERED_TABS_TABLE,
-	TUTORIAL_KEY,
-	WHAT_ADD,
-	WHAT_GET,
-	WHAT_GET_COMMANDS,
-	WHAT_SET,
+	CMD_OPEN_SETTINGS as _CMD_OPEN_SETTINGS,
+	CXM_UNPIN_TAB as _CXM_UNPIN_TAB,
+	EXTENSION_GITHUB_LINK as _EXTENSION_GITHUB_LINK,
+	HIDDEN_CLASS as _HIDDEN_CLASS,
+	SALESFORCE_SETUP_HOME_MINI as _SALESFORCE_SETUP_HOME_MINI,
+	SETUP_LIGHTNING as _SETUP_LIGHTNING,
+	TOAST_WARNING as _TOAST_WARNING,
+	TUTORIAL_CLOSE_EVENT as _TUTORIAL_CLOSE_EVENT,
+	TUTORIAL_EVENT_ACTION_FAVOURITE as _TUTORIAL_EVENT_ACTION_FAVOURITE,
+	TUTORIAL_EVENT_ACTION_UNFAVOURITE as _TUTORIAL_EVENT_ACTION_UNFAVOURITE,
+	TUTORIAL_EVENT_CLOSE_MANAGE_TABS as _TUTORIAL_EVENT_CLOSE_MANAGE_TABS,
+	TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL as
+		_TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL,
+	TUTORIAL_EVENT_PIN_TAB as _TUTORIAL_EVENT_PIN_TAB,
+	TUTORIAL_EVENT_REORDERED_TABS_TABLE as _TUTORIAL_EVENT_REORDERED_TABS_TABLE,
+	TUTORIAL_KEY as _TUTORIAL_KEY,
+	WHAT_ADD as _WHAT_ADD,
+	WHAT_GET as _WHAT_GET,
+	WHAT_GET_COMMANDS as _WHAT_GET_COMMANDS,
+	WHAT_SET as _WHAT_SET,
 } from "../core/constants.js";
 import {
-	performLightningRedirect,
-	sendExtensionMessage,
-	sendExtensionMessages,
+	performLightningRedirect as _performLightningRedirect,
+	sendExtensionMessage as _sendExtensionMessage,
+	sendExtensionMessages as _sendExtensionMessages,
 } from "../core/functions.js";
-import { getTranslations } from "../core/translator.js";
-import Tab from "../core/tab.js";
-import { performActionOnTabs } from "./content.js";
-import { showToast } from "./toast.js";
-import { getCurrentHref, getSetupTabUl } from "./sf-elements.js";
+import { getTranslations as _getTranslations } from "../core/translator.js";
+import _Tab from "../core/tab.js";
+import { performActionOnTabs as _performActionOnTabs } from "./content.js";
+import { showToast as _showToast } from "./toast.js";
 import {
-	FAVOURITE_BUTTON_ID,
-	showFavouriteButton,
+	getCurrentHref as _getCurrentHref,
+	getSetupTabUl as _getSetupTabUl,
+} from "./sf-elements.js";
+import {
+	FAVOURITE_BUTTON_ID as _FAVOURITE_BUTTON_ID,
+	showFavouriteButton as _showFavouriteButton,
 } from "./favourite-manager.js";
 import {
-	generateTutorialElements,
-	MODAL_ID,
-	sldsConfirm,
+	generateTutorialElements as _generateTutorialElements,
+	MODAL_ID as _MODAL_ID,
+	sldsConfirm as _sldsConfirm,
 } from "./generator.js";
 import {
-	ensureAllTabsAvailability,
-	TabContainer,
+	ensureAllTabsAvailability as _ensureAllTabsAvailability,
+	TabContainer as _TabContainer,
 } from "../core/tabContainer.js";
-import { handleActionButtonClick } from "./manageTabs.js";
+import { handleActionButtonClick as _handleActionButtonClick } from "./manageTabs.js";
+
+let CMD_OPEN_SETTINGS = _CMD_OPEN_SETTINGS;
+let CXM_UNPIN_TAB = _CXM_UNPIN_TAB;
+let EXTENSION_GITHUB_LINK = _EXTENSION_GITHUB_LINK;
+let HIDDEN_CLASS = _HIDDEN_CLASS;
+let SALESFORCE_SETUP_HOME_MINI = _SALESFORCE_SETUP_HOME_MINI;
+let SETUP_LIGHTNING = _SETUP_LIGHTNING;
+let TOAST_WARNING = _TOAST_WARNING;
+let TUTORIAL_CLOSE_EVENT = _TUTORIAL_CLOSE_EVENT;
+let TUTORIAL_EVENT_ACTION_FAVOURITE = _TUTORIAL_EVENT_ACTION_FAVOURITE;
+let TUTORIAL_EVENT_ACTION_UNFAVOURITE = _TUTORIAL_EVENT_ACTION_UNFAVOURITE;
+let TUTORIAL_EVENT_CLOSE_MANAGE_TABS = _TUTORIAL_EVENT_CLOSE_MANAGE_TABS;
+let TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL =
+	_TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL;
+let TUTORIAL_EVENT_PIN_TAB = _TUTORIAL_EVENT_PIN_TAB;
+let TUTORIAL_EVENT_REORDERED_TABS_TABLE = _TUTORIAL_EVENT_REORDERED_TABS_TABLE;
+let TUTORIAL_KEY = _TUTORIAL_KEY;
+let WHAT_ADD = _WHAT_ADD;
+let WHAT_GET = _WHAT_GET;
+let WHAT_GET_COMMANDS = _WHAT_GET_COMMANDS;
+let WHAT_SET = _WHAT_SET;
+let performLightningRedirect = _performLightningRedirect;
+let sendExtensionMessage = _sendExtensionMessage;
+let sendExtensionMessages = _sendExtensionMessages;
+let getTranslations = _getTranslations;
+let Tab = _Tab;
+let performActionOnTabs = _performActionOnTabs;
+let showToast = _showToast;
+let getCurrentHref = _getCurrentHref;
+let getSetupTabUl = _getSetupTabUl;
+let FAVOURITE_BUTTON_ID = _FAVOURITE_BUTTON_ID;
+let showFavouriteButton = _showFavouriteButton;
+let generateTutorialElements = _generateTutorialElements;
+let MODAL_ID = _MODAL_ID;
+let sldsConfirm = _sldsConfirm;
+let ensureAllTabsAvailability = _ensureAllTabsAvailability;
+let TabContainer = _TabContainer;
+let handleActionButtonClick = _handleActionButtonClick;
 
 const TUTORIAL_HIGHLIGHT_CLASS = "awsf-tutorial-highlight";
 
@@ -1034,4 +1076,97 @@ export async function checkTutorial(fromPopup = false) {
 		// set the tutorial as completed
 		Tutorial.setTutorialAsCompleted(tutorial);
 	}
+}
+
+/**
+ * Creates tutorial helpers with optional dependency overrides.
+ *
+ * @param {Object} [overrides={}] Runtime overrides used by tests.
+ * @return {{
+ *   Tutorial: typeof Tutorial;
+ *   checkTutorial: typeof checkTutorial;
+ * }} Tutorial module API.
+ */
+export function createTutorialModule(overrides = {}) {
+	if (overrides.CMD_OPEN_SETTINGS != null) CMD_OPEN_SETTINGS = overrides.CMD_OPEN_SETTINGS;
+	if (overrides.CXM_UNPIN_TAB != null) CXM_UNPIN_TAB = overrides.CXM_UNPIN_TAB;
+	if (overrides.EXTENSION_GITHUB_LINK != null) {
+		EXTENSION_GITHUB_LINK = overrides.EXTENSION_GITHUB_LINK;
+	}
+	if (overrides.HIDDEN_CLASS != null) HIDDEN_CLASS = overrides.HIDDEN_CLASS;
+	if (overrides.SALESFORCE_SETUP_HOME_MINI != null) {
+		SALESFORCE_SETUP_HOME_MINI = overrides.SALESFORCE_SETUP_HOME_MINI;
+	}
+	if (overrides.SETUP_LIGHTNING != null) SETUP_LIGHTNING = overrides.SETUP_LIGHTNING;
+	if (overrides.TOAST_WARNING != null) TOAST_WARNING = overrides.TOAST_WARNING;
+	if (overrides.TUTORIAL_CLOSE_EVENT != null) {
+		TUTORIAL_CLOSE_EVENT = overrides.TUTORIAL_CLOSE_EVENT;
+	}
+	if (overrides.TUTORIAL_EVENT_ACTION_FAVOURITE != null) {
+		TUTORIAL_EVENT_ACTION_FAVOURITE = overrides.TUTORIAL_EVENT_ACTION_FAVOURITE;
+	}
+	if (overrides.TUTORIAL_EVENT_ACTION_UNFAVOURITE != null) {
+		TUTORIAL_EVENT_ACTION_UNFAVOURITE = overrides.TUTORIAL_EVENT_ACTION_UNFAVOURITE;
+	}
+	if (overrides.TUTORIAL_EVENT_CLOSE_MANAGE_TABS != null) {
+		TUTORIAL_EVENT_CLOSE_MANAGE_TABS = overrides.TUTORIAL_EVENT_CLOSE_MANAGE_TABS;
+	}
+	if (overrides.TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL != null) {
+		TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL =
+			overrides.TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL;
+	}
+	if (overrides.TUTORIAL_EVENT_PIN_TAB != null) {
+		TUTORIAL_EVENT_PIN_TAB = overrides.TUTORIAL_EVENT_PIN_TAB;
+	}
+	if (overrides.TUTORIAL_EVENT_REORDERED_TABS_TABLE != null) {
+		TUTORIAL_EVENT_REORDERED_TABS_TABLE = overrides.TUTORIAL_EVENT_REORDERED_TABS_TABLE;
+	}
+	if (overrides.TUTORIAL_KEY != null) TUTORIAL_KEY = overrides.TUTORIAL_KEY;
+	if (overrides.WHAT_ADD != null) WHAT_ADD = overrides.WHAT_ADD;
+	if (overrides.WHAT_GET != null) WHAT_GET = overrides.WHAT_GET;
+	if (overrides.WHAT_GET_COMMANDS != null) WHAT_GET_COMMANDS = overrides.WHAT_GET_COMMANDS;
+	if (overrides.WHAT_SET != null) WHAT_SET = overrides.WHAT_SET;
+	if (overrides.performLightningRedirect != null) {
+		performLightningRedirect = overrides.performLightningRedirect;
+	}
+	if (overrides.sendExtensionMessage != null) {
+		sendExtensionMessage = overrides.sendExtensionMessage;
+	}
+	if (overrides.sendExtensionMessages != null) {
+		sendExtensionMessages = overrides.sendExtensionMessages;
+	}
+	if (overrides.getTranslations != null) getTranslations = overrides.getTranslations;
+	if (overrides.Tab != null) Tab = overrides.Tab;
+	if (overrides.performActionOnTabs != null) {
+		performActionOnTabs = overrides.performActionOnTabs;
+	}
+	if (overrides.showToast != null) showToast = overrides.showToast;
+	if (overrides.getCurrentHref != null) getCurrentHref = overrides.getCurrentHref;
+	if (overrides.getSetupTabUl != null) getSetupTabUl = overrides.getSetupTabUl;
+	if (overrides.FAVOURITE_BUTTON_ID != null) {
+		FAVOURITE_BUTTON_ID = overrides.FAVOURITE_BUTTON_ID;
+	}
+	if (overrides.showFavouriteButton != null) {
+		showFavouriteButton = overrides.showFavouriteButton;
+	}
+	if (overrides.generateTutorialElements != null) {
+		generateTutorialElements = overrides.generateTutorialElements;
+	}
+	if (overrides.MODAL_ID != null) MODAL_ID = overrides.MODAL_ID;
+	if (overrides.sldsConfirm != null) sldsConfirm = overrides.sldsConfirm;
+	if (overrides.ensureAllTabsAvailability != null) {
+		ensureAllTabsAvailability = overrides.ensureAllTabsAvailability;
+	}
+	if (overrides.TabContainer != null) TabContainer = overrides.TabContainer;
+	if (overrides.handleActionButtonClick != null) {
+		handleActionButtonClick = overrides.handleActionButtonClick;
+	}
+	if (overrides.document != null) globalThis.document = overrides.document;
+	if (overrides.window != null) globalThis.window = overrides.window;
+	if (overrides.fetch != null) globalThis.fetch = overrides.fetch;
+
+	return {
+		Tutorial,
+		checkTutorial,
+	};
 }

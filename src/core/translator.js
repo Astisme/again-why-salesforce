@@ -1,12 +1,21 @@
 import {
-	BROWSER,
-	FOLLOW_SF_LANG,
-	SETTINGS_KEY,
-	USER_LANGUAGE,
-	WHAT_GET_SETTINGS,
-	WHAT_GET_SF_LANG,
+	BROWSER as _BROWSER,
+	FOLLOW_SF_LANG as _FOLLOW_SF_LANG,
+	SETTINGS_KEY as _SETTINGS_KEY,
+	USER_LANGUAGE as _USER_LANGUAGE,
+	WHAT_GET_SETTINGS as _WHAT_GET_SETTINGS,
+	WHAT_GET_SF_LANG as _WHAT_GET_SF_LANG,
 } from "./constants.js";
-import { sendExtensionMessage } from "./functions.js";
+import { sendExtensionMessage as _sendExtensionMessage } from "./functions.js";
+
+let BROWSER = _BROWSER;
+let FOLLOW_SF_LANG = _FOLLOW_SF_LANG;
+let SETTINGS_KEY = _SETTINGS_KEY;
+let USER_LANGUAGE = _USER_LANGUAGE;
+let WHAT_GET_SETTINGS = _WHAT_GET_SETTINGS;
+let WHAT_GET_SF_LANG = _WHAT_GET_SF_LANG;
+let sendExtensionMessage = _sendExtensionMessage;
+
 const _translationSecret = Symbol("translationSecret");
 let singletonTranslator = null;
 
@@ -464,4 +473,41 @@ export async function getTranslatorAttribute(attribute = null) {
 	if (attribute == null) return null;
 	const translator = await ensureTranslatorAvailability();
 	return translator?.[attribute] ?? null;
+}
+
+/**
+ * Creates translator helpers with optional dependency overrides.
+ *
+ * @param {Object} [overrides={}] Runtime overrides used by tests.
+ * @return {{
+ *   TranslationService: typeof TranslationService;
+ *   ensureTranslatorAvailability: typeof ensureTranslatorAvailability;
+ *   getTranslations: typeof getTranslations;
+ *   getTranslatorAttribute: typeof getTranslatorAttribute;
+ * }} Translator module API.
+ */
+export function createTranslatorModule(overrides = {}) {
+	if (overrides.BROWSER != null) BROWSER = overrides.BROWSER;
+	if (overrides.FOLLOW_SF_LANG != null) FOLLOW_SF_LANG = overrides.FOLLOW_SF_LANG;
+	if (overrides.SETTINGS_KEY != null) SETTINGS_KEY = overrides.SETTINGS_KEY;
+	if (overrides.USER_LANGUAGE != null) USER_LANGUAGE = overrides.USER_LANGUAGE;
+	if (overrides.WHAT_GET_SETTINGS != null) {
+		WHAT_GET_SETTINGS = overrides.WHAT_GET_SETTINGS;
+	}
+	if (overrides.WHAT_GET_SF_LANG != null) {
+		WHAT_GET_SF_LANG = overrides.WHAT_GET_SF_LANG;
+	}
+	if (overrides.sendExtensionMessage != null) {
+		sendExtensionMessage = overrides.sendExtensionMessage;
+	}
+	if (overrides.document != null) globalThis.document = overrides.document;
+	if (overrides.fetch != null) globalThis.fetch = overrides.fetch;
+	singletonTranslator = null;
+
+	return {
+		TranslationService,
+		ensureTranslatorAvailability,
+		getTranslations,
+		getTranslatorAttribute,
+	};
 }

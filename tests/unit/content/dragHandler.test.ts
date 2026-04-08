@@ -1,5 +1,5 @@
 import { assertEquals } from "@std/testing/asserts";
-import { loadIsolatedModule } from "../../load-isolated-module.test.ts";
+import { createDragHandlerModule } from "../../../src/salesforce/dragHandler-runtime.js";
 
 type DragCallbackPayload = {
 	fromIndex: string | null;
@@ -12,19 +12,6 @@ type DragHandlerModule = {
 		callback: (payload: DragCallbackPayload) => void,
 	) => void;
 	setupDragForUl: (callback: (payload: DragCallbackPayload) => void) => void;
-};
-
-type DragHandlerDependencies = {
-	EXTENSION_NAME: string;
-	TabContainer: {
-		keyPinnedTabsNo: string;
-	};
-	document: {
-		getElementById: (id: string) => DragContainer | null;
-		querySelector: (selector: string) => DragContainer | null;
-	};
-	ensureAllTabsAvailability: () => Promise<Record<string, number>>;
-	setTimeout: (callback: () => void, delay: number) => number;
 };
 
 type DragListener = (
@@ -233,7 +220,7 @@ function createDragEvent(target: DragRow) {
  * @param {DragContainer | null} [options.ulContainer=null] UL container.
  * @return {Promise<{ cleanup: () => void; module: DragHandlerModule; timeoutCalls: number[]; }>} Loaded module fixture.
  */
-async function loadDragHandler({
+function loadDragHandler({
 	tableContainer = null,
 	pinnedTabs = 0,
 	ulContainer = null,
@@ -242,63 +229,27 @@ async function loadDragHandler({
 	pinnedTabs?: number;
 	ulContainer?: DragContainer | null;
 }) {
-	const modulePath = new URL(
-		"../../../src/salesforce/dragHandler.js",
-		import.meta.url,
-	);
-	const rawSource = await Deno.readTextFile(modulePath);
-	const sourceLineCount = rawSource.split("\n").length;
-	const transformSource = (source: string) =>
-		source.replace(
-			/\tif \(container == null\) setTimeout\(\(\) => setupDrag\(callback\), 500\);\n\telse createListeners\(\);/,
-			[
-				"\tcontainer == null && setTimeout(() => setupDrag(callback), 500);",
-				"\tcontainer != null && createListeners();",
-			].join("\n"),
-		);
 	const timeoutCalls: number[] = [];
-	const { cleanup, module } = await loadIsolatedModule<
-		DragHandlerModule,
-		DragHandlerDependencies
-	>({
-		modulePath,
-		additionalExports: ["setupDrag"],
-		sourceMapLineMap: Array.from(
-			{ length: sourceLineCount + 3 },
-			(_value, index) => {
-				const generatedLine = index + 1;
-				if (generatedLine > sourceLineCount) {
-					return 133;
-				}
-				return generatedLine;
-			},
-		),
-		dependencies: {
-			EXTENSION_NAME: "again-why-salesforce",
-			TabContainer: {
-				keyPinnedTabsNo: "pinnedTabsNo",
-			},
-			document: {
-				getElementById: () => ulContainer,
-				querySelector: () => tableContainer,
-			},
-			ensureAllTabsAvailability: () =>
-				Promise.resolve({
-					pinnedTabsNo: pinnedTabs,
-				}),
-			setTimeout: (_callback, delay) => {
-				timeoutCalls.push(delay);
-				return timeoutCalls.length;
-			},
+	const module = createDragHandlerModule({
+		extensionName: "again-why-salesforce",
+		tabContainerRef: {
+			keyPinnedTabsNo: "pinnedTabsNo",
 		},
-		importsToReplace: new Set([
-			"/core/constants.js",
-			"/core/tabContainer.js",
-		]),
-		transformSource,
+		documentRef: {
+			getElementById: () => ulContainer,
+			querySelector: () => tableContainer,
+		},
+		ensureAllTabsAvailabilityFn: () =>
+			Promise.resolve({
+				pinnedTabsNo: pinnedTabs,
+			}),
+		setTimeoutFn: (_callback, delay) => {
+			timeoutCalls.push(delay);
+			return timeoutCalls.length;
+		},
 	});
 
-	return { cleanup, module, timeoutCalls };
+	return { cleanup: () => {}, module, timeoutCalls };
 }
 
 Deno.test("dragHandler wires UL drag listeners and reorders rows within the same pinned section", async () => {

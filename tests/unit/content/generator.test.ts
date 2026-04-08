@@ -8,7 +8,6 @@ import {
 	assertThrows,
 } from "@std/testing/asserts";
 import { installMockDom } from "../../happydom.test.ts";
-import { loadIsolatedModule } from "../../load-isolated-module.test.ts";
 
 type StyleRule = {
 	forActive?: boolean;
@@ -392,12 +391,6 @@ type GeneratorDependencies = {
 	ensureAllTabsAvailability: () => Promise<{
 		handleClickTabByData: (payload: { url: string }) => void;
 	}>;
-	ensureTranslatorAvailability: () => Promise<{
-		translate: (
-			key: string | Array<string>,
-			join?: string,
-		) => Promise<string>;
-	}>;
 	getTranslations: (
 		key: string | string[],
 		connector?: string,
@@ -422,10 +415,23 @@ type GeneratorDependencies = {
 		id: string,
 		options: { css?: string; link?: string },
 	) => HTMLElement;
+	open: (url: string, target: string) => void;
 	performLightningRedirect: (url: string) => void;
 	showToast: (message: string, status?: string) => void;
 	updateModalBodyOverflow: () => void;
 };
+
+/**
+ * Lazily imports the generator module factory after global browser stubs are installed.
+ *
+ * @return {Promise<(overrides?: Record<string, unknown>) => GeneratorModule>} Runtime factory.
+ */
+async function getCreateGeneratorModule() {
+	const module = await import("../../../src/salesforce/generator.js");
+	return module.createGeneratorModule as unknown as (
+		overrides?: GeneratorDependencies,
+	) => GeneratorModule;
+}
 
 type GeneratorFixture = {
 	cleanup: () => void;
@@ -545,170 +551,158 @@ async function loadGeneratorFixture({
 	const translationCalls: Array<string> = [];
 	const updateModalBodyOverflowState = { value: 0 };
 
-	const { cleanup, module } = await loadIsolatedModule<
-		GeneratorModule,
-		GeneratorDependencies
-	>({
-		modulePath: new URL(
-			"../../../src/salesforce/generator.js",
-			import.meta.url,
-		),
-		additionalExports: [
-			"getRng_n_digits",
-			"_getLinkTarget",
-			"areArraysEqual",
-			"wereSettingsUpdated",
-			"_getPseudoSelector",
-			"_getPseudoRules",
-			"_isPseudoRule",
-			"_buildCssRules",
-			"createSldsModalShell",
-			"generateSldsPromptModal",
-			"generateRequired",
-			"createInputElement",
-			"generateInput",
-			"generateTableWithCheckboxes",
-			"createTextCell",
-		],
-		dependencies: {
-			BROWSER: {
-				runtime: {
-					getURL: (path) => `chrome-extension://test${path}`,
-				},
+	const hadBrowser = "browser" in globalThis;
+	const originalBrowser = (globalThis as { browser?: unknown }).browser;
+	Object.defineProperty(globalThis, "browser", {
+		configurable: true,
+		value: {
+			i18n: {
+				getMessage: (key: string) => key,
 			},
-			CXM_PIN_TAB: "pin_tab",
-			CXM_REMOVE_TAB: "remove_tab",
-			CXM_UNPIN_TAB: "unpin_tab",
-			EXTENSION_GITHUB_LINK: "https://example.test/repo",
-			EXTENSION_LABEL: "Again Why Salesforce",
-			EXTENSION_NAME: "again-why-salesforce",
-			GENERIC_PINNED_TAB_STYLE_KEY: "genericPinnedStyle",
-			GENERIC_TAB_STYLE_KEY: "genericStyle",
-			HIDDEN_CLASS: "hidden",
-			HTTPS: "https://",
-			LIGHTNING_FORCE_COM: ".lightning.force.com",
-			LINK_NEW_BROWSER: "link_new_browser",
-			ORG_PINNED_TAB_STYLE_KEY: "orgPinnedStyle",
-			ORG_TAB_CLASS: "org-tab",
-			ORG_TAB_STYLE_KEY: "orgStyle",
-			PIN_TAB_CLASS: "pin-tab",
-			SETUP_LIGHTNING: "/lightning/setup/",
-			TAB_STYLE_HOVER: "hover",
-			TAB_STYLE_TOP: "top",
-			TOAST_ERROR: "error",
-			TOAST_SUCCESS: "success",
-			USE_LIGHTNING_NAVIGATION: "use_lightning_navigation",
-			Tab: {
-				extractOrgName: () => "current-org",
-				expandURL: (url, _href) =>
-					url?.startsWith("http")
-						? url
-						: `https://acme.lightning.force.com/lightning/setup/${
-							url ?? ""
-						}`,
-				minifyURL: (url) =>
-					(url ?? "").replace(
-						/^https:\/\/acme\.lightning\.force\.com\/lightning\/setup\//,
-						"",
-					),
-			},
-			TabContainer: {
-				keyPinnedTabsNo: "pinnedTabsNo",
-			},
-			ensureAllTabsAvailability: () =>
-				Promise.resolve({
-					handleClickTabByData: (payload) => {
-						handleClickCalls.push(payload);
-					},
+			runtime: {
+				getManifest: () => ({
+					homepage_url: "https://github.com/example/repo",
+					optional_host_permissions: [],
+					version: "1.0.0",
 				}),
-			ensureTranslatorAvailability: () =>
-				Promise.resolve({
-					translate: (key) => {
-						const joinedKey = Array.isArray(key)
-							? key.join(" ")
-							: key;
-						translationCalls.push(joinedKey);
-						return Promise.resolve(
-							translations[joinedKey] ??
-								`translated:${joinedKey}`,
-						);
-					},
-				}),
-			getTranslations: (key, connector = " ") => {
-				if (Array.isArray(key)) {
-					key.forEach((entry) => translationCalls.push(entry));
-					return Promise.resolve(
-						key.map((entry) =>
-							translations[entry] ?? `translated:${entry}`
-						),
-					);
-				}
-				void connector;
-				translationCalls.push(key);
-				return Promise.resolve(
-					translations[key] ?? `translated:${key}`,
-				);
-			},
-			getCssRule: (id, value) => `${id}:${value};`,
-			getCssSelector: ({
-				isGeneric = false,
-				isInactive = false,
-				isPinned = false,
-				pseudoElement = "",
-			}) =>
-				`.selector-${isGeneric ? "g" : "o"}-${isInactive ? "i" : "a"}-${
-					isPinned ? "p" : "u"
-				}${pseudoElement}`,
-			getCurrentHref: () => currentHref,
-			getPinnedSpecificKey: ({
-				isGeneric = false,
-				isPinned = false,
-			}) =>
-				`${isGeneric ? "generic" : "org"}-${
-					isPinned ? "pinned" : "tabs"
-				}`,
-			getSettings: (_keys) => Promise.resolve(settings),
-			getStyleSettings: () => Promise.resolve(styleSettings),
-			injectStyle: (id, options) => {
-				injectStyleCalls.push({ id, options });
-				const element = document.createElement(
-					options.link != null ? "link" : "style",
-				);
-				element.id = id;
-				if (options.css != null) {
-					element.textContent = options.css;
-				}
-				if (options.link != null) {
-					element.setAttribute("href", options.link);
-				}
-				return element;
-			},
-			performLightningRedirect: (url) => {
-				redirects.push(url);
-			},
-			showToast: (message, status) => {
-				toasts.push({ message, status });
-			},
-			updateModalBodyOverflow: () => {
-				updateModalBodyOverflowState.value++;
+				getURL: (path: string) => `chrome-extension://test${path}`,
+				sendMessage: () => undefined,
 			},
 		},
-		globals: {
-			open: (url: string, target: string) => {
-				openCalls.push({ target, url });
-			},
-		},
-		importsToReplace: new Set([
-			"/core/constants.js",
-			"/core/functions.js",
-			"/core/tab.js",
-			"/core/tabContainer.js",
-			"/core/translator.js",
-			"./toast.js",
-			"./sf-elements.js",
-			"./modal-layout.js",
-		]),
+		writable: true,
 	});
+	const createGeneratorModule = await getCreateGeneratorModule();
+	const module = createGeneratorModule({
+		BROWSER: {
+			runtime: {
+				getURL: (path: string) => `chrome-extension://test${path}`,
+			},
+		},
+		CXM_PIN_TAB: "pin_tab",
+		CXM_REMOVE_TAB: "remove_tab",
+		CXM_UNPIN_TAB: "unpin_tab",
+		EXTENSION_GITHUB_LINK: "https://example.test/repo",
+		EXTENSION_LABEL: "Again Why Salesforce",
+		EXTENSION_NAME: "again-why-salesforce",
+		GENERIC_PINNED_TAB_STYLE_KEY: "genericPinnedStyle",
+		GENERIC_TAB_STYLE_KEY: "genericStyle",
+		HIDDEN_CLASS: "hidden",
+		HTTPS: "https://",
+		LIGHTNING_FORCE_COM: ".lightning.force.com",
+		LINK_NEW_BROWSER: "link_new_browser",
+		ORG_PINNED_TAB_STYLE_KEY: "orgPinnedStyle",
+		ORG_TAB_CLASS: "org-tab",
+		ORG_TAB_STYLE_KEY: "orgStyle",
+		PIN_TAB_CLASS: "pin-tab",
+		SETUP_LIGHTNING: "/lightning/setup/",
+		TAB_STYLE_HOVER: "hover",
+		TAB_STYLE_TOP: "top",
+		TOAST_ERROR: "error",
+		TOAST_SUCCESS: "success",
+		USE_LIGHTNING_NAVIGATION: "use_lightning_navigation",
+		Tab: {
+			extractOrgName: () => "current-org",
+			expandURL: (url: string | null, _href: string) =>
+				url?.startsWith("http")
+					? url
+					: `https://acme.lightning.force.com/lightning/setup/${url ?? ""}`,
+			minifyURL: (url: string | null) =>
+				(url ?? "").replace(
+					/^https:\/\/acme\.lightning\.force\.com\/lightning\/setup\//,
+					"",
+				),
+		},
+		TabContainer: {
+			keyPinnedTabsNo: "pinnedTabsNo",
+		},
+		ensureAllTabsAvailability: () =>
+			Promise.resolve({
+				handleClickTabByData: (payload: { url: string }) => {
+					handleClickCalls.push(payload);
+				},
+			}),
+		getTranslations: (key: string | string[], connector = " ") => {
+			if (Array.isArray(key)) {
+				key.forEach((entry) => translationCalls.push(entry));
+				return Promise.resolve(
+					key.map((entry) =>
+						translations[entry] ?? `translated:${entry}`
+					),
+				);
+			}
+			void connector;
+			translationCalls.push(key);
+			return Promise.resolve(
+				translations[key] ?? `translated:${key}`,
+			);
+		},
+		getCssRule: (id: string, value: string) => `${id}:${value};`,
+		getCssSelector: ({
+			isGeneric = false,
+			isInactive = false,
+			isPinned = false,
+			pseudoElement = "",
+		}: {
+			isGeneric?: boolean;
+			isInactive?: boolean;
+			isPinned?: boolean;
+			pseudoElement?: string;
+		}) =>
+			`.selector-${isGeneric ? "g" : "o"}-${isInactive ? "i" : "a"}-${
+				isPinned ? "p" : "u"
+			}${pseudoElement}`,
+		getCurrentHref: () => currentHref,
+		getPinnedSpecificKey: ({
+			isGeneric = false,
+			isPinned = false,
+		}: { isGeneric?: boolean; isPinned?: boolean }) =>
+			`${isGeneric ? "generic" : "org"}-${
+				isPinned ? "pinned" : "tabs"
+			}`,
+		getSettings: (_keys: string | string[]) => Promise.resolve(settings),
+		getStyleSettings: () => Promise.resolve(styleSettings),
+		injectStyle: (
+			id: string,
+			options: { css?: string; link?: string },
+		) => {
+			injectStyleCalls.push({ id, options });
+			const element = document.createElement(
+				options.link != null ? "link" : "style",
+			);
+			element.id = id;
+			if (options.css != null) {
+				element.textContent = options.css;
+			}
+			if (options.link != null) {
+				element.setAttribute("href", options.link);
+			}
+			return element;
+		},
+		open: (url: string, target: string) => {
+			openCalls.push({ target, url });
+		},
+		performLightningRedirect: (url: string) => {
+			redirects.push(url);
+		},
+		showToast: (message: string, status?: string) => {
+			toasts.push({ message, status });
+		},
+		updateModalBodyOverflow: () => {
+			updateModalBodyOverflowState.value++;
+		},
+	}) as GeneratorModule;
+
+	const cleanup = () => {
+		if (hadBrowser) {
+			Object.defineProperty(globalThis, "browser", {
+				configurable: true,
+				value: originalBrowser,
+				writable: true,
+			});
+		} else {
+			delete (globalThis as { browser?: unknown }).browser;
+		}
+	};
 
 	return {
 		cleanup: () => {

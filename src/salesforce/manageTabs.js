@@ -1,38 +1,82 @@
 "use strict";
 import {
-	CXM_PIN_TAB,
-	CXM_REMOVE_TAB,
-	CXM_UNPIN_TAB,
-	HIDDEN_CLASS,
-	PIN_TAB_CLASS,
-	TOAST_ERROR,
-	TOAST_WARNING,
-	TUTORIAL_EVENT_CLOSE_MANAGE_TABS,
-	TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL,
-	TUTORIAL_EVENT_REORDERED_TABS_TABLE,
+	CXM_PIN_TAB as _CXM_PIN_TAB,
+	CXM_REMOVE_TAB as _CXM_REMOVE_TAB,
+	CXM_UNPIN_TAB as _CXM_UNPIN_TAB,
+	HIDDEN_CLASS as _HIDDEN_CLASS,
+	PIN_TAB_CLASS as _PIN_TAB_CLASS,
+	TOAST_ERROR as _TOAST_ERROR,
+	TOAST_WARNING as _TOAST_WARNING,
+	TUTORIAL_EVENT_CLOSE_MANAGE_TABS as _TUTORIAL_EVENT_CLOSE_MANAGE_TABS,
+	TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL as
+		_TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL,
+	TUTORIAL_EVENT_REORDERED_TABS_TABLE as
+		_TUTORIAL_EVENT_REORDERED_TABS_TABLE,
 } from "../core/constants.js";
 import {
-	getInnerElementFieldBySelector,
-	injectStyle,
+	getInnerElementFieldBySelector as _getInnerElementFieldBySelector,
+	injectStyle as _injectStyle,
 } from "../core/functions.js";
-import Tab from "../core/tab.js";
+import _Tab from "../core/tab.js";
 import {
-	ensureAllTabsAvailability,
-	TabContainer,
+	ensureAllTabsAvailability as _ensureAllTabsAvailability,
+	TabContainer as _TabContainer,
 } from "../core/tabContainer.js";
-import { getTranslations } from "../core/translator.js";
+import { getTranslations as _getTranslations } from "../core/translator.js";
 
-import { setupDragForTable, setupDragForUl } from "./dragHandler.js";
 import {
-	createManageTabRow,
-	generateManageTabsModal,
-	handleLightningLinkClick,
-	MODAL_ID,
+	setupDragForTable as _setupDragForTable,
+	setupDragForUl as _setupDragForUl,
+} from "./dragHandler.js";
+import {
+	createManageTabRow as _createManageTabRow,
+	generateManageTabsModal as _generateManageTabsModal,
+	handleLightningLinkClick as _handleLightningLinkClick,
+	MODAL_ID as _MODAL_ID,
 } from "./generator.js";
-import { makeDuplicatesBold, reorderTabsUl, sf_afterSet } from "./content.js";
-import { showToast } from "./toast.js";
-import { getCurrentHref, getModalHanger } from "./sf-elements.js";
-import { updateModalBodyOverflow } from "./modal-layout.js";
+import {
+	makeDuplicatesBold as _makeDuplicatesBold,
+	reorderTabsUl as _reorderTabsUl,
+	sf_afterSet as _sf_afterSet,
+} from "./content.js";
+import { showToast as _showToast } from "./toast.js";
+import {
+	getCurrentHref as _getCurrentHref,
+	getModalHanger as _getModalHanger,
+} from "./sf-elements.js";
+import { updateModalBodyOverflow as _updateModalBodyOverflow } from "./modal-layout.js";
+
+let CXM_PIN_TAB = _CXM_PIN_TAB;
+let CXM_REMOVE_TAB = _CXM_REMOVE_TAB;
+let CXM_UNPIN_TAB = _CXM_UNPIN_TAB;
+let HIDDEN_CLASS = _HIDDEN_CLASS;
+let PIN_TAB_CLASS = _PIN_TAB_CLASS;
+let TOAST_ERROR = _TOAST_ERROR;
+let TOAST_WARNING = _TOAST_WARNING;
+let TUTORIAL_EVENT_CLOSE_MANAGE_TABS = _TUTORIAL_EVENT_CLOSE_MANAGE_TABS;
+let TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL =
+	_TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL;
+let TUTORIAL_EVENT_REORDERED_TABS_TABLE =
+	_TUTORIAL_EVENT_REORDERED_TABS_TABLE;
+let getInnerElementFieldBySelector = _getInnerElementFieldBySelector;
+let injectStyle = _injectStyle;
+let Tab = _Tab;
+let ensureAllTabsAvailability = _ensureAllTabsAvailability;
+let TabContainer = _TabContainer;
+let getTranslations = _getTranslations;
+let setupDragForTable = _setupDragForTable;
+let setupDragForUl = _setupDragForUl;
+let createManageTabRow = _createManageTabRow;
+let generateManageTabsModal = _generateManageTabsModal;
+let handleLightningLinkClick = _handleLightningLinkClick;
+let MODAL_ID = _MODAL_ID;
+let makeDuplicatesBold = _makeDuplicatesBold;
+let reorderTabsUl = _reorderTabsUl;
+let sf_afterSet = _sf_afterSet;
+let showToast = _showToast;
+let getCurrentHref = _getCurrentHref;
+let getModalHanger = _getModalHanger;
+let updateModalBodyOverflow = _updateModalBodyOverflow;
 
 let focusedIndex = 0;
 const managedLoggers = [];
@@ -883,4 +927,181 @@ export async function createManageTabsModal() {
 	document.dispatchEvent(
 		new CustomEvent(TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL),
 	);
+}
+
+/**
+ * Creates manage-tabs helpers with optional dependency overrides.
+ *
+ * @param {Object} [overrides={}] Runtime overrides used by tests.
+ * @return {{
+ *   __getState: () => {
+ *     actionButtons: unknown[];
+ *     dropdownMenus: unknown[];
+ *     focusedIndex: number;
+ *     managedLoggers: unknown[];
+ *     manageInvalidateSort: boolean;
+ *     manageTabsButtons: Record<string, unknown>;
+ *     trsAndButtons: unknown[];
+ *     wasSomethingUpdated: boolean;
+ *   };
+ *   __setState: (state?: Record<string, unknown>) => void;
+ *   addTr: (tabAppendElement?: HTMLElement | null) => Promise<void>;
+ *   checkAddDuplicateStyle: (tabAppendElement: HTMLElement) => void;
+ *   checkAddRemoveLastTr: (options?: Record<string, unknown>) => Promise<void>;
+ *   checkDuplicates: (tab?: Record<string, unknown>, options?: Record<string, unknown>) => Promise<void>;
+ *   checkOpenAskConfirm: (e: Event) => Promise<void>;
+ *   checkRemoveTr: (e: Event) => Promise<void>;
+ *   closeDropdownOnBtnClick: (e: Event, button: HTMLButtonElement) => void;
+ *   closeDropdownOnTrClick: (e: Event, button: HTMLButtonElement) => void;
+ *   createManageTabsModal: () => Promise<void>;
+ *   getLastTr: (tbody?: HTMLElement | null) => HTMLElement | undefined;
+ *   handleActionButtonClick: (e: Event, options?: Record<string, unknown>) => Promise<void>;
+ *   moveTrToGivenIndex: (options?: Record<string, unknown>) => void;
+ *   performAfterChecks: (tab?: Record<string, unknown>, options?: Record<string, unknown>) => void;
+ *   readManagedTabsAndSave: (options?: Record<string, unknown>) => Promise<void>;
+ *   reduceLoggersToElements: () => Array<{ element: HTMLElement; index: number; type: string }>;
+ *   removeTr: (tabAppendElement?: HTMLElement | null, trToRemove?: HTMLElement | null, removeIndex?: number) => Promise<void>;
+ *   reorderTabsTable: (options?: { fromIndex?: number; toIndex?: number }) => void;
+ *   setInfoForDrag: (element: HTMLElement, listener: () => void, index: number) => void;
+ *   trInputListener: (options?: Record<string, unknown>) => Promise<void>;
+ *   updateLoggerIndex: (fromIndex?: number | null, toIndex?: number | null) => void;
+ *   updateTabAttributes: (options?: Record<string, unknown>) => void;
+ * }} Manage-tabs module API.
+ */
+export function createManageTabsModule(overrides = {}) {
+	if (overrides.CXM_PIN_TAB != null) CXM_PIN_TAB = overrides.CXM_PIN_TAB;
+	if (overrides.CXM_REMOVE_TAB != null) CXM_REMOVE_TAB = overrides.CXM_REMOVE_TAB;
+	if (overrides.CXM_UNPIN_TAB != null) CXM_UNPIN_TAB = overrides.CXM_UNPIN_TAB;
+	if (overrides.HIDDEN_CLASS != null) HIDDEN_CLASS = overrides.HIDDEN_CLASS;
+	if (overrides.PIN_TAB_CLASS != null) PIN_TAB_CLASS = overrides.PIN_TAB_CLASS;
+	if (overrides.TOAST_ERROR != null) TOAST_ERROR = overrides.TOAST_ERROR;
+	if (overrides.TOAST_WARNING != null) TOAST_WARNING = overrides.TOAST_WARNING;
+	if (overrides.TUTORIAL_EVENT_CLOSE_MANAGE_TABS != null) {
+		TUTORIAL_EVENT_CLOSE_MANAGE_TABS = overrides.TUTORIAL_EVENT_CLOSE_MANAGE_TABS;
+	}
+	if (overrides.TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL != null) {
+		TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL =
+			overrides.TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL;
+	}
+	if (overrides.TUTORIAL_EVENT_REORDERED_TABS_TABLE != null) {
+		TUTORIAL_EVENT_REORDERED_TABS_TABLE =
+			overrides.TUTORIAL_EVENT_REORDERED_TABS_TABLE;
+	}
+	if (overrides.MODAL_ID != null) MODAL_ID = overrides.MODAL_ID;
+	if (overrides.Tab != null) Tab = overrides.Tab;
+	if (overrides.TabContainer != null) TabContainer = overrides.TabContainer;
+	if (overrides.createManageTabRow != null) {
+		createManageTabRow = overrides.createManageTabRow;
+	}
+	if (overrides.ensureAllTabsAvailability != null) {
+		ensureAllTabsAvailability = overrides.ensureAllTabsAvailability;
+	}
+	if (overrides.generateManageTabsModal != null) {
+		generateManageTabsModal = overrides.generateManageTabsModal;
+	}
+	if (overrides.getCurrentHref != null) getCurrentHref = overrides.getCurrentHref;
+	if (overrides.getInnerElementFieldBySelector != null) {
+		getInnerElementFieldBySelector = overrides.getInnerElementFieldBySelector;
+	}
+	if (overrides.getModalHanger != null) getModalHanger = overrides.getModalHanger;
+	if (overrides.getTranslations != null) getTranslations = overrides.getTranslations;
+	if (overrides.handleLightningLinkClick != null) {
+		handleLightningLinkClick = overrides.handleLightningLinkClick;
+	}
+	if (overrides.injectStyle != null) injectStyle = overrides.injectStyle;
+	if (overrides.makeDuplicatesBold != null) {
+		makeDuplicatesBold = overrides.makeDuplicatesBold;
+	}
+	if (overrides.reorderTabsUl != null) reorderTabsUl = overrides.reorderTabsUl;
+	if (overrides.setupDragForTable != null) {
+		setupDragForTable = overrides.setupDragForTable;
+	}
+	if (overrides.setupDragForUl != null) setupDragForUl = overrides.setupDragForUl;
+	if (overrides.sf_afterSet != null) sf_afterSet = overrides.sf_afterSet;
+	if (overrides.showToast != null) showToast = overrides.showToast;
+	if (overrides.updateModalBodyOverflow != null) {
+		updateModalBodyOverflow = overrides.updateModalBodyOverflow;
+	}
+	if (overrides.CustomEvent != null) globalThis.CustomEvent = overrides.CustomEvent;
+	if (overrides.confirm != null) globalThis.confirm = overrides.confirm;
+	if (overrides.document != null) globalThis.document = overrides.document;
+	if (overrides.setTimeout != null) globalThis.setTimeout = overrides.setTimeout;
+
+	focusedIndex = 0;
+	managedLoggers.length = 0;
+	for (const key of Object.keys(manageTabsButtons)) delete manageTabsButtons[key];
+	deleteAllButton = null;
+	trsAndButtons.length = 0;
+	dropdownMenus.length = 0;
+	actionButtons.length = 0;
+	closeButton = null;
+	manage_InvalidateSort = false;
+	wasSomethingUpdated = false;
+
+	return {
+		__getState: () => ({
+			actionButtons,
+			dropdownMenus,
+			focusedIndex,
+			managedLoggers,
+			manageInvalidateSort: manage_InvalidateSort,
+			manageTabsButtons,
+			trsAndButtons,
+			wasSomethingUpdated,
+		}),
+		__setState: (state = {}) => {
+			if (state.focusedIndex !== undefined) focusedIndex = state.focusedIndex;
+			if (state.deleteAllButton !== undefined) deleteAllButton = state.deleteAllButton;
+			if (state.closeButton !== undefined) closeButton = state.closeButton;
+			if (state.manageInvalidateSort !== undefined) {
+				manage_InvalidateSort = state.manageInvalidateSort;
+			}
+			if (state.wasSomethingUpdated !== undefined) {
+				wasSomethingUpdated = state.wasSomethingUpdated;
+			}
+			if (state.managedLoggers !== undefined) {
+				managedLoggers.length = 0;
+				managedLoggers.push(...state.managedLoggers);
+			}
+			if (state.actionButtons !== undefined) {
+				actionButtons.length = 0;
+				actionButtons.push(...state.actionButtons);
+			}
+			if (state.dropdownMenus !== undefined) {
+				dropdownMenus.length = 0;
+				dropdownMenus.push(...state.dropdownMenus);
+			}
+			if (state.trsAndButtons !== undefined) {
+				trsAndButtons.length = 0;
+				trsAndButtons.push(...state.trsAndButtons);
+			}
+			if (state.manageTabsButtons !== undefined) {
+				for (const key of Object.keys(manageTabsButtons)) {
+					delete manageTabsButtons[key];
+				}
+				Object.assign(manageTabsButtons, state.manageTabsButtons);
+			}
+		},
+		addTr,
+		checkAddDuplicateStyle,
+		checkAddRemoveLastTr,
+		checkDuplicates,
+		checkOpenAskConfirm,
+		checkRemoveTr,
+		closeDropdownOnBtnClick,
+		closeDropdownOnTrClick,
+		createManageTabsModal,
+		getLastTr,
+		handleActionButtonClick,
+		moveTrToGivenIndex,
+		performAfterChecks,
+		readManagedTabsAndSave,
+		reduceLoggersToElements,
+		removeTr,
+		reorderTabsTable,
+		setInfoForDrag,
+		trInputListener,
+		updateLoggerIndex,
+		updateTabAttributes,
+	};
 }

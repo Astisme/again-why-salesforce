@@ -3,18 +3,10 @@ import {
 	assertExists,
 	assertStringIncludes,
 } from "@std/testing/asserts";
-import { loadIsolatedModule } from "../../load-isolated-module.test.ts";
-
-type BuildManifestDependencies = {
-	console: {
-		error: (message: string) => void;
-	};
-	manifest: Record<string, unknown>;
-	process: {
-		argv: string[];
-	};
-	writeFileSync: (path: string, contents: string) => void;
-};
+import {
+	buildManifestForBrowser,
+	runBuildManifest,
+} from "../../../src/manifest/build-manifest-runtime.mjs";
 
 /**
  * Creates a manifest fixture containing every field touched by the build script.
@@ -62,43 +54,25 @@ function createManifestFixture() {
  * @param {string} browserName Browser argument passed to the script.
  * @return {Promise<{ errors: string[]; manifest: Record<string, unknown>; thrown: Error | null; writes: { contents: string; path: string; }[]; }>} Execution result.
  */
-async function runBuild(browserName: string) {
+function runBuild(browserName: string) {
 	const manifest = createManifestFixture();
 	const errors: string[] = [];
 	const writes: { contents: string; path: string }[] = [];
 	let thrown: Error | null = null;
-	const dependencies: BuildManifestDependencies = {
-		console: {
-			error: (message) => {
-				errors.push(message);
-			},
-		},
-		manifest,
-		process: {
-			argv: ["deno", "build-manifest.mjs", browserName],
-		},
-		writeFileSync: (path, contents) => {
-			writes.push({ contents, path });
-		},
-	};
 
 	try {
-		const { cleanup } = await loadIsolatedModule<
-			Record<string, never>,
-			BuildManifestDependencies
-		>({
-			modulePath: new URL(
-				"../../../src/manifest/build-manifest.mjs",
-				import.meta.url,
-			),
-			dependencies,
-			importsToReplace: new Set([
-				"node:process",
-				"./template-manifest.json",
-				"node:fs",
-			]),
+		runBuildManifest({
+			argv: ["deno", "build-manifest.mjs", browserName],
+			logger: {
+				error: (message: string) => {
+					errors.push(message);
+				},
+			},
+			manifest,
+			writeFileSyncFn: (path: string, contents: string) => {
+				writes.push({ contents, path });
+			},
 		});
-		cleanup();
 	} catch (error) {
 		thrown = error as Error;
 	}
@@ -130,6 +104,18 @@ Deno.test("build-manifest keeps Chromium-only command shortcuts and writes the f
 			.suggested_key,
 		undefined,
 	);
+});
+
+Deno.test("build-manifest treats Edge like Chromium and strips Firefox-specific fields", async () => {
+	const { manifest, thrown, writes } = await runBuild("edge");
+
+	assertEquals(thrown, null);
+	assertEquals(writes.length, 1);
+	assertEquals(
+		(manifest.background as Record<string, unknown>).scripts,
+		undefined,
+	);
+	assertEquals(manifest.browser_specific_settings, undefined);
 });
 
 Deno.test("build-manifest removes Firefox-incompatible fields", async () => {
@@ -177,6 +163,29 @@ Deno.test("build-manifest reports invalid browser arguments", async () => {
 	assertEquals(writes.length, 0);
 	assertExists(thrown);
 	assertStringIncludes(thrown.message, "Unknown browser: opera");
+	assertEquals(errors.length, 1);
+	assertStringIncludes(errors[0], "Usage:");
+});
+
+Deno.test("build-manifest reports invalid browser arguments even with missing argv labels", () => {
+	const errors: string[] = [];
+	const manifest = createManifestFixture();
+
+	try {
+		buildManifestForBrowser({
+			argv: [],
+			browser: "opera",
+			logger: {
+				error: (message: string) => {
+					errors.push(message);
+				},
+			},
+			manifest,
+		});
+	} catch (error) {
+		assertStringIncludes((error as Error).message, "Unknown browser: opera");
+	}
+
 	assertEquals(errors.length, 1);
 	assertStringIncludes(errors[0], "Usage:");
 });

@@ -1,43 +1,88 @@
 "use strict";
 import {
-	BROWSER,
-	EXTENSION_NAME,
-	HIDDEN_CLASS,
-	TOAST_ERROR,
-	TOAST_WARNING,
+	BROWSER as _BROWSER,
+	EXTENSION_NAME as _EXTENSION_NAME,
+	HIDDEN_CLASS as _HIDDEN_CLASS,
+	TOAST_ERROR as _TOAST_ERROR,
+	TOAST_WARNING as _TOAST_WARNING,
 } from "../core/constants.js";
-import { injectStyle } from "../core/functions.js";
-import Tab from "../core/tab.js";
+import { injectStyle as _injectStyle } from "../core/functions.js";
+import _Tab from "../core/tab.js";
 import {
-	ensureAllTabsAvailability,
-	TabContainer,
+	ensureAllTabsAvailability as _ensureAllTabsAvailability,
+	TabContainer as _TabContainer,
 } from "../core/tabContainer.js";
-import { getTranslations } from "../core/translator.js";
+import { getTranslations as _getTranslations } from "../core/translator.js";
 
 import {
-	generateCheckboxWithLabel,
-	generateSection,
-	generateSldsFileInput,
-	generateSldsModal,
-	generateSldsModalWithTabList,
-	MODAL_ID,
+	generateCheckboxWithLabel as _generateCheckboxWithLabel,
+	generateSection as _generateSection,
+	generateSldsFileInput as _generateSldsFileInput,
+	generateSldsModal as _generateSldsModal,
+	generateSldsModalWithTabList as _generateSldsModalWithTabList,
+	MODAL_ID as _MODAL_ID,
 } from "./generator.js";
-import { sf_afterSet } from "./content.js";
-import { showToast } from "./toast.js";
-import { getModalHanger, getSetupTabUl } from "./sf-elements.js";
+import { sf_afterSet as _sf_afterSet } from "./content.js";
+import { showToast as _showToast } from "./toast.js";
+import {
+	getModalHanger as _getModalHanger,
+	getSetupTabUl as _getSetupTabUl,
+} from "./sf-elements.js";
 
-const IMPORT_ID = `${EXTENSION_NAME}-import`;
-const IMPORT_FILE_ID = `${IMPORT_ID}-file`;
-const SELECT_TABS_ID = `${IMPORT_ID}-select-tabs`;
-const METADATA_ID = `${IMPORT_ID}-metadata`;
-const OVERWRITE_ID = `${IMPORT_ID}-overwrite`;
-const OTHER_ORG_ID = `${IMPORT_ID}-other-org`;
-const CLOSE_MODAL_ID = `${IMPORT_ID}-modal-close`;
-const IMPORT_CSS_ID = `${IMPORT_ID}-css`;
-const IMPORT_CONTAINER_ID = `${IMPORT_ID}-container`;
-const IMPORT_DUPLICATE_WARNING_CLASS = `${IMPORT_ID}-duplicate-warning`;
-const IMPORT_DRAG_ACTIVE_CLASS = `${IMPORT_ID}-drag-active`;
+let BROWSER = _BROWSER;
+let EXTENSION_NAME = _EXTENSION_NAME;
+let HIDDEN_CLASS = _HIDDEN_CLASS;
+let TOAST_ERROR = _TOAST_ERROR;
+let TOAST_WARNING = _TOAST_WARNING;
+let injectStyle = _injectStyle;
+let Tab = _Tab;
+let ensureAllTabsAvailability = _ensureAllTabsAvailability;
+let TabContainer = _TabContainer;
+let getTranslations = _getTranslations;
+let generateCheckboxWithLabel = _generateCheckboxWithLabel;
+let generateSection = _generateSection;
+let generateSldsFileInput = _generateSldsFileInput;
+let generateSldsModal = _generateSldsModal;
+let generateSldsModalWithTabList = _generateSldsModalWithTabList;
+let MODAL_ID = _MODAL_ID;
+let sf_afterSet = _sf_afterSet;
+let showToast = _showToast;
+let getModalHanger = _getModalHanger;
+let getSetupTabUl = _getSetupTabUl;
+
+let IMPORT_ID = "";
+let IMPORT_FILE_ID = "";
+let SELECT_TABS_ID = "";
+let METADATA_ID = "";
+let OVERWRITE_ID = "";
+let OTHER_ORG_ID = "";
+let CLOSE_MODAL_ID = "";
+let IMPORT_CSS_ID = "";
+let IMPORT_CONTAINER_ID = "";
+let IMPORT_DUPLICATE_WARNING_CLASS = "";
+let IMPORT_DRAG_ACTIVE_CLASS = "";
 let inputModalParent;
+
+/**
+ * Recomputes derived import IDs from the current extension name.
+ *
+ * @return {void}
+ */
+function updateImportIds() {
+	IMPORT_ID = `${EXTENSION_NAME}-import`;
+	IMPORT_FILE_ID = `${IMPORT_ID}-file`;
+	SELECT_TABS_ID = `${IMPORT_ID}-select-tabs`;
+	METADATA_ID = `${IMPORT_ID}-metadata`;
+	OVERWRITE_ID = `${IMPORT_ID}-overwrite`;
+	OTHER_ORG_ID = `${IMPORT_ID}-other-org`;
+	CLOSE_MODAL_ID = `${IMPORT_ID}-modal-close`;
+	IMPORT_CSS_ID = `${IMPORT_ID}-css`;
+	IMPORT_CONTAINER_ID = `${IMPORT_ID}-container`;
+	IMPORT_DUPLICATE_WARNING_CLASS = `${IMPORT_ID}-duplicate-warning`;
+	IMPORT_DRAG_ACTIVE_CLASS = `${IMPORT_ID}-drag-active`;
+}
+
+updateImportIds();
 
 /**
  * Generates an SLDS import modal for importing tabs.
@@ -554,6 +599,88 @@ async function showFileImport() {
 	}
 	getModalHanger().appendChild(inputModalParent);
 	listenToFileUpload();
+}
+
+/**
+ * Creates the import module API with optional dependency overrides.
+ *
+ * @param {Object} [overrides={}] Runtime overrides used by tests.
+ * @return {{
+ *   __getInputModalParent: () => unknown;
+ *   __setInputModalParent: (value: unknown) => void;
+ *   createImportModal: () => Promise<void>;
+ *   filterForUnexpectedTabKeys: (tabs?: Record<string, unknown>[] | null) => unknown[];
+ *   generateSldsImport: () => Promise<{
+ *     closeButton: HTMLElement;
+ *     inputContainer: HTMLInputElement;
+ *     saveButton: HTMLElement;
+ *   }>;
+ *   getTabsFromJSON: (jsonWithTabs?: Record<string, unknown> | null) => unknown[];
+ *   makeValidTabs: (
+ *     tabs?: Record<string, unknown>[] | null,
+ *     mapping?: { label?: string; org?: string; url?: string },
+ *   ) => unknown[];
+ *   readChangeOrDropFiles: (event: Event) => Promise<void>;
+ *   readFile: (files: FileList | File[] | File) => Promise<void>;
+ *   showFileImport: () => Promise<void>;
+ *   showTabSelectThenImport: (files?: File[], importConfig?: Record<string, boolean>) => Promise<void>;
+ * }} Import module API.
+ */
+export function createImportModule(overrides = {}) {
+	if (overrides.BROWSER != null) BROWSER = overrides.BROWSER;
+	if (overrides.EXTENSION_NAME != null) {
+		EXTENSION_NAME = overrides.EXTENSION_NAME;
+		updateImportIds();
+	}
+	if (overrides.HIDDEN_CLASS != null) HIDDEN_CLASS = overrides.HIDDEN_CLASS;
+	if (overrides.MODAL_ID != null) MODAL_ID = overrides.MODAL_ID;
+	if (overrides.TOAST_ERROR != null) TOAST_ERROR = overrides.TOAST_ERROR;
+	if (overrides.TOAST_WARNING != null) TOAST_WARNING = overrides.TOAST_WARNING;
+	if (overrides.Tab != null) Tab = overrides.Tab;
+	if (overrides.TabContainer != null) TabContainer = overrides.TabContainer;
+	if (overrides.ensureAllTabsAvailability != null) {
+		ensureAllTabsAvailability = overrides.ensureAllTabsAvailability;
+	}
+	if (overrides.getTranslations != null) {
+		getTranslations = overrides.getTranslations;
+	}
+	if (overrides.generateCheckboxWithLabel != null) {
+		generateCheckboxWithLabel = overrides.generateCheckboxWithLabel;
+	}
+	if (overrides.generateSection != null) {
+		generateSection = overrides.generateSection;
+	}
+	if (overrides.generateSldsFileInput != null) {
+		generateSldsFileInput = overrides.generateSldsFileInput;
+	}
+	if (overrides.generateSldsModal != null) {
+		generateSldsModal = overrides.generateSldsModal;
+	}
+	if (overrides.generateSldsModalWithTabList != null) {
+		generateSldsModalWithTabList = overrides.generateSldsModalWithTabList;
+	}
+	if (overrides.getModalHanger != null) getModalHanger = overrides.getModalHanger;
+	if (overrides.getSetupTabUl != null) getSetupTabUl = overrides.getSetupTabUl;
+	if (overrides.injectStyle != null) injectStyle = overrides.injectStyle;
+	if (overrides.sf_afterSet != null) sf_afterSet = overrides.sf_afterSet;
+	if (overrides.showToast != null) showToast = overrides.showToast;
+	inputModalParent = undefined;
+
+	return {
+		__getInputModalParent: () => inputModalParent,
+		__setInputModalParent: (value) => {
+			inputModalParent = value;
+		},
+		createImportModal,
+		filterForUnexpectedTabKeys,
+		generateSldsImport,
+		getTabsFromJSON,
+		makeValidTabs,
+		readChangeOrDropFiles,
+		readFile,
+		showFileImport,
+		showTabSelectThenImport,
+	};
 }
 
 /**

@@ -1,19 +1,17 @@
 import { assertEquals, assertStrictEquals } from "@std/testing/asserts";
 import { installMockDom } from "../../happydom.test.ts";
-import { loadIsolatedModule } from "../../load-isolated-module.test.ts";
-import "../../mocks.test.ts";
+import { createThemeHandlerRuntime } from "../../../src/action/themeHandler-runtime.js";
 
 type ThemeHandlerModule = {
 	handleSwitchColorTheme: () => Promise<void>;
 	initTheme: () => Promise<void>;
-	initThemePromise: Promise<void>;
 	systemColorSchemeListener: (enable?: boolean | null) => Promise<void>;
 };
 
 type Listener = (event: { matches: boolean }) => void | Promise<void>;
 
 /**
- * Minimal localStorage mock used by the isolated theme handler tests.
+ * Minimal localStorage mock used by the theme handler tests.
  */
 class MemoryStorage {
 	#values = new Map<string, string>();
@@ -92,13 +90,7 @@ class MockMediaQueryList {
 	}
 }
 
-type ThemeHandlerDependencies = {
-	WHAT_THEME: string;
-	sendExtensionMessage: (message: { theme: string; what: string }) => void;
-};
-
 type ThemeHandlerFixture = {
-	cleanup: () => void;
 	document: {
 		documentElement: {
 			dataset: Record<string, string | null>;
@@ -111,10 +103,10 @@ type ThemeHandlerFixture = {
 };
 
 /**
- * Loads the theme handler module with isolated dependencies.
+ * Builds a theme-handler runtime with test doubles.
  *
  * @param {{ localStorage?: MemoryStorage; matchMedia?: ((query: string) => MockMediaQueryList) | null; }} [overrides={}] Runtime overrides.
- * @return {Promise<ThemeHandlerFixture>} Module and fixtures.
+ * @return {Promise<ThemeHandlerFixture>} Runtime and fixtures.
  */
 async function loadThemeHandler(
 	overrides: {
@@ -128,41 +120,25 @@ async function loadThemeHandler(
 		dataset: {} as Record<string, string | null>,
 	};
 	const mediaQueryList = new MockMediaQueryList(false);
-	const dependencies: ThemeHandlerDependencies = {
-		WHAT_THEME: "theme-message",
-		sendExtensionMessage: (message) => {
+	const hasMatchMediaOverride = Object.hasOwn(overrides, "matchMedia");
+	const matchMediaFn = hasMatchMediaOverride
+		? overrides.matchMedia ?? undefined
+		: (_query: string) => mediaQueryList;
+	const runtime = createThemeHandlerRuntime({
+		documentRef: { documentElement },
+		localStorageRef: localStorage,
+		matchMediaFn,
+		sendExtensionMessageFn: (message: { what: string; theme: string }) => {
 			sentMessages.push(message);
 		},
-	};
-	const hasMatchMediaOverride = Object.hasOwn(overrides, "matchMedia");
-	const { cleanup, module } = await loadIsolatedModule<
-		ThemeHandlerModule,
-		ThemeHandlerDependencies
-	>({
-		modulePath: new URL(
-			"../../../src/action/themeHandler.js",
-			import.meta.url,
-		),
-		dependencies,
-		globals: {
-			document: { documentElement },
-			localStorage,
-			matchMedia: hasMatchMediaOverride
-				? overrides.matchMedia
-				: () => mediaQueryList,
-		},
-		importsToReplace: new Set([
-			"/core/constants.js",
-			"/core/functions.js",
-		]),
+		whatTheme: "theme-message",
 	});
-	await module.initThemePromise;
+	await runtime.initTheme();
 
 	return {
-		cleanup,
 		document: { documentElement },
 		localStorage,
-		module,
+		module: runtime,
 		sentMessages,
 		mediaQueryList: !hasMatchMediaOverride ? mediaQueryList : (
 			typeof overrides.matchMedia === "function"
@@ -175,44 +151,40 @@ async function loadThemeHandler(
 Deno.test("themeHandler initializes and updates theme state in isolation", async () => {
 	const storage = new MemoryStorage();
 	storage.setItem("userTheme", "dark");
-	const { cleanup, document, localStorage, module, sentMessages } =
+	const { document, localStorage, module, sentMessages } =
 		await loadThemeHandler({
 			localStorage: storage,
 			matchMedia: null,
 		});
-	try {
-		assertEquals(
-			document.documentElement.dataset.usertheme,
-			"dark",
-		);
-		assertEquals(document.documentElement.dataset.theme, "dark");
 
-		await module.handleSwitchColorTheme();
+	assertEquals(
+		document.documentElement.dataset.usertheme,
+		"dark",
+	);
+	assertEquals(document.documentElement.dataset.theme, "dark");
 
-		assertEquals(sentMessages, [{
-			theme: "light",
-			what: "theme-message",
-		}]);
-		assertEquals(document.documentElement.dataset.theme, "light");
-		assertEquals(document.documentElement.dataset.usertheme, "light");
-		assertEquals(localStorage.getItem("usingTheme"), "light");
-		assertEquals(localStorage.getItem("userTheme"), "light");
+	await module.handleSwitchColorTheme();
 
-		await module.handleSwitchColorTheme();
-		assertEquals(sentMessages.at(-1), {
-			theme: "dark",
-			what: "theme-message",
-		});
-		assertEquals(document.documentElement.dataset.theme, "dark");
-		assertEquals(document.documentElement.dataset.usertheme, "dark");
-	} finally {
-		cleanup();
-	}
+	assertEquals(sentMessages, [{
+		theme: "light",
+		what: "theme-message",
+	}]);
+	assertEquals(document.documentElement.dataset.theme, "light");
+	assertEquals(document.documentElement.dataset.usertheme, "light");
+	assertEquals(localStorage.getItem("usingTheme"), "light");
+	assertEquals(localStorage.getItem("userTheme"), "light");
+
+	await module.handleSwitchColorTheme();
+	assertEquals(sentMessages.at(-1), {
+		theme: "dark",
+		what: "theme-message",
+	});
+	assertEquals(document.documentElement.dataset.theme, "dark");
+	assertEquals(document.documentElement.dataset.usertheme, "dark");
 });
 
 Deno.test("themeHandler attaches and detaches the system color listener", async () => {
 	const {
-		cleanup,
 		document,
 		localStorage,
 		module,
@@ -221,85 +193,73 @@ Deno.test("themeHandler attaches and detaches the system color listener", async 
 	} = await loadThemeHandler({
 		localStorage: new MemoryStorage(),
 	});
-	try {
-		assertStrictEquals(mediaQueryList?.listeners.length, 1);
-		assertEquals(sentMessages[0], {
-			theme: "light",
-			what: "theme-message",
-		});
-		assertEquals(localStorage.getItem("userTheme"), "system");
-		assertStrictEquals(mediaQueryList?.listeners.length, 1);
+	assertStrictEquals(mediaQueryList?.listeners.length, 1);
+	assertEquals(sentMessages[0], {
+		theme: "light",
+		what: "theme-message",
+	});
+	assertEquals(localStorage.getItem("userTheme"), "system");
+	assertStrictEquals(mediaQueryList?.listeners.length, 1);
 
-		await mediaQueryList?.dispatch(false);
-		assertEquals(sentMessages.length, 1);
+	await mediaQueryList?.dispatch(false);
+	assertEquals(sentMessages.length, 1);
 
-		await mediaQueryList?.dispatch(true);
-		assertEquals(sentMessages[1], {
-			theme: "dark",
-			what: "theme-message",
-		});
-		assertEquals(document.documentElement.dataset.theme, "dark");
+	await mediaQueryList?.dispatch(true);
+	assertEquals(sentMessages[1], {
+		theme: "dark",
+		what: "theme-message",
+	});
+	assertEquals(document.documentElement.dataset.theme, "dark");
 
-		await module.systemColorSchemeListener(false);
-		assertStrictEquals(mediaQueryList?.listeners.length, 0);
+	await module.systemColorSchemeListener(false);
+	assertStrictEquals(mediaQueryList?.listeners.length, 0);
 
-		await module.systemColorSchemeListener(true);
-		assertStrictEquals(mediaQueryList?.listeners.length, 1);
+	await module.systemColorSchemeListener(true);
+	assertStrictEquals(mediaQueryList?.listeners.length, 1);
 
-		await module.systemColorSchemeListener(true);
-		assertStrictEquals(mediaQueryList?.listeners.length, 1);
+	await module.systemColorSchemeListener(true);
+	assertStrictEquals(mediaQueryList?.listeners.length, 1);
 
-		await module.systemColorSchemeListener(false);
-		await (
-			module.systemColorSchemeListener as (
-				enable?: boolean | null,
-			) => Promise<void>
-		)(null);
-		assertStrictEquals(mediaQueryList?.listeners.length, 0);
-	} finally {
-		cleanup();
-	}
+	await module.systemColorSchemeListener(false);
+	await (
+		module.systemColorSchemeListener as (
+			enable?: boolean | null,
+		) => Promise<void>
+	)(null);
+	assertStrictEquals(mediaQueryList?.listeners.length, 0);
 });
 
 Deno.test("themeHandler ignores enabling the system listener when matchMedia is unavailable", async () => {
 	const storage = new MemoryStorage();
 	storage.setItem("userTheme", "light");
-	const { cleanup, localStorage, module } = await loadThemeHandler({
+	const { localStorage, module } = await loadThemeHandler({
 		localStorage: storage,
 		matchMedia: null,
 	});
 
-	try {
-		await module.systemColorSchemeListener(true);
-		assertEquals(localStorage.getItem("userTheme"), "light");
-	} finally {
-		cleanup();
-	}
+	await module.systemColorSchemeListener(true);
+	assertEquals(localStorage.getItem("userTheme"), "light");
 });
 
 Deno.test("themeHandler re-initializes both stored and default user themes", async () => {
 	const storage = new MemoryStorage();
-	const { cleanup, document, localStorage, module } = await loadThemeHandler({
+	const { document, localStorage, module } = await loadThemeHandler({
 		localStorage: storage,
 		matchMedia: null,
 	});
 
-	try {
-		assertEquals(document.documentElement.dataset.usertheme, "system");
-		assertEquals(document.documentElement.dataset.theme, null);
+	assertEquals(document.documentElement.dataset.usertheme, "system");
+	assertEquals(document.documentElement.dataset.theme, null);
 
-		localStorage.setItem("userTheme", "light");
-		await module.initTheme();
-		assertEquals(document.documentElement.dataset.usertheme, "light");
-		assertEquals(document.documentElement.dataset.theme, "light");
+	localStorage.setItem("userTheme", "light");
+	await module.initTheme();
+	assertEquals(document.documentElement.dataset.usertheme, "light");
+	assertEquals(document.documentElement.dataset.theme, "light");
 
-		localStorage.setItem("userTheme", "system");
-		await module.initTheme();
-		assertEquals(document.documentElement.dataset.usertheme, "system");
-		assertEquals(document.documentElement.dataset.theme, null);
-	} finally {
-		cleanup();
-	}
+	localStorage.setItem("userTheme", "system");
+	await module.initTheme();
+	assertEquals(document.documentElement.dataset.usertheme, "system");
+	assertEquals(document.documentElement.dataset.theme, null);
 });
 
 Deno.test("themeHandler direct module coverage", async () => {
@@ -307,10 +267,38 @@ Deno.test("themeHandler direct module coverage", async () => {
 		"https://example.lightning.force.com/lightning/setup/",
 	);
 	const originalMatchMedia = globalThis.matchMedia;
+	const originalChrome = (globalThis as Record<string, unknown>).chrome;
+	const originalBrowser = (globalThis as Record<string, unknown>).browser;
 	try {
-		const module = await import("../../../src/action/themeHandler.js");
+		const browserGlobal = {
+			i18n: {
+				getMessage: () => "again-why-salesforce",
+			},
+			runtime: {
+				getManifest: () => ({
+					homepage_url: "https://github.com/acme/again-why-salesforce",
+					optional_host_permissions: [],
+					version: "1.0.0",
+				}),
+				lastError: null,
+				sendMessage: (
+					message: { theme: string; what: string },
+					callback?: (response?: { theme: string; what: string }) => void,
+				) => {
+					callback?.(message);
+					return Promise.resolve(message);
+				},
+			},
+		};
+		(globalThis as Record<string, unknown>).chrome = browserGlobal;
+		(globalThis as Record<string, unknown>).browser = browserGlobal;
+
 		const media = new MockMediaQueryList(false);
 		globalThis.matchMedia = () => media as unknown as MediaQueryList;
+		const module = await import(
+			`../../../src/action/themeHandler.js?runtime=${crypto.randomUUID()}`
+		);
+		await module.systemColorSchemeListener(false);
 		localStorage.setItem("userTheme", "system");
 
 		await module.initTheme();
@@ -338,22 +326,10 @@ Deno.test("themeHandler direct module coverage", async () => {
 		localStorage.setItem("userTheme", "dark");
 		await module.initTheme();
 		assertEquals(document.documentElement.dataset.theme, "dark");
-
-		globalThis.matchMedia =
-			undefined as unknown as typeof globalThis.matchMedia;
-		localStorage.setItem("userTheme", "system");
-		await module.initTheme();
-		assertEquals(document.documentElement.dataset.usertheme, "system");
-		assertStrictEquals(document.documentElement.dataset.theme, null);
-
-		localStorage.removeItem("userTheme");
-		await module.initTheme();
-		assertEquals(document.documentElement.dataset.usertheme, "system");
-		assertStrictEquals(document.documentElement.dataset.theme, null);
 	} finally {
 		globalThis.matchMedia = originalMatchMedia;
-		localStorage.removeItem("userTheme");
-		localStorage.removeItem("usingTheme");
+		(globalThis as Record<string, unknown>).chrome = originalChrome;
+		(globalThis as Record<string, unknown>).browser = originalBrowser;
 		dom.cleanup();
 	}
 });

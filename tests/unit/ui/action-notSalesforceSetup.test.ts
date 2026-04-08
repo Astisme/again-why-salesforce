@@ -4,7 +4,7 @@ import {
 	MockDocument,
 	MockElement,
 } from "./mock-dom.test.ts";
-import { loadIsolatedModule } from "../../load-isolated-module.test.ts";
+import { runNotSalesforceSetup } from "../../../src/action/notSalesforceSetup/notSalesforceSetup-runtime.js";
 
 type Setting = {
 	enabled: boolean;
@@ -14,36 +14,6 @@ type Setting = {
 type BrowserTab = {
 	id: number;
 	index: number;
-};
-
-type NotSalesforceSetupDependencies = {
-	BROWSER: {
-		tabs: {
-			create: (details: {
-				index: number;
-				openerTabId: number;
-				url: string;
-			}) => void;
-			update: (details: { url: string }) => void;
-		};
-	};
-	HIDDEN_CLASS: string;
-	POPUP_LOGIN_NEW_TAB: string;
-	POPUP_OPEN_LOGIN: string;
-	POPUP_OPEN_SETUP: string;
-	POPUP_SETUP_NEW_TAB: string;
-	SALESFORCE_LIGHTNING_PATTERN: RegExp;
-	SALESFORCE_SETUP_HOME_MINI: string;
-	SETUP_LIGHTNING: string;
-	WHAT_GET_BROWSER_TAB: string;
-	console: {
-		warn: (error: unknown) => void;
-	};
-	ensureTranslatorAvailability: () => Promise<void>;
-	getSettings: (keys: string[]) => Promise<Setting[]>;
-	sendExtensionMessage: (
-		message: { what: string },
-	) => Promise<BrowserTab | null>;
 };
 
 /**
@@ -72,7 +42,7 @@ function appendElement(
  * @param {BrowserTab[]} [options.browserTabResponses=[]] Tabs returned by the background lookup.
  * @param {string | null} [options.pageUrl=null] Page URL passed in the popup query string.
  * @param {Setting[]} [options.settings=[]] Popup settings returned by `getSettings`.
- * @return {Promise<{ cleanup: () => void; counters: { closeCalls: number; translatorCalls: number; }; creates: { index: number; openerTabId: number; url: string; }[]; invalidUrl: MockElement; login: MockElement; plain: MockElement; sendMessages: { what: string; }[]; setup: MockElement; updates: { url: string; }[]; warnings: unknown[]; }>} Loaded popup fixtures.
+ * @return {Promise<{ counters: { closeCalls: number; translatorCalls: number; }; creates: { index: number; openerTabId: number; url: string; }[]; invalidUrl: MockElement; login: MockElement; plain: MockElement; sendMessages: { what: string; }[]; setup: MockElement; updates: { url: string; }[]; warnings: unknown[]; }>} Loaded popup fixtures.
  */
 async function loadNotSalesforceSetupModule({
 	browserTabResponses = [],
@@ -107,71 +77,57 @@ async function loadNotSalesforceSetupModule({
 	const sendMessages: { what: string }[] = [];
 	const remainingResponses = [...browserTabResponses];
 
-	const { cleanup } = await loadIsolatedModule<
-		Record<string, never>,
-		NotSalesforceSetupDependencies
-	>({
-		modulePath: new URL(
-			"../../../src/action/notSalesforceSetup/notSalesforceSetup.js",
-			import.meta.url,
-		),
-		dependencies: {
-			BROWSER: {
-				tabs: {
-					create: (details) => {
-						creates.push(details);
-					},
-					update: (details) => {
-						updates.push(details);
-					},
+	await runNotSalesforceSetup({
+		browser: {
+			tabs: {
+				create: (details: {
+					index: number;
+					openerTabId: number;
+					url: string;
+				}) => {
+					creates.push(details);
+				},
+				update: (details: { url: string }) => {
+					updates.push(details);
 				},
 			},
-			HIDDEN_CLASS: "hidden",
-			POPUP_LOGIN_NEW_TAB: "popup_login_new_tab",
-			POPUP_OPEN_LOGIN: "popup_open_login",
-			POPUP_OPEN_SETUP: "popup_open_setup",
-			POPUP_SETUP_NEW_TAB: "popup_setup_new_tab",
-			SALESFORCE_LIGHTNING_PATTERN:
-				/^https:\/\/[a-z0-9.-]+\.lightning\.force\.com(?::\d+)?(?:\/|$).*/i,
-			SALESFORCE_SETUP_HOME_MINI: "SetupOneHome/home",
-			SETUP_LIGHTNING: "/lightning/setup/",
-			WHAT_GET_BROWSER_TAB: "get-browser-tab",
-			console: {
-				warn: (error) => {
-					warnings.push(error);
-				},
-			},
-			ensureTranslatorAvailability: () => {
-				counters.translatorCalls++;
-				return Promise.resolve();
-			},
-			getSettings: () => Promise.resolve(settings),
-			sendExtensionMessage: (message) => {
-				sendMessages.push(message);
-				return Promise.resolve(remainingResponses.shift() ?? null);
+		},
+		closePopupFn: () => {
+			counters.closeCalls++;
+		},
+		consoleRef: {
+			warn: (error: unknown) => {
+				warnings.push(error);
 			},
 		},
-		globals: {
-			close: () => {
-				counters.closeCalls++;
-			},
-			document,
-			location: window.location,
-			setTimeout: (callback: () => void) => {
-				callback();
-				return counters.closeCalls;
-			},
+		documentRef: document,
+		ensureTranslatorAvailabilityFn: () => {
+			counters.translatorCalls++;
+			return Promise.resolve();
 		},
-		importsToReplace: new Set([
-			"/core/constants.js",
-			"/core/functions.js",
-			"/core/translator.js",
-			"../themeHandler.js",
-		]),
+		getSettingsFn: () => Promise.resolve(settings),
+		hiddenClass: "hidden",
+		locationRef: window.location,
+		popupLoginNewTab: "popup_login_new_tab",
+		popupOpenLogin: "popup_open_login",
+		popupOpenSetup: "popup_open_setup",
+		popupSetupNewTab: "popup_setup_new_tab",
+		salesforceLightningPattern:
+			/^https:\/\/[a-z0-9.-]+\.lightning\.force\.com(?::\d+)?(?:\/|$).*/i,
+		salesforceSetupHomeMini: "SetupOneHome/home",
+		sendExtensionMessageFn: (message: { what: string }) => {
+			sendMessages.push(message);
+			return Promise.resolve(remainingResponses.shift() ?? null);
+		},
+		setTimeoutFn: (callback: () => void) => {
+			callback();
+			return counters.closeCalls;
+		},
+		setupLightning: "/lightning/setup/",
+		whatGetBrowserTab: "get-browser-tab",
 	});
 
 	return {
-		cleanup,
 		counters,
 		creates,
 		invalidUrl,
@@ -194,26 +150,22 @@ Deno.test("notSalesforceSetup auto-opens Salesforce setup in a new tab", async (
 		],
 	});
 
-	try {
-		assertEquals(fixture.login.classList.contains("hidden"), true);
-		assertEquals(fixture.setup.classList.contains("hidden"), false);
-		assertEquals(
-			fixture.setup.href,
-			"https://acme.lightning.force.com/lightning/setup/SetupOneHome/home",
-		);
-		assertEquals(fixture.creates, [{
-			index: 3,
-			openerTabId: 7,
-			url: "https://acme.lightning.force.com/lightning/setup/SetupOneHome/home",
-		}]);
-		assertEquals(fixture.sendMessages, [{
-			what: "get-browser-tab",
-		}]);
-		assertEquals(fixture.counters.closeCalls, 1);
-		assertEquals(fixture.counters.translatorCalls, 0);
-	} finally {
-		fixture.cleanup();
-	}
+	assertEquals(fixture.login.classList.contains("hidden"), true);
+	assertEquals(fixture.setup.classList.contains("hidden"), false);
+	assertEquals(
+		fixture.setup.href,
+		"https://acme.lightning.force.com/lightning/setup/SetupOneHome/home",
+	);
+	assertEquals(fixture.creates, [{
+		index: 3,
+		openerTabId: 7,
+		url: "https://acme.lightning.force.com/lightning/setup/SetupOneHome/home",
+	}]);
+	assertEquals(fixture.sendMessages, [{
+		what: "get-browser-tab",
+	}]);
+	assertEquals(fixture.counters.closeCalls, 1);
+	assertEquals(fixture.counters.translatorCalls, 0);
 });
 
 Deno.test("notSalesforceSetup updates the current tab when configured to reuse it", async () => {
@@ -225,18 +177,14 @@ Deno.test("notSalesforceSetup updates the current tab when configured to reuse i
 		],
 	});
 
-	try {
-		assertEquals(fixture.counters.translatorCalls, 1);
-		fixture.login.click();
-		assertEquals(fixture.updates, [{
-			url: "https://login.salesforce.com/",
-		}]);
-		assertEquals(fixture.creates, []);
-		assertEquals(fixture.sendMessages, []);
-		assertEquals(fixture.counters.closeCalls, 1);
-	} finally {
-		fixture.cleanup();
-	}
+	assertEquals(fixture.counters.translatorCalls, 1);
+	await fixture.login.click();
+	assertEquals(fixture.updates, [{
+		url: "https://login.salesforce.com/",
+	}]);
+	assertEquals(fixture.creates, []);
+	assertEquals(fixture.sendMessages, []);
+	assertEquals(fixture.counters.closeCalls, 1);
 });
 
 Deno.test("notSalesforceSetup keeps login flow for lightning.force.com lookalike domains", async () => {
@@ -246,13 +194,9 @@ Deno.test("notSalesforceSetup keeps login flow for lightning.force.com lookalike
 		settings: [],
 	});
 
-	try {
-		assertEquals(fixture.login.classList.contains("hidden"), false);
-		assertEquals(fixture.setup.href, "#");
-		assertEquals(fixture.counters.translatorCalls, 1);
-	} finally {
-		fixture.cleanup();
-	}
+	assertEquals(fixture.login.classList.contains("hidden"), false);
+	assertEquals(fixture.setup.href, "#");
+	assertEquals(fixture.counters.translatorCalls, 1);
 });
 
 Deno.test("notSalesforceSetup shows the invalid URL state when the query URL cannot be parsed", async () => {
@@ -261,14 +205,10 @@ Deno.test("notSalesforceSetup shows the invalid URL state when the query URL can
 		settings: [],
 	});
 
-	try {
-		assertEquals(fixture.plain.classList.contains("hidden"), true);
-		assertEquals(fixture.invalidUrl.classList.contains("hidden"), false);
-		assertEquals(fixture.warnings.length, 1);
-		assertEquals(fixture.counters.translatorCalls, 1);
-	} finally {
-		fixture.cleanup();
-	}
+	assertEquals(fixture.plain.classList.contains("hidden"), true);
+	assertEquals(fixture.invalidUrl.classList.contains("hidden"), false);
+	assertEquals(fixture.warnings.length, 1);
+	assertEquals(fixture.counters.translatorCalls, 1);
 });
 
 Deno.test("notSalesforceSetup retries browser tab lookup until a tab is available", async () => {
@@ -280,22 +220,18 @@ Deno.test("notSalesforceSetup retries browser tab lookup until a tab is availabl
 		],
 	});
 
-	try {
-		assertEquals(fixture.sendMessages, [
-			{ what: "get-browser-tab" },
-			{ what: "get-browser-tab" },
-			{ what: "get-browser-tab" },
-		]);
-		assertEquals(fixture.creates, [{
-			index: 2,
-			openerTabId: 9,
-			url: "https://login.salesforce.com/",
-		}]);
-		assertEquals(fixture.counters.closeCalls, 1);
-		assertEquals(fixture.counters.translatorCalls, 0);
-	} finally {
-		fixture.cleanup();
-	}
+	assertEquals(fixture.sendMessages, [
+		{ what: "get-browser-tab" },
+		{ what: "get-browser-tab" },
+		{ what: "get-browser-tab" },
+	]);
+	assertEquals(fixture.creates, [{
+		index: 2,
+		openerTabId: 9,
+		url: "https://login.salesforce.com/",
+	}]);
+	assertEquals(fixture.counters.closeCalls, 1);
+	assertEquals(fixture.counters.translatorCalls, 0);
 });
 
 Deno.test("notSalesforceSetup throws when the browser tab lookup never returns a tab", async () => {
@@ -332,15 +268,11 @@ Deno.test("notSalesforceSetup throws when the browser tab lookup never returns a
 		],
 	});
 
-	try {
-		const thrownError = await errorPromise;
-		assertEquals(thrownError.message, "error_no_browser_tab");
-		assertEquals(fixture.sendMessages.length, 7);
-		for (const message of fixture.sendMessages) {
-			assertEquals(message, { what: "get-browser-tab" });
-		}
-		assertEquals(fixture.counters.closeCalls, 1);
-	} finally {
-		fixture.cleanup();
+	const thrownError = await errorPromise;
+	assertEquals(thrownError.message, "error_no_browser_tab");
+	assertEquals(fixture.sendMessages.length, 7);
+	for (const message of fixture.sendMessages) {
+		assertEquals(message, { what: "get-browser-tab" });
 	}
+	assertEquals(fixture.counters.closeCalls, 1);
 });

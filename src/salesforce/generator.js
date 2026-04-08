@@ -1,52 +1,103 @@
 "use strict";
 import {
-	BROWSER,
-	CXM_PIN_TAB,
-	CXM_REMOVE_TAB,
-	CXM_UNPIN_TAB,
-	EXTENSION_GITHUB_LINK,
-	EXTENSION_LABEL,
-	EXTENSION_NAME,
-	GENERIC_PINNED_TAB_STYLE_KEY,
-	GENERIC_TAB_STYLE_KEY,
-	HIDDEN_CLASS,
-	HTTPS,
-	LIGHTNING_FORCE_COM,
-	LINK_NEW_BROWSER,
-	ORG_PINNED_TAB_STYLE_KEY,
-	ORG_TAB_CLASS,
-	ORG_TAB_STYLE_KEY,
-	PIN_TAB_CLASS,
-	SETUP_LIGHTNING,
-	TAB_STYLE_HOVER,
-	TAB_STYLE_TOP,
-	TOAST_ERROR,
-	TOAST_SUCCESS,
-	USE_LIGHTNING_NAVIGATION,
+	BROWSER as _BROWSER,
+	CXM_PIN_TAB as _CXM_PIN_TAB,
+	CXM_REMOVE_TAB as _CXM_REMOVE_TAB,
+	CXM_UNPIN_TAB as _CXM_UNPIN_TAB,
+	EXTENSION_GITHUB_LINK as _EXTENSION_GITHUB_LINK,
+	EXTENSION_LABEL as _EXTENSION_LABEL,
+	EXTENSION_NAME as _EXTENSION_NAME,
+	GENERIC_PINNED_TAB_STYLE_KEY as _GENERIC_PINNED_TAB_STYLE_KEY,
+	GENERIC_TAB_STYLE_KEY as _GENERIC_TAB_STYLE_KEY,
+	HIDDEN_CLASS as _HIDDEN_CLASS,
+	HTTPS as _HTTPS,
+	LIGHTNING_FORCE_COM as _LIGHTNING_FORCE_COM,
+	LINK_NEW_BROWSER as _LINK_NEW_BROWSER,
+	ORG_PINNED_TAB_STYLE_KEY as _ORG_PINNED_TAB_STYLE_KEY,
+	ORG_TAB_CLASS as _ORG_TAB_CLASS,
+	ORG_TAB_STYLE_KEY as _ORG_TAB_STYLE_KEY,
+	PIN_TAB_CLASS as _PIN_TAB_CLASS,
+	SETUP_LIGHTNING as _SETUP_LIGHTNING,
+	TAB_STYLE_HOVER as _TAB_STYLE_HOVER,
+	TAB_STYLE_TOP as _TAB_STYLE_TOP,
+	TOAST_ERROR as _TOAST_ERROR,
+	TOAST_SUCCESS as _TOAST_SUCCESS,
+	USE_LIGHTNING_NAVIGATION as _USE_LIGHTNING_NAVIGATION,
 } from "../core/constants.js";
 import {
-	getCssRule,
-	getCssSelector,
-	getPinnedSpecificKey,
-	getSettings,
-	getStyleSettings,
-	injectStyle,
-	performLightningRedirect,
+	getCssRule as _getCssRule,
+	getCssSelector as _getCssSelector,
+	getPinnedSpecificKey as _getPinnedSpecificKey,
+	getSettings as _getSettings,
+	getStyleSettings as _getStyleSettings,
+	injectStyle as _injectStyle,
+	performLightningRedirect as _performLightningRedirect,
 } from "../core/functions.js";
-import Tab from "../core/tab.js";
+import _Tab from "../core/tab.js";
 import {
-	ensureAllTabsAvailability,
-	TabContainer,
+	ensureAllTabsAvailability as _ensureAllTabsAvailability,
+	TabContainer as _TabContainer,
 } from "../core/tabContainer.js";
-import { getTranslations } from "../core/translator.js";
+import { getTranslations as _getTranslations } from "../core/translator.js";
 
-import { showToast } from "./toast.js";
-import { getCurrentHref } from "./sf-elements.js";
-import { updateModalBodyOverflow } from "./modal-layout.js";
+import { showToast as _showToast } from "./toast.js";
+import { getCurrentHref as _getCurrentHref } from "./sf-elements.js";
+import { updateModalBodyOverflow as _updateModalBodyOverflow } from "./modal-layout.js";
 
-const TOAST_ID = `${EXTENSION_NAME}-toast`;
-export const MODAL_ID = `${EXTENSION_NAME}-modal`;
-const MODAL_CONFIRM_ID = `${EXTENSION_NAME}-modal-confirm`;
+let BROWSER = _BROWSER;
+let CXM_PIN_TAB = _CXM_PIN_TAB;
+let CXM_REMOVE_TAB = _CXM_REMOVE_TAB;
+let CXM_UNPIN_TAB = _CXM_UNPIN_TAB;
+let EXTENSION_GITHUB_LINK = _EXTENSION_GITHUB_LINK;
+let EXTENSION_LABEL = _EXTENSION_LABEL;
+let EXTENSION_NAME = _EXTENSION_NAME;
+let GENERIC_PINNED_TAB_STYLE_KEY = _GENERIC_PINNED_TAB_STYLE_KEY;
+let GENERIC_TAB_STYLE_KEY = _GENERIC_TAB_STYLE_KEY;
+let HIDDEN_CLASS = _HIDDEN_CLASS;
+let HTTPS = _HTTPS;
+let LIGHTNING_FORCE_COM = _LIGHTNING_FORCE_COM;
+let LINK_NEW_BROWSER = _LINK_NEW_BROWSER;
+let ORG_PINNED_TAB_STYLE_KEY = _ORG_PINNED_TAB_STYLE_KEY;
+let ORG_TAB_CLASS = _ORG_TAB_CLASS;
+let ORG_TAB_STYLE_KEY = _ORG_TAB_STYLE_KEY;
+let PIN_TAB_CLASS = _PIN_TAB_CLASS;
+let SETUP_LIGHTNING = _SETUP_LIGHTNING;
+let TAB_STYLE_HOVER = _TAB_STYLE_HOVER;
+let TAB_STYLE_TOP = _TAB_STYLE_TOP;
+let TOAST_ERROR = _TOAST_ERROR;
+let TOAST_SUCCESS = _TOAST_SUCCESS;
+let USE_LIGHTNING_NAVIGATION = _USE_LIGHTNING_NAVIGATION;
+let getCssRule = _getCssRule;
+let getCssSelector = _getCssSelector;
+let getPinnedSpecificKey = _getPinnedSpecificKey;
+let getSettings = _getSettings;
+let getStyleSettings = _getStyleSettings;
+let injectStyle = _injectStyle;
+let performLightningRedirect = _performLightningRedirect;
+let Tab = _Tab;
+let ensureAllTabsAvailability = _ensureAllTabsAvailability;
+let TabContainer = _TabContainer;
+let getTranslations = _getTranslations;
+let showToast = _showToast;
+let getCurrentHref = _getCurrentHref;
+let updateModalBodyOverflow = _updateModalBodyOverflow;
+
+let TOAST_ID = "";
+export let MODAL_ID = "";
+let MODAL_CONFIRM_ID = "";
+
+/**
+ * Recomputes derived modal identifiers from the current extension name.
+ *
+ * @return {void}
+ */
+function updateGeneratorIds() {
+	TOAST_ID = `${EXTENSION_NAME}-toast`;
+	MODAL_ID = `${EXTENSION_NAME}-modal`;
+	MODAL_CONFIRM_ID = `${EXTENSION_NAME}-modal-confirm`;
+}
+
+updateGeneratorIds();
 
 /**
  * Generates a random number with the specified number of digits.
@@ -2957,4 +3008,112 @@ export function sldsConfirm({
 		});
 		closeButton.addEventListener("click", () => finish(false));
 	});
+}
+
+/**
+ * Creates generator helpers with optional dependency overrides.
+ *
+ * @param {Object} [overrides={}] Runtime overrides used by tests.
+ * @return {Record<string, unknown>} Generator module API.
+ */
+export function createGeneratorModule(overrides = {}) {
+	if (overrides.BROWSER != null) BROWSER = overrides.BROWSER;
+	if (overrides.CXM_PIN_TAB != null) CXM_PIN_TAB = overrides.CXM_PIN_TAB;
+	if (overrides.CXM_REMOVE_TAB != null) CXM_REMOVE_TAB = overrides.CXM_REMOVE_TAB;
+	if (overrides.CXM_UNPIN_TAB != null) CXM_UNPIN_TAB = overrides.CXM_UNPIN_TAB;
+	if (overrides.EXTENSION_GITHUB_LINK != null) {
+		EXTENSION_GITHUB_LINK = overrides.EXTENSION_GITHUB_LINK;
+	}
+	if (overrides.EXTENSION_LABEL != null) EXTENSION_LABEL = overrides.EXTENSION_LABEL;
+	if (overrides.EXTENSION_NAME != null) {
+		EXTENSION_NAME = overrides.EXTENSION_NAME;
+		updateGeneratorIds();
+	}
+	if (overrides.GENERIC_PINNED_TAB_STYLE_KEY != null) {
+		GENERIC_PINNED_TAB_STYLE_KEY = overrides.GENERIC_PINNED_TAB_STYLE_KEY;
+	}
+	if (overrides.GENERIC_TAB_STYLE_KEY != null) {
+		GENERIC_TAB_STYLE_KEY = overrides.GENERIC_TAB_STYLE_KEY;
+	}
+	if (overrides.HIDDEN_CLASS != null) HIDDEN_CLASS = overrides.HIDDEN_CLASS;
+	if (overrides.HTTPS != null) HTTPS = overrides.HTTPS;
+	if (overrides.LIGHTNING_FORCE_COM != null) {
+		LIGHTNING_FORCE_COM = overrides.LIGHTNING_FORCE_COM;
+	}
+	if (overrides.LINK_NEW_BROWSER != null) LINK_NEW_BROWSER = overrides.LINK_NEW_BROWSER;
+	if (overrides.ORG_PINNED_TAB_STYLE_KEY != null) {
+		ORG_PINNED_TAB_STYLE_KEY = overrides.ORG_PINNED_TAB_STYLE_KEY;
+	}
+	if (overrides.ORG_TAB_CLASS != null) ORG_TAB_CLASS = overrides.ORG_TAB_CLASS;
+	if (overrides.ORG_TAB_STYLE_KEY != null) ORG_TAB_STYLE_KEY = overrides.ORG_TAB_STYLE_KEY;
+	if (overrides.PIN_TAB_CLASS != null) PIN_TAB_CLASS = overrides.PIN_TAB_CLASS;
+	if (overrides.SETUP_LIGHTNING != null) SETUP_LIGHTNING = overrides.SETUP_LIGHTNING;
+	if (overrides.TAB_STYLE_HOVER != null) TAB_STYLE_HOVER = overrides.TAB_STYLE_HOVER;
+	if (overrides.TAB_STYLE_TOP != null) TAB_STYLE_TOP = overrides.TAB_STYLE_TOP;
+	if (overrides.TOAST_ERROR != null) TOAST_ERROR = overrides.TOAST_ERROR;
+	if (overrides.TOAST_SUCCESS != null) TOAST_SUCCESS = overrides.TOAST_SUCCESS;
+	if (overrides.USE_LIGHTNING_NAVIGATION != null) {
+		USE_LIGHTNING_NAVIGATION = overrides.USE_LIGHTNING_NAVIGATION;
+	}
+	if (overrides.Tab != null) Tab = overrides.Tab;
+	if (overrides.TabContainer != null) TabContainer = overrides.TabContainer;
+	if (overrides.ensureAllTabsAvailability != null) {
+		ensureAllTabsAvailability = overrides.ensureAllTabsAvailability;
+	}
+	if (overrides.getTranslations != null) getTranslations = overrides.getTranslations;
+	if (overrides.getCssRule != null) getCssRule = overrides.getCssRule;
+	if (overrides.getCssSelector != null) getCssSelector = overrides.getCssSelector;
+	if (overrides.getCurrentHref != null) getCurrentHref = overrides.getCurrentHref;
+	if (overrides.getPinnedSpecificKey != null) {
+		getPinnedSpecificKey = overrides.getPinnedSpecificKey;
+	}
+	if (overrides.getSettings != null) getSettings = overrides.getSettings;
+	if (overrides.getStyleSettings != null) getStyleSettings = overrides.getStyleSettings;
+	if (overrides.injectStyle != null) injectStyle = overrides.injectStyle;
+	if (overrides.performLightningRedirect != null) {
+		performLightningRedirect = overrides.performLightningRedirect;
+	}
+	if (overrides.showToast != null) showToast = overrides.showToast;
+	if (overrides.updateModalBodyOverflow != null) {
+		updateModalBodyOverflow = overrides.updateModalBodyOverflow;
+	}
+	if (overrides.open != null) globalThis.open = overrides.open;
+	oldSettings = null;
+
+	return {
+		_buildCssRules,
+		_getLinkTarget,
+		_getPseudoRules,
+		_getPseudoSelector,
+		_isPseudoRule,
+		areArraysEqual,
+		createInputElement,
+		createManageTabRow,
+		createSldsModalShell,
+		createTextCell,
+		generateCheckboxWithLabel,
+		generateHelpWith_i_popup,
+		generateInput,
+		generateManageTabsModal,
+		generateOpenOtherOrgModal,
+		generateRadioButtons,
+		generateRequired,
+		generateReviewSponsorSvgs,
+		generateRowTemplate,
+		generateSection,
+		generateSldsFileInput,
+		generateSldsModal,
+		generateSldsModalWithTabList,
+		generateSldsPromptModal,
+		generateSldsToastMessage,
+		generateStyleFromSettings,
+		generateTableWithCheckboxes,
+		generateTutorialElements,
+		generateUpdateTabModal,
+		getRng_n_digits,
+		handleLightningLinkClick,
+		MODAL_ID,
+		sldsConfirm,
+		wereSettingsUpdated,
+	};
 }

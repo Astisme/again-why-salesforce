@@ -3,7 +3,6 @@ import {
 	assertRejects,
 	assertThrows,
 } from "@std/testing/asserts";
-import { loadIsolatedModule } from "../../load-isolated-module.test.ts";
 
 type TranslatorModule = {
 	TranslationService: {
@@ -41,28 +40,17 @@ type TranslatorModule = {
 	}>;
 };
 
-type TranslatorDependencies = {
-	BROWSER: {
-		runtime: {
-			getURL: (path: string) => string;
-		};
-		storage: {
-			onChanged: {
-				addListener: (
-					listener: (changes: Record<string, unknown>) => void,
-				) => void;
-			};
-		};
-	};
-	FOLLOW_SF_LANG: string;
-	SETTINGS_KEY: string;
-	USER_LANGUAGE: string;
-	WHAT_GET_SETTINGS: string;
-	WHAT_GET_SF_LANG: string;
-	sendExtensionMessage: (message: { what: string; keys?: string }) => Promise<
-		{ enabled?: string } | string | null
-	>;
-};
+/**
+ * Lazily imports the translator module factory after global browser stubs are installed.
+ *
+ * @return {Promise<(overrides?: Record<string, unknown>) => TranslatorModule>} Runtime factory.
+ */
+async function getCreateTranslatorModule() {
+	const module = await import("../../../src/core/translator.js");
+	return module.createTranslatorModule as unknown as (
+		overrides?: Record<string, unknown>,
+	) => TranslatorModule;
+}
 
 /**
  * Loads translator.js in isolation with source-mapped coverage.
@@ -79,13 +67,6 @@ async function loadTranslatorFixture() {
 	let sfLanguage: string | null = "en";
 	const changeListeners: Array<(changes: Record<string, unknown>) => void> =
 		[];
-	const modulePath = new URL(
-		"../../../src/core/translator.js",
-		import.meta.url,
-	);
-	const sourceMapLineMap = (await Deno.readTextFile(modulePath))
-		.split("\n")
-		.map((_, index) => index + 1);
 	const localeMessages: Record<string, Record<string, { message: string }>> =
 		{
 			en: {
@@ -102,6 +83,10 @@ async function loadTranslatorFixture() {
 			textContent: "",
 		}],
 	};
+	const hadBrowser = "browser" in globalThis;
+	const originalBrowser = (globalThis as { browser?: unknown }).browser;
+	const hadDocument = "document" in globalThis;
+	const originalDocument = (globalThis as { document?: unknown }).document;
 	const originalFetch = globalThis.fetch;
 	globalThis.fetch = (input: string | URL | Request) => {
 		const path = `${input}`;
@@ -121,60 +106,84 @@ async function loadTranslatorFixture() {
 			},
 		} as unknown as Response);
 	};
-	const { cleanup, module } = await loadIsolatedModule<
-		TranslatorModule,
-		TranslatorDependencies
-	>({
-		modulePath,
-		additionalExports: [
-			"TranslationService",
-			"ensureTranslatorAvailability",
-		],
-		transformSource: (source) =>
-			source.replace(
-				"export default function ensureTranslatorAvailability() {",
-				"function ensureTranslatorAvailability() {",
-			),
-		dependencies: {
-			BROWSER: {
-				runtime: {
-					getURL: (path) => path,
-				},
-				storage: {
-					onChanged: {
-						addListener: (listener) => {
-							changeListeners.push(listener);
-						},
-					},
+	const browserStub = {
+		i18n: {
+			getMessage: (key: string) => key,
+		},
+		runtime: {
+			getManifest: () => ({
+				homepage_url: "https://github.com/example/repo",
+				optional_host_permissions: [],
+				version: "1.0.0",
+			}),
+			getURL: (path: string) => path,
+			sendMessage: () => undefined,
+		},
+		storage: {
+			onChanged: {
+				addListener: (
+					listener: (changes: Record<string, unknown>) => void,
+				) => {
+					changeListeners.push(listener);
 				},
 			},
-			FOLLOW_SF_LANG: "follow",
-			SETTINGS_KEY: "settings",
-			USER_LANGUAGE: "picked-language",
-			WHAT_GET_SETTINGS: "get-settings",
-			WHAT_GET_SF_LANG: "get-sf-language",
-			sendExtensionMessage: ({ what }) => {
-				if (what === "get-settings") {
-					return Promise.resolve(
-						userLanguage == null ? null : { enabled: userLanguage },
-					);
-				}
-				if (what === "get-sf-language") {
-					return Promise.resolve(sfLanguage);
-				}
-				return Promise.resolve(null);
-			},
 		},
-		globals: {
-			document: mockDocument,
+	};
+	Object.defineProperty(globalThis, "browser", {
+		configurable: true,
+		value: browserStub,
+		writable: true,
+	});
+	Object.defineProperty(globalThis, "document", {
+		configurable: true,
+		value: mockDocument,
+		writable: true,
+	});
+	const createTranslatorModule = await getCreateTranslatorModule();
+	const module = createTranslatorModule({
+		BROWSER: browserStub,
+		FOLLOW_SF_LANG: "follow",
+		SETTINGS_KEY: "settings",
+		USER_LANGUAGE: "picked-language",
+		WHAT_GET_SETTINGS: "get-settings",
+		WHAT_GET_SF_LANG: "get-sf-language",
+		sendExtensionMessage: (
+			{ what }: { what: string; keys?: string },
+		) => {
+			if (what === "get-settings") {
+				return Promise.resolve(
+					userLanguage == null ? null : { enabled: userLanguage },
+				);
+			}
+			if (what === "get-sf-language") {
+				return Promise.resolve(sfLanguage);
+			}
+			return Promise.resolve(null);
 		},
-		importsToReplace: new Set(["/core/constants.js", "/core/functions.js"]),
-		sourceMapLineMap,
+		document: mockDocument,
+		fetch: globalThis.fetch,
 	});
 	return {
 		cleanup: () => {
-			cleanup();
 			globalThis.fetch = originalFetch;
+			if (hadBrowser) {
+				Object.defineProperty(globalThis, "browser", {
+					configurable: true,
+					value: originalBrowser,
+					writable: true,
+				});
+			} else {
+				delete (globalThis as { browser?: unknown }).browser;
+			}
+			if (hadDocument) {
+				Object.defineProperty(globalThis, "document", {
+					configurable: true,
+					value: originalDocument,
+					writable: true,
+				});
+			} else {
+				delete (globalThis as { document?: unknown }).document;
+			}
 		},
 		changeListeners,
 		module,

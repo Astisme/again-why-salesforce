@@ -7,7 +7,6 @@ import {
 	assertThrows,
 } from "@std/testing/asserts";
 import { installMockDom } from "../../happydom.test.ts";
-import { loadIsolatedModule } from "../../load-isolated-module.test.ts";
 
 /**
  * Filesystem path to the tutorial module under test.
@@ -265,27 +264,55 @@ async function loadTutorialModule(deps: TutorialDeps) {
 		ensureTranslatorAvailability: deps.ensureTranslatorAvailability,
 		getTranslations: deps.getTranslations,
 	};
-	return await loadIsolatedModule<
-		TutorialModule,
-		typeof flattenedDeps
-	>({
-		modulePath: TUTORIAL_PATH,
-		additionalExports: ["Tutorial"],
-		dependencies: flattenedDeps,
-		importsToReplace: new Set([
-			"/core/constants.js",
-			"/core/functions.js",
-			"/core/translator.js",
-			"/core/tab.js",
-			"./content.js",
-			"./favourite-manager.js",
-			"./generator.js",
-			"/core/tabContainer.js",
-			"./manageTabs.js",
-			"./sf-elements.js",
-			"./toast.js",
-		]),
+	const hadBrowser = "browser" in globalThis;
+	const originalBrowser = (globalThis as { browser?: unknown }).browser;
+	const contentLoadedKey = "hasLoadedagain-why-salesforce";
+	const hadContentLoaded = contentLoadedKey in globalThis;
+	const originalContentLoaded =
+		(globalThis as Record<string, unknown>)[contentLoadedKey];
+	(globalThis as Record<string, unknown>)[contentLoadedKey] = true;
+	Object.defineProperty(globalThis, "browser", {
+		configurable: true,
+		value: {
+			i18n: {
+				getMessage: (key: string) => key,
+			},
+			runtime: {
+				getManifest: () => ({
+					homepage_url: "https://github.com/example/repo",
+					optional_host_permissions: [],
+					version: "1.0.0",
+				}),
+				getURL: (path: string) => path,
+				sendMessage: () => undefined,
+			},
+		},
+		writable: true,
 	});
+	const module = await import(TUTORIAL_PATH.href);
+	const tutorialModule = (module.createTutorialModule as (
+		overrides?: Record<string, unknown>,
+	) => TutorialModule)(flattenedDeps);
+	return {
+		cleanup: () => {
+			if (hadBrowser) {
+				Object.defineProperty(globalThis, "browser", {
+					configurable: true,
+					value: originalBrowser,
+					writable: true,
+				});
+			} else {
+				delete (globalThis as { browser?: unknown }).browser;
+			}
+			if (hadContentLoaded) {
+				(globalThis as Record<string, unknown>)[contentLoadedKey] =
+					originalContentLoaded;
+			} else {
+				delete (globalThis as Record<string, unknown>)[contentLoadedKey];
+			}
+		},
+		module: tutorialModule,
+	};
 }
 
 /**
@@ -1762,13 +1789,18 @@ Deno.test(
 				true,
 			);
 
-			tutorialModule.Tutorial.prototype.initSteps = () =>
-				Promise.resolve(false);
-			await assertRejects(
-				() => tutorialModule.checkTutorial(),
-				Error,
-				"error_tutorial_not_initialized",
-			);
+			const originalInitSteps = tutorialModule.Tutorial.prototype.initSteps;
+			try {
+				tutorialModule.Tutorial.prototype.initSteps = () =>
+					Promise.resolve(false);
+				await assertRejects(
+					() => tutorialModule.checkTutorial(),
+					Error,
+					"error_tutorial_not_initialized",
+				);
+			} finally {
+				tutorialModule.Tutorial.prototype.initSteps = originalInitSteps;
+			}
 		} finally {
 			console.error = originalConsoleError;
 			await flush();
