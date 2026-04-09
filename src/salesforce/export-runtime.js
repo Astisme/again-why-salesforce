@@ -1,4 +1,69 @@
 "use strict";
+let modalIdRuntime;
+let toastErrorRuntime;
+let toastWarningRuntime;
+let whatExportRuntime;
+let documentRuntime;
+let ensureAllTabsAvailabilityRuntime;
+let generateSldsModalWithTabListRuntime;
+let getModalHangerRuntime;
+let tabContainerRuntime;
+let sendExtensionMessageRuntime;
+let showToastRuntime;
+
+/**
+ * Displays the export modal when no other modal is open.
+ *
+ * @return {Promise<void>}
+ */
+async function showExportModal() {
+	if (documentRuntime.getElementById(modalIdRuntime) != null) {
+		return showToastRuntime("error_close_other_modal", toastErrorRuntime);
+	}
+	const allTabs = await ensureAllTabsAvailabilityRuntime();
+	const {
+		modalParent,
+		saveButton,
+		closeButton,
+		getSelectedTabs,
+	} = await generateSldsModalWithTabListRuntime(allTabs, {
+		title: "export_tabs",
+		saveButtonLabel: "export",
+		explainer: "select_tabs_export",
+	});
+	getModalHangerRuntime().appendChild(modalParent);
+	saveButton.addEventListener("click", (e) => {
+		e.preventDefault();
+		const { tabs, selectedAll } = getSelectedTabs();
+		if (tabs.length === 0) {
+			return showToastRuntime("error_no_tabs_selected", toastWarningRuntime);
+		}
+		closeButton.click();
+		const tabCont = tabContainerRuntime.getThrowawayInstance();
+		tabCont.push(tabs);
+		tabCont.pinned = selectedAll ? allTabs.pinned : 0;
+		sendExtensionMessageRuntime({
+			what: whatExportRuntime,
+			tabs: tabCont.toJSON(),
+		});
+	});
+}
+
+/**
+ * Displays the export modal and gracefully reports failures.
+ *
+ * @return {Promise<void>}
+ */
+async function createExportModal() {
+	try {
+		await showExportModal();
+	} catch (error) {
+		const message = error instanceof Error
+			? error.message
+			: String(error);
+		showToastRuntime(message, toastErrorRuntime);
+	}
+}
 
 /**
  * Creates export-modal behavior with injected runtime dependencies.
@@ -39,59 +104,17 @@ export function createExportModule({
 	sendExtensionMessageFn,
 	showToastFn,
 }) {
-	/**
-	 * Displays the export modal when no other modal is open.
-	 *
-	 * @return {Promise<void>}
-	 */
-	async function showExportModal() {
-		if (documentRef.getElementById(modalId) != null) {
-			return showToastFn("error_close_other_modal", toastError);
-		}
-		const allTabs = await ensureAllTabsAvailabilityFn();
-		const {
-			modalParent,
-			saveButton,
-			closeButton,
-			getSelectedTabs,
-		} = await generateSldsModalWithTabListFn(allTabs, {
-			title: "export_tabs",
-			saveButtonLabel: "export",
-			explainer: "select_tabs_export",
-		});
-		getModalHangerFn().appendChild(modalParent);
-		saveButton.addEventListener("click", (e) => {
-			e.preventDefault();
-			const { tabs, selectedAll } = getSelectedTabs();
-			if (tabs.length === 0) {
-				return showToastFn("error_no_tabs_selected", toastWarning);
-			}
-			closeButton.click();
-			const tabCont = tabContainerRef.getThrowawayInstance();
-			tabCont.push(tabs);
-			tabCont.pinned = selectedAll ? allTabs.pinned : 0;
-			sendExtensionMessageFn({
-				what: whatExport,
-				tabs: tabCont.toJSON(),
-			});
-		});
-	}
-
-	/**
-	 * Displays the export modal and gracefully reports failures.
-	 *
-	 * @return {Promise<void>}
-	 */
-	async function createExportModal() {
-		try {
-			await showExportModal();
-		} catch (error) {
-			const message = error instanceof Error
-				? error.message
-				: String(error);
-			showToastFn(message, toastError);
-		}
-	}
+	modalIdRuntime = modalId;
+	toastErrorRuntime = toastError;
+	toastWarningRuntime = toastWarning;
+	whatExportRuntime = whatExport;
+	documentRuntime = documentRef;
+	ensureAllTabsAvailabilityRuntime = ensureAllTabsAvailabilityFn;
+	generateSldsModalWithTabListRuntime = generateSldsModalWithTabListFn;
+	getModalHangerRuntime = getModalHangerFn;
+	tabContainerRuntime = tabContainerRef;
+	sendExtensionMessageRuntime = sendExtensionMessageFn;
+	showToastRuntime = showToastFn;
 
 	return {
 		createExportModal,

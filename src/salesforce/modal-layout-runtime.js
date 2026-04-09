@@ -2,6 +2,39 @@ const MODAL_BODY_SELECTOR =
 	".modal-body.scrollable.slds-modal__content.slds-p-around_medium";
 const SORTABLE_TABLE_SELECTOR = "#sortable-table";
 const FIRST_ROW_SELECTOR = "tr:nth-child(1)";
+let hiddenClassRuntime;
+
+/**
+ * Enables or disables scrolling for the modal body based on how much room is left.
+ *
+ * @param {Object | null} [article=null] The article inside the modal body.
+ */
+function updateModalBodyOverflow(article = null) {
+	if (article == null) {
+		throw new Error("error_required_params");
+	}
+	const modalBody = article.closest(MODAL_BODY_SELECTOR);
+	const table = article.querySelector(SORTABLE_TABLE_SELECTOR);
+	modalBody.style.overflowY = hiddenClassRuntime;
+	let otherElementsInArticleHeight = 0;
+	for (const el of article.childNodes) {
+		if (el !== table.parentNode) {
+			otherElementsInArticleHeight += el.clientHeight;
+		}
+	}
+	const tr = table.querySelector(FIRST_ROW_SELECTOR);
+	const hasOverflow = modalBody.clientHeight -
+			table.clientHeight -
+			otherElementsInArticleHeight <=
+		tr.clientHeight / 2;
+	modalBody.style.overflowY = hasOverflow ? "auto" : hiddenClassRuntime;
+	if (!hasOverflow) {
+		article.scrollIntoView({
+			behavior: "smooth",
+			block: "center",
+		});
+	}
+}
 
 /**
  * Creates a modal-layout helper with injected constants.
@@ -27,37 +60,7 @@ const FIRST_ROW_SELECTOR = "tr:nth-child(1)";
 export function createModalLayoutModule({
 	hiddenClass,
 }) {
-	/**
-	 * Enables or disables scrolling for the modal body based on how much room is left.
-	 *
-	 * @param {Object | null} [article=null] The article inside the modal body.
-	 */
-	function updateModalBodyOverflow(article = null) {
-		if (article == null) {
-			throw new Error("error_required_params");
-		}
-		const modalBody = article.closest(MODAL_BODY_SELECTOR);
-		const table = article.querySelector(SORTABLE_TABLE_SELECTOR);
-		modalBody.style.overflowY = hiddenClass;
-		let otherElementsInArticleHeight = 0;
-		for (const el of article.childNodes) {
-			if (el !== table.parentNode) {
-				otherElementsInArticleHeight += el.clientHeight;
-			}
-		}
-		const tr = table.querySelector(FIRST_ROW_SELECTOR);
-		const hasOverflow = modalBody.clientHeight -
-				table.clientHeight -
-				otherElementsInArticleHeight <=
-			tr.clientHeight / 2;
-		modalBody.style.overflowY = hasOverflow ? "auto" : hiddenClass;
-		if (!hasOverflow) {
-			article.scrollIntoView({
-				behavior: "smooth",
-				block: "center",
-			});
-		}
-	}
+	hiddenClassRuntime = hiddenClass;
 
 	return {
 		updateModalBodyOverflow,

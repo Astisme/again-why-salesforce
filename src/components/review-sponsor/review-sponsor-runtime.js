@@ -14,6 +14,115 @@ const SPONSOR_MAP = {
 	it: `${SPONSOR_DOMAIN}/it${SPONSOR_PATH}`,
 	default: `${SPONSOR_DOMAIN}/en${SPONSOR_PATH}`,
 };
+let hiddenClassRuntime;
+let isChromeRuntime;
+let isEdgeRuntime;
+let isFirefoxRuntime;
+let isSafariRuntime;
+let openRuntime;
+
+/**
+ * Based on how many Tabs the user has saved and how long they have actively used the extension,
+ * declares which support links should be shown.
+ *
+ * @param {Object} [param0={}] Input values.
+ * @param {unknown[]} [param0.allTabs=[]] Saved tabs.
+ * @param {number} [param0.usageDays=0] Distinct usage days.
+ * @return {{review: boolean, sponsor: boolean}} Visibility map.
+ */
+function shouldShowReviewOrSponsor({
+	allTabs = [],
+	usageDays = 0,
+} = {}) {
+	return {
+		review: !isSafariRuntime &&
+			(
+				allTabs.length >= REVIEW_TAB_THRESHOLD ||
+				usageDays >= REVIEW_USAGE_DAYS_THRESHOLD
+			),
+		sponsor: allTabs.length >= SPONSOR_TAB_THRESHOLD ||
+			usageDays >= SPONSOR_USAGE_DAYS_THRESHOLD,
+	};
+}
+
+/**
+ * Based on which browser the user is currently using, opens the extension's store link.
+ */
+function openCorrectBrowserReviewLink() {
+	if (isEdgeRuntime) {
+		return openRuntime(EDGE_LINK);
+	}
+	if (isChromeRuntime) {
+		return openRuntime(CHROME_LINK);
+	}
+	if (isFirefoxRuntime) {
+		return openRuntime(FIREFOX_LINK);
+	}
+}
+
+/**
+ * Based on language, opens the appropriate sponsor link.
+ *
+ * @param {string|null} [translatorLanguage=null] Preferred language code.
+ */
+function openSponsorLink(translatorLanguage = null) {
+	openRuntime(
+		SPONSOR_MAP[translatorLanguage] ?? SPONSOR_MAP.default,
+	);
+}
+
+/**
+ * Shows review/sponsor controls and binds click listeners.
+ *
+ * @param {Object} [param0={}] Input values.
+ * @param {unknown[] | null} [param0.allTabs=null] Saved tab list.
+ * @param {number} [param0.usageDays=0] Distinct usage days.
+ * @param {string | null} [param0.translatorLanguage=null] Preferred language code.
+ * @param {HTMLElement | null} [param0.reviewSvg=null] Review SVG element.
+ * @param {HTMLElement | null} [param0.sponsorSvg=null] Sponsor SVG element.
+ * @param {HTMLAnchorElement | null} [param0.reviewLink=null] Review link.
+ * @param {HTMLAnchorElement | null} [param0.sponsorLink=null] Sponsor link.
+ */
+function showReviewOrSponsor({
+	allTabs = null,
+	usageDays = 0,
+	translatorLanguage = null,
+	reviewSvg = null,
+	sponsorSvg = null,
+	reviewLink = null,
+	sponsorLink = null,
+} = {}) {
+	if (
+		allTabs == null ||
+		reviewSvg == null ||
+		sponsorSvg == null ||
+		reviewLink == null ||
+		sponsorLink == null
+	) {
+		throw new Error("error_required_params");
+	}
+	const whatToShow = shouldShowReviewOrSponsor({ allTabs, usageDays });
+	reviewSvg.classList.toggle(hiddenClassRuntime, !whatToShow.review);
+	sponsorSvg.classList.toggle(hiddenClassRuntime, !whatToShow.sponsor);
+	reviewSvg.setAttribute("aria-hidden", String(!whatToShow.review));
+	sponsorSvg.setAttribute("aria-hidden", String(!whatToShow.sponsor));
+	reviewLink.setAttribute("aria-hidden", String(!whatToShow.review));
+	sponsorLink.setAttribute("aria-hidden", String(!whatToShow.sponsor));
+	reviewLink.tabIndex = whatToShow.review ? 0 : -1;
+	sponsorLink.tabIndex = whatToShow.sponsor ? 0 : -1;
+	if (whatToShow.review) {
+		reviewLink.addEventListener("click", (event) => {
+			event.preventDefault();
+			openCorrectBrowserReviewLink();
+		});
+	}
+	if (whatToShow.sponsor) {
+		sponsorLink.addEventListener("click", (event) => {
+			event.preventDefault();
+			openSponsorLink(translatorLanguage);
+		});
+	}
+}
 
 /**
  * Creates and registers review/sponsor UI behavior with injected dependencies.
@@ -102,108 +211,12 @@ export function createReviewSponsorModule({
 	openFn = open,
 	HTMLElementRef = HTMLElement,
 }) {
-	/**
-	 * Based on how many Tabs the user has saved and how long they have actively used the extension,
-	 * declares which support links should be shown.
-	 *
-	 * @param {Object} [param0={}] Input values.
-	 * @param {unknown[]} [param0.allTabs=[]] Saved tabs.
-	 * @param {number} [param0.usageDays=0] Distinct usage days.
-	 * @return {{review: boolean, sponsor: boolean}} Visibility map.
-	 */
-	function shouldShowReviewOrSponsor({
-		allTabs = [],
-		usageDays = 0,
-	} = {}) {
-		return {
-			review: !isSafari &&
-				(
-					allTabs.length >= REVIEW_TAB_THRESHOLD ||
-					usageDays >= REVIEW_USAGE_DAYS_THRESHOLD
-				),
-			sponsor: allTabs.length >= SPONSOR_TAB_THRESHOLD ||
-				usageDays >= SPONSOR_USAGE_DAYS_THRESHOLD,
-		};
-	}
-
-	/**
-	 * Based on which browser the user is currently using, opens the extension's store link.
-	 */
-	function openCorrectBrowserReviewLink() {
-		if (isEdge) {
-			return openFn(EDGE_LINK);
-		}
-		if (isChrome) {
-			return openFn(CHROME_LINK);
-		}
-		if (isFirefox) {
-			return openFn(FIREFOX_LINK);
-		}
-	}
-
-	/**
-	 * Based on language, opens the appropriate sponsor link.
-	 *
-	 * @param {string|null} [translatorLanguage=null] Preferred language code.
-	 */
-	function openSponsorLink(translatorLanguage = null) {
-		openFn(
-			SPONSOR_MAP[translatorLanguage] ?? SPONSOR_MAP.default,
-		);
-	}
-
-	/**
-	 * Shows review/sponsor controls and binds click listeners.
-	 *
-	 * @param {Object} [param0={}] Input values.
-	 * @param {unknown[] | null} [param0.allTabs=null] Saved tab list.
-	 * @param {number} [param0.usageDays=0] Distinct usage days.
-	 * @param {string | null} [param0.translatorLanguage=null] Preferred language code.
-	 * @param {HTMLElement | null} [param0.reviewSvg=null] Review SVG element.
-	 * @param {HTMLElement | null} [param0.sponsorSvg=null] Sponsor SVG element.
-	 * @param {HTMLAnchorElement | null} [param0.reviewLink=null] Review link.
-	 * @param {HTMLAnchorElement | null} [param0.sponsorLink=null] Sponsor link.
-	 */
-	function showReviewOrSponsor({
-		allTabs = null,
-		usageDays = 0,
-		translatorLanguage = null,
-		reviewSvg = null,
-		sponsorSvg = null,
-		reviewLink = null,
-		sponsorLink = null,
-	} = {}) {
-		if (
-			allTabs == null ||
-			reviewSvg == null ||
-			sponsorSvg == null ||
-			reviewLink == null ||
-			sponsorLink == null
-		) {
-			throw new Error("error_required_params");
-		}
-		const whatToShow = shouldShowReviewOrSponsor({ allTabs, usageDays });
-		reviewSvg.classList.toggle(hiddenClass, !whatToShow.review);
-		sponsorSvg.classList.toggle(hiddenClass, !whatToShow.sponsor);
-		reviewSvg.setAttribute("aria-hidden", String(!whatToShow.review));
-		sponsorSvg.setAttribute("aria-hidden", String(!whatToShow.sponsor));
-		reviewLink.setAttribute("aria-hidden", String(!whatToShow.review));
-		sponsorLink.setAttribute("aria-hidden", String(!whatToShow.sponsor));
-		reviewLink.tabIndex = whatToShow.review ? 0 : -1;
-		sponsorLink.tabIndex = whatToShow.sponsor ? 0 : -1;
-		if (whatToShow.review) {
-			reviewLink.addEventListener("click", (event) => {
-				event.preventDefault();
-				openCorrectBrowserReviewLink();
-			});
-		}
-		if (whatToShow.sponsor) {
-			sponsorLink.addEventListener("click", (event) => {
-				event.preventDefault();
-				openSponsorLink(translatorLanguage);
-			});
-		}
-	}
+	hiddenClassRuntime = hiddenClass;
+	isChromeRuntime = isChrome;
+	isEdgeRuntime = isEdge;
+	isFirefoxRuntime = isFirefox;
+	isSafariRuntime = isSafari;
+	openRuntime = openFn;
 
 	/**
 	 * Class to take care of the review-sponsor svgs.

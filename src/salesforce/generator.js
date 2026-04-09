@@ -826,6 +826,126 @@ export async function generateSection(sectionTitle = null) {
 }
 
 /**
+ * Handles modal keyboard shortcuts and unregisters the active listener.
+ *
+ * @param {KeyboardEvent} event Keydown event.
+ * @param {{ click: () => void }} closeButton Modal close button.
+ * @param {{ click: () => void }} saveButton Modal save button.
+ * @param {(event: KeyboardEvent) => void} listener Registered listener reference.
+ */
+function handleModalShellKeydown(event, closeButton, saveButton, listener) {
+	switch (event.key) {
+		case "Escape":
+			closeButton.click();
+			break;
+		case "Enter":
+			saveButton.click();
+			break;
+		default:
+			return;
+	}
+	document.removeEventListener("keydown", listener);
+}
+
+/**
+ * Returns the value of the currently selected radio button.
+ *
+ * @param {Array<{ checked: boolean; value: string }>} allRadioInputs Radio inputs.
+ * @return {string|undefined} Checked input value, if any.
+ */
+function getSelectedRadioButtonValueFromInputs(allRadioInputs) {
+	return allRadioInputs.find((inp) => inp.checked)?.value;
+}
+
+/**
+ * Updates Select/Unselect controls and selected-tab counter.
+ *
+ * @param {Object} state Selection controls.
+ * @param {Array<{ checked: boolean }>} state.checkboxes Checkbox elements.
+ * @param {{ textContent: string | number }} state.tabCounter Counter element.
+ * @param {{ setAttribute: (name: string, value: string | boolean) => void; removeAttribute: (name: string) => void }} state.selectAllButton Select-all button.
+ * @param {{ setAttribute: (name: string, value: string | boolean) => void; removeAttribute: (name: string) => void; hasAttribute: (name: string) => boolean }} state.unselectAllButton Unselect-all button.
+ * @param {{ setAttribute: (name: string, value: string | boolean) => void; removeAttribute: (name: string) => void }} state.saveButton Save button.
+ */
+function updateSelectAllButtonTextState({
+	checkboxes,
+	tabCounter,
+	selectAllButton,
+	unselectAllButton,
+	saveButton,
+}) {
+	if (
+		checkboxes == null ||
+		tabCounter == null ||
+		selectAllButton == null ||
+		unselectAllButton == null ||
+		saveButton == null
+	) {
+		return;
+	}
+	const checkedCount = checkboxes.filter((cb) => cb.checked).length;
+	tabCounter.textContent = checkedCount;
+	if (checkedCount === checkboxes.length) {
+		selectAllButton.setAttribute("disabled", true);
+	} else {
+		selectAllButton.removeAttribute("disabled");
+	}
+	if (checkedCount === 0) {
+		unselectAllButton.setAttribute("disabled", true);
+	} else {
+		unselectAllButton.removeAttribute("disabled");
+	}
+	if (unselectAllButton.hasAttribute("disabled")) {
+		saveButton.setAttribute("disabled", true);
+	} else {
+		saveButton.removeAttribute("disabled");
+	}
+}
+
+/**
+ * Resolves selected-tab payload for export modal.
+ *
+ * @param {Object} options Selection options.
+ * @param {Array<unknown>} options.tabs Available tabs.
+ * @param {Array<{ checked: boolean; dataset: { tabIndex: string } }>} options.checkboxes Checkbox nodes.
+ * @param {{ hasAttribute: (name: string) => boolean }} options.selectAllButton Select-all button.
+ * @return {{ selectedAll: boolean; tabs: Array<unknown> }} Selection result.
+ */
+function getSelectedTabsFromModalSelection({
+	tabs,
+	checkboxes,
+	selectAllButton,
+}) {
+	const selectedAll = selectAllButton.hasAttribute("disabled");
+	const selectedTabs = selectedAll ? tabs : checkboxes
+		.filter((checkbox) => checkbox.checked)
+		.map((checkbox) =>
+			tabs[Number.parseInt(checkbox.dataset.tabIndex)]
+		);
+	return {
+		selectedAll,
+		tabs: selectedTabs,
+	};
+}
+
+/**
+ * Completes the confirmation promise exactly once.
+ *
+ * @param {boolean} value User choice.
+ * @param {{ value: boolean }} isResolvedRef Mutable resolved flag.
+ * @param {{ remove: () => void }} modalParent Prompt root node.
+ * @param {(value: boolean) => void} resolve Promise resolver.
+ */
+function finishSldsConfirm(value, isResolvedRef, modalParent, resolve) {
+	if (isResolvedRef.value) {
+		return;
+	}
+	isResolvedRef.value = true;
+	modalParent.remove();
+	resolve(value);
+}
+
+/**
  * Builds the shared SLDS modal shell used by Salesforce-style dialogs.
  *
  * @param {Object} [options={}] - Modal configuration.
@@ -1083,24 +1203,10 @@ function createSldsModalShell({
 	saveSpan.setAttribute("dir", "ltr");
 	saveSpan.textContent = confirmButtonLabel;
 	saveButton.appendChild(saveSpan);
-	/**
-	 * Handles the keydown event and triggers specific actions based on the key pressed.
-	 *
-	 * @param {KeyboardEvent} event - The keydown event object.
-	 */
-	function keyDownListener(event) {
-		switch (event.key) {
-			case "Escape":
-				closeButton.click();
-				break;
-			case "Enter":
-				saveButton.click();
-				break;
-			default:
-				return;
-		}
-		document.removeEventListener("keydown", keyDownListener);
-	}
+	let keyDownListener = null;
+	keyDownListener = (event) => {
+		handleModalShellKeydown(event, closeButton, saveButton, keyDownListener);
+	};
 	document.addEventListener("keydown", keyDownListener);
 	return {
 		modalParent,
@@ -1295,15 +1401,11 @@ export function generateRadioButtons(name, {
 		innerSpan.appendChild(labelEl);
 		radioGroup.appendChild(innerSpan);
 	}
-	/**
-	 * Returns the value of the currently selected (checked) radio button from the group.
-	 *
-	 * @return {string|undefined} The value of the checked radio button, or undefined if none are checked.
-	 */
-	function getSelectedRadioButtonValue() {
-		return allRadioInputs.find((inp) => inp.checked)?.value;
-	}
-	return { radioGroup, getSelectedRadioButtonValue };
+	return {
+		radioGroup,
+		getSelectedRadioButtonValue: () =>
+			getSelectedRadioButtonValueFromInputs(allRadioInputs),
+	};
 }
 
 /**
@@ -2090,29 +2192,15 @@ export async function generateSldsModalWithTabList(tabs = [], {
 	saveButtonLabel = "export",
 	explainer = "select_tabs_export",
 } = {}) {
-	/**
-	 * Function to update select all button text based on checkbox states
-	 */
-	function updateSelectAllButtonText() {
-		// this checkboxes is the one returned from generateTableWithCheckboxes
-		const checkedCount = checkboxes.filter((cb) => cb.checked).length;
-		tabCounter.textContent = checkedCount;
-		if (checkedCount === checkboxes.length) {
-			selectAllButton.setAttribute("disabled", true);
-		} else {
-			selectAllButton.removeAttribute("disabled");
-		}
-		if (checkedCount === 0) {
-			unselectAllButton.setAttribute("disabled", true);
-		} else {
-			unselectAllButton.removeAttribute("disabled");
-		}
-		if (unselectAllButton.hasAttribute("disabled")) {
-			saveButton.setAttribute("disabled", true);
-		} else {
-			saveButton.removeAttribute("disabled");
-		}
-	}
+	const selectionState = {
+		checkboxes: null,
+		tabCounter: null,
+		selectAllButton: null,
+		unselectAllButton: null,
+		saveButton: null,
+	};
+	const updateSelectAllButtonText = () =>
+		updateSelectAllButtonTextState(selectionState);
 	const [
 		[select_all, unselect_all],
 		{
@@ -2159,6 +2247,11 @@ export async function generateSldsModalWithTabList(tabs = [], {
 	saveButton.appendChild(tabCounterClose);
 	const selectAllButton = document.createElement("button");
 	const unselectAllButton = document.createElement("button");
+	selectionState.checkboxes = checkboxes;
+	selectionState.tabCounter = tabCounter;
+	selectionState.selectAllButton = selectAllButton;
+	selectionState.unselectAllButton = unselectAllButton;
+	selectionState.saveButton = saveButton;
 	// Add Tabs list container
 	const divParent = createModalContentContainer(article);
 	divParent.appendChild(tabsListTable);
@@ -2192,27 +2285,16 @@ export async function generateSldsModalWithTabList(tabs = [], {
 		}
 		updateSelectAllButtonText();
 	});
-	/**
-	 * Function to get selected tabs
-	 * @return {Object{selectedAll: Boolean, tabs: Array}} an object with the selected Tabs and a boolean value to represent whether all Tabs where selected
-	 */
-	function getSelectedTabs() {
-		const selectedAll = selectAllButton.hasAttribute("disabled");
-		const selectedTabs = selectedAll ? tabs : checkboxes
-			.filter((checkbox) => checkbox.checked)
-			.map((checkbox) =>
-				tabs[Number.parseInt(checkbox.dataset.tabIndex)]
-			);
-		return {
-			selectedAll,
-			tabs: selectedTabs,
-		};
-	}
 	return {
 		modalParent,
 		saveButton,
 		closeButton,
-		getSelectedTabs,
+		getSelectedTabs: () =>
+			getSelectedTabsFromModalSelection({
+				tabs,
+				checkboxes,
+				selectAllButton,
+			}),
 	};
 }
 
@@ -2984,29 +3066,19 @@ export function sldsConfirm({
 	document.body.appendChild(modalParent);
 	saveButton.focus();
 	return new Promise((resolve) => {
-		let isResolved = false;
-		/**
-		 * Completes the current prompt only once.
-		 *
-		 * @param {boolean} value - The user selection.
-		 */
-		function finish(value) {
-			if (isResolved) {
-				return;
-			}
-			isResolved = true;
-			modalParent.remove();
-			resolve(value);
-		}
+		const isResolvedRef = { value: false };
 		saveButton.addEventListener("click", (event) => {
 			event.preventDefault();
-			finish(true);
+			finishSldsConfirm(true, isResolvedRef, modalParent, resolve);
 		});
 		cancelButton.addEventListener("click", (event) => {
 			event.preventDefault();
-			finish(false);
+			finishSldsConfirm(false, isResolvedRef, modalParent, resolve);
 		});
-		closeButton.addEventListener("click", () => finish(false));
+		closeButton.addEventListener(
+			"click",
+			() => finishSldsConfirm(false, isResolvedRef, modalParent, resolve),
+		);
 	});
 }
 
