@@ -304,7 +304,9 @@ Deno.test("show review or sponsor block", async (t) => {
 					usageDays: 20,
 					...reviewElements,
 				});
-				assertFalse(reviewElements.reviewSvg.classList.contains("hidden"));
+				assertFalse(
+					reviewElements.reviewSvg.classList.contains("hidden"),
+				);
 				assert(reviewElements.sponsorSvg.classList.contains("hidden"));
 
 				const sponsorFixture = createReviewSponsorFixture();
@@ -314,8 +316,12 @@ Deno.test("show review or sponsor block", async (t) => {
 					usageDays: 40,
 					...sponsorElements,
 				});
-				assertFalse(sponsorElements.reviewSvg.classList.contains("hidden"));
-				assertFalse(sponsorElements.sponsorSvg.classList.contains("hidden"));
+				assertFalse(
+					sponsorElements.reviewSvg.classList.contains("hidden"),
+				);
+				assertFalse(
+					sponsorElements.sponsorSvg.classList.contains("hidden"),
+				);
 			},
 		);
 

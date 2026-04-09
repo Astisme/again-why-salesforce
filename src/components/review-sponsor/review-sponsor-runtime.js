@@ -289,14 +289,19 @@ export function createReviewSponsorModule({
 		 * }} result Rendered element references.
 		 */
 		async _showReviewOrSponsor(result) {
-			const [reviewMsg, sponsorMsg, allTabs, usageDays, translatorLanguage] =
-				await Promise.all([
-					getTranslationsFn("write_review"),
-					getTranslationsFn("send_tip"),
-					ensureAllTabsAvailabilityFn(),
-					this._getExtensionUsageDays(),
-					getTranslatorAttributeFn("currentLanguage"),
-				]);
+			const [
+				reviewMsg,
+				sponsorMsg,
+				allTabs,
+				usageDays,
+				translatorLanguage,
+			] = await Promise.all([
+				getTranslationsFn("write_review"),
+				getTranslationsFn("send_tip"),
+				ensureAllTabsAvailabilityFn(),
+				this._getExtensionUsageDays(),
+				getTranslatorAttributeFn("currentLanguage"),
+			]);
 			showReviewOrSponsor(Object.assign(result, {
 				allTabs,
 				translatorLanguage,

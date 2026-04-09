@@ -1,6 +1,8 @@
+import "../../mocks.test.ts";
 import { assertEquals, assertStrictEquals } from "@std/testing/asserts";
 import { installMockDom } from "../../happydom.test.ts";
 import { createThemeHandlerRuntime } from "../../../src/action/themeHandler-runtime.js";
+import { createThemeHandlerModule } from "../../../src/action/themeHandler.js";
 
 type ThemeHandlerModule = {
 	handleSwitchColorTheme: () => Promise<void>;
@@ -267,43 +269,29 @@ Deno.test("themeHandler direct module coverage", async () => {
 		"https://example.lightning.force.com/lightning/setup/",
 	);
 	const originalMatchMedia = globalThis.matchMedia;
-	const originalChrome = (globalThis as Record<string, unknown>).chrome;
-	const originalBrowser = (globalThis as Record<string, unknown>).browser;
 	try {
-		const browserGlobal = {
-			i18n: {
-				getMessage: () => "again-why-salesforce",
-			},
-			runtime: {
-				getManifest: () => ({
-					homepage_url: "https://github.com/acme/again-why-salesforce",
-					optional_host_permissions: [],
-					version: "1.0.0",
-				}),
-				lastError: null,
-				sendMessage: (
-					message: { theme: string; what: string },
-					callback?: (response?: { theme: string; what: string }) => void,
-				) => {
-					callback?.(message);
-					return Promise.resolve(message);
-				},
-			},
-		};
-		(globalThis as Record<string, unknown>).chrome = browserGlobal;
-		(globalThis as Record<string, unknown>).browser = browserGlobal;
-
 		const media = new MockMediaQueryList(false);
 		globalThis.matchMedia = () => media as unknown as MediaQueryList;
-		const module = await import(
-			`../../../src/action/themeHandler.js?runtime=${crypto.randomUUID()}`
-		);
+		const sentMessages: Array<{ theme: string; what: string }> = [];
+		const module = createThemeHandlerModule({
+			documentRef: document,
+			localStorageRef: localStorage,
+			matchMediaFn: globalThis.matchMedia?.bind(globalThis),
+			sendExtensionMessageFn: (message) => {
+				sentMessages.push(message);
+			},
+			whatTheme: "theme-message",
+		});
 		await module.systemColorSchemeListener(false);
 		localStorage.setItem("userTheme", "system");
 
 		await module.initTheme();
 		assertEquals(document.documentElement.dataset.usertheme, "system");
 		assertEquals(document.documentElement.dataset.theme, "light");
+		assertEquals(sentMessages.at(-1), {
+			theme: "light",
+			what: "theme-message",
+		});
 
 		await media.dispatch(true);
 		assertEquals(document.documentElement.dataset.theme, "dark");
@@ -328,8 +316,6 @@ Deno.test("themeHandler direct module coverage", async () => {
 		assertEquals(document.documentElement.dataset.theme, "dark");
 	} finally {
 		globalThis.matchMedia = originalMatchMedia;
-		(globalThis as Record<string, unknown>).chrome = originalChrome;
-		(globalThis as Record<string, unknown>).browser = originalBrowser;
 		dom.cleanup();
 	}
 });

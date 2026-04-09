@@ -37,7 +37,9 @@ export function createLightningNavigationModule({
 		try {
 			switch (details.navigationType) {
 				case "recordId": {
-					const recordEvent = auraApi.get("e.force:navigateToSObject");
+					const recordEvent = auraApi.get(
+						"e.force:navigateToSObject",
+					);
 					recordEvent.setParams({ recordId: details.recordId });
 					recordEvent.fire();
 					break;
@@ -53,7 +55,9 @@ export function createLightningNavigationModule({
 				}
 			}
 		} catch (error) {
-			const message = error instanceof Error ? error.message : String(error);
+			const message = error instanceof Error
+				? error.message
+				: String(error);
 			consoleRef.error(`Navigation failed: ${message}`);
 			if (details.fallbackURL) {
 				openFn(details.fallbackURL, "_top");

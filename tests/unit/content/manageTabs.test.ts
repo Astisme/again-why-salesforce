@@ -1,8 +1,10 @@
+import "../../mocks.test.ts";
 import {
 	assertEquals,
 	assertRejects,
 	assertThrows,
 } from "@std/testing/asserts";
+import { createManageTabsModule } from "../../../src/salesforce/manageTabs.js";
 
 type ManageTabsModule = {
 	__getState: () => {
@@ -204,18 +206,6 @@ type ManageTabsDependencies = {
 	showToast: (message: string, status?: string) => void;
 	updateModalBodyOverflow: (article?: ManageElement | null) => void;
 };
-
-/**
- * Lazily imports the manage-tabs module factory after global browser stubs are installed.
- *
- * @return {Promise<(overrides?: Record<string, unknown>) => ManageTabsModule>} Runtime factory.
- */
-async function getCreateManageTabsModule() {
-	const module = await import("../../../src/salesforce/manageTabs.js");
-	return module.createManageTabsModule as unknown as (
-		overrides?: Record<string, unknown>,
-	) => ManageTabsModule;
-}
 
 /**
  * Minimal classList implementation for manageTabs tests.
@@ -714,9 +704,9 @@ function createEvent(
 /**
  * Loads manageTabs.js with lightweight dependencies.
  *
- * @return {Promise<ManageTabsFixture>} Loaded module fixture.
+ * @return {ManageTabsFixture} Loaded module fixture.
  */
-async function loadManageTabs() {
+function loadManageTabs() {
 	const allTabs: ManageAllTabs = {
 		exists: () => false,
 		pinnedTabsNo: 0,
@@ -772,9 +762,11 @@ async function loadManageTabs() {
 	const hadConfirm = "confirm" in globalThis;
 	const originalConfirm = (globalThis as { confirm?: unknown }).confirm;
 	const hadTimeout = "setTimeout" in globalThis;
-	const originalSetTimeout = (globalThis as { setTimeout?: unknown }).setTimeout;
+	const originalSetTimeout =
+		(globalThis as { setTimeout?: unknown }).setTimeout;
 	const hadCustomEvent = "CustomEvent" in globalThis;
-	const originalCustomEvent = (globalThis as { CustomEvent?: unknown }).CustomEvent;
+	const originalCustomEvent =
+		(globalThis as { CustomEvent?: unknown }).CustomEvent;
 
 	Object.defineProperty(globalThis, "browser", {
 		configurable: true,
@@ -807,7 +799,6 @@ async function loadManageTabs() {
 		value: mockDocument,
 		writable: true,
 	});
-	const createManageTabsModule = await getCreateManageTabsModule();
 	const module = createManageTabsModule({
 		CXM_PIN_TAB: "pin",
 		CXM_REMOVE_TAB: "remove",
@@ -841,9 +832,7 @@ async function loadManageTabs() {
 		},
 		getTranslations: (key: string | string[]) =>
 			Promise.resolve(
-				Array.isArray(key)
-					? key.map(() => "translated")
-					: "translated",
+				Array.isArray(key) ? key.map(() => "translated") : "translated",
 			),
 		generateManageTabsModal: (tabs: ManageAllTabs) =>
 			generateManageTabsModalResult.current(tabs),
@@ -869,7 +858,9 @@ async function loadManageTabs() {
 			reorderTabsUlCalls.value++;
 		},
 		setupDragForTable: (
-			callback: (options?: { fromIndex?: number; toIndex?: number }) => void,
+			callback: (
+				options?: { fromIndex?: number; toIndex?: number },
+			) => void,
 		) => {
 			setupDragForTableCallbacks.push(callback);
 		},
@@ -906,7 +897,7 @@ async function loadManageTabs() {
 			timeoutWaits.push(delay);
 			return timeouts.length;
 		},
-	}) as ManageTabsModule;
+	}) as unknown as ManageTabsModule;
 
 	const cleanup = () => {
 		if (hadBrowser) {

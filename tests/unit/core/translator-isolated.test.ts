@@ -1,8 +1,10 @@
+import "../../mocks.test.ts";
 import {
 	assertEquals,
 	assertRejects,
 	assertThrows,
 } from "@std/testing/asserts";
+import { createTranslatorModule } from "../../../src/core/translator.js";
 
 type TranslatorModule = {
 	TranslationService: {
@@ -41,28 +43,16 @@ type TranslatorModule = {
 };
 
 /**
- * Lazily imports the translator module factory after global browser stubs are installed.
- *
- * @return {Promise<(overrides?: Record<string, unknown>) => TranslatorModule>} Runtime factory.
- */
-async function getCreateTranslatorModule() {
-	const module = await import("../../../src/core/translator.js");
-	return module.createTranslatorModule as unknown as (
-		overrides?: Record<string, unknown>,
-	) => TranslatorModule;
-}
-
-/**
  * Loads translator.js in isolation with source-mapped coverage.
  *
- * @return {Promise<{
+ * @return {{
  *   cleanup: () => void;
  *   changeListeners: Array<(changes: Record<string, unknown>) => void>;
  *   module: TranslatorModule;
  *   setLanguageResponse: (userLanguage: string | null, sfLanguage: string | null) => void;
- * }>}
+ * }}
  */
-async function loadTranslatorFixture() {
+function loadTranslatorFixture() {
 	let userLanguage: string | null = "fr";
 	let sfLanguage: string | null = "en";
 	const changeListeners: Array<(changes: Record<string, unknown>) => void> =
@@ -139,7 +129,6 @@ async function loadTranslatorFixture() {
 		value: mockDocument,
 		writable: true,
 	});
-	const createTranslatorModule = await getCreateTranslatorModule();
 	const module = createTranslatorModule({
 		BROWSER: browserStub,
 		FOLLOW_SF_LANG: "follow",
@@ -162,7 +151,7 @@ async function loadTranslatorFixture() {
 		},
 		document: mockDocument,
 		fetch: globalThis.fetch,
-	});
+	}) as unknown as TranslatorModule;
 	return {
 		cleanup: () => {
 			globalThis.fetch = originalFetch;

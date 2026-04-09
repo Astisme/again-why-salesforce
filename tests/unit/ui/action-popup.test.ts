@@ -1,4 +1,6 @@
+import "../../mocks.test.ts";
 import { assertEquals } from "@std/testing/asserts";
+import { runPopup } from "../../../src/action/popup/popup-runtime.js";
 import {
 	createMockWindow,
 	MockDocument,
@@ -18,33 +20,6 @@ type Command = {
 	name: string;
 	shortcut: string;
 };
-
-/**
- * Imports the popup runtime after ensuring browser globals exist.
- *
- * @return {Promise<typeof import("../../../src/action/popup/popup-runtime.js")>} Popup runtime module.
- */
-async function loadPopupRuntime() {
-	const globalValues = globalThis as unknown as Record<string, unknown>;
-	if (globalValues.chrome == null || globalValues.browser == null) {
-		const browserGlobal = {
-			i18n: {
-				getMessage: (_key: string) => "again-why-salesforce",
-			},
-			runtime: {
-				getURL: (path: string) => path,
-				getManifest: () => ({
-					homepage_url: "https://github.com/acme/again-why-salesforce",
-					optional_host_permissions: [],
-					version: "1.0.0",
-				}),
-			},
-		};
-		globalValues.chrome = browserGlobal;
-		globalValues.browser = browserGlobal;
-	}
-	return await import("../../../src/action/popup/popup-runtime.js");
-}
 
 /**
  * Creates and appends a mock DOM element with an id.
@@ -118,11 +93,8 @@ async function loadPopupModule({
 		openSettingsCalls: 0,
 	};
 	const messages: Record<string, unknown>[] = [];
-	const { runPopup } = await loadPopupRuntime();
-
 	await runPopup({
-		areFramePatternsAllowedFn: () =>
-			Promise.resolve(framePatternsAllowed),
+		areFramePatternsAllowedFn: () => Promise.resolve(framePatternsAllowed),
 		browser: {
 			runtime: {
 				getURL: (path: string) => `chrome-extension://test/${path}`,
@@ -285,7 +257,6 @@ Deno.test("popup skips command-title updates when command metadata is missing", 
 });
 
 Deno.test("popup exits early when required action buttons are unavailable", async () => {
-	const { runPopup } = await loadPopupRuntime();
 	const window = createMockWindow(
 		"https://example.test/action/popup/popup.html",
 	);

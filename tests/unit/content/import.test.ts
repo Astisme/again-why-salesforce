@@ -1,4 +1,6 @@
+import "../../mocks.test.ts";
 import { assertEquals } from "@std/testing/asserts";
+import { createImportModule } from "../../../src/salesforce/import.js";
 import { MockElement } from "../ui/mock-dom.test.ts";
 
 type ImportModule = {
@@ -160,18 +162,6 @@ function createFile(type: string, contents: string, name = ""): FileLike {
 }
 
 /**
- * Lazily imports the import-module runtime factory after global stubs are installed.
- *
- * @return {Promise<(overrides?: Record<string, unknown>) => ImportModule>} Runtime factory.
- */
-async function getCreateImportModule() {
-	const module = await import("../../../src/salesforce/import.js");
-	return module.createImportModule as unknown as (
-		overrides?: Record<string, unknown>,
-	) => ImportModule;
-}
-
-/**
  * Loads import.js with configurable selection and file-import behavior.
  *
  * @param {Object} options Fixture options.
@@ -183,9 +173,9 @@ async function getCreateImportModule() {
  * @param {boolean} [options.missingModalParentOnce=false] Whether the first modal generation returns a null parent.
  * @param {boolean} [options.selectedAll=false] Whether all tabs were selected in the pick modal.
  * @param {unknown[]} [options.selectedTabs=[]] Tabs selected in the pick modal.
- * @return {Promise<ImportFixture>} Loaded fixture.
+ * @return {ImportFixture} Loaded fixture.
  */
-async function loadImportModule({
+function loadImportModule({
 	checkboxState = {},
 	clearInputModalParentOnRemove = false,
 	generateModalError = null,
@@ -296,9 +286,7 @@ async function loadImportModule({
 				return closeButton;
 			}
 			if (id === "awsf-modal") {
-				return modalPresent || hasExistingModal
-					? modalParent
-					: null;
+				return modalPresent || hasExistingModal ? modalParent : null;
 			}
 			return null;
 		},
@@ -330,7 +318,6 @@ async function loadImportModule({
 		value: mockDocument,
 		writable: true,
 	});
-	const createImportModule = await getCreateImportModule();
 	const module = createImportModule({
 		BROWSER: {
 			runtime: {
@@ -367,7 +354,11 @@ async function loadImportModule({
 					? message.map((item) => `translated:${item}`)
 					: `translated:${message}`,
 			),
-		generateCheckboxWithLabel: (id: string, _label: string, checked: boolean) => {
+		generateCheckboxWithLabel: (
+			id: string,
+			_label: string,
+			checked: boolean,
+		) => {
 			const existingCheckbox = fileCheckboxes[id];
 			if (existingCheckbox != null) {
 				return Promise.resolve(existingCheckbox);
@@ -409,7 +400,10 @@ async function loadImportModule({
 				})(),
 				saveButton,
 			}),
-		generateSldsModalWithTabList: (_tabs: unknown, options: Record<string, string>) => {
+		generateSldsModalWithTabList: (
+			_tabs: unknown,
+			options: Record<string, string>,
+		) => {
 			modalListCalls.push(options);
 			return Promise.resolve({
 				closeButton: selectedCloseButton,
@@ -439,7 +433,7 @@ async function loadImportModule({
 		sf_afterSet: (message: SfAfterSetPayload) => {
 			afterSetCalls.push(message);
 		},
-	}) as ImportModule;
+	}) as unknown as ImportModule;
 	setInputModalParent = module.__setInputModalParent;
 
 	return {

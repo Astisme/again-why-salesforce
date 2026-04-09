@@ -1,87 +1,225 @@
 "use strict";
 import {
-	BROWSER,
-	CXM_EMPTY_GENERIC_TABS,
-	CXM_EMPTY_TABS,
-	CXM_EMPTY_VISIBLE_TABS,
-	CXM_MANAGE_TABS,
-	CXM_MOVE_FIRST,
-	CXM_MOVE_LAST,
-	CXM_MOVE_LEFT,
-	CXM_MOVE_RIGHT,
-	CXM_PIN_TAB,
-	CXM_REMOVE_LEFT_TABS,
-	CXM_REMOVE_OTHER_TABS,
-	CXM_REMOVE_PIN_TABS,
-	CXM_REMOVE_RIGHT_TABS,
-	CXM_REMOVE_TAB,
-	CXM_REMOVE_UNPIN_TABS,
-	CXM_RESET_DEFAULT_TABS,
-	CXM_SORT_CLICK_COUNT,
-	CXM_SORT_CLICK_DATE,
-	CXM_SORT_LABEL,
-	CXM_SORT_ORG,
-	CXM_SORT_URL,
-	CXM_TMP_HIDE_NON_ORG,
-	CXM_TMP_HIDE_ORG,
-	CXM_UNPIN_TAB,
-	EXTENSION_NAME,
-	HAS_ORG_TAB,
-	LINK_NEW_BROWSER,
-	SETUP_LIGHTNING,
-	TAB_ON_LEFT,
-	TOAST_ERROR,
-	TOAST_WARNING,
-	TUTORIAL_EVENT_PIN_TAB,
-	USE_LIGHTNING_NAVIGATION,
-	WHAT_ACTIVATE,
-	WHAT_ADD,
-	WHAT_EXPORT_FROM_BG,
-	WHAT_FOCUS_CHANGED,
-	WHAT_HIGHLIGHTED,
-	WHAT_INSTALLED,
-	WHAT_PAGE_REMOVE_TAB,
-	WHAT_PAGE_SAVE_TAB,
-	WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
-	WHAT_SAVED,
-	WHAT_SHOW_EXPORT_MODAL,
-	WHAT_SHOW_IMPORT,
-	WHAT_SHOW_OPEN_OTHER_ORG,
-	WHAT_START_TUTORIAL,
-	WHAT_STARTUP,
-	WHAT_THEME,
-	WHAT_TOGGLE_ORG,
-	WHAT_UPDATE_EXTENSION,
-	WHAT_UPDATE_TAB,
+	BROWSER as _BROWSER,
+	CXM_EMPTY_GENERIC_TABS as _CXM_EMPTY_GENERIC_TABS,
+	CXM_EMPTY_TABS as _CXM_EMPTY_TABS,
+	CXM_EMPTY_VISIBLE_TABS as _CXM_EMPTY_VISIBLE_TABS,
+	CXM_MANAGE_TABS as _CXM_MANAGE_TABS,
+	CXM_MOVE_FIRST as _CXM_MOVE_FIRST,
+	CXM_MOVE_LAST as _CXM_MOVE_LAST,
+	CXM_MOVE_LEFT as _CXM_MOVE_LEFT,
+	CXM_MOVE_RIGHT as _CXM_MOVE_RIGHT,
+	CXM_PIN_TAB as _CXM_PIN_TAB,
+	CXM_REMOVE_LEFT_TABS as _CXM_REMOVE_LEFT_TABS,
+	CXM_REMOVE_OTHER_TABS as _CXM_REMOVE_OTHER_TABS,
+	CXM_REMOVE_PIN_TABS as _CXM_REMOVE_PIN_TABS,
+	CXM_REMOVE_RIGHT_TABS as _CXM_REMOVE_RIGHT_TABS,
+	CXM_REMOVE_TAB as _CXM_REMOVE_TAB,
+	CXM_REMOVE_UNPIN_TABS as _CXM_REMOVE_UNPIN_TABS,
+	CXM_RESET_DEFAULT_TABS as _CXM_RESET_DEFAULT_TABS,
+	CXM_SORT_CLICK_COUNT as _CXM_SORT_CLICK_COUNT,
+	CXM_SORT_CLICK_DATE as _CXM_SORT_CLICK_DATE,
+	CXM_SORT_LABEL as _CXM_SORT_LABEL,
+	CXM_SORT_ORG as _CXM_SORT_ORG,
+	CXM_SORT_URL as _CXM_SORT_URL,
+	CXM_TMP_HIDE_NON_ORG as _CXM_TMP_HIDE_NON_ORG,
+	CXM_TMP_HIDE_ORG as _CXM_TMP_HIDE_ORG,
+	CXM_UNPIN_TAB as _CXM_UNPIN_TAB,
+	EXTENSION_NAME as _EXTENSION_NAME,
+	HAS_ORG_TAB as _HAS_ORG_TAB,
+	LINK_NEW_BROWSER as _LINK_NEW_BROWSER,
+	SETUP_LIGHTNING as _SETUP_LIGHTNING,
+	TAB_ON_LEFT as _TAB_ON_LEFT,
+	TOAST_ERROR as _TOAST_ERROR,
+	TOAST_WARNING as _TOAST_WARNING,
+	TUTORIAL_EVENT_PIN_TAB as _TUTORIAL_EVENT_PIN_TAB,
+	USE_LIGHTNING_NAVIGATION as _USE_LIGHTNING_NAVIGATION,
+	WHAT_ACTIVATE as _WHAT_ACTIVATE,
+	WHAT_ADD as _WHAT_ADD,
+	WHAT_EXPORT_FROM_BG as _WHAT_EXPORT_FROM_BG,
+	WHAT_FOCUS_CHANGED as _WHAT_FOCUS_CHANGED,
+	WHAT_HIGHLIGHTED as _WHAT_HIGHLIGHTED,
+	WHAT_INSTALLED as _WHAT_INSTALLED,
+	WHAT_PAGE_REMOVE_TAB as _WHAT_PAGE_REMOVE_TAB,
+	WHAT_PAGE_SAVE_TAB as _WHAT_PAGE_SAVE_TAB,
+	WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP
+		as _WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
+	WHAT_SAVED as _WHAT_SAVED,
+	WHAT_SHOW_EXPORT_MODAL as _WHAT_SHOW_EXPORT_MODAL,
+	WHAT_SHOW_IMPORT as _WHAT_SHOW_IMPORT,
+	WHAT_SHOW_OPEN_OTHER_ORG as _WHAT_SHOW_OPEN_OTHER_ORG,
+	WHAT_START_TUTORIAL as _WHAT_START_TUTORIAL,
+	WHAT_STARTUP as _WHAT_STARTUP,
+	WHAT_THEME as _WHAT_THEME,
+	WHAT_TOGGLE_ORG as _WHAT_TOGGLE_ORG,
+	WHAT_UPDATE_EXTENSION as _WHAT_UPDATE_EXTENSION,
+	WHAT_UPDATE_TAB as _WHAT_UPDATE_TAB,
 } from "../core/constants.js";
 import {
-	getInnerElementFieldBySelector,
-	getSettings,
+	getInnerElementFieldBySelector as _getInnerElementFieldBySelector,
+	getSettings as _getSettings,
 } from "../core/functions.js";
-import { getTranslations } from "../core/translator.js";
-import Tab from "../core/tab.js";
-import { ensureAllTabsAvailability } from "../core/tabContainer.js";
-import { setupDragForUl } from "./dragHandler.js";
+import { getTranslations as _getTranslations } from "../core/translator.js";
+import _Tab from "../core/tab.js";
+import { ensureAllTabsAvailability as _ensureAllTabsAvailability } from "../core/tabContainer.js";
+import { setupDragForUl as _setupDragForUl } from "./dragHandler.js";
 
-import { showToast } from "./toast.js";
-import { pageActionTab, showFavouriteButton } from "./favourite-manager.js";
+import { showToast as _showToast } from "./toast.js";
 import {
-	generateRowTemplate,
-	generateStyleFromSettings,
-	generateUpdateTabModal,
-	MODAL_ID,
+	generateRowTemplate as _generateRowTemplate,
+	generateStyleFromSettings as _generateStyleFromSettings,
+	generateUpdateTabModal as _generateUpdateTabModal,
+	MODAL_ID as _MODAL_ID,
 } from "./generator.js";
-import { createImportModal } from "./import.js";
-import { createExportModal } from "./export.js";
-import { createManageTabsModal } from "./manageTabs.js";
-import { createOpenOtherOrgModal } from "./openOtherOrg.js";
-import { checkTutorial } from "./tutorial.js";
-import { executeOncePerDay } from "./once-a-day.js";
+import { createOpenOtherOrgModal as _createOpenOtherOrgModal } from "./openOtherOrg.js";
+import { executeOncePerDay as _executeOncePerDay } from "./once-a-day.js";
 import {
-	findSetupTabUlInSalesforcePage,
-	getCurrentHref,
-	getSetupTabUl,
+	findSetupTabUlInSalesforcePage as _findSetupTabUlInSalesforcePage,
+	getCurrentHref as _getCurrentHref,
+	getModalHanger as _getModalHanger,
+	getSetupTabUl as _getSetupTabUl,
 } from "./sf-elements.js";
+
+let BROWSER = _BROWSER;
+let CXM_EMPTY_GENERIC_TABS = _CXM_EMPTY_GENERIC_TABS;
+let CXM_EMPTY_TABS = _CXM_EMPTY_TABS;
+let CXM_EMPTY_VISIBLE_TABS = _CXM_EMPTY_VISIBLE_TABS;
+let CXM_MANAGE_TABS = _CXM_MANAGE_TABS;
+let CXM_MOVE_FIRST = _CXM_MOVE_FIRST;
+let CXM_MOVE_LAST = _CXM_MOVE_LAST;
+let CXM_MOVE_LEFT = _CXM_MOVE_LEFT;
+let CXM_MOVE_RIGHT = _CXM_MOVE_RIGHT;
+let CXM_PIN_TAB = _CXM_PIN_TAB;
+let CXM_REMOVE_LEFT_TABS = _CXM_REMOVE_LEFT_TABS;
+let CXM_REMOVE_OTHER_TABS = _CXM_REMOVE_OTHER_TABS;
+let CXM_REMOVE_PIN_TABS = _CXM_REMOVE_PIN_TABS;
+let CXM_REMOVE_RIGHT_TABS = _CXM_REMOVE_RIGHT_TABS;
+let CXM_REMOVE_TAB = _CXM_REMOVE_TAB;
+let CXM_REMOVE_UNPIN_TABS = _CXM_REMOVE_UNPIN_TABS;
+let CXM_RESET_DEFAULT_TABS = _CXM_RESET_DEFAULT_TABS;
+let CXM_SORT_CLICK_COUNT = _CXM_SORT_CLICK_COUNT;
+let CXM_SORT_CLICK_DATE = _CXM_SORT_CLICK_DATE;
+let CXM_SORT_LABEL = _CXM_SORT_LABEL;
+let CXM_SORT_ORG = _CXM_SORT_ORG;
+let CXM_SORT_URL = _CXM_SORT_URL;
+let CXM_TMP_HIDE_NON_ORG = _CXM_TMP_HIDE_NON_ORG;
+let CXM_TMP_HIDE_ORG = _CXM_TMP_HIDE_ORG;
+let CXM_UNPIN_TAB = _CXM_UNPIN_TAB;
+let EXTENSION_NAME = _EXTENSION_NAME;
+let HAS_ORG_TAB = _HAS_ORG_TAB;
+let LINK_NEW_BROWSER = _LINK_NEW_BROWSER;
+let SETUP_LIGHTNING = _SETUP_LIGHTNING;
+let TAB_ON_LEFT = _TAB_ON_LEFT;
+let TOAST_ERROR = _TOAST_ERROR;
+let TOAST_WARNING = _TOAST_WARNING;
+let TUTORIAL_EVENT_PIN_TAB = _TUTORIAL_EVENT_PIN_TAB;
+let USE_LIGHTNING_NAVIGATION = _USE_LIGHTNING_NAVIGATION;
+let WHAT_ACTIVATE = _WHAT_ACTIVATE;
+let WHAT_ADD = _WHAT_ADD;
+let WHAT_EXPORT_FROM_BG = _WHAT_EXPORT_FROM_BG;
+let WHAT_FOCUS_CHANGED = _WHAT_FOCUS_CHANGED;
+let WHAT_HIGHLIGHTED = _WHAT_HIGHLIGHTED;
+let WHAT_INSTALLED = _WHAT_INSTALLED;
+let WHAT_PAGE_REMOVE_TAB = _WHAT_PAGE_REMOVE_TAB;
+let WHAT_PAGE_SAVE_TAB = _WHAT_PAGE_SAVE_TAB;
+let WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP =
+	_WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP;
+let WHAT_SAVED = _WHAT_SAVED;
+let WHAT_SHOW_EXPORT_MODAL = _WHAT_SHOW_EXPORT_MODAL;
+let WHAT_SHOW_IMPORT = _WHAT_SHOW_IMPORT;
+let WHAT_SHOW_OPEN_OTHER_ORG = _WHAT_SHOW_OPEN_OTHER_ORG;
+let WHAT_START_TUTORIAL = _WHAT_START_TUTORIAL;
+let WHAT_STARTUP = _WHAT_STARTUP;
+let WHAT_THEME = _WHAT_THEME;
+let WHAT_TOGGLE_ORG = _WHAT_TOGGLE_ORG;
+let WHAT_UPDATE_EXTENSION = _WHAT_UPDATE_EXTENSION;
+let WHAT_UPDATE_TAB = _WHAT_UPDATE_TAB;
+let getInnerElementFieldBySelector = _getInnerElementFieldBySelector;
+let getSettings = _getSettings;
+let getTranslations = _getTranslations;
+let Tab = _Tab;
+let ensureAllTabsAvailability = _ensureAllTabsAvailability;
+let setupDragForUl = _setupDragForUl;
+let showToast = _showToast;
+let generateRowTemplate = _generateRowTemplate;
+let generateStyleFromSettings = _generateStyleFromSettings;
+let generateUpdateTabModal = _generateUpdateTabModal;
+let MODAL_ID = _MODAL_ID;
+let createOpenOtherOrgModal = _createOpenOtherOrgModal;
+let executeOncePerDay = _executeOncePerDay;
+let findSetupTabUlInSalesforcePage = _findSetupTabUlInSalesforcePage;
+let getCurrentHref = _getCurrentHref;
+let getModalHanger = _getModalHanger;
+let getSetupTabUl = _getSetupTabUl;
+
+/**
+ * Lazily loads the tutorial module to avoid circular import initialization issues.
+ *
+ * @param {boolean} [fromPopup=false] Whether tutorial starts from popup action.
+ * @return {Promise<void>}
+ */
+async function defaultCheckTutorial(fromPopup = false) {
+	const tutorialModule = await import("./tutorial.js");
+	await tutorialModule.checkTutorial(fromPopup);
+}
+
+/**
+ * Lazily loads and invokes the favourite-tab action handler.
+ *
+ * @param {boolean} shouldSave Whether tab should be saved.
+ * @return {Promise<void>}
+ */
+async function defaultPageActionTab(shouldSave) {
+	const favouriteModule = await import("./favourite-manager.js");
+	await favouriteModule.pageActionTab(shouldSave);
+}
+
+/**
+ * Lazily loads and invokes the favourite-button renderer.
+ *
+ * @return {Promise<void>}
+ */
+async function defaultShowFavouriteButton() {
+	const favouriteModule = await import("./favourite-manager.js");
+	await favouriteModule.showFavouriteButton();
+}
+
+/**
+ * Lazily loads and invokes the import modal creator.
+ *
+ * @return {Promise<void>}
+ */
+async function defaultCreateImportModal() {
+	const importModule = await import("./import.js");
+	await importModule.createImportModal();
+}
+
+/**
+ * Lazily loads and invokes the export modal creator.
+ *
+ * @return {Promise<void>}
+ */
+async function defaultCreateExportModal() {
+	const exportModule = await import("./export.js");
+	await exportModule.createExportModal();
+}
+
+/**
+ * Lazily loads and invokes the manage-tabs modal creator.
+ *
+ * @return {Promise<void>}
+ */
+async function defaultCreateManageTabsModal() {
+	const manageTabsModule = await import("./manageTabs.js");
+	await manageTabsModule.createManageTabsModal();
+}
+
+let pageActionTab = defaultPageActionTab;
+let showFavouriteButton = defaultShowFavouriteButton;
+let createImportModal = defaultCreateImportModal;
+let createExportModal = defaultCreateExportModal;
+let createManageTabsModal = defaultCreateManageTabsModal;
+let checkTutorial = defaultCheckTutorial;
 
 /**
  * Abort controller for the latest reload operation.
@@ -123,6 +261,20 @@ export function getIsCurrentlyOnSavedTab() {
  * Wheter the href has been updated right now
  */
 let fromHrefUpdate = false;
+
+/**
+ * Tracks asynchronous tasks when tests provide a global tracker.
+ *
+ * @template T
+ * @param {Promise<T> | T} task Task or value to track.
+ * @return {Promise<T> | T} The tracked task/value.
+ */
+function trackContentTask(task) {
+	if (typeof globalThis.__trackContentTask === "function") {
+		return globalThis.__trackContentTask(task);
+	}
+	return task;
+}
 
 /**
  * Dynamically injects the Salesforce Lightning Navigation script into the page
@@ -167,7 +319,7 @@ export function sf_afterSet({
 		showToast(["extension_label", "tabs_saved"]);
 	}
 	if (shouldReload) {
-		reloadTabs(tabs);
+		trackContentTask(reloadTabs(tabs));
 	}
 }
 
@@ -294,8 +446,11 @@ export async function isOnSavedTab(isFromHrefUpdate = false, callback = null) {
  * @param {boolean} isCurrentlyOnSavedTab - Whether the currently displayed page is a saved Tab
  */
 async function _afterHrefUpdate(isCurrentlyOnSavedTab) {
-	if (isCurrentlyOnSavedTab || wasOnSavedTab) reloadTabs();
-	else await showFavouriteButton();
+	if (isCurrentlyOnSavedTab || wasOnSavedTab) {
+		await Promise.resolve(trackContentTask(reloadTabs()));
+		return;
+	}
+	await showFavouriteButton();
 }
 /**
  * Handles the update of the current URL, reloading tabs if necessary.
@@ -306,7 +461,7 @@ function onHrefUpdate() {
 		return;
 	}
 	href = newRef;
-	isOnSavedTab(true, _afterHrefUpdate);
+	trackContentTask(isOnSavedTab(true, _afterHrefUpdate));
 }
 
 /**
@@ -340,20 +495,20 @@ async function checkKeepTabsOnLeft() {
 function delayLoadSetupTabs(count = 0) {
 	if (count > 5) {
 		// write error in the console
-		(async () => {
+		trackContentTask((async () => {
 			const [label, fail] = await getTranslations([
 				"extension_label",
 				"error_no_setup_tab",
 			]);
 			console.error(`${label} - ${fail}`);
 			setTimeout(delayLoadSetupTabs, 5000);
-		})();
+		})());
 		return;
 	}
 	if (!findSetupTabUlInSalesforcePage()) {
 		return setTimeout(() => delayLoadSetupTabs(count + 1), 500);
 	}
-	checkKeepTabsOnLeft();
+	trackContentTask(checkKeepTabsOnLeft());
 	// Start observing changes to the DOM to then check for URL change
 	// when URL changes, show the favourite button
 	new MutationObserver(() => setTimeout(onHrefUpdate, 500))
@@ -363,8 +518,8 @@ function delayLoadSetupTabs(count = 0) {
 		});
 	// initialize
 	setupDragForUl(reorderTabsUl);
-	reloadTabs();
-	checkTutorial();
+	trackContentTask(reloadTabs());
+	trackContentTask(Promise.resolve(checkTutorial()));
 }
 
 /**
@@ -374,11 +529,13 @@ function delayLoadSetupTabs(count = 0) {
  * - Removes all tabs in the setup tab list (except for hidden ones, "Home", and "Object Manager") and then calls the `init` function to load the new tabs.
  *
  * @param {Array<Tab>|null} [tabs=null] - The tabs to initialize. If null, the tabs will be fetched again.
- * @return {void} This function does not return anything, but it reinitializes the tab list as needed.
+ * @return {Promise<void>} Promise resolved after the latest reload work settles.
  */
 function reloadTabs(tabs = null) {
-	void generateStyleFromSettings();
-	void init(tabs, startReloadSignal());
+	trackContentTask(Promise.resolve(generateStyleFromSettings()));
+	return Promise.resolve(
+		trackContentTask(init(tabs, startReloadSignal())),
+	);
 }
 
 /**
@@ -391,6 +548,7 @@ function reloadTabs(tabs = null) {
  */
 export async function reorderTabsUl() {
 	try {
+		const setupTabUl = getSetupTabUl();
 		// Get the list of tabs
 		const tabs = [];
 		for (const li of setupTabUl?.querySelectorAll("li") ?? []) {
@@ -448,6 +606,7 @@ function _toggleWarning(duplicatetabs = []) {
  * @param {string} miniURL - The URL (or part of it) used to identify duplicate tabs.
  */
 export function makeDuplicatesBold(miniURL) {
+	const setupTabUl = getSetupTabUl();
 	const duplicatetabs = setupTabUl?.querySelectorAll(`a[title="${miniURL}"]`);
 	if (duplicatetabs == null) {
 		return;
@@ -571,7 +730,7 @@ export async function performActionOnTabs(
 				break;
 			case WHAT_PAGE_SAVE_TAB:
 			case WHAT_PAGE_REMOVE_TAB:
-				pageActionTab(action === WHAT_PAGE_SAVE_TAB);
+				await pageActionTab(action === WHAT_PAGE_SAVE_TAB);
 				break;
 			default: {
 				const noMatch = await getTranslations("no_match");
@@ -593,6 +752,7 @@ function hideTabs(hideOrgTabs = true) {
 	const selector = hideOrgTabs
 		? `li${HAS_ORG_TAB}`
 		: `li:not(${HAS_ORG_TAB})`;
+	const setupTabUl = getSetupTabUl();
 	const tabsToHide = setupTabUl?.querySelectorAll(selector) ?? [];
 	for (const tth of tabsToHide) {
 		tth.style.display = "none";
@@ -1013,18 +1173,338 @@ function listenToBackgroundPage() {
  * - Inserts analytics script.
  */
 function main() {
-	ensureAllTabsAvailability();
-	checkAddLightningNavigation();
+	trackContentTask(Promise.resolve(ensureAllTabsAvailability()));
+	trackContentTask(checkAddLightningNavigation());
 	listenToBackgroundPage();
-	delayLoadSetupTabs();
-	void executeOncePerDay();
+	trackContentTask(Promise.resolve(delayLoadSetupTabs()));
+	trackContentTask(Promise.resolve(executeOncePerDay()));
+}
+
+/**
+ * Resets mutable content state before bootstrapping.
+ */
+function resetContentState() {
+	reloadController = null;
+	href = getCurrentHref();
+	wasOnSavedTab = undefined;
+	isCurrentlyOnSavedTab = undefined;
+	fromHrefUpdate = false;
+	backgroundMessageQueue = Promise.resolve();
+}
+
+/**
+ * Boots the module when the current page is a setup page and the page has not been initialized.
+ *
+ * @return {boolean} True when bootstrapping started.
+ */
+function bootstrapIfNeeded() {
+	if (
+		href?.includes(SETUP_LIGHTNING) &&
+		!globalThis[`hasLoaded${EXTENSION_NAME}`]
+	) {
+		globalThis[`hasLoaded${EXTENSION_NAME}`] = true;
+		main();
+		return true;
+	}
+	return false;
+}
+
+/**
+ * Creates content-module helpers with optional dependency overrides.
+ *
+ * @param {Object} [overrides={}] Runtime overrides used by tests.
+ * @return {{
+ *   __testHooks: {
+ *     _afterHrefUpdate: (isCurrentlyOnSavedTab: boolean) => Promise<void>;
+ *     checkAddLightningNavigation: () => Promise<void>;
+ *     checkKeepTabsOnLeft: () => Promise<void>;
+ *     delayLoadSetupTabs: (count?: number) => number | undefined;
+ *     getCurrentHref: () => string;
+ *     getModalHanger: () => HTMLElement | null;
+ *     getSetupTabUl: () => HTMLElement | null;
+ *     hideTabs: (hideOrgTabs?: boolean) => void;
+ *     init: (tabs?: unknown[] | null, signal?: AbortSignal | null) => Promise<void>;
+ *     launchDownload: (message: { payload: string; filename?: string }) => void;
+ *     main: () => void;
+ *     onHrefUpdate: () => void;
+ *     promptUpdateExtension: (options?: Record<string, string>) => Promise<void>;
+ *     reloadTabs: (tabs?: unknown[] | null) => Promise<void>;
+ *     showModalOpenOtherOrg: (options?: Record<string, unknown>) => Promise<void> | void;
+ *     showModalUpdateTab: (options?: Record<string, unknown>) => Promise<void>;
+ *     showToast: (message: string | string[], status?: string) => Promise<void> | void;
+ *     toggleOrg: (options?: Record<string, string | null>) => Promise<void>;
+ *   };
+ *   bootstrapIfNeeded: () => boolean;
+ *   getCurrentHref: () => string;
+ *   getIsCurrentlyOnSavedTab: () => boolean | undefined;
+ *   getModalHanger: () => HTMLElement | null;
+ *   getSetupTabUl: () => HTMLElement | null;
+ *   getWasOnSavedTab: () => boolean | undefined;
+ *   isOnSavedTab: (isFromHrefUpdate?: boolean, callback?: ((isSaved: boolean) => void) | null) => Promise<void>;
+ *   makeDuplicatesBold: (miniURL: string) => void;
+ *   performActionOnTabs: (action: string, tab?: unknown, options?: unknown) => Promise<void>;
+ *   reorderTabsUl: () => Promise<void>;
+ *   sf_afterSet: (options?: Record<string, unknown>) => void;
+ *   showToast: (message: string | string[], status?: string) => Promise<void> | void;
+ * }} Content module API.
+ */
+export function createContentModule(overrides = {}) {
+	const constants = overrides.constants ?? {};
+	const functions = overrides.functions ?? {};
+	const tabContainer = overrides.tabContainer ?? {};
+	const dragHandler = overrides.dragHandler ?? {};
+	const favouriteManager = overrides.favouriteManager ?? {};
+	const generator = overrides.generator ?? {};
+	const importModule = overrides.importModule ?? {};
+	const exportModule = overrides.exportModule ?? {};
+	const manageTabs = overrides.manageTabs ?? {};
+	const openOtherOrg = overrides.openOtherOrg ?? {};
+	const sfElements = overrides.sfElements ?? {};
+	const tutorial = overrides.tutorial ?? {};
+	const onceADay = overrides.onceADay ?? {};
+	const toast = overrides.toast ?? {};
+
+	if (constants.BROWSER != null) BROWSER = constants.BROWSER;
+	if (constants.CXM_EMPTY_GENERIC_TABS != null) {
+		CXM_EMPTY_GENERIC_TABS = constants.CXM_EMPTY_GENERIC_TABS;
+	}
+	if (constants.CXM_EMPTY_TABS != null) {
+		CXM_EMPTY_TABS = constants.CXM_EMPTY_TABS;
+	}
+	if (constants.CXM_EMPTY_VISIBLE_TABS != null) {
+		CXM_EMPTY_VISIBLE_TABS = constants.CXM_EMPTY_VISIBLE_TABS;
+	}
+	if (constants.CXM_MANAGE_TABS != null) {
+		CXM_MANAGE_TABS = constants.CXM_MANAGE_TABS;
+	}
+	if (constants.CXM_MOVE_FIRST != null) {
+		CXM_MOVE_FIRST = constants.CXM_MOVE_FIRST;
+	}
+	if (constants.CXM_MOVE_LAST != null) {
+		CXM_MOVE_LAST = constants.CXM_MOVE_LAST;
+	}
+	if (constants.CXM_MOVE_LEFT != null) {
+		CXM_MOVE_LEFT = constants.CXM_MOVE_LEFT;
+	}
+	if (constants.CXM_MOVE_RIGHT != null) {
+		CXM_MOVE_RIGHT = constants.CXM_MOVE_RIGHT;
+	}
+	if (constants.CXM_PIN_TAB != null) CXM_PIN_TAB = constants.CXM_PIN_TAB;
+	if (constants.CXM_REMOVE_LEFT_TABS != null) {
+		CXM_REMOVE_LEFT_TABS = constants.CXM_REMOVE_LEFT_TABS;
+	}
+	if (constants.CXM_REMOVE_OTHER_TABS != null) {
+		CXM_REMOVE_OTHER_TABS = constants.CXM_REMOVE_OTHER_TABS;
+	}
+	if (constants.CXM_REMOVE_PIN_TABS != null) {
+		CXM_REMOVE_PIN_TABS = constants.CXM_REMOVE_PIN_TABS;
+	}
+	if (constants.CXM_REMOVE_RIGHT_TABS != null) {
+		CXM_REMOVE_RIGHT_TABS = constants.CXM_REMOVE_RIGHT_TABS;
+	}
+	if (constants.CXM_REMOVE_TAB != null) {
+		CXM_REMOVE_TAB = constants.CXM_REMOVE_TAB;
+	}
+	if (constants.CXM_REMOVE_UNPIN_TABS != null) {
+		CXM_REMOVE_UNPIN_TABS = constants.CXM_REMOVE_UNPIN_TABS;
+	}
+	if (constants.CXM_RESET_DEFAULT_TABS != null) {
+		CXM_RESET_DEFAULT_TABS = constants.CXM_RESET_DEFAULT_TABS;
+	}
+	if (constants.CXM_SORT_CLICK_COUNT != null) {
+		CXM_SORT_CLICK_COUNT = constants.CXM_SORT_CLICK_COUNT;
+	}
+	if (constants.CXM_SORT_CLICK_DATE != null) {
+		CXM_SORT_CLICK_DATE = constants.CXM_SORT_CLICK_DATE;
+	}
+	if (constants.CXM_SORT_LABEL != null) {
+		CXM_SORT_LABEL = constants.CXM_SORT_LABEL;
+	}
+	if (constants.CXM_SORT_ORG != null) CXM_SORT_ORG = constants.CXM_SORT_ORG;
+	if (constants.CXM_SORT_URL != null) CXM_SORT_URL = constants.CXM_SORT_URL;
+	if (constants.CXM_TMP_HIDE_NON_ORG != null) {
+		CXM_TMP_HIDE_NON_ORG = constants.CXM_TMP_HIDE_NON_ORG;
+	}
+	if (constants.CXM_TMP_HIDE_ORG != null) {
+		CXM_TMP_HIDE_ORG = constants.CXM_TMP_HIDE_ORG;
+	}
+	if (constants.CXM_UNPIN_TAB != null) {
+		CXM_UNPIN_TAB = constants.CXM_UNPIN_TAB;
+	}
+	if (constants.EXTENSION_NAME != null) {
+		EXTENSION_NAME = constants.EXTENSION_NAME;
+	}
+	if (constants.HAS_ORG_TAB != null) HAS_ORG_TAB = constants.HAS_ORG_TAB;
+	if (constants.LINK_NEW_BROWSER != null) {
+		LINK_NEW_BROWSER = constants.LINK_NEW_BROWSER;
+	}
+	if (constants.SETUP_LIGHTNING != null) {
+		SETUP_LIGHTNING = constants.SETUP_LIGHTNING;
+	}
+	if (constants.TAB_ON_LEFT != null) TAB_ON_LEFT = constants.TAB_ON_LEFT;
+	if (constants.TOAST_ERROR != null) TOAST_ERROR = constants.TOAST_ERROR;
+	if (constants.TOAST_WARNING != null) {
+		TOAST_WARNING = constants.TOAST_WARNING;
+	}
+	if (constants.TUTORIAL_EVENT_PIN_TAB != null) {
+		TUTORIAL_EVENT_PIN_TAB = constants.TUTORIAL_EVENT_PIN_TAB;
+	}
+	if (constants.USE_LIGHTNING_NAVIGATION != null) {
+		USE_LIGHTNING_NAVIGATION = constants.USE_LIGHTNING_NAVIGATION;
+	}
+	if (constants.WHAT_ACTIVATE != null) {
+		WHAT_ACTIVATE = constants.WHAT_ACTIVATE;
+	}
+	if (constants.WHAT_ADD != null) WHAT_ADD = constants.WHAT_ADD;
+	if (constants.WHAT_EXPORT_FROM_BG != null) {
+		WHAT_EXPORT_FROM_BG = constants.WHAT_EXPORT_FROM_BG;
+	}
+	if (constants.WHAT_FOCUS_CHANGED != null) {
+		WHAT_FOCUS_CHANGED = constants.WHAT_FOCUS_CHANGED;
+	}
+	if (constants.WHAT_HIGHLIGHTED != null) {
+		WHAT_HIGHLIGHTED = constants.WHAT_HIGHLIGHTED;
+	}
+	if (constants.WHAT_INSTALLED != null) {
+		WHAT_INSTALLED = constants.WHAT_INSTALLED;
+	}
+	if (constants.WHAT_PAGE_REMOVE_TAB != null) {
+		WHAT_PAGE_REMOVE_TAB = constants.WHAT_PAGE_REMOVE_TAB;
+	}
+	if (constants.WHAT_PAGE_SAVE_TAB != null) {
+		WHAT_PAGE_SAVE_TAB = constants.WHAT_PAGE_SAVE_TAB;
+	}
+	if (constants.WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP != null) {
+		WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP =
+			constants.WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP;
+	}
+	if (constants.WHAT_SAVED != null) WHAT_SAVED = constants.WHAT_SAVED;
+	if (constants.WHAT_SHOW_EXPORT_MODAL != null) {
+		WHAT_SHOW_EXPORT_MODAL = constants.WHAT_SHOW_EXPORT_MODAL;
+	}
+	if (constants.WHAT_SHOW_IMPORT != null) {
+		WHAT_SHOW_IMPORT = constants.WHAT_SHOW_IMPORT;
+	}
+	if (constants.WHAT_SHOW_OPEN_OTHER_ORG != null) {
+		WHAT_SHOW_OPEN_OTHER_ORG = constants.WHAT_SHOW_OPEN_OTHER_ORG;
+	}
+	if (constants.WHAT_START_TUTORIAL != null) {
+		WHAT_START_TUTORIAL = constants.WHAT_START_TUTORIAL;
+	}
+	if (constants.WHAT_STARTUP != null) WHAT_STARTUP = constants.WHAT_STARTUP;
+	if (constants.WHAT_THEME != null) WHAT_THEME = constants.WHAT_THEME;
+	if (constants.WHAT_TOGGLE_ORG != null) {
+		WHAT_TOGGLE_ORG = constants.WHAT_TOGGLE_ORG;
+	}
+	if (constants.WHAT_UPDATE_EXTENSION != null) {
+		WHAT_UPDATE_EXTENSION = constants.WHAT_UPDATE_EXTENSION;
+	}
+	if (constants.WHAT_UPDATE_TAB != null) {
+		WHAT_UPDATE_TAB = constants.WHAT_UPDATE_TAB;
+	}
+
+	if (functions.getInnerElementFieldBySelector != null) {
+		getInnerElementFieldBySelector =
+			functions.getInnerElementFieldBySelector;
+	}
+	if (functions.getSettings != null) getSettings = functions.getSettings;
+	if (overrides.getTranslations != null) {
+		getTranslations = overrides.getTranslations;
+	}
+	if (overrides.Tab != null) Tab = overrides.Tab;
+	if (tabContainer.ensureAllTabsAvailability != null) {
+		ensureAllTabsAvailability = tabContainer.ensureAllTabsAvailability;
+	}
+	if (dragHandler.setupDragForUl != null) {
+		setupDragForUl = dragHandler.setupDragForUl;
+	}
+	if (toast.showToast != null) showToast = toast.showToast;
+	if (favouriteManager.pageActionTab != null) {
+		pageActionTab = favouriteManager.pageActionTab;
+	}
+	if (favouriteManager.showFavouriteButton != null) {
+		showFavouriteButton = favouriteManager.showFavouriteButton;
+	}
+	if (generator.generateRowTemplate != null) {
+		generateRowTemplate = generator.generateRowTemplate;
+	}
+	if (generator.generateStyleFromSettings != null) {
+		generateStyleFromSettings = generator.generateStyleFromSettings;
+	}
+	if (generator.generateUpdateTabModal != null) {
+		generateUpdateTabModal = generator.generateUpdateTabModal;
+	}
+	if (generator.MODAL_ID != null) MODAL_ID = generator.MODAL_ID;
+	if (importModule.createImportModal != null) {
+		createImportModal = importModule.createImportModal;
+	}
+	if (exportModule.createExportModal != null) {
+		createExportModal = exportModule.createExportModal;
+	}
+	if (manageTabs.createManageTabsModal != null) {
+		createManageTabsModal = manageTabs.createManageTabsModal;
+	}
+	if (openOtherOrg.createOpenOtherOrgModal != null) {
+		createOpenOtherOrgModal = openOtherOrg.createOpenOtherOrgModal;
+	}
+	if (tutorial.checkTutorial != null) checkTutorial = tutorial.checkTutorial;
+	if (onceADay.executeOncePerDay != null) {
+		executeOncePerDay = onceADay.executeOncePerDay;
+	}
+	if (sfElements.findSetupTabUlInSalesforcePage != null) {
+		findSetupTabUlInSalesforcePage =
+			sfElements.findSetupTabUlInSalesforcePage;
+	}
+	if (sfElements.getCurrentHref != null) {
+		getCurrentHref = sfElements.getCurrentHref;
+	}
+	if (sfElements.getModalHanger != null) {
+		getModalHanger = sfElements.getModalHanger;
+	}
+	if (sfElements.getSetupTabUl != null) {
+		getSetupTabUl = sfElements.getSetupTabUl;
+	}
+
+	resetContentState();
+
+	return {
+		__testHooks: {
+			_afterHrefUpdate,
+			checkAddLightningNavigation,
+			checkKeepTabsOnLeft,
+			delayLoadSetupTabs,
+			getCurrentHref,
+			getModalHanger,
+			getSetupTabUl,
+			hideTabs,
+			init,
+			launchDownload,
+			main,
+			onHrefUpdate,
+			promptUpdateExtension,
+			reloadTabs,
+			showModalOpenOtherOrg: createOpenOtherOrgModal,
+			showModalUpdateTab,
+			showToast,
+			toggleOrg,
+		},
+		bootstrapIfNeeded,
+		getCurrentHref,
+		getIsCurrentlyOnSavedTab,
+		getModalHanger,
+		getSetupTabUl,
+		getWasOnSavedTab,
+		isOnSavedTab,
+		makeDuplicatesBold,
+		performActionOnTabs,
+		reorderTabsUl,
+		sf_afterSet,
+		showToast,
+	};
 }
 
 // queries the currently active tab of the current active window
 // this prevents showing the tabs when not in a setup page (like Sales or Service Console)
-if (
-	href?.includes(SETUP_LIGHTNING) && !globalThis[`hasLoaded${EXTENSION_NAME}`]
-) {
-	globalThis[`hasLoaded${EXTENSION_NAME}`] = true;
-	main();
+if (globalThis.__AWSF_SKIP_CONTENT_AUTO_BOOTSTRAP__ !== true) {
+	bootstrapIfNeeded();
 }

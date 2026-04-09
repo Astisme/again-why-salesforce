@@ -120,13 +120,19 @@ export function createFavouriteManagerModule({
 		id = null,
 		alt = null,
 	} = {}, slashed = false) {
-		const svg = documentRef.createElementNS("http://www.w3.org/2000/svg", "svg");
+		const svg = documentRef.createElementNS(
+			"http://www.w3.org/2000/svg",
+			"svg",
+		);
 		if (id) svg.id = id;
 		if (alt) svg.alt = alt;
 		svg.style.width = "2em";
 		svg.style.height = "2em";
 		svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-		const path = documentRef.createElementNS("http://www.w3.org/2000/svg", "path");
+		const path = documentRef.createElementNS(
+			"http://www.w3.org/2000/svg",
+			"path",
+		);
 		const salesforceLightBlue = "#00a1e0";
 		if (slashed) {
 			path.style.fill = salesforceLightBlue;
@@ -192,7 +198,9 @@ export function createFavouriteManagerModule({
 					break;
 			}
 		}
-		const saveTabAssistive = `${saveTab}${starCmd == null ? "" : ` (${starCmd})`}`;
+		const saveTabAssistive = `${saveTab}${
+			starCmd == null ? "" : ` (${starCmd})`
+		}`;
 		const removeTabAssistive = `${removeTab}${
 			slashedStarCmd == null ? "" : ` (${slashedStarCmd})`
 		}`;
@@ -248,7 +256,8 @@ export function createFavouriteManagerModule({
 		if (isSaved == null) {
 			return;
 		}
-		const favouriteButton = button ?? documentRef.getElementById(FAVOURITE_BUTTON_ID);
+		const favouriteButton = button ??
+			documentRef.getElementById(FAVOURITE_BUTTON_ID);
 		const star = getFavouriteImage(STAR_ID, button);
 		const slashedStar = getFavouriteImage(SLASHED_STAR_ID, button);
 		if (isSaved) {
@@ -265,7 +274,9 @@ export function createFavouriteManagerModule({
 			favouriteButton.setAttribute("aria-pressed", `${isSaved}`);
 			favouriteButton.setAttribute("aria-label", assistiveLabel);
 			favouriteButton.title = assistiveLabel;
-			const assistiveText = favouriteButton.querySelector(".slds-assistive-text");
+			const assistiveText = favouriteButton.querySelector(
+				".slds-assistive-text",
+			);
 			if (assistiveText != null) {
 				assistiveText.textContent = assistiveLabel;
 			}
@@ -287,16 +298,14 @@ export function createFavouriteManagerModule({
 		]);
 		const href = getCurrentHrefFn();
 		let org;
-		const isTabAsOrgEnabled = (
-			Array.isArray(settings) &&
-			!settings.some((setting) => setting.id === tabAsOrg && !setting.enabled)
-		);
-		const isLinkDetectionEnabled = (
-			Array.isArray(settings) &&
+		const isTabAsOrgEnabled = Array.isArray(settings) &&
+			!settings.some((setting) =>
+				setting.id === tabAsOrg && !setting.enabled
+			);
+		const isLinkDetectionEnabled = Array.isArray(settings) &&
 			!settings.some((setting) =>
 				setting.id === skipLinkDetection && setting.enabled
-			)
-		);
+			);
 		if (
 			isTabAsOrgEnabled ||
 			(
@@ -314,7 +323,9 @@ export function createFavouriteManagerModule({
 			{ label, url, org },
 			{
 				addInFront: Array.isArray(settings) &&
-					settings.some((setting) => setting.id === tabAddFront && setting.enabled),
+					settings.some((setting) =>
+						setting.id === tabAddFront && setting.enabled
+					),
 			},
 		);
 	}
@@ -400,7 +411,9 @@ export function createFavouriteManagerModule({
 	function pageActionTab(save = true) {
 		const favourite = getFavouriteImage(save ? STAR_ID : SLASHED_STAR_ID);
 		if (favourite.classList.contains(hiddenClass)) {
-			const message = save ? "error_useless_save" : "error_useless_remove";
+			const message = save
+				? "error_useless_save"
+				: "error_useless_remove";
 			showToastFn(message, toastInfo);
 		} else {
 			favourite.closest("button").click();

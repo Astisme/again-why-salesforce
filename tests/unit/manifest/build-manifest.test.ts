@@ -183,7 +183,10 @@ Deno.test("build-manifest reports invalid browser arguments even with missing ar
 			manifest,
 		});
 	} catch (error) {
-		assertStringIncludes((error as Error).message, "Unknown browser: opera");
+		assertStringIncludes(
+			(error as Error).message,
+			"Unknown browser: opera",
+		);
 	}
 
 	assertEquals(errors.length, 1);

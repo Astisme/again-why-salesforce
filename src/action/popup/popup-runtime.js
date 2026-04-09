@@ -20,7 +20,8 @@ import { getTranslations, TranslationService } from "../../core/translator.js";
 
 const HOST_PERMISSIONS_REDIRECT =
 	"action/req_permissions/req_permissions.html?whichid=hostpermissions";
-const NOT_SALESFORCE_SETUP_REDIRECT = "action/notSalesforceSetup/notSalesforceSetup.html";
+const NOT_SALESFORCE_SETUP_REDIRECT =
+	"action/notSalesforceSetup/notSalesforceSetup.html";
 
 const POPUP_BUTTON_IDS = {
 	export: "export",
@@ -173,7 +174,9 @@ export async function runPopup({
 	const isonSFsetup = await isOnSalesforceSetupFn();
 	if (isonSFsetup.ison) {
 		if (!(await areFramePatternsAllowedFn())) {
-			locationRef.href = browser.runtime.getURL(HOST_PERMISSIONS_REDIRECT);
+			locationRef.href = browser.runtime.getURL(
+				HOST_PERMISSIONS_REDIRECT,
+			);
 			return { redirected: true };
 		}
 	} else {

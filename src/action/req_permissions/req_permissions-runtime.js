@@ -73,7 +73,9 @@ export async function runReqPermissions({
 		};
 	}
 	if (whichPermissions === "download") {
-		documentRef.getElementById("host_permissions").classList.add(hiddenClass);
+		documentRef.getElementById("host_permissions").classList.add(
+			hiddenClass,
+		);
 		documentRef.getElementById("download").classList.remove(hiddenClass);
 		/**
 		 * Resets the browser action popup back to the standard popup page.

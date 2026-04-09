@@ -24,7 +24,7 @@ function loadExportModule({
 	selectedAll = false,
 	selectedTabs = [],
 }: {
-		generateError?: unknown;
+	generateError?: unknown;
 	hasExistingModal?: boolean;
 	pinned?: number;
 	selectedAll?: boolean;

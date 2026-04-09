@@ -53,14 +53,17 @@ export function buildManifestForBrowser({
 			manifest.permissions = manifest.permissions.filter((perm) =>
 				!notAllowedPermissions.has(perm)
 			);
-			manifest.optional_permissions = manifest.optional_permissions.filter((
-				optionalPermission,
-			) => !notAllowedPermissions.has(optionalPermission));
+			manifest.optional_permissions = manifest.optional_permissions
+				.filter((
+					optionalPermission,
+				) => !notAllowedPermissions.has(optionalPermission));
 			break;
 		}
 		default:
 			logger.error(
-				`Usage: ${argv[0] ?? ""} ${argv[1] ?? ""} (firefox || chrome || safari)`,
+				`Usage: ${argv[0] ?? ""} ${
+					argv[1] ?? ""
+				} (firefox || chrome || safari)`,
 			);
 			throw new Error(`Unknown browser: ${browser}`);
 	}

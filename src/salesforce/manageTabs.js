@@ -8,10 +8,9 @@ import {
 	TOAST_ERROR as _TOAST_ERROR,
 	TOAST_WARNING as _TOAST_WARNING,
 	TUTORIAL_EVENT_CLOSE_MANAGE_TABS as _TUTORIAL_EVENT_CLOSE_MANAGE_TABS,
-	TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL as
-		_TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL,
-	TUTORIAL_EVENT_REORDERED_TABS_TABLE as
-		_TUTORIAL_EVENT_REORDERED_TABS_TABLE,
+	TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL
+		as _TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL,
+	TUTORIAL_EVENT_REORDERED_TABS_TABLE as _TUTORIAL_EVENT_REORDERED_TABS_TABLE,
 } from "../core/constants.js";
 import {
 	getInnerElementFieldBySelector as _getInnerElementFieldBySelector,
@@ -56,8 +55,7 @@ let TOAST_WARNING = _TOAST_WARNING;
 let TUTORIAL_EVENT_CLOSE_MANAGE_TABS = _TUTORIAL_EVENT_CLOSE_MANAGE_TABS;
 let TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL =
 	_TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL;
-let TUTORIAL_EVENT_REORDERED_TABS_TABLE =
-	_TUTORIAL_EVENT_REORDERED_TABS_TABLE;
+let TUTORIAL_EVENT_REORDERED_TABS_TABLE = _TUTORIAL_EVENT_REORDERED_TABS_TABLE;
 let getInnerElementFieldBySelector = _getInnerElementFieldBySelector;
 let injectStyle = _injectStyle;
 let Tab = _Tab;
@@ -970,14 +968,23 @@ export async function createManageTabsModal() {
  */
 export function createManageTabsModule(overrides = {}) {
 	if (overrides.CXM_PIN_TAB != null) CXM_PIN_TAB = overrides.CXM_PIN_TAB;
-	if (overrides.CXM_REMOVE_TAB != null) CXM_REMOVE_TAB = overrides.CXM_REMOVE_TAB;
-	if (overrides.CXM_UNPIN_TAB != null) CXM_UNPIN_TAB = overrides.CXM_UNPIN_TAB;
+	if (overrides.CXM_REMOVE_TAB != null) {
+		CXM_REMOVE_TAB = overrides.CXM_REMOVE_TAB;
+	}
+	if (overrides.CXM_UNPIN_TAB != null) {
+		CXM_UNPIN_TAB = overrides.CXM_UNPIN_TAB;
+	}
 	if (overrides.HIDDEN_CLASS != null) HIDDEN_CLASS = overrides.HIDDEN_CLASS;
-	if (overrides.PIN_TAB_CLASS != null) PIN_TAB_CLASS = overrides.PIN_TAB_CLASS;
+	if (overrides.PIN_TAB_CLASS != null) {
+		PIN_TAB_CLASS = overrides.PIN_TAB_CLASS;
+	}
 	if (overrides.TOAST_ERROR != null) TOAST_ERROR = overrides.TOAST_ERROR;
-	if (overrides.TOAST_WARNING != null) TOAST_WARNING = overrides.TOAST_WARNING;
+	if (overrides.TOAST_WARNING != null) {
+		TOAST_WARNING = overrides.TOAST_WARNING;
+	}
 	if (overrides.TUTORIAL_EVENT_CLOSE_MANAGE_TABS != null) {
-		TUTORIAL_EVENT_CLOSE_MANAGE_TABS = overrides.TUTORIAL_EVENT_CLOSE_MANAGE_TABS;
+		TUTORIAL_EVENT_CLOSE_MANAGE_TABS =
+			overrides.TUTORIAL_EVENT_CLOSE_MANAGE_TABS;
 	}
 	if (overrides.TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL != null) {
 		TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL =
@@ -999,12 +1006,19 @@ export function createManageTabsModule(overrides = {}) {
 	if (overrides.generateManageTabsModal != null) {
 		generateManageTabsModal = overrides.generateManageTabsModal;
 	}
-	if (overrides.getCurrentHref != null) getCurrentHref = overrides.getCurrentHref;
-	if (overrides.getInnerElementFieldBySelector != null) {
-		getInnerElementFieldBySelector = overrides.getInnerElementFieldBySelector;
+	if (overrides.getCurrentHref != null) {
+		getCurrentHref = overrides.getCurrentHref;
 	}
-	if (overrides.getModalHanger != null) getModalHanger = overrides.getModalHanger;
-	if (overrides.getTranslations != null) getTranslations = overrides.getTranslations;
+	if (overrides.getInnerElementFieldBySelector != null) {
+		getInnerElementFieldBySelector =
+			overrides.getInnerElementFieldBySelector;
+	}
+	if (overrides.getModalHanger != null) {
+		getModalHanger = overrides.getModalHanger;
+	}
+	if (overrides.getTranslations != null) {
+		getTranslations = overrides.getTranslations;
+	}
 	if (overrides.handleLightningLinkClick != null) {
 		handleLightningLinkClick = overrides.handleLightningLinkClick;
 	}
@@ -1012,24 +1026,34 @@ export function createManageTabsModule(overrides = {}) {
 	if (overrides.makeDuplicatesBold != null) {
 		makeDuplicatesBold = overrides.makeDuplicatesBold;
 	}
-	if (overrides.reorderTabsUl != null) reorderTabsUl = overrides.reorderTabsUl;
+	if (overrides.reorderTabsUl != null) {
+		reorderTabsUl = overrides.reorderTabsUl;
+	}
 	if (overrides.setupDragForTable != null) {
 		setupDragForTable = overrides.setupDragForTable;
 	}
-	if (overrides.setupDragForUl != null) setupDragForUl = overrides.setupDragForUl;
+	if (overrides.setupDragForUl != null) {
+		setupDragForUl = overrides.setupDragForUl;
+	}
 	if (overrides.sf_afterSet != null) sf_afterSet = overrides.sf_afterSet;
 	if (overrides.showToast != null) showToast = overrides.showToast;
 	if (overrides.updateModalBodyOverflow != null) {
 		updateModalBodyOverflow = overrides.updateModalBodyOverflow;
 	}
-	if (overrides.CustomEvent != null) globalThis.CustomEvent = overrides.CustomEvent;
+	if (overrides.CustomEvent != null) {
+		globalThis.CustomEvent = overrides.CustomEvent;
+	}
 	if (overrides.confirm != null) globalThis.confirm = overrides.confirm;
 	if (overrides.document != null) globalThis.document = overrides.document;
-	if (overrides.setTimeout != null) globalThis.setTimeout = overrides.setTimeout;
+	if (overrides.setTimeout != null) {
+		globalThis.setTimeout = overrides.setTimeout;
+	}
 
 	focusedIndex = 0;
 	managedLoggers.length = 0;
-	for (const key of Object.keys(manageTabsButtons)) delete manageTabsButtons[key];
+	for (const key of Object.keys(manageTabsButtons)) {
+		delete manageTabsButtons[key];
+	}
 	deleteAllButton = null;
 	trsAndButtons.length = 0;
 	dropdownMenus.length = 0;
@@ -1050,9 +1074,15 @@ export function createManageTabsModule(overrides = {}) {
 			wasSomethingUpdated,
 		}),
 		__setState: (state = {}) => {
-			if (state.focusedIndex !== undefined) focusedIndex = state.focusedIndex;
-			if (state.deleteAllButton !== undefined) deleteAllButton = state.deleteAllButton;
-			if (state.closeButton !== undefined) closeButton = state.closeButton;
+			if (state.focusedIndex !== undefined) {
+				focusedIndex = state.focusedIndex;
+			}
+			if (state.deleteAllButton !== undefined) {
+				deleteAllButton = state.deleteAllButton;
+			}
+			if (state.closeButton !== undefined) {
+				closeButton = state.closeButton;
+			}
 			if (state.manageInvalidateSort !== undefined) {
 				manage_InvalidateSort = state.manageInvalidateSort;
 			}

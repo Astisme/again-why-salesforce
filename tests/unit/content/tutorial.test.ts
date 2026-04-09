@@ -1,4 +1,5 @@
 /// <reference lib="dom" />
+import "../../mocks.test.ts";
 import {
 	assert,
 	assertEquals,
@@ -6,15 +7,8 @@ import {
 	assertRejects,
 	assertThrows,
 } from "@std/testing/asserts";
+import { createTutorialModule } from "../../../src/salesforce/tutorial.js";
 import { installMockDom } from "../../happydom.test.ts";
-
-/**
- * Filesystem path to the tutorial module under test.
- */
-const TUTORIAL_PATH = new URL(
-	"../../../src/salesforce/tutorial.js",
-	import.meta.url,
-);
 /**
  * Baseline Salesforce Setup URL used to initialize the DOM harness.
  */
@@ -244,12 +238,12 @@ type TutorialModule = {
 };
 
 /**
- * Loads the real tutorial module after replacing its imports with injected test doubles.
+ * Builds the tutorial runtime with injected test doubles.
  *
- * @param deps Dependency bundle exposed through `globalThis`.
- * @return Loaded tutorial module plus isolated-module cleanup hooks.
+ * @param {TutorialDeps} deps Dependency bundle exposed through `globalThis`.
+ * @return {{ cleanup: () => void; module: TutorialModule; }} Runtime module and cleanup hook.
  */
-async function loadTutorialModule(deps: TutorialDeps) {
+function loadTutorialModule(deps: TutorialDeps) {
 	const flattenedDeps = {
 		...deps.constants,
 		...deps.functions,
@@ -264,53 +258,11 @@ async function loadTutorialModule(deps: TutorialDeps) {
 		ensureTranslatorAvailability: deps.ensureTranslatorAvailability,
 		getTranslations: deps.getTranslations,
 	};
-	const hadBrowser = "browser" in globalThis;
-	const originalBrowser = (globalThis as { browser?: unknown }).browser;
-	const contentLoadedKey = "hasLoadedagain-why-salesforce";
-	const hadContentLoaded = contentLoadedKey in globalThis;
-	const originalContentLoaded =
-		(globalThis as Record<string, unknown>)[contentLoadedKey];
-	(globalThis as Record<string, unknown>)[contentLoadedKey] = true;
-	Object.defineProperty(globalThis, "browser", {
-		configurable: true,
-		value: {
-			i18n: {
-				getMessage: (key: string) => key,
-			},
-			runtime: {
-				getManifest: () => ({
-					homepage_url: "https://github.com/example/repo",
-					optional_host_permissions: [],
-					version: "1.0.0",
-				}),
-				getURL: (path: string) => path,
-				sendMessage: () => undefined,
-			},
-		},
-		writable: true,
-	});
-	const module = await import(TUTORIAL_PATH.href);
-	const tutorialModule = (module.createTutorialModule as (
-		overrides?: Record<string, unknown>,
-	) => TutorialModule)(flattenedDeps);
+	const tutorialModule = createTutorialModule(
+		flattenedDeps,
+	) as unknown as TutorialModule;
 	return {
-		cleanup: () => {
-			if (hadBrowser) {
-				Object.defineProperty(globalThis, "browser", {
-					configurable: true,
-					value: originalBrowser,
-					writable: true,
-				});
-			} else {
-				delete (globalThis as { browser?: unknown }).browser;
-			}
-			if (hadContentLoaded) {
-				(globalThis as Record<string, unknown>)[contentLoadedKey] =
-					originalContentLoaded;
-			} else {
-				delete (globalThis as Record<string, unknown>)[contentLoadedKey];
-			}
-		},
+		cleanup: () => {},
 		module: tutorialModule,
 	};
 }
@@ -861,8 +813,8 @@ function createHarness(options: {
 		translator,
 		createManageTabsModal,
 		dispatchTutorialEvent,
-		async load() {
-			const loadedModule = await loadTutorialModule(deps);
+		load() {
+			const loadedModule = loadTutorialModule(deps);
 			moduleCleanup = loadedModule.cleanup;
 			return loadedModule.module;
 		},
@@ -1789,7 +1741,8 @@ Deno.test(
 				true,
 			);
 
-			const originalInitSteps = tutorialModule.Tutorial.prototype.initSteps;
+			const originalInitSteps =
+				tutorialModule.Tutorial.prototype.initSteps;
 			try {
 				tutorialModule.Tutorial.prototype.initSteps = () =>
 					Promise.resolve(false);

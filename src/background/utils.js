@@ -43,4 +43,9 @@ const {
 	fetchFn: (input) => globalThis.fetch(input),
 });
 
-export { bg_getCurrentBrowserTab, bg_notify, checkForUpdates, checkLaunchExport };
+export {
+	bg_getCurrentBrowserTab,
+	bg_notify,
+	checkForUpdates,
+	checkLaunchExport,
+};

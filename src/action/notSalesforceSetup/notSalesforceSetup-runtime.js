@@ -80,7 +80,8 @@ export async function runNotSalesforceSetup({
 				documentRef.getElementById(loginId).classList.add(hiddenClass);
 				const goSetup = documentRef.getElementById(setupId);
 				goSetup.classList.remove(hiddenClass);
-				goSetup.href = `${domain}${setupLightning}${salesforceSetupHomeMini}`;
+				goSetup.href =
+					`${domain}${setupLightning}${salesforceSetupHomeMini}`;
 				willOpenLogin = false;
 			}
 		} catch (error) {

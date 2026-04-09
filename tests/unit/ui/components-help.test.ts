@@ -43,13 +43,14 @@ Deno.test("help component syncs link attributes and accessibility text in isolat
 				getURL: (path: string) => `chrome-extension://test${path}`,
 			},
 		},
-			customElementsRef: {
-				define: (name: string, constructor: unknown) => {
-					registeredName = name;
-					registeredConstructor = constructor as HelpComponentClass;
-				},
+		customElementsRef: {
+			define: (name: string, constructor: unknown) => {
+				registeredName = name;
+				registeredConstructor = constructor as HelpComponentClass;
 			},
-			generateHelpWithPopupFn: () => ({
+		},
+		generateHelpWithPopupFn: () =>
+			({
 				anchor: new MockElement("a"),
 				linkTip: new MockElement("span"),
 				root: new MockElement("div"),
@@ -60,12 +61,12 @@ Deno.test("help component syncs link attributes and accessibility text in isolat
 			return Promise.resolve("Help");
 		},
 		hiddenClass: "hidden",
-			injectStyleFn: (id: string, options: { link: string }) => {
-				injectCalls.push({ id, link: options.link });
-				return new MockElement("link") as never;
-			},
-			HTMLElementRef: MockHelpHTMLElement as unknown as never,
-		});
+		injectStyleFn: (id: string, options: { link: string }) => {
+			injectCalls.push({ id, link: options.link });
+			return new MockElement("link") as never;
+		},
+		HTMLElementRef: MockHelpHTMLElement as unknown as never,
+	});
 
 	assertEquals(registeredName, "help-aws");
 	const HelpConstructor = registeredConstructor as

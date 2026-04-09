@@ -3019,12 +3019,18 @@ export function sldsConfirm({
 export function createGeneratorModule(overrides = {}) {
 	if (overrides.BROWSER != null) BROWSER = overrides.BROWSER;
 	if (overrides.CXM_PIN_TAB != null) CXM_PIN_TAB = overrides.CXM_PIN_TAB;
-	if (overrides.CXM_REMOVE_TAB != null) CXM_REMOVE_TAB = overrides.CXM_REMOVE_TAB;
-	if (overrides.CXM_UNPIN_TAB != null) CXM_UNPIN_TAB = overrides.CXM_UNPIN_TAB;
+	if (overrides.CXM_REMOVE_TAB != null) {
+		CXM_REMOVE_TAB = overrides.CXM_REMOVE_TAB;
+	}
+	if (overrides.CXM_UNPIN_TAB != null) {
+		CXM_UNPIN_TAB = overrides.CXM_UNPIN_TAB;
+	}
 	if (overrides.EXTENSION_GITHUB_LINK != null) {
 		EXTENSION_GITHUB_LINK = overrides.EXTENSION_GITHUB_LINK;
 	}
-	if (overrides.EXTENSION_LABEL != null) EXTENSION_LABEL = overrides.EXTENSION_LABEL;
+	if (overrides.EXTENSION_LABEL != null) {
+		EXTENSION_LABEL = overrides.EXTENSION_LABEL;
+	}
 	if (overrides.EXTENSION_NAME != null) {
 		EXTENSION_NAME = overrides.EXTENSION_NAME;
 		updateGeneratorIds();
@@ -3040,18 +3046,34 @@ export function createGeneratorModule(overrides = {}) {
 	if (overrides.LIGHTNING_FORCE_COM != null) {
 		LIGHTNING_FORCE_COM = overrides.LIGHTNING_FORCE_COM;
 	}
-	if (overrides.LINK_NEW_BROWSER != null) LINK_NEW_BROWSER = overrides.LINK_NEW_BROWSER;
+	if (overrides.LINK_NEW_BROWSER != null) {
+		LINK_NEW_BROWSER = overrides.LINK_NEW_BROWSER;
+	}
 	if (overrides.ORG_PINNED_TAB_STYLE_KEY != null) {
 		ORG_PINNED_TAB_STYLE_KEY = overrides.ORG_PINNED_TAB_STYLE_KEY;
 	}
-	if (overrides.ORG_TAB_CLASS != null) ORG_TAB_CLASS = overrides.ORG_TAB_CLASS;
-	if (overrides.ORG_TAB_STYLE_KEY != null) ORG_TAB_STYLE_KEY = overrides.ORG_TAB_STYLE_KEY;
-	if (overrides.PIN_TAB_CLASS != null) PIN_TAB_CLASS = overrides.PIN_TAB_CLASS;
-	if (overrides.SETUP_LIGHTNING != null) SETUP_LIGHTNING = overrides.SETUP_LIGHTNING;
-	if (overrides.TAB_STYLE_HOVER != null) TAB_STYLE_HOVER = overrides.TAB_STYLE_HOVER;
-	if (overrides.TAB_STYLE_TOP != null) TAB_STYLE_TOP = overrides.TAB_STYLE_TOP;
+	if (overrides.ORG_TAB_CLASS != null) {
+		ORG_TAB_CLASS = overrides.ORG_TAB_CLASS;
+	}
+	if (overrides.ORG_TAB_STYLE_KEY != null) {
+		ORG_TAB_STYLE_KEY = overrides.ORG_TAB_STYLE_KEY;
+	}
+	if (overrides.PIN_TAB_CLASS != null) {
+		PIN_TAB_CLASS = overrides.PIN_TAB_CLASS;
+	}
+	if (overrides.SETUP_LIGHTNING != null) {
+		SETUP_LIGHTNING = overrides.SETUP_LIGHTNING;
+	}
+	if (overrides.TAB_STYLE_HOVER != null) {
+		TAB_STYLE_HOVER = overrides.TAB_STYLE_HOVER;
+	}
+	if (overrides.TAB_STYLE_TOP != null) {
+		TAB_STYLE_TOP = overrides.TAB_STYLE_TOP;
+	}
 	if (overrides.TOAST_ERROR != null) TOAST_ERROR = overrides.TOAST_ERROR;
-	if (overrides.TOAST_SUCCESS != null) TOAST_SUCCESS = overrides.TOAST_SUCCESS;
+	if (overrides.TOAST_SUCCESS != null) {
+		TOAST_SUCCESS = overrides.TOAST_SUCCESS;
+	}
 	if (overrides.USE_LIGHTNING_NAVIGATION != null) {
 		USE_LIGHTNING_NAVIGATION = overrides.USE_LIGHTNING_NAVIGATION;
 	}
@@ -3060,15 +3082,23 @@ export function createGeneratorModule(overrides = {}) {
 	if (overrides.ensureAllTabsAvailability != null) {
 		ensureAllTabsAvailability = overrides.ensureAllTabsAvailability;
 	}
-	if (overrides.getTranslations != null) getTranslations = overrides.getTranslations;
+	if (overrides.getTranslations != null) {
+		getTranslations = overrides.getTranslations;
+	}
 	if (overrides.getCssRule != null) getCssRule = overrides.getCssRule;
-	if (overrides.getCssSelector != null) getCssSelector = overrides.getCssSelector;
-	if (overrides.getCurrentHref != null) getCurrentHref = overrides.getCurrentHref;
+	if (overrides.getCssSelector != null) {
+		getCssSelector = overrides.getCssSelector;
+	}
+	if (overrides.getCurrentHref != null) {
+		getCurrentHref = overrides.getCurrentHref;
+	}
 	if (overrides.getPinnedSpecificKey != null) {
 		getPinnedSpecificKey = overrides.getPinnedSpecificKey;
 	}
 	if (overrides.getSettings != null) getSettings = overrides.getSettings;
-	if (overrides.getStyleSettings != null) getStyleSettings = overrides.getStyleSettings;
+	if (overrides.getStyleSettings != null) {
+		getStyleSettings = overrides.getStyleSettings;
+	}
 	if (overrides.injectStyle != null) injectStyle = overrides.injectStyle;
 	if (overrides.performLightningRedirect != null) {
 		performLightningRedirect = overrides.performLightningRedirect;

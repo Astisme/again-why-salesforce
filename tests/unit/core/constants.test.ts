@@ -148,7 +148,10 @@ Deno.test("constants expose escaped Salesforce host patterns and reject lookalik
 	});
 	const pattern = result.salesforceLightningPattern;
 
-	assertEquals(pattern?.test("https://acme.lightning.force.com/lightning/page/home"), true);
+	assertEquals(
+		pattern?.test("https://acme.lightning.force.com/lightning/page/home"),
+		true,
+	);
 	assertEquals(
 		pattern?.test(
 			"https://acme.lightning.force.com:8443/lightning/page/home",

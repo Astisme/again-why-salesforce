@@ -635,7 +635,9 @@ export function createImportModule(overrides = {}) {
 	if (overrides.HIDDEN_CLASS != null) HIDDEN_CLASS = overrides.HIDDEN_CLASS;
 	if (overrides.MODAL_ID != null) MODAL_ID = overrides.MODAL_ID;
 	if (overrides.TOAST_ERROR != null) TOAST_ERROR = overrides.TOAST_ERROR;
-	if (overrides.TOAST_WARNING != null) TOAST_WARNING = overrides.TOAST_WARNING;
+	if (overrides.TOAST_WARNING != null) {
+		TOAST_WARNING = overrides.TOAST_WARNING;
+	}
 	if (overrides.Tab != null) Tab = overrides.Tab;
 	if (overrides.TabContainer != null) TabContainer = overrides.TabContainer;
 	if (overrides.ensureAllTabsAvailability != null) {
@@ -659,8 +661,12 @@ export function createImportModule(overrides = {}) {
 	if (overrides.generateSldsModalWithTabList != null) {
 		generateSldsModalWithTabList = overrides.generateSldsModalWithTabList;
 	}
-	if (overrides.getModalHanger != null) getModalHanger = overrides.getModalHanger;
-	if (overrides.getSetupTabUl != null) getSetupTabUl = overrides.getSetupTabUl;
+	if (overrides.getModalHanger != null) {
+		getModalHanger = overrides.getModalHanger;
+	}
+	if (overrides.getSetupTabUl != null) {
+		getSetupTabUl = overrides.getSetupTabUl;
+	}
 	if (overrides.injectStyle != null) injectStyle = overrides.injectStyle;
 	if (overrides.sf_afterSet != null) sf_afterSet = overrides.sf_afterSet;
 	if (overrides.showToast != null) showToast = overrides.showToast;

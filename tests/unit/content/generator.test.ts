@@ -1,4 +1,5 @@
 /// <reference lib="dom" />
+import "../../mocks.test.ts";
 import {
 	assert,
 	assertEquals,
@@ -7,6 +8,7 @@ import {
 	assertStringIncludes,
 	assertThrows,
 } from "@std/testing/asserts";
+import { createGeneratorModule } from "../../../src/salesforce/generator.js";
 import { installMockDom } from "../../happydom.test.ts";
 
 type StyleRule = {
@@ -421,18 +423,6 @@ type GeneratorDependencies = {
 	updateModalBodyOverflow: () => void;
 };
 
-/**
- * Lazily imports the generator module factory after global browser stubs are installed.
- *
- * @return {Promise<(overrides?: Record<string, unknown>) => GeneratorModule>} Runtime factory.
- */
-async function getCreateGeneratorModule() {
-	const module = await import("../../../src/salesforce/generator.js");
-	return module.createGeneratorModule as unknown as (
-		overrides?: GeneratorDependencies,
-	) => GeneratorModule;
-}
-
 type GeneratorFixture = {
 	cleanup: () => void;
 	handleClickCalls: Array<{ url: string }>;
@@ -455,9 +445,9 @@ type GeneratorFixture = {
  * @param {Array<{ enabled: boolean; id: string; }>} [options.settings=[]] Settings returned by getSettings.
  * @param {StyleSettings | null} [options.styleSettings=null] Style settings returned by getStyleSettings.
  * @param {Record<string, string>} [options.translations={}] Translation overrides.
- * @return {Promise<GeneratorFixture>} Loaded fixture.
+ * @return {GeneratorFixture} Loaded fixture.
  */
-async function loadGeneratorFixture({
+function loadGeneratorFixture({
 	currentHref = "https://acme.lightning.force.com/lightning/setup/Users/home",
 	settings = [],
 	styleSettings = null,
@@ -571,7 +561,6 @@ async function loadGeneratorFixture({
 		},
 		writable: true,
 	});
-	const createGeneratorModule = await getCreateGeneratorModule();
 	const module = createGeneratorModule({
 		BROWSER: {
 			runtime: {
@@ -605,7 +594,9 @@ async function loadGeneratorFixture({
 			expandURL: (url: string | null, _href: string) =>
 				url?.startsWith("http")
 					? url
-					: `https://acme.lightning.force.com/lightning/setup/${url ?? ""}`,
+					: `https://acme.lightning.force.com/lightning/setup/${
+						url ?? ""
+					}`,
 			minifyURL: (url: string | null) =>
 				(url ?? "").replace(
 					/^https:\/\/acme\.lightning\.force\.com\/lightning\/setup\//,
@@ -656,9 +647,7 @@ async function loadGeneratorFixture({
 			isGeneric = false,
 			isPinned = false,
 		}: { isGeneric?: boolean; isPinned?: boolean }) =>
-			`${isGeneric ? "generic" : "org"}-${
-				isPinned ? "pinned" : "tabs"
-			}`,
+			`${isGeneric ? "generic" : "org"}-${isPinned ? "pinned" : "tabs"}`,
 		getSettings: (_keys: string | string[]) => Promise.resolve(settings),
 		getStyleSettings: () => Promise.resolve(styleSettings),
 		injectStyle: (

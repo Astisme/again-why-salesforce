@@ -34,7 +34,8 @@ export function createDragHandlerModule({
 	 */
 	function handleDragStart(event) {
 		if (
-			event.target.draggable === "true" || event.target.dataset.draggable === "true"
+			event.target.draggable === "true" ||
+			event.target.dataset.draggable === "true"
 		) {
 			event.target.style.cursor = "grabbing";
 			dragSrcIndex = event.target.closest(closestTag).dataset.rowIndex;
@@ -79,8 +80,9 @@ export function createDragHandlerModule({
 		const dragSrcEl = container.querySelector(
 			`${closestTag}[data-row-index="${dragSrcIndex}"]`,
 		);
-		const pinnedNumber =
-			(await ensureAllTabsAvailabilityFn())[tabContainerRef.keyPinnedTabsNo];
+		const pinnedNumber = (await ensureAllTabsAvailabilityFn())[
+			tabContainerRef.keyPinnedTabsNo
+		];
 		const isMovingRight = targetIndex > dragSrcIndex;
 		if (
 			(
@@ -93,7 +95,9 @@ export function createDragHandlerModule({
 			)
 		) {
 			targetRow = container.querySelector(
-				`${closestTag}:nth-child(${pinnedNumber + Number(!isMovingRight)})`,
+				`${closestTag}:nth-child(${
+					pinnedNumber + Number(!isMovingRight)
+				})`,
 			);
 			targetIndex = Array.from(this.children).indexOf(targetRow);
 		} else {

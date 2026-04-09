@@ -32,7 +32,8 @@ function loadLightningNavigation({
 } = {}) {
 	const errors: string[] = [];
 	const opens: { target: string; url: string }[] = [];
-	const records: { eventName: string; params: Record<string, string>[] }[] = [];
+	const records: { eventName: string; params: Record<string, string>[] }[] =
+		[];
 	let listener: LightningNavigationListener | null = null;
 
 	createLightningNavigationModule({
@@ -139,7 +140,9 @@ Deno.test("lightning-navigation ignores foreign sources and reports invalid type
 });
 
 Deno.test("lightning-navigation falls back to open when the Salesforce event API throws", () => {
-	const { errors, listener, opens } = loadLightningNavigation({ throwOnGet: true });
+	const { errors, listener, opens } = loadLightningNavigation({
+		throwOnGet: true,
+	});
 	const registeredListener = listener as LightningNavigationListener | null;
 
 	assertExists(registeredListener);

@@ -45,8 +45,7 @@ function loadLogoModule() {
 }
 
 Deno.test("logo initializes theme handling and reacts only to theme messages", () => {
-	const { html, initThemeCalls, listener, responses } =
-		loadLogoModule();
+	const { html, initThemeCalls, listener, responses } = loadLogoModule();
 	const registeredListener = listener as RuntimeListener | null;
 	assertEquals(initThemeCalls, 1);
 	assertExists(registeredListener);

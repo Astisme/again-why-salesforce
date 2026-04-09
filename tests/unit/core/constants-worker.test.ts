@@ -52,7 +52,12 @@ function createBrowser(label: string, homepageUrl: string) {
 }
 
 self.onmessage = async (event: MessageEvent<WorkerRequest>) => {
-	const { userAgent, homepageUrl, browserLabel = "browser", chromeLabel = "chrome" } = event.data;
+	const {
+		userAgent,
+		homepageUrl,
+		browserLabel = "browser",
+		chromeLabel = "chrome",
+	} = event.data;
 	Object.defineProperty(globalThis, "navigator", {
 		value: { userAgent },
 		configurable: true,
@@ -72,23 +77,25 @@ self.onmessage = async (event: MessageEvent<WorkerRequest>) => {
 		const module = await import("../../../src/core/constants.js");
 		self.postMessage(
 			{
-				browserMessage: module.BROWSER.i18n.getMessage("extension_label"),
+				browserMessage: module.BROWSER.i18n.getMessage(
+					"extension_label",
+				),
 				browserName: module.BROWSER_NAME as string | undefined,
 				contextMenuPatterns: module.CONTEXT_MENU_PATTERNS as string[],
-				contextMenuPatternsRegex: module.CONTEXT_MENU_PATTERNS_REGEX as
-					string[],
+				contextMenuPatternsRegex: module
+					.CONTEXT_MENU_PATTERNS_REGEX as string[],
 				errorMessage: null,
 				extensionGithubLink: module.EXTENSION_GITHUB_LINK as string,
 				extensionLabel: module.EXTENSION_LABEL as string,
-				extensionOptionalHostPerm: module.EXTENSION_OPTIONAL_HOST_PERM as
-					string[],
+				extensionOptionalHostPerm: module
+					.EXTENSION_OPTIONAL_HOST_PERM as string[],
 				extensionVersion: module.EXTENSION_VERSION as string,
 				isChrome: module.ISCHROME as boolean,
 				isEdge: module.ISEDGE as boolean,
 				isFirefox: module.ISFIREFOX as boolean,
 				isSafari: module.ISSAFARI as boolean,
-				salesforceLightningPattern:
-					module.SALESFORCE_LIGHTNING_PATTERN as RegExp,
+				salesforceLightningPattern: module
+					.SALESFORCE_LIGHTNING_PATTERN as RegExp,
 			} satisfies WorkerResponse,
 		);
 	} catch (error) {

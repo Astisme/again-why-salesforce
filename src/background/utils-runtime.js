@@ -145,7 +145,9 @@ export function createBackgroundUtilsModule({
 	function _exportHandler(tabs) {
 		const jsonData = JSON.stringify(tabs);
 		const filename = `${extensionName}_${
-			Array.isArray(tabs) ? tabs.length : tabs[tabContainerRef.keyTabs]?.length
+			Array.isArray(tabs)
+				? tabs.length
+				: tabs[tabContainerRef.keyTabs]?.length
 		}-Tabs.json`;
 		if (isFirefox) {
 			const blob = new Blob([jsonData], { type: "application/json" });

@@ -71,7 +71,9 @@ class LayoutElement {
 }
 
 const fixture = {
-	module: createModalLayoutModule({ hiddenClass: "hidden" }) as ModalLayoutModule,
+	module: createModalLayoutModule({
+		hiddenClass: "hidden",
+	}) as ModalLayoutModule,
 };
 
 Deno.test("modal-layout validates required article parameter", () => {

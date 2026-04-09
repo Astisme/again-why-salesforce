@@ -86,7 +86,9 @@ export function createExportModule({
 		try {
 			await showExportModal();
 		} catch (error) {
-			const message = error instanceof Error ? error.message : String(error);
+			const message = error instanceof Error
+				? error.message
+				: String(error);
 			showToastFn(message, toastError);
 		}
 	}

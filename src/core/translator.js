@@ -488,9 +488,13 @@ export async function getTranslatorAttribute(attribute = null) {
  */
 export function createTranslatorModule(overrides = {}) {
 	if (overrides.BROWSER != null) BROWSER = overrides.BROWSER;
-	if (overrides.FOLLOW_SF_LANG != null) FOLLOW_SF_LANG = overrides.FOLLOW_SF_LANG;
+	if (overrides.FOLLOW_SF_LANG != null) {
+		FOLLOW_SF_LANG = overrides.FOLLOW_SF_LANG;
+	}
 	if (overrides.SETTINGS_KEY != null) SETTINGS_KEY = overrides.SETTINGS_KEY;
-	if (overrides.USER_LANGUAGE != null) USER_LANGUAGE = overrides.USER_LANGUAGE;
+	if (overrides.USER_LANGUAGE != null) {
+		USER_LANGUAGE = overrides.USER_LANGUAGE;
+	}
 	if (overrides.WHAT_GET_SETTINGS != null) {
 		WHAT_GET_SETTINGS = overrides.WHAT_GET_SETTINGS;
 	}

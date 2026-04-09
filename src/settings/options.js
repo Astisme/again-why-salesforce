@@ -1,72 +1,138 @@
 import {
-	EXTENSION_LAST_ACTIVE_DAY,
-	EXTENSION_NAME,
-	EXTENSION_USAGE_DAYS,
-	FOLLOW_SF_LANG,
-	GENERIC_PINNED_TAB_STYLE_KEY,
-	GENERIC_TAB_STYLE_KEY,
-	HIDDEN_CLASS,
-	LINK_NEW_BROWSER,
-	NO_RELEASE_NOTES,
-	NO_UPDATE_NOTIFICATION,
-	ORG_PINNED_TAB_STYLE_KEY,
-	ORG_TAB_STYLE_KEY,
-	PERSIST_SORT,
-	POPUP_LOGIN_NEW_TAB,
-	POPUP_OPEN_LOGIN,
-	POPUP_OPEN_SETUP,
-	POPUP_SETUP_NEW_TAB,
-	PREVENT_ANALYTICS,
-	PREVENT_DEFAULT_OVERRIDE,
-	SETTINGS_KEY,
-	SKIP_LINK_DETECTION,
-	SLDS_ACTIVE,
-	TAB_ADD_FRONT,
-	TAB_AS_ORG,
-	TAB_GENERIC_STYLE,
-	TAB_ON_LEFT,
-	TAB_ORG_STYLE,
-	TAB_STYLE_BACKGROUND,
-	TAB_STYLE_BOLD,
-	TAB_STYLE_BORDER,
-	TAB_STYLE_COLOR,
-	TAB_STYLE_HOVER,
-	TAB_STYLE_ITALIC,
-	TAB_STYLE_SHADOW,
-	TAB_STYLE_TOP,
-	TAB_STYLE_UNDERLINE,
-	USE_LIGHTNING_NAVIGATION,
-	USER_LANGUAGE,
-	WHAT_SET,
+	EXTENSION_LAST_ACTIVE_DAY as _EXTENSION_LAST_ACTIVE_DAY,
+	EXTENSION_NAME as _EXTENSION_NAME,
+	EXTENSION_USAGE_DAYS as _EXTENSION_USAGE_DAYS,
+	FOLLOW_SF_LANG as _FOLLOW_SF_LANG,
+	GENERIC_PINNED_TAB_STYLE_KEY as _GENERIC_PINNED_TAB_STYLE_KEY,
+	GENERIC_TAB_STYLE_KEY as _GENERIC_TAB_STYLE_KEY,
+	HIDDEN_CLASS as _HIDDEN_CLASS,
+	LINK_NEW_BROWSER as _LINK_NEW_BROWSER,
+	NO_RELEASE_NOTES as _NO_RELEASE_NOTES,
+	NO_UPDATE_NOTIFICATION as _NO_UPDATE_NOTIFICATION,
+	ORG_PINNED_TAB_STYLE_KEY as _ORG_PINNED_TAB_STYLE_KEY,
+	ORG_TAB_STYLE_KEY as _ORG_TAB_STYLE_KEY,
+	PERSIST_SORT as _PERSIST_SORT,
+	POPUP_LOGIN_NEW_TAB as _POPUP_LOGIN_NEW_TAB,
+	POPUP_OPEN_LOGIN as _POPUP_OPEN_LOGIN,
+	POPUP_OPEN_SETUP as _POPUP_OPEN_SETUP,
+	POPUP_SETUP_NEW_TAB as _POPUP_SETUP_NEW_TAB,
+	PREVENT_ANALYTICS as _PREVENT_ANALYTICS,
+	PREVENT_DEFAULT_OVERRIDE as _PREVENT_DEFAULT_OVERRIDE,
+	SETTINGS_KEY as _SETTINGS_KEY,
+	SKIP_LINK_DETECTION as _SKIP_LINK_DETECTION,
+	SLDS_ACTIVE as _SLDS_ACTIVE,
+	TAB_ADD_FRONT as _TAB_ADD_FRONT,
+	TAB_AS_ORG as _TAB_AS_ORG,
+	TAB_GENERIC_STYLE as _TAB_GENERIC_STYLE,
+	TAB_ON_LEFT as _TAB_ON_LEFT,
+	TAB_ORG_STYLE as _TAB_ORG_STYLE,
+	TAB_STYLE_BACKGROUND as _TAB_STYLE_BACKGROUND,
+	TAB_STYLE_BOLD as _TAB_STYLE_BOLD,
+	TAB_STYLE_BORDER as _TAB_STYLE_BORDER,
+	TAB_STYLE_COLOR as _TAB_STYLE_COLOR,
+	TAB_STYLE_HOVER as _TAB_STYLE_HOVER,
+	TAB_STYLE_ITALIC as _TAB_STYLE_ITALIC,
+	TAB_STYLE_SHADOW as _TAB_STYLE_SHADOW,
+	TAB_STYLE_TOP as _TAB_STYLE_TOP,
+	TAB_STYLE_UNDERLINE as _TAB_STYLE_UNDERLINE,
+	USE_LIGHTNING_NAVIGATION as _USE_LIGHTNING_NAVIGATION,
+	USER_LANGUAGE as _USER_LANGUAGE,
+	WHAT_SET as _WHAT_SET,
 } from "../core/constants.js";
 import {
-	areFramePatternsAllowed,
-	getCssRule,
-	getCssSelector,
-	getPinnedSpecificKey,
-	getSettings,
-	getStyleSettings,
-	injectStyle,
-	isExportAllowed,
-	isGenericKey,
-	isPinnedKey,
-	isStyleKey,
-	requestCookiesPermission,
-	requestExportPermission,
-	requestFramePatternsPermission,
-	sendExtensionMessage,
+	areFramePatternsAllowed as _areFramePatternsAllowed,
+	getCssRule as _getCssRule,
+	getCssSelector as _getCssSelector,
+	getPinnedSpecificKey as _getPinnedSpecificKey,
+	getSettings as _getSettings,
+	getStyleSettings as _getStyleSettings,
+	injectStyle as _injectStyle,
+	isExportAllowed as _isExportAllowed,
+	isGenericKey as _isGenericKey,
+	isPinnedKey as _isPinnedKey,
+	isStyleKey as _isStyleKey,
+	requestCookiesPermission as _requestCookiesPermission,
+	requestExportPermission as _requestExportPermission,
+	requestFramePatternsPermission as _requestFramePatternsPermission,
+	sendExtensionMessage as _sendExtensionMessage,
 } from "../core/functions.js";
 import {
-	ensureTranslatorAvailability,
-	getTranslations,
+	ensureTranslatorAvailability as _ensureTranslatorAvailability,
+	getTranslations as _getTranslations,
 } from "../core/translator.js";
-import "../components/theme-selector/theme-selector.js";
 
-// no need to await as we do not need to call the translator
-// we only need it to translate the text on the screen and it may take the time it needs to do so
-ensureTranslatorAvailability();
+let EXTENSION_LAST_ACTIVE_DAY = _EXTENSION_LAST_ACTIVE_DAY;
+let EXTENSION_NAME = _EXTENSION_NAME;
+let EXTENSION_USAGE_DAYS = _EXTENSION_USAGE_DAYS;
+let FOLLOW_SF_LANG = _FOLLOW_SF_LANG;
+let GENERIC_PINNED_TAB_STYLE_KEY = _GENERIC_PINNED_TAB_STYLE_KEY;
+let GENERIC_TAB_STYLE_KEY = _GENERIC_TAB_STYLE_KEY;
+let HIDDEN_CLASS = _HIDDEN_CLASS;
+let LINK_NEW_BROWSER = _LINK_NEW_BROWSER;
+let NO_RELEASE_NOTES = _NO_RELEASE_NOTES;
+let NO_UPDATE_NOTIFICATION = _NO_UPDATE_NOTIFICATION;
+let ORG_PINNED_TAB_STYLE_KEY = _ORG_PINNED_TAB_STYLE_KEY;
+let ORG_TAB_STYLE_KEY = _ORG_TAB_STYLE_KEY;
+let PERSIST_SORT = _PERSIST_SORT;
+let POPUP_LOGIN_NEW_TAB = _POPUP_LOGIN_NEW_TAB;
+let POPUP_OPEN_LOGIN = _POPUP_OPEN_LOGIN;
+let POPUP_OPEN_SETUP = _POPUP_OPEN_SETUP;
+let POPUP_SETUP_NEW_TAB = _POPUP_SETUP_NEW_TAB;
+let PREVENT_ANALYTICS = _PREVENT_ANALYTICS;
+let PREVENT_DEFAULT_OVERRIDE = _PREVENT_DEFAULT_OVERRIDE;
+let SETTINGS_KEY = _SETTINGS_KEY;
+let SKIP_LINK_DETECTION = _SKIP_LINK_DETECTION;
+let SLDS_ACTIVE = _SLDS_ACTIVE;
+let TAB_ADD_FRONT = _TAB_ADD_FRONT;
+let TAB_AS_ORG = _TAB_AS_ORG;
+let TAB_GENERIC_STYLE = _TAB_GENERIC_STYLE;
+let TAB_ON_LEFT = _TAB_ON_LEFT;
+let TAB_ORG_STYLE = _TAB_ORG_STYLE;
+let TAB_STYLE_BACKGROUND = _TAB_STYLE_BACKGROUND;
+let TAB_STYLE_BOLD = _TAB_STYLE_BOLD;
+let TAB_STYLE_BORDER = _TAB_STYLE_BORDER;
+let TAB_STYLE_COLOR = _TAB_STYLE_COLOR;
+let TAB_STYLE_HOVER = _TAB_STYLE_HOVER;
+let TAB_STYLE_ITALIC = _TAB_STYLE_ITALIC;
+let TAB_STYLE_SHADOW = _TAB_STYLE_SHADOW;
+let TAB_STYLE_TOP = _TAB_STYLE_TOP;
+let TAB_STYLE_UNDERLINE = _TAB_STYLE_UNDERLINE;
+let USE_LIGHTNING_NAVIGATION = _USE_LIGHTNING_NAVIGATION;
+let USER_LANGUAGE = _USER_LANGUAGE;
+let WHAT_SET = _WHAT_SET;
+
+let areFramePatternsAllowed = _areFramePatternsAllowed;
+let getCssRule = _getCssRule;
+let getCssSelector = _getCssSelector;
+let getPinnedSpecificKey = _getPinnedSpecificKey;
+let getSettings = _getSettings;
+let getStyleSettings = _getStyleSettings;
+let injectStyle = _injectStyle;
+let isExportAllowed = _isExportAllowed;
+let isGenericKey = _isGenericKey;
+let isPinnedKey = _isPinnedKey;
+let isStyleKey = _isStyleKey;
+let requestCookiesPermission = _requestCookiesPermission;
+let requestExportPermission = _requestExportPermission;
+let requestFramePatternsPermission = _requestFramePatternsPermission;
+let sendExtensionMessage = _sendExtensionMessage;
+let ensureTranslatorAvailability = _ensureTranslatorAvailability;
+let getTranslations = _getTranslations;
+
+/**
+ * Loads and registers the theme selector component unless tests ask to skip it.
+ *
+ * @return {Promise<void>}
+ */
+async function ensureThemeSelectorAvailability() {
+	if (globalThis.__AWSF_SKIP_THEME_SELECTOR_IMPORT__ === true) {
+		return;
+	}
+	await import("../components/theme-selector/theme-selector.js");
+}
+
 const invisible = "invisible";
-const html = document.documentElement;
+let html = document.documentElement;
 const themeTransitionClass = "theme-transitioning";
 const themeTransitionDuration = 500;
 let themeTransitionTimeout = null;
@@ -82,10 +148,7 @@ function startThemeTransition() {
 	}, themeTransitionDuration);
 }
 
-document.querySelector("theme-selector-aws").addEventListener(
-	"before-theme-toggle",
-	startThemeTransition,
-);
+let themeSelectorElement = document.querySelector("theme-selector-aws");
 
 /**
  * Creates the object used to update the settings
@@ -132,13 +195,13 @@ function saveCheckboxOptions(e, ...dependentCheckboxElements) {
 	sendExtensionMessage(set_msg);
 }
 
-const allowExport = document.getElementById("allow-export");
-const allowDomains = document.getElementById("allow-domains");
+let allowExport = document.getElementById("allow-export");
+let allowDomains = document.getElementById("allow-domains");
 
 /**
  * Contains all checkbox elements used for settings, separated by their Id.
  */
-const allCheckboxes = {
+let allCheckboxes = {
 	[LINK_NEW_BROWSER]: document.getElementById(LINK_NEW_BROWSER),
 	[SKIP_LINK_DETECTION]: document.getElementById(SKIP_LINK_DETECTION),
 	[USE_LIGHTNING_NAVIGATION]: document.getElementById(
@@ -156,11 +219,11 @@ const allCheckboxes = {
 	[PREVENT_ANALYTICS]: document.getElementById(PREVENT_ANALYTICS),
 };
 
-const user_language_select = document.getElementById(USER_LANGUAGE);
+let user_language_select = document.getElementById(USER_LANGUAGE);
 
-const keep_sorted_el = document.getElementById("keep_sorted");
-const sortContainer = document.getElementById("sort-wrapper");
-const picked_sort = {
+let keep_sorted_el = document.getElementById("keep_sorted");
+let sortContainer = document.getElementById("sort-wrapper");
+let picked_sort = {
 	select: document.getElementById("picked-sort"),
 	direction: document.getElementById(
 		"picked-sort-direction",
@@ -690,12 +753,20 @@ function createStyleConfigurations() {
  * Each style type maps to element references, style IDs, and decoration containers
  * organized by active/inactive state and generic/org variants.
  */
-const {
+let styleConfigurations;
+let genericTabConf;
+let orgTabConf;
+let allGenericInputs;
+let allOrgInputs;
+let allGenericDecorations;
+let allOrgDecorations;
+
+({
 	configs: styleConfigurations,
 	generic: genericTabConf,
 	org: orgTabConf,
-} = createStyleConfigurations();
-const allGenericInputs = {
+} = createStyleConfigurations());
+allGenericInputs = {
 	unpinned: {
 		active: genericTabConf.unpinned.active.inputs,
 		inactive: genericTabConf.unpinned.inactive.inputs,
@@ -705,7 +776,7 @@ const allGenericInputs = {
 		inactive: genericTabConf.pinned.inactive.inputs,
 	},
 };
-const allOrgInputs = {
+allOrgInputs = {
 	unpinned: {
 		active: orgTabConf.unpinned.active.inputs,
 		inactive: orgTabConf.unpinned.inactive.inputs,
@@ -715,7 +786,7 @@ const allOrgInputs = {
 		inactive: orgTabConf.pinned.inactive.inputs,
 	},
 };
-const allGenericDecorations = {
+allGenericDecorations = {
 	unpinned: {
 		active: genericTabConf.unpinned.active.decorations,
 		inactive: genericTabConf.unpinned.inactive.decorations,
@@ -725,7 +796,7 @@ const allGenericDecorations = {
 		inactive: genericTabConf.pinned.inactive.decorations,
 	},
 };
-const allOrgDecorations = {
+allOrgDecorations = {
 	unpinned: {
 		active: orgTabConf.unpinned.active.decorations,
 		inactive: orgTabConf.unpinned.inactive.decorations,
@@ -990,13 +1061,18 @@ function savePickedSort(enabled = null, direction = null) {
 	}));
 }
 
-keep_sorted_el.addEventListener("click", (e) => {
+/**
+ * Toggles sort controls visibility when the keep-sorted checkbox changes.
+ *
+ * @param {Event} e Change/click event from the keep-sorted checkbox.
+ */
+function handleKeepSortedClick(e) {
 	if (e.currentTarget.checked) {
 		sortContainer.classList.remove(invisible);
 	} else {
 		sortContainer.classList.add(invisible);
 	}
-});
+}
 
 /**
  * Toggles the visibility of the given toast for a small amount of time
@@ -1007,8 +1083,8 @@ function showThenHideToast(toast) {
 	setTimeout(() => toast.classList.add(invisible), 2500);
 }
 
-const successToast = document.getElementById("toast-display-success");
-const errorToast = document.getElementById("toast-display-error");
+let successToast = document.getElementById("toast-display-success");
+let errorToast = document.getElementById("toast-display-error");
 /**
  * Shows the given message in a success / error toast.
  * @param {string} message - the message to be translated to be shown to the user
@@ -1468,11 +1544,11 @@ function getContainers(name = null) {
 	};
 }
 
-const settings_settings = getContainers("general");
-const settings_generic = getContainers(TAB_GENERIC_STYLE);
-const settings_org = getContainers(TAB_ORG_STYLE);
-const settings_pinnedGeneric = getContainers(`pinned_${TAB_GENERIC_STYLE}`);
-const settings_pinnedOrg = getContainers(`pinned_${TAB_ORG_STYLE}`);
+let settings_settings = getContainers("general");
+let settings_generic = getContainers(TAB_GENERIC_STYLE);
+let settings_org = getContainers(TAB_ORG_STYLE);
+let settings_pinnedGeneric = getContainers(`pinned_${TAB_GENERIC_STYLE}`);
+let settings_pinnedOrg = getContainers(`pinned_${TAB_ORG_STYLE}`);
 
 /**
  * Toggles the active class on a list item containing the target element
@@ -1482,7 +1558,7 @@ function toggleActivePreview(event) {
 	event.target.closest("li").classList.toggle(SLDS_ACTIVE);
 }
 
-const allPreviews = [
+let allPreviews = [
 	settings_generic.preview,
 	settings_org.preview,
 	settings_pinnedGeneric.preview,
@@ -1492,14 +1568,14 @@ for (const prev of allPreviews) {
 	prev.addEventListener("click", toggleActivePreview);
 }
 
-const allHeaders = [
+let allHeaders = [
 	settings_settings.header,
 	settings_generic.header,
 	settings_org.header,
 	settings_pinnedGeneric.header,
 	settings_pinnedOrg.header,
 ];
-const allContainers = [
+let allContainers = [
 	settings_settings.container,
 	settings_generic.container,
 	settings_org.container,
@@ -1524,42 +1600,412 @@ function showRelevantSettings_HideOthers(settings_object) {
 	activePreview = settings_object.preview;
 }
 
-settings_settings.header.addEventListener("click", () => {
-	restoreGeneralSettings();
-	showRelevantSettings_HideOthers(settings_settings);
-});
+let saveToast = document.getElementById("save-confirm");
 
-settings_generic.header.addEventListener("click", () => {
-	restoreTabSettings(GENERIC_TAB_STYLE_KEY);
-	showRelevantSettings_HideOthers(settings_generic);
-});
+/**
+ * Binds options-page listeners that are independent from restoreTabSettings calls.
+ */
+function bindOptionPageListeners() {
+	themeSelectorElement?.addEventListener(
+		"before-theme-toggle",
+		startThemeTransition,
+	);
+	keep_sorted_el?.addEventListener("click", handleKeepSortedClick);
+	for (const prev of allPreviews) {
+		prev?.addEventListener("click", toggleActivePreview);
+	}
+	settings_settings.header?.addEventListener("click", () => {
+		restoreGeneralSettings();
+		showRelevantSettings_HideOthers(settings_settings);
+	});
+	settings_generic.header?.addEventListener("click", () => {
+		restoreTabSettings(GENERIC_TAB_STYLE_KEY);
+		showRelevantSettings_HideOthers(settings_generic);
+	});
+	settings_org.header?.addEventListener("click", () => {
+		restoreTabSettings(ORG_TAB_STYLE_KEY);
+		showRelevantSettings_HideOthers(settings_org);
+	});
+	settings_pinnedGeneric.header?.addEventListener("click", () => {
+		restoreTabSettings(GENERIC_TAB_STYLE_KEY, { isPinned: true });
+		showRelevantSettings_HideOthers(settings_pinnedGeneric);
+	});
+	settings_pinnedOrg.header?.addEventListener("click", () => {
+		restoreTabSettings(ORG_TAB_STYLE_KEY, { isPinned: true });
+		showRelevantSettings_HideOthers(settings_pinnedOrg);
+	});
+	document.querySelector("#save-container > button")?.addEventListener(
+		"click",
+		() => {
+			savePickedSort(
+				keep_sorted_el.checked && picked_sort.select.value,
+				picked_sort.direction.value,
+			);
+			showThenHideToast(saveToast);
+		},
+	);
+}
 
-settings_org.header.addEventListener("click", () => {
-	restoreTabSettings(ORG_TAB_STYLE_KEY);
-	showRelevantSettings_HideOthers(settings_org);
-});
+/**
+ * Recomputes DOM references and style configuration structures.
+ */
+function resetOptionsReferences() {
+	html = document.documentElement;
+	themeSelectorElement = document.querySelector("theme-selector-aws");
+	allowExport = document.getElementById("allow-export");
+	allowDomains = document.getElementById("allow-domains");
+	allCheckboxes = {
+		[LINK_NEW_BROWSER]: document.getElementById(LINK_NEW_BROWSER),
+		[SKIP_LINK_DETECTION]: document.getElementById(SKIP_LINK_DETECTION),
+		[USE_LIGHTNING_NAVIGATION]: document.getElementById(
+			USE_LIGHTNING_NAVIGATION,
+		),
+		[POPUP_OPEN_LOGIN]: document.getElementById(POPUP_OPEN_LOGIN),
+		[POPUP_OPEN_SETUP]: document.getElementById(POPUP_OPEN_SETUP),
+		[POPUP_LOGIN_NEW_TAB]: document.getElementById(POPUP_LOGIN_NEW_TAB),
+		[POPUP_SETUP_NEW_TAB]: document.getElementById(POPUP_SETUP_NEW_TAB),
+		[TAB_ON_LEFT]: document.getElementById(TAB_ON_LEFT),
+		[TAB_ADD_FRONT]: document.getElementById(TAB_ADD_FRONT),
+		[TAB_AS_ORG]: document.getElementById(TAB_AS_ORG),
+		[NO_RELEASE_NOTES]: document.getElementById(NO_RELEASE_NOTES),
+		[NO_UPDATE_NOTIFICATION]: document.getElementById(
+			NO_UPDATE_NOTIFICATION,
+		),
+		[PREVENT_ANALYTICS]: document.getElementById(PREVENT_ANALYTICS),
+	};
+	user_language_select = document.getElementById(USER_LANGUAGE);
+	keep_sorted_el = document.getElementById("keep_sorted");
+	sortContainer = document.getElementById("sort-wrapper");
+	picked_sort = {
+		select: document.getElementById("picked-sort"),
+		direction: document.getElementById("picked-sort-direction"),
+	};
+	({
+		configs: styleConfigurations,
+		generic: genericTabConf,
+		org: orgTabConf,
+	} = createStyleConfigurations());
+	allGenericInputs = {
+		unpinned: {
+			active: genericTabConf.unpinned.active.inputs,
+			inactive: genericTabConf.unpinned.inactive.inputs,
+		},
+		pinned: {
+			active: genericTabConf.pinned.active.inputs,
+			inactive: genericTabConf.pinned.inactive.inputs,
+		},
+	};
+	allOrgInputs = {
+		unpinned: {
+			active: orgTabConf.unpinned.active.inputs,
+			inactive: orgTabConf.unpinned.inactive.inputs,
+		},
+		pinned: {
+			active: orgTabConf.pinned.active.inputs,
+			inactive: orgTabConf.pinned.inactive.inputs,
+		},
+	};
+	allGenericDecorations = {
+		unpinned: {
+			active: genericTabConf.unpinned.active.decorations,
+			inactive: genericTabConf.unpinned.inactive.decorations,
+		},
+		pinned: {
+			active: genericTabConf.pinned.active.decorations,
+			inactive: genericTabConf.pinned.inactive.decorations,
+		},
+	};
+	allOrgDecorations = {
+		unpinned: {
+			active: orgTabConf.unpinned.active.decorations,
+			inactive: orgTabConf.unpinned.inactive.decorations,
+		},
+		pinned: {
+			active: orgTabConf.pinned.active.decorations,
+			inactive: orgTabConf.pinned.inactive.decorations,
+		},
+	};
+	successToast = document.getElementById("toast-display-success");
+	errorToast = document.getElementById("toast-display-error");
+	settings_settings = getContainers("general");
+	settings_generic = getContainers(TAB_GENERIC_STYLE);
+	settings_org = getContainers(TAB_ORG_STYLE);
+	settings_pinnedGeneric = getContainers(`pinned_${TAB_GENERIC_STYLE}`);
+	settings_pinnedOrg = getContainers(`pinned_${TAB_ORG_STYLE}`);
+	allPreviews = [
+		settings_generic.preview,
+		settings_org.preview,
+		settings_pinnedGeneric.preview,
+		settings_pinnedOrg.preview,
+	];
+	allHeaders = [
+		settings_settings.header,
+		settings_generic.header,
+		settings_org.header,
+		settings_pinnedGeneric.header,
+		settings_pinnedOrg.header,
+	];
+	allContainers = [
+		settings_settings.container,
+		settings_generic.container,
+		settings_org.container,
+		settings_pinnedGeneric.container,
+		settings_pinnedOrg.container,
+	];
+	saveToast = document.getElementById("save-confirm");
+}
 
-settings_pinnedGeneric.header.addEventListener("click", () => {
-	restoreTabSettings(GENERIC_TAB_STYLE_KEY, { isPinned: true });
-	showRelevantSettings_HideOthers(settings_pinnedGeneric);
-});
+/**
+ * Applies dependency and global overrides for tests.
+ *
+ * @param {Object} [overrides={}] Override object passed by tests.
+ */
+function applyOptionsOverrides(overrides = {}) {
+	const constants = overrides.constants ?? {};
+	const functions = overrides.functions ?? {};
+	const globals = overrides.globals ?? {};
+	if (globals.document != null) globalThis.document = globals.document;
+	if (globals.clearTimeout != null) {
+		globalThis.clearTimeout = globals.clearTimeout;
+	}
+	if (globals.setTimeout != null) globalThis.setTimeout = globals.setTimeout;
+	if (globals.console != null) globalThis.console = globals.console;
 
-settings_pinnedOrg.header.addEventListener("click", () => {
-	restoreTabSettings(ORG_TAB_STYLE_KEY, { isPinned: true });
-	showRelevantSettings_HideOthers(settings_pinnedOrg);
-});
+	if (constants.EXTENSION_LAST_ACTIVE_DAY != null) {
+		EXTENSION_LAST_ACTIVE_DAY = constants.EXTENSION_LAST_ACTIVE_DAY;
+	}
+	if (constants.EXTENSION_NAME != null) {
+		EXTENSION_NAME = constants.EXTENSION_NAME;
+	}
+	if (constants.EXTENSION_USAGE_DAYS != null) {
+		EXTENSION_USAGE_DAYS = constants.EXTENSION_USAGE_DAYS;
+	}
+	if (constants.FOLLOW_SF_LANG != null) {
+		FOLLOW_SF_LANG = constants.FOLLOW_SF_LANG;
+	}
+	if (constants.GENERIC_PINNED_TAB_STYLE_KEY != null) {
+		GENERIC_PINNED_TAB_STYLE_KEY = constants.GENERIC_PINNED_TAB_STYLE_KEY;
+	}
+	if (constants.GENERIC_TAB_STYLE_KEY != null) {
+		GENERIC_TAB_STYLE_KEY = constants.GENERIC_TAB_STYLE_KEY;
+	}
+	if (constants.HIDDEN_CLASS != null) HIDDEN_CLASS = constants.HIDDEN_CLASS;
+	if (constants.LINK_NEW_BROWSER != null) {
+		LINK_NEW_BROWSER = constants.LINK_NEW_BROWSER;
+	}
+	if (constants.NO_RELEASE_NOTES != null) {
+		NO_RELEASE_NOTES = constants.NO_RELEASE_NOTES;
+	}
+	if (constants.NO_UPDATE_NOTIFICATION != null) {
+		NO_UPDATE_NOTIFICATION = constants.NO_UPDATE_NOTIFICATION;
+	}
+	if (constants.ORG_PINNED_TAB_STYLE_KEY != null) {
+		ORG_PINNED_TAB_STYLE_KEY = constants.ORG_PINNED_TAB_STYLE_KEY;
+	}
+	if (constants.ORG_TAB_STYLE_KEY != null) {
+		ORG_TAB_STYLE_KEY = constants.ORG_TAB_STYLE_KEY;
+	}
+	if (constants.PERSIST_SORT != null) PERSIST_SORT = constants.PERSIST_SORT;
+	if (constants.POPUP_LOGIN_NEW_TAB != null) {
+		POPUP_LOGIN_NEW_TAB = constants.POPUP_LOGIN_NEW_TAB;
+	}
+	if (constants.POPUP_OPEN_LOGIN != null) {
+		POPUP_OPEN_LOGIN = constants.POPUP_OPEN_LOGIN;
+	}
+	if (constants.POPUP_OPEN_SETUP != null) {
+		POPUP_OPEN_SETUP = constants.POPUP_OPEN_SETUP;
+	}
+	if (constants.POPUP_SETUP_NEW_TAB != null) {
+		POPUP_SETUP_NEW_TAB = constants.POPUP_SETUP_NEW_TAB;
+	}
+	if (constants.PREVENT_ANALYTICS != null) {
+		PREVENT_ANALYTICS = constants.PREVENT_ANALYTICS;
+	}
+	if (constants.PREVENT_DEFAULT_OVERRIDE != null) {
+		PREVENT_DEFAULT_OVERRIDE = constants.PREVENT_DEFAULT_OVERRIDE;
+	}
+	if (constants.SETTINGS_KEY != null) SETTINGS_KEY = constants.SETTINGS_KEY;
+	if (constants.SKIP_LINK_DETECTION != null) {
+		SKIP_LINK_DETECTION = constants.SKIP_LINK_DETECTION;
+	}
+	if (constants.SLDS_ACTIVE != null) SLDS_ACTIVE = constants.SLDS_ACTIVE;
+	if (constants.TAB_ADD_FRONT != null) {
+		TAB_ADD_FRONT = constants.TAB_ADD_FRONT;
+	}
+	if (constants.TAB_AS_ORG != null) TAB_AS_ORG = constants.TAB_AS_ORG;
+	if (constants.TAB_GENERIC_STYLE != null) {
+		TAB_GENERIC_STYLE = constants.TAB_GENERIC_STYLE;
+	}
+	if (constants.TAB_ON_LEFT != null) TAB_ON_LEFT = constants.TAB_ON_LEFT;
+	if (constants.TAB_ORG_STYLE != null) {
+		TAB_ORG_STYLE = constants.TAB_ORG_STYLE;
+	}
+	if (constants.TAB_STYLE_BACKGROUND != null) {
+		TAB_STYLE_BACKGROUND = constants.TAB_STYLE_BACKGROUND;
+	}
+	if (constants.TAB_STYLE_BOLD != null) {
+		TAB_STYLE_BOLD = constants.TAB_STYLE_BOLD;
+	}
+	if (constants.TAB_STYLE_BORDER != null) {
+		TAB_STYLE_BORDER = constants.TAB_STYLE_BORDER;
+	}
+	if (constants.TAB_STYLE_COLOR != null) {
+		TAB_STYLE_COLOR = constants.TAB_STYLE_COLOR;
+	}
+	if (constants.TAB_STYLE_HOVER != null) {
+		TAB_STYLE_HOVER = constants.TAB_STYLE_HOVER;
+	}
+	if (constants.TAB_STYLE_ITALIC != null) {
+		TAB_STYLE_ITALIC = constants.TAB_STYLE_ITALIC;
+	}
+	if (constants.TAB_STYLE_SHADOW != null) {
+		TAB_STYLE_SHADOW = constants.TAB_STYLE_SHADOW;
+	}
+	if (constants.TAB_STYLE_TOP != null) {
+		TAB_STYLE_TOP = constants.TAB_STYLE_TOP;
+	}
+	if (constants.TAB_STYLE_UNDERLINE != null) {
+		TAB_STYLE_UNDERLINE = constants.TAB_STYLE_UNDERLINE;
+	}
+	if (constants.USE_LIGHTNING_NAVIGATION != null) {
+		USE_LIGHTNING_NAVIGATION = constants.USE_LIGHTNING_NAVIGATION;
+	}
+	if (constants.USER_LANGUAGE != null) {
+		USER_LANGUAGE = constants.USER_LANGUAGE;
+	}
+	if (constants.WHAT_SET != null) WHAT_SET = constants.WHAT_SET;
 
-const saveToast = document.getElementById("save-confirm");
+	if (functions.areFramePatternsAllowed != null) {
+		areFramePatternsAllowed = functions.areFramePatternsAllowed;
+	}
+	if (functions.getCssRule != null) getCssRule = functions.getCssRule;
+	if (functions.getCssSelector != null) {
+		getCssSelector = functions.getCssSelector;
+	}
+	if (functions.getPinnedSpecificKey != null) {
+		getPinnedSpecificKey = functions.getPinnedSpecificKey;
+	}
+	if (functions.getSettings != null) getSettings = functions.getSettings;
+	if (functions.getStyleSettings != null) {
+		getStyleSettings = functions.getStyleSettings;
+	}
+	if (functions.injectStyle != null) injectStyle = functions.injectStyle;
+	if (functions.isExportAllowed != null) {
+		isExportAllowed = functions.isExportAllowed;
+	}
+	if (functions.isGenericKey != null) isGenericKey = functions.isGenericKey;
+	if (functions.isPinnedKey != null) isPinnedKey = functions.isPinnedKey;
+	if (functions.isStyleKey != null) isStyleKey = functions.isStyleKey;
+	if (functions.requestCookiesPermission != null) {
+		requestCookiesPermission = functions.requestCookiesPermission;
+	}
+	if (functions.requestExportPermission != null) {
+		requestExportPermission = functions.requestExportPermission;
+	}
+	if (functions.requestFramePatternsPermission != null) {
+		requestFramePatternsPermission =
+			functions.requestFramePatternsPermission;
+	}
+	if (functions.sendExtensionMessage != null) {
+		sendExtensionMessage = functions.sendExtensionMessage;
+	}
 
-document.querySelector("#save-container > button").addEventListener(
-	"click",
-	() => {
-		savePickedSort(
-			keep_sorted_el.checked && picked_sort.select.value,
-			picked_sort.direction.value,
-		);
-		showThenHideToast(saveToast);
-	},
-);
+	if (overrides.ensureTranslatorAvailability != null) {
+		ensureTranslatorAvailability = overrides.ensureTranslatorAvailability;
+	}
+	if (overrides.getTranslations != null) {
+		getTranslations = overrides.getTranslations;
+	}
+}
 
-await restoreGeneralSettings();
+/**
+ * Test helper to mutate local module state.
+ *
+ * @param {Object} [state={}] state patch.
+ */
+function __setState(state = {}) {
+	if (state.activePreview !== undefined) activePreview = state.activePreview;
+	if (state.listenersSet !== undefined) {
+		for (const key of Object.keys(listenersSet)) delete listenersSet[key];
+		Object.assign(listenersSet, state.listenersSet);
+	}
+}
+
+/**
+ * Test helper to inspect local module state.
+ *
+ * @return {{ activePreview: HTMLElement | null; listenersSet: Record<string, boolean> }}
+ */
+function __getState() {
+	return { activePreview, listenersSet };
+}
+
+/**
+ * Creates the options module API and optionally restores settings immediately.
+ *
+ * @param {Object} [overrides={}] Dependency overrides used by tests.
+ * @param {Object} [options={}] Runtime options.
+ * @param {boolean} [options.runRestoreOnLoad=true] Whether to call restoreGeneralSettings immediately.
+ * @return {Record<string, unknown>} options module API.
+ */
+export function createOptionsModule(
+	overrides = {},
+	{ runRestoreOnLoad = true } = {},
+) {
+	applyOptionsOverrides(overrides);
+	ensureTranslatorAvailability();
+	void ensureThemeSelectorAvailability();
+	for (const key of Object.keys(listenersSet)) delete listenersSet[key];
+	activePreview = null;
+	themeTransitionTimeout = null;
+	resetOptionsReferences();
+	bindOptionPageListeners();
+	const restoreOnLoadPromise = runRestoreOnLoad
+		? restoreGeneralSettings()
+		: Promise.resolve();
+	return {
+		_buildCssRule,
+		_flipSelected,
+		_getElementReferences,
+		_getPseudoSelector,
+		_getReferencesByKey,
+		_getStyleId,
+		_getTabResources,
+		_restoreSettings,
+		_updateUIElements,
+		__getState,
+		__setState,
+		buildDecorationConfigs,
+		buildInputConfigs,
+		buildInputDecorationConfigs,
+		buildStructuredConf,
+		createStyleIds,
+		createTabElements,
+		getContainers,
+		getDecorationUls,
+		getMoveButtons,
+		getObjectToSet,
+		getPinKey,
+		getTabElement,
+		moveSelectedDecorationsTo,
+		restoreGeneralSettings,
+		restoreOnLoadPromise,
+		restoreTabSettings,
+		saveCheckboxOptions,
+		savePickedSort,
+		saveTabDecorations,
+		saveTabOptions,
+		setActivePreview,
+		setCurrentChoice,
+		setPreviewAndInputValue,
+		showRelevantSettings_HideOthers,
+		showThenHideToast,
+		showToast,
+		startThemeTransition,
+		toggleActivePreview,
+	};
+}
+
+if (globalThis.__AWSF_SKIP_OPTIONS_AUTO_BOOTSTRAP__ !== true) {
+	createOptionsModule();
+}

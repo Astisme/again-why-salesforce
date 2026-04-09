@@ -16,7 +16,7 @@ export function createThemeHandlerRuntime({
 	sendExtensionMessageFn,
 	whatTheme,
 }) {
-	const html = documentRef.documentElement;
+	const html = documentRef?.documentElement ?? null;
 	let systemColorListener = null;
 	/**
 	 * Updates DOM/storage state and emits the theme message.
@@ -26,6 +26,9 @@ export function createThemeHandlerRuntime({
 	 * @return {Promise<unknown> | unknown} Message dispatch result.
 	 */
 	function messageAndUpdateTheme(theme, updateUserTheme = false) {
+		if (html == null) {
+			return;
+		}
 		html.dataset.theme = theme;
 		localStorageRef.setItem("usingTheme", theme);
 		if (updateUserTheme) {
@@ -41,6 +44,9 @@ export function createThemeHandlerRuntime({
 	 * @return {Promise<unknown> | unknown | void} Theme update result when a change is required.
 	 */
 	function handleSystemColorSchemeChange(event) {
+		if (html == null) {
+			return;
+		}
 		const systemThemeValue = event.matches ? "dark" : "light";
 		const htmlThemeValue = html.dataset.theme;
 		if (systemThemeValue !== htmlThemeValue) {
@@ -55,6 +61,7 @@ export function createThemeHandlerRuntime({
 	 */
 	function systemColorSchemeListener(enable = true) {
 		if (
+			html == null ||
 			matchMediaFn == null ||
 			(enable && systemColorListener != null) ||
 			(!enable && systemColorListener == null)
@@ -84,6 +91,9 @@ export function createThemeHandlerRuntime({
 	 * @return {Promise<unknown> | unknown} Theme update result.
 	 */
 	function handleSwitchColorTheme() {
+		if (html == null) {
+			return;
+		}
 		const newTheme = html.dataset.theme === "light" ? "dark" : "light";
 		return messageAndUpdateTheme(newTheme, true);
 	}
@@ -93,7 +103,11 @@ export function createThemeHandlerRuntime({
 	 * @return {Promise<void> | void} Initialization result.
 	 */
 	function initTheme() {
-		html.dataset.usertheme = localStorageRef.getItem("userTheme") ?? "system";
+		if (html == null) {
+			return;
+		}
+		html.dataset.usertheme = localStorageRef.getItem("userTheme") ??
+			"system";
 		html.dataset.theme = html.dataset.usertheme === "system"
 			? null
 			: html.dataset.usertheme;
