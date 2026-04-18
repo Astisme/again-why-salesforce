@@ -63,7 +63,7 @@ function consoleToastedMessage(message, status) {
  * Displays a toast message on the UI with the provided message and styling options.
  * The toast message is appended to the DOM and automatically removed after an estimated reading time.
  *
- * @param {string} message - The message to display in the toast.
+ * @param {string|string[]} message - The message to display in the toast.
  * @param {string} [status="success"]  - The toast type.
  */
 export async function showToast(message, status = TOAST_SUCCESS) {

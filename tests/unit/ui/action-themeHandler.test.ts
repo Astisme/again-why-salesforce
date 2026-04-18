@@ -2,7 +2,13 @@ import "../../mocks.test.ts";
 import { assertEquals, assertStrictEquals } from "@std/testing/asserts";
 import { installMockDom } from "../../happydom.test.ts";
 import { createThemeHandlerRuntime } from "../../../src/action/themeHandler-runtime.js";
-import { createThemeHandlerModule } from "../../../src/action/themeHandler.js";
+import {
+	createThemeHandlerModule,
+	handleSwitchColorTheme as handleSwitchColorThemeExport,
+	initTheme as initThemeExport,
+	initThemePromise,
+	systemColorSchemeListener as systemColorSchemeListenerExport,
+} from "../../../src/action/themeHandler.js";
 
 type ThemeHandlerModule = {
 	handleSwitchColorTheme: () => Promise<void>;
@@ -317,5 +323,58 @@ Deno.test("themeHandler direct module coverage", async () => {
 	} finally {
 		globalThis.matchMedia = originalMatchMedia;
 		dom.cleanup();
+	}
+});
+
+Deno.test("themeHandler module-level exports proxy to the singleton module", async () => {
+	await initThemePromise;
+	await initThemeExport();
+	await handleSwitchColorThemeExport();
+	await systemColorSchemeListenerExport(false);
+	await systemColorSchemeListenerExport(true);
+});
+
+Deno.test("themeHandler createThemeHandlerModule uses fallback globals when runtime globals are unavailable", async () => {
+	const originalDocument = globalThis.document;
+	const originalLocalStorage = globalThis.localStorage;
+	const originalMatchMedia = globalThis.matchMedia;
+	try {
+		Object.defineProperty(globalThis, "document", {
+			configurable: true,
+			value: undefined,
+			writable: true,
+		});
+		Object.defineProperty(globalThis, "localStorage", {
+			configurable: true,
+			value: undefined,
+			writable: true,
+		});
+		Object.defineProperty(globalThis, "matchMedia", {
+			configurable: true,
+			value: undefined,
+			writable: true,
+		});
+
+		const fallbackModule = createThemeHandlerModule();
+		await fallbackModule.initTheme();
+		await fallbackModule.handleSwitchColorTheme();
+		await fallbackModule.systemColorSchemeListener(true);
+		await fallbackModule.systemColorSchemeListener(false);
+	} finally {
+		Object.defineProperty(globalThis, "document", {
+			configurable: true,
+			value: originalDocument,
+			writable: true,
+		});
+		Object.defineProperty(globalThis, "localStorage", {
+			configurable: true,
+			value: originalLocalStorage,
+			writable: true,
+		});
+		Object.defineProperty(globalThis, "matchMedia", {
+			configurable: true,
+			value: originalMatchMedia,
+			writable: true,
+		});
 	}
 });

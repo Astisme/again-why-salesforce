@@ -1,5 +1,7 @@
 import { assertEquals } from "@std/testing/asserts";
 import { loadIsolatedModule } from "../../load-isolated-module.test.ts";
+import { installMockDom } from "../../happydom.test.ts";
+import "../../mocks.test.ts";
 
 type WheelListener = (
 	event: { deltaY: number; preventDefault: () => void },
@@ -264,4 +266,121 @@ Deno.test("sf-elements creates a setup ul when missing and applies setup classes
 		fixture.module.getSetupTabUl()?.classList.contains("slds-grid"),
 		true,
 	);
+});
+
+/**
+ * Waits one macrotask so async listeners can settle.
+ *
+ * @return {Promise<void>} A promise resolved on the next macrotask.
+ */
+function flushAsyncTasks() {
+	return new Promise<void>((resolve) => {
+		setTimeout(resolve, 0);
+	});
+}
+
+/**
+ * Adds a `getElementsByClassName` fallback to the mock document.
+ *
+ * @return {() => void} Cleanup callback restoring previous behavior.
+ */
+function installGetElementsByClassNamePolyfill() {
+	const originalGetElementsByClassName = document.getElementsByClassName;
+	Object.defineProperty(document, "getElementsByClassName", {
+		configurable: true,
+		value: (className: string) => {
+			const selector = className
+				.split(/\s+/)
+				.filter((token) => token !== "")
+				.map((token) => `.${token}`)
+				.join("");
+			return [...document.querySelectorAll(selector)];
+		},
+		writable: true,
+	});
+	return () => {
+		Object.defineProperty(document, "getElementsByClassName", {
+			configurable: true,
+			value: originalGetElementsByClassName,
+			writable: true,
+		});
+	};
+}
+
+Deno.test("sf-elements canonical import covers setup discovery, wheel behavior, and modal caching", async () => {
+	const dom = installMockDom(
+		"https://acme.lightning.force.com/lightning/setup/Users/home",
+	);
+	const restoreGetElementsByClassName =
+		installGetElementsByClassNamePolyfill();
+	const originalCreateElement = document.createElement.bind(document);
+	try {
+		document.createElement = ((tagName: string) => {
+			const element = originalCreateElement(tagName);
+			if (
+				"style" in element &&
+				element.style.overflowX == null
+			) {
+				element.style.overflowX = "";
+			}
+			return element;
+		}) as Document["createElement"];
+		const sfElements = await import(
+			"../../../src/salesforce/sf-elements.js"
+		);
+		const {
+			findSetupTabUlInSalesforcePage,
+			getCurrentHref,
+			getModalHanger,
+			getSetupTabUl,
+			setSetupTabUl,
+		} = sfElements;
+		const standalone = document.createElement("ul");
+		setSetupTabUl(standalone);
+		assertEquals(getSetupTabUl(), standalone);
+		assertEquals(getCurrentHref().includes("/lightning/setup/"), true);
+
+		assertEquals(findSetupTabUlInSalesforcePage(), false);
+
+		const tabParent = document.createElement("div");
+		const pinnedUl = document.createElement("ul");
+		pinnedUl.className = "pinnedItems slds-grid";
+		tabParent.appendChild(pinnedUl);
+		document.body.appendChild(tabParent);
+
+		assertEquals(findSetupTabUlInSalesforcePage(), true);
+		const extensionUl = getSetupTabUl();
+		assertEquals(extensionUl?.id, "again-why-salesforce");
+		assertEquals(extensionUl?.classList.contains("tabBarItems"), true);
+		assertEquals(String(extensionUl?.dataset.wheelListenerApplied), "true");
+
+		if (extensionUl != null) {
+			extensionUl.scrollLeft = 0;
+			const wheelEvent = new Event("wheel", {
+				bubbles: true,
+				cancelable: true,
+			}) as Event & { deltaY: number };
+			Object.defineProperty(wheelEvent, "deltaY", {
+				value: 11,
+			});
+			extensionUl.dispatchEvent(wheelEvent);
+			await flushAsyncTasks();
+			assertEquals(extensionUl.scrollLeft, 11);
+		}
+
+		const modalA = document.createElement("div");
+		modalA.className = "DESKTOP uiContainerManager";
+		document.body.appendChild(modalA);
+		assertEquals(getModalHanger(), modalA);
+
+		modalA.remove();
+		const modalB = document.createElement("div");
+		modalB.className = "DESKTOP uiContainerManager";
+		document.body.appendChild(modalB);
+		assertEquals(getModalHanger(), modalA);
+	} finally {
+		document.createElement = originalCreateElement;
+		restoreGetElementsByClassName();
+		dom.cleanup();
+	}
 });

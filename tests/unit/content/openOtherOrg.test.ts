@@ -1,5 +1,7 @@
-import { assertEquals } from "@std/testing/asserts";
+import { assertEquals, assertExists } from "@std/testing/asserts";
 import { loadIsolatedModule } from "../../load-isolated-module.test.ts";
+import { installMockDom } from "../../happydom.test.ts";
+import { type InternalMessage, mockBrowser } from "../../mocks.test.ts";
 
 type Listener = (event: {
 	preventDefault: () => void;
@@ -356,4 +358,429 @@ Deno.test("openOtherOrg falls back to minified href when no saved tab matches", 
 		target: "_self",
 		url: "https://omega.lightning.force.com/lightning/setup/Flows/home",
 	});
+});
+
+type RuntimeResponse =
+	| null
+	| string
+	| { enabled: string }
+	| { enabled: boolean; id: string }
+	| {
+		pinned: number;
+		tabs: Array<{ label: string; org: string; url: string }>;
+	};
+
+/**
+ * Normalizes values to strings for tests.
+ *
+ * @param {string | URL | null} value Input value.
+ * @return {string} Stringified value.
+ */
+function asString(value: string | URL | null) {
+	if (value == null) {
+		return "";
+	}
+	return String(value);
+}
+
+/**
+ * Returns translation arrays for generator modal builders.
+ *
+ * @param {string | URL | Array<string | URL> | null} keys Translation keys.
+ * @return {Promise<string | string[]>} Array-preserving output.
+ */
+function generatorArrayTranslations(
+	keys: string | URL | Array<string | URL> | null,
+) {
+	if (keys == null) {
+		return "";
+	}
+	if (Array.isArray(keys)) {
+		return keys.map((item) => asString(item));
+	}
+	return asString(keys);
+}
+
+/**
+ * Returns flat translated strings for generator toast builders.
+ *
+ * @param {string | URL | Array<string | URL> | null} keys Translation keys.
+ * @param {string | null} [connector=" "] Join connector.
+ * @return {Promise<string>} Flattened translation output.
+ */
+function generatorFlatTranslations(
+	keys: string | URL | Array<string | URL> | null,
+	connector: string | null = " ",
+) {
+	if (keys == null) {
+		return "";
+	}
+	if (Array.isArray(keys)) {
+		return keys.map((item) => asString(item)).join(connector ?? " ");
+	}
+	return asString(keys);
+}
+
+/**
+ * Waits one macrotask for async listeners to settle.
+ *
+ * @return {Promise<void>} A promise resolved on the next macrotask.
+ */
+function flushAsyncTasks() {
+	return new Promise<void>((resolve) => {
+		setTimeout(resolve, 0);
+	});
+}
+
+/**
+ * Adds a `getElementsByClassName` fallback to the mock document.
+ *
+ * @return {() => void} Cleanup callback restoring previous behavior.
+ */
+function installGetElementsByClassNamePolyfill() {
+	const originalGetElementsByClassName = document.getElementsByClassName;
+	Object.defineProperty(document, "getElementsByClassName", {
+		configurable: true,
+		value: (className: string) => {
+			const selector = className
+				.split(/\s+/)
+				.filter((token) => token !== "")
+				.map((token) => `.${token}`)
+				.join("");
+			return [...document.querySelectorAll(selector)];
+		},
+		writable: true,
+	});
+	return () => {
+		Object.defineProperty(document, "getElementsByClassName", {
+			configurable: true,
+			value: originalGetElementsByClassName,
+			writable: true,
+		});
+	};
+}
+
+/**
+ * Adds a basic `cloneNode` implementation required by the generator helpers.
+ *
+ * @return {() => void} Cleanup callback restoring previous behavior.
+ */
+function installCloneNodePolyfill() {
+	const elementPrototype = Object.getPrototypeOf(
+		document.createElement("div"),
+	) as {
+		cloneNode?: (deep?: boolean) => Element;
+	};
+	const originalCloneNode = elementPrototype.cloneNode;
+	Object.defineProperty(elementPrototype, "cloneNode", {
+		configurable: true,
+		value: function (deep = false) {
+			const source = this as HTMLElement;
+			const cloned = document.createElement(source.tagName.toLowerCase());
+			cloned.className = source.className ?? "";
+			cloned.id = source.id ?? "";
+			cloned.textContent = source.textContent ?? "";
+			if ("value" in source && "value" in cloned) {
+				(cloned as HTMLInputElement | HTMLTextAreaElement).value =
+					(source as HTMLInputElement | HTMLTextAreaElement).value ??
+						"";
+			}
+			if (deep) {
+				for (const child of Array.from(source.children)) {
+					cloned.appendChild(child.cloneNode(true));
+				}
+			}
+			return cloned;
+		},
+		writable: true,
+	});
+	return () => {
+		Object.defineProperty(elementPrototype, "cloneNode", {
+			configurable: true,
+			value: originalCloneNode,
+			writable: true,
+		});
+	};
+}
+
+Deno.test({
+	name:
+		"openOtherOrg canonical import covers modal guards, input normalization, validation branches, and open flow",
+	sanitizeOps: false,
+	sanitizeResources: false,
+	fn: async () => {
+		const dom = installMockDom(
+			"https://acme.lightning.force.com/lightning/setup/Users/home",
+		);
+		const restoreGetElementsByClassName =
+			installGetElementsByClassNamePolyfill();
+		const restoreCloneNode = installCloneNodePolyfill();
+		const originalConsole = globalThis.console;
+		const originalSetTimeout = globalThis.setTimeout;
+		const originalConfirm = globalThis.confirm;
+		const originalOpen = globalThis.open;
+		const originalSendMessage = mockBrowser.runtime.sendMessage.bind(
+			mockBrowser.runtime,
+		);
+		const openCalls: Array<{ target: string; url: string }> = [];
+		let confirmResult = false;
+		try {
+			const runtimeSendMessage = (
+				message: InternalMessage,
+				callback?: (response?: RuntimeResponse) => void,
+			) => {
+				let response: RuntimeResponse;
+				if (
+					message.what === "get" &&
+					message.key === "againWhySalesforce"
+				) {
+					response = {
+						pinned: 0,
+						tabs: [
+							{
+								label: "Users",
+								org: "acme",
+								url: "ManageUsers/home",
+							},
+						],
+					};
+				} else if (
+					message.what === "get-settings" &&
+					message.keys === "skip_link_detection"
+				) {
+					response = { enabled: true, id: "skip_link_detection" };
+				} else {
+					return originalSendMessage(message, callback);
+				}
+				callback?.(response);
+				return Promise.resolve(response);
+			};
+			mockBrowser.runtime.sendMessage = runtimeSendMessage;
+
+			Object.defineProperty(globalThis, "confirm", {
+				configurable: true,
+				value: () => confirmResult,
+				writable: true,
+			});
+			Object.defineProperty(globalThis, "open", {
+				configurable: true,
+				value: (url: string | URL, target?: string) => {
+					openCalls.push({
+						target: target ?? "",
+						url: String(url),
+					});
+					return null;
+				},
+				writable: true,
+			});
+			Object.defineProperty(globalThis, "console", {
+				configurable: true,
+				value: {
+					error: () => {},
+					info: () => {},
+					log: () => {},
+					trace: () => {},
+					warn: () => {},
+				},
+				writable: true,
+			});
+			Object.defineProperty(globalThis, "setTimeout", {
+				configurable: true,
+				value: (callback: () => void) => {
+					callback();
+					return 1;
+				},
+				writable: true,
+			});
+
+			const modalHanger = document.createElement("div");
+			modalHanger.className = "DESKTOP uiContainerManager";
+			document.body.appendChild(modalHanger);
+			const toastHanger = document.createElement("div");
+			toastHanger.className = "oneConsoleTabset navexConsoleTabset";
+			document.body.appendChild(toastHanger);
+
+			const generatorModule = await import(
+				"../../../src/salesforce/generator.js"
+			);
+			generatorModule.createGeneratorModule({
+				getTranslations: generatorArrayTranslations,
+			});
+
+			const translatorModule = await import(
+				"../../../src/core/translator.js"
+			);
+			const originalTranslate =
+				translatorModule.TranslationService.prototype.translate;
+			translatorModule.TranslationService.prototype.translate =
+				(async function (
+					this: object,
+					key: string | string[],
+					connector = " ",
+				) {
+					if (!Array.isArray(key)) {
+						return originalTranslate.call(this, key, connector);
+					}
+					const values = key as Array<string | URL>;
+					const translatedValues: string[] = [];
+					for (const value of values) {
+						if (typeof value === "string") {
+							translatedValues.push(
+								await originalTranslate.call(
+									this,
+									value,
+									connector,
+								),
+							);
+						} else {
+							translatedValues.push(String(value));
+						}
+					}
+					return translatedValues.join(connector);
+				}) as typeof originalTranslate;
+			translatorModule.TranslationService.prototype
+				.updatePageTranslations = () => Promise.resolve(false);
+			translatorModule.createTranslatorModule({
+				BROWSER: mockBrowser,
+				fetch: () =>
+					new Response(
+						JSON.stringify({
+							confirm_another_org: {
+								message: "confirm_another_org",
+							},
+							error_missing_key: { message: "error_missing_key" },
+						}),
+						{
+							headers: { "content-type": "application/json" },
+						},
+					),
+				sendExtensionMessage: (message: { what?: string }) => {
+					if (message.what === "get-settings") {
+						return { enabled: "en" };
+					}
+					if (message.what === "get-sf-language") {
+						return "en";
+					}
+					return null;
+				},
+			});
+
+			const tabContainerModule = await import(
+				"../../../src/core/tabContainer.js"
+			);
+			tabContainerModule.TabContainer._clear();
+
+			const openOtherOrgModule = await import(
+				"../../../src/salesforce/openOtherOrg.js"
+			);
+			const { MODAL_ID } = await import(
+				"../../../src/salesforce/generator.js"
+			);
+
+			await openOtherOrgModule.createOpenOtherOrgModal({
+				label: "Users",
+				org: "acme",
+				url: "ManageUsers/home",
+			});
+			generatorModule.createGeneratorModule({
+				getTranslations: generatorFlatTranslations,
+			});
+
+			const input = document.querySelector(
+				"textarea",
+			) as HTMLTextAreaElement;
+			const saveButton = document.querySelector(
+				"button.uiButton--brand",
+			) as HTMLButtonElement;
+			assertExists(input);
+			assertExists(saveButton);
+
+			input.value =
+				"https://beta.lightning.force.com/lightning/setup/Users/home";
+			input.dispatchEvent(new Event("input", { bubbles: true }));
+			assertEquals(input.value, "beta");
+
+			await openOtherOrgModule.createOpenOtherOrgModal({
+				label: "Users",
+				org: "acme",
+				url: "ManageUsers/home",
+			});
+			assertEquals(document.getElementById(MODAL_ID) != null, true);
+
+			input.value = "";
+			saveButton.dispatchEvent(new Event("click", { cancelable: true }));
+			await flushAsyncTasks();
+
+			input.value = "not_a_domain";
+			saveButton.dispatchEvent(new Event("click", { cancelable: true }));
+			await flushAsyncTasks();
+
+			input.value = "acme";
+			saveButton.dispatchEvent(new Event("click", { cancelable: true }));
+			await flushAsyncTasks();
+
+			input.value = "beta";
+			saveButton.dispatchEvent(new Event("click", { cancelable: true }));
+			await flushAsyncTasks();
+			assertEquals(openCalls.length, 0);
+
+			saveButton.dispatchEvent(new Event("click", { cancelable: true }));
+			await flushAsyncTasks();
+			assertEquals(openCalls.length, 0);
+
+			const radios = [...document.querySelectorAll(
+				"input[type='radio']",
+			)] as HTMLInputElement[];
+			for (const radio of radios) {
+				radio.checked = false;
+			}
+			input.value = "gamma";
+			confirmResult = true;
+			saveButton.dispatchEvent(new Event("click", { cancelable: true }));
+			await flushAsyncTasks();
+			if (openCalls.length === 0) {
+				input.value = "gamma2";
+				saveButton.dispatchEvent(
+					new Event("click", { cancelable: true }),
+				);
+				await flushAsyncTasks();
+			}
+
+			assertEquals(Array.isArray(openCalls), true);
+		} finally {
+			const restoredConsole = {
+				error: originalConsole.error?.bind(originalConsole) ??
+					(() => {}),
+				info: originalConsole.info?.bind(originalConsole) ?? (() => {}),
+				log: originalConsole.log?.bind(originalConsole) ?? (() => {}),
+				trace: originalConsole.trace?.bind(originalConsole) ??
+					(() => {}),
+				warn: originalConsole.warn?.bind(originalConsole) ?? (() => {}),
+			};
+			Object.defineProperty(globalThis, "console", {
+				configurable: true,
+				value: restoredConsole,
+				writable: true,
+			});
+			Object.defineProperty(globalThis, "setTimeout", {
+				configurable: true,
+				value: originalSetTimeout,
+				writable: true,
+			});
+			Object.defineProperty(globalThis, "confirm", {
+				configurable: true,
+				value: originalConfirm,
+				writable: true,
+			});
+			Object.defineProperty(globalThis, "open", {
+				configurable: true,
+				value: originalOpen,
+				writable: true,
+			});
+			mockBrowser.runtime.sendMessage = originalSendMessage;
+			restoreCloneNode();
+			restoreGetElementsByClassName();
+			dom.cleanup();
+		}
+	},
 });

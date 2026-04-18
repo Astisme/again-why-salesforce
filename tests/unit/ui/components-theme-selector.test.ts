@@ -13,7 +13,7 @@ import {
 	createLocalStorageMock,
 	installCustomElementsRegistry,
 	type ThemeSelectorElement,
-} from "./theme-selector-test-helpers.ts";
+} from "./theme-selector-test-helpers.test.ts";
 
 Deno.test("ThemeSelectorAws", async (t) => {
 	const { cleanup } = installMockDom();
