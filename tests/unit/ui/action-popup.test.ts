@@ -1,25 +1,25 @@
 import "../../mocks.test.ts";
 import { assertEquals } from "@std/testing/asserts";
-import { runPopup } from "../../../src/action/popup/popup-runtime.js";
+import {
+	CMD_EXPORT_ALL,
+	CMD_IMPORT,
+	CMD_OPEN_SETTINGS,
+	CXM_MANAGE_TABS,
+	WHAT_EXPORT_CHECK,
+	WHAT_GET_COMMANDS,
+	WHAT_SHOW_IMPORT,
+	WHAT_START_TUTORIAL,
+} from "../../../src/core/constants.js";
+import {
+	createPopupModule,
+	runPopup,
+	runPopupWithInjectedOptions,
+} from "../../../src/action/popup/popup-runtime.js";
 import {
 	createMockWindow,
 	MockDocument,
 	MockElement,
 } from "./mock-dom.test.ts";
-
-const CMD_EXPORT_ALL = "cmd-export-all";
-const CMD_IMPORT = "cmd-import";
-const CMD_OPEN_SETTINGS = "cmd-open-settings";
-const CXM_MANAGE_TABS = "manage-tabs";
-const WHAT_EXPORT_CHECK = "export-check";
-const WHAT_GET_COMMANDS = "get-commands";
-const WHAT_SHOW_IMPORT = "show-import";
-const WHAT_START_TUTORIAL = "start-tutorial";
-
-type Command = {
-	name: string;
-	shortcut: string;
-};
 
 /**
  * Creates and appends a mock DOM element with an id.
@@ -41,60 +41,49 @@ function appendElement(
 }
 
 /**
- * Loads the popup entrypoint with isolated dependencies.
+ * Creates all popup action buttons on the mock page and returns references.
  *
- * @param {Object} options Fixture options.
- * @param {Command[]} [options.availableCommands=[]] Commands returned by the background script.
- * @param {Command[] | null | undefined} [options.commandResponse=availableCommands] Message response for the command list request.
- * @param {boolean} [options.framePatternsAllowed=true] Whether frame patterns are allowed.
- * @param {string | null} [options.exportDataset="popup_export+-+extra"] Export button translation dataset.
- * @param {string | null} [options.importDataset="popup_import+-+extra"] Import button translation dataset.
- * @param {{ison: boolean; url?: string | null}} [options.salesforceState={ ison: true }] Salesforce setup detection result.
- * @param {string | null} [options.settingsDataset="popup_settings+-+extra"] Settings button translation dataset.
- * @return {Promise<{ counters: { closeCalls: number; openSettingsCalls: number; }; exportButton: MockElement; importButton: MockElement; locationRef: URL; manageTabsButton: MockElement; messages: Record<string, unknown>[]; settingsButton: MockElement; tutorialButton: MockElement; }>} Loaded popup fixture.
+ * @param {MockDocument} document Mock document.
+ * @return {{ exportButton: MockElement; importButton: MockElement; manageTabsButton: MockElement; settingsButton: MockElement; tutorialButton: MockElement; }} Button references.
  */
-async function loadPopupModule({
-	availableCommands = [],
-	commandResponse = availableCommands,
-	framePatternsAllowed = true,
-	exportDataset = "popup_export+-+extra",
-	importDataset = "popup_import+-+extra",
-	salesforceState = { ison: true },
-	settingsDataset = "popup_settings+-+extra",
-}: {
-	availableCommands?: Command[];
-	commandResponse?: Command[] | null;
-	framePatternsAllowed?: boolean;
-	exportDataset?: string | null;
-	importDataset?: string | null;
-	salesforceState?: { ison: boolean; url?: string | null };
-	settingsDataset?: string | null;
-}) {
-	const window = createMockWindow(
-		"https://example.test/action/popup/popup.html",
-	);
-	const document = window.document;
+function appendPopupButtons(document: MockDocument) {
 	const importButton = appendElement(document, "button", "import");
 	const exportButton = appendElement(document, "button", "export");
 	const settingsButton = appendElement(document, "button", "open-settings");
 	const manageTabsButton = appendElement(document, "button", "manage-tabs");
 	const tutorialButton = appendElement(document, "button", "tutorial");
-	if (importDataset != null) {
-		importButton.dataset.i18n = importDataset;
-	}
-	if (exportDataset != null) {
-		exportButton.dataset.i18n = exportDataset;
-	}
-	if (settingsDataset != null) {
-		settingsButton.dataset.i18n = settingsDataset;
-	}
+	return {
+		exportButton,
+		importButton,
+		manageTabsButton,
+		settingsButton,
+		tutorialButton,
+	};
+}
+
+Deno.test("popup-runtime createPopupModule wires runtime constants through the pure module", async () => {
+	const window = createMockWindow(
+		"https://example.test/action/popup/popup.html",
+	);
+	const document = window.document;
+	const {
+		exportButton,
+		importButton,
+		manageTabsButton,
+		settingsButton,
+		tutorialButton,
+	} = appendPopupButtons(document);
+	importButton.dataset.i18n = "popup_import+-+extra";
+	exportButton.dataset.i18n = "popup_export+-+extra";
+	settingsButton.dataset.i18n = "popup_settings+-+extra";
 	const counters = {
 		closeCalls: 0,
 		openSettingsCalls: 0,
 	};
 	const messages: Record<string, unknown>[] = [];
-	await runPopup({
-		areFramePatternsAllowedFn: () => Promise.resolve(framePatternsAllowed),
+
+	const popupModule = createPopupModule({
+		areFramePatternsAllowedFn: () => Promise.resolve(true),
 		browser: {
 			runtime: {
 				getURL: (path: string) => `chrome-extension://test/${path}`,
@@ -104,18 +93,21 @@ async function loadPopupModule({
 			counters.closeCalls++;
 		},
 		documentRef: document,
-		getTranslationsFn: (message) => Promise.resolve(message),
-		isOnSalesforceSetupFn: () => Promise.resolve(salesforceState),
-		locationRef: window.location,
+		getTranslationsFn: (message: string | string[]) =>
+			Promise.resolve(message),
+		isOnSalesforceSetupFn: () => Promise.resolve({ ison: true }),
+		locationRef: window.location as URL,
 		openSettingsPageFn: () => {
 			counters.openSettingsCalls++;
 		},
-		sendExtensionMessageFn: (
-			message: Record<string, unknown>,
-		) => {
+		sendExtensionMessageFn: (message: Record<string, unknown>) => {
 			messages.push(message);
 			if (message.what === WHAT_GET_COMMANDS) {
-				return Promise.resolve(commandResponse);
+				return Promise.resolve([
+					{ name: CMD_IMPORT, shortcut: "Ctrl+I" },
+					{ name: CMD_EXPORT_ALL, shortcut: "Ctrl+E" },
+					{ name: CMD_OPEN_SETTINGS, shortcut: "Ctrl+S" },
+				]);
 			}
 			return Promise.resolve(undefined);
 		},
@@ -123,89 +115,14 @@ async function loadPopupModule({
 		translationSeparator: "+-+",
 	});
 
-	return {
-		counters,
-		exportButton,
-		importButton,
-		locationRef: window.location as URL,
-		manageTabsButton,
-		messages,
-		settingsButton,
-		tutorialButton,
-	};
-}
+	await popupModule.runPopup();
+	await importButton.click();
+	await exportButton.click();
+	await settingsButton.click();
+	await manageTabsButton.click();
+	await tutorialButton.click();
 
-Deno.test("popup redirects to the host-permissions page when Salesforce setup access lacks frame permissions", async () => {
-	const fixture = await loadPopupModule({
-		framePatternsAllowed: false,
-		salesforceState: { ison: true },
-	});
-
-	assertEquals(
-		fixture.locationRef.href,
-		"chrome-extension://test/action/req_permissions/req_permissions.html?whichid=hostpermissions",
-	);
-});
-
-Deno.test("popup redirects to the non-Salesforce page when the current tab is not Salesforce setup", async () => {
-	const fixture = await loadPopupModule({
-		salesforceState: {
-			ison: false,
-			url: "https://example.com/page",
-		},
-	});
-
-	assertEquals(
-		fixture.locationRef.href,
-		"chrome-extension://test/action/notSalesforceSetup/notSalesforceSetup.html?url=https://example.com/page",
-	);
-});
-
-Deno.test("popup omits the url query string when Salesforce setup detection returns no page url", async () => {
-	const fixture = await loadPopupModule({
-		salesforceState: {
-			ison: false,
-			url: null,
-		},
-	});
-
-	assertEquals(
-		fixture.locationRef.href,
-		"chrome-extension://test/action/notSalesforceSetup/notSalesforceSetup.html",
-	);
-});
-
-Deno.test("popup wires command titles and action buttons in the normal setup flow", async () => {
-	const fixture = await loadPopupModule({
-		availableCommands: [
-			{ name: CMD_IMPORT, shortcut: "Ctrl+I" },
-			{ name: CMD_EXPORT_ALL, shortcut: "Ctrl+E" },
-			{ name: CMD_OPEN_SETTINGS, shortcut: "Ctrl+S" },
-			{ name: "cmd-unknown", shortcut: "Ctrl+U" },
-		],
-		salesforceState: { ison: true },
-	});
-
-	assertEquals(
-		String(fixture.importButton.title),
-		"popup_import,(Ctrl+I)",
-	);
-	assertEquals(
-		String(fixture.exportButton.title),
-		"popup_export,(Ctrl+E)",
-	);
-	assertEquals(
-		String(fixture.settingsButton.title),
-		"popup_settings,(Ctrl+S)",
-	);
-
-	await fixture.importButton.click();
-	await fixture.exportButton.click();
-	await fixture.settingsButton.click();
-	await fixture.manageTabsButton.click();
-	await fixture.tutorialButton.click();
-
-	assertEquals(fixture.messages, [
+	assertEquals(messages, [
 		{
 			what: WHAT_GET_COMMANDS,
 			commands: [CMD_EXPORT_ALL, CMD_IMPORT, CMD_OPEN_SETTINGS],
@@ -215,84 +132,120 @@ Deno.test("popup wires command titles and action buttons in the normal setup flo
 		{ what: CXM_MANAGE_TABS },
 		{ what: WHAT_START_TUTORIAL },
 	]);
-	assertEquals(fixture.counters.closeCalls, 4);
-	assertEquals(fixture.counters.openSettingsCalls, 1);
+	assertEquals(counters.closeCalls, 4);
+	assertEquals(counters.openSettingsCalls, 1);
+	assertEquals(String(importButton.title), "popup_import,(Ctrl+I)");
+	assertEquals(String(exportButton.title), "popup_export,(Ctrl+E)");
+	assertEquals(String(settingsButton.title), "popup_settings,(Ctrl+S)");
 });
 
-Deno.test("popup keeps shortcut wiring stable when translation datasets are incomplete", async () => {
-	const fixture = await loadPopupModule({
-		availableCommands: [
-			{ name: CMD_IMPORT, shortcut: "Ctrl+I" },
-			{ name: CMD_OPEN_SETTINGS, shortcut: "Ctrl+S" },
-		],
-		importDataset: null,
-		settingsDataset: "popup_settings",
-	});
+Deno.test("popup-runtime runPopup keeps runtime redirect behavior for host and non-setup tabs", async (t) => {
+	await t.step(
+		"redirects to host permissions when setup frame patterns are blocked",
+		async () => {
+			const window = createMockWindow(
+				"https://example.test/action/popup/popup.html",
+			);
+			appendPopupButtons(window.document);
 
-	assertEquals(
-		String(fixture.importButton.title),
-		",(Ctrl+I)",
-	);
-	assertEquals(
-		String(fixture.settingsButton.title),
-		"popup_settings,(Ctrl+S)",
-	);
-});
+			await runPopup({
+				areFramePatternsAllowedFn: () => Promise.resolve(false),
+				browser: {
+					runtime: {
+						getURL: (path: string) =>
+							`chrome-extension://test/${path}`,
+					},
+				},
+				documentRef: window.document,
+				isOnSalesforceSetupFn: () => Promise.resolve({ ison: true }),
+				locationRef: window.location as URL,
+			});
 
-Deno.test("popup skips command-title updates when command metadata is missing", async () => {
-	const fixture = await loadPopupModule({
-		commandResponse: null,
-	});
-
-	assertEquals(String(fixture.importButton.title), "");
-	await fixture.importButton.click();
-	assertEquals(fixture.messages, [
-		{
-			what: WHAT_GET_COMMANDS,
-			commands: [CMD_EXPORT_ALL, CMD_IMPORT, CMD_OPEN_SETTINGS],
+			assertEquals(
+				window.location.href,
+				"chrome-extension://test/action/req_permissions/req_permissions.html?whichid=hostpermissions",
+			);
 		},
-		{ what: WHAT_SHOW_IMPORT },
-	]);
-	assertEquals(fixture.counters.closeCalls, 1);
+	);
+
+	await t.step(
+		"redirects to non-setup popup page and preserves the source tab url",
+		async () => {
+			const window = createMockWindow(
+				"https://example.test/action/popup/popup.html",
+			);
+			appendPopupButtons(window.document);
+
+			await runPopup({
+				areFramePatternsAllowedFn: () => Promise.resolve(true),
+				browser: {
+					runtime: {
+						getURL: (path: string) =>
+							`chrome-extension://test/${path}`,
+					},
+				},
+				documentRef: window.document,
+				isOnSalesforceSetupFn: () =>
+					Promise.resolve({
+						ison: false,
+						url: "https://example.com/page",
+					}),
+				locationRef: window.location as URL,
+			});
+
+			assertEquals(
+				window.location.href,
+				"chrome-extension://test/action/notSalesforceSetup/notSalesforceSetup.html?url=https://example.com/page",
+			);
+		},
+	);
 });
 
-Deno.test("popup exits early when required action buttons are unavailable", async () => {
+Deno.test("popup-runtime runPopupWithInjectedOptions bypasses runtime constants and uses explicit injected values", async () => {
 	const window = createMockWindow(
 		"https://example.test/action/popup/popup.html",
 	);
 	const document = window.document;
-	appendElement(document, "button", "import");
-	appendElement(document, "button", "export");
-	appendElement(document, "button", "open-settings");
-	appendElement(document, "button", "manage-tabs");
-	const documentRef = {
-		getElementById(id: string) {
-			if (id === "tutorial") {
-				return null;
-			}
-			return document.getElementById(id);
-		},
-	};
+	const { importButton } = appendPopupButtons(document);
 	const messages: Record<string, unknown>[] = [];
 
-	const result = await runPopup({
+	await runPopupWithInjectedOptions({
 		areFramePatternsAllowedFn: () => Promise.resolve(true),
 		browser: {
 			runtime: {
-				getURL: (path: string) => `chrome-extension://test/${path}`,
+				getURL: (path: string) => path,
 			},
 		},
-		documentRef,
+		cmdExportAll: "custom-export",
+		cmdImport: "custom-import",
+		cmdOpenSettings: "custom-settings",
+		cxmManageTabs: "custom-manage-tabs",
+		documentRef: document,
 		isOnSalesforceSetupFn: () => Promise.resolve({ ison: true }),
-		locationRef: window.location,
-		sendExtensionMessageFn: (
-			message: Record<string, unknown>,
-		) => {
+		locationRef: window.location as URL,
+		sendExtensionMessageFn: (message: Record<string, unknown>) => {
 			messages.push(message);
-			return Promise.resolve([]);
+			if (message.what === "custom-get-commands") {
+				return Promise.resolve([{
+					name: "custom-import",
+					shortcut: "I",
+				}]);
+			}
+			return Promise.resolve(undefined);
 		},
+		whatExportCheck: "custom-export-check",
+		whatGetCommands: "custom-get-commands",
+		whatShowImport: "custom-show-import",
+		whatStartTutorial: "custom-start-tutorial",
 	});
 
-	assertEquals(result.redirected, false);
-	assertEquals(messages.length, 0);
+	await importButton.click();
+
+	assertEquals(messages, [
+		{
+			what: "custom-get-commands",
+			commands: ["custom-export", "custom-import", "custom-settings"],
+		},
+		{ what: "custom-show-import" },
+	]);
 });

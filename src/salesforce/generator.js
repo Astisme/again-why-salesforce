@@ -919,9 +919,7 @@ function getSelectedTabsFromModalSelection({
 	const selectedAll = selectAllButton.hasAttribute("disabled");
 	const selectedTabs = selectedAll ? tabs : checkboxes
 		.filter((checkbox) => checkbox.checked)
-		.map((checkbox) =>
-			tabs[Number.parseInt(checkbox.dataset.tabIndex)]
-		);
+		.map((checkbox) => tabs[Number.parseInt(checkbox.dataset.tabIndex)]);
 	return {
 		selectedAll,
 		tabs: selectedTabs,
@@ -1205,7 +1203,12 @@ function createSldsModalShell({
 	saveButton.appendChild(saveSpan);
 	let keyDownListener = null;
 	keyDownListener = (event) => {
-		handleModalShellKeydown(event, closeButton, saveButton, keyDownListener);
+		handleModalShellKeydown(
+			event,
+			closeButton,
+			saveButton,
+			keyDownListener,
+		);
 	};
 	document.addEventListener("keydown", keyDownListener);
 	return {

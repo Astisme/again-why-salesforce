@@ -100,7 +100,9 @@ function initTheme() {
 	htmlRuntime.dataset.theme = htmlRuntime.dataset.usertheme === "system"
 		? null
 		: htmlRuntime.dataset.usertheme;
-	return systemColorSchemeListener(htmlRuntime.dataset.usertheme === "system");
+	return systemColorSchemeListener(
+		htmlRuntime.dataset.usertheme === "system",
+	);
 }
 
 /**

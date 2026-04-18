@@ -219,7 +219,9 @@ function _isNewerVersion(latest, current) {
  * @return {Promise<void>}
  */
 async function checkForUpdates() {
-	const noUpdateSetting = await bgGetSettingsRuntime(noUpdateNotificationRuntime);
+	const noUpdateSetting = await bgGetSettingsRuntime(
+		noUpdateNotificationRuntime,
+	);
 	if (
 		noUpdateSetting != null &&
 		(

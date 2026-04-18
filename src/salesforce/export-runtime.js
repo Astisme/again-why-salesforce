@@ -36,7 +36,10 @@ async function showExportModal() {
 		e.preventDefault();
 		const { tabs, selectedAll } = getSelectedTabs();
 		if (tabs.length === 0) {
-			return showToastRuntime("error_no_tabs_selected", toastWarningRuntime);
+			return showToastRuntime(
+				"error_no_tabs_selected",
+				toastWarningRuntime,
+			);
 		}
 		closeButton.click();
 		const tabCont = tabContainerRuntime.getThrowawayInstance();
@@ -58,9 +61,7 @@ async function createExportModal() {
 	try {
 		await showExportModal();
 	} catch (error) {
-		const message = error instanceof Error
-			? error.message
-			: String(error);
+		const message = error instanceof Error ? error.message : String(error);
 		showToastRuntime(message, toastErrorRuntime);
 	}
 }

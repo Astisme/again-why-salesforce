@@ -363,9 +363,7 @@ function pageActionTab(save = true) {
 		save ? STAR_ID_RUNTIME : SLASHED_STAR_ID_RUNTIME,
 	);
 	if (favourite.classList.contains(hiddenClassRuntime)) {
-		const message = save
-			? "error_useless_save"
-			: "error_useless_remove";
+		const message = save ? "error_useless_save" : "error_useless_remove";
 		showToastRuntime(message, toastInfoRuntime);
 	} else {
 		favourite.closest("button").click();

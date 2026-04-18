@@ -34,9 +34,7 @@ function doLightningNavigation(details) {
 			}
 		}
 	} catch (error) {
-		const message = error instanceof Error
-			? error.message
-			: String(error);
+		const message = error instanceof Error ? error.message : String(error);
 		consoleRuntime.error(`Navigation failed: ${message}`);
 		if (details.fallbackURL) {
 			openRuntime(details.fallbackURL, "_top");
