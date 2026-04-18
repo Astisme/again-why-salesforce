@@ -416,3 +416,23 @@ Deno.test("popup-module fallback document safely handles setup flow when no butt
 	});
 	assertEquals(result.redirected, false);
 });
+
+Deno.test("popup-module setup flow can rely on the default message sender", async () => {
+	const window = createMockWindow(
+		"https://example.test/action/popup/popup.html",
+	);
+	const document = window.document;
+	appendElement(document, "button", "import");
+	appendElement(document, "button", "export");
+	appendElement(document, "button", "open-settings");
+	appendElement(document, "button", "manage-tabs");
+	appendElement(document, "button", "tutorial");
+
+	const result = await runPopup({
+		documentRef: document,
+		isOnSalesforceSetupFn: () => Promise.resolve({ ison: true }),
+		locationRef: window.location as URL,
+	});
+
+	assertEquals(result.redirected, false);
+});

@@ -458,9 +458,7 @@ async function loadOptions(
 	setGlobal("chrome", browserMock);
 	setGlobal("document", documentMock);
 
-	const optionsModule = await import(
-		`../../../src/settings/options.js#${crypto.randomUUID()}`
-	);
+	const optionsModule = await import("../../../src/settings/options.js");
 	const module = optionsModule.createOptionsModule(
 		{
 			constants: {

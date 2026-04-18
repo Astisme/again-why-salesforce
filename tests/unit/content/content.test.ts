@@ -165,7 +165,7 @@ async function loadContentModule(deps: ContentDeps) {
 	setGlobal("__AWSF_SKIP_CONTENT_AUTO_BOOTSTRAP__", true);
 	try {
 		const contentModule = await import(
-			`../../../src/salesforce/content.js#${crypto.randomUUID()}`
+			"../../../src/salesforce/content.js"
 		);
 		const content = contentModule.createContentModule(deps);
 		content.bootstrapIfNeeded();
