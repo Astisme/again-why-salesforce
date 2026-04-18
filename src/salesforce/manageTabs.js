@@ -28,6 +28,7 @@ import {
 	generateManageTabsModal,
 	handleLightningLinkClick,
 	MODAL_ID,
+	sldsConfirm,
 } from "./generator.js";
 import { makeDuplicatesBold, reorderTabsUl, sf_afterSet } from "./content.js";
 import { showToast } from "./toast.js";
@@ -149,9 +150,22 @@ function moveTrToGivenIndex({
  * @param {event} e - the event which had this function called
  */
 async function checkOpenAskConfirm(e) {
+	const [body, confirmLabel, cancelLabel, closeLabel] = await getTranslations(
+		[
+			"unsaved_changes_confirm",
+			"confirm",
+			"cancel",
+			"cancel_close",
+		],
+	);
 	if (
 		!wasSomethingUpdated ||
-		confirm(await getTranslations("unsaved_changes_confirm"))
+		await sldsConfirm({
+			body,
+			confirmLabel,
+			cancelLabel,
+			closeLabel,
+		})
 	) {
 		handleLightningLinkClick(e);
 		closeButton.click();

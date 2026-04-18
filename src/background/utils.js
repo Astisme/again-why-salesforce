@@ -242,34 +242,24 @@ export async function checkForUpdates() {
 		const urlParts = EXTENSION_GITHUB_LINK.split("github.com/");
 		const repoPath = urlParts[1].replace(/\.git$/, "");
 		// Fetch latest release data from GitHub API
+		const releasesLatest = "/releases/latest";
 		const response = await fetch(
-			`https://api.github.com/repos/${repoPath}/releases`,
+			`https://api.github.com/repos/${repoPath}${releasesLatest}`,
 		);
 		if (!response.ok) {
 			console.error("error_failed_to_fetch", response.status);
 			return;
 		}
-		const releases = await response.json();
+		const latestRelease = await response.json();
 		// Find the latest non-prerelease version
-		const latestVersion = releases
-			.filter((release) =>
-				!release.prerelease &&
-				_isNewerVersion(
-					release.tag_name.replace(/^.*(-)?v/, ""),
-					EXTENSION_VERSION,
-				)
-			)
-			.sort((a, b) => {
-				return new Date(b.created_at) - new Date(a.created_at);
-			})
-			?.[0]?.tag_name?.replace(/^.*(-)?v/, "");
+		const latestVersion = latestRelease?.tag_name?.replace(/^.*(-)?v/, "");
 		// Compare versions and open homepage if update is available
-		if (latestVersion != null) {
+		if (_isNewerVersion(latestVersion, EXTENSION_VERSION)) {
 			await bg_notify({
 				what: WHAT_UPDATE_EXTENSION,
 				oldversion: EXTENSION_VERSION,
 				version: latestVersion,
-				link: EXTENSION_GITHUB_LINK,
+				link: `${EXTENSION_GITHUB_LINK}${releasesLatest}`,
 			});
 		}
 	} catch (error) {

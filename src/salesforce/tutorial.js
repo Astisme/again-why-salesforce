@@ -982,8 +982,8 @@ export async function checkTutorial(fromPopup = false) {
 		confirmLabel,
 		cancelLabel,
 		closeLabel,
-		start_title,
-		start_body,
+		title,
+		body,
 		continue_title,
 		continue_body,
 	] = await getTranslations([
@@ -998,8 +998,8 @@ export async function checkTutorial(fromPopup = false) {
 	if (tutorialProgress == null) {
 		if (
 			await sldsConfirm({
-				title: start_title,
-				body: start_body,
+				title,
+				body,
 				confirmLabel,
 				cancelLabel,
 				closeLabel,

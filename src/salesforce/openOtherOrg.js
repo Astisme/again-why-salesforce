@@ -12,7 +12,11 @@ import { getTranslations } from "../core/translator.js";
 import Tab from "../core/tab.js";
 import { ensureAllTabsAvailability } from "../core/tabContainer.js";
 
-import { generateOpenOtherOrgModal, MODAL_ID } from "./generator.js";
+import {
+	generateOpenOtherOrgModal,
+	MODAL_ID,
+	sldsConfirm,
+} from "./generator.js";
 import { showToast } from "./toast.js";
 import { getCurrentHref, getModalHanger } from "./sf-elements.js";
 
@@ -118,13 +122,21 @@ export async function createOpenOtherOrgModal(
 				url.startsWith("/") ? "" : SETUP_LIGHTNING
 			}${url}`,
 		);
-		const confirm_msg = await getTranslations([
-			[
+		const [confirm_msg, confirmLabel, cancelLabel, closeLabel] =
+			await getTranslations([
 				"confirm_another_org",
-				targetUrl,
-			],
-		], "\n");
-		if (confirm(confirm_msg)) {
+				"confirm",
+				"cancel",
+				"cancel_close",
+			]);
+		if (
+			await sldsConfirm({
+				body: [confirm_msg, targetUrl],
+				confirmLabel,
+				cancelLabel,
+				closeLabel,
+			})
+		) {
 			closeButton.click();
 			open(targetUrl, linkTarget ?? "_blank");
 		}

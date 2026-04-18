@@ -435,10 +435,10 @@ export function ensureTranslatorAvailability() {
  * When `translations` is an array, this returns an array of translated strings in the same order.
  *
  * @param {string[]|string} [translations=[]] - Translation key(s) to resolve.
- * @param {string|null} [connector=null] - the connector used to join the elements
+ * @param {string|null} [connector=" "] - the connector used to join the elements
  * @return {Promise<string[]|string>} Translated result matching the input shape.
  */
-export async function getTranslations(translations = [], connector = null) {
+export async function getTranslations(translations = [], connector = " ") {
 	const isArrayInput = Array.isArray(translations);
 	const translationKeys = isArrayInput ? translations : [translations];
 	if (translationKeys.length === 0) {

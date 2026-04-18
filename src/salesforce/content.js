@@ -70,6 +70,7 @@ import {
 	generateStyleFromSettings,
 	generateUpdateTabModal,
 	MODAL_ID,
+	sldsConfirm,
 } from "./generator.js";
 import { createImportModal } from "./import.js";
 import { createExportModal } from "./export.js";
@@ -708,12 +709,27 @@ async function showModalUpdateTab(
  * @return {Promise<void>} Resolves after the prompt and possible navigation.
  */
 async function promptUpdateExtension({ version, link, oldversion } = {}) {
-	const confirm_msg = await getTranslations([
-		`${oldversion} → ${version}`,
-		"confirm_update_extension",
-		link,
-	], "\n");
-	if (confirm(confirm_msg)) {
+	const [confirm_msg, [confirmLabel, cancelLabel, closeLabel]] = await Promise
+		.all([
+			getTranslations([
+				`${oldversion} → ${version}`,
+				"confirm_update_extension",
+				link,
+			], "\n"),
+			getTranslations([
+				"open_new_tab",
+				"cancel",
+				"cancel_close",
+			]),
+		]);
+	if (
+		await sldsConfirm({
+			body: confirm_msg,
+			confirmLabel,
+			cancelLabel,
+			closeLabel,
+		})
+	) {
 		open(link, "_blank");
 	}
 }
