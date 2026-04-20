@@ -3,6 +3,7 @@ import {
 	BROWSER,
 	EXTENSION_NAME,
 	HIDDEN_CLASS,
+	MODAL_ID,
 	TOAST_ERROR,
 	TOAST_WARNING,
 } from "../../core/constants.js";
@@ -20,7 +21,6 @@ import {
 	generateSldsFileInput,
 	generateSldsModal,
 	generateSldsModalWithTabList,
-	MODAL_ID,
 } from "../generator.js";
 import { createImportPureModule } from "../module/import-module.js";
 import { sf_afterSet } from "./content-runtime.js";

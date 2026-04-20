@@ -4,6 +4,7 @@ import {
 	CXM_UNPIN_TAB,
 	EXTENSION_GITHUB_LINK,
 	HIDDEN_CLASS,
+	MODAL_ID,
 	SALESFORCE_SETUP_HOME_MINI,
 	SETUP_LIGHTNING,
 	TOAST_WARNING,
@@ -34,11 +35,7 @@ import {
 	FAVOURITE_BUTTON_ID,
 	showFavouriteButton,
 } from "../favourite-manager.js";
-import {
-	generateTutorialElements,
-	MODAL_ID,
-	sldsConfirm,
-} from "../generator.js";
+import { generateTutorialElements, sldsConfirm } from "../generator.js";
 import {
 	ensureAllTabsAvailability,
 	TabContainer,

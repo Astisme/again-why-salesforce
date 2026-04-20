@@ -13,6 +13,7 @@ import {
 	HTTPS as _HTTPS,
 	LIGHTNING_FORCE_COM as _LIGHTNING_FORCE_COM,
 	LINK_NEW_BROWSER as _LINK_NEW_BROWSER,
+	MODAL_ID,
 	ORG_PINNED_TAB_STYLE_KEY as _ORG_PINNED_TAB_STYLE_KEY,
 	ORG_TAB_CLASS as _ORG_TAB_CLASS,
 	ORG_TAB_STYLE_KEY as _ORG_TAB_STYLE_KEY,
@@ -83,7 +84,6 @@ let getCurrentHref = _getCurrentHref;
 let updateModalBodyOverflow = _updateModalBodyOverflow;
 
 let TOAST_ID = "";
-export let MODAL_ID = "";
 let MODAL_CONFIRM_ID = "";
 
 /**
@@ -93,11 +93,24 @@ let MODAL_CONFIRM_ID = "";
  */
 function updateGeneratorIds() {
 	TOAST_ID = `${EXTENSION_NAME}-toast`;
-	MODAL_ID = `${EXTENSION_NAME}-modal`;
 	MODAL_CONFIRM_ID = `${EXTENSION_NAME}-modal-confirm`;
 }
 
 updateGeneratorIds();
+
+/**
+ * Assigns an override value only when it is not nullish.
+ *
+ * @template T
+ * @param {T | null | undefined} nextValue Candidate override value.
+ * @param {(value: T) => void} assignFn Setter for the target runtime dependency.
+ * @return {void}
+ */
+function applyOverride(nextValue, assignFn) {
+	if (nextValue != null) {
+		assignFn(nextValue);
+	}
+}
 
 /**
  * Generates a random number with the specified number of digits.
@@ -3092,97 +3105,121 @@ export function sldsConfirm({
  * @return {Record<string, unknown>} Generator module API.
  */
 export function createGeneratorModule(overrides = {}) {
-	if (overrides.BROWSER != null) BROWSER = overrides.BROWSER;
-	if (overrides.CXM_PIN_TAB != null) CXM_PIN_TAB = overrides.CXM_PIN_TAB;
-	if (overrides.CXM_REMOVE_TAB != null) {
-		CXM_REMOVE_TAB = overrides.CXM_REMOVE_TAB;
-	}
-	if (overrides.CXM_UNPIN_TAB != null) {
-		CXM_UNPIN_TAB = overrides.CXM_UNPIN_TAB;
-	}
-	if (overrides.EXTENSION_GITHUB_LINK != null) {
-		EXTENSION_GITHUB_LINK = overrides.EXTENSION_GITHUB_LINK;
-	}
-	if (overrides.EXTENSION_LABEL != null) {
-		EXTENSION_LABEL = overrides.EXTENSION_LABEL;
-	}
-	if (overrides.EXTENSION_NAME != null) {
-		EXTENSION_NAME = overrides.EXTENSION_NAME;
+	applyOverride(overrides.BROWSER, (value) => {
+		BROWSER = value;
+	});
+	applyOverride(overrides.CXM_PIN_TAB, (value) => {
+		CXM_PIN_TAB = value;
+	});
+	applyOverride(overrides.CXM_REMOVE_TAB, (value) => {
+		CXM_REMOVE_TAB = value;
+	});
+	applyOverride(overrides.CXM_UNPIN_TAB, (value) => {
+		CXM_UNPIN_TAB = value;
+	});
+	applyOverride(overrides.EXTENSION_GITHUB_LINK, (value) => {
+		EXTENSION_GITHUB_LINK = value;
+	});
+	applyOverride(overrides.EXTENSION_LABEL, (value) => {
+		EXTENSION_LABEL = value;
+	});
+	applyOverride(overrides.EXTENSION_NAME, (value) => {
+		EXTENSION_NAME = value;
 		updateGeneratorIds();
-	}
-	if (overrides.GENERIC_PINNED_TAB_STYLE_KEY != null) {
-		GENERIC_PINNED_TAB_STYLE_KEY = overrides.GENERIC_PINNED_TAB_STYLE_KEY;
-	}
-	if (overrides.GENERIC_TAB_STYLE_KEY != null) {
-		GENERIC_TAB_STYLE_KEY = overrides.GENERIC_TAB_STYLE_KEY;
-	}
-	if (overrides.HIDDEN_CLASS != null) HIDDEN_CLASS = overrides.HIDDEN_CLASS;
-	if (overrides.HTTPS != null) HTTPS = overrides.HTTPS;
-	if (overrides.LIGHTNING_FORCE_COM != null) {
-		LIGHTNING_FORCE_COM = overrides.LIGHTNING_FORCE_COM;
-	}
-	if (overrides.LINK_NEW_BROWSER != null) {
-		LINK_NEW_BROWSER = overrides.LINK_NEW_BROWSER;
-	}
-	if (overrides.ORG_PINNED_TAB_STYLE_KEY != null) {
-		ORG_PINNED_TAB_STYLE_KEY = overrides.ORG_PINNED_TAB_STYLE_KEY;
-	}
-	if (overrides.ORG_TAB_CLASS != null) {
-		ORG_TAB_CLASS = overrides.ORG_TAB_CLASS;
-	}
-	if (overrides.ORG_TAB_STYLE_KEY != null) {
-		ORG_TAB_STYLE_KEY = overrides.ORG_TAB_STYLE_KEY;
-	}
-	if (overrides.PIN_TAB_CLASS != null) {
-		PIN_TAB_CLASS = overrides.PIN_TAB_CLASS;
-	}
-	if (overrides.SETUP_LIGHTNING != null) {
-		SETUP_LIGHTNING = overrides.SETUP_LIGHTNING;
-	}
-	if (overrides.TAB_STYLE_HOVER != null) {
-		TAB_STYLE_HOVER = overrides.TAB_STYLE_HOVER;
-	}
-	if (overrides.TAB_STYLE_TOP != null) {
-		TAB_STYLE_TOP = overrides.TAB_STYLE_TOP;
-	}
-	if (overrides.TOAST_ERROR != null) TOAST_ERROR = overrides.TOAST_ERROR;
-	if (overrides.TOAST_SUCCESS != null) {
-		TOAST_SUCCESS = overrides.TOAST_SUCCESS;
-	}
-	if (overrides.USE_LIGHTNING_NAVIGATION != null) {
-		USE_LIGHTNING_NAVIGATION = overrides.USE_LIGHTNING_NAVIGATION;
-	}
-	if (overrides.Tab != null) Tab = overrides.Tab;
-	if (overrides.TabContainer != null) TabContainer = overrides.TabContainer;
-	if (overrides.ensureAllTabsAvailability != null) {
-		ensureAllTabsAvailability = overrides.ensureAllTabsAvailability;
-	}
-	if (overrides.getTranslations != null) {
-		getTranslations = overrides.getTranslations;
-	}
-	if (overrides.getCssRule != null) getCssRule = overrides.getCssRule;
-	if (overrides.getCssSelector != null) {
-		getCssSelector = overrides.getCssSelector;
-	}
-	if (overrides.getCurrentHref != null) {
-		getCurrentHref = overrides.getCurrentHref;
-	}
-	if (overrides.getPinnedSpecificKey != null) {
-		getPinnedSpecificKey = overrides.getPinnedSpecificKey;
-	}
-	if (overrides.getSettings != null) getSettings = overrides.getSettings;
-	if (overrides.getStyleSettings != null) {
-		getStyleSettings = overrides.getStyleSettings;
-	}
-	if (overrides.injectStyle != null) injectStyle = overrides.injectStyle;
-	if (overrides.performLightningRedirect != null) {
-		performLightningRedirect = overrides.performLightningRedirect;
-	}
-	if (overrides.showToast != null) showToast = overrides.showToast;
-	if (overrides.updateModalBodyOverflow != null) {
-		updateModalBodyOverflow = overrides.updateModalBodyOverflow;
-	}
-	if (overrides.open != null) globalThis.open = overrides.open;
+	});
+	applyOverride(overrides.GENERIC_PINNED_TAB_STYLE_KEY, (value) => {
+		GENERIC_PINNED_TAB_STYLE_KEY = value;
+	});
+	applyOverride(overrides.GENERIC_TAB_STYLE_KEY, (value) => {
+		GENERIC_TAB_STYLE_KEY = value;
+	});
+	applyOverride(overrides.HIDDEN_CLASS, (value) => {
+		HIDDEN_CLASS = value;
+	});
+	applyOverride(overrides.HTTPS, (value) => {
+		HTTPS = value;
+	});
+	applyOverride(overrides.LIGHTNING_FORCE_COM, (value) => {
+		LIGHTNING_FORCE_COM = value;
+	});
+	applyOverride(overrides.LINK_NEW_BROWSER, (value) => {
+		LINK_NEW_BROWSER = value;
+	});
+	applyOverride(overrides.ORG_PINNED_TAB_STYLE_KEY, (value) => {
+		ORG_PINNED_TAB_STYLE_KEY = value;
+	});
+	applyOverride(overrides.ORG_TAB_CLASS, (value) => {
+		ORG_TAB_CLASS = value;
+	});
+	applyOverride(overrides.ORG_TAB_STYLE_KEY, (value) => {
+		ORG_TAB_STYLE_KEY = value;
+	});
+	applyOverride(overrides.PIN_TAB_CLASS, (value) => {
+		PIN_TAB_CLASS = value;
+	});
+	applyOverride(overrides.SETUP_LIGHTNING, (value) => {
+		SETUP_LIGHTNING = value;
+	});
+	applyOverride(overrides.TAB_STYLE_HOVER, (value) => {
+		TAB_STYLE_HOVER = value;
+	});
+	applyOverride(overrides.TAB_STYLE_TOP, (value) => {
+		TAB_STYLE_TOP = value;
+	});
+	applyOverride(overrides.TOAST_ERROR, (value) => {
+		TOAST_ERROR = value;
+	});
+	applyOverride(overrides.TOAST_SUCCESS, (value) => {
+		TOAST_SUCCESS = value;
+	});
+	applyOverride(overrides.USE_LIGHTNING_NAVIGATION, (value) => {
+		USE_LIGHTNING_NAVIGATION = value;
+	});
+	applyOverride(overrides.Tab, (value) => {
+		Tab = value;
+	});
+	applyOverride(overrides.TabContainer, (value) => {
+		TabContainer = value;
+	});
+	applyOverride(overrides.ensureAllTabsAvailability, (value) => {
+		ensureAllTabsAvailability = value;
+	});
+	applyOverride(overrides.getTranslations, (value) => {
+		getTranslations = value;
+	});
+	applyOverride(overrides.getCssRule, (value) => {
+		getCssRule = value;
+	});
+	applyOverride(overrides.getCssSelector, (value) => {
+		getCssSelector = value;
+	});
+	applyOverride(overrides.getCurrentHref, (value) => {
+		getCurrentHref = value;
+	});
+	applyOverride(overrides.getPinnedSpecificKey, (value) => {
+		getPinnedSpecificKey = value;
+	});
+	applyOverride(overrides.getSettings, (value) => {
+		getSettings = value;
+	});
+	applyOverride(overrides.getStyleSettings, (value) => {
+		getStyleSettings = value;
+	});
+	applyOverride(overrides.injectStyle, (value) => {
+		injectStyle = value;
+	});
+	applyOverride(overrides.performLightningRedirect, (value) => {
+		performLightningRedirect = value;
+	});
+	applyOverride(overrides.showToast, (value) => {
+		showToast = value;
+	});
+	applyOverride(overrides.updateModalBodyOverflow, (value) => {
+		updateModalBodyOverflow = value;
+	});
+	applyOverride(overrides.open, (value) => {
+		globalThis.open = value;
+	});
 	oldSettings = null;
 
 	return {

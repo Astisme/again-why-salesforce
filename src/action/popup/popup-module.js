@@ -408,8 +408,8 @@ export function getPopupRuntimeDefaults() {
  * @param {Object} [options.browser] Browser runtime.
  * @param {(...args: unknown[]) => Promise<boolean>} [options.areFramePatternsAllowedFn] Permission checker for frame patterns.
  * @param {() => void} [options.closePopupFn] Popup close callback.
- * @param {Document | { querySelector: (selector: string) => HTMLElement | null }} [options.documentRef] Document reference used by the popup.
- * @param {(messageKey: string) => Promise<string>} [options.getTranslationsFn] Translation lookup callback.
+ * @param {{ getElementById?: (id: string) => unknown; querySelector?: (selector: string) => unknown } | null} [options.documentRef] Document reference used by the popup.
+ * @param {(messageKey: string | string[]) => Promise<string | string[]>} [options.getTranslationsFn] Translation lookup callback.
  * @param {() => Promise<{ ison: boolean }>} [options.isOnSalesforceSetupFn] Salesforce setup page checker.
  * @param {Location | { href?: string }} [options.locationRef] Location reference used for redirects.
  * @param {() => void} [options.openSettingsPageFn] Settings page opener.

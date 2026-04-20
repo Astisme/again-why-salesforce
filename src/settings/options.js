@@ -1,7 +1,4 @@
-import { createOptionsModule } from "./options-module.js";
-import { createOptionsRuntime, runOptionsRuntime } from "./options-runtime.js";
-
-export { createOptionsModule, createOptionsRuntime, runOptionsRuntime };
+import { runOptionsRuntime } from "./options-runtime.js";
 
 /**
  * Bootstraps the options page when auto-bootstrap is enabled.

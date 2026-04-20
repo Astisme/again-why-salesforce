@@ -4,6 +4,7 @@ import {
 	CXM_REMOVE_TAB,
 	CXM_UNPIN_TAB,
 	HIDDEN_CLASS,
+	MODAL_ID,
 	PIN_TAB_CLASS,
 	TOAST_ERROR,
 	TOAST_WARNING,
@@ -27,7 +28,6 @@ import {
 	createManageTabRow,
 	generateManageTabsModal,
 	handleLightningLinkClick,
-	MODAL_ID,
 } from "../generator.js";
 import {
 	makeDuplicatesBold,

@@ -4,6 +4,7 @@ import {
 	CXM_REMOVE_TAB as _CXM_REMOVE_TAB,
 	CXM_UNPIN_TAB as _CXM_UNPIN_TAB,
 	HIDDEN_CLASS as _HIDDEN_CLASS,
+	MODAL_ID as _MODAL_ID,
 	PIN_TAB_CLASS as _PIN_TAB_CLASS,
 	TOAST_ERROR as _TOAST_ERROR,
 	TOAST_WARNING as _TOAST_WARNING,
@@ -31,7 +32,6 @@ import {
 	createManageTabRow as _createManageTabRow,
 	generateManageTabsModal as _generateManageTabsModal,
 	handleLightningLinkClick as _handleLightningLinkClick,
-	MODAL_ID as _MODAL_ID,
 } from "../generator.js";
 import {
 	makeDuplicatesBold as _makeDuplicatesBold,

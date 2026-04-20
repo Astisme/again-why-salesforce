@@ -2,6 +2,7 @@
 import {
 	HTTPS,
 	LIGHTNING_FORCE_COM,
+	MODAL_ID,
 	SALESFORCE_URL_PATTERN,
 	SETUP_LIGHTNING,
 	TOAST_ERROR,
@@ -12,7 +13,7 @@ import { getTranslations } from "../../core/translator.js";
 import Tab from "../../core/tab.js";
 import { ensureAllTabsAvailability } from "../../core/tabContainer.js";
 
-import { generateOpenOtherOrgModal, MODAL_ID } from "../generator.js";
+import { generateOpenOtherOrgModal } from "../generator.js";
 import {
 	createOpenOtherOrgModule as createOpenOtherOrgPureModule,
 } from "../module/openOtherOrg-module.js";

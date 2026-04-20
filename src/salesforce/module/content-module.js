@@ -28,6 +28,7 @@ import {
 	EXTENSION_NAME as _EXTENSION_NAME,
 	HAS_ORG_TAB as _HAS_ORG_TAB,
 	LINK_NEW_BROWSER as _LINK_NEW_BROWSER,
+	MODAL_ID as _MODAL_ID,
 	SETUP_LIGHTNING as _SETUP_LIGHTNING,
 	TAB_ON_LEFT as _TAB_ON_LEFT,
 	TOAST_ERROR as _TOAST_ERROR,
@@ -69,7 +70,6 @@ import {
 	generateRowTemplate as _generateRowTemplate,
 	generateStyleFromSettings as _generateStyleFromSettings,
 	generateUpdateTabModal as _generateUpdateTabModal,
-	MODAL_ID as _MODAL_ID,
 } from "../generator.js";
 import { createOpenOtherOrgModal as _createOpenOtherOrgModal } from "../openOtherOrg.js";
 import { executeOncePerDay as _executeOncePerDay } from "../once-a-day.js";

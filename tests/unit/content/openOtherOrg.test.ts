@@ -664,9 +664,7 @@ Deno.test({
 			const openOtherOrgModule = await import(
 				"../../../src/salesforce/openOtherOrg.js"
 			);
-			const { MODAL_ID } = await import(
-				"../../../src/salesforce/generator.js"
-			);
+			const { MODAL_ID } = await import("../../../src/core/constants.js");
 
 			await openOtherOrgModule.createOpenOtherOrgModal({
 				label: "Users",

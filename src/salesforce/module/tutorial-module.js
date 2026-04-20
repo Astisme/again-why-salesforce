@@ -4,6 +4,7 @@ import {
 	CXM_UNPIN_TAB as _CXM_UNPIN_TAB,
 	EXTENSION_GITHUB_LINK as _EXTENSION_GITHUB_LINK,
 	HIDDEN_CLASS as _HIDDEN_CLASS,
+	MODAL_ID as _MODAL_ID,
 	SALESFORCE_SETUP_HOME_MINI as _SALESFORCE_SETUP_HOME_MINI,
 	SETUP_LIGHTNING as _SETUP_LIGHTNING,
 	TOAST_WARNING as _TOAST_WARNING,
@@ -40,7 +41,6 @@ import {
 } from "../favourite-manager.js";
 import {
 	generateTutorialElements as _generateTutorialElements,
-	MODAL_ID as _MODAL_ID,
 	sldsConfirm as _sldsConfirm,
 } from "../generator.js";
 import {

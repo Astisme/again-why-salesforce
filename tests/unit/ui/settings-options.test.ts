@@ -458,7 +458,9 @@ async function loadOptions(
 	setGlobal("chrome", browserMock);
 	setGlobal("document", documentMock);
 
-	const optionsModule = await import("../../../src/settings/options.js");
+	const optionsModule = await import(
+		"../../../src/settings/options-module.js"
+	);
 	const module = optionsModule.createOptionsModule(
 		{
 			constants: {
