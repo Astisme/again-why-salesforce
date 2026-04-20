@@ -301,14 +301,15 @@ export function createReviewSponsorModule({
 				sponsorMsg,
 				allTabs,
 				usageDays,
-				translatorLanguage,
 			] = await Promise.all([
 				getTranslationsFn("write_review"),
 				getTranslationsFn("send_tip"),
 				ensureAllTabsAvailabilityFn(),
 				this._getExtensionUsageDays(),
-				getTranslatorAttributeFn("currentLanguage"),
 			]);
+			const translatorLanguage = getTranslatorAttributeFn(
+				"currentLanguage",
+			);
 			showReviewOrSponsor(Object.assign(result, {
 				allTabs,
 				translatorLanguage,

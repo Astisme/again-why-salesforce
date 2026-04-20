@@ -13,8 +13,8 @@ import {
 import {
 	createPopupModule,
 	runPopup,
-	runPopupWithInjectedOptions,
 } from "../../../src/action/popup/popup-runtime.js";
+import { runPopupWithInjectedOptions } from "../../../src/action/popup/popup-module.js";
 import {
 	createMockWindow,
 	MockDocument,

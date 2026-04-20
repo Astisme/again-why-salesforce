@@ -1756,6 +1756,21 @@ function resetOptionsReferences() {
 }
 
 /**
+ * Applies named overrides using setter callbacks.
+ *
+ * @param {Record<string, unknown>} source Source override values.
+ * @param {Record<string, (value: unknown) => void>} setters Setter callbacks.
+ */
+function applyNamedOverrides(source, setters) {
+	for (const [name, setter] of Object.entries(setters)) {
+		const value = source[name];
+		if (value != null) {
+			setter(value);
+		}
+	}
+}
+
+/**
  * Applies dependency and global overrides for tests.
  *
  * @param {Object} [overrides={}] Override object passed by tests.
@@ -1764,158 +1779,182 @@ function applyOptionsOverrides(overrides = {}) {
 	const constants = overrides.constants ?? {};
 	const functions = overrides.functions ?? {};
 	const globals = overrides.globals ?? {};
-	if (globals.document != null) globalThis.document = globals.document;
-	if (globals.clearTimeout != null) {
-		globalThis.clearTimeout = globals.clearTimeout;
-	}
-	if (globals.setTimeout != null) globalThis.setTimeout = globals.setTimeout;
-	if (globals.console != null) globalThis.console = globals.console;
+	globalThis.document = globals.document ?? globalThis.document;
+	globalThis.clearTimeout = globals.clearTimeout ?? globalThis.clearTimeout;
+	globalThis.setTimeout = globals.setTimeout ?? globalThis.setTimeout;
+	globalThis.console = globals.console ?? globalThis.console;
 
-	if (constants.EXTENSION_LAST_ACTIVE_DAY != null) {
-		EXTENSION_LAST_ACTIVE_DAY = constants.EXTENSION_LAST_ACTIVE_DAY;
-	}
-	if (constants.EXTENSION_NAME != null) {
-		EXTENSION_NAME = constants.EXTENSION_NAME;
-	}
-	if (constants.EXTENSION_USAGE_DAYS != null) {
-		EXTENSION_USAGE_DAYS = constants.EXTENSION_USAGE_DAYS;
-	}
-	if (constants.FOLLOW_SF_LANG != null) {
-		FOLLOW_SF_LANG = constants.FOLLOW_SF_LANG;
-	}
-	if (constants.GENERIC_PINNED_TAB_STYLE_KEY != null) {
-		GENERIC_PINNED_TAB_STYLE_KEY = constants.GENERIC_PINNED_TAB_STYLE_KEY;
-	}
-	if (constants.GENERIC_TAB_STYLE_KEY != null) {
-		GENERIC_TAB_STYLE_KEY = constants.GENERIC_TAB_STYLE_KEY;
-	}
-	if (constants.HIDDEN_CLASS != null) HIDDEN_CLASS = constants.HIDDEN_CLASS;
-	if (constants.LINK_NEW_BROWSER != null) {
-		LINK_NEW_BROWSER = constants.LINK_NEW_BROWSER;
-	}
-	if (constants.NO_RELEASE_NOTES != null) {
-		NO_RELEASE_NOTES = constants.NO_RELEASE_NOTES;
-	}
-	if (constants.NO_UPDATE_NOTIFICATION != null) {
-		NO_UPDATE_NOTIFICATION = constants.NO_UPDATE_NOTIFICATION;
-	}
-	if (constants.ORG_PINNED_TAB_STYLE_KEY != null) {
-		ORG_PINNED_TAB_STYLE_KEY = constants.ORG_PINNED_TAB_STYLE_KEY;
-	}
-	if (constants.ORG_TAB_STYLE_KEY != null) {
-		ORG_TAB_STYLE_KEY = constants.ORG_TAB_STYLE_KEY;
-	}
-	if (constants.PERSIST_SORT != null) PERSIST_SORT = constants.PERSIST_SORT;
-	if (constants.POPUP_LOGIN_NEW_TAB != null) {
-		POPUP_LOGIN_NEW_TAB = constants.POPUP_LOGIN_NEW_TAB;
-	}
-	if (constants.POPUP_OPEN_LOGIN != null) {
-		POPUP_OPEN_LOGIN = constants.POPUP_OPEN_LOGIN;
-	}
-	if (constants.POPUP_OPEN_SETUP != null) {
-		POPUP_OPEN_SETUP = constants.POPUP_OPEN_SETUP;
-	}
-	if (constants.POPUP_SETUP_NEW_TAB != null) {
-		POPUP_SETUP_NEW_TAB = constants.POPUP_SETUP_NEW_TAB;
-	}
-	if (constants.PREVENT_ANALYTICS != null) {
-		PREVENT_ANALYTICS = constants.PREVENT_ANALYTICS;
-	}
-	if (constants.PREVENT_DEFAULT_OVERRIDE != null) {
-		PREVENT_DEFAULT_OVERRIDE = constants.PREVENT_DEFAULT_OVERRIDE;
-	}
-	if (constants.SETTINGS_KEY != null) SETTINGS_KEY = constants.SETTINGS_KEY;
-	if (constants.SKIP_LINK_DETECTION != null) {
-		SKIP_LINK_DETECTION = constants.SKIP_LINK_DETECTION;
-	}
-	if (constants.SLDS_ACTIVE != null) SLDS_ACTIVE = constants.SLDS_ACTIVE;
-	if (constants.TAB_ADD_FRONT != null) {
-		TAB_ADD_FRONT = constants.TAB_ADD_FRONT;
-	}
-	if (constants.TAB_AS_ORG != null) TAB_AS_ORG = constants.TAB_AS_ORG;
-	if (constants.TAB_GENERIC_STYLE != null) {
-		TAB_GENERIC_STYLE = constants.TAB_GENERIC_STYLE;
-	}
-	if (constants.TAB_ON_LEFT != null) TAB_ON_LEFT = constants.TAB_ON_LEFT;
-	if (constants.TAB_ORG_STYLE != null) {
-		TAB_ORG_STYLE = constants.TAB_ORG_STYLE;
-	}
-	if (constants.TAB_STYLE_BACKGROUND != null) {
-		TAB_STYLE_BACKGROUND = constants.TAB_STYLE_BACKGROUND;
-	}
-	if (constants.TAB_STYLE_BOLD != null) {
-		TAB_STYLE_BOLD = constants.TAB_STYLE_BOLD;
-	}
-	if (constants.TAB_STYLE_BORDER != null) {
-		TAB_STYLE_BORDER = constants.TAB_STYLE_BORDER;
-	}
-	if (constants.TAB_STYLE_COLOR != null) {
-		TAB_STYLE_COLOR = constants.TAB_STYLE_COLOR;
-	}
-	if (constants.TAB_STYLE_HOVER != null) {
-		TAB_STYLE_HOVER = constants.TAB_STYLE_HOVER;
-	}
-	if (constants.TAB_STYLE_ITALIC != null) {
-		TAB_STYLE_ITALIC = constants.TAB_STYLE_ITALIC;
-	}
-	if (constants.TAB_STYLE_SHADOW != null) {
-		TAB_STYLE_SHADOW = constants.TAB_STYLE_SHADOW;
-	}
-	if (constants.TAB_STYLE_TOP != null) {
-		TAB_STYLE_TOP = constants.TAB_STYLE_TOP;
-	}
-	if (constants.TAB_STYLE_UNDERLINE != null) {
-		TAB_STYLE_UNDERLINE = constants.TAB_STYLE_UNDERLINE;
-	}
-	if (constants.USE_LIGHTNING_NAVIGATION != null) {
-		USE_LIGHTNING_NAVIGATION = constants.USE_LIGHTNING_NAVIGATION;
-	}
-	if (constants.USER_LANGUAGE != null) {
-		USER_LANGUAGE = constants.USER_LANGUAGE;
-	}
-	if (constants.WHAT_SET != null) WHAT_SET = constants.WHAT_SET;
+	applyNamedOverrides(constants, {
+		EXTENSION_LAST_ACTIVE_DAY: (value) => {
+			EXTENSION_LAST_ACTIVE_DAY = value;
+		},
+		EXTENSION_NAME: (value) => {
+			EXTENSION_NAME = value;
+		},
+		EXTENSION_USAGE_DAYS: (value) => {
+			EXTENSION_USAGE_DAYS = value;
+		},
+		FOLLOW_SF_LANG: (value) => {
+			FOLLOW_SF_LANG = value;
+		},
+		GENERIC_PINNED_TAB_STYLE_KEY: (value) => {
+			GENERIC_PINNED_TAB_STYLE_KEY = value;
+		},
+		GENERIC_TAB_STYLE_KEY: (value) => {
+			GENERIC_TAB_STYLE_KEY = value;
+		},
+		HIDDEN_CLASS: (value) => {
+			HIDDEN_CLASS = value;
+		},
+		LINK_NEW_BROWSER: (value) => {
+			LINK_NEW_BROWSER = value;
+		},
+		NO_RELEASE_NOTES: (value) => {
+			NO_RELEASE_NOTES = value;
+		},
+		NO_UPDATE_NOTIFICATION: (value) => {
+			NO_UPDATE_NOTIFICATION = value;
+		},
+		ORG_PINNED_TAB_STYLE_KEY: (value) => {
+			ORG_PINNED_TAB_STYLE_KEY = value;
+		},
+		ORG_TAB_STYLE_KEY: (value) => {
+			ORG_TAB_STYLE_KEY = value;
+		},
+		PERSIST_SORT: (value) => {
+			PERSIST_SORT = value;
+		},
+		POPUP_LOGIN_NEW_TAB: (value) => {
+			POPUP_LOGIN_NEW_TAB = value;
+		},
+		POPUP_OPEN_LOGIN: (value) => {
+			POPUP_OPEN_LOGIN = value;
+		},
+		POPUP_OPEN_SETUP: (value) => {
+			POPUP_OPEN_SETUP = value;
+		},
+		POPUP_SETUP_NEW_TAB: (value) => {
+			POPUP_SETUP_NEW_TAB = value;
+		},
+		PREVENT_ANALYTICS: (value) => {
+			PREVENT_ANALYTICS = value;
+		},
+		PREVENT_DEFAULT_OVERRIDE: (value) => {
+			PREVENT_DEFAULT_OVERRIDE = value;
+		},
+		SETTINGS_KEY: (value) => {
+			SETTINGS_KEY = value;
+		},
+		SKIP_LINK_DETECTION: (value) => {
+			SKIP_LINK_DETECTION = value;
+		},
+		SLDS_ACTIVE: (value) => {
+			SLDS_ACTIVE = value;
+		},
+		TAB_ADD_FRONT: (value) => {
+			TAB_ADD_FRONT = value;
+		},
+		TAB_AS_ORG: (value) => {
+			TAB_AS_ORG = value;
+		},
+		TAB_GENERIC_STYLE: (value) => {
+			TAB_GENERIC_STYLE = value;
+		},
+		TAB_ON_LEFT: (value) => {
+			TAB_ON_LEFT = value;
+		},
+		TAB_ORG_STYLE: (value) => {
+			TAB_ORG_STYLE = value;
+		},
+		TAB_STYLE_BACKGROUND: (value) => {
+			TAB_STYLE_BACKGROUND = value;
+		},
+		TAB_STYLE_BOLD: (value) => {
+			TAB_STYLE_BOLD = value;
+		},
+		TAB_STYLE_BORDER: (value) => {
+			TAB_STYLE_BORDER = value;
+		},
+		TAB_STYLE_COLOR: (value) => {
+			TAB_STYLE_COLOR = value;
+		},
+		TAB_STYLE_HOVER: (value) => {
+			TAB_STYLE_HOVER = value;
+		},
+		TAB_STYLE_ITALIC: (value) => {
+			TAB_STYLE_ITALIC = value;
+		},
+		TAB_STYLE_SHADOW: (value) => {
+			TAB_STYLE_SHADOW = value;
+		},
+		TAB_STYLE_TOP: (value) => {
+			TAB_STYLE_TOP = value;
+		},
+		TAB_STYLE_UNDERLINE: (value) => {
+			TAB_STYLE_UNDERLINE = value;
+		},
+		USE_LIGHTNING_NAVIGATION: (value) => {
+			USE_LIGHTNING_NAVIGATION = value;
+		},
+		USER_LANGUAGE: (value) => {
+			USER_LANGUAGE = value;
+		},
+		WHAT_SET: (value) => {
+			WHAT_SET = value;
+		},
+	});
 
-	if (functions.areFramePatternsAllowed != null) {
-		areFramePatternsAllowed = functions.areFramePatternsAllowed;
-	}
-	if (functions.getCssRule != null) getCssRule = functions.getCssRule;
-	if (functions.getCssSelector != null) {
-		getCssSelector = functions.getCssSelector;
-	}
-	if (functions.getPinnedSpecificKey != null) {
-		getPinnedSpecificKey = functions.getPinnedSpecificKey;
-	}
-	if (functions.getSettings != null) getSettings = functions.getSettings;
-	if (functions.getStyleSettings != null) {
-		getStyleSettings = functions.getStyleSettings;
-	}
-	if (functions.injectStyle != null) injectStyle = functions.injectStyle;
-	if (functions.isExportAllowed != null) {
-		isExportAllowed = functions.isExportAllowed;
-	}
-	if (functions.isGenericKey != null) isGenericKey = functions.isGenericKey;
-	if (functions.isPinnedKey != null) isPinnedKey = functions.isPinnedKey;
-	if (functions.isStyleKey != null) isStyleKey = functions.isStyleKey;
-	if (functions.requestCookiesPermission != null) {
-		requestCookiesPermission = functions.requestCookiesPermission;
-	}
-	if (functions.requestExportPermission != null) {
-		requestExportPermission = functions.requestExportPermission;
-	}
-	if (functions.requestFramePatternsPermission != null) {
-		requestFramePatternsPermission =
-			functions.requestFramePatternsPermission;
-	}
-	if (functions.sendExtensionMessage != null) {
-		sendExtensionMessage = functions.sendExtensionMessage;
-	}
+	applyNamedOverrides(functions, {
+		areFramePatternsAllowed: (value) => {
+			areFramePatternsAllowed = value;
+		},
+		getCssRule: (value) => {
+			getCssRule = value;
+		},
+		getCssSelector: (value) => {
+			getCssSelector = value;
+		},
+		getPinnedSpecificKey: (value) => {
+			getPinnedSpecificKey = value;
+		},
+		getSettings: (value) => {
+			getSettings = value;
+		},
+		getStyleSettings: (value) => {
+			getStyleSettings = value;
+		},
+		injectStyle: (value) => {
+			injectStyle = value;
+		},
+		isExportAllowed: (value) => {
+			isExportAllowed = value;
+		},
+		isGenericKey: (value) => {
+			isGenericKey = value;
+		},
+		isPinnedKey: (value) => {
+			isPinnedKey = value;
+		},
+		isStyleKey: (value) => {
+			isStyleKey = value;
+		},
+		requestCookiesPermission: (value) => {
+			requestCookiesPermission = value;
+		},
+		requestExportPermission: (value) => {
+			requestExportPermission = value;
+		},
+		requestFramePatternsPermission: (value) => {
+			requestFramePatternsPermission = value;
+		},
+		sendExtensionMessage: (value) => {
+			sendExtensionMessage = value;
+		},
+	});
 
-	if (overrides.ensureTranslatorAvailability != null) {
-		ensureTranslatorAvailability = overrides.ensureTranslatorAvailability;
-	}
-	if (overrides.getTranslations != null) {
-		getTranslations = overrides.getTranslations;
-	}
+	ensureTranslatorAvailability = overrides.ensureTranslatorAvailability ??
+		ensureTranslatorAvailability;
+	getTranslations = overrides.getTranslations ?? getTranslations;
 }
 
 /**

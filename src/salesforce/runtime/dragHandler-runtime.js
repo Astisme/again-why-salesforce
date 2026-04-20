@@ -1,4 +1,16 @@
 /**
+ * Handles dragover events.
+ *
+ * @param {DragEvent} event Dragover event.
+ * @return {boolean} Always `false`.
+ */
+function handleDragOver(event) {
+	event.preventDefault();
+	event.dataTransfer.dropEffect = "move";
+	return false;
+}
+
+/**
  * Creates drag-and-drop handlers with injected dependencies.
  *
  * @param {Object} options Runtime dependencies.
@@ -51,18 +63,6 @@ export function createDragHandlerModule({
 		} else {
 			event.preventDefault();
 		}
-	}
-
-	/**
-	 * Handles dragover events.
-	 *
-	 * @param {DragEvent} event Dragover event.
-	 * @return {boolean} Always `false`.
-	 */
-	function handleDragOver(event) {
-		event.preventDefault();
-		event.dataTransfer.dropEffect = "move";
-		return false;
 	}
 
 	/**

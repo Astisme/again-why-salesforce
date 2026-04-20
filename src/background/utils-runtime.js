@@ -1,6 +1,33 @@
 "use strict";
 
 /**
+ * Compares semantic versions and checks whether `latest` is newer than `current`.
+ *
+ * @param {string} latest Latest version.
+ * @param {string} current Current version.
+ * @return {boolean} `true` when latest is newer.
+ */
+function _isNewerVersion(latest, current) {
+	const latestParts = latest.split(".").map(Number);
+	const currentParts = current.split(".").map(Number);
+	for (
+		let index = 0;
+		index < Math.max(latestParts.length, currentParts.length);
+		index++
+	) {
+		const latestPart = latestParts[index] ?? 0;
+		const currentPart = currentParts[index] ?? 0;
+		if (latestPart > currentPart) {
+			return true;
+		}
+		if (latestPart < currentPart) {
+			return false;
+		}
+	}
+	return false;
+}
+
+/**
  * Creates background utility handlers with injected runtime dependencies.
  *
  * @param {Object} options Runtime dependencies.
@@ -251,33 +278,6 @@ export function createBackgroundUtilsModule({
 			});
 		}
 		return isAllowed;
-	}
-
-	/**
-	 * Compares semantic versions and checks whether `latest` is newer than `current`.
-	 *
-	 * @param {string} latest Latest version.
-	 * @param {string} current Current version.
-	 * @return {boolean} `true` when latest is newer.
-	 */
-	function _isNewerVersion(latest, current) {
-		const latestParts = latest.split(".").map(Number);
-		const currentParts = current.split(".").map(Number);
-		for (
-			let index = 0;
-			index < Math.max(latestParts.length, currentParts.length);
-			index++
-		) {
-			const latestPart = latestParts[index] ?? 0;
-			const currentPart = currentParts[index] ?? 0;
-			if (latestPart > currentPart) {
-				return true;
-			}
-			if (latestPart < currentPart) {
-				return false;
-			}
-		}
-		return false;
 	}
 
 	/**

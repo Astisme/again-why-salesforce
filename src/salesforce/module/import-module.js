@@ -36,6 +36,108 @@ function buildImportIds(extensionName) {
 }
 
 /**
+ * Maps imported tab objects to valid tab keys.
+ *
+ * @param {Array<Record<string, unknown>>} [tabs=[]] Source tabs.
+ * @param {Object} [mapping={}] Key mapping.
+ * @param {string} [mapping.label="label"] Label key.
+ * @param {string} [mapping.url="url"] URL key.
+ * @param {string} [mapping.org="org"] Org key.
+ * @return {Array<Record<string, unknown>>} Mapped tabs.
+ */
+function makeValidTabs(tabs = [], {
+	label = "label",
+	url = "url",
+	org = "org",
+} = {}) {
+	return tabs?.map((tab) => ({
+		label: tab[label],
+		url: tab[url],
+		org: tab[org],
+	})) ?? [];
+}
+
+/**
+ * Checks if a tab uses WhySalesforce export keys.
+ *
+ * @param {Record<string, unknown>} tab Tab to validate.
+ * @return {boolean} Whether it matches.
+ */
+function isWhySalesforceTab(tab) {
+	return tab?.label == null && tab?.tabTitle != null;
+}
+
+/**
+ * Checks if a tab uses Salesforce Easy Navigator export keys.
+ *
+ * @param {Record<string, unknown>} tab Tab to validate.
+ * @return {boolean} Whether it matches.
+ */
+function isSalesforceEasyNavigatorTab(tab) {
+	return tab?.label == null && tab?.title != null;
+}
+
+/**
+ * Normalizes file-like inputs into a plain array.
+ *
+ * @param {File | File[] | FileList | null | undefined} files Input files.
+ * @return {File[]} Normalized file list.
+ */
+function normalizeFiles(files) {
+	if (files == null) {
+		return [];
+	}
+	if (Array.isArray(files)) {
+		return files;
+	}
+	if (typeof files.length === "number") {
+		return Array.from(files);
+	}
+	return [files];
+}
+
+/**
+ * Returns true when the provided file can be treated as JSON.
+ *
+ * @param {File} file File to validate.
+ * @return {boolean} Whether it is a JSON file.
+ */
+function isJsonFile(file) {
+	const fileName = file?.name?.toLowerCase?.() ?? "";
+	return file?.type === "application/json" || fileName.endsWith(".json");
+}
+
+/**
+ * Prevents default drag behavior.
+ *
+ * @param {Event} event Drag event.
+ * @return {void}
+ */
+function preventDragDefaults(event) {
+	event.preventDefault?.();
+	event.stopPropagation?.();
+}
+
+/**
+ * Serializes imported tab-container-like values to JSON.
+ *
+ * @param {unknown} tabs Tab container instance or JSON-serializable value.
+ * @return {string} Serialized tab payload.
+ */
+function serializeImportedTabs(tabs) {
+	if (typeof tabs?.toJSON === "function") {
+		return JSON.stringify(tabs.toJSON());
+	}
+	if (
+		typeof tabs?.toString === "function" &&
+		tabs.toString !== Object.prototype.toString
+	) {
+		return tabs.toString();
+	}
+	return JSON.stringify(tabs);
+}
+
+/**
  * Creates the import module API with injected dependencies.
  *
  * @param {Object} [options={}] Runtime options and dependencies.
@@ -143,7 +245,7 @@ export function createImportPureModule({
 	documentRef = globalThis.document,
 } = {}) {
 	const ids = buildImportIds(extensionName);
-	let inputModalParent = undefined;
+	let inputModalParent;
 
 	/**
 	 * Generates an SLDS import modal for importing tabs.
@@ -235,7 +337,7 @@ export function createImportPureModule({
 		let importedNum = 0;
 		if (tabs instanceof tabContainerRef) {
 			importedNum = await allTabs.importTabs(
-				tabs.toString(),
+				serializeImportedTabs(tabs),
 				importConfig,
 			);
 		} else {
@@ -256,28 +358,6 @@ export function createImportPureModule({
 	}
 
 	/**
-	 * Maps imported tab objects to valid tab keys.
-	 *
-	 * @param {Array<Record<string, unknown>>} [tabs=[]] Source tabs.
-	 * @param {Object} [mapping={}] Key mapping.
-	 * @param {string} [mapping.label="label"] Label key.
-	 * @param {string} [mapping.url="url"] URL key.
-	 * @param {string} [mapping.org="org"] Org key.
-	 * @return {Array<Record<string, unknown>>} Mapped tabs.
-	 */
-	function makeValidTabs(tabs = [], {
-		label = "label",
-		url = "url",
-		org = "org",
-	} = {}) {
-		return tabs?.map((tab) => ({
-			label: tab[label],
-			url: tab[url],
-			org: tab[org],
-		})) ?? [];
-	}
-
-	/**
 	 * Extracts extension tabs with a custom mapping.
 	 *
 	 * @param {unknown} tabs Source tab list.
@@ -289,26 +369,6 @@ export function createImportPureModule({
 		return Array.isArray(tabs) && tabs.length > 0 && tabs.every(validator)
 			? makeValidTabs(tabs, mapping)
 			: [];
-	}
-
-	/**
-	 * Checks if a tab uses WhySalesforce export keys.
-	 *
-	 * @param {Record<string, unknown>} tab Tab to validate.
-	 * @return {boolean} Whether it matches.
-	 */
-	function isWhySalesforceTab(tab) {
-		return tab?.label == null && tab?.tabTitle != null;
-	}
-
-	/**
-	 * Checks if a tab uses Salesforce Easy Navigator export keys.
-	 *
-	 * @param {Record<string, unknown>} tab Tab to validate.
-	 * @return {boolean} Whether it matches.
-	 */
-	function isSalesforceEasyNavigatorTab(tab) {
-		return tab?.label == null && tab?.title != null;
 	}
 
 	/**
@@ -424,36 +484,6 @@ export function createImportPureModule({
 	}
 
 	/**
-	 * Normalizes file-like inputs into a plain array.
-	 *
-	 * @param {File | File[] | FileList | null | undefined} files Input files.
-	 * @return {File[]} Normalized file list.
-	 */
-	function normalizeFiles(files) {
-		if (files == null) {
-			return [];
-		}
-		if (Array.isArray(files)) {
-			return files;
-		}
-		if (typeof files.length === "number") {
-			return Array.from(files);
-		}
-		return [files];
-	}
-
-	/**
-	 * Returns true when the provided file can be treated as JSON.
-	 *
-	 * @param {File} file File to validate.
-	 * @return {boolean} Whether it is a JSON file.
-	 */
-	function isJsonFile(file) {
-		const fileName = file?.name?.toLowerCase?.() ?? "";
-		return file?.type === "application/json" || fileName.endsWith(".json");
-	}
-
-	/**
 	 * Reads and processes JSON files.
 	 *
 	 * @param {File | File[]} files File(s) to process.
@@ -526,17 +556,6 @@ export function createImportPureModule({
 	function readChangeOrDropFiles(event) {
 		event.preventDefault();
 		return readFile(getFilesFromChangeOrDropEvent(event));
-	}
-
-	/**
-	 * Prevents default drag behavior.
-	 *
-	 * @param {Event} event Drag event.
-	 * @return {void}
-	 */
-	function preventDragDefaults(event) {
-		event.preventDefault?.();
-		event.stopPropagation?.();
 	}
 
 	/**

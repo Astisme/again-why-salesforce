@@ -217,7 +217,7 @@ function applyNonNullOverrides(target, source = {}) {
  */
 async function defaultCheckTutorial(fromPopup = false) {
 	const tutorialModule = await import("../tutorial.js");
-	await tutorialModule.checkTutorial(fromPopup);
+	return tutorialModule.checkTutorial(fromPopup);
 }
 
 /**
@@ -228,7 +228,7 @@ async function defaultCheckTutorial(fromPopup = false) {
  */
 async function defaultPageActionTab(shouldSave) {
 	const favouriteModule = await import("../favourite-manager.js");
-	await favouriteModule.pageActionTab(shouldSave);
+	return favouriteModule.pageActionTab(shouldSave);
 }
 
 /**
@@ -238,7 +238,7 @@ async function defaultPageActionTab(shouldSave) {
  */
 async function defaultShowFavouriteButton() {
 	const favouriteModule = await import("../favourite-manager.js");
-	await favouriteModule.showFavouriteButton();
+	return favouriteModule.showFavouriteButton();
 }
 
 /**
@@ -511,7 +511,7 @@ async function isOnSavedTab(isFromHrefUpdate = false, callback = null) {
  */
 async function _afterHrefUpdate(isCurrentlyOnSavedTab) {
 	if (isCurrentlyOnSavedTab || STATE.wasOnSavedTab) {
-		await Promise.resolve(trackContentTask(reloadTabs()));
+		await trackContentTask(reloadTabs());
 		return;
 	}
 	await showFavouriteButton();
@@ -583,7 +583,7 @@ function delayLoadSetupTabs(count = 0) {
 	// initialize
 	setupDragForUl(reorderTabsUl);
 	trackContentTask(reloadTabs());
-	trackContentTask(Promise.resolve(checkTutorial()));
+	trackContentTask(checkTutorial());
 }
 
 /**
@@ -596,10 +596,8 @@ function delayLoadSetupTabs(count = 0) {
  * @return {Promise<void>} Promise resolved after the latest reload work settles.
  */
 function reloadTabs(tabs = null) {
-	trackContentTask(Promise.resolve(generateStyleFromSettings()));
-	return Promise.resolve(
-		trackContentTask(init(tabs, startReloadSignal())),
-	);
+	trackContentTask(generateStyleFromSettings());
+	return trackContentTask(init(tabs, startReloadSignal()));
 }
 
 /**
@@ -685,6 +683,177 @@ function makeDuplicatesBold(miniURL) {
 const ACTION_MOVE = "move";
 const ACTION_REMOVE_OTHER = "remove-other";
 const ACTION_SORT = "sort";
+const ACTION_RESULT_SYNC = "do-sync";
+const ACTION_RESULT_NO_SYNC = "no-sync";
+
+/**
+ * Throws a translated action error when an action result is falsy.
+ *
+ * @param {boolean} actionResult Action result to validate.
+ * @param {string} errorMessage Translatable error key.
+ */
+function assertActionResult(actionResult, errorMessage) {
+	if (!actionResult) {
+		throw new Error(errorMessage);
+	}
+}
+
+/**
+ * Executes a tab action and returns whether `sf_afterSet` should run.
+ *
+ * @param {{
+ *   action: string;
+ *   allTabs: {
+ *     addTab: (tab: unknown, options: { addInFront?: boolean }) => Promise<boolean>;
+ *     moveTab: (tab: unknown, options?: unknown) => Promise<void>;
+ *     pinOrUnpin: (tab: unknown, shouldPin: boolean) => Promise<boolean>;
+ *     remove: (tab: unknown, options?: unknown) => Promise<boolean>;
+ *     removeOtherTabs: (tab: unknown, options?: unknown) => Promise<boolean>;
+ *     removePinned: (removePinnedTabs: boolean) => Promise<boolean>;
+ *     replaceTabs: (tabs?: unknown[], options?: Record<string, unknown>) => Promise<boolean>;
+ *     setDefaultTabs: () => Promise<boolean>;
+ *     sort: (options?: unknown) => Promise<boolean>;
+ *   };
+ *   tab: unknown;
+ *   options: unknown;
+ * }} options Action context.
+ * @return {Promise<boolean | null>} Sync flag (`null` means no action matched).
+ */
+function executeTabAction({
+	action,
+	allTabs,
+	tab,
+	options,
+}) {
+	/** @type {Record<string, () => Promise<boolean>>} */
+	const actionHandlers = {
+		[ACTION_MOVE]: async () => {
+			await allTabs.moveTab(tab, options);
+			return ACTION_RESULT_SYNC;
+		},
+		[CONSTANTS.CXM_REMOVE_TAB]: async () => {
+			assertActionResult(
+				await allTabs.remove(tab, options),
+				"error_removing_tab",
+			);
+			return ACTION_RESULT_SYNC;
+		},
+		[ACTION_REMOVE_OTHER]: async () => {
+			assertActionResult(
+				await allTabs.removeOtherTabs(tab, options),
+				"error_removing_other_tabs",
+			);
+			return ACTION_RESULT_SYNC;
+		},
+		[CONSTANTS.WHAT_ADD]: async () => {
+			assertActionResult(
+				await allTabs.addTab(
+					tab,
+					{
+						addInFront: options?.addInFront,
+					},
+				),
+				"error_adding_tab",
+			);
+			return ACTION_RESULT_SYNC;
+		},
+		[CONSTANTS.CXM_EMPTY_GENERIC_TABS]: async () => {
+			assertActionResult(
+				await allTabs.replaceTabs(),
+				"error_removing_generic_tabs",
+			);
+			return ACTION_RESULT_SYNC;
+		},
+		[CONSTANTS.CXM_EMPTY_TABS]: async () => {
+			assertActionResult(
+				await allTabs.replaceTabs([], { removeOrgTabs: true }),
+				"error_removing_all_tabs",
+			);
+			return ACTION_RESULT_SYNC;
+		},
+		[CONSTANTS.WHAT_TOGGLE_ORG]: async () => {
+			await toggleOrg(tab);
+			return ACTION_RESULT_SYNC;
+		},
+		[CONSTANTS.CXM_EMPTY_VISIBLE_TABS]: async () => {
+			const thisOrg = Tab.extractOrgName(STATE.href);
+			assertActionResult(
+				await allTabs.replaceTabs([], {
+					removeOrgTabs: true,
+					removeThisOrgTabs: thisOrg,
+				}),
+				"error_removing_visible_tabs",
+			);
+			return ACTION_RESULT_SYNC;
+		},
+		[CONSTANTS.CXM_RESET_DEFAULT_TABS]: async () => {
+			assertActionResult(
+				await allTabs.setDefaultTabs(),
+				"error_resetting_default_tabs",
+			);
+			return ACTION_RESULT_SYNC;
+		},
+		[ACTION_SORT]: async () => {
+			assertActionResult(
+				await allTabs.sort(options),
+				"error_sorting_tabs",
+			);
+			return ACTION_RESULT_SYNC;
+		},
+		[CONSTANTS.CXM_TMP_HIDE_ORG]: () => {
+			hideTabs(true);
+			return ACTION_RESULT_NO_SYNC;
+		},
+		[CONSTANTS.CXM_TMP_HIDE_NON_ORG]: () => {
+			hideTabs(false);
+			return ACTION_RESULT_NO_SYNC;
+		},
+		[CONSTANTS.CXM_PIN_TAB]: async () => {
+			assertActionResult(
+				await allTabs.pinOrUnpin(tab, true),
+				"error_pin_tab",
+			);
+			document.dispatchEvent(
+				new CustomEvent(CONSTANTS.TUTORIAL_EVENT_PIN_TAB),
+			);
+			return ACTION_RESULT_SYNC;
+		},
+		[CONSTANTS.CXM_UNPIN_TAB]: async () => {
+			assertActionResult(
+				await allTabs.pinOrUnpin(tab, false),
+				"error_unpin_tab",
+			);
+			return ACTION_RESULT_SYNC;
+		},
+		[CONSTANTS.CXM_REMOVE_PIN_TABS]: async () => {
+			assertActionResult(
+				await allTabs.removePinned(true),
+				"error_removing_pin_tabs",
+			);
+			return ACTION_RESULT_SYNC;
+		},
+		[CONSTANTS.CXM_REMOVE_UNPIN_TABS]: async () => {
+			assertActionResult(
+				await allTabs.removePinned(false),
+				"error_removing_unpin_tabs",
+			);
+			return ACTION_RESULT_SYNC;
+		},
+		[CONSTANTS.WHAT_PAGE_SAVE_TAB]: async () => {
+			await pageActionTab(true);
+			return ACTION_RESULT_SYNC;
+		},
+		[CONSTANTS.WHAT_PAGE_REMOVE_TAB]: async () => {
+			await pageActionTab(false);
+			return ACTION_RESULT_SYNC;
+		},
+	};
+	const actionHandler = actionHandlers[action];
+	if (typeof actionHandler !== "function") {
+		return null;
+	}
+	return actionHandler();
+}
 
 /**
  * Performs a specified action on a given tab, such as moving, removing, or adding it, with additional options.
@@ -705,105 +874,20 @@ async function performActionOnTabs(
 ) {
 	try {
 		const allTabs = await ensureAllTabsAvailability();
-		switch (action) {
-			case ACTION_MOVE:
-				await allTabs.moveTab(tab, options);
-				break;
-			case CONSTANTS.CXM_REMOVE_TAB:
-				if (!await allTabs.remove(tab, options)) {
-					throw new Error("error_removing_tab", tab);
-				}
-				break;
-			case ACTION_REMOVE_OTHER:
-				if (!await allTabs.removeOtherTabs(tab, options)) {
-					throw new Error("error_removing_other_tabs", tab);
-				}
-				break;
-			case CONSTANTS.WHAT_ADD:
-				if (
-					!await allTabs.addTab(
-						tab,
-						{
-							addInFront: options?.addInFront,
-						},
-					)
-				) {
-					throw new Error("error_adding_tab");
-				}
-				break;
-			case CONSTANTS.CXM_EMPTY_GENERIC_TABS:
-				if (!await allTabs.replaceTabs()) {
-					throw new Error("error_removing_generic_tabs");
-				}
-				break;
-			case CONSTANTS.CXM_EMPTY_TABS:
-				if (!await allTabs.replaceTabs([], { removeOrgTabs: true })) {
-					throw new Error("error_removing_all_tabs");
-				}
-				break;
-			case CONSTANTS.WHAT_TOGGLE_ORG:
-				await toggleOrg(tab);
-				break;
-			case CONSTANTS.CXM_EMPTY_VISIBLE_TABS: {
-				// The visible Tabs are all the generic ones + the org-specific Tabs for the current Org
-				const thisOrg = Tab.extractOrgName(STATE.href);
-				if (
-					!await allTabs.replaceTabs([], {
-						removeOrgTabs: true,
-						removeThisOrgTabs: thisOrg,
-					})
-				) {
-					throw new Error("error_removing_visible_tabs");
-				}
-				break;
-			}
-			case CONSTANTS.CXM_RESET_DEFAULT_TABS:
-				if (!await allTabs.setDefaultTabs()) {
-					throw new Error("error_resetting_default_tabs");
-				}
-				break;
-			case ACTION_SORT:
-				if (!await allTabs.sort(options)) {
-					throw new Error("error_sorting_tabs", options);
-				}
-				break;
-			case CONSTANTS.CXM_TMP_HIDE_ORG:
-			case CONSTANTS.CXM_TMP_HIDE_NON_ORG:
-				hideTabs(action === CONSTANTS.CXM_TMP_HIDE_ORG);
-				return;
-			case CONSTANTS.CXM_PIN_TAB:
-				if (!await allTabs.pinOrUnpin(tab, true)) {
-					throw new Error("error_pin_tab", tab);
-				}
-				document.dispatchEvent(
-					new CustomEvent(CONSTANTS.TUTORIAL_EVENT_PIN_TAB),
-				);
-				break;
-			case CONSTANTS.CXM_UNPIN_TAB:
-				if (!await allTabs.pinOrUnpin(tab, false)) {
-					throw new Error("error_unpin_tab", tab);
-				}
-				break;
-			case CONSTANTS.CXM_REMOVE_PIN_TABS:
-				if (!await allTabs.removePinned(true)) {
-					throw new Error("error_removing_pin_tabs");
-				}
-				break;
-			case CONSTANTS.CXM_REMOVE_UNPIN_TABS:
-				if (!await allTabs.removePinned(false)) {
-					throw new Error("error_removing_unpin_tabs");
-				}
-				break;
-			case CONSTANTS.WHAT_PAGE_SAVE_TAB:
-			case CONSTANTS.WHAT_PAGE_REMOVE_TAB:
-				await pageActionTab(action === CONSTANTS.WHAT_PAGE_SAVE_TAB);
-				break;
-			default: {
-				const noMatch = await getTranslations("no_match");
-				return console.error(noMatch, action);
-			}
+		const shouldSyncTabs = await executeTabAction({
+			action,
+			allTabs,
+			tab,
+			options,
+		});
+		if (shouldSyncTabs == null) {
+			const noMatch = await getTranslations("no_match");
+			console.error(noMatch, action);
+			return;
 		}
-		sf_afterSet({ tabs: allTabs });
+		if (shouldSyncTabs === ACTION_RESULT_SYNC) {
+			sf_afterSet({ tabs: allTabs });
+		}
 	} catch (error) {
 		console.warn({ action, tab, options });
 		showToast(error.message, CONSTANTS.TOAST_ERROR);
@@ -1236,11 +1320,11 @@ function listenToBackgroundPage() {
  * - Inserts analytics script.
  */
 function main() {
-	trackContentTask(Promise.resolve(ensureAllTabsAvailability()));
+	trackContentTask(ensureAllTabsAvailability());
 	trackContentTask(checkAddLightningNavigation());
 	listenToBackgroundPage();
-	trackContentTask(Promise.resolve(delayLoadSetupTabs()));
-	trackContentTask(Promise.resolve(executeOncePerDay()));
+	trackContentTask(delayLoadSetupTabs());
+	trackContentTask(executeOncePerDay());
 }
 
 /**

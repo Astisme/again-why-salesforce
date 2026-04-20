@@ -967,87 +967,50 @@ export async function createManageTabsModal() {
  * }} Manage-tabs module API.
  */
 export function createManageTabsModule(overrides = {}) {
-	if (overrides.CXM_PIN_TAB != null) CXM_PIN_TAB = overrides.CXM_PIN_TAB;
-	if (overrides.CXM_REMOVE_TAB != null) {
-		CXM_REMOVE_TAB = overrides.CXM_REMOVE_TAB;
-	}
-	if (overrides.CXM_UNPIN_TAB != null) {
-		CXM_UNPIN_TAB = overrides.CXM_UNPIN_TAB;
-	}
-	if (overrides.HIDDEN_CLASS != null) HIDDEN_CLASS = overrides.HIDDEN_CLASS;
-	if (overrides.PIN_TAB_CLASS != null) {
-		PIN_TAB_CLASS = overrides.PIN_TAB_CLASS;
-	}
-	if (overrides.TOAST_ERROR != null) TOAST_ERROR = overrides.TOAST_ERROR;
-	if (overrides.TOAST_WARNING != null) {
-		TOAST_WARNING = overrides.TOAST_WARNING;
-	}
-	if (overrides.TUTORIAL_EVENT_CLOSE_MANAGE_TABS != null) {
-		TUTORIAL_EVENT_CLOSE_MANAGE_TABS =
-			overrides.TUTORIAL_EVENT_CLOSE_MANAGE_TABS;
-	}
-	if (overrides.TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL != null) {
-		TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL =
-			overrides.TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL;
-	}
-	if (overrides.TUTORIAL_EVENT_REORDERED_TABS_TABLE != null) {
-		TUTORIAL_EVENT_REORDERED_TABS_TABLE =
-			overrides.TUTORIAL_EVENT_REORDERED_TABS_TABLE;
-	}
-	if (overrides.MODAL_ID != null) MODAL_ID = overrides.MODAL_ID;
-	if (overrides.Tab != null) Tab = overrides.Tab;
-	if (overrides.TabContainer != null) TabContainer = overrides.TabContainer;
-	if (overrides.createManageTabRow != null) {
-		createManageTabRow = overrides.createManageTabRow;
-	}
-	if (overrides.ensureAllTabsAvailability != null) {
-		ensureAllTabsAvailability = overrides.ensureAllTabsAvailability;
-	}
-	if (overrides.generateManageTabsModal != null) {
-		generateManageTabsModal = overrides.generateManageTabsModal;
-	}
-	if (overrides.getCurrentHref != null) {
-		getCurrentHref = overrides.getCurrentHref;
-	}
-	if (overrides.getInnerElementFieldBySelector != null) {
-		getInnerElementFieldBySelector =
-			overrides.getInnerElementFieldBySelector;
-	}
-	if (overrides.getModalHanger != null) {
-		getModalHanger = overrides.getModalHanger;
-	}
-	if (overrides.getTranslations != null) {
-		getTranslations = overrides.getTranslations;
-	}
-	if (overrides.handleLightningLinkClick != null) {
-		handleLightningLinkClick = overrides.handleLightningLinkClick;
-	}
-	if (overrides.injectStyle != null) injectStyle = overrides.injectStyle;
-	if (overrides.makeDuplicatesBold != null) {
-		makeDuplicatesBold = overrides.makeDuplicatesBold;
-	}
-	if (overrides.reorderTabsUl != null) {
-		reorderTabsUl = overrides.reorderTabsUl;
-	}
-	if (overrides.setupDragForTable != null) {
-		setupDragForTable = overrides.setupDragForTable;
-	}
-	if (overrides.setupDragForUl != null) {
-		setupDragForUl = overrides.setupDragForUl;
-	}
-	if (overrides.sf_afterSet != null) sf_afterSet = overrides.sf_afterSet;
-	if (overrides.showToast != null) showToast = overrides.showToast;
-	if (overrides.updateModalBodyOverflow != null) {
-		updateModalBodyOverflow = overrides.updateModalBodyOverflow;
-	}
-	if (overrides.CustomEvent != null) {
-		globalThis.CustomEvent = overrides.CustomEvent;
-	}
-	if (overrides.confirm != null) globalThis.confirm = overrides.confirm;
-	if (overrides.document != null) globalThis.document = overrides.document;
-	if (overrides.setTimeout != null) {
-		globalThis.setTimeout = overrides.setTimeout;
-	}
+	CXM_PIN_TAB = overrides.CXM_PIN_TAB ?? CXM_PIN_TAB;
+	CXM_REMOVE_TAB = overrides.CXM_REMOVE_TAB ?? CXM_REMOVE_TAB;
+	CXM_UNPIN_TAB = overrides.CXM_UNPIN_TAB ?? CXM_UNPIN_TAB;
+	HIDDEN_CLASS = overrides.HIDDEN_CLASS ?? HIDDEN_CLASS;
+	PIN_TAB_CLASS = overrides.PIN_TAB_CLASS ?? PIN_TAB_CLASS;
+	TOAST_ERROR = overrides.TOAST_ERROR ?? TOAST_ERROR;
+	TOAST_WARNING = overrides.TOAST_WARNING ?? TOAST_WARNING;
+	TUTORIAL_EVENT_CLOSE_MANAGE_TABS =
+		overrides.TUTORIAL_EVENT_CLOSE_MANAGE_TABS ??
+			TUTORIAL_EVENT_CLOSE_MANAGE_TABS;
+	TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL =
+		overrides.TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL ??
+			TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL;
+	TUTORIAL_EVENT_REORDERED_TABS_TABLE =
+		overrides.TUTORIAL_EVENT_REORDERED_TABS_TABLE ??
+			TUTORIAL_EVENT_REORDERED_TABS_TABLE;
+	MODAL_ID = overrides.MODAL_ID ?? MODAL_ID;
+	Tab = overrides.Tab ?? Tab;
+	TabContainer = overrides.TabContainer ?? TabContainer;
+	createManageTabRow = overrides.createManageTabRow ?? createManageTabRow;
+	ensureAllTabsAvailability = overrides.ensureAllTabsAvailability ??
+		ensureAllTabsAvailability;
+	generateManageTabsModal = overrides.generateManageTabsModal ??
+		generateManageTabsModal;
+	getCurrentHref = overrides.getCurrentHref ?? getCurrentHref;
+	getInnerElementFieldBySelector = overrides.getInnerElementFieldBySelector ??
+		getInnerElementFieldBySelector;
+	getModalHanger = overrides.getModalHanger ?? getModalHanger;
+	getTranslations = overrides.getTranslations ?? getTranslations;
+	handleLightningLinkClick = overrides.handleLightningLinkClick ??
+		handleLightningLinkClick;
+	injectStyle = overrides.injectStyle ?? injectStyle;
+	makeDuplicatesBold = overrides.makeDuplicatesBold ?? makeDuplicatesBold;
+	reorderTabsUl = overrides.reorderTabsUl ?? reorderTabsUl;
+	setupDragForTable = overrides.setupDragForTable ?? setupDragForTable;
+	setupDragForUl = overrides.setupDragForUl ?? setupDragForUl;
+	sf_afterSet = overrides.sf_afterSet ?? sf_afterSet;
+	showToast = overrides.showToast ?? showToast;
+	updateModalBodyOverflow = overrides.updateModalBodyOverflow ??
+		updateModalBodyOverflow;
+	globalThis.CustomEvent = overrides.CustomEvent ?? globalThis.CustomEvent;
+	globalThis.confirm = overrides.confirm ?? globalThis.confirm;
+	globalThis.document = overrides.document ?? globalThis.document;
+	globalThis.setTimeout = overrides.setTimeout ?? globalThis.setTimeout;
 
 	focusedIndex = 0;
 	managedLoggers.length = 0;

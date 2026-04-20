@@ -119,10 +119,10 @@ export function createToastModule({
 	 */
 	async function showToast(message, status = toastSuccess) {
 		if (!allToastTypes.has(status)) {
-			throw new Error("error_unknown_toast_type");
+			throw new TypeError("error_unknown_toast_type");
 		}
 		if (typeof generateSldsToastMessageFn !== "function") {
-			throw new Error("error_required_params");
+			throw new TypeError("error_required_params");
 		}
 		const hanger = getToastHanger();
 		const toastElement = await generateSldsToastMessageFn(

@@ -3,7 +3,6 @@
 import {
 	createPopupModule as _createPopupModule,
 	getPopupRuntimeDefaults as _getPopupRuntimeDefaults,
-	runPopupWithInjectedOptions,
 } from "./popup-module.js";
 
 /**
@@ -28,5 +27,3 @@ export function createPopupModule(overrides = {}) {
 export function runPopup(overrides = {}) {
 	return createPopupModule(overrides).runPopup();
 }
-
-export { runPopupWithInjectedOptions };
