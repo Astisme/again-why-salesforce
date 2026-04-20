@@ -283,7 +283,7 @@ export async function isOnSavedTab(isFromHrefUpdate = false, callback = null) {
 	const allTabs = await ensureAllTabsAvailability();
 	isCurrentlyOnSavedTab = allTabs.existsWithOrWithoutOrg({ url, org: href });
 	if (isFromHrefUpdate) {
-		callback(isCurrentlyOnSavedTab);
+		callback?.(isCurrentlyOnSavedTab);
 	}
 }
 

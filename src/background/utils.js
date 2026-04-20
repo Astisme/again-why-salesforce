@@ -41,7 +41,9 @@ async function _queryTabs(callback, count = 0) {
 		}
 		return _queryTabs(callback, count + 1);
 	}
-	return callback(browserTabs[0]);
+	const res = browserTabs[0];
+	callback?.(res);
+	return res;
 }
 /**
  * Retrieves the current active browser tab based on the given parameters.

@@ -20,20 +20,16 @@ export async function bg_getCommandLinks(
 		singleCommand.shortcut !== ""
 	);
 	if (commands == null) {
-		if (callback == null) {
-			return availableCommands;
-		}
-		callback(availableCommands);
-		return;
+		callback?.(availableCommands);
+		return availableCommands;
 	}
 	if (!Array.isArray(commands)) {
 		commands = [commands];
 	}
+	const commandSet = new Set(commands);
 	const requestedCommands = availableCommands.filter((ac) =>
-		commands.includes(ac.name)
+		commandSet.has(ac.name)
 	);
-	if (callback == null) {
-		return requestedCommands;
-	}
-	callback(requestedCommands);
+	callback?.(requestedCommands);
+	return requestedCommands;
 }
