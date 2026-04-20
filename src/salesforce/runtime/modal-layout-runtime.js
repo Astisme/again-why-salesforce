@@ -33,6 +33,7 @@ export function createModalLayoutModule({
 	 * Enables or disables scrolling for the modal body based on how much room is left.
 	 *
 	 * @param {Object | null} [article=null] The article inside the modal body.
+	 * @throws {Error} Throws when `article` is not provided.
 	 */
 	function updateModalBodyOverflow(article = null) {
 		if (article == null) {

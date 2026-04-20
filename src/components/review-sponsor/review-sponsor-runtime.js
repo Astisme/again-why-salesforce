@@ -135,6 +135,8 @@ export function createReviewSponsorModule({
 
 	/**
 	 * Based on which browser the user is currently using, opens the extension's store link.
+	 *
+	 * @return {unknown | undefined} Result of the `open` call for the detected browser.
 	 */
 	function openCorrectBrowserReviewLink() {
 		if (isEdgeRuntime) {
@@ -170,6 +172,7 @@ export function createReviewSponsorModule({
 	 * @param {HTMLElement | null} [param0.sponsorSvg=null] Sponsor SVG element.
 	 * @param {HTMLAnchorElement | null} [param0.reviewLink=null] Review link.
 	 * @param {HTMLAnchorElement | null} [param0.sponsorLink=null] Sponsor link.
+	 * @throws {Error} Throws when required UI elements or tab data are missing.
 	 */
 	function showReviewOrSponsor({
 		allTabs = null,

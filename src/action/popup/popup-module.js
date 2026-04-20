@@ -405,6 +405,29 @@ export function getPopupRuntimeDefaults() {
  * Creates a popup module that can be executed later.
  *
  * @param {Object} [options={}] Popup runtime options.
+ * @param {Object} [options.browser] Browser runtime.
+ * @param {(...args: unknown[]) => Promise<boolean>} [options.areFramePatternsAllowedFn] Permission checker for frame patterns.
+ * @param {() => void} [options.closePopupFn] Popup close callback.
+ * @param {Document | { querySelector: (selector: string) => HTMLElement | null }} [options.documentRef] Document reference used by the popup.
+ * @param {(messageKey: string) => Promise<string>} [options.getTranslationsFn] Translation lookup callback.
+ * @param {() => Promise<{ ison: boolean }>} [options.isOnSalesforceSetupFn] Salesforce setup page checker.
+ * @param {Location | { href?: string }} [options.locationRef] Location reference used for redirects.
+ * @param {() => void} [options.openSettingsPageFn] Settings page opener.
+ * @param {(message: Record<string, unknown>) => Promise<unknown>} [options.sendExtensionMessageFn] Extension messaging callback.
+ * @param {string} [options.translationDataset] Translation dataset attribute name.
+ * @param {string} [options.translationSeparator] Translation key separator.
+ * @param {string} [options.cmdExportAll] Export-all command id.
+ * @param {string} [options.cmdImport] Import command id.
+ * @param {string} [options.cmdOpenSettings] Open-settings command id.
+ * @param {string} [options.cxmManageTabs] Command id for managing tabs.
+ * @param {string} [options.whatExportCheck] Message key for export permission checks.
+ * @param {string} [options.whatGetCommands] Message key for command retrieval.
+ * @param {string} [options.whatShowImport] Message key for showing import UI.
+ * @param {string} [options.whatStartTutorial] Message key for starting tutorial.
+ * @param {string} [options.hostPermissionsRedirect] Redirect path for host permissions.
+ * @param {string} [options.notSalesforceSetupRedirect] Redirect path when not on Salesforce setup.
+ * @param {Record<string, string>} [options.popupButtonIds] Popup button id map.
+ * @param {string[] | null} [options.requestedCommands] Pre-fetched command list.
  * @return {{ runPopup: () => Promise<{ redirected: boolean }> }} Popup module API.
  */
 export function createPopupModule({

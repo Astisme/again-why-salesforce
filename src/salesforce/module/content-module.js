@@ -691,6 +691,7 @@ const ACTION_RESULT_NO_SYNC = "no-sync";
  *
  * @param {boolean} actionResult Action result to validate.
  * @param {string} errorMessage Translatable error key.
+ * @throws {Error} Throws when the action result is falsy.
  */
 function assertActionResult(actionResult, errorMessage) {
 	if (!actionResult) {

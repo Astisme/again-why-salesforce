@@ -279,6 +279,7 @@ export function createFavouriteManagerModule({
 	 * @param {string|null} favouriteId Target favourite id.
 	 * @param {HTMLButtonElement|null} [button=null] Optional button scope.
 	 * @return {HTMLElement|null} Matching element.
+	 * @throws {Error} Throws when `favouriteId` is missing.
 	 */
 	function getFavouriteImage(favouriteId, button = null) {
 		if (favouriteId == null) {
@@ -412,7 +413,7 @@ export function createFavouriteManagerModule({
 	 * Shows or refreshes the favourite button in the setup header.
 	 *
 	 * @param {number} [count=0] Retry counter.
-	 * @return {Promise<number | void>}
+	 * @return {Promise<number | void>} Timeout id when retried, otherwise nothing.
 	 */
 	async function showFavouriteButton(count = 0) {
 		if (count > 5) {

@@ -1973,7 +1973,7 @@ function __setState(state = {}) {
 /**
  * Test helper to inspect local module state.
  *
- * @return {{ activePreview: HTMLElement | null; listenersSet: Record<string, boolean> }}
+ * @return {{ activePreview: HTMLElement | null; listenersSet: Record<string, boolean> }} Current test-visible options state.
  */
 function __getState() {
 	return { activePreview, listenersSet };

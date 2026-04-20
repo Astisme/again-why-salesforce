@@ -231,7 +231,7 @@ export function createBackgroundUtilsModule({
 	 * Launches export, reading from storage when tabs are omitted.
 	 *
 	 * @param {Array | object | null} [tabs=null] Optional tab payload.
-	 * @return {Promise<void> | void}
+	 * @return {Promise<void> | void} Launch result for storage-backed or direct export.
 	 */
 	function exportHandler(tabs = null) {
 		if (tabs == null) {

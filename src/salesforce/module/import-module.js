@@ -121,7 +121,7 @@ function preventDragDefaults(event) {
 /**
  * Serializes imported tab-container-like values to JSON.
  *
- * @param {unknown} tabs Tab container instance or JSON-serializable value.
+ * @param {TabContainer} tabs Tab container instance or JSON-serializable value.
  * @return {string} Serialized tab payload.
  */
 function serializeImportedTabs(tabs) {
@@ -135,6 +135,25 @@ function serializeImportedTabs(tabs) {
 		return tabs.toString();
 	}
 	return JSON.stringify(tabs);
+}
+
+/**
+ * Extracts files from a change/drop event.
+ *
+ * @param {Event} event Event containing files.
+ * @return {File[]} Collected files.
+ */
+function getFilesFromChangeOrDropEvent(event) {
+	const targetFiles = normalizeFiles(
+		event.target?.files ?? event.dataTransfer?.files,
+	);
+	if (targetFiles.length > 0) {
+		return targetFiles;
+	}
+	const transferItems = normalizeFiles(event.dataTransfer?.items);
+	return transferItems
+		.map((item) => item?.getAsFile?.())
+		.filter((file) => file != null);
 }
 
 /**
@@ -526,25 +545,6 @@ export function createImportPureModule({
 		} catch (error) {
 			showToastFn(["error_import", error.message], toastError);
 		}
-	}
-
-	/**
-	 * Extracts files from a change/drop event.
-	 *
-	 * @param {Event} event Event containing files.
-	 * @return {File[]} Collected files.
-	 */
-	function getFilesFromChangeOrDropEvent(event) {
-		const targetFiles = normalizeFiles(
-			event.target?.files ?? event.dataTransfer?.files,
-		);
-		if (targetFiles.length > 0) {
-			return targetFiles;
-		}
-		const transferItems = normalizeFiles(event.dataTransfer?.items);
-		return transferItems
-			.map((item) => item?.getAsFile?.())
-			.filter((file) => file != null);
 	}
 
 	/**
