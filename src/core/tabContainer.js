@@ -329,7 +329,7 @@ export class TabContainer extends Array {
 	/**
 	 * Creates a new array with all elements that pass the test implemented by the provided function.
 	 *
-	 * @param {Function} callback Function to test each element of the array.
+	 * @param {Function} filterCallback Function to test each element of the array.
 	 *    The filterCallback function accepts three arguments:
 	 *    - element: The current element being processed in the array
 	 *    - index: The index of the current element being processed in the array
@@ -1011,7 +1011,7 @@ export class TabContainer extends Array {
 	/**
 	 * Creates a new TabContainer with the results of calling a provided function for every element.
 	 *
-	 * @param {Function} callback Function that produces an element of the new TabContainer.
+	 * @param {Function} mapCallback Function that produces an element of the new TabContainer.
 	 *    The mapCallback function accepts three arguments:
 	 *    - currentValue: The current element being processed
 	 *    - index: The index of the current element being processed
