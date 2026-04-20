@@ -15,7 +15,7 @@ export function buildManifestForBrowser({
 	manifest,
 	logger = console,
 	argv = [],
-}) {
+} = {}) {
 	switch (browser) {
 		case "firefox":
 			delete manifest.minimum_chrome_version;
@@ -87,7 +87,7 @@ export function runBuildManifest({
 	writeFileSyncFn,
 	logger = console,
 	outputPath = "./src/manifest.json",
-}) {
+} = {}) {
 	const builtManifest = buildManifestForBrowser({
 		argv,
 		browser: argv[2],

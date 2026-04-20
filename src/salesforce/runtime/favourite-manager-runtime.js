@@ -90,7 +90,7 @@ export function createFavouriteManagerModule({
 	setTimeoutFn,
 	customEventCtor,
 	consoleRef = console,
-}) {
+} = {}) {
 	const cmdRemoveTabRuntime = cmdRemoveTab;
 	const cmdSaveAsTabRuntime = cmdSaveAsTab;
 	const cxmRemoveTabRuntime = cxmRemoveTab;

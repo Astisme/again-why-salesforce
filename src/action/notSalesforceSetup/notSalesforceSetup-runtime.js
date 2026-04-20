@@ -15,7 +15,7 @@ async function nss_getCurrentBrowserTab({
 	callback,
 	url,
 	onTabFound,
-}) {
+} = {}) {
 	const browserTab = await sendExtensionMessageFn({
 		what: whatGetBrowserTab,
 	});
@@ -66,7 +66,7 @@ export async function runNotSalesforceSetup({
 	setTimeoutFn = setTimeout,
 	closePopupFn = close,
 	consoleRef = console,
-}) {
+} = {}) {
 	const sfsetupTextEl = documentRef.getElementById("plain");
 	const invalidUrl = documentRef.getElementById("invalid-url");
 	const loginId = "login";

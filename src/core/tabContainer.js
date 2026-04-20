@@ -1104,7 +1104,7 @@ export class TabContainer extends Array {
 		maxIndex,
 		currentIndex = 0,
 		org = null,
-	}) {
+	} = {}) {
 		if (fullMovement) {
 			return moveBefore ? minIndex : maxIndex;
 		}

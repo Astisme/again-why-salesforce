@@ -886,7 +886,7 @@ function updateSelectAllButtonTextState({
 	selectAllButton,
 	unselectAllButton,
 	saveButton,
-}) {
+} = {}) {
 	if (
 		checkboxes == null ||
 		tabCounter == null ||
@@ -928,7 +928,7 @@ function getSelectedTabsFromModalSelection({
 	tabs,
 	checkboxes,
 	selectAllButton,
-}) {
+} = {}) {
 	const selectedAll = selectAllButton.hasAttribute("disabled");
 	const selectedTabs = selectedAll ? tabs : checkboxes
 		.filter((checkbox) => checkbox.checked)
@@ -3064,7 +3064,7 @@ export function sldsConfirm({
 	confirmLabel,
 	cancelLabel,
 	closeLabel,
-}) {
+} = {}) {
 	document.getElementById(MODAL_CONFIRM_ID)?.remove(); // remove itself
 	const {
 		modalParent,

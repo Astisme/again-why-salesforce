@@ -101,7 +101,7 @@ export function createReviewSponsorModule({
 	customElementsRef = customElements,
 	openFn = open,
 	HTMLElementRef = HTMLElement,
-}) {
+} = {}) {
 	const hiddenClassRuntime = hiddenClass;
 	const isChromeRuntime = isChrome;
 	const isEdgeRuntime = isEdge;

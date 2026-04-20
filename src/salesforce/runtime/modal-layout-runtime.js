@@ -26,7 +26,7 @@ const FIRST_ROW_SELECTOR = "tr:nth-child(1)";
  */
 export function createModalLayoutModule({
 	hiddenClass,
-}) {
+} = {}) {
 	const hiddenClassRuntime = hiddenClass;
 
 	/**

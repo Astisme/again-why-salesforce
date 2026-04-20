@@ -38,7 +38,7 @@ export function createExportModule({
 	tabContainerRef,
 	sendExtensionMessageFn,
 	showToastFn,
-}) {
+} = {}) {
 	const modalIdRuntime = modalId;
 	const toastErrorRuntime = toastError;
 	const toastWarningRuntime = toastWarning;

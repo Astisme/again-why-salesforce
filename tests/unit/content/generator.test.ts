@@ -1248,10 +1248,11 @@ Deno.test("generator builds modal shells, prompt modals, and confirm flows", asy
 				title?: string;
 			},
 		) => Promise<boolean>;
-		assertThrows(
-			() => permissiveConfirm(),
-			TypeError,
-		);
+		const permissivePromise = permissiveConfirm({});
+		document.getElementById("again-why-salesforce-modal-confirm")
+			?.querySelector(".slds-modal__close")
+			?.dispatchEvent(new Event("click"));
+		assertEquals(await permissivePromise, false);
 	} finally {
 		fixture.cleanup();
 	}

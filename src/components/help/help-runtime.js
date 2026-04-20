@@ -27,7 +27,7 @@ export function createHelpAwsClass({
 	generateHelpWithPopupFn,
 	getTranslationsFn,
 	HTMLElementRef = HTMLElement,
-}) {
+} = {}) {
 	/**
 	 * Class to take care of the Help button in the settings.
 	 */
@@ -166,7 +166,7 @@ export function registerHelpComponent({
 	hiddenClass,
 	injectStyleFn,
 	HTMLElementRef = HTMLElement,
-}) {
+} = {}) {
 	const HelpAws = createHelpAwsClass({
 		browser,
 		generateHelpWithPopupFn,

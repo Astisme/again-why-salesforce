@@ -15,7 +15,7 @@ export function createThemeHandlerRuntime({
 	matchMediaFn,
 	sendExtensionMessageFn,
 	whatTheme,
-}) {
+} = {}) {
 	const html = documentRef?.documentElement ?? null;
 	const localStorageRuntime = localStorageRef;
 	const matchMediaRuntime = matchMediaFn;

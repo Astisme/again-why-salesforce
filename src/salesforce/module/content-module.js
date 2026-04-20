@@ -725,7 +725,7 @@ function executeTabAction({
 	allTabs,
 	tab,
 	options,
-}) {
+} = {}) {
 	/** @type {Record<string, () => Promise<boolean>>} */
 	const actionHandlers = {
 		[ACTION_MOVE]: async () => {

@@ -23,7 +23,7 @@ export function createLightningNavigationModule({
 	consoleRef,
 	openFn,
 	globalRef = globalThis,
-}) {
+} = {}) {
 	const auraApiRuntime = auraApi;
 	const consoleRuntime = consoleRef;
 	const openRuntime = openFn;

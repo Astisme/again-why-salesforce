@@ -31,7 +31,7 @@ export function createDragHandlerModule({
 	ensureAllTabsAvailabilityFn,
 	documentRef,
 	setTimeoutFn,
-}) {
+} = {}) {
 	const extensionNameRuntime = extensionName;
 	const tabContainerRuntime = tabContainerRef;
 	const ensureAllTabsAvailabilityRuntime = ensureAllTabsAvailabilityFn;

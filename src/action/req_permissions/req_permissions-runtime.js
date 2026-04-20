@@ -27,7 +27,7 @@ export async function runReqPermissions({
 	requestFramePatternsPermissionFn,
 	closePopupFn = close,
 	setTimeoutFn = setTimeout,
-}) {
+} = {}) {
 	await ensureTranslatorAvailabilityFn();
 	const whichPermissions = new URL(locationRef.href).searchParams.get(
 		"whichid",
