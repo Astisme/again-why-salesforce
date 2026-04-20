@@ -2,7 +2,7 @@ import { assertEquals, assertExists } from "@std/testing/asserts";
 import { installMockDom } from "../../happydom.test.ts";
 import {
 	createOpenOtherOrgModule,
-} from "../../../src/salesforce/openOtherOrg-module.js";
+} from "../../../src/salesforce/module/openOtherOrg-module.js";
 import { type InternalMessage, mockBrowser } from "../../mocks.test.ts";
 
 type Listener = (event: {

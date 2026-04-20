@@ -11,39 +11,39 @@ import {
 	TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL
 		as _TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL,
 	TUTORIAL_EVENT_REORDERED_TABS_TABLE as _TUTORIAL_EVENT_REORDERED_TABS_TABLE,
-} from "../core/constants.js";
+} from "../../core/constants.js";
 import {
 	getInnerElementFieldBySelector as _getInnerElementFieldBySelector,
 	injectStyle as _injectStyle,
-} from "../core/functions.js";
-import _Tab from "../core/tab.js";
+} from "../../core/functions.js";
+import _Tab from "../../core/tab.js";
 import {
 	ensureAllTabsAvailability as _ensureAllTabsAvailability,
 	TabContainer as _TabContainer,
-} from "../core/tabContainer.js";
-import { getTranslations as _getTranslations } from "../core/translator.js";
+} from "../../core/tabContainer.js";
+import { getTranslations as _getTranslations } from "../../core/translator.js";
 
 import {
 	setupDragForTable as _setupDragForTable,
 	setupDragForUl as _setupDragForUl,
-} from "./dragHandler.js";
+} from "../dragHandler.js";
 import {
 	createManageTabRow as _createManageTabRow,
 	generateManageTabsModal as _generateManageTabsModal,
 	handleLightningLinkClick as _handleLightningLinkClick,
 	MODAL_ID as _MODAL_ID,
-} from "./generator.js";
+} from "../generator.js";
 import {
 	makeDuplicatesBold as _makeDuplicatesBold,
 	reorderTabsUl as _reorderTabsUl,
 	sf_afterSet as _sf_afterSet,
-} from "./content-runtime.js";
-import { showToast as _showToast } from "./toast.js";
+} from "../runtime/content-runtime.js";
+import { showToast as _showToast } from "../toast.js";
 import {
 	getCurrentHref as _getCurrentHref,
 	getModalHanger as _getModalHanger,
-} from "./sf-elements.js";
-import { updateModalBodyOverflow as _updateModalBodyOverflow } from "./modal-layout.js";
+} from "../sf-elements.js";
+import { updateModalBodyOverflow as _updateModalBodyOverflow } from "../modal-layout.js";
 
 let CXM_PIN_TAB = _CXM_PIN_TAB;
 let CXM_REMOVE_TAB = _CXM_REMOVE_TAB;

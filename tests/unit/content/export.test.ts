@@ -1,6 +1,6 @@
 import { assertEquals } from "@std/testing/asserts";
 import { MockElement } from "../ui/mock-dom.test.ts";
-import { createExportModule } from "../../../src/salesforce/export-runtime.js";
+import { createExportModule } from "../../../src/salesforce/runtime/export-runtime.js";
 
 type ExportModule = {
 	createExportModal: () => Promise<void>;

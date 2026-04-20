@@ -1,6 +1,6 @@
 import { assertEquals, assertRejects } from "@std/testing/asserts";
 import { installMockDom } from "../../happydom.test.ts";
-import { createToastModule } from "../../../src/salesforce/toast-module.js";
+import { createToastModule } from "../../../src/salesforce/module/toast-module.js";
 import "../../mocks.test.ts";
 
 /**

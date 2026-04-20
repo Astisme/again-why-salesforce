@@ -6,18 +6,18 @@ import {
 	SETUP_LIGHTNING,
 	TOAST_ERROR,
 	TOAST_WARNING,
-} from "../core/constants.js";
-import { getSettings } from "../core/functions.js";
-import { getTranslations } from "../core/translator.js";
-import Tab from "../core/tab.js";
-import { ensureAllTabsAvailability } from "../core/tabContainer.js";
+} from "../../core/constants.js";
+import { getSettings } from "../../core/functions.js";
+import { getTranslations } from "../../core/translator.js";
+import Tab from "../../core/tab.js";
+import { ensureAllTabsAvailability } from "../../core/tabContainer.js";
 
-import { generateOpenOtherOrgModal, MODAL_ID } from "./generator.js";
+import { generateOpenOtherOrgModal, MODAL_ID } from "../generator.js";
 import {
 	createOpenOtherOrgModule as createOpenOtherOrgPureModule,
-} from "./openOtherOrg-module.js";
-import { getCurrentHref, getModalHanger } from "./sf-elements.js";
-import { showToast } from "./toast.js";
+} from "../module/openOtherOrg-module.js";
+import { getCurrentHref, getModalHanger } from "../sf-elements.js";
+import { showToast } from "../toast.js";
 
 /**
  * Creates the open-other-org runtime module with dependency overrides.

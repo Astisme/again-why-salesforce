@@ -1,5 +1,5 @@
 import { assertEquals } from "@std/testing/asserts";
-import { createDragHandlerModule } from "../../../src/salesforce/dragHandler-runtime.js";
+import { createDragHandlerModule } from "../../../src/salesforce/runtime/dragHandler-runtime.js";
 
 type DragCallbackPayload = {
 	fromIndex: string | null;

@@ -3,4 +3,4 @@
 export {
 	createOpenOtherOrgModal,
 	createOpenOtherOrgModule,
-} from "./openOtherOrg-runtime.js";
+} from "./runtime/openOtherOrg-runtime.js";

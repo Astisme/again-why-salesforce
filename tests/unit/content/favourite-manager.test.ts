@@ -1,6 +1,6 @@
 import { assert, assertEquals, assertThrows } from "@std/testing/asserts";
 import { installMockDom } from "../../happydom.test.ts";
-import { createFavouriteManagerModule } from "../../../src/salesforce/favourite-manager-runtime.js";
+import { createFavouriteManagerModule } from "../../../src/salesforce/runtime/favourite-manager-runtime.js";
 const HEADER_SELECTOR_BASE =
 	"div.tabsetBody.main-content.mainContentMark.fullheight.active.isSetupApp > div.split-right > section.tabContent.oneConsoleTab.active div.overflow.uiBlock";
 

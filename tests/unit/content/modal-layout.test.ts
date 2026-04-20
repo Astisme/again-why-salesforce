@@ -1,5 +1,5 @@
 import { assertEquals, assertThrows } from "@std/testing/asserts";
-import { createModalLayoutModule } from "../../../src/salesforce/modal-layout-runtime.js";
+import { createModalLayoutModule } from "../../../src/salesforce/runtime/modal-layout-runtime.js";
 
 type ModalLayoutModule = {
 	updateModalBodyOverflow: (article?: LayoutElement | null) => void;

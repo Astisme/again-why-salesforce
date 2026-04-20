@@ -3,7 +3,7 @@ import {
 	assertExists,
 	assertStrictEquals,
 } from "@std/testing/asserts";
-import { createLightningNavigationModule } from "../../../src/salesforce/lightning-navigation-runtime.js";
+import { createLightningNavigationModule } from "../../../src/salesforce/runtime/lightning-navigation-runtime.js";
 
 type LightningNavigationListener = (event: {
 	data: Record<string, string>;

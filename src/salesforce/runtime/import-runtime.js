@@ -5,14 +5,14 @@ import {
 	HIDDEN_CLASS,
 	TOAST_ERROR,
 	TOAST_WARNING,
-} from "../core/constants.js";
-import { injectStyle } from "../core/functions.js";
-import Tab from "../core/tab.js";
+} from "../../core/constants.js";
+import { injectStyle } from "../../core/functions.js";
+import Tab from "../../core/tab.js";
 import {
 	ensureAllTabsAvailability,
 	TabContainer,
-} from "../core/tabContainer.js";
-import { getTranslations } from "../core/translator.js";
+} from "../../core/tabContainer.js";
+import { getTranslations } from "../../core/translator.js";
 
 import {
 	generateCheckboxWithLabel,
@@ -21,11 +21,11 @@ import {
 	generateSldsModal,
 	generateSldsModalWithTabList,
 	MODAL_ID,
-} from "./generator.js";
-import { createImportPureModule } from "./import-module.js";
+} from "../generator.js";
+import { createImportPureModule } from "../module/import-module.js";
 import { sf_afterSet } from "./content-runtime.js";
-import { showToast } from "./toast.js";
-import { getModalHanger, getSetupTabUl } from "./sf-elements.js";
+import { showToast } from "../toast.js";
+import { getModalHanger, getSetupTabUl } from "../sf-elements.js";
 
 /**
  * Creates the import module API with runtime defaults and override support.

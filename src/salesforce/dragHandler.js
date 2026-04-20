@@ -3,7 +3,7 @@ import {
 	ensureAllTabsAvailability,
 	TabContainer,
 } from "../core/tabContainer.js";
-import { createDragHandlerModule } from "./dragHandler-runtime.js";
+import { createDragHandlerModule } from "./runtime/dragHandler-runtime.js";
 
 const { setupDragForTable, setupDragForUl } = createDragHandlerModule({
 	extensionName: EXTENSION_NAME,

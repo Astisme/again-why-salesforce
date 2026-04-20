@@ -8,7 +8,7 @@ import {
 import { generateSldsModalWithTabList, MODAL_ID } from "./generator.js";
 import { showToast } from "./toast.js";
 import { getModalHanger } from "./sf-elements.js";
-import { createExportModule } from "./export-runtime.js";
+import { createExportModule } from "./runtime/export-runtime.js";
 
 export const { createExportModal } = createExportModule({
 	modalId: MODAL_ID,

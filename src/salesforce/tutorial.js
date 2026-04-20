@@ -1,3 +1,6 @@
 "use strict";
 
-export { checkTutorial, createTutorialModule } from "./tutorial-runtime.js";
+export {
+	checkTutorial,
+	createTutorialModule,
+} from "./runtime/tutorial-runtime.js";

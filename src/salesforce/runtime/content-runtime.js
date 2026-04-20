@@ -1,6 +1,6 @@
 "use strict";
 
-import { createContentModule as createContentPureModule } from "./content-module.js";
+import { createContentModule as createContentPureModule } from "../module/content-module.js";
 
 /**
  * Creates the content runtime module with dependency overrides.

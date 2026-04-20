@@ -2,7 +2,7 @@ import { assertEquals } from "@std/testing/asserts";
 import { installMockDom } from "../../happydom.test.ts";
 import {
 	createSfElementsModule,
-} from "../../../src/salesforce/sf-elements-module.js";
+} from "../../../src/salesforce/module/sf-elements-module.js";
 import "../../mocks.test.ts";
 
 type WheelListener = (

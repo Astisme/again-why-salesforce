@@ -19,34 +19,34 @@ import {
 	WHAT_GET,
 	WHAT_GET_COMMANDS,
 	WHAT_SET,
-} from "../core/constants.js";
+} from "../../core/constants.js";
 import {
 	performLightningRedirect,
 	sendExtensionMessage,
 	sendExtensionMessages,
-} from "../core/functions.js";
-import { getTranslations } from "../core/translator.js";
-import Tab from "../core/tab.js";
+} from "../../core/functions.js";
+import { getTranslations } from "../../core/translator.js";
+import Tab from "../../core/tab.js";
 import { performActionOnTabs } from "./content-runtime.js";
-import { showToast } from "./toast.js";
-import { getCurrentHref, getSetupTabUl } from "./sf-elements.js";
+import { showToast } from "../toast.js";
+import { getCurrentHref, getSetupTabUl } from "../sf-elements.js";
 import {
 	FAVOURITE_BUTTON_ID,
 	showFavouriteButton,
-} from "./favourite-manager.js";
+} from "../favourite-manager.js";
 import {
 	generateTutorialElements,
 	MODAL_ID,
 	sldsConfirm,
-} from "./generator.js";
+} from "../generator.js";
 import {
 	ensureAllTabsAvailability,
 	TabContainer,
-} from "../core/tabContainer.js";
-import { handleActionButtonClick } from "./manageTabs.js";
+} from "../../core/tabContainer.js";
+import { handleActionButtonClick } from "../manageTabs.js";
 import {
 	createTutorialModule as createTutorialPureModule,
-} from "./tutorial-module.js";
+} from "../module/tutorial-module.js";
 
 /**
  * Creates tutorial helpers with runtime defaults and optional overrides.

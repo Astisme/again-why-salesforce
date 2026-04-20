@@ -10,36 +10,36 @@ import {
 	TUTORIAL_EVENT_CLOSE_MANAGE_TABS,
 	TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL,
 	TUTORIAL_EVENT_REORDERED_TABS_TABLE,
-} from "../core/constants.js";
+} from "../../core/constants.js";
 import {
 	getInnerElementFieldBySelector,
 	injectStyle,
-} from "../core/functions.js";
-import Tab from "../core/tab.js";
+} from "../../core/functions.js";
+import Tab from "../../core/tab.js";
 import {
 	ensureAllTabsAvailability,
 	TabContainer,
-} from "../core/tabContainer.js";
-import { getTranslations } from "../core/translator.js";
+} from "../../core/tabContainer.js";
+import { getTranslations } from "../../core/translator.js";
 
-import { setupDragForTable, setupDragForUl } from "./dragHandler.js";
+import { setupDragForTable, setupDragForUl } from "../dragHandler.js";
 import {
 	createManageTabRow,
 	generateManageTabsModal,
 	handleLightningLinkClick,
 	MODAL_ID,
-} from "./generator.js";
+} from "../generator.js";
 import {
 	makeDuplicatesBold,
 	reorderTabsUl,
 	sf_afterSet,
 } from "./content-runtime.js";
-import { showToast } from "./toast.js";
-import { getCurrentHref, getModalHanger } from "./sf-elements.js";
-import { updateModalBodyOverflow } from "./modal-layout.js";
+import { showToast } from "../toast.js";
+import { getCurrentHref, getModalHanger } from "../sf-elements.js";
+import { updateModalBodyOverflow } from "../modal-layout.js";
 import {
 	createManageTabsModule as createManageTabsPureModule,
-} from "./manageTabs-module.js";
+} from "../module/manageTabs-module.js";
 
 /**
  * Creates manage-tabs helpers with runtime defaults and optional overrides.

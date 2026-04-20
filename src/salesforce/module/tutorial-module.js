@@ -20,34 +20,34 @@ import {
 	WHAT_GET as _WHAT_GET,
 	WHAT_GET_COMMANDS as _WHAT_GET_COMMANDS,
 	WHAT_SET as _WHAT_SET,
-} from "../core/constants.js";
+} from "../../core/constants.js";
 import {
 	performLightningRedirect as _performLightningRedirect,
 	sendExtensionMessage as _sendExtensionMessage,
 	sendExtensionMessages as _sendExtensionMessages,
-} from "../core/functions.js";
-import { getTranslations as _getTranslations } from "../core/translator.js";
-import _Tab from "../core/tab.js";
-import { performActionOnTabs as _performActionOnTabs } from "./content-runtime.js";
-import { showToast as _showToast } from "./toast.js";
+} from "../../core/functions.js";
+import { getTranslations as _getTranslations } from "../../core/translator.js";
+import _Tab from "../../core/tab.js";
+import { performActionOnTabs as _performActionOnTabs } from "../runtime/content-runtime.js";
+import { showToast as _showToast } from "../toast.js";
 import {
 	getCurrentHref as _getCurrentHref,
 	getSetupTabUl as _getSetupTabUl,
-} from "./sf-elements.js";
+} from "../sf-elements.js";
 import {
 	FAVOURITE_BUTTON_ID as _FAVOURITE_BUTTON_ID,
 	showFavouriteButton as _showFavouriteButton,
-} from "./favourite-manager.js";
+} from "../favourite-manager.js";
 import {
 	generateTutorialElements as _generateTutorialElements,
 	MODAL_ID as _MODAL_ID,
 	sldsConfirm as _sldsConfirm,
-} from "./generator.js";
+} from "../generator.js";
 import {
 	ensureAllTabsAvailability as _ensureAllTabsAvailability,
 	TabContainer as _TabContainer,
-} from "../core/tabContainer.js";
-import { handleActionButtonClick as _handleActionButtonClick } from "./manageTabs.js";
+} from "../../core/tabContainer.js";
+import { handleActionButtonClick as _handleActionButtonClick } from "../manageTabs.js";
 
 let CMD_OPEN_SETTINGS = _CMD_OPEN_SETTINGS;
 let CXM_UNPIN_TAB = _CXM_UNPIN_TAB;

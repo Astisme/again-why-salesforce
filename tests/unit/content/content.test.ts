@@ -165,7 +165,7 @@ async function loadContentModule(deps: ContentDeps) {
 	setGlobal("__AWSF_SKIP_CONTENT_AUTO_BOOTSTRAP__", true);
 	try {
 		const contentModule = await import(
-			"../../../src/salesforce/content-runtime.js"
+			"../../../src/salesforce/runtime/content-runtime.js"
 		);
 		const content = contentModule.createContentModule(deps);
 		content.bootstrapIfNeeded();

@@ -6,11 +6,11 @@ import {
 	TOAST_INFO,
 	TOAST_SUCCESS,
 	TOAST_WARNING,
-} from "../core/constants.js";
-import { calculateReadingTime } from "../core/functions.js";
+} from "../../core/constants.js";
+import { calculateReadingTime } from "../../core/functions.js";
 
-import { generateSldsToastMessage } from "./generator.js";
-import { createToastModule as createToastPureModule } from "./toast-module.js";
+import { generateSldsToastMessage } from "../generator.js";
+import { createToastModule as createToastPureModule } from "../module/toast-module.js";
 
 /**
  * Creates the toast runtime module with dependency overrides.

@@ -4,4 +4,4 @@ export {
 	createManageTabsModal,
 	createManageTabsModule,
 	handleActionButtonClick,
-} from "./manageTabs-runtime.js";
+} from "./runtime/manageTabs-runtime.js";

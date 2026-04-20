@@ -54,31 +54,31 @@ import {
 	WHAT_TOGGLE_ORG as _WHAT_TOGGLE_ORG,
 	WHAT_UPDATE_EXTENSION as _WHAT_UPDATE_EXTENSION,
 	WHAT_UPDATE_TAB as _WHAT_UPDATE_TAB,
-} from "../core/constants.js";
+} from "../../core/constants.js";
 import {
 	getInnerElementFieldBySelector as _getInnerElementFieldBySelector,
 	getSettings as _getSettings,
-} from "../core/functions.js";
-import { getTranslations as _getTranslations } from "../core/translator.js";
-import _Tab from "../core/tab.js";
-import { ensureAllTabsAvailability as _ensureAllTabsAvailability } from "../core/tabContainer.js";
-import { setupDragForUl as _setupDragForUl } from "./dragHandler.js";
+} from "../../core/functions.js";
+import { getTranslations as _getTranslations } from "../../core/translator.js";
+import _Tab from "../../core/tab.js";
+import { ensureAllTabsAvailability as _ensureAllTabsAvailability } from "../../core/tabContainer.js";
+import { setupDragForUl as _setupDragForUl } from "../dragHandler.js";
 
-import { showToast as _showToast } from "./toast.js";
+import { showToast as _showToast } from "../toast.js";
 import {
 	generateRowTemplate as _generateRowTemplate,
 	generateStyleFromSettings as _generateStyleFromSettings,
 	generateUpdateTabModal as _generateUpdateTabModal,
 	MODAL_ID as _MODAL_ID,
-} from "./generator.js";
-import { createOpenOtherOrgModal as _createOpenOtherOrgModal } from "./openOtherOrg.js";
-import { executeOncePerDay as _executeOncePerDay } from "./once-a-day.js";
+} from "../generator.js";
+import { createOpenOtherOrgModal as _createOpenOtherOrgModal } from "../openOtherOrg.js";
+import { executeOncePerDay as _executeOncePerDay } from "../once-a-day.js";
 import {
 	findSetupTabUlInSalesforcePage as _findSetupTabUlInSalesforcePage,
 	getCurrentHref as _getCurrentHref,
 	getModalHanger as _getModalHanger,
 	getSetupTabUl as _getSetupTabUl,
-} from "./sf-elements.js";
+} from "../sf-elements.js";
 
 const CONSTANTS = {
 	BROWSER: _BROWSER,
@@ -216,7 +216,7 @@ function applyNonNullOverrides(target, source = {}) {
  * @return {Promise<void>}
  */
 async function defaultCheckTutorial(fromPopup = false) {
-	const tutorialModule = await import("./tutorial.js");
+	const tutorialModule = await import("../tutorial.js");
 	await tutorialModule.checkTutorial(fromPopup);
 }
 
@@ -227,7 +227,7 @@ async function defaultCheckTutorial(fromPopup = false) {
  * @return {Promise<void>}
  */
 async function defaultPageActionTab(shouldSave) {
-	const favouriteModule = await import("./favourite-manager.js");
+	const favouriteModule = await import("../favourite-manager.js");
 	await favouriteModule.pageActionTab(shouldSave);
 }
 
@@ -237,7 +237,7 @@ async function defaultPageActionTab(shouldSave) {
  * @return {Promise<void>}
  */
 async function defaultShowFavouriteButton() {
-	const favouriteModule = await import("./favourite-manager.js");
+	const favouriteModule = await import("../favourite-manager.js");
 	await favouriteModule.showFavouriteButton();
 }
 
@@ -247,7 +247,7 @@ async function defaultShowFavouriteButton() {
  * @return {Promise<void>}
  */
 async function defaultCreateImportModal() {
-	const importModule = await import("./import.js");
+	const importModule = await import("../import.js");
 	await importModule.createImportModal();
 }
 
@@ -257,7 +257,7 @@ async function defaultCreateImportModal() {
  * @return {Promise<void>}
  */
 async function defaultCreateExportModal() {
-	const exportModule = await import("./export.js");
+	const exportModule = await import("../export.js");
 	await exportModule.createExportModal();
 }
 
@@ -267,7 +267,7 @@ async function defaultCreateExportModal() {
  * @return {Promise<void>}
  */
 async function defaultCreateManageTabsModal() {
-	const manageTabsModule = await import("./manageTabs.js");
+	const manageTabsModule = await import("../manageTabs.js");
 	await manageTabsModule.createManageTabsModal();
 }
 

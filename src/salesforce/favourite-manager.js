@@ -30,10 +30,10 @@ import {
 	getWasOnSavedTab,
 	isOnSavedTab,
 	performActionOnTabs,
-} from "./content-runtime.js";
+} from "./runtime/content-runtime.js";
 import { getCurrentHref } from "./sf-elements.js";
 import { showToast } from "./toast.js";
-import { createFavouriteManagerModule } from "./favourite-manager-runtime.js";
+import { createFavouriteManagerModule } from "./runtime/favourite-manager-runtime.js";
 
 const moduleRef = createFavouriteManagerModule({
 	cmdRemoveTab: CMD_REMOVE_TAB,

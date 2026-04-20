@@ -8,4 +8,4 @@ export {
 	getModalHanger,
 	getSetupTabUl,
 	setSetupTabUl,
-} from "./sf-elements-runtime.js";
+} from "./runtime/sf-elements-runtime.js";
