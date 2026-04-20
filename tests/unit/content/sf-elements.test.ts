@@ -1,6 +1,8 @@
 import { assertEquals } from "@std/testing/asserts";
-import { loadIsolatedModule } from "../../load-isolated-module.test.ts";
 import { installMockDom } from "../../happydom.test.ts";
+import {
+	createSfElementsModule,
+} from "../../../src/salesforce/sf-elements-module.js";
 import "../../mocks.test.ts";
 
 type WheelListener = (
@@ -45,7 +47,7 @@ class SfElement {
 	id = "";
 	parentElement: SfElement | null = null;
 	scrollLeft = 0;
-	style: Record<string, string> = { overflowX: "" };
+	style: { overflowX: string; [key: string]: string } = { overflowX: "" };
 	attributes = new Map<string, string>();
 	#children: SfElement[] = [];
 	#wheelListeners: WheelListener[] = [];
@@ -53,12 +55,13 @@ class SfElement {
 	/**
 	 * Appends a child element.
 	 *
-	 * @param {SfElement} child Child element.
+	 * @param {unknown} child Child element.
 	 * @return {void}
 	 */
-	appendChild(child: SfElement) {
-		child.parentElement = this;
-		this.#children.push(child);
+	appendChild(child: unknown) {
+		const sfChild = child as SfElement;
+		sfChild.parentElement = this;
+		this.#children.push(sfChild);
 	}
 
 	/**
@@ -136,6 +139,13 @@ type SfElementsModule = {
 	getSetupTabUl: () => SfElement | undefined;
 	setSetupTabUl: (newSetupTabUl: SfElement) => void;
 };
+type SfElementsRuntimeModule = {
+	findSetupTabUlInSalesforcePage: () => boolean;
+	getCurrentHref: () => string;
+	getModalHanger: () => HTMLElement | null;
+	getSetupTabUl: () => HTMLElement | undefined;
+	setSetupTabUl: (newSetupTabUl: HTMLElement) => void;
+};
 
 /**
  * Loads sf-elements.js with a custom document.
@@ -143,9 +153,9 @@ type SfElementsModule = {
  * @param {Object} [options={}] Fixture options.
  * @param {SfElement | null} [options.modalHanger=null] Modal hanger.
  * @param {SfElement | null} [options.parent=null] Parent of the setup list.
- * @return {Promise<{ module: SfElementsModule; created: SfElement[]; parent: SfElement | null; setModal: (element: SfElement | null) => void; setParent: (element: SfElement | null) => void; }>} Loaded fixture.
+ * @return {{ module: SfElementsModule; created: SfElement[]; parent: SfElement | null; setModal: (element: SfElement | null) => void; setParent: (element: SfElement | null) => void; }} Loaded fixture.
  */
-async function loadSfElementsFixture(
+function loadSfElementsFixture(
 	{ modalHanger = null, parent = null }: {
 		modalHanger?: SfElement | null;
 		parent?: SfElement | null;
@@ -158,45 +168,33 @@ async function loadSfElementsFixture(
 	const pinnedUl = new SfElement();
 	pinnedUl.classList.add("pinnedItems", "slds-grid");
 
-	const { module } = await loadIsolatedModule<
-		SfElementsModule,
-		Record<string, unknown>
-	>({
-		modulePath: new URL(
-			"../../../src/salesforce/sf-elements.js",
-			import.meta.url,
-		),
-		dependencies: {
-			EXTENSION_NAME: "again-why-salesforce",
-		},
-		globals: {
-			document: {
-				createElement: () => {
-					const element = new SfElement();
-					created.push(element);
-					return element;
-				},
-				getElementsByClassName: () => [pinnedUl],
-				querySelector: (selector: string) => {
-					if (selector === "ul.pinnedItems.slds-grid") {
-						if (currentParent == null) {
-							return null;
-						}
-						pinnedUl.parentElement = currentParent;
-						return pinnedUl;
-					}
-					if (selector === "div.DESKTOP.uiContainerManager") {
-						return currentModal;
-					}
-					return null;
-				},
+	const module = createSfElementsModule({
+		documentRef: {
+			createElement: () => {
+				const element = new SfElement();
+				created.push(element);
+				return element;
 			},
-			location: {
-				href:
-					"https://acme.lightning.force.com/lightning/setup/Users/home",
+			getElementsByClassName: () => [pinnedUl],
+			querySelector: (selector: string) => {
+				if (selector === "ul.pinnedItems.slds-grid") {
+					if (currentParent == null) {
+						return null;
+					}
+					pinnedUl.parentElement = currentParent;
+					return pinnedUl;
+				}
+				if (selector === "div.DESKTOP.uiContainerManager") {
+					return currentModal;
+				}
+				return null;
 			},
 		},
-	});
+		extensionName: "again-why-salesforce",
+		locationRef: {
+			href: "https://acme.lightning.force.com/lightning/setup/Users/home",
+		},
+	}) as SfElementsModule;
 
 	return {
 		created,
@@ -327,7 +325,7 @@ Deno.test("sf-elements canonical import covers setup discovery, wheel behavior, 
 		}) as Document["createElement"];
 		const sfElements = await import(
 			"../../../src/salesforce/sf-elements.js"
-		);
+		) as SfElementsRuntimeModule;
 		const {
 			findSetupTabUlInSalesforcePage,
 			getCurrentHref,

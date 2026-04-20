@@ -1,110 +1,3 @@
-let htmlRuntime = null;
-let localStorageRuntime;
-let matchMediaRuntime;
-let sendExtensionMessageRuntime;
-let whatThemeRuntime;
-let systemColorListener = null;
-
-/**
- * Updates DOM/storage state and emits the theme message.
- *
- * @param {string} theme Theme value.
- * @param {boolean} [updateUserTheme=false] Whether to persist explicit user theme.
- * @return {Promise<unknown> | unknown} Message dispatch result.
- */
-function messageAndUpdateTheme(theme, updateUserTheme = false) {
-	if (htmlRuntime == null) {
-		return;
-	}
-	htmlRuntime.dataset.theme = theme;
-	localStorageRuntime.setItem("usingTheme", theme);
-	if (updateUserTheme) {
-		htmlRuntime.dataset.usertheme = theme;
-		localStorageRuntime.setItem("userTheme", theme);
-	}
-	return sendExtensionMessageRuntime({ what: whatThemeRuntime, theme });
-}
-
-/**
- * Handles system color-scheme updates.
- *
- * @param {{ matches: boolean }} event Change event.
- * @return {Promise<unknown> | unknown | void} Theme update result when a change is required.
- */
-function handleSystemColorSchemeChange(event) {
-	if (htmlRuntime == null) {
-		return;
-	}
-	const systemThemeValue = event.matches ? "dark" : "light";
-	const htmlThemeValue = htmlRuntime.dataset.theme;
-	if (systemThemeValue !== htmlThemeValue) {
-		return messageAndUpdateTheme(systemThemeValue);
-	}
-}
-
-/**
- * Enables or disables the system color listener.
- *
- * @param {boolean | null} [enable=true] Enable flag.
- * @return {Promise<void> | void} Listener update result.
- */
-function systemColorSchemeListener(enable = true) {
-	if (
-		htmlRuntime == null ||
-		matchMediaRuntime == null ||
-		(enable && systemColorListener != null) ||
-		(!enable && systemColorListener == null)
-	) {
-		return;
-	}
-	localStorageRuntime.setItem("userTheme", "system");
-	if (enable) {
-		systemColorListener = matchMediaRuntime("(prefers-color-scheme: dark)");
-		systemColorListener.addEventListener(
-			"change",
-			handleSystemColorSchemeChange,
-		);
-		return handleSystemColorSchemeChange(systemColorListener);
-	}
-	systemColorListener.removeEventListener(
-		"change",
-		handleSystemColorSchemeChange,
-	);
-	systemColorListener = null;
-}
-
-/**
- * Toggles between light and dark user themes.
- *
- * @return {Promise<unknown> | unknown} Theme update result.
- */
-function handleSwitchColorTheme() {
-	if (htmlRuntime == null) {
-		return;
-	}
-	const newTheme = htmlRuntime.dataset.theme === "light" ? "dark" : "light";
-	return messageAndUpdateTheme(newTheme, true);
-}
-
-/**
- * Initializes theme state from storage and system preferences.
- *
- * @return {Promise<void> | void} Initialization result.
- */
-function initTheme() {
-	if (htmlRuntime == null) {
-		return;
-	}
-	htmlRuntime.dataset.usertheme = localStorageRuntime.getItem("userTheme") ??
-		"system";
-	htmlRuntime.dataset.theme = htmlRuntime.dataset.usertheme === "system"
-		? null
-		: htmlRuntime.dataset.usertheme;
-	return systemColorSchemeListener(
-		htmlRuntime.dataset.usertheme === "system",
-	);
-}
-
 /**
  * Creates a theme-handler runtime with explicit dependencies.
  *
@@ -123,12 +16,109 @@ export function createThemeHandlerRuntime({
 	sendExtensionMessageFn,
 	whatTheme,
 }) {
-	htmlRuntime = documentRef?.documentElement ?? null;
-	localStorageRuntime = localStorageRef;
-	matchMediaRuntime = matchMediaFn;
-	sendExtensionMessageRuntime = sendExtensionMessageFn;
-	whatThemeRuntime = whatTheme;
-	systemColorListener = null;
+	const html = documentRef?.documentElement ?? null;
+	const localStorageRuntime = localStorageRef;
+	const matchMediaRuntime = matchMediaFn;
+	const sendExtensionMessageRuntime = sendExtensionMessageFn;
+	const whatThemeRuntime = whatTheme;
+	let systemColorListener = null;
+
+	/**
+	 * Updates DOM/storage state and emits the theme message.
+	 *
+	 * @param {string} theme Theme value.
+	 * @param {boolean} [updateUserTheme=false] Whether to persist explicit user theme.
+	 * @return {Promise<unknown> | unknown} Message dispatch result.
+	 */
+	function messageAndUpdateTheme(theme, updateUserTheme = false) {
+		html.dataset.theme = theme;
+		localStorageRuntime.setItem("usingTheme", theme);
+		if (updateUserTheme) {
+			html.dataset.usertheme = theme;
+			localStorageRuntime.setItem("userTheme", theme);
+		}
+		return sendExtensionMessageRuntime({ what: whatThemeRuntime, theme });
+	}
+
+	/**
+	 * Handles system color-scheme updates.
+	 *
+	 * @param {{ matches: boolean }} event Change event.
+	 * @return {Promise<unknown> | unknown | void} Theme update result when a change is required.
+	 */
+	function handleSystemColorSchemeChange(event) {
+		const systemThemeValue = event.matches ? "dark" : "light";
+		const htmlThemeValue = html.dataset.theme;
+		if (systemThemeValue !== htmlThemeValue) {
+			return messageAndUpdateTheme(systemThemeValue);
+		}
+	}
+
+	/**
+	 * Enables or disables the system color listener.
+	 *
+	 * @param {boolean | null} [enable=true] Enable flag.
+	 * @return {Promise<void> | void} Listener update result.
+	 */
+	function systemColorSchemeListener(enable = true) {
+		if (
+			html == null ||
+			matchMediaRuntime == null ||
+			(enable && systemColorListener != null) ||
+			(!enable && systemColorListener == null)
+		) {
+			return;
+		}
+		localStorageRuntime.setItem("userTheme", "system");
+		if (enable) {
+			systemColorListener = matchMediaRuntime(
+				"(prefers-color-scheme: dark)",
+			);
+			systemColorListener.addEventListener(
+				"change",
+				handleSystemColorSchemeChange,
+			);
+			return handleSystemColorSchemeChange(systemColorListener);
+		}
+		systemColorListener.removeEventListener(
+			"change",
+			handleSystemColorSchemeChange,
+		);
+		systemColorListener = null;
+	}
+
+	/**
+	 * Toggles between light and dark user themes.
+	 *
+	 * @return {Promise<unknown> | unknown} Theme update result.
+	 */
+	function handleSwitchColorTheme() {
+		if (html == null) {
+			return;
+		}
+		const newTheme = html.dataset.theme === "light" ? "dark" : "light";
+		return messageAndUpdateTheme(newTheme, true);
+	}
+
+	/**
+	 * Initializes theme state from storage and system preferences.
+	 *
+	 * @return {Promise<void> | void} Initialization result.
+	 */
+	function initTheme() {
+		if (html == null) {
+			return;
+		}
+		html.dataset.usertheme = localStorageRuntime.getItem("userTheme") ??
+			"system";
+		html.dataset.theme = html.dataset.usertheme === "system"
+			? null
+			: html.dataset.usertheme;
+		return systemColorSchemeListener(
+			html.dataset.usertheme === "system",
+		);
+	}
+
 	return {
 		handleSwitchColorTheme,
 		initTheme,

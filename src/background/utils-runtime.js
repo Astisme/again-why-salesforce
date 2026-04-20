@@ -1,283 +1,5 @@
 "use strict";
 
-let browserRuntime;
-let extensionGithubLinkRuntime;
-let extensionNameRuntime;
-let extensionVersionRuntime;
-let isChromeRuntime;
-let isFirefoxRuntime;
-let noUpdateNotificationRuntime;
-let settingsKeyRuntime;
-let whatExportFromBgRuntime;
-let whatRequestExportPermissionToOpenPopupRuntime;
-let whatUpdateExtensionRuntime;
-let isExportAllowedRuntime;
-let tabContainerRuntime;
-let bgGetSettingsRuntime;
-let bgGetStorageRuntime;
-let bgSetStorageRuntime;
-let chromeRuntime;
-let fetchRuntime;
-let urlRuntime;
-let consoleRuntime;
-
-/**
- * Queries the browser for the current active tab.
- *
- * @param {(tab: {
- *   id: number;
- *   active?: boolean;
- *   currentWindow?: boolean;
- *   url?: string;
- * }) => unknown} callback Callback invoked with found tab.
- * @param {number} [count=0] Retry counter.
- * @return {Promise<unknown>} Callback result.
- */
-async function _queryTabs(callback, count = 0) {
-	const queryParams = { active: true, currentWindow: true };
-	if (count > 0) {
-		delete queryParams.currentWindow;
-	}
-	const browserTabs = await browserRuntime.tabs.query(queryParams);
-	if (
-		browserRuntime.runtime.lastError || browserTabs == null ||
-		browserTabs.length === 0 || browserTabs[0] == null
-	) {
-		if (count > 5) {
-			throw new Error("error_no_browser_tab");
-		}
-		return _queryTabs(callback, count + 1);
-	}
-	return callback(browserTabs[0]);
-}
-
-/**
- * Retrieves the current active browser tab.
- *
- * @param {((tab: {
- *   id: number;
- *   active?: boolean;
- *   currentWindow?: boolean;
- *   url?: string;
- * }) => unknown) | null} [callback=null] Optional callback.
- * @return {Promise<{
- *   id: number;
- *   active?: boolean;
- *   currentWindow?: boolean;
- *   url?: string;
- * } | unknown>} Resolved tab value or callback result.
- */
-function bg_getCurrentBrowserTab(callback = null) {
-	if (callback == null) {
-		return new Promise((resolve, reject) => {
-			_queryTabs(resolve)
-				.then((queryResult) => resolve(queryResult))
-				.catch((error) => reject(error));
-		});
-	}
-	return _queryTabs(callback);
-}
-
-/**
- * Sends a message to the current tab.
- *
- * @param {object | null} message Message payload.
- * @return {Promise<void>}
- */
-async function bg_notify(message) {
-	if (message == null) {
-		throw new Error("error_no_message");
-	}
-	const browserTab = await bg_getCurrentBrowserTab();
-	browserRuntime.tabs.sendMessage(browserTab.id, message);
-}
-
-/**
- * Handles tab export in Firefox, Chrome, or fallback environments.
- *
- * @param {Array | { length?: number; tabs?: object[] }} tabs Tab payload.
- */
-function _exportHandler(tabs) {
-	const jsonData = JSON.stringify(tabs);
-	const filename = `${extensionNameRuntime}_${
-		Array.isArray(tabs)
-			? tabs.length
-			: tabs[tabContainerRuntime.keyTabs]?.length
-	}-Tabs.json`;
-	if (isFirefoxRuntime) {
-		const blob = new Blob([jsonData], { type: "application/json" });
-		const url = urlRuntime.createObjectURL(blob);
-		browserRuntime.downloads.download({
-			url,
-			filename,
-		}).then(() => {
-			browserRuntime.downloads.onChanged.addListener((event) => {
-				if (event.state.current === "complete") {
-					urlRuntime.revokeObjectURL(url);
-				}
-			});
-		});
-	} else if (isChromeRuntime) {
-		const dataStr = "data:application/json;charset=utf-8," +
-			encodeURIComponent(jsonData);
-		chromeRuntime.downloads.download({
-			url: dataStr,
-			filename,
-		});
-	} else {
-		bg_notify({
-			what: whatExportFromBgRuntime,
-			filename,
-			payload: jsonData,
-		});
-	}
-}
-
-/**
- * Launches export, reading from storage when tabs are omitted.
- *
- * @param {Array | object | null} [tabs=null] Optional tab payload.
- * @return {Promise<void> | void}
- */
-function exportHandler(tabs = null) {
-	if (tabs == null) {
-		return bgGetStorageRuntime(_exportHandler);
-	}
-	_exportHandler(tabs);
-}
-
-/**
- * Attempts to set the browser action popup for download permission.
- *
- * @return {boolean} Whether popup was set.
- */
-function requestExportPermission() {
-	const permissionLink = browserRuntime.runtime.getURL(
-		"action/req_permissions/req_permissions.html",
-	);
-	if (permissionLink == null) {
-		return false;
-	}
-	browserRuntime.action.setPopup({
-		popup: `${permissionLink}?whichid=download`,
-	});
-	return true;
-}
-
-/**
- * Checks download permission and optionally launches export.
- *
- * @param {object[] | object | null} [tabs=null] Optional export payload.
- * @param {boolean} [checkOnly=false] When true, only checks permission.
- * @return {boolean} Whether export permission is available.
- */
-function checkLaunchExport(tabs = null, checkOnly = false) {
-	const isAllowed = isExportAllowedRuntime();
-	if (isAllowed) {
-		if (!checkOnly) {
-			exportHandler(tabs);
-		}
-	} else {
-		bg_notify({
-			what: whatRequestExportPermissionToOpenPopupRuntime,
-			ok: requestExportPermission(),
-		});
-	}
-	return isAllowed;
-}
-
-/**
- * Compares semantic versions and checks whether `latest` is newer than `current`.
- *
- * @param {string} latest Latest version.
- * @param {string} current Current version.
- * @return {boolean} `true` when latest is newer.
- */
-function _isNewerVersion(latest, current) {
-	const latestParts = latest.split(".").map(Number);
-	const currentParts = current.split(".").map(Number);
-	for (
-		let index = 0;
-		index < Math.max(latestParts.length, currentParts.length);
-		index++
-	) {
-		const latestPart = latestParts[index] ?? 0;
-		const currentPart = currentParts[index] ?? 0;
-		if (latestPart > currentPart) {
-			return true;
-		}
-		if (latestPart < currentPart) {
-			return false;
-		}
-	}
-	return false;
-}
-
-/**
- * Checks GitHub releases and notifies when a newer extension version exists.
- *
- * @return {Promise<void>}
- */
-async function checkForUpdates() {
-	const noUpdateSetting = await bgGetSettingsRuntime(
-		noUpdateNotificationRuntime,
-	);
-	if (
-		noUpdateSetting != null &&
-		(
-			noUpdateSetting.enabled === true ||
-			(
-				noUpdateSetting.date != null &&
-				Math.floor(
-						(Date.now() - new Date(noUpdateSetting.date)) /
-							(1000 * 60 * 60 * 24),
-					) <= 7
-			)
-		)
-	) {
-		return;
-	}
-	bgSetStorageRuntime(
-		[{ id: noUpdateNotificationRuntime, date: new Date().toJSON() }],
-		null,
-		settingsKeyRuntime,
-	);
-	try {
-		const urlParts = extensionGithubLinkRuntime.split("github.com/");
-		const repoPath = urlParts[1].replace(/\.git$/, "");
-		const response = await fetchRuntime(
-			`https://api.github.com/repos/${repoPath}/releases`,
-		);
-		if (!response.ok) {
-			consoleRuntime.error("error_failed_to_fetch", response.status);
-			return;
-		}
-		const releases = await response.json();
-		const latestVersion = releases
-			.filter((release) =>
-				!release.prerelease &&
-				_isNewerVersion(
-					release.tag_name.replace(/^.*(-)?v/, ""),
-					extensionVersionRuntime,
-				)
-			)
-			.sort((a, b) => {
-				return new Date(b.created_at) - new Date(a.created_at);
-			})
-			?.[0]?.tag_name?.replace(/^.*(-)?v/, "");
-		if (latestVersion != null) {
-			await bg_notify({
-				what: whatUpdateExtensionRuntime,
-				oldversion: extensionVersionRuntime,
-				version: latestVersion,
-				link: extensionGithubLinkRuntime,
-			});
-		}
-	} catch (error) {
-		consoleRuntime.error("error_check_update", error);
-	}
-}
-
 /**
  * Creates background utility handlers with injected runtime dependencies.
  *
@@ -344,27 +66,284 @@ export function createBackgroundUtilsModule({
 	urlCtor = URL,
 	consoleRef = console,
 } = {}) {
-	browserRuntime = browser;
-	extensionGithubLinkRuntime = extensionGithubLink;
-	extensionNameRuntime = extensionName;
-	extensionVersionRuntime = extensionVersion;
-	isChromeRuntime = isChrome;
-	isFirefoxRuntime = isFirefox;
-	noUpdateNotificationRuntime = noUpdateNotification;
-	settingsKeyRuntime = settingsKey;
-	whatExportFromBgRuntime = whatExportFromBg;
-	whatRequestExportPermissionToOpenPopupRuntime =
+	const browserRuntime = browser;
+	const extensionGithubLinkRuntime = extensionGithubLink;
+	const extensionNameRuntime = extensionName;
+	const extensionVersionRuntime = extensionVersion;
+	const isChromeRuntime = isChrome;
+	const isFirefoxRuntime = isFirefox;
+	const noUpdateNotificationRuntime = noUpdateNotification;
+	const settingsKeyRuntime = settingsKey;
+	const whatExportFromBgRuntime = whatExportFromBg;
+	const whatRequestExportPermissionToOpenPopupRuntime =
 		whatRequestExportPermissionToOpenPopup;
-	whatUpdateExtensionRuntime = whatUpdateExtension;
-	isExportAllowedRuntime = isExportAllowedFn;
-	tabContainerRuntime = tabContainerRef;
-	bgGetSettingsRuntime = bgGetSettingsFn;
-	bgGetStorageRuntime = bgGetStorageFn;
-	bgSetStorageRuntime = bgSetStorageFn;
-	chromeRuntime = chromeRef;
-	fetchRuntime = fetchFn;
-	urlRuntime = urlCtor;
-	consoleRuntime = consoleRef;
+	const whatUpdateExtensionRuntime = whatUpdateExtension;
+	const isExportAllowedRuntime = isExportAllowedFn;
+	const tabContainerRuntime = tabContainerRef;
+	const bgGetSettingsRuntime = bgGetSettingsFn;
+	const bgGetStorageRuntime = bgGetStorageFn;
+	const bgSetStorageRuntime = bgSetStorageFn;
+	const chromeRuntime = chromeRef;
+	const fetchRuntime = fetchFn;
+	const urlRuntime = urlCtor;
+	const consoleRuntime = consoleRef;
+
+	/**
+	 * Queries the browser for the current active tab.
+	 *
+	 * @param {(tab: {
+	 *   id: number;
+	 *   active?: boolean;
+	 *   currentWindow?: boolean;
+	 *   url?: string;
+	 * }) => unknown} callback Callback invoked with found tab.
+	 * @param {number} [count=0] Retry counter.
+	 * @return {Promise<unknown>} Callback result.
+	 */
+	async function _queryTabs(callback, count = 0) {
+		const queryParams = { active: true, currentWindow: true };
+		if (count > 0) {
+			delete queryParams.currentWindow;
+		}
+		const browserTabs = await browserRuntime.tabs.query(queryParams);
+		if (
+			browserRuntime.runtime.lastError || browserTabs == null ||
+			browserTabs.length === 0 || browserTabs[0] == null
+		) {
+			if (count > 5) {
+				throw new Error("error_no_browser_tab");
+			}
+			return _queryTabs(callback, count + 1);
+		}
+		return callback(browserTabs[0]);
+	}
+
+	/**
+	 * Retrieves the current active browser tab.
+	 *
+	 * @param {((tab: {
+	 *   id: number;
+	 *   active?: boolean;
+	 *   currentWindow?: boolean;
+	 *   url?: string;
+	 * }) => unknown) | null} [callback=null] Optional callback.
+	 * @return {Promise<{
+	 *   id: number;
+	 *   active?: boolean;
+	 *   currentWindow?: boolean;
+	 *   url?: string;
+	 * } | unknown>} Resolved tab value or callback result.
+	 */
+	function bg_getCurrentBrowserTab(callback = null) {
+		if (callback == null) {
+			return new Promise((resolve, reject) => {
+				_queryTabs(resolve)
+					.then((queryResult) => resolve(queryResult))
+					.catch((error) => reject(error));
+			});
+		}
+		return _queryTabs(callback);
+	}
+
+	/**
+	 * Sends a message to the current tab.
+	 *
+	 * @param {object | null} message Message payload.
+	 * @return {Promise<void>}
+	 */
+	async function bg_notify(message) {
+		if (message == null) {
+			throw new Error("error_no_message");
+		}
+		const browserTab = await bg_getCurrentBrowserTab();
+		browserRuntime.tabs.sendMessage(browserTab.id, message);
+	}
+
+	/**
+	 * Handles tab export in Firefox, Chrome, or fallback environments.
+	 *
+	 * @param {Array | { length?: number; tabs?: object[] }} tabs Tab payload.
+	 */
+	function _exportHandler(tabs) {
+		const jsonData = JSON.stringify(tabs);
+		const filename = `${extensionNameRuntime}_${
+			Array.isArray(tabs)
+				? tabs.length
+				: tabs[tabContainerRuntime.keyTabs]?.length
+		}-Tabs.json`;
+		if (isFirefoxRuntime) {
+			const blob = new Blob([jsonData], { type: "application/json" });
+			const url = urlRuntime.createObjectURL(blob);
+			browserRuntime.downloads.download({
+				url,
+				filename,
+			}).then(() => {
+				browserRuntime.downloads.onChanged.addListener((event) => {
+					if (event.state.current === "complete") {
+						urlRuntime.revokeObjectURL(url);
+					}
+				});
+			});
+		} else if (isChromeRuntime) {
+			const dataStr = "data:application/json;charset=utf-8," +
+				encodeURIComponent(jsonData);
+			chromeRuntime.downloads.download({
+				url: dataStr,
+				filename,
+			});
+		} else {
+			bg_notify({
+				what: whatExportFromBgRuntime,
+				filename,
+				payload: jsonData,
+			});
+		}
+	}
+
+	/**
+	 * Launches export, reading from storage when tabs are omitted.
+	 *
+	 * @param {Array | object | null} [tabs=null] Optional tab payload.
+	 * @return {Promise<void> | void}
+	 */
+	function exportHandler(tabs = null) {
+		if (tabs == null) {
+			return bgGetStorageRuntime(_exportHandler);
+		}
+		_exportHandler(tabs);
+	}
+
+	/**
+	 * Attempts to set the browser action popup for download permission.
+	 *
+	 * @return {boolean} Whether popup was set.
+	 */
+	function requestExportPermission() {
+		const permissionLink = browserRuntime.runtime.getURL(
+			"action/req_permissions/req_permissions.html",
+		);
+		if (permissionLink == null) {
+			return false;
+		}
+		browserRuntime.action.setPopup({
+			popup: `${permissionLink}?whichid=download`,
+		});
+		return true;
+	}
+
+	/**
+	 * Checks download permission and optionally launches export.
+	 *
+	 * @param {object[] | object | null} [tabs=null] Optional export payload.
+	 * @param {boolean} [checkOnly=false] When true, only checks permission.
+	 * @return {boolean} Whether export permission is available.
+	 */
+	function checkLaunchExport(tabs = null, checkOnly = false) {
+		const isAllowed = isExportAllowedRuntime();
+		if (isAllowed) {
+			if (!checkOnly) {
+				exportHandler(tabs);
+			}
+		} else {
+			bg_notify({
+				what: whatRequestExportPermissionToOpenPopupRuntime,
+				ok: requestExportPermission(),
+			});
+		}
+		return isAllowed;
+	}
+
+	/**
+	 * Compares semantic versions and checks whether `latest` is newer than `current`.
+	 *
+	 * @param {string} latest Latest version.
+	 * @param {string} current Current version.
+	 * @return {boolean} `true` when latest is newer.
+	 */
+	function _isNewerVersion(latest, current) {
+		const latestParts = latest.split(".").map(Number);
+		const currentParts = current.split(".").map(Number);
+		for (
+			let index = 0;
+			index < Math.max(latestParts.length, currentParts.length);
+			index++
+		) {
+			const latestPart = latestParts[index] ?? 0;
+			const currentPart = currentParts[index] ?? 0;
+			if (latestPart > currentPart) {
+				return true;
+			}
+			if (latestPart < currentPart) {
+				return false;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Checks GitHub releases and notifies when a newer extension version exists.
+	 *
+	 * @return {Promise<void>}
+	 */
+	async function checkForUpdates() {
+		const noUpdateSetting = await bgGetSettingsRuntime(
+			noUpdateNotificationRuntime,
+		);
+		if (
+			noUpdateSetting != null &&
+			(
+				noUpdateSetting.enabled === true ||
+				(
+					noUpdateSetting.date != null &&
+					Math.floor(
+							(Date.now() - new Date(noUpdateSetting.date)) /
+								(1000 * 60 * 60 * 24),
+						) <= 7
+				)
+			)
+		) {
+			return;
+		}
+		bgSetStorageRuntime(
+			[{ id: noUpdateNotificationRuntime, date: new Date().toJSON() }],
+			null,
+			settingsKeyRuntime,
+		);
+		try {
+			const urlParts = extensionGithubLinkRuntime.split("github.com/");
+			const repoPath = urlParts[1].replace(/\.git$/, "");
+			const response = await fetchRuntime(
+				`https://api.github.com/repos/${repoPath}/releases`,
+			);
+			if (!response.ok) {
+				consoleRuntime.error("error_failed_to_fetch", response.status);
+				return;
+			}
+			const releases = await response.json();
+			const latestVersion = releases
+				.filter((release) =>
+					!release.prerelease &&
+					_isNewerVersion(
+						release.tag_name.replace(/^.*(-)?v/, ""),
+						extensionVersionRuntime,
+					)
+				)
+				.sort((a, b) => {
+					return new Date(b.created_at) - new Date(a.created_at);
+				})
+				?.[0]?.tag_name?.replace(/^.*(-)?v/, "");
+			if (latestVersion != null) {
+				await bg_notify({
+					what: whatUpdateExtensionRuntime,
+					oldversion: extensionVersionRuntime,
+					version: latestVersion,
+					link: extensionGithubLinkRuntime,
+				});
+			}
+		} catch (error) {
+			consoleRuntime.error("error_check_update", error);
+		}
+	}
 
 	return {
 		_exportHandler,

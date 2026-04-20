@@ -30,7 +30,7 @@ import {
 	getWasOnSavedTab,
 	isOnSavedTab,
 	performActionOnTabs,
-} from "./content.js";
+} from "./content-runtime.js";
 import { getCurrentHref } from "./sf-elements.js";
 import { showToast } from "./toast.js";
 import { createFavouriteManagerModule } from "./favourite-manager-runtime.js";

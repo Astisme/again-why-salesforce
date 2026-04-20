@@ -1,23 +1,3 @@
-let html;
-/**
- * Listener for runtime messages related to theme updates.
- *
- * @param {Object} message Incoming runtime message.
- * @param {*} _sender Unused sender parameter.
- * @param {Function} sendResponse Runtime response callback.
- * @return {void}
- */
-function readThemeMessage(message, _sender, sendResponse, whatTheme) {
-	if (
-		message?.what !== whatTheme ||
-		message?.theme == null
-	) {
-		return;
-	}
-	sendResponse(null);
-	html.dataset.theme = message.theme;
-}
-
 /**
  * Initializes logo page theme wiring and runtime theme-message handling.
  *
@@ -34,10 +14,28 @@ export function runLogo({
 	initThemeFn,
 	documentRef = document,
 } = {}) {
+	const html = documentRef.documentElement;
+
+	/**
+	 * Listener for runtime messages related to theme updates.
+	 *
+	 * @param {Object} message Incoming runtime message.
+	 * @param {*} _sender Unused sender parameter.
+	 * @param {Function} sendResponse Runtime response callback.
+	 * @return {void}
+	 */
+	function readThemeMessage(message, _sender, sendResponse) {
+		if (
+			message?.what !== whatTheme ||
+			message?.theme == null
+		) {
+			return;
+		}
+		sendResponse(null);
+		html.dataset.theme = message.theme;
+	}
+
 	initThemeFn();
-	html = documentRef.documentElement;
-	browser.runtime.onMessage.addListener((m, s, c) =>
-		readThemeMessage(m, s, c, whatTheme)
-	);
+	browser.runtime.onMessage.addListener(readThemeMessage);
 	return readThemeMessage;
 }

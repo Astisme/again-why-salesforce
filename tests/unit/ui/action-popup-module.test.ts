@@ -1,9 +1,6 @@
 import "../../mocks.test.ts";
 import { assertEquals } from "@std/testing/asserts";
-import {
-	createPopupModule,
-	runPopup,
-} from "../../../src/action/popup/popup-module.js";
+import { createPopupModule } from "../../../src/action/popup/popup-module.js";
 import {
 	createMockWindow,
 	MockDocument,
@@ -23,6 +20,18 @@ type Command = {
 	name: string;
 	shortcut: string;
 };
+
+/**
+ * Executes popup behavior via the popup-module factory.
+ *
+ * @param {Record<string, unknown>} [popupOptions={}] Popup options.
+ * @return {Promise<{ redirected: boolean }>} Redirect status.
+ */
+function runPopupWithModule(
+	popupOptions: Record<string, unknown> = {},
+) {
+	return createPopupModule(popupOptions).runPopup();
+}
 
 /**
  * Creates and appends a mock DOM element with an id.
@@ -145,7 +154,7 @@ async function loadPopupModule({
 		const popupModule = createPopupModule(popupOptions);
 		await popupModule.runPopup();
 	} else {
-		await runPopup(popupOptions);
+		await runPopupWithModule(popupOptions);
 	}
 
 	return {
@@ -293,7 +302,7 @@ Deno.test("popup-module exits early when one required popup button is unavailabl
 	};
 	const messages: Record<string, unknown>[] = [];
 
-	const result = await runPopup({
+	const result = await runPopupWithModule({
 		areFramePatternsAllowedFn: () => Promise.resolve(true),
 		browser: {
 			runtime: {
@@ -332,7 +341,7 @@ Deno.test("popup-module runPopup supports explicit requestedCommands overrides",
 	appendElement(document, "button", "tutorial");
 	const messages: Record<string, unknown>[] = [];
 
-	await runPopup({
+	await runPopupWithModule({
 		areFramePatternsAllowedFn: () => Promise.resolve(true),
 		browser: {
 			runtime: {
@@ -363,7 +372,7 @@ Deno.test("popup-module runPopup supports explicit requestedCommands overrides",
 });
 
 Deno.test("popup-module runPopup default fallbacks redirect safely with no overrides", async () => {
-	const result = await runPopup();
+	const result = await runPopupWithModule();
 	assertEquals(result.redirected, true);
 });
 
@@ -381,7 +390,7 @@ Deno.test("popup-module runPopup default handlers remain safe with partial overr
 
 	const messages: Record<string, unknown>[] = [];
 
-	await runPopup({
+	await runPopupWithModule({
 		documentRef: document,
 		isOnSalesforceSetupFn: () => Promise.resolve({ ison: true }),
 		locationRef: window.location as URL,
@@ -411,7 +420,7 @@ Deno.test("popup-module runPopup default handlers remain safe with partial overr
 });
 
 Deno.test("popup-module fallback document safely handles setup flow when no buttons are present", async () => {
-	const result = await runPopup({
+	const result = await runPopupWithModule({
 		isOnSalesforceSetupFn: () => Promise.resolve({ ison: true }),
 	});
 	assertEquals(result.redirected, false);
@@ -428,7 +437,7 @@ Deno.test("popup-module setup flow can rely on the default message sender", asyn
 	appendElement(document, "button", "manage-tabs");
 	appendElement(document, "button", "tutorial");
 
-	const result = await runPopup({
+	const result = await runPopupWithModule({
 		documentRef: document,
 		isOnSalesforceSetupFn: () => Promise.resolve({ ison: true }),
 		locationRef: window.location as URL,

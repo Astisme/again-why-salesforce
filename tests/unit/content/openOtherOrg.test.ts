@@ -1,6 +1,8 @@
 import { assertEquals, assertExists } from "@std/testing/asserts";
-import { loadIsolatedModule } from "../../load-isolated-module.test.ts";
 import { installMockDom } from "../../happydom.test.ts";
+import {
+	createOpenOtherOrgModule,
+} from "../../../src/salesforce/openOtherOrg-module.js";
 import { type InternalMessage, mockBrowser } from "../../mocks.test.ts";
 
 type Listener = (event: {
@@ -48,11 +50,11 @@ class TestElement {
 	/**
 	 * Appends a child element.
 	 *
-	 * @param {TestElement} child Child element.
+	 * @param {unknown} child Child element.
 	 * @return {void}
 	 */
-	appendChild(child: TestElement) {
-		this.children.push(child);
+	appendChild(child: unknown) {
+		this.children.push(child as TestElement);
 	}
 
 	/**
@@ -104,9 +106,9 @@ type OpenOtherOrgFixture = {
 /**
  * Creates an isolated open-other-org module with configurable dependency behavior.
  *
- * @return {Promise<OpenOtherOrgFixture>} Loaded fixture.
+ * @return {OpenOtherOrgFixture} Loaded fixture.
  */
-async function loadOpenOtherOrgFixture() {
+function loadOpenOtherOrgFixture() {
 	let confirmResult = true;
 	let modalPresent = false;
 	let skipLinkDetectionEnabled = false;
@@ -139,78 +141,67 @@ async function loadOpenOtherOrgFixture() {
 		},
 	};
 
-	const { module } = await loadIsolatedModule<
-		OpenOtherOrgModule,
-		Record<string, unknown>
-	>({
-		modulePath: new URL(
-			"../../../src/salesforce/openOtherOrg.js",
-			import.meta.url,
-		),
-		dependencies: {
-			HTTPS: "https://",
-			LIGHTNING_FORCE_COM: ".lightning.force.com",
-			MODAL_ID: "awsf-modal",
-			SALESFORCE_URL_PATTERN: /^[a-z0-9.-]+$/i,
-			SETUP_LIGHTNING: "/lightning/setup/",
-			TOAST_ERROR: "error",
-			TOAST_WARNING: "warning",
-			Tab: {
-				containsSalesforceId: (url: string | null) =>
-					typeof url === "string" && url.includes("001"),
-				extractOrgName: (value: string | null | undefined) => {
-					if (value == null) {
-						return "acme";
-					}
-					const sanitized = value.replace(/^https?:\/\//, "");
-					const hostname = sanitized.split("/")[0] ?? sanitized;
-					return hostname.replace(/\.lightning\.force\.com$/, "");
-				},
-				minifyURL: (value: string | null | undefined) => {
-					if (value == null) {
-						return "";
-					}
-					return value.replace(
-						/^https:\/\/acme\.lightning\.force\.com\/lightning\/setup\//,
-						"",
-					);
-				},
+	const runtimeModule = createOpenOtherOrgModule({
+		confirmFn: () => confirmResult,
+		documentRef,
+		ensureAllTabsAvailabilityFn: () => Promise.resolve(allTabs),
+		generateOpenOtherOrgModalFn: () =>
+			Promise.resolve({
+				closeButton,
+				getSelectedRadioButtonValue: () => selectedLinkTarget,
+				inputContainer: input,
+				modalParent,
+				saveButton,
+			}),
+		getCurrentHrefFn: () =>
+			"https://acme.lightning.force.com/lightning/setup/Users/home",
+		getModalHangerFn: () => hanger,
+		getSettingsFn: () =>
+			Promise.resolve([{ enabled: skipLinkDetectionEnabled }]),
+		getTranslationsFn: (payload: unknown) => {
+			translations.push(payload);
+			return Promise.resolve("confirm-msg");
+		},
+		https: "https://",
+		lightningForceCom: ".lightning.force.com",
+		locationRef: {
+			href: "https://acme.lightning.force.com/lightning/setup/Users/home",
+		},
+		modalId: "awsf-modal",
+		openFn: (url: string | URL, target?: string) => {
+			openCalls.push({ target: target ?? "", url: String(url) });
+		},
+		salesforceUrlPattern: /^[a-z0-9.-]+$/i,
+		setupLightning: "/lightning/setup/",
+		showToastFn: (message: string | string[], status = "") => {
+			toasts.push({ message, status });
+		},
+		tabRef: {
+			containsSalesforceId: (url: string | null) =>
+				typeof url === "string" && url.includes("001"),
+			extractOrgName: (value: string | null | undefined) => {
+				if (value == null) {
+					return "acme";
+				}
+				const sanitized = value.replace(/^https?:\/\//, "");
+				const hostname = sanitized.split("/")[0] ?? sanitized;
+				return hostname.replace(/\.lightning\.force\.com$/, "");
 			},
-			ensureAllTabsAvailability: () => Promise.resolve(allTabs),
-			generateOpenOtherOrgModal: () =>
-				Promise.resolve({
-					closeButton,
-					getSelectedRadioButtonValue: () => selectedLinkTarget,
-					inputContainer: input,
-					modalParent,
-					saveButton,
-				}),
-			getCurrentHref: () =>
-				"https://acme.lightning.force.com/lightning/setup/Users/home",
-			getModalHanger: () => hanger,
-			getSettings: () =>
-				Promise.resolve([{ enabled: skipLinkDetectionEnabled }]),
-			getTranslations: (payload: unknown) => {
-				translations.push(payload);
-				return Promise.resolve("confirm-msg");
-			},
-			showToast: (message: string | string[], status: string) => {
-				toasts.push({ message, status });
+			minifyURL: (value: string | null | undefined) => {
+				if (value == null) {
+					return "";
+				}
+				return value.replace(
+					/^https:\/\/acme\.lightning\.force\.com\/lightning\/setup\//,
+					"",
+				);
 			},
 		},
-		globals: {
-			console: {
-				info: () => {},
-			},
-			confirm: () => confirmResult,
-			document: documentRef,
-			location: {
-				href:
-					"https://acme.lightning.force.com/lightning/setup/Users/home",
-			},
-			open: (url: URL, target: string) => {
-				openCalls.push({ target, url: String(url) });
-			},
+		toastError: "error",
+		toastWarning: "warning",
+		urlCtor: URL,
+		consoleRef: {
+			info: () => {},
 		},
 	});
 
@@ -218,7 +209,7 @@ async function loadOpenOtherOrgFixture() {
 		closeButton,
 		hanger,
 		input,
-		module,
+		module: runtimeModule,
 		openCalls,
 		saveButton,
 		setConfirmResult: (value: boolean) => {

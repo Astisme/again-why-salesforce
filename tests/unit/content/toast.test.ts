@@ -1,6 +1,6 @@
 import { assertEquals, assertRejects } from "@std/testing/asserts";
-import { loadIsolatedModule } from "../../load-isolated-module.test.ts";
 import { installMockDom } from "../../happydom.test.ts";
+import { createToastModule } from "../../../src/salesforce/toast-module.js";
 import "../../mocks.test.ts";
 
 /**
@@ -29,22 +29,28 @@ class ToastElement {
 	}
 }
 
-type ToastModule = {
+type ToastShowApi = {
 	showToast: (message: string | string[], status?: string) => Promise<void>;
+};
+type ToastHanger = {
+	appendChild: (element: {
+		remove: () => void;
+		textContent?: string | null;
+	}) => unknown;
 };
 
 /**
  * Builds an isolated toast module fixture.
  *
- * @return {Promise<{
+ * @return {{
  *   appended: ToastElement[];
- *   module: ToastModule;
- *   setHanger: (newHanger: { appendChild: (element: ToastElement) => ToastElement }) => void;
+ *   module: ToastShowApi;
+ *   setHanger: (newHanger: ToastHanger) => void;
  *   traces: { value: number };
  *   logs: { error: string[]; info: string[]; log: string[]; warn: string[] };
- * }>} Loaded fixture.
+ * }} Loaded fixture.
  */
-async function loadToastFixture() {
+function loadToastFixture() {
 	const appended: ToastElement[] = [];
 	const traces = { value: 0 };
 	const logs = {
@@ -53,58 +59,51 @@ async function loadToastFixture() {
 		log: [] as Array<string | string[]>,
 		warn: [] as string[],
 	};
-	let currentHanger = {
-		appendChild: (element: ToastElement) => {
-			appended.push(element);
+	let currentHanger: ToastHanger = {
+		appendChild: (element: {
+			remove: () => void;
+			textContent?: string | null;
+		}) => {
+			appended.push(element as ToastElement);
 			return element;
 		},
 	};
 
-	const { module } = await loadIsolatedModule<
-		ToastModule,
-		Record<string, unknown>
-	>({
-		modulePath: new URL(
-			"../../../src/salesforce/toast.js",
-			import.meta.url,
-		),
-		dependencies: {
-			ALL_TOAST_TYPES: new Set(["success", "info", "warning", "error"]),
-			TOAST_ERROR: "error",
-			TOAST_INFO: "info",
-			TOAST_SUCCESS: "success",
-			TOAST_WARNING: "warning",
-			calculateReadingTime: () => 1,
-			generateSldsToastMessage: (message: string[]) =>
-				Promise.resolve(new ToastElement(message.join("|"))),
+	const module = createToastModule({
+		allToastTypes: new Set(["success", "info", "warning", "error"]),
+		calculateReadingTimeFn: () => 1,
+		consoleRef: {
+			error: (message: string | string[]) =>
+				logs.error.push(String(message)),
+			info: (message: string | string[]) =>
+				logs.info.push(String(message)),
+			log: (message: string | string[]) => logs.log.push(message),
+			trace: () => {
+				traces.value++;
+			},
+			warn: (message: string | string[]) =>
+				logs.warn.push(String(message)),
 		},
-		globals: {
-			console: {
-				error: (message: string) => logs.error.push(message),
-				info: (message: string) => logs.info.push(message),
-				log: (message: string) => logs.log.push(message),
-				trace: () => {
-					traces.value++;
-				},
-				warn: (message: string) => logs.warn.push(message),
-			},
-			document: {
-				getElementsByClassName: () => [currentHanger],
-			},
-			setTimeout: (callback: () => void) => {
-				callback();
-				return 1;
-			},
+		documentRef: {
+			getElementsByClassName: () => [currentHanger],
 		},
+		generateSldsToastMessageFn: (message: string[]) =>
+			Promise.resolve(new ToastElement(message.join("|"))),
+		setTimeoutFn: (callback: () => void) => {
+			callback();
+			return 1;
+		},
+		toastError: "error",
+		toastInfo: "info",
+		toastSuccess: "success",
+		toastWarning: "warning",
 	});
 
 	return {
 		appended,
 		logs,
 		module,
-		setHanger: (
-			newHanger: { appendChild: (element: ToastElement) => ToastElement },
-		) => {
+		setHanger: (newHanger: ToastHanger) => {
 			currentHanger = newHanger;
 		},
 		traces,
@@ -143,8 +142,11 @@ Deno.test("toast reuses the cached hanger after the first lookup", async () => {
 
 	await fixture.module.showToast("first", "success");
 	fixture.setHanger({
-		appendChild: (element: ToastElement) => {
-			secondAppend.push(element);
+		appendChild: (element: {
+			remove: () => void;
+			textContent?: string | null;
+		}) => {
+			secondAppend.push(element as ToastElement);
 			return element;
 		},
 	});
@@ -163,45 +165,40 @@ Deno.test("toast accepts custom statuses present in the allowed status set", asy
 		warn: [] as string[],
 	};
 	const hanger = {
-		appendChild: (element: ToastElement) => {
-			appended.push(element);
+		appendChild: (element: {
+			remove: () => void;
+			textContent?: string | null;
+		}) => {
+			appended.push(element as ToastElement);
 			return element;
 		},
 	};
-	const { module } = await loadIsolatedModule<
-		ToastModule,
-		Record<string, unknown>
-	>({
-		modulePath: new URL(
-			"../../../src/salesforce/toast.js",
-			import.meta.url,
-		),
-		dependencies: {
-			ALL_TOAST_TYPES: new Set(["custom"]),
-			TOAST_ERROR: "error",
-			TOAST_INFO: "info",
-			TOAST_SUCCESS: "success",
-			TOAST_WARNING: "warning",
-			calculateReadingTime: () => 1,
-			generateSldsToastMessage: (message: string[]) =>
-				Promise.resolve(new ToastElement(message.join("|"))),
+	const module: ToastShowApi = createToastModule({
+		allToastTypes: new Set(["custom"]),
+		calculateReadingTimeFn: () => 1,
+		consoleRef: {
+			error: (message: string | string[]) =>
+				logs.error.push(String(message)),
+			info: (message: string | string[]) =>
+				logs.info.push(String(message)),
+			log: (message: string | string[]) => logs.log.push(message),
+			trace: () => {},
+			warn: (message: string | string[]) =>
+				logs.warn.push(String(message)),
 		},
-		globals: {
-			console: {
-				error: (message: string) => logs.error.push(message),
-				info: (message: string) => logs.info.push(message),
-				log: (message: string) => logs.log.push(message),
-				trace: () => {},
-				warn: (message: string) => logs.warn.push(message),
-			},
-			document: {
-				getElementsByClassName: () => [hanger],
-			},
-			setTimeout: (callback: () => void) => {
-				callback();
-				return 1;
-			},
+		documentRef: {
+			getElementsByClassName: () => [hanger],
 		},
+		generateSldsToastMessageFn: (message: string[]) =>
+			Promise.resolve(new ToastElement(message.join("|"))),
+		setTimeoutFn: (callback: () => void) => {
+			callback();
+			return 1;
+		},
+		toastError: "error",
+		toastInfo: "info",
+		toastSuccess: "success",
+		toastWarning: "warning",
 	});
 
 	await module.showToast("custom-message", "custom");
@@ -278,6 +275,28 @@ Deno.test("toast canonical import validates status handling, logging branches, a
 	const appendedFirst: HTMLElement[] = [];
 	const appendedSecond: HTMLElement[] = [];
 	try {
+		Object.defineProperty(globalThis, "setTimeout", {
+			configurable: true,
+			value: (callback: () => void) => {
+				callback();
+				return 1;
+			},
+			writable: true,
+		});
+		Object.defineProperty(globalThis, "console", {
+			configurable: true,
+			value: {
+				error: (message: string) => logs.error.push(message),
+				info: (message: string) => logs.info.push(message),
+				log: (message: string | string[]) => logs.log.push(message),
+				trace: () => {
+					logs.trace++;
+				},
+				warn: (message: string) => logs.warn.push(message),
+			},
+			writable: true,
+		});
+
 		const generatorModule = await import(
 			"../../../src/salesforce/generator.js"
 		);
@@ -304,28 +323,6 @@ Deno.test("toast canonical import validates status handling, logging branches, a
 			return originalSecondAppend(node);
 		}) as HTMLElement["appendChild"];
 		document.body.appendChild(secondHanger);
-
-		Object.defineProperty(globalThis, "setTimeout", {
-			configurable: true,
-			value: (callback: () => void) => {
-				callback();
-				return 1;
-			},
-			writable: true,
-		});
-		Object.defineProperty(globalThis, "console", {
-			configurable: true,
-			value: {
-				error: (message: string) => logs.error.push(message),
-				info: (message: string) => logs.info.push(message),
-				log: (message: string | string[]) => logs.log.push(message),
-				trace: () => {
-					logs.trace++;
-				},
-				warn: (message: string) => logs.warn.push(message),
-			},
-			writable: true,
-		});
 
 		const toastModule = await import("../../../src/salesforce/toast.js");
 

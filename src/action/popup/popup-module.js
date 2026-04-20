@@ -1,5 +1,27 @@
 "use strict";
 
+import {
+	BROWSER as _BROWSER,
+	CMD_EXPORT_ALL as _CMD_EXPORT_ALL,
+	CMD_IMPORT as _CMD_IMPORT,
+	CMD_OPEN_SETTINGS as _CMD_OPEN_SETTINGS,
+	CXM_MANAGE_TABS as _CXM_MANAGE_TABS,
+	WHAT_EXPORT_CHECK as _WHAT_EXPORT_CHECK,
+	WHAT_GET_COMMANDS as _WHAT_GET_COMMANDS,
+	WHAT_SHOW_IMPORT as _WHAT_SHOW_IMPORT,
+	WHAT_START_TUTORIAL as _WHAT_START_TUTORIAL,
+} from "../../core/constants.js";
+import {
+	areFramePatternsAllowed as _areFramePatternsAllowed,
+	isOnSalesforceSetup as _isOnSalesforceSetup,
+	openSettingsPage as _openSettingsPage,
+	sendExtensionMessage as _sendExtensionMessage,
+} from "../../core/functions.js";
+import {
+	getTranslations as _getTranslations,
+	TranslationService as _TranslationService,
+} from "../../core/translator.js";
+
 const HOST_PERMISSIONS_REDIRECT =
 	"action/req_permissions/req_permissions.html?whichid=hostpermissions";
 const NOT_SALESFORCE_SETUP_REDIRECT =
@@ -205,7 +227,7 @@ function getPopupButtons(documentRef, popupButtonIds) {
  * @param {string[] | null} [options.requestedCommands=null] Explicit commands to request.
  * @return {Promise<{ redirected: boolean }>} Redirect status.
  */
-export async function runPopup({
+async function runPopupImpl({
 	browser = FALLBACK_BROWSER,
 	areFramePatternsAllowedFn = () => Promise.resolve(true),
 	closePopupFn = () => {},
@@ -348,13 +370,115 @@ export async function runPopup({
 }
 
 /**
+ * Builds runtime defaults for popup wiring.
+ *
+ * @return {Object} Runtime popup defaults.
+ */
+export function getPopupRuntimeDefaults() {
+	return {
+		browser: _BROWSER,
+		areFramePatternsAllowedFn: _areFramePatternsAllowed,
+		closePopupFn: globalThis.close ?? (() => {}),
+		documentRef: globalThis.document ?? FALLBACK_DOCUMENT_REF,
+		getTranslationsFn: _getTranslations,
+		isOnSalesforceSetupFn: _isOnSalesforceSetup,
+		locationRef: globalThis.location ?? FALLBACK_LOCATION_REF,
+		openSettingsPageFn: _openSettingsPage,
+		sendExtensionMessageFn: _sendExtensionMessage,
+		translationDataset: _TranslationService.TRANSLATE_DATASET,
+		translationSeparator: _TranslationService.TRANSLATE_SEPARATOR,
+		cmdExportAll: _CMD_EXPORT_ALL,
+		cmdImport: _CMD_IMPORT,
+		cmdOpenSettings: _CMD_OPEN_SETTINGS,
+		cxmManageTabs: _CXM_MANAGE_TABS,
+		whatExportCheck: _WHAT_EXPORT_CHECK,
+		whatGetCommands: _WHAT_GET_COMMANDS,
+		whatShowImport: _WHAT_SHOW_IMPORT,
+		whatStartTutorial: _WHAT_START_TUTORIAL,
+		hostPermissionsRedirect: HOST_PERMISSIONS_REDIRECT,
+		notSalesforceSetupRedirect: NOT_SALESFORCE_SETUP_REDIRECT,
+		popupButtonIds: POPUP_BUTTON_IDS,
+	};
+}
+
+/**
  * Creates a popup module that can be executed later.
  *
  * @param {Object} [options={}] Popup runtime options.
  * @return {{ runPopup: () => Promise<{ redirected: boolean }> }} Popup module API.
  */
-export function createPopupModule(options = {}) {
+export function createPopupModule({
+	browser = FALLBACK_BROWSER,
+	areFramePatternsAllowedFn = () => Promise.resolve(true),
+	closePopupFn = () => {},
+	documentRef = FALLBACK_DOCUMENT_REF,
+	getTranslationsFn = (message) => Promise.resolve(message),
+	isOnSalesforceSetupFn = () => Promise.resolve({ ison: false }),
+	locationRef = FALLBACK_LOCATION_REF,
+	openSettingsPageFn = () => {},
+	sendExtensionMessageFn = () => Promise.resolve(undefined),
+	translationDataset = "i18n",
+	translationSeparator = "+-+",
+	cmdExportAll = "",
+	cmdImport = "",
+	cmdOpenSettings = "",
+	cxmManageTabs = "",
+	whatExportCheck = "",
+	whatGetCommands = "",
+	whatShowImport = "",
+	whatStartTutorial = "",
+	hostPermissionsRedirect = HOST_PERMISSIONS_REDIRECT,
+	notSalesforceSetupRedirect = NOT_SALESFORCE_SETUP_REDIRECT,
+	popupButtonIds = POPUP_BUTTON_IDS,
+	requestedCommands = null,
+	...overrides
+} = {}) {
 	return {
-		runPopup: runPopup.bind(null, options),
+		runPopup: runPopupImpl.bind(null, {
+			browser,
+			areFramePatternsAllowedFn,
+			closePopupFn,
+			documentRef,
+			getTranslationsFn,
+			isOnSalesforceSetupFn,
+			locationRef,
+			openSettingsPageFn,
+			sendExtensionMessageFn,
+			translationDataset,
+			translationSeparator,
+			cmdExportAll,
+			cmdImport,
+			cmdOpenSettings,
+			cxmManageTabs,
+			whatExportCheck,
+			whatGetCommands,
+			whatShowImport,
+			whatStartTutorial,
+			hostPermissionsRedirect,
+			notSalesforceSetupRedirect,
+			popupButtonIds,
+			requestedCommands,
+			...overrides,
+		}),
 	};
+}
+
+/**
+ * Executes popup startup behavior with runtime defaults.
+ *
+ * @param {Object} [overrides={}] Runtime overrides used by tests.
+ * @return {Promise<{ redirected: boolean }>} Redirect status.
+ */
+export function runPopup(overrides = {}) {
+	return createPopupModule(overrides).runPopup();
+}
+
+/**
+ * Executes popup startup behavior with fully injected options.
+ *
+ * @param {Object} [options={}] Fully injected popup options.
+ * @return {Promise<{ redirected: boolean }>} Redirect status.
+ */
+export function runPopupWithInjectedOptions(options = {}) {
+	return runPopupImpl(options);
 }
