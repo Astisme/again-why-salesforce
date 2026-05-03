@@ -77,7 +77,9 @@ export function createOpenOtherOrgModule({
 	locationRef = globalThis.location,
 	consoleRef = console,
 	sldsConfirmFn = ({ body } = {}) =>
-		globalThis.confirm?.(Array.isArray(body) ? body.join("\n") : body ?? "") ??
+		globalThis.confirm?.(
+			Array.isArray(body) ? body.join("\n") : body ?? "",
+		) ??
 			false,
 	openFn = globalThis.open,
 	urlCtor = URL,

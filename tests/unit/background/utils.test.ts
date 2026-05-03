@@ -512,7 +512,8 @@ Deno.test("background utils isolated branches cover export handlers and update c
 					what: "update-extension",
 					oldversion: "1.0.0",
 					version: "1.1.0",
-					link: "https://github.com/acme/again-why-salesforce/releases/latest",
+					link:
+						"https://github.com/acme/again-why-salesforce/releases/latest",
 				}]);
 			} finally {
 				updateFixture.cleanup();
