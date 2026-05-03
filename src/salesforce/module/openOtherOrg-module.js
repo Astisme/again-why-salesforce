@@ -45,7 +45,14 @@
  * @param {{ getElementById: (id: string) => unknown } | undefined} [options.documentRef=globalThis.document] Document-like object.
  * @param {{ href?: string } | undefined} [options.locationRef=globalThis.location] Location-like object.
  * @param {{ info: (message: unknown) => void }} [options.consoleRef=console] Console-like object.
- * @param {(message?: string) => boolean} [options.confirmFn=globalThis.confirm] Confirm callback.
+ * @param {(options?: {
+ *   body?: string | string[];
+ *   cancelLabel?: string;
+ *   closeLabel?: string;
+ *   confirmLabel?: string;
+ *   title?: string;
+ * }) => Promise<boolean> | boolean} [options.sldsConfirmFn] Confirm callback.
+ * @param {(message?: string) => boolean} [options.confirmFn=globalThis.confirm] Legacy confirm callback.
  * @param {(url: string | URL, target?: string) => unknown} [options.openFn=globalThis.open] Window open callback.
  * @param {{ new(input: string): URL }} [options.urlCtor=URL] URL constructor.
  * @return {{
@@ -71,6 +78,7 @@ export function createOpenOtherOrgModule({
 	documentRef = globalThis.document,
 	locationRef = globalThis.location,
 	consoleRef = console,
+	sldsConfirmFn,
 	confirmFn = globalThis.confirm,
 	openFn = globalThis.open,
 	urlCtor = URL,
@@ -191,13 +199,39 @@ export function createOpenOtherOrgModule({
 					url.startsWith("/") ? "" : setupLightning
 				}${url}`,
 			);
-			const confirmMsg = await getTranslationsFn([
-				[
+			const [confirmMsg, confirmLabel, cancelLabel, closeLabel] =
+				await getTranslationsFn([
 					"confirm_another_org",
-					targetUrl,
-				],
-			], "\n");
-			if (confirmFn?.(confirmMsg)) {
+					"confirm",
+					"cancel",
+					"cancel_close",
+				]);
+			let confirmResult = false;
+			if (typeof sldsConfirmFn === "function") {
+				try {
+					confirmResult = await sldsConfirmFn({
+						body: [confirmMsg, targetUrl],
+						confirmLabel,
+						cancelLabel,
+						closeLabel,
+					});
+				} catch {
+					confirmResult = confirmFn?.(
+						[
+							confirmMsg,
+							`${targetUrl}`,
+						].join("\n"),
+					) ?? false;
+				}
+			} else {
+				confirmResult = confirmFn?.(
+					[
+						confirmMsg,
+						`${targetUrl}`,
+					].join("\n"),
+				) ?? false;
+			}
+			if (confirmResult) {
 				closeButton.click();
 				openFn?.(targetUrl, linkTarget ?? "_blank");
 			}

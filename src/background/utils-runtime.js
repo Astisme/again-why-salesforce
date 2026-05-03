@@ -312,32 +312,37 @@ export function createBackgroundUtilsModule({
 		try {
 			const urlParts = extensionGithubLinkRuntime.split("github.com/");
 			const repoPath = urlParts[1].replace(/\.git$/, "");
+			const releasesLatest = "/releases/latest";
 			const response = await fetchRuntime(
-				`https://api.github.com/repos/${repoPath}/releases`,
+				`https://api.github.com/repos/${repoPath}${releasesLatest}`,
 			);
 			if (!response.ok) {
 				consoleRuntime.error("error_failed_to_fetch", response.status);
 				return;
 			}
-			const releases = await response.json();
-			const latestVersion = releases
-				.filter((release) =>
-					!release.prerelease &&
-					_isNewerVersion(
-						release.tag_name.replace(/^.*(-)?v/, ""),
-						extensionVersionRuntime,
-					)
-				)
-				.sort((a, b) => {
-					return new Date(b.created_at) - new Date(a.created_at);
-				})
-				?.[0]?.tag_name?.replace(/^.*(-)?v/, "");
-			if (latestVersion != null) {
+			const latestRelease = await response.json();
+			let latestVersion = null;
+			let releaseLink = `${extensionGithubLinkRuntime}${releasesLatest}`;
+			if (Array.isArray(latestRelease)) {
+				latestVersion = latestRelease
+					.filter((release) => !release?.prerelease)
+					.sort((a, b) => {
+						return new Date(b.created_at) - new Date(a.created_at);
+					})
+					?.[0]?.tag_name?.replace(/^.*(-)?v/, "");
+				releaseLink = extensionGithubLinkRuntime;
+			} else if (latestRelease?.prerelease !== true) {
+				latestVersion = latestRelease?.tag_name?.replace(/^.*(-)?v/, "");
+			}
+			if (
+				latestVersion != null &&
+				_isNewerVersion(latestVersion, extensionVersionRuntime)
+			) {
 				await bg_notify({
 					what: whatUpdateExtensionRuntime,
 					oldversion: extensionVersionRuntime,
 					version: latestVersion,
-					link: extensionGithubLinkRuntime,
+					link: releaseLink,
 				});
 			}
 		} catch (error) {

@@ -13,7 +13,7 @@ import { getTranslations } from "../../core/translator.js";
 import Tab from "../../core/tab.js";
 import { ensureAllTabsAvailability } from "../../core/tabContainer.js";
 
-import { generateOpenOtherOrgModal } from "../generator.js";
+import { generateOpenOtherOrgModal, sldsConfirm } from "../generator.js";
 import {
 	createOpenOtherOrgModule as createOpenOtherOrgPureModule,
 } from "../module/openOtherOrg-module.js";
@@ -65,7 +65,14 @@ import { showToast } from "../toast.js";
  * @param {{ getElementById: (id: string) => unknown } | undefined} [overrides.documentRef=globalThis.document] Document-like object.
  * @param {{ href?: string } | undefined} [overrides.locationRef=globalThis.location] Location-like object.
  * @param {{ info: (message: unknown) => void }} [overrides.consoleRef=console] Console-like object.
- * @param {(message?: string) => boolean} [overrides.confirmFn=globalThis.confirm] Confirm callback.
+ * @param {(options?: {
+ *   body?: string | string[];
+ *   cancelLabel?: string;
+ *   closeLabel?: string;
+ *   confirmLabel?: string;
+ *   title?: string;
+ * }) => Promise<boolean> | boolean} [overrides.sldsConfirmFn=sldsConfirm] Confirm callback.
+ * @param {(message?: string) => boolean} [overrides.confirmFn=globalThis.confirm] Legacy confirm callback.
  * @param {(url: string | URL, target?: string) => unknown} [overrides.openFn=globalThis.open] Window open callback.
  * @param {{ new(input: string): URL }} [overrides.urlCtor=URL] URL constructor.
  * @return {{
@@ -91,6 +98,7 @@ export function createOpenOtherOrgModule({
 	documentRef = globalThis.document,
 	locationRef = globalThis.location,
 	consoleRef = console,
+	sldsConfirmFn = sldsConfirm,
 	confirmFn = globalThis.confirm,
 	openFn = globalThis.open,
 	urlCtor = URL,
@@ -114,6 +122,7 @@ export function createOpenOtherOrgModule({
 		documentRef,
 		locationRef,
 		consoleRef,
+		sldsConfirmFn,
 		confirmFn,
 		openFn,
 		urlCtor,

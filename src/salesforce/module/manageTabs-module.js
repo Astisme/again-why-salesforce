@@ -33,6 +33,7 @@ import {
 	createManageTabRow as _createManageTabRow,
 	generateManageTabsModal as _generateManageTabsModal,
 	handleLightningLinkClick as _handleLightningLinkClick,
+	sldsConfirm as _sldsConfirm,
 } from "../generator.js";
 import {
 	makeDuplicatesBold as _makeDuplicatesBold,
@@ -69,6 +70,7 @@ let setupDragForUl = _setupDragForUl;
 let createManageTabRow = _createManageTabRow;
 let generateManageTabsModal = _generateManageTabsModal;
 let handleLightningLinkClick = _handleLightningLinkClick;
+let sldsConfirm = _sldsConfirm;
 let MODAL_ID = _MODAL_ID;
 let makeDuplicatesBold = _makeDuplicatesBold;
 let reorderTabsUl = _reorderTabsUl;
@@ -193,9 +195,22 @@ function moveTrToGivenIndex({
  * @param {event} e - the event which had this function called
  */
 async function checkOpenAskConfirm(e) {
+	const [body, confirmLabel, cancelLabel, closeLabel] = await getTranslations(
+		[
+			"unsaved_changes_confirm",
+			"confirm",
+			"cancel",
+			"cancel_close",
+		],
+	);
 	if (
 		!wasSomethingUpdated ||
-		confirm(await getTranslations("unsaved_changes_confirm"))
+		await sldsConfirm({
+			body,
+			confirmLabel,
+			cancelLabel,
+			closeLabel,
+		})
 	) {
 		handleLightningLinkClick(e);
 		closeButton.click();
@@ -997,10 +1012,11 @@ export function createManageTabsModule(overrides = {}) {
 	getInnerElementFieldBySelector = overrides.getInnerElementFieldBySelector ??
 		getInnerElementFieldBySelector;
 	getModalHanger = overrides.getModalHanger ?? getModalHanger;
-	getTranslations = overrides.getTranslations ?? getTranslations;
-	handleLightningLinkClick = overrides.handleLightningLinkClick ??
-		handleLightningLinkClick;
-	injectStyle = overrides.injectStyle ?? injectStyle;
+		getTranslations = overrides.getTranslations ?? getTranslations;
+		handleLightningLinkClick = overrides.handleLightningLinkClick ??
+			handleLightningLinkClick;
+		sldsConfirm = overrides.sldsConfirm ?? sldsConfirm;
+		injectStyle = overrides.injectStyle ?? injectStyle;
 	makeDuplicatesBold = overrides.makeDuplicatesBold ?? makeDuplicatesBold;
 	reorderTabsUl = overrides.reorderTabsUl ?? reorderTabsUl;
 	setupDragForTable = overrides.setupDragForTable ?? setupDragForTable;
@@ -1009,10 +1025,18 @@ export function createManageTabsModule(overrides = {}) {
 	showToast = overrides.showToast ?? showToast;
 	updateModalBodyOverflow = overrides.updateModalBodyOverflow ??
 		updateModalBodyOverflow;
-	applyGlobalOverride("CustomEvent", overrides.CustomEvent);
-	applyGlobalOverride("confirm", overrides.confirm);
-	applyGlobalOverride("document", overrides.document);
-	applyGlobalOverride("setTimeout", overrides.setTimeout);
+		applyGlobalOverride("CustomEvent", overrides.CustomEvent);
+		if (
+			typeof overrides.confirm === "function" &&
+			overrides.sldsConfirm == null
+		) {
+			sldsConfirm = ({ body } = {}) => {
+				const promptText = Array.isArray(body) ? body.join("\n") : body;
+				return overrides.confirm(promptText);
+			};
+		}
+		applyGlobalOverride("document", overrides.document);
+		applyGlobalOverride("setTimeout", overrides.setTimeout);
 
 	focusedIndex = 0;
 	managedLoggers.length = 0;

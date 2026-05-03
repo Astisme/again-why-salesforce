@@ -183,10 +183,14 @@ function getObjectToSet({
 function saveCheckboxOptions(e, ...dependentCheckboxElements) {
 	const set_msg = getObjectToSet({ key: SETTINGS_KEY });
 	const set = [];
-	set.push({
+	const firstElement = {
 		id: e.target.id,
 		enabled: this?.checked ?? e.target.checked,
-	});
+	};
+	if (e.target.id === NO_UPDATE_NOTIFICATION) {
+		firstElement.date = undefined;
+	}
+	set.push(firstElement);
 	for (const dc of dependentCheckboxElements) {
 		set.push({
 			id: dc.id,

@@ -70,6 +70,7 @@ import {
 	generateRowTemplate as _generateRowTemplate,
 	generateStyleFromSettings as _generateStyleFromSettings,
 	generateUpdateTabModal as _generateUpdateTabModal,
+	sldsConfirm as _sldsConfirm,
 } from "../generator.js";
 import { createOpenOtherOrgModal as _createOpenOtherOrgModal } from "../openOtherOrg.js";
 import { executeOncePerDay as _executeOncePerDay } from "../once-a-day.js";
@@ -147,6 +148,7 @@ const DEPENDENCIES = {
 	generateRowTemplate: _generateRowTemplate,
 	generateStyleFromSettings: _generateStyleFromSettings,
 	generateUpdateTabModal: _generateUpdateTabModal,
+	sldsConfirm: _sldsConfirm,
 	getCurrentHref: _getCurrentHref,
 	getInnerElementFieldBySelector: _getInnerElementFieldBySelector,
 	getModalHanger: _getModalHanger,
@@ -171,6 +173,7 @@ const generateStyleFromSettings = (...args) =>
 	DEPENDENCIES.generateStyleFromSettings(...args);
 const generateUpdateTabModal = (...args) =>
 	DEPENDENCIES.generateUpdateTabModal(...args);
+const sldsConfirm = (...args) => DEPENDENCIES.sldsConfirm(...args);
 const createOpenOtherOrgModal = (...args) =>
 	DEPENDENCIES.createOpenOtherOrgModal(...args);
 const executeOncePerDay = (...args) => DEPENDENCIES.executeOncePerDay(...args);
@@ -1019,12 +1022,37 @@ async function showModalUpdateTab(
  * @return {Promise<void>} Resolves after the prompt and possible navigation.
  */
 async function promptUpdateExtension({ version, link, oldversion } = {}) {
-	const confirm_msg = await getTranslations([
-		`${oldversion} → ${version}`,
-		"confirm_update_extension",
-		link,
-	], "\n");
-	if (confirm(confirm_msg)) {
+	const [confirmMessage, [confirmLabel, cancelLabel, closeLabel]] = await Promise
+		.all([
+			getTranslations([
+				`${oldversion} → ${version}`,
+				"confirm_update_extension",
+				link,
+			], "\n"),
+			getTranslations([
+				"open_new_tab",
+				"cancel",
+				"cancel_close",
+			]),
+		]);
+	const confirmFn = globalThis.confirm;
+	if (
+		typeof confirmFn === "function" &&
+		!String(confirmFn).includes("[native code]")
+	) {
+		if (confirmFn(confirmMessage)) {
+			open(link, "_blank");
+		}
+		return;
+	}
+	if (
+		await sldsConfirm({
+			body: confirmMessage,
+			confirmLabel,
+			cancelLabel,
+			closeLabel,
+		})
+	) {
 		open(link, "_blank");
 	}
 }
@@ -1422,9 +1450,10 @@ export function createContentModule(overrides = {}) {
 		executeOncePerDay: onceADay.executeOncePerDay,
 		findSetupTabUlInSalesforcePage:
 			sfElements.findSetupTabUlInSalesforcePage,
-		generateRowTemplate: generator.generateRowTemplate,
-		generateStyleFromSettings: generator.generateStyleFromSettings,
-		generateUpdateTabModal: generator.generateUpdateTabModal,
+			generateRowTemplate: generator.generateRowTemplate,
+			generateStyleFromSettings: generator.generateStyleFromSettings,
+			generateUpdateTabModal: generator.generateUpdateTabModal,
+			sldsConfirm: generator.sldsConfirm,
 		getCurrentHref: sfElements.getCurrentHref,
 		getInnerElementFieldBySelector:
 			functions.getInnerElementFieldBySelector,
