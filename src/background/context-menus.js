@@ -342,83 +342,44 @@ const menuItemsOriginal = [
 });
 
 /**
- * Returns a deep clone of the original context menu items with updated titles including command shortcuts.
- * Each menu item's title is appended with its corresponding keyboard shortcut (if available),
- * enhancing user visibility of assigned commands.
+ * Gets the configured keyboard shortcut for a menu item id.
  *
- * @return {Array<Object>} A cloned array of menu items with updated titles reflecting shortcuts.
+ * @param {string} menuItemId - The context menu item id.
+ * @return {string|null} The keyboard shortcut, if configured.
+ */
+function getMenuShortcutById(menuItemId) {
+	switch (menuItemId) {
+		case CXM_PAGE_SAVE_TAB:
+			return link_cmd_save_as_tab;
+		case CXM_PAGE_REMOVE_TAB:
+			return link_cmd_remove_tab;
+		case CXM_UPDATE_ORG:
+			return link_cmd_toggle_org;
+		case CXM_UPDATE_TAB:
+			return link_cmd_update_tab;
+		case CMD_OPEN_SETTINGS:
+			return link_cmd_open_settings;
+		case CXM_OPEN_OTHER_ORG:
+			return link_cmd_open_other_org;
+		case CXM_IMPORT_TABS:
+			return link_cmd_import;
+		case CXM_EXPORT_TABS:
+			return link_cmd_export_all;
+		default:
+			return null;
+	}
+}
+
+/**
+ * Returns a deep clone of the original context menu items enriched with command shortcuts.
+ * Each menu item receives a `shortcut` property when a corresponding keyboard shortcut exists.
+ *
+ * @return {Array<Object>} A cloned array of menu items with optional shortcut metadata.
  */
 function getMenuItemsClone() {
 	const clone = structuredClone(menuItemsOriginal);
 	for (const el of clone) {
-		switch (el.id) {
-			case CXM_PAGE_SAVE_TAB:
-				if (link_cmd_save_as_tab != null) {
-					el.title = [
-						el.title,
-						`(${link_cmd_save_as_tab})`,
-					];
-				}
-				break;
-			case CXM_PAGE_REMOVE_TAB:
-				if (link_cmd_remove_tab != null) {
-					el.title = [
-						el.title,
-						`(${link_cmd_remove_tab})`,
-					];
-				}
-				break;
-			case CXM_UPDATE_ORG:
-				if (link_cmd_toggle_org != null) {
-					el.title = [
-						el.title,
-						`(${link_cmd_toggle_org})`,
-					];
-				}
-				break;
-			case CXM_UPDATE_TAB:
-				if (link_cmd_update_tab != null) {
-					el.title = [
-						el.title,
-						`(${link_cmd_update_tab})`,
-					];
-				}
-				break;
-			case CMD_OPEN_SETTINGS:
-				if (link_cmd_open_settings != null) {
-					el.title = [
-						el.title,
-						`(${link_cmd_open_settings})`,
-					];
-				}
-				break;
-			case CXM_OPEN_OTHER_ORG:
-				if (link_cmd_open_other_org != null) {
-					el.title = [
-						el.title,
-						`(${link_cmd_open_other_org})`,
-					];
-				}
-				break;
-			case CXM_IMPORT_TABS:
-				if (link_cmd_import != null) {
-					el.title = [
-						el.title,
-						`(${link_cmd_import})`,
-					];
-				}
-				break;
-			case CXM_EXPORT_TABS:
-				if (link_cmd_export_all != null) {
-					el.title = [
-						el.title,
-						`(${link_cmd_export_all})`,
-					];
-				}
-				break;
-			default:
-				break;
-		}
+		el.shortcut = getMenuShortcutById(el.id);
 	}
 	return clone;
 }
@@ -456,6 +417,11 @@ async function createMenuItems(force = false) {
 		const menuItems = getMenuItemsClone();
 		for (const item of menuItems) {
 			item.title = await getTranslations(item.title);
+			const shortcut = item.shortcut ?? null;
+			if (shortcut != null) {
+				item.title = `${item.title} (${shortcut})`;
+			}
+			delete item.shortcut;
 			BROWSER.contextMenus.create(item);
 			if (BROWSER.runtime.lastError) {
 				console.trace();

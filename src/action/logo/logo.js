@@ -1,30 +1,10 @@
 "use strict";
 import { BROWSER, WHAT_THEME } from "../../core/constants.js";
 import { initTheme } from "../themeHandler.js";
-initTheme();
+import { runLogo } from "./logo-runtime.js";
 
-const html = document.documentElement;
-
-/**
- * Listener for runtime messages related to theme updates.
- * Listens for messages with `what: WHAT_THEME` and a valid `theme` property.
- *
- * @param {Object} message - The incoming message object.
- * @param {*} _ - Unused sender parameter.
- * @param {Function} sendResponse - Callback to respond to the sender.
- */
-function readThemeMessage(message, _, sendResponse) {
-	if (
-		message?.what !== WHAT_THEME ||
-		message?.theme == null
-	) {
-		return;
-	}
-	sendResponse(null);
-	/**
-	 * Set the data-theme attribute on the html tag to the given theme
-	 * @param {string} theme - The name of the theme to apply (e.g., "light", "dark").
-	 */
-	html.dataset.theme = message.theme;
-}
-BROWSER.runtime.onMessage.addListener(readThemeMessage);
+runLogo({
+	browser: BROWSER,
+	initThemeFn: initTheme,
+	whatTheme: WHAT_THEME,
+});

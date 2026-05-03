@@ -4,10 +4,6 @@
  * Handles Lightning navigation based on the provided details.
  * Navigates to a record page or a URL based on the navigation type.
  *
- * Why this exists: Lightning's `$A` navigation events are only available in
- * Salesforce's page context, so this bridge runs inside the page and receives
- * extension requests through `postMessage`.
- *
  * @param {Object} details - The details for navigation.
  * @param {string} details.navigationType - The type of navigation ("recordId" or "url").
  * @param {string} [details.recordId] - The record ID for "recordId" navigation type.
@@ -43,8 +39,6 @@ function doLightningNavigation(details) {
 
 // listen to possible updates from tableDragHandler
 addEventListener("message", (e) => {
-	// Why this exists: the page can receive cross-origin messages; only handle
-	// messages posted from the same window context.
 	if (e.source != globalThis) {
 		return;
 	}

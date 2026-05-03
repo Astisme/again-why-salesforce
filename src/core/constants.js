@@ -36,6 +36,7 @@ export const ISSAFARI = BROWSER_NAME === "safari";
 export const BROWSER = ISCHROME ? chrome : browser;
 export const EXTENSION_LABEL = BROWSER.i18n.getMessage("extension_label");
 export const EXTENSION_NAME = "again-why-salesforce";
+export const MODAL_ID = `${EXTENSION_NAME}-modal`;
 export const SETUP_LIGHTNING = "/lightning/setup/";
 export const WHY_KEY = "againWhySalesforce";
 export const LOCALE_KEY = "_locale";
