@@ -26,6 +26,7 @@ import {
 	USE_LIGHTNING_NAVIGATION as _USE_LIGHTNING_NAVIGATION,
 } from "../../core/constants.js";
 import {
+	applyGlobalOverride as _applyGlobalOverride,
 	getCssRule as _getCssRule,
 	getCssSelector as _getCssSelector,
 	getPinnedSpecificKey as _getPinnedSpecificKey,
@@ -67,6 +68,7 @@ let TAB_STYLE_TOP = _TAB_STYLE_TOP;
 let TOAST_ERROR = _TOAST_ERROR;
 let TOAST_SUCCESS = _TOAST_SUCCESS;
 let USE_LIGHTNING_NAVIGATION = _USE_LIGHTNING_NAVIGATION;
+const applyGlobalOverride = _applyGlobalOverride;
 let getCssRule = _getCssRule;
 let getCssSelector = _getCssSelector;
 let getPinnedSpecificKey = _getPinnedSpecificKey;
@@ -3231,7 +3233,7 @@ export function createGeneratorModule(overrides = {}) {
 		updateModalBodyOverflow = value;
 	});
 	applyOverride(overrides.open, (value) => {
-		globalThis.open = value;
+		applyGlobalOverride("open", value);
 	});
 	oldSettings = null;
 

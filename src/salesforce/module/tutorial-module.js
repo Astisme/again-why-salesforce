@@ -23,6 +23,7 @@ import {
 	WHAT_SET as _WHAT_SET,
 } from "../../core/constants.js";
 import {
+	applyGlobalOverride as _applyGlobalOverride,
 	performLightningRedirect as _performLightningRedirect,
 	sendExtensionMessage as _sendExtensionMessage,
 	sendExtensionMessages as _sendExtensionMessages,
@@ -69,6 +70,7 @@ let WHAT_ADD = _WHAT_ADD;
 let WHAT_GET = _WHAT_GET;
 let WHAT_GET_COMMANDS = _WHAT_GET_COMMANDS;
 let WHAT_SET = _WHAT_SET;
+const applyGlobalOverride = _applyGlobalOverride;
 let performLightningRedirect = _performLightningRedirect;
 let sendExtensionMessage = _sendExtensionMessage;
 let sendExtensionMessages = _sendExtensionMessages;
@@ -1144,9 +1146,9 @@ export function createTutorialModule(overrides = {}) {
 	TabContainer = overrides.TabContainer ?? TabContainer;
 	handleActionButtonClick = overrides.handleActionButtonClick ??
 		handleActionButtonClick;
-	globalThis.document = overrides.document ?? globalThis.document;
-	globalThis.window = overrides.window ?? globalThis.window;
-	globalThis.fetch = overrides.fetch ?? globalThis.fetch;
+	applyGlobalOverride("document", overrides.document);
+	applyGlobalOverride("window", overrides.window);
+	applyGlobalOverride("fetch", overrides.fetch);
 
 	return {
 		Tutorial,

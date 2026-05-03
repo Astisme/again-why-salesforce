@@ -14,6 +14,7 @@ import {
 	TUTORIAL_EVENT_REORDERED_TABS_TABLE as _TUTORIAL_EVENT_REORDERED_TABS_TABLE,
 } from "../../core/constants.js";
 import {
+	applyGlobalOverride as _applyGlobalOverride,
 	getInnerElementFieldBySelector as _getInnerElementFieldBySelector,
 	injectStyle as _injectStyle,
 } from "../../core/functions.js";
@@ -56,6 +57,7 @@ let TUTORIAL_EVENT_CLOSE_MANAGE_TABS = _TUTORIAL_EVENT_CLOSE_MANAGE_TABS;
 let TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL =
 	_TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL;
 let TUTORIAL_EVENT_REORDERED_TABS_TABLE = _TUTORIAL_EVENT_REORDERED_TABS_TABLE;
+const applyGlobalOverride = _applyGlobalOverride;
 let getInnerElementFieldBySelector = _getInnerElementFieldBySelector;
 let injectStyle = _injectStyle;
 let Tab = _Tab;
@@ -1007,10 +1009,10 @@ export function createManageTabsModule(overrides = {}) {
 	showToast = overrides.showToast ?? showToast;
 	updateModalBodyOverflow = overrides.updateModalBodyOverflow ??
 		updateModalBodyOverflow;
-	globalThis.CustomEvent = overrides.CustomEvent ?? globalThis.CustomEvent;
-	globalThis.confirm = overrides.confirm ?? globalThis.confirm;
-	globalThis.document = overrides.document ?? globalThis.document;
-	globalThis.setTimeout = overrides.setTimeout ?? globalThis.setTimeout;
+	applyGlobalOverride("CustomEvent", overrides.CustomEvent);
+	applyGlobalOverride("confirm", overrides.confirm);
+	applyGlobalOverride("document", overrides.document);
+	applyGlobalOverride("setTimeout", overrides.setTimeout);
 
 	focusedIndex = 0;
 	managedLoggers.length = 0;

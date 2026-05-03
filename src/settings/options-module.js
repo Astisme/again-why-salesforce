@@ -40,6 +40,7 @@ import {
 	WHAT_SET as _WHAT_SET,
 } from "../core/constants.js";
 import {
+	applyGlobalOverride as _applyGlobalOverride,
 	areFramePatternsAllowed as _areFramePatternsAllowed,
 	getCssRule as _getCssRule,
 	getCssSelector as _getCssSelector,
@@ -102,6 +103,7 @@ let USER_LANGUAGE = _USER_LANGUAGE;
 let WHAT_SET = _WHAT_SET;
 
 let areFramePatternsAllowed = _areFramePatternsAllowed;
+const applyGlobalOverride = _applyGlobalOverride;
 let getCssRule = _getCssRule;
 let getCssSelector = _getCssSelector;
 let getPinnedSpecificKey = _getPinnedSpecificKey;
@@ -1779,10 +1781,10 @@ function applyOptionsOverrides(overrides = {}) {
 	const constants = overrides.constants ?? {};
 	const functions = overrides.functions ?? {};
 	const globals = overrides.globals ?? {};
-	globalThis.document = globals.document ?? globalThis.document;
-	globalThis.clearTimeout = globals.clearTimeout ?? globalThis.clearTimeout;
-	globalThis.setTimeout = globals.setTimeout ?? globalThis.setTimeout;
-	globalThis.console = globals.console ?? globalThis.console;
+	applyGlobalOverride("document", globals.document);
+	applyGlobalOverride("clearTimeout", globals.clearTimeout);
+	applyGlobalOverride("setTimeout", globals.setTimeout);
+	applyGlobalOverride("console", globals.console);
 
 	applyNamedOverrides(constants, {
 		EXTENSION_LAST_ACTIVE_DAY: (value) => {

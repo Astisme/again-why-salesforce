@@ -6,7 +6,10 @@ import {
 	WHAT_GET_SETTINGS as _WHAT_GET_SETTINGS,
 	WHAT_GET_SF_LANG as _WHAT_GET_SF_LANG,
 } from "./constants.js";
-import { sendExtensionMessage as _sendExtensionMessage } from "./functions.js";
+import {
+	applyGlobalOverride as _applyGlobalOverride,
+	sendExtensionMessage as _sendExtensionMessage,
+} from "./functions.js";
 
 let BROWSER = _BROWSER;
 let FOLLOW_SF_LANG = _FOLLOW_SF_LANG;
@@ -14,6 +17,7 @@ let SETTINGS_KEY = _SETTINGS_KEY;
 let USER_LANGUAGE = _USER_LANGUAGE;
 let WHAT_GET_SETTINGS = _WHAT_GET_SETTINGS;
 let WHAT_GET_SF_LANG = _WHAT_GET_SF_LANG;
+const applyGlobalOverride = _applyGlobalOverride;
 let sendExtensionMessage = _sendExtensionMessage;
 
 const _translationSecret = Symbol("translationSecret");
@@ -504,8 +508,8 @@ export function createTranslatorModule(overrides = {}) {
 	if (overrides.sendExtensionMessage != null) {
 		sendExtensionMessage = overrides.sendExtensionMessage;
 	}
-	if (overrides.document != null) globalThis.document = overrides.document;
-	if (overrides.fetch != null) globalThis.fetch = overrides.fetch;
+	applyGlobalOverride("document", overrides.document);
+	applyGlobalOverride("fetch", overrides.fetch);
 	singletonTranslator = null;
 
 	return {
