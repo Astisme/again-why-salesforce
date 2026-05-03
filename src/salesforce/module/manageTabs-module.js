@@ -1012,11 +1012,11 @@ export function createManageTabsModule(overrides = {}) {
 	getInnerElementFieldBySelector = overrides.getInnerElementFieldBySelector ??
 		getInnerElementFieldBySelector;
 	getModalHanger = overrides.getModalHanger ?? getModalHanger;
-		getTranslations = overrides.getTranslations ?? getTranslations;
-		handleLightningLinkClick = overrides.handleLightningLinkClick ??
-			handleLightningLinkClick;
-		sldsConfirm = overrides.sldsConfirm ?? sldsConfirm;
-		injectStyle = overrides.injectStyle ?? injectStyle;
+	getTranslations = overrides.getTranslations ?? getTranslations;
+	handleLightningLinkClick = overrides.handleLightningLinkClick ??
+		handleLightningLinkClick;
+	sldsConfirm = overrides.sldsConfirm ?? sldsConfirm;
+	injectStyle = overrides.injectStyle ?? injectStyle;
 	makeDuplicatesBold = overrides.makeDuplicatesBold ?? makeDuplicatesBold;
 	reorderTabsUl = overrides.reorderTabsUl ?? reorderTabsUl;
 	setupDragForTable = overrides.setupDragForTable ?? setupDragForTable;
@@ -1025,18 +1025,18 @@ export function createManageTabsModule(overrides = {}) {
 	showToast = overrides.showToast ?? showToast;
 	updateModalBodyOverflow = overrides.updateModalBodyOverflow ??
 		updateModalBodyOverflow;
-		applyGlobalOverride("CustomEvent", overrides.CustomEvent);
-		if (
-			typeof overrides.confirm === "function" &&
-			overrides.sldsConfirm == null
-		) {
-			sldsConfirm = ({ body } = {}) => {
-				const promptText = Array.isArray(body) ? body.join("\n") : body;
-				return overrides.confirm(promptText);
-			};
-		}
-		applyGlobalOverride("document", overrides.document);
-		applyGlobalOverride("setTimeout", overrides.setTimeout);
+	applyGlobalOverride("CustomEvent", overrides.CustomEvent);
+	if (
+		typeof overrides.confirm === "function" &&
+		overrides.sldsConfirm == null
+	) {
+		sldsConfirm = ({ body } = {}) => {
+			const promptText = Array.isArray(body) ? body.join("\n") : body;
+			return overrides.confirm(promptText);
+		};
+	}
+	applyGlobalOverride("document", overrides.document);
+	applyGlobalOverride("setTimeout", overrides.setTimeout);
 
 	focusedIndex = 0;
 	managedLoggers.length = 0;

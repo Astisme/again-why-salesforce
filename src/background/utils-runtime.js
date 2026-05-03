@@ -332,7 +332,10 @@ export function createBackgroundUtilsModule({
 					?.[0]?.tag_name?.replace(/^.*(-)?v/, "");
 				releaseLink = extensionGithubLinkRuntime;
 			} else if (latestRelease?.prerelease !== true) {
-				latestVersion = latestRelease?.tag_name?.replace(/^.*(-)?v/, "");
+				latestVersion = latestRelease?.tag_name?.replace(
+					/^.*(-)?v/,
+					"",
+				);
 			}
 			if (
 				latestVersion != null &&

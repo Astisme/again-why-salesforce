@@ -1022,19 +1022,20 @@ async function showModalUpdateTab(
  * @return {Promise<void>} Resolves after the prompt and possible navigation.
  */
 async function promptUpdateExtension({ version, link, oldversion } = {}) {
-	const [confirmMessage, [confirmLabel, cancelLabel, closeLabel]] = await Promise
-		.all([
-			getTranslations([
-				`${oldversion} → ${version}`,
-				"confirm_update_extension",
-				link,
-			], "\n"),
-			getTranslations([
-				"open_new_tab",
-				"cancel",
-				"cancel_close",
-			]),
-		]);
+	const [confirmMessage, [confirmLabel, cancelLabel, closeLabel]] =
+		await Promise
+			.all([
+				getTranslations([
+					`${oldversion} → ${version}`,
+					"confirm_update_extension",
+					link,
+				], "\n"),
+				getTranslations([
+					"open_new_tab",
+					"cancel",
+					"cancel_close",
+				]),
+			]);
 	const confirmFn = globalThis.confirm;
 	if (
 		typeof confirmFn === "function" &&
@@ -1450,10 +1451,10 @@ export function createContentModule(overrides = {}) {
 		executeOncePerDay: onceADay.executeOncePerDay,
 		findSetupTabUlInSalesforcePage:
 			sfElements.findSetupTabUlInSalesforcePage,
-			generateRowTemplate: generator.generateRowTemplate,
-			generateStyleFromSettings: generator.generateStyleFromSettings,
-			generateUpdateTabModal: generator.generateUpdateTabModal,
-			sldsConfirm: generator.sldsConfirm,
+		generateRowTemplate: generator.generateRowTemplate,
+		generateStyleFromSettings: generator.generateStyleFromSettings,
+		generateUpdateTabModal: generator.generateUpdateTabModal,
+		sldsConfirm: generator.sldsConfirm,
 		getCurrentHref: sfElements.getCurrentHref,
 		getInnerElementFieldBySelector:
 			functions.getInnerElementFieldBySelector,
