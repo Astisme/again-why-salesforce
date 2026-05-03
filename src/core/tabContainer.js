@@ -7,9 +7,8 @@ import {
 } from "./constants.js";
 import { getSettings, sendExtensionMessage, setSettings } from "./functions.js";
 import Tab from "./tab.js";
-import ensureTranslatorAvailability from "./translator.js";
+import { getTranslations } from "./translator.js";
 
-let translator = null;
 let singletonAllTabs = null;
 
 const _tabContainerSecret = Symbol("tabContainerSecret");
@@ -111,7 +110,6 @@ export class TabContainer extends Array {
 	 */
 	constructor(secret) {
 		if (secret !== _tabContainerSecret) {
-			console.trace();
 			throw new Error(
 				"error_tabcontainer_constructor",
 			);
@@ -176,10 +174,9 @@ export class TabContainer extends Array {
 		}
 		singletonAllTabs = (async () => {
 			const instance = new TabContainer(_tabContainerSecret);
-			translator = await ensureTranslatorAvailability();
 			if (!await TabContainer.#initialize(instance)) {
 				throw new Error(
-					await translator.translate(
+					await getTranslations(
 						"error_tabcont_not_initialized",
 					),
 				);
@@ -332,21 +329,21 @@ export class TabContainer extends Array {
 	/**
 	 * Creates a new array with all elements that pass the test implemented by the provided function.
 	 *
-	 * @param {Function} callback Function to test each element of the array.
-	 *    The callback function accepts three arguments:
+	 * @param {Function} filterCallback Function to test each element of the array.
+	 *    The filterCallback function accepts three arguments:
 	 *    - element: The current element being processed in the array
 	 *    - index: The index of the current element being processed in the array
 	 *    - array: The array filter was called upon
 	 * @return {Array} A new array with the elements that pass the test.
 	 *    If no elements pass the test, an empty array will be returned.
 	 */
-	filter(callback) {
+	filter(filterCallback) {
 		// Create a new instance of the same class
 		const filtered = TabContainer.getThrowawayInstance();
 		// Manually iterate through the array and apply the callback
 		for (let i = 0; i < this.length; i++) {
 			const element = this[i];
-			if (callback(element, i, this)) {
+			if (filterCallback(element, i, this)) {
 				filtered.push(element);
 			}
 		}
@@ -407,9 +404,9 @@ export class TabContainer extends Array {
 	 * @return {Promise<void>} - A promise that resolves once the default tabs are successfully set.
 	 */
 	async setDefaultTabs() {
-		const [flows, users] = await Promise.all([
-			translator.translate("flows"),
-			translator.translate("users"),
+		const [flows, users] = await getTranslations([
+			"flows",
+			"users",
 		]);
 		this.length = 0;
 		this[TabContainer.keyPinnedTabsNo] = 0;
@@ -445,7 +442,7 @@ export class TabContainer extends Array {
 		if (this.length <= initialLength) {
 			// nothing was added
 			const { msg } = this.#validateItem(tab);
-			throw new Error(`${await translator.translate(
+			throw new Error(`${await getTranslations(
 				msg,
 			)} ${JSON.stringify(tab)}`);
 		}
@@ -1014,19 +1011,19 @@ export class TabContainer extends Array {
 	/**
 	 * Creates a new TabContainer with the results of calling a provided function for every element.
 	 *
-	 * @param {Function} callback Function that produces an element of the new TabContainer.
-	 *    The callback function accepts three arguments:
+	 * @param {Function} mapCallback Function that produces an element of the new TabContainer.
+	 *    The mapCallback function accepts three arguments:
 	 *    - currentValue: The current element being processed
 	 *    - index: The index of the current element being processed
 	 *    - array: The TabContainer map was called upon
 	 * @return {Array} A new Array with each element being the result of the callback function.
 	 */
-	map(callback) {
+	map(mapCallback) {
 		// Create a new instance of TabContainer
 		const mapped = TabContainer.getThrowawayInstance();
 		// Manually iterate and apply the callback
 		for (let i = 0; i < this.length; i++) {
-			mapped[i] = callback(this[i], i, this);
+			mapped[i] = mapCallback(this[i], i, this);
 		}
 		return mapped;
 	}
@@ -1107,7 +1104,7 @@ export class TabContainer extends Array {
 		maxIndex,
 		currentIndex = 0,
 		org = null,
-	}) {
+	} = {}) {
 		if (fullMovement) {
 			return moveBefore ? minIndex : maxIndex;
 		}
@@ -1145,7 +1142,7 @@ export class TabContainer extends Array {
 	async remove({ label = null, url = null, org = null } = {}) {
 		const tab = { label, url, org };
 		if (tab.label == null && tab.url == null && tab.org == null) {
-			const msg = await translator.translate("error_no_data");
+			const msg = await getTranslations("error_no_data");
 			throw new Error(msg);
 		}
 		const index = this.getTabIndex(this.getSingleTabByData(tab));

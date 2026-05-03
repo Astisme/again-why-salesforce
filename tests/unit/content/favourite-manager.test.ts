@@ -1,14 +1,6 @@
 import { assert, assertEquals, assertThrows } from "@std/testing/asserts";
 import { installMockDom } from "../../happydom.test.ts";
-import { loadIsolatedModule } from "../../load-isolated-module.test.ts";
-
-const MODULE_PATH = new URL(
-	"../../../src/salesforce/favourite-manager.js",
-	import.meta.url,
-);
-const MODULE_SOURCE_LINE_MAP = (await Deno.readTextFile(MODULE_PATH))
-	.split("\n")
-	.map((_line, index) => index + 1);
+import { createFavouriteManagerModule } from "../../../src/salesforce/runtime/favourite-manager-runtime.js";
 const HEADER_SELECTOR_BASE =
 	"div.tabsetBody.main-content.mainContentMark.fullheight.active.isSetupApp > div.split-right > section.tabContent.oneConsoleTab.active div.overflow.uiBlock";
 
@@ -40,17 +32,17 @@ type FavouriteManagerModule = {
 	createStarSvg: (
 		options?: { alt?: string | null; id?: string | null },
 		slashed?: boolean,
-	) => Element;
-	generateFavouriteButton: () => Promise<HTMLElement>;
+	) => SVGElement;
+	generateFavouriteButton: () => Promise<HTMLButtonElement>;
 	getFavouriteImage: (
 		favouriteId: string | null,
-		button?: HTMLElement | null,
+		button?: HTMLButtonElement | null,
 	) => HTMLElement | null;
 	pageActionTab: (save?: boolean) => void;
 	showFavouriteButton: (count?: number) => Promise<number | void>;
 	toggleFavouriteButton: (
 		isSaved?: boolean | null,
-		button?: HTMLElement | null,
+		button?: HTMLButtonElement | null,
 	) => void;
 };
 
@@ -64,50 +56,6 @@ type TabList = {
 	getSingleTabByData: (
 		tab: { org: string; url: string },
 	) => FavouriteActionPayload;
-};
-
-type FavouriteManagerDependencies = {
-	CMD_REMOVE_TAB: string;
-	CMD_SAVE_AS_TAB: string;
-	CXM_REMOVE_TAB: string;
-	EXTENSION_LABEL: string;
-	EXTENSION_NAME: string;
-	HIDDEN_CLASS: string;
-	SALESFORCE_SETUP_HOME_MINI: string;
-	SKIP_LINK_DETECTION: string;
-	TAB_ADD_FRONT: string;
-	TAB_AS_ORG: string;
-	TOAST_INFO: string;
-	TOAST_WARNING: string;
-	TUTORIAL_EVENT_ACTION_FAVOURITE: string;
-	TUTORIAL_EVENT_ACTION_UNFAVOURITE: string;
-	WHAT_ADD: string;
-	WHAT_GET_COMMANDS: string;
-	Tab: {
-		containsSalesforceId: (href: string) => boolean;
-		extractOrgName: (href: string) => string;
-		minifyURL: (href: string) => string;
-	};
-	ensureAllTabsAvailability: () => Promise<TabList>;
-	ensureTranslatorAvailability: () => Promise<{
-		translate: (key: string) => Promise<string>;
-	}>;
-	getCurrentHref: () => string;
-	getIsCurrentlyOnSavedTab: () => boolean | null;
-	getSettings: (keys: string[]) => Promise<SettingsEntry[] | null>;
-	getWasOnSavedTab: () => boolean | null;
-	injectStyle: (id: string, options: { css: string }) => HTMLElement;
-	isOnSavedTab: () => Promise<void>;
-	performActionOnTabs: (
-		action: string,
-		payload: FavouriteActionPayload,
-		options?: { addInFront: boolean },
-	) => Promise<void>;
-	sendExtensionMessage: (message: {
-		commands: string[];
-		what: string;
-	}) => Promise<Command[]>;
-	showToast: (message: string, status: string) => void;
 };
 
 type LoadFavouriteManagerOptions = {
@@ -166,12 +114,12 @@ function createHeaderSelector(innerElement: string) {
 }
 
 /**
- * Loads favourite-manager.js with isolated dependencies and a small DOM harness.
+ * Loads the favourite-manager runtime with configurable dependencies and a small DOM harness.
  *
  * @param {LoadFavouriteManagerOptions} [options={}] Fixture configuration.
  * @return {Promise<FavouriteManagerFixture>} Loaded fixture.
  */
-async function loadFavouriteManagerFixture(
+function loadFavouriteManagerFixture(
 	{
 		commands = [],
 		currentHref =
@@ -217,128 +165,113 @@ async function loadFavouriteManagerFixture(
 	const existsCalls: Array<{ org: string; url: string }> = [];
 	const getSingleTabByDataCalls: Array<{ org: string; url: string }> = [];
 	const isOnSavedTabCalls = { value: 0 };
+	const documentRef = {
+		createElement: (tag: string) => document.createElement(tag),
+		createElementNS: (_ns: string, tag: string) =>
+			document.createElementNS("http://www.w3.org/2000/svg", tag),
+		getElementById: (id: string) => document.getElementById(id),
+		querySelector: (selector: string) =>
+			document.querySelector(selector) as HTMLElement | null,
+		dispatchEvent: (event: Event) => document.dispatchEvent(event),
+	};
 
-	const globals = {
-		BUTTON_ID: "awsf-button",
-		console: {
-			error: (message: string) => {
-				errorCalls.push(message);
-			},
-			warn: (message: Error | string) => {
-				warnCalls.push(String(message));
-			},
+	const module = createFavouriteManagerModule({
+		cmdRemoveTab: "cmd_remove_tab",
+		cmdSaveAsTab: "cmd_save_as_tab",
+		cxmRemoveTab: "cxm_remove_tab",
+		extensionLabel: "AWSF",
+		extensionName: "awsf",
+		hiddenClass: "hidden",
+		salesforceSetupHomeMini: "SetupOneHome/home",
+		skipLinkDetection: "skip_link_detection",
+		tabAddFront: "tab_add_front",
+		tabAsOrg: "tab_as_org",
+		toastInfo: "info",
+		toastWarning: "warning",
+		tutorialEventActionFavourite: "tutorial:favourite",
+		tutorialEventActionUnfavourite: "tutorial:unfavourite",
+		whatAdd: "add",
+		whatGetCommands: "get_commands",
+		tabRef: {
+			containsSalesforceId: (_href) => tabContainsSalesforceId,
+			extractOrgName: (href) => `org:${href}`,
+			minifyURL: (_href) => minifiedUrl,
 		},
-		setTimeout: (callback: () => void, delay: number) => {
+		ensureAllTabsAvailabilityFn: () =>
+			Promise.resolve({
+				existsWithOrWithoutOrg: (tab) => {
+					existsCalls.push(tab);
+					return existsWithOrWithoutOrg;
+				},
+				getSingleTabByData: (tab) => {
+					getSingleTabByDataCalls.push(tab);
+					if (getSingleTabByDataError != null) {
+						throw getSingleTabByDataError;
+					}
+					return {
+						label: "Saved Tab",
+						org: tab.org,
+						url: tab.url,
+					};
+				},
+			} as TabList),
+		getTranslationsFn: (keys, connector = " ") => {
+			if (Array.isArray(keys)) {
+				keys.forEach((key) => translationCalls.push(key));
+				return Promise.resolve(
+					keys.map((key) => `translated:${key}`),
+				);
+			}
+			translationCalls.push(keys);
+			void connector;
+			return Promise.resolve(`translated:${keys}`);
+		},
+		getCurrentHrefFn: () => currentHref,
+		getIsCurrentlyOnSavedTabFn: () => isCurrentlyOnSavedTab,
+		getSettingsFn: (_keys) => Promise.resolve(settings),
+		getWasOnSavedTabFn: () => wasOnSavedTab,
+		injectStyleFn: (id, options) => {
+			injectStyleCalls.push({ css: options.css, id });
+			const style = document.createElement("style");
+			style.id = id;
+			style.textContent = options.css;
+			return style;
+		},
+		isOnSavedTabFn: () => {
+			isOnSavedTabCalls.value++;
+			return Promise.resolve();
+		},
+		performActionOnTabsFn: (action, payload, options) => {
+			performActionCalls.push({ action, options, payload });
+			return Promise.resolve();
+		},
+		sendExtensionMessageFn: (message) => {
+			sendMessageCalls.push(message);
+			return Promise.resolve(commands);
+		},
+		showToastFn: (message, status) => {
+			toasts.push({ message, status });
+		},
+		documentRef,
+		setTimeoutFn: (callback, delay) => {
 			timeoutCalls.push({ callback, delay });
 			return timeoutCalls.length;
 		},
-	};
-
-	const { cleanup, module } = await loadIsolatedModule<
-		FavouriteManagerModule,
-		FavouriteManagerDependencies
-	>({
-		modulePath: MODULE_PATH,
-		additionalExports: [
-			"actionFavourite",
-			"addTab",
-			"createStarSvg",
-			"generateFavouriteButton",
-			"getFavouriteImage",
-			"toggleFavouriteButton",
-		],
-		dependencies: {
-			CMD_REMOVE_TAB: "cmd_remove_tab",
-			CMD_SAVE_AS_TAB: "cmd_save_as_tab",
-			CXM_REMOVE_TAB: "cxm_remove_tab",
-			EXTENSION_LABEL: "AWSF",
-			EXTENSION_NAME: "awsf",
-			HIDDEN_CLASS: "hidden",
-			SALESFORCE_SETUP_HOME_MINI: "SetupOneHome/home",
-			SKIP_LINK_DETECTION: "skip_link_detection",
-			TAB_ADD_FRONT: "tab_add_front",
-			TAB_AS_ORG: "tab_as_org",
-			TOAST_INFO: "info",
-			TOAST_WARNING: "warning",
-			TUTORIAL_EVENT_ACTION_FAVOURITE: "tutorial:favourite",
-			TUTORIAL_EVENT_ACTION_UNFAVOURITE: "tutorial:unfavourite",
-			WHAT_ADD: "add",
-			WHAT_GET_COMMANDS: "get_commands",
-			Tab: {
-				containsSalesforceId: (_href) => tabContainsSalesforceId,
-				extractOrgName: (href) => `org:${href}`,
-				minifyURL: (_href) => minifiedUrl,
+		customEventCtor: CustomEvent,
+		consoleRef: {
+			error: (message) => {
+				errorCalls.push(message);
 			},
-			ensureAllTabsAvailability: () =>
-				Promise.resolve({
-					existsWithOrWithoutOrg: (tab) => {
-						existsCalls.push(tab);
-						return existsWithOrWithoutOrg;
-					},
-					getSingleTabByData: (tab) => {
-						getSingleTabByDataCalls.push(tab);
-						if (getSingleTabByDataError != null) {
-							throw getSingleTabByDataError;
-						}
-						return {
-							label: "Saved Tab",
-							org: tab.org,
-							url: tab.url,
-						};
-					},
-				}),
-			ensureTranslatorAvailability: () =>
-				Promise.resolve({
-					translate: (key) => {
-						translationCalls.push(key);
-						return Promise.resolve(`translated:${key}`);
-					},
-				}),
-			getCurrentHref: () => currentHref,
-			getIsCurrentlyOnSavedTab: () => isCurrentlyOnSavedTab,
-			getSettings: (_keys) => Promise.resolve(settings),
-			getWasOnSavedTab: () => wasOnSavedTab,
-			injectStyle: (id, options) => {
-				injectStyleCalls.push({ css: options.css, id });
-				const style = document.createElement("style");
-				style.id = id;
-				style.textContent = options.css;
-				return style;
-			},
-			isOnSavedTab: () => {
-				isOnSavedTabCalls.value++;
-				return Promise.resolve();
-			},
-			performActionOnTabs: (action, payload, options) => {
-				performActionCalls.push({ action, options, payload });
-				return Promise.resolve();
-			},
-			sendExtensionMessage: (message) => {
-				sendMessageCalls.push(message);
-				return Promise.resolve(commands);
-			},
-			showToast: (message, status) => {
-				toasts.push({ message, status });
+			warn: (message) => {
+				warnCalls.push(String(message));
 			},
 		},
-		globals,
-		importsToReplace: new Set([
-			"/core/constants.js",
-			"/core/functions.js",
-			"/core/tab.js",
-			"/core/tabContainer.js",
-			"/core/translator.js",
-			"./content.js",
-			"./toast.js",
-			"./sf-elements.js",
-		]),
-		sourceMapLineMap: MODULE_SOURCE_LINE_MAP,
 	});
 
 	return {
 		breadcrumb,
 		cleanup: () => {
-			cleanup();
+			document.querySelector = originalQuerySelector;
 			dom.cleanup();
 		},
 		errorCalls,
@@ -362,7 +295,7 @@ async function loadFavouriteManagerFixture(
  *
  * @param {FavouriteManagerFixture} fixture Loaded fixture.
  * @param {HTMLElement} parent Parent element receiving the button.
- * @return {Promise<HTMLElement>} Created favourite button.
+ * @return {Promise<HTMLButtonElement>} Created favourite button.
  */
 async function appendGeneratedButton(
 	fixture: FavouriteManagerFixture,
@@ -424,7 +357,7 @@ Deno.test("favourite-manager creates regular and slashed star svgs", async () =>
 		);
 		assertEquals(slashedStar.id, "star-id");
 		assertEquals(
-			(slashedStar as HTMLElement & { alt?: string }).alt,
+			(slashedStar as unknown as { alt?: string }).alt,
 			"label",
 		);
 		assertEquals(slashedStar.getAttribute("viewBox"), "0 0 56 56");
@@ -579,8 +512,8 @@ Deno.test("favourite-manager tolerates missing favourite buttons and assistive t
 			{ id: fixture.module.SLASHED_STAR_ID },
 			true,
 		);
-		document.body.appendChild(star as HTMLElement);
-		document.body.appendChild(slashedStar as HTMLElement);
+		document.body.appendChild(star);
+		document.body.appendChild(slashedStar);
 
 		fixture.module.toggleFavouriteButton(true);
 		assert(star.classList.contains("hidden"));
@@ -590,8 +523,8 @@ Deno.test("favourite-manager tolerates missing favourite buttons and assistive t
 		button.id = fixture.module.FAVOURITE_BUTTON_ID;
 		button.dataset.saveAssistiveText = "translated:save_tab";
 		button.dataset.removeAssistiveText = "translated:remove_tab";
-		button.appendChild(star as HTMLElement);
-		button.appendChild(slashedStar as HTMLElement);
+		button.appendChild(star);
+		button.appendChild(slashedStar);
 		document.body.appendChild(button);
 
 		fixture.module.toggleFavouriteButton(false);

@@ -3,9 +3,10 @@ manifest.json
 deno.lock
 bin/*.zip
 bin/*.dmg
-**/bundled*
+src/generated/*
 missing-keys-report.json
 invalid-variables-report.json
+logging-audit-report.json
 dmg_staging
 safari-*/
 .env

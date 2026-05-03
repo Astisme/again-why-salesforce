@@ -1,12 +1,25 @@
 import {
-	BROWSER,
-	FOLLOW_SF_LANG,
-	SETTINGS_KEY,
-	USER_LANGUAGE,
-	WHAT_GET_SETTINGS,
-	WHAT_GET_SF_LANG,
+	BROWSER as _BROWSER,
+	FOLLOW_SF_LANG as _FOLLOW_SF_LANG,
+	SETTINGS_KEY as _SETTINGS_KEY,
+	USER_LANGUAGE as _USER_LANGUAGE,
+	WHAT_GET_SETTINGS as _WHAT_GET_SETTINGS,
+	WHAT_GET_SF_LANG as _WHAT_GET_SF_LANG,
 } from "./constants.js";
-import { sendExtensionMessage } from "./functions.js";
+import {
+	applyGlobalOverride as _applyGlobalOverride,
+	sendExtensionMessage as _sendExtensionMessage,
+} from "./functions.js";
+
+let BROWSER = _BROWSER;
+let FOLLOW_SF_LANG = _FOLLOW_SF_LANG;
+let SETTINGS_KEY = _SETTINGS_KEY;
+let USER_LANGUAGE = _USER_LANGUAGE;
+let WHAT_GET_SETTINGS = _WHAT_GET_SETTINGS;
+let WHAT_GET_SF_LANG = _WHAT_GET_SF_LANG;
+const applyGlobalOverride = _applyGlobalOverride;
+let sendExtensionMessage = _sendExtensionMessage;
+
 const _translationSecret = Symbol("translationSecret");
 let singletonTranslator = null;
 
@@ -14,7 +27,7 @@ let singletonTranslator = null;
  * Service for handling text translations in a browser extension.
  * Uses language-specific caches to improve performance.
  */
-class TranslationService {
+export class TranslationService {
 	static FALLBACK_LANGUAGE = "en";
 	static TRANSLATE_DATASET = "i18n";
 	/**
@@ -165,7 +178,7 @@ class TranslationService {
 			console.error(`Failed to load language file for ${language}`, e);
 			const index = language.indexOf("_");
 			if (index > 0) {
-				this.loadLanguageFile(language.substring(0, index));
+				return this.loadLanguageFile(language.substring(0, index));
 			} else {
 				this.currentLanguage = TranslationService.FALLBACK_LANGUAGE;
 				return this.caches[TranslationService.FALLBACK_LANGUAGE];
@@ -419,11 +432,90 @@ function getTranslator() {
  * @return {Promise<TranslationService>} A promise that resolves to the translator instance.
  * @async
  */
-export default function ensureTranslatorAvailability() {
+export function ensureTranslatorAvailability() {
 	try {
 		return getTranslator();
 	} catch (e) {
 		console.info(e);
 		return getTranslator_async();
 	}
+}
+
+/**
+ * Returns one or more translated messages.
+ *
+ * When `translations` is a string, this returns a single translated string.
+ * When `translations` is an array, this returns an array of translated strings in the same order.
+ *
+ * @param {string[]|string} [translations=[]] - Translation key(s) to resolve.
+ * @param {string|null} [connector=null] - the connector used to join the elements
+ * @return {Promise<string[]|string>} Translated result matching the input shape.
+ */
+export async function getTranslations(translations = [], connector = null) {
+	const isArrayInput = Array.isArray(translations);
+	const translationKeys = isArrayInput ? translations : [translations];
+	if (translationKeys.length === 0) {
+		return translations;
+	}
+	const translator = await ensureTranslatorAvailability();
+	const translated = await Promise.all(
+		translationKeys.map((item) => translator.translate(item, connector)),
+	);
+	return isArrayInput ? translated : translated[0];
+}
+
+/**
+ * Returns a translator attribute when available.
+ *
+ * This helper is synchronous on purpose so callers can read static translator
+ * attributes without awaiting service initialization.
+ *
+ * @param {string|null} [attribute=null] - The attribute to read.
+ * @return {Promise<string|null>} The requested attribute value or null.
+ */
+export async function getTranslatorAttribute(attribute = null) {
+	if (attribute == null) return null;
+	const translator = await ensureTranslatorAvailability();
+	return translator?.[attribute] ?? null;
+}
+
+/**
+ * Creates translator helpers with optional dependency overrides.
+ *
+ * @param {Object} [overrides={}] Runtime overrides used by tests.
+ * @return {{
+ *   TranslationService: typeof TranslationService;
+ *   ensureTranslatorAvailability: typeof ensureTranslatorAvailability;
+ *   getTranslations: typeof getTranslations;
+ *   getTranslatorAttribute: typeof getTranslatorAttribute;
+ * }} Translator module API.
+ */
+export function createTranslatorModule(overrides = {}) {
+	if (overrides.BROWSER != null) BROWSER = overrides.BROWSER;
+	if (overrides.FOLLOW_SF_LANG != null) {
+		FOLLOW_SF_LANG = overrides.FOLLOW_SF_LANG;
+	}
+	if (overrides.SETTINGS_KEY != null) SETTINGS_KEY = overrides.SETTINGS_KEY;
+	if (overrides.USER_LANGUAGE != null) {
+		USER_LANGUAGE = overrides.USER_LANGUAGE;
+	}
+	if (overrides.WHAT_GET_SETTINGS != null) {
+		WHAT_GET_SETTINGS = overrides.WHAT_GET_SETTINGS;
+	}
+	if (overrides.WHAT_GET_SF_LANG != null) {
+		WHAT_GET_SF_LANG = overrides.WHAT_GET_SF_LANG;
+	}
+	if (overrides.sendExtensionMessage != null) {
+		sendExtensionMessage = overrides.sendExtensionMessage;
+	}
+	applyGlobalOverride("document", overrides.document);
+	applyGlobalOverride("fetch", overrides.fetch);
+	singletonTranslator = null;
+
+	return {
+		TranslationService,
+		ensureTranslatorAvailability,
+		getTranslations,
+		getTranslatorAttribute,
+	};
 }

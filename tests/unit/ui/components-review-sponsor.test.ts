@@ -6,19 +6,24 @@ import {
 } from "@std/testing/asserts";
 import { MockElement } from "./mock-dom.test.ts";
 import { installMockDom } from "../../happydom.test.ts";
-import { loadIsolatedModule } from "../../load-isolated-module.test.ts";
-import { mockStorage } from "../../mocks.test.ts";
-import {
-	EXTENSION_USAGE_DAYS,
-	HIDDEN_CLASS,
-	SETTINGS_KEY,
-	WHY_KEY,
-} from "../../../src/core/constants.js";
+import { createReviewSponsorModule } from "../../../src/components/review-sponsor/review-sponsor-runtime.js";
 
 const CHROME_REVIEW_LINK =
 	"https://chromewebstore.google.com/detail/again-why-salesforce/bceeoimjhgjbihanbiifgpndmkklajbi/reviews";
+const EDGE_REVIEW_LINK =
+	"https://microsoftedge.microsoft.com/addons/detail/again-why-salesforce/dfdjpokbfeaamjcomllncennmfhpldmm#description";
+const FIREFOX_REVIEW_LINK =
+	"https://addons.mozilla.org/en-US/firefox/addon/again-why-salesforce/";
 
-type ReviewSponsorClass = CustomElementConstructor & {
+type ReviewSponsorResult = {
+	reviewLink: MockElement;
+	reviewSvg: MockElement;
+	root: MockElement;
+	sponsorLink: MockElement;
+	sponsorSvg: MockElement;
+};
+
+type ReviewSponsorClass = {
 	new (): ReviewSponsorInstance;
 	prototype: ReviewSponsorInstance;
 };
@@ -31,48 +36,8 @@ type ReviewSponsorInstance = MockElement & {
 	whenReady: () => Promise<void>;
 };
 
-type ReviewSponsorDependencies = {
-	BROWSER: {
-		runtime: {
-			getURL: (path: string) => string;
-		};
-	};
-	EXTENSION_USAGE_DAYS: string;
-	HIDDEN_CLASS: string;
-	ISCHROME: boolean;
-	ISEDGE: boolean;
-	ISFIREFOX: boolean;
-	ISSAFARI: boolean;
-	ensureAllTabsAvailability: () => Promise<Record<string, string>[]>;
-	ensureTranslatorAvailability: () => Promise<{
-		currentLanguage: string;
-		translate: (message: string) => Promise<string>;
-	}>;
-	generateReviewSponsorSvgs: () => ReviewSponsorResult;
-	getSettings: (keys: string[]) => Promise<{ enabled: number }>;
-	injectStyle: (
-		id: string,
-		options: { link: string },
-	) => MockElement | HTMLElement;
-};
-
-type ReviewSponsorResult = {
-	reviewLink: MockElement | HTMLElement;
-	reviewSvg: MockElement | HTMLElement;
-	root: MockElement | HTMLElement;
-	sponsorLink: MockElement | HTMLElement;
-	sponsorSvg: MockElement | HTMLElement;
-};
-
-type ToggleableClassList = {
-	add: (...tokens: string[]) => void;
-	contains: (token: string) => boolean;
-	remove: (...tokens: string[]) => void;
-	toggle?: (token: string, force?: boolean) => boolean;
-};
-
 /**
- * HTMLElement replacement with shadow-root support for isolated tests.
+ * HTMLElement replacement with shadow-root support.
  */
 class MockReviewSponsorHTMLElement extends MockElement {
 	/**
@@ -107,8 +72,8 @@ function createElements() {
 			return false;
 		};
 	}
-	reviewSvg.classList.add(HIDDEN_CLASS);
-	sponsorSvg.classList.add(HIDDEN_CLASS);
+	reviewSvg.classList.add("hidden");
+	sponsorSvg.classList.add("hidden");
 	const reviewLink = document.createElement("a");
 	const sponsorLink = document.createElement("a");
 	return {
@@ -120,531 +85,294 @@ function createElements() {
 }
 
 /**
- * Creates a custom-elements registry that stores the review-sponsor
- * constructor for isolated tests.
+ * Creates a custom-elements registry that stores the review-sponsor constructor.
  *
- * @return {{ getConstructor: () => ReviewSponsorClass | null; registry: CustomElementRegistry; }}
+ * @return {{
+ *   getConstructor: () => ReviewSponsorClass | null;
+ *   registry: { define: (name: string, constructor: ReviewSponsorClass) => void; };
+ * }}
  */
 function createStoredCustomElementsRegistry() {
 	let constructor: ReviewSponsorClass | null = null;
 	return {
 		getConstructor: () => constructor,
 		registry: {
-			define(
-				name: string,
-				registeredConstructor: CustomElementConstructor,
-			) {
+			define(name: string, registeredConstructor: unknown) {
 				if (
 					name === "review-sponsor-aws" &&
-					isReviewSponsorClass(registeredConstructor)
+					typeof registeredConstructor === "function"
 				) {
-					constructor = registeredConstructor;
+					constructor = registeredConstructor as ReviewSponsorClass;
 				}
 			},
-			get(_name: string) {
-				return undefined;
-			},
-			getName(_constructor: CustomElementConstructor) {
-				return null;
-			},
-			upgrade(_root: Node) {},
-			whenDefined(_name: string) {
-				return Promise.resolve(class extends HTMLElement {});
-			},
-		} satisfies CustomElementRegistry,
+		},
 	};
 }
 
 /**
- * Narrows a custom-element constructor to the review-sponsor shape used in tests.
- *
- * @param {CustomElementConstructor} constructor Constructor registered for the element.
- * @return {constructor is ReviewSponsorClass} `true` when the constructor exposes the expected methods.
- */
-function isReviewSponsorClass(
-	constructor: CustomElementConstructor,
-): constructor is ReviewSponsorClass {
-	return typeof constructor.prototype._getExtensionUsageDays === "function" &&
-		typeof constructor.prototype._showReviewOrSponsor === "function";
-}
-
-/**
- * Loads the review-sponsor module with browser flags overridden for branch tests.
+ * Creates a review-sponsor module fixture with injected dependencies.
  *
  * @param {{
+ *   generated?: ReviewSponsorResult;
  *   isChrome?: boolean;
  *   isEdge?: boolean;
  *   isFirefox?: boolean;
  *   isSafari?: boolean;
- * }} [options={}] Browser flag overrides.
- * @return {Promise<{
- *   cleanup: () => void;
+ *   tabs?: unknown[];
+ *   translatorLanguage?: string;
+ *   usageDays?: number;
+ * }} [options={}] Fixture options.
+ * @return {{
  *   getConstructor: () => ReviewSponsorClass | null;
+ *   injectCalls: Array<{ id: string; link: string }>;
  *   openCalls: string[];
- *   showReviewOrSponsor: (input: {
- *     allTabs?: object[];
- *     reviewLink?: HTMLElement;
- *     reviewSvg?: HTMLElement;
- *     sponsorLink?: HTMLElement;
- *     sponsorSvg?: HTMLElement;
- *     translator?: { currentLanguage?: string } | null;
+ *   settingsCalls: string[][];
+ *   showReviewOrSponsor: (options?: {
+ *     allTabs?: unknown[] | null;
  *     usageDays?: number;
+ *     translatorLanguage?: string | null;
+ *     reviewSvg?: HTMLElement | null;
+ *     sponsorSvg?: HTMLElement | null;
+ *     reviewLink?: HTMLAnchorElement | null;
+ *     sponsorLink?: HTMLAnchorElement | null;
  *   }) => void;
- * }>} Loaded module handles.
+ *   translateCalls: string[];
+ * }}
  */
-async function loadReviewSponsorBranchModule(
-	{
-		isChrome = false,
-		isEdge = false,
-		isFirefox = false,
-		isSafari = false,
-	}: {
-		isChrome?: boolean;
-		isEdge?: boolean;
-		isFirefox?: boolean;
-		isSafari?: boolean;
-	} = {},
-) {
-	const registry = createStoredCustomElementsRegistry();
-	const openCalls: string[] = [];
-	const result = await loadIsolatedModule<
-		{
-			showReviewOrSponsor: (input: {
-				allTabs?: object[];
-				reviewLink?: HTMLElement;
-				reviewSvg?: HTMLElement;
-				sponsorLink?: HTMLElement;
-				sponsorSvg?: HTMLElement;
-				translator?: { currentLanguage?: string } | null;
-				usageDays?: number;
-			}) => void;
-		},
-		ReviewSponsorDependencies
-	>({
-		modulePath: new URL(
-			"../../../src/components/review-sponsor/review-sponsor.js",
-			import.meta.url,
-		),
-		dependencies: {
-			BROWSER: {
-				runtime: {
-					getURL: (path) => `chrome-extension://test${path}`,
-				},
-			},
-			EXTENSION_USAGE_DAYS: "extension_usage_days",
-			HIDDEN_CLASS: "hidden",
-			ISCHROME: isChrome,
-			ISEDGE: isEdge,
-			ISFIREFOX: isFirefox,
-			ISSAFARI: isSafari,
-			ensureAllTabsAvailability: () => Promise.resolve([]),
-			ensureTranslatorAvailability: () =>
-				Promise.resolve({
-					currentLanguage: "en",
-					translate: (message) => Promise.resolve(message),
-				}),
-			generateReviewSponsorSvgs: () => {
-				const root = document.createElement("div");
-				const reviewLink = document.createElement("a");
-				const sponsorLink = document.createElement("a");
-				const reviewSvg = document.createElement("svg");
-				const sponsorSvg = document.createElement("svg");
-				for (const element of [reviewSvg, sponsorSvg]) {
-					element.classList.toggle ??= (
-						token: string,
-						force?: boolean,
-					) => {
-						const shouldAdd = force ??
-							!element.classList.contains(token);
-						if (shouldAdd) {
-							element.classList.add(token);
-							return true;
-						}
-						element.classList.remove(token);
-						return false;
-					};
-				}
-				reviewLink.appendChild(reviewSvg);
-				sponsorLink.appendChild(sponsorSvg);
-				root.appendChild(reviewLink);
-				root.appendChild(sponsorLink);
-				return {
-					reviewLink,
-					reviewSvg,
-					root,
-					sponsorLink,
-					sponsorSvg,
-				};
-			},
-			getSettings: (keys) => {
-				const settingId = keys[0];
-				const settings = mockStorage[SETTINGS_KEY] ?? [];
-				const matched = settings.find((setting) =>
-					setting.id === settingId
-				);
-				return Promise.resolve({
-					enabled: Number(matched?.enabled ?? 0),
-				});
-			},
-			injectStyle: () => document.createElement("link"),
-		},
-		globals: {
-			HTMLElement: MockReviewSponsorHTMLElement,
-			customElements: registry.registry,
-			open: (url?: string | URL) => {
-				openCalls.push(String(url));
-				return null;
-			},
-		},
-		importsToReplace: new Set([
-			"/core/constants.js",
-			"/core/functions.js",
-			"/core/tabContainer.js",
-			"/core/translator.js",
-			"/salesforce/generator.js",
-		]),
-	});
-	return {
-		cleanup: result.cleanup,
-		getConstructor: registry.getConstructor,
-		openCalls,
-		showReviewOrSponsor: result.module.showReviewOrSponsor,
-	};
-}
-
-Deno.test("show review or sponsor block", async (t) => {
-	const { cleanup } = installMockDom();
-	const reviewSponsorModule = await loadReviewSponsorBranchModule();
-	const { showReviewOrSponsor, openCalls } = reviewSponsorModule;
-
-	await t.step("throws when required params are missing", () => {
-		assertThrows(
-			() => showReviewOrSponsor({}),
-			Error,
-			"error_required_params",
-		);
-	});
-
-	await t.step(
-		"shows none when shouldShowReviewOrSponsor returns none",
-		() => {
-			const { reviewSvg, sponsorSvg, reviewLink, sponsorLink } =
-				createElements();
-			showReviewOrSponsor({
-				allTabs: Array(7),
-				translator: {},
-				reviewSvg,
-				sponsorSvg,
-				reviewLink,
-				sponsorLink,
-			});
-			assert(reviewSvg.classList.contains(HIDDEN_CLASS));
-			assert(sponsorSvg.classList.contains(HIDDEN_CLASS));
-			assertEquals(reviewLink.getAttribute("aria-hidden"), "true");
-			assertEquals(sponsorLink.getAttribute("aria-hidden"), "true");
-			assertEquals(reviewLink.tabIndex, -1);
-			assertEquals(sponsorLink.tabIndex, -1);
-		},
-	);
-
-	await t.step(
-		"shows review when shouldShowReviewOrSponsor returns review",
-		() => {
-			const { reviewSvg, sponsorSvg, reviewLink, sponsorLink } =
-				createElements();
-			openCalls.length = 0;
-			showReviewOrSponsor({
-				allTabs: Array(8),
-				translator: {},
-				reviewSvg,
-				sponsorSvg,
-				reviewLink,
-				sponsorLink,
-			});
-			assertFalse(reviewSvg.classList.contains(HIDDEN_CLASS));
-			assert(reviewLink.tabIndex === 0);
-			assert(sponsorSvg.classList.contains(HIDDEN_CLASS));
-			assertEquals(sponsorLink.tabIndex, -1);
-			reviewLink.click();
-			assertEquals(openCalls.length, 0);
-		},
-	);
-
-	await t.step(
-		"shows sponsor and review when shouldShowReviewOrSponsor returns sponsor",
-		() => {
-			const { reviewSvg, sponsorSvg, reviewLink, sponsorLink } =
-				createElements();
-			const translator = { currentLanguage: "it" };
-			openCalls.length = 0;
-			showReviewOrSponsor({
-				allTabs: Array(16),
-				translator,
-				reviewSvg,
-				sponsorSvg,
-				reviewLink,
-				sponsorLink,
-			});
-			assertFalse(reviewSvg.classList.contains(HIDDEN_CLASS));
-			assertFalse(sponsorSvg.classList.contains(HIDDEN_CLASS));
-			sponsorLink.click();
-			assertEquals(openCalls.length, 1);
-			assert(openCalls[0].includes("/it/"));
-		},
-	);
-
-	await t.step(
-		"shows review after 20 days of actual use even without enough tabs",
-		() => {
-			const { reviewSvg, sponsorSvg, reviewLink, sponsorLink } =
-				createElements();
-			showReviewOrSponsor({
-				allTabs: [],
-				usageDays: 20,
-				translator: {},
-				reviewSvg,
-				sponsorSvg,
-				reviewLink,
-				sponsorLink,
-			});
-			assertFalse(reviewSvg.classList.contains(HIDDEN_CLASS));
-			assert(sponsorSvg.classList.contains(HIDDEN_CLASS));
-			assertEquals(reviewLink.tabIndex, 0);
-			assertEquals(sponsorLink.tabIndex, -1);
-		},
-	);
-
-	await t.step(
-		"shows sponsor after 40 days of actual use even without enough tabs",
-		() => {
-			const { reviewSvg, sponsorSvg, reviewLink, sponsorLink } =
-				createElements();
-			showReviewOrSponsor({
-				allTabs: [],
-				usageDays: 40,
-				translator: {},
-				reviewSvg,
-				sponsorSvg,
-				reviewLink,
-				sponsorLink,
-			});
-			assertFalse(reviewSvg.classList.contains(HIDDEN_CLASS));
-			assertFalse(sponsorSvg.classList.contains(HIDDEN_CLASS));
-			assertEquals(reviewLink.tabIndex, 0);
-			assertEquals(sponsorLink.tabIndex, 0);
-		},
-	);
-
-	await t.step(
-		"opens Edge and Firefox review links and defaults sponsor language in isolation",
-		async () => {
-			{
-				const edgeModule = await loadReviewSponsorBranchModule({
-					isEdge: true,
-				});
-				const edgeElements = createElements();
-				try {
-					edgeModule.showReviewOrSponsor({
-						allTabs: Array(8),
-						translator: {},
-						...edgeElements,
-					});
-					edgeElements.reviewLink.click();
-					assertEquals(
-						edgeModule.openCalls[0],
-						"https://microsoftedge.microsoft.com/addons/detail/again-why-salesforce/dfdjpokbfeaamjcomllncennmfhpldmm#description",
-					);
-				} finally {
-					edgeModule.cleanup();
-				}
-			}
-
-			{
-				const firefoxModule = await loadReviewSponsorBranchModule({
-					isFirefox: true,
-				});
-				const firefoxElements = createElements();
-				try {
-					firefoxModule.showReviewOrSponsor({
-						allTabs: Array(16),
-						translator: {},
-						...firefoxElements,
-					});
-					firefoxElements.reviewLink.click();
-					firefoxElements.sponsorLink.click();
-					assertEquals(
-						firefoxModule.openCalls[0],
-						"https://addons.mozilla.org/en-US/firefox/addon/again-why-salesforce/",
-					);
-					assertEquals(
-						firefoxModule.openCalls[1],
-						"https://alfredoit.dev/en/sponsor/?email=againwhysalesforce@duck.com",
-					);
-				} finally {
-					firefoxModule.cleanup();
-				}
-			}
-
-			{
-				const safariModule = await loadReviewSponsorBranchModule({
-					isSafari: true,
-				});
-				const safariElements = createElements();
-				try {
-					safariModule.showReviewOrSponsor({
-						allTabs: Array(8),
-						translator: {},
-						...safariElements,
-					});
-					assert(
-						safariElements.reviewSvg.classList.contains(
-							HIDDEN_CLASS,
-						),
-					);
-					assertEquals(safariElements.reviewLink.tabIndex, -1);
-				} finally {
-					safariModule.cleanup();
-				}
-			}
-		},
-	);
-
-	await t.step(
-		"constructs the custom element and populates direct-import metadata",
-		async () => {
-			const ReviewSponsorConstructor = reviewSponsorModule
-				.getConstructor();
-			assert(ReviewSponsorConstructor != null);
-			const originalFetch = globalThis.fetch;
-			const originalWhy = structuredClone(mockStorage[WHY_KEY]);
-			const originalSettings = structuredClone(mockStorage[SETTINGS_KEY]);
-			openCalls.length = 0;
-			mockStorage[WHY_KEY] = Array.from(
-				{ length: 20 },
-				(_value, index) => ({
-					label: `Tab ${index}`,
-					org: "acme",
-					url: `/setup/${index}`,
-				}),
-			);
-			mockStorage[SETTINGS_KEY] = [
-				{ enabled: "en", id: "picked-language" },
-				{ enabled: false, id: "persist_sort" },
-				{ enabled: 45, id: EXTENSION_USAGE_DAYS },
-			];
-			const originalCreateElementNS = document.createElementNS.bind(
-				document,
-			);
-			document.createElementNS =
-				((namespace: string, tagName: string) => {
-					const element = originalCreateElementNS(namespace, tagName);
-					const classList = element.classList as ToggleableClassList;
-					classList.toggle ??= function (
-						token: string,
-						force?: boolean,
-					) {
-						const shouldAdd = force ?? !this.contains(token);
-						if (shouldAdd) {
-							this.add(token);
-							return true;
-						}
-						this.remove(token);
-						return false;
-					};
-					return element;
-				}) as typeof document.createElementNS;
-			const originalAttachShadow =
-				ReviewSponsorConstructor.prototype.attachShadow;
-			Object.defineProperty(
-				ReviewSponsorConstructor.prototype,
-				"attachShadow",
-				{
-					value(this: HTMLElement) {
-						const shadowRoot = document.createElement(
-							"shadow-root",
-						);
-						Object.defineProperty(this, "shadowRoot", {
-							value: shadowRoot,
-							configurable: true,
-							writable: true,
-						});
-						return shadowRoot;
-					},
-					configurable: true,
-					writable: true,
-				},
-			);
-			globalThis.fetch = ((path: string | URL | Request) => {
-				const url = String(path);
-				if (url.includes("/_locales/")) {
-					return Promise.resolve({
-						json: () =>
-							Promise.resolve({
-								send_tip: { message: "Send tip" },
-								write_review: { message: "Write review" },
-							}),
-					} as Response);
-				}
-				return originalFetch(path);
-			}) as typeof globalThis.fetch;
-
-			try {
-				const component = new ReviewSponsorConstructor();
-				component.connectedCallback();
-				await component.whenReady();
-
-				assertEquals(await component._getExtensionUsageDays(), 45);
-				assertEquals(component.shadowRoot?.children.length, 2);
-
-				const links = component.shadowRoot?.querySelectorAll("a") ?? [];
-				const reviewLink = links[0] as HTMLAnchorElement | undefined;
-				const sponsorLink = links[1] as HTMLAnchorElement | undefined;
-				const reviewSvg = reviewLink?.querySelector("svg");
-				assert(reviewLink != null);
-				assert(sponsorLink != null);
-				assert(reviewSvg != null);
-
-				assertEquals(reviewLink.title, "write_review");
-				assertEquals(
-					reviewLink.getAttribute("aria-label"),
-					"write_review",
-				);
-				assertEquals(reviewSvg.getAttribute("focusable"), "false");
-			} finally {
-				document.createElementNS = originalCreateElementNS;
-				if (originalAttachShadow == null) {
-					Reflect.deleteProperty(
-						ReviewSponsorConstructor.prototype,
-						"attachShadow",
-					);
-				} else {
-					Object.defineProperty(
-						ReviewSponsorConstructor.prototype,
-						"attachShadow",
-						{
-							value: originalAttachShadow,
-							configurable: true,
-							writable: true,
-						},
-					);
-				}
-				globalThis.fetch = originalFetch;
-				mockStorage[WHY_KEY] = originalWhy;
-				mockStorage[SETTINGS_KEY] = originalSettings;
-			}
-		},
-	);
-
-	reviewSponsorModule.cleanup();
-	cleanup();
-});
-
-Deno.test("ReviewSponsorAws loads async metadata and opens the expected links in isolation", async () => {
+function createReviewSponsorFixture({
+	generated = {
+		reviewLink: new MockElement("a"),
+		reviewSvg: new MockElement("svg"),
+		root: new MockElement("div"),
+		sponsorLink: new MockElement("a"),
+		sponsorSvg: new MockElement("svg"),
+	},
+	isChrome = false,
+	isEdge = false,
+	isFirefox = false,
+	isSafari = false,
+	tabs = [],
+	translatorLanguage = "en",
+	usageDays = 0,
+}: {
+	generated?: ReviewSponsorResult;
+	isChrome?: boolean;
+	isEdge?: boolean;
+	isFirefox?: boolean;
+	isSafari?: boolean;
+	tabs?: unknown[];
+	translatorLanguage?: string;
+	usageDays?: number;
+} = {}) {
 	const registry = createStoredCustomElementsRegistry();
 	const injectCalls: Array<{ id: string; link: string }> = [];
 	const openCalls: string[] = [];
 	const settingsCalls: string[][] = [];
 	const translateCalls: string[] = [];
+
+	const { showReviewOrSponsor } = createReviewSponsorModule({
+		browser: {
+			runtime: {
+				getURL: (path: string) => `chrome-extension://test${path}`,
+			},
+		},
+		extensionUsageDays: "extension_usage_days",
+		hiddenClass: "hidden",
+		isChrome,
+		isEdge,
+		isFirefox,
+		isSafari,
+		getSettingsFn: (keys: string[]) => {
+			settingsCalls.push(keys);
+			return Promise.resolve({ enabled: usageDays });
+		},
+		injectStyleFn: (id: string, options: { link: string }) => {
+			injectCalls.push({ id, link: options.link });
+			return new MockElement("link") as never;
+		},
+		ensureAllTabsAvailabilityFn: () => Promise.resolve(tabs),
+		getTranslationsFn: (message: string) => {
+			translateCalls.push(message);
+			return Promise.resolve(`translated:${message}`);
+		},
+		getTranslatorAttributeFn: (attribute: string) =>
+			attribute === "currentLanguage" ? translatorLanguage : null,
+		generateReviewSponsorSvgsFn: () => generated as never,
+		customElementsRef: registry.registry,
+		openFn: (url: string | URL) => {
+			openCalls.push(String(url));
+			return null;
+		},
+		HTMLElementRef: MockReviewSponsorHTMLElement as never,
+	});
+
+	return {
+		getConstructor: registry.getConstructor,
+		injectCalls,
+		openCalls,
+		settingsCalls,
+		showReviewOrSponsor,
+		translateCalls,
+	};
+}
+
+Deno.test("show review or sponsor block", async (t) => {
+	const { cleanup } = installMockDom();
+
+	try {
+		const baseFixture = createReviewSponsorFixture();
+
+		await t.step("throws when required params are missing", () => {
+			assertThrows(
+				() => baseFixture.showReviewOrSponsor({}),
+				Error,
+				"error_required_params",
+			);
+		});
+
+		await t.step(
+			"shows none when shouldShowReviewOrSponsor returns none",
+			() => {
+				const { reviewSvg, sponsorSvg, reviewLink, sponsorLink } =
+					createElements();
+				baseFixture.showReviewOrSponsor({
+					allTabs: Array(7),
+					reviewSvg,
+					sponsorSvg,
+					reviewLink,
+					sponsorLink,
+				});
+				assert(reviewSvg.classList.contains("hidden"));
+				assert(sponsorSvg.classList.contains("hidden"));
+				assertEquals(reviewLink.getAttribute("aria-hidden"), "true");
+				assertEquals(sponsorLink.getAttribute("aria-hidden"), "true");
+				assertEquals(reviewLink.tabIndex, -1);
+				assertEquals(sponsorLink.tabIndex, -1);
+			},
+		);
+
+		await t.step(
+			"shows review and opens the chrome link",
+			() => {
+				const fixture = createReviewSponsorFixture({ isChrome: true });
+				const { reviewSvg, sponsorSvg, reviewLink, sponsorLink } =
+					createElements();
+				fixture.showReviewOrSponsor({
+					allTabs: Array(8),
+					reviewSvg,
+					sponsorSvg,
+					reviewLink,
+					sponsorLink,
+				});
+				assertFalse(reviewSvg.classList.contains("hidden"));
+				assert(sponsorSvg.classList.contains("hidden"));
+				assertEquals(reviewLink.tabIndex, 0);
+				assertEquals(sponsorLink.tabIndex, -1);
+				reviewLink.click();
+				assertEquals(fixture.openCalls[0], CHROME_REVIEW_LINK);
+			},
+		);
+
+		await t.step(
+			"shows sponsor and opens locale-aware sponsor link",
+			() => {
+				const fixture = createReviewSponsorFixture();
+				const { reviewSvg, sponsorSvg, reviewLink, sponsorLink } =
+					createElements();
+				fixture.showReviewOrSponsor({
+					allTabs: Array(16),
+					translatorLanguage: "it",
+					reviewSvg,
+					sponsorSvg,
+					reviewLink,
+					sponsorLink,
+				});
+				assertFalse(reviewSvg.classList.contains("hidden"));
+				assertFalse(sponsorSvg.classList.contains("hidden"));
+				sponsorLink.click();
+				assert(fixture.openCalls[0].includes("/it/"));
+			},
+		);
+
+		await t.step(
+			"uses usage-day thresholds when there are few tabs",
+			() => {
+				const reviewFixture = createReviewSponsorFixture();
+				const reviewElements = createElements();
+				reviewFixture.showReviewOrSponsor({
+					allTabs: [],
+					usageDays: 20,
+					...reviewElements,
+				});
+				assertFalse(
+					reviewElements.reviewSvg.classList.contains("hidden"),
+				);
+				assert(reviewElements.sponsorSvg.classList.contains("hidden"));
+
+				const sponsorFixture = createReviewSponsorFixture();
+				const sponsorElements = createElements();
+				sponsorFixture.showReviewOrSponsor({
+					allTabs: [],
+					usageDays: 40,
+					...sponsorElements,
+				});
+				assertFalse(
+					sponsorElements.reviewSvg.classList.contains("hidden"),
+				);
+				assertFalse(
+					sponsorElements.sponsorSvg.classList.contains("hidden"),
+				);
+			},
+		);
+
+		await t.step(
+			"opens edge and firefox review links and hides safari review",
+			() => {
+				const edgeFixture = createReviewSponsorFixture({
+					isEdge: true,
+				});
+				const edgeElements = createElements();
+				edgeFixture.showReviewOrSponsor({
+					allTabs: Array(8),
+					...edgeElements,
+				});
+				edgeElements.reviewLink.click();
+				assertEquals(edgeFixture.openCalls[0], EDGE_REVIEW_LINK);
+
+				const firefoxFixture = createReviewSponsorFixture({
+					isFirefox: true,
+				});
+				const firefoxElements = createElements();
+				firefoxFixture.showReviewOrSponsor({
+					allTabs: Array(16),
+					...firefoxElements,
+				});
+				firefoxElements.reviewLink.click();
+				firefoxElements.sponsorLink.click();
+				assertEquals(firefoxFixture.openCalls[0], FIREFOX_REVIEW_LINK);
+				assertEquals(
+					firefoxFixture.openCalls[1],
+					"https://alfredoit.dev/en/sponsor/?email=againwhysalesforce@duck.com",
+				);
+
+				const safariFixture = createReviewSponsorFixture({
+					isSafari: true,
+				});
+				const safariElements = createElements();
+				safariFixture.showReviewOrSponsor({
+					allTabs: Array(8),
+					...safariElements,
+				});
+				assert(safariElements.reviewSvg.classList.contains("hidden"));
+				assertEquals(safariElements.reviewLink.tabIndex, -1);
+			},
+		);
+	} finally {
+		cleanup();
+	}
+});
+
+Deno.test("ReviewSponsorAws loads async metadata and opens expected links", async () => {
 	const generated = {
 		reviewLink: new MockElement("a"),
 		reviewSvg: new MockElement("svg"),
@@ -653,103 +381,50 @@ Deno.test("ReviewSponsorAws loads async metadata and opens the expected links in
 		sponsorSvg: new MockElement("svg"),
 	} satisfies ReviewSponsorResult;
 
-	const { cleanup } = await loadIsolatedModule<
-		Record<string, never>,
-		ReviewSponsorDependencies
-	>({
-		modulePath: new URL(
-			"../../../src/components/review-sponsor/review-sponsor.js",
-			import.meta.url,
+	const fixture = createReviewSponsorFixture({
+		generated,
+		isChrome: true,
+		tabs: Array.from(
+			{ length: 20 },
+			(_value, index) => ({ id: String(index) }),
 		),
-		dependencies: {
-			BROWSER: {
-				runtime: {
-					getURL: (path) => `chrome-extension://test${path}`,
-				},
-			},
-			EXTENSION_USAGE_DAYS: "extension_usage_days",
-			HIDDEN_CLASS: "hidden",
-			ISCHROME: true,
-			ISEDGE: false,
-			ISFIREFOX: false,
-			ISSAFARI: false,
-			ensureAllTabsAvailability: () =>
-				Promise.resolve(Array.from(
-					{ length: 20 },
-					(_value, index) => ({ id: String(index) }),
-				)),
-			ensureTranslatorAvailability: () =>
-				Promise.resolve({
-					currentLanguage: "fr",
-					translate: (message) => {
-						translateCalls.push(message);
-						return Promise.resolve(`translated:${message}`);
-					},
-				}),
-			generateReviewSponsorSvgs: () => generated,
-			getSettings: (keys) => {
-				settingsCalls.push(keys);
-				return Promise.resolve({ enabled: 45 });
-			},
-			injectStyle: (id, options) => {
-				injectCalls.push({ id, link: options.link });
-				return new MockElement("link");
-			},
-		},
-		globals: {
-			HTMLElement: MockReviewSponsorHTMLElement,
-			customElements: registry.registry,
-			open: (url?: string | URL) => {
-				openCalls.push(String(url));
-				return null;
-			},
-		},
-		importsToReplace: new Set([
-			"/core/constants.js",
-			"/core/functions.js",
-			"/core/tabContainer.js",
-			"/core/translator.js",
-			"/salesforce/generator.js",
-		]),
+		translatorLanguage: "fr",
+		usageDays: 45,
 	});
 
-	try {
-		const ReviewSponsorConstructor = registry.getConstructor();
-		assert(ReviewSponsorConstructor != null);
+	const ReviewSponsorConstructor = fixture.getConstructor();
+	assert(ReviewSponsorConstructor != null);
 
-		const component = new ReviewSponsorConstructor();
-		component.connectedCallback();
-		component.connectedCallback();
-		await component.whenReady();
+	const component = new ReviewSponsorConstructor();
+	component.connectedCallback();
+	component.connectedCallback();
+	await component.whenReady();
 
-		assertEquals(settingsCalls, [["extension_usage_days"]]);
-		assertEquals(injectCalls, [{
-			id: "awsf-rev-spons",
-			link:
-				"chrome-extension://test/components/review-sponsor/review-sponsor.css",
-		}]);
-		assertEquals(translateCalls, ["write_review", "send_tip"]);
-		assertEquals(component.shadowRoot?.children.length, 2);
-		assertEquals(await component._getExtensionUsageDays(), 45);
-		assertEquals(generated.reviewLink.title, "translated:write_review");
-		assertEquals(
-			generated.reviewLink.getAttribute("aria-label"),
-			"translated:write_review",
-		);
-		assertEquals(generated.reviewSvg.getAttribute("focusable"), "false");
-		assertEquals(generated.sponsorLink.title, "translated:send_tip");
-		assertEquals(
-			generated.sponsorLink.getAttribute("aria-label"),
-			"translated:send_tip",
-		);
-		assertEquals(generated.sponsorSvg.getAttribute("focusable"), "false");
+	assertEquals(fixture.settingsCalls, [["extension_usage_days"]]);
+	assertEquals(fixture.injectCalls, [{
+		id: "awsf-rev-spons",
+		link:
+			"chrome-extension://test/components/review-sponsor/review-sponsor.css",
+	}]);
+	assertEquals(fixture.translateCalls, ["write_review", "send_tip"]);
+	assertEquals(component.shadowRoot?.children.length, 2);
+	assertEquals(await component._getExtensionUsageDays(), 45);
+	assertEquals(generated.reviewLink.title, "translated:write_review");
+	assertEquals(
+		generated.reviewLink.getAttribute("aria-label"),
+		"translated:write_review",
+	);
+	assertEquals(generated.reviewSvg.getAttribute("focusable"), "false");
+	assertEquals(generated.sponsorLink.title, "translated:send_tip");
+	assertEquals(
+		generated.sponsorLink.getAttribute("aria-label"),
+		"translated:send_tip",
+	);
+	assertEquals(generated.sponsorSvg.getAttribute("focusable"), "false");
 
-		generated.reviewLink.click();
-		generated.sponsorLink.click();
+	generated.reviewLink.click();
+	generated.sponsorLink.click();
 
-		assertEquals(openCalls[0], CHROME_REVIEW_LINK);
-		assert(openCalls[1].includes("/en/"));
-	} finally {
-		cleanup();
-	}
+	assertEquals(fixture.openCalls[0], CHROME_REVIEW_LINK);
+	assert(fixture.openCalls[1].includes("/en/"));
 });

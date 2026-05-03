@@ -1,6 +1,7 @@
+import "../../mocks.test.ts";
 import { assertEquals } from "@std/testing/asserts";
+import { createImportModule } from "../../../src/salesforce/import.js";
 import { MockElement } from "../ui/mock-dom.test.ts";
-import { loadIsolatedModule } from "../../load-isolated-module.test.ts";
 
 type ImportModule = {
 	__getInputModalParent: () => MockElement | null | undefined;
@@ -41,94 +42,6 @@ type FileLike = {
 	name?: string;
 	text: () => Promise<string>;
 	type: string;
-};
-
-type ImportDependencies = {
-	BROWSER: {
-		runtime: {
-			getURL: (path: string) => string;
-		};
-	};
-	EXTENSION_NAME: string;
-	HIDDEN_CLASS: string;
-	MODAL_ID: string;
-	TOAST_ERROR: string;
-	TOAST_WARNING: string;
-	Tab: {
-		hasUnexpectedKeys: (tab: Record<string, unknown>) => boolean;
-	};
-	TabContainer: {
-		getThrowawayInstance: (options?: {
-			pinned?: number;
-			tabs?: unknown[];
-		}) => {
-			pinned: number;
-			push?: (tabs: unknown[]) => void;
-			sort: (options: { sortBy: string }, sync: boolean) => void;
-			toString: () => string;
-		};
-		keyPinnedTabsNo: string;
-		keyTabs: string;
-	};
-	document: {
-		createElement: (tagName: string) => MockElement;
-		getElementById: (id: string) => MockElement | null;
-	};
-	ensureAllTabsAvailability: () => Promise<{
-		importTabs: (
-			json: string,
-			config: Record<string, boolean>,
-		) => Promise<number>;
-	}>;
-	ensureTranslatorAvailability: () => Promise<{
-		translate: (message: string) => Promise<string>;
-	}>;
-	generateCheckboxWithLabel: (
-		id: string,
-		label: string,
-		checked: boolean,
-	) => Promise<MockElement>;
-	generateSection: () => Promise<{
-		divParent: MockElement;
-		section: MockElement;
-	}>;
-	generateSldsFileInput: (
-		importId: string,
-		fileId: string,
-		accept: string,
-	) => Promise<{
-		fileInputWrapper: MockElement;
-		inputContainer: MockElement;
-	}>;
-	generateSldsModal: (options: {
-		modalTitle: string;
-	}) => Promise<{
-		article: MockElement;
-		closeButton: MockElement;
-		modalParent: MockElement & {
-			querySelector: (selector: string) => MockElement | null;
-		};
-		saveButton: MockElement & { remove: () => void };
-	}>;
-	generateSldsModalWithTabList: (
-		tabs: unknown,
-		options: Record<string, string>,
-	) => Promise<{
-		closeButton: MockElement;
-		getSelectedTabs: () => { selectedAll: boolean; tabs: unknown[] };
-		modalParent: MockElement;
-		saveButton: MockElement;
-	}>;
-	getModalHanger: () => MockElement;
-	getSetupTabUl: () => {
-		querySelector: (selector: string) => MockElement | null;
-	};
-	injectStyle: (
-		id: string,
-		options: { css?: string; link?: string },
-	) => MockElement;
-	showToast: (message: string | unknown[], status?: string) => void;
-	sf_afterSet: (message: SfAfterSetPayload) => void;
 };
 
 type SfAfterSetPayload = {
@@ -260,9 +173,9 @@ function createFile(type: string, contents: string, name = ""): FileLike {
  * @param {boolean} [options.missingModalParentOnce=false] Whether the first modal generation returns a null parent.
  * @param {boolean} [options.selectedAll=false] Whether all tabs were selected in the pick modal.
  * @param {unknown[]} [options.selectedTabs=[]] Tabs selected in the pick modal.
- * @return {Promise<ImportFixture>} Loaded fixture.
+ * @return {ImportFixture} Loaded fixture.
  */
-async function loadImportModule({
+function loadImportModule({
 	checkboxState = {},
 	clearInputModalParentOnRemove = false,
 	generateModalError = null,
@@ -363,167 +276,189 @@ async function loadImportModule({
 		checkbox.checked = checked;
 		fileCheckboxes[id] = checkbox;
 	}
-
-	const { cleanup, module } = await loadIsolatedModule<
-		ImportModule,
-		ImportDependencies
-	>({
-		modulePath: new URL(
-			"../../../src/salesforce/import.js",
-			import.meta.url,
-		),
-		additionalExports: [
-			"__setInputModalParent",
-			"__getInputModalParent",
-			"filterForUnexpectedTabKeys",
-			"generateSldsImport",
-			"getTabsFromJSON",
-			"makeValidTabs",
-			"readFile",
-			"readChangeOrDropFiles",
-			"showFileImport",
-			"showTabSelectThenImport",
-		],
-		extraSource: `
-function __setInputModalParent(value) { inputModalParent = value; }
-function __getInputModalParent() { return inputModalParent; }`,
-		dependencies: {
-			BROWSER: {
-				runtime: {
-					getURL: (path) => `chrome-extension://unit${path}`,
-				},
+	const mockDocument = {
+		createElement: () => new MockElement("div"),
+		getElementById: (id: string) => {
+			if (id === importId) {
+				return changeTarget;
+			}
+			if (id === closeModalId) {
+				return closeButton;
+			}
+			if (id === "awsf-modal") {
+				return modalPresent || hasExistingModal ? modalParent : null;
+			}
+			return null;
+		},
+	};
+	const hadDocument = "document" in globalThis;
+	const originalDocument = (globalThis as { document?: unknown }).document;
+	const hadBrowser = "browser" in globalThis;
+	const originalBrowser = (globalThis as { browser?: unknown }).browser;
+	Object.defineProperty(globalThis, "browser", {
+		configurable: true,
+		value: {
+			i18n: {
+				getMessage: (key: string) => key,
 			},
-			EXTENSION_NAME: "again-why-salesforce",
-			HIDDEN_CLASS: "hidden",
-			MODAL_ID: "awsf-modal",
-			TOAST_ERROR: "error",
-			TOAST_WARNING: "warning",
-			Tab: {
-				hasUnexpectedKeys: (tab) =>
-					Object.keys(tab).some((key) =>
-						!["label", "url", "org", "tabTitle", "title"].includes(
-							key,
-						)
-					),
-			},
-			TabContainer: MockTabContainer,
-			document: {
-				createElement: () => new MockElement("div"),
-				getElementById: (id) => {
-					if (id === importId) {
-						return changeTarget;
-					}
-					if (id === closeModalId) {
-						return closeButton;
-					}
-					if (id === "awsf-modal") {
-						return modalPresent || hasExistingModal
-							? modalParent
-							: null;
-					}
-					return null;
-				},
-			},
-			ensureAllTabsAvailability: () =>
-				Promise.resolve({
-					importTabs: (json, config) => {
-						importCalls.push({ config, json });
-						return Promise.resolve(importCount);
-					},
+			runtime: {
+				getURL: (path: string) => `chrome-extension://unit${path}`,
+				getManifest: () => ({
+					homepage_url: "https://github.com/example/repo",
+					optional_host_permissions: [],
+					version: "1.0.0",
 				}),
-			ensureTranslatorAvailability: () =>
-				Promise.resolve({
-					translate: (message) =>
-						Promise.resolve(`translated:${message}`),
-				}),
-			generateCheckboxWithLabel: (id, _label, checked) => {
-				const existingCheckbox = fileCheckboxes[id];
-				if (existingCheckbox != null) {
-					return Promise.resolve(existingCheckbox);
-				}
-				const checkbox = new MockElement("input");
-				checkbox.id = id;
-				checkbox.checked = checked;
-				fileCheckboxes[id] = checkbox;
-				return Promise.resolve(checkbox);
-			},
-			generateSection: () =>
-				Promise.resolve({
-					divParent: new MockElement("div"),
-					section: new MockElement("section"),
-				}),
-			generateSldsFileInput: () =>
-				Promise.resolve({
-					fileInputWrapper,
-					inputContainer,
-				}),
-			generateSldsModal: () =>
-				Promise.resolve({
-					...(generateModalError == null ? {} : (() => {
-						throw generateModalError;
-					})()),
-					article,
-					closeButton,
-					modalParent: (() => {
-						const currentBuildCount = modalBuildCount;
-						modalBuildCount += 1;
-						modalPresent = true;
-						return missingModalParentOnce && currentBuildCount === 0
-							? null as unknown as MockElement & {
-								querySelector: (
-									selector: string,
-								) => MockElement | null;
-							}
-							: modalParent;
-					})(),
-					saveButton,
-				}),
-			generateSldsModalWithTabList: (_tabs, options) => {
-				modalListCalls.push(options);
-				return Promise.resolve({
-					closeButton: selectedCloseButton,
-					getSelectedTabs: () => ({
-						selectedAll,
-						tabs: selectedTabs,
-					}),
-					modalParent: selectedModalParent,
-					saveButton: selectedSaveButton,
-				});
-			},
-			getModalHanger: () => modalHanger,
-			getSetupTabUl: () => ({
-				querySelector: () =>
-					setupImportPresent ? new MockElement("div") : null,
-			}),
-			injectStyle: (id, options) => {
-				injectStyleCalls.push({ id, options });
-				return new MockElement("style");
-			},
-			showToast: (message, status) => {
-				toasts.push({ message, status });
-			},
-			sf_afterSet: (message) => {
-				afterSetCalls.push(message);
+				sendMessage: () => undefined,
 			},
 		},
-		importsToReplace: new Set([
-			"/core/constants.js",
-			"/core/functions.js",
-			"/core/tab.js",
-			"/core/tabContainer.js",
-			"/core/translator.js",
-			"./generator.js",
-			"./content.js",
-			"./toast.js",
-			"./sf-elements.js",
-		]),
+		writable: true,
 	});
+	Object.defineProperty(globalThis, "document", {
+		configurable: true,
+		value: mockDocument,
+		writable: true,
+	});
+	const module = createImportModule({
+		BROWSER: {
+			runtime: {
+				getURL: (path: string) => `chrome-extension://unit${path}`,
+			},
+		},
+		EXTENSION_NAME: "again-why-salesforce",
+		HIDDEN_CLASS: "hidden",
+		MODAL_ID: "awsf-modal",
+		TOAST_ERROR: "error",
+		TOAST_WARNING: "warning",
+		Tab: {
+			hasUnexpectedKeys: (tab: Record<string, unknown>) =>
+				Object.keys(tab).some((key) =>
+					!["label", "url", "org", "tabTitle", "title"].includes(
+						key,
+					)
+				),
+		},
+		TabContainer: MockTabContainer,
+		ensureAllTabsAvailability: () =>
+			Promise.resolve({
+				importTabs: (
+					json: string,
+					config: Record<string, boolean>,
+				) => {
+					importCalls.push({ config, json });
+					return Promise.resolve(importCount);
+				},
+			}),
+		getTranslations: (message: string | string[]) =>
+			Promise.resolve(
+				Array.isArray(message)
+					? message.map((item) => `translated:${item}`)
+					: `translated:${message}`,
+			),
+		generateCheckboxWithLabel: (
+			id: string,
+			_label: string,
+			checked: boolean,
+		) => {
+			const existingCheckbox = fileCheckboxes[id];
+			if (existingCheckbox != null) {
+				return Promise.resolve(existingCheckbox);
+			}
+			const checkbox = new MockElement("input");
+			checkbox.id = id;
+			checkbox.checked = checked;
+			fileCheckboxes[id] = checkbox;
+			return Promise.resolve(checkbox);
+		},
+		generateSection: () =>
+			Promise.resolve({
+				divParent: new MockElement("div"),
+				section: new MockElement("section"),
+			}),
+		generateSldsFileInput: () =>
+			Promise.resolve({
+				fileInputWrapper,
+				inputContainer,
+			}),
+		generateSldsModal: () =>
+			Promise.resolve({
+				...(generateModalError == null ? {} : (() => {
+					throw generateModalError;
+				})()),
+				article,
+				closeButton,
+				modalParent: (() => {
+					const currentBuildCount = modalBuildCount;
+					modalBuildCount += 1;
+					modalPresent = true;
+					return missingModalParentOnce && currentBuildCount === 0
+						? null as unknown as MockElement & {
+							querySelector: (
+								selector: string,
+							) => MockElement | null;
+						}
+						: modalParent;
+				})(),
+				saveButton,
+			}),
+		generateSldsModalWithTabList: (
+			_tabs: unknown,
+			options: Record<string, string>,
+		) => {
+			modalListCalls.push(options);
+			return Promise.resolve({
+				closeButton: selectedCloseButton,
+				getSelectedTabs: () => ({
+					selectedAll,
+					tabs: selectedTabs,
+				}),
+				modalParent: selectedModalParent,
+				saveButton: selectedSaveButton,
+			});
+		},
+		getModalHanger: () => modalHanger,
+		getSetupTabUl: () => ({
+			querySelector: () =>
+				setupImportPresent ? new MockElement("div") : null,
+		}),
+		injectStyle: (
+			id: string,
+			options: { css?: string; link?: string },
+		) => {
+			injectStyleCalls.push({ id, options });
+			return new MockElement("style");
+		},
+		showToast: (message: string | unknown[], status?: string) => {
+			toasts.push({ message, status });
+		},
+		sf_afterSet: (message: SfAfterSetPayload) => {
+			afterSetCalls.push(message);
+		},
+	}) as unknown as ImportModule;
 	setInputModalParent = module.__setInputModalParent;
 
 	return {
 		appendCount,
 		changeTarget,
-		cleanup,
+		cleanup: () => {
+			if (hadDocument) {
+				Object.defineProperty(globalThis, "document", {
+					configurable: true,
+					value: originalDocument,
+					writable: true,
+				});
+			} else {
+				delete (globalThis as { document?: unknown }).document;
+			}
+			if (hadBrowser) {
+				Object.defineProperty(globalThis, "browser", {
+					configurable: true,
+					value: originalBrowser,
+					writable: true,
+				});
+			} else {
+				delete (globalThis as { browser?: unknown }).browser;
+			}
+		},
 		closeClicks,
 		fileCheckboxes,
 		hangerChildren,
