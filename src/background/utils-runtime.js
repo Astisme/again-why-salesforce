@@ -142,7 +142,9 @@ export function createBackgroundUtilsModule({
 			}
 			return _queryTabs(callback, count + 1);
 		}
-		return callback(browserTabs[0]);
+		const browserTab = browserTabs[0];
+		callback?.(browserTab);
+		return browserTab;
 	}
 
 	/**

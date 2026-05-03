@@ -502,7 +502,7 @@ async function isOnSavedTab(isFromHrefUpdate = false, callback = null) {
 		url,
 	});
 	if (isFromHrefUpdate) {
-		callback(STATE.isCurrentlyOnSavedTab);
+		callback?.(STATE.isCurrentlyOnSavedTab);
 	}
 }
 

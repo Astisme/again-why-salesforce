@@ -329,21 +329,21 @@ export class TabContainer extends Array {
 	/**
 	 * Creates a new array with all elements that pass the test implemented by the provided function.
 	 *
-	 * @param {Function} callback Function to test each element of the array.
-	 *    The callback function accepts three arguments:
+	 * @param {Function} filterCallback Function to test each element of the array.
+	 *    The filterCallback function accepts three arguments:
 	 *    - element: The current element being processed in the array
 	 *    - index: The index of the current element being processed in the array
 	 *    - array: The array filter was called upon
 	 * @return {Array} A new array with the elements that pass the test.
 	 *    If no elements pass the test, an empty array will be returned.
 	 */
-	filter(callback) {
+	filter(filterCallback) {
 		// Create a new instance of the same class
 		const filtered = TabContainer.getThrowawayInstance();
 		// Manually iterate through the array and apply the callback
 		for (let i = 0; i < this.length; i++) {
 			const element = this[i];
-			if (callback(element, i, this)) {
+			if (filterCallback(element, i, this)) {
 				filtered.push(element);
 			}
 		}
@@ -1011,19 +1011,19 @@ export class TabContainer extends Array {
 	/**
 	 * Creates a new TabContainer with the results of calling a provided function for every element.
 	 *
-	 * @param {Function} callback Function that produces an element of the new TabContainer.
-	 *    The callback function accepts three arguments:
+	 * @param {Function} mapCallback Function that produces an element of the new TabContainer.
+	 *    The mapCallback function accepts three arguments:
 	 *    - currentValue: The current element being processed
 	 *    - index: The index of the current element being processed
 	 *    - array: The TabContainer map was called upon
 	 * @return {Array} A new Array with each element being the result of the callback function.
 	 */
-	map(callback) {
+	map(mapCallback) {
 		// Create a new instance of TabContainer
 		const mapped = TabContainer.getThrowawayInstance();
 		// Manually iterate and apply the callback
 		for (let i = 0; i < this.length; i++) {
-			mapped[i] = callback(this[i], i, this);
+			mapped[i] = mapCallback(this[i], i, this);
 		}
 		return mapped;
 	}
