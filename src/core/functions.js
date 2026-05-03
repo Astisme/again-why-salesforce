@@ -42,6 +42,26 @@ import {
 function sendMessage(message, callback) {
 	return BROWSER.runtime.sendMessage(message, callback);
 }
+
+/**
+ * Applies a global override without direct assignment.
+ * This supports getter-only globals such as `document`.
+ *
+ * @param {string} name Global property name.
+ * @param {unknown} value Override value.
+ * @return {void}
+ */
+export function applyGlobalOverride(name, value) {
+	if (value == null) {
+		return;
+	}
+	Object.defineProperty(globalThis, name, {
+		configurable: true,
+		enumerable: true,
+		value,
+		writable: true,
+	});
+}
 /**
  * Sends a message to the background script with the specified message.
  *

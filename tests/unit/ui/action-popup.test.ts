@@ -1,54 +1,25 @@
+import "../../mocks.test.ts";
 import { assertEquals } from "@std/testing/asserts";
+import {
+	CMD_EXPORT_ALL,
+	CMD_IMPORT,
+	CMD_OPEN_SETTINGS,
+	CXM_MANAGE_TABS,
+	WHAT_EXPORT_CHECK,
+	WHAT_GET_COMMANDS,
+	WHAT_SHOW_IMPORT,
+	WHAT_START_TUTORIAL,
+} from "../../../src/core/constants.js";
+import {
+	createPopupModule,
+	runPopup,
+} from "../../../src/action/popup/popup-runtime.js";
+import { runPopupWithInjectedOptions } from "../../../src/action/popup/popup-module.js";
 import {
 	createMockWindow,
 	MockDocument,
 	MockElement,
 } from "./mock-dom.test.ts";
-import { loadIsolatedModule } from "../../load-isolated-module.test.ts";
-
-type Command = {
-	name: string;
-	shortcut: string;
-};
-
-type PopupDependencies = {
-	BROWSER: {
-		runtime: {
-			getURL: (path: string) => string;
-		};
-	};
-	CMD_EXPORT_ALL: string;
-	CMD_IMPORT: string;
-	CMD_OPEN_SETTINGS: string;
-	CXM_MANAGE_TABS: string;
-	WHAT_EXPORT_CHECK: string;
-	WHAT_GET_COMMANDS: string;
-	WHAT_SHOW_IMPORT: string;
-	WHAT_START_TUTORIAL: string;
-	TranslationService: {
-		TRANSLATE_DATASET: string;
-		TRANSLATE_SEPARATOR: string;
-	};
-	areFramePatternsAllowed: () => Promise<boolean>;
-	ensureTranslatorAvailability: () => Promise<{
-		separator: string;
-		translate: (
-			message: string | string[],
-			connector?: string,
-		) => Promise<string>;
-		translateAttributeDataset: string;
-	}>;
-	getTranslations: (
-		message: string | string[],
-		connector?: string,
-	) => Promise<string | string[]>;
-	getTranslatorAttribute: (attribute: string) => string | null;
-	isOnSalesforceSetup: () => Promise<{ ison: boolean; url?: string | null }>;
-	openSettingsPage: () => void;
-	sendExtensionMessage: (
-		message: Record<string, unknown>,
-	) => Promise<Command[] | undefined> | undefined;
-};
 
 /**
  * Creates and appends a mock DOM element with an id.
@@ -70,254 +41,211 @@ function appendElement(
 }
 
 /**
- * Loads the popup entrypoint with isolated dependencies.
+ * Creates all popup action buttons on the mock page and returns references.
  *
- * @param {Object} options Fixture options.
- * @param {Command[]} [options.availableCommands=[]] Commands returned by the background script.
- * @param {boolean} [options.framePatternsAllowed=true] Whether frame patterns are allowed.
- * @param {{ison: boolean; url?: string | null}} [options.salesforceState={ ison: true }] Salesforce setup detection result.
- * @return {Promise<{ cleanup: () => void; counters: { closeCalls: number; openSettingsCalls: number; translatorCalls: number; }; exportButton: MockElement; importButton: MockElement; locationRef: URL; manageTabsButton: MockElement; messages: Record<string, unknown>[]; settingsButton: MockElement; tutorialButton: MockElement; }>} Loaded popup fixture.
+ * @param {MockDocument} document Mock document.
+ * @return {{ exportButton: MockElement; importButton: MockElement; manageTabsButton: MockElement; settingsButton: MockElement; tutorialButton: MockElement; }} Button references.
  */
-async function loadPopupModule({
-	availableCommands = [],
-	framePatternsAllowed = true,
-	salesforceState = { ison: true },
-}: {
-	availableCommands?: Command[];
-	framePatternsAllowed?: boolean;
-	salesforceState?: { ison: boolean; url?: string | null };
-}) {
-	const window = createMockWindow(
-		"https://example.test/action/popup/popup.html",
-	);
-	const document = window.document;
+function appendPopupButtons(document: MockDocument) {
 	const importButton = appendElement(document, "button", "import");
 	const exportButton = appendElement(document, "button", "export");
 	const settingsButton = appendElement(document, "button", "open-settings");
 	const manageTabsButton = appendElement(document, "button", "manage-tabs");
 	const tutorialButton = appendElement(document, "button", "tutorial");
+	return {
+		exportButton,
+		importButton,
+		manageTabsButton,
+		settingsButton,
+		tutorialButton,
+	};
+}
+
+Deno.test("popup-runtime createPopupModule wires runtime constants through the pure module", async () => {
+	const window = createMockWindow(
+		"https://example.test/action/popup/popup.html",
+	);
+	const document = window.document;
+	const {
+		exportButton,
+		importButton,
+		manageTabsButton,
+		settingsButton,
+		tutorialButton,
+	} = appendPopupButtons(document);
 	importButton.dataset.i18n = "popup_import+-+extra";
 	exportButton.dataset.i18n = "popup_export+-+extra";
 	settingsButton.dataset.i18n = "popup_settings+-+extra";
 	const counters = {
 		closeCalls: 0,
 		openSettingsCalls: 0,
-		translatorCalls: 0,
 	};
 	const messages: Record<string, unknown>[] = [];
-	let translatorInstance:
-		| Promise<{
-			separator: string;
-			translate: (
-				message: string | string[],
-				connector?: string,
-			) => Promise<string>;
-			translateAttributeDataset: string;
-		}>
-		| null = null;
-	const ensureTranslatorAvailability = () => {
-		if (translatorInstance == null) {
-			counters.translatorCalls++;
-			translatorInstance = Promise.resolve({
-				separator: "+-+",
-				translate: (message, connector = " ") =>
-					Promise.resolve(
-						Array.isArray(message)
-							? message.join(connector)
-							: `translated:${message}`,
-					),
-				translateAttributeDataset: "i18n",
-			});
-		}
-		return translatorInstance;
-	};
 
-	const { cleanup } = await loadIsolatedModule<
-		Record<string, never>,
-		PopupDependencies
-	>({
-		modulePath: new URL(
-			"../../../src/action/popup/popup.js",
-			import.meta.url,
-		),
-		dependencies: {
-			BROWSER: {
-				runtime: {
-					getURL: (path) => `chrome-extension://test/${path}`,
-				},
-			},
-			CMD_EXPORT_ALL: "cmd-export-all",
-			CMD_IMPORT: "cmd-import",
-			CMD_OPEN_SETTINGS: "cmd-open-settings",
-			CXM_MANAGE_TABS: "manage-tabs",
-			WHAT_EXPORT_CHECK: "export-check",
-			WHAT_GET_COMMANDS: "get-commands",
-			WHAT_SHOW_IMPORT: "show-import",
-			WHAT_START_TUTORIAL: "start-tutorial",
-			TranslationService: {
-				TRANSLATE_DATASET: "i18n",
-				TRANSLATE_SEPARATOR: "+-+",
-			},
-			areFramePatternsAllowed: () =>
-				Promise.resolve(framePatternsAllowed),
-			ensureTranslatorAvailability,
-			getTranslations: (message, _connector = " ") => {
-				if (Array.isArray(message)) {
-					return Promise.resolve(message);
-				}
-				return Promise.resolve(message);
-			},
-			getTranslatorAttribute: (attribute) => {
-				switch (attribute) {
-					case "separator":
-						return "+-+";
-					case "translateAttributeDataset":
-						return "i18n";
-					default:
-						return null;
-				}
-			},
-			isOnSalesforceSetup: () => Promise.resolve(salesforceState),
-			openSettingsPage: () => {
-				counters.openSettingsCalls++;
-			},
-			sendExtensionMessage: (message) => {
-				messages.push(message);
-				if (message.what === "get-commands") {
-					return Promise.resolve(availableCommands);
-				}
-				return Promise.resolve(undefined);
+	const popupModule = createPopupModule({
+		areFramePatternsAllowedFn: () => Promise.resolve(true),
+		browser: {
+			runtime: {
+				getURL: (path: string) => `chrome-extension://test/${path}`,
 			},
 		},
-		globals: {
-			close: () => {
-				counters.closeCalls++;
-			},
-			document,
-			location: window.location,
-			setTimeout: (callback: () => void) => {
-				callback();
-				return counters.closeCalls;
-			},
+		closePopupFn: () => {
+			counters.closeCalls++;
 		},
-		importsToReplace: new Set([
-			"/core/constants.js",
-			"/core/functions.js",
-			"/core/translator.js",
-			"/components/theme-selector/theme-selector.js",
-		]),
-	});
-
-	return {
-		cleanup,
-		counters,
-		exportButton,
-		importButton,
+		documentRef: document,
+		getTranslationsFn: (message: string | string[]) =>
+			Promise.resolve(message),
+		isOnSalesforceSetupFn: () => Promise.resolve({ ison: true }),
 		locationRef: window.location as URL,
-		manageTabsButton,
-		messages,
-		settingsButton,
-		tutorialButton,
-	};
-}
-
-Deno.test("popup redirects to the host-permissions page when Salesforce setup access lacks frame permissions", async () => {
-	const fixture = await loadPopupModule({
-		framePatternsAllowed: false,
-		salesforceState: { ison: true },
-	});
-
-	try {
-		assertEquals(
-			fixture.locationRef.href,
-			"chrome-extension://test/action/req_permissions/req_permissions.html?whichid=hostpermissions",
-		);
-	} finally {
-		fixture.cleanup();
-	}
-});
-
-Deno.test("popup redirects to the non-Salesforce page when the current tab is not Salesforce setup", async () => {
-	const fixture = await loadPopupModule({
-		salesforceState: {
-			ison: false,
-			url: "https://example.com/page",
+		openSettingsPageFn: () => {
+			counters.openSettingsCalls++;
 		},
-	});
-
-	try {
-		assertEquals(
-			fixture.locationRef.href,
-			"chrome-extension://test/action/notSalesforceSetup/notSalesforceSetup.html?url=https://example.com/page",
-		);
-	} finally {
-		fixture.cleanup();
-	}
-});
-
-Deno.test("popup omits the url query string when Salesforce setup detection returns no page url", async () => {
-	const fixture = await loadPopupModule({
-		salesforceState: {
-			ison: false,
-			url: null,
+		sendExtensionMessageFn: (message: Record<string, unknown>) => {
+			messages.push(message);
+			if (message.what === WHAT_GET_COMMANDS) {
+				return Promise.resolve([
+					{ name: CMD_IMPORT, shortcut: "Ctrl+I" },
+					{ name: CMD_EXPORT_ALL, shortcut: "Ctrl+E" },
+					{ name: CMD_OPEN_SETTINGS, shortcut: "Ctrl+S" },
+				]);
+			}
+			return Promise.resolve(undefined);
 		},
+		translationDataset: "i18n",
+		translationSeparator: "+-+",
 	});
 
-	try {
-		assertEquals(
-			fixture.locationRef.href,
-			"chrome-extension://test/action/notSalesforceSetup/notSalesforceSetup.html",
-		);
-	} finally {
-		fixture.cleanup();
-	}
+	await popupModule.runPopup();
+	await importButton.click();
+	await exportButton.click();
+	await settingsButton.click();
+	await manageTabsButton.click();
+	await tutorialButton.click();
+
+	assertEquals(messages, [
+		{
+			what: WHAT_GET_COMMANDS,
+			commands: [CMD_EXPORT_ALL, CMD_IMPORT, CMD_OPEN_SETTINGS],
+		},
+		{ what: WHAT_SHOW_IMPORT },
+		{ what: WHAT_EXPORT_CHECK },
+		{ what: CXM_MANAGE_TABS },
+		{ what: WHAT_START_TUTORIAL },
+	]);
+	assertEquals(counters.closeCalls, 4);
+	assertEquals(counters.openSettingsCalls, 1);
+	assertEquals(String(importButton.title), "popup_import,(Ctrl+I)");
+	assertEquals(String(exportButton.title), "popup_export,(Ctrl+E)");
+	assertEquals(String(settingsButton.title), "popup_settings,(Ctrl+S)");
 });
 
-Deno.test("popup wires command titles and action buttons in the normal setup flow", async () => {
-	const fixture = await loadPopupModule({
-		availableCommands: [
-			{ name: "cmd-import", shortcut: "Ctrl+I" },
-			{ name: "cmd-export-all", shortcut: "Ctrl+E" },
-			{ name: "cmd-open-settings", shortcut: "Ctrl+S" },
-			{ name: "cmd-unknown", shortcut: "Ctrl+U" },
-		],
-		salesforceState: { ison: true },
-	});
+Deno.test("popup-runtime runPopup keeps runtime redirect behavior for host and non-setup tabs", async (t) => {
+	await t.step(
+		"redirects to host permissions when setup frame patterns are blocked",
+		async () => {
+			const window = createMockWindow(
+				"https://example.test/action/popup/popup.html",
+			);
+			appendPopupButtons(window.document);
 
-	try {
-		assertEquals(fixture.counters.translatorCalls, 0);
-		assertEquals(
-			String(fixture.importButton.title),
-			"popup_import,(Ctrl+I)",
-		);
-		assertEquals(
-			String(fixture.exportButton.title),
-			"popup_export,(Ctrl+E)",
-		);
-		assertEquals(
-			String(fixture.settingsButton.title),
-			"popup_settings,(Ctrl+S)",
-		);
+			await runPopup({
+				areFramePatternsAllowedFn: () => Promise.resolve(false),
+				browser: {
+					runtime: {
+						getURL: (path: string) =>
+							`chrome-extension://test/${path}`,
+					},
+				},
+				documentRef: window.document,
+				isOnSalesforceSetupFn: () => Promise.resolve({ ison: true }),
+				locationRef: window.location as URL,
+			});
 
-		await fixture.importButton.click();
-		await fixture.exportButton.click();
-		await fixture.settingsButton.click();
-		await fixture.manageTabsButton.click();
-		await fixture.tutorialButton.click();
+			assertEquals(
+				window.location.href,
+				"chrome-extension://test/action/req_permissions/req_permissions.html?whichid=hostpermissions",
+			);
+		},
+	);
 
-		assertEquals(fixture.messages, [
-			{
-				what: "get-commands",
-				commands: ["cmd-export-all", "cmd-import", "cmd-open-settings"],
+	await t.step(
+		"redirects to non-setup popup page and preserves the source tab url",
+		async () => {
+			const window = createMockWindow(
+				"https://example.test/action/popup/popup.html",
+			);
+			appendPopupButtons(window.document);
+
+			await runPopup({
+				areFramePatternsAllowedFn: () => Promise.resolve(true),
+				browser: {
+					runtime: {
+						getURL: (path: string) =>
+							`chrome-extension://test/${path}`,
+					},
+				},
+				documentRef: window.document,
+				isOnSalesforceSetupFn: () =>
+					Promise.resolve({
+						ison: false,
+						url: "https://example.com/page",
+					}),
+				locationRef: window.location as URL,
+			});
+
+			assertEquals(
+				window.location.href,
+				"chrome-extension://test/action/notSalesforceSetup/notSalesforceSetup.html?url=https://example.com/page",
+			);
+		},
+	);
+});
+
+Deno.test("popup-runtime runPopupWithInjectedOptions bypasses runtime constants and uses explicit injected values", async () => {
+	const window = createMockWindow(
+		"https://example.test/action/popup/popup.html",
+	);
+	const document = window.document;
+	const { importButton } = appendPopupButtons(document);
+	const messages: Record<string, unknown>[] = [];
+
+	await runPopupWithInjectedOptions({
+		areFramePatternsAllowedFn: () => Promise.resolve(true),
+		browser: {
+			runtime: {
+				getURL: (path: string) => path,
 			},
-			{ what: "show-import" },
-			{ what: "export-check" },
-			{ what: "manage-tabs" },
-			{ what: "start-tutorial" },
-		]);
-		assertEquals(fixture.counters.closeCalls, 4);
-		assertEquals(fixture.counters.openSettingsCalls, 1);
-	} finally {
-		fixture.cleanup();
-	}
+		},
+		cmdExportAll: "custom-export",
+		cmdImport: "custom-import",
+		cmdOpenSettings: "custom-settings",
+		cxmManageTabs: "custom-manage-tabs",
+		documentRef: document,
+		isOnSalesforceSetupFn: () => Promise.resolve({ ison: true }),
+		locationRef: window.location as URL,
+		sendExtensionMessageFn: (message: Record<string, unknown>) => {
+			messages.push(message);
+			if (message.what === "custom-get-commands") {
+				return Promise.resolve([{
+					name: "custom-import",
+					shortcut: "I",
+				}]);
+			}
+			return Promise.resolve(undefined);
+		},
+		whatExportCheck: "custom-export-check",
+		whatGetCommands: "custom-get-commands",
+		whatShowImport: "custom-show-import",
+		whatStartTutorial: "custom-start-tutorial",
+	});
+
+	await importButton.click();
+
+	assertEquals(messages, [
+		{
+			what: "custom-get-commands",
+			commands: ["custom-export", "custom-import", "custom-settings"],
+		},
+		{ what: "custom-show-import" },
+	]);
 });

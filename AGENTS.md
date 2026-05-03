@@ -11,3 +11,5 @@ Tests do not use: --allow-env, --no-check, --quiet, unknown or any types, await 
 test command: deno task test
 use replaceAll instead of replace if possible
 use String.raw instead of double escape
+allow changes with deno task dev-firefox
+re exports are not allowed

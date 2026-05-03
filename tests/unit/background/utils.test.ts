@@ -6,8 +6,8 @@ import {
 	assertRejects,
 } from "@std/testing/asserts";
 import { waitForCondition, waitForNextTask } from "../../async.test.ts";
-import { loadIsolatedModule } from "../../load-isolated-module.test.ts";
 import { mockStorage } from "../../mocks.test.ts";
+import { createBackgroundUtilsModule } from "../../../src/background/utils-runtime.js";
 
 import {
 	bg_getCurrentBrowserTab,
@@ -34,51 +34,6 @@ type BackgroundUtilsModule = {
 	requestExportPermission: () => boolean;
 };
 
-type BackgroundUtilsDependencies = {
-	BROWSER: {
-		action: {
-			setPopup: (details: { popup: string }) => void;
-		};
-		downloads: {
-			download: (
-				details: { filename: string; url: string },
-			) => Promise<number> | number;
-			onChanged: {
-				addListener: (
-					listener: (event: { state: { current: string } }) => void,
-				) => void;
-			};
-		} | null;
-		runtime: {
-			getURL: (path: string) => string | null;
-			lastError?: Error | null;
-		};
-		tabs: {
-			query: (_params: object) => Promise<Array<{ id: number }>>;
-			sendMessage: (tabId: number, message: object) => void;
-		};
-	};
-	EXTENSION_GITHUB_LINK: string;
-	EXTENSION_NAME: string;
-	EXTENSION_VERSION: string;
-	ISCHROME: boolean;
-	ISFIREFOX: boolean;
-	NO_UPDATE_NOTIFICATION: string;
-	SETTINGS_KEY: string;
-	WHAT_EXPORT_FROM_BG: string;
-	WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP: string;
-	WHAT_UPDATE_EXTENSION: string;
-	isExportAllowed: () => boolean;
-	TabContainer: {
-		keyTabs: string;
-	};
-	bg_getSettings: (
-		_key: string,
-	) => Promise<{ date?: string; enabled?: boolean } | null>;
-	bg_getStorage: (callback: (tabs: object[]) => void) => Promise<void>;
-	bg_setStorage: (value: object[], other?: null, key?: string) => void;
-};
-
 /**
  * Loads background/utils.js with explicit browser and update-check stubs.
  *
@@ -103,7 +58,7 @@ type BackgroundUtilsDependencies = {
  *   triggerDownloadComplete: () => void;
  * }>} Loaded module and captured side effects.
  */
-async function loadBackgroundUtilsModule(
+function loadBackgroundUtilsModule(
 	{
 		extensionVersion = "1.0.0",
 		getURL = (path: string) => path,
@@ -134,111 +89,82 @@ async function loadBackgroundUtilsModule(
 	const changedListeners: Array<
 		(event: { state: { current: string } }) => void
 	> = [];
-	const modulePath = new NativeURL(
-		"../../../src/background/utils.js",
-		import.meta.url,
-	);
-	const sourceMapLineMap = (await Deno.readTextFile(modulePath))
-		.split("\n")
-		.map((_, index) => index + 1);
 	const MockURL = Object.assign(class extends NativeURL {}, {
 		createObjectURL: () => "blob:test",
 		revokeObjectURL: (url: string) => {
 			revokedUrls.push(url);
 		},
 	});
-	const { cleanup, module } = await loadIsolatedModule<
-		BackgroundUtilsModule,
-		BackgroundUtilsDependencies
-	>({
-		modulePath,
-		additionalExports: [
-			"_exportHandler",
-			"_isNewerVersion",
-			"requestExportPermission",
-		],
-		dependencies: {
-			BROWSER: {
-				action: {
-					setPopup: ({ popup }) => {
-						popups.push(popup);
-					},
+	const module = createBackgroundUtilsModule({
+		browser: {
+			action: {
+				setPopup: ({ popup }) => {
+					popups.push(popup);
 				},
-				downloads: {
-					download: (details) => {
-						downloads.push(details);
-						return Promise.resolve(1);
-					},
-					onChanged: {
-						addListener: (listener) => {
-							changedListeners.push(listener);
-						},
-					},
+			},
+			downloads: {
+				download: (details) => {
+					downloads.push(details);
+					return Promise.resolve(1);
 				},
-				runtime: {
-					getURL: getURL ?? (() => null),
-					lastError: null,
-				},
-				tabs: {
-					query: () => Promise.resolve([{ id: 7 }]),
-					sendMessage: (_tabId, message) => {
-						messages.push(message);
+				onChanged: {
+					addListener: (listener) => {
+						changedListeners.push(listener);
 					},
 				},
 			},
-			EXTENSION_GITHUB_LINK:
-				"https://github.com/acme/again-why-salesforce",
-			EXTENSION_NAME: "again-why-salesforce",
-			EXTENSION_VERSION: extensionVersion,
-			ISCHROME: isChrome,
-			ISFIREFOX: isFirefox,
-			NO_UPDATE_NOTIFICATION: "no-update",
-			SETTINGS_KEY: "settings",
-			WHAT_EXPORT_FROM_BG: "export-from-bg",
-			WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP:
-				"request-export-permission",
-			WHAT_UPDATE_EXTENSION: "update-extension",
-			isExportAllowed: () => exportAllowed,
-			TabContainer: {
-				keyTabs: "tabs",
+			runtime: {
+				getURL: getURL ?? (() => null),
+				lastError: null,
 			},
-			bg_getSettings: () => Promise.resolve(updateSetting),
-			bg_getStorage: (callback) => {
-				callback([{ url: "/one" }]);
-				return Promise.resolve();
-			},
-			bg_setStorage: (value, _other, key) => {
-				storageWrites.push({ key, value });
+			tabs: {
+				query: () => Promise.resolve([{ id: 7 }]),
+				sendMessage: (_tabId, message) => {
+					messages.push(message);
+				},
 			},
 		},
-		globals: {
-			URL: MockURL,
-			chrome: {
-				downloads: {
-					download: (details: { filename: string; url: string }) => {
-						downloads.push(details);
-						return 1;
-					},
+		extensionGithubLink: "https://github.com/acme/again-why-salesforce",
+		extensionName: "again-why-salesforce",
+		extensionVersion,
+		isChrome,
+		isFirefox,
+		noUpdateNotification: "no-update",
+		settingsKey: "settings",
+		whatExportFromBg: "export-from-bg",
+		whatRequestExportPermissionToOpenPopup: "request-export-permission",
+		whatUpdateExtension: "update-extension",
+		isExportAllowedFn: () => exportAllowed,
+		tabContainerRef: {
+			keyTabs: "tabs",
+		},
+		bgGetSettingsFn: () => Promise.resolve(updateSetting),
+		bgGetStorageFn: (callback) => {
+			callback([{ url: "/one" }]);
+			return Promise.resolve();
+		},
+		bgSetStorageFn: (value, _other, key) => {
+			storageWrites.push({ key, value });
+		},
+		chromeRef: {
+			downloads: {
+				download: (details: { filename: string; url: string }) => {
+					downloads.push(details);
 				},
 			},
-			fetch: () =>
-				Promise.resolve({
-					json: () => Promise.resolve(releases),
-					ok: responseOk,
-					status: 500,
-				}),
 		},
-		importsToReplace: new Set([
-			"/core/constants.js",
-			"/core/functions.js",
-			"/core/tabContainer.js",
-			"./storage.js",
-		]),
-		sourceMapLineMap,
+		consoleRef: console,
+		fetchFn: () =>
+			Promise.resolve({
+				json: () => Promise.resolve(releases),
+				ok: responseOk,
+				status: 500,
+			}),
+		urlCtor: MockURL,
 	});
 
 	return {
-		cleanup,
+		cleanup: () => {},
 		downloads,
 		messages,
 		module,
@@ -273,7 +199,12 @@ Deno.test("bg_getCurrentBrowserTab behavior", async (t) => {
 	}]);
 
 	await t.step("resolves with active tab (promise)", async () => {
-		const tab = await bg_getCurrentBrowserTab();
+		const tab = await bg_getCurrentBrowserTab() as {
+			active: boolean;
+			currentWindow: boolean;
+			id: number;
+			url: string;
+		};
 		assert(typeof tab.id === "number", "Tab id should be a number");
 		assert(typeof tab.url === "string", "Tab url should be a string");
 		assert(tab.active);
@@ -282,7 +213,7 @@ Deno.test("bg_getCurrentBrowserTab behavior", async (t) => {
 
 	await t.step("invokes callback with active tab", () => {
 		return new Promise<void>((resolve, reject) => {
-			bg_getCurrentBrowserTab((tab: { id: number; url: string }) => {
+			bg_getCurrentBrowserTab((tab: { id: number; url?: string }) => {
 				try {
 					assert(typeof tab.id === "number");
 					assert(typeof tab.url === "string");

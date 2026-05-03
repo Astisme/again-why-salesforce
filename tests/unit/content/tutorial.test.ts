@@ -1,4 +1,5 @@
 /// <reference lib="dom" />
+import "../../mocks.test.ts";
 import {
 	assert,
 	assertEquals,
@@ -6,16 +7,8 @@ import {
 	assertRejects,
 	assertThrows,
 } from "@std/testing/asserts";
+import { createTutorialModule } from "../../../src/salesforce/tutorial.js";
 import { installMockDom } from "../../happydom.test.ts";
-import { loadIsolatedModule } from "../../load-isolated-module.test.ts";
-
-/**
- * Filesystem path to the tutorial module under test.
- */
-const TUTORIAL_PATH = new URL(
-	"../../../src/salesforce/tutorial.js",
-	import.meta.url,
-);
 /**
  * Baseline Salesforce Setup URL used to initialize the DOM harness.
  */
@@ -245,12 +238,12 @@ type TutorialModule = {
 };
 
 /**
- * Loads the real tutorial module after replacing its imports with injected test doubles.
+ * Builds the tutorial runtime with injected test doubles.
  *
- * @param deps Dependency bundle exposed through `globalThis`.
- * @return Loaded tutorial module plus isolated-module cleanup hooks.
+ * @param {TutorialDeps} deps Dependency bundle exposed through `globalThis`.
+ * @return {{ cleanup: () => void; module: TutorialModule; }} Runtime module and cleanup hook.
  */
-async function loadTutorialModule(deps: TutorialDeps) {
+function loadTutorialModule(deps: TutorialDeps) {
 	const flattenedDeps = {
 		...deps.constants,
 		...deps.functions,
@@ -265,27 +258,13 @@ async function loadTutorialModule(deps: TutorialDeps) {
 		ensureTranslatorAvailability: deps.ensureTranslatorAvailability,
 		getTranslations: deps.getTranslations,
 	};
-	return await loadIsolatedModule<
-		TutorialModule,
-		typeof flattenedDeps
-	>({
-		modulePath: TUTORIAL_PATH,
-		additionalExports: ["Tutorial"],
-		dependencies: flattenedDeps,
-		importsToReplace: new Set([
-			"/core/constants.js",
-			"/core/functions.js",
-			"/core/translator.js",
-			"/core/tab.js",
-			"./content.js",
-			"./favourite-manager.js",
-			"./generator.js",
-			"/core/tabContainer.js",
-			"./manageTabs.js",
-			"./sf-elements.js",
-			"./toast.js",
-		]),
-	});
+	const tutorialModule = createTutorialModule(
+		flattenedDeps,
+	) as unknown as TutorialModule;
+	return {
+		cleanup: () => {},
+		module: tutorialModule,
+	};
 }
 
 /**
@@ -834,8 +813,8 @@ function createHarness(options: {
 		translator,
 		createManageTabsModal,
 		dispatchTutorialEvent,
-		async load() {
-			const loadedModule = await loadTutorialModule(deps);
+		load() {
+			const loadedModule = loadTutorialModule(deps);
 			moduleCleanup = loadedModule.cleanup;
 			return loadedModule.module;
 		},
@@ -1762,13 +1741,19 @@ Deno.test(
 				true,
 			);
 
-			tutorialModule.Tutorial.prototype.initSteps = () =>
-				Promise.resolve(false);
-			await assertRejects(
-				() => tutorialModule.checkTutorial(),
-				Error,
-				"error_tutorial_not_initialized",
-			);
+			const originalInitSteps =
+				tutorialModule.Tutorial.prototype.initSteps;
+			try {
+				tutorialModule.Tutorial.prototype.initSteps = () =>
+					Promise.resolve(false);
+				await assertRejects(
+					() => tutorialModule.checkTutorial(),
+					Error,
+					"error_tutorial_not_initialized",
+				);
+			} finally {
+				tutorialModule.Tutorial.prototype.initSteps = originalInitSteps;
+			}
 		} finally {
 			console.error = originalConsoleError;
 			await flush();

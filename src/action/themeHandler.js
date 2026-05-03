@@ -1,102 +1,93 @@
 import { WHAT_THEME } from "../core/constants.js";
 import { sendExtensionMessage } from "../core/functions.js";
-const html = document.documentElement;
-let systemColorListener = null;
+import { createThemeHandlerRuntime } from "./themeHandler-runtime.js";
+
+const fallbackDocumentRef = {
+	documentElement: {
+		dataset: {},
+	},
+};
+const fallbackStorageRef = {
+	getItem() {
+		return null;
+	},
+	setItem() {},
+};
 
 /**
- * Updates the theme and applies the changes to the HTML document.
+ * Creates the theme-handler module with dependency overrides.
  *
- * @param {string} theme - The theme to be applied.
- * @param {boolean} [updateUserTheme=false] - A flag to determine if the user theme should be updated in localStorage.
- * @return {Promise<void>} Promise resolved when the theme update has been applied.
+ * @param {Object} [overrides={}] Dependency overrides used by tests/runtime.
+ * @param {Document} [overrides.documentRef=document] Document reference.
+ * @param {Storage} [overrides.localStorageRef=localStorage] Storage reference.
+ * @param {(query: string) => MediaQueryList | undefined} [overrides.matchMediaFn=globalThis.matchMedia?.bind(globalThis)] Media-query factory.
+ * @param {(message: { what: string; theme: string }) => unknown} [overrides.sendExtensionMessageFn=sendExtensionMessage] Message sender.
+ * @param {string} [overrides.whatTheme=WHAT_THEME] Theme message key.
+ * @return {{
+ *   handleSwitchColorTheme: () => Promise<unknown> | unknown;
+ *   initTheme: () => Promise<void> | void;
+ *   initThemePromise: Promise<void>;
+ *   systemColorSchemeListener: (enable?: boolean) => Promise<void> | void;
+ * }} Theme-handler module API.
  */
-function messageAndUpdateTheme(theme, updateUserTheme = false) {
-	html.dataset.theme = theme;
-	localStorage.setItem("usingTheme", theme);
-	if (updateUserTheme) {
-		html.dataset.usertheme = theme;
-		localStorage.setItem("userTheme", theme);
-	}
-	return sendExtensionMessage({ what: WHAT_THEME, theme });
+export function createThemeHandlerModule({
+	documentRef = globalThis.document ?? fallbackDocumentRef,
+	localStorageRef = globalThis.localStorage ?? fallbackStorageRef,
+	matchMediaFn = globalThis.matchMedia?.bind(globalThis),
+	sendExtensionMessageFn = sendExtensionMessage,
+	whatTheme = WHAT_THEME,
+} = {}) {
+	const themeHandlerRuntime = createThemeHandlerRuntime({
+		documentRef,
+		localStorageRef,
+		matchMediaFn,
+		sendExtensionMessageFn,
+		whatTheme,
+	});
+	return {
+		systemColorSchemeListener(enable = true) {
+			return themeHandlerRuntime.systemColorSchemeListener(enable);
+		},
+		handleSwitchColorTheme() {
+			return themeHandlerRuntime.handleSwitchColorTheme();
+		},
+		initTheme() {
+			return themeHandlerRuntime.initTheme();
+		},
+		initThemePromise: Promise.resolve(themeHandlerRuntime.initTheme()),
+	};
 }
 
-/**
- * Handles the system color scheme change event and updates the theme accordingly.
- *
- * @param {MediaQueryListEvent} e - The event triggered when the system color scheme changes.
- * @return {Promise<void>} Promise resolved when the theme update (if needed) has been applied.
- * @async
- */
-function handleSystemColorSchemeChange(e) {
-	// check if theme has to be changed
-	const systemThemeValue = e.matches ? "dark" : "light";
-	const htmlThemeValue = html.dataset.theme;
-	if (systemThemeValue !== htmlThemeValue) {
-		return messageAndUpdateTheme(systemThemeValue);
-	}
-}
+const themeHandlerModule = createThemeHandlerModule();
 
 /**
  * Enables or disables the listener for system color scheme changes, and updates the theme based on system preferences.
  *
- * @param {boolean} enable - A flag to enable or disable the system color scheme listener.
- * @return {Promise<void>} Promise resolved when listener and initial update logic are completed.
- * @async
+ * @param {boolean} [enable=true] A flag to enable or disable the system color scheme listener.
+ * @return {Promise<void> | void} Promise resolved when listener and initial update logic are completed.
  */
 export function systemColorSchemeListener(enable = true) {
-	if (
-		globalThis.matchMedia == null ||
-		(enable && systemColorListener != null) ||
-		(!enable && systemColorListener == null)
-	) {
-		return;
-	}
-
-	localStorage.setItem("userTheme", "system");
-	if (enable) {
-		// If enabling, add the systemColorListener
-		systemColorListener = globalThis.matchMedia(
-			"(prefers-color-scheme: dark)",
-		);
-		systemColorListener.addEventListener(
-			"change",
-			handleSystemColorSchemeChange,
-		);
-		// Initial check for the current color scheme
-		return handleSystemColorSchemeChange(systemColorListener);
-	} else {
-		// If disabling, remove the systemColorListener
-		systemColorListener.removeEventListener(
-			"change",
-			handleSystemColorSchemeChange,
-		);
-		systemColorListener = null;
-	}
+	return themeHandlerModule.systemColorSchemeListener(enable);
 }
 
 /**
  * Switches between light and dark themes, and updates the user theme in localStorage.
- * @return {Promise<void>} Promise resolved when the theme switch has been applied.
+ *
+ * @return {Promise<unknown> | unknown} Promise resolved when the theme switch has been applied.
  */
 export function handleSwitchColorTheme() {
-	const newTheme = html.dataset.theme === "light" ? "dark" : "light";
-	return messageAndUpdateTheme(newTheme, true);
+	return themeHandlerModule.handleSwitchColorTheme();
 }
 
 /**
  * Initializes the theme by checking the user preference stored in localStorage and applying the correct theme.
  * Also listens for system color scheme changes if necessary.
- * @return {Promise<void>} Promise resolved when initialization has completed.
- * @async
+ *
+ * @return {Promise<void> | void} Promise resolved when initialization has completed.
  */
 export function initTheme() {
-	html.dataset.usertheme = localStorage.getItem("userTheme") ?? "system";
-	html.dataset.theme = html.dataset.usertheme === "system"
-		? null
-		: html.dataset.usertheme;
-	// call other function to match system theme
-	return systemColorSchemeListener(html.dataset.usertheme === "system");
+	return themeHandlerModule.initTheme();
 }
 
 // exported for tests
-export const initThemePromise = await initTheme();
+export const initThemePromise = await themeHandlerModule.initThemePromise;
