@@ -1,9 +1,10 @@
+import "../../mocks.test.ts";
 import {
 	assertEquals,
 	assertRejects,
 	assertThrows,
 } from "@std/testing/asserts";
-import { loadIsolatedModule } from "../../load-isolated-module.test.ts";
+import { createManageTabsModule } from "../../../src/salesforce/manageTabs.js";
 
 type ManageTabsModule = {
 	__getState: () => {
@@ -703,9 +704,9 @@ function createEvent(
 /**
  * Loads manageTabs.js with lightweight dependencies.
  *
- * @return {Promise<ManageTabsFixture>} Loaded module fixture.
+ * @return {ManageTabsFixture} Loaded module fixture.
  */
-async function loadManageTabs() {
+function loadManageTabs() {
 	const allTabs: ManageAllTabs = {
 		exists: () => false,
 		pinnedTabsNo: 0,
@@ -754,195 +755,197 @@ async function loadManageTabs() {
 		return Promise.resolve(replacedTabsResult.value);
 	};
 
-	const { cleanup, module } = await loadIsolatedModule<
-		ManageTabsModule,
-		ManageTabsDependencies
-	>({
-		modulePath: new URL(
-			"../../../src/salesforce/manageTabs.js",
-			import.meta.url,
-		),
-		additionalExports: [
-			"addTr",
-			"__getState",
-			"__setState",
-			"checkAddDuplicateStyle",
-			"checkAddRemoveLastTr",
-			"checkDuplicates",
-			"checkOpenAskConfirm",
-			"checkRemoveTr",
-			"closeDropdownOnBtnClick",
-			"closeDropdownOnTrClick",
-			"getLastTr",
-			"moveTrToGivenIndex",
-			"performAfterChecks",
-			"readManagedTabsAndSave",
-			"reduceLoggersToElements",
-			"removeTr",
-			"reorderTabsTable",
-			"setInfoForDrag",
-			"trInputListener",
-			"updateLoggerIndex",
-			"updateTabAttributes",
-		],
-		extraSource: `
-function __setState(state = {}) {
-	if (state.focusedIndex !== undefined) focusedIndex = state.focusedIndex;
-	if (state.deleteAllButton !== undefined) deleteAllButton = state.deleteAllButton;
-	if (state.closeButton !== undefined) closeButton = state.closeButton;
-	if (state.manageInvalidateSort !== undefined) manage_InvalidateSort = state.manageInvalidateSort;
-	if (state.wasSomethingUpdated !== undefined) wasSomethingUpdated = state.wasSomethingUpdated;
-	if (state.managedLoggers !== undefined) {
-		managedLoggers.length = 0;
-		managedLoggers.push(...state.managedLoggers);
-	}
-	if (state.actionButtons !== undefined) {
-		actionButtons.length = 0;
-		actionButtons.push(...state.actionButtons);
-	}
-	if (state.dropdownMenus !== undefined) {
-		dropdownMenus.length = 0;
-		dropdownMenus.push(...state.dropdownMenus);
-	}
-	if (state.trsAndButtons !== undefined) {
-		trsAndButtons.length = 0;
-		trsAndButtons.push(...state.trsAndButtons);
-	}
-	if (state.manageTabsButtons !== undefined) {
-		for (const key of Object.keys(manageTabsButtons)) delete manageTabsButtons[key];
-		Object.assign(manageTabsButtons, state.manageTabsButtons);
-	}
-}
-function __getState() {
-	return {
-		actionButtons,
-		dropdownMenus,
-		focusedIndex,
-		managedLoggers,
-		manageInvalidateSort: manage_InvalidateSort,
-		manageTabsButtons,
-		trsAndButtons,
-		wasSomethingUpdated,
-	};
-}`,
-		dependencies: {
-			CXM_PIN_TAB: "pin",
-			CXM_REMOVE_TAB: "remove",
-			CXM_UNPIN_TAB: "unpin",
-			HIDDEN_CLASS: "hidden",
-			MODAL_ID: "modal",
-			PIN_TAB_CLASS: "pin-tab",
-			TOAST_ERROR: "error",
-			TOAST_WARNING: "warning",
-			Tab: {
-				create: (tab) => tab,
-				expandURL: (url, href, org) => `${href}::${url}::${org ?? ""}`,
-				extractOrgName: (url) => url,
-				minifyURL: (url) => `min:${url}`,
-			},
-			TabContainer: {
-				keyPinnedTabsNo: "pinnedTabsNo",
-			},
-			TUTORIAL_EVENT_CLOSE_MANAGE_TABS: "close-manage-tabs",
-			TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL: "create-manage-tabs",
-			TUTORIAL_EVENT_REORDERED_TABS_TABLE: "reordered-tabs-table",
-			confirm: () => confirmResult.value,
-			createManageTabRow: (...args) =>
-				createManageTabRowResult.current(...args),
-			ensureAllTabsAvailability: (options) => {
-				ensureAllTabsCalls.push(options);
-				return Promise.resolve(allTabs);
-			},
-			ensureTranslatorAvailability: () =>
-				Promise.resolve({
-					translate: () => Promise.resolve("translated"),
-				}),
-			getTranslations: (key) =>
-				Promise.resolve(
-					Array.isArray(key)
-						? key.map(() => "translated")
-						: "translated",
-				),
-			generateManageTabsModal: (tabs) =>
-				generateManageTabsModalResult.current(tabs),
-			getCurrentHref: () => currentHref.value,
-			getInnerElementFieldBySelector: (
-				{ field, parentElement, selector },
-			) => (parentElement.querySelector(selector) as
-				| Record<string, unknown>
-				| null)?.[field] ?? null,
-			getModalHanger: () => hanger,
-			handleLightningLinkClick: () => {
-				lightningClicks.value++;
-			},
-			injectStyle: () => new ManageElement("style"),
-			makeDuplicatesBold: (url) => {
-				duplicateUrls.push(url);
-			},
-			reorderTabsUl: () => {
-				reorderTabsUlCalls.value++;
-			},
-			setupDragForTable: (callback) => {
-				setupDragForTableCallbacks.push(callback);
-			},
-			setupDragForUl: () => {
-				setupDragForUlCalls.value++;
-			},
-			sf_afterSet: (payload) => {
-				sfAfterSetCalls.push(payload);
-			},
-			showToast: (message, status) => {
-				toasts.push({ message, status });
-			},
-			updateModalBodyOverflow: (article) => {
-				updateModalBodyOverflowCalls.push(article ?? null);
-				if (article == null) {
-					throw new Error("error_required_params");
-				}
-			},
-		},
-		globals: {
-			CustomEvent: class {
-				type: string;
+	const hadBrowser = "browser" in globalThis;
+	const originalBrowser = (globalThis as { browser?: unknown }).browser;
+	const hadDocument = "document" in globalThis;
+	const originalDocument = (globalThis as { document?: unknown }).document;
+	const hadConfirm = "confirm" in globalThis;
+	const originalConfirm = (globalThis as { confirm?: unknown }).confirm;
+	const hadTimeout = "setTimeout" in globalThis;
+	const originalSetTimeout =
+		(globalThis as { setTimeout?: unknown }).setTimeout;
+	const hadCustomEvent = "CustomEvent" in globalThis;
+	const originalCustomEvent =
+		(globalThis as { CustomEvent?: unknown }).CustomEvent;
 
-				/**
-				 * Stores the event type.
-				 *
-				 * @param {string} type Event type.
-				 */
-				constructor(type: string) {
-					this.type = type;
-				}
+	Object.defineProperty(globalThis, "browser", {
+		configurable: true,
+		value: {
+			i18n: {
+				getMessage: (key: string) => key,
 			},
-			confirm: () => confirmResult.value,
-			document: {
-				dispatchEvent: (event: { type: string }) => {
-					documentEvents.push(event.type);
-					return true;
-				},
-				getElementById: () => documentById.current,
-				querySelector: () => documentQuery.current,
-			},
-			setTimeout: (callback: () => void, delay: number) => {
-				timeouts.push(callback);
-				timeoutWaits.push(delay);
-				return timeouts.length;
+			runtime: {
+				getManifest: () => ({
+					homepage_url: "https://github.com/example/repo",
+					optional_host_permissions: [],
+					version: "1.0.0",
+				}),
+				getURL: (path: string) => path,
+				sendMessage: () => undefined,
 			},
 		},
-		importsToReplace: new Set([
-			"/core/constants.js",
-			"/core/functions.js",
-			"/core/tab.js",
-			"/core/tabContainer.js",
-			"/core/translator.js",
-			"./dragHandler.js",
-			"./generator.js",
-			"./content.js",
-			"./toast.js",
-			"./sf-elements.js",
-			"./modal-layout.js",
-		]),
+		writable: true,
 	});
+	const mockDocument = {
+		dispatchEvent: (event: { type: string }) => {
+			documentEvents.push(event.type);
+			return true;
+		},
+		getElementById: () => documentById.current,
+		querySelector: () => documentQuery.current,
+	};
+	Object.defineProperty(globalThis, "document", {
+		configurable: true,
+		value: mockDocument,
+		writable: true,
+	});
+	const module = createManageTabsModule({
+		CXM_PIN_TAB: "pin",
+		CXM_REMOVE_TAB: "remove",
+		CXM_UNPIN_TAB: "unpin",
+		HIDDEN_CLASS: "hidden",
+		MODAL_ID: "modal",
+		PIN_TAB_CLASS: "pin-tab",
+		TOAST_ERROR: "error",
+		TOAST_WARNING: "warning",
+		Tab: {
+			create: (tab: Record<string, unknown>) => tab,
+			expandURL: (url: string, href: string, org?: string | null) =>
+				`${href}::${url}::${org ?? ""}`,
+			extractOrgName: (url: string) => url,
+			minifyURL: (url: string) => `min:${url}`,
+		},
+		TabContainer: {
+			keyPinnedTabsNo: "pinnedTabsNo",
+		},
+		TUTORIAL_EVENT_CLOSE_MANAGE_TABS: "close-manage-tabs",
+		TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL: "create-manage-tabs",
+		TUTORIAL_EVENT_REORDERED_TABS_TABLE: "reordered-tabs-table",
+		confirm: () => confirmResult.value,
+		createManageTabRow: (
+			tab?: Record<string, unknown>,
+			options?: { index?: number },
+		) => createManageTabRowResult.current(tab, options),
+		ensureAllTabsAvailability: (options: Record<string, unknown>) => {
+			ensureAllTabsCalls.push(options);
+			return Promise.resolve(allTabs);
+		},
+		getTranslations: (key: string | string[]) =>
+			Promise.resolve(
+				Array.isArray(key) ? key.map(() => "translated") : "translated",
+			),
+		generateManageTabsModal: (tabs: ManageAllTabs) =>
+			generateManageTabsModalResult.current(tabs),
+		getCurrentHref: () => currentHref.value,
+		getInnerElementFieldBySelector: (
+			{ field, parentElement, selector }: {
+				field: string;
+				parentElement: ManageElement;
+				selector: string;
+			},
+		) => (parentElement.querySelector(selector) as
+			| Record<string, unknown>
+			| null)?.[field] ?? null,
+		getModalHanger: () => hanger,
+		handleLightningLinkClick: () => {
+			lightningClicks.value++;
+		},
+		injectStyle: () => new ManageElement("style"),
+		makeDuplicatesBold: (url: string) => {
+			duplicateUrls.push(url);
+		},
+		reorderTabsUl: () => {
+			reorderTabsUlCalls.value++;
+		},
+		setupDragForTable: (
+			callback: (
+				options?: { fromIndex?: number; toIndex?: number },
+			) => void,
+		) => {
+			setupDragForTableCallbacks.push(callback);
+		},
+		setupDragForUl: () => {
+			setupDragForUlCalls.value++;
+		},
+		sf_afterSet: (payload: unknown) => {
+			sfAfterSetCalls.push(payload);
+		},
+		showToast: (message: string, status?: string) => {
+			toasts.push({ message, status });
+		},
+		updateModalBodyOverflow: (article: ManageElement | null) => {
+			updateModalBodyOverflowCalls.push(article ?? null);
+			if (article == null) {
+				throw new Error("error_required_params");
+			}
+		},
+		CustomEvent: class {
+			type: string;
+
+			/**
+			 * Stores the event type.
+			 *
+			 * @param {string} type Event type.
+			 */
+			constructor(type: string) {
+				this.type = type;
+			}
+		},
+		document: mockDocument,
+		setTimeout: (callback: () => void, delay: number) => {
+			timeouts.push(callback);
+			timeoutWaits.push(delay);
+			return timeouts.length;
+		},
+	}) as unknown as ManageTabsModule;
+
+	const cleanup = () => {
+		if (hadBrowser) {
+			Object.defineProperty(globalThis, "browser", {
+				configurable: true,
+				value: originalBrowser,
+				writable: true,
+			});
+		} else {
+			delete (globalThis as { browser?: unknown }).browser;
+		}
+		if (hadDocument) {
+			Object.defineProperty(globalThis, "document", {
+				configurable: true,
+				value: originalDocument,
+				writable: true,
+			});
+		} else {
+			delete (globalThis as { document?: unknown }).document;
+		}
+		if (hadConfirm) {
+			Object.defineProperty(globalThis, "confirm", {
+				configurable: true,
+				value: originalConfirm,
+				writable: true,
+			});
+		} else {
+			delete (globalThis as { confirm?: unknown }).confirm;
+		}
+		if (hadTimeout) {
+			Object.defineProperty(globalThis, "setTimeout", {
+				configurable: true,
+				value: originalSetTimeout,
+				writable: true,
+			});
+		} else {
+			delete (globalThis as { setTimeout?: unknown }).setTimeout;
+		}
+		if (hadCustomEvent) {
+			Object.defineProperty(globalThis, "CustomEvent", {
+				configurable: true,
+				value: originalCustomEvent,
+				writable: true,
+			});
+		} else {
+			delete (globalThis as { CustomEvent?: unknown }).CustomEvent;
+		}
+	};
 
 	return {
 		allTabs,

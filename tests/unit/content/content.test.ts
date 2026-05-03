@@ -11,10 +11,6 @@ import {
 import { installMockDom } from "../../happydom.test.ts";
 
 const EXTENSION_NAME = "again-why-salesforce";
-const CONTENT_PATH = new URL(
-	"../../../src/salesforce/content.js",
-	import.meta.url,
-);
 
 /**
  * Creates a button whose dispatch can await async listeners during tests.
@@ -146,344 +142,37 @@ type ContentDeps = {
 	};
 };
 
-/**
- * Replaces an import statement with the same number of newlines to preserve line numbers.
- *
- * @param {string} source Source code containing imports.
- * @param {string} fileName Import specifier to blank out.
- * @return {string} Source code with the import replaced by blank lines.
- */
-function blankImport(source: string, fileName: string) {
-	return source.replace(
-		new RegExp(
-			String.raw`import[\s\S]*?from\s*"${
-				fileName.replaceAll("/", "\\/")
-			}";\n`,
-		),
-		(match) => "\n".repeat(match.split("\n").length - 1),
-	);
-}
-
-/**
- * Encodes one signed integer using base64-VLQ for source-map generation.
- *
- * @param {number} value Integer to encode.
- * @return {string} Encoded VLQ segment.
- */
-function encodeVlqValue(value: number) {
-	const alphabet =
-		"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-	let encoded = "";
-	let vlq = value < 0 ? ((-value) << 1) + 1 : value << 1;
-	do {
-		let digit = vlq & 31;
-		vlq >>>= 5;
-		if (vlq > 0) {
-			digit |= 32;
-		}
-		encoded += alphabet[digit];
-	} while (vlq > 0);
-	return encoded;
-}
-
-/**
- * Builds a simple per-line source map from generated code back to the original file.
- *
- * @param {Object} options Mapping options.
- * @param {number[]} options.originalLines 1-based original line numbers for each generated line.
- * @param {string} options.sourceUrl Absolute source URL for the original file.
- * @return {string} Base64-encoded JSON source-map payload.
- */
-function buildInlineSourceMap({
-	originalLines,
-	sourceUrl,
-}: {
-	originalLines: number[];
-	sourceUrl: string;
-}) {
-	let previousSource = 0;
-	let previousOriginalLine = 0;
-	let previousOriginalColumn = 0;
-	const mappings = originalLines.map((lineNumber) => {
-		if (lineNumber < 1) {
-			return "";
-		}
-		const segment = [
-			encodeVlqValue(0),
-			encodeVlqValue(0 - previousSource),
-			encodeVlqValue((lineNumber - 1) - previousOriginalLine),
-			encodeVlqValue(0 - previousOriginalColumn),
-		].join("");
-		previousSource = 0;
-		previousOriginalLine = lineNumber - 1;
-		previousOriginalColumn = 0;
-		return segment;
-	}).join(";");
-	const sourceMap = {
-		version: 3,
-		file: CONTENT_PATH.href,
-		sources: [sourceUrl],
-		names: [],
-		mappings,
-	};
-	return btoa(JSON.stringify(sourceMap));
-}
-
 async function loadContentModule(deps: ContentDeps) {
-	let source = await Deno.readTextFile(CONTENT_PATH);
-	for (
-		const fileName of [
-			"/core/constants.js",
-			"/core/functions.js",
-			"/core/translator.js",
-			"/core/tab.js",
-			"/core/tabContainer.js",
-			"./dragHandler.js",
-			"./favourite-manager.js",
-			"./generator.js",
-			"./import.js",
-			"./export.js",
-			"./manageTabs.js",
-			"./openOtherOrg.js",
-			"./sf-elements.js",
-			"./toast.js",
-			"./tutorial.js",
-			"./once-a-day.js",
-		]
-	) {
-		source = blankImport(source, fileName);
-	}
-	source = source
-		.replace(
-			"reloadTabs(tabs);",
-			"__trackContentTask(reloadTabs(tabs));",
-		)
-		.replace(
-			"if (isCurrentlyOnSavedTab || wasOnSavedTab) reloadTabs();",
-			"if (isCurrentlyOnSavedTab || wasOnSavedTab) __trackContentTask(reloadTabs());",
-		)
-		.replace(
-			"reloadTabs();\n\tcheckTutorial();",
-			"__trackContentTask(reloadTabs());\n\tcheckTutorial();",
-		)
-		.replace(
-			"ensureAllTabsAvailability();",
-			"__trackContentTask(Promise.resolve(ensureAllTabsAvailability()));",
-		)
-		.replace(
-			"checkAddLightningNavigation();",
-			"__trackContentTask(checkAddLightningNavigation());",
-		)
-		.replace(
-			"delayLoadSetupTabs();",
-			"__trackContentTask(delayLoadSetupTabs());",
-		)
-		.replace(
-			"\t\t(async () => {",
-			"\t\t__trackContentTask((async () => {",
-		)
-		.replace(
-			"\t\t})();\n\t\treturn;",
-			"\t\t})());\n\t\treturn;",
-		)
-		.replace(
-			"isOnSavedTab(true, _afterHrefUpdate);",
-			"__trackContentTask(isOnSavedTab(true, _afterHrefUpdate));",
-		)
-		.replace(
-			"void init(tabs, startReloadSignal());",
-			"return init(tabs, startReloadSignal());",
-		)
-		.replace(
-			"createImportModal();",
-			"__trackContentTask(createImportModal());",
-		)
-		.replace(
-			"createManageTabsModal();",
-			"__trackContentTask(createManageTabsModal());",
-		)
-		.replace(
-			"createExportModal();",
-			"__trackContentTask(createExportModal());",
-		)
-		.replace(
-			"createOpenOtherOrgModal(messageTab);",
-			"__trackContentTask(createOpenOtherOrgModal(messageTab));",
-		)
-		.replace(
-			"showModalUpdateTab(messageTab);",
-			"__trackContentTask(showModalUpdateTab(messageTab));",
-		)
-		.replace(
-			"promptUpdateExtension(message);",
-			"__trackContentTask(promptUpdateExtension(message));",
-		);
-	const prelude = `
-const __deps = globalThis.__contentTestDeps;
-const __trackContentTask = globalThis.__trackContentTask ?? ((task) => task);
-const {
-	ALL_TOAST_TYPES,
-	BROWSER,
-	CXM_EMPTY_GENERIC_TABS,
-	CXM_EMPTY_TABS,
-	CXM_EMPTY_VISIBLE_TABS,
-	CXM_MANAGE_TABS,
-	CXM_MOVE_FIRST,
-	CXM_MOVE_LAST,
-	CXM_MOVE_LEFT,
-	CXM_MOVE_RIGHT,
-	CXM_PIN_TAB,
-	CXM_REMOVE_LEFT_TABS,
-	CXM_REMOVE_OTHER_TABS,
-	CXM_REMOVE_PIN_TABS,
-	CXM_REMOVE_RIGHT_TABS,
-	CXM_REMOVE_TAB,
-	CXM_REMOVE_UNPIN_TABS,
-	CXM_RESET_DEFAULT_TABS,
-	CXM_SORT_CLICK_COUNT,
-	CXM_SORT_CLICK_DATE,
-	CXM_SORT_LABEL,
-	CXM_SORT_ORG,
-	CXM_SORT_URL,
-	CXM_TMP_HIDE_NON_ORG,
-	CXM_TMP_HIDE_ORG,
-	CXM_UNPIN_TAB,
-	EXTENSION_NAME,
-	HAS_ORG_TAB,
-	HTTPS,
-	LIGHTNING_FORCE_COM,
-	LINK_NEW_BROWSER,
-	SALESFORCE_URL_PATTERN,
-	SETUP_LIGHTNING,
-	TAB_ON_LEFT,
-	TOAST_ERROR,
-	TOAST_INFO,
-	TOAST_SUCCESS,
-	TOAST_WARNING,
-	TUTORIAL_EVENT_PIN_TAB,
-	USE_LIGHTNING_NAVIGATION,
-	WHAT_ACTIVATE,
-	WHAT_ADD,
-	WHAT_EXPORT_FROM_BG,
-	WHAT_FOCUS_CHANGED,
-	WHAT_HIGHLIGHTED,
-	WHAT_INSTALLED,
-	WHAT_PAGE_REMOVE_TAB,
-	WHAT_PAGE_SAVE_TAB,
-	WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
-	WHAT_SAVED,
-	WHAT_SHOW_EXPORT_MODAL,
-	WHAT_SHOW_IMPORT,
-	WHAT_SHOW_OPEN_OTHER_ORG,
-	WHAT_START_TUTORIAL,
-	WHAT_STARTUP,
-	WHAT_THEME,
-	WHAT_TOGGLE_ORG,
-	WHAT_UPDATE_EXTENSION,
-	WHAT_UPDATE_TAB,
-} = __deps.constants;
-const {
-	calculateReadingTime,
-	getInnerElementFieldBySelector,
-	getSettings,
-} = __deps.functions;
-const ensureTranslatorAvailability = __deps.ensureTranslatorAvailability;
-const getTranslations = __deps.getTranslations;
-const Tab = __deps.Tab;
-const { ensureAllTabsAvailability } = __deps.tabContainer;
-const { setupDragForUl } = __deps.dragHandler;
-const { pageActionTab, showFavouriteButton } = __deps.favouriteManager;
-const {
-	generateRowTemplate,
-	generateSldsToastMessage,
-	generateStyleFromSettings,
-	generateUpdateTabModal,
-	MODAL_ID,
-} = __deps.generator;
-const { createImportModal } = __deps.importModule;
-const { createExportModal } = __deps.exportModule;
-const { createManageTabsModal } = __deps.manageTabs;
-const { createOpenOtherOrgModal } = __deps.openOtherOrg;
-const { getCurrentHref, getModalHanger, getSetupTabUl, } = __deps.sfElements;
-let setupTabUl = getSetupTabUl();
-const findSetupTabUlInSalesforcePage = () => {
-	const found = __deps.sfElements.findSetupTabUlInSalesforcePage();
-	setupTabUl = getSetupTabUl();
-	return found;
-};
-const { showToast } = __deps.toast;
-const showModalOpenOtherOrg = createOpenOtherOrgModal;
-const { checkTutorial } = __deps.tutorial;
-const { executeOncePerDay } = __deps.onceADay;
-`;
-	const sourceLines = source.split("\n");
-	const preludeLines = prelude.split("\n");
-	const hookLines = [
-		"export const __testHooks = {",
-		"\t_afterHrefUpdate,",
-		"\tcheckAddLightningNavigation,",
-		"\tcheckKeepTabsOnLeft,",
-		"\tdelayLoadSetupTabs,",
-		"\tgetModalHanger,",
-		"\tgetSetupTabUl,",
-		"\thideTabs,",
-		"\tinit,",
-		"\tlaunchDownload,",
-		"\tmain,",
-		"\tonHrefUpdate,",
-		"\tpromptUpdateExtension,",
-		"\treloadTabs,",
-		"\tshowModalOpenOtherOrg,",
-		"\tshowModalUpdateTab,",
-		"\tshowToast,",
-		"\ttoggleOrg,",
-		"\tgetCurrentHref,",
-		"};",
-		"export { getCurrentHref, getModalHanger, getSetupTabUl, showToast };",
-	];
-	const strictModeLineIndex = sourceLines.findIndex((line) =>
-		line.trim() === '"use strict";'
-	);
-	if (strictModeLineIndex < 0) {
-		throw new Error("error_missing_use_strict");
-	}
-	const preludeInsertLineIndex = strictModeLineIndex + 1;
-	const generatedLines = [
-		...sourceLines.slice(0, preludeInsertLineIndex),
-		...preludeLines,
-		...sourceLines.slice(preludeInsertLineIndex),
-		...hookLines,
-	];
-	const originalLines = [
-		...sourceLines.slice(0, preludeInsertLineIndex).map((_, index) =>
-			index + 1
-		),
-		...preludeLines.map(() => 0),
-		...sourceLines.slice(preludeInsertLineIndex).map((_, index) =>
-			preludeInsertLineIndex + index + 1
-		),
-		...hookLines.map(() => 0),
-	];
-	const inlineSourceMap = buildInlineSourceMap({
-		originalLines,
-		sourceUrl: CONTENT_PATH.href,
+	const browserRuntime = deps.constants.BROWSER ?? {};
+	browserRuntime.i18n ??= {
+		getMessage: (key: string) => key,
+	};
+	browserRuntime.runtime ??= {};
+	browserRuntime.runtime.getManifest ??= () => ({
+		homepage_url: "https://github.com/againwhy/awsf",
+		optional_host_permissions: [],
+		version: "0.0.0-test",
 	});
-	const moduleUrl = URL.createObjectURL(
-		new Blob([`${generatedLines.join("\n")}
-//# sourceMappingURL=data:application/json;base64,${inlineSourceMap}
-//# sourceURL=${CONTENT_PATH.href}
-`], { type: "text/javascript" }),
-	);
+	browserRuntime.runtime.sendMessage ??= (
+		_message: Record<string, unknown>,
+		callback?: (payload?: unknown) => void,
+	) => {
+		callback?.(null);
+		return Promise.resolve(null);
+	};
+	setGlobal("browser", browserRuntime);
+	setGlobal("chrome", browserRuntime);
+	setGlobal("__AWSF_SKIP_CONTENT_AUTO_BOOTSTRAP__", true);
 	try {
-		(globalThis as typeof globalThis & {
-			__contentTestDeps?: ContentDeps;
-		}).__contentTestDeps = deps;
-		return await import(`${moduleUrl}#${crypto.randomUUID()}`);
+		const contentModule = await import(
+			"../../../src/salesforce/runtime/content-runtime.js"
+		);
+		const content = contentModule.createContentModule(deps);
+		content.bootstrapIfNeeded();
+		return content;
 	} finally {
-		delete (globalThis as typeof globalThis & {
-			__contentTestDeps?: ContentDeps;
-		}).__contentTestDeps;
-		URL.revokeObjectURL(moduleUrl);
+		delete (globalThis as Record<string, unknown>)
+			.__AWSF_SKIP_CONTENT_AUTO_BOOTSTRAP__;
 	}
 }
 
