@@ -308,7 +308,6 @@ type GeneratorModule = {
 		modalTitle?: string;
 	}) => {
 		article: HTMLElement;
-		bodyParagraph: HTMLElement;
 		buttonContainer: HTMLElement;
 		cancelButton: HTMLButtonElement;
 		closeButton: HTMLButtonElement;
@@ -345,7 +344,7 @@ type GeneratorModule = {
 	getRng_n_digits: (digits?: number) => number;
 	handleLightningLinkClick: (event: LightningLinkEvent) => Promise<void>;
 	sldsConfirm: (options: {
-		body?: string;
+		body?: string | string[];
 		cancelLabel?: string;
 		closeLabel?: string;
 		confirmLabel?: string;
@@ -1197,16 +1196,19 @@ Deno.test("generator builds modal shells, prompt modals, and confirm flows", asy
 		);
 
 		const prompt = fixture.module.generateSldsPromptModal({
-			bodyText: "Prompt body",
+			bodyText: "Prompt body\nSecond line",
 			cancelButtonLabel: "Cancel",
 			closeButtonLabel: "Close",
 			confirmButtonLabel: "Save",
 			modalTitle: "Prompt",
 		});
-		assertEquals(prompt.bodyParagraph.textContent, "Prompt body");
+		const promptLines = prompt.article.querySelectorAll("p");
+		assertEquals(promptLines.length, 2);
+		assertEquals(promptLines[0]?.textContent, "Prompt body");
+		assertEquals(promptLines[1]?.textContent, "Second line");
 		assertEquals(
 			prompt.modalBody.getAttribute("aria-label"),
-			"Prompt body",
+			"Prompt body\nSecond line",
 		);
 
 		const rejectPromise = fixture.module.sldsConfirm({
@@ -1239,9 +1241,24 @@ Deno.test("generator builds modal shells, prompt modals, and confirm flows", asy
 			?.dispatchEvent(new Event("click"));
 		assertEquals(await minimalPromise, false);
 
+		const multilinePromise = fixture.module.sldsConfirm({
+			body: ["Line A", "Line B"],
+		});
+		const multilineModal = document.getElementById(
+			"again-why-salesforce-modal-confirm",
+		);
+		assertEquals(
+			multilineModal?.querySelectorAll("p").length,
+			2,
+		);
+		multilineModal?.querySelector(".slds-modal__close")?.dispatchEvent(
+			new Event("click"),
+		);
+		assertEquals(await multilinePromise, false);
+
 		const permissiveConfirm = fixture.module.sldsConfirm as (
 			options?: {
-				body?: string;
+				body?: string | string[];
 				cancelLabel?: string;
 				closeLabel?: string;
 				confirmLabel?: string;

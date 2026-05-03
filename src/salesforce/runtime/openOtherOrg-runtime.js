@@ -13,7 +13,7 @@ import { getTranslations } from "../../core/translator.js";
 import Tab from "../../core/tab.js";
 import { ensureAllTabsAvailability } from "../../core/tabContainer.js";
 
-import { generateOpenOtherOrgModal } from "../generator.js";
+import { generateOpenOtherOrgModal, sldsConfirm } from "../generator.js";
 import {
 	createOpenOtherOrgModule as createOpenOtherOrgPureModule,
 } from "../module/openOtherOrg-module.js";
@@ -31,7 +31,7 @@ import { showToast } from "../toast.js";
  * @param {string} [overrides.toastError=TOAST_ERROR] Error toast status.
  * @param {string} [overrides.toastWarning=TOAST_WARNING] Warning toast status.
  * @param {(keys: string | string[]) => Promise<unknown>} [overrides.getSettingsFn=getSettings] Settings resolver.
- * @param {(message: string | string[] | unknown[], connector?: string) => Promise<string>} [overrides.getTranslationsFn=getTranslations] Translation resolver.
+ * @param {(message: string | string[] | unknown[], connector?: string) => Promise<string | string[]>} [overrides.getTranslationsFn=getTranslations] Translation resolver.
  * @param {{
  *   containsSalesforceId: (url: string | null) => boolean;
  *   extractOrgName: (value: string | null | undefined) => string;
@@ -65,7 +65,12 @@ import { showToast } from "../toast.js";
  * @param {{ getElementById: (id: string) => unknown } | undefined} [overrides.documentRef=globalThis.document] Document-like object.
  * @param {{ href?: string } | undefined} [overrides.locationRef=globalThis.location] Location-like object.
  * @param {{ info: (message: unknown) => void }} [overrides.consoleRef=console] Console-like object.
- * @param {(message?: string) => boolean} [overrides.confirmFn=globalThis.confirm] Confirm callback.
+ * @param {(options?: {
+ *   body?: string | string[];
+ *   cancelLabel?: string;
+ *   closeLabel?: string;
+ *   confirmLabel?: string;
+ * }) => boolean | Promise<boolean>} [overrides.sldsConfirmFn=sldsConfirm] Confirm callback.
  * @param {(url: string | URL, target?: string) => unknown} [overrides.openFn=globalThis.open] Window open callback.
  * @param {{ new(input: string): URL }} [overrides.urlCtor=URL] URL constructor.
  * @return {{
@@ -91,7 +96,7 @@ export function createOpenOtherOrgModule({
 	documentRef = globalThis.document,
 	locationRef = globalThis.location,
 	consoleRef = console,
-	confirmFn = globalThis.confirm,
+	sldsConfirmFn = sldsConfirm,
 	openFn = globalThis.open,
 	urlCtor = URL,
 } = {}) {
@@ -114,7 +119,7 @@ export function createOpenOtherOrgModule({
 		documentRef,
 		locationRef,
 		consoleRef,
-		confirmFn,
+		sldsConfirmFn,
 		openFn,
 		urlCtor,
 	});

@@ -28,6 +28,7 @@ import {
 	createManageTabRow,
 	generateManageTabsModal,
 	handleLightningLinkClick,
+	sldsConfirm,
 } from "../generator.js";
 import {
 	makeDuplicatesBold,
@@ -93,7 +94,6 @@ export function createManageTabsModule(overrides = {}) {
 		CustomEvent: overrides.CustomEvent ?? globalThis.CustomEvent,
 		Tab: overrides.Tab ?? Tab,
 		TabContainer: overrides.TabContainer ?? TabContainer,
-		confirm: overrides.confirm ?? globalThis.confirm,
 		createManageTabRow: overrides.createManageTabRow ?? createManageTabRow,
 		document: overrides.document ?? globalThis.document,
 		ensureAllTabsAvailability: overrides.ensureAllTabsAvailability ??
@@ -111,6 +111,7 @@ export function createManageTabsModule(overrides = {}) {
 		injectStyle: overrides.injectStyle ?? injectStyle,
 		makeDuplicatesBold: overrides.makeDuplicatesBold ?? makeDuplicatesBold,
 		reorderTabsUl: overrides.reorderTabsUl ?? reorderTabsUl,
+		sldsConfirm: overrides.sldsConfirm ?? sldsConfirm,
 		setTimeout: overrides.setTimeout ?? globalThis.setTimeout,
 		setupDragForTable: overrides.setupDragForTable ?? setupDragForTable,
 		setupDragForUl: overrides.setupDragForUl ?? setupDragForUl,

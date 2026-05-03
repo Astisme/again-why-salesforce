@@ -43,7 +43,7 @@ type BackgroundUtilsModule = {
  *   isChrome?: boolean;
  *   isExportAllowed?: boolean;
  *   isFirefox?: boolean;
- *   releases?: Array<{ created_at: string; prerelease: boolean; tag_name: string }>;
+ *   latestRelease?: { tag_name?: string };
  *   responseOk?: boolean;
  *   updateSetting?: { date?: string; enabled?: boolean } | null;
  * }} [options={}] Override values for the isolated module.
@@ -53,6 +53,7 @@ type BackgroundUtilsModule = {
  *   messages: object[];
  *   module: BackgroundUtilsModule;
  *   popups: string[];
+ *   requestUrls: string[];
  *   revokedUrls: string[];
  *   storageWrites: Array<{ key?: string; value: object[] }>;
  *   triggerDownloadComplete: () => void;
@@ -65,7 +66,7 @@ function loadBackgroundUtilsModule(
 		isChrome = false,
 		isExportAllowed: exportAllowed = true,
 		isFirefox = false,
-		releases = [],
+		latestRelease = {},
 		responseOk = true,
 		updateSetting = null,
 	}: {
@@ -74,9 +75,7 @@ function loadBackgroundUtilsModule(
 		isChrome?: boolean;
 		isExportAllowed?: boolean;
 		isFirefox?: boolean;
-		releases?: Array<
-			{ created_at: string; prerelease: boolean; tag_name: string }
-		>;
+		latestRelease?: { tag_name?: string };
 		responseOk?: boolean;
 		updateSetting?: { date?: string; enabled?: boolean } | null;
 	} = {},
@@ -84,6 +83,7 @@ function loadBackgroundUtilsModule(
 	const downloads: Array<{ filename: string; url: string }> = [];
 	const messages: object[] = [];
 	const popups: string[] = [];
+	const requestUrls: string[] = [];
 	const revokedUrls: string[] = [];
 	const storageWrites: Array<{ key?: string; value: object[] }> = [];
 	const changedListeners: Array<
@@ -154,12 +154,14 @@ function loadBackgroundUtilsModule(
 			},
 		},
 		consoleRef: console,
-		fetchFn: () =>
-			Promise.resolve({
-				json: () => Promise.resolve(releases),
+		fetchFn: (url: string) => {
+			requestUrls.push(url);
+			return Promise.resolve({
+				json: () => Promise.resolve(latestRelease),
 				ok: responseOk,
 				status: 500,
-			}),
+			});
+		},
 		urlCtor: MockURL,
 	});
 
@@ -169,6 +171,7 @@ function loadBackgroundUtilsModule(
 		messages,
 		module,
 		popups,
+		requestUrls,
 		revokedUrls,
 		storageWrites,
 		triggerDownloadComplete: () => {
@@ -320,6 +323,7 @@ Deno.test("checkForUpdates and export-permission direct branches", async (t) => 
 				mockStorage[SETTINGS_KEY] as Array<Record<string, unknown>>,
 			);
 			const sentMessages: Array<{ what?: string; version?: string }> = [];
+			const fetchedUrls: string[] = [];
 			mockStorage[SETTINGS_KEY] = [];
 			BROWSER.tabs.setMockBrowserTabs([{
 				id: 0,
@@ -333,23 +337,26 @@ Deno.test("checkForUpdates and export-permission direct branches", async (t) => 
 				);
 				return Promise.resolve(true);
 			};
-			globalThis.fetch = () =>
-				Promise.resolve({
+			globalThis.fetch = (url: string | URL | Request) => {
+				fetchedUrls.push(String(url));
+				return Promise.resolve({
 					json: () =>
-						Promise.resolve([{
+						Promise.resolve({
 							tag_name: "release-v999.0.0",
-							prerelease: false,
-							created_at: "2026-01-01T00:00:00.000Z",
-						}]),
+						}),
 					ok: true,
 					status: 200,
 				} as Response);
+			};
 			try {
 				await checkForUpdates();
 				assert(
 					mockStorage[SETTINGS_KEY].some((setting) =>
 						setting.id === NO_UPDATE_NOTIFICATION
 					),
+				);
+				assert(
+					fetchedUrls.some((url) => url.endsWith("/releases/latest")),
 				);
 				assert(
 					sentMessages.some((message) =>
@@ -365,7 +372,7 @@ Deno.test("checkForUpdates and export-permission direct branches", async (t) => 
 	);
 
 	await t.step(
-		"checkForUpdates handles older/equal/newer releases and fetch errors",
+		"checkForUpdates handles equal versions and fetch errors",
 		async () => {
 			const originalFetch = globalThis.fetch;
 			const originalSendMessage = BROWSER.tabs.sendMessage;
@@ -389,38 +396,15 @@ Deno.test("checkForUpdates and export-permission direct branches", async (t) => 
 			globalThis.fetch = () =>
 				Promise.resolve({
 					json: () =>
-						Promise.resolve([
-							{
-								tag_name: "release-v0.0.1",
-								prerelease: false,
-								created_at: "2024-01-01T00:00:00.000Z",
-							},
-							{
-								tag_name: `release-v${EXTENSION_VERSION}`,
-								prerelease: false,
-								created_at: "2024-01-02T00:00:00.000Z",
-							},
-							{
-								tag_name: "release-v999.0.0",
-								prerelease: false,
-								created_at: "2024-01-03T00:00:00.000Z",
-							},
-							{
-								tag_name: "release-v1000.0.0",
-								prerelease: false,
-								created_at: "2024-01-04T00:00:00.000Z",
-							},
-						]),
+						Promise.resolve({
+							tag_name: `release-v${EXTENSION_VERSION}`,
+						}),
 					ok: true,
 					status: 200,
 				} as Response);
 			try {
 				await checkForUpdates();
-				assert(
-					sentMessages.some((message) =>
-						message.version === "1000.0.0"
-					),
-				);
+				assertEquals(sentMessages.length, 0);
 				mockStorage[SETTINGS_KEY] = [];
 				globalThis.fetch = () =>
 					Promise.reject(new Error("fetch-failure"));
@@ -513,27 +497,22 @@ Deno.test("background utils isolated branches cover export handlers and update c
 
 			const updateFixture = await loadBackgroundUtilsModule({
 				extensionVersion: "1.0.0",
-				releases: [
-					{
-						tag_name: "release-v1.1.0",
-						prerelease: false,
-						created_at: "2025-02-01T00:00:00.000Z",
-					},
-					{
-						tag_name: "release-v2.0.0-beta",
-						prerelease: true,
-						created_at: "2025-03-01T00:00:00.000Z",
-					},
-				],
+				latestRelease: {
+					tag_name: "release-v1.1.0",
+				},
 			});
 			try {
 				await updateFixture.module.checkForUpdates();
 				assertEquals(updateFixture.storageWrites.length, 1);
+				assertEquals(
+					updateFixture.requestUrls[0],
+					"https://api.github.com/repos/acme/again-why-salesforce/releases/latest",
+				);
 				assertEquals(updateFixture.messages, [{
 					what: "update-extension",
 					oldversion: "1.0.0",
 					version: "1.1.0",
-					link: "https://github.com/acme/again-why-salesforce",
+					link: "https://github.com/acme/again-why-salesforce/releases/latest",
 				}]);
 			} finally {
 				updateFixture.cleanup();
@@ -561,7 +540,7 @@ Deno.test("background utils isolated branches cover export handlers and update c
 			}
 
 			const emptyReleasesFixture = await loadBackgroundUtilsModule({
-				releases: [],
+				latestRelease: {},
 				responseOk: true,
 			});
 			try {

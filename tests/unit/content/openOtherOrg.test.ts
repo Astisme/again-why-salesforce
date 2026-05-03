@@ -142,7 +142,6 @@ function loadOpenOtherOrgFixture() {
 	};
 
 	const runtimeModule = createOpenOtherOrgModule({
-		confirmFn: () => confirmResult,
 		documentRef,
 		ensureAllTabsAvailabilityFn: () => Promise.resolve(allTabs),
 		generateOpenOtherOrgModalFn: () =>
@@ -158,8 +157,11 @@ function loadOpenOtherOrgFixture() {
 		getModalHangerFn: () => hanger,
 		getSettingsFn: () =>
 			Promise.resolve([{ enabled: skipLinkDetectionEnabled }]),
-		getTranslationsFn: (payload: unknown) => {
+		getTranslationsFn: (payload: string | string[] | unknown[]) => {
 			translations.push(payload);
+			if (Array.isArray(payload)) {
+				return Promise.resolve(payload.map(() => "confirm-msg"));
+			}
 			return Promise.resolve("confirm-msg");
 		},
 		https: "https://",
@@ -171,6 +173,7 @@ function loadOpenOtherOrgFixture() {
 		openFn: (url: string | URL, target?: string) => {
 			openCalls.push({ target: target ?? "", url: String(url) });
 		},
+		sldsConfirmFn: () => Promise.resolve(confirmResult),
 		salesforceUrlPattern: /^[a-z0-9.-]+$/i,
 		setupLightning: "/lightning/setup/",
 		showToastFn: (message: string | string[], status = "") => {
@@ -508,7 +511,6 @@ Deno.test({
 		const restoreCloneNode = installCloneNodePolyfill();
 		const originalConsole = globalThis.console;
 		const originalSetTimeout = globalThis.setTimeout;
-		const originalConfirm = globalThis.confirm;
 		const originalOpen = globalThis.open;
 		const originalSendMessage = mockBrowser.runtime.sendMessage.bind(
 			mockBrowser.runtime,
@@ -548,11 +550,6 @@ Deno.test({
 			};
 			mockBrowser.runtime.sendMessage = runtimeSendMessage;
 
-			Object.defineProperty(globalThis, "confirm", {
-				configurable: true,
-				value: () => confirmResult,
-				writable: true,
-			});
 			Object.defineProperty(globalThis, "open", {
 				configurable: true,
 				value: (url: string | URL, target?: string) => {
@@ -661,10 +658,14 @@ Deno.test({
 			);
 			tabContainerModule.TabContainer._clear();
 
-			const openOtherOrgModule = await import(
-				"../../../src/salesforce/openOtherOrg.js"
+			const openOtherOrgRuntimeModule = await import(
+				"../../../src/salesforce/runtime/openOtherOrg-runtime.js"
 			);
 			const { MODAL_ID } = await import("../../../src/core/constants.js");
+			const openOtherOrgModule = openOtherOrgRuntimeModule
+				.createOpenOtherOrgModule({
+					sldsConfirmFn: () => Promise.resolve(confirmResult),
+				});
 
 			await openOtherOrgModule.createOpenOtherOrgModal({
 				label: "Users",
@@ -754,11 +755,6 @@ Deno.test({
 			Object.defineProperty(globalThis, "setTimeout", {
 				configurable: true,
 				value: originalSetTimeout,
-				writable: true,
-			});
-			Object.defineProperty(globalThis, "confirm", {
-				configurable: true,
-				value: originalConfirm,
 				writable: true,
 			});
 			Object.defineProperty(globalThis, "open", {

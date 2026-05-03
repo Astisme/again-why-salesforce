@@ -33,6 +33,7 @@ import {
 	createManageTabRow as _createManageTabRow,
 	generateManageTabsModal as _generateManageTabsModal,
 	handleLightningLinkClick as _handleLightningLinkClick,
+	sldsConfirm as _sldsConfirm,
 } from "../generator.js";
 import {
 	makeDuplicatesBold as _makeDuplicatesBold,
@@ -69,6 +70,7 @@ let setupDragForUl = _setupDragForUl;
 let createManageTabRow = _createManageTabRow;
 let generateManageTabsModal = _generateManageTabsModal;
 let handleLightningLinkClick = _handleLightningLinkClick;
+let sldsConfirm = _sldsConfirm;
 let MODAL_ID = _MODAL_ID;
 let makeDuplicatesBold = _makeDuplicatesBold;
 let reorderTabsUl = _reorderTabsUl;
@@ -193,9 +195,22 @@ function moveTrToGivenIndex({
  * @param {event} e - the event which had this function called
  */
 async function checkOpenAskConfirm(e) {
+	const [body, confirmLabel, cancelLabel, closeLabel] = await getTranslations(
+		[
+			"unsaved_changes_confirm",
+			"confirm",
+			"cancel",
+			"cancel_close",
+		],
+	);
 	if (
 		!wasSomethingUpdated ||
-		confirm(await getTranslations("unsaved_changes_confirm"))
+		await sldsConfirm({
+			body,
+			confirmLabel,
+			cancelLabel,
+			closeLabel,
+		})
 	) {
 		handleLightningLinkClick(e);
 		closeButton.click();
@@ -1000,6 +1015,7 @@ export function createManageTabsModule(overrides = {}) {
 	getTranslations = overrides.getTranslations ?? getTranslations;
 	handleLightningLinkClick = overrides.handleLightningLinkClick ??
 		handleLightningLinkClick;
+	sldsConfirm = overrides.sldsConfirm ?? sldsConfirm;
 	injectStyle = overrides.injectStyle ?? injectStyle;
 	makeDuplicatesBold = overrides.makeDuplicatesBold ?? makeDuplicatesBold;
 	reorderTabsUl = overrides.reorderTabsUl ?? reorderTabsUl;

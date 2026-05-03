@@ -178,7 +178,7 @@ type ManageTabsPureModule = {
 
 type ManageTabsRuntimeModule = {
 	createManageTabsModule: (
-		overrides?: Record<string, string | ((input: string) => string)>,
+		overrides?: Record<string, unknown>,
 	) => ManageTabsPureModule;
 	createManageTabsModal: () => string;
 	handleActionButtonClick: (
@@ -210,6 +210,7 @@ type ManageTabsDependencyMap = {
 	createManageTabRow: (rowLabel: string) => string;
 	generateManageTabsModal: (title: string) => string;
 	handleLightningLinkClick: (eventName: string) => string;
+	sldsConfirm: (options: { body?: string }) => Promise<boolean>;
 	makeDuplicatesBold: (url: string) => string;
 	reorderTabsUl: () => string;
 	sf_afterSet: (state: string) => string;
@@ -218,7 +219,7 @@ type ManageTabsDependencyMap = {
 	getModalHanger: () => string;
 	updateModalBodyOverflow: (state: string) => string;
 	createManageTabsPureModule: (
-		dependencies: Record<string, string | ((input: string) => string)>,
+		dependencies: Record<string, unknown>,
 	) => ManageTabsPureModule;
 };
 
@@ -605,9 +606,7 @@ Deno.test("manageTabs-runtime wrappers delegate singleton and merge overrides", 
 			return "singleton-action";
 		},
 	};
-	const factoryInputs: Array<
-		Record<string, string | ((input: string) => string)>
-	> = [];
+	const factoryInputs: Array<Record<string, unknown>> = [];
 	const dependencies: ManageTabsDependencyMap = {
 		CXM_PIN_TAB: "ctx-pin",
 		CXM_REMOVE_TAB: "ctx-remove",
@@ -636,6 +635,7 @@ Deno.test("manageTabs-runtime wrappers delegate singleton and merge overrides", 
 		createManageTabRow: (rowLabel) => rowLabel,
 		generateManageTabsModal: (title) => title,
 		handleLightningLinkClick: (eventName) => eventName,
+		sldsConfirm: () => Promise.resolve(true),
 		makeDuplicatesBold: (url) => url,
 		reorderTabsUl: () => "reorder",
 		sf_afterSet: (state) => state,

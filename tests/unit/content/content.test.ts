@@ -106,6 +106,13 @@ type ContentDeps = {
 			status: string,
 		) => Promise<HTMLElement>;
 		generateStyleFromSettings: () => void;
+		sldsConfirm: (options?: {
+			body?: string | string[];
+			cancelLabel?: string;
+			closeLabel?: string;
+			confirmLabel?: string;
+			title?: string;
+		}) => Promise<boolean>;
 		generateUpdateTabModal: (...args: unknown[]) => Promise<any>;
 	};
 	importModule: {
@@ -360,6 +367,13 @@ function createHarness(url = SETUP_URL) {
 		toasts: [] as Array<{ message: string[]; status: string }>,
 		openCalls: [] as Array<unknown[]>,
 		confirmCalls: [] as string[],
+		sldsConfirmCalls: [] as Array<{
+			body?: string | string[];
+			cancelLabel?: string;
+			closeLabel?: string;
+			confirmLabel?: string;
+			title?: string;
+		}>,
 		replaceTabsCalls: [] as Array<
 			{ tabs: any[]; options: Record<string, unknown> }
 		>,
@@ -985,6 +999,10 @@ function createHarness(url = SETUP_URL) {
 			},
 			generateStyleFromSettings: () => {
 				records.styleCalls++;
+			},
+			sldsConfirm: (options = {}) => {
+				records.sldsConfirmCalls.push(options);
+				return Promise.resolve(state.confirmResult);
 			},
 			generateUpdateTabModal: updateTabModalFactory,
 		},
@@ -2540,7 +2558,7 @@ Deno.test(
 					});
 					await harness.flush();
 					assertStringIncludes(
-						harness.records.confirmCalls[0],
+						String(harness.records.sldsConfirmCalls[0]?.body),
 						"1.0.0",
 					);
 					assertEquals(

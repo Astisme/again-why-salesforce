@@ -160,7 +160,13 @@ type ManageTabsDependencies = {
 	TUTORIAL_EVENT_CLOSE_MANAGE_TABS: string;
 	TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL: string;
 	TUTORIAL_EVENT_REORDERED_TABS_TABLE: string;
-	confirm: (message: string) => boolean;
+	sldsConfirm: (options?: {
+		body?: string | string[];
+		cancelLabel?: string;
+		closeLabel?: string;
+		confirmLabel?: string;
+		title?: string;
+	}) => Promise<boolean>;
 	createManageTabRow: (
 		tab?: Record<string, unknown>,
 		options?: { index?: number },
@@ -821,7 +827,7 @@ function loadManageTabs() {
 		TUTORIAL_EVENT_CLOSE_MANAGE_TABS: "close-manage-tabs",
 		TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL: "create-manage-tabs",
 		TUTORIAL_EVENT_REORDERED_TABS_TABLE: "reordered-tabs-table",
-		confirm: () => confirmResult.value,
+		sldsConfirm: () => Promise.resolve(confirmResult.value),
 		createManageTabRow: (
 			tab?: Record<string, unknown>,
 			options?: { index?: number },

@@ -48,7 +48,7 @@ function _isNewerVersion(latest, current) {
  * @param {(callback: (tabs: object[]) => void) => Promise<void>} options.bgGetStorageFn Storage reader.
  * @param {(value: object[], other?: null, key?: string) => void} options.bgSetStorageFn Storage writer.
  * @param {{ downloads?: { download: (details: { filename: string; url: string }) => void } }} [options.chromeRef=chrome] Chrome global wrapper.
- * @param {(input: string) => Promise<{ ok: boolean; status: number; json: () => Promise<Array<{ created_at: string; prerelease: boolean; tag_name: string }>> }>} [options.fetchFn=fetch] Fetch implementation.
+ * @param {(input: string) => Promise<{ ok: boolean; status: number; json: () => Promise<{ tag_name?: string } | Array<{ created_at: string; prerelease: boolean; tag_name: string }>> }>} [options.fetchFn=fetch] Fetch implementation.
  * @param {{ createObjectURL: (blob: Blob) => string; revokeObjectURL: (url: string) => void }} [options.urlCtor=URL] URL wrapper.
  * @param {{ error: (...args: unknown[]) => void }} [options.consoleRef=console] Console wrapper.
  * @return {{
@@ -312,32 +312,25 @@ export function createBackgroundUtilsModule({
 		try {
 			const urlParts = extensionGithubLinkRuntime.split("github.com/");
 			const repoPath = urlParts[1].replace(/\.git$/, "");
+			const releasesLatest = "/releases/latest";
 			const response = await fetchRuntime(
-				`https://api.github.com/repos/${repoPath}/releases`,
+				`https://api.github.com/repos/${repoPath}${releasesLatest}`,
 			);
 			if (!response.ok) {
 				consoleRuntime.error("error_failed_to_fetch", response.status);
 				return;
 			}
-			const releases = await response.json();
-			const latestVersion = releases
-				.filter((release) =>
-					!release.prerelease &&
-					_isNewerVersion(
-						release.tag_name.replace(/^.*(-)?v/, ""),
-						extensionVersionRuntime,
-					)
-				)
-				.sort((a, b) => {
-					return new Date(b.created_at) - new Date(a.created_at);
-				})
-				?.[0]?.tag_name?.replace(/^.*(-)?v/, "");
-			if (latestVersion != null) {
+			const latestRelease = await response.json();
+			const latestVersion = latestRelease?.tag_name?.replace(
+				/^.*(-)?v/,
+				"",
+			);
+			if (_isNewerVersion(latestVersion, extensionVersionRuntime)) {
 				await bg_notify({
 					what: whatUpdateExtensionRuntime,
 					oldversion: extensionVersionRuntime,
 					version: latestVersion,
-					link: extensionGithubLinkRuntime,
+					link: `${extensionGithubLinkRuntime}${releasesLatest}`,
 				});
 			}
 		} catch (error) {

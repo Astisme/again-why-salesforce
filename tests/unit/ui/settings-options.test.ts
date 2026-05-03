@@ -660,6 +660,22 @@ Deno.test("options starts the theme transition and builds checkbox payloads", as
 			],
 			what: "what-set",
 		});
+
+		const noUpdateCheckbox = new OptionElement("no-update-notification");
+		noUpdateCheckbox.checked = true;
+		fixture.module.saveCheckboxOptions.call(
+			noUpdateCheckbox,
+			{ target: noUpdateCheckbox },
+		);
+		assertEquals(fixture.sendMessages[1], {
+			key: "settings-key",
+			set: [{
+				date: undefined,
+				enabled: true,
+				id: "no-update-notification",
+			}],
+			what: "what-set",
+		});
 	} finally {
 		fixture.cleanup();
 	}
