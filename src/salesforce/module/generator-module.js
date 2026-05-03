@@ -547,10 +547,12 @@ export async function generateSldsToastMessage(
 	contentInner.classList.add("slds-align-middle", "slds-hyphenate");
 	const descriptionDiv = document.createElement("div");
 	descriptionDiv.id = "toastDescription7382:0";
-	const translatedMessageSplit = (await getTranslations(message)).split(
-		"\n",
-	);
-	for (const msg_split of translatedMessageSplit) {
+	const translatedMessage = await getTranslations(message);
+	for (
+		const msg_split of Array.isArray(translatedMessage)
+			? translatedMessage
+			: translatedMessage.split("\n")
+	) {
 		const messageSpan = document.createElement("div");
 		messageSpan.classList.add(
 			"toastMessage",
@@ -1021,6 +1023,7 @@ function createSldsModalShell({
 		"slds-backdrop_open",
 	);
 	backdropDiv.style.opacity = "0.8";
+	backdropDiv.style.zIndex = "9001";
 	modalParent.appendChild(backdropDiv);
 	const dialog = document.createElement("div");
 	dialog.setAttribute("role", "dialog");
@@ -1347,20 +1350,21 @@ function generateSldsPromptModal({
 	});
 	saveButton.setAttribute("type", "button");
 	modalBody.setAttribute("aria-label", bodyText);
-	const bodyParagraph = document.createElement("p");
-	bodyParagraph.classList.add(
-		"slds-text-body_regular",
-		"slds-text-align_center",
-	);
-	bodyParagraph.style.margin = "0";
-	bodyParagraph.textContent = bodyText;
-	article.appendChild(bodyParagraph);
+	for (const bodyPart of bodyText.split("\n")) {
+		const bodyParagraph = document.createElement("p");
+		bodyParagraph.classList.add(
+			"slds-text-body_regular",
+			"slds-text-align_center",
+		);
+		bodyParagraph.style.margin = "0";
+		bodyParagraph.textContent = bodyPart;
+		article.appendChild(bodyParagraph);
+	}
 	article.style.padding = "1em";
 	return {
 		modalParent,
 		article,
 		modalBody,
-		bodyParagraph,
 		saveButton,
 		closeButton,
 		cancelButton,
@@ -3067,7 +3071,7 @@ export async function generateTutorialElements() {
  *
  * @param {Object} options - Prompt configuration.
  * @param {string} options.title - Already translated modal title.
- * @param {string} options.body - Already translated modal body.
+ * @param {string|string[]} options.body - Already translated modal body.
  * @param {string} options.confirmLabel - Already translated confirm button label.
  * @param {string} options.cancelLabel - Already translated cancel button label.
  * @param {string} options.closeLabel - Already translated close button label.
@@ -3081,6 +3085,7 @@ export function sldsConfirm({
 	closeLabel,
 } = {}) {
 	document.getElementById(MODAL_CONFIRM_ID)?.remove(); // remove itself
+	if (Array.isArray(body)) body = body.join("\n");
 	const {
 		modalParent,
 		saveButton,

@@ -11,7 +11,7 @@
  * @param {string} [options.toastError="error"] Error toast status.
  * @param {string} [options.toastWarning="warning"] Warning toast status.
  * @param {(keys: string | string[]) => Promise<unknown>} [options.getSettingsFn] Settings resolver.
- * @param {(message: string | string[] | unknown[], connector?: string) => Promise<string>} [options.getTranslationsFn] Translation resolver.
+ * @param {(message: string | string[] | unknown[], connector?: string) => Promise<string | string[]>} [options.getTranslationsFn] Translation resolver.
  * @param {{
  *   containsSalesforceId: (url: string | null) => boolean;
  *   extractOrgName: (value: string | null | undefined) => string;
@@ -45,7 +45,12 @@
  * @param {{ getElementById: (id: string) => unknown } | undefined} [options.documentRef=globalThis.document] Document-like object.
  * @param {{ href?: string } | undefined} [options.locationRef=globalThis.location] Location-like object.
  * @param {{ info: (message: unknown) => void }} [options.consoleRef=console] Console-like object.
- * @param {(message?: string) => boolean} [options.confirmFn=globalThis.confirm] Confirm callback.
+ * @param {(options?: {
+ *   body?: string | string[];
+ *   cancelLabel?: string;
+ *   closeLabel?: string;
+ *   confirmLabel?: string;
+ * }) => boolean | Promise<boolean>} [options.sldsConfirmFn] Confirm callback.
  * @param {(url: string | URL, target?: string) => unknown} [options.openFn=globalThis.open] Window open callback.
  * @param {{ new(input: string): URL }} [options.urlCtor=URL] URL constructor.
  * @return {{
@@ -71,7 +76,11 @@ export function createOpenOtherOrgModule({
 	documentRef = globalThis.document,
 	locationRef = globalThis.location,
 	consoleRef = console,
-	confirmFn = globalThis.confirm,
+	sldsConfirmFn = ({ body } = {}) =>
+		globalThis.confirm?.(
+			Array.isArray(body) ? body.join("\n") : body ?? "",
+		) ??
+			false,
 	openFn = globalThis.open,
 	urlCtor = URL,
 } = {}) {
@@ -191,13 +200,21 @@ export function createOpenOtherOrgModule({
 					url.startsWith("/") ? "" : setupLightning
 				}${url}`,
 			);
-			const confirmMsg = await getTranslationsFn([
-				[
+			const [confirmMsg, confirmLabel, cancelLabel, closeLabel] =
+				await getTranslationsFn([
 					"confirm_another_org",
-					targetUrl,
-				],
-			], "\n");
-			if (confirmFn?.(confirmMsg)) {
+					"confirm",
+					"cancel",
+					"cancel_close",
+				]);
+			if (
+				await sldsConfirmFn?.({
+					body: [confirmMsg, String(targetUrl)],
+					confirmLabel,
+					cancelLabel,
+					closeLabel,
+				})
+			) {
 				closeButton.click();
 				openFn?.(targetUrl, linkTarget ?? "_blank");
 			}
