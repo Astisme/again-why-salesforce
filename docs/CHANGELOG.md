@@ -20,6 +20,7 @@ Please remember that this project is entirely funded by **the support of its use
 
 1. Changed how the translations are returned, not requiring to get the translation instance everytime
 2. Squashed useless function into parent
+3. Removed use of `confirm` for `sldsConfirm` to use our own modal instead of the browser's default
 
 ## 🧪 Tests
 

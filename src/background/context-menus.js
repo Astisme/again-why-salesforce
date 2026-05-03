@@ -354,66 +354,42 @@ function getMenuItemsClone() {
 		switch (el.id) {
 			case CXM_PAGE_SAVE_TAB:
 				if (link_cmd_save_as_tab != null) {
-					el.title = [
-						el.title,
-						`(${link_cmd_save_as_tab})`,
-					];
+					el.title = `${el.title} (${link_cmd_save_as_tab})`;
 				}
 				break;
 			case CXM_PAGE_REMOVE_TAB:
 				if (link_cmd_remove_tab != null) {
-					el.title = [
-						el.title,
-						`(${link_cmd_remove_tab})`,
-					];
+					el.title = `${el.title} (${link_cmd_remove_tab})`;
 				}
 				break;
 			case CXM_UPDATE_ORG:
 				if (link_cmd_toggle_org != null) {
-					el.title = [
-						el.title,
-						`(${link_cmd_toggle_org})`,
-					];
+					el.title = `${el.title} (${link_cmd_toggle_org})`;
 				}
 				break;
 			case CXM_UPDATE_TAB:
 				if (link_cmd_update_tab != null) {
-					el.title = [
-						el.title,
-						`(${link_cmd_update_tab})`,
-					];
+					el.title = `${el.title} (${link_cmd_update_tab})`;
 				}
 				break;
 			case CMD_OPEN_SETTINGS:
 				if (link_cmd_open_settings != null) {
-					el.title = [
-						el.title,
-						`(${link_cmd_open_settings})`,
-					];
+					el.title = `${el.title} (${link_cmd_open_settings})`;
 				}
 				break;
 			case CXM_OPEN_OTHER_ORG:
 				if (link_cmd_open_other_org != null) {
-					el.title = [
-						el.title,
-						`(${link_cmd_open_other_org})`,
-					];
+					el.title = `${el.title} (${link_cmd_open_other_org})`;
 				}
 				break;
 			case CXM_IMPORT_TABS:
 				if (link_cmd_import != null) {
-					el.title = [
-						el.title,
-						`(${link_cmd_import})`,
-					];
+					el.title = `${el.title} (${link_cmd_import})`;
 				}
 				break;
 			case CXM_EXPORT_TABS:
 				if (link_cmd_export_all != null) {
-					el.title = [
-						el.title,
-						`(${link_cmd_export_all})`,
-					];
+					el.title = `${el.title} (${link_cmd_export_all})`;
 				}
 				break;
 			default:
