@@ -49,6 +49,7 @@ let BROWSER = _BROWSER;
 let CXM_PIN_TAB = _CXM_PIN_TAB;
 let CXM_REMOVE_TAB = _CXM_REMOVE_TAB;
 let CXM_UNPIN_TAB = _CXM_UNPIN_TAB;
+/** @type {string} */
 let EXTENSION_GITHUB_LINK = _EXTENSION_GITHUB_LINK;
 let EXTENSION_LABEL = _EXTENSION_LABEL;
 let EXTENSION_NAME = _EXTENSION_NAME;
@@ -212,8 +213,7 @@ export async function handleLightningLinkClick(e) {
 function areArraysEqual(arr1, arr2) {
 	return (arr1 == null && arr2 == null) ||
 		(
-			arr1 != null && arr2 != null &&
-			arr1.length === arr2.length &&
+			arr1?.length === arr2?.length &&
 			JSON.stringify(arr1) === JSON.stringify(arr2)
 		);
 }
