@@ -19,7 +19,8 @@ Please remember that this project is entirely funded by **the support of its use
 ## 🛠 Changed
 
 1. Changed how the translations are returned, not requiring to get the translation instance everytime
-2. Squashed useless function into parent
+2. Squashed modal explainer into parent function (#185)
+3. Improved callback management using optional chaining and default returns (#189)
 
 ## 🧪 Tests
 
