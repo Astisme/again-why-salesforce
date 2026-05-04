@@ -30,11 +30,37 @@ Both of these steps are done automatically when you push a commit to a branch wh
   deno task test
   ```
 
-## 4. Commit Message Guidelines
+## 4. Changelog Workflow
+
+For releases, generate a candidate changelog block from commits and then review/edit it:
+
+```bash
+deno task changelog-synth -- --version=2.3.0 --dry-run
+```
+
+To prepend the generated block directly into `docs/CHANGELOG.md`:
+
+```bash
+deno task changelog-synth -- --version=2.3.0 --prepend
+```
+
+Useful options:
+
+- `--from=<git ref>` and `--to=<git ref>` to control the commit range
+- `--output=<path>` to write output to a custom file
+- `--dry-run` to print output without writing files
+
+Expected workflow:
+
+1. Generate the block.
+2. Review and refine wording if needed.
+3. Commit the final changelog update.
+
+## 5. Commit Message Guidelines
 
 We do not follow standards for commit messages as we are much more focused on PRs.
 
-## 5. Pull Request Checklist
+## 6. Pull Request Checklist
 
 - [ ] Tests pass
 - [ ] Linter and formatter run

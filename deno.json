@@ -47,6 +47,7 @@
 		"build-edge": "deno task dev-edge && bash bin/zip-extension.bash edge",
 		"build-safari": "deno task dev-safari && bash bin/zip-extension.bash safari && bash bin/convert-to-safari-app-extension.bash",
 
+		"changelog-synth": "deno --allow-run --allow-read --allow-write bin/changelog-synth.ts",
 		"release": "deno --allow-read --allow-run --allow-env bin/build-releases.ts"
 	},
 	"imports": {
