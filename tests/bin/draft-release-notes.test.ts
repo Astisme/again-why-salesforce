@@ -1,4 +1,8 @@
-import { assertEquals, assertRejects, assertThrows } from "@std/testing/asserts";
+import {
+	assertEquals,
+	assertRejects,
+	assertThrows,
+} from "@std/testing/asserts";
 import { main, parseArgs } from "../../bin/draft-release-notes.ts";
 import type {
 	GitCommandResult,
