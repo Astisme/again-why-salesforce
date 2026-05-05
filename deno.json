@@ -34,6 +34,7 @@
 		"locale-check": "deno --allow-read --allow-write bin/find-invalid-variables.ts && deno --allow-read --allow-write bin/missing-locales.ts",
 		"locales": "deno task locale-check && deno task sort",
 		"audit-logging": "deno run --allow-read --allow-write bin/audit-logging.ts",
+		"draft-release-notes": "deno run --allow-read --allow-write --allow-run bin/draft-release-notes.ts",
 		"bundle": "deno run -A bin/build.ts",
 		"checks": "deno task fmt && deno task lint && deno task test && deno task locales && deno task dev-firefox",
 
