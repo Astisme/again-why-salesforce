@@ -334,3 +334,27 @@ html[data-theme="dark"] {
 		border-color: var(--border-color);
 	}
 }
+
+li.again-why-salesforce > a.tabHeader {
+	max-width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	& > span.label {
+		display: -ms-flexbox;
+		display: flex;
+		-ms-flex-line-pack: center;
+		align-content: center;
+		-ms-flex-align: center;
+		align-items: center;
+		-ms-flex-positive: 1;
+		flex-grow: 1;
+		padding: 0 0.75rem;
+		border-radius: 0;
+		min-width: 0;
+		color: inherit;
+		font-size: 0.8125rem;
+		height: 100%;
+	}
+}

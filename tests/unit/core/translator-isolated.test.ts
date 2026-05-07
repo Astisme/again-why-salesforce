@@ -31,6 +31,7 @@ type TranslatorModule = {
 		new (secret: symbol): unknown;
 	};
 	ensureTranslatorAvailability: () => Promise<{
+		currentLanguage: string | null;
 		loadLanguageFile: (
 			language?: string | null,
 		) => Promise<Record<string, { message: string }>>;
@@ -78,8 +79,10 @@ function loadTranslatorFixture() {
 	const hadDocument = "document" in globalThis;
 	const originalDocument = (globalThis as { document?: unknown }).document;
 	const originalFetch = globalThis.fetch;
+	const fetchCalls: string[] = [];
 	globalThis.fetch = (input: string | URL | Request) => {
 		const path = `${input}`;
+		fetchCalls.push(path);
 		return Promise.resolve({
 			json: () => {
 				const language = path.match(
@@ -175,6 +178,7 @@ function loadTranslatorFixture() {
 			}
 		},
 		changeListeners,
+		fetchCalls,
 		module,
 		setLanguageResponse: (
 			newUserLanguage: string | null,
@@ -232,6 +236,23 @@ Deno.test("translator isolated coverage hits constructor, fallback, and listener
 				newValue: [{ id: "picked-language", enabled: "en" }],
 			},
 		});
+	} finally {
+		fixture.cleanup();
+	}
+});
+
+Deno.test("translator isolated avoids repeated fetches for missing locale after fallback", async () => {
+	const fixture = await loadTranslatorFixture();
+	try {
+		fixture.setLanguageResponse("pt_BR", null);
+		const translator = await fixture.module.ensureTranslatorAvailability();
+		assertEquals(translator.currentLanguage, "en");
+		assertEquals(await translator.translate("hello"), "Hello");
+		assertEquals(await translator.translate("hello"), "Hello");
+		const ptBrFetches = fixture.fetchCalls.filter((path) =>
+			path.includes("/_locales/pt_BR/messages.json")
+		);
+		assertEquals(ptBrFetches.length, 1);
 	} finally {
 		fixture.cleanup();
 	}
