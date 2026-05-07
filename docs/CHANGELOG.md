@@ -18,9 +18,15 @@ Please remember that this project is entirely funded by **the support of its use
 
 ## 🛠 Changed
 
-1. Changed how the translations are returned, not requiring to get the translation instance everytime
+1. Changed how the translations are returned, not requiring to get the translation instance everytime (#186)
 2. Squashed modal explainer into parent function (#185)
 3. Improved callback management using optional chaining and default returns (#189)
+4. Replaced `confirm` calls with our own confirm modal (#187)
+
+## 🐛 Fixed
+
+1. Changing color of your Tabs would not be visible from the settings page
+2. Translator would request multiple times the same locale file due to mismanagement of current language
 
 ## 🧪 Tests
 

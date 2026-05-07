@@ -22,6 +22,7 @@ let sendExtensionMessage = _sendExtensionMessage;
 
 const _translationSecret = Symbol("translationSecret");
 let singletonTranslator = null;
+let singletonTranslatorPromise = null;
 
 /**
  * Service for handling text translations in a browser extension.
@@ -108,14 +109,14 @@ export class TranslationService {
 		if (
 			await this.loadNewLanguage(userLanguage)
 		) {
-			return userLanguage;
+			return this.currentLanguage;
 		}
 		// load the language in which salesforce is currently set
 		const sfLanguage = await sendExtensionMessage({
 			what: WHAT_GET_SF_LANG,
 		});
 		if (await this.loadNewLanguage(sfLanguage)) {
-			return sfLanguage;
+			return this.currentLanguage;
 		}
 		return null;
 	}
@@ -133,18 +134,26 @@ export class TranslationService {
 			await singletonTranslator.loadLanguageBackground();
 			return singletonTranslator;
 		}
-		singletonTranslator = new TranslationService(_translationSecret);
-		// load the default language for fallback cases
-		await singletonTranslator.loadLanguageFile(
-			TranslationService.FALLBACK_LANGUAGE,
-		);
-		// load translations for user picked language or salesforce language
-		singletonTranslator.currentLanguage = await singletonTranslator
-			.loadLanguageBackground();
-		if (await singletonTranslator.updatePageTranslations()) {
-			singletonTranslator.setListenerForLanguageChange();
+		if (singletonTranslatorPromise != null) {
+			return singletonTranslatorPromise;
 		}
-		return singletonTranslator;
+		singletonTranslatorPromise = (async () => {
+			const translator = new TranslationService(_translationSecret);
+			// load the default language for fallback cases
+			await translator.loadLanguageFile(
+				TranslationService.FALLBACK_LANGUAGE,
+			);
+			// load translations for user picked language or salesforce language
+			await translator.loadLanguageBackground();
+			if (await translator.updatePageTranslations()) {
+				translator.setListenerForLanguageChange();
+			}
+			singletonTranslator = translator;
+			return translator;
+		})().finally(() => {
+			singletonTranslatorPromise = null;
+		});
+		return singletonTranslatorPromise;
 	}
 
 	/**
@@ -406,7 +415,8 @@ export class TranslationService {
  * @async
  */
 function getTranslator_async() {
-	return singletonTranslator ?? TranslationService.create();
+	return singletonTranslatorPromise ?? singletonTranslator ??
+		TranslationService.create();
 }
 
 /**
@@ -418,7 +428,10 @@ function getTranslator_async() {
  * @return {TranslationService} The initialized translator instance.
  */
 function getTranslator() {
-	if (singletonTranslator == null || singletonTranslator instanceof Promise) {
+	if (
+		singletonTranslator == null ||
+		singletonTranslatorPromise != null
+	) {
 		throw new Error("error_translator_not_initialized");
 	}
 	return singletonTranslator;
@@ -511,6 +524,7 @@ export function createTranslatorModule(overrides = {}) {
 	applyGlobalOverride("document", overrides.document);
 	applyGlobalOverride("fetch", overrides.fetch);
 	singletonTranslator = null;
+	singletonTranslatorPromise = null;
 
 	return {
 		TranslationService,
