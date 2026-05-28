@@ -1629,7 +1629,8 @@ export async function generateSldsFileInput(
 			"slds-icon",
 			"slds-icon-text-default",
 			"slds-button__icon",
-			"slds-icon_container forceIcon",
+			"slds-icon_container",
+      "forceIcon",
 		);
 		lightningIcon.setAttribute("icon-name", "utility:upload");
 		lightningIcon.dataset.auraClass = "forceIcon";

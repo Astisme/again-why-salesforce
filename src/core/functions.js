@@ -55,6 +55,15 @@ export function applyGlobalOverride(name, value) {
 	if (value == null) {
 		return;
 	}
+	const descriptor = Object.getOwnPropertyDescriptor(globalThis, name);
+	if (descriptor != null && descriptor.configurable === false) {
+		try {
+			globalThis[name] = value;
+		} catch (_ignored) {
+			// Getter-only or read-only global. Keep existing value.
+		}
+		return;
+	}
 	Object.defineProperty(globalThis, name, {
 		configurable: true,
 		enumerable: true,
