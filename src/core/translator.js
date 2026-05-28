@@ -125,13 +125,14 @@ export class TranslationService {
 	 * Initializes or returns the singletonTranslator TranslationService instance,
 	 * preloading fallback and active translations, and sets up change listeners.
 	 *
+	 * @param {Function|null} [loadLanguageFn=null] Optional active-language loader.
 	 * @return {Promise<TranslationService>}
 	 *   Resolves to the singletonTranslator TranslationService, with fallback and current
 	 *   language files loaded, and page translations applied.
 	 */
-	static async create() {
+	static async create(loadLanguageFn = null) {
 		if (singletonTranslator != null) {
-			await singletonTranslator.loadLanguageBackground();
+			await TranslationService.#loadTranslatorLanguage(singletonTranslator, loadLanguageFn);
 			return singletonTranslator;
 		}
 		if (singletonTranslatorPromise != null) {
@@ -144,7 +145,7 @@ export class TranslationService {
 				TranslationService.FALLBACK_LANGUAGE,
 			);
 			// load translations for user picked language or salesforce language
-			await translator.loadLanguageBackground();
+			await TranslationService.#loadTranslatorLanguage(translator, loadLanguageFn);
 			if (await translator.updatePageTranslations()) {
 				translator.setListenerForLanguageChange();
 			}
@@ -361,10 +362,10 @@ export class TranslationService {
 	 */
 	async updatePageTranslations(language = this.currentLanguage) {
 		this.currentLanguage = language ?? TranslationService.FALLBACK_LANGUAGE;
-		if (document == null) {
+		if (globalThis.document == null) {
 			return false;
 		}
-		const elements = document.querySelectorAll(
+		const elements = globalThis.document.querySelectorAll(
 			`[${TranslationService.TRANSLATE_ELEMENT_ATTRIBUTE}]:not([${TranslationService.ATTRIBUTE_EXCLUDE}="true"])`,
 		);
 		for (const element of elements) {
@@ -403,94 +404,117 @@ export class TranslationService {
 			}
 		});
 	}
-}
 
-/**
- * Asynchronously retrieves the translator instance, initializing it if necessary.
- *
- * If the translator has not been initialized, it creates a new instance.
- * If initialization is already in progress (i.e., `singletonTranslator` is a Promise), it waits for it to complete.
- *
- * @return {Promise<TranslationService>} A promise that resolves to the translator instance.
- * @async
- */
-function getTranslator_async() {
-	return singletonTranslatorPromise ?? singletonTranslator ??
-		TranslationService.create();
-}
-
-/**
- * Returns the initialized translator instance.
- *
- * Throws an error if the translator has not been initialized or is still initializing.
- *
- * @throws {Error} If the translator is not yet initialized.
- * @return {TranslationService} The initialized translator instance.
- */
-function getTranslator() {
-	if (
-		singletonTranslator == null ||
-		singletonTranslatorPromise != null
-	) {
-		throw new Error("error_translator_not_initialized");
+  /**
+   * Loads the active translator language with an optional caller-provided loader.
+   *
+   * @param {TranslationService} translator - The translator to load.
+   * @param {Function|null} [loadLanguageFn=null] Optional active-language loader.
+   * @return {Promise<string|null>} The loaded language code when available.
+   */
+	static async #loadTranslatorLanguage(translator, loadLanguageFn = null) {
+		if (loadLanguageFn != null) {
+			return await loadLanguageFn(translator);
+		}
+		return translator.loadLanguageBackground();
 	}
-	return singletonTranslator;
-}
 
-/**
- * Ensures that the translator service is available.
- *
- * Returns the initialized translator if available, otherwise attempts to initialize and return it.
- *
- * @return {Promise<TranslationService>} A promise that resolves to the translator instance.
- * @async
- */
-export function ensureTranslatorAvailability() {
-	try {
-		return getTranslator();
-	} catch (e) {
-		console.info(e);
-		return getTranslator_async();
+  /**
+   * Asynchronously retrieves the translator instance, initializing it if necessary.
+   *
+   * If the translator has not been initialized, it creates a new instance.
+   * If initialization is already in progress (i.e., `singletonTranslator` is a Promise), it waits for it to complete.
+   *
+   * @param {Function|null} [loadLanguageFn=null] Optional active-language loader.
+   * @return {Promise<TranslationService>} A promise that resolves to the translator instance.
+   * @async
+   */
+	static #getTranslator_async(loadLanguageFn = null) {
+		return singletonTranslatorPromise ?? singletonTranslator ??
+			TranslationService.create(loadLanguageFn);
+	}
+
+  /**
+   * Returns the initialized translator instance.
+   *
+   * Throws an error if the translator has not been initialized or is still initializing.
+   *
+   * @throws {Error} If the translator is not yet initialized.
+   * @return {TranslationService} The initialized translator instance.
+   */
+	static #getTranslator() {
+		if (
+			singletonTranslator == null ||
+			singletonTranslatorPromise != null
+		) {
+			throw new Error("error_translator_not_initialized");
+		}
+		return singletonTranslator;
+	}
+
+  /**
+   * Ensures that the translator service is available.
+   *
+   * Returns the initialized translator if available, otherwise attempts to initialize and return it.
+   *
+   * @param {Function|null} [loadLanguageFn=null] Optional active-language loader.
+   * @return {Promise<TranslationService>} A promise that resolves to the translator instance.
+   * @async
+   */
+	static async ensureTranslatorAvailability(loadLanguageFn = null) {
+		try {
+			const translator = TranslationService.#getTranslator();
+			await TranslationService.#loadTranslatorLanguage(
+				translator,
+				loadLanguageFn,
+			);
+			return translator;
+		} catch (e) {
+			console.info(e);
+			return TranslationService.#getTranslator_async(loadLanguageFn);
+		}
+	}
+
+  /**
+   * Returns one or more translated messages.
+   *
+   * When `translations` is a string, this returns a single translated string.
+   * When `translations` is an array, this returns an array of translated strings in the same order.
+   *
+   * @param {string[]|string} [translations=[]] - Translation key(s) to resolve.
+   * @param {string|null} [connector=null] - the connector used to join the elements
+   * @return {Promise<string[]|string>} Translated result matching the input shape.
+   */
+	static async getTranslations(translations = [], connector = null) {
+		const isArrayInput = Array.isArray(translations);
+		const translationKeys = isArrayInput ? translations : [translations];
+		if (translationKeys.length === 0) {
+			return translations;
+		}
+		const translator = await TranslationService
+			.ensureTranslatorAvailability();
+		const translated = await Promise.all(
+			translationKeys.map((item) => translator.translate(item, connector)),
+		);
+		return isArrayInput ? translated : translated[0];
+	}
+
+  /**
+   * Returns a translator attribute when available.
+   *
+   * @param {string|null} [attribute=null] - The attribute to read.
+   * @return {Promise<string|null>} The requested attribute value or null.
+   */
+	static async getTranslatorAttribute(attribute = null) {
+		if (attribute == null) return null;
+		const translator = await TranslationService
+			.ensureTranslatorAvailability();
+		return translator?.[attribute] ?? null;
 	}
 }
 
-/**
- * Returns one or more translated messages.
- *
- * When `translations` is a string, this returns a single translated string.
- * When `translations` is an array, this returns an array of translated strings in the same order.
- *
- * @param {string[]|string} [translations=[]] - Translation key(s) to resolve.
- * @param {string|null} [connector=null] - the connector used to join the elements
- * @return {Promise<string[]|string>} Translated result matching the input shape.
- */
-export async function getTranslations(translations = [], connector = null) {
-	const isArrayInput = Array.isArray(translations);
-	const translationKeys = isArrayInput ? translations : [translations];
-	if (translationKeys.length === 0) {
-		return translations;
-	}
-	const translator = await ensureTranslatorAvailability();
-	const translated = await Promise.all(
-		translationKeys.map((item) => translator.translate(item, connector)),
-	);
-	return isArrayInput ? translated : translated[0];
-}
 
-/**
- * Returns a translator attribute when available.
- *
- * This helper is synchronous on purpose so callers can read static translator
- * attributes without awaiting service initialization.
- *
- * @param {string|null} [attribute=null] - The attribute to read.
- * @return {Promise<string|null>} The requested attribute value or null.
- */
-export async function getTranslatorAttribute(attribute = null) {
-	if (attribute == null) return null;
-	const translator = await ensureTranslatorAvailability();
-	return translator?.[attribute] ?? null;
-}
+
 
 /**
  * Creates translator helpers with optional dependency overrides.
@@ -498,9 +522,9 @@ export async function getTranslatorAttribute(attribute = null) {
  * @param {Object} [overrides={}] Runtime overrides used by tests.
  * @return {{
  *   TranslationService: typeof TranslationService;
- *   ensureTranslatorAvailability: typeof ensureTranslatorAvailability;
- *   getTranslations: typeof getTranslations;
- *   getTranslatorAttribute: typeof getTranslatorAttribute;
+ *   ensureTranslatorAvailability: typeof TranslationService.ensureTranslatorAvailability;
+ *   getTranslations: typeof TranslationService.getTranslations;
+ *   getTranslatorAttribute: typeof TranslationService.getTranslatorAttribute;
  * }} Translator module API.
  */
 export function createTranslatorModule(overrides = {}) {
@@ -528,8 +552,9 @@ export function createTranslatorModule(overrides = {}) {
 
 	return {
 		TranslationService,
-		ensureTranslatorAvailability,
-		getTranslations,
-		getTranslatorAttribute,
+		ensureTranslatorAvailability:
+			TranslationService.ensureTranslatorAvailability,
+		getTranslations: TranslationService.getTranslations,
+		getTranslatorAttribute: TranslationService.getTranslatorAttribute,
 	};
 }

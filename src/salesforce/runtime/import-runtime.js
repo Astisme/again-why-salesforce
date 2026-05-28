@@ -13,7 +13,7 @@ import {
 	ensureAllTabsAvailability,
 	TabContainer,
 } from "../../core/tabContainer.js";
-import { getTranslations } from "../../core/translator.js";
+import { TranslationService } from "../../core/translator.js";
 
 import {
 	generateCheckboxWithLabel,
@@ -40,7 +40,7 @@ import { getModalHanger, getSetupTabUl } from "../sf-elements.js";
  * @param {unknown} [overrides.Tab=Tab] Tab helper object.
  * @param {unknown} [overrides.TabContainer=TabContainer] TabContainer helper object.
  * @param {() => Promise<unknown>} [overrides.ensureAllTabsAvailability=ensureAllTabsAvailability] Saved-tab container resolver.
- * @param {(keys: string | string[]) => Promise<string | string[]>} [overrides.getTranslations=getTranslations] Translation resolver.
+ * @param {(keys: string | string[]) => Promise<string | string[]>} [overrides.getTranslations=TranslationService.getTranslations] Translation resolver.
  * @param {(id: string, i18nKey: string, checked: boolean) => Promise<unknown>} [overrides.generateCheckboxWithLabel=generateCheckboxWithLabel] Checkbox generator.
  * @param {() => Promise<{ section: unknown; divParent: unknown }>} [overrides.generateSection=generateSection] Section generator.
  * @param {(importId: string, fileInputId: string, accept: string) => Promise<{ fileInputWrapper: unknown; inputContainer: unknown }>} [overrides.generateSldsFileInput=generateSldsFileInput] File input generator.
@@ -97,7 +97,8 @@ export function createImportModule(overrides = {}) {
 		tabContainerRef: overrides.TabContainer ?? TabContainer,
 		ensureAllTabsAvailabilityFn: overrides.ensureAllTabsAvailability ??
 			ensureAllTabsAvailability,
-		getTranslationsFn: overrides.getTranslations ?? getTranslations,
+		getTranslationsFn: overrides.getTranslations ??
+			TranslationService.getTranslations,
 		generateCheckboxWithLabelFn: overrides.generateCheckboxWithLabel ??
 			generateCheckboxWithLabel,
 		generateSectionFn: overrides.generateSection ?? generateSection,

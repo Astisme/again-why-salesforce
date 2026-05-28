@@ -11,13 +11,13 @@ import {
 	WHAT_GET_BROWSER_TAB,
 } from "../../core/constants.js";
 import { getSettings, sendExtensionMessage } from "../../core/functions.js";
-import { ensureTranslatorAvailability } from "../../core/translator.js";
+import { TranslationService } from "../../core/translator.js";
 import "../themeHandler.js";
 import { runNotSalesforceSetup } from "./notSalesforceSetup-runtime.js";
 
 await runNotSalesforceSetup({
 	browser: BROWSER,
-	ensureTranslatorAvailabilityFn: ensureTranslatorAvailability,
+	ensureTranslatorAvailabilityFn: TranslationService.ensureTranslatorAvailability,
 	getSettingsFn: getSettings,
 	hiddenClass: HIDDEN_CLASS,
 	popupLoginNewTab: POPUP_LOGIN_NEW_TAB,

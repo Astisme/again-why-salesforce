@@ -204,6 +204,9 @@ type ManageTabsDependencyMap = {
 	Tab: new () => { kind: string };
 	ensureAllTabsAvailability: () => string[];
 	TabContainer: new () => { size: number };
+	TranslationService: {
+		getTranslations: (message: string | string[]) => string;
+	};
 	getTranslations: (message: string | string[]) => string;
 	setupDragForTable: (name: string) => string;
 	setupDragForUl: (name: string) => string;
@@ -627,6 +630,10 @@ Deno.test("manageTabs-runtime wrappers delegate singleton and merge overrides", 
 		ensureAllTabsAvailability: () => [],
 		TabContainer: class {
 			size = 0;
+		},
+		TranslationService: {
+			getTranslations: (message) =>
+				Array.isArray(message) ? message.join(",") : message,
 		},
 		getTranslations: (message) =>
 			Array.isArray(message) ? message.join(",") : message,

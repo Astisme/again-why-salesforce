@@ -40,7 +40,7 @@ import {
 	ensureAllTabsAvailability as _ensureAllTabsAvailability,
 	TabContainer as _TabContainer,
 } from "../../core/tabContainer.js";
-import { getTranslations as _getTranslations } from "../../core/translator.js";
+import { TranslationService as _TranslationService } from "../../core/translator.js";
 
 import { getCurrentHref as _getCurrentHref } from "../sf-elements.js";
 import { updateModalBodyOverflow as _updateModalBodyOverflow } from "../modal-layout.js";
@@ -80,7 +80,7 @@ let performLightningRedirect = _performLightningRedirect;
 let Tab = _Tab;
 let ensureAllTabsAvailability = _ensureAllTabsAvailability;
 let TabContainer = _TabContainer;
-let getTranslations = _getTranslations;
+let getTranslations = _TranslationService.getTranslations;
 let getCurrentHref = _getCurrentHref;
 let updateModalBodyOverflow = _updateModalBodyOverflow;
 

@@ -57,10 +57,7 @@ import {
 	requestFramePatternsPermission as _requestFramePatternsPermission,
 	sendExtensionMessage as _sendExtensionMessage,
 } from "../core/functions.js";
-import {
-	ensureTranslatorAvailability as _ensureTranslatorAvailability,
-	getTranslations as _getTranslations,
-} from "../core/translator.js";
+import { TranslationService as _TranslationService } from "../core/translator.js";
 
 let EXTENSION_LAST_ACTIVE_DAY = _EXTENSION_LAST_ACTIVE_DAY;
 let EXTENSION_NAME = _EXTENSION_NAME;
@@ -118,8 +115,8 @@ let requestCookiesPermission = _requestCookiesPermission;
 let requestExportPermission = _requestExportPermission;
 let requestFramePatternsPermission = _requestFramePatternsPermission;
 let sendExtensionMessage = _sendExtensionMessage;
-let ensureTranslatorAvailability = _ensureTranslatorAvailability;
-let getTranslations = _getTranslations;
+let ensureTranslatorAvailability = _TranslationService.ensureTranslatorAvailability;
+let getTranslations = _TranslationService.getTranslations;
 
 /**
  * Loads and registers the theme selector component unless tests ask to skip it.
@@ -1998,7 +1995,7 @@ export function createOptionsModule(
 	{ runRestoreOnLoad = true } = {},
 ) {
 	applyOptionsOverrides(overrides);
-	ensureTranslatorAvailability();
+	void ensureTranslatorAvailability();
 	void ensureThemeSelectorAvailability();
 	for (const key of Object.keys(listenersSet)) delete listenersSet[key];
 	activePreview = null;

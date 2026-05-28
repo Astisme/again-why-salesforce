@@ -21,7 +21,7 @@ import {
 	ensureAllTabsAvailability,
 	TabContainer,
 } from "../../core/tabContainer.js";
-import { getTranslations } from "../../core/translator.js";
+import { TranslationService } from "../../core/translator.js";
 
 import { setupDragForTable, setupDragForUl } from "../dragHandler.js";
 import {
@@ -105,7 +105,8 @@ export function createManageTabsModule(overrides = {}) {
 			overrides.getInnerElementFieldBySelector ??
 				getInnerElementFieldBySelector,
 		getModalHanger: overrides.getModalHanger ?? getModalHanger,
-		getTranslations: overrides.getTranslations ?? getTranslations,
+		getTranslations: overrides.getTranslations ??
+			TranslationService.getTranslations,
 		handleLightningLinkClick: overrides.handleLightningLinkClick ??
 			handleLightningLinkClick,
 		injectStyle: overrides.injectStyle ?? injectStyle,

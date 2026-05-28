@@ -24,7 +24,7 @@ import {
 } from "../core/functions.js";
 import Tab from "../core/tab.js";
 import { ensureAllTabsAvailability } from "../core/tabContainer.js";
-import { getTranslations } from "../core/translator.js";
+import { TranslationService } from "../core/translator.js";
 import {
 	getIsCurrentlyOnSavedTab,
 	getWasOnSavedTab,
@@ -54,7 +54,7 @@ const moduleRef = createFavouriteManagerModule({
 	whatGetCommands: WHAT_GET_COMMANDS,
 	tabRef: Tab,
 	ensureAllTabsAvailabilityFn: ensureAllTabsAvailability,
-	getTranslationsFn: getTranslations,
+	getTranslationsFn: TranslationService.getTranslations,
 	getCurrentHrefFn: getCurrentHref,
 	getIsCurrentlyOnSavedTabFn: getIsCurrentlyOnSavedTab,
 	getSettingsFn: getSettings,

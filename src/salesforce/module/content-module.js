@@ -60,7 +60,7 @@ import {
 	getInnerElementFieldBySelector as _getInnerElementFieldBySelector,
 	getSettings as _getSettings,
 } from "../../core/functions.js";
-import { getTranslations as _getTranslations } from "../../core/translator.js";
+import { TranslationService as _TranslationService } from "../../core/translator.js";
 import _Tab from "../../core/tab.js";
 import { ensureAllTabsAvailability as _ensureAllTabsAvailability } from "../../core/tabContainer.js";
 import { setupDragForUl as _setupDragForUl } from "../dragHandler.js";
@@ -154,7 +154,7 @@ const DEPENDENCIES = {
 	getModalHanger: _getModalHanger,
 	getSettings: _getSettings,
 	getSetupTabUl: _getSetupTabUl,
-	getTranslations: _getTranslations,
+	getTranslations: _TranslationService.getTranslations,
 	setupDragForUl: _setupDragForUl,
 	showToast: _showToast,
 };

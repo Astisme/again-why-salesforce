@@ -9,7 +9,7 @@ import {
 	TOAST_WARNING,
 } from "../../core/constants.js";
 import { getSettings } from "../../core/functions.js";
-import { getTranslations } from "../../core/translator.js";
+import { TranslationService } from "../../core/translator.js";
 import Tab from "../../core/tab.js";
 import { ensureAllTabsAvailability } from "../../core/tabContainer.js";
 
@@ -31,7 +31,7 @@ import { showToast } from "../toast.js";
  * @param {string} [overrides.toastError=TOAST_ERROR] Error toast status.
  * @param {string} [overrides.toastWarning=TOAST_WARNING] Warning toast status.
  * @param {(keys: string | string[]) => Promise<unknown>} [overrides.getSettingsFn=getSettings] Settings resolver.
- * @param {(message: string | string[] | unknown[], connector?: string) => Promise<string | string[]>} [overrides.getTranslationsFn=getTranslations] Translation resolver.
+ * @param {(message: string | string[] | unknown[], connector?: string) => Promise<string | string[]>} [overrides.getTranslationsFn=TranslationService.getTranslations] Translation resolver.
  * @param {{
  *   containsSalesforceId: (url: string | null) => boolean;
  *   extractOrgName: (value: string | null | undefined) => string;
@@ -85,7 +85,7 @@ export function createOpenOtherOrgModule({
 	toastError = TOAST_ERROR,
 	toastWarning = TOAST_WARNING,
 	getSettingsFn = getSettings,
-	getTranslationsFn = getTranslations,
+	getTranslationsFn = TranslationService.getTranslations,
 	tabRef = Tab,
 	ensureAllTabsAvailabilityFn = ensureAllTabsAvailability,
 	generateOpenOtherOrgModalFn = generateOpenOtherOrgModal,

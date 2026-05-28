@@ -23,7 +23,7 @@ import {
 	ensureAllTabsAvailability as _ensureAllTabsAvailability,
 	TabContainer as _TabContainer,
 } from "../../core/tabContainer.js";
-import { getTranslations as _getTranslations } from "../../core/translator.js";
+import { TranslationService as _TranslationService } from "../../core/translator.js";
 
 import {
 	setupDragForTable as _setupDragForTable,
@@ -64,7 +64,7 @@ let injectStyle = _injectStyle;
 let Tab = _Tab;
 let ensureAllTabsAvailability = _ensureAllTabsAvailability;
 let TabContainer = _TabContainer;
-let getTranslations = _getTranslations;
+let getTranslations = _TranslationService.getTranslations;
 let setupDragForTable = _setupDragForTable;
 let setupDragForUl = _setupDragForUl;
 let createManageTabRow = _createManageTabRow;
