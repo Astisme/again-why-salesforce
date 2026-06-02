@@ -44,6 +44,29 @@ Deno.test("ThemeSelectorAws", async (t) => {
 			globalThis.localStorage = testLocalStorage;
 		};
 
+		/**
+		 * Installs synchronous timers for transition tests.
+		 *
+		 * @return {void}
+		 */
+		const installImmediateTimers = () => {
+			Object.defineProperty(globalThis, "setTimeout", {
+				configurable: true,
+				value: (callback: TimerHandler) => {
+					if (typeof callback === "function") {
+						callback();
+					}
+					return 1;
+				},
+				writable: true,
+			});
+			Object.defineProperty(globalThis, "clearTimeout", {
+				configurable: true,
+				value: () => {},
+				writable: true,
+			});
+		};
+
 		await t.step(
 			"renders the template when the host starts empty",
 			() => {
@@ -124,13 +147,7 @@ Deno.test("ThemeSelectorAws", async (t) => {
 			"dispatches the before-theme-toggle event and swaps visible buttons on click",
 			() => {
 				restoreGlobals();
-				globalThis.setTimeout = (callback: TimerHandler) => {
-					if (typeof callback === "function") {
-						callback();
-					}
-					return 1;
-				};
-				globalThis.clearTimeout = () => {};
+				installImmediateTimers();
 				document.documentElement.dataset.theme = "light";
 				const component = document.createElement(
 					"theme-selector-aws",
@@ -216,13 +233,7 @@ Deno.test("ThemeSelectorAws", async (t) => {
 			"swaps the opposite buttons when the current theme is dark",
 			() => {
 				restoreGlobals();
-				globalThis.setTimeout = (callback: TimerHandler) => {
-					if (typeof callback === "function") {
-						callback();
-					}
-					return 1;
-				};
-				globalThis.clearTimeout = () => {};
+				installImmediateTimers();
 				document.documentElement.dataset.theme = "dark";
 				testLocalStorage.setItem("usingTheme", "dark");
 				const component = document.createElement(
