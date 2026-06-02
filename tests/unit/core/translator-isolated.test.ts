@@ -274,8 +274,8 @@ Deno.test("translator isolated uses caller language loader without extension mes
 		assertEquals(translator.currentLanguage, "fr");
 		assertEquals(fixture.messageCalls, []);
 
-		const reloadedTranslator =
-			await fixture.module.ensureTranslatorAvailability(
+		const reloadedTranslator = await fixture.module
+			.ensureTranslatorAvailability(
 				async (service) => {
 					await service.loadNewLanguage("en");
 					return service.currentLanguage;
