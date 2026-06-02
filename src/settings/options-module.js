@@ -115,7 +115,8 @@ let requestCookiesPermission = _requestCookiesPermission;
 let requestExportPermission = _requestExportPermission;
 let requestFramePatternsPermission = _requestFramePatternsPermission;
 let sendExtensionMessage = _sendExtensionMessage;
-let ensureTranslatorAvailability = _TranslationService.ensureTranslatorAvailability;
+let ensureTranslatorAvailability =
+	_TranslationService.ensureTranslatorAvailability;
 let getTranslations = _TranslationService.getTranslations;
 
 /**

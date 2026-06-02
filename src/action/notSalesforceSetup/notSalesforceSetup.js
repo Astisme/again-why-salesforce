@@ -17,7 +17,8 @@ import { runNotSalesforceSetup } from "./notSalesforceSetup-runtime.js";
 
 await runNotSalesforceSetup({
 	browser: BROWSER,
-	ensureTranslatorAvailabilityFn: TranslationService.ensureTranslatorAvailability,
+	ensureTranslatorAvailabilityFn:
+		TranslationService.ensureTranslatorAvailability,
 	getSettingsFn: getSettings,
 	hiddenClass: HIDDEN_CLASS,
 	popupLoginNewTab: POPUP_LOGIN_NEW_TAB,
