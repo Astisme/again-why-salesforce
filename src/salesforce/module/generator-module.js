@@ -167,9 +167,9 @@ function _getLinkTarget(e, url) {
  */
 export async function handleLightningLinkClick(e) {
 	e.preventDefault();
-	const currentTarget = e.currentTarget?.target ?? e.target;
+	const currentTarget = e.currentTarget ?? e.target;
 	const metaCtrl = { ctrlKey: e.ctrlKey, metaKey: e.metaKey };
-	const url = currentTarget.href;
+	const url = currentTarget?.href;
 	if (url == null) {
 		await showToast("error_redirect", TOAST_ERROR);
 		return;
@@ -182,9 +182,10 @@ export async function handleLightningLinkClick(e) {
 		]),
 	]);
 	allTabs.handleClickTabByData({ url: Tab.minifyURL(url) });
-	const fallbackTarget = currentTarget === ""
+	const linkTarget = currentTarget.target ?? "";
+	const fallbackTarget = linkTarget === ""
 		? _getLinkTarget(metaCtrl, url)
-		: currentTarget;
+		: linkTarget;
 	const target =
 		settings?.some((setting) =>
 				setting.id === LINK_NEW_BROWSER && setting.enabled

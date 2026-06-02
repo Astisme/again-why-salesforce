@@ -28,15 +28,14 @@ type LightningLinkEvent = {
 	ctrlKey: boolean;
 	currentTarget: {
 		href: string | null;
-		target:
-			| {
-				href: string | null;
-			}
-			| string
-			| null;
+		target: string;
 	};
 	metaKey: boolean;
 	preventDefault: () => void;
+	target?: {
+		href: string | null;
+		target: string;
+	};
 };
 
 type ManageTabsInput =
@@ -828,7 +827,7 @@ Deno.test("generator handles Lightning links for missing href, redirects, and ne
 			ctrlKey: false,
 			currentTarget: {
 				href: null,
-				target: null,
+				target: "",
 			},
 			metaKey: false,
 			preventDefault() {},
@@ -849,11 +848,9 @@ Deno.test("generator handles Lightning links for missing href, redirects, and ne
 		await redirectFixture.module.handleLightningLinkClick({
 			ctrlKey: false,
 			currentTarget: {
-				target: {
-					href:
-						"https://acme.lightning.force.com/lightning/setup/Flows/home",
-				},
-				href: null,
+				href:
+					"https://acme.lightning.force.com/lightning/setup/Flows/home",
+				target: "",
 			},
 			metaKey: false,
 			preventDefault() {},
@@ -880,7 +877,7 @@ Deno.test("generator handles Lightning links for missing href, redirects, and ne
 			currentTarget: {
 				href:
 					"https://acme.lightning.force.com/lightning/setup/Profiles/home",
-				target: null,
+				target: "",
 			},
 			metaKey: false,
 			preventDefault() {},
@@ -931,7 +928,7 @@ Deno.test("generator handles Lightning links for missing href, redirects, and ne
 			currentTarget: {
 				href:
 					"https://acme.lightning.force.com/lightning/setup/PermissionSets/home",
-				target: null,
+				target: "",
 			},
 			metaKey: false,
 			preventDefault() {},
