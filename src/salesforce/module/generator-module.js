@@ -167,9 +167,9 @@ function _getLinkTarget(e, url) {
  */
 export async function handleLightningLinkClick(e) {
 	e.preventDefault();
-	const currentTarget = e.currentTarget.target;
+	const currentTarget = e.currentTarget?.target ?? e.target;
 	const metaCtrl = { ctrlKey: e.ctrlKey, metaKey: e.metaKey };
-	const url = e.currentTarget.href;
+	const url = currentTarget.href;
 	if (url == null) {
 		await showToast("error_redirect", TOAST_ERROR);
 		return;

@@ -1500,8 +1500,12 @@ export class TabContainer extends Array {
 	 * @async
 	 */
 	handleClickTabByData(tabData = {}) {
-		this.getSingleTabByData(tabData)
-			?.handleClick();
+		try {
+			this.getSingleTabByData(tabData)
+				?.handleClick();
+		} catch (e) {
+			console.warn(e);
+		}
 		return this.syncTabs();
 	}
 
