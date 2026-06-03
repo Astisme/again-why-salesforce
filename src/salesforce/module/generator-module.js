@@ -463,7 +463,7 @@ export function generateRowTemplate(
 /**
  * Generates an SLDS-styled toast message with a specified message, success, and warning types.
  *
- * @param {string} message - The message to display in the toast.
+ * @param {string|string[]} message - The message to display in the toast.
  * @param {string} [status="success"]  - The toast type.
  * @throws {Error} Throws an error if required parameters are missing or invalid.
  * @param {string} status - The toast type.
@@ -546,8 +546,12 @@ export async function generateSldsToastMessage(
 	toastContent.classList.add("toastContent", "slds-notify__content");
 	const contentInner = document.createElement("div");
 	contentInner.classList.add("slds-align-middle", "slds-hyphenate");
-	const descriptionDiv = document.createElement("div");
-	descriptionDiv.id = "toastDescription7382:0";
+	const extensionNameTitle = document.createElement("div");
+	extensionNameTitle.classList.add("slds-text-heading--small");
+	extensionNameTitle.style.fontWeight = "bold";
+	extensionNameTitle.style.textDecoration = "underline";
+	extensionNameTitle.textContent = EXTENSION_LABEL;
+	contentInner.appendChild(extensionNameTitle);
 	const translatedMessage = await getTranslations(message);
 	for (
 		const msg_split of Array.isArray(translatedMessage)
@@ -562,10 +566,9 @@ export async function generateSldsToastMessage(
 		);
 		messageSpan.dataset.auraClass = "forceActionsText";
 		messageSpan.textContent = msg_split;
-		descriptionDiv.appendChild(messageSpan);
+		contentInner.appendChild(messageSpan);
 	}
 	// Assemble the message
-	contentInner.appendChild(descriptionDiv);
 	toastContent.appendChild(contentInner);
 	// Assemble the toast
 	toast.appendChild(iconContainer);

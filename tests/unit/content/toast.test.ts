@@ -87,8 +87,12 @@ function loadToastFixture() {
 		documentRef: {
 			getElementsByClassName: () => [currentHanger],
 		},
-		generateSldsToastMessageFn: (message: string[]) =>
-			Promise.resolve(new ToastElement(message.join("|"))),
+		generateSldsToastMessageFn: (message: string[] | string) =>
+			Promise.resolve(
+				new ToastElement(
+					Array.isArray(message) ? message.join("|") : message,
+				),
+			),
 		setTimeoutFn: (callback: () => void) => {
 			callback();
 			return 1;
@@ -189,8 +193,12 @@ Deno.test("toast accepts custom statuses present in the allowed status set", asy
 		documentRef: {
 			getElementsByClassName: () => [hanger],
 		},
-		generateSldsToastMessageFn: (message: string[]) =>
-			Promise.resolve(new ToastElement(message.join("|"))),
+		generateSldsToastMessageFn: (message: string[] | string) =>
+			Promise.resolve(
+				new ToastElement(
+					Array.isArray(message) ? message.join("|") : message,
+				),
+			),
 		setTimeoutFn: (callback: () => void) => {
 			callback();
 			return 1;

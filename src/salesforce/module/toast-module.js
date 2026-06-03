@@ -126,7 +126,7 @@ export function createToastModule({
 		}
 		const hanger = getToastHanger();
 		const toastElement = await generateSldsToastMessageFn(
-			Array.isArray(message) ? message : [message],
+			message,
 			status,
 		);
 		hanger?.appendChild(toastElement);

@@ -1503,10 +1503,11 @@ export class TabContainer extends Array {
 		try {
 			this.getSingleTabByData(tabData)
 				?.handleClick();
+			return this.syncTabs();
 		} catch (e) {
 			console.warn(e);
 		}
-		return this.syncTabs();
+		return true;
 	}
 
 	/**

@@ -1237,7 +1237,7 @@ Deno.test(
 			});
 			await harness.flush();
 			assertEquals(harness.records.toasts.at(-1), {
-				message: ["extension_label", "tabs_saved"],
+				message: ["tabs_saved"],
 				status: "success",
 			});
 			content.sf_afterSet({ what: "focused", tabs: newTabs });

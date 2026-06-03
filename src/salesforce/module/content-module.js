@@ -380,7 +380,7 @@ function sf_afterSet({
 		return;
 	}
 	if (what === CONSTANTS.WHAT_SAVED) {
-		showToast(["extension_label", "tabs_saved"]);
+		showToast("tabs_saved");
 	}
 	if (shouldReload) {
 		trackContentTask(reloadTabs(tabs));
@@ -563,11 +563,10 @@ function delayLoadSetupTabs(count = 0) {
 	if (count > 5) {
 		// write error in the console
 		trackContentTask((async () => {
-			const [label, fail] = await getTranslations([
-				"extension_label",
+			const fail = await getTranslations(
 				"error_no_setup_tab",
-			]);
-			console.error(`${label} - ${fail}`);
+			);
+			console.error(fail);
 			setTimeout(delayLoadSetupTabs, 5000);
 		})());
 		return;
