@@ -38,22 +38,22 @@
 
 ## Fast Install
 
-<a href="https://github.com/Astisme/again-why-salesforce/releases" target="_top">
-  <img src="https://developer.apple.com/assets/elements/icons/safari-macos-11/safari-macos-11-128x128_2x.png" title="Add to Safari" width="80px" height="80px" align="right"/>
-</a>
-<a href="https://addons.mozilla.org/en-US/firefox/addon/again-why-salesforce/" target="_blank">
-  <img src="https://www.mozilla.org/media/protocol/img/logos/firefox/browser/logo.eb1324e44442.svg" title="Add to Firefox" width="80px" height="80px" align="right"/>
-</a>
-<a href="https://microsoftedge.microsoft.com/addons/detail/dfdjpokbfeaamjcomllncennmfhpldmm" target="_blank">
-  <img src="https://edgestatic.azureedge.net/shared/cms/lrs1c69a1j/section-images/2c3f3c46bd764335beec466a0acfde0e.png" title="Add to Edge" width="80px" height="80px" align="right"/>
-</a>
-<a href="https://chromewebstore.google.com/detail/again-why-salesforce/bceeoimjhgjbihanbiifgpndmkklajbi" target="_blank">
-  <img src="https://www.google.com/chrome/static/images/chrome-logo-m100.svg" title="Add to Chrome" width="80px" height="80px" align="right"/>
-</a>
-
 Click on your preferred browser icon to go to the extension store.
 
 For Safari users, we recommend checking out our [installation guide](https://github.com/Astisme/again-why-salesforce/wiki/Safari-Installation).
+
+<a href="https://chromewebstore.google.com/detail/again-why-salesforce/bceeoimjhgjbihanbiifgpndmkklajbi" target="_blank">
+  <img src="https://developer.chrome.com/static/docs/webstore/branding/image/iNEddTyWiMfLSwFD6qGq.png" title="Add to Chrome" width="200px" height="54px" />
+</a>
+<a href="https://get.microsoft.com/installer/download/0RDCKBMQGSCW?referrer=appbadge" target="_blank" >
+	<img src="https://get.microsoft.com/images/en-us%20light.svg" title="Add to Edge" width="200px" height="54px" />
+</a>
+<a href="https://addons.mozilla.org/en-US/firefox/addon/again-why-salesforce/" target="_blank">
+  <img src="https://blog.mozilla.org/addons/files/2020/04/get-the-addon-fx-apr-2020.svg" title="Add to Firefox" width="157px" height="54px" />
+</a>
+<a href="https://github.com/Astisme/again-why-salesforce/releases" target="_top">
+  <img src="https://developer.apple.com/assets/elements/icons/safari-macos-11/safari-macos-11-128x128_2x.png" title="Add to Safari" width="54px" height="54px" />
+</a>
 
 ## Wonderful Features
 
