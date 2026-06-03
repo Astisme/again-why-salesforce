@@ -12,6 +12,7 @@ Please remember that this project is entirely funded by **the support of its use
 ## 🐛 Fixed
 ## 💥 Removed
 ## 🧪 Tests
+## 💾 Repository
 -->
 
 # v2.2.5
@@ -22,16 +23,24 @@ Please remember that this project is entirely funded by **the support of its use
 2. Squashed modal explainer into parent function (#185)
 3. Improved callback management using optional chaining and default returns (#189)
 4. Replaced `confirm` calls with our own confirm modal (#187)
+5. Toast messages now show the extension name as title (#210)
 
 ## 🐛 Fixed
 
 1. Changing color of your Tabs would not be visible from the settings page
 2. Translator would request multiple times the same locale file due to mismanagement of current language
+3. Hunted runtime errors which would break the flow (#210)
+4. Fixed "open" on updated Tab from Manage Tabs modal not opening the link (#210)
+5. Improved secure use of regex to match Salesforce tab (#184)
 
 ## 🧪 Tests
 
 1. Added Logging Auditor & tests
 2. Added tests for new exports of translator file
+
+## 💾 Repository
+1. Refactored to use runtime + module for easier testing (#176)
+2. Updated README images which link to webstores (#210)
 
 # v2.2.4
 
