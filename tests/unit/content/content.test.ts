@@ -1247,6 +1247,10 @@ Deno.test(
 				"Only Users",
 			);
 			assertEquals(content.getSetupTabUl().childElementCount, 1);
+
+			content.sf_afterSet({ what: "focused", tabs: [] });
+			await harness.flush();
+			assertEquals(content.getSetupTabUl().childElementCount, 0);
 		} finally {
 			harness.cleanup();
 		}
@@ -1797,9 +1801,13 @@ Deno.test(
 			});
 
 			await t.step("hide org tabs", async () => {
+				const currentOrgLi = document.createElement("li");
+				currentOrgLi.classList.add("has-org-tab");
+				const currentGenericLi = document.createElement("li");
+				setupTabUl.replaceChildren(currentOrgLi, currentGenericLi);
 				await content.performActionOnTabs("hide-with-org");
-				assertEquals(orgLi.style.display, "none");
-				assertEquals(genericLi.style.display, "");
+				assertEquals(currentOrgLi.style.display, "none");
+				assertEquals(currentGenericLi.style.display, "");
 			});
 
 			await t.step("pin tab dispatches tutorial event", async () => {

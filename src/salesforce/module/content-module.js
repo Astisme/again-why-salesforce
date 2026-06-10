@@ -421,8 +421,8 @@ async function init(tabs = null, signal = null) {
 	if (shouldAbortReload(signal)) {
 		return;
 	}
+	const frag = document.createDocumentFragment();
 	if (allTabs.length > 0) {
-		const frag = document.createDocumentFragment();
 		const pinnedItems = allTabs.pinned;
 		for (const i in allTabs) {
 			if (shouldAbortReload(signal)) {
@@ -441,11 +441,11 @@ async function init(tabs = null, signal = null) {
 				),
 			);
 		}
-		if (shouldAbortReload(signal)) {
-			return;
-		}
-		getSetupTabUl().replaceChildren(frag);
 	}
+	if (shouldAbortReload(signal)) {
+		return;
+	}
+	getSetupTabUl().replaceChildren(frag);
 	await isOnSavedTab();
 	if (shouldAbortReload(signal)) {
 		return;
