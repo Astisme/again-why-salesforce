@@ -791,6 +791,7 @@ function reorderTabsTable({
  *
  * @param {TbodyHTMLElement | null} [tbody=null] Table body containing managed rows.
  * @return {number} Number of pinned rows currently shown in the modal.
+ * @throws {Error} when tbody is null
  */
 function countPinnedRows(tbody = null) {
 	if (tbody == null) {
