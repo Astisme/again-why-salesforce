@@ -40,12 +40,13 @@ Please remember that this project is entirely funded by **the support of its use
 2. Added tests for new exports of translator file
 
 ## 💾 Repository
+
 1. Refactored to use runtime + module for easier testing (#176)
 2. Updated README images which link to webstores (#210)
 
 ## 🔐 Privacy
-1. The [Privacy Policy](./PRIVACY_POLICY.md) has been aligned with recent changes (#210)
 
+1. The [Privacy Policy](./PRIVACY_POLICY.md) has been aligned with recent changes (#210)
 
 # v2.2.4
 

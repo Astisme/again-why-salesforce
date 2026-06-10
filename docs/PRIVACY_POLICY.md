@@ -21,11 +21,11 @@ _Last updated: June 2026_
 
 We use the browser's `localStorage` for page-local preferences only:
 
-| Key | Description |
-| --- | --- |
-| `usingTheme` | Current theme applied to the popup/options UI. |
-| `userTheme` | User-selected theme preference. |
-| `noPerm` | Whether you asked the extension not to prompt again for Salesforce Setup host access. |
+| Key          | Description                                                                           |
+| ------------ | ------------------------------------------------------------------------------------- |
+| `usingTheme` | Current theme applied to the popup/options UI.                                        |
+| `userTheme`  | User-selected theme preference.                                                       |
+| `noPerm`     | Whether you asked the extension not to prompt again for Salesforce Setup host access. |
 
 No personal data or browsing history is stored in `localStorage`. You can clear this by deleting browser history; the extension will continue to function after a page reload.
 
@@ -54,18 +54,18 @@ No personal data or browsing history is stored in `localStorage`. You can clear 
 
 All settings live in browser storage and are scoped to this extension only:
 
-| Key | Variable Name | Description |
-| --- | --- | --- |
-| `againWhySalesforce` | `WHY_KEY` | Saved Tabs and pinned-tab metadata. |
-| `settings` | `SETTINGS_KEY` | General extension preferences. |
-| `settings-tab_generic_style` | `GENERIC_TAB_STYLE_KEY` | Styles for generic (all-org) Tab decorations. |
-| `settings-tab_generic_style-pinned` | `GENERIC_PINNED_TAB_STYLE_KEY` | Styles for pinned generic Tab decorations. |
-| `settings-tab_org_style` | `ORG_TAB_STYLE_KEY` | Styles for org-specific Tab decorations. |
-| `settings-tab_org_style-pinned` | `ORG_PINNED_TAB_STYLE_KEY` | Styles for pinned org-specific Tab decorations. |
-| `_locale` | `LOCALE_KEY` | Stores Salesforce language (if available). |
-| `extension_usage_days` | `EXTENSION_USAGE_DAYS` | Number of days the extension has been used, for local review/sponsor UI timing. |
-| `extension_last_active_day` | `EXTENSION_LAST_ACTIVE_DAY` | Last active day, used to avoid repeated once-a-day actions. |
-| `no_update_notification` | `NO_UPDATE_NOTIFICATION` | Update notification preference and last update-check date. |
+| Key                                 | Variable Name                  | Description                                                                     |
+| ----------------------------------- | ------------------------------ | ------------------------------------------------------------------------------- |
+| `againWhySalesforce`                | `WHY_KEY`                      | Saved Tabs and pinned-tab metadata.                                             |
+| `settings`                          | `SETTINGS_KEY`                 | General extension preferences.                                                  |
+| `settings-tab_generic_style`        | `GENERIC_TAB_STYLE_KEY`        | Styles for generic (all-org) Tab decorations.                                   |
+| `settings-tab_generic_style-pinned` | `GENERIC_PINNED_TAB_STYLE_KEY` | Styles for pinned generic Tab decorations.                                      |
+| `settings-tab_org_style`            | `ORG_TAB_STYLE_KEY`            | Styles for org-specific Tab decorations.                                        |
+| `settings-tab_org_style-pinned`     | `ORG_PINNED_TAB_STYLE_KEY`     | Styles for pinned org-specific Tab decorations.                                 |
+| `_locale`                           | `LOCALE_KEY`                   | Stores Salesforce language (if available).                                      |
+| `extension_usage_days`              | `EXTENSION_USAGE_DAYS`         | Number of days the extension has been used, for local review/sponsor UI timing. |
+| `extension_last_active_day`         | `EXTENSION_LAST_ACTIVE_DAY`    | Last active day, used to avoid repeated once-a-day actions.                     |
+| `no_update_notification`            | `NO_UPDATE_NOTIFICATION`       | Update notification preference and last update-check date.                      |
 
 You can reset or remove these at any time via your browser's extension storage settings as presented at point 3 above.
 
