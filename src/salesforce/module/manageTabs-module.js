@@ -787,6 +787,33 @@ function reorderTabsTable({
 }
 
 /**
+ * Counts pinned rows in the manage-tabs table, excluding trailing empty row.
+ *
+ * @param {TbodyHTMLElement | null} [tbody=null] Table body containing managed rows.
+ * @return {number} Number of pinned rows currently shown in the modal.
+ */
+function countPinnedRows(tbody = null) {
+	if (tbody == null) {
+		throw new Error("error_required_params");
+	}
+	const lastTr = getLastTr(tbody);
+	let pinnedRows = 0;
+	for (const tr of tbody.querySelectorAll("tr")) {
+		if (tr === lastTr) {
+			continue;
+		}
+		if (
+			tr.querySelector("td.slds-cell-wrap")?.classList.contains(
+				PIN_TAB_CLASS,
+			)
+		) {
+			pinnedRows++;
+		}
+	}
+	return pinnedRows;
+}
+
+/**
  * Finds all the trs and their inputs to update the currently saved Tabs
  * @param {Object} [param0={}] an object with the following keys
  * @param {TbodyHTMLElement} [param0.tbody=document.querySelector("#sortable-table tbody")] - the tbody inside the modal where the trs can be found
@@ -821,6 +848,7 @@ async function readManagedTabsAndSave({
 		}
 	}
 	allTabs = allTabs ?? await ensureAllTabsAvailability();
+	allTabs[TabContainer.keyPinnedTabsNo] = countPinnedRows(tbody);
 	// send message to save the Tabs as they were read
 	if (
 		await allTabs.replaceTabs(tableTabs, {
@@ -969,6 +997,7 @@ export async function createManageTabsModal() {
  *   closeDropdownOnBtnClick: (e: Event, button: HTMLButtonElement) => void;
  *   closeDropdownOnTrClick: (e: Event, button: HTMLButtonElement) => void;
  *   createManageTabsModal: () => Promise<void>;
+ *   countPinnedRows: (tbody?: HTMLElement | null) => number;
  *   getLastTr: (tbody?: HTMLElement | null) => HTMLElement | undefined;
  *   handleActionButtonClick: (e: Event, options?: Record<string, unknown>) => Promise<void>;
  *   moveTrToGivenIndex: (options?: Record<string, unknown>) => void;
@@ -1101,6 +1130,7 @@ export function createManageTabsModule(overrides = {}) {
 		checkRemoveTr,
 		closeDropdownOnBtnClick,
 		closeDropdownOnTrClick,
+		countPinnedRows,
 		createManageTabsModal,
 		getLastTr,
 		handleActionButtonClick,

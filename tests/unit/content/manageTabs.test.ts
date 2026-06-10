@@ -1,5 +1,6 @@
 import "../../mocks.test.ts";
 import {
+	assert,
 	assertEquals,
 	assertRejects,
 	assertThrows,
@@ -46,6 +47,7 @@ type ManageTabsModule = {
 		button: ManageElement,
 	) => void;
 	closeDropdownOnTrClick: (event: ManageEvent, button: ManageElement) => void;
+	countPinnedRows: (tbody?: ManageElement | null) => number;
 	createManageTabsModal: () => Promise<void>;
 	getLastTr: (tbody?: ManageElement | null) => ManageElement | null;
 	handleActionButtonClick: (
@@ -675,6 +677,36 @@ function createManagedLoggers(rows: ManageElement[]) {
 			url,
 		};
 	});
+}
+
+/**
+ * Builds a manage-tabs tbody with a requested number of saved and pinned rows.
+ *
+ * @param {number} savedRows Number of non-empty rows to save.
+ * @param {number} pinnedRows Number of pinned rows among saved rows.
+ * @return {{ managedLoggers: ManageLogger[]; tbody: ManageTbody; }} Table fixture.
+ */
+function createManagedTable(savedRows: number, pinnedRows: number) {
+	const tbody = new ManageTbody();
+	const rowParts = Array.from(
+		{ length: savedRows + 1 },
+		(_, index) => createRow(index),
+	);
+	for (const rowPart of rowParts) {
+		tbody.appendChild(rowPart.row);
+	}
+	for (let index = 0; index < pinnedRows; index++) {
+		rowParts[index].dragWrapperCell.classList.add("pin-tab");
+	}
+	const managedLoggers = createManagedLoggers(
+		rowParts.map((rowPart) => rowPart.row),
+	);
+	for (let index = 0; index < savedRows; index++) {
+		managedLoggers[index].label.value = `Label ${index}`;
+		managedLoggers[index].url.value = `Url ${index}`;
+		managedLoggers[index].org.value = `Org ${index}`;
+	}
+	return { managedLoggers, tbody };
 }
 
 /**
@@ -1722,23 +1754,14 @@ Deno.test("manageTabs checks duplicates, updates links, and handles input bookke
 
 Deno.test("manageTabs reduces loggers, reorders rows, and saves managed tabs", async () => {
 	const fixture = await loadManageTabs();
-	const tbody = new ManageTbody();
-	const rows = [createRow(0).row, createRow(1).row, createRow(2).row];
-	for (const row of rows) {
-		tbody.appendChild(row);
-	}
-	const managedLoggers = createManagedLoggers(rows);
-	managedLoggers[0].label.value = "Label 0";
-	managedLoggers[0].url.value = "Url 0";
-	managedLoggers[0].org.value = "Org 0";
-	managedLoggers[1].label.value = "Label 1";
-	managedLoggers[1].url.value = "Url 1";
-	managedLoggers[1].org.value = "Org 1";
+	const { managedLoggers, tbody } = createManagedTable(2, 1);
+	const rows = tbody.querySelectorAll("tr");
 	fixture.module.__setState({ managedLoggers });
 	fixture.documentQuery.current = tbody;
 
 	try {
 		assertEquals(fixture.module.reduceLoggersToElements().length, 9);
+		assertEquals(fixture.module.countPinnedRows(tbody), 1);
 
 		fixture.module.reorderTabsTable({ fromIndex: 2, toIndex: 0 });
 		assertEquals(
@@ -1756,8 +1779,13 @@ Deno.test("manageTabs reduces loggers, reorders rows, and saves managed tabs", a
 			allTabs: fixture.allTabs,
 		});
 		assertEquals(fixture.replaceTabsCalls.length, 1);
+		assertEquals(fixture.allTabs.pinnedTabsNo, 1);
 		assertEquals(fixture.replaceTabsCalls[0].tabs.length, 2);
 		assertEquals(fixture.replaceTabsCalls[0].options.invalidateSort, true);
+		assertEquals(
+			fixture.replaceTabsCalls[0].options.updatePinnedTabs,
+			false,
+		);
 		assertEquals(fixture.sfAfterSetCalls.length, 1);
 
 		fixture.replacedTabsResult.value = false;
@@ -1768,6 +1796,49 @@ Deno.test("manageTabs reduces loggers, reorders rows, and saves managed tabs", a
 		});
 	} finally {
 		fixture.cleanup();
+	}
+});
+
+Deno.test("manageTabs saves requested pinned count transitions", async () => {
+	const scenarios = [
+		{ from: 0, to: 1 },
+		{ from: 0, to: 3 },
+		{ from: 1, to: 0 },
+		{ from: 1, to: 2 },
+		{ from: 3, to: 2 },
+		{ from: 3, to: 0 },
+	];
+	for (const scenario of scenarios) {
+		const fixture = await loadManageTabs();
+		const savedRows = 3;
+		fixture.allTabs.pinnedTabsNo = scenario.from;
+		const { managedLoggers, tbody } = createManagedTable(
+			savedRows,
+			scenario.to,
+		);
+		fixture.module.__setState({ managedLoggers });
+		try {
+			await fixture.module.readManagedTabsAndSave({
+				tbody,
+				allTabs: fixture.allTabs,
+			});
+			assertEquals(
+				fixture.allTabs.pinnedTabsNo,
+				scenario.to,
+				`${scenario.from} -> ${scenario.to}`,
+			);
+			assertEquals(
+				fixture.replaceTabsCalls.at(-1)?.tabs.length,
+				savedRows,
+				`${scenario.from} -> ${scenario.to}`,
+			);
+			assert(
+				!fixture.replaceTabsCalls.at(-1)?.options.updatePinnedTabs,
+				`${scenario.from} -> ${scenario.to}`,
+			);
+		} finally {
+			fixture.cleanup();
+		}
 	}
 });
 
