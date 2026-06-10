@@ -31,8 +31,10 @@ Please remember that this project is entirely funded by **the support of its use
 1. Changing color of your Tabs would not be visible from the settings page
 2. Translator would request multiple times the same locale file due to mismanagement of current language
 3. Hunted runtime errors which would break the flow (#210)
-4. Fixed "open" on updated Tab from Manage Tabs modal not opening the link (#210)
+4. "open" action on updated Tab from Manage Tabs modal now opens the updated link (#210)
 5. Improved secure use of regex to match Salesforce tab (#184)
+6. Manage Tabs modal now saves the correct number of pinned Tabs (#210)
+7. Import now shows a new option to import the number of pinned Tabs which will be added to your list (#210)
 
 ## 🧪 Tests
 
