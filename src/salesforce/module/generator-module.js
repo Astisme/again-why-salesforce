@@ -553,13 +553,15 @@ export async function generateSldsToastMessage(
 	extensionNameTitle.textContent = EXTENSION_LABEL;
 	contentInner.appendChild(extensionNameTitle);
 	const translatedMessage = await getTranslations(message);
-  const isArrayMessage = Array.isArray(translatedMessage);
+	const isArrayMessage = Array.isArray(translatedMessage);
 	for (
 		const msg_split of isArrayMessage
 			? translatedMessage
 			: translatedMessage.split("\n")
 	) {
-		const messageSpan = document.createElement(isArrayMessage ? "span" : "div");
+		const messageSpan = document.createElement(
+			isArrayMessage ? "span" : "div",
+		);
 		messageSpan.classList.add(
 			"toastMessage",
 			"slds-text-heading--small",

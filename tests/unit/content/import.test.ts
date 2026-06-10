@@ -562,7 +562,7 @@ Deno.test("import shows the file modal and imports valid JSON files directly", a
 		assertEquals(fixture.importCalls, [{
 			config: {
 				importMetadata: true,
-				importPinnedTabs: true,
+				importPinnedTabs: false,
 				preserveOtherOrg: false,
 				resetTabs: false,
 			},
@@ -612,11 +612,11 @@ Deno.test("import pinned checkbox shows only when metadata import is unchecked",
 			"again-why-salesforce-import-pinned"
 		];
 
-		assertEquals(pinnedCheckbox.checked, true);
+		assertEquals(pinnedCheckbox.checked, false);
 		assertEquals(pinnedCheckbox.classList.contains("hidden"), false);
 		metadataCheckbox.checked = true;
 		metadataCheckbox.dispatchEvent(new Event("change"));
-		assertEquals(pinnedCheckbox.classList.contains("hidden"), true);
+		assertEquals(pinnedCheckbox.classList.contains("hidden"), false);
 		metadataCheckbox.checked = false;
 		metadataCheckbox.dispatchEvent(new Event("change"));
 		assertEquals(pinnedCheckbox.classList.contains("hidden"), false);
@@ -654,7 +654,7 @@ Deno.test("import passes current org when preserving other orgs during overwrite
 			config: {
 				currentOrg: "current-org",
 				importMetadata: false,
-				importPinnedTabs: true,
+				importPinnedTabs: false,
 				preserveOtherOrg: true,
 				resetTabs: true,
 			},
@@ -765,7 +765,7 @@ Deno.test("import reads dropped files from dataTransfer.items when files is empt
 		assertEquals(fixture.importCalls, [{
 			config: {
 				importMetadata: false,
-				importPinnedTabs: true,
+				importPinnedTabs: false,
 				preserveOtherOrg: false,
 				resetTabs: false,
 			},
@@ -860,7 +860,7 @@ Deno.test("import maps supported external formats and imports the selected tabs"
 		assertEquals(fixture.importCalls, [{
 			config: {
 				importMetadata: false,
-				importPinnedTabs: true,
+				importPinnedTabs: false,
 				preserveOtherOrg: false,
 				resetTabs: false,
 			},
@@ -909,7 +909,7 @@ Deno.test("import maps WhySalesforce tab arrays through the select flow", async 
 		assertEquals(fixture.importCalls, [{
 			config: {
 				importMetadata: false,
-				importPinnedTabs: true,
+				importPinnedTabs: false,
 				preserveOtherOrg: false,
 				resetTabs: false,
 			},
@@ -1110,7 +1110,7 @@ Deno.test("import attaches the drop reader directly", async () => {
 		assertEquals(fixture.importCalls, [{
 			config: {
 				importMetadata: false,
-				importPinnedTabs: true,
+				importPinnedTabs: false,
 				preserveOtherOrg: false,
 				resetTabs: false,
 			},
@@ -1186,7 +1186,7 @@ Deno.test("import reads a single file object directly and surfaces read failures
 		assertEquals(fixture.importCalls[0], {
 			config: {
 				importMetadata: false,
-				importPinnedTabs: true,
+				importPinnedTabs: false,
 				preserveOtherOrg: false,
 				resetTabs: false,
 			},
