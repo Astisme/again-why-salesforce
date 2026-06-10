@@ -804,6 +804,7 @@ export class TabContainer extends Array {
 					}),
 				);
 			}
+			this.unshift(...pinnedTabsList);
 			// set the pinnedTabs to the updated length of the pinnedTabsList
 			if (updatePinnedTabs) {
 				this[TabContainer.keyPinnedTabsNo] = pinnedTabsList.length;
@@ -841,12 +842,16 @@ export class TabContainer extends Array {
 	 * @param {boolean} [param1.resetTabs=false] - Whether the imported array should overwrite the currently saved tabs.
 	 * @param {boolean} [param1.preserveOtherOrg=true] - Whether the org-specific tabs should be preserved.
 	 * @param {boolean} [param1.importMetadata=false] - Whether pinned-tab metadata should also be restored.
+	 * @param {boolean} [param1.importPinnedTabs=importMetadata] - Whether pinned-tab count should be restored.
+	 * @param {string|null} [param1.currentOrg=null] - The current org when preserving other-org tabs during overwrite.
 	 * @return {Promise<number>} - Number of tabs successfully imported
 	 */
 	async importTabs(jsonString, {
 		resetTabs = false,
 		preserveOtherOrg = true,
 		importMetadata = false,
+		importPinnedTabs = false,
+		currentOrg = null,
 	} = {}) {
 		let { [TabContainer.keyTabs]: imported, ...metadata } = this
 			.#getTabContainerFromObj(JSON.parse(jsonString));
@@ -861,9 +866,20 @@ export class TabContainer extends Array {
 		const backupTabs = [...this]; // clones the Tabs inside this; otherwise, we would simply "rename" this.
 		const backupPinnedTabs = this[TabContainer.keyPinnedTabsNo];
 		try {
-			let importPinnedTabs = 0;
+			let importPinnedTabsNo = 0;
 			let importedTabsNo = 0;
-			if (importMetadata) {
+			if (!importMetadata) {
+				// remove per-Tab metadata from the JSON string
+				const metadataKeys = new Set(Tab.metadataKeys);
+				imported = this.#getTabContainerFromObj(
+					JSON.parse(
+						jsonString,
+						(key, value) =>
+							metadataKeys.has(key) ? undefined : value,
+					),
+				)[TabContainer.keyTabs];
+			}
+			if (importPinnedTabs) {
 				const {
 					pinnedTabs: _importPinnedTabs,
 					importedTabs: _importedTabsNo,
@@ -872,37 +888,24 @@ export class TabContainer extends Array {
 					importedArr: imported,
 					resetTabs,
 				});
-				importPinnedTabs = _importPinnedTabs;
+				importPinnedTabsNo = _importPinnedTabs;
 				importedTabsNo = _importedTabsNo;
-			} else {
-				// remove metadata from the JSON string
-				const metadataKeys = new Set([
-					...Tab.metadataKeys,
-					...TabContainer.metadataKeys,
-				]);
-				imported = this.#getTabContainerFromObj(
-					JSON.parse(
-						jsonString,
-						(key, value) =>
-							metadataKeys.has(key) ? undefined : value,
-					),
-				)[TabContainer.keyTabs];
-				// no need to save metadata
 			}
 			// perform actions on current Array
 			if (
 				await this.replaceTabs(undefined, {
 					resetTabs,
-					removeOrgTabs: !preserveOtherOrg,
-					updatePinnedTabs: false,
+					removeOrgTabs: !preserveOtherOrg || currentOrg != null,
+					removeThisOrgTabs: preserveOtherOrg ? currentOrg : null,
+					updatePinnedTabs: resetTabs,
 				})
 			) {
 				const newLen = this.length;
 				// import the Tabs from the JSON string (except for pinned Tabs of the list)
 				if (await this.addTabs(imported)) {
 					importedTabsNo += this.length - newLen;
-					if (resetTabs && importMetadata) {
-						this[TabContainer.keyPinnedTabsNo] = importPinnedTabs;
+					if (resetTabs && importPinnedTabs) {
+						this[TabContainer.keyPinnedTabsNo] = importPinnedTabsNo;
 					}
 					return importedTabsNo;
 				}

@@ -795,6 +795,10 @@
 		"message": "Tuo Tab-välilehden metatiedot (\"Klikkausmäärä\", \"Klikkauspäivämäärä\" jne.).",
 		"description": "[label] tuo kaikki tiedostosta löytyvät tiedot tuontiprosessin aikana"
 	},
+	"import_pinned_tabs": {
+		"message": "Import pinned $tabs number.",
+		"description": "[label] import pinned $tabs count during import process"
+	},
 	"import_successful": {
 		"message": "Tuonti onnistui",
 		"description": "[import] tuonti on suoritettu. Tämän jälkeen näytetään tuontien määrä"

@@ -795,6 +795,10 @@
 		"message": "Tab meta verilerini (\"Tıklama Sayısı\", \"Tıklama Tarihi\" vb.) İçe Aktar.",
 		"description": "[etiket] içe aktarma işlemi sırasında dosyada bulunan her şeyi içe aktar"
 	},
+	"import_pinned_tabs": {
+		"message": "Import pinned $tabs number.",
+		"description": "[label] import pinned $tabs count during import process"
+	},
 	"import_successful": {
 		"message": "Başarıyla içe aktarıldı",
 		"description": "[içe-aktar] içe aktarma tamamlandı. Bundan sonra, kaç kaydın içe aktarıldığı gösterilecektir"

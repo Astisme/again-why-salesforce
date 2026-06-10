@@ -795,6 +795,10 @@
 		"message": "Import metadata Tab (\"Kiraan Klik\", \"Tarikh Klik\" dsb.).",
 		"description": "[label] import semua yang ditemui dalam fail semasa proses import"
 	},
+	"import_pinned_tabs": {
+		"message": "Import pinned $tabs number.",
+		"description": "[label] import pinned $tabs count during import process"
+	},
 	"import_successful": {
 		"message": "Berjaya diimport",
 		"description": "[import] import telah selesai. Selepas ini, bilangan rekod yang telah diimport akan ditunjukkan"

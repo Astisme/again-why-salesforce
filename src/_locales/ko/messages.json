@@ -795,6 +795,10 @@
 		"message": "Tab 메타데이터(\"클릭 횟수\", \"클릭 날짜\" 등) 가져오기.",
 		"description": "[라벨] 가져오기 프로세스 중에 파일에서 발견된 모든 것을 가져옵니다"
 	},
+	"import_pinned_tabs": {
+		"message": "Import pinned $tabs number.",
+		"description": "[label] import pinned $tabs count during import process"
+	},
 	"import_successful": {
 		"message": "성공적으로 가져왔습니다",
 		"description": "[가져오기] 가져오기가 완료되었습니다. 이 후 가져온 레코드 수가 표시됩니다."

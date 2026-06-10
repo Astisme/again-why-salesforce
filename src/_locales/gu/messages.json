@@ -795,6 +795,10 @@
 		"message": "Tab મેટાડેટા આયાત કરો (\"ક્લિક ગણતરી\", \"ક્લિક તારીખ\" વગેરે).",
 		"description": "[લેબલ] આયાત પ્રક્રિયા દરમિયાન ફાઇલમાં મળેલ બધું આયાત કરો"
 	},
+	"import_pinned_tabs": {
+		"message": "Import pinned $tabs number.",
+		"description": "[label] import pinned $tabs count during import process"
+	},
 	"import_successful": {
 		"message": "Successfully imported",
 		"description": "[import] આયાત પૂર્ણ થઈ ગઈ. ત્યારબાદ કેટલાય રેકોર્ડ આયાત થયેલ હોવાનું દર્શાવવામાં આવશે"

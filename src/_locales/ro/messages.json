@@ -795,6 +795,10 @@
 		"message": "Importă metadatele Tab-ului (\"Număr de Click-uri\", \"Data Click-ului\" etc.).",
 		"description": "[etichetă] importă tot ce se găsește în fișier în timpul procesului de import"
 	},
+	"import_pinned_tabs": {
+		"message": "Import pinned $tabs number.",
+		"description": "[label] import pinned $tabs count during import process"
+	},
 	"import_successful": {
 		"message": "Importat cu succes",
 		"description": "[import] importul a fost finalizat. După aceasta, se va afișa numărul de înregistrări importate"

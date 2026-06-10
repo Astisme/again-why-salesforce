@@ -795,6 +795,10 @@
 		"message": "Importovať metadáta Tab-u (\"Počet Kliknutí\", \"Dátum Kliknutia\" atď.).",
 		"description": "[štítok] importovať všetko nájdené v súbore počas procesu importu"
 	},
+	"import_pinned_tabs": {
+		"message": "Import pinned $tabs number.",
+		"description": "[label] import pinned $tabs count during import process"
+	},
 	"import_successful": {
 		"message": "Import bol úspešný",
 		"description": "[import] Import bol dokončený. Následne sa zobrazí počet importovaných záznamov"

@@ -795,6 +795,10 @@
 		"message": "Nhập siêu dữ liệu Tab (\"Số Lần Nhấp\", \"Ngày Nhấp\" v.v.).",
 		"description": "[nhãn] nhập mọi thứ tìm thấy trong tệp trong quá trình nhập"
 	},
+	"import_pinned_tabs": {
+		"message": "Import pinned $tabs number.",
+		"description": "[label] import pinned $tabs count during import process"
+	},
 	"import_successful": {
 		"message": "Nhập thành công",
 		"description": "[nhập] quá trình nhập đã hoàn tất. Sau đó, một số lượng bản ghi đã được nhập sẽ được hiển thị"

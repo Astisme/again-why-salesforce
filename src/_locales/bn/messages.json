@@ -795,6 +795,10 @@
 		"message": "Tab মেটাডেটা আমদানি করুন (\"ক্লিক গণনা\", \"ক্লিক তারিখ\" ইত্যাদি)।",
 		"description": "[label] আমদানি প্রক্রিয়া চলাকালীন ফাইলে পাওয়া সবকিছু আমদানি করুন"
 	},
+	"import_pinned_tabs": {
+		"message": "Import pinned $tabs number.",
+		"description": "[label] import pinned $tabs count during import process"
+	},
 	"import_successful": {
 		"message": "সফলভাবে ইম্পোর্ট করা হয়েছে",
 		"description": "[import] ইম্পোর্ট সম্পন্ন হয়েছে। এর পরে, কতগুলো রেকর্ড ইম্পোর্ট করা হয়েছে তার সংখ্যা দেখানো হবে"

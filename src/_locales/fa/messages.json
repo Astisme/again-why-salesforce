@@ -795,6 +795,10 @@
 		"message": "وارد کردن فراداده Tab (\"تعداد کلیک\"، \"تاریخ کلیک\" و غیره).",
 		"description": "[label] وارد کردن همه چیزهایی که در فایل در طول فرآیند واردات یافت می‌شود"
 	},
+	"import_pinned_tabs": {
+		"message": "Import pinned $tabs number.",
+		"description": "[label] import pinned $tabs count during import process"
+	},
 	"import_successful": {
 		"message": "با موفقیت وارد شد",
 		"description": "[ورود] ورود کامل شد. پس از این، تعداد رکوردهای وارد شده نمایش داده خواهد شد"

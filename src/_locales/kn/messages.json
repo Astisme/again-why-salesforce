@@ -795,6 +795,10 @@
 		"message": "Tab ಮೆಟಾಡೇಟಾವನ್ನು ಆಮದು ಮಾಡಿ (\"ಕ್ಲಿಕ್ ಎಣಿಕೆ\", \"ಕ್ಲಿಕ್ ದಿನಾಂಕ\" ಇತ್ಯಾದಿ).",
 		"description": "[ಲೇಬಲ್] ಆಮದು ಪ್ರಕ್ರಿಯೆಯ ಸಮಯದಲ್ಲಿ ಫೈಲ್‌ನಲ್ಲಿ ಕಂಡುಬರುವ ಎಲ್ಲವನ್ನೂ ಆಮದು ಮಾಡಿ"
 	},
+	"import_pinned_tabs": {
+		"message": "Import pinned $tabs number.",
+		"description": "[label] import pinned $tabs count during import process"
+	},
 	"import_successful": {
 		"message": "ಯಶಸ್ವಿಯಾಗಿ ಆಮದುಮಾಡಲಾಗಿದೆ",
 		"description": "[ಆಮದು] ಆಮದು ಪೂರ್ಣಗೊಂಡಿದೆ. ನಂತರ, ಆಮದು ಮಾಡಿದ ದಾಖಲೆಗಳ ಸಂಖ್ಯೆ ತೋರಿಸಲಾಗುತ್ತದೆ"

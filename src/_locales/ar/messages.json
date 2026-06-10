@@ -795,6 +795,10 @@
 		"message": "استيراد بيانات تعريف Tab (مثل \"عدد النقرات\"، \"تاريخ النقر\" وما إلى ذلك).",
 		"description": "[label] استيراد كل شيء موجود في الملف أثناء عملية الاستيراد"
 	},
+	"import_pinned_tabs": {
+		"message": "Import pinned $tabs number.",
+		"description": "[label] import pinned $tabs count during import process"
+	},
 	"import_successful": {
 		"message": "تم الاستيراد بنجاح",
 		"description": "[import] تم الانتهاء من الاستيراد. بعد ذلك، سيتم عرض عدد السجلات التي تم استيرادها"

@@ -795,6 +795,10 @@
 		"message": "Імпортувати метадані Tab (\"Кількість Кліків\", \"Дата Кліка\" тощо).",
 		"description": "[мітка] імпортувати все, що знайдено у файлі під час процесу імпорту"
 	},
+	"import_pinned_tabs": {
+		"message": "Import pinned $tabs number.",
+		"description": "[label] import pinned $tabs count during import process"
+	},
 	"import_successful": {
 		"message": "Успішно імпортовано",
 		"description": "[імпорт] імпорт завершено. Після цього буде показано кількість імпортованих записів"

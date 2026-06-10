@@ -795,6 +795,10 @@
 		"message": "Tabblad metadata importeren (\"Kliktelling\", \"Klikdatum\" enz.).",
 		"description": "[label] importeer alles wat in het bestand wordt gevonden tijdens het importproces"
 	},
+	"import_pinned_tabs": {
+		"message": "Import pinned $tabs number.",
+		"description": "[label] import pinned $tabs count during import process"
+	},
 	"import_successful": {
 		"message": "Succesvol geïmporteerd",
 		"description": "[importeren] importeren is voltooid. Hierna wordt getoond hoeveel records zijn geïmporteerd"

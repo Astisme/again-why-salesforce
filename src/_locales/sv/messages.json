@@ -795,6 +795,10 @@
 		"message": "Importera Tab metadata (\"Antal Klick\", \"Klickdatum\" etc.).",
 		"description": "[etikett] importera allt som finns i filen under importprocessen"
 	},
+	"import_pinned_tabs": {
+		"message": "Import pinned $tabs number.",
+		"description": "[label] import pinned $tabs count during import process"
+	},
 	"import_successful": {
 		"message": "Import lyckades",
 		"description": "[import] importen slutfördes. Därefter visas antalet importerade poster"

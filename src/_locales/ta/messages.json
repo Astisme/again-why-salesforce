@@ -795,6 +795,10 @@
 		"message": "Tab மேடேட்டாவை (\"கிளிக் எண்ணிக்கை\", \"கிளிக் தேதி\" போன்றவை) இறக்குமதி செய்.",
 		"description": "[லேபிள்] இறக்குமதி செயல்முறையின் போது கோப்பில் காணப்படும் அனைத்தையும் இறக்குமதி செய்"
 	},
+	"import_pinned_tabs": {
+		"message": "Import pinned $tabs number.",
+		"description": "[label] import pinned $tabs count during import process"
+	},
 	"import_successful": {
 		"message": "வெற்றிகரமாக இறக்குமதி செய்யப்பட்டது",
 		"description": "[இறக்குமதி] இறக்குமதி முடிந்தது. இதற்குப் பிறகு, எத்தனை பதிவுகள் இறக்குமதி செய்யப்பட்டன என்பது காண்பிக்கப்படும்"

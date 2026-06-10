@@ -795,6 +795,10 @@
 		"message": "Importovat metadata Tab karty (\"Počet kliknutí\", \"Datum kliknutí\" atd.).",
 		"description": "[label] importovat vše nalezené v souboru během procesu importu"
 	},
+	"import_pinned_tabs": {
+		"message": "Import pinned $tabs number.",
+		"description": "[label] import pinned $tabs count during import process"
+	},
 	"import_successful": {
 		"message": "Úspěšně importováno",
 		"description": "[import] import byl úspěšně dokončen. Následně bude zobrazen počet importovaných záznamů"

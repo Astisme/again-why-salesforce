@@ -795,6 +795,10 @@
 		"message": "Ingiza metadata ya Tab (\"Idadi ya Mibofyo\", \"Tarehe ya Kubofya\" n.k.).",
 		"description": "[lebo] ingiza kila kitu kinachopatikana kwenye faili wakati wa mchakato wa kuingiza"
 	},
+	"import_pinned_tabs": {
+		"message": "Import pinned $tabs number.",
+		"description": "[label] import pinned $tabs count during import process"
+	},
 	"import_successful": {
 		"message": "Imeingizwa kwa mafanikio",
 		"description": "[ingiza] kuingiza kumekamilika. Baada ya hapo, idadi ya rekodi zilizoingizwa itaonyeshwa"

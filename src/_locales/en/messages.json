@@ -795,6 +795,10 @@
 		"message": "Import $tab metadata (\"Click Count\", \"Click Date\" etc.).",
 		"description": "[label] import everything found in the file during the import process"
 	},
+	"import_pinned_tabs": {
+		"message": "Import pinned $tabs number.",
+		"description": "[label] import pinned $tabs count during import process"
+	},
 	"import_successful": {
 		"message": "Successfully imported",
 		"description": "[import] import was completed. After this, a number of how many records have been imported will be shown"

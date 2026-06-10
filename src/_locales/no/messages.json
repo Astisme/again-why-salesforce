@@ -795,6 +795,10 @@
 		"message": "Importer Tab metadata (\"Klikktelling\", \"Klikkdato\" osv.).",
 		"description": "[etikett] importer alt som finnes i filen under importprosessen"
 	},
+	"import_pinned_tabs": {
+		"message": "Import pinned $tabs number.",
+		"description": "[label] import pinned $tabs count during import process"
+	},
 	"import_successful": {
 		"message": "Importen var vellykket",
 		"description": "[import] importen er fullført. Antallet importerte poster vises deretter"

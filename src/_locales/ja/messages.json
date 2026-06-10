@@ -795,6 +795,10 @@
 		"message": "Tabメタデータ（「クリック数」、「クリック日」など）をインポートします。",
 		"description": "[ラベル] インポートプロセス中にファイル内で見つかったすべてをインポートする"
 	},
+	"import_pinned_tabs": {
+		"message": "Import pinned $tabs number.",
+		"description": "[label] import pinned $tabs count during import process"
+	},
 	"import_successful": {
 		"message": "インポートに成功しました",
 		"description": "[インポート] インポートが完了しました。この後、インポートされたレコード数が表示されます"

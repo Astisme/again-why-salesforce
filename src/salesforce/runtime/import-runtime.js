@@ -25,7 +25,11 @@ import {
 import { createImportPureModule } from "../module/import-module.js";
 import { sf_afterSet } from "./content-runtime.js";
 import { showToast } from "../toast.js";
-import { getModalHanger, getSetupTabUl } from "../sf-elements.js";
+import {
+	getCurrentHref,
+	getModalHanger,
+	getSetupTabUl,
+} from "../sf-elements.js";
 
 /**
  * Creates the import module API with runtime defaults and override support.
@@ -52,12 +56,13 @@ import { getModalHanger, getSetupTabUl } from "../sf-elements.js";
  *   tabs?: {
  *     importTabs: (
  *       json: string,
- *       config: Record<string, boolean>,
+ *       config: Record<string, boolean | string | null>,
  *     ) => Promise<number>;
  *   } | null;
  *   what?: string;
  * }) => void} [overrides.sf_afterSet=sf_afterSet] Content post-update hook.
  * @param {(message: string | unknown[], status?: string) => void | Promise<void>} [overrides.showToast=showToast] Toast helper.
+ * @param {() => string} [overrides.getCurrentHref=getCurrentHref] Current href resolver.
  * @param {() => unknown} [overrides.getModalHanger=getModalHanger] Modal hanger resolver.
  * @param {() => unknown} [overrides.getSetupTabUl=getSetupTabUl] Setup-tab UL resolver.
  * @param {{
@@ -82,7 +87,7 @@ import { getModalHanger, getSetupTabUl } from "../sf-elements.js";
  *   readChangeOrDropFiles: (event: Event) => Promise<void>;
  *   readFile: (files: FileList | File[] | File) => Promise<void>;
  *   showFileImport: () => Promise<void>;
- *   showTabSelectThenImport: (files?: File[], importConfig?: Record<string, boolean>) => Promise<void>;
+ *   showTabSelectThenImport: (files?: File[], importConfig?: Record<string, boolean | string | null>) => Promise<void>;
  * }} Import module API.
  */
 export function createImportModule(overrides = {}) {
@@ -111,6 +116,7 @@ export function createImportModule(overrides = {}) {
 		injectStyleFn: overrides.injectStyle ?? injectStyle,
 		sfAfterSetFn: overrides.sf_afterSet ?? sf_afterSet,
 		showToastFn: overrides.showToast ?? showToast,
+		getCurrentHrefFn: overrides.getCurrentHref ?? getCurrentHref,
 		getModalHangerFn: overrides.getModalHanger ?? getModalHanger,
 		getSetupTabUlFn: overrides.getSetupTabUl ?? getSetupTabUl,
 		documentRef: overrides.documentRef ?? globalThis.document,

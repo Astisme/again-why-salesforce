@@ -795,6 +795,10 @@
 		"message": "Impordi Tabi metaandmed (\"Klõpsude arv\", \"Klõpsamise kuupäev\" jne).",
 		"description": "[label] impordi kõik, mis failis impordiprotsessi ajal leiti"
 	},
+	"import_pinned_tabs": {
+		"message": "Import pinned $tabs number.",
+		"description": "[label] import pinned $tabs count during import process"
+	},
 	"import_successful": {
 		"message": "Edukalt imporditud",
 		"description": "[import] importimine lõpetatud. Pärast seda näidatakse, mitu kirjet imporditi"

@@ -34,7 +34,7 @@ type ImportModule = {
 	showFileImport: () => Promise<void>;
 	showTabSelectThenImport: (
 		files?: FileLike[],
-		importConfig?: Record<string, boolean>,
+		importConfig?: Record<string, boolean | string | null>,
 	) => Promise<void>;
 };
 
@@ -49,7 +49,7 @@ type SfAfterSetPayload = {
 	tabs?: {
 		importTabs: (
 			json: string,
-			config: Record<string, boolean>,
+			config: Record<string, boolean | string | null>,
 		) => Promise<number>;
 	} | null;
 	what?: string;
@@ -62,7 +62,10 @@ type ImportFixture = {
 	closeClicks: { value: number };
 	fileCheckboxes: Record<string, MockElement>;
 	hangerChildren: MockElement[];
-	importCalls: { config: Record<string, boolean>; json: string }[];
+	importCalls: {
+		config: Record<string, boolean | string | null>;
+		json: string;
+	}[];
 	injectStyleCalls: {
 		id: string;
 		options: { css?: string; link?: string };
@@ -169,6 +172,7 @@ function createFile(type: string, contents: string, name = ""): FileLike {
  * @param {Error | null} [options.generateModalError=null] Error thrown while creating the input modal.
  * @param {boolean} [options.hasExistingModal=false] Whether another modal is already open.
  * @param {number} [options.importCount=2] Count returned by importTabs.
+ * @param {string} [options.currentHref="https://current-org.lightning.force.com/lightning/setup/SetupOneHome/home"] Current page href.
  * @param {boolean} [options.clearInputModalParentOnRemove=false] Whether removing the save button clears the module modal parent.
  * @param {boolean} [options.missingModalParentOnce=false] Whether the first modal generation returns a null parent.
  * @param {boolean} [options.selectedAll=false] Whether all tabs were selected in the pick modal.
@@ -178,6 +182,8 @@ function createFile(type: string, contents: string, name = ""): FileLike {
 function loadImportModule({
 	checkboxState = {},
 	clearInputModalParentOnRemove = false,
+	currentHref =
+		"https://current-org.lightning.force.com/lightning/setup/SetupOneHome/home",
 	generateModalError = null,
 	hasExistingModal = false,
 	importCount = 2,
@@ -187,6 +193,7 @@ function loadImportModule({
 }: {
 	checkboxState?: Record<string, boolean>;
 	clearInputModalParentOnRemove?: boolean;
+	currentHref?: string;
 	generateModalError?: Error | null;
 	hasExistingModal?: boolean;
 	importCount?: number;
@@ -218,7 +225,10 @@ function loadImportModule({
 	const changeTarget = new MockElement("div");
 	const toasts: { message: string | unknown[]; status?: string }[] = [];
 	const afterSetCalls: SfAfterSetPayload[] = [];
-	const importCalls: { config: Record<string, boolean>; json: string }[] = [];
+	const importCalls: {
+		config: Record<string, boolean | string | null>;
+		json: string;
+	}[] = [];
 	const hangerChildren: MockElement[] = [];
 	const appendCount = { value: 0 };
 	const closeClicks = { value: 0 };
@@ -330,6 +340,8 @@ function loadImportModule({
 		TOAST_ERROR: "error",
 		TOAST_WARNING: "warning",
 		Tab: {
+			extractOrgName: (url: string) =>
+				new URL(url).hostname.split(".")[0],
 			hasUnexpectedKeys: (tab: Record<string, unknown>) =>
 				Object.keys(tab).some((key) =>
 					!["label", "url", "org", "tabTitle", "title"].includes(
@@ -342,7 +354,7 @@ function loadImportModule({
 			Promise.resolve({
 				importTabs: (
 					json: string,
-					config: Record<string, boolean>,
+					config: Record<string, boolean | string | null>,
 				) => {
 					importCalls.push({ config, json });
 					return Promise.resolve(importCount);
@@ -416,6 +428,7 @@ function loadImportModule({
 			});
 		},
 		getModalHanger: () => modalHanger,
+		getCurrentHref: () => currentHref,
 		getSetupTabUl: () => ({
 			querySelector: () =>
 				setupImportPresent ? new MockElement("div") : null,
@@ -549,6 +562,7 @@ Deno.test("import shows the file modal and imports valid JSON files directly", a
 		assertEquals(fixture.importCalls, [{
 			config: {
 				importMetadata: true,
+				importPinnedTabs: true,
 				preserveOtherOrg: false,
 				resetTabs: false,
 			},
@@ -581,6 +595,102 @@ Deno.test("import toggles the other-org checkbox visibility when overwrite chang
 		assertEquals(otherOrgCheckbox.classList.contains("hidden"), false);
 		overwriteCheckbox.dispatchEvent(new Event("change"));
 		assertEquals(otherOrgCheckbox.classList.contains("hidden"), true);
+	} finally {
+		fixture.cleanup();
+	}
+});
+
+Deno.test("import pinned checkbox shows only when metadata import is unchecked", async () => {
+	const fixture = await loadImportModule({});
+
+	try {
+		await fixture.module.generateSldsImport();
+		const metadataCheckbox = fixture.fileCheckboxes[
+			"again-why-salesforce-import-metadata"
+		];
+		const pinnedCheckbox = fixture.fileCheckboxes[
+			"again-why-salesforce-import-pinned"
+		];
+
+		assertEquals(pinnedCheckbox.checked, true);
+		assertEquals(pinnedCheckbox.classList.contains("hidden"), false);
+		metadataCheckbox.checked = true;
+		metadataCheckbox.dispatchEvent(new Event("change"));
+		assertEquals(pinnedCheckbox.classList.contains("hidden"), true);
+		metadataCheckbox.checked = false;
+		metadataCheckbox.dispatchEvent(new Event("change"));
+		assertEquals(pinnedCheckbox.classList.contains("hidden"), false);
+	} finally {
+		fixture.cleanup();
+	}
+});
+
+Deno.test("import passes current org when preserving other orgs during overwrite", async () => {
+	const fixture = await loadImportModule({
+		checkboxState: {
+			"again-why-salesforce-import-overwrite": true,
+			"again-why-salesforce-import-other-org": true,
+		},
+		currentHref:
+			"https://current-org.lightning.force.com/lightning/setup/SetupOneHome/home",
+	});
+
+	try {
+		await fixture.module.createImportModal();
+		await fixture.changeTarget.dispatchEvent({
+			preventDefault() {},
+			target: {
+				files: [
+					createFile(
+						"application/json",
+						JSON.stringify([{ label: "A", url: "/a" }]),
+					),
+				],
+			},
+			type: "change",
+		} as unknown as Event);
+
+		assertEquals(fixture.importCalls, [{
+			config: {
+				currentOrg: "current-org",
+				importMetadata: false,
+				importPinnedTabs: true,
+				preserveOtherOrg: true,
+				resetTabs: true,
+			},
+			json: JSON.stringify([{ label: "A", url: "/a" }]),
+		}]);
+	} finally {
+		fixture.cleanup();
+	}
+});
+
+Deno.test("import can opt out of pinned count while metadata is unchecked", async () => {
+	const fixture = await loadImportModule({
+		checkboxState: {
+			"again-why-salesforce-import-pinned": false,
+		},
+	});
+
+	try {
+		await fixture.module.createImportModal();
+		await fixture.changeTarget.dispatchEvent({
+			preventDefault() {},
+			target: {
+				files: [
+					createFile(
+						"application/json",
+						JSON.stringify({
+							pinned: 1,
+							tabs: [{ label: "A", url: "/a" }],
+						}),
+					),
+				],
+			},
+			type: "change",
+		} as unknown as Event);
+
+		assertEquals(fixture.importCalls[0].config.importPinnedTabs, false);
 	} finally {
 		fixture.cleanup();
 	}
@@ -655,6 +765,7 @@ Deno.test("import reads dropped files from dataTransfer.items when files is empt
 		assertEquals(fixture.importCalls, [{
 			config: {
 				importMetadata: false,
+				importPinnedTabs: true,
 				preserveOtherOrg: false,
 				resetTabs: false,
 			},
@@ -749,6 +860,7 @@ Deno.test("import maps supported external formats and imports the selected tabs"
 		assertEquals(fixture.importCalls, [{
 			config: {
 				importMetadata: false,
+				importPinnedTabs: true,
 				preserveOtherOrg: false,
 				resetTabs: false,
 			},
@@ -797,6 +909,7 @@ Deno.test("import maps WhySalesforce tab arrays through the select flow", async 
 		assertEquals(fixture.importCalls, [{
 			config: {
 				importMetadata: false,
+				importPinnedTabs: true,
 				preserveOtherOrg: false,
 				resetTabs: false,
 			},
@@ -997,6 +1110,7 @@ Deno.test("import attaches the drop reader directly", async () => {
 		assertEquals(fixture.importCalls, [{
 			config: {
 				importMetadata: false,
+				importPinnedTabs: true,
 				preserveOtherOrg: false,
 				resetTabs: false,
 			},
@@ -1072,6 +1186,7 @@ Deno.test("import reads a single file object directly and surfaces read failures
 		assertEquals(fixture.importCalls[0], {
 			config: {
 				importMetadata: false,
+				importPinnedTabs: true,
 				preserveOtherOrg: false,
 				resetTabs: false,
 			},

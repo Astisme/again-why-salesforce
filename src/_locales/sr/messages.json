@@ -795,6 +795,10 @@
 		"message": "Увези метаподатке Tab-а (\"Број Кликова\", \"Датум Клика\" итд.).",
 		"description": "[ознака] увези све што се нађе у датотеци током процеса увоза"
 	},
+	"import_pinned_tabs": {
+		"message": "Import pinned $tabs number.",
+		"description": "[label] import pinned $tabs count during import process"
+	},
 	"import_successful": {
 		"message": "Uvoz je uspešan",
 		"description": "[import] uvoz je završen. Nakon toga će biti prikazan broj unetih zapisa"

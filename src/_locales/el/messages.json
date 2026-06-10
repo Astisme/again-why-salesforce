@@ -795,6 +795,10 @@
 		"message": "Εισαγωγή μεταδεδομένων Tab («Αριθμός Κλικ», «Ημερομηνία Κλικ» κ.λπ.).",
 		"description": "[label] εισαγωγή όλων των στοιχείων που βρέθηκαν στο αρχείο κατά τη διαδικασία εισαγωγής"
 	},
+	"import_pinned_tabs": {
+		"message": "Import pinned $tabs number.",
+		"description": "[label] import pinned $tabs count during import process"
+	},
 	"import_successful": {
 		"message": "Εισήχθη με επιτυχία",
 		"description": "[εισαγωγή] η εισαγωγή ολοκληρώθηκε. Μετά από αυτό, θα εμφανιστεί ο αριθμός των εγγεγραμμένων εγγραφών"

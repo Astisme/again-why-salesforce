@@ -795,6 +795,10 @@
 		"message": "ייבא מטא-נתונים של Tab (\"ספירת לחיצות\", \"תאריך לחיצה\" וכו').",
 		"description": "[תווית] ייבא כל מה שנמצא בקובץ במהלך תהליך הייבוא"
 	},
+	"import_pinned_tabs": {
+		"message": "Import pinned $tabs number.",
+		"description": "[label] import pinned $tabs count during import process"
+	},
 	"import_successful": {
 		"message": "ייבוא הצליח",
 		"description": "[import] הייבוא הושלם. לאחר מכן יוצג מספר הרשומות שיובאו"

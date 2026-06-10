@@ -795,6 +795,10 @@
 		"message": "导入 Tab 元数据（“点击次数”、“点击日期”等）。",
 		"description": "[标签] 在导入过程中导入文件中找到的所有内容"
 	},
+	"import_pinned_tabs": {
+		"message": "Import pinned $tabs number.",
+		"description": "[label] import pinned $tabs count during import process"
+	},
 	"import_successful": {
 		"message": "成功导入",
 		"description": "[导入] 导入已完成。之后将显示导入了多少条记录"

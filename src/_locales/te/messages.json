@@ -795,6 +795,10 @@
 		"message": "Tab మెటాడేటాను (\"క్లిక్ సంఖ్య\", \"క్లిక్ తేదీ\" మొదలైనవి) దిగుమతి చేయి.",
 		"description": "[లేబుల్] దిగుమతి ప్రక్రియలో ఫైల్‌లో కనుగొనబడిన ప్రతిదాన్ని దిగుమతి చేయి"
 	},
+	"import_pinned_tabs": {
+		"message": "Import pinned $tabs number.",
+		"description": "[label] import pinned $tabs count during import process"
+	},
 	"import_successful": {
 		"message": "విజయవంతంగా దిగుమతి చేయబడింది",
 		"description": "[import] దిగుమతి పూర్తయింది. దీని తరువాత, ఎన్ని రికార్డులు దిగుమతి చేయబడ్డాయో సంఖ్య చూపబడుతుంది"

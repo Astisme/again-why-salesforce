@@ -795,6 +795,10 @@
 		"message": "Tab metaadatok importálása (\"Kattintási Szám\", \"Kattintási Dátum\" stb.).",
 		"description": "[címke] mindent importál, amit a fájlban talál az importálási folyamat során"
 	},
+	"import_pinned_tabs": {
+		"message": "Import pinned $tabs number.",
+		"description": "[label] import pinned $tabs count during import process"
+	},
 	"import_successful": {
 		"message": "Sikeresen importálva",
 		"description": "[import] az importálás befejeződött. Ezt követően megjelenik az importált rekordok száma"

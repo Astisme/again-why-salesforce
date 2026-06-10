@@ -795,6 +795,10 @@
 		"message": "Tab मेटाडेटा आयात करें (\"क्लिक गणना\", \"क्लिक तारीख\" आदि)।",
 		"description": "[लेबल] आयात प्रक्रिया के दौरान फ़ाइल में मिली हर चीज़ आयात करें"
 	},
+	"import_pinned_tabs": {
+		"message": "Import pinned $tabs number.",
+		"description": "[label] import pinned $tabs count during import process"
+	},
 	"import_successful": {
 		"message": "सफलतापूर्वक आयात किया गया",
 		"description": "[import] आयात पूरा हो गया है; उसके बाद आयात किए गए रिकॉर्ड की संख्या दिखाई जाएगी।"

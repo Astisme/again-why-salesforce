@@ -795,6 +795,10 @@
 		"message": "匯入 Tab 後設資料（「點擊次數」、「點擊日期」等）。",
 		"description": "[標籤] 在匯入過程中匯入檔案中找到的所有內容"
 	},
+	"import_pinned_tabs": {
+		"message": "Import pinned $tabs number.",
+		"description": "[label] import pinned $tabs count during import process"
+	},
 	"import_successful": {
 		"message": "Successfully imported",
 		"description": "[import] 匯入已完成，之後會顯示匯入記錄的數量"

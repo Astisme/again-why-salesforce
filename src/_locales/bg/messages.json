@@ -795,6 +795,10 @@
 		"message": "Импортиране на метаданни на Tab („Брой кликвания“, „Дата на кликване“ и т.н.).",
 		"description": "[label] импортиране на всичко, намерено във файла по време на процеса на импортиране"
 	},
+	"import_pinned_tabs": {
+		"message": "Import pinned $tabs number.",
+		"description": "[label] import pinned $tabs count during import process"
+	},
 	"import_successful": {
 		"message": "Импортирането е успешно",
 		"description": "[import] импортирането е завършено. След това ще бъде показан броят на импортираните записи"

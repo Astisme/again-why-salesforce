@@ -315,6 +315,7 @@ await Deno.test("TabContainer - Organization Filtering", async (t) => {
 await Deno.test("TabContainer - replaceTabs edge cases", async (t) => {
 	async function setupContainer() {
 		container.length = 0;
+		container[TabContainer.keyPinnedTabsNo] = 0;
 		await container.addTabs([
 			{ label: "Tab A", url: "url1", org: "test-org" },
 			{ label: "Tab B", url: "url2", org: "other-org" },
@@ -378,6 +379,24 @@ await Deno.test("TabContainer - replaceTabs edge cases", async (t) => {
 		assertEquals(container.length, 3);
 		assert(container.every((t) => t.org != null));
 	});
+
+	await t.step(
+		"preserves matching pinned tabs when removing generic tabs",
+		async () => {
+			const container = await setupContainer();
+			container[TabContainer.keyPinnedTabsNo] = 2;
+			await container.replaceTabs([], {
+				resetTabs: true,
+				removeOrgTabs: false,
+			});
+			assertEquals(container[TabContainer.keyPinnedTabsNo], 2);
+			assertEquals(container.length, 3);
+			assertEquals(container[0].url, "url1");
+			assertEquals(container[1].url, "url2");
+			assertEquals(container[2].url, "url3");
+			assert(container.every((t) => t.org != null));
+		},
+	);
 
 	// resetTabs = false, removeOrgTabs = true, keepTabsNotThisOrg = 'test-org'
 	await t.step(
@@ -1448,6 +1467,92 @@ await Deno.test("TabContainer - Import", async (t) => {
 		assertEquals(container.at(-1)[Tab.keyClickCount], undefined);
 		assertEquals(container.at(-1)[Tab.keyClickDate], undefined);
 	});
+
+	await t.step(
+		"overwrite import without metadata resets pinned tabs",
+		async () => {
+			await container.importTabs(
+				`{"${TabContainer.keyPinnedTabsNo}":2,"${TabContainer.keyTabs}":[{"label":"pin-a","url":"pin-a"},{"label":"pin-b","url":"pin-b"},{"label":"old","url":"old"}]}`,
+				{
+					importMetadata: true,
+					preserveOtherOrg: false,
+					resetTabs: true,
+				},
+			);
+			assertEquals(container[TabContainer.keyPinnedTabsNo], 2);
+			assertEquals(container.length, 3);
+			assertEquals(
+				await container.importTabs(
+					`{"${TabContainer.keyTabs}":[{"label":"new","url":"new"}]}`,
+					{
+						importMetadata: false,
+						preserveOtherOrg: true,
+						resetTabs: true,
+					},
+				),
+				1,
+			);
+			assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
+			assertEquals(container.length, 1);
+			assertEquals(container[0].url, "new");
+		},
+	);
+
+	await t.step(
+		"overwrite import preserves other org but removes current org",
+		async () => {
+			container.length = 0;
+			container[TabContainer.keyPinnedTabsNo] = 0;
+			await container.addTabs([
+				{ label: "Current", url: "current", org: "current-org" },
+				{ label: "Other", url: "other", org: "other-org" },
+				{ label: "Generic", url: "generic" },
+			]);
+			container[TabContainer.keyPinnedTabsNo] = 2;
+
+			assertEquals(
+				await container.importTabs(
+					`{"${TabContainer.keyTabs}":[{"label":"New","url":"new"}]}`,
+					{
+						currentOrg: "current-org",
+						importMetadata: false,
+						preserveOtherOrg: true,
+						resetTabs: true,
+					},
+				),
+				1,
+			);
+			assertEquals(container[TabContainer.keyPinnedTabsNo], 1);
+			assertEquals(container.length, 2);
+			assertEquals(container[0].url, "other");
+			assertEquals(container[1].url, "new");
+		},
+	);
+
+	await t.step(
+		"imports pinned count without importing tab metadata",
+		async () => {
+			await container.setDefaultTabs();
+			assertEquals(
+				await container.importTabs(
+					`{"${TabContainer.keyPinnedTabsNo}":2,"${TabContainer.keyTabs}":[{"label":"Pin A","url":"pin-a","${Tab.keyClickCount}":7},{"label":"Pin B","url":"pin-b","${Tab.keyClickDate}":${currentDate}},{"label":"Rest","url":"rest"}]}`,
+					{
+						importMetadata: false,
+						importPinnedTabs: true,
+						preserveOtherOrg: false,
+						resetTabs: true,
+					},
+				),
+				3,
+			);
+			assertEquals(container[TabContainer.keyPinnedTabsNo], 2);
+			assertEquals(container.length, 3);
+			assertEquals(container[0].url, "pin-a");
+			assertEquals(container[1].url, "pin-b");
+			assertEquals(container[0][Tab.keyClickCount], undefined);
+			assertEquals(container[1][Tab.keyClickDate], undefined);
+		},
+	);
 
 	await t.step("import tabs with pinned tabs", async () => {
 		await container.setDefaultTabs();

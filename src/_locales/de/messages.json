@@ -795,6 +795,10 @@
 		"message": "Tab-Metadaten importieren (\"Klickanzahl\", \"Klickdatum\" usw.).",
 		"description": "[label] alles importieren, was während des Importvorgangs in der Datei gefunden wird"
 	},
+	"import_pinned_tabs": {
+		"message": "Import pinned $tabs number.",
+		"description": "[label] import pinned $tabs count during import process"
+	},
 	"import_successful": {
 		"message": "Erfolgreich importiert",
 		"description": "[import] Der Import wurde abgeschlossen. Anschließend wird die Anzahl der importierten Datensätze angezeigt"
