@@ -1,4 +1,7 @@
-{
+{"import_pinned_tabs": {
+"message": "导入固定的 $tabs 数量。",
+"description": "[标签] 在导入过程中导入固定的 $tabs 数量"
+},
 	"account": {
 		"message": "账户",
 		"description": "与 ObjectManager/Account/FieldsAndRelationships/view 相关的页面"
@@ -794,10 +797,6 @@
 	"import_metadata": {
 		"message": "导入 Tab 元数据（“点击次数”、“点击日期”等）。",
 		"description": "[标签] 在导入过程中导入文件中找到的所有内容"
-	},
-	"import_pinned_tabs": {
-		"message": "Import pinned $tabs number.",
-		"description": "[label] import pinned $tabs count during import process"
 	},
 	"import_successful": {
 		"message": "成功导入",

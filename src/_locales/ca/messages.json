@@ -1,4 +1,7 @@
-{
+{"import_pinned_tabs": {
+"message": "Importa el nombre de $tabs fixades.",
+"description": "[etiqueta] importa el recompte de $tabs fixades durant el procés d'importació"
+},
 	"account": {
 		"message": "Compte",
 		"description": "La pàgina relacionada amb ObjectManager/Account/FieldsAndRelationships/view"
@@ -794,10 +797,6 @@
 	"import_metadata": {
 		"message": "Importa les metadades de la Tab (\"Compte de Clics\", \"Data de Clic\" etc.).",
 		"description": "[label] importa tot el que es trobi al fitxer durant el procés d'importació"
-	},
-	"import_pinned_tabs": {
-		"message": "Import pinned $tabs number.",
-		"description": "[label] import pinned $tabs count during import process"
 	},
 	"import_successful": {
 		"message": "Importació realitzada amb èxit",

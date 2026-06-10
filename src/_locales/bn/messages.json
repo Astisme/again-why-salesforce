@@ -1,4 +1,7 @@
-{
+{"import_pinned_tabs": {
+"message": "পিন করা $tabs সংখ্যা ইম্পোর্ট করুন।",
+"description": "[লেবেল] ইম্পোর্ট প্রক্রিয়ার সময় পিন করা $tabs সংখ্যা ইম্পোর্ট করুন"
+},
 	"account": {
 		"message": "অ্যাকাউন্ট",
 		"description": "ObjectManager/Account/FieldsAndRelationships/view সংক্রান্ত পাতা"
@@ -794,10 +797,6 @@
 	"import_metadata": {
 		"message": "Tab মেটাডেটা আমদানি করুন (\"ক্লিক গণনা\", \"ক্লিক তারিখ\" ইত্যাদি)।",
 		"description": "[label] আমদানি প্রক্রিয়া চলাকালীন ফাইলে পাওয়া সবকিছু আমদানি করুন"
-	},
-	"import_pinned_tabs": {
-		"message": "Import pinned $tabs number.",
-		"description": "[label] import pinned $tabs count during import process"
 	},
 	"import_successful": {
 		"message": "সফলভাবে ইম্পোর্ট করা হয়েছে",

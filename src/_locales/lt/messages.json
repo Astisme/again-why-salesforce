@@ -1,4 +1,7 @@
-{
+{"import_pinned_tabs": {
+"message": "Importuoti prisegtų $tabs skaičių.",
+"description": "[etiketė] importuoti prisegtų $tabs skaičių importavimo proceso metu"
+},
 	"account": {
 		"message": "Paskyra",
 		"description": "Puslapis, susijęs su ObjectManager/Account/FieldsAndRelationships/view"
@@ -794,10 +797,6 @@
 	"import_metadata": {
 		"message": "Importuoti Tab metaduomenis (\"Paspaudimų Skaičius\", \"Paspaudimo Data\" ir t.t.).",
 		"description": "[žymė] importuoti viską, kas rasta faile importavimo proceso metu"
-	},
-	"import_pinned_tabs": {
-		"message": "Import pinned $tabs number.",
-		"description": "[label] import pinned $tabs count during import process"
 	},
 	"import_successful": {
 		"message": "Sėkmingai importuota",

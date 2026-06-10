@@ -1,4 +1,7 @@
-{
+{"import_pinned_tabs": {
+"message": "ייבוא מספר ה- $tabs המודבקים.",
+"description": "[תווית] ייבוא מספר ה- $tabs המודבקים במהלך תהליך הייבוא"
+},
 	"account": {
 		"message": "חשבון",
 		"description": "הדף הקשור ל-ObjectManager/Account/FieldsAndRelationships/view"
@@ -794,10 +797,6 @@
 	"import_metadata": {
 		"message": "ייבא מטא-נתונים של Tab (\"ספירת לחיצות\", \"תאריך לחיצה\" וכו').",
 		"description": "[תווית] ייבא כל מה שנמצא בקובץ במהלך תהליך הייבוא"
-	},
-	"import_pinned_tabs": {
-		"message": "Import pinned $tabs number.",
-		"description": "[label] import pinned $tabs count during import process"
 	},
 	"import_successful": {
 		"message": "ייבוא הצליח",

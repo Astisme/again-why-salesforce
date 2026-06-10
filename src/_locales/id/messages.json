@@ -1,4 +1,7 @@
-{
+{"import_pinned_tabs": {
+"message": "Impor jumlah $tabs yang disematkan.",
+"description": "[label] impor jumlah $tabs yang disematkan selama proses impor"
+},
 	"account": {
 		"message": "Akun",
 		"description": "Halaman yang terkait dengan ObjectManager/Account/FieldsAndRelationships/view"
@@ -794,10 +797,6 @@
 	"import_metadata": {
 		"message": "Impor metadata Tab (\"Jumlah Klik\", \"Tanggal Klik\", dll.).",
 		"description": "[label] impor semua yang ditemukan dalam file selama proses impor"
-	},
-	"import_pinned_tabs": {
-		"message": "Import pinned $tabs number.",
-		"description": "[label] import pinned $tabs count during import process"
 	},
 	"import_successful": {
 		"message": "Berhasil diimpor",

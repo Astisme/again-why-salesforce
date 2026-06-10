@@ -1,4 +1,7 @@
-{
+{"import_pinned_tabs": {
+"message": "وارد کردن تعداد $tabs سنجاق شده.",
+"description": "[برچسب] وارد کردن تعداد $tabs سنجاق شده در طول فرآیند وارد کردن"
+},
 	"account": {
 		"message": "حساب",
 		"description": "صفحه مربوط به ObjectManager/Account/FieldsAndRelationships/view"
@@ -794,10 +797,6 @@
 	"import_metadata": {
 		"message": "وارد کردن فراداده Tab (\"تعداد کلیک\"، \"تاریخ کلیک\" و غیره).",
 		"description": "[label] وارد کردن همه چیزهایی که در فایل در طول فرآیند واردات یافت می‌شود"
-	},
-	"import_pinned_tabs": {
-		"message": "Import pinned $tabs number.",
-		"description": "[label] import pinned $tabs count during import process"
 	},
 	"import_successful": {
 		"message": "با موفقیت وارد شد",

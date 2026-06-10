@@ -1,4 +1,7 @@
-{
+{"import_pinned_tabs": {
+"message": "Sabitlenmiş $tabs sayısını içe aktar.",
+"description": "[etiket] içe aktarma işlemi sırasında sabitlenmiş $tabs sayısını içe aktar"
+},
 	"account": {
 		"message": "Hesap",
 		"description": "ObjectManager/Account/FieldsAndRelationships/view ile ilgili sayfa"
@@ -794,10 +797,6 @@
 	"import_metadata": {
 		"message": "Tab meta verilerini (\"Tıklama Sayısı\", \"Tıklama Tarihi\" vb.) İçe Aktar.",
 		"description": "[etiket] içe aktarma işlemi sırasında dosyada bulunan her şeyi içe aktar"
-	},
-	"import_pinned_tabs": {
-		"message": "Import pinned $tabs number.",
-		"description": "[label] import pinned $tabs count during import process"
 	},
 	"import_successful": {
 		"message": "Başarıyla içe aktarıldı",

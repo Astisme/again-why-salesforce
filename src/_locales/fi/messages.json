@@ -1,4 +1,7 @@
-{
+{"import_pinned_tabs": {
+"message": "Tuo kiinnitettyjen $tabs määrä.",
+"description": "[tunniste] tuo kiinnitettyjen $tabs määrä tuontiprosessin aikana"
+},
 	"account": {
 		"message": "Tili",
 		"description": "Sivu, joka liittyy kohteeseen ObjectManager/Account/FieldsAndRelationships/view"
@@ -794,10 +797,6 @@
 	"import_metadata": {
 		"message": "Tuo Tab-välilehden metatiedot (\"Klikkausmäärä\", \"Klikkauspäivämäärä\" jne.).",
 		"description": "[label] tuo kaikki tiedostosta löytyvät tiedot tuontiprosessin aikana"
-	},
-	"import_pinned_tabs": {
-		"message": "Import pinned $tabs number.",
-		"description": "[label] import pinned $tabs count during import process"
 	},
 	"import_successful": {
 		"message": "Tuonti onnistui",

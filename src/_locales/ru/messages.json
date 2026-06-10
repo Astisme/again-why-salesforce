@@ -1,4 +1,7 @@
-{
+{"import_pinned_tabs": {
+"message": "Импортировать количество закрепленных $tabs .",
+"description": "[метка] импортировать количество закрепленных $tabs во время процесса импорта"
+},
 	"account": {
 		"message": "Аккаунт",
 		"description": "Страница, связанная с ObjectManager/Account/FieldsAndRelationships/view"
@@ -794,10 +797,6 @@
 	"import_metadata": {
 		"message": "Импортировать метаданные Tab-а (\"Количество Кликов\", \"Дата Клика\" и т.д.).",
 		"description": "[метка] импортировать все найденное в файле в процессе импорта"
-	},
-	"import_pinned_tabs": {
-		"message": "Import pinned $tabs number.",
-		"description": "[label] import pinned $tabs count during import process"
 	},
 	"import_successful": {
 		"message": "Успешно импортировано",

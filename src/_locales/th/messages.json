@@ -1,4 +1,7 @@
-{
+{"import_pinned_tabs": {
+"message": "นำเข้าจำนวน $tabs ที่ปักหมุดไว้",
+"description": "[ป้ายกำกับ] นำเข้าจำนวน $tabs ที่ปักหมุดไว้ระหว่างกระบวนการนำเข้า"
+},
 	"account": {
 		"message": "บัญชี",
 		"description": "หน้าเว็บที่เกี่ยวข้องกับ ObjectManager/Account/FieldsAndRelationships/view"
@@ -794,10 +797,6 @@
 	"import_metadata": {
 		"message": "นำเข้าข้อมูลเมตา Tab (\"จำนวนคลิก\", \"วันที่คลิก\" ฯลฯ)",
 		"description": "[ป้ายกำกับ] นำเข้าทุกสิ่งที่พบในไฟล์ระหว่างกระบวนการนำเข้า"
-	},
-	"import_pinned_tabs": {
-		"message": "Import pinned $tabs number.",
-		"description": "[label] import pinned $tabs count during import process"
 	},
 	"import_successful": {
 		"message": "Successfully imported",

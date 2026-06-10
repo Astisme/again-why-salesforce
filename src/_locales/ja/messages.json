@@ -1,4 +1,7 @@
-{
+{"import_pinned_tabs": {
+"message": "固定された $tabs の数をインポートします。",
+"description": "[ラベル] インポートプロセス中に固定された $tabs の数をインポートします"
+},
 	"account": {
 		"message": "取引先",
 		"description": "ObjectManager/Account/FieldsAndRelationships/view に関連するページ"
@@ -794,10 +797,6 @@
 	"import_metadata": {
 		"message": "Tabメタデータ（「クリック数」、「クリック日」など）をインポートします。",
 		"description": "[ラベル] インポートプロセス中にファイル内で見つかったすべてをインポートする"
-	},
-	"import_pinned_tabs": {
-		"message": "Import pinned $tabs number.",
-		"description": "[label] import pinned $tabs count during import process"
 	},
 	"import_successful": {
 		"message": "インポートに成功しました",

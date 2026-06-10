@@ -1,4 +1,7 @@
-{
+{"import_pinned_tabs": {
+"message": "የተሰኩ $tabs ቁጥር አስምጣ።",
+"description": "[መለያ] በማስመጣት ሂደት ወቅት የተሰኩ $tabs ብዛት አስምጣ"
+},
 	"account": {
 		"message": "አካውንት",
 		"description": "ከ ObjectManager/Account/FieldsAndRelationships/view ጋር የተያያዘ ገጽ"
@@ -794,10 +797,6 @@
 	"import_metadata": {
 		"message": "የ Tab ሜታዳታ አስመጣ (\"የመጫን ብዛት\"፣ \"የመጫን ቀን\" ወዘተ)።",
 		"description": "[label] በአስመጪ ሂደት ወቅት በፋይሉ ውስጥ የተገኘውን ሁሉ አስመጣ"
-	},
-	"import_pinned_tabs": {
-		"message": "Import pinned $tabs number.",
-		"description": "[label] import pinned $tabs count during import process"
 	},
 	"import_successful": {
 		"message": "በተሳካ ሁኔታ አስመጥቷል",

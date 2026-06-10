@@ -1,4 +1,7 @@
-{
+{"import_pinned_tabs": {
+"message": "Importēt piesprausto $tabs skaitu.",
+"description": "[etiķete] importēt piesprausto $tabs skaitu importēšanas procesa laikā"
+},
 	"account": {
 		"message": "Konts",
 		"description": "Lapa, kas saistīta ar ObjectManager/Account/FieldsAndRelationships/view"
@@ -794,10 +797,6 @@
 	"import_metadata": {
 		"message": "Importēt Tab metadatus (\"Klikšķu Skaits\", \"Klikšķināšanas Datums\" utt.).",
 		"description": "[etiķete] importēt visu, kas atrasts failā importēšanas procesa laikā"
-	},
-	"import_pinned_tabs": {
-		"message": "Import pinned $tabs number.",
-		"description": "[label] import pinned $tabs count during import process"
 	},
 	"import_successful": {
 		"message": "Veiksmīgi importēts",
