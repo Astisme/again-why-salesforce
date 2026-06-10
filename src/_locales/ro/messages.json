@@ -1,7 +1,4 @@
-{"import_pinned_tabs": {
-"message": "Importă numărul de $tabs fixate.",
-"description": "[etichetă] importă numărul de $tabs fixate în timpul procesului de import"
-},
+{
 	"account": {
 		"message": "Cont",
 		"description": "Pagina legată de ObjectManager/Account/FieldsAndRelationships/view"
@@ -797,6 +794,10 @@
 	"import_metadata": {
 		"message": "Importă metadatele Tab-ului (\"Număr de Click-uri\", \"Data Click-ului\" etc.).",
 		"description": "[etichetă] importă tot ce se găsește în fișier în timpul procesului de import"
+	},
+	"import_pinned_tabs": {
+		"message": "Importă numărul de $tabs fixate.",
+		"description": "[etichetă] importă numărul de $tabs fixate în timpul procesului de import"
 	},
 	"import_successful": {
 		"message": "Importat cu succes",

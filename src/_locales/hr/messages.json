@@ -1,7 +1,4 @@
-{"import_pinned_tabs": {
-"message": "Uvezi broj prikvačenih $tabs .",
-"description": "[oznaka] uvezi broj prikvačenih $tabs tijekom procesa uvoza"
-},
+{
 	"account": {
 		"message": "Račun",
 		"description": "Stranica koja se odnosi na ObjectManager/Account/FieldsAndRelationships/view"
@@ -797,6 +794,10 @@
 	"import_metadata": {
 		"message": "Uvezi Tab metapodatke (\"Broj Klikova\", \"Datum Klika\" itd.).",
 		"description": "[oznaka] uvezite sve pronađeno u datoteci tijekom procesa uvoza"
+	},
+	"import_pinned_tabs": {
+		"message": "Uvezi broj prikvačenih $tabs .",
+		"description": "[oznaka] uvezi broj prikvačenih $tabs tijekom procesa uvoza"
 	},
 	"import_successful": {
 		"message": "Uvoz je uspješan",

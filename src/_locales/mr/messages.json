@@ -1,7 +1,4 @@
-{"import_pinned_tabs": {
-"message": "पिन केलेल्या $tabs ची संख्या आयात करा.",
-"description": "[लेबल] आयात प्रक्रियेदरम्यान पिन केलेल्या $tabs ची संख्या आयात करा"
-},
+{
 	"account": {
 		"message": "खाते (Account)",
 		"description": "ObjectManager/Account/FieldsAndRelationships/view शी संबंधित पृष्ठ"
@@ -797,6 +794,10 @@
 	"import_metadata": {
 		"message": "Tab मेटाडेटा आयात करा (\"क्लिक संख्या\", \"क्लिक तारीख\" इ.).",
 		"description": "[लेबल] आयात प्रक्रियेदरम्यान फाइलमध्ये सापडलेले सर्व काही आयात करा"
+	},
+	"import_pinned_tabs": {
+		"message": "पिन केलेल्या $tabs ची संख्या आयात करा.",
+		"description": "[लेबल] आयात प्रक्रियेदरम्यान पिन केलेल्या $tabs ची संख्या आयात करा"
 	},
 	"import_successful": {
 		"message": "यशस्वीरित्या आयात केले",

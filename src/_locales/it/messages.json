@@ -1,7 +1,4 @@
-{"import_pinned_tabs": {
-"message": "Importa il numero di $tabs bloccate.",
-"description": "[etichetta] importa il numero di $tabs bloccate durante il processo di importazione"
-},
+{
 	"account": {
 		"message": "Account",
 		"description": "La pagina relativa a ObjectManager/Account/FieldsAndRelationships/view"
@@ -797,6 +794,10 @@
 	"import_metadata": {
 		"message": "Importa metadati Tab (\"Conteggio Clic\", \"Data Clic\", ecc.).",
 		"description": "[etichetta] importa tutto ciò che si trova nel file durante il processo di importazione"
+	},
+	"import_pinned_tabs": {
+		"message": "Importa il numero di $tabs bloccate.",
+		"description": "[etichetta] importa il numero di $tabs bloccate durante il processo di importazione"
 	},
 	"import_successful": {
 		"message": "Importati con successo",

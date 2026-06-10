@@ -1,7 +1,4 @@
-{"import_pinned_tabs": {
-"message": "Importuj liczbę przypiętych $tabs .",
-"description": "[etykieta] importuj liczbę przypiętych $tabs podczas procesu importu"
-},
+{
 	"account": {
 		"message": "Konto",
 		"description": "Strona powiązana z ObjectManager/Account/FieldsAndRelationships/view"
@@ -797,6 +794,10 @@
 	"import_metadata": {
 		"message": "Importuj metadane Tab (\"Liczba Kliknięć\", \"Data Kliknięcia\" itd.).",
 		"description": "[etykieta] importuj wszystko znalezione w pliku podczas procesu importu"
+	},
+	"import_pinned_tabs": {
+		"message": "Importuj liczbę przypiętych $tabs .",
+		"description": "[etykieta] importuj liczbę przypiętych $tabs podczas procesu importu"
 	},
 	"import_successful": {
 		"message": "Pomyślnie zaimportowano",

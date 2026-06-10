@@ -1,7 +1,4 @@
-{"import_pinned_tabs": {
-"message": "Importar número de $tabs fijadas.",
-"description": "[etiqueta] importar el recuento de $tabs fijadas durante el proceso de importación"
-},
+{
 	"account": {
 		"message": "Cuenta",
 		"description": "La página relacionada con ObjectManager/Account/FieldsAndRelationships/view"
@@ -797,6 +794,10 @@
 	"import_metadata": {
 		"message": "Importar metadatos de Tab (\"Recuento de Clics\", \"Fecha de Clic\" etc.).",
 		"description": "[label] importar todo lo que se encuentre en el archivo durante el proceso de importación"
+	},
+	"import_pinned_tabs": {
+		"message": "Importar número de $tabs fijadas.",
+		"description": "[etiqueta] importar el recuento de $tabs fijadas durante el proceso de importación"
 	},
 	"import_successful": {
 		"message": "Importación exitosa",

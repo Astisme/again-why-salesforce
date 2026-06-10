@@ -1,7 +1,4 @@
-{"import_pinned_tabs": {
-"message": "പിൻ ചെയ്‌ത $tabs എണ്ണം ഇമ്പോർട്ട് ചെയ്യുക.",
-"description": "[ലേബൽ] ഇമ്പോർട്ട് പ്രക്രിയയിൽ പിൻ ചെയ്‌ത $tabs എണ്ണം ഇമ്പോർട്ട് ചെയ്യുക"
-},
+{
 	"account": {
 		"message": "അക്കൗണ്ട്",
 		"description": "ObjectManager/Account/FieldsAndRelationships/view സംബന്ധിച്ച പേജ്"
@@ -797,6 +794,10 @@
 	"import_metadata": {
 		"message": "Tab മെറ്റാഡാറ്റ (\"ക്ലിക്ക് എണ്ണം\", \"ക്ലിക്ക് തീയതി\" തുടങ്ങിയവ) ഇറക്കുമതി ചെയ്യുക.",
 		"description": "[ലേബൽ] ഇറക്കുമതി പ്രക്രിയയിൽ ഫയലിൽ കണ്ടെത്തിയ എല്ലാം ഇറക്കുമതി ചെയ്യുക"
+	},
+	"import_pinned_tabs": {
+		"message": "പിൻ ചെയ്‌ത $tabs എണ്ണം ഇമ്പോർട്ട് ചെയ്യുക.",
+		"description": "[ലേബൽ] ഇമ്പോർട്ട് പ്രക്രിയയിൽ പിൻ ചെയ്‌ത $tabs എണ്ണം ഇമ്പോർട്ട് ചെയ്യുക"
 	},
 	"import_successful": {
 		"message": "യശಸ್ವിയായി ഇറക്കി വന്നു",

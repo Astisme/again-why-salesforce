@@ -1,7 +1,4 @@
-{"import_pinned_tabs": {
-"message": "고정된 $tabs 수 가져오기.",
-"description": "[레이블] 가져오기 프로세스 중에 고정된 $tabs 수 가져오기"
-},
+{
 	"account": {
 		"message": "계정",
 		"description": "ObjectManager/Account/FieldsAndRelationships/view와 관련된 페이지"
@@ -797,6 +794,10 @@
 	"import_metadata": {
 		"message": "Tab 메타데이터(\"클릭 횟수\", \"클릭 날짜\" 등) 가져오기.",
 		"description": "[라벨] 가져오기 프로세스 중에 파일에서 발견된 모든 것을 가져옵니다"
+	},
+	"import_pinned_tabs": {
+		"message": "고정된 $tabs 수 가져오기.",
+		"description": "[레이블] 가져오기 프로세스 중에 고정된 $tabs 수 가져오기"
 	},
 	"import_successful": {
 		"message": "성공적으로 가져왔습니다",

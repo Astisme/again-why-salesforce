@@ -1,7 +1,4 @@
-{"import_pinned_tabs": {
-"message": "Rögzített $tabs számának importálása.",
-"description": "[címke] rögzített $tabs számának importálása az importálási folyamat során"
-},
+{
 	"account": {
 		"message": "Fiók",
 		"description": "Az ObjectManager/Account/FieldsAndRelationships/view oldallal kapcsolatos"
@@ -797,6 +794,10 @@
 	"import_metadata": {
 		"message": "Tab metaadatok importálása (\"Kattintási Szám\", \"Kattintási Dátum\" stb.).",
 		"description": "[címke] mindent importál, amit a fájlban talál az importálási folyamat során"
+	},
+	"import_pinned_tabs": {
+		"message": "Rögzített $tabs számának importálása.",
+		"description": "[címke] rögzített $tabs számának importálása az importálási folyamat során"
 	},
 	"import_successful": {
 		"message": "Sikeresen importálva",

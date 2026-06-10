@@ -1,7 +1,4 @@
-{"import_pinned_tabs": {
-"message": "Увези број закачених $tabs .",
-"description": "[ознака] увези број закачених $tabs током процеса увоза"
-},
+{
 	"account": {
 		"message": "Nalog",
 		"description": "Stranica povezana sa ObjectManager/Account/FieldsAndRelationships/view"
@@ -797,6 +794,10 @@
 	"import_metadata": {
 		"message": "Увези метаподатке Tab-а (\"Број Кликова\", \"Датум Клика\" итд.).",
 		"description": "[ознака] увези све што се нађе у датотеци током процеса увоза"
+	},
+	"import_pinned_tabs": {
+		"message": "Увези број закачених $tabs .",
+		"description": "[ознака] увези број закачених $tabs током процеса увоза"
 	},
 	"import_successful": {
 		"message": "Uvoz je uspešan",

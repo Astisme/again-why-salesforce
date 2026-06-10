@@ -1,7 +1,4 @@
-{"import_pinned_tabs": {
-"message": "Aantal vastgemaakte $tabs importeren.",
-"description": "[label] aantal vastgemaakte $tabs importeren tijdens importproces"
-},
+{
 	"account": {
 		"message": "Account",
 		"description": "Pagina gerelateerd aan ObjectManager/Account/FieldsAndRelationships/view"
@@ -797,6 +794,10 @@
 	"import_metadata": {
 		"message": "Tabblad metadata importeren (\"Kliktelling\", \"Klikdatum\" enz.).",
 		"description": "[label] importeer alles wat in het bestand wordt gevonden tijdens het importproces"
+	},
+	"import_pinned_tabs": {
+		"message": "Aantal vastgemaakte $tabs importeren.",
+		"description": "[label] aantal vastgemaakte $tabs importeren tijdens importproces"
 	},
 	"import_successful": {
 		"message": "Succesvol geïmporteerd",

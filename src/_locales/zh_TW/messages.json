@@ -1,7 +1,4 @@
-{"import_pinned_tabs": {
-"message": "匯入釘選的 $tabs 數量。",
-"description": "[標籤] 在匯入過程中匯入釘選的 $tabs 數量"
-},
+{
 	"account": {
 		"message": "帳戶",
 		"description": "與 ObjectManager/Account/FieldsAndRelationships/view 相關的頁面"
@@ -797,6 +794,10 @@
 	"import_metadata": {
 		"message": "匯入 Tab 後設資料（「點擊次數」、「點擊日期」等）。",
 		"description": "[標籤] 在匯入過程中匯入檔案中找到的所有內容"
+	},
+	"import_pinned_tabs": {
+		"message": "匯入釘選的 $tabs 數量。",
+		"description": "[標籤] 在匯入過程中匯入釘選的 $tabs 數量"
 	},
 	"import_successful": {
 		"message": "Successfully imported",

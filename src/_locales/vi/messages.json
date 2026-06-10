@@ -1,7 +1,4 @@
-{"import_pinned_tabs": {
-"message": "Nhập số lượng $tabs đã ghim.",
-"description": "[nhãn] nhập số lượng $tabs đã ghim trong quá trình nhập"
-},
+{
 	"account": {
 		"message": "Tài khoản",
 		"description": "Trang liên quan đến ObjectManager/Account/FieldsAndRelationships/view"
@@ -797,6 +794,10 @@
 	"import_metadata": {
 		"message": "Nhập siêu dữ liệu Tab (\"Số Lần Nhấp\", \"Ngày Nhấp\" v.v.).",
 		"description": "[nhãn] nhập mọi thứ tìm thấy trong tệp trong quá trình nhập"
+	},
+	"import_pinned_tabs": {
+		"message": "Nhập số lượng $tabs đã ghim.",
+		"description": "[nhãn] nhập số lượng $tabs đã ghim trong quá trình nhập"
 	},
 	"import_successful": {
 		"message": "Nhập thành công",

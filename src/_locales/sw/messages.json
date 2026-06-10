@@ -1,7 +1,4 @@
-{"import_pinned_tabs": {
-"message": "Ingiza idadi ya $tabs zilizobandikwa.",
-"description": "[lebo] ingiza idadi ya $tabs zilizobandikwa wakati wa mchakato wa kuingiza"
-},
+{
 	"account": {
 		"message": "Akaunti",
 		"description": "Ukurasa unaohusiana na ObjectManager/Account/FieldsAndRelationships/view"
@@ -797,6 +794,10 @@
 	"import_metadata": {
 		"message": "Ingiza metadata ya Tab (\"Idadi ya Mibofyo\", \"Tarehe ya Kubofya\" n.k.).",
 		"description": "[lebo] ingiza kila kitu kinachopatikana kwenye faili wakati wa mchakato wa kuingiza"
+	},
+	"import_pinned_tabs": {
+		"message": "Ingiza idadi ya $tabs zilizobandikwa.",
+		"description": "[lebo] ingiza idadi ya $tabs zilizobandikwa wakati wa mchakato wa kuingiza"
 	},
 	"import_successful": {
 		"message": "Imeingizwa kwa mafanikio",

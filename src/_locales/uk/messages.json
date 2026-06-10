@@ -1,7 +1,4 @@
-{"import_pinned_tabs": {
-"message": "Імпортувати кількість закріплених $tabs .",
-"description": "[мітка] імпортувати кількість закріплених $tabs під час процесу імпорту"
-},
+{
 	"account": {
 		"message": "Обліковий запис",
 		"description": "Сторінка, пов'язана з ObjectManager/Account/FieldsAndRelationships/view"
@@ -797,6 +794,10 @@
 	"import_metadata": {
 		"message": "Імпортувати метадані Tab (\"Кількість Кліків\", \"Дата Кліка\" тощо).",
 		"description": "[мітка] імпортувати все, що знайдено у файлі під час процесу імпорту"
+	},
+	"import_pinned_tabs": {
+		"message": "Імпортувати кількість закріплених $tabs .",
+		"description": "[мітка] імпортувати кількість закріплених $tabs під час процесу імпорту"
 	},
 	"import_successful": {
 		"message": "Успішно імпортовано",

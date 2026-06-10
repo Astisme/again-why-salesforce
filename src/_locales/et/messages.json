@@ -1,7 +1,4 @@
-{"import_pinned_tabs": {
-"message": "Impordi kinnitatud $tabs arv.",
-"description": "[silt] impordi kinnitatud $tabs arv impordiprotsessi ajal"
-},
+{
 	"account": {
 		"message": "Konto",
 		"description": "Leht, mis on seotud ObjectManager/Account/FieldsAndRelationships/view"
@@ -797,6 +794,10 @@
 	"import_metadata": {
 		"message": "Impordi Tabi metaandmed (\"Klõpsude arv\", \"Klõpsamise kuupäev\" jne).",
 		"description": "[label] impordi kõik, mis failis impordiprotsessi ajal leiti"
+	},
+	"import_pinned_tabs": {
+		"message": "Impordi kinnitatud $tabs arv.",
+		"description": "[silt] impordi kinnitatud $tabs arv impordiprotsessi ajal"
 	},
 	"import_successful": {
 		"message": "Edukalt imporditud",

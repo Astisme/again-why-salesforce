@@ -1,7 +1,4 @@
-{"import_pinned_tabs": {
-"message": "استيراد عدد $tabs المثبتة.",
-"description": "[تسمية] استيراد عدد $tabs المثبتة أثناء عملية الاستيراد"
-},
+{
 	"account": {
 		"message": "الحساب",
 		"description": "الصفحة المتعلقة بـ ObjectManager/Account/FieldsAndRelationships/view"
@@ -797,6 +794,10 @@
 	"import_metadata": {
 		"message": "استيراد بيانات تعريف Tab (مثل \"عدد النقرات\"، \"تاريخ النقر\" وما إلى ذلك).",
 		"description": "[label] استيراد كل شيء موجود في الملف أثناء عملية الاستيراد"
+	},
+	"import_pinned_tabs": {
+		"message": "استيراد عدد $tabs المثبتة.",
+		"description": "[تسمية] استيراد عدد $tabs المثبتة أثناء عملية الاستيراد"
 	},
 	"import_successful": {
 		"message": "تم الاستيراد بنجاح",

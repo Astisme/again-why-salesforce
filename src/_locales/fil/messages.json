@@ -1,7 +1,4 @@
-{"import_pinned_tabs": {
-"message": "I-import ang bilang ng mga naka-pin na $tabs .",
-"description": "[label] i-import ang bilang ng mga naka-pin na $tabs sa panahon ng proseso ng pag-import"
-},
+{
 	"account": {
 		"message": "Account",
 		"description": "Ang pahinang may kaugnayan sa ObjectManager/Account/FieldsAndRelationships/view"
@@ -797,6 +794,10 @@
 	"import_metadata": {
 		"message": "I-import ang metadata ng Tab (\"Click Count\", \"Click Date\" atbp.).",
 		"description": "[label] i-import ang lahat ng nakita sa file sa panahon ng proseso ng pag-import"
+	},
+	"import_pinned_tabs": {
+		"message": "I-import ang bilang ng mga naka-pin na $tabs .",
+		"description": "[label] i-import ang bilang ng mga naka-pin na $tabs sa panahon ng proseso ng pag-import"
 	},
 	"import_successful": {
 		"message": "Matagumpay na na-import",

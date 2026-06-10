@@ -1,7 +1,4 @@
-{"import_pinned_tabs": {
-"message": "Import bilangan $tabs yang आपण pin.",
-"description": "[label] import bilangan $tabs yang dipin semasa proses import"
-},
+{
 	"account": {
 		"message": "Akaun",
 		"description": "Halaman yang berkaitan dengan ObjectManager/Account/FieldsAndRelationships/view"
@@ -797,6 +794,10 @@
 	"import_metadata": {
 		"message": "Import metadata Tab (\"Kiraan Klik\", \"Tarikh Klik\" dsb.).",
 		"description": "[label] import semua yang ditemui dalam fail semasa proses import"
+	},
+	"import_pinned_tabs": {
+		"message": "Import bilangan $tabs yang आपण pin.",
+		"description": "[label] import bilangan $tabs yang dipin semasa proses import"
 	},
 	"import_successful": {
 		"message": "Berjaya diimport",

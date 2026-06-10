@@ -1,7 +1,4 @@
-{"import_pinned_tabs": {
-"message": "Εισαγωγή αριθμού καρφιτσωμένων $tabs .",
-"description": "[ετικέτα] εισαγωγή καταμέτρησης καρφιτσωμένων $tabs κατά τη διαδικασία εισαγωγής"
-},
+{
 	"account": {
 		"message": "Λογαριασμός",
 		"description": "Η σελίδα που σχετίζεται με το ObjectManager/Account/FieldsAndRelationships/view"
@@ -797,6 +794,10 @@
 	"import_metadata": {
 		"message": "Εισαγωγή μεταδεδομένων Tab («Αριθμός Κλικ», «Ημερομηνία Κλικ» κ.λπ.).",
 		"description": "[label] εισαγωγή όλων των στοιχείων που βρέθηκαν στο αρχείο κατά τη διαδικασία εισαγωγής"
+	},
+	"import_pinned_tabs": {
+		"message": "Εισαγωγή αριθμού καρφιτσωμένων $tabs .",
+		"description": "[ετικέτα] εισαγωγή καταμέτρησης καρφιτσωμένων $tabs κατά τη διαδικασία εισαγωγής"
 	},
 	"import_successful": {
 		"message": "Εισήχθη με επιτυχία",

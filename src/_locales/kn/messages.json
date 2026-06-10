@@ -1,7 +1,4 @@
-{"import_pinned_tabs": {
-"message": "ಪಿನ್ ಮಾಡಲಾದ $tabs ಸಂಖ್ಯೆಯನ್ನು ಆಮದು ಮಾಡಿ.",
-"description": "[ಲೇಬಲ್] ಆಮದು ಪ್ರಕ್ರಿಯೆಯ ಸಮಯದಲ್ಲಿ ಪಿನ್ ಮಾಡಲಾದ $tabs ಸಂಖ್ಯೆಯನ್ನು ಆಮದು ಮಾಡಿ"
-},
+{
 	"account": {
 		"message": "ಖಾತೆ",
 		"description": "ObjectManager/Account/FieldsAndRelationships/view ಗೆ ಸಂಬಂಧಿಸಿದ ಪುಟ"
@@ -797,6 +794,10 @@
 	"import_metadata": {
 		"message": "Tab ಮೆಟಾಡೇಟಾವನ್ನು ಆಮದು ಮಾಡಿ (\"ಕ್ಲಿಕ್ ಎಣಿಕೆ\", \"ಕ್ಲಿಕ್ ದಿನಾಂಕ\" ಇತ್ಯಾದಿ).",
 		"description": "[ಲೇಬಲ್] ಆಮದು ಪ್ರಕ್ರಿಯೆಯ ಸಮಯದಲ್ಲಿ ಫೈಲ್‌ನಲ್ಲಿ ಕಂಡುಬರುವ ಎಲ್ಲವನ್ನೂ ಆಮದು ಮಾಡಿ"
+	},
+	"import_pinned_tabs": {
+		"message": "ಪಿನ್ ಮಾಡಲಾದ $tabs ಸಂಖ್ಯೆಯನ್ನು ಆಮದು ಮಾಡಿ.",
+		"description": "[ಲೇಬಲ್] ಆಮದು ಪ್ರಕ್ರಿಯೆಯ ಸಮಯದಲ್ಲಿ ಪಿನ್ ಮಾಡಲಾದ $tabs ಸಂಖ್ಯೆಯನ್ನು ಆಮದು ಮಾಡಿ"
 	},
 	"import_successful": {
 		"message": "ಯಶಸ್ವಿಯಾಗಿ ಆಮದುಮಾಡಲಾಗಿದೆ",

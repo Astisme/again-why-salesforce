@@ -1,7 +1,4 @@
-{"import_pinned_tabs": {
-"message": "Importovať počet pripnutých $tabs .",
-"description": "[štítok] importovať počet pripnutých $tabs počas procesu importu"
-},
+{
 	"account": {
 		"message": "Účet",
 		"description": "Stránka súvisiaca s ObjectManager/Account/FieldsAndRelationships/view"
@@ -797,6 +794,10 @@
 	"import_metadata": {
 		"message": "Importovať metadáta Tab-u (\"Počet Kliknutí\", \"Dátum Kliknutia\" atď.).",
 		"description": "[štítok] importovať všetko nájdené v súbore počas procesu importu"
+	},
+	"import_pinned_tabs": {
+		"message": "Importovať počet pripnutých $tabs .",
+		"description": "[štítok] importovať počet pripnutých $tabs počas procesu importu"
 	},
 	"import_successful": {
 		"message": "Import bol úspešný",

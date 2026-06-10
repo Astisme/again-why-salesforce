@@ -1,7 +1,4 @@
-{"import_pinned_tabs": {
-"message": "Importer le nombre de $tabs épinglés.",
-"description": "[libellé] importer le nombre de $tabs épinglés pendant le processus d'importation"
-},
+{
 	"account": {
 		"message": "Compte",
 		"description": "La page relative à ObjectManager/Account/FieldsAndRelationships/view"
@@ -797,6 +794,10 @@
 	"import_metadata": {
 		"message": "Importer les métadonnées Tab (\"Compte de Clics\", \"Date de Clic\" etc.).",
 		"description": "[label] importer tout ce qui est trouvé dans le fichier pendant le processus d'importation"
+	},
+	"import_pinned_tabs": {
+		"message": "Importer le nombre de $tabs épinglés.",
+		"description": "[libellé] importer le nombre de $tabs épinglés pendant le processus d'importation"
 	},
 	"import_successful": {
 		"message": "Importation réussie",

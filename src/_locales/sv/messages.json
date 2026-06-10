@@ -1,7 +1,4 @@
-{"import_pinned_tabs": {
-"message": "Importera antal fästa $tabs .",
-"description": "[etikett] importera antal fästa $tabs under importprocessen"
-},
+{
 	"account": {
 		"message": "Konto",
 		"description": "Sida relaterad till ObjectManager/Account/FieldsAndRelationships/view"
@@ -797,6 +794,10 @@
 	"import_metadata": {
 		"message": "Importera Tab metadata (\"Antal Klick\", \"Klickdatum\" etc.).",
 		"description": "[etikett] importera allt som finns i filen under importprocessen"
+	},
+	"import_pinned_tabs": {
+		"message": "Importera antal fästa $tabs .",
+		"description": "[etikett] importera antal fästa $tabs under importprocessen"
 	},
 	"import_successful": {
 		"message": "Import lyckades",

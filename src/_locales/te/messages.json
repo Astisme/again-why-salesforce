@@ -1,7 +1,4 @@
-{"import_pinned_tabs": {
-"message": "పిన్ చేసిన $tabs సంఖ్యను దిగుమతి చేయండి.",
-"description": "[లేబుల్] దిగుమతి ప్రక్రియలో పిన్ చేసిన $tabs సంఖ్యను దిగుమతి చేయండి"
-},
+{
 	"account": {
 		"message": "ఖాతా",
 		"description": "ObjectManager/Account/FieldsAndRelationships/view కి సంబంధించిన పేజీ"
@@ -797,6 +794,10 @@
 	"import_metadata": {
 		"message": "Tab మెటాడేటాను (\"క్లిక్ సంఖ్య\", \"క్లిక్ తేదీ\" మొదలైనవి) దిగుమతి చేయి.",
 		"description": "[లేబుల్] దిగుమతి ప్రక్రియలో ఫైల్‌లో కనుగొనబడిన ప్రతిదాన్ని దిగుమతి చేయి"
+	},
+	"import_pinned_tabs": {
+		"message": "పిన్ చేసిన $tabs సంఖ్యను దిగుమతి చేయండి.",
+		"description": "[లేబుల్] దిగుమతి ప్రక్రియలో పిన్ చేసిన $tabs సంఖ్యను దిగుమతి చేయండి"
 	},
 	"import_successful": {
 		"message": "విజయవంతంగా దిగుమతి చేయబడింది",
