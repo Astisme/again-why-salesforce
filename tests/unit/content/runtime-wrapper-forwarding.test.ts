@@ -226,6 +226,91 @@ type ManageTabsDependencyMap = {
 	) => ManageTabsPureModule;
 };
 
+type FavouriteManagerPureModule = {
+	FAVOURITE_BUTTON_ID: string;
+	SLASHED_STAR_ID: string;
+	STAR_ID: string;
+	actionFavourite: () => string;
+	addTab: (url: string) => string;
+	createStarSvg: (
+		options: { id?: string | null; alt?: string | null },
+		slashed: boolean,
+	) => string;
+	generateFavouriteButton: () => string;
+	getFavouriteImage: (
+		favouriteId: string | null,
+		button: string | null,
+	) => string;
+	pageActionTab: (save: boolean) => string;
+	showFavouriteButton: (count: number) => string;
+	toggleFavouriteButton: (
+		isSaved: boolean | null,
+		button: string | null,
+	) => string;
+};
+
+type FavouriteManagerRuntimeModule = {
+	FAVOURITE_BUTTON_ID: string;
+	SLASHED_STAR_ID: string;
+	STAR_ID: string;
+	actionFavourite: () => string;
+	addTab: (url: string) => string;
+	createFavouriteManagerModule: (
+		overrides?: Record<string, unknown>,
+	) => FavouriteManagerPureModule;
+	createStarSvg: (
+		options?: { id?: string | null; alt?: string | null },
+		slashed?: boolean,
+	) => string;
+	generateFavouriteButton: () => string;
+	getFavouriteImage: (
+		favouriteId: string | null,
+		button?: string | null,
+	) => string;
+	pageActionTab: (save?: boolean) => string;
+	showFavouriteButton: (count?: number) => string;
+	toggleFavouriteButton: (
+		isSaved?: boolean | null,
+		button?: string | null,
+	) => string;
+};
+
+type FavouriteManagerDependencyMap = {
+	CMD_REMOVE_TAB: string;
+	CMD_SAVE_AS_TAB: string;
+	CXM_REMOVE_TAB: string;
+	EXTENSION_LABEL: string;
+	EXTENSION_NAME: string;
+	HIDDEN_CLASS: string;
+	SALESFORCE_SETUP_HOME_MINI: string;
+	SKIP_LINK_DETECTION: string;
+	TAB_ADD_FRONT: string;
+	TAB_AS_ORG: string;
+	TOAST_INFO: string;
+	TOAST_WARNING: string;
+	TUTORIAL_EVENT_ACTION_FAVOURITE: string;
+	TUTORIAL_EVENT_ACTION_UNFAVOURITE: string;
+	WHAT_ADD: string;
+	WHAT_GET_COMMANDS: string;
+	getSettings: (keys: string[]) => string[];
+	injectStyle: (id: string) => string;
+	sendExtensionMessage: (message: Record<string, unknown>) => string;
+	Tab: { kind: string };
+	ensureAllTabsAvailability: () => string[];
+	TranslationService: {
+		getTranslations: (keys: string | string[]) => string | string[];
+	};
+	getIsCurrentlyOnSavedTab: () => boolean;
+	getWasOnSavedTab: () => boolean;
+	isOnSavedTab: () => string;
+	performActionOnTabs: (action: string) => string;
+	getCurrentHref: () => string;
+	showToast: (message: string, status?: string) => string;
+	createFavouriteManagerPureModule: (
+		dependencies: Record<string, unknown>,
+	) => FavouriteManagerPureModule;
+};
+
 /**
  * Loads `generator.js` with a mocked runtime module.
  *
@@ -694,6 +779,166 @@ Deno.test("manageTabs-runtime wrappers delegate singleton and merge overrides", 
 		assertStrictEquals(
 			(factoryInputs[1].getCurrentHref as () => string)(),
 			"https://custom.example",
+		);
+	} finally {
+		cleanup();
+	}
+});
+
+Deno.test("favourite-manager-runtime wrappers delegate singleton and merge overrides", async () => {
+	const singletonCalls: string[] = [];
+	const explicitModule: FavouriteManagerPureModule = {
+		FAVOURITE_BUTTON_ID: "fav-explicit",
+		SLASHED_STAR_ID: "slash-explicit",
+		STAR_ID: "star-explicit",
+		actionFavourite: () => "explicit-action",
+		addTab: () => "explicit-add",
+		createStarSvg: () => "explicit-star",
+		generateFavouriteButton: () => "explicit-button",
+		getFavouriteImage: () => "explicit-image",
+		pageActionTab: () => "explicit-page",
+		showFavouriteButton: () => "explicit-show",
+		toggleFavouriteButton: () => "explicit-toggle",
+	};
+	const singletonModule: FavouriteManagerPureModule = {
+		FAVOURITE_BUTTON_ID: "fav-singleton",
+		SLASHED_STAR_ID: "slash-singleton",
+		STAR_ID: "star-singleton",
+		actionFavourite: () => {
+			singletonCalls.push("actionFavourite");
+			return "singleton-action";
+		},
+		addTab: (url) => {
+			singletonCalls.push(`addTab:${url}`);
+			return "singleton-add";
+		},
+		createStarSvg: (options, slashed) => {
+			singletonCalls.push(`createStarSvg:${options.id}:${slashed}`);
+			return "singleton-star";
+		},
+		generateFavouriteButton: () => {
+			singletonCalls.push("generateFavouriteButton");
+			return "singleton-button";
+		},
+		getFavouriteImage: (favouriteId, button) => {
+			singletonCalls.push(`getFavouriteImage:${favouriteId}:${button}`);
+			return "singleton-image";
+		},
+		pageActionTab: (save) => {
+			singletonCalls.push(`pageActionTab:${save}`);
+			return "singleton-page";
+		},
+		showFavouriteButton: (count) => {
+			singletonCalls.push(`showFavouriteButton:${count}`);
+			return "singleton-show";
+		},
+		toggleFavouriteButton: (isSaved, button) => {
+			singletonCalls.push(`toggleFavouriteButton:${isSaved}:${button}`);
+			return "singleton-toggle";
+		},
+	};
+	const factoryInputs: Array<Record<string, unknown>> = [];
+	const dependencies: FavouriteManagerDependencyMap = {
+		CMD_REMOVE_TAB: "cmd-remove",
+		CMD_SAVE_AS_TAB: "cmd-save",
+		CXM_REMOVE_TAB: "cxm-remove",
+		EXTENSION_LABEL: "AWSF",
+		EXTENSION_NAME: "awsf",
+		HIDDEN_CLASS: "hidden",
+		SALESFORCE_SETUP_HOME_MINI: "setup-home",
+		SKIP_LINK_DETECTION: "skip-detect",
+		TAB_ADD_FRONT: "tab-front",
+		TAB_AS_ORG: "tab-org",
+		TOAST_INFO: "toast-info",
+		TOAST_WARNING: "toast-warning",
+		TUTORIAL_EVENT_ACTION_FAVOURITE: "event-fav",
+		TUTORIAL_EVENT_ACTION_UNFAVOURITE: "event-unfav",
+		WHAT_ADD: "what-add",
+		WHAT_GET_COMMANDS: "what-commands",
+		getSettings: (keys) => keys,
+		injectStyle: (id) => id,
+		sendExtensionMessage: (message) => JSON.stringify(message),
+		Tab: { kind: "tab" },
+		ensureAllTabsAvailability: () => [],
+		TranslationService: {
+			getTranslations: (keys) => keys,
+		},
+		getIsCurrentlyOnSavedTab: () => true,
+		getWasOnSavedTab: () => false,
+		isOnSavedTab: () => "saved-check",
+		performActionOnTabs: (action) => action,
+		getCurrentHref: () => "https://example.com/setup",
+		showToast: (message, status) => `${message}:${status}`,
+		createFavouriteManagerPureModule: (inputDependencies) => {
+			factoryInputs.push(inputDependencies);
+			return factoryInputs.length === 1
+				? singletonModule
+				: explicitModule;
+		},
+	};
+
+	const { cleanup, module } = await loadIsolatedModule<
+		FavouriteManagerRuntimeModule,
+		FavouriteManagerDependencyMap
+	>({
+		modulePath: new URL(
+			"../../../src/salesforce/runtime/favourite-manager-runtime.js",
+			import.meta.url,
+		),
+		dependencies,
+	});
+
+	try {
+		const customShowToast = (message: string) => `custom-${message}`;
+		const createdModule = module.createFavouriteManagerModule({
+			extensionName: "custom-name",
+			showToastFn: customShowToast,
+		});
+		assertStrictEquals(createdModule, explicitModule);
+		assertStrictEquals(module.FAVOURITE_BUTTON_ID, "fav-singleton");
+		assertStrictEquals(module.SLASHED_STAR_ID, "slash-singleton");
+		assertStrictEquals(module.STAR_ID, "star-singleton");
+		assertStrictEquals(module.actionFavourite(), "singleton-action");
+		assertStrictEquals(module.addTab("tab-a"), "singleton-add");
+		assertStrictEquals(
+			module.createStarSvg({ id: "star-a" }, true),
+			"singleton-star",
+		);
+		assertStrictEquals(
+			module.generateFavouriteButton(),
+			"singleton-button",
+		);
+		assertStrictEquals(
+			module.getFavouriteImage("fav-id", "button-a"),
+			"singleton-image",
+		);
+		assertStrictEquals(module.pageActionTab(false), "singleton-page");
+		assertStrictEquals(
+			module.showFavouriteButton(4),
+			"singleton-show",
+		);
+		assertStrictEquals(
+			module.toggleFavouriteButton(true, "button-b"),
+			"singleton-toggle",
+		);
+
+		assertEquals(singletonCalls, [
+			"actionFavourite",
+			"addTab:tab-a",
+			"createStarSvg:star-a:true",
+			"generateFavouriteButton",
+			"getFavouriteImage:fav-id:button-a",
+			"pageActionTab:false",
+			"showFavouriteButton:4",
+			"toggleFavouriteButton:true:button-b",
+		]);
+		assertStrictEquals(factoryInputs.length, 2);
+		assertEquals(factoryInputs[1].cmdRemoveTab, "cmd-remove");
+		assertEquals(factoryInputs[1].extensionName, "custom-name");
+		assertStrictEquals(factoryInputs[1].showToastFn, customShowToast);
+		assertStrictEquals(
+			(factoryInputs[1].getCurrentHrefFn as () => string)(),
+			"https://example.com/setup",
 		);
 	} finally {
 		cleanup();

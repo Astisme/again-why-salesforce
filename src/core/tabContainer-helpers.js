@@ -13,12 +13,12 @@ export function getTabContainerFromObj(tbContainerObj) {
 	res.isUsingOldVersion = Array.isArray(tbContainerObj);
 	if (res.isUsingOldVersion) {
 		// Deprecated legacy array backup shape.
-    // the Tabs will automatically get saved in the newer version at the first sync
+		// the Tabs will automatically get saved in the newer version at the first sync
 		res.tabs = tbContainerObj;
 	} else {
-    // new version of saving the Tabs
-    // in a later release, we'll have to remove the deprecated way of saving them.
-    // currently this is not possible because we're using this for import as well (meaning someone might have "old" versions of their Tabs backed up as json files
+		// new version of saving the Tabs
+		// in a later release, we'll have to remove the deprecated way of saving them.
+		// currently this is not possible because we're using this for import as well (meaning someone might have "old" versions of their Tabs backed up as json files
 		Object.assign(res, tbContainerObj);
 	}
 	return res;
