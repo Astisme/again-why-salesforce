@@ -780,6 +780,143 @@ Deno.test("import reads dropped files from dataTransfer.items when files is empt
 	}
 });
 
+Deno.test("import resets only once across direct multi-file drop imports", async () => {
+	const fixture = await loadImportModule({
+		checkboxState: {
+			"again-why-salesforce-import-overwrite": true,
+			"again-why-salesforce-import-other-org": true,
+			"again-why-salesforce-import-pinned": true,
+		},
+	});
+
+	try {
+		await fixture.module.createImportModal();
+		await fixture.module.readChangeOrDropFiles({
+			dataTransfer: {
+				files: [
+					createFile(
+						"application/json",
+						JSON.stringify({
+							pinned: 1,
+							tabs: [{
+								label: "First",
+								url: "/first",
+								org: "org-a",
+							}],
+						}),
+						"first.json",
+					),
+					createFile(
+						"application/json",
+						JSON.stringify({
+							pinned: 1,
+							tabs: [{
+								label: "Second",
+								url: "/second",
+								org: "org-b",
+							}],
+						}),
+						"second.json",
+					),
+				],
+			},
+			preventDefault() {},
+			type: "drop",
+		} as unknown as {
+			dataTransfer?: {
+				files?: FileLike[];
+				items?: { getAsFile: () => FileLike | null }[];
+			};
+			preventDefault: () => void;
+			target?: { files?: FileLike[] };
+		});
+
+		assertEquals(fixture.importCalls, [
+			{
+				config: {
+					currentOrg: "current-org",
+					importMetadata: false,
+					importPinnedTabs: true,
+					preserveOtherOrg: true,
+					resetTabs: true,
+				},
+				json: JSON.stringify({
+					pinned: 1,
+					tabs: [{ label: "First", url: "/first", org: "org-a" }],
+				}),
+			},
+			{
+				config: {
+					currentOrg: null,
+					importMetadata: false,
+					importPinnedTabs: true,
+					preserveOtherOrg: true,
+					resetTabs: false,
+				},
+				json: JSON.stringify({
+					pinned: 1,
+					tabs: [{ label: "Second", url: "/second", org: "org-b" }],
+				}),
+			},
+		]);
+	} finally {
+		fixture.cleanup();
+	}
+});
+
+Deno.test("import reads single Firefox drop item with overwrite and pinned import", async () => {
+	const fixture = await loadImportModule({
+		checkboxState: {
+			"again-why-salesforce-import-overwrite": true,
+			"again-why-salesforce-import-other-org": true,
+			"again-why-salesforce-import-pinned": true,
+		},
+	});
+
+	try {
+		await fixture.module.createImportModal();
+		await fixture.module.readChangeOrDropFiles({
+			dataTransfer: {
+				files: [],
+				items: [
+					{
+						getAsFile: () =>
+							createFile(
+								"",
+								JSON.stringify({
+									pinnedTabsNo: 1,
+									tabs: [{
+										label: "ItemDrop",
+										url: "/item",
+										org: "org",
+									}],
+								}),
+								"item-drop.json",
+							),
+					},
+				],
+			},
+			preventDefault() {},
+		});
+
+		assertEquals(fixture.importCalls, [{
+			config: {
+				currentOrg: "current-org",
+				importMetadata: false,
+				importPinnedTabs: true,
+				preserveOtherOrg: true,
+				resetTabs: true,
+			},
+			json: JSON.stringify({
+				pinnedTabsNo: 1,
+				tabs: [{ label: "ItemDrop", url: "/item", org: "org" }],
+			}),
+		}]);
+	} finally {
+		fixture.cleanup();
+	}
+});
+
 Deno.test("import lets the user pick tabs before importing and warns on empty selection", async () => {
 	const fixture = await loadImportModule({
 		checkboxState: {

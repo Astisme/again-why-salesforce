@@ -1500,6 +1500,37 @@ await Deno.test("TabContainer - Import", async (t) => {
 	);
 
 	await t.step(
+		"overwrite import with pinned import resets even when pinned metadata is absent",
+		async () => {
+			await container.importTabs(
+				`{"${TabContainer.keyPinnedTabsNo}":1,"${TabContainer.keyTabs}":[{"label":"old","url":"old"}]}`,
+				{
+					importMetadata: false,
+					importPinnedTabs: true,
+					preserveOtherOrg: false,
+					resetTabs: true,
+				},
+			);
+			assertEquals(container[TabContainer.keyPinnedTabsNo], 1);
+			assertEquals(container.length, 1);
+			assertEquals(container[0].url, "old");
+
+			await container.importTabs(
+				`{"pinnedTabsNo":1,"${TabContainer.keyTabs}":[{"label":"new","url":"new"}]}`,
+				{
+					importMetadata: false,
+					importPinnedTabs: true,
+					preserveOtherOrg: false,
+					resetTabs: true,
+				},
+			);
+			assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
+			assertEquals(container.length, 1);
+			assertEquals(container[0].url, "new");
+		},
+	);
+
+	await t.step(
 		"overwrite import preserves other org but removes current org",
 		async () => {
 			container.length = 0;
@@ -1552,6 +1583,99 @@ await Deno.test("TabContainer - Import", async (t) => {
 			assertEquals(container[1].url, "pin-b");
 			assertEquals(container[0][Tab.keyClickCount], undefined);
 			assertEquals(container[1][Tab.keyClickDate], undefined);
+		},
+	);
+
+	await t.step(
+		"overwrite plus preserve-other-org keeps surviving pinned org tabs and appends imported tail",
+		async () => {
+			container.length = 0;
+			container[TabContainer.keyPinnedTabsNo] = 0;
+			await container.addTabs([
+				{ label: "Other Pin", url: "other-pin", org: "other-org" },
+				{
+					label: "Current Pin",
+					url: "current-pin",
+					org: "current-org",
+				},
+				{ label: "Other Tail", url: "other-tail", org: "other-org" },
+				{ label: "Generic Tail", url: "generic-tail" },
+			]);
+			container[TabContainer.keyPinnedTabsNo] = 2;
+
+			assertEquals(
+				await container.importTabs(
+					`{"${TabContainer.keyPinnedTabsNo}":1,"${TabContainer.keyTabs}":[{"label":"Imported Pin","url":"imported-pin"},{"label":"Imported Tail","url":"imported-tail"}]}`,
+					{
+						currentOrg: "current-org",
+						importMetadata: false,
+						importPinnedTabs: true,
+						preserveOtherOrg: true,
+						resetTabs: true,
+					},
+				),
+				2,
+			);
+			assertEquals(container[TabContainer.keyPinnedTabsNo], 2);
+			assertEquals(
+				Array.from(container, (tab: TabInput) => tab.url),
+				["other-pin", "imported-pin", "other-tail", "imported-tail"],
+			);
+		},
+	);
+
+	await t.step(
+		"import overwrite with pinned tabs syncs once with final state",
+		async () => {
+			container.length = 0;
+			container[TabContainer.keyPinnedTabsNo] = 0;
+			await container.addTabs([
+				{ label: "Other Pin", url: "other-pin", org: "other-org" },
+				{
+					label: "Current Org",
+					url: "current-org-url",
+					org: "current-org",
+				},
+				{ label: "Other Tail", url: "other-tail", org: "other-org" },
+			]);
+			container[TabContainer.keyPinnedTabsNo] = 2;
+			const originalSyncTabs = container.syncTabs;
+			const syncSnapshots: Array<{
+				pinned: number;
+				urls: string[];
+			}> = [];
+			container.syncTabs = async function (...args) {
+				syncSnapshots.push({
+					pinned: this[TabContainer.keyPinnedTabsNo],
+					urls: Array.from(this, (tab: TabInput) => tab.url),
+				});
+				return await originalSyncTabs.apply(this, args);
+			};
+			try {
+				assertEquals(
+					await container.importTabs(
+						`{"${TabContainer.keyPinnedTabsNo}":1,"${TabContainer.keyTabs}":[{"label":"Imported Pin","url":"import-pin"},{"label":"Imported Tail","url":"import-tail"}]}`,
+						{
+							currentOrg: "current-org",
+							importMetadata: false,
+							importPinnedTabs: true,
+							preserveOtherOrg: true,
+							resetTabs: true,
+						},
+					),
+					2,
+				);
+			} finally {
+				Reflect.deleteProperty(container, "syncTabs");
+			}
+			assertEquals(syncSnapshots.length, 1);
+			assertEquals(syncSnapshots[0].pinned, 2);
+			assertEquals(syncSnapshots[0].urls, [
+				"other-pin",
+				"import-pin",
+				"other-tail",
+				"import-tail",
+			]);
 		},
 	);
 
@@ -1713,6 +1837,39 @@ await Deno.test("TabContainer - Import", async (t) => {
 		assertEquals(container[2].url, "pin-url");
 		assertEquals(container[3].url, "testurl");
 	});
+
+	await t.step(
+		"failed final import validation restores original tabs and pinned count",
+		async () => {
+			container.length = 0;
+			container[TabContainer.keyPinnedTabsNo] = 0;
+			await container.addTabs([
+				{ label: "Pinned Old", url: "pinned-old" },
+				{ label: "Tail Old", url: "tail-old", org: "tail-org" },
+			]);
+			container[TabContainer.keyPinnedTabsNo] = 1;
+
+			await assertRejects(
+				async () =>
+					await container.importTabs(
+						`{"${TabContainer.keyPinnedTabsNo}":1,"${TabContainer.keyTabs}":[{"label":"Pinned New","url":"pinned-new"},{"url":"missing-label"}]}`,
+						{
+							importMetadata: false,
+							importPinnedTabs: true,
+							preserveOtherOrg: false,
+							resetTabs: true,
+						},
+					),
+				Error,
+				"error_invalid_tab",
+			);
+			assertEquals(container[TabContainer.keyPinnedTabsNo], 1);
+			assertEquals(
+				Array.from(container, (tab: TabInput) => tab.url),
+				["pinned-old", "tail-old"],
+			);
+		},
+	);
 
 	await t.step("does not import tabs from wrong JSON string", async () => {
 		await container.setDefaultTabs();

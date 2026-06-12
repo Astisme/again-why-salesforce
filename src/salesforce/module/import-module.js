@@ -372,11 +372,17 @@ export function createImportPureModule({
 				importConfig,
 			);
 		} else {
-			for (const file of tabs) {
+			for (const [index, file] of tabs.entries()) {
 				const jsonString = await file.text();
+				const fileImportConfig = index === 0 ? importConfig : {
+					...importConfig,
+					currentOrg: null,
+					preserveOtherOrg: true,
+					resetTabs: false,
+				};
 				importedNum += await allTabs.importTabs(
 					jsonString,
-					importConfig,
+					fileImportConfig,
 				);
 			}
 		}
