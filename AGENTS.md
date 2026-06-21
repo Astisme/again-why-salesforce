@@ -13,3 +13,4 @@ use replaceAll instead of replace if possible
 use String.raw instead of double escape
 allow changes with deno task dev-firefox
 re exports are not allowed
+to revert whole file, use git commands

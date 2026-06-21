@@ -10,6 +10,23 @@ import {
 } from "@std/testing/asserts";
 import { installMockDom } from "../../happydom.test.ts";
 
+globalThis.browser ??= {
+	i18n: {
+		getMessage: (key: string) => key,
+	},
+	runtime: {
+		getURL: (path: string) => path,
+		getManifest: () => ({
+			homepage_url: "https://github.com/againwhy/awsf",
+			optional_host_permissions: [],
+			version: "0.0.0-test",
+		}),
+	},
+};
+globalThis.chrome ??= globalThis.browser;
+
+const CONSTANTS = await import("../../../src/core/constants.js");
+
 const EXTENSION_NAME = "again-why-salesforce";
 
 /**
@@ -844,30 +861,30 @@ function createHarness(url = SETUP_URL) {
 		constants: {
 			ALL_TOAST_TYPES: new Set(["success", "info", "warning", "error"]),
 			BROWSER: browser,
-			CXM_EMPTY_GENERIC_TABS: "empty-generic-tabs",
-			CXM_EMPTY_TABS: "empty-tabs",
-			CXM_EMPTY_VISIBLE_TABS: "empty-visible-tabs",
-			CXM_MANAGE_TABS: "manage-tabs",
-			CXM_MOVE_FIRST: "move-first",
-			CXM_MOVE_LAST: "move-last",
-			CXM_MOVE_LEFT: "move-left",
-			CXM_MOVE_RIGHT: "move-right",
-			CXM_PIN_TAB: "pin-tab",
-			CXM_REMOVE_LEFT_TABS: "remove-left-tabs",
-			CXM_REMOVE_OTHER_TABS: "remove-other-tabs",
-			CXM_REMOVE_PIN_TABS: "remove-pin-tabs",
-			CXM_REMOVE_RIGHT_TABS: "remove-right-tabs",
-			CXM_REMOVE_TAB: "remove-tab",
-			CXM_REMOVE_UNPIN_TABS: "remove-unpin-tabs",
-			CXM_RESET_DEFAULT_TABS: "reset-default",
-			CXM_SORT_CLICK_COUNT: "sort-click-count",
-			CXM_SORT_CLICK_DATE: "sort-click-date",
-			CXM_SORT_LABEL: "sort-label",
-			CXM_SORT_ORG: "sort-org",
-			CXM_SORT_URL: "sort-url",
-			CXM_TMP_HIDE_NON_ORG: "hide-without-org",
-			CXM_TMP_HIDE_ORG: "hide-with-org",
-			CXM_UNPIN_TAB: "unpin-tab",
+			CXM_EMPTY_GENERIC_TABS: CONSTANTS.CXM_EMPTY_GENERIC_TABS,
+			CXM_EMPTY_TABS: CONSTANTS.CXM_EMPTY_TABS,
+			CXM_EMPTY_VISIBLE_TABS: CONSTANTS.CXM_EMPTY_VISIBLE_TABS,
+			CXM_MANAGE_TABS: CONSTANTS.CXM_MANAGE_TABS,
+			CXM_MOVE_FIRST: CONSTANTS.CXM_MOVE_FIRST,
+			CXM_MOVE_LAST: CONSTANTS.CXM_MOVE_LAST,
+			CXM_MOVE_LEFT: CONSTANTS.CXM_MOVE_LEFT,
+			CXM_MOVE_RIGHT: CONSTANTS.CXM_MOVE_RIGHT,
+			CXM_PIN_TAB: CONSTANTS.CXM_PIN_TAB,
+			CXM_REMOVE_LEFT_TABS: CONSTANTS.CXM_REMOVE_LEFT_TABS,
+			CXM_REMOVE_OTHER_TABS: CONSTANTS.CXM_REMOVE_OTHER_TABS,
+			CXM_REMOVE_PIN_TABS: CONSTANTS.CXM_REMOVE_PIN_TABS,
+			CXM_REMOVE_RIGHT_TABS: CONSTANTS.CXM_REMOVE_RIGHT_TABS,
+			CXM_REMOVE_TAB: CONSTANTS.CXM_REMOVE_TAB,
+			CXM_REMOVE_UNPIN_TABS: CONSTANTS.CXM_REMOVE_UNPIN_TABS,
+			CXM_RESET_DEFAULT_TABS: CONSTANTS.CXM_RESET_DEFAULT_TABS,
+			CXM_SORT_CLICK_COUNT: CONSTANTS.CXM_SORT_CLICK_COUNT,
+			CXM_SORT_CLICK_DATE: CONSTANTS.CXM_SORT_CLICK_DATE,
+			CXM_SORT_LABEL: CONSTANTS.CXM_SORT_LABEL,
+			CXM_SORT_ORG: CONSTANTS.CXM_SORT_ORG,
+			CXM_SORT_URL: CONSTANTS.CXM_SORT_URL,
+			CXM_TMP_HIDE_NON_ORG: CONSTANTS.CXM_TMP_HIDE_NON_ORG,
+			CXM_TMP_HIDE_ORG: CONSTANTS.CXM_TMP_HIDE_ORG,
+			CXM_UNPIN_TAB: CONSTANTS.CXM_UNPIN_TAB,
 			EXTENSION_NAME: "again-why-salesforce",
 			HAS_ORG_TAB: ".has-org-tab",
 			HTTPS: "https://",
@@ -1805,7 +1822,7 @@ Deno.test(
 				currentOrgLi.classList.add("has-org-tab");
 				const currentGenericLi = document.createElement("li");
 				setupTabUl.replaceChildren(currentOrgLi, currentGenericLi);
-				await content.performActionOnTabs("hide-with-org");
+				await content.performActionOnTabs(CONSTANTS.CXM_TMP_HIDE_ORG);
 				assertEquals(currentOrgLi.style.display, "none");
 				assertEquals(currentGenericLi.style.display, "");
 			});
@@ -1815,7 +1832,7 @@ Deno.test(
 				document.addEventListener("tutorial-pin", () => {
 					pinEventCount++;
 				});
-				await content.performActionOnTabs("pin-tab", {
+				await content.performActionOnTabs(CONSTANTS.CXM_PIN_TAB, {
 					label: "Users",
 					url: USERS_URL,
 				});
@@ -1837,7 +1854,7 @@ Deno.test(
 
 			await t.step("failing remove shows an error toast", async () => {
 				harness.state.removeResult = false;
-				await content.performActionOnTabs("remove-tab", {
+				await content.performActionOnTabs(CONSTANTS.CXM_REMOVE_TAB, {
 					label: "Users",
 					url: USERS_URL,
 				});
@@ -1888,10 +1905,16 @@ Deno.test(
 			await t.step(
 				"reset and empty actions call replace/default handlers",
 				async () => {
-					await content.performActionOnTabs("empty-generic-tabs");
-					await content.performActionOnTabs("empty-tabs");
-					await content.performActionOnTabs("empty-visible-tabs");
-					await content.performActionOnTabs("reset-default");
+					await content.performActionOnTabs(
+						CONSTANTS.CXM_EMPTY_GENERIC_TABS,
+					);
+					await content.performActionOnTabs(CONSTANTS.CXM_EMPTY_TABS);
+					await content.performActionOnTabs(
+						CONSTANTS.CXM_EMPTY_VISIBLE_TABS,
+					);
+					await content.performActionOnTabs(
+						CONSTANTS.CXM_RESET_DEFAULT_TABS,
+					);
 					await harness.flush();
 					assertEquals(
 						harness.records.replaceTabsCalls.length >= 3,
@@ -1954,12 +1977,16 @@ Deno.test(
 			await t.step(
 				"pin removal and unpin variants are forwarded",
 				async () => {
-					await content.performActionOnTabs("unpin-tab", {
+					await content.performActionOnTabs(CONSTANTS.CXM_UNPIN_TAB, {
 						label: "Users",
 						url: USERS_URL,
 					});
-					await content.performActionOnTabs("remove-pin-tabs");
-					await content.performActionOnTabs("remove-unpin-tabs");
+					await content.performActionOnTabs(
+						CONSTANTS.CXM_REMOVE_PIN_TABS,
+					);
+					await content.performActionOnTabs(
+						CONSTANTS.CXM_REMOVE_UNPIN_TABS,
+					);
 					assertEquals(
 						harness.records.pinCalls.at(-1)?.shouldPin,
 						false,
@@ -2148,16 +2175,18 @@ Deno.test(
 					harness.state.replaceTabsResult = false;
 					for (
 						const action of [
-							"empty-generic-tabs",
-							"empty-tabs",
-							"empty-visible-tabs",
+							CONSTANTS.CXM_EMPTY_GENERIC_TABS,
+							CONSTANTS.CXM_EMPTY_TABS,
+							CONSTANTS.CXM_EMPTY_VISIBLE_TABS,
 						]
 					) {
 						await content.performActionOnTabs(action);
 					}
 					harness.state.replaceTabsResult = true;
 					harness.state.defaultTabsResult = false;
-					await content.performActionOnTabs("reset-default");
+					await content.performActionOnTabs(
+						CONSTANTS.CXM_RESET_DEFAULT_TABS,
+					);
 					harness.state.defaultTabsResult = true;
 					harness.state.sortResult = false;
 					await content.performActionOnTabs("sort", undefined, {
@@ -2165,18 +2194,22 @@ Deno.test(
 					});
 					harness.state.sortResult = true;
 					harness.state.pinResult = false;
-					await content.performActionOnTabs("pin-tab", {
+					await content.performActionOnTabs(CONSTANTS.CXM_PIN_TAB, {
 						label: "Users",
 						url: USERS_URL,
 					});
-					await content.performActionOnTabs("unpin-tab", {
+					await content.performActionOnTabs(CONSTANTS.CXM_UNPIN_TAB, {
 						label: "Users",
 						url: USERS_URL,
 					});
 					harness.state.pinResult = true;
 					harness.state.removePinnedResult = false;
-					await content.performActionOnTabs("remove-pin-tabs");
-					await content.performActionOnTabs("remove-unpin-tabs");
+					await content.performActionOnTabs(
+						CONSTANTS.CXM_REMOVE_PIN_TABS,
+					);
+					await content.performActionOnTabs(
+						CONSTANTS.CXM_REMOVE_UNPIN_TABS,
+					);
 					harness.state.removePinnedResult = true;
 					assertEquals(
 						harness.records.toasts.some((toast) =>
@@ -2533,7 +2566,7 @@ Deno.test(
 							what: "show-import",
 						});
 						harness.browser.runtime.triggerMessage({
-							what: "manage-tabs",
+							what: CONSTANTS.CXM_MANAGE_TABS,
 						});
 						harness.browser.runtime.triggerMessage({
 							what: "show-export-modal",
@@ -2578,7 +2611,7 @@ Deno.test(
 
 				await t.step("sorting delegates computed options", async () => {
 					harness.browser.runtime.triggerMessage({
-						what: "sort-label",
+						what: CONSTANTS.CXM_SORT_LABEL,
 					});
 					await harness.flush();
 					assertEquals(harness.records.sortCalls[0], {
@@ -2594,7 +2627,7 @@ Deno.test(
 							harness.browser.runtime._listeners[0];
 						await backgroundListener(
 							{
-								what: "remove-left-tabs",
+								what: CONSTANTS.CXM_REMOVE_LEFT_TABS,
 								label: "Users",
 								url: USERS_URL,
 							},
@@ -2636,7 +2669,7 @@ Deno.test(
 							() => {},
 						);
 						const secondNonQueuedCall = backgroundListener(
-							{ what: "manage-tabs" },
+							{ what: CONSTANTS.CXM_MANAGE_TABS },
 							{},
 							() => {},
 						);
@@ -2692,7 +2725,7 @@ Deno.test(
 						};
 						const firstQueuedMove = backgroundListener(
 							{
-								what: "move-right",
+								what: CONSTANTS.CXM_MOVE_RIGHT,
 								label: "Users",
 								url: USERS_URL,
 							},
@@ -2756,7 +2789,7 @@ Deno.test(
 						await importStarted.promise;
 						const secondQueuedMove = backgroundListener(
 							{
-								what: "move-right",
+								what: CONSTANTS.CXM_MOVE_RIGHT,
 								label: "Users",
 								url: USERS_URL,
 							},
@@ -2819,7 +2852,7 @@ Deno.test(
 						};
 						const firstQueuedMove = backgroundListener(
 							{
-								what: "move-right",
+								what: CONSTANTS.CXM_MOVE_RIGHT,
 								label: "Users",
 								url: USERS_URL,
 							},
@@ -2828,7 +2861,7 @@ Deno.test(
 						);
 						const secondQueuedMove = backgroundListener(
 							{
-								what: "move-last",
+								what: CONSTANTS.CXM_MOVE_LAST,
 								label: "Users",
 								url: USERS_URL,
 							},
@@ -2837,7 +2870,7 @@ Deno.test(
 						);
 						const thirdQueuedMove = backgroundListener(
 							{
-								what: "move-first",
+								what: CONSTANTS.CXM_MOVE_FIRST,
 								label: "Users",
 								url: USERS_URL,
 							},
@@ -2845,7 +2878,11 @@ Deno.test(
 							() => {},
 						);
 						await firstMoveStarted.promise;
-						assertEquals(totalMoveCalls, 1);
+						assertEquals(
+							totalMoveCalls,
+							1,
+							`total: ${totalMoveCalls}`,
+						);
 						assertEquals(thirdMoveStarted, false);
 						firstMoveDeferred.resolve();
 						await secondMoveStarted.promise;
@@ -2893,7 +2930,7 @@ Deno.test(
 						};
 						const firstQueuedMove = backgroundListener(
 							{
-								what: "move-right",
+								what: CONSTANTS.CXM_MOVE_RIGHT,
 								label: "Users",
 								url: USERS_URL,
 							},
@@ -2902,7 +2939,7 @@ Deno.test(
 						);
 						const secondQueuedMove = backgroundListener(
 							{
-								what: "move-last",
+								what: CONSTANTS.CXM_MOVE_LAST,
 								label: "Users",
 								url: USERS_URL,
 							},
@@ -2910,7 +2947,11 @@ Deno.test(
 							() => {},
 						);
 						await firstMoveStarted.promise;
-						assertEquals(totalMoveCalls, 1);
+						assertEquals(
+							totalMoveCalls,
+							1,
+							`total: ${totalMoveCalls}`,
+						);
 						assertEquals(secondMoveStarted, false);
 						firstMoveDeferred.resolve();
 						await Promise.all([firstQueuedMove, secondQueuedMove]);
@@ -2926,38 +2967,38 @@ Deno.test(
 							ok: false,
 						});
 						harness.browser.runtime.triggerMessage({
-							what: "move-right",
+							what: CONSTANTS.CXM_MOVE_RIGHT,
 							label: "Users",
 							url: USERS_URL,
 						});
 						harness.browser.runtime.triggerMessage({
-							what: "move-last",
+							what: CONSTANTS.CXM_MOVE_LAST,
 							label: "Users",
 							url: USERS_URL,
 						});
 						harness.browser.runtime.triggerMessage({
-							what: "move-left",
+							what: CONSTANTS.CXM_MOVE_LEFT,
 							label: "Users",
 							url: USERS_URL,
 						});
 						harness.browser.runtime.triggerMessage({
-							what: "move-first",
+							what: CONSTANTS.CXM_MOVE_FIRST,
 							label: "Users",
 							url: USERS_URL,
 						});
 						harness.browser.runtime.triggerMessage({
-							what: "remove-other-tabs",
+							what: CONSTANTS.CXM_REMOVE_OTHER_TABS,
 							label: "Users",
 							url: USERS_URL,
 						});
 						harness.browser.runtime.triggerMessage({
-							what: "remove-left-tabs",
+							what: CONSTANTS.CXM_REMOVE_LEFT_TABS,
 							label: "Users",
 							url: USERS_URL,
 						});
 						await backgroundListener(
 							{
-								what: "remove-left-tabs",
+								what: CONSTANTS.CXM_REMOVE_LEFT_TABS,
 								label: "Users",
 								url: USERS_URL,
 							},
@@ -2965,21 +3006,21 @@ Deno.test(
 							() => {},
 						);
 						harness.browser.runtime.triggerMessage({
-							what: "remove-right-tabs",
+							what: CONSTANTS.CXM_REMOVE_RIGHT_TABS,
 							label: "Users",
 							url: USERS_URL,
 						});
 						harness.browser.runtime.triggerMessage({
-							what: "sort-url",
+							what: CONSTANTS.CXM_SORT_URL,
 						});
 						harness.browser.runtime.triggerMessage({
-							what: "sort-org",
+							what: CONSTANTS.CXM_SORT_ORG,
 						});
 						harness.browser.runtime.triggerMessage({
-							what: "sort-click-count",
+							what: CONSTANTS.CXM_SORT_CLICK_COUNT,
 						});
 						harness.browser.runtime.triggerMessage({
-							what: "sort-click-date",
+							what: CONSTANTS.CXM_SORT_CLICK_DATE,
 						});
 						await harness.flush();
 						assertEquals(
@@ -3058,18 +3099,18 @@ Deno.test(
 						});
 						for (
 							const what of [
-								"remove-pin-tabs",
-								"remove-unpin-tabs",
-								"empty-generic-tabs",
-								"empty-tabs",
-								"empty-visible-tabs",
-								"reset-default",
+								CONSTANTS.CXM_REMOVE_PIN_TABS,
+								CONSTANTS.CXM_REMOVE_UNPIN_TABS,
+								CONSTANTS.CXM_EMPTY_GENERIC_TABS,
+								CONSTANTS.CXM_EMPTY_TABS,
+								CONSTANTS.CXM_EMPTY_VISIBLE_TABS,
+								CONSTANTS.CXM_RESET_DEFAULT_TABS,
 								"toggle-org",
-								"pin-tab",
-								"unpin-tab",
-								"remove-tab",
-								"hide-with-org",
-								"hide-without-org",
+								CONSTANTS.CXM_PIN_TAB,
+								CONSTANTS.CXM_UNPIN_TAB,
+								CONSTANTS.CXM_REMOVE_TAB,
+								CONSTANTS.CXM_TMP_HIDE_ORG,
+								CONSTANTS.CXM_TMP_HIDE_NON_ORG,
 								"page-save-tab",
 								"page-remove-tab",
 							]
