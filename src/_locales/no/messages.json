@@ -615,6 +615,10 @@
 		"message": "Feil under løsning av Tab",
 		"description": "[feil]"
 	},
+	"error_unsavable_page": {
+		"message": "Denne siden kan ikke lagres.",
+		"description": "Feil når en side ikke har overskriften (og stjernen/den gjennomstrekede stjernen)"
+	},
 	"error_useless_remove": {
 		"message": "Kan ikke fjernes:\nEn side som ikke har vært lagret, kan ikke fjernes",
 		"description": "[error] brukeren forsøkte å fjerne en side som ennå ikke var lagret"

@@ -615,6 +615,10 @@
 		"message": "Tab sabitlemesi kaldırılırken hata oluştu",
 		"description": "[hata]"
 	},
+	"error_unsavable_page": {
+		"message": "Bu sayfa kaydedilemiyor.",
+		"description": "Bir sayfada üstbilgi (ve yıldız/üzeri çizili yıldız) olmadığında oluşan hata"
+	},
 	"error_useless_remove": {
 		"message": "Kaldırılamıyor:\nDaha önce kaydedilmemiş bir sayfa kaldırılamaz",
 		"description": "[hata] kullanıcı henüz kaydedilmemiş bir sayfayı kaldırmaya çalıştı"

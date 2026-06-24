@@ -472,6 +472,9 @@ export function createFavouriteManagerModule({
 		const favourite = getFavouriteImage(
 			save ? STAR_ID_RUNTIME : SLASHED_STAR_ID_RUNTIME,
 		);
+		if (favourite == null) {
+			throw new Error("error_unsavable_page");
+		}
 		if (favourite.classList.contains(hiddenClassRuntime)) {
 			const message = save
 				? "error_useless_save"

@@ -615,6 +615,10 @@
 		"message": "Chyba pri odopínaní Tab-u",
 		"description": "[chyba]"
 	},
+	"error_unsavable_page": {
+		"message": "Túto stránku nie je možné uložiť.",
+		"description": "Chyba, keď stránka nemá hlavičku (a hviezdičku/prečiarknutú hviezdičku)"
+	},
 	"error_useless_remove": {
 		"message": "Nemožno odstrániť:\nStránku, ktorá nebola predtým uložená, nemožno odstrániť",
 		"description": "[error] Používateľ sa pokúsil odstrániť stránku, ktorá ešte nebola uložená"

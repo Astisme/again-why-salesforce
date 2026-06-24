@@ -615,6 +615,10 @@
 		"message": "Chyba při odepínání Tab karty",
 		"description": "[error]"
 	},
+	"error_unsavable_page": {
+		"message": "Tuto stránku nelze uložit.",
+		"description": "Chyba, když stránka nemá záhlaví (a hvězdičku/přeškrtnutou hvězdičku)"
+	},
 	"error_useless_remove": {
 		"message": "Nelze odstranit:\nNelze odstranit stránku, která nebyla předem uložena",
 		"description": "[error] uživatel se pokusil odstranit stránku, která ještě nebyla uložena"

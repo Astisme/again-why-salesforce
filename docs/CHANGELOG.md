@@ -36,6 +36,7 @@ Please remember that this project is entirely funded by **the support of its use
 6. Manage Tabs modal now saves the correct number of pinned Tabs (#210)
 7. Import now shows a new option to import the number of pinned Tabs which will be added to your list (#210)
 8. Open Other Org modal would work only on odd-numbered openings (#210)
+9. Save / Remove Page would send 2 toasts (#210)
 
 ## 🧪 Tests
 

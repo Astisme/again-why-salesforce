@@ -615,6 +615,10 @@
 		"message": "Lỗi khi bỏ ghim Tab",
 		"description": "[lỗi]"
 	},
+	"error_unsavable_page": {
+		"message": "Không thể lưu trang này.",
+		"description": "Lỗi khi trang không có phần đầu trang (và dấu sao/dấu sao bị gạch chéo)"
+	},
 	"error_useless_remove": {
 		"message": "Không thể xóa:\nKhông thể xóa một trang chưa từng được lưu.",
 		"description": "[error] Đã cố xóa trang chưa được lưu."

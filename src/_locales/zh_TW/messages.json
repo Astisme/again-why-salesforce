@@ -615,6 +615,10 @@
 		"message": "取消釘選 Tab 時發生錯誤",
 		"description": "[錯誤]"
 	},
+	"error_unsavable_page": {
+		"message": "無法儲存此頁面。",
+		"description": "頁面沒有頁首（以及星星/帶斜線的星星）时出錯"
+	},
 	"error_useless_remove": {
 		"message": "無法移除：\n無法刪除尚未儲存的頁面",
 		"description": "[error] 使用者嘗試移除尚未儲存的頁面"

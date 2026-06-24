@@ -615,6 +615,10 @@
 		"message": "Fehler beim Loslösen der Tab-Karte",
 		"description": "[error]"
 	},
+	"error_unsavable_page": {
+		"message": "Diese Seite kann nicht gespeichert werden.",
+		"description": "Fehler, wenn eine Seite nicht den Header (und den Stern/durchgestrichenen Stern) hat"
+	},
 	"error_useless_remove": {
 		"message": "Kann nicht entfernt werden:\nEine Seite, die nie gespeichert wurde, kann nicht entfernt werden.",
 		"description": "[error] Es wurde versucht, eine Seite zu entfernen, die noch nicht gespeichert wurde."

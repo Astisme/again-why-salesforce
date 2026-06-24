@@ -844,11 +844,11 @@ function executeTabAction({
 		},
 		[CONSTANTS.WHAT_PAGE_SAVE_TAB]: async () => {
 			await pageActionTab(true);
-			return ACTION_RESULT_SYNC;
+			return ACTION_RESULT_NO_SYNC;
 		},
 		[CONSTANTS.WHAT_PAGE_REMOVE_TAB]: async () => {
 			await pageActionTab(false);
-			return ACTION_RESULT_SYNC;
+			return ACTION_RESULT_NO_SYNC;
 		},
 	};
 	const actionHandler = actionHandlers[action];

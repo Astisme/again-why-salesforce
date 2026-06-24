@@ -615,6 +615,10 @@
 		"message": "Error habang nag-uunpin ng Tab",
 		"description": "[error]"
 	},
+	"error_unsavable_page": {
+		"message": "Hindi mai-save ang pahinang ito.",
+		"description": "Error kapag walang header ang isang pahina (at ang bituin/may guhit na bituin)"
+	},
 	"error_useless_remove": {
 		"message": "Hindi maalis:\nHindi maalis ang isang page na hindi pa nai-save dati",
 		"description": "[error] sinubukan ng user na alisin ang isang page na hindi pa nai-save"

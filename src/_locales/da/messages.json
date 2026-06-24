@@ -615,6 +615,10 @@
 		"message": "Fejl under frigørelse af Tab",
 		"description": "[error]"
 	},
+	"error_unsavable_page": {
+		"message": "Denne side kan ikke gemmes.",
+		"description": "Fejl, når en side ikke har overskriften (og stjernen/den overstregede stjerne)"
+	},
 	"error_useless_remove": {
 		"message": "Kan ikke fjernes:\nDet er ikke muligt at fjerne en side, som ikke er blevet gemt tidligere",
 		"description": "[error] brugeren forsøgte at fjerne en side, der endnu ikke var gemt"

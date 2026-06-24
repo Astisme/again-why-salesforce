@@ -615,6 +615,10 @@
 		"message": "Error while unpinning $tab",
 		"description": "[error]"
 	},
+	"error_unsavable_page": {
+		"message": "This page cannot be saved.",
+		"description": "Error when a page does not have the header (and the star/slashed star)"
+	},
 	"error_useless_remove": {
 		"message": "Cannot remove:\nCannot remove a page that has not been saved before",
 		"description": "[error] the user tried to remove a page that was not saved yet"

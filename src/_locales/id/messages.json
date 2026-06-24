@@ -615,6 +615,10 @@
 		"message": "Kesalahan saat melepaskan sematan Tab",
 		"description": "[kesalahan]"
 	},
+	"error_unsavable_page": {
+		"message": "Halaman ini tidak dapat disimpan.",
+		"description": "Kesalahan ketika halaman tidak memiliki header (dan bintang/bintang yang dicoret)"
+	},
 	"error_useless_remove": {
 		"message": "Tidak dapat menghapus:\nHalaman yang belum pernah disimpan tidak bisa dihapus.",
 		"description": "[error] Pengguna mencoba menghapus halaman yang belum disimpan."

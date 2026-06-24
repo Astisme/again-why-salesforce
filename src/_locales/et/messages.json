@@ -615,6 +615,10 @@
 		"message": "Viga Tabi kinnitamise tühistamisel",
 		"description": "[error]"
 	},
+	"error_unsavable_page": {
+		"message": "Seda lehte ei saa salvestada.",
+		"description": "Viga, kui lehel puudub päis (ja täht/läbikriipsutatud täht)"
+	},
 	"error_useless_remove": {
 		"message": "Ei saa eemaldada:\nEi saa eemaldada lehte, mida pole varem salvestatud",
 		"description": "[viga] kasutaja üritas eemaldada lehte, mida polnud veel salvestatud"

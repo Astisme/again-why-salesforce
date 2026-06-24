@@ -1843,12 +1843,17 @@ Deno.test(
 			await t.step(
 				"page actions delegate to favourite manager",
 				async () => {
+					const initialToastCount = harness.records.toasts.length;
 					await content.performActionOnTabs("page-save-tab");
 					await content.performActionOnTabs("page-remove-tab");
 					assertEquals(harness.records.pageActions.slice(-2), [
 						true,
 						false,
 					]);
+					assertEquals(
+						harness.records.toasts.length,
+						initialToastCount,
+					);
 				},
 			);
 
@@ -2638,6 +2643,41 @@ Deno.test(
 							harness.records.removeOtherCalls.at(-1)?.options
 								.removeBefore,
 							true,
+						);
+					},
+				);
+
+				await t.step(
+					"page action routing does not add content toast",
+					async () => {
+						const backgroundListener =
+							harness.browser.runtime._listeners[0];
+						const initialToastCount = harness.records.toasts.length;
+						await backgroundListener(
+							{
+								what: "page-save-tab",
+								label: "Users",
+								url: USERS_URL,
+							},
+							{},
+							() => {},
+						);
+						await backgroundListener(
+							{
+								what: "page-remove-tab",
+								label: "Users",
+								url: USERS_URL,
+							},
+							{},
+							() => {},
+						);
+						assertEquals(harness.records.pageActions.slice(-2), [
+							true,
+							false,
+						]);
+						assertEquals(
+							harness.records.toasts.length,
+							initialToastCount,
 						);
 					},
 				);

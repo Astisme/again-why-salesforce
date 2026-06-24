@@ -615,6 +615,10 @@
 		"message": "Kļūda atspraužot Tab",
 		"description": "[kļūda]"
 	},
+	"error_unsavable_page": {
+		"message": "Šo lapu nevar saglabāt.",
+		"description": "Kļūda, ja lapai nav galvenes (un zvaigznītes/pārsvītrotas zvaigznītes)"
+	},
 	"error_useless_remove": {
 		"message": "Nevar noņemt:\nNevar noņemt lapu, kas iepriekš nav saglabāta",
 		"description": "[kļūda] lietotājs mēģināja noņemt lapu, kas vēl nebija saglabāta"

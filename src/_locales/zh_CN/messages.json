@@ -615,6 +615,10 @@
 		"message": "取消固定 Tab 时出错",
 		"description": "[错误]"
 	},
+	"error_unsavable_page": {
+		"message": "无法保存此页面。",
+		"description": "页面没有页眉（以及星星/带斜线的星星）时出错"
+	},
 	"error_useless_remove": {
 		"message": "无法移除：\n无法移除之前未保存的页面",
 		"description": "[错误] 用户尝试移除尚未保存的页面"
