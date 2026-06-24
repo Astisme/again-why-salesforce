@@ -1,6 +1,18 @@
 "use strict";
 
 /**
+ * Tests an org target against validation regex without leaking regex cursor state.
+ *
+ * @param {RegExp} pattern Validation regex.
+ * @param {string} value Candidate org target.
+ * @return {boolean} True when candidate matches pattern.
+ */
+function matchesSalesforceUrlPattern(pattern, value) {
+  return new RegExp(pattern.source, pattern.flags.replaceAll(/[gy]/g, ""))
+    .test(value);
+}
+
+/**
  * Creates the open-other-org module with injectable dependencies.
  *
  * @param {Object} [options={}] Runtime overrides.
@@ -84,17 +96,6 @@ export function createOpenOtherOrgModule({
 	openFn = globalThis.open,
 	urlCtor = URL,
 } = {}) {
-	/**
-	 * Tests an org target against validation regex without leaking regex cursor state.
-	 *
-	 * @param {RegExp} pattern Validation regex.
-	 * @param {string} value Candidate org target.
-	 * @return {boolean} True when candidate matches pattern.
-	 */
-	function matchesSalesforceUrlPattern(pattern, value) {
-		return new RegExp(pattern.source, pattern.flags.replaceAll(/[gy]/g, ""))
-			.test(value);
-	}
 
 	/**
 	 * Displays a modal for opening a page in another Salesforce organization.
