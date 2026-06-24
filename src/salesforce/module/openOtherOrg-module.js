@@ -85,6 +85,18 @@ export function createOpenOtherOrgModule({
 	urlCtor = URL,
 } = {}) {
 	/**
+	 * Tests an org target against validation regex without leaking regex cursor state.
+	 *
+	 * @param {RegExp} pattern Validation regex.
+	 * @param {string} value Candidate org target.
+	 * @return {boolean} True when candidate matches pattern.
+	 */
+	function matchesSalesforceUrlPattern(pattern, value) {
+		return new RegExp(pattern.source, pattern.flags.replaceAll(/[gy]/g, ""))
+			.test(value);
+	}
+
+	/**
 	 * Displays a modal for opening a page in another Salesforce organization.
 	 *
 	 * @param {Object} [options={}] Modal context values.
@@ -181,7 +193,7 @@ export function createOpenOtherOrgModule({
 				return;
 			}
 			lastExtracted = newTarget;
-			if (!salesforceUrlPattern.test(newTarget)) {
+			if (!matchesSalesforceUrlPattern(salesforceUrlPattern, newTarget)) {
 				return showToastFn?.(
 					["insert_valid_org", newTarget],
 					toastError,

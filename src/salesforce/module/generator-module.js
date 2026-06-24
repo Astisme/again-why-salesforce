@@ -881,7 +881,7 @@ function handleModalShellKeydown(event, closeButton, saveButton, listener) {
 		default:
 			return;
 	}
-	document.removeEventListener("keydown", listener);
+	document.removeEventListener?.("keydown", listener);
 }
 
 /**
@@ -968,7 +968,10 @@ function getSelectedTabsFromModalSelection({
  *
  * @param {boolean} value User choice.
  * @param {{ value: boolean }} isResolvedRef Mutable resolved flag.
- * @param {{ remove: () => void }} modalParent Prompt root node.
+ * @param {{
+ *   __awsfCleanupModalShell__?: () => void;
+ *   remove: () => void;
+ * }} modalParent Prompt root node.
  * @param {(value: boolean) => void} resolve Promise resolver.
  */
 function finishSldsConfirm(value, isResolvedRef, modalParent, resolve) {
@@ -976,7 +979,7 @@ function finishSldsConfirm(value, isResolvedRef, modalParent, resolve) {
 		return;
 	}
 	isResolvedRef.value = true;
-	modalParent.remove();
+	modalParent.__awsfCleanupModalShell__?.() ?? modalParent.remove();
 	resolve(value);
 }
 
@@ -1067,7 +1070,20 @@ function createSldsModalShell({
 		"slds-button_icon-bare",
 	);
 	modalHeader.appendChild(closeButton);
-	closeButton.addEventListener("click", () => modalParent.remove());
+	let keyDownListener = null;
+	/**
+	 * Removes modal shell and unregisters document listener.
+	 *
+	 * @return {void}
+	 */
+	function closeModalShell() {
+		if (keyDownListener != null) {
+			document.removeEventListener?.("keydown", keyDownListener);
+		}
+		modalParent.remove();
+	}
+	modalParent.__awsfCleanupModalShell__ = closeModalShell;
+	closeButton.addEventListener("click", closeModalShell);
 	backdropDiv.addEventListener("click", () => closeButton.click());
 	const closeIcon = document.createElement("lightning-primitive-icon");
 	closeIcon.setAttribute("variant", "bare");
@@ -1239,7 +1255,6 @@ function createSldsModalShell({
 	saveSpan.setAttribute("dir", "ltr");
 	saveSpan.textContent = confirmButtonLabel;
 	saveButton.appendChild(saveSpan);
-	let keyDownListener = null;
 	keyDownListener = (event) => {
 		handleModalShellKeydown(
 			event,

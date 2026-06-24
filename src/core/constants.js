@@ -59,7 +59,7 @@ export const SALESFORCE_ID_PATTERN = new RegExp(
 	"i",
 );
 export const SALESFORCE_URL_PATTERN =
-	/^[a-zA-Z0-9-]+(--[a-zA-Z0-9]+\.sandbox)?(\.develop)?$/g;
+	/^[a-zA-Z0-9-]+(--[a-zA-Z0-9]+\.sandbox)?(\.develop)?$/;
 export const FRAME_PATTERNS = [
 	`${HTTPS}*${MY_SALESFORCE_SETUP_COM}/*`,
 	`${HTTPS}*${LIGHTNING_FORCE_COM}/*`,
