@@ -35,6 +35,7 @@ Please remember that this project is entirely funded by **the support of its use
 5. Improved secure use of regex to match Salesforce tab (#184)
 6. Manage Tabs modal now saves the correct number of pinned Tabs (#210)
 7. Import now shows a new option to import the number of pinned Tabs which will be added to your list (#210)
+8. Open Other Org modal would work only on odd-numbered openings (#210)
 
 ## 🧪 Tests
 
