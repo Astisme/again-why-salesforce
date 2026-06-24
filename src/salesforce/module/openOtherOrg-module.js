@@ -8,8 +8,8 @@
  * @return {boolean} True when candidate matches pattern.
  */
 function matchesSalesforceUrlPattern(pattern, value) {
-  return new RegExp(pattern.source, pattern.flags.replaceAll(/[gy]/g, ""))
-    .test(value);
+	return new RegExp(pattern.source, pattern.flags.replaceAll(/[gy]/g, ""))
+		.test(value);
 }
 
 /**
@@ -96,7 +96,6 @@ export function createOpenOtherOrgModule({
 	openFn = globalThis.open,
 	urlCtor = URL,
 } = {}) {
-
 	/**
 	 * Displays a modal for opening a page in another Salesforce organization.
 	 *
