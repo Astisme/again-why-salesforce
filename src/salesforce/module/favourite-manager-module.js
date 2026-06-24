@@ -466,7 +466,7 @@ export function createFavouriteManagerModule({
 	 * Executes page save/remove favourite action.
 	 *
 	 * @param {boolean} [save=true] Whether to save (`true`) or remove (`false`).
-   * @throws Error when the favourite image cannot be found (which means the page cannot be saved)
+	 * @throws Error when the favourite image cannot be found (which means the page cannot be saved)
 	 * @return {void}
 	 */
 	function pageActionTab(save = true) {
