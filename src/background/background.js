@@ -1,16 +1,11 @@
 "use strict";
 import {
-	ALL_CMD_KEYS,
 	ALL_WHAT_REASONS,
 	BROWSER,
-	CMD_AND_CXM_MAP_TO_WHAT,
-	CMD_EXPORT_ALL,
-	CMD_OPEN_SETTINGS,
 	CXM_MANAGE_TABS,
 	EXTENSION_GITHUB_LINK,
 	NO_RELEASE_NOTES,
 	PERM_CHECK,
-	SETUP_LIGHTNING_PATTERN,
 	TOAST_ERROR,
 	TOAST_WARNING,
 	WHAT_ACTIVATE,
@@ -33,8 +28,6 @@ import {
 	WHAT_STARTUP,
 	WHAT_THEME,
 } from "../core/constants.js";
-import { openSettingsPage } from "../core/functions.js";
-import Tab from "../core/tab.js";
 import {
 	bg_getCurrentBrowserTab,
 	bg_notify,
@@ -54,6 +47,7 @@ import {
 import { bg_getSalesforceLanguage } from "./salesforce-language.js";
 import { bg_getCommandLinks } from "./commands.js";
 import { setDefaultOrgStyle } from "./default-styles.js";
+import { listenToExtensionCommands } from "./commands.js";
 
 /**
  * Checks whether the object passed as contains is contained in the granted permissions.
@@ -139,43 +133,6 @@ function listenToExtensionMessages() {
 				break;
 		}
 		return true;
-	});
-}
-
-/**
- * Listens for extension command events and executes appropriate actions
- * based on the current Salesforce Setup page context and command received.
- */
-function listenToExtensionCommands() {
-	BROWSER.commands.onCommand.addListener(async (command) => {
-		// check the current page is Salesforce Setup
-		const browserTabUrl = (await bg_getCurrentBrowserTab())?.url;
-		if (!browserTabUrl?.match(SETUP_LIGHTNING_PATTERN)) { // we're not in Salesforce Setup
-			return;
-		}
-		const message = {
-			what: CMD_AND_CXM_MAP_TO_WHAT[command] ?? command,
-			url: Tab.minifyURL(browserTabUrl),
-			org: Tab.extractOrgName(browserTabUrl),
-		};
-		switch (command) {
-			case CMD_OPEN_SETTINGS:
-				openSettingsPage();
-				return;
-			case CMD_EXPORT_ALL:
-				if (!checkLaunchExport(undefined, true)) {
-					return;
-				}
-				break;
-			default:
-				if (!ALL_CMD_KEYS.has(command)) {
-					message.what = TOAST_WARNING;
-					message.what = TOAST_WARNING;
-					message.message = `Received unknown command: ${command}`;
-				}
-				break;
-		}
-		bg_notify(message);
 	});
 }
 
