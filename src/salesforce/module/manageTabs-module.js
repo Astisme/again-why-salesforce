@@ -3,9 +3,12 @@ import {
 	CXM_PIN_TAB as _CXM_PIN_TAB,
 	CXM_REMOVE_TAB as _CXM_REMOVE_TAB,
 	CXM_UNPIN_TAB as _CXM_UNPIN_TAB,
+	EXTENSION_NAME as _EXTENSION_NAME,
 	HIDDEN_CLASS as _HIDDEN_CLASS,
 	MODAL_ID as _MODAL_ID,
+	ORG_TAB_CLASS as _ORG_TAB_CLASS,
 	PIN_TAB_CLASS as _PIN_TAB_CLASS,
+	SLDS_ACTIVE as _SLDS_ACTIVE,
 	TOAST_ERROR as _TOAST_ERROR,
 	TOAST_WARNING as _TOAST_WARNING,
 	TUTORIAL_EVENT_CLOSE_MANAGE_TABS as _TUTORIAL_EVENT_CLOSE_MANAGE_TABS,
@@ -50,8 +53,11 @@ import { updateModalBodyOverflow as _updateModalBodyOverflow } from "../modal-la
 let CXM_PIN_TAB = _CXM_PIN_TAB;
 let CXM_REMOVE_TAB = _CXM_REMOVE_TAB;
 let CXM_UNPIN_TAB = _CXM_UNPIN_TAB;
+let EXTENSION_NAME = _EXTENSION_NAME;
 let HIDDEN_CLASS = _HIDDEN_CLASS;
+let ORG_TAB_CLASS = _ORG_TAB_CLASS;
 let PIN_TAB_CLASS = _PIN_TAB_CLASS;
+let SLDS_ACTIVE = _SLDS_ACTIVE;
 let TOAST_ERROR = _TOAST_ERROR;
 let TOAST_WARNING = _TOAST_WARNING;
 let TUTORIAL_EVENT_CLOSE_MANAGE_TABS = _TUTORIAL_EVENT_CLOSE_MANAGE_TABS;
@@ -90,6 +96,7 @@ const actionButtons = [];
 let closeButton = null;
 let manage_InvalidateSort = false;
 let wasSomethingUpdated = false;
+const MANAGE_TABS_ACTIVE_ROW_STYLE_ID = "awsf-manage-tabs-active-row";
 
 /**
  * Updates all the indexes on every tr after index fromIndex
@@ -224,6 +231,117 @@ async function checkOpenAskConfirm(e) {
  */
 function getLastTr(tbody = null) {
 	return tbody?.querySelector("tr:last-child");
+}
+
+/**
+ * Returns whether a row is the empty append row at the bottom of the table.
+ *
+ * @param {TrHTMLElement} tr Row to inspect.
+ * @return {boolean} True when the row is the current last table row.
+ */
+function isAppendRow(tr) {
+	return tr === getLastTr(tr.closest("tbody"));
+}
+
+/**
+ * Adds or removes the active class for a row based on hover, focus, and append-row state.
+ *
+ * @param {TrHTMLElement} tr Row to update.
+ * @return {void}
+ */
+function syncRowActiveClass(tr) {
+	if (
+		tr.dataset.isMouseHovered === "true" ||
+		tr.dataset.isInputFocused === "true" ||
+		isAppendRow(tr)
+	) {
+		tr.classList.add(SLDS_ACTIVE);
+		return;
+	}
+	tr.classList.remove(SLDS_ACTIVE);
+}
+
+/**
+ * Updates a row interaction flag and refreshes the active class.
+ *
+ * @param {TrHTMLElement | null} [tr=null] Row to update.
+ * @param {string} dataKey Dataset key to update.
+ * @param {boolean} value Whether the interaction is currently active.
+ * @return {void}
+ */
+function updateRowInteractionState(tr = null, dataKey, value) {
+	if (tr == null) {
+		return;
+	}
+	if (value) {
+		tr.dataset[dataKey] = "true";
+	} else {
+		delete tr.dataset[dataKey];
+	}
+	syncRowActiveClass(tr);
+}
+
+/**
+ * Adds pointer listeners that keep the row active while it is hovered.
+ *
+ * @param {TrHTMLElement | null} [tr=null] Row to wire.
+ * @return {void}
+ */
+function ensureRowHoverListeners(tr = null) {
+	if (tr == null || tr.dataset.hasManageTabsHoverListeners === "true") {
+		return;
+	}
+	tr.dataset.hasManageTabsHoverListeners = "true";
+	tr.addEventListener(
+		"mouseenter",
+		() => updateRowInteractionState(tr, "isMouseHovered", true),
+	);
+	tr.addEventListener(
+		"mouseleave",
+		() => updateRowInteractionState(tr, "isMouseHovered", false),
+	);
+}
+
+/**
+ * Marks org cells so tab style selectors can distinguish org-specific rows.
+ *
+ * @param {HTMLInputElement | null} [input=null] Org input to inspect.
+ * @return {void}
+ */
+function syncOrgCellClass(input = null) {
+	const td = input?.closest("td");
+	if (td == null) {
+		return;
+	}
+	if (input.value !== "") {
+		td.classList.add(ORG_TAB_CLASS);
+		return;
+	}
+	td.classList.remove(ORG_TAB_CLASS);
+}
+
+/**
+ * Refreshes active state for the current append row and any previous append row.
+ *
+ * @param {TbodyHTMLElement} tabAppendElement Table body to inspect.
+ * @return {void}
+ */
+function syncAppendRowActiveState(tabAppendElement) {
+	for (const tr of tabAppendElement.querySelectorAll("tr")) {
+		syncRowActiveClass(tr);
+	}
+}
+
+/**
+ * Injects manage-tabs row CSS that prevents SLDS hover cells from covering active row styles.
+ *
+ * @return {void}
+ */
+function injectManageTabsActiveRowStyle() {
+	injectStyle(MANAGE_TABS_ACTIVE_ROW_STYLE_ID, {
+		css:
+			`tr.${EXTENSION_NAME}.${SLDS_ACTIVE} > td { background-color: inherit !important; }`,
+	});
 }
 
 /**
@@ -377,14 +495,35 @@ function checkRemoveTr(e) {
 function setInfoForDrag(element, listener, index) {
 	element.dataset.element_index = index;
 	element.addEventListener("input", listener);
+	const tr = element.closest("tr");
+	ensureRowHoverListeners(tr);
+	if (
+		element.classList.contains("org") ||
+		element.className.split(" ").includes("org")
+	) {
+		syncOrgCellClass(element);
+	}
 	element.addEventListener(
 		"focusin",
-		(e) =>
+		(e) => {
 			focusedIndex = Number.parseInt(
 				e.currentTarget.dataset.element_index,
-			),
+			);
+			updateRowInteractionState(
+				e.currentTarget.closest("tr"),
+				"isInputFocused",
+				true,
+			);
+		},
 	);
-	element.addEventListener("focusout", checkRemoveTr);
+	element.addEventListener("focusout", (e) => {
+		updateRowInteractionState(
+			e.currentTarget.closest("tr"),
+			"isInputFocused",
+			false,
+		);
+		return checkRemoveTr(e);
+	});
 }
 
 /**
@@ -458,6 +597,7 @@ async function addTr(tabAppendElement = null) {
 		index: tabAppendElement.childElementCount,
 	});
 	tabAppendElement.append(tr);
+	syncAppendRowActiveState(tabAppendElement);
 	updateModalBodyOverflow(tabAppendElement.closest("article"));
 	// update loggers
 	const index = managedLoggers.length;
@@ -532,6 +672,7 @@ async function removeTr(
 	const indexWasProvided = removeIndex !== managedLoggers.length - 1;
 	trToRemove.remove();
 	managedLoggers.splice(removeIndex, 1);
+	syncAppendRowActiveState(tabAppendElement);
 	updateTabAttributes({
 		tabAppendElement,
 		enable: false,
@@ -722,6 +863,7 @@ function trInputListener({
 				org = Tab.extractOrgName(value);
 				element.value = org;
 			}
+			syncOrgCellClass(element);
 			const thisUrlOrg = Tab.extractOrgName(getCurrentHref());
 			const isThisOrgTab = org === "" ||
 				org === thisUrlOrg;
@@ -878,6 +1020,7 @@ export async function createManageTabsModal() {
 		return showToast("error_close_other_modal", TOAST_ERROR);
 	}
 	const allTabs = await ensureAllTabsAvailability({ reset: true });
+	injectManageTabsActiveRowStyle();
 	const {
 		modalParent,
 		closeButton: modalCloseBtn,
@@ -941,6 +1084,7 @@ export async function createManageTabsModal() {
 				type: el.type,
 			}), el.index);
 	}
+	syncAppendRowActiveState(tbody);
 	// Close dropdown when clicking outside
 	for (const { tr, button } of trsAndButtons) {
 		tr.addEventListener("click", (e) => closeDropdownOnTrClick(e, button));
@@ -966,6 +1110,7 @@ export async function createManageTabsModal() {
 				tr.remove();
 			}
 		}
+		syncAppendRowActiveState(tbody);
 		deleteAllButton.setAttribute("disabled", true);
 	});
 	document.dispatchEvent(
@@ -1017,8 +1162,11 @@ export function createManageTabsModule(overrides = {}) {
 	CXM_PIN_TAB = overrides.CXM_PIN_TAB ?? CXM_PIN_TAB;
 	CXM_REMOVE_TAB = overrides.CXM_REMOVE_TAB ?? CXM_REMOVE_TAB;
 	CXM_UNPIN_TAB = overrides.CXM_UNPIN_TAB ?? CXM_UNPIN_TAB;
+	EXTENSION_NAME = overrides.EXTENSION_NAME ?? EXTENSION_NAME;
 	HIDDEN_CLASS = overrides.HIDDEN_CLASS ?? HIDDEN_CLASS;
+	ORG_TAB_CLASS = overrides.ORG_TAB_CLASS ?? ORG_TAB_CLASS;
 	PIN_TAB_CLASS = overrides.PIN_TAB_CLASS ?? PIN_TAB_CLASS;
+	SLDS_ACTIVE = overrides.SLDS_ACTIVE ?? SLDS_ACTIVE;
 	TOAST_ERROR = overrides.TOAST_ERROR ?? TOAST_ERROR;
 	TOAST_WARNING = overrides.TOAST_WARNING ?? TOAST_WARNING;
 	TUTORIAL_EVENT_CLOSE_MANAGE_TABS =

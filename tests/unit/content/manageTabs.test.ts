@@ -590,6 +590,7 @@ type ManageTabsFixture = {
 		current: ManageTabsDependencies["generateManageTabsModal"];
 	};
 	hanger: ManageElement;
+	injectStyleCalls: Array<{ css?: string; id: string }>;
 	lightningClicks: { value: number };
 	module: ManageTabsModule;
 	replaceTabsCalls: Array<
@@ -656,7 +657,10 @@ function createManagedLoggers(rows: ManageElement[]) {
 		const label = new ManageElement("input");
 		const url = new ManageElement("input");
 		const org = new ManageElement("input");
+		const orgCell = new ManageElement("td");
 		const openLink = new ManageElement("a");
+		org.classList.add("org");
+		orgCell.appendChild(org);
 		openLink.dataset.action = "open";
 		for (const element of [label, url, org]) {
 			element.setClosest("tr", row);
@@ -771,6 +775,7 @@ function loadManageTabs() {
 			)) as ManageTabsDependencies["generateManageTabsModal"],
 	};
 	const hanger = new ManageElement("div");
+	const injectStyleCalls: Array<{ css?: string; id: string }> = [];
 	const lightningClicks = { value: 0 };
 	const replaceTabsCalls: Array<
 		{ options: Record<string, unknown>; tabs: unknown[] }
@@ -888,7 +893,10 @@ function loadManageTabs() {
 		handleLightningLinkClick: () => {
 			lightningClicks.value++;
 		},
-		injectStyle: () => new ManageElement("style"),
+		injectStyle: (id: string, options: { css?: string }) => {
+			injectStyleCalls.push({ css: options.css, id });
+			return new ManageElement("style");
+		},
 		makeDuplicatesBold: (url: string) => {
 			duplicateUrls.push(url);
 		},
@@ -999,6 +1007,7 @@ function loadManageTabs() {
 		ensureAllTabsCalls,
 		generateManageTabsModalResult,
 		hanger,
+		injectStyleCalls,
 		lightningClicks,
 		module,
 		replaceTabsCalls,
@@ -1419,10 +1428,20 @@ Deno.test("manageTabs closes dropdowns and removes empty rows from drag listener
 		assertEquals(visibleMenu.classList.contains("hidden"), false);
 		assertEquals(otherMenu.classList.contains("hidden"), true);
 
+		const orphanOrg = new ManageElement("input");
+		orphanOrg.classList.add("org");
+		fixture.module.setInfoForDrag(orphanOrg, () => {}, 4);
+		orphanOrg.dispatchEvent(createEvent(orphanOrg, orphanOrg, "focusin"));
+		assertEquals(fixture.module.__getState().focusedIndex, 4);
+
 		let inputCalls = 0;
 		fixture.module.setInfoForDrag(managedLoggers[0].label, () => {
 			inputCalls++;
 		}, 0);
+		row0.dispatchEvent(createEvent(row0, row0, "mouseenter"));
+		assertEquals(row0.classList.contains("slds-is-active"), true);
+		row0.dispatchEvent(createEvent(row0, row0, "mouseleave"));
+		assertEquals(row0.classList.contains("slds-is-active"), false);
 		managedLoggers[0].label.dispatchEvent(
 			createEvent(
 				managedLoggers[0].label,
@@ -1439,6 +1458,7 @@ Deno.test("manageTabs closes dropdowns and removes empty rows from drag listener
 		);
 		assertEquals(inputCalls, 1);
 		assertEquals(fixture.module.__getState().focusedIndex, 0);
+		assertEquals(row0.classList.contains("slds-is-active"), true);
 
 		managedLoggers[0].label.value = "";
 		managedLoggers[0].url.value = "";
@@ -1501,6 +1521,14 @@ Deno.test("manageTabs adds and removes rows through internal helpers", async () 
 		);
 		await fixture.module.addTr(tbody);
 		assertEquals(tbody.children.length, 2);
+		assertEquals(
+			tbody.children[1].classList.contains("slds-is-active"),
+			true,
+		);
+		assertEquals(
+			tbody.children[0].classList.contains("slds-is-active"),
+			false,
+		);
 		assertEquals(fixture.module.__getState().managedLoggers.length, 2);
 		assertEquals(fixture.module.__getState().trsAndButtons.length, 2);
 
@@ -1540,6 +1568,10 @@ Deno.test("manageTabs adds and removes rows through internal helpers", async () 
 		fixture.allTabs.pinnedTabsNo = 1;
 		await fixture.module.removeTr(tbody, row0Parts.row, 0);
 		assertEquals(tbody.children.length, 1);
+		assertEquals(
+			tbody.children[0].classList.contains("slds-is-active"),
+			true,
+		);
 		assertEquals(fixture.allTabs.pinnedTabsNo, 0);
 		assertEquals(fixture.module.__getState().managedLoggers.length, 1);
 	} finally {
@@ -1677,10 +1709,24 @@ Deno.test("manageTabs checks duplicates, updates links, and handles input bookke
 		});
 		assertEquals(managedLoggers[0].org.value, "external-org");
 		assertEquals(
+			managedLoggers[0].org.parentNode?.classList.contains("is-org-tab"),
+			true,
+		);
+		assertEquals(
 			row0Parts.row.dataset.isThisOrgTab,
 			false as unknown as string,
 		);
 		assertEquals(hideButton.attributes.has("disabled"), false);
+
+		managedLoggers[0].org.value = "";
+		fixture.module.trInputListener({
+			tabAppendElement: tbody,
+			type: "org",
+		});
+		assertEquals(
+			managedLoggers[0].org.parentNode?.classList.contains("is-org-tab"),
+			false,
+		);
 
 		managedLoggers[0].label.value = "Tab label";
 		fixture.module.trInputListener({
@@ -1910,6 +1956,11 @@ Deno.test("manageTabs creates the modal and wires its listeners", async () => {
 		fixture.documentById.current = null;
 		await fixture.module.createManageTabsModal();
 		assertEquals(fixture.ensureAllTabsCalls.at(-1), { reset: true });
+		assertEquals(fixture.injectStyleCalls.at(-1), {
+			css:
+				"tr.again-why-salesforce.slds-is-active > td { background-color: inherit !important; }",
+			id: "awsf-manage-tabs-active-row",
+		});
 		assertEquals(fixture.hanger.children[0], modalParent);
 		assertEquals(
 			fixture.module.__getState().manageTabsButtons.hide,
@@ -1920,6 +1971,7 @@ Deno.test("manageTabs creates the modal and wires its listeners", async () => {
 			fixture.documentEvents.includes("create-manage-tabs"),
 			true,
 		);
+		assertEquals(row2Parts.row.classList.contains("slds-is-active"), true);
 
 		tbody.setQueryResults("tr input.url", [loggers[2].url]);
 		loggers[2].last_input = { label: "", org: "Org 2", url: "" };
