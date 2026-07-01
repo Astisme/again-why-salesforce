@@ -615,6 +615,10 @@
 		"message": "Erreur lors du désépinglage de Tab",
 		"description": "[error]"
 	},
+	"error_unsavable_page": {
+		"message": "Cette page ne peut pas être enregistrée.",
+		"description": "Erreur lorsqu'une page n'a pas l'en-tête (et l'étoile/l'étoile barrée)"
+	},
 	"error_useless_remove": {
 		"message": "Impossible de supprimer :\nImpossible de supprimer une page qui n'a jamais été enregistrée.",
 		"description": "[error] L'utilisateur a tenté de supprimer une page qui n'avait pas été enregistrée."

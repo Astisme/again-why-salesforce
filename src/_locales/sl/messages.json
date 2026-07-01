@@ -615,6 +615,10 @@
 		"message": "Napaka pri odpenjanju Tab-a",
 		"description": "[napaka]"
 	},
+	"error_unsavable_page": {
+		"message": "Te strani ni mogoče shraniti.",
+		"description": "Napaka, ko stran nima glave (in zvezdice/prečrtane zvezdice)"
+	},
 	"error_useless_remove": {
 		"message": "Ni mogoče odstraniti:\nNi mogoče odstraniti strani, ki še ni bila shranjena",
 		"description": "[napaka] uporabnik je poskusil odstraniti stran, ki še ni bila shranjena"

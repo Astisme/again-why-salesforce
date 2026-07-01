@@ -466,12 +466,16 @@ export function createFavouriteManagerModule({
 	 * Executes page save/remove favourite action.
 	 *
 	 * @param {boolean} [save=true] Whether to save (`true`) or remove (`false`).
+	 * @throws Error when the favourite image cannot be found (which means the page cannot be saved)
 	 * @return {void}
 	 */
 	function pageActionTab(save = true) {
 		const favourite = getFavouriteImage(
 			save ? STAR_ID_RUNTIME : SLASHED_STAR_ID_RUNTIME,
 		);
+		if (favourite == null) {
+			throw new Error("error_unsavable_page");
+		}
 		if (favourite.classList.contains(hiddenClassRuntime)) {
 			const message = save
 				? "error_useless_save"

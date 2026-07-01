@@ -615,6 +615,10 @@
 		"message": "Tab ሰካ ሲነሳ ስህተት ተፈጥሯል",
 		"description": "[error]"
 	},
+	"error_unsavable_page": {
+		"message": "ይህ ገጽ ሊቀመጥ አይችልም።",
+		"description": "አንድ ገጽ ራስጌ (እና ኮከብ/የተሰረዘ ኮከብ) ከሌለው የሚመጣ ስህተት"
+	},
 	"error_useless_remove": {
 		"message": "ማስወገድ አይቻልም፦\nከዚህ በፊት ያልተቀመጠ ገጽ ማስወገድ አይቻልም",
 		"description": "[ስህተት] ተጠቃሚው ገና ያልተቀመጠ ገጽ ለማስወገድ ሞክሯል"

@@ -615,6 +615,10 @@
 		"message": "Tabのピン留め解除中にエラーが発生しました",
 		"description": "[エラー]"
 	},
+	"error_unsavable_page": {
+		"message": "このページは保存できません。",
+		"description": "ページにヘッダー（および星/斜線付きの星）がない場合の エラー"
+	},
 	"error_useless_remove": {
 		"message": "削除できません：\n一度も保存されていないページは削除できません",
 		"description": "[error] まだ保存されていないページの削除が試みられました"

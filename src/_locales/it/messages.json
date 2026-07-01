@@ -615,6 +615,10 @@
 		"message": "Errore durante lo sblocco del Tab",
 		"description": "[errore]"
 	},
+	"error_unsavable_page": {
+		"message": "Questa pagina non può essere salvata.",
+		"description": "Errore quando una pagina non ha l'intestazione (e la stella/stella sbarrata)"
+	},
 	"error_useless_remove": {
 		"message": "Impossibile rimuovere:\nNon si può rimuovere una pagina che non è mai stata salvata",
 		"description": "[error] l'utente ha tentato di rimuovere una pagina non ancora salvata"

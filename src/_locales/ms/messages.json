@@ -615,6 +615,10 @@
 		"message": "Ralat semasa menyahsemat Tab",
 		"description": "[ralat]"
 	},
+	"error_unsavable_page": {
+		"message": "Halaman ini tidak boleh disimpan.",
+		"description": "Ralat apabila halaman tidak mempunyai pengepala (dan bintang/bintang bergaris)"
+	},
 	"error_useless_remove": {
 		"message": "Tidak dapat membuang:\nTidak dapat membuang halaman yang belum disimpan sebelum ini",
 		"description": "[ralat] pengguna cuba membuang halaman yang belum disimpan lagi"

@@ -615,6 +615,10 @@
 		"message": "Błąd podczas odpinania Tab",
 		"description": "[błąd]"
 	},
+	"error_unsavable_page": {
+		"message": "Tej strony no można zapisać.",
+		"description": "Błąd, gdy strona nie ma nagłówka (i gwiazdki/przekreślonej gwiazdki)"
+	},
 	"error_useless_remove": {
 		"message": "Nie można usunąć:\nNie można usunąć strony, która nie została wcześniej zapisana",
 		"description": "[błąd] użytkownik próbował usunąć stronę, która nie została jeszcze zapisana"

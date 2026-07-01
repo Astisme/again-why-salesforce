@@ -615,6 +615,10 @@
 		"message": "שגיאה בעת ביטול הצמדת Tab",
 		"description": "[שגיאה]"
 	},
+	"error_unsavable_page": {
+		"message": "לא ניתן לשמור דף זה.",
+		"description": "שגיאה כאשר לדף אין את הכותרת העליונה (ואת הכוכב/כוכב מחוק)"
+	},
 	"error_useless_remove": {
 		"message": "לא ניתן להסיר:\nלא ניתן להסיר דף שלא נשמר קודם",
 		"description": "[error] המשתמש ניסה להסיר דף שטרם נשמר"

@@ -615,6 +615,10 @@
 		"message": "Error en desfixar la Tab",
 		"description": "[error]"
 	},
+	"error_unsavable_page": {
+		"message": "Aquesta pàgina no es pot desar.",
+		"description": "Error quan una pàgina no té la capçalera (i l'estrella/l'estrella tancada)"
+	},
 	"error_useless_remove": {
 		"message": "No es pot eliminar:\nNo es pot eliminar una pàgina que no ha estat desada prèviament",
 		"description": "[error] l'usuari ha intentat eliminar una pàgina que encara no s'ha desat"

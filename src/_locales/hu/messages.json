@@ -615,6 +615,10 @@
 		"message": "Hiba a Tab rögzítésének feloldása közben",
 		"description": "[hiba]"
 	},
+	"error_unsavable_page": {
+		"message": "Ez az oldal nem menthető.",
+		"description": "Hiba, ha egy oldal nem rendelkezik a fejléccel (és a csillaggal/áthúzott csillaggal)"
+	},
 	"error_useless_remove": {
 		"message": "Nem lehet eltávolítani:\nNem lehet eltávolítani egy korábban nem mentett oldalt",
 		"description": "[error] a felhasználó olyan oldalt próbált meg eltávolítani, amelyet még nem mentett"

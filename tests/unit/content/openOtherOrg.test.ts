@@ -327,6 +327,196 @@ Deno.test("openOtherOrg ignores repeated save clicks for the same extracted org"
 	assertEquals(fixture.toasts.length, toastCountAfterFirstClick);
 });
 
+Deno.test(
+	"openOtherOrg reuses stateful validation regex across modal reopens without alternating failures",
+	async () => {
+		const openCalls: Array<{ target: string; url: string }> = [];
+		const modalSessions: Array<{
+			closeButton: TestElement;
+			input: TestElement;
+			saveButton: TestElement;
+		}> = [];
+
+		const module = createOpenOtherOrgModule({
+			documentRef: {
+				getElementById: () => null,
+			},
+			ensureAllTabsAvailabilityFn: () =>
+				Promise.resolve({
+					getSingleTabByData: () => ({
+						label: "Users",
+						url: "Users/home",
+					}),
+				}),
+			generateOpenOtherOrgModalFn: () => {
+				const session = {
+					closeButton: new TestElement(),
+					input: new TestElement(),
+					saveButton: new TestElement(),
+				};
+				modalSessions.push(session);
+				return Promise.resolve({
+					closeButton: session.closeButton,
+					getSelectedRadioButtonValue: () => "_blank",
+					inputContainer: session.input,
+					modalParent: new TestElement(),
+					saveButton: session.saveButton,
+				});
+			},
+			getCurrentHrefFn: () =>
+				"https://acme.lightning.force.com/lightning/setup/Users/home",
+			getModalHangerFn: () => new TestElement(),
+			getSettingsFn: () => Promise.resolve([{ enabled: true }]),
+			getTranslationsFn: (payload: string | string[] | unknown[]) =>
+				Array.isArray(payload)
+					? Promise.resolve(payload.map(() => "confirm-msg"))
+					: Promise.resolve("confirm-msg"),
+			locationRef: {
+				href:
+					"https://acme.lightning.force.com/lightning/setup/Users/home",
+			},
+			openFn: (url: string | URL, target?: string) => {
+				openCalls.push({ target: target ?? "", url: String(url) });
+			},
+			salesforceUrlPattern: /^[a-z0-9.-]+$/gi,
+			sldsConfirmFn: () => Promise.resolve(true),
+			showToastFn: () => {},
+			tabRef: {
+				containsSalesforceId: () => false,
+				extractOrgName: (value: string | null | undefined) => {
+					if (value == null) {
+						return "acme";
+					}
+					return value.replace(/\.lightning\.force\.com$/, "");
+				},
+				minifyURL: () => "Users/home",
+			},
+		});
+
+		await module.createOpenOtherOrgModal({
+			label: "Users",
+			org: "acme",
+			url: "Users/home",
+		});
+		modalSessions[0].input.value = "beta";
+		await modalSessions[0].saveButton.click();
+
+		await module.createOpenOtherOrgModal({
+			label: "Users",
+			org: "acme",
+			url: "Users/home",
+		});
+		modalSessions[1].input.value = "gamma";
+		await modalSessions[1].saveButton.click();
+
+		assertEquals(openCalls, [
+			{
+				target: "_blank",
+				url: "https://beta.lightning.force.com/lightning/setup/Users/home",
+			},
+			{
+				target: "_blank",
+				url: "https://gamma.lightning.force.com/lightning/setup/Users/home",
+			},
+		]);
+	},
+);
+
+Deno.test(
+	"openOtherOrg rebuilt modal controls do not stack listeners across reopens",
+	async () => {
+		const openCalls: Array<{ target: string; url: string }> = [];
+		const modalSessions: Array<{
+			closeButton: TestElement;
+			input: TestElement;
+			saveButton: TestElement;
+		}> = [];
+
+		const module = createOpenOtherOrgModule({
+			documentRef: {
+				getElementById: () => null,
+			},
+			ensureAllTabsAvailabilityFn: () =>
+				Promise.resolve({
+					getSingleTabByData: () => ({
+						label: "Users",
+						url: "Users/home",
+					}),
+				}),
+			generateOpenOtherOrgModalFn: () => {
+				const session = {
+					closeButton: new TestElement(),
+					input: new TestElement(),
+					saveButton: new TestElement(),
+				};
+				modalSessions.push(session);
+				return Promise.resolve({
+					closeButton: session.closeButton,
+					getSelectedRadioButtonValue: () => "_blank",
+					inputContainer: session.input,
+					modalParent: new TestElement(),
+					saveButton: session.saveButton,
+				});
+			},
+			getCurrentHrefFn: () =>
+				"https://acme.lightning.force.com/lightning/setup/Users/home",
+			getModalHangerFn: () => new TestElement(),
+			getSettingsFn: () => Promise.resolve([{ enabled: true }]),
+			getTranslationsFn: (payload: string | string[] | unknown[]) =>
+				Array.isArray(payload)
+					? Promise.resolve(payload.map(() => "confirm-msg"))
+					: Promise.resolve("confirm-msg"),
+			locationRef: {
+				href:
+					"https://acme.lightning.force.com/lightning/setup/Users/home",
+			},
+			openFn: (url: string | URL, target?: string) => {
+				openCalls.push({ target: target ?? "", url: String(url) });
+			},
+			salesforceUrlPattern: /^[a-z0-9.-]+$/i,
+			sldsConfirmFn: () => Promise.resolve(true),
+			showToastFn: () => {},
+			tabRef: {
+				containsSalesforceId: () => false,
+				extractOrgName: (value: string | null | undefined) => {
+					if (value == null) {
+						return "acme";
+					}
+					return value.replace(/\.lightning\.force\.com$/, "");
+				},
+				minifyURL: () => "Users/home",
+			},
+		});
+
+		await module.createOpenOtherOrgModal({
+			label: "Users",
+			org: "acme",
+			url: "Users/home",
+		});
+		modalSessions[0].input.value = "beta";
+		await modalSessions[0].saveButton.click();
+
+		await module.createOpenOtherOrgModal({
+			label: "Users",
+			org: "acme",
+			url: "Users/home",
+		});
+		modalSessions[1].input.value = "gamma";
+		await modalSessions[1].saveButton.click();
+
+		assertEquals(openCalls, [
+			{
+				target: "_blank",
+				url: "https://beta.lightning.force.com/lightning/setup/Users/home",
+			},
+			{
+				target: "_blank",
+				url: "https://gamma.lightning.force.com/lightning/setup/Users/home",
+			},
+		]);
+	},
+);
+
 Deno.test("openOtherOrg falls back to minified href when no saved tab matches", async () => {
 	const fixture = await loadOpenOtherOrgFixture();
 	fixture.setTabLookupFailure(true);
@@ -762,6 +952,293 @@ Deno.test({
 				value: originalOpen,
 				writable: true,
 			});
+			mockBrowser.runtime.sendMessage = originalSendMessage;
+			restoreCloneNode();
+			restoreGetElementsByClassName();
+			dom.cleanup();
+		}
+	},
+});
+
+Deno.test({
+	name:
+		"openOtherOrg stock modal does not leak Enter key listeners across reopen",
+	sanitizeOps: false,
+	sanitizeResources: false,
+	fn: async () => {
+		const dom = installMockDom(
+			"https://acme.lightning.force.com/lightning/setup/Users/home",
+		);
+		const restoreGetElementsByClassName =
+			installGetElementsByClassNamePolyfill();
+		const restoreCloneNode = installCloneNodePolyfill();
+		const originalConsole = globalThis.console;
+		const originalOpen = globalThis.open;
+		const translatorModule = await import(
+			"../../../src/core/translator.js"
+		);
+		const originalTranslate =
+			translatorModule.TranslationService.prototype.translate;
+		const originalSendMessage = mockBrowser.runtime.sendMessage.bind(
+			mockBrowser.runtime,
+		);
+		const openCalls: Array<{ target: string; url: string }> = [];
+		try {
+			mockBrowser.runtime.sendMessage = (
+				message: InternalMessage,
+				callback?: (response?: RuntimeResponse) => void,
+			) => {
+				if (
+					message.what === "get" &&
+					message.key === "againWhySalesforce"
+				) {
+					const response = {
+						pinned: 0,
+						tabs: [{
+							label: "Users",
+							org: "acme",
+							url: "Users/home",
+						}],
+					};
+					callback?.(response);
+					return Promise.resolve(response);
+				}
+				if (
+					message.what === "get-settings" &&
+					message.keys === "skip_link_detection"
+				) {
+					const response = {
+						enabled: true,
+						id: "skip_link_detection",
+					};
+					callback?.(response);
+					return Promise.resolve(response);
+				}
+				return originalSendMessage(message, callback);
+			};
+
+			Object.defineProperty(globalThis, "open", {
+				configurable: true,
+				value: (url: string | URL, target?: string) => {
+					openCalls.push({
+						target: target ?? "",
+						url: String(url),
+					});
+					return null;
+				},
+				writable: true,
+			});
+			Object.defineProperty(globalThis, "console", {
+				configurable: true,
+				value: {
+					error: () => {},
+					info: () => {},
+					log: () => {},
+					trace: () => {},
+					warn: () => {},
+				},
+				writable: true,
+			});
+
+			const modalHanger = document.createElement("div");
+			modalHanger.className = "DESKTOP uiContainerManager";
+			document.body.appendChild(modalHanger);
+			const toastHanger = document.createElement("div");
+			toastHanger.className = "oneConsoleTabset navexConsoleTabset";
+			document.body.appendChild(toastHanger);
+
+			const generatorModule = await import(
+				"../../../src/salesforce/generator.js"
+			);
+			generatorModule.createGeneratorModule({
+				getTranslations: generatorArrayTranslations,
+			});
+
+			translatorModule.TranslationService.prototype.translate =
+				(function (
+					this: object,
+					key: string | string[],
+					connector = " ",
+				) {
+					if (Array.isArray(key)) {
+						return Promise.resolve(key.join(connector));
+					}
+					return Promise.resolve(key);
+				}) as typeof translatorModule.TranslationService.prototype.translate;
+			translatorModule.TranslationService.prototype
+				.updatePageTranslations = () => Promise.resolve(false);
+			translatorModule.createTranslatorModule({
+				BROWSER: mockBrowser,
+				fetch: () =>
+					new Response(
+						JSON.stringify({
+							cancel: { message: "cancel" },
+							cancel_close: { message: "cancel_close" },
+							confirm: { message: "confirm" },
+							confirm_another_org: {
+								message: "confirm_another_org",
+							},
+							continue: { message: "continue" },
+							open_here: { message: "open_here" },
+							open_new_tab: { message: "open_new_tab" },
+							org_link: { message: "org_link" },
+							other_org_info: { message: "other_org_info" },
+							other_org_placeholder: {
+								message: "other_org_placeholder",
+							},
+							required_info: { message: "required_info" },
+							where_to: { message: "where_to" },
+						}),
+						{
+							headers: { "content-type": "application/json" },
+						},
+					),
+				sendExtensionMessage: (message: { what?: string }) => {
+					if (message.what === "get-settings") {
+						return { enabled: "en" };
+					}
+					if (message.what === "get-sf-language") {
+						return "en";
+					}
+					return null;
+				},
+			});
+
+			const generatorExports = await import(
+				"../../../src/salesforce/generator.js"
+			);
+			const generateOpenOtherOrgModalFn = (options: {
+				label: string | null;
+				org: string | null;
+				url: string | null;
+			}) =>
+				generatorExports.generateOpenOtherOrgModal(options) as Promise<{
+					closeButton: {
+						click: () => void | Promise<void>;
+					};
+					getSelectedRadioButtonValue: () => string | null;
+					inputContainer: {
+						addEventListener: (
+							type: string,
+							listener: (event: {
+								preventDefault: () => void;
+								target: { value: string };
+							}) => void | Promise<void>,
+						) => void;
+						value: string;
+					};
+					modalParent: unknown;
+					saveButton: {
+						addEventListener: (
+							type: string,
+							listener: (event: {
+								preventDefault: () => void;
+								target: { value: string };
+							}) => void | Promise<void>,
+						) => void;
+					};
+				}>;
+			const getModalHangerFn = () => ({
+				appendChild: (element: unknown) =>
+					modalHanger.appendChild(
+						element as Node,
+					),
+			});
+			const getTranslationsFn = (
+				message: string | string[] | unknown[],
+			) => Promise.resolve(
+				generatorArrayTranslations(
+					message as string | URL | Array<string | URL> | null,
+				) as string | string[],
+			);
+			const openOtherOrgModule = createOpenOtherOrgModule({
+				documentRef: document,
+				ensureAllTabsAvailabilityFn: () =>
+					Promise.resolve({
+						getSingleTabByData: () => ({
+							label: "Users",
+							url: "Users/home",
+						}),
+					}),
+				generateOpenOtherOrgModalFn,
+				getCurrentHrefFn: () => String(globalThis.location.href),
+				getModalHangerFn,
+				getSettingsFn: () => Promise.resolve([{ enabled: true }]),
+				getTranslationsFn,
+				locationRef: globalThis.location,
+				modalId: "again-why-salesforce-modal",
+				openFn: (url: string | URL, target?: string) => {
+					openCalls.push({
+						target: target ?? "",
+						url: String(url),
+					});
+					return null;
+				},
+				salesforceUrlPattern: /^[a-z0-9.-]+$/i,
+				sldsConfirmFn: () => Promise.resolve(true),
+				tabRef: {
+					containsSalesforceId: () => false,
+					extractOrgName: (value: string | null | undefined) => {
+						if (value == null) {
+							return "acme";
+						}
+						const sanitized = value.replace(/^https?:\/\//, "");
+						const hostname = sanitized.split("/")[0] ?? sanitized;
+						return hostname.replace(/\.lightning\.force\.com$/, "");
+					},
+					minifyURL: () => "Users/home",
+				},
+				toastError: "error",
+				toastWarning: "warning",
+				urlCtor: URL,
+			});
+
+			await openOtherOrgModule.createOpenOtherOrgModal({
+				label: "Users",
+				org: "acme",
+				url: "Users/home",
+			});
+			const firstCloseButton = document.querySelector(
+				"button.slds-button.slds-button_icon",
+			) as HTMLButtonElement;
+			assertExists(firstCloseButton);
+			firstCloseButton.click();
+
+			await openOtherOrgModule.createOpenOtherOrgModal({
+				label: "Users",
+				org: "acme",
+				url: "Users/home",
+			});
+			const secondInput = document.querySelector(
+				"textarea",
+			) as HTMLTextAreaElement;
+			assertExists(secondInput);
+			secondInput.value = "beta";
+			const enterEvent = new Event("keydown", { bubbles: true });
+			Object.defineProperty(enterEvent, "key", {
+				configurable: true,
+				value: "Enter",
+			});
+			document.dispatchEvent(enterEvent);
+			await flushAsyncTasks();
+
+			assertEquals(openCalls, [{
+				target: "_blank",
+				url: "https://beta.lightning.force.com/lightning/setup/Users/home",
+			}]);
+		} finally {
+			Object.defineProperty(globalThis, "console", {
+				configurable: true,
+				value: originalConsole,
+				writable: true,
+			});
+			Object.defineProperty(globalThis, "open", {
+				configurable: true,
+				value: originalOpen,
+				writable: true,
+			});
+			translatorModule.TranslationService.prototype.translate =
+				originalTranslate;
 			mockBrowser.runtime.sendMessage = originalSendMessage;
 			restoreCloneNode();
 			restoreGetElementsByClassName();

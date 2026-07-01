@@ -615,6 +615,10 @@
 		"message": "Error al desanclar Tab",
 		"description": "[error]"
 	},
+	"error_unsavable_page": {
+		"message": "Esta página no se puede guardar.",
+		"description": "Error cuando una página no tiene el encabezado (y la estrella/estrella tachada)"
+	},
 	"error_useless_remove": {
 		"message": "No se puede eliminar:\nNo se puede eliminar una página que nunca se ha guardado.",
 		"description": "[error] Se intentó eliminar una página que no había sido guardada."

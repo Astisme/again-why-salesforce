@@ -615,6 +615,10 @@
 		"message": "Eroare la defixarea Tab-ului",
 		"description": "[eroare]"
 	},
+	"error_unsavable_page": {
+		"message": "Această pagină nu poate fi salvată.",
+		"description": "Eroare când o pagină nu are antetul (și steaua/steaua tăiată)"
+	},
 	"error_useless_remove": {
 		"message": "Nu se poate elimina:\nNu se poate elimina o pagină care nu a fost salvată anterior",
 		"description": "[eroare] utilizatorul a încercat să elimine o pagină care nu fusese încă salvată"
