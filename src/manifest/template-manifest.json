@@ -88,7 +88,7 @@
 			}
 		},
 		"safari": {
-			"strict_min_version": "14.0"
+			"strict_min_version": "15.4"
 		}
 	},
 	"incognito": "spanning",

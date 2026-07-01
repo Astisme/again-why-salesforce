@@ -128,7 +128,7 @@ For Safari users, we recommend checking out our [installation guide](https://git
 | Chrome  | 120             |
 | Edge    | 120             |
 | Firefox | 140             |
-| Safari  | 14              |
+| Safari  | 15.4            |
 
 <p align="center">
 	<img src="/images/browsers.gif" width="50%" title="Supported Browsers"/>
