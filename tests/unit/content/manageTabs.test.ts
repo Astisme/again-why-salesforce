@@ -1957,8 +1957,7 @@ Deno.test("manageTabs creates the modal and wires its listeners", async () => {
 		await fixture.module.createManageTabsModal();
 		assertEquals(fixture.ensureAllTabsCalls.at(-1), { reset: true });
 		assertEquals(fixture.injectStyleCalls.at(-1), {
-			css:
-				"tr.again-why-salesforce.slds-is-active > td { background-color: inherit !important; }",
+			css: "tr.again-why-salesforce.slds-is-active > td { background-color: inherit !important; }",
 			id: "awsf-manage-tabs-active-row",
 		});
 		assertEquals(fixture.hanger.children[0], modalParent);

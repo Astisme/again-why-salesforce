@@ -339,8 +339,7 @@ function syncAppendRowActiveState(tabAppendElement) {
  */
 function injectManageTabsActiveRowStyle() {
 	injectStyle(MANAGE_TABS_ACTIVE_ROW_STYLE_ID, {
-		css:
-			`tr.${EXTENSION_NAME}.${SLDS_ACTIVE} > td { background-color: inherit !important; }`,
+		css: `tr.${EXTENSION_NAME}.${SLDS_ACTIVE} > td { background-color: inherit !important; }`,
 	});
 }
 
