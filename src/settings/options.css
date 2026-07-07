@@ -50,7 +50,8 @@ html.theme-transitioning input[type="checkbox"] {
 	filter: saturate(0.2);
 }
 
-html.theme-transitioning :is(#optional-settings li, ul.settings > li, #sort-container > .flex-row) {
+html.theme-transitioning
+	:is(#optional-settings li, ul.settings > li, #sort-container > .flex-row) {
 	opacity: 0.78;
 }
 
@@ -162,7 +163,9 @@ button {
 	display: unset;
 }
 
-.slds-dueling-list__column:has(> button.slds-button.slds-button_icon.slds-button_icon-container) {
+.slds-dueling-list__column:has(
+	> button.slds-button.slds-button_icon.slds-button_icon-container
+) {
 	display: flex;
 	flex-direction: row;
 	& > button.slds-button.slds-button_icon.slds-button_icon-container {
@@ -268,7 +271,16 @@ hr {
 	transition-timing-function: var(--transition-timing-function);
 }
 
-#header :is(.slds-context-bar, .slds-context-bar__primary, .slds-context-bar__secondary, .slds-context-bar__label-action, .slds-context-bar__button, .slds-truncate, .appName) {
+#header
+	:is(
+		.slds-context-bar,
+		.slds-context-bar__primary,
+		.slds-context-bar__secondary,
+		.slds-context-bar__label-action,
+		.slds-context-bar__button,
+		.slds-truncate,
+		.appName
+	) {
 	transition-property: background-color, color;
 	transition-duration: var(--transition-duration);
 	transition-timing-function: var(--transition-timing-function);
@@ -284,11 +296,22 @@ hr {
 
 html[data-theme="dark"] {
 	#header,
-	#header :is(.slds-context-bar, .slds-context-bar__primary, .slds-context-bar__secondary) {
+	#header
+		:is(
+			.slds-context-bar,
+			.slds-context-bar__primary,
+			.slds-context-bar__secondary
+		) {
 		background-color: var(--shade);
 	}
 
-	#header :is(.slds-context-bar__label-action, .slds-context-bar__button, .slds-truncate, .appName) {
+	#header
+		:is(
+			.slds-context-bar__label-action,
+			.slds-context-bar__button,
+			.slds-truncate,
+			.appName
+		) {
 		color: var(--color);
 	}
 
