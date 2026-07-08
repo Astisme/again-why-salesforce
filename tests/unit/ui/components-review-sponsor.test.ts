@@ -147,6 +147,7 @@ function createStoredCustomElementsRegistry() {
 			getName(_constructor: CustomElementConstructor) {
 				return null;
 			},
+			initialize(_root: Node) {},
 			upgrade(_root: Node) {},
 			whenDefined(_name: string) {
 				return Promise.resolve(class extends HTMLElement {});

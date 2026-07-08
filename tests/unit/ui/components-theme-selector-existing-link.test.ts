@@ -65,6 +65,7 @@ function installCustomElementsRegistry(document: Document) {
 			}
 			return null;
 		},
+		initialize(_root: Node) {},
 		upgrade(_root: Node) {},
 		whenDefined(name: string) {
 			const constructor = constructors.get(name);

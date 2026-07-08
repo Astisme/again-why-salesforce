@@ -76,6 +76,7 @@ function installCustomElementsRegistry(document: Document) {
 			}
 			return null;
 		},
+		initialize(_root: Node) {},
 		upgrade(_root: Node) {},
 		whenDefined(name: string) {
 			const constructor = constructors.get(name);
@@ -219,12 +220,12 @@ Deno.test("ThemeSelectorAws", async (t) => {
 		"dispatches the before-theme-toggle event and swaps visible buttons on click",
 		() => {
 			restoreGlobals();
-			globalThis.setTimeout = (callback: TimerHandler) => {
+			globalThis.setTimeout = Object.assign((callback: TimerHandler) => {
 				if (typeof callback === "function") {
 					callback();
 				}
 				return 1;
-			};
+			}, { __promisify__: setTimeout.__promisify__ }) as typeof globalThis.setTimeout;
 			globalThis.clearTimeout = () => {};
 			document.documentElement.dataset.theme = "light";
 			const component = document.createElement(
@@ -308,12 +309,12 @@ Deno.test("ThemeSelectorAws", async (t) => {
 		"swaps the opposite buttons when the current theme is dark",
 		() => {
 			restoreGlobals();
-			globalThis.setTimeout = (callback: TimerHandler) => {
+			globalThis.setTimeout = Object.assign((callback: TimerHandler) => {
 				if (typeof callback === "function") {
 					callback();
 				}
 				return 1;
-			};
+			}, { __promisify__: setTimeout.__promisify__ }) as typeof globalThis.setTimeout;
 			globalThis.clearTimeout = () => {};
 			document.documentElement.dataset.theme = "dark";
 			testLocalStorage.setItem("usingTheme", "dark");
