@@ -47,6 +47,7 @@ type GeneratorModule = {
 		isGeneric?: boolean;
 		isPinned?: boolean;
 		list?: StyleRule[];
+		surface?: string;
 	}) => {
 		activeCss: string;
 		inactiveCss: string;
@@ -60,6 +61,7 @@ type GeneratorModule = {
 		isGeneric?: boolean;
 		isPinned?: boolean;
 		pseudoRules?: StyleRule[];
+		surface?: string;
 	}) => string;
 	_getPseudoSelector: (id: string) => string;
 	_isPseudoRule: (id: string) => boolean;
@@ -323,7 +325,9 @@ type GeneratorModule = {
 		message: string | Array<string>,
 		status?: string,
 	) => Promise<HTMLElement>;
-	generateStyleFromSettings: () => Promise<void>;
+	generateStyleFromSettings: (options?: {
+		surface?: string;
+	}) => Promise<void>;
 	generateTutorialElements: () => Promise<{
 		btnsParent: HTMLDivElement;
 		closeBtn: HTMLButtonElement;
@@ -405,6 +409,7 @@ type GeneratorDependencies = {
 		isGeneric?: boolean;
 		isInactive?: boolean;
 		isPinned?: boolean;
+		surface?: string;
 		pseudoElement?: string;
 	}) => string;
 	getCurrentHref: () => string;
@@ -635,16 +640,18 @@ function loadGeneratorFixture({
 			isGeneric = false,
 			isInactive = false,
 			isPinned = false,
+			surface = "tabs",
 			pseudoElement = "",
 		}: {
 			isGeneric?: boolean;
 			isInactive?: boolean;
 			isPinned?: boolean;
+			surface?: string;
 			pseudoElement?: string;
 		}) =>
-			`.selector-${isGeneric ? "g" : "o"}-${isInactive ? "i" : "a"}-${
-				isPinned ? "p" : "u"
-			}${pseudoElement}`,
+			`.selector-${surface}-${isGeneric ? "g" : "o"}-${
+				isInactive ? "i" : "a"
+			}-${isPinned ? "p" : "u"}${pseudoElement}`,
 		getCurrentHref: () => currentHref,
 		getPinnedSpecificKey: ({
 			isGeneric = false,
@@ -800,11 +807,11 @@ Deno.test("generator helper functions cover random validation and CSS rule assem
 
 		assertStringIncludes(
 			builtRules.inactiveCss,
-			".selector-g-i-u { color:red;}",
+			".selector-tabs-g-i-u { color:red; }",
 		);
 		assertStringIncludes(
 			builtRules.activeCss,
-			".selector-g-a-u {background:blue;}",
+			".selector-tabs-g-a-u { background:blue; }",
 		);
 		assertEquals(builtRules.pseudoRules.length, 1);
 		assertStringIncludes(
@@ -812,7 +819,7 @@ Deno.test("generator helper functions cover random validation and CSS rule assem
 				isGeneric: true,
 				pseudoRules: builtRules.pseudoRules,
 			}),
-			".selector-g-a-u:hover{ hover:orange; }",
+			".selector-tabs-g-a-u:hover { hover:orange; }",
 		);
 	} finally {
 		fixture.cleanup();
@@ -953,6 +960,13 @@ Deno.test("generator renders styles only when settings exist and change", async 
 		orgStyle: [
 			{ forActive: true, id: "background", value: "green" },
 		],
+		genericPinnedStyle: [
+			{ forActive: false, id: "border", value: "blue" },
+			{ forActive: true, id: "top", value: "gold" },
+		],
+		orgPinnedStyle: [
+			{ forActive: true, id: "bold", value: "bold" },
+		],
 	};
 	const fixture = await loadGeneratorFixture({
 		styleSettings,
@@ -961,23 +975,54 @@ Deno.test("generator renders styles only when settings exist and change", async 
 	try {
 		await fixture.module.generateStyleFromSettings();
 		await fixture.module.generateStyleFromSettings();
+		await fixture.module.generateStyleFromSettings({
+			surface: "manage-tabs",
+		});
+		await fixture.module.generateStyleFromSettings({
+			surface: "manage-tabs",
+		});
 
-		assertEquals(fixture.injectStyleCalls.length, 2);
+		assertEquals(fixture.injectStyleCalls.length, 8);
 		assertEquals(
 			fixture.injectStyleCalls[0].id,
 			"again-why-salesforce-generic-tabs",
 		);
 		assertStringIncludes(
 			fixture.injectStyleCalls[0].options.css ?? "",
-			".selector-g-i-u { color:red;}",
+			".selector-tabs-g-i-u { color:red; }",
 		);
 		assertStringIncludes(
 			fixture.injectStyleCalls[0].options.css ?? "",
-			".selector-g-a-u:hover{ hover:orange; }",
+			".selector-tabs-g-a-u:hover { hover:orange; }",
 		);
 		assertEquals(
 			fixture.injectStyleCalls[1].id,
 			"again-why-salesforce-org-tabs",
+		);
+		assertEquals(
+			fixture.injectStyleCalls[4].id,
+			"again-why-salesforce-manage-tabs-generic-tabs",
+		);
+		assertStringIncludes(
+			fixture.injectStyleCalls[4].options.css ?? "",
+			".selector-manage-tabs-g-i-u { background-color: transparent !important; }",
+		);
+		assertStringIncludes(
+			fixture.injectStyleCalls[4].options.css ?? "",
+			".selector-manage-tabs-g-i-u > td, .selector-manage-tabs-g-i-u > td input, .selector-manage-tabs-g-i-u > td button, .selector-manage-tabs-g-i-u > td a { color:red; }",
+		);
+		assertStringIncludes(
+			fixture.injectStyleCalls[4].options.css ?? "",
+			".selector-manage-tabs-g-a-u:hover > td { hover:orange; }",
+		);
+		assertEquals(
+			fixture.injectStyleCalls[6].id,
+			"again-why-salesforce-manage-tabs-generic-pinned",
+		);
+		assert(
+			!(fixture.injectStyleCalls[6].options.css ?? "").includes(
+				"::before",
+			),
 		);
 	} finally {
 		fixture.cleanup();
@@ -1545,6 +1590,7 @@ Deno.test("generator covers selectable tab-list and manage-tabs modal builders",
 			pinButton?.style.display === "none",
 			true,
 		);
+		assertEquals(manageRow.dropdownButton.style.color, "inherit");
 		manageRow.dropdownButton.dispatchEvent(new Event("click"));
 		assertEquals(
 			manageRow.dropdownMenu.classList.contains("hidden"),

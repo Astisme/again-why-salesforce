@@ -485,6 +485,35 @@ Deno.test("getCssSelector builds correct selector", () => {
 		}),
 		`${extensionNameClass}${isActive}${hasOrgTab}${isPinTab}::before`,
 	);
+	const manageTabsBase = `tr${extensionNameClass}${notOrg}${notPin}`;
+	assertEquals(
+		getCssSelector({
+			surface: "manage-tabs",
+		}),
+		`${manageTabsBase}:not([data-draggable=false]):not(:focus-within):not(:hover)`,
+	);
+	assertEquals(
+		getCssSelector({
+			isInactive: false,
+			surface: "manage-tabs",
+		}),
+		`${manageTabsBase}:not([data-draggable=false]):hover, ${manageTabsBase}:focus-within`,
+	);
+	assertEquals(
+		getCssSelector({
+			isInactive: false,
+			surface: "manage-tabs",
+			pseudoElement: ":hover",
+		}),
+		`${manageTabsBase}:not([data-draggable=false]):hover`,
+	);
+	assertEquals(
+		getCssSelector({
+			surface: "manage-tabs",
+			pseudoElement: "::before",
+		}),
+		"",
+	);
 });
 
 Deno.test("getCssRule generates correct CSS rules", async (t) => {

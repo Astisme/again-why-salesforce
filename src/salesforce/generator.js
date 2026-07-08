@@ -25,10 +25,11 @@ export function handleLightningLinkClick(e) {
 /**
  * Generates and injects CSS rules based on saved tab style settings.
  *
+ * @param {Object} [options={}] Style generation options.
  * @return {Promise<void>} Resolves once styles are updated.
  */
-export function generateStyleFromSettings() {
-	return generatorRuntime.generateStyleFromSettings();
+export function generateStyleFromSettings(options = {}) {
+	return generatorRuntime.generateStyleFromSettings(options);
 }
 
 /**

@@ -19,8 +19,15 @@ import {
 	ORG_TAB_STYLE_KEY as _ORG_TAB_STYLE_KEY,
 	PIN_TAB_CLASS as _PIN_TAB_CLASS,
 	SETUP_LIGHTNING as _SETUP_LIGHTNING,
+	TAB_STYLE_BACKGROUND as _TAB_STYLE_BACKGROUND,
+	TAB_STYLE_BOLD as _TAB_STYLE_BOLD,
+	TAB_STYLE_BORDER as _TAB_STYLE_BORDER,
+	TAB_STYLE_COLOR as _TAB_STYLE_COLOR,
 	TAB_STYLE_HOVER as _TAB_STYLE_HOVER,
+	TAB_STYLE_ITALIC as _TAB_STYLE_ITALIC,
+	TAB_STYLE_SHADOW as _TAB_STYLE_SHADOW,
 	TAB_STYLE_TOP as _TAB_STYLE_TOP,
+	TAB_STYLE_UNDERLINE as _TAB_STYLE_UNDERLINE,
 	TOAST_ERROR as _TOAST_ERROR,
 	TOAST_SUCCESS as _TOAST_SUCCESS,
 	USE_LIGHTNING_NAVIGATION as _USE_LIGHTNING_NAVIGATION,
@@ -64,8 +71,15 @@ let ORG_TAB_CLASS = _ORG_TAB_CLASS;
 let ORG_TAB_STYLE_KEY = _ORG_TAB_STYLE_KEY;
 let PIN_TAB_CLASS = _PIN_TAB_CLASS;
 let SETUP_LIGHTNING = _SETUP_LIGHTNING;
+let TAB_STYLE_BACKGROUND = _TAB_STYLE_BACKGROUND;
+let TAB_STYLE_BOLD = _TAB_STYLE_BOLD;
+let TAB_STYLE_BORDER = _TAB_STYLE_BORDER;
+let TAB_STYLE_COLOR = _TAB_STYLE_COLOR;
 let TAB_STYLE_HOVER = _TAB_STYLE_HOVER;
+let TAB_STYLE_ITALIC = _TAB_STYLE_ITALIC;
+let TAB_STYLE_SHADOW = _TAB_STYLE_SHADOW;
 let TAB_STYLE_TOP = _TAB_STYLE_TOP;
+let TAB_STYLE_UNDERLINE = _TAB_STYLE_UNDERLINE;
 let TOAST_ERROR = _TOAST_ERROR;
 let TOAST_SUCCESS = _TOAST_SUCCESS;
 let USE_LIGHTNING_NAVIGATION = _USE_LIGHTNING_NAVIGATION;
@@ -219,13 +233,15 @@ function areArraysEqual(arr1, arr2) {
 		);
 }
 
-let oldSettings = null;
+const oldSettingsBySurface = new Map();
 /**
  * Determines if tab settings have been updated compared to previous settings.
+ * @param {string} [surface="tabs"] - Surface key for caching style settings.
  * @param {Object} settings - Current settings to compare.
  * @return {boolean} True if settings were updated, otherwise false.
  */
-function wereSettingsUpdated(settings) {
+function wereSettingsUpdated(settings, surface = "tabs") {
+	const oldSettings = oldSettingsBySurface.get(surface) ?? null;
 	return oldSettings == null ||
 		Object.keys(settings).some((key) =>
 			!areArraysEqual(oldSettings[key], settings[key])
@@ -253,12 +269,14 @@ function _getPseudoSelector(id) {
  * @param {Array} [param0.pseudoRules=[]] - Array of pseudo rules to process
  * @param {boolean} [param0.isGeneric=true] - Whether this is for generic Tab styles
  * @param {boolean} [param0.isPinned=false] - Whether this is for pinned Tab styles
+ * @param {string} [param0.surface="tabs"] - UI surface to target.
  * @return {string} the css pseudo element rules
  */
 function _getPseudoRules({
 	pseudoRules = [],
 	isGeneric = true,
 	isPinned = false,
+	surface = "tabs",
 } = {}) {
 	let result = "";
 	for (const rule of pseudoRules) {
@@ -268,8 +286,14 @@ function _getPseudoRules({
 			isGeneric,
 			pseudoElement: pseudoSelector,
 			isPinned,
+			surface,
 		});
-		result += `${selector}{ ${getCssRule(rule.id, rule.value)} }`;
+		result += _buildSurfaceCssRule({
+			rule: getCssRule(rule.id, rule.value),
+			selector,
+			styleId: rule.id,
+			surface,
+		});
 	}
 	return result;
 }
@@ -281,6 +305,144 @@ function _getPseudoRules({
 function _isPseudoRule(id) {
 	return id === TAB_STYLE_HOVER || id === TAB_STYLE_TOP;
 }
+
+/**
+ * Expands a selector with the descendants that should receive manage-tabs styles.
+ *
+ * @param {string} selector Base selector for the row.
+ * @param {string[]} suffixes Descendant suffixes to append.
+ * @return {string} Comma-joined selector list.
+ */
+function _appendSelectorSuffixes(selector, suffixes) {
+	return selector.split(", ").flatMap((baseSelector) =>
+		suffixes.map((suffix) => `${baseSelector}${suffix}`)
+	).join(", ");
+}
+
+/**
+ * Returns the manage-tabs descendants that should receive a given style.
+ *
+ * @param {string} styleId Style identifier.
+ * @return {string[]} CSS selector suffixes.
+ */
+function _getManageTabsTargetSuffixes(styleId) {
+	switch (styleId) {
+		case TAB_STYLE_TOP:
+			return [];
+		case TAB_STYLE_BACKGROUND:
+		case TAB_STYLE_HOVER:
+		case TAB_STYLE_BORDER:
+			return [" > td"];
+		case TAB_STYLE_COLOR:
+		case TAB_STYLE_SHADOW:
+		case TAB_STYLE_BOLD:
+		case TAB_STYLE_ITALIC:
+		case TAB_STYLE_UNDERLINE:
+			return [
+				" > td",
+				" > td input",
+				" > td button",
+				" > td a",
+			];
+		default:
+			throw new Error("error_required_params");
+	}
+}
+
+/**
+ * Builds the baseline manage-tabs reset that suppresses SLDS gray hover fills.
+ *
+ * @param {string} selector Base selector for the row.
+ * @return {string} CSS block string.
+ */
+function _buildManageTabsSurfaceReset(selector) {
+	const rowSelector = selector;
+	const cellSelector = _appendSelectorSuffixes(selector, [" > td"]);
+	const contentSelector = _appendSelectorSuffixes(selector, [
+		" > td input",
+		" > td button",
+		" > td a",
+	]);
+	return `${rowSelector} { background-color: transparent !important; }${cellSelector} { background-color: inherit !important; }${contentSelector} { background-color: transparent !important; }`;
+}
+
+/**
+ * Builds the base selector for a manage-tabs row bucket.
+ *
+ * @param {Object} [param0={}] Selector options.
+ * @param {boolean} [param0.isGeneric=true] Whether the selector targets generic rows.
+ * @param {boolean} [param0.isPinned=false] Whether the selector targets pinned rows.
+ * @return {string} Base selector for the manage-tabs row bucket.
+ */
+function _getManageTabsBaseSelector({
+	isGeneric = true,
+	isPinned = false,
+} = {}) {
+	const orgTabSelector = isGeneric
+		? `:not(:has(.${ORG_TAB_CLASS}))`
+		: `:has(.${ORG_TAB_CLASS})`;
+	const pinTabSelector = isPinned
+		? `:has(.${PIN_TAB_CLASS})`
+		: `:not(:has(.${PIN_TAB_CLASS}))`;
+	return `tr.${EXTENSION_NAME}${orgTabSelector}${pinTabSelector}`;
+}
+
+/**
+ * Builds the reset for append row so it keeps default appearance until focus.
+ *
+ * @param {Object} [param0={}] Selector options.
+ * @param {boolean} [param0.isGeneric=true] Whether the selector targets generic rows.
+ * @param {boolean} [param0.isPinned=false] Whether the selector targets pinned rows.
+ * @return {string} CSS block string.
+ */
+function _buildManageTabsAppendRowReset({
+	isGeneric = true,
+	isPinned = false,
+} = {}) {
+	const selector = `${
+		_getManageTabsBaseSelector({ isGeneric, isPinned })
+	}[data-draggable=false]:not(:focus-within)`;
+	const rowSelector = selector;
+	const cellSelector = _appendSelectorSuffixes(selector, [" > td"]);
+	const contentSelector = _appendSelectorSuffixes(selector, [
+		" > td input",
+		" > td button",
+		" > td a",
+	]);
+	return `${rowSelector} { background-color: transparent !important; }${cellSelector} { background-color: transparent !important; }${contentSelector} { background-color: transparent !important; }`;
+}
+
+/**
+ * Builds a surface-specific CSS block from a base selector and declaration string.
+ *
+ * @param {Object} [param0={}] Build options.
+ * @param {string} [param0.rule=""] CSS declarations.
+ * @param {string} [param0.selector=""] Base selector.
+ * @param {string} [param0.styleId=""] Style identifier.
+ * @param {string} [param0.surface="tabs"] UI surface to target.
+ * @return {string} CSS block or an empty string when the rule is not valid.
+ */
+function _buildSurfaceCssRule({
+	rule = "",
+	selector = "",
+	styleId = "",
+	surface = "tabs",
+} = {}) {
+	if (selector === "" || rule === "") {
+		return "";
+	}
+	if (surface !== "manage-tabs") {
+		return `${selector} { ${rule} }`;
+	}
+	const targetSelector = _appendSelectorSuffixes(
+		selector,
+		_getManageTabsTargetSuffixes(styleId),
+	);
+	if (targetSelector === "") {
+		return "";
+	}
+	return `${targetSelector} { ${rule} }`;
+}
 /**
  * Builds CSS rules for active/inactive tabs and separates pseudo rules.
  *
@@ -288,6 +450,7 @@ function _isPseudoRule(id) {
  * @param {Object[]} [param0.list=[]] - Array of style elements to process
  * @param {boolean} [param0.isGeneric=false] - Whether this is for generic Tab styles
  * @param {boolean} [param0.isPinned=false] - Whether this is for pinned Tab styles
+ * @param {string} [param0.surface="tabs"] - UI surface to target.
  *
  * @return {Object} Object containing activeCss, inactiveCss, and pseudoRules
  */
@@ -295,13 +458,26 @@ function _buildCssRules({
 	list = [],
 	isGeneric = false,
 	isPinned = false,
+	surface = "tabs",
 } = {}) {
-	let inactiveCss = `${
-		getCssSelector({ isInactive: true, isGeneric, isPinned })
-	} { `;
-	let activeCss = `${
-		getCssSelector({ isInactive: false, isGeneric, isPinned })
-	} {`;
+	let inactiveCss = "";
+	let activeCss = "";
+	const inactiveSelector = getCssSelector({
+		isInactive: true,
+		isGeneric,
+		isPinned,
+		surface,
+	});
+	const activeSelector = getCssSelector({
+		isInactive: false,
+		isGeneric,
+		isPinned,
+		surface,
+	});
+	const firstRenderableStyleId =
+		list.find((element) => !_isPseudoRule(element.id))?.id ?? "";
+	const inactiveRules = [];
+	const activeRules = [];
 	const pseudoRules = [];
 	for (const element of list) {
 		if (_isPseudoRule(element.id)) {
@@ -310,13 +486,34 @@ function _buildCssRules({
 		}
 		const rule = getCssRule(element.id, element.value);
 		if (element.forActive) {
-			activeCss += rule;
+			activeRules.push(rule);
 		} else {
-			inactiveCss += rule;
+			inactiveRules.push(rule);
 		}
 	}
-	inactiveCss += "}";
-	activeCss += "}";
+	inactiveCss = _buildSurfaceCssRule({
+		rule: inactiveRules.join(""),
+		selector: inactiveSelector,
+		styleId: firstRenderableStyleId,
+		surface,
+	});
+	activeCss = _buildSurfaceCssRule({
+		rule: activeRules.join(""),
+		selector: activeSelector,
+		styleId: firstRenderableStyleId,
+		surface,
+	});
+	if (surface === "manage-tabs") {
+		inactiveCss = `${
+			_buildManageTabsAppendRowReset({
+				isGeneric,
+				isPinned,
+			})
+		}${_buildManageTabsSurfaceReset(inactiveSelector)}${inactiveCss}`;
+		activeCss = `${
+			_buildManageTabsSurfaceReset(activeSelector)
+		}${activeCss}`;
+	}
 	return { activeCss, inactiveCss, pseudoRules };
 }
 
@@ -327,22 +524,30 @@ function _buildCssRules({
  * @param {Object[]} [param0.list=[]] - Array of style elements to process
  * @param {boolean} [param0.isGeneric=false] - Whether this is for generic Tab styles
  * @param {boolean} [param0.isPinned=false] - Whether this is for pinned Tab styles
+ * @param {string} [param0.surface="tabs"] - UI surface to target.
  */
 function _processStyleList({
 	list = [],
 	isGeneric = false,
 	isPinned = false,
+	surface = "tabs",
 } = {}) {
 	const { activeCss, inactiveCss, pseudoRules } = _buildCssRules({
 		list,
 		isGeneric,
 		isPinned,
+		surface,
 	});
 	const cssRules = `${inactiveCss}${activeCss}${
-		_getPseudoRules({ pseudoRules, isGeneric, isPinned })
+		_getPseudoRules({ pseudoRules, isGeneric, isPinned, surface })
 	}`;
+	const styleId = surface === "tabs"
+		? `${EXTENSION_NAME}-${getPinnedSpecificKey({ isGeneric, isPinned })}`
+		: `${EXTENSION_NAME}-${surface}-${
+			getPinnedSpecificKey({ isGeneric, isPinned })
+		}`;
 	injectStyle(
-		`${EXTENSION_NAME}-${getPinnedSpecificKey({ isGeneric, isPinned })}`,
+		styleId,
 		{ css: cssRules },
 	);
 }
@@ -354,14 +559,18 @@ function _processStyleList({
  * - Builds separate CSS rules for active vs. inactive tabs.
  * - Handles pseudo-selectors (`:hover`, `::before`) for special rules.
  * - Appends the assembled `<style>` element to the document head.
+ * @param {Object} [options={}] Style generation options.
+ * @param {string} [options.surface="tabs"] - UI surface to target.
  * @return {Promise<void>} Resolves once styles are updated.
  */
-export async function generateStyleFromSettings() {
+export async function generateStyleFromSettings({
+	surface = "tabs",
+} = {}) {
 	const settings = await getStyleSettings();
-	if (settings == null || !wereSettingsUpdated(settings)) {
+	if (settings == null || !wereSettingsUpdated(settings, surface)) {
 		return;
 	}
-	oldSettings = settings;
+	oldSettingsBySurface.set(surface, settings);
 	const styleLists = [
 		{
 			list: settings[GENERIC_TAB_STYLE_KEY],
@@ -386,7 +595,7 @@ export async function generateStyleFromSettings() {
 	];
 	for (const el of styleLists) {
 		if (el.list?.length > 0) {
-			_processStyleList(el);
+			_processStyleList({ ...el, surface });
 		}
 	}
 }
@@ -2579,6 +2788,7 @@ export async function createManageTabRow({
 		dropdownButton.setAttribute("disabled", true);
 	}
 	dropdownButton.style.position = "relative";
+	dropdownButton.style.color = "inherit";
 	dropdownButton.textContent = `▼`; // downward arrow
 	dropdownButton.title = msg_actions;
 	dropdownButton.setAttribute("aria-label", msg_actions);
@@ -3203,11 +3413,32 @@ export function createGeneratorModule(overrides = {}) {
 	applyOverride(overrides.SETUP_LIGHTNING, (value) => {
 		SETUP_LIGHTNING = value;
 	});
+	applyOverride(overrides.TAB_STYLE_BACKGROUND, (value) => {
+		TAB_STYLE_BACKGROUND = value;
+	});
+	applyOverride(overrides.TAB_STYLE_BOLD, (value) => {
+		TAB_STYLE_BOLD = value;
+	});
+	applyOverride(overrides.TAB_STYLE_BORDER, (value) => {
+		TAB_STYLE_BORDER = value;
+	});
+	applyOverride(overrides.TAB_STYLE_COLOR, (value) => {
+		TAB_STYLE_COLOR = value;
+	});
 	applyOverride(overrides.TAB_STYLE_HOVER, (value) => {
 		TAB_STYLE_HOVER = value;
 	});
+	applyOverride(overrides.TAB_STYLE_ITALIC, (value) => {
+		TAB_STYLE_ITALIC = value;
+	});
+	applyOverride(overrides.TAB_STYLE_SHADOW, (value) => {
+		TAB_STYLE_SHADOW = value;
+	});
 	applyOverride(overrides.TAB_STYLE_TOP, (value) => {
 		TAB_STYLE_TOP = value;
+	});
+	applyOverride(overrides.TAB_STYLE_UNDERLINE, (value) => {
+		TAB_STYLE_UNDERLINE = value;
 	});
 	applyOverride(overrides.TOAST_ERROR, (value) => {
 		TOAST_ERROR = value;
@@ -3263,7 +3494,7 @@ export function createGeneratorModule(overrides = {}) {
 	applyOverride(overrides.open, (value) => {
 		applyGlobalOverride("open", value);
 	});
-	oldSettings = null;
+	oldSettingsBySurface.clear();
 
 	return {
 		_buildCssRules,
