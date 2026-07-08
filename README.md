@@ -65,6 +65,8 @@ For Safari users, we recommend checking out our [installation guide](https://git
     <img src="/images/manage-tabs.png" width="50%" title="Manage your Tabs"/>
 </p>
 
+[Read the wiki](https://github.com/Astisme/again-why-salesforce/wiki/Manage-Tabs-modal)
+
 ### Settings and Tab Styles
 
 <p align="center">
@@ -83,6 +85,8 @@ For Safari users, we recommend checking out our [installation guide](https://git
 	<img src="/images/commands.gif" width="50%" title="Commands"/>
 </p>
 
+[Read the wiki](https://github.com/Astisme/again-why-salesforce/wiki/Commands)
+
 ### Context Menus
 
 <p align="center">
@@ -90,6 +94,8 @@ For Safari users, we recommend checking out our [installation guide](https://git
     <br />
 	<img src="/images/context-menus.gif" width="50%" title="Context Menu"/>
 </p>
+
+[Read the wiki](https://github.com/Astisme/again-why-salesforce/wiki/Context-Menu)
 
 ### Open in Another Org
 
