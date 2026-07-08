@@ -615,6 +615,10 @@
 		"message": "Erro ao desafixar Tab",
 		"description": "[erro]"
 	},
+	"error_unsavable_page": {
+		"message": "Esta página não pode ser salva.",
+		"description": "Erro quando uma página não tem o cabeçalho (e a estrela/estrela riscada)"
+	},
 	"error_useless_remove": {
 		"message": "Não é possível remover:\nNão é possível remover uma página que não foi salva antes",
 		"description": "[erro] o usuário tentou remover uma página que ainda não foi salva"
@@ -794,6 +798,10 @@
 	"import_metadata": {
 		"message": "Importar metadados da Tab (\"Contagem de Cliques\", \"Data do Clique\" etc.).",
 		"description": "[rótulo] importar tudo o que for encontrado no arquivo durante o processo de importação"
+	},
+	"import_pinned_tabs": {
+		"message": "Importar número de $tabs fixadas.",
+		"description": "[rótulo] importar contagem de $tabs fixadas durante o processo de importação"
 	},
 	"import_successful": {
 		"message": "Importado com sucesso",

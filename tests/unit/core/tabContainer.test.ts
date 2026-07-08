@@ -315,6 +315,7 @@ await Deno.test("TabContainer - Organization Filtering", async (t) => {
 await Deno.test("TabContainer - replaceTabs edge cases", async (t) => {
 	async function setupContainer() {
 		container.length = 0;
+		container[TabContainer.keyPinnedTabsNo] = 0;
 		await container.addTabs([
 			{ label: "Tab A", url: "url1", org: "test-org" },
 			{ label: "Tab B", url: "url2", org: "other-org" },
@@ -378,6 +379,24 @@ await Deno.test("TabContainer - replaceTabs edge cases", async (t) => {
 		assertEquals(container.length, 3);
 		assert(container.every((t) => t.org != null));
 	});
+
+	await t.step(
+		"preserves matching pinned tabs when removing generic tabs",
+		async () => {
+			const container = await setupContainer();
+			container[TabContainer.keyPinnedTabsNo] = 2;
+			await container.replaceTabs([], {
+				resetTabs: true,
+				removeOrgTabs: false,
+			});
+			assertEquals(container[TabContainer.keyPinnedTabsNo], 2);
+			assertEquals(container.length, 3);
+			assertEquals(container[0].url, "url1");
+			assertEquals(container[1].url, "url2");
+			assertEquals(container[2].url, "url3");
+			assert(container.every((t) => t.org != null));
+		},
+	);
 
 	// resetTabs = false, removeOrgTabs = true, keepTabsNotThisOrg = 'test-org'
 	await t.step(
@@ -1449,6 +1468,217 @@ await Deno.test("TabContainer - Import", async (t) => {
 		assertEquals(container.at(-1)[Tab.keyClickDate], undefined);
 	});
 
+	await t.step(
+		"overwrite import without metadata resets pinned tabs",
+		async () => {
+			await container.importTabs(
+				`{"${TabContainer.keyPinnedTabsNo}":2,"${TabContainer.keyTabs}":[{"label":"pin-a","url":"pin-a"},{"label":"pin-b","url":"pin-b"},{"label":"old","url":"old"}]}`,
+				{
+					importMetadata: false,
+					importPinnedTabs: true,
+					preserveOtherOrg: false,
+					resetTabs: true,
+				},
+			);
+			assertEquals(container[TabContainer.keyPinnedTabsNo], 2);
+			assertEquals(container.length, 3);
+			assertEquals(
+				await container.importTabs(
+					`{"${TabContainer.keyTabs}":[{"label":"new","url":"new"}]}`,
+					{
+						importMetadata: false,
+						preserveOtherOrg: true,
+						resetTabs: true,
+					},
+				),
+				1,
+			);
+			assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
+			assertEquals(container.length, 1);
+			assertEquals(container[0].url, "new");
+		},
+	);
+
+	await t.step(
+		"overwrite import with pinned import resets even when pinned metadata is absent",
+		async () => {
+			await container.importTabs(
+				`{"${TabContainer.keyPinnedTabsNo}":1,"${TabContainer.keyTabs}":[{"label":"old","url":"old"}]}`,
+				{
+					importMetadata: false,
+					importPinnedTabs: true,
+					preserveOtherOrg: false,
+					resetTabs: true,
+				},
+			);
+			assertEquals(container[TabContainer.keyPinnedTabsNo], 1);
+			assertEquals(container.length, 1);
+			assertEquals(container[0].url, "old");
+
+			await container.importTabs(
+				`{"pinnedTabsNo":1,"${TabContainer.keyTabs}":[{"label":"new","url":"new"}]}`,
+				{
+					importMetadata: false,
+					importPinnedTabs: true,
+					preserveOtherOrg: false,
+					resetTabs: true,
+				},
+			);
+			assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
+			assertEquals(container.length, 1);
+			assertEquals(container[0].url, "new");
+		},
+	);
+
+	await t.step(
+		"overwrite import preserves other org but removes current org",
+		async () => {
+			container.length = 0;
+			container[TabContainer.keyPinnedTabsNo] = 0;
+			await container.addTabs([
+				{ label: "Current", url: "current", org: "current-org" },
+				{ label: "Other", url: "other", org: "other-org" },
+				{ label: "Generic", url: "generic" },
+			]);
+			container[TabContainer.keyPinnedTabsNo] = 2;
+
+			assertEquals(
+				await container.importTabs(
+					`{"${TabContainer.keyTabs}":[{"label":"New","url":"new"}]}`,
+					{
+						currentOrg: "current-org",
+						importMetadata: false,
+						preserveOtherOrg: true,
+						resetTabs: true,
+					},
+				),
+				1,
+			);
+			assertEquals(container[TabContainer.keyPinnedTabsNo], 1);
+			assertEquals(container.length, 2);
+			assertEquals(container[0].url, "other");
+			assertEquals(container[1].url, "new");
+		},
+	);
+
+	await t.step(
+		"imports pinned count without importing tab metadata",
+		async () => {
+			await container.setDefaultTabs();
+			assertEquals(
+				await container.importTabs(
+					`{"${TabContainer.keyPinnedTabsNo}":2,"${TabContainer.keyTabs}":[{"label":"Pin A","url":"pin-a","${Tab.keyClickCount}":7},{"label":"Pin B","url":"pin-b","${Tab.keyClickDate}":${currentDate}},{"label":"Rest","url":"rest"}]}`,
+					{
+						importMetadata: false,
+						importPinnedTabs: true,
+						preserveOtherOrg: false,
+						resetTabs: true,
+					},
+				),
+				3,
+			);
+			assertEquals(container[TabContainer.keyPinnedTabsNo], 2);
+			assertEquals(container.length, 3);
+			assertEquals(container[0].url, "pin-a");
+			assertEquals(container[1].url, "pin-b");
+			assertEquals(container[0][Tab.keyClickCount], undefined);
+			assertEquals(container[1][Tab.keyClickDate], undefined);
+		},
+	);
+
+	await t.step(
+		"overwrite plus preserve-other-org keeps surviving pinned org tabs and appends imported tail",
+		async () => {
+			container.length = 0;
+			container[TabContainer.keyPinnedTabsNo] = 0;
+			await container.addTabs([
+				{ label: "Other Pin", url: "other-pin", org: "other-org" },
+				{
+					label: "Current Pin",
+					url: "current-pin",
+					org: "current-org",
+				},
+				{ label: "Other Tail", url: "other-tail", org: "other-org" },
+				{ label: "Generic Tail", url: "generic-tail" },
+			]);
+			container[TabContainer.keyPinnedTabsNo] = 2;
+
+			assertEquals(
+				await container.importTabs(
+					`{"${TabContainer.keyPinnedTabsNo}":1,"${TabContainer.keyTabs}":[{"label":"Imported Pin","url":"imported-pin"},{"label":"Imported Tail","url":"imported-tail"}]}`,
+					{
+						currentOrg: "current-org",
+						importMetadata: false,
+						importPinnedTabs: true,
+						preserveOtherOrg: true,
+						resetTabs: true,
+					},
+				),
+				2,
+			);
+			assertEquals(container[TabContainer.keyPinnedTabsNo], 2);
+			assertEquals(
+				Array.from(container, (tab: TabInput) => tab.url),
+				["other-pin", "imported-pin", "other-tail", "imported-tail"],
+			);
+		},
+	);
+
+	await t.step(
+		"import overwrite with pinned tabs syncs once with final state",
+		async () => {
+			container.length = 0;
+			container[TabContainer.keyPinnedTabsNo] = 0;
+			await container.addTabs([
+				{ label: "Other Pin", url: "other-pin", org: "other-org" },
+				{
+					label: "Current Org",
+					url: "current-org-url",
+					org: "current-org",
+				},
+				{ label: "Other Tail", url: "other-tail", org: "other-org" },
+			]);
+			container[TabContainer.keyPinnedTabsNo] = 2;
+			const originalSyncTabs = container.syncTabs;
+			const syncSnapshots: Array<{
+				pinned: number;
+				urls: string[];
+			}> = [];
+			container.syncTabs = async function (...args) {
+				syncSnapshots.push({
+					pinned: this[TabContainer.keyPinnedTabsNo],
+					urls: Array.from(this, (tab: TabInput) => tab.url),
+				});
+				return await originalSyncTabs.apply(this, args);
+			};
+			try {
+				assertEquals(
+					await container.importTabs(
+						`{"${TabContainer.keyPinnedTabsNo}":1,"${TabContainer.keyTabs}":[{"label":"Imported Pin","url":"import-pin"},{"label":"Imported Tail","url":"import-tail"}]}`,
+						{
+							currentOrg: "current-org",
+							importMetadata: false,
+							importPinnedTabs: true,
+							preserveOtherOrg: true,
+							resetTabs: true,
+						},
+					),
+					2,
+				);
+			} finally {
+				Reflect.deleteProperty(container, "syncTabs");
+			}
+			assertEquals(syncSnapshots.length, 1);
+			assertEquals(syncSnapshots[0].pinned, 2);
+			assertEquals(syncSnapshots[0].urls, [
+				"other-pin",
+				"import-pin",
+				"other-tail",
+				"import-tail",
+			]);
+		},
+	);
+
 	await t.step("import tabs with pinned tabs", async () => {
 		await container.setDefaultTabs();
 		assertEquals(container.length, 3);
@@ -1459,6 +1689,7 @@ await Deno.test("TabContainer - Import", async (t) => {
 				`{"${TabContainer.keyPinnedTabsNo}":2,"${TabContainer.keyTabs}":[{"label":"hello","url":"nice-url6","${Tab.keyClickCount}":6},{"label":"orglabel","url":"orgurl6","org":"orgorg","${Tab.keyClickDate}":${currentDate}}]}`,
 				{
 					importMetadata: true,
+					importPinnedTabs: true,
 				},
 			),
 			2,
@@ -1474,6 +1705,7 @@ await Deno.test("TabContainer - Import", async (t) => {
 				`{"${TabContainer.keyPinnedTabsNo}":2,"${TabContainer.keyTabs}":[{"label":"hello","url":"nice-url6","${Tab.keyClickCount}":6},{"label":"orglabel","url":"orgurl7","org":"orgorg","${Tab.keyClickDate}":${currentDate}}]}`,
 				{
 					importMetadata: true,
+					importPinnedTabs: true,
 				},
 			),
 			1,
@@ -1494,6 +1726,7 @@ await Deno.test("TabContainer - Import", async (t) => {
 				`{"${TabContainer.keyPinnedTabsNo}":2,"${TabContainer.keyTabs}":[{"label":"hello","url":"nice-url7"}]}`,
 				{
 					importMetadata: true,
+					importPinnedTabs: true,
 				},
 			),
 			1,
@@ -1556,7 +1789,7 @@ await Deno.test("TabContainer - Import", async (t) => {
 			await container.importTabs(
 				`{"${TabContainer.keyPinnedTabsNo}":1,"${TabContainer.keyTabs}":[{"label":"hello","url":"nice-url84"}]}`,
 				{
-					importMetadata: true,
+					importPinnedTabs: true,
 				},
 			),
 			1,
@@ -1575,6 +1808,7 @@ await Deno.test("TabContainer - Import", async (t) => {
 				`{"${TabContainer.keyPinnedTabsNo}":2,"${TabContainer.keyTabs}":[{"label":"hello","url":"nice-url62","${Tab.keyClickCount}":6},{"label":"orglabel","url":"orgurl62","org":"orgorg","${Tab.keyClickDate}":${currentDate}},{"label":"testlabel","url":"testurl"}]}`,
 				{
 					importMetadata: true,
+					importPinnedTabs: true,
 					resetTabs: true,
 				},
 			),
@@ -1590,7 +1824,7 @@ await Deno.test("TabContainer - Import", async (t) => {
 			await container.importTabs(
 				`{"${TabContainer.keyPinnedTabsNo}":1,"${TabContainer.keyTabs}":[{"label":"hello","url":"pin-url"},{"label":"hello","url":"nice-url62"}]}`,
 				{
-					importMetadata: true,
+					importPinnedTabs: true,
 				},
 			),
 			1,
@@ -1603,6 +1837,39 @@ await Deno.test("TabContainer - Import", async (t) => {
 		assertEquals(container[2].url, "pin-url");
 		assertEquals(container[3].url, "testurl");
 	});
+
+	await t.step(
+		"failed final import validation restores original tabs and pinned count",
+		async () => {
+			container.length = 0;
+			container[TabContainer.keyPinnedTabsNo] = 0;
+			await container.addTabs([
+				{ label: "Pinned Old", url: "pinned-old" },
+				{ label: "Tail Old", url: "tail-old", org: "tail-org" },
+			]);
+			container[TabContainer.keyPinnedTabsNo] = 1;
+
+			await assertRejects(
+				async () =>
+					await container.importTabs(
+						`{"${TabContainer.keyPinnedTabsNo}":1,"${TabContainer.keyTabs}":[{"label":"Pinned New","url":"pinned-new"},{"url":"missing-label"}]}`,
+						{
+							importMetadata: false,
+							importPinnedTabs: true,
+							preserveOtherOrg: false,
+							resetTabs: true,
+						},
+					),
+				Error,
+				"error_invalid_tab",
+			);
+			assertEquals(container[TabContainer.keyPinnedTabsNo], 1);
+			assertEquals(
+				Array.from(container, (tab: TabInput) => tab.url),
+				["pinned-old", "tail-old"],
+			);
+		},
+	);
 
 	await t.step("does not import tabs from wrong JSON string", async () => {
 		await container.setDefaultTabs();
@@ -1995,6 +2262,7 @@ await Deno.test("TabContainer - Remove Tab(s)", async (t) => {
 				`{"${TabContainer.keyPinnedTabsNo}":1,"${TabContainer.keyTabs}":[{"label":"hello","url":"nice-url6","${Tab.keyClickCount}":6},{"label":"orglabel","url":"orgurl6","org":"orgorg","${Tab.keyClickDate}":${currentDate}}]}`,
 				{
 					importMetadata: true,
+					importPinnedTabs: true,
 					resetTabs: true,
 				},
 			),
@@ -2048,7 +2316,8 @@ await Deno.test("TabContainer - Remove Tab(s)", async (t) => {
 			await container.importTabs(
 				`{"${TabContainer.keyPinnedTabsNo}":1,"${TabContainer.keyTabs}":[{"label":"hello","url":"pin-url"},{"label":"hello","url":"nice-url4"}]}`,
 				{
-					importMetadata: true,
+					importMetadata: false,
+					importPinnedTabs: true,
 				},
 			),
 			2,
@@ -2064,12 +2333,13 @@ await Deno.test("TabContainer - Remove Tab(s)", async (t) => {
 				`{"${TabContainer.keyPinnedTabsNo}":1,"${TabContainer.keyTabs}":[{"label":"hello","url":"pin-url"},{"label":"hello","url":"nice-url3"}]}`,
 				{
 					importMetadata: true,
+					importPinnedTabs: true,
 				},
 			),
 			2,
 			"new pinned Tab + new unpinned Tab",
 		);
-		assertEquals(container.length, 3);
+		assertEquals(container.length, 3, "" + container);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 1);
 		assert(await container.removeOtherTabs({ url: "pin-url" }));
 		assertEquals(container.length, 1);
@@ -2127,7 +2397,8 @@ await Deno.test("TabContainer - Remove Tab(s)", async (t) => {
 			await container.importTabs(
 				`{"${TabContainer.keyPinnedTabsNo}":2,"${TabContainer.keyTabs}":[{"label":"hello","url":"pin-url"},{"label":"hello","url":"nice-url3"}]}`,
 				{
-					importMetadata: true,
+					importMetadata: false,
+					importPinnedTabs: true,
 				},
 			),
 			2,
@@ -2152,7 +2423,7 @@ await Deno.test("TabContainer - Remove Tab(s)", async (t) => {
 			await container.importTabs(
 				`{"${TabContainer.keyPinnedTabsNo}":1,"${TabContainer.keyTabs}":[{"label":"hello","url":"pin-url"},{"label":"hello","url":"nice-url3"}]}`,
 				{
-					importMetadata: true,
+					importPinnedTabs: true,
 				},
 			),
 			1,
@@ -2225,7 +2496,8 @@ await Deno.test("TabContainer - Remove Tab(s)", async (t) => {
 			await container.importTabs(
 				`{"${TabContainer.keyPinnedTabsNo}":1,"${TabContainer.keyTabs}":[{"label":"hello","url":"pin-url"},{"label":"hello","url":"url","org":"test-org1"}]}`,
 				{
-					importMetadata: true,
+					importMetadata: false,
+					importPinnedTabs: true,
 				},
 			),
 			1,
@@ -2250,7 +2522,7 @@ await Deno.test("TabContainer - Remove Tab(s)", async (t) => {
 			await container.importTabs(
 				`{"${TabContainer.keyPinnedTabsNo}":2,"${TabContainer.keyTabs}":[{"label":"hello","url":"pin-url2"},{"label":"hello","url":"url2"}]}`,
 				{
-					importMetadata: true,
+					importPinnedTabs: true,
 				},
 			),
 			2,
@@ -2327,7 +2599,7 @@ await Deno.test("TabContainer - Update Tab", async () => {
 		await container.importTabs(
 			`{"${TabContainer.keyPinnedTabsNo}":2,"${TabContainer.keyTabs}":[{"label":"hello","url":"pin-url"},{"label":"hello","url":"nice-url3"}]}`,
 			{
-				importMetadata: true,
+				importPinnedTabs: true,
 			},
 		),
 		2,
@@ -2429,7 +2701,7 @@ await Deno.test("TabContainer - Sort Tabs", async (t) => {
 			await container.importTabs(
 				`{"${TabContainer.keyPinnedTabsNo}":2,"${TabContainer.keyTabs}":[{"label":"hello","url":"pin-url"},{"label":"hello","url":"nice-url3"}]}`,
 				{
-					importMetadata: true,
+					importPinnedTabs: true,
 				},
 			),
 			2,
@@ -2489,6 +2761,7 @@ await Deno.test("TabContainer - Sort Tabs", async (t) => {
 				`{"${TabContainer.keyPinnedTabsNo}":2,"${TabContainer.keyTabs}":[{"label":"hello","url":"pin-url","${Tab.keyClickCount}":5,"${Tab.keyClickDate}":5,"org":"t"},{"label":"hxello","url":"nice-url3","${Tab.keyClickCount}":3,"${Tab.keyClickDate}":3,"org":"m"}]}`,
 				{
 					importMetadata: true,
+					importPinnedTabs: true,
 				},
 			),
 			2,
@@ -2885,6 +3158,7 @@ await Deno.test("TabContainer - Sort Tabs", async (t) => {
 				`{"${TabContainer.keyPinnedTabsNo}":2,"${TabContainer.keyTabs}":[{"label":"hello","url":"pin-url","org":"b","${Tab.keyClickCount}":2,"${Tab.keyClickDate}":2},{"label":"hello","url":"nice-url3","org":"c","${Tab.keyClickCount}":3,"${Tab.keyClickDate}":3},{"label":"hello","url":"aurl","org":"a","${Tab.keyClickCount}":1,"${Tab.keyClickDate}":1}]}`,
 				{
 					importMetadata: true,
+					importPinnedTabs: true,
 					resetTabs: true,
 				},
 			),

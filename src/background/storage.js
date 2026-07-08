@@ -18,11 +18,13 @@ import cssColorNames from "./css-color-names.json" with { type: "json" };
  * @param {function} callback - The callback to execute after sending the message.
  * @return {Promise} containing the requested info for the given key.
  */
-function _getFromStorage(key, callback) {
-	return BROWSER.storage.sync.get(
-		Array.isArray(key) ? key : [key],
-		(items) => callback(Array.isArray(key) ? items : items[key]),
+async function _getFromStorage(key, callback) {
+	const isArrayKey = Array.isArray(key);
+	const items = await BROWSER.storage.sync.get(
+		isArrayKey ? key : [key],
 	);
+	callback?.(isArrayKey ? items : items[key]);
+	return items;
 }
 
 /**
@@ -68,10 +70,8 @@ export async function bg_getSettings(
 ) {
 	const settings = await bg_getStorage(null, key);
 	if (settingKeys == null || settings == null) {
-		if (callback == null) {
-			return settings;
-		}
-		return callback(settings);
+		callback?.(settings);
+		return settings;
 	}
 	if (!Array.isArray(settingKeys)) {
 		settingKeys = [settingKeys];
@@ -82,10 +82,8 @@ export async function bg_getSettings(
 	const response = settingKeys.length === 1 && key === SETTINGS_KEY
 		? requestedSettings[0]
 		: requestedSettings;
-	if (callback == null) {
-		return response;
-	}
-	callback(response);
+	callback?.(response);
+	return response;
 }
 
 /**
@@ -170,9 +168,7 @@ export async function bg_getStyleSettings(
 	} else {
 		settings = await checkStyleSettingsHex(key, settings);
 	}
-	if (callback != null) {
-		return callback(settings);
-	}
+	callback?.(settings);
 	return settings;
 }
 
@@ -276,8 +272,7 @@ export async function bg_setStorage(tobeset, callback = null, key = WHY_KEY) {
 		throw new Error("error_unknown_request", key);
 	}
 	set[key] = tobeset;
-	if (callback == null) {
-		return BROWSER.storage.sync.set(set);
-	}
-	return BROWSER.storage.sync.set(set, () => callback(set[key]));
+	await BROWSER.storage.sync.set(set);
+	callback?.(set[key]);
+	return set[key];
 }

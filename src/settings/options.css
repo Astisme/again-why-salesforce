@@ -50,8 +50,7 @@ html.theme-transitioning input[type="checkbox"] {
 	filter: saturate(0.2);
 }
 
-html.theme-transitioning
-	:is(#optional-settings li, ul.settings > li, #sort-container > .flex-row) {
+html.theme-transitioning :is(#optional-settings li, ul.settings > li, #sort-container > .flex-row) {
 	opacity: 0.78;
 }
 
@@ -149,7 +148,8 @@ ul.settings {
 	background-color: transparent;
 }
 
-.button, button {
+.button,
+button {
 	&:not(.highlight):hover {
 		background-color: unset;
 	}
@@ -162,9 +162,7 @@ ul.settings {
 	display: unset;
 }
 
-.slds-dueling-list__column:has(
-	> button.slds-button.slds-button_icon.slds-button_icon-container
-) {
+.slds-dueling-list__column:has(> button.slds-button.slds-button_icon.slds-button_icon-container) {
 	display: flex;
 	flex-direction: row;
 	& > button.slds-button.slds-button_icon.slds-button_icon-container {
@@ -270,16 +268,7 @@ hr {
 	transition-timing-function: var(--transition-timing-function);
 }
 
-#header
-	:is(
-		.slds-context-bar,
-		.slds-context-bar__primary,
-		.slds-context-bar__secondary,
-		.slds-context-bar__label-action,
-		.slds-context-bar__button,
-		.slds-truncate,
-		.appName
-	) {
+#header :is(.slds-context-bar, .slds-context-bar__primary, .slds-context-bar__secondary, .slds-context-bar__label-action, .slds-context-bar__button, .slds-truncate, .appName) {
 	transition-property: background-color, color;
 	transition-duration: var(--transition-duration);
 	transition-timing-function: var(--transition-timing-function);
@@ -295,22 +284,11 @@ hr {
 
 html[data-theme="dark"] {
 	#header,
-	#header
-		:is(
-			.slds-context-bar,
-			.slds-context-bar__primary,
-			.slds-context-bar__secondary
-		) {
+	#header :is(.slds-context-bar, .slds-context-bar__primary, .slds-context-bar__secondary) {
 		background-color: var(--shade);
 	}
 
-	#header
-		:is(
-			.slds-context-bar__label-action,
-			.slds-context-bar__button,
-			.slds-truncate,
-			.appName
-		) {
+	#header :is(.slds-context-bar__label-action, .slds-context-bar__button, .slds-truncate, .appName) {
 		color: var(--color);
 	}
 
@@ -332,5 +310,29 @@ html[data-theme="dark"] {
 
 	hr {
 		border-color: var(--border-color);
+	}
+}
+
+li.again-why-salesforce > a.tabHeader {
+	max-width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	& > span.label {
+		display: -ms-flexbox;
+		display: flex;
+		-ms-flex-line-pack: center;
+		align-content: center;
+		-ms-flex-align: center;
+		align-items: center;
+		-ms-flex-positive: 1;
+		flex-grow: 1;
+		padding: 0 0.75rem;
+		border-radius: 0;
+		min-width: 0;
+		color: inherit;
+		font-size: 0.8125rem;
+		height: 100%;
 	}
 }

@@ -31,6 +31,7 @@ import {
 	USE_LIGHTNING_NAVIGATION,
 } from "../../../src/core/constants.js";
 import {
+	applyGlobalOverride,
 	areFramePatternsAllowed,
 	calculateReadingTime,
 	getCssRule,
@@ -60,6 +61,25 @@ import { installMockDom } from "../../happydom.test.ts";
 Deno.test("sendExtensionMessage returns promise if no callback", async () => {
 	const result = await sendExtensionMessage({ what: "echo", echo: "bar" });
 	assertEquals(result, "bar");
+});
+
+Deno.test("applyGlobalOverride handles configurable and non-configurable globals", () => {
+	const propName = "__test_apply_global_override__";
+	Object.defineProperty(globalThis, propName, {
+		configurable: true,
+		value: "old",
+		writable: true,
+	});
+	try {
+		applyGlobalOverride(propName, "new");
+		assertEquals(globalThis[propName], "new");
+	} finally {
+		delete globalThis[propName];
+	}
+
+	const infinityBefore = Infinity;
+	applyGlobalOverride("Infinity", Number.POSITIVE_INFINITY);
+	assertEquals(Infinity, infinityBefore);
 });
 
 Deno.test("sendExtensionMessage ignores null messages", () => {
@@ -464,6 +484,35 @@ Deno.test("getCssSelector builds correct selector", () => {
 			isPinned: true,
 		}),
 		`${extensionNameClass}${isActive}${hasOrgTab}${isPinTab}::before`,
+	);
+	const manageTabsBase = `tr${extensionNameClass}${notOrg}${notPin}`;
+	assertEquals(
+		getCssSelector({
+			surface: "manage-tabs",
+		}),
+		`${manageTabsBase}:not([data-draggable=false]):not(:focus-within):not(:hover)`,
+	);
+	assertEquals(
+		getCssSelector({
+			isInactive: false,
+			surface: "manage-tabs",
+		}),
+		`${manageTabsBase}:not([data-draggable=false]):hover, ${manageTabsBase}:focus-within`,
+	);
+	assertEquals(
+		getCssSelector({
+			isInactive: false,
+			surface: "manage-tabs",
+			pseudoElement: ":hover",
+		}),
+		`${manageTabsBase}:not([data-draggable=false]):hover`,
+	);
+	assertEquals(
+		getCssSelector({
+			surface: "manage-tabs",
+			pseudoElement: "::before",
+		}),
+		"",
 	);
 });
 

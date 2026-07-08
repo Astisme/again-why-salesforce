@@ -1,9 +1,14 @@
+import "../../mocks.test.ts";
 import {
+	assert,
 	assertEquals,
 	assertRejects,
 	assertThrows,
 } from "@std/testing/asserts";
-import { loadIsolatedModule } from "../../load-isolated-module.test.ts";
+import { createManageTabsModule } from "../../../src/salesforce/manageTabs.js";
+import {
+	createManageTabsModule as createManageTabsPureModule,
+} from "../../../src/salesforce/module/manageTabs-module.js";
 
 type ManageTabsModule = {
 	__getState: () => {
@@ -45,6 +50,7 @@ type ManageTabsModule = {
 		button: ManageElement,
 	) => void;
 	closeDropdownOnTrClick: (event: ManageEvent, button: ManageElement) => void;
+	countPinnedRows: (tbody?: ManageElement | null) => number;
 	createManageTabsModal: () => Promise<void>;
 	getLastTr: (tbody?: ManageElement | null) => ManageElement | null;
 	handleActionButtonClick: (
@@ -159,7 +165,13 @@ type ManageTabsDependencies = {
 	TUTORIAL_EVENT_CLOSE_MANAGE_TABS: string;
 	TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL: string;
 	TUTORIAL_EVENT_REORDERED_TABS_TABLE: string;
-	confirm: (message: string) => boolean;
+	sldsConfirm: (options?: {
+		body?: string | string[];
+		cancelLabel?: string;
+		closeLabel?: string;
+		confirmLabel?: string;
+		title?: string;
+	}) => Promise<boolean>;
 	createManageTabRow: (
 		tab?: Record<string, unknown>,
 		options?: { index?: number },
@@ -175,6 +187,7 @@ type ManageTabsDependencies = {
 	ensureTranslatorAvailability: () => Promise<{
 		translate: (key: string) => Promise<string>;
 	}>;
+	getTranslations: (key: string | string[]) => Promise<string | string[]>;
 	generateManageTabsModal: (allTabs: ManageAllTabs) => Promise<{
 		closeButton: ManageElement;
 		deleteAllTabsButton: ManageElement;
@@ -185,6 +198,9 @@ type ManageTabsDependencies = {
 		tbody: ManageElement;
 		trsAndButtons: { button: ManageElement; tr: ManageElement }[];
 	}>;
+	generateStyleFromSettings: (
+		options?: { surface?: string },
+	) => Promise<void>;
 	getCurrentHref: () => string;
 	getInnerElementFieldBySelector: (options: {
 		field: string;
@@ -193,7 +209,10 @@ type ManageTabsDependencies = {
 	}) => unknown;
 	getModalHanger: () => ManageElement;
 	handleLightningLinkClick: (event: ManageEvent) => void;
-	injectStyle: (id: string, options: { css: string }) => ManageElement;
+	injectStyle: (
+		id: string,
+		options: { css?: string; link?: string },
+	) => ManageElement;
 	makeDuplicatesBold: (url: string) => void;
 	reorderTabsUl: () => void;
 	setupDragForTable: (
@@ -579,7 +598,9 @@ type ManageTabsFixture = {
 	generateManageTabsModalResult: {
 		current: ManageTabsDependencies["generateManageTabsModal"];
 	};
+	generateStyleFromSettingsCalls: Array<{ surface?: string } | undefined>;
 	hanger: ManageElement;
+	injectStyleCalls: Array<{ css?: string; id: string; link?: string }>;
 	lightningClicks: { value: number };
 	module: ManageTabsModule;
 	replaceTabsCalls: Array<
@@ -646,7 +667,10 @@ function createManagedLoggers(rows: ManageElement[]) {
 		const label = new ManageElement("input");
 		const url = new ManageElement("input");
 		const org = new ManageElement("input");
+		const orgCell = new ManageElement("td");
 		const openLink = new ManageElement("a");
+		org.classList.add("org");
+		orgCell.appendChild(org);
 		openLink.dataset.action = "open";
 		for (const element of [label, url, org]) {
 			element.setClosest("tr", row);
@@ -667,6 +691,36 @@ function createManagedLoggers(rows: ManageElement[]) {
 			url,
 		};
 	});
+}
+
+/**
+ * Builds a manage-tabs tbody with a requested number of saved and pinned rows.
+ *
+ * @param {number} savedRows Number of non-empty rows to save.
+ * @param {number} pinnedRows Number of pinned rows among saved rows.
+ * @return {{ managedLoggers: ManageLogger[]; tbody: ManageTbody; }} Table fixture.
+ */
+function createManagedTable(savedRows: number, pinnedRows: number) {
+	const tbody = new ManageTbody();
+	const rowParts = Array.from(
+		{ length: savedRows + 1 },
+		(_, index) => createRow(index),
+	);
+	for (const rowPart of rowParts) {
+		tbody.appendChild(rowPart.row);
+	}
+	for (let index = 0; index < pinnedRows; index++) {
+		rowParts[index].dragWrapperCell.classList.add("pin-tab");
+	}
+	const managedLoggers = createManagedLoggers(
+		rowParts.map((rowPart) => rowPart.row),
+	);
+	for (let index = 0; index < savedRows; index++) {
+		managedLoggers[index].label.value = `Label ${index}`;
+		managedLoggers[index].url.value = `Url ${index}`;
+		managedLoggers[index].org.value = `Org ${index}`;
+	}
+	return { managedLoggers, tbody };
 }
 
 /**
@@ -702,9 +756,9 @@ function createEvent(
 /**
  * Loads manageTabs.js with lightweight dependencies.
  *
- * @return {Promise<ManageTabsFixture>} Loaded module fixture.
+ * @return {ManageTabsFixture} Loaded module fixture.
  */
-async function loadManageTabs() {
+function loadManageTabs() {
 	const allTabs: ManageAllTabs = {
 		exists: () => false,
 		pinnedTabsNo: 0,
@@ -730,7 +784,12 @@ async function loadManageTabs() {
 				new Error("not-needed"),
 			)) as ManageTabsDependencies["generateManageTabsModal"],
 	};
+	const generateStyleFromSettingsCalls: Array<
+		{ surface?: string } | undefined
+	> = [];
 	const hanger = new ManageElement("div");
+	const injectStyleCalls: Array<{ css?: string; id: string; link?: string }> =
+		[];
 	const lightningClicks = { value: 0 };
 	const replaceTabsCalls: Array<
 		{ options: Record<string, unknown>; tabs: unknown[] }
@@ -753,189 +812,204 @@ async function loadManageTabs() {
 		return Promise.resolve(replacedTabsResult.value);
 	};
 
-	const { cleanup, module } = await loadIsolatedModule<
-		ManageTabsModule,
-		ManageTabsDependencies
-	>({
-		modulePath: new URL(
-			"../../../src/salesforce/manageTabs.js",
-			import.meta.url,
-		),
-		additionalExports: [
-			"addTr",
-			"__getState",
-			"__setState",
-			"checkAddDuplicateStyle",
-			"checkAddRemoveLastTr",
-			"checkDuplicates",
-			"checkOpenAskConfirm",
-			"checkRemoveTr",
-			"closeDropdownOnBtnClick",
-			"closeDropdownOnTrClick",
-			"getLastTr",
-			"moveTrToGivenIndex",
-			"performAfterChecks",
-			"readManagedTabsAndSave",
-			"reduceLoggersToElements",
-			"removeTr",
-			"reorderTabsTable",
-			"setInfoForDrag",
-			"trInputListener",
-			"updateLoggerIndex",
-			"updateTabAttributes",
-		],
-		extraSource: `
-function __setState(state = {}) {
-	if (state.focusedIndex !== undefined) focusedIndex = state.focusedIndex;
-	if (state.deleteAllButton !== undefined) deleteAllButton = state.deleteAllButton;
-	if (state.closeButton !== undefined) closeButton = state.closeButton;
-	if (state.manageInvalidateSort !== undefined) manage_InvalidateSort = state.manageInvalidateSort;
-	if (state.wasSomethingUpdated !== undefined) wasSomethingUpdated = state.wasSomethingUpdated;
-	if (state.managedLoggers !== undefined) {
-		managedLoggers.length = 0;
-		managedLoggers.push(...state.managedLoggers);
-	}
-	if (state.actionButtons !== undefined) {
-		actionButtons.length = 0;
-		actionButtons.push(...state.actionButtons);
-	}
-	if (state.dropdownMenus !== undefined) {
-		dropdownMenus.length = 0;
-		dropdownMenus.push(...state.dropdownMenus);
-	}
-	if (state.trsAndButtons !== undefined) {
-		trsAndButtons.length = 0;
-		trsAndButtons.push(...state.trsAndButtons);
-	}
-	if (state.manageTabsButtons !== undefined) {
-		for (const key of Object.keys(manageTabsButtons)) delete manageTabsButtons[key];
-		Object.assign(manageTabsButtons, state.manageTabsButtons);
-	}
-}
-function __getState() {
-	return {
-		actionButtons,
-		dropdownMenus,
-		focusedIndex,
-		managedLoggers,
-		manageInvalidateSort: manage_InvalidateSort,
-		manageTabsButtons,
-		trsAndButtons,
-		wasSomethingUpdated,
-	};
-}`,
-		dependencies: {
-			CXM_PIN_TAB: "pin",
-			CXM_REMOVE_TAB: "remove",
-			CXM_UNPIN_TAB: "unpin",
-			HIDDEN_CLASS: "hidden",
-			MODAL_ID: "modal",
-			PIN_TAB_CLASS: "pin-tab",
-			TOAST_ERROR: "error",
-			TOAST_WARNING: "warning",
-			Tab: {
-				create: (tab) => tab,
-				expandURL: (url, href, org) => `${href}::${url}::${org ?? ""}`,
-				extractOrgName: (url) => url,
-				minifyURL: (url) => `min:${url}`,
-			},
-			TabContainer: {
-				keyPinnedTabsNo: "pinnedTabsNo",
-			},
-			TUTORIAL_EVENT_CLOSE_MANAGE_TABS: "close-manage-tabs",
-			TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL: "create-manage-tabs",
-			TUTORIAL_EVENT_REORDERED_TABS_TABLE: "reordered-tabs-table",
-			confirm: () => confirmResult.value,
-			createManageTabRow: (...args) =>
-				createManageTabRowResult.current(...args),
-			ensureAllTabsAvailability: (options) => {
-				ensureAllTabsCalls.push(options);
-				return Promise.resolve(allTabs);
-			},
-			ensureTranslatorAvailability: () =>
-				Promise.resolve({
-					translate: () => Promise.resolve("translated"),
-				}),
-			generateManageTabsModal: (tabs) =>
-				generateManageTabsModalResult.current(tabs),
-			getCurrentHref: () => currentHref.value,
-			getInnerElementFieldBySelector: (
-				{ field, parentElement, selector },
-			) => (parentElement.querySelector(selector) as
-				| Record<string, unknown>
-				| null)?.[field] ?? null,
-			getModalHanger: () => hanger,
-			handleLightningLinkClick: () => {
-				lightningClicks.value++;
-			},
-			injectStyle: () => new ManageElement("style"),
-			makeDuplicatesBold: (url) => {
-				duplicateUrls.push(url);
-			},
-			reorderTabsUl: () => {
-				reorderTabsUlCalls.value++;
-			},
-			setupDragForTable: (callback) => {
-				setupDragForTableCallbacks.push(callback);
-			},
-			setupDragForUl: () => {
-				setupDragForUlCalls.value++;
-			},
-			sf_afterSet: (payload) => {
-				sfAfterSetCalls.push(payload);
-			},
-			showToast: (message, status) => {
-				toasts.push({ message, status });
-			},
-			updateModalBodyOverflow: (article) => {
-				updateModalBodyOverflowCalls.push(article ?? null);
-				if (article == null) {
-					throw new Error("error_required_params");
-				}
-			},
-		},
-		globals: {
-			CustomEvent: class {
-				type: string;
+	const hadBrowser = "browser" in globalThis;
+	const originalBrowser = (globalThis as { browser?: unknown }).browser;
+	const hadDocument = "document" in globalThis;
+	const originalDocument = (globalThis as { document?: unknown }).document;
+	const hadConfirm = "confirm" in globalThis;
+	const originalConfirm = (globalThis as { confirm?: unknown }).confirm;
+	const hadTimeout = "setTimeout" in globalThis;
+	const originalSetTimeout =
+		(globalThis as { setTimeout?: unknown }).setTimeout;
+	const hadCustomEvent = "CustomEvent" in globalThis;
+	const originalCustomEvent =
+		(globalThis as { CustomEvent?: unknown }).CustomEvent;
 
-				/**
-				 * Stores the event type.
-				 *
-				 * @param {string} type Event type.
-				 */
-				constructor(type: string) {
-					this.type = type;
-				}
+	Object.defineProperty(globalThis, "browser", {
+		configurable: true,
+		value: {
+			i18n: {
+				getMessage: (key: string) => key,
 			},
-			confirm: () => confirmResult.value,
-			document: {
-				dispatchEvent: (event: { type: string }) => {
-					documentEvents.push(event.type);
-					return true;
-				},
-				getElementById: () => documentById.current,
-				querySelector: () => documentQuery.current,
-			},
-			setTimeout: (callback: () => void, delay: number) => {
-				timeouts.push(callback);
-				timeoutWaits.push(delay);
-				return timeouts.length;
+			runtime: {
+				getManifest: () => ({
+					homepage_url: "https://github.com/example/repo",
+					optional_host_permissions: [],
+					version: "1.0.0",
+				}),
+				getURL: (path: string) => path,
+				sendMessage: () => undefined,
 			},
 		},
-		importsToReplace: new Set([
-			"/core/constants.js",
-			"/core/functions.js",
-			"/core/tab.js",
-			"/core/tabContainer.js",
-			"/core/translator.js",
-			"./dragHandler.js",
-			"./generator.js",
-			"./content.js",
-			"./toast.js",
-			"./sf-elements.js",
-			"./modal-layout.js",
-		]),
+		writable: true,
 	});
+	const mockDocument = {
+		dispatchEvent: (event: { type: string }) => {
+			documentEvents.push(event.type);
+			return true;
+		},
+		getElementById: () => documentById.current,
+		querySelector: () => documentQuery.current,
+	};
+	Object.defineProperty(globalThis, "document", {
+		configurable: true,
+		value: mockDocument,
+		writable: true,
+	});
+	const module = createManageTabsModule({
+		CXM_PIN_TAB: "pin",
+		CXM_REMOVE_TAB: "remove",
+		CXM_UNPIN_TAB: "unpin",
+		HIDDEN_CLASS: "hidden",
+		MODAL_ID: "modal",
+		PIN_TAB_CLASS: "pin-tab",
+		TOAST_ERROR: "error",
+		TOAST_WARNING: "warning",
+		Tab: {
+			create: (tab: Record<string, unknown>) => tab,
+			expandURL: (url: string, href: string, org?: string | null) =>
+				`${href}::${url}::${org ?? ""}`,
+			extractOrgName: (url: string) => url,
+			minifyURL: (url: string) => `min:${url}`,
+		},
+		TabContainer: {
+			keyPinnedTabsNo: "pinnedTabsNo",
+		},
+		TUTORIAL_EVENT_CLOSE_MANAGE_TABS: "close-manage-tabs",
+		TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL: "create-manage-tabs",
+		TUTORIAL_EVENT_REORDERED_TABS_TABLE: "reordered-tabs-table",
+		sldsConfirm: () => Promise.resolve(confirmResult.value),
+		createManageTabRow: (
+			tab?: Record<string, unknown>,
+			options?: { index?: number },
+		) => createManageTabRowResult.current(tab, options),
+		ensureAllTabsAvailability: (options: Record<string, unknown>) => {
+			ensureAllTabsCalls.push(options);
+			return Promise.resolve(allTabs);
+		},
+		getTranslations: (key: string | string[]) =>
+			Promise.resolve(
+				Array.isArray(key) ? key.map(() => "translated") : "translated",
+			),
+		generateManageTabsModal: (tabs: ManageAllTabs) =>
+			generateManageTabsModalResult.current(tabs),
+		generateStyleFromSettings: (options?: { surface?: string }) => {
+			generateStyleFromSettingsCalls.push(options);
+			return Promise.resolve();
+		},
+		getCurrentHref: () => currentHref.value,
+		getInnerElementFieldBySelector: (
+			{ field, parentElement, selector }: {
+				field: string;
+				parentElement: ManageElement;
+				selector: string;
+			},
+		) => (parentElement.querySelector(selector) as
+			| Record<string, unknown>
+			| null)?.[field] ?? null,
+		getModalHanger: () => hanger,
+		handleLightningLinkClick: () => {
+			lightningClicks.value++;
+		},
+		injectStyle: (id: string, options: { css?: string; link?: string }) => {
+			injectStyleCalls.push({ css: options.css, id, link: options.link });
+			return new ManageElement("style");
+		},
+		makeDuplicatesBold: (url: string) => {
+			duplicateUrls.push(url);
+		},
+		reorderTabsUl: () => {
+			reorderTabsUlCalls.value++;
+		},
+		setupDragForTable: (
+			callback: (
+				options?: { fromIndex?: number; toIndex?: number },
+			) => void,
+		) => {
+			setupDragForTableCallbacks.push(callback);
+		},
+		setupDragForUl: () => {
+			setupDragForUlCalls.value++;
+		},
+		sf_afterSet: (payload: unknown) => {
+			sfAfterSetCalls.push(payload);
+		},
+		showToast: (message: string, status?: string) => {
+			toasts.push({ message, status });
+		},
+		updateModalBodyOverflow: (article: ManageElement | null) => {
+			updateModalBodyOverflowCalls.push(article ?? null);
+			if (article == null) {
+				throw new Error("error_required_params");
+			}
+		},
+		CustomEvent: class {
+			type: string;
+
+			/**
+			 * Stores the event type.
+			 *
+			 * @param {string} type Event type.
+			 */
+			constructor(type: string) {
+				this.type = type;
+			}
+		},
+		document: mockDocument,
+		setTimeout: (callback: () => void, delay: number) => {
+			timeouts.push(callback);
+			timeoutWaits.push(delay);
+			return timeouts.length;
+		},
+	}) as unknown as ManageTabsModule;
+
+	const cleanup = () => {
+		if (hadBrowser) {
+			Object.defineProperty(globalThis, "browser", {
+				configurable: true,
+				value: originalBrowser,
+				writable: true,
+			});
+		} else {
+			delete (globalThis as { browser?: unknown }).browser;
+		}
+		if (hadDocument) {
+			Object.defineProperty(globalThis, "document", {
+				configurable: true,
+				value: originalDocument,
+				writable: true,
+			});
+		} else {
+			delete (globalThis as { document?: unknown }).document;
+		}
+		if (hadConfirm) {
+			Object.defineProperty(globalThis, "confirm", {
+				configurable: true,
+				value: originalConfirm,
+				writable: true,
+			});
+		} else {
+			delete (globalThis as { confirm?: unknown }).confirm;
+		}
+		if (hadTimeout) {
+			Object.defineProperty(globalThis, "setTimeout", {
+				configurable: true,
+				value: originalSetTimeout,
+				writable: true,
+			});
+		} else {
+			delete (globalThis as { setTimeout?: unknown }).setTimeout;
+		}
+		if (hadCustomEvent) {
+			Object.defineProperty(globalThis, "CustomEvent", {
+				configurable: true,
+				value: originalCustomEvent,
+				writable: true,
+			});
+		} else {
+			delete (globalThis as { CustomEvent?: unknown }).CustomEvent;
+		}
+	};
 
 	return {
 		allTabs,
@@ -950,7 +1024,9 @@ function __getState() {
 		duplicateUrls,
 		ensureAllTabsCalls,
 		generateManageTabsModalResult,
+		generateStyleFromSettingsCalls,
 		hanger,
+		injectStyleCalls,
 		lightningClicks,
 		module,
 		replaceTabsCalls,
@@ -1371,6 +1447,12 @@ Deno.test("manageTabs closes dropdowns and removes empty rows from drag listener
 		assertEquals(visibleMenu.classList.contains("hidden"), false);
 		assertEquals(otherMenu.classList.contains("hidden"), true);
 
+		const orphanOrg = new ManageElement("input");
+		orphanOrg.classList.add("org");
+		fixture.module.setInfoForDrag(orphanOrg, () => {}, 4);
+		orphanOrg.dispatchEvent(createEvent(orphanOrg, orphanOrg, "focusin"));
+		assertEquals(fixture.module.__getState().focusedIndex, 4);
+
 		let inputCalls = 0;
 		fixture.module.setInfoForDrag(managedLoggers[0].label, () => {
 			inputCalls++;
@@ -1403,6 +1485,27 @@ Deno.test("manageTabs closes dropdowns and removes empty rows from drag listener
 		);
 		assertEquals(tbody.children.length, 1);
 		assertEquals(row1.attributes.has("draggable"), false);
+
+		const lastRowTbody = new ManageTbody();
+		const appendRow0 = createRow(0).row;
+		const appendRow1 = createRow(1).row;
+		lastRowTbody.appendChild(appendRow0);
+		lastRowTbody.appendChild(appendRow1);
+		const appendLoggers = createManagedLoggers([appendRow0, appendRow1]);
+		createArticleFixture(lastRowTbody, appendRow1);
+		fixture.module.__setState({
+			deleteAllButton,
+			focusedIndex: 1,
+			managedLoggers: appendLoggers,
+		});
+		await appendLoggers[1].label.dispatchEvent(
+			createEvent(
+				appendLoggers[1].label,
+				appendLoggers[1].label,
+				"focusout",
+			),
+		);
+		assertEquals(lastRowTbody.children.length, 2);
 	} finally {
 		fixture.cleanup();
 	}
@@ -1629,10 +1732,24 @@ Deno.test("manageTabs checks duplicates, updates links, and handles input bookke
 		});
 		assertEquals(managedLoggers[0].org.value, "external-org");
 		assertEquals(
+			managedLoggers[0].org.parentNode?.classList.contains("is-org-tab"),
+			true,
+		);
+		assertEquals(
 			row0Parts.row.dataset.isThisOrgTab,
 			false as unknown as string,
 		);
 		assertEquals(hideButton.attributes.has("disabled"), false);
+
+		managedLoggers[0].org.value = "";
+		fixture.module.trInputListener({
+			tabAppendElement: tbody,
+			type: "org",
+		});
+		assertEquals(
+			managedLoggers[0].org.parentNode?.classList.contains("is-org-tab"),
+			false,
+		);
 
 		managedLoggers[0].label.value = "Tab label";
 		fixture.module.trInputListener({
@@ -1706,23 +1823,14 @@ Deno.test("manageTabs checks duplicates, updates links, and handles input bookke
 
 Deno.test("manageTabs reduces loggers, reorders rows, and saves managed tabs", async () => {
 	const fixture = await loadManageTabs();
-	const tbody = new ManageTbody();
-	const rows = [createRow(0).row, createRow(1).row, createRow(2).row];
-	for (const row of rows) {
-		tbody.appendChild(row);
-	}
-	const managedLoggers = createManagedLoggers(rows);
-	managedLoggers[0].label.value = "Label 0";
-	managedLoggers[0].url.value = "Url 0";
-	managedLoggers[0].org.value = "Org 0";
-	managedLoggers[1].label.value = "Label 1";
-	managedLoggers[1].url.value = "Url 1";
-	managedLoggers[1].org.value = "Org 1";
+	const { managedLoggers, tbody } = createManagedTable(2, 1);
+	const rows = tbody.querySelectorAll("tr");
 	fixture.module.__setState({ managedLoggers });
 	fixture.documentQuery.current = tbody;
 
 	try {
 		assertEquals(fixture.module.reduceLoggersToElements().length, 9);
+		assertEquals(fixture.module.countPinnedRows(tbody), 1);
 
 		fixture.module.reorderTabsTable({ fromIndex: 2, toIndex: 0 });
 		assertEquals(
@@ -1740,8 +1848,13 @@ Deno.test("manageTabs reduces loggers, reorders rows, and saves managed tabs", a
 			allTabs: fixture.allTabs,
 		});
 		assertEquals(fixture.replaceTabsCalls.length, 1);
+		assertEquals(fixture.allTabs.pinnedTabsNo, 1);
 		assertEquals(fixture.replaceTabsCalls[0].tabs.length, 2);
 		assertEquals(fixture.replaceTabsCalls[0].options.invalidateSort, true);
+		assertEquals(
+			fixture.replaceTabsCalls[0].options.updatePinnedTabs,
+			false,
+		);
 		assertEquals(fixture.sfAfterSetCalls.length, 1);
 
 		fixture.replacedTabsResult.value = false;
@@ -1752,6 +1865,49 @@ Deno.test("manageTabs reduces loggers, reorders rows, and saves managed tabs", a
 		});
 	} finally {
 		fixture.cleanup();
+	}
+});
+
+Deno.test("manageTabs saves requested pinned count transitions", async () => {
+	const scenarios = [
+		{ from: 0, to: 1 },
+		{ from: 0, to: 3 },
+		{ from: 1, to: 0 },
+		{ from: 1, to: 2 },
+		{ from: 3, to: 2 },
+		{ from: 3, to: 0 },
+	];
+	for (const scenario of scenarios) {
+		const fixture = await loadManageTabs();
+		const savedRows = 3;
+		fixture.allTabs.pinnedTabsNo = scenario.from;
+		const { managedLoggers, tbody } = createManagedTable(
+			savedRows,
+			scenario.to,
+		);
+		fixture.module.__setState({ managedLoggers });
+		try {
+			await fixture.module.readManagedTabsAndSave({
+				tbody,
+				allTabs: fixture.allTabs,
+			});
+			assertEquals(
+				fixture.allTabs.pinnedTabsNo,
+				scenario.to,
+				`${scenario.from} -> ${scenario.to}`,
+			);
+			assertEquals(
+				fixture.replaceTabsCalls.at(-1)?.tabs.length,
+				savedRows,
+				`${scenario.from} -> ${scenario.to}`,
+			);
+			assert(
+				!fixture.replaceTabsCalls.at(-1)?.options.updatePinnedTabs,
+				`${scenario.from} -> ${scenario.to}`,
+			);
+		} finally {
+			fixture.cleanup();
+		}
 	}
 });
 
@@ -1881,6 +2037,51 @@ Deno.test("manageTabs creates the modal and wires its listeners", async () => {
 		assertEquals(
 			deleteAllTabsButton.attributes.get("disabled"),
 			true as unknown as string,
+		);
+	} finally {
+		fixture.cleanup();
+	}
+});
+
+Deno.test("manageTabs covers default override fallbacks and state reset branches", async () => {
+	const fixture = await loadManageTabs();
+
+	try {
+		const defaultModule = createManageTabsPureModule(
+			{},
+		) as unknown as ManageTabsModule;
+		assertThrows(
+			() => defaultModule.countPinnedRows(),
+			Error,
+			"error_required_params",
+		);
+
+		const initialButton = new ManageElement("button");
+		defaultModule.__setState({
+			manageInvalidateSort: true,
+			manageTabsButtons: { initial: initialButton },
+		});
+		assertEquals(defaultModule.__getState().manageInvalidateSort, true);
+		assertEquals(
+			defaultModule.__getState().manageTabsButtons.initial,
+			initialButton,
+		);
+
+		const replacementButton = new ManageElement("button");
+		defaultModule.__setState({
+			manageTabsButtons: { replacement: replacementButton },
+		});
+		assertEquals(
+			"default" in defaultModule.__getState().manageTabsButtons,
+			false,
+		);
+		assertEquals(
+			"initial" in defaultModule.__getState().manageTabsButtons,
+			false,
+		);
+		assertEquals(
+			defaultModule.__getState().manageTabsButtons.replacement,
+			replacementButton,
 		);
 	} finally {
 		fixture.cleanup();

@@ -7,5 +7,5 @@ Current entrypoints:
 
 - `content.js` -> `salesforce/content.js`
 - `background.js` -> `background/background.js`
-- `popup.js` -> `action/popup/popup.js`
+- `popup.js` -> `action/popup/popup-runtime.js`
 - `options.js` -> `settings/options.js`

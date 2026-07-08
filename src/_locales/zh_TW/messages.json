@@ -615,6 +615,10 @@
 		"message": "取消釘選 Tab 時發生錯誤",
 		"description": "[錯誤]"
 	},
+	"error_unsavable_page": {
+		"message": "無法儲存此頁面。",
+		"description": "頁面沒有頁首（以及星星/帶斜線的星星）时出錯"
+	},
 	"error_useless_remove": {
 		"message": "無法移除：\n無法刪除尚未儲存的頁面",
 		"description": "[error] 使用者嘗試移除尚未儲存的頁面"
@@ -636,7 +640,7 @@
 		"description": "[popup] 匯出按鈕的標題"
 	},
 	"extension_description": {
-		"message": "Create and manage custom Tab in the available space on Salesforce Lightning Setup page.",
+		"message": "在 Salesforce Lightning Setup 頁面可用的空間中建立並管理自訂 Tab",
 		"description": "[manifest] 此擴充功能的描述"
 	},
 	"extension_label": {
@@ -794,6 +798,10 @@
 	"import_metadata": {
 		"message": "匯入 Tab 後設資料（「點擊次數」、「點擊日期」等）。",
 		"description": "[標籤] 在匯入過程中匯入檔案中找到的所有內容"
+	},
+	"import_pinned_tabs": {
+		"message": "匯入釘選的 $tabs 數量。",
+		"description": "[標籤] 在匯入過程中匯入釘選的 $tabs 數量"
 	},
 	"import_successful": {
 		"message": "Successfully imported",

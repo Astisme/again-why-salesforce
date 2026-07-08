@@ -3,7 +3,6 @@ import {
 	assertRejects,
 	assertThrows,
 } from "@std/testing/asserts";
-import { loadIsolatedModule } from "../../load-isolated-module.test.ts";
 
 type OptionsModule = {
 	buildDecorationConfigs: (
@@ -402,187 +401,183 @@ async function loadOptions(
 			message,
 		);
 	}
-
-	const { cleanup, module } = await loadIsolatedModule<
-		OptionsModule,
-		Record<string, unknown>
-	>({
-		modulePath: new URL(
-			"../../../src/settings/options.js",
-			import.meta.url,
-		),
-		additionalExports: [
-			"_buildCssRule",
-			"_flipSelected",
-			"_getElementReferences",
-			"_getPseudoSelector",
-			"_getReferencesByKey",
-			"_getStyleId",
-			"_getTabResources",
-			"_restoreSettings",
-			"_setupMoveButtonListeners",
-			"_setupUIListeners",
-			"_updateUIElements",
-			"__getState",
-			"__setState",
-			"buildDecorationConfigs",
-			"buildInputConfigs",
-			"buildInputDecorationConfigs",
-			"buildStructuredConf",
-			"createStyleIds",
-			"createTabElements",
-			"getContainers",
-			"getDecorationUls",
-			"getMoveButtons",
-			"getObjectToSet",
-			"getPinKey",
-			"getTabElement",
-			"moveSelectedDecorationsTo",
-			"restoreGeneralSettings",
-			"restoreTabSettings",
-			"saveCheckboxOptions",
-			"savePickedSort",
-			"saveTabDecorations",
-			"saveTabOptions",
-			"setActivePreview",
-			"setCurrentChoice",
-			"setPreviewAndInputValue",
-			"showRelevantSettings_HideOthers",
-			"showThenHideToast",
-			"showToast",
-			"startThemeTransition",
-			"toggleActivePreview",
-		],
-		extraSource: `
-function __setState(state = {}) {
-	if (state.activePreview !== undefined) activePreview = state.activePreview;
-	if (state.listenersSet !== undefined) {
-		for (const key of Object.keys(listenersSet)) delete listenersSet[key];
-		Object.assign(listenersSet, state.listenersSet);
+	const globalsToRestore = [
+		"__AWSF_SKIP_OPTIONS_AUTO_BOOTSTRAP__",
+		"__AWSF_SKIP_THEME_SELECTOR_IMPORT__",
+		"browser",
+		"chrome",
+		"document",
+	];
+	const previousDescriptors = new Map<
+		string,
+		PropertyDescriptor | undefined
+	>();
+	for (const key of globalsToRestore) {
+		previousDescriptors.set(
+			key,
+			Object.getOwnPropertyDescriptor(globalThis, key),
+		);
 	}
-}
-function __getState() {
-	return { activePreview, listenersSet };
-}`,
-		dependencies: {
-			EXTENSION_NAME: "awsf",
-			FOLLOW_SF_LANG: "follow-sf-lang",
-			GENERIC_PINNED_TAB_STYLE_KEY: "generic-pinned-style",
-			GENERIC_TAB_STYLE_KEY: "generic-style",
-			HIDDEN_CLASS: "hidden",
-			LINK_NEW_BROWSER: "link-new-browser",
-			NO_RELEASE_NOTES: "no-release-notes",
-			NO_UPDATE_NOTIFICATION: "no-update-notification",
-			ORG_PINNED_TAB_STYLE_KEY: "org-pinned-style",
-			ORG_TAB_STYLE_KEY: "org-style",
-			PERSIST_SORT: "persist-sort",
-			POPUP_LOGIN_NEW_TAB: "popup-login-new-tab",
-			POPUP_OPEN_LOGIN: "popup-open-login",
-			POPUP_OPEN_SETUP: "popup-open-setup",
-			POPUP_SETUP_NEW_TAB: "popup-setup-new-tab",
-			PREVENT_ANALYTICS: "prevent-analytics",
-			PREVENT_DEFAULT_OVERRIDE: "prevent-default-override",
-			SETTINGS_KEY: "settings-key",
-			SKIP_LINK_DETECTION: "skip-link-detection",
-			SLDS_ACTIVE: "slds-active",
-			TAB_ADD_FRONT: "tab-add-front",
-			TAB_AS_ORG: "tab-as-org",
-			TAB_GENERIC_STYLE: "generic",
-			TAB_ON_LEFT: "tab-on-left",
-			TAB_ORG_STYLE: "org",
-			TAB_STYLE_BACKGROUND: "background",
-			TAB_STYLE_BOLD: "bold",
-			TAB_STYLE_BORDER: "border",
-			TAB_STYLE_COLOR: "color",
-			TAB_STYLE_HOVER: "hover",
-			TAB_STYLE_ITALIC: "italic",
-			TAB_STYLE_SHADOW: "shadow",
-			TAB_STYLE_TOP: "top",
-			TAB_STYLE_UNDERLINE: "underline",
-			USE_LIGHTNING_NAVIGATION: "use-lightning-navigation",
-			USER_LANGUAGE: "user-language",
-			WHAT_SET: "what-set",
-			EXTENSION_USAGE_DAYS: "extension_usage_days",
-			EXTENSION_LAST_ACTIVE_DAY: "extension_last_active_day",
-			areFramePatternsAllowed: () =>
-				Promise.resolve(areFramePatternsAllowedResult.value),
+	const setGlobal = (key: string, value: unknown) => {
+		Object.defineProperty(globalThis, key, {
+			value,
+			configurable: true,
+			writable: true,
+		});
+	};
+
+	const documentMock = {
+		documentElement,
+		getElementById: (id: string) => getOrCreateElement(elements, id),
+		querySelector: (selector: string) =>
+			querySelectorMap.get(selector) ??
+				getOrCreateElement(elements, selector),
+	};
+	const browserMock = {
+		i18n: {
+			getMessage: (key: string) => key,
+		},
+		runtime: {
+			getManifest: () => ({
+				homepage_url: "https://github.com/againwhy/awsf",
+				optional_host_permissions: [],
+				version: "0.0.0-test",
+			}),
+			sendMessage: (
+				_message: Record<string, unknown>,
+				callback?: (response: unknown) => void,
+			) => {
+				callback?.(null);
+				return Promise.resolve(null);
+			},
+		},
+	};
+	setGlobal("__AWSF_SKIP_OPTIONS_AUTO_BOOTSTRAP__", true);
+	setGlobal("__AWSF_SKIP_THEME_SELECTOR_IMPORT__", true);
+	setGlobal("browser", browserMock);
+	setGlobal("chrome", browserMock);
+	setGlobal("document", documentMock);
+
+	const optionsModule = await import(
+		"../../../src/settings/options-module.js"
+	);
+	const module = optionsModule.createOptionsModule(
+		{
+			constants: {
+				EXTENSION_NAME: "awsf",
+				FOLLOW_SF_LANG: "follow-sf-lang",
+				GENERIC_PINNED_TAB_STYLE_KEY: "generic-pinned-style",
+				GENERIC_TAB_STYLE_KEY: "generic-style",
+				HIDDEN_CLASS: "hidden",
+				LINK_NEW_BROWSER: "link-new-browser",
+				NO_RELEASE_NOTES: "no-release-notes",
+				NO_UPDATE_NOTIFICATION: "no-update-notification",
+				ORG_PINNED_TAB_STYLE_KEY: "org-pinned-style",
+				ORG_TAB_STYLE_KEY: "org-style",
+				PERSIST_SORT: "persist-sort",
+				POPUP_LOGIN_NEW_TAB: "popup-login-new-tab",
+				POPUP_OPEN_LOGIN: "popup-open-login",
+				POPUP_OPEN_SETUP: "popup-open-setup",
+				POPUP_SETUP_NEW_TAB: "popup-setup-new-tab",
+				PREVENT_ANALYTICS: "prevent-analytics",
+				PREVENT_DEFAULT_OVERRIDE: "prevent-default-override",
+				SETTINGS_KEY: "settings-key",
+				SKIP_LINK_DETECTION: "skip-link-detection",
+				SLDS_ACTIVE: "slds-active",
+				TAB_ADD_FRONT: "tab-add-front",
+				TAB_AS_ORG: "tab-as-org",
+				TAB_GENERIC_STYLE: "generic",
+				TAB_ON_LEFT: "tab-on-left",
+				TAB_ORG_STYLE: "org",
+				TAB_STYLE_BACKGROUND: "background",
+				TAB_STYLE_BOLD: "bold",
+				TAB_STYLE_BORDER: "border",
+				TAB_STYLE_COLOR: "color",
+				TAB_STYLE_HOVER: "hover",
+				TAB_STYLE_ITALIC: "italic",
+				TAB_STYLE_SHADOW: "shadow",
+				TAB_STYLE_TOP: "top",
+				TAB_STYLE_UNDERLINE: "underline",
+				USE_LIGHTNING_NAVIGATION: "use-lightning-navigation",
+				USER_LANGUAGE: "user-language",
+				WHAT_SET: "what-set",
+				EXTENSION_USAGE_DAYS: "extension_usage_days",
+				EXTENSION_LAST_ACTIVE_DAY: "extension_last_active_day",
+			},
 			ensureTranslatorAvailability: () =>
 				Promise.resolve({
 					translate: (key: string) => Promise.resolve(key),
 				}),
-			getCssRule: (id: string, value: string) => {
-				cssRuleCalls.push({ id, value });
-				return `${id}:${value};`;
-			},
-			getCssSelector: (options: Record<string, unknown>) => {
-				cssSelectorCalls.push(options);
-				return `.selector-${cssSelectorCalls.length}`;
-			},
-			getPinnedSpecificKey: (
-				{ isGeneric, isPinned }: {
-					isGeneric: boolean;
-					isPinned: boolean;
+			functions: {
+				areFramePatternsAllowed: () =>
+					Promise.resolve(areFramePatternsAllowedResult.value),
+				getCssRule: (id: string, value: string) => {
+					cssRuleCalls.push({ id, value });
+					return `${id}:${value};`;
 				},
-			) => `${isGeneric ? "generic" : "org"}-${
-				isPinned ? "pinned" : "unpinned"
-			}`,
-			getSettings: () => Promise.resolve(settingsResult.value),
-			getStyleSettings: (key: string) =>
-				Promise.resolve(styleSettings.get(key) ?? null),
-			injectStyle: (id: string, { css }: { css: string | null }) => {
-				injectStyleCalls.push({ css, id });
-				return new OptionElement(id, "style");
-			},
-			isExportAllowed: () => isExportAllowedResult.value,
-			isGenericKey: (key: string) => key.includes("generic"),
-			isPinnedKey: (key: string) => key.includes("pinned"),
-			isStyleKey: () => isStyleKeyResult.value,
-			requestCookiesPermission: () =>
-				Promise.resolve(requestCookiesPermissionResult.value),
-			requestExportPermission: () =>
-				Promise.resolve(exportPermissionResult.value),
-			requestFramePatternsPermission: () =>
-				Promise.resolve(framePatternsPermissionResult.value),
-			sendExtensionMessage: (message: Record<string, unknown>) => {
-				sendMessages.push(message);
-			},
-		},
-		globals: {
-			clearTimeout: (timeoutId: number | null) => {
-				clearTimeoutCalls.push(timeoutId);
-			},
-			console: {
-				error: (message: string) => {
-					consoleErrors.push(message);
+				getCssSelector: (options: Record<string, unknown>) => {
+					cssSelectorCalls.push(options);
+					return `.selector-${cssSelectorCalls.length}`;
+				},
+				getPinnedSpecificKey: (
+					{ isGeneric, isPinned }: {
+						isGeneric: boolean;
+						isPinned: boolean;
+					},
+				) => `${isGeneric ? "generic" : "org"}-${
+					isPinned ? "pinned" : "unpinned"
+				}`,
+				getSettings: () => Promise.resolve(settingsResult.value),
+				getStyleSettings: (key: string) =>
+					Promise.resolve(styleSettings.get(key) ?? null),
+				injectStyle: (id: string, { css }: { css: string | null }) => {
+					injectStyleCalls.push({ css, id });
+					return new OptionElement(id, "style");
+				},
+				isExportAllowed: () => isExportAllowedResult.value,
+				isGenericKey: (key: string) => key.includes("generic"),
+				isPinnedKey: (key: string) => key.includes("pinned"),
+				isStyleKey: () => isStyleKeyResult.value,
+				requestCookiesPermission: () =>
+					Promise.resolve(requestCookiesPermissionResult.value),
+				requestExportPermission: () =>
+					Promise.resolve(exportPermissionResult.value),
+				requestFramePatternsPermission: () =>
+					Promise.resolve(framePatternsPermissionResult.value),
+				sendExtensionMessage: (message: Record<string, unknown>) => {
+					sendMessages.push(message);
 				},
 			},
-			document: {
-				documentElement,
-				getElementById: (id: string) =>
-					getOrCreateElement(elements, id),
-				querySelector: (selector: string) =>
-					querySelectorMap.get(selector) ??
-						getOrCreateElement(elements, selector),
-			},
-			__runRestoreGeneralSettingsOnLoad: runRestoreOnLoad,
-			__restoreGeneralSettingsOnLoadPromise: undefined,
-			setTimeout: (callback: () => void) => {
-				scheduledTimeouts.push(callback);
-				return scheduledTimeouts.length;
+			getTranslations: (key: string | string[]) =>
+				Promise.resolve(Array.isArray(key) ? key.join(" ") : key),
+			globals: {
+				clearTimeout: (timeoutId: number | null) => {
+					clearTimeoutCalls.push(timeoutId);
+				},
+				console: {
+					error: (message: string) => {
+						consoleErrors.push(message);
+					},
+				},
+				document: documentMock,
+				setTimeout: (callback: () => void) => {
+					scheduledTimeouts.push(callback);
+					return scheduledTimeouts.length;
+				},
 			},
 		},
-		importsToReplace: new Set([
-			"/core/constants.js",
-			"/core/functions.js",
-			"/core/translator.js",
-			"/components/theme-selector/theme-selector.js",
-		]),
-		transformSource: (source) =>
-			source.replace(
-				/\nawait restoreGeneralSettings\(\);\s*$/,
-				"\nif (globalThis.__runRestoreGeneralSettingsOnLoad) { globalThis.__restoreGeneralSettingsOnLoadPromise = restoreGeneralSettings(); } else { globalThis.__restoreGeneralSettingsSkipped = true; globalThis.__restoreGeneralSettingsOnLoadPromise = Promise.resolve(); }\n",
-			),
-	});
+		{ runRestoreOnLoad },
+	) as OptionsModule & { restoreOnLoadPromise: Promise<void> };
+
+	const cleanup = () => {
+		for (const [key, descriptor] of previousDescriptors.entries()) {
+			if (descriptor == null) {
+				delete (globalThis as Record<string, unknown>)[key];
+				continue;
+			}
+			Object.defineProperty(globalThis, key, descriptor);
+		}
+	};
 
 	return {
 		areFramePatternsAllowedResult,
@@ -601,9 +596,7 @@ function __getState() {
 		module,
 		querySelectors: querySelectorMap,
 		requestCookiesPermissionResult,
-		restoreOnLoadPromise: (globalThis as {
-			__restoreGeneralSettingsOnLoadPromise?: Promise<void>;
-		}).__restoreGeneralSettingsOnLoadPromise ?? Promise.resolve(),
+		restoreOnLoadPromise: module.restoreOnLoadPromise,
 		scheduledTimeouts,
 		sendMessages,
 		settingsResult,
@@ -665,6 +658,22 @@ Deno.test("options starts the theme transition and builds checkbox payloads", as
 				{ enabled: true, id: "allow-export" },
 				{ enabled: true, id: "dependent" },
 			],
+			what: "what-set",
+		});
+
+		const noUpdateCheckbox = new OptionElement("no-update-notification");
+		noUpdateCheckbox.checked = true;
+		fixture.module.saveCheckboxOptions.call(
+			noUpdateCheckbox,
+			{ target: noUpdateCheckbox },
+		);
+		assertEquals(fixture.sendMessages[1], {
+			key: "settings-key",
+			set: [{
+				date: undefined,
+				enabled: true,
+				id: "no-update-notification",
+			}],
 			what: "what-set",
 		});
 	} finally {

@@ -30,6 +30,10 @@ module.exports = async function commentOnPr({
 	try {
 		raw = fs.readFileSync(logFile, 'utf8');
 	} catch (e) {
+		if (e && e.code === 'ENOENT') {
+			core.info(`ℹ️ ${logFile} was not generated; skipping comment.`);
+			return;
+		}
 		core.error(`⛔ Could not read ${logFile}: ${e.message}`);
 		process.exit(1);
 	}

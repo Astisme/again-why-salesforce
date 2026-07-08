@@ -4,23 +4,7 @@ import {
 	MockDocument,
 	MockElement,
 } from "./mock-dom.test.ts";
-import { loadIsolatedModule } from "../../load-isolated-module.test.ts";
-
-type PermissionDependencies = {
-	BROWSER: {
-		action: {
-			setPopup: (options: { popup: string }) => void;
-		};
-		runtime: {
-			getURL: (path: string) => string;
-		};
-	};
-	DO_NOT_REQUEST_FRAME_PERMISSION: string;
-	HIDDEN_CLASS: string;
-	ensureTranslatorAvailability: () => Promise<void>;
-	requestExportPermission: () => void;
-	requestFramePatternsPermission: () => void;
-};
+import { runReqPermissions } from "../../../src/action/req_permissions/req_permissions-runtime.js";
 
 /**
  * Simple in-memory storage implementation used by popup tests.
@@ -73,7 +57,7 @@ function appendElement(
  * Loads the permissions popup with the provided query string.
  *
  * @param {string} url Full popup URL.
- * @return {Promise<{ allowPermissions: MockElement; allowPermissionsDown: MockElement; cleanup: () => void; counters: { closeCalls: number; exportRequests: number; frameRequests: number; translatorCalls: number; }; download: MockElement; getLocation: () => string | URL; hostPermissions: MockElement; localStorage: MemoryStorage; noPermissions: MockElement; noPermissionsDown: MockElement; popupUpdates: { popup: string; }[]; rememberSkip: MockElement; timeoutCalls: number[]; }>} Loaded popup fixtures.
+ * @return {Promise<{ allowPermissions: MockElement; allowPermissionsDown: MockElement; counters: { closeCalls: number; exportRequests: number; frameRequests: number; translatorCalls: number; }; download: MockElement; getLocation: () => string | URL; hostPermissions: MockElement; localStorage: MemoryStorage; noPermissions: MockElement; noPermissionsDown: MockElement; popupUpdates: { popup: string; }[]; rememberSkip: MockElement; timeoutCalls: number[]; }>} Loaded popup fixtures.
  */
 async function loadPermissionsModule(url: string) {
 	const window = createMockWindow(url);
@@ -107,63 +91,45 @@ async function loadPermissionsModule(url: string) {
 	const timeoutCalls: number[] = [];
 	const popupUpdates: { popup: string }[] = [];
 
-	const { cleanup } = await loadIsolatedModule<
-		Record<string, never>,
-		PermissionDependencies
-	>({
-		modulePath: new URL(
-			"../../../src/action/req_permissions/req_permissions.js",
-			import.meta.url,
-		),
-		dependencies: {
-			BROWSER: {
-				action: {
-					setPopup: (options) => {
-						popupUpdates.push(options);
-					},
-				},
-				runtime: {
-					getURL: (path) => `chrome-extension://test/${path}`,
+	await runReqPermissions({
+		browser: {
+			action: {
+				setPopup: (options: { popup: string }) => {
+					popupUpdates.push(options);
 				},
 			},
-			DO_NOT_REQUEST_FRAME_PERMISSION: "no-frame-request",
-			HIDDEN_CLASS: "hidden",
-			ensureTranslatorAvailability: () => {
-				counters.translatorCalls++;
-				return Promise.resolve();
-			},
-			requestExportPermission: () => {
-				counters.exportRequests++;
-			},
-			requestFramePatternsPermission: () => {
-				counters.frameRequests++;
+			runtime: {
+				getURL: (path: string) => `chrome-extension://test/${path}`,
 			},
 		},
-		globals: {
-			close: () => {
-				counters.closeCalls++;
-			},
-			document,
-			localStorage,
-			location: window.location,
-			setTimeout: (callback: () => void, delay: number) => {
-				timeoutCalls.push(delay);
-				callback();
-				return timeoutCalls.length;
-			},
+		closePopupFn: () => {
+			counters.closeCalls++;
 		},
-		importsToReplace: new Set([
-			"/core/constants.js",
-			"/core/functions.js",
-			"/core/translator.js",
-			"../themeHandler.js",
-		]),
+		doNotRequestFramePermissionKey: "no-frame-request",
+		documentRef: document,
+		ensureTranslatorAvailabilityFn: () => {
+			counters.translatorCalls++;
+			return Promise.resolve();
+		},
+		hiddenClass: "hidden",
+		localStorageRef: localStorage,
+		locationRef: window.location,
+		requestExportPermissionFn: () => {
+			counters.exportRequests++;
+		},
+		requestFramePatternsPermissionFn: () => {
+			counters.frameRequests++;
+		},
+		setTimeoutFn: (callback: () => void, delay: number) => {
+			timeoutCalls.push(delay);
+			callback();
+			return timeoutCalls.length;
+		},
 	});
 
 	return {
 		allowPermissions,
 		allowPermissionsDown,
-		cleanup,
 		counters,
 		download,
 		hostPermissions,
@@ -173,7 +139,7 @@ async function loadPermissionsModule(url: string) {
 		popupUpdates,
 		rememberSkip,
 		timeoutCalls,
-		getLocation: () => globalThis.location as unknown as string | URL,
+		getLocation: () => window.location.href,
 	};
 }
 
@@ -182,32 +148,28 @@ Deno.test("req_permissions handles the host-permission flow in isolation", async
 		"https://example.test/action/req_permissions.html?whichid=hostpermissions",
 	);
 
-	try {
-		assertEquals(fixture.counters.translatorCalls, 1);
-		assertEquals(
-			fixture.noPermissions.href,
-			"chrome-extension://test/action/popup/popup.html?no-frame-request=true",
-		);
+	assertEquals(fixture.counters.translatorCalls, 1);
+	assertEquals(
+		fixture.noPermissions.href,
+		"chrome-extension://test/action/popup/popup.html?no-frame-request=true",
+	);
 
-		fixture.allowPermissions.click();
-		assertEquals(fixture.counters.frameRequests, 1);
-		assertEquals(fixture.counters.closeCalls, 1);
-		assertEquals(fixture.timeoutCalls, [100]);
+	fixture.allowPermissions.click();
+	assertEquals(fixture.counters.frameRequests, 1);
+	assertEquals(fixture.counters.closeCalls, 1);
+	assertEquals(fixture.timeoutCalls, [100]);
 
-		fixture.rememberSkip.checked = true;
-		fixture.rememberSkip.click();
-		fixture.noPermissions.click();
-		assertEquals(
-			fixture.localStorage.getItem("no-frame-request"),
-			"true",
-		);
-		assertEquals(
-			fixture.getLocation(),
-			"chrome-extension://test/action/popup/popup.html?no-frame-request=true",
-		);
-	} finally {
-		fixture.cleanup();
-	}
+	fixture.rememberSkip.checked = true;
+	fixture.rememberSkip.click();
+	fixture.noPermissions.click();
+	assertEquals(
+		fixture.localStorage.getItem("no-frame-request"),
+		"true",
+	);
+	assertEquals(
+		fixture.getLocation(),
+		"chrome-extension://test/action/popup/popup.html?no-frame-request=true",
+	);
 });
 
 Deno.test("req_permissions handles the download-permission flow in isolation", async () => {
@@ -215,34 +177,30 @@ Deno.test("req_permissions handles the download-permission flow in isolation", a
 		"https://example.test/action/req_permissions.html?whichid=download",
 	);
 
-	try {
-		assertEquals(fixture.counters.translatorCalls, 1);
-		assertEquals(
-			fixture.hostPermissions.classList.contains("hidden"),
-			true,
-		);
-		assertEquals(fixture.download.classList.contains("hidden"), false);
+	assertEquals(fixture.counters.translatorCalls, 1);
+	assertEquals(
+		fixture.hostPermissions.classList.contains("hidden"),
+		true,
+	);
+	assertEquals(fixture.download.classList.contains("hidden"), false);
 
-		fixture.noPermissionsDown.click();
-		assertEquals(fixture.popupUpdates, [{
-			popup: "chrome-extension://test/action/popup/popup.html",
-		}]);
-		assertEquals(
-			fixture.getLocation(),
-			"chrome-extension://test/action/popup/popup.html",
-		);
+	fixture.noPermissionsDown.click();
+	assertEquals(fixture.popupUpdates, [{
+		popup: "chrome-extension://test/action/popup/popup.html",
+	}]);
+	assertEquals(
+		fixture.getLocation(),
+		"chrome-extension://test/action/popup/popup.html",
+	);
 
-		fixture.allowPermissionsDown.click();
-		assertEquals(fixture.counters.exportRequests, 1);
-		assertEquals(fixture.counters.closeCalls, 1);
-		assertEquals(fixture.timeoutCalls, [100]);
-		assertEquals(fixture.popupUpdates, [
-			{ popup: "chrome-extension://test/action/popup/popup.html" },
-			{ popup: "chrome-extension://test/action/popup/popup.html" },
-		]);
-	} finally {
-		fixture.cleanup();
-	}
+	fixture.allowPermissionsDown.click();
+	assertEquals(fixture.counters.exportRequests, 1);
+	assertEquals(fixture.counters.closeCalls, 1);
+	assertEquals(fixture.timeoutCalls, [100]);
+	assertEquals(fixture.popupUpdates, [
+		{ popup: "chrome-extension://test/action/popup/popup.html" },
+		{ popup: "chrome-extension://test/action/popup/popup.html" },
+	]);
 });
 
 Deno.test("req_permissions treats a missing query value as host permissions and can remove the skip handler", async () => {
@@ -250,23 +208,22 @@ Deno.test("req_permissions treats a missing query value as host permissions and 
 		"https://example.test/action/req_permissions.html",
 	);
 
-	try {
-		fixture.rememberSkip.checked = true;
-		fixture.rememberSkip.click();
-		fixture.rememberSkip.checked = false;
-		fixture.rememberSkip.click();
-		fixture.noPermissions.click();
+	fixture.rememberSkip.checked = true;
+	fixture.rememberSkip.click();
+	fixture.rememberSkip.checked = false;
+	fixture.rememberSkip.click();
+	fixture.noPermissions.click();
 
-		assertEquals(
-			fixture.noPermissions.href,
-			"chrome-extension://test/action/popup/popup.html?no-frame-request=true",
-		);
-		assertEquals(fixture.localStorage.getItem("no-frame-request"), null);
-		assertEquals(
-			fixture.getLocation(),
-			new URL("https://example.test/action/req_permissions.html"),
-		);
-	} finally {
-		fixture.cleanup();
-	}
+	assertEquals(
+		fixture.localStorage.getItem("no-frame-request"),
+		null,
+	);
+	assertEquals(
+		fixture.getLocation(),
+		"https://example.test/action/req_permissions.html",
+	);
+	assertEquals(
+		fixture.noPermissions.href,
+		"chrome-extension://test/action/popup/popup.html?no-frame-request=true",
+	);
 });

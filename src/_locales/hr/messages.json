@@ -615,6 +615,10 @@
 		"message": "Greška prilikom otkvačivanja Tab",
 		"description": "[greška]"
 	},
+	"error_unsavable_page": {
+		"message": "Ova se stranica ne može spremiti.",
+		"description": "Pogreška kada stranica nema zaglavlje (i zvjezdicu/prekriženu zvjezdicu)"
+	},
 	"error_useless_remove": {
 		"message": "Ne može se ukloniti:\nNe može se ukloniti stranica koja nije prethodno spremljena",
 		"description": "[error] korisnik je pokušao ukloniti stranicu koja još nije bila spremljena"
@@ -794,6 +798,10 @@
 	"import_metadata": {
 		"message": "Uvezi Tab metapodatke (\"Broj Klikova\", \"Datum Klika\" itd.).",
 		"description": "[oznaka] uvezite sve pronađeno u datoteci tijekom procesa uvoza"
+	},
+	"import_pinned_tabs": {
+		"message": "Uvezi broj prikvačenih $tabs .",
+		"description": "[oznaka] uvezi broj prikvačenih $tabs tijekom procesa uvoza"
 	},
 	"import_successful": {
 		"message": "Uvoz je uspješan",
