@@ -26,7 +26,7 @@ import {
 	sendExtensionMessage,
 	sendExtensionMessages,
 } from "../../core/functions.js";
-import { getTranslations } from "../../core/translator.js";
+import { TranslationService } from "../../core/translator.js";
 import Tab from "../../core/tab.js";
 import { performActionOnTabs } from "./content-runtime.js";
 import { showToast } from "../toast.js";
@@ -102,7 +102,8 @@ export function createTutorialModule(overrides = {}) {
 			generateTutorialElements,
 		getCurrentHref: overrides.getCurrentHref ?? getCurrentHref,
 		getSetupTabUl: overrides.getSetupTabUl ?? getSetupTabUl,
-		getTranslations: overrides.getTranslations ?? getTranslations,
+		getTranslations: overrides.getTranslations ??
+			TranslationService.getTranslations,
 		handleActionButtonClick: overrides.handleActionButtonClick ??
 			handleActionButtonClick,
 		performActionOnTabs: overrides.performActionOnTabs ??

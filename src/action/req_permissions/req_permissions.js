@@ -7,14 +7,15 @@ import {
 	requestExportPermission,
 	requestFramePatternsPermission,
 } from "../../core/functions.js";
-import { ensureTranslatorAvailability } from "../../core/translator.js";
+import { TranslationService } from "../../core/translator.js";
 import "../themeHandler.js";
 import { runReqPermissions } from "./req_permissions-runtime.js";
 
 await runReqPermissions({
 	browser: BROWSER,
 	doNotRequestFramePermissionKey: DO_NOT_REQUEST_FRAME_PERMISSION,
-	ensureTranslatorAvailabilityFn: ensureTranslatorAvailability,
+	ensureTranslatorAvailabilityFn:
+		TranslationService.ensureTranslatorAvailability,
 	hiddenClass: HIDDEN_CLASS,
 	requestExportPermissionFn: requestExportPermission,
 	requestFramePatternsPermissionFn: requestFramePatternsPermission,

@@ -55,6 +55,15 @@ export function applyGlobalOverride(name, value) {
 	if (value == null) {
 		return;
 	}
+	const descriptor = Object.getOwnPropertyDescriptor(globalThis, name);
+	if (descriptor?.configurable === false) {
+		try {
+			globalThis[name] = value;
+		} catch {
+			// Getter-only or read-only global. Keep existing value.
+		}
+		return;
+	}
 	Object.defineProperty(globalThis, name, {
 		configurable: true,
 		enumerable: true,
@@ -212,6 +221,7 @@ const HAS_PIN_TAB = `:has(.${PIN_TAB_CLASS})`;
  * @param {boolean} [param0.isInactive=true] - Whether the selector targets inactive tabs.
  * @param {boolean} [param0.isGeneric=true] - Whether the selector targets generic tabs.
  * @param {boolean} [param0.isPinned=false] - Whether the selector targets pinned tabs.
+ * @param {string} [param0.surface="tabs"] - UI surface to target (`tabs` or `manage-tabs`).
  * @param {string} [param0.pseudoElement=""] - Optional pseudo-element or pseudo-class to append.
  * @return {string} The constructed CSS selector.
  */
@@ -219,13 +229,29 @@ export function getCssSelector({
 	isInactive = true,
 	isGeneric = true,
 	isPinned = false,
+	surface = "tabs",
 	pseudoElement = "",
 } = {}) {
+	const orgTabClass = isGeneric ? `:not(${HAS_ORG_TAB})` : HAS_ORG_TAB;
+	const pinTabClass = isPinned ? HAS_PIN_TAB : `:not(${HAS_PIN_TAB})`;
+	if (surface === "manage-tabs") {
+		const baseSelector = `tr.${EXTENSION_NAME}${orgTabClass}${pinTabClass}`;
+		const savedRowSelector = `${baseSelector}:not([data-draggable=false])`;
+		const hoverSelector = `${savedRowSelector}:hover`;
+		const focusSelector = `${baseSelector}:focus-within`;
+		if (pseudoElement === "::before") {
+			return "";
+		}
+		if (pseudoElement === ":hover") {
+			return isInactive ? "" : hoverSelector;
+		}
+		return isInactive
+			? `${savedRowSelector}:not(:focus-within):not(:hover)`
+			: `${hoverSelector}, ${focusSelector}`;
+	}
 	const activeClass = isInactive
 		? `:not(${SLDS_ACTIVE_CLASS})`
 		: SLDS_ACTIVE_CLASS;
-	const orgTabClass = isGeneric ? `:not(${HAS_ORG_TAB})` : HAS_ORG_TAB;
-	const pinTabClass = isPinned ? HAS_PIN_TAB : `:not(${HAS_PIN_TAB})`;
 	return `.${EXTENSION_NAME}${activeClass}${orgTabClass}${pinTabClass}${pseudoElement}`;
 }
 /**

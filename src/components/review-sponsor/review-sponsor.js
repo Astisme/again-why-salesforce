@@ -9,10 +9,7 @@ import {
 } from "../../core/constants.js";
 import { getSettings, injectStyle } from "../../core/functions.js";
 import { ensureAllTabsAvailability } from "../../core/tabContainer.js";
-import {
-	getTranslations,
-	getTranslatorAttribute,
-} from "../../core/translator.js";
+import { TranslationService } from "../../core/translator.js";
 import { generateReviewSponsorSvgs } from "../../salesforce/generator.js";
 import { createReviewSponsorModule } from "./review-sponsor-runtime.js";
 
@@ -27,8 +24,8 @@ const { showReviewOrSponsor } = createReviewSponsorModule({
 	getSettingsFn: getSettings,
 	injectStyleFn: injectStyle,
 	ensureAllTabsAvailabilityFn: ensureAllTabsAvailability,
-	getTranslationsFn: getTranslations,
-	getTranslatorAttributeFn: getTranslatorAttribute,
+	getTranslationsFn: TranslationService.getTranslations,
+	getTranslatorAttributeFn: TranslationService.getTranslatorAttribute,
 	generateReviewSponsorSvgsFn: generateReviewSponsorSvgs,
 });
 

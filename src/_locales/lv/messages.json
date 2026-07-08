@@ -615,6 +615,10 @@
 		"message": "Kļūda atspraužot Tab",
 		"description": "[kļūda]"
 	},
+	"error_unsavable_page": {
+		"message": "Šo lapu nevar saglabāt.",
+		"description": "Kļūda, ja lapai nav galvenes (un zvaigznītes/pārsvītrotas zvaigznītes)"
+	},
 	"error_useless_remove": {
 		"message": "Nevar noņemt:\nNevar noņemt lapu, kas iepriekš nav saglabāta",
 		"description": "[kļūda] lietotājs mēģināja noņemt lapu, kas vēl nebija saglabāta"
@@ -794,6 +798,10 @@
 	"import_metadata": {
 		"message": "Importēt Tab metadatus (\"Klikšķu Skaits\", \"Klikšķināšanas Datums\" utt.).",
 		"description": "[etiķete] importēt visu, kas atrasts failā importēšanas procesa laikā"
+	},
+	"import_pinned_tabs": {
+		"message": "Importēt piesprausto $tabs skaitu.",
+		"description": "[etiķete] importēt piesprausto $tabs skaitu importēšanas procesa laikā"
 	},
 	"import_successful": {
 		"message": "Veiksmīgi importēts",

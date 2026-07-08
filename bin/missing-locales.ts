@@ -1,5 +1,6 @@
 // deno-lint-ignore-file no-explicit-any
 const LOCALES_DIR = "src/_locales";
+const OUTPUT_FILE = "missing-keys-report.json";
 
 // Type definitions
 interface MessageFile {
@@ -285,7 +286,7 @@ async function main() {
 		}
 		// Write the grouped report to a JSON file
 		await Deno.writeTextFile(
-			"missing-keys-report.json",
+			OUTPUT_FILE,
 			JSON.stringify(groupedReport, null, "\t"),
 		);
 	} catch (error) {
@@ -294,4 +295,14 @@ async function main() {
 	Deno.exit(1);
 }
 
-main();
+async function removeThenMain(): Promise<void> {
+	try {
+		await Deno.remove(OUTPUT_FILE);
+	} catch (_e) {
+		// nothing
+	} finally {
+		await main();
+	}
+}
+
+await removeThenMain();

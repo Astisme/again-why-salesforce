@@ -615,6 +615,10 @@
 		"message": "Lỗi khi bỏ ghim Tab",
 		"description": "[lỗi]"
 	},
+	"error_unsavable_page": {
+		"message": "Không thể lưu trang này.",
+		"description": "Lỗi khi trang không có phần đầu trang (và dấu sao/dấu sao bị gạch chéo)"
+	},
 	"error_useless_remove": {
 		"message": "Không thể xóa:\nKhông thể xóa một trang chưa từng được lưu.",
 		"description": "[error] Đã cố xóa trang chưa được lưu."
@@ -794,6 +798,10 @@
 	"import_metadata": {
 		"message": "Nhập siêu dữ liệu Tab (\"Số Lần Nhấp\", \"Ngày Nhấp\" v.v.).",
 		"description": "[nhãn] nhập mọi thứ tìm thấy trong tệp trong quá trình nhập"
+	},
+	"import_pinned_tabs": {
+		"message": "Nhập số lượng $tabs đã ghim.",
+		"description": "[nhãn] nhập số lượng $tabs đã ghim trong quá trình nhập"
 	},
 	"import_successful": {
 		"message": "Nhập thành công",

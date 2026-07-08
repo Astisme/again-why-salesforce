@@ -615,6 +615,10 @@
 		"message": "Viga Tabi kinnitamise tühistamisel",
 		"description": "[error]"
 	},
+	"error_unsavable_page": {
+		"message": "Seda lehte ei saa salvestada.",
+		"description": "Viga, kui lehel puudub päis (ja täht/läbikriipsutatud täht)"
+	},
 	"error_useless_remove": {
 		"message": "Ei saa eemaldada:\nEi saa eemaldada lehte, mida pole varem salvestatud",
 		"description": "[viga] kasutaja üritas eemaldada lehte, mida polnud veel salvestatud"
@@ -794,6 +798,10 @@
 	"import_metadata": {
 		"message": "Impordi Tabi metaandmed (\"Klõpsude arv\", \"Klõpsamise kuupäev\" jne).",
 		"description": "[label] impordi kõik, mis failis impordiprotsessi ajal leiti"
+	},
+	"import_pinned_tabs": {
+		"message": "Impordi kinnitatud $tabs arv.",
+		"description": "[silt] impordi kinnitatud $tabs arv impordiprotsessi ajal"
 	},
 	"import_successful": {
 		"message": "Edukalt imporditud",

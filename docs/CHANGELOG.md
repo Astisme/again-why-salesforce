@@ -12,6 +12,8 @@ Please remember that this project is entirely funded by **the support of its use
 ## 🐛 Fixed
 ## 💥 Removed
 ## 🧪 Tests
+## 💾 Repository
+## 🔐 Privacy
 -->
 
 # v2.2.5
@@ -22,16 +24,33 @@ Please remember that this project is entirely funded by **the support of its use
 2. Squashed modal explainer into parent function (#185)
 3. Improved callback management using optional chaining and default returns (#189)
 4. Replaced `confirm` calls with our own confirm modal (#187)
+5. Toast messages now show the extension name as title (#210)
 
 ## 🐛 Fixed
 
 1. Changing color of your Tabs would not be visible from the settings page
 2. Translator would request multiple times the same locale file due to mismanagement of current language
+3. Hunted runtime errors which would break the flow (#210)
+4. "open" action on updated Tab from Manage Tabs modal now opens the updated link (#210)
+5. Improved secure use of regex to match Salesforce tab (#184)
+6. Manage Tabs modal now saves the correct number of pinned Tabs (#210)
+7. Import now shows a new option to import the number of pinned Tabs which will be added to your list (#210)
+8. Open Other Org modal would work only on odd-numbered openings (#210)
+9. Save / Remove Page would send 2 toasts (#210)
 
 ## 🧪 Tests
 
 1. Added Logging Auditor & tests
 2. Added tests for new exports of translator file
+
+## 💾 Repository
+
+1. Refactored to use runtime + module for easier testing (#176)
+2. Updated README images which link to webstores (#210)
+
+## 🔐 Privacy
+
+1. The [Privacy Policy](./PRIVACY_POLICY.md) has been aligned with recent changes (#210)
 
 # v2.2.4
 

@@ -6,41 +6,41 @@ import {
 } from "@std/testing/asserts";
 import { createTranslatorModule } from "../../../src/core/translator.js";
 
+type TranslatorInstance = {
+	caches: Record<string, Record<string, { message: string }>>;
+	currentLanguage: string | null;
+	loadLanguageBackground: () => Promise<string | null>;
+	loadLanguageFile: (
+		language?: string | null,
+	) => Promise<Record<string, { message: string }>>;
+	loadNewLanguage: (language?: string | null) => Promise<boolean>;
+	separator: string;
+	setListenerForLanguageChange: () => void;
+	translate: (
+		key: string | string[],
+		connector?: string,
+	) => Promise<string>;
+	translateAttributeDataset: string;
+	updatePageTranslations: (
+		language?: string | null,
+	) => Promise<boolean>;
+};
+
 type TranslatorModule = {
 	TranslationService: {
 		FALLBACK_LANGUAGE: string;
-		create: () => Promise<{
-			caches: Record<string, Record<string, { message: string }>>;
-			currentLanguage: string | null;
-			loadLanguageBackground: () => Promise<string | null>;
-			loadLanguageFile: (
-				language?: string | null,
-			) => Promise<Record<string, { message: string }>>;
-			loadNewLanguage: (language?: string | null) => Promise<boolean>;
-			separator: string;
-			setListenerForLanguageChange: () => void;
-			translate: (
-				key: string | string[],
-				connector?: string,
-			) => Promise<string>;
-			translateAttributeDataset: string;
-			updatePageTranslations: (
-				language?: string | null,
-			) => Promise<boolean>;
-		}>;
+		create: (
+			loadLanguageFn?: (
+				translator: TranslatorInstance,
+			) => Promise<string | null>,
+		) => Promise<TranslatorInstance>;
 		new (secret: symbol): unknown;
 	};
-	ensureTranslatorAvailability: () => Promise<{
-		currentLanguage: string | null;
-		loadLanguageFile: (
-			language?: string | null,
-		) => Promise<Record<string, { message: string }>>;
-		translate: (
-			key: string | string[],
-			connector?: string,
-		) => Promise<string>;
-		updatePageTranslations: (language?: string | null) => Promise<boolean>;
-	}>;
+	ensureTranslatorAvailability: (
+		loadLanguageFn?: (
+			translator: TranslatorInstance,
+		) => Promise<string | null>,
+	) => Promise<TranslatorInstance>;
 };
 
 /**
@@ -50,6 +50,7 @@ type TranslatorModule = {
  *   cleanup: () => void;
  *   changeListeners: Array<(changes: Record<string, unknown>) => void>;
  *   module: TranslatorModule;
+ *   messageCalls: string[];
  *   setLanguageResponse: (userLanguage: string | null, sfLanguage: string | null) => void;
  * }}
  */
@@ -80,6 +81,7 @@ function loadTranslatorFixture() {
 	const originalDocument = (globalThis as { document?: unknown }).document;
 	const originalFetch = globalThis.fetch;
 	const fetchCalls: string[] = [];
+	const messageCalls: string[] = [];
 	globalThis.fetch = (input: string | URL | Request) => {
 		const path = `${input}`;
 		fetchCalls.push(path);
@@ -142,6 +144,7 @@ function loadTranslatorFixture() {
 		sendExtensionMessage: (
 			{ what }: { what: string; keys?: string },
 		) => {
+			messageCalls.push(what);
 			if (what === "get-settings") {
 				return Promise.resolve(
 					userLanguage == null ? null : { enabled: userLanguage },
@@ -179,6 +182,7 @@ function loadTranslatorFixture() {
 		},
 		changeListeners,
 		fetchCalls,
+		messageCalls,
 		module,
 		setLanguageResponse: (
 			newUserLanguage: string | null,
@@ -253,6 +257,32 @@ Deno.test("translator isolated avoids repeated fetches for missing locale after 
 			path.includes("/_locales/pt_BR/messages.json")
 		);
 		assertEquals(ptBrFetches.length, 1);
+	} finally {
+		fixture.cleanup();
+	}
+});
+
+Deno.test("translator isolated uses caller language loader without extension messages", async () => {
+	const fixture = await loadTranslatorFixture();
+	try {
+		const translator = await fixture.module.TranslationService.create(
+			async (service) => {
+				await service.loadNewLanguage("fr");
+				return service.currentLanguage;
+			},
+		);
+		assertEquals(translator.currentLanguage, "fr");
+		assertEquals(fixture.messageCalls, []);
+
+		const reloadedTranslator = await fixture.module
+			.ensureTranslatorAvailability(
+				async (service) => {
+					await service.loadNewLanguage("en");
+					return service.currentLanguage;
+				},
+			);
+		assertEquals(reloadedTranslator.currentLanguage, "en");
+		assertEquals(fixture.messageCalls, []);
 	} finally {
 		fixture.cleanup();
 	}

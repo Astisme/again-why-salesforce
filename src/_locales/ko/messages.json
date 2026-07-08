@@ -615,6 +615,10 @@
 		"message": "Tab 고정 해제 중 오류",
 		"description": "[오류]"
 	},
+	"error_unsavable_page": {
+		"message": "이 페이지는 저장할 수 없습니다.",
+		"description": "페이지에 헤더(및 별/취소선이 있는 별)가 없을 때 발생하는 오류"
+	},
 	"error_useless_remove": {
 		"message": "제거할 수 없음:\n이전에 저장되지 않은 페이지는 제거할 수 없습니다.",
 		"description": "[오류] 사용자가 아직 저장되지 않은 페이지를 제거하려고 했습니다."
@@ -794,6 +798,10 @@
 	"import_metadata": {
 		"message": "Tab 메타데이터(\"클릭 횟수\", \"클릭 날짜\" 등) 가져오기.",
 		"description": "[라벨] 가져오기 프로세스 중에 파일에서 발견된 모든 것을 가져옵니다"
+	},
+	"import_pinned_tabs": {
+		"message": "고정된 $tabs 수 가져오기.",
+		"description": "[레이블] 가져오기 프로세스 중에 고정된 $tabs 수 가져오기"
 	},
 	"import_successful": {
 		"message": "성공적으로 가져왔습니다",

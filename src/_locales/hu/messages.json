@@ -615,6 +615,10 @@
 		"message": "Hiba a Tab rögzítésének feloldása közben",
 		"description": "[hiba]"
 	},
+	"error_unsavable_page": {
+		"message": "Ez az oldal nem menthető.",
+		"description": "Hiba, ha egy oldal nem rendelkezik a fejléccel (és a csillaggal/áthúzott csillaggal)"
+	},
 	"error_useless_remove": {
 		"message": "Nem lehet eltávolítani:\nNem lehet eltávolítani egy korábban nem mentett oldalt",
 		"description": "[error] a felhasználó olyan oldalt próbált meg eltávolítani, amelyet még nem mentett"
@@ -794,6 +798,10 @@
 	"import_metadata": {
 		"message": "Tab metaadatok importálása (\"Kattintási Szám\", \"Kattintási Dátum\" stb.).",
 		"description": "[címke] mindent importál, amit a fájlban talál az importálási folyamat során"
+	},
+	"import_pinned_tabs": {
+		"message": "Rögzített $tabs számának importálása.",
+		"description": "[címke] rögzített $tabs számának importálása az importálási folyamat során"
 	},
 	"import_successful": {
 		"message": "Sikeresen importálva",

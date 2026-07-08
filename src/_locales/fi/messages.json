@@ -615,6 +615,10 @@
 		"message": "Virhe Tab-välilehden kiinnityksen poistamisessa",
 		"description": "[error]"
 	},
+	"error_unsavable_page": {
+		"message": "Tätä sivua ei voi tallentaa.",
+		"description": "Virhe, kun sivulla ei ole ylätunnistetta (ja tähteä / yliviivattua tähteä)"
+	},
 	"error_useless_remove": {
 		"message": "Ei voi poistaa:\nSivua, jota ei ole aiemmin tallennettu, ei voi poistaa",
 		"description": "[error] käyttäjä yritti poistaa sivua, jota ei ollut tallennettu"
@@ -794,6 +798,10 @@
 	"import_metadata": {
 		"message": "Tuo Tab-välilehden metatiedot (\"Klikkausmäärä\", \"Klikkauspäivämäärä\" jne.).",
 		"description": "[label] tuo kaikki tiedostosta löytyvät tiedot tuontiprosessin aikana"
+	},
+	"import_pinned_tabs": {
+		"message": "Tuo kiinnitettyjen $tabs määrä.",
+		"description": "[tunniste] tuo kiinnitettyjen $tabs määrä tuontiprosessin aikana"
 	},
 	"import_successful": {
 		"message": "Tuonti onnistui",

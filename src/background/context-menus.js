@@ -50,10 +50,7 @@ import {
 } from "../core/constants.js";
 import { openSettingsPage } from "../core/functions.js";
 import Tab from "../core/tab.js";
-import {
-	ensureTranslatorAvailability,
-	getTranslations,
-} from "../core/translator.js";
+import { TranslationService } from "../core/translator.js";
 import {
 	bg_getCurrentBrowserTab,
 	bg_notify,
@@ -75,6 +72,29 @@ let link_cmd_import = null;
 let link_cmd_export_all = null;
 // deno-lint-ignore no-var
 var pendingContextMenuOperation = null; // is var for tests
+
+/**
+ * Loads translator language from background APIs without sending an extension
+ * message back to the background worker.
+ *
+ * @param {Object} translator - The translator service instance.
+ * @return {Promise<string|null>} The loaded language code, or null when none loaded.
+ */
+async function loadTranslatorLanguageFromBackground(translator) {
+	try {
+		const userLanguage = await bg_getSettings(USER_LANGUAGE);
+		if (await translator.loadNewLanguage(userLanguage?.enabled)) {
+			return translator.currentLanguage;
+		}
+		const sfLanguage = await bg_getSalesforceLanguage();
+		if (await translator.loadNewLanguage(sfLanguage)) {
+			return translator.currentLanguage;
+		}
+	} catch {
+		return null;
+	}
+	return null;
+}
 
 /**
  * Asynchronously retrieves command shortcut links and updates corresponding variables.
@@ -397,26 +417,17 @@ async function createMenuItems(force = false) {
 	if (areMenuItemsVisible && !force) {
 		return;
 	}
-	const translator = await ensureTranslatorAvailability();
+	await TranslationService.ensureTranslatorAvailability(
+		loadTranslatorLanguageFromBackground,
+	);
 	try {
-		const [userLanguage, sfLanguage] = await Promise.all([
-			bg_getSettings(USER_LANGUAGE),
-			bg_getSalesforceLanguage(),
+		await Promise.all([
 			updateCommandLinks(),
 			removeMenuItems(true),
 		]);
-		// load the user picked language
-		if (
-			!await translator.loadNewLanguage(
-				userLanguage?.enabled,
-			)
-		) {
-			// load the language in which salesforce is currently set
-			await translator.loadNewLanguage(sfLanguage);
-		}
 		const menuItems = getMenuItemsClone();
 		for (const item of menuItems) {
-			item.title = await getTranslations(item.title);
+			item.title = await TranslationService.getTranslations(item.title);
 			const shortcut = item.shortcut ?? null;
 			if (shortcut != null) {
 				item.title = `${item.title} (${shortcut})`;
@@ -431,7 +442,9 @@ async function createMenuItems(force = false) {
 		areMenuItemsVisible = true;
 	} catch (error) {
 		areMenuItemsVisible = false;
-		const msg = await getTranslations("error_cxm_create");
+		const msg = await TranslationService.getTranslations(
+			"error_cxm_create",
+		);
 		console.error(msg, error);
 		await removeMenuItems(true);
 	}
@@ -511,7 +524,9 @@ async function removeMenuItems(force = false) {
 		await BROWSER.contextMenus.removeAll();
 		areMenuItemsVisible = false;
 	} catch (error) {
-		const msg = await getTranslations("error_cxm_remove");
+		const msg = await TranslationService.getTranslations(
+			"error_cxm_remove",
+		);
 		console.error(msg, error);
 	}
 }
@@ -527,7 +542,7 @@ async function logContextMenuError(error) {
 	if (error == null || error.message === "") {
 		return;
 	}
-	const msg = await getTranslations("error_cxm_check");
+	const msg = await TranslationService.getTranslations("error_cxm_check");
 	console.error(msg, error.message);
 }
 

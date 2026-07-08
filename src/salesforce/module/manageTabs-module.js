@@ -5,6 +5,7 @@ import {
 	CXM_UNPIN_TAB as _CXM_UNPIN_TAB,
 	HIDDEN_CLASS as _HIDDEN_CLASS,
 	MODAL_ID as _MODAL_ID,
+	ORG_TAB_CLASS as _ORG_TAB_CLASS,
 	PIN_TAB_CLASS as _PIN_TAB_CLASS,
 	TOAST_ERROR as _TOAST_ERROR,
 	TOAST_WARNING as _TOAST_WARNING,
@@ -23,7 +24,7 @@ import {
 	ensureAllTabsAvailability as _ensureAllTabsAvailability,
 	TabContainer as _TabContainer,
 } from "../../core/tabContainer.js";
-import { getTranslations as _getTranslations } from "../../core/translator.js";
+import { TranslationService as _TranslationService } from "../../core/translator.js";
 
 import {
 	setupDragForTable as _setupDragForTable,
@@ -32,6 +33,7 @@ import {
 import {
 	createManageTabRow as _createManageTabRow,
 	generateManageTabsModal as _generateManageTabsModal,
+	generateStyleFromSettings as _generateStyleFromSettings,
 	handleLightningLinkClick as _handleLightningLinkClick,
 	sldsConfirm as _sldsConfirm,
 } from "../generator.js";
@@ -51,6 +53,7 @@ let CXM_PIN_TAB = _CXM_PIN_TAB;
 let CXM_REMOVE_TAB = _CXM_REMOVE_TAB;
 let CXM_UNPIN_TAB = _CXM_UNPIN_TAB;
 let HIDDEN_CLASS = _HIDDEN_CLASS;
+let ORG_TAB_CLASS = _ORG_TAB_CLASS;
 let PIN_TAB_CLASS = _PIN_TAB_CLASS;
 let TOAST_ERROR = _TOAST_ERROR;
 let TOAST_WARNING = _TOAST_WARNING;
@@ -64,10 +67,11 @@ let injectStyle = _injectStyle;
 let Tab = _Tab;
 let ensureAllTabsAvailability = _ensureAllTabsAvailability;
 let TabContainer = _TabContainer;
-let getTranslations = _getTranslations;
+let getTranslations = _TranslationService.getTranslations;
 let setupDragForTable = _setupDragForTable;
 let setupDragForUl = _setupDragForUl;
 let createManageTabRow = _createManageTabRow;
+let generateStyleFromSettings = _generateStyleFromSettings;
 let generateManageTabsModal = _generateManageTabsModal;
 let handleLightningLinkClick = _handleLightningLinkClick;
 let sldsConfirm = _sldsConfirm;
@@ -227,6 +231,24 @@ function getLastTr(tbody = null) {
 }
 
 /**
+ * Marks org cells so tab style selectors can distinguish org-specific rows.
+ *
+ * @param {HTMLInputElement | null} [input=null] Org input to inspect.
+ * @return {void}
+ */
+function syncOrgCellClass(input = null) {
+	const td = input?.closest("td");
+	if (td == null) {
+		return;
+	}
+	if (input.value !== "") {
+		td.classList.add(ORG_TAB_CLASS);
+		return;
+	}
+	td.classList.remove(ORG_TAB_CLASS);
+}
+
+/**
  * Handles action button clicks (actions are the ones on the right of each row)
  * @param {event} e - the event which had this function called
  * @param {Object} [param1={}] an object with the following keys
@@ -359,6 +381,9 @@ function checkRemoveTr(e) {
 	const label = parentTr.querySelector(".label").value;
 	const url = parentTr.querySelector(".url").value;
 	const tabAppendElement = parentTr.closest("tbody");
+	if (parentTr === getLastTr(tabAppendElement)) {
+		return;
+	}
 	if (label === "" && url === "") {
 		return removeTr(tabAppendElement, parentTr, focusedIndex);
 	}
@@ -377,6 +402,12 @@ function checkRemoveTr(e) {
 function setInfoForDrag(element, listener, index) {
 	element.dataset.element_index = index;
 	element.addEventListener("input", listener);
+	if (
+		element.classList.contains("org") ||
+		element.className.split(" ").includes("org")
+	) {
+		syncOrgCellClass(element);
+	}
 	element.addEventListener(
 		"focusin",
 		(e) =>
@@ -722,6 +753,7 @@ function trInputListener({
 				org = Tab.extractOrgName(value);
 				element.value = org;
 			}
+			syncOrgCellClass(element);
 			const thisUrlOrg = Tab.extractOrgName(getCurrentHref());
 			const isThisOrgTab = org === "" ||
 				org === thisUrlOrg;
@@ -787,6 +819,34 @@ function reorderTabsTable({
 }
 
 /**
+ * Counts pinned rows in the manage-tabs table, excluding trailing empty row.
+ *
+ * @param {TbodyHTMLElement | null} [tbody=null] Table body containing managed rows.
+ * @return {number} Number of pinned rows currently shown in the modal.
+ * @throws {Error} when tbody is null
+ */
+function countPinnedRows(tbody = null) {
+	if (tbody == null) {
+		throw new Error("error_required_params");
+	}
+	const lastTr = getLastTr(tbody);
+	let pinnedRows = 0;
+	for (const tr of tbody.querySelectorAll("tr")) {
+		if (tr === lastTr) {
+			continue;
+		}
+		if (
+			tr.querySelector("td.slds-cell-wrap")?.classList.contains(
+				PIN_TAB_CLASS,
+			)
+		) {
+			pinnedRows++;
+		}
+	}
+	return pinnedRows;
+}
+
+/**
  * Finds all the trs and their inputs to update the currently saved Tabs
  * @param {Object} [param0={}] an object with the following keys
  * @param {TbodyHTMLElement} [param0.tbody=document.querySelector("#sortable-table tbody")] - the tbody inside the modal where the trs can be found
@@ -821,6 +881,7 @@ async function readManagedTabsAndSave({
 		}
 	}
 	allTabs = allTabs ?? await ensureAllTabsAvailability();
+	allTabs[TabContainer.keyPinnedTabsNo] = countPinnedRows(tbody);
 	// send message to save the Tabs as they were read
 	if (
 		await allTabs.replaceTabs(tableTabs, {
@@ -848,6 +909,7 @@ export async function createManageTabsModal() {
 	if (document.getElementById(MODAL_ID) != null) {
 		return showToast("error_close_other_modal", TOAST_ERROR);
 	}
+	await generateStyleFromSettings({ surface: "manage-tabs" });
 	const allTabs = await ensureAllTabsAvailability({ reset: true });
 	const {
 		modalParent,
@@ -969,6 +1031,7 @@ export async function createManageTabsModal() {
  *   closeDropdownOnBtnClick: (e: Event, button: HTMLButtonElement) => void;
  *   closeDropdownOnTrClick: (e: Event, button: HTMLButtonElement) => void;
  *   createManageTabsModal: () => Promise<void>;
+ *   countPinnedRows: (tbody?: HTMLElement | null) => number;
  *   getLastTr: (tbody?: HTMLElement | null) => HTMLElement | undefined;
  *   handleActionButtonClick: (e: Event, options?: Record<string, unknown>) => Promise<void>;
  *   moveTrToGivenIndex: (options?: Record<string, unknown>) => void;
@@ -988,6 +1051,7 @@ export function createManageTabsModule(overrides = {}) {
 	CXM_REMOVE_TAB = overrides.CXM_REMOVE_TAB ?? CXM_REMOVE_TAB;
 	CXM_UNPIN_TAB = overrides.CXM_UNPIN_TAB ?? CXM_UNPIN_TAB;
 	HIDDEN_CLASS = overrides.HIDDEN_CLASS ?? HIDDEN_CLASS;
+	ORG_TAB_CLASS = overrides.ORG_TAB_CLASS ?? ORG_TAB_CLASS;
 	PIN_TAB_CLASS = overrides.PIN_TAB_CLASS ?? PIN_TAB_CLASS;
 	TOAST_ERROR = overrides.TOAST_ERROR ?? TOAST_ERROR;
 	TOAST_WARNING = overrides.TOAST_WARNING ?? TOAST_WARNING;
@@ -1004,6 +1068,8 @@ export function createManageTabsModule(overrides = {}) {
 	Tab = overrides.Tab ?? Tab;
 	TabContainer = overrides.TabContainer ?? TabContainer;
 	createManageTabRow = overrides.createManageTabRow ?? createManageTabRow;
+	generateStyleFromSettings = overrides.generateStyleFromSettings ??
+		generateStyleFromSettings;
 	ensureAllTabsAvailability = overrides.ensureAllTabsAvailability ??
 		ensureAllTabsAvailability;
 	generateManageTabsModal = overrides.generateManageTabsModal ??
@@ -1101,6 +1167,7 @@ export function createManageTabsModule(overrides = {}) {
 		checkRemoveTr,
 		closeDropdownOnBtnClick,
 		closeDropdownOnTrClick,
+		countPinnedRows,
 		createManageTabsModal,
 		getLastTr,
 		handleActionButtonClick,

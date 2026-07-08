@@ -14,6 +14,7 @@
  *   importId: string;
  *   metadataId: string;
  *   otherOrgId: string;
+ *   pinnedId: string;
  *   overwriteId: string;
  *   selectTabsId: string;
  * }} Import IDs.
@@ -30,6 +31,7 @@ function buildImportIds(extensionName) {
 		importId,
 		metadataId: `${importId}-metadata`,
 		otherOrgId: `${importId}-other-org`,
+		pinnedId: `${importId}-pinned`,
 		overwriteId: `${importId}-overwrite`,
 		selectTabsId: `${importId}-select-tabs`,
 	};
@@ -184,7 +186,7 @@ function getFilesFromChangeOrDropEvent(event) {
  * @param {() => Promise<{
  *   importTabs: (
  *     json: string,
- *     config: Record<string, boolean>,
+ *     config: Record<string, boolean | string | null>,
  *   ) => Promise<number>;
  * }>} [options.ensureAllTabsAvailabilityFn] Saved-tab container resolver.
  * @param {(keys: string | string[]) => Promise<string | string[]>} [options.getTranslationsFn] Translation resolver.
@@ -213,6 +215,7 @@ function getFilesFromChangeOrDropEvent(event) {
  * @param {(id: string, options: { css?: string; link?: string }) => unknown} [options.injectStyleFn] Style injector.
  * @param {(options?: Record<string, unknown>) => void} [options.sfAfterSetFn] Content post-update hook.
  * @param {(message: string | string[] | unknown[], status?: string) => void | Promise<void>} [options.showToastFn] Toast helper.
+ * @param {() => string} [options.getCurrentHrefFn] Current href resolver.
  * @param {() => { appendChild: (node: unknown) => unknown } | null} [options.getModalHangerFn] Modal hanger resolver.
  * @param {() => { querySelector: (selector: string) => unknown } | null} [options.getSetupTabUlFn] Setup-tab UL resolver.
  * @param {{
@@ -237,7 +240,7 @@ function getFilesFromChangeOrDropEvent(event) {
  *   readChangeOrDropFiles: (event: Event) => Promise<void>;
  *   readFile: (files: FileList | File[] | File) => Promise<void>;
  *   showFileImport: () => Promise<void>;
- *   showTabSelectThenImport: (files?: File[], importConfig?: Record<string, boolean>) => Promise<void>;
+ *   showTabSelectThenImport: (files?: File[], importConfig?: Record<string, boolean | string | null>) => Promise<void>;
  * }} Import module API.
  */
 export function createImportPureModule({
@@ -259,6 +262,7 @@ export function createImportPureModule({
 	injectStyleFn,
 	sfAfterSetFn,
 	showToastFn,
+	getCurrentHrefFn = () => globalThis.location?.href ?? "",
 	getModalHangerFn,
 	getSetupTabUlFn,
 	documentRef = globalThis.document,
@@ -321,6 +325,12 @@ export function createImportPureModule({
 			false,
 		);
 		divParent.appendChild(importMetadataCheckbox);
+		const importPinnedCheckbox = await generateCheckboxWithLabelFn(
+			ids.pinnedId,
+			"import_pinned_tabs",
+			false,
+		);
+		divParent.appendChild(importPinnedCheckbox);
 		const overwriteCheckbox = await generateCheckboxWithLabelFn(
 			ids.overwriteId,
 			"overwrite_tabs",
@@ -349,6 +359,8 @@ export function createImportPureModule({
 	 * @param {boolean} [importConfig.resetTabs=false] Whether to overwrite existing tabs.
 	 * @param {boolean} [importConfig.preserveOtherOrg=false] Whether to preserve other-org tabs.
 	 * @param {boolean} [importConfig.importMetadata=false] Whether to import metadata.
+	 * @param {boolean} [importConfig.importPinnedTabs=false] Whether to import pinned-tab count.
+	 * @param {string|null} [importConfig.currentOrg=null] Current org for preserving only other-org tabs.
 	 * @return {Promise<void>}
 	 */
 	async function launchImport(tabs = [], importConfig = {}) {
@@ -360,11 +372,17 @@ export function createImportPureModule({
 				importConfig,
 			);
 		} else {
-			for (const file of tabs) {
+			for (const [index, file] of tabs.entries()) {
 				const jsonString = await file.text();
+				const fileImportConfig = index === 0 ? importConfig : {
+					...importConfig,
+					currentOrg: null,
+					preserveOtherOrg: true,
+					resetTabs: false,
+				};
 				importedNum += await allTabs.importTabs(
 					jsonString,
-					importConfig,
+					fileImportConfig,
 				);
 			}
 		}
@@ -526,6 +544,8 @@ export function createImportPureModule({
 				inputModalParent.querySelector(`#${ids.selectTabsId}`).checked;
 			const metadataPick =
 				inputModalParent.querySelector(`#${ids.metadataId}`).checked;
+			const pinnedPick =
+				inputModalParent.querySelector(`#${ids.pinnedId}`).checked;
 			const overwritePick =
 				inputModalParent.querySelector(`#${ids.overwriteId}`).checked;
 			const otherOrgPick =
@@ -534,7 +554,17 @@ export function createImportPureModule({
 				resetTabs: overwritePick,
 				preserveOtherOrg: otherOrgPick,
 				importMetadata: metadataPick,
+				importPinnedTabs: pinnedPick,
 			};
+			if (
+				overwritePick && otherOrgPick &&
+				typeof tabRef.extractOrgName === "function"
+			) {
+				const currentOrg = tabRef.extractOrgName(getCurrentHrefFn());
+				if (currentOrg != null) {
+					importConfig.currentOrg = currentOrg;
+				}
+			}
 			if (selectTabsPick) {
 				return await showTabSelectThenImport(
 					validFileArray,

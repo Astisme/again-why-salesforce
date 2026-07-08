@@ -615,6 +615,10 @@
 		"message": "Hitilafu wakati wa kubandua Tab",
 		"description": "[hitilafu]"
 	},
+	"error_unsavable_page": {
+		"message": "Ukurasa huu hauwezi kuhifadhiwa.",
+		"description": "Hitilafu wakati ukurasa hauna kichwa (na nyota/nyota iliyofutwa)"
+	},
 	"error_useless_remove": {
 		"message": "Haiwezi kuondoa:\nHaiwezi kuondoa ukurasa ambao haujawahi kuhifadhiwa",
 		"description": "[hitilafu] mtumiaji alijaribu kuondoa ukurasa ambao haukuwa umehifadhiwa bado"
@@ -794,6 +798,10 @@
 	"import_metadata": {
 		"message": "Ingiza metadata ya Tab (\"Idadi ya Mibofyo\", \"Tarehe ya Kubofya\" n.k.).",
 		"description": "[lebo] ingiza kila kitu kinachopatikana kwenye faili wakati wa mchakato wa kuingiza"
+	},
+	"import_pinned_tabs": {
+		"message": "Ingiza idadi ya $tabs zilizobandikwa.",
+		"description": "[lebo] ingiza idadi ya $tabs zilizobandikwa wakati wa mchakato wa kuingiza"
 	},
 	"import_successful": {
 		"message": "Imeingizwa kwa mafanikio",

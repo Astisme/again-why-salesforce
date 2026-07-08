@@ -22,9 +22,12 @@ import {
 	CMD_TOGGLE_ORG,
 	CMD_UPDATE_TAB,
 	CXM_EXPORT_TABS,
+	CXM_IMPORT_TABS,
 	CXM_OPEN_OTHER_ORG,
 	CXM_PAGE_REMOVE_TAB,
 	CXM_PAGE_SAVE_TAB,
+	CXM_UPDATE_ORG,
+	CXM_UPDATE_TAB,
 } from "../../../src/core/constants.js";
 
 /**
@@ -153,11 +156,11 @@ Deno.test({
 		const expectedById = new Map<string, string>([
 			[CXM_PAGE_SAVE_TAB, "Alt+1"],
 			[CXM_PAGE_REMOVE_TAB, "Alt+2"],
-			["update-org", "Alt+3"],
-			["update-tab", "Alt+4"],
+			[CXM_UPDATE_ORG, "Alt+3"],
+			[CXM_UPDATE_TAB, "Alt+4"],
 			[CMD_OPEN_SETTINGS, "Alt+5"],
 			[CXM_OPEN_OTHER_ORG, "Alt+6"],
-			["import-tabs", "Alt+7"],
+			[CXM_IMPORT_TABS, "Alt+7"],
 			[CXM_EXPORT_TABS, "Alt+8"],
 		]);
 		for (const [id, shortcut] of expectedById.entries()) {
