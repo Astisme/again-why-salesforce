@@ -615,6 +615,10 @@
 		"message": "Kesalahan saat melepaskan sematan Tab",
 		"description": "[kesalahan]"
 	},
+	"error_unsavable_page": {
+		"message": "Halaman ini tidak dapat disimpan.",
+		"description": "Kesalahan ketika halaman tidak memiliki header (dan bintang/bintang yang dicoret)"
+	},
 	"error_useless_remove": {
 		"message": "Tidak dapat menghapus:\nHalaman yang belum pernah disimpan tidak bisa dihapus.",
 		"description": "[error] Pengguna mencoba menghapus halaman yang belum disimpan."
@@ -794,6 +798,10 @@
 	"import_metadata": {
 		"message": "Impor metadata Tab (\"Jumlah Klik\", \"Tanggal Klik\", dll.).",
 		"description": "[label] impor semua yang ditemukan dalam file selama proses impor"
+	},
+	"import_pinned_tabs": {
+		"message": "Impor jumlah $tabs yang disematkan.",
+		"description": "[label] impor jumlah $tabs yang disematkan selama proses impor"
 	},
 	"import_successful": {
 		"message": "Berhasil diimpor",

@@ -5,9 +5,19 @@ import {
 	WHAT_SET,
 	WHY_KEY,
 } from "./constants.js";
-import { getSettings, sendExtensionMessage, setSettings } from "./functions.js";
+import { getSettings, sendExtensionMessage } from "./functions.js";
 import Tab from "./tab.js";
-import { getTranslations } from "./translator.js";
+import {
+	checkSortOrderForKey,
+	getFilteredReplaceState,
+	getMoveIndex,
+	getTabContainerFromObj,
+	invalidateSort,
+	prepareImportedPinnedTabs,
+	sortFunction,
+	stripImportedTabMetadata,
+} from "./tabContainer-helpers.js";
+import { TranslationService } from "./translator.js";
 
 let singletonAllTabs = null;
 
@@ -176,7 +186,7 @@ export class TabContainer extends Array {
 			const instance = new TabContainer(_tabContainerSecret);
 			if (!await TabContainer.#initialize(instance)) {
 				throw new Error(
-					await getTranslations(
+					await TranslationService.getTranslations(
 						"error_tabcont_not_initialized",
 					),
 				);
@@ -356,22 +366,6 @@ export class TabContainer extends Array {
 	 * @param {Object|Array} tbContainerObj - the JSON input from which to find the data (Array is old implementation)
 	 * @return {Object} the TabContainer represed in JSON with all the keys from tbContainerObj (if it was an Object) + `isUsingOldVersion` key (boolean)
 	 */
-	#getTabContainerFromObj(tbContainerObj) {
-		const res = {};
-		res.isUsingOldVersion = Array.isArray(tbContainerObj);
-		if (res.isUsingOldVersion) {
-			// deprecated (old version of saving the Tabs)
-			// the Tabs will automatically get saved in the newer version at the first sync
-			res[TabContainer.keyTabs] = tbContainerObj;
-		} else {
-			// new version of saving the Tabs
-			// in a later release, we'll have to remove the deprecated way of saving them.
-			// currently this is not possible because we're using this for import as well (meaning someone might have "old" versions of their Tabs backed up as json files
-			Object.assign(res, tbContainerObj);
-		}
-		return res;
-	}
-
 	/**
 	 * Retrieves the saved tabs from the browser's runtime and optionally replaces the current tabs.
 	 *
@@ -379,7 +373,7 @@ export class TabContainer extends Array {
 	 * @return {Promise<Object|TabContainer>} - A promise that resolves to either the `TabContainer` instance (if `replace` is `true`) or the retrieved saved tabs.
 	 */
 	async getSavedTabs(replace = true) {
-		const res = this.#getTabContainerFromObj(
+		const res = getTabContainerFromObj(
 			await sendExtensionMessage({ what: WHAT_GET, key: WHY_KEY }),
 		);
 		if (replace) {
@@ -404,7 +398,7 @@ export class TabContainer extends Array {
 	 * @return {Promise<void>} - A promise that resolves once the default tabs are successfully set.
 	 */
 	async setDefaultTabs() {
-		const [flows, users] = await getTranslations([
+		const [flows, users] = await TranslationService.getTranslations([
 			"flows",
 			"users",
 		]);
@@ -442,7 +436,7 @@ export class TabContainer extends Array {
 		if (this.length <= initialLength) {
 			// nothing was added
 			const { msg } = this.#validateItem(tab);
-			throw new Error(`${await getTranslations(
+			throw new Error(`${await TranslationService.getTranslations(
 				msg,
 			)} ${JSON.stringify(tab)}`);
 		}
@@ -751,62 +745,20 @@ export class TabContainer extends Array {
 	} = {}) {
 		if (newTabs === this) {
 			return true;
-		} else if (
-			resetTabs && removeOrgTabs && keepTabsNotThisOrg == null &&
-			removeThisOrgTabs == null
-		) {
-			this.splice(0, this.length);
-			if (updatePinnedTabs) {
-				this[TabContainer.keyPinnedTabsNo] = 0;
-			}
-		} else if (resetTabs || removeOrgTabs) {
-			// treat the pinned Tabs as their own list
-			const pinnedTabsList = this.splice(
-				0,
-				this[TabContainer.keyPinnedTabsNo],
-			);
-			// loop on both this and pinnedTabsList with the same splice function
-			for (const what of [this, pinnedTabsList]) {
-				what.splice(
-					0,
-					what.length,
-					...what.filter((tab) => {
-						// If resetTabs, clear existing tabs
-						if (resetTabs) {
-							// if removeOrgTabs, clear existing tabs and existing tabs with an org set as well
-							// else, clear existing tabs which do not have an org set
-							if (!removeOrgTabs) {
-								return tab.org != null;
-							} else if (
-								keepTabsNotThisOrg != null ||
-								removeThisOrgTabs != null
-							) {
-								return tab.org != null &&
-									(keepTabsNotThisOrg == null ||
-										tab.org !== keepTabsNotThisOrg) &&
-									(removeThisOrgTabs == null ||
-										tab.org !== removeThisOrgTabs);
-								// if keepTabsNotThisOrg, clear existing tabs and existing tabs with an org set but not matching the keepTabsNotThisOrg string
-								// if removeThisOrgTabs, clear existing tabs and existing tabs with an org set and matching the removeThisOrgTabs string
-							} else {
-								// else, clear existing tabs
-								return false;
-							}
-						} else if (removeOrgTabs) {
-							// if keepTabsNotThisOrg, remove the org tabs which do not match the keepTabsNotThisOrg string
-							// else, keep only non-org-specific tabs
-							return tab.org == null ||
-								(keepTabsNotThisOrg != null &&
-									tab.org === keepTabsNotThisOrg) ||
-								(removeThisOrgTabs != null &&
-									tab.org !== removeThisOrgTabs);
-						}
-					}),
-				);
-			}
+		}
+		const { tabs, pinnedTabsNo } = getFilteredReplaceState({
+			currentTabs: this,
+			pinnedTabsNo: this[TabContainer.keyPinnedTabsNo],
+			resetTabs,
+			removeOrgTabs,
+			keepTabsNotThisOrg,
+			removeThisOrgTabs,
+		});
+		if (resetTabs || removeOrgTabs) {
+			this.splice(0, this.length, ...tabs);
 			// set the pinnedTabs to the updated length of the pinnedTabsList
 			if (updatePinnedTabs) {
-				this[TabContainer.keyPinnedTabsNo] = pinnedTabsList.length;
+				this[TabContainer.keyPinnedTabsNo] = pinnedTabsNo;
 			}
 		}
 		// Add new tabs and sync them
@@ -841,15 +793,22 @@ export class TabContainer extends Array {
 	 * @param {boolean} [param1.resetTabs=false] - Whether the imported array should overwrite the currently saved tabs.
 	 * @param {boolean} [param1.preserveOtherOrg=true] - Whether the org-specific tabs should be preserved.
 	 * @param {boolean} [param1.importMetadata=false] - Whether pinned-tab metadata should also be restored.
+	 * @param {boolean} [param1.importPinnedTabs=importMetadata] - Whether pinned-tab count should be restored.
+	 * @param {string|null} [param1.currentOrg=null] - The current org when preserving other-org tabs during overwrite.
 	 * @return {Promise<number>} - Number of tabs successfully imported
 	 */
 	async importTabs(jsonString, {
 		resetTabs = false,
 		preserveOtherOrg = true,
 		importMetadata = false,
+		importPinnedTabs = false,
+		currentOrg = null,
 	} = {}) {
-		let { [TabContainer.keyTabs]: imported, ...metadata } = this
-			.#getTabContainerFromObj(JSON.parse(jsonString));
+		const parsedTabs = JSON.parse(jsonString);
+		const {
+			[TabContainer.keyTabs]: normalizedImported = [],
+			...metadata
+		} = getTabContainerFromObj(parsedTabs);
 		if (metadata.isUsingOldVersion) {
 			// tell the user to upgrade their backups
 			sendExtensionMessage({
@@ -857,56 +816,67 @@ export class TabContainer extends Array {
 				message: "warn_upgrade_backup",
 			});
 		}
-		// imported is now a valid Array of Tabs
+		const imported = importMetadata
+			? normalizedImported
+			: stripImportedTabMetadata(normalizedImported);
 		const backupTabs = [...this]; // clones the Tabs inside this; otherwise, we would simply "rename" this.
 		const backupPinnedTabs = this[TabContainer.keyPinnedTabsNo];
 		try {
-			let importPinnedTabs = 0;
-			let importedTabsNo = 0;
-			if (importMetadata) {
-				const {
-					pinnedTabs: _importPinnedTabs,
-					importedTabs: _importedTabsNo,
-				} = this.#importPinnedTabs({
+			// Keep old overwrite semantics: pinned overwrite without org-preserve context starts from empty state.
+			const shouldKeepExistingTabs = !(
+				resetTabs && importPinnedTabs && currentOrg == null
+			);
+			const baseState = shouldKeepExistingTabs
+				? getFilteredReplaceState({
+					currentTabs: this,
+					pinnedTabsNo: this[TabContainer.keyPinnedTabsNo],
+					resetTabs,
+					removeOrgTabs: !preserveOtherOrg || currentOrg != null,
+					removeThisOrgTabs: preserveOtherOrg ? currentOrg : null,
+				})
+				: {
+					tabs: [],
+					pinnedTabsNo: 0,
+				};
+			const pinnedState = importPinnedTabs
+				? prepareImportedPinnedTabs({
 					pinnedTabsNo: metadata?.[TabContainer.keyPinnedTabsNo],
 					importedArr: imported,
-					resetTabs,
-				});
-				importPinnedTabs = _importPinnedTabs;
-				importedTabsNo = _importedTabsNo;
-			} else {
-				// remove metadata from the JSON string
-				const metadataKeys = new Set([
-					...Tab.metadataKeys,
-					...TabContainer.metadataKeys,
-				]);
-				imported = this.#getTabContainerFromObj(
-					JSON.parse(
-						jsonString,
-						(key, value) =>
-							metadataKeys.has(key) ? undefined : value,
+					existingPinnedTabs: baseState.tabs.slice(
+						0,
+						baseState.pinnedTabsNo,
 					),
-				)[TabContainer.keyTabs];
-				// no need to save metadata
-			}
-			// perform actions on current Array
-			if (
-				await this.replaceTabs(undefined, {
 					resetTabs,
-					removeOrgTabs: !preserveOtherOrg,
-					updatePinnedTabs: false,
 				})
-			) {
-				const newLen = this.length;
-				// import the Tabs from the JSON string (except for pinned Tabs of the list)
-				if (await this.addTabs(imported)) {
-					importedTabsNo += this.length - newLen;
-					if (resetTabs && importMetadata) {
-						this[TabContainer.keyPinnedTabsNo] = importPinnedTabs;
-					}
-					return importedTabsNo;
+				: {
+					importedPinnedTabs: [],
+					remainingImportedTabs: Array.from(imported),
+					pinnedTabsNo: 0,
+					importedTabs: 0,
+				};
+			for (const tab of pinnedState.importedPinnedTabs) {
+				if (!Tab.isValid(tab)) {
+					throw new Error(`error_invalid_tab ${JSON.stringify(tab)}`);
 				}
 			}
+			const nextTabs = [
+				...baseState.tabs.slice(0, baseState.pinnedTabsNo),
+				...pinnedState.importedPinnedTabs,
+				...baseState.tabs.slice(baseState.pinnedTabsNo),
+			];
+			const nextPinnedTabsNo = baseState.pinnedTabsNo +
+				pinnedState.pinnedTabsNo;
+			// Stage full next container first so validation errors can roll back cleanly.
+			const nextState = TabContainer.getThrowawayInstance();
+			nextState.push(nextTabs);
+			nextState[TabContainer.keyPinnedTabsNo] = nextPinnedTabsNo;
+			const nextStateLength = nextState.length;
+			await nextState.addTabs(pinnedState.remainingImportedTabs, false);
+			this.splice(0, this.length, ...nextState);
+			this[TabContainer.keyPinnedTabsNo] = nextPinnedTabsNo;
+			await this.syncTabs();
+			return pinnedState.importedTabs +
+				(nextState.length - nextStateLength);
 		} catch (error) {
 			console.info(error);
 			this.length = 0;
@@ -914,72 +884,6 @@ export class TabContainer extends Array {
 			this[TabContainer.keyPinnedTabsNo] = backupPinnedTabs;
 			throw error;
 		}
-		return 0;
-	}
-
-	/**
-	 * Helper function for importTabs used to import the pinned Tabs
-	 *
-	 * @param {Object} [param0={}] - an object containing the following parameters
-	 * @param {number} [param0.pinnedTabsNo=0] - the number of the pinned Tabs to be imported
-	 * @param {Tab[]} [param0.importedArr=[]] - an array of Tabs to import
-	 * @param {boolean} [param0.resetTabs=false] - whether the currently pinned Tabs should be reset
-	 *
-	 * @return {Object} containing the number of pinnedTabs and the importTabs number
-	 */
-	#importPinnedTabs({
-		pinnedTabsNo = 0,
-		importedArr = [],
-		resetTabs = false,
-	} = {}) {
-		const res = {
-			pinnedTabs: 0,
-			importedTabs: 0,
-		};
-		res.pinnedTabs = Math.max(
-			0,
-			// check for out of bounds number
-			Math.min(
-				pinnedTabsNo ?? 0,
-				importedArr.length,
-			),
-		);
-		if (res.pinnedTabs <= 0) {
-			return res;
-		}
-		// if the user does not want to reset their Tabs, get the pinned Tabs to be imported and add them to the pinned list
-		if (resetTabs) {
-			this.length = 0;
-			this[TabContainer.keyPinnedTabsNo] = 0;
-			return res;
-		}
-		// merge the already pinned Tabs with the imported pinned Tabs
-		// if pinnedTabs is 0, we'll simply do an unshift of the importPinnedTabsList
-		const pinnedTabsList = this.splice(
-			0,
-			this[TabContainer.keyPinnedTabsNo],
-		);
-		const uniqueImportPinnedTabsList = importedArr
-			.splice(
-				0,
-				res.pinnedTabs,
-			) // the `importedArr` array does not have the pinned Tabs anymore
-			.filter((tb, index, arr) =>
-				// remove internal duplicates
-				(
-					arr.findIndex((t) => t.equals?.(tb) || t === tb) === index
-				) &&
-				// remove duplicates of the other list
-				!pinnedTabsList.exists(tb)
-			);
-		this.unshift(
-			...pinnedTabsList,
-			...uniqueImportPinnedTabsList,
-		);
-		this[TabContainer.keyPinnedTabsNo] = pinnedTabsList.length +
-			uniqueImportPinnedTabsList.length;
-		res.importedTabs = uniqueImportPinnedTabsList.length;
-		return res;
 	}
 
 	/**
@@ -1056,7 +960,7 @@ export class TabContainer extends Array {
 			this.getSingleTabByData({ label, url, org }),
 		);
 		const isPinned = currentIndex < this[TabContainer.keyPinnedTabsNo];
-		const newIndex = this.#getMoveIndex({
+		const newIndex = getMoveIndex({
 			fullMovement,
 			moveBefore,
 			minIndex: isPinned ? 0 : this[TabContainer.keyPinnedTabsNo],
@@ -1065,6 +969,7 @@ export class TabContainer extends Array {
 				: this.length - 1,
 			currentIndex,
 			org,
+			tabs: this,
 		});
 		if (pinMovement != null) {
 			if (pinMovement && newIndex < this[TabContainer.keyPinnedTabsNo]) {
@@ -1087,50 +992,6 @@ export class TabContainer extends Array {
 	}
 
 	/**
-	 * Finds the index where to put the new Tab while moving it.
-	 * @param {Object} param0 an Object containing the following keys
-	 * @param {boolean} [param0.fullMovement=false] - A flag indicating whether to move the tab to the start or end of the container (`true`), or just to an adjacent position (`false`).
-	 * @param {boolean} [param0.moveBefore=true] - A flag indicating whether to move the tab before the current one (`true`) or after (`false`).
-	 * @param {number} [param0.minIndex=0] - the minimum index where to put the Tab
-	 * @param {number} [param0.maxIndex=this.length] - the maximum index where to put the Tab
-	 * @param {number} [param0.currentIndex=0] - the index where the Tab is currently located
-	 * @param {null} [param0.org=null] - the org of the Tab
-	 * @return {number} the index where to move the Tab
-	 */
-	#getMoveIndex({
-		fullMovement = false,
-		moveBefore = true,
-		minIndex,
-		maxIndex,
-		currentIndex = 0,
-		org = null,
-	} = {}) {
-		if (fullMovement) {
-			return moveBefore ? minIndex : maxIndex;
-		}
-		const direction = moveBefore ? -1 : 1;
-		const clamp = moveBefore ? Math.max : Math.min;
-		const boundary = moveBefore ? minIndex : maxIndex;
-		let lastIndex;
-		for (let offset = 1; offset <= maxIndex; offset++) {
-			const candidateIndex = clamp(
-				boundary,
-				currentIndex + direction * offset,
-			);
-			if (lastIndex === candidateIndex) {
-				break;
-			}
-			const targetTab = this[candidateIndex];
-			if (
-				org == null || targetTab?.org == null || targetTab.org === org
-			) {
-				return candidateIndex;
-			}
-			lastIndex = candidateIndex;
-		}
-		return boundary;
-	}
-	/**
 	 * Remove all tabs matching the label, url and org (based on the passed data)
 	 *
 	 * @param {Object} tab - an Object containing the following parameters to match a Tab to remove
@@ -1142,7 +1003,9 @@ export class TabContainer extends Array {
 	async remove({ label = null, url = null, org = null } = {}) {
 		const tab = { label, url, org };
 		if (tab.label == null && tab.url == null && tab.org == null) {
-			const msg = await getTranslations("error_no_data");
+			const msg = await TranslationService.getTranslations(
+				"error_no_data",
+			);
 			throw new Error(msg);
 		}
 		const index = this.getTabIndex(this.getSingleTabByData(tab));
@@ -1278,18 +1141,6 @@ export class TabContainer extends Array {
 	 * @param {string} b - the second element
 	 * @return {integer} negative if a < b; positive if a > b; 0 if a === b
 	 */
-	#sortFunction(a, b) {
-		a = a == null ? "" : String(a);
-		b = b == null ? "" : String(b);
-		return String(a).localeCompare(
-			String(b),
-			undefined,
-			{
-				sensitivity: "base",
-			},
-		);
-	}
-
 	/**
 	 * Sorts the tabs in the container by a specified property and order.
 	 * After sorting, it synchronizes the changes.
@@ -1318,7 +1169,7 @@ export class TabContainer extends Array {
 		super.sort((a, b) => {
 			// Treat null or undefined values as "smaller" to ensure they are grouped together
 			// Adjust direction for descending order
-			return sortFactor * this.#sortFunction(a[sortBy], b[sortBy]);
+			return sortFactor * sortFunction(a[sortBy], b[sortBy]);
 		});
 		this.#setSortState(sortBy, sortAsc);
 		// readd the pinned Tabs at the beginning
@@ -1336,41 +1187,6 @@ export class TabContainer extends Array {
 	 * Handles the invalidation of sort function by updating persisted settings
 	 * @return {Promise} when the sorting has been invalidated
 	 */
-	#invalidateSort() {
-		// Update the sort setting persisted (do not wait for response)
-		return setSettings({
-			id: PERSIST_SORT,
-			enabled: false,
-		});
-	}
-
-	/**
-	 * Checks if tabs are sorted by a specific key
-	 * @param {string} key - The key to check sorting for
-	 * @return {{isSorted: boolean, isAscending: boolean}} Sort result
-	 */
-	#checkSortOrderForKey(key) {
-		let asc = true;
-		let desc = true;
-		for (
-			let i = this[TabContainer.keyPinnedTabsNo] + 1;
-			i < this.length && (asc || desc);
-			i++
-		) {
-			const comparison = this.#sortFunction(
-				this[i - 1][key],
-				this[i][key],
-			);
-			if (comparison === 0) continue;
-			if (comparison > 0) asc = false;
-			if (comparison < 0) desc = false;
-		}
-		return {
-			isSorted: asc || desc,
-			isAscending: asc && !desc,
-		};
-	}
-
 	/**
 	 * Checks if the provided tabs are sorted by one of the allowed keys
 	 * ('label', 'url', or 'org') in either ascending or descending order.
@@ -1398,7 +1214,7 @@ export class TabContainer extends Array {
 			return true;
 		}
 		if (fromInvalidateSortFunction) {
-			await this.#invalidateSort();
+			await invalidateSort();
 			// check if, out of luck, the array is still sorted (do not return)
 		}
 		// Check if the user wants to keep the Tabs always sorted
@@ -1409,7 +1225,11 @@ export class TabContainer extends Array {
 		this.#setSortState();
 		// check if the array is still sorted
 		for (const key of Tab.allowedKeys) {
-			const sortResult = this.#checkSortOrderForKey(key);
+			const sortResult = checkSortOrderForKey({
+				key,
+				tabs: this,
+				pinnedTabsNo: this[TabContainer.keyPinnedTabsNo],
+			});
 			if (sortResult.isSorted) {
 				this.#setSortState(key, sortResult.isAscending);
 				break;
@@ -1498,9 +1318,14 @@ export class TabContainer extends Array {
 	 * @async
 	 */
 	handleClickTabByData(tabData = {}) {
-		this.getSingleTabByData(tabData)
-			?.handleClick();
-		return this.syncTabs();
+		try {
+			this.getSingleTabByData(tabData)
+				?.handleClick();
+			return this.syncTabs();
+		} catch (e) {
+			console.warn(e);
+		}
+		return true;
 	}
 
 	/**

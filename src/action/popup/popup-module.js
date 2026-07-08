@@ -18,7 +18,6 @@ import {
 	sendExtensionMessage as _sendExtensionMessage,
 } from "../../core/functions.js";
 import {
-	getTranslations as _getTranslations,
 	TranslationService as _TranslationService,
 } from "../../core/translator.js";
 
@@ -380,7 +379,7 @@ export function getPopupRuntimeDefaults() {
 		areFramePatternsAllowedFn: _areFramePatternsAllowed,
 		closePopupFn: globalThis.close ?? (() => {}),
 		documentRef: globalThis.document ?? FALLBACK_DOCUMENT_REF,
-		getTranslationsFn: _getTranslations,
+		getTranslationsFn: _TranslationService.getTranslations,
 		isOnSalesforceSetupFn: _isOnSalesforceSetup,
 		locationRef: globalThis.location ?? FALLBACK_LOCATION_REF,
 		openSettingsPageFn: _openSettingsPage,

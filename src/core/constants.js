@@ -59,7 +59,7 @@ export const SALESFORCE_ID_PATTERN = new RegExp(
 	"i",
 );
 export const SALESFORCE_URL_PATTERN =
-	/^[a-zA-Z0-9-]+(--[a-zA-Z0-9]+\.sandbox)?(\.develop)?$/g;
+	/^[a-zA-Z0-9-]+(--[a-zA-Z0-9]+\.sandbox)?(\.develop)?$/;
 export const FRAME_PATTERNS = [
 	`${HTTPS}*${MY_SALESFORCE_SETUP_COM}/*`,
 	`${HTTPS}*${LIGHTNING_FORCE_COM}/*`,
@@ -158,37 +158,37 @@ export const PIN_TAB_CLASS = "is-pin-tab";
 export const USER_LANGUAGE = "picked-language";
 export const FOLLOW_SF_LANG = "follow-sf-lang";
 // context menus
-export const CXM_OPEN_OTHER_ORG = "open-other-org";
-export const CXM_UPDATE_ORG = "update-org";
-export const CXM_UPDATE_TAB = "update-tab";
-export const CXM_MOVE_FIRST = "move-first";
-export const CXM_MOVE_LEFT = "move-left";
-export const CXM_MOVE_RIGHT = "move-right";
-export const CXM_MOVE_LAST = "move-last";
-export const CXM_REMOVE_TAB = "remove-tab";
-export const CXM_REMOVE_OTHER_TABS = "remove-other-tabs";
-export const CXM_REMOVE_LEFT_TABS = "remove-left-tabs";
-export const CXM_REMOVE_RIGHT_TABS = "remove-right-tabs";
-export const CXM_REMOVE_PIN_TABS = "remove-pin-tabs";
-export const CXM_REMOVE_UNPIN_TABS = "remove-unpin-tabs";
-export const CXM_EMPTY_VISIBLE_TABS = "empty-visible-tabs";
-export const CXM_EMPTY_GENERIC_TABS = "empty-generic-tabs";
-export const CXM_RESET_DEFAULT_TABS = "reset-default";
-export const CXM_EMPTY_TABS = "empty-tabs";
-export const CXM_IMPORT_TABS = "import-tabs";
-export const CXM_EXPORT_TABS = "export-tabs";
-export const CXM_PAGE_SAVE_TAB = "page-save-tab";
-export const CXM_PAGE_REMOVE_TAB = "page-remove-tab";
-export const CXM_SORT_LABEL = "sort-label";
-export const CXM_SORT_URL = "sort-url";
-export const CXM_SORT_ORG = "sort-org";
-export const CXM_SORT_CLICK_COUNT = "sort-click-count";
-export const CXM_SORT_CLICK_DATE = "sort-click-date";
-export const CXM_TMP_HIDE_ORG = "hide-with-org";
-export const CXM_TMP_HIDE_NON_ORG = "hide-without-org";
-export const CXM_PIN_TAB = "pin-tab";
-export const CXM_UNPIN_TAB = "unpin-tab";
-export const CXM_MANAGE_TABS = "manage-tabs";
+export const CXM_OPEN_OTHER_ORG = "cxm-open-other-org";
+export const CXM_UPDATE_ORG = "cxm-update-org";
+export const CXM_UPDATE_TAB = "cxm-update-tab";
+export const CXM_MOVE_FIRST = "cxm-move-first";
+export const CXM_MOVE_LEFT = "cxm-move-left";
+export const CXM_MOVE_RIGHT = "cxm-move-right";
+export const CXM_MOVE_LAST = "cxm-move-last";
+export const CXM_REMOVE_TAB = "cxm-remove-tab";
+export const CXM_REMOVE_OTHER_TABS = "cxm-remove-other-tabs";
+export const CXM_REMOVE_LEFT_TABS = "cxm-remove-left-tabs";
+export const CXM_REMOVE_RIGHT_TABS = "cxm-remove-right-tabs";
+export const CXM_REMOVE_PIN_TABS = "cxm-remove-pin-tabs";
+export const CXM_REMOVE_UNPIN_TABS = "cxm-remove-unpin-tabs";
+export const CXM_EMPTY_VISIBLE_TABS = "cxm-empty-visible-tabs";
+export const CXM_EMPTY_GENERIC_TABS = "cxm-empty-generic-tabs";
+export const CXM_RESET_DEFAULT_TABS = "cxm-reset-default";
+export const CXM_EMPTY_TABS = "cxm-empty-tabs";
+export const CXM_IMPORT_TABS = "cxm-import-tabs";
+export const CXM_EXPORT_TABS = "cxm-export-tabs";
+export const CXM_PAGE_SAVE_TAB = "cxm-page-save-tab";
+export const CXM_PAGE_REMOVE_TAB = "cxm-page-remove-tab";
+export const CXM_SORT_LABEL = "cxm-sort-label";
+export const CXM_SORT_URL = "cxm-sort-url";
+export const CXM_SORT_ORG = "cxm-sort-org";
+export const CXM_SORT_CLICK_COUNT = "cxm-sort-click-count";
+export const CXM_SORT_CLICK_DATE = "cxm-sort-click-date";
+export const CXM_TMP_HIDE_ORG = "cxm-hide-with-org";
+export const CXM_TMP_HIDE_NON_ORG = "cxm-hide-without-org";
+export const CXM_PIN_TAB = "cxm-pin-tab";
+export const CXM_UNPIN_TAB = "cxm-unpin-tab";
+export const CXM_MANAGE_TABS = "cxm-manage-tabs";
 export const ALL_CXM_KEYS = new Set([
 	CXM_OPEN_OTHER_ORG,
 	CXM_UPDATE_ORG,

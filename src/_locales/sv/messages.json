@@ -615,6 +615,10 @@
 		"message": "Fel vid lossning av Tab",
 		"description": "[fel]"
 	},
+	"error_unsavable_page": {
+		"message": "Den här sidan kan inte sparas.",
+		"description": "Fel när en sida saknar rubrik (och stjärnan/den genomstrukna stjärnan)"
+	},
 	"error_useless_remove": {
 		"message": "Kan inte ta bort:\nKan inte ta bort en sida som inte har sparats tidigare",
 		"description": "[error] användaren försökte ta bort en sida som ännu inte hade sparats"
@@ -794,6 +798,10 @@
 	"import_metadata": {
 		"message": "Importera Tab metadata (\"Antal Klick\", \"Klickdatum\" etc.).",
 		"description": "[etikett] importera allt som finns i filen under importprocessen"
+	},
+	"import_pinned_tabs": {
+		"message": "Importera antal fästa $tabs .",
+		"description": "[etikett] importera antal fästa $tabs under importprocessen"
 	},
 	"import_successful": {
 		"message": "Import lyckades",

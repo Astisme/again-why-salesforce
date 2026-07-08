@@ -1,15 +1,11 @@
 /// <reference lib="dom" />
 import { assertEquals } from "@std/testing/asserts";
 import { translations } from "../../mocks.test.ts";
-import {
-	ensureTranslatorAvailability,
-	getTranslations,
-	getTranslatorAttribute,
-} from "../../../src/core/translator.js";
+import { TranslationService } from "../../../src/core/translator.js";
 const translate_element_attribute = "data-i18n";
 
 Deno.test("TranslationService - load user preference", async () => {
-	const service = await ensureTranslatorAvailability();
+	const service = await TranslationService.ensureTranslatorAvailability();
 	assertEquals(
 		service.currentLanguage,
 		"fr",
@@ -20,7 +16,7 @@ Deno.test("TranslationService - load user preference", async () => {
 });
 
 Deno.test("TranslationService - translate method", async () => {
-	const service = await ensureTranslatorAvailability();
+	const service = await TranslationService.ensureTranslatorAvailability();
 	// Test available translation
 	assertEquals(
 		await service.translate("hello"),
@@ -70,7 +66,7 @@ Deno.test("TranslationService - translate method", async () => {
 });
 
 Deno.test("TranslationService - updatePageTranslations", async (t) => {
-	const service = await ensureTranslatorAvailability();
+	const service = await TranslationService.ensureTranslatorAvailability();
 	await t.step("translates to french", async () => {
 		// Mock DOM elements
 		await service.updatePageTranslations("fr");
@@ -139,7 +135,7 @@ Deno.test("TranslationService - updatePageTranslations", async (t) => {
 });
 
 Deno.test("TranslationService - loadLanguageFile", async () => {
-	const service = await ensureTranslatorAvailability();
+	const service = await TranslationService.ensureTranslatorAvailability();
 	// Test loading a new language
 	// Add mock de to translations
 	const mockJson: Record<string, { message: string }> = {
@@ -174,7 +170,7 @@ Deno.test("TranslationService - loadLanguageFile", async () => {
 });
 
 Deno.test("TranslationService - edge cases", async () => {
-	const service = await ensureTranslatorAvailability();
+	const service = await TranslationService.ensureTranslatorAvailability();
 	assertEquals(
 		await service.translate("plain sentence key"),
 		"plain sentence key",
@@ -192,20 +188,25 @@ Deno.test("TranslationService - edge cases", async () => {
 });
 
 Deno.test("TranslationService - public translator helpers", async () => {
-	const service = await ensureTranslatorAvailability();
+	const service = await TranslationService.ensureTranslatorAvailability();
 	await service.loadLanguageFile("fr");
 
-	assertEquals(await getTranslations("hello"), "Bonjour");
+	assertEquals(await TranslationService.getTranslations("hello"), "Bonjour");
 	assertEquals(
-		await getTranslations(["hello", "goodbye"]),
+		await TranslationService.getTranslations(["hello", "goodbye"]),
 		["Bonjour", "Goodbye"],
 	);
-	assertEquals(await getTranslations([]), []);
+	assertEquals(await TranslationService.getTranslations([]), []);
 
 	assertEquals(
-		await getTranslatorAttribute("translateAttributeDataset"),
+		await TranslationService.getTranslatorAttribute(
+			"translateAttributeDataset",
+		),
 		"i18n",
 	);
-	assertEquals(await getTranslatorAttribute("missingAttribute"), null);
-	assertEquals(await getTranslatorAttribute(null), null);
+	assertEquals(
+		await TranslationService.getTranslatorAttribute("missingAttribute"),
+		null,
+	);
+	assertEquals(await TranslationService.getTranslatorAttribute(null), null);
 });

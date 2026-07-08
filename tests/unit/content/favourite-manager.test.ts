@@ -1,6 +1,6 @@
 import { assert, assertEquals, assertThrows } from "@std/testing/asserts";
 import { installMockDom } from "../../happydom.test.ts";
-import { createFavouriteManagerModule } from "../../../src/salesforce/runtime/favourite-manager-runtime.js";
+import { createFavouriteManagerModule } from "../../../src/salesforce/module/favourite-manager-module.js";
 const HEADER_SELECTOR_BASE =
 	"div.tabsetBody.main-content.mainContentMark.fullheight.active.isSetupApp > div.split-right > section.tabContent.oneConsoleTab.active div.overflow.uiBlock";
 
@@ -193,9 +193,9 @@ function loadFavouriteManagerFixture(
 		whatAdd: "add",
 		whatGetCommands: "get_commands",
 		tabRef: {
-			containsSalesforceId: (_href) => tabContainsSalesforceId,
-			extractOrgName: (href) => `org:${href}`,
-			minifyURL: (_href) => minifiedUrl,
+			containsSalesforceId: (_href: string) => tabContainsSalesforceId,
+			extractOrgName: (href: string) => `org:${href}`,
+			minifyURL: (_href: string) => minifiedUrl,
 		},
 		ensureAllTabsAvailabilityFn: () =>
 			Promise.resolve({
@@ -215,7 +215,10 @@ function loadFavouriteManagerFixture(
 					};
 				},
 			} as TabList),
-		getTranslationsFn: (keys, connector = " ") => {
+		getTranslationsFn: (
+			keys: string | string[],
+			connector = " ",
+		) => {
 			if (Array.isArray(keys)) {
 				keys.forEach((key) => translationCalls.push(key));
 				return Promise.resolve(
@@ -228,9 +231,9 @@ function loadFavouriteManagerFixture(
 		},
 		getCurrentHrefFn: () => currentHref,
 		getIsCurrentlyOnSavedTabFn: () => isCurrentlyOnSavedTab,
-		getSettingsFn: (_keys) => Promise.resolve(settings),
+		getSettingsFn: (_keys: string[]) => Promise.resolve(settings),
 		getWasOnSavedTabFn: () => wasOnSavedTab,
-		injectStyleFn: (id, options) => {
+		injectStyleFn: (id: string, options: { css: string }) => {
 			injectStyleCalls.push({ css: options.css, id });
 			const style = document.createElement("style");
 			style.id = id;
@@ -241,28 +244,35 @@ function loadFavouriteManagerFixture(
 			isOnSavedTabCalls.value++;
 			return Promise.resolve();
 		},
-		performActionOnTabsFn: (action, payload, options) => {
+		performActionOnTabsFn: (
+			action: string,
+			payload: FavouriteActionPayload,
+			options?: { addInFront: boolean },
+		) => {
 			performActionCalls.push({ action, options, payload });
 			return Promise.resolve();
 		},
-		sendExtensionMessageFn: (message) => {
+		sendExtensionMessageFn: (message: {
+			commands: string[];
+			what: string;
+		}) => {
 			sendMessageCalls.push(message);
 			return Promise.resolve(commands);
 		},
-		showToastFn: (message, status) => {
+		showToastFn: (message: string, status: string) => {
 			toasts.push({ message, status });
 		},
 		documentRef,
-		setTimeoutFn: (callback, delay) => {
+		setTimeoutFn: (callback: () => void, delay: number) => {
 			timeoutCalls.push({ callback, delay });
 			return timeoutCalls.length;
 		},
 		customEventCtor: CustomEvent,
 		consoleRef: {
-			error: (message) => {
+			error: (message: string) => {
 				errorCalls.push(message);
 			},
-			warn: (message) => {
+			warn: (message: Error | string) => {
 				warnCalls.push(String(message));
 			},
 		},

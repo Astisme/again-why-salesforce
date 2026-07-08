@@ -13,7 +13,7 @@ import {
 	ensureAllTabsAvailability,
 	TabContainer,
 } from "../../core/tabContainer.js";
-import { getTranslations } from "../../core/translator.js";
+import { TranslationService } from "../../core/translator.js";
 
 import {
 	generateCheckboxWithLabel,
@@ -25,7 +25,11 @@ import {
 import { createImportPureModule } from "../module/import-module.js";
 import { sf_afterSet } from "./content-runtime.js";
 import { showToast } from "../toast.js";
-import { getModalHanger, getSetupTabUl } from "../sf-elements.js";
+import {
+	getCurrentHref,
+	getModalHanger,
+	getSetupTabUl,
+} from "../sf-elements.js";
 
 /**
  * Creates the import module API with runtime defaults and override support.
@@ -40,7 +44,7 @@ import { getModalHanger, getSetupTabUl } from "../sf-elements.js";
  * @param {unknown} [overrides.Tab=Tab] Tab helper object.
  * @param {unknown} [overrides.TabContainer=TabContainer] TabContainer helper object.
  * @param {() => Promise<unknown>} [overrides.ensureAllTabsAvailability=ensureAllTabsAvailability] Saved-tab container resolver.
- * @param {(keys: string | string[]) => Promise<string | string[]>} [overrides.getTranslations=getTranslations] Translation resolver.
+ * @param {(keys: string | string[]) => Promise<string | string[]>} [overrides.getTranslations=TranslationService.getTranslations] Translation resolver.
  * @param {(id: string, i18nKey: string, checked: boolean) => Promise<unknown>} [overrides.generateCheckboxWithLabel=generateCheckboxWithLabel] Checkbox generator.
  * @param {() => Promise<{ section: unknown; divParent: unknown }>} [overrides.generateSection=generateSection] Section generator.
  * @param {(importId: string, fileInputId: string, accept: string) => Promise<{ fileInputWrapper: unknown; inputContainer: unknown }>} [overrides.generateSldsFileInput=generateSldsFileInput] File input generator.
@@ -52,12 +56,13 @@ import { getModalHanger, getSetupTabUl } from "../sf-elements.js";
  *   tabs?: {
  *     importTabs: (
  *       json: string,
- *       config: Record<string, boolean>,
+ *       config: Record<string, boolean | string | null>,
  *     ) => Promise<number>;
  *   } | null;
  *   what?: string;
  * }) => void} [overrides.sf_afterSet=sf_afterSet] Content post-update hook.
  * @param {(message: string | unknown[], status?: string) => void | Promise<void>} [overrides.showToast=showToast] Toast helper.
+ * @param {() => string} [overrides.getCurrentHref=getCurrentHref] Current href resolver.
  * @param {() => unknown} [overrides.getModalHanger=getModalHanger] Modal hanger resolver.
  * @param {() => unknown} [overrides.getSetupTabUl=getSetupTabUl] Setup-tab UL resolver.
  * @param {{
@@ -82,7 +87,7 @@ import { getModalHanger, getSetupTabUl } from "../sf-elements.js";
  *   readChangeOrDropFiles: (event: Event) => Promise<void>;
  *   readFile: (files: FileList | File[] | File) => Promise<void>;
  *   showFileImport: () => Promise<void>;
- *   showTabSelectThenImport: (files?: File[], importConfig?: Record<string, boolean>) => Promise<void>;
+ *   showTabSelectThenImport: (files?: File[], importConfig?: Record<string, boolean | string | null>) => Promise<void>;
  * }} Import module API.
  */
 export function createImportModule(overrides = {}) {
@@ -97,7 +102,8 @@ export function createImportModule(overrides = {}) {
 		tabContainerRef: overrides.TabContainer ?? TabContainer,
 		ensureAllTabsAvailabilityFn: overrides.ensureAllTabsAvailability ??
 			ensureAllTabsAvailability,
-		getTranslationsFn: overrides.getTranslations ?? getTranslations,
+		getTranslationsFn: overrides.getTranslations ??
+			TranslationService.getTranslations,
 		generateCheckboxWithLabelFn: overrides.generateCheckboxWithLabel ??
 			generateCheckboxWithLabel,
 		generateSectionFn: overrides.generateSection ?? generateSection,
@@ -110,6 +116,7 @@ export function createImportModule(overrides = {}) {
 		injectStyleFn: overrides.injectStyle ?? injectStyle,
 		sfAfterSetFn: overrides.sf_afterSet ?? sf_afterSet,
 		showToastFn: overrides.showToast ?? showToast,
+		getCurrentHrefFn: overrides.getCurrentHref ?? getCurrentHref,
 		getModalHangerFn: overrides.getModalHanger ?? getModalHanger,
 		getSetupTabUlFn: overrides.getSetupTabUl ?? getSetupTabUl,
 		documentRef: overrides.documentRef ?? globalThis.document,

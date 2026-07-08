@@ -615,6 +615,10 @@
 		"message": "Tabのピン留め解除中にエラーが発生しました",
 		"description": "[エラー]"
 	},
+	"error_unsavable_page": {
+		"message": "このページは保存できません。",
+		"description": "ページにヘッダー（および星/斜線付きの星）がない場合の エラー"
+	},
 	"error_useless_remove": {
 		"message": "削除できません：\n一度も保存されていないページは削除できません",
 		"description": "[error] まだ保存されていないページの削除が試みられました"
@@ -794,6 +798,10 @@
 	"import_metadata": {
 		"message": "Tabメタデータ（「クリック数」、「クリック日」など）をインポートします。",
 		"description": "[ラベル] インポートプロセス中にファイル内で見つかったすべてをインポートする"
+	},
+	"import_pinned_tabs": {
+		"message": "固定された $tabs の数をインポートします。",
+		"description": "[ラベル] インポートプロセス中に固定された $tabs の数をインポートします"
 	},
 	"import_successful": {
 		"message": "インポートに成功しました",

@@ -58,9 +58,13 @@ export async function main(args: string[]): Promise<number> {
  */
 export function parseArgs(args: string[], projectRoot: string): CliOptions {
 	const defaults = {
-		srcDir: join(projectRoot, "src"),
-		localeFile: join(projectRoot, "src", "_locales", "en", "messages.json"),
-		reportFile: join(projectRoot, "logging-audit-report.json"),
+		srcDir: normalizePathSeparators(join(projectRoot, "src")),
+		localeFile: normalizePathSeparators(
+			join(projectRoot, "src", "_locales", "en", "messages.json"),
+		),
+		reportFile: normalizePathSeparators(
+			join(projectRoot, "logging-audit-report.json"),
+		),
 		failSeverity: "warn" as FindingSeverity,
 	};
 	const parsed = {
@@ -109,9 +113,19 @@ export function parseArgs(args: string[], projectRoot: string): CliOptions {
  */
 function resolvePath(projectRoot: string, pathValue: string): string {
 	if (pathValue.startsWith("/")) {
-		return pathValue;
+		return normalizePathSeparators(pathValue);
 	}
-	return join(projectRoot, pathValue);
+	return normalizePathSeparators(join(projectRoot, pathValue));
+}
+
+/**
+ * Normalizes path separators to forward slashes for stable cross-platform output.
+ *
+ * @param {string} pathValue Path to normalize.
+ * @return {string} Slash-normalized path.
+ */
+function normalizePathSeparators(pathValue: string): string {
+	return pathValue.replaceAll("\\", "/");
 }
 
 /**
@@ -176,7 +190,9 @@ async function findFilesWithConsoleAliases(
 ): Promise<Set<string>> {
 	const filesWithAliases = new Set<string>();
 	for (const relativePath of relativePaths) {
-		const absolutePath = join(projectRoot, relativePath);
+		const absolutePath = normalizePathSeparators(
+			join(projectRoot, relativePath),
+		);
 		try {
 			const fileContent = await Deno.readTextFile(absolutePath);
 			if (containsCalledWarnOrErrorAlias(fileContent)) {

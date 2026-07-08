@@ -28,7 +28,7 @@ import {
 	sendExtensionMessage as _sendExtensionMessage,
 	sendExtensionMessages as _sendExtensionMessages,
 } from "../../core/functions.js";
-import { getTranslations as _getTranslations } from "../../core/translator.js";
+import { TranslationService as _TranslationService } from "../../core/translator.js";
 import _Tab from "../../core/tab.js";
 import { performActionOnTabs as _performActionOnTabs } from "../runtime/content-runtime.js";
 import { showToast as _showToast } from "../toast.js";
@@ -74,7 +74,7 @@ const applyGlobalOverride = _applyGlobalOverride;
 let performLightningRedirect = _performLightningRedirect;
 let sendExtensionMessage = _sendExtensionMessage;
 let sendExtensionMessages = _sendExtensionMessages;
-let getTranslations = _getTranslations;
+let getTranslations = _TranslationService.getTranslations;
 let Tab = _Tab;
 let performActionOnTabs = _performActionOnTabs;
 let showToast = _showToast;

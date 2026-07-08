@@ -1,6 +1,7 @@
 #!/usr/bin/env -S deno run --allow-read --allow-write
 
 const LOCALES_DIR = "src/_locales";
+const OUTPUT_FILE = "invalid-variables-report.json";
 
 // matches $something where either
 // - no space before OR
@@ -165,10 +166,20 @@ async function main(): Promise<void> {
 		return;
 	}
 	await Deno.writeTextFile(
-		"invalid-variables-report.json",
+		OUTPUT_FILE,
 		`${JSON.stringify(result, null, 2)}\n`,
 	);
 	Deno.exit(1);
 }
 
-await main();
+async function removeThenMain(): Promise<void> {
+	try {
+		await Deno.remove(OUTPUT_FILE);
+	} catch (_e) {
+		// nothing
+	} finally {
+		await main();
+	}
+}
+
+await removeThenMain();

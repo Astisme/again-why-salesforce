@@ -615,6 +615,10 @@
 		"message": "Fout bij het losmaken van Tabblad",
 		"description": "[fout]"
 	},
+	"error_unsavable_page": {
+		"message": "Deze pagina kan niet worden opgeslagen.",
+		"description": "Fout wanneer een pagina niet de header (en de ster/doorgestreepte ster) heeft"
+	},
 	"error_useless_remove": {
 		"message": "Kan niet verwijderen:\nKan een pagina die nog niet eerder is opgeslagen niet verwijderen",
 		"description": "[fout] de gebruiker probeerde een pagina te verwijderen die nog niet was opgeslagen"
@@ -794,6 +798,10 @@
 	"import_metadata": {
 		"message": "Tabblad metadata importeren (\"Kliktelling\", \"Klikdatum\" enz.).",
 		"description": "[label] importeer alles wat in het bestand wordt gevonden tijdens het importproces"
+	},
+	"import_pinned_tabs": {
+		"message": "Aantal vastgemaakte $tabs importeren.",
+		"description": "[label] aantal vastgemaakte $tabs importeren tijdens importproces"
 	},
 	"import_successful": {
 		"message": "Succesvol geïmporteerd",

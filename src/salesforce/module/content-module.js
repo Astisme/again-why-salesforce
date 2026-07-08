@@ -60,7 +60,7 @@ import {
 	getInnerElementFieldBySelector as _getInnerElementFieldBySelector,
 	getSettings as _getSettings,
 } from "../../core/functions.js";
-import { getTranslations as _getTranslations } from "../../core/translator.js";
+import { TranslationService as _TranslationService } from "../../core/translator.js";
 import _Tab from "../../core/tab.js";
 import { ensureAllTabsAvailability as _ensureAllTabsAvailability } from "../../core/tabContainer.js";
 import { setupDragForUl as _setupDragForUl } from "../dragHandler.js";
@@ -154,7 +154,7 @@ const DEPENDENCIES = {
 	getModalHanger: _getModalHanger,
 	getSettings: _getSettings,
 	getSetupTabUl: _getSetupTabUl,
-	getTranslations: _getTranslations,
+	getTranslations: _TranslationService.getTranslations,
 	setupDragForUl: _setupDragForUl,
 	showToast: _showToast,
 };
@@ -380,7 +380,7 @@ function sf_afterSet({
 		return;
 	}
 	if (what === CONSTANTS.WHAT_SAVED) {
-		showToast(["extension_label", "tabs_saved"]);
+		showToast("tabs_saved");
 	}
 	if (shouldReload) {
 		trackContentTask(reloadTabs(tabs));
@@ -421,8 +421,8 @@ async function init(tabs = null, signal = null) {
 	if (shouldAbortReload(signal)) {
 		return;
 	}
+	const frag = document.createDocumentFragment();
 	if (allTabs.length > 0) {
-		const frag = document.createDocumentFragment();
 		const pinnedItems = allTabs.pinned;
 		for (const i in allTabs) {
 			if (shouldAbortReload(signal)) {
@@ -441,11 +441,11 @@ async function init(tabs = null, signal = null) {
 				),
 			);
 		}
-		if (shouldAbortReload(signal)) {
-			return;
-		}
-		getSetupTabUl().replaceChildren(frag);
 	}
+	if (shouldAbortReload(signal)) {
+		return;
+	}
+	getSetupTabUl().replaceChildren(frag);
 	await isOnSavedTab();
 	if (shouldAbortReload(signal)) {
 		return;
@@ -563,11 +563,10 @@ function delayLoadSetupTabs(count = 0) {
 	if (count > 5) {
 		// write error in the console
 		trackContentTask((async () => {
-			const [label, fail] = await getTranslations([
-				"extension_label",
+			const fail = await getTranslations(
 				"error_no_setup_tab",
-			]);
-			console.error(`${label} - ${fail}`);
+			);
+			console.error(fail);
 			setTimeout(delayLoadSetupTabs, 5000);
 		})());
 		return;
@@ -845,11 +844,11 @@ function executeTabAction({
 		},
 		[CONSTANTS.WHAT_PAGE_SAVE_TAB]: async () => {
 			await pageActionTab(true);
-			return ACTION_RESULT_SYNC;
+			return ACTION_RESULT_NO_SYNC;
 		},
 		[CONSTANTS.WHAT_PAGE_REMOVE_TAB]: async () => {
 			await pageActionTab(false);
-			return ACTION_RESULT_SYNC;
+			return ACTION_RESULT_NO_SYNC;
 		},
 	};
 	const actionHandler = actionHandlers[action];

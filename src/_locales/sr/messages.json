@@ -615,6 +615,10 @@
 		"message": "Грешка приликом одзакачивања Tab-а",
 		"description": "[грешка]"
 	},
+	"error_unsavable_page": {
+		"message": "Ова страница се не може сачувати.",
+		"description": "Грешка када страница нема заглавље (и звездицу/прецртану звездицу)"
+	},
 	"error_useless_remove": {
 		"message": "Ne može se ukloniti:\nNe može se ukloniti stranica koja ranije nije sačuvana",
 		"description": "[error] korisnik je pokušao da ukloni stranicu koja još nije bila sačuvana"
@@ -794,6 +798,10 @@
 	"import_metadata": {
 		"message": "Увези метаподатке Tab-а (\"Број Кликова\", \"Датум Клика\" итд.).",
 		"description": "[ознака] увези све што се нађе у датотеци током процеса увоза"
+	},
+	"import_pinned_tabs": {
+		"message": "Увези број закачених $tabs .",
+		"description": "[ознака] увези број закачених $tabs током процеса увоза"
 	},
 	"import_successful": {
 		"message": "Uvoz je uspešan",
