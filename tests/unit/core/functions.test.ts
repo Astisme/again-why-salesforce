@@ -10,8 +10,11 @@ import {
 
 import {
 	BROWSER,
+	CHROME_LINK,
 	DO_NOT_REQUEST_FRAME_PERMISSION,
+	EDGE_LINK,
 	EXTENSION_OPTIONAL_HOST_PERM,
+	FIREFOX_LINK,
 	FRAME_PATTERNS,
 	GENERIC_PINNED_TAB_STYLE_KEY,
 	GENERIC_TAB_STYLE_KEY,
@@ -19,6 +22,7 @@ import {
 	ORG_PINNED_TAB_STYLE_KEY,
 	ORG_TAB_STYLE_KEY,
 	SETTINGS_KEY,
+	SPONSOR_MAP,
 	TAB_STYLE_BACKGROUND,
 	TAB_STYLE_BOLD,
 	TAB_STYLE_BORDER,
@@ -48,7 +52,9 @@ import {
 	isPinnedKey,
 	isSalesforceHostname,
 	isStyleKey,
+	openCorrectBrowserReviewLink,
 	openSettingsPage,
+	openSponsorLink,
 	performLightningRedirect,
 	requestCookiesPermission,
 	requestExportPermission,
@@ -925,4 +931,33 @@ Deno.test("getTodayDateKey formats the local calendar day", () => {
 		getTodayDateKey(new Date(2026, 10, 2, 23, 59, 59, 999)),
 		"2026-11-02",
 	);
+});
+
+Deno.test("review sponsor link openers choose correct destinations", () => {
+	const openedLinks = [];
+	const originalOpen = globalThis.open;
+	globalThis.open = (url, target) => {
+		openedLinks.push([String(url), target]);
+		return null;
+	};
+
+	try {
+		openCorrectBrowserReviewLink("_self");
+		openSponsorLink("it");
+		openSponsorLink("unknown");
+		assertEquals(openedLinks.slice(-2), [
+			[SPONSOR_MAP.it, "_blank"],
+			[SPONSOR_MAP.default, "_blank"],
+		]);
+		if (openedLinks.length === 3) {
+			assertEquals(openedLinks[0][1], "_self");
+			assert([
+				CHROME_LINK,
+				EDGE_LINK,
+				FIREFOX_LINK,
+			].includes(openedLinks[0][0]));
+		}
+	} finally {
+		globalThis.open = originalOpen;
+	}
 });

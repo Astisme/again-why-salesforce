@@ -26,17 +26,21 @@ import {
 	CXM_TMP_HIDE_ORG as _CXM_TMP_HIDE_ORG,
 	CXM_UNPIN_TAB as _CXM_UNPIN_TAB,
 	EXTENSION_NAME as _EXTENSION_NAME,
+	EXTENSION_USAGE_DAYS as _EXTENSION_USAGE_DAYS,
 	HAS_ORG_TAB as _HAS_ORG_TAB,
 	LINK_NEW_BROWSER as _LINK_NEW_BROWSER,
 	MODAL_ID as _MODAL_ID,
 	SETUP_LIGHTNING as _SETUP_LIGHTNING,
 	TAB_ON_LEFT as _TAB_ON_LEFT,
 	TOAST_ERROR as _TOAST_ERROR,
+	TOAST_INFO as _TOAST_INFO,
 	TOAST_WARNING as _TOAST_WARNING,
 	TUTORIAL_EVENT_PIN_TAB as _TUTORIAL_EVENT_PIN_TAB,
 	USE_LIGHTNING_NAVIGATION as _USE_LIGHTNING_NAVIGATION,
 	WHAT_ACTIVATE as _WHAT_ACTIVATE,
 	WHAT_ADD as _WHAT_ADD,
+	WHAT_DID_REVIEW as _WHAT_DID_REVIEW,
+	WHAT_DID_SPONSOR as _WHAT_DID_SPONSOR,
 	WHAT_EXPORT_FROM_BG as _WHAT_EXPORT_FROM_BG,
 	WHAT_FOCUS_CHANGED as _WHAT_FOCUS_CHANGED,
 	WHAT_HIGHLIGHTED as _WHAT_HIGHLIGHTED,
@@ -49,6 +53,8 @@ import {
 	WHAT_SHOW_EXPORT_MODAL as _WHAT_SHOW_EXPORT_MODAL,
 	WHAT_SHOW_IMPORT as _WHAT_SHOW_IMPORT,
 	WHAT_SHOW_OPEN_OTHER_ORG as _WHAT_SHOW_OPEN_OTHER_ORG,
+	WHAT_SHOW_REVIEW as _WHAT_SHOW_REVIEW,
+	WHAT_SHOW_SPONSOR as _WHAT_SHOW_SPONSOR,
 	WHAT_START_TUTORIAL as _WHAT_START_TUTORIAL,
 	WHAT_STARTUP as _WHAT_STARTUP,
 	WHAT_THEME as _WHAT_THEME,
@@ -59,6 +65,10 @@ import {
 import {
 	getInnerElementFieldBySelector as _getInnerElementFieldBySelector,
 	getSettings as _getSettings,
+	openCorrectBrowserReviewLink as _openCorrectBrowserReviewLink,
+	openSponsorLink as _openSponsorLink,
+	setSettings as _setSettings,
+	shouldShowReviewOrSponsor as _shouldShowReviewOrSponsor,
 } from "../../core/functions.js";
 import { TranslationService as _TranslationService } from "../../core/translator.js";
 import _Tab from "../../core/tab.js";
@@ -108,11 +118,13 @@ const CONSTANTS = {
 	CXM_TMP_HIDE_ORG: _CXM_TMP_HIDE_ORG,
 	CXM_UNPIN_TAB: _CXM_UNPIN_TAB,
 	EXTENSION_NAME: _EXTENSION_NAME,
+	EXTENSION_USAGE_DAYS: _EXTENSION_USAGE_DAYS,
 	HAS_ORG_TAB: _HAS_ORG_TAB,
 	LINK_NEW_BROWSER: _LINK_NEW_BROWSER,
 	SETUP_LIGHTNING: _SETUP_LIGHTNING,
 	TAB_ON_LEFT: _TAB_ON_LEFT,
 	TOAST_ERROR: _TOAST_ERROR,
+	TOAST_INFO: _TOAST_INFO,
 	TOAST_WARNING: _TOAST_WARNING,
 	TUTORIAL_EVENT_PIN_TAB: _TUTORIAL_EVENT_PIN_TAB,
 	USE_LIGHTNING_NAVIGATION: _USE_LIGHTNING_NAVIGATION,
@@ -130,6 +142,10 @@ const CONSTANTS = {
 	WHAT_SHOW_EXPORT_MODAL: _WHAT_SHOW_EXPORT_MODAL,
 	WHAT_SHOW_IMPORT: _WHAT_SHOW_IMPORT,
 	WHAT_SHOW_OPEN_OTHER_ORG: _WHAT_SHOW_OPEN_OTHER_ORG,
+	WHAT_DID_REVIEW: _WHAT_DID_REVIEW,
+	WHAT_DID_SPONSOR: _WHAT_DID_SPONSOR,
+	WHAT_SHOW_REVIEW: _WHAT_SHOW_REVIEW,
+	WHAT_SHOW_SPONSOR: _WHAT_SHOW_SPONSOR,
 	WHAT_START_TUTORIAL: _WHAT_START_TUTORIAL,
 	WHAT_STARTUP: _WHAT_STARTUP,
 	WHAT_THEME: _WHAT_THEME,
@@ -155,16 +171,28 @@ const DEPENDENCIES = {
 	getSettings: _getSettings,
 	getSetupTabUl: _getSetupTabUl,
 	getTranslations: _TranslationService.getTranslations,
+	openCorrectBrowserReviewLink: _openCorrectBrowserReviewLink,
+	openSponsorLink: _openSponsorLink,
 	setupDragForUl: _setupDragForUl,
+	setSettings: _setSettings,
+	shouldShowReviewOrSponsor: _shouldShowReviewOrSponsor,
 	showToast: _showToast,
+	ensureTranslatorAvailability:
+		_TranslationService.ensureTranslatorAvailability,
 };
 
 const getInnerElementFieldBySelector = (...args) =>
 	DEPENDENCIES.getInnerElementFieldBySelector(...args);
 const getSettings = (...args) => DEPENDENCIES.getSettings(...args);
 const getTranslations = (...args) => DEPENDENCIES.getTranslations(...args);
+const openCorrectBrowserReviewLink = (...args) =>
+	DEPENDENCIES.openCorrectBrowserReviewLink(...args);
+const openSponsorLink = (...args) => DEPENDENCIES.openSponsorLink(...args);
+const setSettings = (...args) => DEPENDENCIES.setSettings(...args);
 const ensureAllTabsAvailability = (...args) =>
 	DEPENDENCIES.ensureAllTabsAvailability(...args);
+const ensureTranslatorAvailability = (...args) =>
+	DEPENDENCIES.ensureTranslatorAvailability(...args);
 const setupDragForUl = (...args) => DEPENDENCIES.setupDragForUl(...args);
 const showToast = (...args) => DEPENDENCIES.showToast(...args);
 const generateRowTemplate = (...args) =>
@@ -182,6 +210,8 @@ const findSetupTabUlInSalesforcePage = (...args) =>
 const getCurrentHref = (...args) => DEPENDENCIES.getCurrentHref(...args);
 const getModalHanger = (...args) => DEPENDENCIES.getModalHanger(...args);
 const getSetupTabUl = (...args) => DEPENDENCIES.getSetupTabUl(...args);
+const shouldShowReviewOrSponsor = (...args) =>
+	DEPENDENCIES.shouldShowReviewOrSponsor(...args);
 const Tab = new Proxy({}, {
 	get(_target, property) {
 		return DEPENDENCIES.Tab[property];
@@ -702,6 +732,109 @@ function assertActionResult(actionResult, errorMessage) {
 }
 
 /**
+ * Persists that review or sponsor prompt has already been shown.
+ *
+ * @param {string} [what=CONSTANTS.WHAT_DID_REVIEW] Setting id to persist.
+ * @param {number} [date=Date.now()] Timestamp to persist.
+ * @return {Promise<void>} Resolves when setting save completes.
+ */
+function saveReviewSponsorWasToasted(
+	what = CONSTANTS.WHAT_DID_REVIEW,
+	date = Date.now(),
+) {
+	return setSettings({
+		id: what,
+		enabled: date,
+	});
+}
+
+/**
+ * Shows the review or sponsor toast only when the current usage thresholds allow it.
+ *
+ * @param {string} messageType Review/sponsor message id.
+ * @return {Promise<void>} Resolves after visibility check completes.
+ */
+async function checkShouldShowReviewSponsorToast(messageType) {
+	const [
+		allTabs,
+    usageSettings,
+  ] = await Promise.all([
+    ensureAllTabsAvailability(),
+    getSettings(CONSTANTS.EXTENSION_USAGE_DAYS),
+  ]);
+	const usageDays = Number(usageSettings?.enabled ?? 0);
+	const whatToShow = shouldShowReviewOrSponsor({
+		allTabs,
+		usageDays,
+	});
+  const showReview = messageType === CONSTANTS.WHAT_SHOW_REVIEW ||
+			whatToShow.review;
+  const showSponsor = messageType === CONSTANTS.WHAT_SHOW_SPONSOR ||
+			whatToShow.sponsor
+  if(!showReview && !showSponsor)
+    return;
+	const [
+		[
+			didReview,
+			didSponsor,
+		],
+		[
+			confirmLabel,
+			cancelLabel,
+			closeLabel,
+			writeReview,
+			sendTip,
+		],
+	] = await Promise.all([
+		getSettings([
+			CONSTANTS.WHAT_DID_REVIEW,
+			CONSTANTS.WHAT_DID_SPONSOR,
+		]),
+		getTranslations([
+			"open_new_tab",
+			"cancel",
+			"cancel_close",
+			"write_review",
+			"send_tip",
+		]),
+	]);
+	if (
+    showReview &&
+		didReview?.enabled == null
+	) {
+		if (
+			await sldsConfirm({
+				body: writeReview,
+				confirmLabel,
+				cancelLabel,
+				closeLabel,
+			})
+		) {
+			openCorrectBrowserReviewLink();
+		}
+		await saveReviewSponsorWasToasted(CONSTANTS.WHAT_DID_REVIEW);
+		return;
+	}
+	if (
+    showSponsor &&
+		didSponsor?.enabled == null
+	) {
+		if (
+			await sldsConfirm({
+				body: sendTip,
+				confirmLabel,
+				cancelLabel,
+				closeLabel,
+			})
+		) {
+			const translator = await ensureTranslatorAvailability();
+			openSponsorLink(translator.currentLanguage);
+		}
+		await saveReviewSponsorWasToasted(CONSTANTS.WHAT_DID_SPONSOR);
+	}
+}
+
+/**
  * Executes a tab action and returns whether `sf_afterSet` should run.
  *
  * @param {{
@@ -758,6 +891,7 @@ function executeTabAction({
 				),
 				"error_adding_tab",
 			);
+      await checkShouldShowReviewSponsorToast();
 			return ACTION_RESULT_SYNC;
 		},
 		[CONSTANTS.CXM_EMPTY_GENERIC_TABS]: async () => {
@@ -844,6 +978,7 @@ function executeTabAction({
 		},
 		[CONSTANTS.WHAT_PAGE_SAVE_TAB]: async () => {
 			await pageActionTab(true);
+      await checkShouldShowReviewSponsorToast();
 			return ACTION_RESULT_NO_SYNC;
 		},
 		[CONSTANTS.WHAT_PAGE_REMOVE_TAB]: async () => {
@@ -1143,6 +1278,7 @@ async function routeBackgroundMessage(message) {
 			case CONSTANTS.WHAT_HIGHLIGHTED:
 			case CONSTANTS.WHAT_FOCUS_CHANGED:
 				sf_afterSet(message);
+        await checkShouldShowReviewSponsorToast();
 				break;
 			case CONSTANTS.TOAST_WARNING:
 			case CONSTANTS.TOAST_ERROR:
@@ -1284,6 +1420,10 @@ async function routeBackgroundMessage(message) {
 			case CONSTANTS.WHAT_PAGE_SAVE_TAB:
 			case CONSTANTS.WHAT_PAGE_REMOVE_TAB:
 				await performActionOnTabs(message.what, messageTab);
+				break;
+			case CONSTANTS.WHAT_SHOW_REVIEW:
+			case CONSTANTS.WHAT_SHOW_SPONSOR:
+				await checkShouldShowReviewSponsorToast(message.what);
 				break;
 			default:
 				if (message.what !== CONSTANTS.WHAT_THEME) {
@@ -1450,8 +1590,13 @@ export function createContentModule(overrides = {}) {
 		getSettings: functions.getSettings,
 		getSetupTabUl: sfElements.getSetupTabUl,
 		getTranslations: overrides.getTranslations,
+		openCorrectBrowserReviewLink: functions.openCorrectBrowserReviewLink,
+		openSponsorLink: functions.openSponsorLink,
 		setupDragForUl: dragHandler.setupDragForUl,
+		setSettings: functions.setSettings,
+		shouldShowReviewOrSponsor: functions.shouldShowReviewOrSponsor,
 		showToast: toast.showToast,
+		ensureTranslatorAvailability: overrides.ensureTranslatorAvailability,
 	});
 
 	applyNonNullOverrides(ACTION_HANDLERS, {
