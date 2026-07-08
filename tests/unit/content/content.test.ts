@@ -10,11 +10,24 @@ import {
 } from "@std/testing/asserts";
 import { installMockDom } from "../../happydom.test.ts";
 
+globalThis.browser ??= {
+	i18n: {
+		getMessage: (key: string) => key,
+	},
+	runtime: {
+		getURL: (path: string) => path,
+		getManifest: () => ({
+			homepage_url: "https://github.com/againwhy/awsf",
+			optional_host_permissions: [],
+			version: "0.0.0-test",
+		}),
+	},
+};
+globalThis.chrome ??= globalThis.browser;
+
+const CONSTANTS = await import("../../../src/core/constants.js");
+
 const EXTENSION_NAME = "again-why-salesforce";
-const CONTENT_PATH = new URL(
-	"../../../src/salesforce/content.js",
-	import.meta.url,
-);
 
 /**
  * Creates a button whose dispatch can await async listeners during tests.
@@ -84,6 +97,10 @@ type ContentDeps = {
 			join?: string,
 		) => Promise<string>;
 	}>;
+	getTranslations: (
+		message: string | string[],
+		join?: string,
+	) => Promise<string | string[]>;
 	Tab: any;
 	tabContainer: {
 		ensureAllTabsAvailability: () => Promise<any[]>;
@@ -106,6 +123,13 @@ type ContentDeps = {
 			status: string,
 		) => Promise<HTMLElement>;
 		generateStyleFromSettings: () => void;
+		sldsConfirm: (options?: {
+			body?: string | string[];
+			cancelLabel?: string;
+			closeLabel?: string;
+			confirmLabel?: string;
+			title?: string;
+		}) => Promise<boolean>;
 		generateUpdateTabModal: (...args: unknown[]) => Promise<any>;
 	};
 	importModule: {
@@ -142,343 +166,37 @@ type ContentDeps = {
 	};
 };
 
-/**
- * Replaces an import statement with the same number of newlines to preserve line numbers.
- *
- * @param {string} source Source code containing imports.
- * @param {string} fileName Import specifier to blank out.
- * @return {string} Source code with the import replaced by blank lines.
- */
-function blankImport(source: string, fileName: string) {
-	return source.replace(
-		new RegExp(
-			String.raw`import[\s\S]*?from\s*"${
-				fileName.replaceAll("/", "\\/")
-			}";\n`,
-		),
-		(match) => "\n".repeat(match.split("\n").length - 1),
-	);
-}
-
-/**
- * Encodes one signed integer using base64-VLQ for source-map generation.
- *
- * @param {number} value Integer to encode.
- * @return {string} Encoded VLQ segment.
- */
-function encodeVlqValue(value: number) {
-	const alphabet =
-		"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-	let encoded = "";
-	let vlq = value < 0 ? ((-value) << 1) + 1 : value << 1;
-	do {
-		let digit = vlq & 31;
-		vlq >>>= 5;
-		if (vlq > 0) {
-			digit |= 32;
-		}
-		encoded += alphabet[digit];
-	} while (vlq > 0);
-	return encoded;
-}
-
-/**
- * Builds a simple per-line source map from generated code back to the original file.
- *
- * @param {Object} options Mapping options.
- * @param {number[]} options.originalLines 1-based original line numbers for each generated line.
- * @param {string} options.sourceUrl Absolute source URL for the original file.
- * @return {string} Base64-encoded JSON source-map payload.
- */
-function buildInlineSourceMap({
-	originalLines,
-	sourceUrl,
-}: {
-	originalLines: number[];
-	sourceUrl: string;
-}) {
-	let previousSource = 0;
-	let previousOriginalLine = 0;
-	let previousOriginalColumn = 0;
-	const mappings = originalLines.map((lineNumber) => {
-		if (lineNumber < 1) {
-			return "";
-		}
-		const segment = [
-			encodeVlqValue(0),
-			encodeVlqValue(0 - previousSource),
-			encodeVlqValue((lineNumber - 1) - previousOriginalLine),
-			encodeVlqValue(0 - previousOriginalColumn),
-		].join("");
-		previousSource = 0;
-		previousOriginalLine = lineNumber - 1;
-		previousOriginalColumn = 0;
-		return segment;
-	}).join(";");
-	const sourceMap = {
-		version: 3,
-		file: CONTENT_PATH.href,
-		sources: [sourceUrl],
-		names: [],
-		mappings,
-	};
-	return btoa(JSON.stringify(sourceMap));
-}
-
 async function loadContentModule(deps: ContentDeps) {
-	let source = await Deno.readTextFile(CONTENT_PATH);
-	for (
-		const fileName of [
-			"/core/constants.js",
-			"/core/functions.js",
-			"/core/translator.js",
-			"/core/tab.js",
-			"/core/tabContainer.js",
-			"./dragHandler.js",
-			"./favourite-manager.js",
-			"./generator.js",
-			"./import.js",
-			"./export.js",
-			"./manageTabs.js",
-			"./openOtherOrg.js",
-			"./sf-elements.js",
-			"./toast.js",
-			"./tutorial.js",
-			"./once-a-day.js",
-		]
-	) {
-		source = blankImport(source, fileName);
-	}
-	source = source
-		.replace(
-			"reloadTabs(tabs);",
-			"__trackContentTask(reloadTabs(tabs));",
-		)
-		.replace(
-			"if (isCurrentlyOnSavedTab || wasOnSavedTab) reloadTabs();",
-			"if (isCurrentlyOnSavedTab || wasOnSavedTab) __trackContentTask(reloadTabs());",
-		)
-		.replace(
-			"reloadTabs();\n\tcheckTutorial();",
-			"__trackContentTask(reloadTabs());\n\tcheckTutorial();",
-		)
-		.replace(
-			"ensureAllTabsAvailability();",
-			"__trackContentTask(Promise.resolve(ensureAllTabsAvailability()));",
-		)
-		.replace(
-			"checkAddLightningNavigation();",
-			"__trackContentTask(checkAddLightningNavigation());",
-		)
-		.replace(
-			"delayLoadSetupTabs();",
-			"__trackContentTask(delayLoadSetupTabs());",
-		)
-		.replace(
-			"\t\t(async () => {",
-			"\t\t__trackContentTask((async () => {",
-		)
-		.replace(
-			"\t\t})();\n\t\treturn;",
-			"\t\t})());\n\t\treturn;",
-		)
-		.replace(
-			"isOnSavedTab(true, _afterHrefUpdate);",
-			"__trackContentTask(isOnSavedTab(true, _afterHrefUpdate));",
-		)
-		.replace(
-			"void init(tabs, startReloadSignal());",
-			"return init(tabs, startReloadSignal());",
-		)
-		.replace(
-			"createImportModal();",
-			"__trackContentTask(createImportModal());",
-		)
-		.replace(
-			"createManageTabsModal();",
-			"__trackContentTask(createManageTabsModal());",
-		)
-		.replace(
-			"createExportModal();",
-			"__trackContentTask(createExportModal());",
-		)
-		.replace(
-			"createOpenOtherOrgModal(messageTab);",
-			"__trackContentTask(createOpenOtherOrgModal(messageTab));",
-		)
-		.replace(
-			"showModalUpdateTab(messageTab);",
-			"__trackContentTask(showModalUpdateTab(messageTab));",
-		)
-		.replace(
-			"promptUpdateExtension(message);",
-			"__trackContentTask(promptUpdateExtension(message));",
-		);
-	const prelude = `
-const __deps = globalThis.__contentTestDeps;
-const __trackContentTask = globalThis.__trackContentTask ?? ((task) => task);
-const {
-	ALL_TOAST_TYPES,
-	BROWSER,
-	CXM_EMPTY_GENERIC_TABS,
-	CXM_EMPTY_TABS,
-	CXM_EMPTY_VISIBLE_TABS,
-	CXM_MANAGE_TABS,
-	CXM_MOVE_FIRST,
-	CXM_MOVE_LAST,
-	CXM_MOVE_LEFT,
-	CXM_MOVE_RIGHT,
-	CXM_PIN_TAB,
-	CXM_REMOVE_LEFT_TABS,
-	CXM_REMOVE_OTHER_TABS,
-	CXM_REMOVE_PIN_TABS,
-	CXM_REMOVE_RIGHT_TABS,
-	CXM_REMOVE_TAB,
-	CXM_REMOVE_UNPIN_TABS,
-	CXM_RESET_DEFAULT_TABS,
-	CXM_SORT_CLICK_COUNT,
-	CXM_SORT_CLICK_DATE,
-	CXM_SORT_LABEL,
-	CXM_SORT_ORG,
-	CXM_SORT_URL,
-	CXM_TMP_HIDE_NON_ORG,
-	CXM_TMP_HIDE_ORG,
-	CXM_UNPIN_TAB,
-	EXTENSION_NAME,
-	HAS_ORG_TAB,
-	HTTPS,
-	LIGHTNING_FORCE_COM,
-	LINK_NEW_BROWSER,
-	SALESFORCE_URL_PATTERN,
-	SETUP_LIGHTNING,
-	TAB_ON_LEFT,
-	TOAST_ERROR,
-	TOAST_INFO,
-	TOAST_SUCCESS,
-	TOAST_WARNING,
-	TUTORIAL_EVENT_PIN_TAB,
-	USE_LIGHTNING_NAVIGATION,
-	WHAT_ACTIVATE,
-	WHAT_ADD,
-	WHAT_EXPORT_FROM_BG,
-	WHAT_FOCUS_CHANGED,
-	WHAT_HIGHLIGHTED,
-	WHAT_INSTALLED,
-	WHAT_PAGE_REMOVE_TAB,
-	WHAT_PAGE_SAVE_TAB,
-	WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
-	WHAT_SAVED,
-	WHAT_SHOW_EXPORT_MODAL,
-	WHAT_SHOW_IMPORT,
-	WHAT_SHOW_OPEN_OTHER_ORG,
-	WHAT_START_TUTORIAL,
-	WHAT_STARTUP,
-	WHAT_THEME,
-	WHAT_TOGGLE_ORG,
-	WHAT_UPDATE_EXTENSION,
-	WHAT_UPDATE_TAB,
-} = __deps.constants;
-const {
-	calculateReadingTime,
-	getInnerElementFieldBySelector,
-	getSettings,
-} = __deps.functions;
-const ensureTranslatorAvailability = __deps.ensureTranslatorAvailability;
-const Tab = __deps.Tab;
-const { ensureAllTabsAvailability } = __deps.tabContainer;
-const { setupDragForUl } = __deps.dragHandler;
-const { pageActionTab, showFavouriteButton } = __deps.favouriteManager;
-const {
-	generateRowTemplate,
-	generateSldsToastMessage,
-	generateStyleFromSettings,
-	generateUpdateTabModal,
-	MODAL_ID,
-} = __deps.generator;
-const { createImportModal } = __deps.importModule;
-const { createExportModal } = __deps.exportModule;
-const { createManageTabsModal } = __deps.manageTabs;
-const { createOpenOtherOrgModal } = __deps.openOtherOrg;
-const { getCurrentHref, getModalHanger, getSetupTabUl, } = __deps.sfElements;
-let setupTabUl = getSetupTabUl();
-const findSetupTabUlInSalesforcePage = () => {
-	const found = __deps.sfElements.findSetupTabUlInSalesforcePage();
-	setupTabUl = getSetupTabUl();
-	return found;
-};
-const { showToast } = __deps.toast;
-const showModalOpenOtherOrg = createOpenOtherOrgModal;
-const { checkTutorial } = __deps.tutorial;
-const { executeOncePerDay } = __deps.onceADay;
-`;
-	const sourceLines = source.split("\n");
-	const preludeLines = prelude.split("\n");
-	const hookLines = [
-		"export const __testHooks = {",
-		"\t_afterHrefUpdate,",
-		"\tcheckAddLightningNavigation,",
-		"\tcheckKeepTabsOnLeft,",
-		"\tdelayLoadSetupTabs,",
-		"\tgetModalHanger,",
-		"\tgetSetupTabUl,",
-		"\thideTabs,",
-		"\tinit,",
-		"\tlaunchDownload,",
-		"\tmain,",
-		"\tonHrefUpdate,",
-		"\tpromptUpdateExtension,",
-		"\treloadTabs,",
-		"\tshowModalOpenOtherOrg,",
-		"\tshowModalUpdateTab,",
-		"\tshowToast,",
-		"\ttoggleOrg,",
-		"\tgetCurrentHref,",
-		"};",
-		"export { getCurrentHref, getModalHanger, getSetupTabUl, showToast };",
-	];
-	const strictModeLineIndex = sourceLines.findIndex((line) =>
-		line.trim() === '"use strict";'
-	);
-	if (strictModeLineIndex < 0) {
-		throw new Error("error_missing_use_strict");
-	}
-	const preludeInsertLineIndex = strictModeLineIndex + 1;
-	const generatedLines = [
-		...sourceLines.slice(0, preludeInsertLineIndex),
-		...preludeLines,
-		...sourceLines.slice(preludeInsertLineIndex),
-		...hookLines,
-	];
-	const originalLines = [
-		...sourceLines.slice(0, preludeInsertLineIndex).map((_, index) =>
-			index + 1
-		),
-		...preludeLines.map(() => 0),
-		...sourceLines.slice(preludeInsertLineIndex).map((_, index) =>
-			preludeInsertLineIndex + index + 1
-		),
-		...hookLines.map(() => 0),
-	];
-	const inlineSourceMap = buildInlineSourceMap({
-		originalLines,
-		sourceUrl: CONTENT_PATH.href,
+	const browserRuntime = deps.constants.BROWSER ?? {};
+	browserRuntime.i18n ??= {
+		getMessage: (key: string) => key,
+	};
+	browserRuntime.runtime ??= {};
+	browserRuntime.runtime.getManifest ??= () => ({
+		homepage_url: "https://github.com/againwhy/awsf",
+		optional_host_permissions: [],
+		version: "0.0.0-test",
 	});
-	const moduleUrl = URL.createObjectURL(
-		new Blob([`${generatedLines.join("\n")}
-//# sourceMappingURL=data:application/json;base64,${inlineSourceMap}
-//# sourceURL=${CONTENT_PATH.href}
-`], { type: "text/javascript" }),
-	);
+	browserRuntime.runtime.sendMessage ??= (
+		_message: Record<string, unknown>,
+		callback?: (payload?: unknown) => void,
+	) => {
+		callback?.(null);
+		return Promise.resolve(null);
+	};
+	setGlobal("browser", browserRuntime);
+	setGlobal("chrome", browserRuntime);
+	setGlobal("__AWSF_SKIP_CONTENT_AUTO_BOOTSTRAP__", true);
 	try {
-		(globalThis as typeof globalThis & {
-			__contentTestDeps?: ContentDeps;
-		}).__contentTestDeps = deps;
-		return await import(`${moduleUrl}#${crypto.randomUUID()}`);
+		const contentModule = await import(
+			"../../../src/salesforce/runtime/content-runtime.js"
+		);
+		const content = contentModule.createContentModule(deps);
+		content.bootstrapIfNeeded();
+		return content;
 	} finally {
-		delete (globalThis as typeof globalThis & {
-			__contentTestDeps?: ContentDeps;
-		}).__contentTestDeps;
-		URL.revokeObjectURL(moduleUrl);
+		delete (globalThis as Record<string, unknown>)
+			.__AWSF_SKIP_CONTENT_AUTO_BOOTSTRAP__;
 	}
 }
 
@@ -666,6 +384,13 @@ function createHarness(url = SETUP_URL) {
 		toasts: [] as Array<{ message: string[]; status: string }>,
 		openCalls: [] as Array<unknown[]>,
 		confirmCalls: [] as string[],
+		sldsConfirmCalls: [] as Array<{
+			body?: string | string[];
+			cancelLabel?: string;
+			closeLabel?: string;
+			confirmLabel?: string;
+			title?: string;
+		}>,
 		replaceTabsCalls: [] as Array<
 			{ tabs: any[]; options: Record<string, unknown> }
 		>,
@@ -1136,30 +861,30 @@ function createHarness(url = SETUP_URL) {
 		constants: {
 			ALL_TOAST_TYPES: new Set(["success", "info", "warning", "error"]),
 			BROWSER: browser,
-			CXM_EMPTY_GENERIC_TABS: "empty-generic-tabs",
-			CXM_EMPTY_TABS: "empty-tabs",
-			CXM_EMPTY_VISIBLE_TABS: "empty-visible-tabs",
-			CXM_MANAGE_TABS: "manage-tabs",
-			CXM_MOVE_FIRST: "move-first",
-			CXM_MOVE_LAST: "move-last",
-			CXM_MOVE_LEFT: "move-left",
-			CXM_MOVE_RIGHT: "move-right",
-			CXM_PIN_TAB: "pin-tab",
-			CXM_REMOVE_LEFT_TABS: "remove-left-tabs",
-			CXM_REMOVE_OTHER_TABS: "remove-other-tabs",
-			CXM_REMOVE_PIN_TABS: "remove-pin-tabs",
-			CXM_REMOVE_RIGHT_TABS: "remove-right-tabs",
-			CXM_REMOVE_TAB: "remove-tab",
-			CXM_REMOVE_UNPIN_TABS: "remove-unpin-tabs",
-			CXM_RESET_DEFAULT_TABS: "reset-default",
-			CXM_SORT_CLICK_COUNT: "sort-click-count",
-			CXM_SORT_CLICK_DATE: "sort-click-date",
-			CXM_SORT_LABEL: "sort-label",
-			CXM_SORT_ORG: "sort-org",
-			CXM_SORT_URL: "sort-url",
-			CXM_TMP_HIDE_NON_ORG: "hide-without-org",
-			CXM_TMP_HIDE_ORG: "hide-with-org",
-			CXM_UNPIN_TAB: "unpin-tab",
+			CXM_EMPTY_GENERIC_TABS: CONSTANTS.CXM_EMPTY_GENERIC_TABS,
+			CXM_EMPTY_TABS: CONSTANTS.CXM_EMPTY_TABS,
+			CXM_EMPTY_VISIBLE_TABS: CONSTANTS.CXM_EMPTY_VISIBLE_TABS,
+			CXM_MANAGE_TABS: CONSTANTS.CXM_MANAGE_TABS,
+			CXM_MOVE_FIRST: CONSTANTS.CXM_MOVE_FIRST,
+			CXM_MOVE_LAST: CONSTANTS.CXM_MOVE_LAST,
+			CXM_MOVE_LEFT: CONSTANTS.CXM_MOVE_LEFT,
+			CXM_MOVE_RIGHT: CONSTANTS.CXM_MOVE_RIGHT,
+			CXM_PIN_TAB: CONSTANTS.CXM_PIN_TAB,
+			CXM_REMOVE_LEFT_TABS: CONSTANTS.CXM_REMOVE_LEFT_TABS,
+			CXM_REMOVE_OTHER_TABS: CONSTANTS.CXM_REMOVE_OTHER_TABS,
+			CXM_REMOVE_PIN_TABS: CONSTANTS.CXM_REMOVE_PIN_TABS,
+			CXM_REMOVE_RIGHT_TABS: CONSTANTS.CXM_REMOVE_RIGHT_TABS,
+			CXM_REMOVE_TAB: CONSTANTS.CXM_REMOVE_TAB,
+			CXM_REMOVE_UNPIN_TABS: CONSTANTS.CXM_REMOVE_UNPIN_TABS,
+			CXM_RESET_DEFAULT_TABS: CONSTANTS.CXM_RESET_DEFAULT_TABS,
+			CXM_SORT_CLICK_COUNT: CONSTANTS.CXM_SORT_CLICK_COUNT,
+			CXM_SORT_CLICK_DATE: CONSTANTS.CXM_SORT_CLICK_DATE,
+			CXM_SORT_LABEL: CONSTANTS.CXM_SORT_LABEL,
+			CXM_SORT_ORG: CONSTANTS.CXM_SORT_ORG,
+			CXM_SORT_URL: CONSTANTS.CXM_SORT_URL,
+			CXM_TMP_HIDE_NON_ORG: CONSTANTS.CXM_TMP_HIDE_NON_ORG,
+			CXM_TMP_HIDE_ORG: CONSTANTS.CXM_TMP_HIDE_ORG,
+			CXM_UNPIN_TAB: CONSTANTS.CXM_UNPIN_TAB,
 			EXTENSION_NAME: "again-why-salesforce",
 			HAS_ORG_TAB: ".has-org-tab",
 			HTTPS: "https://",
@@ -1248,6 +973,14 @@ function createHarness(url = SETUP_URL) {
 			translate: (message: string | string[], join = " ") =>
 				Array.isArray(message) ? message.join(join) : message,
 		}),
+		getTranslations: (message: string | string[], join = " ") => {
+			if (Array.isArray(message)) {
+				return Promise.resolve(
+					join == null ? message : message.join(join),
+				);
+			}
+			return Promise.resolve(message);
+		},
 		Tab: {
 			keyClickCount: "click-count",
 			keyClickDate: "click-date",
@@ -1283,6 +1016,10 @@ function createHarness(url = SETUP_URL) {
 			},
 			generateStyleFromSettings: () => {
 				records.styleCalls++;
+			},
+			sldsConfirm: (options = {}) => {
+				records.sldsConfirmCalls.push(options);
+				return Promise.resolve(state.confirmResult);
 			},
 			generateUpdateTabModal: updateTabModalFactory,
 		},
@@ -1517,7 +1254,7 @@ Deno.test(
 			});
 			await harness.flush();
 			assertEquals(harness.records.toasts.at(-1), {
-				message: ["extension_label", "tabs_saved"],
+				message: ["tabs_saved"],
 				status: "success",
 			});
 			content.sf_afterSet({ what: "focused", tabs: newTabs });
@@ -1527,6 +1264,10 @@ Deno.test(
 				"Only Users",
 			);
 			assertEquals(content.getSetupTabUl().childElementCount, 1);
+
+			content.sf_afterSet({ what: "focused", tabs: [] });
+			await harness.flush();
+			assertEquals(content.getSetupTabUl().childElementCount, 0);
 		} finally {
 			harness.cleanup();
 		}
@@ -2077,9 +1818,13 @@ Deno.test(
 			});
 
 			await t.step("hide org tabs", async () => {
-				await content.performActionOnTabs("hide-with-org");
-				assertEquals(orgLi.style.display, "none");
-				assertEquals(genericLi.style.display, "");
+				const currentOrgLi = document.createElement("li");
+				currentOrgLi.classList.add("has-org-tab");
+				const currentGenericLi = document.createElement("li");
+				setupTabUl.replaceChildren(currentOrgLi, currentGenericLi);
+				await content.performActionOnTabs(CONSTANTS.CXM_TMP_HIDE_ORG);
+				assertEquals(currentOrgLi.style.display, "none");
+				assertEquals(currentGenericLi.style.display, "");
 			});
 
 			await t.step("pin tab dispatches tutorial event", async () => {
@@ -2087,7 +1832,7 @@ Deno.test(
 				document.addEventListener("tutorial-pin", () => {
 					pinEventCount++;
 				});
-				await content.performActionOnTabs("pin-tab", {
+				await content.performActionOnTabs(CONSTANTS.CXM_PIN_TAB, {
 					label: "Users",
 					url: USERS_URL,
 				});
@@ -2098,18 +1843,23 @@ Deno.test(
 			await t.step(
 				"page actions delegate to favourite manager",
 				async () => {
+					const initialToastCount = harness.records.toasts.length;
 					await content.performActionOnTabs("page-save-tab");
 					await content.performActionOnTabs("page-remove-tab");
 					assertEquals(harness.records.pageActions.slice(-2), [
 						true,
 						false,
 					]);
+					assertEquals(
+						harness.records.toasts.length,
+						initialToastCount,
+					);
 				},
 			);
 
 			await t.step("failing remove shows an error toast", async () => {
 				harness.state.removeResult = false;
-				await content.performActionOnTabs("remove-tab", {
+				await content.performActionOnTabs(CONSTANTS.CXM_REMOVE_TAB, {
 					label: "Users",
 					url: USERS_URL,
 				});
@@ -2160,10 +1910,16 @@ Deno.test(
 			await t.step(
 				"reset and empty actions call replace/default handlers",
 				async () => {
-					await content.performActionOnTabs("empty-generic-tabs");
-					await content.performActionOnTabs("empty-tabs");
-					await content.performActionOnTabs("empty-visible-tabs");
-					await content.performActionOnTabs("reset-default");
+					await content.performActionOnTabs(
+						CONSTANTS.CXM_EMPTY_GENERIC_TABS,
+					);
+					await content.performActionOnTabs(CONSTANTS.CXM_EMPTY_TABS);
+					await content.performActionOnTabs(
+						CONSTANTS.CXM_EMPTY_VISIBLE_TABS,
+					);
+					await content.performActionOnTabs(
+						CONSTANTS.CXM_RESET_DEFAULT_TABS,
+					);
 					await harness.flush();
 					assertEquals(
 						harness.records.replaceTabsCalls.length >= 3,
@@ -2226,12 +1982,16 @@ Deno.test(
 			await t.step(
 				"pin removal and unpin variants are forwarded",
 				async () => {
-					await content.performActionOnTabs("unpin-tab", {
+					await content.performActionOnTabs(CONSTANTS.CXM_UNPIN_TAB, {
 						label: "Users",
 						url: USERS_URL,
 					});
-					await content.performActionOnTabs("remove-pin-tabs");
-					await content.performActionOnTabs("remove-unpin-tabs");
+					await content.performActionOnTabs(
+						CONSTANTS.CXM_REMOVE_PIN_TABS,
+					);
+					await content.performActionOnTabs(
+						CONSTANTS.CXM_REMOVE_UNPIN_TABS,
+					);
 					assertEquals(
 						harness.records.pinCalls.at(-1)?.shouldPin,
 						false,
@@ -2420,16 +2180,18 @@ Deno.test(
 					harness.state.replaceTabsResult = false;
 					for (
 						const action of [
-							"empty-generic-tabs",
-							"empty-tabs",
-							"empty-visible-tabs",
+							CONSTANTS.CXM_EMPTY_GENERIC_TABS,
+							CONSTANTS.CXM_EMPTY_TABS,
+							CONSTANTS.CXM_EMPTY_VISIBLE_TABS,
 						]
 					) {
 						await content.performActionOnTabs(action);
 					}
 					harness.state.replaceTabsResult = true;
 					harness.state.defaultTabsResult = false;
-					await content.performActionOnTabs("reset-default");
+					await content.performActionOnTabs(
+						CONSTANTS.CXM_RESET_DEFAULT_TABS,
+					);
 					harness.state.defaultTabsResult = true;
 					harness.state.sortResult = false;
 					await content.performActionOnTabs("sort", undefined, {
@@ -2437,18 +2199,22 @@ Deno.test(
 					});
 					harness.state.sortResult = true;
 					harness.state.pinResult = false;
-					await content.performActionOnTabs("pin-tab", {
+					await content.performActionOnTabs(CONSTANTS.CXM_PIN_TAB, {
 						label: "Users",
 						url: USERS_URL,
 					});
-					await content.performActionOnTabs("unpin-tab", {
+					await content.performActionOnTabs(CONSTANTS.CXM_UNPIN_TAB, {
 						label: "Users",
 						url: USERS_URL,
 					});
 					harness.state.pinResult = true;
 					harness.state.removePinnedResult = false;
-					await content.performActionOnTabs("remove-pin-tabs");
-					await content.performActionOnTabs("remove-unpin-tabs");
+					await content.performActionOnTabs(
+						CONSTANTS.CXM_REMOVE_PIN_TABS,
+					);
+					await content.performActionOnTabs(
+						CONSTANTS.CXM_REMOVE_UNPIN_TABS,
+					);
 					harness.state.removePinnedResult = true;
 					assertEquals(
 						harness.records.toasts.some((toast) =>
@@ -2805,7 +2571,7 @@ Deno.test(
 							what: "show-import",
 						});
 						harness.browser.runtime.triggerMessage({
-							what: "manage-tabs",
+							what: CONSTANTS.CXM_MANAGE_TABS,
 						});
 						harness.browser.runtime.triggerMessage({
 							what: "show-export-modal",
@@ -2838,7 +2604,7 @@ Deno.test(
 					});
 					await harness.flush();
 					assertStringIncludes(
-						harness.records.confirmCalls[0],
+						String(harness.records.sldsConfirmCalls[0]?.body),
 						"1.0.0",
 					);
 					assertEquals(
@@ -2850,7 +2616,7 @@ Deno.test(
 
 				await t.step("sorting delegates computed options", async () => {
 					harness.browser.runtime.triggerMessage({
-						what: "sort-label",
+						what: CONSTANTS.CXM_SORT_LABEL,
 					});
 					await harness.flush();
 					assertEquals(harness.records.sortCalls[0], {
@@ -2866,7 +2632,7 @@ Deno.test(
 							harness.browser.runtime._listeners[0];
 						await backgroundListener(
 							{
-								what: "remove-left-tabs",
+								what: CONSTANTS.CXM_REMOVE_LEFT_TABS,
 								label: "Users",
 								url: USERS_URL,
 							},
@@ -2877,6 +2643,41 @@ Deno.test(
 							harness.records.removeOtherCalls.at(-1)?.options
 								.removeBefore,
 							true,
+						);
+					},
+				);
+
+				await t.step(
+					"page action routing does not add content toast",
+					async () => {
+						const backgroundListener =
+							harness.browser.runtime._listeners[0];
+						const initialToastCount = harness.records.toasts.length;
+						await backgroundListener(
+							{
+								what: "page-save-tab",
+								label: "Users",
+								url: USERS_URL,
+							},
+							{},
+							() => {},
+						);
+						await backgroundListener(
+							{
+								what: "page-remove-tab",
+								label: "Users",
+								url: USERS_URL,
+							},
+							{},
+							() => {},
+						);
+						assertEquals(harness.records.pageActions.slice(-2), [
+							true,
+							false,
+						]);
+						assertEquals(
+							harness.records.toasts.length,
+							initialToastCount,
 						);
 					},
 				);
@@ -2908,7 +2709,7 @@ Deno.test(
 							() => {},
 						);
 						const secondNonQueuedCall = backgroundListener(
-							{ what: "manage-tabs" },
+							{ what: CONSTANTS.CXM_MANAGE_TABS },
 							{},
 							() => {},
 						);
@@ -2964,7 +2765,7 @@ Deno.test(
 						};
 						const firstQueuedMove = backgroundListener(
 							{
-								what: "move-right",
+								what: CONSTANTS.CXM_MOVE_RIGHT,
 								label: "Users",
 								url: USERS_URL,
 							},
@@ -3028,7 +2829,7 @@ Deno.test(
 						await importStarted.promise;
 						const secondQueuedMove = backgroundListener(
 							{
-								what: "move-right",
+								what: CONSTANTS.CXM_MOVE_RIGHT,
 								label: "Users",
 								url: USERS_URL,
 							},
@@ -3091,7 +2892,7 @@ Deno.test(
 						};
 						const firstQueuedMove = backgroundListener(
 							{
-								what: "move-right",
+								what: CONSTANTS.CXM_MOVE_RIGHT,
 								label: "Users",
 								url: USERS_URL,
 							},
@@ -3100,7 +2901,7 @@ Deno.test(
 						);
 						const secondQueuedMove = backgroundListener(
 							{
-								what: "move-last",
+								what: CONSTANTS.CXM_MOVE_LAST,
 								label: "Users",
 								url: USERS_URL,
 							},
@@ -3109,7 +2910,7 @@ Deno.test(
 						);
 						const thirdQueuedMove = backgroundListener(
 							{
-								what: "move-first",
+								what: CONSTANTS.CXM_MOVE_FIRST,
 								label: "Users",
 								url: USERS_URL,
 							},
@@ -3117,7 +2918,11 @@ Deno.test(
 							() => {},
 						);
 						await firstMoveStarted.promise;
-						assertEquals(totalMoveCalls, 1);
+						assertEquals(
+							totalMoveCalls,
+							1,
+							`total: ${totalMoveCalls}`,
+						);
 						assertEquals(thirdMoveStarted, false);
 						firstMoveDeferred.resolve();
 						await secondMoveStarted.promise;
@@ -3165,7 +2970,7 @@ Deno.test(
 						};
 						const firstQueuedMove = backgroundListener(
 							{
-								what: "move-right",
+								what: CONSTANTS.CXM_MOVE_RIGHT,
 								label: "Users",
 								url: USERS_URL,
 							},
@@ -3174,7 +2979,7 @@ Deno.test(
 						);
 						const secondQueuedMove = backgroundListener(
 							{
-								what: "move-last",
+								what: CONSTANTS.CXM_MOVE_LAST,
 								label: "Users",
 								url: USERS_URL,
 							},
@@ -3182,7 +2987,11 @@ Deno.test(
 							() => {},
 						);
 						await firstMoveStarted.promise;
-						assertEquals(totalMoveCalls, 1);
+						assertEquals(
+							totalMoveCalls,
+							1,
+							`total: ${totalMoveCalls}`,
+						);
 						assertEquals(secondMoveStarted, false);
 						firstMoveDeferred.resolve();
 						await Promise.all([firstQueuedMove, secondQueuedMove]);
@@ -3198,38 +3007,38 @@ Deno.test(
 							ok: false,
 						});
 						harness.browser.runtime.triggerMessage({
-							what: "move-right",
+							what: CONSTANTS.CXM_MOVE_RIGHT,
 							label: "Users",
 							url: USERS_URL,
 						});
 						harness.browser.runtime.triggerMessage({
-							what: "move-last",
+							what: CONSTANTS.CXM_MOVE_LAST,
 							label: "Users",
 							url: USERS_URL,
 						});
 						harness.browser.runtime.triggerMessage({
-							what: "move-left",
+							what: CONSTANTS.CXM_MOVE_LEFT,
 							label: "Users",
 							url: USERS_URL,
 						});
 						harness.browser.runtime.triggerMessage({
-							what: "move-first",
+							what: CONSTANTS.CXM_MOVE_FIRST,
 							label: "Users",
 							url: USERS_URL,
 						});
 						harness.browser.runtime.triggerMessage({
-							what: "remove-other-tabs",
+							what: CONSTANTS.CXM_REMOVE_OTHER_TABS,
 							label: "Users",
 							url: USERS_URL,
 						});
 						harness.browser.runtime.triggerMessage({
-							what: "remove-left-tabs",
+							what: CONSTANTS.CXM_REMOVE_LEFT_TABS,
 							label: "Users",
 							url: USERS_URL,
 						});
 						await backgroundListener(
 							{
-								what: "remove-left-tabs",
+								what: CONSTANTS.CXM_REMOVE_LEFT_TABS,
 								label: "Users",
 								url: USERS_URL,
 							},
@@ -3237,21 +3046,21 @@ Deno.test(
 							() => {},
 						);
 						harness.browser.runtime.triggerMessage({
-							what: "remove-right-tabs",
+							what: CONSTANTS.CXM_REMOVE_RIGHT_TABS,
 							label: "Users",
 							url: USERS_URL,
 						});
 						harness.browser.runtime.triggerMessage({
-							what: "sort-url",
+							what: CONSTANTS.CXM_SORT_URL,
 						});
 						harness.browser.runtime.triggerMessage({
-							what: "sort-org",
+							what: CONSTANTS.CXM_SORT_ORG,
 						});
 						harness.browser.runtime.triggerMessage({
-							what: "sort-click-count",
+							what: CONSTANTS.CXM_SORT_CLICK_COUNT,
 						});
 						harness.browser.runtime.triggerMessage({
-							what: "sort-click-date",
+							what: CONSTANTS.CXM_SORT_CLICK_DATE,
 						});
 						await harness.flush();
 						assertEquals(
@@ -3330,18 +3139,18 @@ Deno.test(
 						});
 						for (
 							const what of [
-								"remove-pin-tabs",
-								"remove-unpin-tabs",
-								"empty-generic-tabs",
-								"empty-tabs",
-								"empty-visible-tabs",
-								"reset-default",
+								CONSTANTS.CXM_REMOVE_PIN_TABS,
+								CONSTANTS.CXM_REMOVE_UNPIN_TABS,
+								CONSTANTS.CXM_EMPTY_GENERIC_TABS,
+								CONSTANTS.CXM_EMPTY_TABS,
+								CONSTANTS.CXM_EMPTY_VISIBLE_TABS,
+								CONSTANTS.CXM_RESET_DEFAULT_TABS,
 								"toggle-org",
-								"pin-tab",
-								"unpin-tab",
-								"remove-tab",
-								"hide-with-org",
-								"hide-without-org",
+								CONSTANTS.CXM_PIN_TAB,
+								CONSTANTS.CXM_UNPIN_TAB,
+								CONSTANTS.CXM_REMOVE_TAB,
+								CONSTANTS.CXM_TMP_HIDE_ORG,
+								CONSTANTS.CXM_TMP_HIDE_NON_ORG,
 								"page-save-tab",
 								"page-remove-tab",
 							]

@@ -1,4 +1,7 @@
 #!/bin/bash
+set -euo pipefail
+export LANG=C
+export LC_ALL=C
 
 EXT_NAME="Again, Why Salesforce"
 INSTALLER_NAME="$EXT_NAME Installer"
@@ -6,15 +9,41 @@ PROJ_DIR="safari-proj"
 BIN_DIR="safari-bin"
 DMG_STAGING="dmg_staging/$INSTALLER_NAME"
 BACKGROUND_DIR="dmg_resources"
+BUILD_ASSETS_DIR="src/assets/build"
+DMG_TEMP=""
+MOUNT_DIR="/Volumes/$INSTALLER_NAME"
+
+cleanup() {
+    local exit_code=$?
+    trap - EXIT INT TERM
+
+    if [ -n "${MOUNT_DIR:-}" ] && [ -d "$MOUNT_DIR" ]; then
+        hdiutil detach "$MOUNT_DIR" -force 2>/dev/null || diskutil unmount "$MOUNT_DIR" 2>/dev/null || true
+    fi
+
+    if [ -n "${DMG_TEMP:-}" ]; then
+        rm -f "$DMG_TEMP"
+    fi
+
+    rm -rf "$BIN_DIR" "$PROJ_DIR" "$(dirname "$DMG_STAGING")" "$BACKGROUND_DIR"
+    rm -f temp_awsf-safari-v*.dmg
+
+    exit "$exit_code"
+}
+
+trap cleanup EXIT INT TERM
+
+rm -rf "$BIN_DIR" "$PROJ_DIR" "$(dirname "$DMG_STAGING")" "$BACKGROUND_DIR"
+rm -f temp_awsf-safari-v*.dmg
 
 # Create background resources directory if it doesn't exist
 mkdir -p "$BACKGROUND_DIR"
 
 # Unzip built extension
 BASE_NAME=$(basename bin/awsf-safari-v*.*.*.zip .zip)
-unzip -oq bin/$BASE_NAME.zip -d $BIN_DIR
-rm bin/$BASE_NAME.zip
-mkdir -p $PROJ_DIR "$DMG_STAGING"
+unzip -oq "bin/$BASE_NAME.zip" -d "$BIN_DIR"
+rm "bin/$BASE_NAME.zip"
+mkdir -p "$PROJ_DIR" "$DMG_STAGING"
 
 # Convert Web Extension -> Safari App Extension
 /Applications/Xcode.app/Contents/Developer/usr/bin/safari-web-extension-converter \
@@ -22,8 +51,14 @@ mkdir -p $PROJ_DIR "$DMG_STAGING"
     --no-prompt \
     --macos-only \
     --bundle-identifier "com.whysalesforce.again" \
-    --project-location $PROJ_DIR \
-    $BIN_DIR
+    --project-location "$PROJ_DIR" \
+    "$BIN_DIR"
+
+APP_INFO_PLIST="$PROJ_DIR/$EXT_NAME/$EXT_NAME/Info.plist"
+if [ -f "$APP_INFO_PLIST" ]; then
+    /usr/libexec/PlistBuddy -c "Set :LSApplicationCategoryType public.app-category.productivity" "$APP_INFO_PLIST" 2>/dev/null ||
+        /usr/libexec/PlistBuddy -c "Add :LSApplicationCategoryType string public.app-category.productivity" "$APP_INFO_PLIST"
+fi
 
 # Build macOS App Archive (unsigned)
 xcodebuild clean archive \
@@ -44,7 +79,6 @@ rm -f "$DMG_TEMP"
 rm -f "bin/$BASE_NAME.dmg"
 
 # Unmount any existing volumes with the same name
-MOUNT_DIR="/Volumes/$INSTALLER_NAME"
 if [ -d "$MOUNT_DIR" ]; then
     echo "Unmounting existing volume..."
     hdiutil detach "$MOUNT_DIR" -force 2>/dev/null || true
@@ -73,11 +107,11 @@ if [ ! -w "$MOUNT_DIR" ]; then
 fi
 
 # Copy background images to hidden .background folder in DMG
-if [ -f "assets/build/dmg-bkg.png" ]; then
+if [ -f "$BUILD_ASSETS_DIR/dmg-bkg.png" ]; then
     echo "Setting up background assets..."
     mkdir -p "$MOUNT_DIR/.background"
     # Copy the regular resolution image
-    cp "assets/build/dmg-bkg.png" "$MOUNT_DIR/.background/dmg-bkg.png" || {
+    cp "$BUILD_ASSETS_DIR/dmg-bkg.png" "$MOUNT_DIR/.background/dmg-bkg.png" || {
         echo "Warning: Could not copy background image"
     }
   # Use AppleScript to customize the DMG appearance
@@ -113,18 +147,20 @@ fi
 
 
 # Hide background folder
-SetFile -a V "$MOUNT_DIR/.background" 2>/dev/null || chflags hidden "$MOUNT_DIR/.background" 2>/dev/null
+if [ -d "$MOUNT_DIR/.background" ]; then
+    SetFile -a V "$MOUNT_DIR/.background" 2>/dev/null || chflags hidden "$MOUNT_DIR/.background" 2>/dev/null
+fi
 
 # Create and add custom volume icon from existing images (do this BEFORE mounting)
 VOLUME_ICON_ICNS="$BACKGROUND_DIR/VolumeIcon.icns"
-if [ ! -f "$VOLUME_ICON_ICNS" ] && [ -d "assets/build" ]; then
+if [ ! -f "$VOLUME_ICON_ICNS" ] && [ -d "$BUILD_ASSETS_DIR" ]; then
     echo "Creating volume icon from existing assets..."
     # Create iconset directory in the proper location
     ICONSET_DIR="$BACKGROUND_DIR/VolumeIcon.iconset"
     mkdir -p "$ICONSET_DIR"
     
     # Copy and rename existing PNGs to iconset format
-    [ -f "assets/build/dmg-img.png" ] && cp "assets/build/dmg-img.png" "$ICONSET_DIR/icon_32x32@2x.png"
+    [ -f "$BUILD_ASSETS_DIR/dmg-img.png" ] && cp "$BUILD_ASSETS_DIR/dmg-img.png" "$ICONSET_DIR/icon_32x32@2x.png"
     
     # Check if we have at least one icon
     if [ "$(ls -1 "$ICONSET_DIR" 2>/dev/null | wc -l)" -gt 0 ]; then
@@ -134,8 +170,8 @@ if [ ! -f "$VOLUME_ICON_ICNS" ] && [ -d "assets/build" ]; then
         else
             echo "✗ Failed to create .icns file with iconutil"
             # Fallback: try using the largest PNG directly (some tools accept this)
-            if [ -f "assets/build/dmg-img.png" ]; then
-                cp "assets/build/dmg-img.png" "$VOLUME_ICON_ICNS.png"
+            if [ -f "$BUILD_ASSETS_DIR/dmg-img.png" ]; then
+                cp "$BUILD_ASSETS_DIR/dmg-img.png" "$VOLUME_ICON_ICNS.png"
                 echo "→ Using PNG fallback: $VOLUME_ICON_ICNS.png"
             fi
         fi

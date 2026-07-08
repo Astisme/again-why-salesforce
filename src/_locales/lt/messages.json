@@ -615,6 +615,10 @@
 		"message": "Klaida atsegant Tab",
 		"description": "[klaida]"
 	},
+	"error_unsavable_page": {
+		"message": "Šio puslapio nepavyko išsaugoti.",
+		"description": "Klaida, kai puslapyje nėra antraštės (ir žvaždutės / perbrauktos žvaždutės)"
+	},
 	"error_useless_remove": {
 		"message": "Negalima pašalinti:\nNegalima pašalinti puslapio, kuris anksčiau nebuvo išsaugotas",
 		"description": "[klaida] vartotojas bandė pašalinti puslapį, kuris dar nebuvo išsaugotas"
@@ -794,6 +798,10 @@
 	"import_metadata": {
 		"message": "Importuoti Tab metaduomenis (\"Paspaudimų Skaičius\", \"Paspaudimo Data\" ir t.t.).",
 		"description": "[žymė] importuoti viską, kas rasta faile importavimo proceso metu"
+	},
+	"import_pinned_tabs": {
+		"message": "Importuoti prisegtų $tabs skaičių.",
+		"description": "[etiketė] importuoti prisegtų $tabs skaičių importavimo proceso metu"
 	},
 	"import_successful": {
 		"message": "Sėkmingai importuota",

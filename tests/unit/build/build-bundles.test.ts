@@ -37,11 +37,19 @@ Deno.test("popup and options entrypoints import required UI modules", async () =
 	const popupEntrypoint = await readRepoFile("src/entrypoints/popup.js");
 	const optionsEntrypoint = await readRepoFile("src/entrypoints/options.js");
 
-	assertStringIncludes(popupEntrypoint, "../action/popup/popup.js");
+	assertStringIncludes(
+		popupEntrypoint,
+		"../action/popup/popup-runtime.js",
+	);
+	assertStringIncludes(
+		popupEntrypoint,
+		"../components/theme-selector/theme-selector.js",
+	);
 	assertStringIncludes(
 		popupEntrypoint,
 		"../components/review-sponsor/review-sponsor.js",
 	);
+	assertStringIncludes(popupEntrypoint, "await runPopup()");
 	assertStringIncludes(optionsEntrypoint, "../settings/options.js");
 	assertStringIncludes(optionsEntrypoint, "../components/help/help.js");
 	assertStringIncludes(

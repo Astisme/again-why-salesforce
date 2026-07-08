@@ -186,4 +186,22 @@ export class ThemeSelectorAws extends HTMLElement {
 	};
 }
 
-customElements.define("theme-selector-aws", ThemeSelectorAws);
+/**
+ * Registers the theme-selector custom element when a registry is available.
+ *
+ * @param {CustomElementRegistry | undefined} [customElementsRef=globalThis.customElements] Custom elements registry.
+ * @return {boolean} `true` when the element is registered or already present.
+ */
+export function defineThemeSelector(
+	customElementsRef = globalThis.customElements,
+) {
+	if (customElementsRef == null) {
+		return false;
+	}
+	if (customElementsRef.get("theme-selector-aws") == null) {
+		customElementsRef.define("theme-selector-aws", ThemeSelectorAws);
+	}
+	return true;
+}
+
+defineThemeSelector();

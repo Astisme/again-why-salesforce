@@ -1,6 +1,7 @@
+import "../../mocks.test.ts";
 import { assertEquals } from "@std/testing/asserts";
+import { createImportModule } from "../../../src/salesforce/import.js";
 import { MockElement } from "../ui/mock-dom.test.ts";
-import { loadIsolatedModule } from "../../load-isolated-module.test.ts";
 
 type ImportModule = {
 	__getInputModalParent: () => MockElement | null | undefined;
@@ -33,7 +34,7 @@ type ImportModule = {
 	showFileImport: () => Promise<void>;
 	showTabSelectThenImport: (
 		files?: FileLike[],
-		importConfig?: Record<string, boolean>,
+		importConfig?: Record<string, boolean | string | null>,
 	) => Promise<void>;
 };
 
@@ -43,100 +44,12 @@ type FileLike = {
 	type: string;
 };
 
-type ImportDependencies = {
-	BROWSER: {
-		runtime: {
-			getURL: (path: string) => string;
-		};
-	};
-	EXTENSION_NAME: string;
-	HIDDEN_CLASS: string;
-	MODAL_ID: string;
-	TOAST_ERROR: string;
-	TOAST_WARNING: string;
-	Tab: {
-		hasUnexpectedKeys: (tab: Record<string, unknown>) => boolean;
-	};
-	TabContainer: {
-		getThrowawayInstance: (options?: {
-			pinned?: number;
-			tabs?: unknown[];
-		}) => {
-			pinned: number;
-			push?: (tabs: unknown[]) => void;
-			sort: (options: { sortBy: string }, sync: boolean) => void;
-			toString: () => string;
-		};
-		keyPinnedTabsNo: string;
-		keyTabs: string;
-	};
-	document: {
-		createElement: (tagName: string) => MockElement;
-		getElementById: (id: string) => MockElement | null;
-	};
-	ensureAllTabsAvailability: () => Promise<{
-		importTabs: (
-			json: string,
-			config: Record<string, boolean>,
-		) => Promise<number>;
-	}>;
-	ensureTranslatorAvailability: () => Promise<{
-		translate: (message: string) => Promise<string>;
-	}>;
-	generateCheckboxWithLabel: (
-		id: string,
-		label: string,
-		checked: boolean,
-	) => Promise<MockElement>;
-	generateSection: () => Promise<{
-		divParent: MockElement;
-		section: MockElement;
-	}>;
-	generateSldsFileInput: (
-		importId: string,
-		fileId: string,
-		accept: string,
-	) => Promise<{
-		fileInputWrapper: MockElement;
-		inputContainer: MockElement;
-	}>;
-	generateSldsModal: (options: {
-		modalTitle: string;
-	}) => Promise<{
-		article: MockElement;
-		closeButton: MockElement;
-		modalParent: MockElement & {
-			querySelector: (selector: string) => MockElement | null;
-		};
-		saveButton: MockElement & { remove: () => void };
-	}>;
-	generateSldsModalWithTabList: (
-		tabs: unknown,
-		options: Record<string, string>,
-	) => Promise<{
-		closeButton: MockElement;
-		getSelectedTabs: () => { selectedAll: boolean; tabs: unknown[] };
-		modalParent: MockElement;
-		saveButton: MockElement;
-	}>;
-	getModalHanger: () => MockElement;
-	getSetupTabUl: () => {
-		querySelector: (selector: string) => MockElement | null;
-	};
-	injectStyle: (
-		id: string,
-		options: { css?: string; link?: string },
-	) => MockElement;
-	showToast: (message: string | unknown[], status?: string) => void;
-	sf_afterSet: (message: SfAfterSetPayload) => void;
-};
-
 type SfAfterSetPayload = {
 	shouldReload?: boolean;
 	tabs?: {
 		importTabs: (
 			json: string,
-			config: Record<string, boolean>,
+			config: Record<string, boolean | string | null>,
 		) => Promise<number>;
 	} | null;
 	what?: string;
@@ -149,7 +62,10 @@ type ImportFixture = {
 	closeClicks: { value: number };
 	fileCheckboxes: Record<string, MockElement>;
 	hangerChildren: MockElement[];
-	importCalls: { config: Record<string, boolean>; json: string }[];
+	importCalls: {
+		config: Record<string, boolean | string | null>;
+		json: string;
+	}[];
 	injectStyleCalls: {
 		id: string;
 		options: { css?: string; link?: string };
@@ -256,15 +172,18 @@ function createFile(type: string, contents: string, name = ""): FileLike {
  * @param {Error | null} [options.generateModalError=null] Error thrown while creating the input modal.
  * @param {boolean} [options.hasExistingModal=false] Whether another modal is already open.
  * @param {number} [options.importCount=2] Count returned by importTabs.
+ * @param {string} [options.currentHref="https://current-org.lightning.force.com/lightning/setup/SetupOneHome/home"] Current page href.
  * @param {boolean} [options.clearInputModalParentOnRemove=false] Whether removing the save button clears the module modal parent.
  * @param {boolean} [options.missingModalParentOnce=false] Whether the first modal generation returns a null parent.
  * @param {boolean} [options.selectedAll=false] Whether all tabs were selected in the pick modal.
  * @param {unknown[]} [options.selectedTabs=[]] Tabs selected in the pick modal.
- * @return {Promise<ImportFixture>} Loaded fixture.
+ * @return {ImportFixture} Loaded fixture.
  */
-async function loadImportModule({
+function loadImportModule({
 	checkboxState = {},
 	clearInputModalParentOnRemove = false,
+	currentHref =
+		"https://current-org.lightning.force.com/lightning/setup/SetupOneHome/home",
 	generateModalError = null,
 	hasExistingModal = false,
 	importCount = 2,
@@ -274,6 +193,7 @@ async function loadImportModule({
 }: {
 	checkboxState?: Record<string, boolean>;
 	clearInputModalParentOnRemove?: boolean;
+	currentHref?: string;
 	generateModalError?: Error | null;
 	hasExistingModal?: boolean;
 	importCount?: number;
@@ -305,7 +225,10 @@ async function loadImportModule({
 	const changeTarget = new MockElement("div");
 	const toasts: { message: string | unknown[]; status?: string }[] = [];
 	const afterSetCalls: SfAfterSetPayload[] = [];
-	const importCalls: { config: Record<string, boolean>; json: string }[] = [];
+	const importCalls: {
+		config: Record<string, boolean | string | null>;
+		json: string;
+	}[] = [];
 	const hangerChildren: MockElement[] = [];
 	const appendCount = { value: 0 };
 	const closeClicks = { value: 0 };
@@ -363,167 +286,192 @@ async function loadImportModule({
 		checkbox.checked = checked;
 		fileCheckboxes[id] = checkbox;
 	}
-
-	const { cleanup, module } = await loadIsolatedModule<
-		ImportModule,
-		ImportDependencies
-	>({
-		modulePath: new URL(
-			"../../../src/salesforce/import.js",
-			import.meta.url,
-		),
-		additionalExports: [
-			"__setInputModalParent",
-			"__getInputModalParent",
-			"filterForUnexpectedTabKeys",
-			"generateSldsImport",
-			"getTabsFromJSON",
-			"makeValidTabs",
-			"readFile",
-			"readChangeOrDropFiles",
-			"showFileImport",
-			"showTabSelectThenImport",
-		],
-		extraSource: `
-function __setInputModalParent(value) { inputModalParent = value; }
-function __getInputModalParent() { return inputModalParent; }`,
-		dependencies: {
-			BROWSER: {
-				runtime: {
-					getURL: (path) => `chrome-extension://unit${path}`,
-				},
+	const mockDocument = {
+		createElement: () => new MockElement("div"),
+		getElementById: (id: string) => {
+			if (id === importId) {
+				return changeTarget;
+			}
+			if (id === closeModalId) {
+				return closeButton;
+			}
+			if (id === "awsf-modal") {
+				return modalPresent || hasExistingModal ? modalParent : null;
+			}
+			return null;
+		},
+	};
+	const hadDocument = "document" in globalThis;
+	const originalDocument = (globalThis as { document?: unknown }).document;
+	const hadBrowser = "browser" in globalThis;
+	const originalBrowser = (globalThis as { browser?: unknown }).browser;
+	Object.defineProperty(globalThis, "browser", {
+		configurable: true,
+		value: {
+			i18n: {
+				getMessage: (key: string) => key,
 			},
-			EXTENSION_NAME: "again-why-salesforce",
-			HIDDEN_CLASS: "hidden",
-			MODAL_ID: "awsf-modal",
-			TOAST_ERROR: "error",
-			TOAST_WARNING: "warning",
-			Tab: {
-				hasUnexpectedKeys: (tab) =>
-					Object.keys(tab).some((key) =>
-						!["label", "url", "org", "tabTitle", "title"].includes(
-							key,
-						)
-					),
-			},
-			TabContainer: MockTabContainer,
-			document: {
-				createElement: () => new MockElement("div"),
-				getElementById: (id) => {
-					if (id === importId) {
-						return changeTarget;
-					}
-					if (id === closeModalId) {
-						return closeButton;
-					}
-					if (id === "awsf-modal") {
-						return modalPresent || hasExistingModal
-							? modalParent
-							: null;
-					}
-					return null;
-				},
-			},
-			ensureAllTabsAvailability: () =>
-				Promise.resolve({
-					importTabs: (json, config) => {
-						importCalls.push({ config, json });
-						return Promise.resolve(importCount);
-					},
+			runtime: {
+				getURL: (path: string) => `chrome-extension://unit${path}`,
+				getManifest: () => ({
+					homepage_url: "https://github.com/example/repo",
+					optional_host_permissions: [],
+					version: "1.0.0",
 				}),
-			ensureTranslatorAvailability: () =>
-				Promise.resolve({
-					translate: (message) =>
-						Promise.resolve(`translated:${message}`),
-				}),
-			generateCheckboxWithLabel: (id, _label, checked) => {
-				const existingCheckbox = fileCheckboxes[id];
-				if (existingCheckbox != null) {
-					return Promise.resolve(existingCheckbox);
-				}
-				const checkbox = new MockElement("input");
-				checkbox.id = id;
-				checkbox.checked = checked;
-				fileCheckboxes[id] = checkbox;
-				return Promise.resolve(checkbox);
-			},
-			generateSection: () =>
-				Promise.resolve({
-					divParent: new MockElement("div"),
-					section: new MockElement("section"),
-				}),
-			generateSldsFileInput: () =>
-				Promise.resolve({
-					fileInputWrapper,
-					inputContainer,
-				}),
-			generateSldsModal: () =>
-				Promise.resolve({
-					...(generateModalError == null ? {} : (() => {
-						throw generateModalError;
-					})()),
-					article,
-					closeButton,
-					modalParent: (() => {
-						const currentBuildCount = modalBuildCount;
-						modalBuildCount += 1;
-						modalPresent = true;
-						return missingModalParentOnce && currentBuildCount === 0
-							? null as unknown as MockElement & {
-								querySelector: (
-									selector: string,
-								) => MockElement | null;
-							}
-							: modalParent;
-					})(),
-					saveButton,
-				}),
-			generateSldsModalWithTabList: (_tabs, options) => {
-				modalListCalls.push(options);
-				return Promise.resolve({
-					closeButton: selectedCloseButton,
-					getSelectedTabs: () => ({
-						selectedAll,
-						tabs: selectedTabs,
-					}),
-					modalParent: selectedModalParent,
-					saveButton: selectedSaveButton,
-				});
-			},
-			getModalHanger: () => modalHanger,
-			getSetupTabUl: () => ({
-				querySelector: () =>
-					setupImportPresent ? new MockElement("div") : null,
-			}),
-			injectStyle: (id, options) => {
-				injectStyleCalls.push({ id, options });
-				return new MockElement("style");
-			},
-			showToast: (message, status) => {
-				toasts.push({ message, status });
-			},
-			sf_afterSet: (message) => {
-				afterSetCalls.push(message);
+				sendMessage: () => undefined,
 			},
 		},
-		importsToReplace: new Set([
-			"/core/constants.js",
-			"/core/functions.js",
-			"/core/tab.js",
-			"/core/tabContainer.js",
-			"/core/translator.js",
-			"./generator.js",
-			"./content.js",
-			"./toast.js",
-			"./sf-elements.js",
-		]),
+		writable: true,
 	});
+	Object.defineProperty(globalThis, "document", {
+		configurable: true,
+		value: mockDocument,
+		writable: true,
+	});
+	const module = createImportModule({
+		BROWSER: {
+			runtime: {
+				getURL: (path: string) => `chrome-extension://unit${path}`,
+			},
+		},
+		EXTENSION_NAME: "again-why-salesforce",
+		HIDDEN_CLASS: "hidden",
+		MODAL_ID: "awsf-modal",
+		TOAST_ERROR: "error",
+		TOAST_WARNING: "warning",
+		Tab: {
+			extractOrgName: (url: string) =>
+				new URL(url).hostname.split(".")[0],
+			hasUnexpectedKeys: (tab: Record<string, unknown>) =>
+				Object.keys(tab).some((key) =>
+					!["label", "url", "org", "tabTitle", "title"].includes(
+						key,
+					)
+				),
+		},
+		TabContainer: MockTabContainer,
+		ensureAllTabsAvailability: () =>
+			Promise.resolve({
+				importTabs: (
+					json: string,
+					config: Record<string, boolean | string | null>,
+				) => {
+					importCalls.push({ config, json });
+					return Promise.resolve(importCount);
+				},
+			}),
+		getTranslations: (message: string | string[]) =>
+			Promise.resolve(
+				Array.isArray(message)
+					? message.map((item) => `translated:${item}`)
+					: `translated:${message}`,
+			),
+		generateCheckboxWithLabel: (
+			id: string,
+			_label: string,
+			checked: boolean,
+		) => {
+			const existingCheckbox = fileCheckboxes[id];
+			if (existingCheckbox != null) {
+				return Promise.resolve(existingCheckbox);
+			}
+			const checkbox = new MockElement("input");
+			checkbox.id = id;
+			checkbox.checked = checked;
+			fileCheckboxes[id] = checkbox;
+			return Promise.resolve(checkbox);
+		},
+		generateSection: () =>
+			Promise.resolve({
+				divParent: new MockElement("div"),
+				section: new MockElement("section"),
+			}),
+		generateSldsFileInput: () =>
+			Promise.resolve({
+				fileInputWrapper,
+				inputContainer,
+			}),
+		generateSldsModal: () =>
+			Promise.resolve({
+				...(generateModalError == null ? {} : (() => {
+					throw generateModalError;
+				})()),
+				article,
+				closeButton,
+				modalParent: (() => {
+					const currentBuildCount = modalBuildCount;
+					modalBuildCount += 1;
+					modalPresent = true;
+					return missingModalParentOnce && currentBuildCount === 0
+						? null as unknown as MockElement & {
+							querySelector: (
+								selector: string,
+							) => MockElement | null;
+						}
+						: modalParent;
+				})(),
+				saveButton,
+			}),
+		generateSldsModalWithTabList: (
+			_tabs: unknown,
+			options: Record<string, string>,
+		) => {
+			modalListCalls.push(options);
+			return Promise.resolve({
+				closeButton: selectedCloseButton,
+				getSelectedTabs: () => ({
+					selectedAll,
+					tabs: selectedTabs,
+				}),
+				modalParent: selectedModalParent,
+				saveButton: selectedSaveButton,
+			});
+		},
+		getModalHanger: () => modalHanger,
+		getCurrentHref: () => currentHref,
+		getSetupTabUl: () => ({
+			querySelector: () =>
+				setupImportPresent ? new MockElement("div") : null,
+		}),
+		injectStyle: (
+			id: string,
+			options: { css?: string; link?: string },
+		) => {
+			injectStyleCalls.push({ id, options });
+			return new MockElement("style");
+		},
+		showToast: (message: string | unknown[], status?: string) => {
+			toasts.push({ message, status });
+		},
+		sf_afterSet: (message: SfAfterSetPayload) => {
+			afterSetCalls.push(message);
+		},
+	}) as unknown as ImportModule;
 	setInputModalParent = module.__setInputModalParent;
 
 	return {
 		appendCount,
 		changeTarget,
-		cleanup,
+		cleanup: () => {
+			if (hadDocument) {
+				Object.defineProperty(globalThis, "document", {
+					configurable: true,
+					value: originalDocument,
+					writable: true,
+				});
+			} else {
+				delete (globalThis as { document?: unknown }).document;
+			}
+			if (hadBrowser) {
+				Object.defineProperty(globalThis, "browser", {
+					configurable: true,
+					value: originalBrowser,
+					writable: true,
+				});
+			} else {
+				delete (globalThis as { browser?: unknown }).browser;
+			}
+		},
 		closeClicks,
 		fileCheckboxes,
 		hangerChildren,
@@ -614,6 +562,7 @@ Deno.test("import shows the file modal and imports valid JSON files directly", a
 		assertEquals(fixture.importCalls, [{
 			config: {
 				importMetadata: true,
+				importPinnedTabs: false,
 				preserveOtherOrg: false,
 				resetTabs: false,
 			},
@@ -646,6 +595,102 @@ Deno.test("import toggles the other-org checkbox visibility when overwrite chang
 		assertEquals(otherOrgCheckbox.classList.contains("hidden"), false);
 		overwriteCheckbox.dispatchEvent(new Event("change"));
 		assertEquals(otherOrgCheckbox.classList.contains("hidden"), true);
+	} finally {
+		fixture.cleanup();
+	}
+});
+
+Deno.test("import pinned checkbox shows only when metadata import is unchecked", async () => {
+	const fixture = await loadImportModule({});
+
+	try {
+		await fixture.module.generateSldsImport();
+		const metadataCheckbox = fixture.fileCheckboxes[
+			"again-why-salesforce-import-metadata"
+		];
+		const pinnedCheckbox = fixture.fileCheckboxes[
+			"again-why-salesforce-import-pinned"
+		];
+
+		assertEquals(pinnedCheckbox.checked, false);
+		assertEquals(pinnedCheckbox.classList.contains("hidden"), false);
+		metadataCheckbox.checked = true;
+		metadataCheckbox.dispatchEvent(new Event("change"));
+		assertEquals(pinnedCheckbox.classList.contains("hidden"), false);
+		metadataCheckbox.checked = false;
+		metadataCheckbox.dispatchEvent(new Event("change"));
+		assertEquals(pinnedCheckbox.classList.contains("hidden"), false);
+	} finally {
+		fixture.cleanup();
+	}
+});
+
+Deno.test("import passes current org when preserving other orgs during overwrite", async () => {
+	const fixture = await loadImportModule({
+		checkboxState: {
+			"again-why-salesforce-import-overwrite": true,
+			"again-why-salesforce-import-other-org": true,
+		},
+		currentHref:
+			"https://current-org.lightning.force.com/lightning/setup/SetupOneHome/home",
+	});
+
+	try {
+		await fixture.module.createImportModal();
+		await fixture.changeTarget.dispatchEvent({
+			preventDefault() {},
+			target: {
+				files: [
+					createFile(
+						"application/json",
+						JSON.stringify([{ label: "A", url: "/a" }]),
+					),
+				],
+			},
+			type: "change",
+		} as unknown as Event);
+
+		assertEquals(fixture.importCalls, [{
+			config: {
+				currentOrg: "current-org",
+				importMetadata: false,
+				importPinnedTabs: false,
+				preserveOtherOrg: true,
+				resetTabs: true,
+			},
+			json: JSON.stringify([{ label: "A", url: "/a" }]),
+		}]);
+	} finally {
+		fixture.cleanup();
+	}
+});
+
+Deno.test("import can opt out of pinned count while metadata is unchecked", async () => {
+	const fixture = await loadImportModule({
+		checkboxState: {
+			"again-why-salesforce-import-pinned": false,
+		},
+	});
+
+	try {
+		await fixture.module.createImportModal();
+		await fixture.changeTarget.dispatchEvent({
+			preventDefault() {},
+			target: {
+				files: [
+					createFile(
+						"application/json",
+						JSON.stringify({
+							pinned: 1,
+							tabs: [{ label: "A", url: "/a" }],
+						}),
+					),
+				],
+			},
+			type: "change",
+		} as unknown as Event);
+
+		assertEquals(fixture.importCalls[0].config.importPinnedTabs, false);
 	} finally {
 		fixture.cleanup();
 	}
@@ -720,6 +765,7 @@ Deno.test("import reads dropped files from dataTransfer.items when files is empt
 		assertEquals(fixture.importCalls, [{
 			config: {
 				importMetadata: false,
+				importPinnedTabs: false,
 				preserveOtherOrg: false,
 				resetTabs: false,
 			},
@@ -728,6 +774,143 @@ Deno.test("import reads dropped files from dataTransfer.items when files is empt
 				url: "/item",
 				org: "org",
 			}]),
+		}]);
+	} finally {
+		fixture.cleanup();
+	}
+});
+
+Deno.test("import resets only once across direct multi-file drop imports", async () => {
+	const fixture = await loadImportModule({
+		checkboxState: {
+			"again-why-salesforce-import-overwrite": true,
+			"again-why-salesforce-import-other-org": true,
+			"again-why-salesforce-import-pinned": true,
+		},
+	});
+
+	try {
+		await fixture.module.createImportModal();
+		await fixture.module.readChangeOrDropFiles({
+			dataTransfer: {
+				files: [
+					createFile(
+						"application/json",
+						JSON.stringify({
+							pinned: 1,
+							tabs: [{
+								label: "First",
+								url: "/first",
+								org: "org-a",
+							}],
+						}),
+						"first.json",
+					),
+					createFile(
+						"application/json",
+						JSON.stringify({
+							pinned: 1,
+							tabs: [{
+								label: "Second",
+								url: "/second",
+								org: "org-b",
+							}],
+						}),
+						"second.json",
+					),
+				],
+			},
+			preventDefault() {},
+			type: "drop",
+		} as unknown as {
+			dataTransfer?: {
+				files?: FileLike[];
+				items?: { getAsFile: () => FileLike | null }[];
+			};
+			preventDefault: () => void;
+			target?: { files?: FileLike[] };
+		});
+
+		assertEquals(fixture.importCalls, [
+			{
+				config: {
+					currentOrg: "current-org",
+					importMetadata: false,
+					importPinnedTabs: true,
+					preserveOtherOrg: true,
+					resetTabs: true,
+				},
+				json: JSON.stringify({
+					pinned: 1,
+					tabs: [{ label: "First", url: "/first", org: "org-a" }],
+				}),
+			},
+			{
+				config: {
+					currentOrg: null,
+					importMetadata: false,
+					importPinnedTabs: true,
+					preserveOtherOrg: true,
+					resetTabs: false,
+				},
+				json: JSON.stringify({
+					pinned: 1,
+					tabs: [{ label: "Second", url: "/second", org: "org-b" }],
+				}),
+			},
+		]);
+	} finally {
+		fixture.cleanup();
+	}
+});
+
+Deno.test("import reads single Firefox drop item with overwrite and pinned import", async () => {
+	const fixture = await loadImportModule({
+		checkboxState: {
+			"again-why-salesforce-import-overwrite": true,
+			"again-why-salesforce-import-other-org": true,
+			"again-why-salesforce-import-pinned": true,
+		},
+	});
+
+	try {
+		await fixture.module.createImportModal();
+		await fixture.module.readChangeOrDropFiles({
+			dataTransfer: {
+				files: [],
+				items: [
+					{
+						getAsFile: () =>
+							createFile(
+								"",
+								JSON.stringify({
+									pinnedTabsNo: 1,
+									tabs: [{
+										label: "ItemDrop",
+										url: "/item",
+										org: "org",
+									}],
+								}),
+								"item-drop.json",
+							),
+					},
+				],
+			},
+			preventDefault() {},
+		});
+
+		assertEquals(fixture.importCalls, [{
+			config: {
+				currentOrg: "current-org",
+				importMetadata: false,
+				importPinnedTabs: true,
+				preserveOtherOrg: true,
+				resetTabs: true,
+			},
+			json: JSON.stringify({
+				pinnedTabsNo: 1,
+				tabs: [{ label: "ItemDrop", url: "/item", org: "org" }],
+			}),
 		}]);
 	} finally {
 		fixture.cleanup();
@@ -814,6 +997,7 @@ Deno.test("import maps supported external formats and imports the selected tabs"
 		assertEquals(fixture.importCalls, [{
 			config: {
 				importMetadata: false,
+				importPinnedTabs: false,
 				preserveOtherOrg: false,
 				resetTabs: false,
 			},
@@ -862,6 +1046,7 @@ Deno.test("import maps WhySalesforce tab arrays through the select flow", async 
 		assertEquals(fixture.importCalls, [{
 			config: {
 				importMetadata: false,
+				importPinnedTabs: false,
 				preserveOtherOrg: false,
 				resetTabs: false,
 			},
@@ -1062,6 +1247,7 @@ Deno.test("import attaches the drop reader directly", async () => {
 		assertEquals(fixture.importCalls, [{
 			config: {
 				importMetadata: false,
+				importPinnedTabs: false,
 				preserveOtherOrg: false,
 				resetTabs: false,
 			},
@@ -1137,6 +1323,7 @@ Deno.test("import reads a single file object directly and surfaces read failures
 		assertEquals(fixture.importCalls[0], {
 			config: {
 				importMetadata: false,
+				importPinnedTabs: false,
 				preserveOtherOrg: false,
 				resetTabs: false,
 			},

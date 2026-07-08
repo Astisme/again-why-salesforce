@@ -615,6 +615,10 @@
 		"message": "取消固定 Tab 时出错",
 		"description": "[错误]"
 	},
+	"error_unsavable_page": {
+		"message": "无法保存此页面。",
+		"description": "页面没有页眉（以及星星/带斜线的星星）时出错"
+	},
 	"error_useless_remove": {
 		"message": "无法移除：\n无法移除之前未保存的页面",
 		"description": "[错误] 用户尝试移除尚未保存的页面"
@@ -794,6 +798,10 @@
 	"import_metadata": {
 		"message": "导入 Tab 元数据（“点击次数”、“点击日期”等）。",
 		"description": "[标签] 在导入过程中导入文件中找到的所有内容"
+	},
+	"import_pinned_tabs": {
+		"message": "导入固定的 $tabs 数量。",
+		"description": "[标签] 在导入过程中导入固定的 $tabs 数量"
 	},
 	"import_successful": {
 		"message": "成功导入",

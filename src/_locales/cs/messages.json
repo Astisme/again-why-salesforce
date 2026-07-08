@@ -615,6 +615,10 @@
 		"message": "Chyba při odepínání Tab karty",
 		"description": "[error]"
 	},
+	"error_unsavable_page": {
+		"message": "Tuto stránku nelze uložit.",
+		"description": "Chyba, když stránka nemá záhlaví (a hvězdičku/přeškrtnutou hvězdičku)"
+	},
 	"error_useless_remove": {
 		"message": "Nelze odstranit:\nNelze odstranit stránku, která nebyla předem uložena",
 		"description": "[error] uživatel se pokusil odstranit stránku, která ještě nebyla uložena"
@@ -794,6 +798,10 @@
 	"import_metadata": {
 		"message": "Importovat metadata Tab karty (\"Počet kliknutí\", \"Datum kliknutí\" atd.).",
 		"description": "[label] importovat vše nalezené v souboru během procesu importu"
+	},
+	"import_pinned_tabs": {
+		"message": "Importovat počet připnutých $tabs .",
+		"description": "[štítek] importovat počet připnutých $tabs během procesu importu"
 	},
 	"import_successful": {
 		"message": "Úspěšně importováno",

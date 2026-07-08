@@ -615,6 +615,10 @@
 		"message": "Error al desanclar Tab",
 		"description": "[error]"
 	},
+	"error_unsavable_page": {
+		"message": "Esta página no se puede guardar.",
+		"description": "Error cuando una página no tiene el encabezado (y la estrella/estrella tachada)"
+	},
 	"error_useless_remove": {
 		"message": "No se puede eliminar:\nNo se puede eliminar una página que nunca se ha guardado.",
 		"description": "[error] Se intentó eliminar una página que no había sido guardada."
@@ -794,6 +798,10 @@
 	"import_metadata": {
 		"message": "Importar metadatos de Tab (\"Recuento de Clics\", \"Fecha de Clic\" etc.).",
 		"description": "[label] importar todo lo que se encuentre en el archivo durante el proceso de importación"
+	},
+	"import_pinned_tabs": {
+		"message": "Importar número de $tabs fijadas.",
+		"description": "[etiqueta] importar el recuento de $tabs fijadas durante el proceso de importación"
 	},
 	"import_successful": {
 		"message": "Importación exitosa",
