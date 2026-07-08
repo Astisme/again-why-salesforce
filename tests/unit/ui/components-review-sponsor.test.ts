@@ -6,7 +6,7 @@ import {
 } from "@std/testing/asserts";
 import { MockElement } from "./mock-dom.test.ts";
 import { installMockDom } from "../../happydom.test.ts";
-import { createReviewSponsorModule } from "../../../src/components/review-sponsor/review-sponsor-runtime.js";
+import { createReviewSponsorModule } from "../../../src/components/review-sponsor/review-sponsor-module.js";
 
 const CHROME_REVIEW_LINK =
 	"https://chromewebstore.google.com/detail/again-why-salesforce/bceeoimjhgjbihanbiifgpndmkklajbi/reviews";
@@ -14,6 +14,26 @@ const EDGE_REVIEW_LINK =
 	"https://microsoftedge.microsoft.com/addons/detail/again-why-salesforce/dfdjpokbfeaamjcomllncennmfhpldmm#description";
 const FIREFOX_REVIEW_LINK =
 	"https://addons.mozilla.org/en-US/firefox/addon/again-why-salesforce/";
+
+/**
+ * Test visibility helper matching the core review/sponsor visibility contract.
+ *
+ * @param {Object} options Helper options.
+ * @param {boolean} [options.isSafari=false] Whether review should be hidden for Safari.
+ * @return {(input?: { allTabs?: unknown[]; usageDays?: number }) => { review: boolean; sponsor: boolean }} Visibility helper.
+ */
+function createShouldShowReviewOrSponsorFn({ isSafari = false } = {}) {
+	return ({
+		allTabs = [],
+		usageDays = 0,
+	}: {
+		allTabs?: unknown[];
+		usageDays?: number;
+	} = {}) => ({
+		review: !isSafari && (allTabs.length >= 8 || usageDays >= 20),
+		sponsor: allTabs.length >= 16 || usageDays >= 40,
+	});
+}
 
 type ReviewSponsorResult = {
 	reviewLink: MockElement;
@@ -125,6 +145,7 @@ function createStoredCustomElementsRegistry() {
  * @return {{
  *   getConstructor: () => ReviewSponsorClass | null;
  *   injectCalls: Array<{ id: string; link: string }>;
+ *   messages: Array<Record<string, unknown>>;
  *   openCalls: string[];
  *   settingsCalls: string[][];
  *   showReviewOrSponsor: (options?: {
@@ -166,6 +187,7 @@ function createReviewSponsorFixture({
 } = {}) {
 	const registry = createStoredCustomElementsRegistry();
 	const injectCalls: Array<{ id: string; link: string }> = [];
+	const messages: Array<Record<string, unknown>> = [];
 	const openCalls: string[] = [];
 	const settingsCalls: string[][] = [];
 	const translateCalls: string[] = [];
@@ -178,10 +200,8 @@ function createReviewSponsorFixture({
 		},
 		extensionUsageDays: "extension_usage_days",
 		hiddenClass: "hidden",
-		isChrome,
-		isEdge,
-		isFirefox,
-		isSafari,
+		whatShowReview: "show-review",
+		whatShowSponsor: "show-sponsor",
 		getSettingsFn: (keys: string[]) => {
 			settingsCalls.push(keys);
 			return Promise.resolve({ enabled: usageDays });
@@ -197,18 +217,45 @@ function createReviewSponsorFixture({
 		},
 		getTranslatorAttributeFn: (attribute: string) =>
 			attribute === "currentLanguage" ? translatorLanguage : null,
-		generateReviewSponsorSvgsFn: () => generated as never,
-		customElementsRef: registry.registry,
-		openFn: (url: string | URL) => {
-			openCalls.push(String(url));
+		sendExtensionMessageFn: (message: Record<string, unknown>) => {
+			messages.push(message);
+			return undefined;
+		},
+		shouldShowReviewOrSponsorFn: createShouldShowReviewOrSponsorFn({
+			isSafari,
+		}),
+		openCorrectBrowserReviewLinkFn: () => {
+			if (isEdge) {
+				openCalls.push(EDGE_REVIEW_LINK);
+				return null;
+			}
+			if (isChrome) {
+				openCalls.push(CHROME_REVIEW_LINK);
+				return null;
+			}
+			if (isFirefox) {
+				openCalls.push(FIREFOX_REVIEW_LINK);
+				return null;
+			}
+			return undefined;
+		},
+		openSponsorLinkFn: (language: string | null = null) => {
+			openCalls.push(
+				language === "it"
+					? "https://alfredoit.dev/it/sponsor/?email=againwhysalesforce@duck.com"
+					: "https://alfredoit.dev/en/sponsor/?email=againwhysalesforce@duck.com",
+			);
 			return null;
 		},
+		generateReviewSponsorSvgsFn: () => generated as never,
+		customElementsRef: registry.registry,
 		HTMLElementRef: MockReviewSponsorHTMLElement as never,
 	});
 
 	return {
 		getConstructor: registry.getConstructor,
 		injectCalls,
+		messages,
 		openCalls,
 		settingsCalls,
 		showReviewOrSponsor,
@@ -248,6 +295,7 @@ Deno.test("show review or sponsor block", async (t) => {
 				assertEquals(sponsorLink.getAttribute("aria-hidden"), "true");
 				assertEquals(reviewLink.tabIndex, -1);
 				assertEquals(sponsorLink.tabIndex, -1);
+				assertEquals(baseFixture.messages, []);
 			},
 		);
 
@@ -270,6 +318,7 @@ Deno.test("show review or sponsor block", async (t) => {
 				assertEquals(sponsorLink.tabIndex, -1);
 				reviewLink.click();
 				assertEquals(fixture.openCalls[0], CHROME_REVIEW_LINK);
+				assertEquals(fixture.messages, [{ what: "show-review" }]);
 			},
 		);
 
@@ -291,6 +340,10 @@ Deno.test("show review or sponsor block", async (t) => {
 				assertFalse(sponsorSvg.classList.contains("hidden"));
 				sponsorLink.click();
 				assert(fixture.openCalls[0].includes("/it/"));
+				assertEquals(fixture.messages, [
+					{ what: "show-review" },
+					{ what: "show-sponsor" },
+				]);
 			},
 		);
 
@@ -427,4 +480,99 @@ Deno.test("ReviewSponsorAws loads async metadata and opens expected links", asyn
 
 	assertEquals(fixture.openCalls[0], CHROME_REVIEW_LINK);
 	assert(fixture.openCalls[1].includes("/en/"));
+});
+
+Deno.test("review-sponsor module defaults stay safe without browser globals", () => {
+	const noMessageModule = createReviewSponsorModule({
+		hiddenClass: "hidden",
+		isChrome: true,
+		shouldShowReviewOrSponsorFn: createShouldShowReviewOrSponsorFn(),
+	} as never);
+	noMessageModule.showReviewOrSponsor({
+		allTabs: Array(8),
+		reviewLink: new MockElement("a"),
+		reviewSvg: new MockElement("svg"),
+		sponsorLink: new MockElement("a"),
+		sponsorSvg: new MockElement("svg"),
+	} as never);
+
+	const { showReviewOrSponsor } = createReviewSponsorModule({
+		hiddenClass: "hidden",
+		isChrome: true,
+		whatShowReview: "show-review",
+		shouldShowReviewOrSponsorFn: createShouldShowReviewOrSponsorFn(),
+		openCorrectBrowserReviewLinkFn: () => null,
+	} as never);
+	const elements = {
+		reviewLink: new MockElement("a"),
+		reviewSvg: new MockElement("svg"),
+		sponsorLink: new MockElement("a"),
+		sponsorSvg: new MockElement("svg"),
+	};
+
+	showReviewOrSponsor({
+		allTabs: Array(8),
+		...elements,
+	} as never);
+	elements.reviewLink.click();
+
+	assertFalse(elements.reviewSvg.classList.contains("hidden"));
+	assert(elements.sponsorSvg.classList.contains("hidden"));
+});
+
+Deno.test("review-sponsor runtime wires default message constants", async () => {
+	await import("../../mocks.test.ts");
+	const runtime = await import(
+		`../../../src/components/review-sponsor/review-sponsor-runtime.js?${crypto.randomUUID()}`
+	);
+	const registry = createStoredCustomElementsRegistry();
+	const messages: Array<Record<string, unknown>> = [];
+	const { showReviewOrSponsor } = runtime.createReviewSponsorModule({
+		browser: {
+			runtime: {
+				getURL: (path: string) => path,
+			},
+		},
+		customElementsRef: registry.registry,
+		ensureAllTabsAvailabilityFn: () => Promise.resolve([]),
+		generateReviewSponsorSvgsFn: () => ({
+			reviewLink: new MockElement("a"),
+			reviewSvg: new MockElement("svg"),
+			root: new MockElement("div"),
+			sponsorLink: new MockElement("a"),
+			sponsorSvg: new MockElement("svg"),
+		}),
+		getSettingsFn: () => Promise.resolve({ enabled: 0 }),
+		getTranslationsFn: (message: string) => Promise.resolve(message),
+		getTranslatorAttributeFn: () => "en",
+		HTMLElementRef: MockReviewSponsorHTMLElement as never,
+		injectStyleFn: () => new MockElement("link") as never,
+		sendExtensionMessageFn: (message: Record<string, unknown>) => {
+			messages.push(message);
+		},
+	});
+	const elements = {
+		reviewLink: new MockElement("a"),
+		reviewSvg: new MockElement("svg"),
+		sponsorLink: new MockElement("a"),
+		sponsorSvg: new MockElement("svg"),
+	};
+
+	showReviewOrSponsor({
+		allTabs: Array(16),
+		...elements,
+	});
+	const originalOpen = globalThis.open;
+	globalThis.open = () => null;
+	try {
+		elements.reviewLink.click();
+		elements.sponsorLink.click();
+	} finally {
+		globalThis.open = originalOpen;
+	}
+
+	assertEquals(messages, [
+		{ what: "show-review" },
+		{ what: "show-sponsor" },
+	]);
 });

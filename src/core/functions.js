@@ -1,21 +1,32 @@
 "use strict";
 import {
 	BROWSER,
+	CHROME_LINK,
 	DO_NOT_REQUEST_FRAME_PERMISSION,
+	EDGE_LINK,
 	EXTENSION_NAME,
 	EXTENSION_OPTIONAL_HOST_PERM,
+	FIREFOX_LINK,
 	FRAME_PATTERNS,
 	GENERIC_PINNED_TAB_STYLE_KEY,
 	GENERIC_TAB_STYLE_KEY,
 	HAS_ORG_TAB,
+	ISCHROME,
+	ISEDGE,
+	ISFIREFOX,
 	ISSAFARI,
 	ORG_PINNED_TAB_STYLE_KEY,
 	ORG_TAB_STYLE_KEY,
 	PIN_TAB_CLASS,
 	PREVENT_DEFAULT_OVERRIDE,
+	REVIEW_TAB_THRESHOLD,
+	REVIEW_USAGE_DAYS_THRESHOLD,
 	SETTINGS_KEY,
 	SETUP_LIGHTNING_PATTERN,
 	SLDS_ACTIVE,
+	SPONSOR_MAP,
+	SPONSOR_TAB_THRESHOLD,
+	SPONSOR_USAGE_DAYS_THRESHOLD,
 	SUPPORTED_SALESFORCE_URLS,
 	TAB_STYLE_BACKGROUND,
 	TAB_STYLE_BOLD,
@@ -474,4 +485,61 @@ export function getTodayDateKey(today = new Date()) {
 		String(today.getMonth() + 1).padStart(2, "0"),
 		String(today.getDate()).padStart(2, "0"),
 	].join("-");
+}
+/**
+ * Based on how many Tabs the user has saved and how long they have actively used the extension,
+ * declares which support links should be shown.
+ *
+ * @param {Object} [param0={}] Input values.
+ * @param {unknown[]} [param0.allTabs=[]] Saved tabs.
+ * @param {number} [param0.usageDays=0] Distinct usage days.
+ * @return {{review: boolean, sponsor: boolean}} Visibility map.
+ */
+export function shouldShowReviewOrSponsor({
+	allTabs = [],
+	usageDays = 0,
+} = {}) {
+	return {
+		review: !ISSAFARI &&
+			(
+				allTabs.length >= REVIEW_TAB_THRESHOLD ||
+				usageDays >= REVIEW_USAGE_DAYS_THRESHOLD
+			),
+		sponsor: allTabs.length >= SPONSOR_TAB_THRESHOLD ||
+			usageDays >= SPONSOR_USAGE_DAYS_THRESHOLD,
+	};
+}
+/**
+ * Opens the extension review link for the current browser.
+ *
+ * @param {string} [target="_blank"] Where to open the link
+ * @return {unknown | undefined} Result of the `open` call for the detected browser.
+ */
+export function openCorrectBrowserReviewLink(
+	target = "_blank",
+) {
+	let linkTarget = EDGE_LINK;
+	if (ISCHROME && !ISEDGE) {
+		linkTarget = CHROME_LINK;
+	}
+	if (ISFIREFOX) {
+		linkTarget = FIREFOX_LINK;
+	}
+	open(linkTarget, target);
+}
+/**
+ * Opens the sponsor link for the requested language.
+ *
+ * @param {string|null} [languageCode=null] Preferred language code.
+ * @param {string} [target="_blank"] Where to open the link
+ * @return {unknown} Result of the `open` call.
+ */
+export function openSponsorLink(
+	languageCode = null,
+	target = "_blank",
+) {
+	open(
+		SPONSOR_MAP[languageCode] ?? SPONSOR_MAP.default,
+		target,
+	);
 }
