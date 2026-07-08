@@ -45,9 +45,8 @@ import {
 	bg_setStorage,
 } from "./storage.js";
 import { bg_getSalesforceLanguage } from "./salesforce-language.js";
-import { bg_getCommandLinks } from "./commands.js";
+import { bg_getCommandLinks, listenToExtensionCommands } from "./commands.js";
 import { setDefaultOrgStyle } from "./default-styles.js";
-import { listenToExtensionCommands } from "./commands.js";
 
 /**
  * Checks whether the object passed as contains is contained in the granted permissions.

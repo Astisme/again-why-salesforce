@@ -323,6 +323,7 @@ function _appendSelectorSuffixes(selector, suffixes) {
  * Returns the manage-tabs descendants that should receive a given style.
  *
  * @param {string} styleId Style identifier.
+ * @throws {Error} when styleId was not matched.
  * @return {string[]} CSS selector suffixes.
  */
 function _getManageTabsTargetSuffixes(styleId) {
