@@ -721,7 +721,7 @@ function assertActionResult(actionResult, errorMessage) {
  *   tab: unknown;
  *   options: unknown;
  * }} options Action context.
- * @return {Promise<boolean | null>} Sync flag (`null` means no action matched).
+ * @return {Promise<string | null>} Sync flag (`null` means no action matched).
  */
 function executeTabAction({
 	action,

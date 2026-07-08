@@ -92,6 +92,7 @@ export const EXTENSION_VERSION = MANIFEST.version;
 if (!MANIFEST.homepage_url?.startsWith("https://github.com/")) {
 	throw new Error("no_manifest_github");
 }
+/** @type {string} */
 export const EXTENSION_GITHUB_LINK = MANIFEST.homepage_url;
 export const EXTENSION_GITHUB_WIKI_LINK = `${EXTENSION_GITHUB_LINK}/wiki`;
 export const EXTENSION_OPTIONAL_HOST_PERM = MANIFEST.optional_host_permissions;
