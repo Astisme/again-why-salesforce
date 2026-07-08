@@ -1,6 +1,7 @@
 import { execSync } from "node:child_process";
 import { existsSync } from "node:fs";
 import { env, exit } from "node:process";
+import { assertBuildSucceeded } from "./build-releases-runtime.ts";
 
 // Builds browser extensions for all supported browsers and creates a GitHub release
 const browsers: string[] = [
@@ -49,6 +50,7 @@ for (const browser of browsers) {
 		}
 		const { code } = await child.status;
 		console.log(`Process exited with code ${code}`);
+		assertBuildSucceeded({ browser, code });
 	} catch (error) {
 		console.error(`✗ Failed to build ${browser}:`, error);
 		errorHappened = true;

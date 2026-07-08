@@ -44,6 +44,10 @@ function createManifestFixture() {
 		},
 		permissions: ["downloads", "storage"],
 		optional_permissions: ["downloads", "cookies"],
+		options_ui: {
+			open_in_tab: true,
+			page: "settings/options.html",
+		},
 		incognito: "split",
 	};
 }
@@ -151,6 +155,14 @@ Deno.test("build-manifest removes Safari-incompatible permissions and background
 	assertEquals(manifest.incognito, undefined);
 	assertEquals(manifest.permissions, ["storage"]);
 	assertEquals(manifest.optional_permissions, ["cookies"]);
+	assertEquals(
+		(manifest.options_ui as Record<string, unknown>).open_in_tab,
+		undefined,
+	);
+	assertEquals(
+		(manifest.options_ui as Record<string, unknown>).page,
+		"settings/options.html",
+	);
 	assertEquals(
 		(manifest.browser_specific_settings as Record<string, unknown>).gecko,
 		undefined,

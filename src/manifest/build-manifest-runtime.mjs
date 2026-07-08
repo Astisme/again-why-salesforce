@@ -47,6 +47,7 @@ export function buildManifestForBrowser({
 			delete manifest.background.type;
 			delete manifest.background.scripts;
 			delete manifest.incognito;
+			delete manifest.options_ui.open_in_tab;
 			const notAllowedPermissions = new Set([
 				"downloads",
 			]);

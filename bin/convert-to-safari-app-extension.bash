@@ -60,6 +60,11 @@ if [ -f "$APP_INFO_PLIST" ]; then
         /usr/libexec/PlistBuddy -c "Add :LSApplicationCategoryType string public.app-category.productivity" "$APP_INFO_PLIST"
 fi
 
+PROJECT_FILE="$PROJ_DIR/$EXT_NAME/$EXT_NAME.xcodeproj/project.pbxproj"
+if [ -f "$PROJECT_FILE" ]; then
+    /usr/bin/perl -0pi -e 's/com\.whysalesforce\.Again--Why-Salesforce/com.whysalesforce.again/g' "$PROJECT_FILE"
+fi
+
 # Build macOS App Archive (unsigned)
 xcodebuild clean archive \
     -project "$PROJ_DIR/$EXT_NAME/$EXT_NAME.xcodeproj" \
