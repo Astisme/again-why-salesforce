@@ -303,7 +303,7 @@ export class TranslationService {
 		if (
 			typeof key === "string" &&
 			key.startsWith("$") &&
-			key.match(/^\$[a-zA-Z0-9_]+.*$/) != null &&
+      /^\$\w+.*$/.exec(key) &&
 			this.#getMessageFromCache(key) == null
 		) {
 			const translatedPlaceholder = await this.#translateMessageTokens(
@@ -343,7 +343,7 @@ export class TranslationService {
 	 */
 	async #translateMessageTokens(message) {
 		let messageTranslated = "";
-		const parts = message.split(/(\$[a-zA-Z0-9_]+)/);
+		const parts = message.split(/(\$\w+)/);
 		for (const part of parts) {
 			if (part === "") {
 				continue;

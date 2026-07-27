@@ -789,6 +789,7 @@ function wasReviewSponsorPromptSkippedToday(
 
 const REVIEW_PROMPT_ACTION_REVIEW = "write_review";
 const REVIEW_PROMPT_ACTION_ISSUE = "open_github_issue";
+const REVIEW_PROMPT_ACTION_SPONSOR = "open_sponsor";
 const REVIEW_PROMPT_ACTION_CANCEL = "cancel";
 const REVIEW_PROMPT_ACTION_LATER = "request_later";
 
@@ -868,6 +869,7 @@ async function showSponsorPrompt({
 	const sponsorAction = await sldsConfirm({
 		body: sendTip,
 		confirmLabel,
+		confirmValue: REVIEW_PROMPT_ACTION_SPONSOR,
 		cancelLabel,
 		closeLabel,
 		cancelValue: REVIEW_PROMPT_ACTION_CANCEL,
@@ -879,16 +881,17 @@ async function showSponsorPrompt({
 			},
 		],
 	});
-	if (sponsorAction === REVIEW_PROMPT_ACTION_LATER) {
-		await skipReviewSponsorPromptToday(CONSTANTS.WHAT_DID_SPONSOR);
-		return;
-	}
-	if (
-		sponsorAction &&
-		sponsorAction !== REVIEW_PROMPT_ACTION_CANCEL
-	) {
-		const translator = await ensureTranslatorAvailability();
-		openSponsorLink(translator.currentLanguage);
+	switch (sponsorAction) {
+		case REVIEW_PROMPT_ACTION_LATER:
+			await skipReviewSponsorPromptToday(CONSTANTS.WHAT_DID_SPONSOR);
+			return;
+		case REVIEW_PROMPT_ACTION_SPONSOR: {
+			const translator = await ensureTranslatorAvailability();
+			openSponsorLink(translator.currentLanguage);
+			break;
+		}
+		default:
+			break;
 	}
 	await saveReviewSponsorWasToasted(CONSTANTS.WHAT_DID_SPONSOR);
 }

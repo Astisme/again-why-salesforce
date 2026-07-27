@@ -2665,6 +2665,7 @@ Deno.test(
 							{},
 							() => {},
 						);
+						harness.state.confirmResult = "open_sponsor";
 						await backgroundListener(
 							{ what: "show-sponsor" },
 							{},
@@ -2852,6 +2853,7 @@ Deno.test(
 							harness.records.setSettingsCalls.at(-1)?.id,
 							"did-review",
 						);
+						harness.state.confirmResult = "open_sponsor";
 						await backgroundListener(
 							{ what: "show-sponsor" },
 							{},

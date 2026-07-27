@@ -228,7 +228,7 @@ export function generateTutorialElements() {
  * Shows a Salesforce-styled confirm modal and resolves the user choice.
  *
  * @param {Object} [options={}] Prompt labels and text.
- * @return {Promise<boolean>} True when user confirms.
+ * @return {Promise<unknown>} Selected prompt value.
  */
 export function sldsConfirm(options = {}) {
 	return generatorRuntime.sldsConfirm(options);
