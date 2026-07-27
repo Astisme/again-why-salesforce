@@ -37,7 +37,7 @@
 		"audit-logging": "deno run --allow-read --allow-write bin/audit-logging.ts",
 		"bundle": "deno run -A bin/build.ts",
 		"checks": "deno task fmt && deno task lint && deno task test && deno task locales && deno task dev-firefox",
-    "locale-translate": "deno run --allow-read bin/render-locale-message.ts",
+		"locale-translate": "deno run --allow-read bin/render-locale-message.ts",
 
 		"dev-firefox": "deno --allow-write src/manifest/build-manifest.mjs firefox && deno task bundle",
 		"dev-chrome": "deno --allow-write src/manifest/build-manifest.mjs chrome && deno task bundle",

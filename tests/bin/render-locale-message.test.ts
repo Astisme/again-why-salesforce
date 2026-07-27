@@ -66,7 +66,10 @@ Deno.test("renderLocaleMessage replaces nested parameters", () => {
 });
 
 Deno.test("renderLocaleMessage accepts parameter key", () => {
-	assertEquals(renderLocaleMessage(localeFile, "$action"), "Pick Pinned Tab.");
+	assertEquals(
+		renderLocaleMessage(localeFile, "$action"),
+		"Pick Pinned Tab.",
+	);
 });
 
 Deno.test("renderLocaleMessage rejects circular parameters", () => {
