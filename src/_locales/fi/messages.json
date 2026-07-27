@@ -1616,7 +1616,7 @@
 		"description": "[tutorial] linkki välilehtien hallintaan"
 	},
 	"tutorial_pin_tab": {
-		"message": "Napsauta korostettua $tab -välilehteä kakkospainikkeella ja kiinnitä se valitsemalla $extension_label > $cxm_move > $cxm_pin_tab .",
+		"message": "Napsauta korostettua $tab -välilehteä kakkospainikkeella ja kiinnitä se valitsemalla $extension_label > $cxm_move > $cxm_pin_tab.",
 		"description": "[tutorial] kiinnitä välilehti"
 	},
 	"tutorial_pinned_explanation": {
@@ -1644,11 +1644,11 @@
 		"description": "[tutorial] kehote opastuksen uudelleenkäynnistämiseksi"
 	},
 	"tutorial_save_modal": {
-		"message": "Ota muutokset käyttöön ja näytä vahvistusviesti napsauttamalla $save .",
+		"message": "Ota muutokset käyttöön ja näytä vahvistusviesti napsauttamalla $save.",
 		"description": "[tutorial] tallenna modaali"
 	},
 	"tutorial_start_prompt_body": {
-		"message": "Tämä koskee laajennusta $extension_label . Se vie sinut ensin Setup Home -sivulle ja aloittaa sitten ohjatun opastuksen $tutorial .",
+		"message": "Tämä koskee laajennusta $extension_label. Se vie sinut ensin Setup Home -sivulle ja aloittaa sitten ohjatun opastuksen $tutorial.",
 		"description": "[tutorial] leipäteksti opastuksen aloittamiseksi"
 	},
 	"tutorial_start_prompt_title": {

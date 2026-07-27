@@ -1576,7 +1576,7 @@
 		"description": "[tutorial] pievienot izlasei"
 	},
 	"tutorial_click_highlighted_tab": {
-		"message": "Noklikšķiniet uz izceltās $tab , lai pārietu uz attiecīgo lapu.",
+		"message": "Noklikšķiniet uz izceltās $tab, lai pārietu uz attiecīgo lapu.",
 		"description": "[tutorial] noklikšķiniet uz izceltās cilnes"
 	},
 	"tutorial_continue_prompt_body": {
@@ -1600,7 +1600,7 @@
 		"description": "[tutorial] kļūdas ziņojums par neiespējamību sākt"
 	},
 	"tutorial_favourite_tabs": {
-		"message": "Šīs ir jūsu izlases $tabs , un tās tiek izmantotas ātrai piekļuvei biežāk lietotajām lapām.",
+		"message": "Šīs ir jūsu izlases $tabs, un tās tiek izmantotas ātrai piekļuvei biežāk lietotajām lapām.",
 		"description": "[tutorial] izcelt izlases cilni"
 	},
 	"tutorial_keyboard_shortcut": {
@@ -1608,15 +1608,15 @@
 		"description": "[tutorial] tastatūras saīsne"
 	},
 	"tutorial_manage_tabs": {
-		"message": "Ar peles labo pogu noklikšķiniet uz lapas (nevis uz cilnes) un izvēlieties $extension_label > $cxm_manage_tabs , lai atvērtu pārvaldības logu.",
+		"message": "Ar peles labo pogu noklikšķiniet uz lapas (nevis uz cilnes) un izvēlieties $extension_label > $cxm_manage_tabs, lai atvērtu pārvaldības logu.",
 		"description": "[tutorial] pārvaldīt cilni"
 	},
 	"tutorial_manage_tabs_link": {
-		"message": "Šajā ekrānā varat pārvaldīt savas $tabs . Noklikšķiniet šeit, lai iegūtu vairāk informācijas.",
+		"message": "Šajā ekrānā varat pārvaldīt savas $tabs. Noklikšķiniet šeit, lai iegūtu vairāk informācijas.",
 		"description": "[tutorial] cilņu pārvaldības saite"
 	},
 	"tutorial_pin_tab": {
-		"message": "Ar peles labo pogu noklikšķiniet uz izceltās $tab un izvēlieties $extension_label > $cxm_move > $cxm_pin_tab , lai to piespraustu.",
+		"message": "Ar peles labo pogu noklikšķiniet uz izceltās $tab un izvēlieties $extension_label > $cxm_move > $cxm_pin_tab, lai to piespraustu.",
 		"description": "[tutorial] piespraust cilni"
 	},
 	"tutorial_pinned_explanation": {
@@ -1644,11 +1644,11 @@
 		"description": "[tutorial] aicinājums restartēt pamācību"
 	},
 	"tutorial_save_modal": {
-		"message": "Noklikšķiniet uz $save , lai lietotu izmaiņas un redzētu apstiprinājuma ziņojumu.",
+		"message": "Noklikšķiniet uz $save, lai lietotu izmaiņas un redzētu apstiprinājuma ziņojumu.",
 		"description": "[tutorial] saglabāt modālo logu"
 	},
 	"tutorial_start_prompt_body": {
-		"message": "Tas ir paredzēts $extension_label . Vispirms jūs tiksit novirzīts uz iestatīšanas sākumlapu, un pēc tam sāksies $tutorial",
+		"message": "Tas ir paredzēts $extension_label. Vispirms jūs tiksit novirzīts uz iestatīšanas sākumlapu, un pēc tam sāksies $tutorial",
 		"description": "[tutorial] pamatteksts pamācības sākšanai"
 	},
 	"tutorial_start_prompt_title": {

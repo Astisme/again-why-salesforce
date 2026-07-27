@@ -800,7 +800,7 @@
 		"description": "[label] i-import ang lahat ng nakita sa file sa panahon ng proseso ng pag-import"
 	},
 	"import_pinned_tabs": {
-		"message": "I-import ang bilang ng mga naka-pin na $tabs .",
+		"message": "I-import ang bilang ng mga naka-pin na $tabs.",
 		"description": "[label] i-import ang bilang ng mga naka-pin na $tabs sa panahon ng proseso ng pag-import"
 	},
 	"import_successful": {
@@ -1592,7 +1592,7 @@
 		"description": "[tutorial] i-drag ang mga flow"
 	},
 	"tutorial_end": {
-		"message": "Tapos na ang $tutorial ! Masiyahan sa paggamit ng extension.",
+		"message": "Tapos na ang $tutorial! Masiyahan sa paggamit ng extension.",
 		"description": "[tutorial] wakas"
 	},
 	"tutorial_export_and_reset_for_tutorial": {

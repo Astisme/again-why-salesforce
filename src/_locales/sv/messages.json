@@ -800,7 +800,7 @@
 		"description": "[etikett] importera allt som finns i filen under importprocessen"
 	},
 	"import_pinned_tabs": {
-		"message": "Importera antal fästa $tabs .",
+		"message": "Importera antal fästa $tabs.",
 		"description": "[etikett] importera antal fästa $tabs under importprocessen"
 	},
 	"import_successful": {

@@ -1576,7 +1576,7 @@
 		"description": "[tutorial] Favorit hinzufügen"
 	},
 	"tutorial_click_highlighted_tab": {
-		"message": "Klicken Sie auf den hervorgehobenen $tab , um zur entsprechenden Seite zu navigieren.",
+		"message": "Klicken Sie auf den hervorgehobenen $tab, um zur entsprechenden Seite zu navigieren.",
 		"description": "[tutorial] auf hervorgehobenen Tab klicken"
 	},
 	"tutorial_continue_prompt_body": {
@@ -1608,7 +1608,7 @@
 		"description": "[tutorial] Tastenkombination"
 	},
 	"tutorial_manage_tabs": {
-		"message": "Klicken Sie mit der rechten Maustaste auf die Seite (nicht auf einen Tab) und wählen Sie $extension_label > $cxm_manage_tabs , um das Verwaltungsmodal zu öffnen.",
+		"message": "Klicken Sie mit der rechten Maustaste auf die Seite (nicht auf einen Tab) und wählen Sie $extension_label > $cxm_manage_tabs, um das Verwaltungsmodal zu öffnen.",
 		"description": "[tutorial] Tab verwalten"
 	},
 	"tutorial_manage_tabs_link": {
@@ -1616,7 +1616,7 @@
 		"description": "[tutorial] Link zum Verwalten von Tab"
 	},
 	"tutorial_pin_tab": {
-		"message": "Klicken Sie mit der rechten Maustaste auf den hervorgehobenen $tab und wählen Sie $extension_label > $cxm_move > $cxm_pin_tab , um ihn anzuheften.",
+		"message": "Klicken Sie mit der rechten Maustaste auf den hervorgehobenen $tab und wählen Sie $extension_label > $cxm_move > $cxm_pin_tab, um ihn anzuheften.",
 		"description": "[tutorial] Tab anheften"
 	},
 	"tutorial_pinned_explanation": {
@@ -1644,7 +1644,7 @@
 		"description": "[tutorial] Aufforderung zum Neustart des Tutorials"
 	},
 	"tutorial_save_modal": {
-		"message": "Klicken Sie auf $save , um die Änderungen zu übernehmen und die Bestätigungsmeldung zu sehen.",
+		"message": "Klicken Sie auf $save, um die Änderungen zu übernehmen und die Bestätigungsmeldung zu sehen.",
 		"description": "[tutorial] Modal speichern"
 	},
 	"tutorial_start_prompt_body": {

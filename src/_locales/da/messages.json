@@ -800,7 +800,7 @@
 		"description": "[label] importer alt fundet i filen under importprocessen"
 	},
 	"import_pinned_tabs": {
-		"message": "Importer antal fastgjorte $tabs .",
+		"message": "Importer antal fastgjorte $tabs.",
 		"description": "[etiket] importer antal fastgjorte $tabs under importprocessen"
 	},
 	"import_successful": {
@@ -1580,7 +1580,7 @@
 		"description": "[tutorial] klik på fremhævet Tab"
 	},
 	"tutorial_continue_prompt_body": {
-		"message": "Dette er til $extension_label , og det vil genoptage din uafsluttede $tutorial fra der, hvor du slap.",
+		"message": "Dette er til $extension_label, og det vil genoptage din uafsluttede $tutorial fra der, hvor du slap.",
 		"description": "[tutorial] brødtekst til at fortsætte tutorial"
 	},
 	"tutorial_continue_prompt_title": {
@@ -1600,11 +1600,11 @@
 		"description": "[tutorial] fejlmeddelelse kunne ikke starte"
 	},
 	"tutorial_favourite_tabs": {
-		"message": "Dette er dine foretrukne $tabs , og de bruges til hurtig adgang til ofte brugte sider.",
+		"message": "Dette er dine foretrukne $tabs, og de bruges til hurtig adgang til ofte brugte sider.",
 		"description": "[tutorial] fremhæv favorit-Tab"
 	},
 	"tutorial_keyboard_shortcut": {
-		"message": "Tryk på tastaturgenvejen for at åbne siden $settings , hvor du kan ændre udvidelsens adfærd og style dine $tabs",
+		"message": "Tryk på tastaturgenvejen for at åbne siden $settings, hvor du kan ændre udvidelsens adfærd og style dine $tabs",
 		"description": "[tutorial] tastaturgenvej"
 	},
 	"tutorial_manage_tabs": {
@@ -1648,7 +1648,7 @@
 		"description": "[tutorial] gem modal"
 	},
 	"tutorial_start_prompt_body": {
-		"message": "Dette er til $extension_label , og det vil tage dig til Setup Home-siden først og derefter starte den guidede $tutorial",
+		"message": "Dette er til $extension_label, og det vil tage dig til Setup Home-siden først og derefter starte den guidede $tutorial",
 		"description": "[tutorial] brødtekst til at starte tutorial"
 	},
 	"tutorial_start_prompt_title": {

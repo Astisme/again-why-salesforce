@@ -800,7 +800,7 @@
 		"description": "[label] importovat vše nalezené v souboru během procesu importu"
 	},
 	"import_pinned_tabs": {
-		"message": "Importovat počet připnutých $tabs .",
+		"message": "Importovat počet připnutých $tabs.",
 		"description": "[štítek] importovat počet připnutých $tabs během procesu importu"
 	},
 	"import_successful": {
@@ -1604,7 +1604,7 @@
 		"description": "[tutorial] zvýraznění oblíbených Tab"
 	},
 	"tutorial_keyboard_shortcut": {
-		"message": "Stisknutím klávesové zkratky otevřete stránku $settings , kde můžete změnit chování rozšíření a stylizovat své $tabs",
+		"message": "Stisknutím klávesové zkratky otevřete stránku $settings, kde můžete změnit chování rozšíření a stylizovat své $tabs",
 		"description": "[tutorial] klávesová zkratka"
 	},
 	"tutorial_manage_tabs": {

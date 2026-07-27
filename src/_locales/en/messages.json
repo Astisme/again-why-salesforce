@@ -748,7 +748,7 @@
 		"description": "[settings-help] for $opt_prevent_lightning_navigation"
 	},
 	"help_skip_link_detection": {
-		"message": "Disables the extension check verifying that a $url fragment matches the format of Salesforce record/object IDs ( used to automatically set the saved $tab as an $org $tab ).",
+		"message": "Disables the extension check verifying that a $url fragment matches the format of Salesforce record/object IDs ( used to automatically set the saved $tab as an $org $tab).",
 		"description": "[settings-help] for $opt_skip_link_detection"
 	},
 	"help_tab_actions": {

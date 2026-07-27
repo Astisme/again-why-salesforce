@@ -800,7 +800,7 @@
 		"description": "[štítok] importovať všetko nájdené v súbore počas procesu importu"
 	},
 	"import_pinned_tabs": {
-		"message": "Importovať počet pripnutých $tabs .",
+		"message": "Importovať počet pripnutých $tabs.",
 		"description": "[štítok] importovať počet pripnutých $tabs počas procesu importu"
 	},
 	"import_successful": {

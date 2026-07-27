@@ -800,7 +800,7 @@
 		"description": "[label] импортиране на всичко, намерено във файла по време на процеса на импортиране"
 	},
 	"import_pinned_tabs": {
-		"message": "Импортиране броя на закачените $tabs .",
+		"message": "Импортиране броя на закачените $tabs.",
 		"description": "[етикет] импортиране броя на закачените $tabs по време на процеса на импортиране"
 	},
 	"import_successful": {
@@ -1576,7 +1576,7 @@
 		"description": "[tutorial] добавяне на любими"
 	},
 	"tutorial_click_highlighted_tab": {
-		"message": "Кликнете върху подчертания $tab , за да отидете на съответната страница.",
+		"message": "Кликнете върху подчертания $tab, за да отидете на съответната страница.",
 		"description": "[tutorial] кликнете върху подчертания Tab"
 	},
 	"tutorial_continue_prompt_body": {
@@ -1604,11 +1604,11 @@
 		"description": "[tutorial] подчертаване на любими Tab"
 	},
 	"tutorial_keyboard_shortcut": {
-		"message": "Натиснете клавишната комбинация, за да отворите страницата $settings , където можете да промените поведението на разширението и да стилизирате вашите $tabs",
+		"message": "Натиснете клавишната комбинация, за да отворите страницата $settings, където можете да промените поведението на разширението и да стилизирате вашите $tabs",
 		"description": "[tutorial] клавишна комбинация"
 	},
 	"tutorial_manage_tabs": {
-		"message": "Кликнете с десния бутон върху страницата (не върху Tab) и изберете $extension_label > $cxm_manage_tabs , за да отворите модалния прозорец за управление.",
+		"message": "Кликнете с десния бутон върху страницата (не върху Tab) и изберете $extension_label > $cxm_manage_tabs, за да отворите модалния прозорец за управление.",
 		"description": "[tutorial] управление на Tab"
 	},
 	"tutorial_manage_tabs_link": {
@@ -1616,7 +1616,7 @@
 		"description": "[tutorial] връзка за управление на Tab"
 	},
 	"tutorial_pin_tab": {
-		"message": "Кликнете с десния бутон върху подчертания $tab и изберете $extension_label > $cxm_move > $cxm_pin_tab , за да го закачите.",
+		"message": "Кликнете с десния бутон върху подчертания $tab и изберете $extension_label > $cxm_move > $cxm_pin_tab, за да го закачите.",
 		"description": "[tutorial] закачане на Tab"
 	},
 	"tutorial_pinned_explanation": {
@@ -1644,7 +1644,7 @@
 		"description": "[tutorial] подкана за рестартиране на ръководството"
 	},
 	"tutorial_save_modal": {
-		"message": "Кликнете върху $save , за да приложите промените и да видите съобщението за потвърждение.",
+		"message": "Кликнете върху $save, за да приложите промените и да видите съобщението за потвърждение.",
 		"description": "[tutorial] запазване в модален прозорец"
 	},
 	"tutorial_start_prompt_body": {

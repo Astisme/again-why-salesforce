@@ -1592,7 +1592,7 @@
 		"description": "[برنامج تعليمي] سحب التدفقات"
 	},
 	"tutorial_end": {
-		"message": "اكتمل $tutorial ! استمتع باستخدام الامتداد.",
+		"message": "اكتمل $tutorial! استمتع باستخدام الامتداد.",
 		"description": "[برنامج تعليمي] النهاية"
 	},
 	"tutorial_export_and_reset_for_tutorial": {

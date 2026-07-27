@@ -1604,11 +1604,11 @@
 		"description": "[tutorial] tõstke esile lemmik Tab"
 	},
 	"tutorial_keyboard_shortcut": {
-		"message": "Vajutage klaviatuuri lühiteed, et avada leht $settings , kus saate muuta laienduse käitumist ja kujundada oma $tabs",
+		"message": "Vajutage klaviatuuri lühiteed, et avada leht $settings, kus saate muuta laienduse käitumist ja kujundada oma $tabs",
 		"description": "[tutorial] klaviatuuri lühitee"
 	},
 	"tutorial_manage_tabs": {
-		"message": "Paremklõpsake lehel (mitte Tab peal) ja valige haldusmodaali avamiseks $extension_label > $cxm_manage_tabs .",
+		"message": "Paremklõpsake lehel (mitte Tab peal) ja valige haldusmodaali avamiseks $extension_label > $cxm_manage_tabs.",
 		"description": "[tutorial] halda Tab"
 	},
 	"tutorial_manage_tabs_link": {
@@ -1616,7 +1616,7 @@
 		"description": "[tutorial] Tab haldamise link"
 	},
 	"tutorial_pin_tab": {
-		"message": "Paremklõpsake esiletõstetud $tab peal ja valige selle kinnitamiseks $extension_label > $cxm_move > $cxm_pin_tab .",
+		"message": "Paremklõpsake esiletõstetud $tab peal ja valige selle kinnitamiseks $extension_label > $cxm_move > $cxm_pin_tab.",
 		"description": "[tutorial] kinnita Tab"
 	},
 	"tutorial_pinned_explanation": {
@@ -1644,7 +1644,7 @@
 		"description": "[tutorial] viip õpetuse taaskäivitamiseks"
 	},
 	"tutorial_save_modal": {
-		"message": "Klõpsake nuppu $save , et rakendada muudatused ja näha kinnitusteadet.",
+		"message": "Klõpsake nuppu $save, et rakendada muudatused ja näha kinnitusteadet.",
 		"description": "[tutorial] salvesta modaal"
 	},
 	"tutorial_start_prompt_body": {

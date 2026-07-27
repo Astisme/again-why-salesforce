@@ -800,7 +800,7 @@
 		"description": "[мітка] імпортувати все, що знайдено у файлі під час процесу імпорту"
 	},
 	"import_pinned_tabs": {
-		"message": "Імпортувати кількість закріплених $tabs .",
+		"message": "Імпортувати кількість закріплених $tabs.",
 		"description": "[мітка] імпортувати кількість закріплених $tabs під час процесу імпорту"
 	},
 	"import_successful": {
@@ -1576,11 +1576,11 @@
 		"description": "[tutorial] додати до обраного"
 	},
 	"tutorial_click_highlighted_tab": {
-		"message": "Натисніть на виділену вкладку $tab , щоб перейти на відповідну сторінку.",
+		"message": "Натисніть на виділену вкладку $tab, щоб перейти на відповідну сторінку.",
 		"description": "[tutorial] натиснути на виділену вкладку"
 	},
 	"tutorial_continue_prompt_body": {
-		"message": "Це для $extension_label , посібник $tutorial буде продовжено з того місця, де ви зупинилися.",
+		"message": "Це для $extension_label, посібник $tutorial буде продовжено з того місця, де ви зупинилися.",
 		"description": "[tutorial] текст для продовження посібника"
 	},
 	"tutorial_continue_prompt_title": {
@@ -1600,15 +1600,15 @@
 		"description": "[tutorial] повідомлення про помилку при неможливості запуску"
 	},
 	"tutorial_favourite_tabs": {
-		"message": "Це ваші обрані вкладки $tabs , вони використовуються для швидкого доступу до сторінок, що часто використовуються.",
+		"message": "Це ваші обрані вкладки $tabs, вони використовуються для швидкого доступу до сторінок, що часто використовуються.",
 		"description": "[tutorial] виділити обрану вкладку"
 	},
 	"tutorial_keyboard_shortcut": {
-		"message": "Натисніть комбінацію клавіш, щоб відкрити сторінку $settings , де ви можете змінити поведінку розширення та стилізувати свої вкладки $tabs",
+		"message": "Натисніть комбінацію клавіш, щоб відкрити сторінку $settings, де ви можете змінити поведінку розширення та стилізувати свої вкладки $tabs",
 		"description": "[tutorial] комбінація клавіш"
 	},
 	"tutorial_manage_tabs": {
-		"message": "Клацніть правою кнопкою миші на сторінці (не на вкладці) і виберіть $extension_label > $cxm_manage_tabs , щоб відкрити вікно керування.",
+		"message": "Клацніть правою кнопкою миші на сторінці (не на вкладці) і виберіть $extension_label > $cxm_manage_tabs, щоб відкрити вікно керування.",
 		"description": "[tutorial] керувати вкладкою"
 	},
 	"tutorial_manage_tabs_link": {
@@ -1616,7 +1616,7 @@
 		"description": "[tutorial] посилання на керування вкладками"
 	},
 	"tutorial_pin_tab": {
-		"message": "Клацніть правою кнопкою миші на виділеній вкладці $tab і виберіть $extension_label > $cxm_move > $cxm_pin_tab , щоб закріпити її.",
+		"message": "Клацніть правою кнопкою миші на виділеній вкладці $tab і виберіть $extension_label > $cxm_move > $cxm_pin_tab, щоб закріпити її.",
 		"description": "[tutorial] закріпити вкладку"
 	},
 	"tutorial_pinned_explanation": {
@@ -1644,11 +1644,11 @@
 		"description": "[tutorial] запит на перезапуск посібника"
 	},
 	"tutorial_save_modal": {
-		"message": "Натисніть $save , щоб застосувати зміни та побачити повідомлення про підтвердження.",
+		"message": "Натисніть $save, щоб застосувати зміни та побачити повідомлення про підтвердження.",
 		"description": "[tutorial] зберегти модальне вікно"
 	},
 	"tutorial_start_prompt_body": {
-		"message": "Це для $extension_label , ви спочатку перейдете на головну сторінку налаштувань, а потім почнеться покроковий посібник $tutorial",
+		"message": "Це для $extension_label, ви спочатку перейдете на головну сторінку налаштувань, а потім почнеться покроковий посібник $tutorial",
 		"description": "[tutorial] текст для початку посібника"
 	},
 	"tutorial_start_prompt_title": {

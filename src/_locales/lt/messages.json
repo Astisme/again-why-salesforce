@@ -1576,7 +1576,7 @@
 		"description": "[tutorial] pridėti mėgstamiausią"
 	},
 	"tutorial_click_highlighted_tab": {
-		"message": "Spustelėkite paryškintą $tab , kad pereitumėte į atitinkamą puslapį.",
+		"message": "Spustelėkite paryškintą $tab, kad pereitumėte į atitinkamą puslapį.",
 		"description": "[tutorial] spustelėkite paryškintą kortelę"
 	},
 	"tutorial_continue_prompt_body": {
@@ -1600,7 +1600,7 @@
 		"description": "[tutorial] klaidos pranešimas apie negalėjimą pradėti"
 	},
 	"tutorial_favourite_tabs": {
-		"message": "Tai jūsų mėgstamiausios $tabs , jos naudojamos greitai pasiekti dažnai naudojamus puslapius.",
+		"message": "Tai jūsų mėgstamiausios $tabs, jos naudojamos greitai pasiekti dažnai naudojamus puslapius.",
 		"description": "[tutorial] paryškinti mėgstamiausią kortelę"
 	},
 	"tutorial_keyboard_shortcut": {
@@ -1608,15 +1608,15 @@
 		"description": "[tutorial] klaviatūros klavišų derinys"
 	},
 	"tutorial_manage_tabs": {
-		"message": "Dešiniuoju pelės mygtuku spustelėkite puslapį (ne kortelę) ir pasirinkite $extension_label > $cxm_manage_tabs , kad atidarytumėte valdymo langą.",
+		"message": "Dešiniuoju pelės mygtuku spustelėkite puslapį (ne kortelę) ir pasirinkite $extension_label > $cxm_manage_tabs, kad atidarytumėte valdymo langą.",
 		"description": "[tutorial] tvarkyti kortelę"
 	},
 	"tutorial_manage_tabs_link": {
-		"message": "Šiame ekrane galite tvarkyti savo $tabs . Spustelėkite čia norėdami gauti daugiau informacijos.",
+		"message": "Šiame ekrane galite tvarkyti savo $tabs. Spustelėkite čia norėdami gauti daugiau informacijos.",
 		"description": "[tutorial] kortelių valdymo nuoroda"
 	},
 	"tutorial_pin_tab": {
-		"message": "Dešiniuoju pelės mygtuku spustelėkite paryškintą $tab ir pasirinkite $extension_label > $cxm_move > $cxm_pin_tab , kad ją prisegtumėte.",
+		"message": "Dešiniuoju pelės mygtuku spustelėkite paryškintą $tab ir pasirinkite $extension_label > $cxm_move > $cxm_pin_tab, kad ją prisegtumėte.",
 		"description": "[tutorial] prisegti kortelę"
 	},
 	"tutorial_pinned_explanation": {
@@ -1644,11 +1644,11 @@
 		"description": "[tutorial] raginimas iš naujo paleisti mokomąją medžiagą"
 	},
 	"tutorial_save_modal": {
-		"message": "Spustelėkite $save , kad pritaikytumėte pakeitimus ir pamatytumėte patvirtinimo pranešimą.",
+		"message": "Spustelėkite $save, kad pritaikytumėte pakeitimus ir pamatytumėte patvirtinimo pranešimą.",
 		"description": "[tutorial] išsaugoti modalinį langą"
 	},
 	"tutorial_start_prompt_body": {
-		"message": "Tai skirta $extension_label . Pirmiausia pateksite į sąrankos pagrindinį puslapį, o tada prasidės $tutorial",
+		"message": "Tai skirta $extension_label. Pirmiausia pateksite į sąrankos pagrindinį puslapį, o tada prasidės $tutorial",
 		"description": "[tutorial] pagrindinis tekstas mokomajai medžiagai pradėti"
 	},
 	"tutorial_start_prompt_title": {

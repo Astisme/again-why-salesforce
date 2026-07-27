@@ -800,7 +800,7 @@
 		"description": "[oznaka] uvozi vse, kar je najdeno v datoteki med postopkom uvoza"
 	},
 	"import_pinned_tabs": {
-		"message": "Uvozi število pripetih $tabs .",
+		"message": "Uvozi število pripetih $tabs.",
 		"description": "[oznaka] uvozi število pripetih $tabs med postopkom uvoza"
 	},
 	"import_successful": {
