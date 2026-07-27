@@ -303,7 +303,7 @@ export class TranslationService {
 		if (
 			typeof key === "string" &&
 			key.startsWith("$") &&
-			/^\$\w+.*$/.exec(key) &&
+			/^\$\w.*$/.exec(key) &&
 			this.#getMessageFromCache(key) == null
 		) {
 			const translatedPlaceholder = await this.#translateMessageTokens(

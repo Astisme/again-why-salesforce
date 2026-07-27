@@ -1,9 +1,18 @@
 "use strict";
 
 const FALLBACK_CUSTOM_ELEMENTS = {
+	/**
+	 * Ignores custom element registration when no browser registry exists.
+	 *
+	 * @return {void}
+	 */
 	define() {},
 };
-const FALLBACK_HTML_ELEMENT = class {};
+
+/**
+ * Minimal HTMLElement constructor fallback for non-browser analysis/test runtimes.
+ */
+const FALLBACK_HTML_ELEMENT = class {}; // NOSONAR
 
 /**
  * Creates and registers review/sponsor UI behavior with injected dependencies.
