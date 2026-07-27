@@ -899,6 +899,10 @@
 		"message": "זה אינו דף הגדרות של $salesforce_lightning",
 		"description": "[notSalesforceSetup] המשתמש אינו נמצא בדף Salesforce."
 	},
+	"open_github_issue": {
+		"message": "פתיחת דיווח ב-GitHub",
+		"description": "[הודעת ביקורת] תווית לחצן עבור משתמשים שזקוקים לעזרה או רוצים לדווח על בעיה"
+	},
 	"open_here": {
 		"message": "פתח ב-Tab זה.",
 		"description": "[open-other-org-modal] לחצן רדיו המאפשר למשתמש לפתוח באותו Tab דפדפן"
@@ -1103,6 +1107,10 @@
 		"message": "אם תרצה, תוכל להציג את ה-Tabs המועדפים עליך\nברגע שתנווט לדף $salesforce_setup\nמבלי שתצטרך ללחוץ על תוסף זה בכל פעם.",
 		"description": "[req_permission] טקסט המסביר מדוע מתבקשות ההרשאות"
 	},
+	"request_later": {
+		"message": "לבקש מאוחר יותר",
+		"description": "[הודעת ביקורת] תווית לחצן לבקש שוב מאוחר יותר מבלי לשמור את ההודעה הושלמה"
+	},
 	"required": {
 		"message": "נדרש",
 		"description": "[input] מסמן שדה קלט כחובה"
@@ -1110,6 +1118,10 @@
 	"required_info": {
 		"message": "= מידע נדרש",
 		"description": "[modal] מודיע למשתמש שמידע מסוים הינו חובה"
+	},
+	"review_prompt_body": {
+		"message": "נהנים מ- $extension_label ? אנא כתבו ביקורת.\nלא מרוצים? פתחו דיווח ב-GitHub כדי שנוכל לעזור.\nלא רוצים לבחור עכשיו? ביטול מפסיק בקשה זו, לבקש מאוחר יותר ישאל שוב בפעם הבאה.",
+		"description": "[הודעת ביקורת] גוף ההודעה המסביר את אפשרויות הביקורת, הדיווח, הביטול והבקשה מאוחר יותר"
 	},
 	"salesforce_domain": {
 		"message": "דומיין Salesforce",
@@ -1156,8 +1168,8 @@
 		"description": "[import] אפשר למשתמש לבחור אילו $tabs לייבא לפני ייבואם"
 	},
 	"send_tip": {
-		"message": "שלח לנו טיפ ❤️",
-		"description": "[popup] כותרת ל-svg כדי להניע שליחת טיפ"
+		"message": "אם $extension_label חוסך לכם זמן, שקלו לתמוך בפיתוח שלו.\nאנו מודים לכם מראש על כך שאתם אוהבים אותו כל כך!",
+		"description": "[הודעה] הודעה המבקשת מהמשתמש לתמוך בהרחבה"
 	},
 	"sessions": {
 		"message": "סשנים",

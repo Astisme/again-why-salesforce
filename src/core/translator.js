@@ -300,6 +300,18 @@ export class TranslationService {
 			this.#addTranslationToCache(key, translation);
 			return translation;
 		}
+		if (
+			typeof key === "string" &&
+			key.startsWith("$") &&
+			/^\$\w.*$/.exec(key) &&
+			this.#getMessageFromCache(key) == null
+		) {
+			const translatedPlaceholder = await this.#translateMessageTokens(
+				key,
+			);
+			this.#addTranslationToCache(key, translatedPlaceholder);
+			return translatedPlaceholder;
+		}
 		if (Array.isArray(key)) {
 			return (await Promise.all(
 				key.map((k) => this.translate(k)),
@@ -312,29 +324,42 @@ export class TranslationService {
 			if (!keyTranslate.includes("$")) {
 				return keyTranslate;
 			}
-			let messageTranslated = "";
-			const words = keyTranslate.split(/\s+/);
-			for (const word of words) {
-				if (!word.startsWith("$")) {
-					messageTranslated += ` ${word}`;
-					continue;
-				}
-				const innerTranslation = await this.#_translate(word);
-				if (innerTranslation.includes("$")) {
-					messageTranslated += ` ${await this.translate(
-						innerTranslation,
-					)}`;
-				} else {
-					messageTranslated += ` ${innerTranslation}`;
-				}
-			}
-			const finalTranslation = messageTranslated.slice(1); // remove beginning whitespace
+			const finalTranslation = await this.#translateMessageTokens(
+				keyTranslate,
+			);
 			this.#addTranslationToCache(key, finalTranslation);
 			return finalTranslation;
 		} catch (e) {
 			console.info(e);
 			return key;
 		}
+	}
+
+	/**
+	 * Translates placeholder tokens inside a message while preserving surrounding text.
+	 *
+	 * @param {string} message Message containing `$key` placeholders.
+	 * @return {Promise<string>} Message with placeholders translated.
+	 */
+	async #translateMessageTokens(message) {
+		let messageTranslated = "";
+		const parts = message.split(/(\$\w+)/);
+		for (const part of parts) {
+			if (part === "") {
+				continue;
+			}
+			if (!part.startsWith("$")) {
+				messageTranslated += part;
+				continue;
+			}
+			const innerTranslation = await this.#_translate(part);
+			if (innerTranslation.includes("$")) {
+				messageTranslated += await this.translate(innerTranslation);
+			} else {
+				messageTranslated += innerTranslation;
+			}
+		}
+		return messageTranslated;
 	}
 
 	/**

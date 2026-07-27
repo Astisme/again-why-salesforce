@@ -599,6 +599,9 @@ export const translations: Record<
 		"plz_use_sf_login": {
 			"message": "$you_should $use_sf_login please!",
 		},
+		"prompt_with_newline": {
+			"message": "Enjoying $sf_login?\nPlease continue.",
+		},
 		"error_missing_key": {
 			"message": "Key not found anywhere",
 		},

@@ -899,6 +899,10 @@
 		"message": "Šī nav $salesforce_lightning iestatīšanas lapa.",
 		"description": "[notSalesforceSetup] lietotājs neatrodas Salesforce lapā."
 	},
+	"open_github_issue": {
+		"message": "Atvērt GitHub problēmu",
+		"description": "[atsauksmes vaicājums] pogas etiķete lietotājiem, kuriem nepieciešama palīdzība vai kuri vēlas ziņot par problēmu"
+	},
 	"open_here": {
 		"message": "Atvērt šajā Tab.",
 		"description": "[open-other-org-modal] radiopoga, kas ļauj lietotājam atvērt tajā pašā pārlūkprogrammas Tab"
@@ -1103,6 +1107,10 @@
 		"message": "Ja vēlaties, varat parādīt savas iecienītākās Tabs,\ntiklīdz pārejat uz $salesforce_setup lapu,\nkatru reizi neklikšķinot uz šī paplašinājuma.",
 		"description": "[req_permission] teksts, kas paskaidro, kāpēc tiek pieprasītas atļaujas"
 	},
+	"request_later": {
+		"message": "Pieprasīt vēlāk",
+		"description": "[atsauksmes vaicājums] pogas etiķete, lai jautātu vēlreiz vēlāk, nesaglabājot vaicājumu kā pabeigtu"
+	},
 	"required": {
 		"message": "obligāts",
 		"description": "[ievade] atzīmē ievades lauku kā obligātu"
@@ -1110,6 +1118,10 @@
 	"required_info": {
 		"message": "= Obligātā informācija",
 		"description": "[modal] informē lietotāju, ka daļa informācijas ir obligāta"
+	},
+	"review_prompt_body": {
+		"message": "Vai patīk $extension_label ? Lūdzu, uzrakstiet atsauksmi.\nNeesat apmierināts? Atveriet GitHub problēmu, lai mēs varētu palīdzēt.\nNēgribat izvēlēties tagad? Atcelt aptur šo pieprasījumu, Pieprasīt vēlāk jautās vēlreiz nākamreiz.",
+		"description": "[atsauksmes vaicājums] pamatteksts, kurā paskaidrotas atsauksmes, problēmas, atcelšanas un vēlākās izvēles"
 	},
 	"salesforce_domain": {
 		"message": "Salesforce domēns",
@@ -1156,8 +1168,8 @@
 		"description": "[import] ļaujiet lietotājam izvēlēties, kurus $tabs importēt pirms to importēšanas"
 	},
 	"send_tip": {
-		"message": "Sūtiet mums dzeramnaudu ❤️",
-		"description": "[popup] svg virsraksts, lai mudinātu sūtīt dzeramnaudu"
+		"message": "Ja $extension_label ietaupa jūsu laiku, apsveriet iespēju sponsorēt tā izstrādi.\nJau iepriekš pateicamies par to, ka jums tas tik ļoti patīk!",
+		"description": "[vaicājums] ziņojums, kurā lietotājam lūgts sponsorēt paplašinājumu"
 	},
 	"sessions": {
 		"message": "Sesijas",
@@ -1564,7 +1576,7 @@
 		"description": "[tutorial] pievienot izlasei"
 	},
 	"tutorial_click_highlighted_tab": {
-		"message": "Noklikšķiniet uz izceltās $tab , lai pārietu uz attiecīgo lapu.",
+		"message": "Noklikšķiniet uz izceltās $tab, lai pārietu uz attiecīgo lapu.",
 		"description": "[tutorial] noklikšķiniet uz izceltās cilnes"
 	},
 	"tutorial_continue_prompt_body": {
@@ -1588,7 +1600,7 @@
 		"description": "[tutorial] kļūdas ziņojums par neiespējamību sākt"
 	},
 	"tutorial_favourite_tabs": {
-		"message": "Šīs ir jūsu izlases $tabs , un tās tiek izmantotas ātrai piekļuvei biežāk lietotajām lapām.",
+		"message": "Šīs ir jūsu izlases $tabs, un tās tiek izmantotas ātrai piekļuvei biežāk lietotajām lapām.",
 		"description": "[tutorial] izcelt izlases cilni"
 	},
 	"tutorial_keyboard_shortcut": {
@@ -1596,15 +1608,15 @@
 		"description": "[tutorial] tastatūras saīsne"
 	},
 	"tutorial_manage_tabs": {
-		"message": "Ar peles labo pogu noklikšķiniet uz lapas (nevis uz cilnes) un izvēlieties $extension_label > $cxm_manage_tabs , lai atvērtu pārvaldības logu.",
+		"message": "Ar peles labo pogu noklikšķiniet uz lapas (nevis uz cilnes) un izvēlieties $extension_label > $cxm_manage_tabs, lai atvērtu pārvaldības logu.",
 		"description": "[tutorial] pārvaldīt cilni"
 	},
 	"tutorial_manage_tabs_link": {
-		"message": "Šajā ekrānā varat pārvaldīt savas $tabs . Noklikšķiniet šeit, lai iegūtu vairāk informācijas.",
+		"message": "Šajā ekrānā varat pārvaldīt savas $tabs. Noklikšķiniet šeit, lai iegūtu vairāk informācijas.",
 		"description": "[tutorial] cilņu pārvaldības saite"
 	},
 	"tutorial_pin_tab": {
-		"message": "Ar peles labo pogu noklikšķiniet uz izceltās $tab un izvēlieties $extension_label > $cxm_move > $cxm_pin_tab , lai to piespraustu.",
+		"message": "Ar peles labo pogu noklikšķiniet uz izceltās $tab un izvēlieties $extension_label > $cxm_move > $cxm_pin_tab, lai to piespraustu.",
 		"description": "[tutorial] piespraust cilni"
 	},
 	"tutorial_pinned_explanation": {
@@ -1632,11 +1644,11 @@
 		"description": "[tutorial] aicinājums restartēt pamācību"
 	},
 	"tutorial_save_modal": {
-		"message": "Noklikšķiniet uz $save , lai lietotu izmaiņas un redzētu apstiprinājuma ziņojumu.",
+		"message": "Noklikšķiniet uz $save, lai lietotu izmaiņas un redzētu apstiprinājuma ziņojumu.",
 		"description": "[tutorial] saglabāt modālo logu"
 	},
 	"tutorial_start_prompt_body": {
-		"message": "Tas ir paredzēts $extension_label . Vispirms jūs tiksit novirzīts uz iestatīšanas sākumlapu, un pēc tam sāksies $tutorial",
+		"message": "Tas ir paredzēts $extension_label. Vispirms jūs tiksit novirzīts uz iestatīšanas sākumlapu, un pēc tam sāksies $tutorial",
 		"description": "[tutorial] pamatteksts pamācības sākšanai"
 	},
 	"tutorial_start_prompt_title": {

@@ -899,6 +899,10 @@
 		"message": "See ei ole $salesforce_lightning seadistusleht.",
 		"description": "[notSalesforceSetup] kasutaja ei ole Salesforce'i lehel."
 	},
+	"open_github_issue": {
+		"message": "Ava GitHubi probleem",
+		"description": "[arvustuse küsimine] nupu silt kasutajatele, kes vajavad abi või soovivad probleemist teatada"
+	},
 	"open_here": {
 		"message": "Ava siin Tab.",
 		"description": "[open-other-org-modal] raadionupp, mis laseb kasutajal avada samas brauseri Tab"
@@ -1103,6 +1107,10 @@
 		"message": "Soovi korral võite lasta oma lemmik Tabs ilmuda\nkohe, kui navigeerite $salesforce_setup lehele,\nilma et peaksite iga kord seda laiendust klõpsama.",
 		"description": "[req_permission] tekst, mis selgitab, miks lube taotletakse"
 	},
+	"request_later": {
+		"message": "Küsi hiljem",
+		"description": "[arvustuse küsimine] nupu silt hiljem uuesti küsimiseks ilma teadet lõpetatuks salvestamata"
+	},
 	"required": {
 		"message": "nõutud",
 		"description": "[sisend] märgib sisendvälja kohustuslikuks"
@@ -1110,6 +1118,10 @@
 	"required_info": {
 		"message": "= Nõutud teave",
 		"description": "[modaal] ütleb kasutajale, et osa teavet on kohustuslik"
+	},
+	"review_prompt_body": {
+		"message": "Naudid $extension_label kasutamist? Palun kirjuta arvustus.\nPole rahul? Ava GitHubi probleem, et saaksime aidata.\nEi soovi praegu valida? Tühista peatab selle päringu, Küsi hiljem küsib järgmisel korral uuesti.",
+		"description": "[arvustuse küsimine] põhiosa, mis selgitab arvustuse, probleemi, tühistamise ja hiljem küsimise valikuid"
 	},
 	"salesforce_domain": {
 		"message": "Salesforce'i domeen",
@@ -1156,8 +1168,8 @@
 		"description": "[import] lase kasutajal valida, milliseid $tabs importida enne nende importimist"
 	},
 	"send_tip": {
-		"message": "Saada meile jootraha ❤️",
-		"description": "[popup] svg-i pealkiri jootraha saatmise küsimiseks"
+		"message": "Kui $extension_label säästab sinu aega, kaalu selle arenduse toetamist.\nTänäme teid ette, et seda nii väga armastate!",
+		"description": "[teade] sõnum, mis palub kasutajal laienduse arendust toetada"
 	},
 	"sessions": {
 		"message": "Seansid",
@@ -1592,11 +1604,11 @@
 		"description": "[tutorial] tõstke esile lemmik Tab"
 	},
 	"tutorial_keyboard_shortcut": {
-		"message": "Vajutage klaviatuuri lühiteed, et avada leht $settings , kus saate muuta laienduse käitumist ja kujundada oma $tabs",
+		"message": "Vajutage klaviatuuri lühiteed, et avada leht $settings, kus saate muuta laienduse käitumist ja kujundada oma $tabs",
 		"description": "[tutorial] klaviatuuri lühitee"
 	},
 	"tutorial_manage_tabs": {
-		"message": "Paremklõpsake lehel (mitte Tab peal) ja valige haldusmodaali avamiseks $extension_label > $cxm_manage_tabs .",
+		"message": "Paremklõpsake lehel (mitte Tab peal) ja valige haldusmodaali avamiseks $extension_label > $cxm_manage_tabs.",
 		"description": "[tutorial] halda Tab"
 	},
 	"tutorial_manage_tabs_link": {
@@ -1604,7 +1616,7 @@
 		"description": "[tutorial] Tab haldamise link"
 	},
 	"tutorial_pin_tab": {
-		"message": "Paremklõpsake esiletõstetud $tab peal ja valige selle kinnitamiseks $extension_label > $cxm_move > $cxm_pin_tab .",
+		"message": "Paremklõpsake esiletõstetud $tab peal ja valige selle kinnitamiseks $extension_label > $cxm_move > $cxm_pin_tab.",
 		"description": "[tutorial] kinnita Tab"
 	},
 	"tutorial_pinned_explanation": {
@@ -1632,7 +1644,7 @@
 		"description": "[tutorial] viip õpetuse taaskäivitamiseks"
 	},
 	"tutorial_save_modal": {
-		"message": "Klõpsake nuppu $save , et rakendada muudatused ja näha kinnitusteadet.",
+		"message": "Klõpsake nuppu $save, et rakendada muudatused ja näha kinnitusteadet.",
 		"description": "[tutorial] salvesta modaal"
 	},
 	"tutorial_start_prompt_body": {

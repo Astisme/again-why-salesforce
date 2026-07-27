@@ -899,6 +899,10 @@
 		"message": "ይህ የ $salesforce_lightning ማዋቀሪያ ገጽ አይደለም።",
 		"description": "[notSalesforceSetup] ተጠቃሚው በ Salesforce ገጽ ላይ የለም።"
 	},
+	"open_github_issue": {
+		"message": "የ GitHub ችግር ይክፈቱ",
+		"description": "[የግምገማ ጥያቄ] እርዳታ ለሚፈልጉ ወይም ችግር ለመጠቆም ለሚፈልጉ ተጠቃሚዎች የቁልፍ ምልክት"
+	},
 	"open_here": {
 		"message": "በዚህ Tab ውስጥ ክፈት።",
 		"description": "[open-other-org-modal] ተጠቃሚው በተመሳሳይ የአሳሽ Tab እንዲከፍት የሚያስችል የሬዲዮ ቁልፍ"
@@ -1103,6 +1107,10 @@
 		"message": "ከፈለጉ፣ ወደ $salesforce_setup ገጽ በሚሄዱበት ጊዜ ሁሉ\nይህን ቅጥያ ጠቅ ማድረግ ሳያስፈልግዎት\nየሚወዷቸው Tabs እንዲታዩ ማድረግ ይችላሉ።",
 		"description": "[req_permission] ፈቃዶቹ ለምን እንደሚጠየቁ የሚያብራራ ጽሑፍ"
 	},
+	"request_later": {
+		"message": "በኋላ ይጠይቁ",
+		"description": "[የግምገማ ጥያቄ] ጥያቄውን እንደተጠናቀቀ ሳይመዝገብ በኋላ እንደገና ለመጠየቅ የቁልፍ ምልክት"
+	},
 	"required": {
 		"message": "ያስፈልጋል",
 		"description": "[ግቤት] የግቤት መስክን እንደ አስገዳጅ ምልክት ያደርጋል"
@@ -1110,6 +1118,10 @@
 	"required_info": {
 		"message": "= አስፈላጊ መረጃ",
 		"description": "[ሞዳል] አንዳንድ መረጃዎች አስገዳጅ እንደሆኑ ለተጠቃሚው ይነግረዋል"
+	},
+	"review_prompt_body": {
+		"message": "$extension_label እየወደዱት ነው? እባክዎ ግምገማ ይፃፉ።\nደስተኛ አይደሉም? እንድናግዝዎት የ GitHub ችግር ይክፈቱ።\nአሁን መምረጥ አይፈልጉም? ሰርዝ ይህን ጥያቄ ያቆማል፣ በኋላ ይጠይቁ በሚቀጥለው ጊዜ እንደገና ይጠይቃል።",
+		"description": "[የግምገማ ጥያቄ] ግምገማን፣ ችግርን፣ ሰርዝን እና በኋላ የሚሉ ምርጫዎችን የሚያብራራ አካል"
 	},
 	"salesforce_domain": {
 		"message": "Salesforce ጎራ",
@@ -1156,8 +1168,8 @@
 		"description": "[import] ተጠቃሚው ከማስመጣቱ በፊት የትኞቹን $tabs ማስመጣት እንደሚፈልግ እንዲመርጥ ይፍቀዱ"
 	},
 	"send_tip": {
-		"message": "ጠቃሚ ምክር ይላኩልን ❤️",
-		"description": "[popup] ምክር ለመላክ የሚጠይቅ የ svg ርዕስ"
+		"message": "$extension_label ጊዜዎን የሚያድን ከሆነ ልማቱን ስፖንሰር ለማድረግ ያስቡበት።\nበጣም ስለወደዱት በቅድሚያ እናመሰግናለን!",
+		"description": "[ጥያቄ] ተጠቃሚው ቅextensionውን ስፖንሰር እንዲያደርግ የሚጠይቅ መልእክት"
 	},
 	"sessions": {
 		"message": "ክፍለ-ጊዜዎች",

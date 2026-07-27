@@ -94,6 +94,8 @@ if (!MANIFEST.homepage_url?.startsWith("https://github.com/")) {
 }
 /** @type {string} */
 export const EXTENSION_GITHUB_LINK = MANIFEST.homepage_url;
+export const EXTENSION_GITHUB_ISSUES_LINK =
+	`${EXTENSION_GITHUB_LINK}/issues/new/choose`;
 export const EXTENSION_GITHUB_WIKI_LINK = `${EXTENSION_GITHUB_LINK}/wiki`;
 export const EXTENSION_OPTIONAL_HOST_PERM = MANIFEST.optional_host_permissions;
 // SETTINGS
@@ -309,6 +311,10 @@ export const WHAT_GET_SETTINGS = "get-settings";
 export const WHAT_GET_STYLE_SETTINGS = "get-style-settings";
 export const WHAT_GET_COMMANDS = "get-commands";
 export const WHAT_START_TUTORIAL = "start-tutorial";
+export const WHAT_SHOW_REVIEW = "show-review";
+export const WHAT_SHOW_SPONSOR = "show-sponsor";
+export const WHAT_DID_REVIEW = "did-review";
+export const WHAT_DID_SPONSOR = "did-sponsor";
 export const ALL_WHAT_REASONS = new Set([
 	WHAT_FOCUS_CHANGED,
 	WHAT_STARTUP,
@@ -338,5 +344,25 @@ export const ALL_WHAT_REASONS = new Set([
 	WHAT_SHOW_EXPORT_MODAL,
 	WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
 	WHAT_EXPORT_FROM_BG,
+	WHAT_SHOW_REVIEW,
+	WHAT_SHOW_SPONSOR,
+	WHAT_DID_REVIEW,
+	WHAT_DID_SPONSOR,
 ]);
 export const PERM_CHECK = "check-permission-granted";
+export const REVIEW_TAB_THRESHOLD = 8;
+export const SPONSOR_TAB_THRESHOLD = 16;
+export const REVIEW_USAGE_DAYS_THRESHOLD = 20;
+export const SPONSOR_USAGE_DAYS_THRESHOLD = 40;
+export const EDGE_LINK =
+	"https://microsoftedge.microsoft.com/addons/detail/again-why-salesforce/dfdjpokbfeaamjcomllncennmfhpldmm#description";
+export const CHROME_LINK =
+	"https://chromewebstore.google.com/detail/again-why-salesforce/bceeoimjhgjbihanbiifgpndmkklajbi/reviews";
+export const FIREFOX_LINK =
+	"https://addons.mozilla.org/en-US/firefox/addon/again-why-salesforce/";
+const SPONSOR_DOMAIN = "https://alfredoit.dev";
+const SPONSOR_PATH = "/sponsor/?email=againwhysalesforce@duck.com";
+export const SPONSOR_MAP = {
+	it: `${SPONSOR_DOMAIN}/it${SPONSOR_PATH}`,
+	default: `${SPONSOR_DOMAIN}/en${SPONSOR_PATH}`,
+};

@@ -899,6 +899,10 @@
 		"message": "Questa non è una pagina di configurazione di $salesforce_lightning",
 		"description": "[notSalesforceSetup] l'utente non si trova su una pagina Salesforce."
 	},
+	"open_github_issue": {
+		"message": "Apri problema su GitHub",
+		"description": "[richiesta di recensione] etichetta del pulsante per gli utenti che hanno bisogno di aiuto o desiderano segnalare un problema"
+	},
 	"open_here": {
 		"message": "Apri in questa Tab.",
 		"description": "[open-other-org-modal] pulsante di opzione per consentire all'utente di aprire nella stessa Tab del browser"
@@ -1103,6 +1107,10 @@
 		"message": "Se lo desideri, puoi visualizzare le tue Tabs preferite\nnon appena accedi a una pagina $salesforce_setup\nsenza dover fare clic su questa estensione ogni volta.",
 		"description": "[req_permission] testo per spiegare perché vengono richieste le autorizzazioni"
 	},
+	"request_later": {
+		"message": "Richiedi più tardi",
+		"description": "[richiesta di recensione] etichetta del pulsante per chiedere di nuovo più tardi senza salvare la richiesta come completata"
+	},
 	"required": {
 		"message": "obbligatorio",
 		"description": "[input] indica che un campo di inserimento è obbligatorio"
@@ -1110,6 +1118,10 @@
 	"required_info": {
 		"message": "= Informazioni Obbligatorie",
 		"description": "[modal] informa l'utente che alcune informazioni sono obbligatorie"
+	},
+	"review_prompt_body": {
+		"message": "Ti piace $extension_label ? Scrivi una recensione.\nNon sei soddisfatto? Apri un problema su GitHub così possiamo aiutarti.\nNon vuoi scegliere ora? Annulla interrompe questa richiesta, Richiedi più tardi chiederà di nuovo la prossima volta.",
+		"description": "[richiesta di recensione] testo che spiega le opzioni di recensione, problema, annulla e più tardi"
 	},
 	"salesforce_domain": {
 		"message": "Dominio Salesforce",
@@ -1156,8 +1168,8 @@
 		"description": "[import] consente all'utente di selezionare quali $tabs importare prima di importarli"
 	},
 	"send_tip": {
-		"message": "Inviaci un consiglio ❤️",
-		"description": "[popup] titolo per svg per richiedere l'invio di un consiglio"
+		"message": "Se $extension_label ti fa risparmiare tempo, considera di sponsorizzarne lo sviluppo.\nTi ringraziamo in anticipo per apprezzarlo così tanto!",
+		"description": "[richiesta] messaggio che chiede all'utente di sponsorizzare l'estensione"
 	},
 	"sessions": {
 		"message": "Sessioni",

@@ -899,6 +899,10 @@
 		"message": "Ini bukan halaman Pengaturan $salesforce_lightning",
 		"description": "[notSalesforceSetup] pengguna tidak berada di halaman Salesforce."
 	},
+	"open_github_issue": {
+		"message": "Buka masalah GitHub",
+		"description": "[anjuran ulasan] label tombol untuk pengguna yang membutuhkan bantuan atau ingin melaporkan masalah"
+	},
 	"open_here": {
 		"message": "Buka di Tab ini.",
 		"description": "[open-other-org-modal] tombol radio untuk mengizinkan pengguna membuka di Tab browser yang sama"
@@ -1103,6 +1107,10 @@
 		"message": "Jika mau, Anda dapat menampilkan Tabs favorit Anda\nsegera setelah Anda menavigasi ke halaman $salesforce_setup\ntanpa harus mengeklik ekstensi ini setiap saat.",
 		"description": "[req_permission] teks untuk menjelaskan mengapa izin diminta"
 	},
+	"request_later": {
+		"message": "Minta nanti",
+		"description": "[anjuran ulasan] label tombol untuk bertanya lagi nanti tanpa menyimpan anjuran sebagai selesai"
+	},
 	"required": {
 		"message": "diperlukan",
 		"description": "[input] Menandai kolom input sebagai wajib"
@@ -1110,6 +1118,10 @@
 	"required_info": {
 		"message": "= Informasi yang diperlukan",
 		"description": "[modal] Memberitahukan pengguna bahwa beberapa informasi wajib diisi"
+	},
+	"review_prompt_body": {
+		"message": "Menikmati $extension_label ? Silakan tulis ulasan.\nTidak puas? Buka masalah GitHub agar kami dapat membantu.\nTidak ingin memilih sekarang? Batal menghentikan permintaan ini, Minta nanti akan bertanya lagi lain kali.",
+		"description": "[anjuran ulasan] teks utama yang menjelaskan pilihan ulasan, masalah, batal, dan nanti"
 	},
 	"salesforce_domain": {
 		"message": "Domain Salesforce",
@@ -1156,8 +1168,8 @@
 		"description": "[import] biarkan pengguna memilih $tabs mana yang akan diimpor sebelum mengimpornya"
 	},
 	"send_tip": {
-		"message": "Kirimkan kami tip ❤️",
-		"description": "[popup] judul untuk svg untuk meminta pengiriman tip"
+		"message": "Jika $extension_label menghemat waktu Anda, pertimbangkan untuk mensponsori pengembangannya.\nKami berterima kasih sebelumnya karena Anda sangat menyukainya!",
+		"description": "[anjuran] pesan yang meminta pengguna untuk mensponsori ekstensi"
 	},
 	"sessions": {
 		"message": "Sesi",

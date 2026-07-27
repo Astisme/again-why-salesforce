@@ -1,8 +1,10 @@
 we work in deno
-do not format or rebuild, run deno lint. if lint says unused var, remove it. do not double check build output
+do not format or rebuild, run deno lint. if lint says unused var, remove it. do not double check build output. no lint if only jsdocs change
 any string in src should be a string that is a key in src/_locales/en/messages.json. do not touch other files in src/_locales
 only write en messages unless explicitly requested to translate
 make sure to always write jsdocs for functions
+after update jsdocs, update wrapper/runtime/module as well
+Implementation contract lives in module; wrapper/runtime docs must not narrow return/param types.
 follow DRY principles, also for strings
 prefer to not have external dependencies especially for code in `src`
 when creating a new branch, start from `stag` unless explicitly told otherwise

@@ -899,6 +899,10 @@
 		"message": "Đây không phải là trang Thiết lập $salesforce_lightning",
 		"description": "[notSalesforceSetup] người dùng không ở trên trang Salesforce."
 	},
+	"open_github_issue": {
+		"message": "Mở vấn đề trên GitHub",
+		"description": "[lời nhắc đánh giá] nhãn nút dành cho người dùng cần trợ giúp hoặc muốn báo cáo sự cố"
+	},
 	"open_here": {
 		"message": "Mở trong Tab này.",
 		"description": "[open-other-org-modal] nút radio để cho phép người dùng mở trong cùng một Tab trình duyệt"
@@ -1103,6 +1107,10 @@
 		"message": "Nếu bạn muốn, bạn có thể hiển thị các Tab yêu thích của mình\nngay khi bạn điều hướng đến trang $salesforce_setup\nmà không cần phải nhấp vào tiện ích mở rộng này mỗi lần.",
 		"description": "[req_permission] văn bản giải thích lý do tại sao các quyền được yêu cầu"
 	},
+	"request_later": {
+		"message": "Yêu cầu sau",
+		"description": "[lời nhắc đánh giá] nhãn nút để hỏi lại sau mà không lưu lời nhắc là hoàn thành"
+	},
 	"required": {
 		"message": "bắt buộc",
 		"description": "[input] Đánh dấu một trường nhập liệu là bắt buộc"
@@ -1110,6 +1118,10 @@
 	"required_info": {
 		"message": "= Thông tin bắt buộc",
 		"description": "[modal] Cho biết cho người dùng rằng một số thông tin là bắt buộc"
+	},
+	"review_prompt_body": {
+		"message": "Bạn thích $extension_label chứ? Vui lòng viết đánh giá.\nKhông hài lòng? Hãy mở vấn đề trên GitHub để chúng tôi có thể giúp đỡ.\nKhông muốn chọn bây giờ? Hủy sẽ dừng yêu cầu này, Yêu cầu sau sẽ hỏi lại vào lần tới.",
+		"description": "[lời nhắc đánh giá] phần thân giải thích các lựa chọn đánh giá, vấn đề, hủy và yêu cầu sau"
 	},
 	"salesforce_domain": {
 		"message": "Tên miền Salesforce",
@@ -1156,8 +1168,8 @@
 		"description": "[import] cho phép người dùng chọn $tabs nào để nhập trước khi nhập chúng"
 	},
 	"send_tip": {
-		"message": "Gửi cho chúng tôi một mẹo ❤️",
-		"description": "[popup] tiêu đề cho svg để nhắc nhở gửi một mẹo"
+		"message": "Nếu $extension_label tiết kiệm thời gian cho bạn, hãy cân nhắc tài trợ cho sự phát triển của nó.\nChúng tôi xin cảm ơn trước vì bạn đã yêu thích nó đến vậy!",
+		"description": "[lời nhắc] tin nhắn yêu cầu người dùng tài trợ cho tiện ích mở rộng"
 	},
 	"sessions": {
 		"message": "Phiên làm việc",

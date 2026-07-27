@@ -800,7 +800,7 @@
 		"description": "[etykieta] importuj wszystko znalezione w pliku podczas procesu importu"
 	},
 	"import_pinned_tabs": {
-		"message": "Importuj liczbę przypiętych $tabs .",
+		"message": "Importuj liczbę przypiętych $tabs.",
 		"description": "[etykieta] importuj liczbę przypiętych $tabs podczas procesu importu"
 	},
 	"import_successful": {
@@ -898,6 +898,10 @@
 	"nss_not_setup_page": {
 		"message": "To nie jest strona konfiguracji $salesforce_lightning",
 		"description": "[notSalesforceSetup] użytkownik nie znajduje się na stronie Salesforce."
+	},
+	"open_github_issue": {
+		"message": "Otwórz zgłoszenie na GitHubie",
+		"description": "[monit o recenzję] etykieta przycisku dla użytkowników, którzy potrzebują pomocy lub chcą zgłosić problem"
 	},
 	"open_here": {
 		"message": "Otwórz w tej Tab.",
@@ -1103,6 +1107,10 @@
 		"message": "Jeśli chcesz możesz wyświetlać ulubione Tabs\nzaraz po przejściu na stronę $salesforce_setup\nbez konieczności klikania tego rozszerzenia za każdym razem",
 		"description": "[req_permission] tekst wyjaśniający, dlaczego wymagane są uprawnienia"
 	},
+	"request_later": {
+		"message": "Zapytaj później",
+		"description": "[monit o recenzję] etykieta przycisku do ponownego zapytania później bez zapisywania monitu jako zakończonego"
+	},
 	"required": {
 		"message": "wymagane",
 		"description": "[wejście] oznacza pole wejściowe jako obowiązkowe"
@@ -1110,6 +1118,10 @@
 	"required_info": {
 		"message": "= Wymagane informacje",
 		"description": "[modal] informuje użytkownika, że niektóre informacje są obowiązkowe"
+	},
+	"review_prompt_body": {
+		"message": "Podoba Ci się $extension_label ? Napisz recenzję.\nNie jesteś zadowolony? Otwórz zgłoszenie na GitHubie, abyśmy mogli pomóc.\nNie chcesz teraz wybierać? Anuluj zatrzymuje to żądanie, Zapytaj później zapyta ponowne następnym razem.",
+		"description": "[monit o recenzję] treść wyjaśniająca opcje recenzji, zgłoszenia, anulowania i późniejszego zapytania"
 	},
 	"salesforce_domain": {
 		"message": "Domena Salesforce",
@@ -1156,8 +1168,8 @@
 		"description": "[import] pozwól użytkownikowi wybrać, które $tabs zaimportować przed ich importowaniem"
 	},
 	"send_tip": {
-		"message": "Wyślij nam napiwek ❤️",
-		"description": "[popup] tytuł svg do prośby o wysłanie napiwku"
+		"message": "Jeśli $extension_label oszczędza Twój czas, rozważ zasponsorowanie jego rozwoju.\nZ góry dziękujemy za tak duże uznanie!",
+		"description": "[monit] wiadomość prosząca użytkownika o zasponsorowanie rozszerzenia"
 	},
 	"sessions": {
 		"message": "Sesje",
@@ -1564,7 +1576,7 @@
 		"description": "[tutorial] dodaj do ulubionych"
 	},
 	"tutorial_click_highlighted_tab": {
-		"message": "Kliknij wyróżnioną kartę $tab , aby przejść do odpowiedniej strony.",
+		"message": "Kliknij wyróżnioną kartę $tab, aby przejść do odpowiedniej strony.",
 		"description": "[tutorial] kliknij wyróżnioną kartę"
 	},
 	"tutorial_continue_prompt_body": {
@@ -1588,23 +1600,23 @@
 		"description": "[tutorial] komunikat o błędzie uniemożliwiającym uruchomienie"
 	},
 	"tutorial_favourite_tabs": {
-		"message": "To są Twoje ulubione karty $tabs , służą one do szybkiego dostępu do często używanych stron.",
+		"message": "To są Twoje ulubione karty $tabs, służą one do szybkiego dostępu do często używanych stron.",
 		"description": "[tutorial] wyróżnij ulubioną kartę"
 	},
 	"tutorial_keyboard_shortcut": {
-		"message": "Naciśnij skrót klawiaturowy, aby otworzyć stronę $settings , gdzie możesz zmienić zachowanie rozszerzenia i stylizować swoje karty $tabs",
+		"message": "Naciśnij skrót klawiaturowy, aby otworzyć stronę $settings, gdzie możesz zmienić zachowanie rozszerzenia i stylizować swoje karty $tabs",
 		"description": "[tutorial] skrót klawiaturowy"
 	},
 	"tutorial_manage_tabs": {
-		"message": "Kliknij prawym przyciskiem myszy na stronie (nie na karcie) i wybierz $extension_label > $cxm_manage_tabs , aby otworzyć okno zarządzania.",
+		"message": "Kliknij prawym przyciskiem myszy na stronie (nie na karcie) i wybierz $extension_label > $cxm_manage_tabs, aby otworzyć okno zarządzania.",
 		"description": "[tutorial] zarządzaj kartą"
 	},
 	"tutorial_manage_tabs_link": {
-		"message": "Z tego ekranu możesz zarządzać swoimi kartami $tabs . Kliknij tutaj, aby uzyskać więcej informacji.",
+		"message": "Z tego ekranu możesz zarządzać swoimi kartami $tabs. Kliknij tutaj, aby uzyskać więcej informacji.",
 		"description": "[tutorial] link do zarządzania kartami"
 	},
 	"tutorial_pin_tab": {
-		"message": "Kliknij prawym przyciskiem myszy na wyróżnioną kartę $tab i wybierz $extension_label > $cxm_move > $cxm_pin_tab , aby ją przypiąć.",
+		"message": "Kliknij prawym przyciskiem myszy na wyróżnioną kartę $tab i wybierz $extension_label > $cxm_move > $cxm_pin_tab, aby ją przypiąć.",
 		"description": "[tutorial] przypnij kartę"
 	},
 	"tutorial_pinned_explanation": {
@@ -1632,7 +1644,7 @@
 		"description": "[tutorial] monit o zrestartowanie samouczka"
 	},
 	"tutorial_save_modal": {
-		"message": "Kliknij $save , aby zastosować zmiany i zobaczyć komunikat potwierdzający.",
+		"message": "Kliknij $save, aby zastosować zmiany i zobaczyć komunikat potwierdzający.",
 		"description": "[tutorial] zapisz okno modalne"
 	},
 	"tutorial_start_prompt_body": {

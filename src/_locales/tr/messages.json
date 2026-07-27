@@ -899,6 +899,10 @@
 		"message": "Bu bir $salesforce_lightning Kurulum sayfası değil.",
 		"description": "[notSalesforceSetup] kullanıcı bir Salesforce sayfasında değil."
 	},
+	"open_github_issue": {
+		"message": "GitHub sorunu aç",
+		"description": "[değerlendirme istemi] yardıma ihtiyacı olan veya bir sorunu bildirmek isteyen kullanıcılar için düğme etiketi"
+	},
 	"open_here": {
 		"message": "Bu Tab sekmesinde aç.",
 		"description": "[open-other-org-modal] kullanıcının aynı tarayıcı sekmesinde açmasına izin veren radyo düğmesi"
@@ -1103,6 +1107,10 @@
 		"message": "İsterseniz, bir $salesforce_setup sayfasına gider gitmez\nbu uzantıyı her seferinde tıklamak zorunda kalmadan\nfavori Tabs sekmelerinizin görünmesini sağlayabilirsiniz.",
 		"description": "[req_permission] izinlerin neden istendiğini açıklayan metin"
 	},
+	"request_later": {
+		"message": "Daha sonra iste",
+		"description": "[değerlendirme istemi] istemi tamamlandı olarak kaydetmeden daha sonra tekrar sormak için düğme etiketi"
+	},
 	"required": {
 		"message": "gerekli",
 		"description": "[giriş] bir giriş alanını zorunlu olarak işaretler"
@@ -1110,6 +1118,10 @@
 	"required_info": {
 		"message": "= Gerekli Bilgi",
 		"description": "[modal] kullanıcıya bazı bilgilerin zorunlu olduğunu söyler"
+	},
+	"review_prompt_body": {
+		"message": "$extension_label uygulamasından memnun musunuz? Lütfen bir değerlendirme yazın.\nMemnun değil misiniz? Yardım edebilmemiz için bir GitHub sorunu açın.\nŞimdi seçim yapmak istemiyor musunuz? İptal bu isteği durdurur, Daha sonra iste bir dahaki sefere tekrar sorar.",
+		"description": "[değerlendirme istemi] değerlendirme, sorun, iptal ve daha sonra seçeneklerini açıklayan gövde"
 	},
 	"salesforce_domain": {
 		"message": "Salesforce alanı",
@@ -1156,8 +1168,8 @@
 		"description": "[import] kullanıcının içe aktarmadan önce hangi $tabs'ı içe aktaracağını seçmesine izin verin"
 	},
 	"send_tip": {
-		"message": "Bize bir bahşiş gönderin ❤️",
-		"description": "[popup] bahşiş gönderme uyarısı için svg başlığı"
+		"message": "$extension_label zaman kazanmanızı sağlıyorsa, geliştirilmesini desteklemeyi düşünün.\nBu kadar çok sevdiğiniz için şimdiden teşekkür ederiz!",
+		"description": "[istem] kullanıcıdan uzantıyı desteklemesini isteyen mesaj"
 	},
 	"sessions": {
 		"message": "Oturumlar",

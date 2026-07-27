@@ -24,6 +24,8 @@ import {
 	WHAT_SET,
 	WHAT_SHOW_EXPORT_MODAL,
 	WHAT_SHOW_IMPORT,
+	WHAT_SHOW_REVIEW,
+	WHAT_SHOW_SPONSOR,
 	WHAT_START_TUTORIAL,
 	WHAT_STARTUP,
 	WHAT_THEME,
@@ -92,6 +94,8 @@ function listenToExtensionMessages() {
 			case WHAT_SHOW_EXPORT_MODAL:
 			case CXM_MANAGE_TABS: // from popup
 			case WHAT_START_TUTORIAL: // from popup
+			case WHAT_SHOW_REVIEW:
+			case WHAT_SHOW_SPONSOR:
 				sendResponse(null);
 				setTimeout(() => bg_notify(request), 250); // delay the notification to prevent accidental removal (for WHAT_SHOW_IMPORT)
 				break;
