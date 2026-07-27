@@ -123,7 +123,9 @@ export async function main(
 ): Promise<number> {
 	const [language, key] = args;
 	if (language == null || key == null || args.length !== 2) {
-		logError("Usage: deno run --allow-read bin/render-locale-message.ts <language> <key>");
+		logError(
+			"Usage: deno run --allow-read bin/render-locale-message.ts <language> <key>",
+		);
 		return 1;
 	}
 	const localeFile = await readLocaleFile(language);
