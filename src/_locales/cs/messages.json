@@ -899,6 +899,10 @@
 		"message": "Toto není stránka nastavení $salesforce_lightning",
 		"description": "[notSalesforceSetup] uživatel není na stránce Salesforce."
 	},
+	"open_github_issue": {
+		"message": "Otevřít problém na GitHubu",
+		"description": "[výzva k реценزي] štítek tlačítka pro uživatele, kteří potřebují nápovědu nebo chtějí nahlásit problém"
+	},
 	"open_here": {
 		"message": "Otevřít v této Tab.",
 		"description": "[open-other-org-modal] přepínač, který uživateli umožní otevřít ve stejné Tab prohlížeče"
@@ -1103,6 +1107,10 @@
 		"message": "Pokud chcete můžete si nechat zobrazit své oblíbené Tabs\njakmile přejdete na stránku $salesforce_setup\naniž byste museli pokaždé klikat na toto rozšíření",
 		"description": "[req_permission] text vysvětlující, proč jsou oprávnění požadována"
 	},
+	"request_later": {
+		"message": "Požádat později",
+		"description": "[výzva k recenzi] štítek tlačítka pro opětovný dotaz později bez uložení výzvy jako dokončené"
+	},
 	"required": {
 		"message": "povinné",
 		"description": "[input] označuje, že pole je vyžadováno"
@@ -1110,6 +1118,10 @@
 	"required_info": {
 		"message": "= Povinné informace",
 		"description": "[modal] informuje uživatele, že některé údaje jsou povinné"
+	},
+	"review_prompt_body": {
+		"message": "Líbí se vám $extension_label ? Napište prosím recenzi.\nNejste spokojeni? Otevřete problém na GitHubu, abychom vám mohli pomoci.\nNechcete vybírat nyní? Zrušit zastaví tuto žádost, Požádat později se zeptá příště.",
+		"description": "[výzva k recenzi] text vysvětlující možnosti recenze, problému, zrušení a pozdějšího dotazu"
 	},
 	"salesforce_domain": {
 		"message": "Doména Salesforce",
@@ -1156,8 +1168,8 @@
 		"description": "[import] umožňuje uživateli vybrat, které $tabs se mají importovat před jejich importem"
 	},
 	"send_tip": {
-		"message": "Pošlete nám tip ❤️",
-		"description": "[popup] titul pro svg k odeslání tipu"
+		"message": "Pokud vám $extension_label šetří čas, zvažte sponzorování jeho vývoje.\nPředem vám děkujeme, že si ho tak ceníte!",
+		"description": "[výzva] zpráva žádající uživatele o sponzorování rozšíření"
 	},
 	"sessions": {
 		"message": "Relace",

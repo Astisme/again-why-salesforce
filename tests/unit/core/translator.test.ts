@@ -63,6 +63,40 @@ Deno.test("TranslationService - translate method", async () => {
 		"You should Use Salesforce Login please!",
 		"Placeholder in placeholder in placeholder should get translated",
 	);
+	assertEquals(
+		await service.translate("prompt_with_newline"),
+		"Enjoying Salesforce Login?\nPlease continue.",
+		"Placeholder punctuation and newline should be preserved",
+	);
+});
+
+Deno.test("TranslationService - Japanese locale preserves placeholders and newlines", async () => {
+	const service = await TranslationService.ensureTranslatorAvailability();
+	translations.ja = JSON.parse(
+		await Deno.readTextFile("src/_locales/ja/messages.json"),
+	) as Record<string, { message: string }>;
+	await service.loadLanguageFile("ja");
+
+	assertEquals(
+		await service.translate("confirm_update_extension"),
+		"Again, Why Salesforce の新しいバージョンが利用可能になりました！",
+	);
+	assertEquals(
+		await service.translate("$extension_label"),
+		"Again, Why Salesforce",
+	);
+	assertEquals(
+		await service.translate("$extension_label?"),
+		"Again, Why Salesforce?",
+	);
+	assertEquals(
+		await service.translate("$account,"),
+		"取引先,",
+	);
+	assertEquals(
+		await service.translate("req_permissions_header"),
+		"Salesforce Setup ページへの\n自動アクセスを許可してください",
+	);
 });
 
 Deno.test("TranslationService - updatePageTranslations", async (t) => {

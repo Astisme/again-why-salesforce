@@ -4,6 +4,7 @@ import {
 	CHROME_LINK,
 	DO_NOT_REQUEST_FRAME_PERMISSION,
 	EDGE_LINK,
+	EXTENSION_GITHUB_ISSUES_LINK,
 	EXTENSION_NAME,
 	EXTENSION_OPTIONAL_HOST_PERM,
 	FIREFOX_LINK,
@@ -542,4 +543,14 @@ export function openSponsorLink(
 		SPONSOR_MAP[languageCode] ?? SPONSOR_MAP.default,
 		target,
 	);
+}
+
+/**
+ * Opens the GitHub issue creation page for the extension.
+ *
+ * @param {string} [target="_blank"] Where to open the link.
+ * @return {unknown} Result of the `open` call.
+ */
+export function openGithubIssueLink(target = "_blank") {
+	return open(EXTENSION_GITHUB_ISSUES_LINK, target);
 }

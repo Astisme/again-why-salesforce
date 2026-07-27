@@ -8,15 +8,12 @@ import {
 	ISEDGE,
 	ISFIREFOX,
 	ISSAFARI,
-	WHAT_SHOW_REVIEW,
-	WHAT_SHOW_SPONSOR,
 } from "../../core/constants.js";
 import {
 	getSettings,
 	injectStyle,
 	openCorrectBrowserReviewLink,
 	openSponsorLink,
-	sendExtensionMessage,
 	shouldShowReviewOrSponsor,
 } from "../../core/functions.js";
 import { ensureAllTabsAvailability } from "../../core/tabContainer.js";
@@ -38,14 +35,11 @@ export function getReviewSponsorRuntimeDefaults() {
 		isEdge: ISEDGE,
 		isFirefox: ISFIREFOX,
 		isSafari: ISSAFARI,
-		whatShowReview: WHAT_SHOW_REVIEW,
-		whatShowSponsor: WHAT_SHOW_SPONSOR,
 		getSettingsFn: getSettings,
 		injectStyleFn: injectStyle,
 		ensureAllTabsAvailabilityFn: ensureAllTabsAvailability,
 		getTranslationsFn: TranslationService.getTranslations,
 		getTranslatorAttributeFn: TranslationService.getTranslatorAttribute,
-		sendExtensionMessageFn: sendExtensionMessage,
 		shouldShowReviewOrSponsorFn: shouldShowReviewOrSponsor,
 		openCorrectBrowserReviewLinkFn: openCorrectBrowserReviewLink,
 		openSponsorLinkFn: openSponsorLink,

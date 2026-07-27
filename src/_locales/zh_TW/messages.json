@@ -899,6 +899,10 @@
 		"message": "這不是 $salesforce_lightning 設定頁面。",
 		"description": "[notSalesforceSetup] 使用者不在 Salesforce 頁面上。"
 	},
+	"open_github_issue": {
+		"message": "開啟 GitHub issue",
+		"description": "[評價提示] 適用於需要協助或希望回報問題的使用者的按鈕標籤"
+	},
 	"open_here": {
 		"message": "在此 Tab 中開啟。",
 		"description": "[open-other-org-modal] 圓形按鈕，讓使用者在相同的瀏覽器 Tab 中開啟"
@@ -1103,6 +1107,10 @@
 		"message": "如果您願意，您可以在導覽至 $salesforce_setup 頁面後\n立即顯示您最愛的 Tabs，\n而不需要每次都按一下此擴充功能。",
 		"description": "[req_permission] 說明為何要求權限的文字"
 	},
+	"request_later": {
+		"message": "稍後請求",
+		"description": "[評價提示] 適用於稍後再次詢問而不將提示儲存為已完成的按鈕標籤"
+	},
 	"required": {
 		"message": "required",
 		"description": "[input] 將輸入欄位標記為必填"
@@ -1110,6 +1118,10 @@
 	"required_info": {
 		"message": "= Required Information",
 		"description": "[modal] 告知使用者某些資訊為必填"
+	},
+	"review_prompt_body": {
+		"message": "喜歡使用 $extension_label 嗎？請撰寫評價。\n不滿意？請開啟 GitHub issue 以便我們提供協助。\n現在不想選擇？取消將停止此請求，稍後請求將在下次再次詢問。",
+		"description": "[評價提示] 解釋評價、issue、取消和稍後選項的正文"
 	},
 	"salesforce_domain": {
 		"message": "Salesforce 網域",
@@ -1156,8 +1168,8 @@
 		"description": "[import] 允許使用者在匯入前選擇要匯入的 $tabs"
 	},
 	"send_tip": {
-		"message": "發送小費 ❤️",
-		"description": "[popup] 提示發送小費的 svg 標題"
+		"message": "如果 $extension_label 節省了您的時間，請考慮贊助其開發。\n預先感謝您對它的喜愛！",
+		"description": "[提示] 請求使用者贊助擴充功能的信息"
 	},
 	"sessions": {
 		"message": "工作階段",

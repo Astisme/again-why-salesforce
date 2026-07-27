@@ -65,7 +65,9 @@ import {
 import {
 	getInnerElementFieldBySelector as _getInnerElementFieldBySelector,
 	getSettings as _getSettings,
+	getTodayDateKey as _getTodayDateKey,
 	openCorrectBrowserReviewLink as _openCorrectBrowserReviewLink,
+	openGithubIssueLink as _openGithubIssueLink,
 	openSponsorLink as _openSponsorLink,
 	setSettings as _setSettings,
 	shouldShowReviewOrSponsor as _shouldShowReviewOrSponsor,
@@ -170,8 +172,10 @@ const DEPENDENCIES = {
 	getModalHanger: _getModalHanger,
 	getSettings: _getSettings,
 	getSetupTabUl: _getSetupTabUl,
+	getTodayDateKey: _getTodayDateKey,
 	getTranslations: _TranslationService.getTranslations,
 	openCorrectBrowserReviewLink: _openCorrectBrowserReviewLink,
+	openGithubIssueLink: _openGithubIssueLink,
 	openSponsorLink: _openSponsorLink,
 	setupDragForUl: _setupDragForUl,
 	setSettings: _setSettings,
@@ -184,9 +188,12 @@ const DEPENDENCIES = {
 const getInnerElementFieldBySelector = (...args) =>
 	DEPENDENCIES.getInnerElementFieldBySelector(...args);
 const getSettings = (...args) => DEPENDENCIES.getSettings(...args);
+const getTodayDateKey = (...args) => DEPENDENCIES.getTodayDateKey(...args);
 const getTranslations = (...args) => DEPENDENCIES.getTranslations(...args);
 const openCorrectBrowserReviewLink = (...args) =>
 	DEPENDENCIES.openCorrectBrowserReviewLink(...args);
+const openGithubIssueLink = (...args) =>
+	DEPENDENCIES.openGithubIssueLink(...args);
 const openSponsorLink = (...args) => DEPENDENCIES.openSponsorLink(...args);
 const setSettings = (...args) => DEPENDENCIES.setSettings(...args);
 const ensureAllTabsAvailability = (...args) =>
@@ -749,6 +756,144 @@ function saveReviewSponsorWasToasted(
 }
 
 /**
+ * Persists that review or sponsor prompt should be skipped for the current day.
+ *
+ * @param {string} [what=CONSTANTS.WHAT_DID_REVIEW] Setting id to persist.
+ * @param {string} [today=getTodayDateKey()] Local date key for skip state.
+ * @return {Promise<void>} Resolves when setting save completes.
+ */
+function skipReviewSponsorPromptToday(
+	what = CONSTANTS.WHAT_DID_REVIEW,
+	today = getTodayDateKey(),
+) {
+	return setSettings({
+		id: what,
+		enabled: null,
+		skipped: today,
+	});
+}
+
+/**
+ * Checks if a review or sponsor prompt was already skipped today.
+ *
+ * @param {Object} setting Prompt setting payload.
+ * @param {string} [today=getTodayDateKey()] Local date key for skip state.
+ * @return {boolean} True when prompt was skipped today.
+ */
+function wasReviewSponsorPromptSkippedToday(
+	setting,
+	today = getTodayDateKey(),
+) {
+	return setting?.enabled == null && setting?.skipped === today;
+}
+
+const REVIEW_PROMPT_ACTION_REVIEW = "write_review";
+const REVIEW_PROMPT_ACTION_ISSUE = "open_github_issue";
+const REVIEW_PROMPT_ACTION_CANCEL = "cancel";
+const REVIEW_PROMPT_ACTION_LATER = "request_later";
+
+/**
+ * Shows the review prompt and routes the selected follow-up action.
+ *
+ * @param {Object} labels Already translated prompt labels.
+ * @param {string} labels.cancelLabel Cancel button label.
+ * @param {string} labels.closeLabel Close button label.
+ * @param {string} labels.issueLabel GitHub issue button label.
+ * @param {string} labels.laterLabel Request-later button label.
+ * @param {string} labels.reviewBody Prompt body.
+ * @param {string} labels.reviewLabel Review button label.
+ * @return {Promise<void>} Resolves after action and persistence finish.
+ */
+async function showReviewPrompt({
+	cancelLabel,
+	closeLabel,
+	issueLabel,
+	laterLabel,
+	reviewBody,
+	reviewLabel,
+}) {
+	const reviewAction = await sldsConfirm({
+		body: reviewBody,
+		cancelLabel,
+		closeLabel,
+		confirmLabel: reviewLabel,
+		confirmValue: REVIEW_PROMPT_ACTION_REVIEW,
+		cancelValue: REVIEW_PROMPT_ACTION_CANCEL,
+		closeValue: REVIEW_PROMPT_ACTION_CANCEL,
+		extraButtons: [
+			{
+				label: laterLabel,
+				value: REVIEW_PROMPT_ACTION_LATER,
+			},
+			{
+				label: issueLabel,
+				value: REVIEW_PROMPT_ACTION_ISSUE,
+			},
+		],
+	});
+	switch (reviewAction) {
+		case REVIEW_PROMPT_ACTION_LATER:
+			await skipReviewSponsorPromptToday(CONSTANTS.WHAT_DID_REVIEW);
+			return;
+		case REVIEW_PROMPT_ACTION_REVIEW:
+			openCorrectBrowserReviewLink();
+			break;
+		case REVIEW_PROMPT_ACTION_ISSUE:
+			openGithubIssueLink();
+			break;
+		default:
+			break;
+	}
+	await saveReviewSponsorWasToasted(CONSTANTS.WHAT_DID_REVIEW);
+}
+
+/**
+ * Shows the sponsor prompt and routes the selected follow-up action.
+ *
+ * @param {Object} labels Already translated prompt labels.
+ * @param {string} labels.cancelLabel Cancel button label.
+ * @param {string} labels.closeLabel Close button label.
+ * @param {string} labels.confirmLabel Open sponsor button label.
+ * @param {string} labels.laterLabel Request-later button label.
+ * @param {string} labels.sendTip Prompt body.
+ * @return {Promise<void>} Resolves after action and persistence finish.
+ */
+async function showSponsorPrompt({
+	cancelLabel,
+	closeLabel,
+	confirmLabel,
+	laterLabel,
+	sendTip,
+}) {
+	const sponsorAction = await sldsConfirm({
+		body: sendTip,
+		confirmLabel,
+		cancelLabel,
+		closeLabel,
+		cancelValue: REVIEW_PROMPT_ACTION_CANCEL,
+		closeValue: REVIEW_PROMPT_ACTION_CANCEL,
+		extraButtons: [
+			{
+				label: laterLabel,
+				value: REVIEW_PROMPT_ACTION_LATER,
+			},
+		],
+	});
+	if (sponsorAction === REVIEW_PROMPT_ACTION_LATER) {
+		await skipReviewSponsorPromptToday(CONSTANTS.WHAT_DID_SPONSOR);
+		return;
+	}
+	if (
+		sponsorAction &&
+		sponsorAction !== REVIEW_PROMPT_ACTION_CANCEL
+	) {
+		const translator = await ensureTranslatorAvailability();
+		openSponsorLink(translator.currentLanguage);
+	}
+	await saveReviewSponsorWasToasted(CONSTANTS.WHAT_DID_SPONSOR);
+}
+
+/**
  * Shows the review or sponsor toast only when the current usage thresholds allow it.
  *
  * @param {string} messageType Review/sponsor message id.
@@ -757,22 +902,23 @@ function saveReviewSponsorWasToasted(
 async function checkShouldShowReviewSponsorToast(messageType) {
 	const [
 		allTabs,
-    usageSettings,
-  ] = await Promise.all([
-    ensureAllTabsAvailability(),
-    getSettings(CONSTANTS.EXTENSION_USAGE_DAYS),
-  ]);
+		usageSettings,
+	] = await Promise.all([
+		ensureAllTabsAvailability(),
+		getSettings(CONSTANTS.EXTENSION_USAGE_DAYS),
+	]);
 	const usageDays = Number(usageSettings?.enabled ?? 0);
 	const whatToShow = shouldShowReviewOrSponsor({
 		allTabs,
 		usageDays,
 	});
-  const showReview = messageType === CONSTANTS.WHAT_SHOW_REVIEW ||
-			whatToShow.review;
-  const showSponsor = messageType === CONSTANTS.WHAT_SHOW_SPONSOR ||
-			whatToShow.sponsor
-  if(!showReview && !showSponsor)
-    return;
+	const showReview = messageType === CONSTANTS.WHAT_SHOW_REVIEW ||
+		whatToShow.review;
+	const showSponsor = messageType === CONSTANTS.WHAT_SHOW_SPONSOR ||
+		whatToShow.sponsor;
+	if (!showReview && !showSponsor) {
+		return;
+	}
 	const [
 		[
 			didReview,
@@ -782,8 +928,11 @@ async function checkShouldShowReviewSponsorToast(messageType) {
 			confirmLabel,
 			cancelLabel,
 			closeLabel,
-			writeReview,
+			reviewPromptBody,
 			sendTip,
+			reviewLabel,
+			issueLabel,
+			laterLabel,
 		],
 	] = await Promise.all([
 		getSettings([
@@ -794,43 +943,50 @@ async function checkShouldShowReviewSponsorToast(messageType) {
 			"open_new_tab",
 			"cancel",
 			"cancel_close",
-			"write_review",
+			"review_prompt_body",
 			"send_tip",
+			"write_review",
+			"open_github_issue",
+			"request_later",
 		]),
 	]);
 	if (
-    showReview &&
-		didReview?.enabled == null
+		showReview &&
+		wasReviewSponsorPromptSkippedToday(didReview)
 	) {
-		if (
-			await sldsConfirm({
-				body: writeReview,
-				confirmLabel,
-				cancelLabel,
-				closeLabel,
-			})
-		) {
-			openCorrectBrowserReviewLink();
-		}
-		await saveReviewSponsorWasToasted(CONSTANTS.WHAT_DID_REVIEW);
 		return;
 	}
 	if (
-    showSponsor &&
+		showReview &&
+		didReview?.enabled == null
+	) {
+		await showReviewPrompt({
+			cancelLabel,
+			closeLabel,
+			issueLabel,
+			laterLabel,
+			reviewBody: reviewPromptBody,
+			reviewLabel,
+		});
+		return;
+	}
+	if (
+		showSponsor &&
+		wasReviewSponsorPromptSkippedToday(didSponsor)
+	) {
+		return;
+	}
+	if (
+		showSponsor &&
 		didSponsor?.enabled == null
 	) {
-		if (
-			await sldsConfirm({
-				body: sendTip,
-				confirmLabel,
-				cancelLabel,
-				closeLabel,
-			})
-		) {
-			const translator = await ensureTranslatorAvailability();
-			openSponsorLink(translator.currentLanguage);
-		}
-		await saveReviewSponsorWasToasted(CONSTANTS.WHAT_DID_SPONSOR);
+		await showSponsorPrompt({
+			cancelLabel,
+			closeLabel,
+			confirmLabel,
+			laterLabel,
+			sendTip,
+		});
 	}
 }
 
@@ -891,7 +1047,7 @@ function executeTabAction({
 				),
 				"error_adding_tab",
 			);
-      await checkShouldShowReviewSponsorToast();
+			await checkShouldShowReviewSponsorToast();
 			return ACTION_RESULT_SYNC;
 		},
 		[CONSTANTS.CXM_EMPTY_GENERIC_TABS]: async () => {
@@ -978,7 +1134,7 @@ function executeTabAction({
 		},
 		[CONSTANTS.WHAT_PAGE_SAVE_TAB]: async () => {
 			await pageActionTab(true);
-      await checkShouldShowReviewSponsorToast();
+			await checkShouldShowReviewSponsorToast();
 			return ACTION_RESULT_NO_SYNC;
 		},
 		[CONSTANTS.WHAT_PAGE_REMOVE_TAB]: async () => {
@@ -1278,7 +1434,6 @@ async function routeBackgroundMessage(message) {
 			case CONSTANTS.WHAT_HIGHLIGHTED:
 			case CONSTANTS.WHAT_FOCUS_CHANGED:
 				sf_afterSet(message);
-        await checkShouldShowReviewSponsorToast();
 				break;
 			case CONSTANTS.TOAST_WARNING:
 			case CONSTANTS.TOAST_ERROR:
@@ -1589,8 +1744,10 @@ export function createContentModule(overrides = {}) {
 		getModalHanger: sfElements.getModalHanger,
 		getSettings: functions.getSettings,
 		getSetupTabUl: sfElements.getSetupTabUl,
+		getTodayDateKey: functions.getTodayDateKey,
 		getTranslations: overrides.getTranslations,
 		openCorrectBrowserReviewLink: functions.openCorrectBrowserReviewLink,
+		openGithubIssueLink: functions.openGithubIssueLink,
 		openSponsorLink: functions.openSponsorLink,
 		setupDragForUl: dragHandler.setupDragForUl,
 		setSettings: functions.setSettings,

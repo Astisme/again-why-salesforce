@@ -899,6 +899,10 @@
 		"message": "To ni stran za nastavitev $salesforce_lightning",
 		"description": "[notSalesforceSetup] uporabnik ni na strani Salesforce."
 	},
+	"open_github_issue": {
+		"message": "Odpri težavo na GitHubu",
+		"description": "[poziv k ocenitvi] oznaka gumba za uporabnike, ki potrebujejo pomoč ali želijo prijaviti težavo"
+	},
 	"open_here": {
 		"message": "Odpri v tem Tab.",
 		"description": "[open-other-org-modal] izbirni gumb, ki uporabniku omogoča odpiranje v istem Tab brskalnika"
@@ -1103,6 +1107,10 @@
 		"message": "Če želite lahko svoje priljubljene Tabs prikažete\ntakoj ko se pomaknete na stran $salesforce_setup\nne da bi morali vsakič klikniti to razširitev",
 		"description": "[req_permission] besedilo, ki pojasnjuje, zakaj se zahtevajo dovoljenja"
 	},
+	"request_later": {
+		"message": "Zahtevaj pozneje",
+		"description": "[poziv k ocenitvi] oznaka gumba za ponovno vprašanje pozneje, ne da bi se poziv shranil kot zaključen"
+	},
 	"required": {
 		"message": "zahtevano",
 		"description": "[vnos] označi vnosno polje kot obvezno"
@@ -1110,6 +1118,10 @@
 	"required_info": {
 		"message": "= Zahtevane informacije",
 		"description": "[modalno_okno] sporoči uporabniku, da so nekatere informacije obvezne"
+	},
+	"review_prompt_body": {
+		"message": "Uživate v $extension_label ? Prosimo, napišite oceno.\nNiste zadovoljni? Odprite težavo na GitHubu, da vam lahko pomagamo.\nNe želite izbrati zdaj? Prekliči zaustavi to zahtevo, Zahtevaj pozneje pa bo ponovno vprašal naslednjič.",
+		"description": "[poziv k ocenitvi] besedilo, ki pojasnjuje izbire za oceno, težavo, preklic in poznejšo zahtevo"
 	},
 	"salesforce_domain": {
 		"message": "Salesforce domena",
@@ -1156,8 +1168,8 @@
 		"description": "[import] omogočite uporabniku, da izbere, katere $tabs naj uvozi pred uvozom"
 	},
 	"send_tip": {
-		"message": "Pošljite nam namig ❤️",
-		"description": "[popup] naslov za svg za poziv k pošiljanju namiga"
+		"message": "Če vam $extension_label prihrani čas, razmislite o sponzoriranju njegovega razvoja.\nŽe vnaprej se vam zahvaljujemo, ker ga imate tako radi!",
+		"description": "[poziv] sporočilo, ki uporabnika prosi za sponzoriranje razširitve"
 	},
 	"sessions": {
 		"message": "Seje",

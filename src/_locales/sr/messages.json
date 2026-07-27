@@ -899,6 +899,10 @@
 		"message": "Ово није $salesforce_lightning страница за подешавање.",
 		"description": "[notSalesforceSetup] корисник није на Salesforce страници."
 	},
+	"open_github_issue": {
+		"message": "Отвори GitHub проблем",
+		"description": "[захтев за рецензију] ознака дугмета за кориснике којима је потребна помоћ или желе да пријаве проблем"
+	},
 	"open_here": {
 		"message": "Отвори у овом Tab.",
 		"description": "[open-other-org-modal] радио дугме које омогућава кориснику да отвори у истом Tab прегледача"
@@ -1103,6 +1107,10 @@
 		"message": "Ако желите, можете да прикажете своје омиљене Tabs\nчим одете на $salesforce_setup страницу\nбез потребе да сваки пут кликнете на ову екстензију.",
 		"description": "[req_permission] текст који објашњава зашто се траже дозволе"
 	},
+	"request_later": {
+		"message": "Затражи касније",
+		"description": "[захтев за рецензију] ознака дугмета да поново пита касније без чувања захтева као завршеног"
+	},
 	"required": {
 		"message": "obavezno",
 		"description": "[input] označava polje za unos kao obavezno"
@@ -1110,6 +1118,10 @@
 	"required_info": {
 		"message": "= Obavezne informacije",
 		"description": "[modal] obaveštava korisnika da su određene informacije obavezne"
+	},
+	"review_prompt_body": {
+		"message": "Уживате у $extension_label ? Молимо напишите рецензију.\nНисте задовољни? Отворите GitHub проблем како бисмо могли да помогнемо.\nНе желите сада да изаберете? Откажи зауставља овај захтев, Затражи касније пита поново следећи пут.",
+		"description": "[захтев за рецензију] главни текст који објашњава изборе за рецензију, проблем, отказивање и касније"
 	},
 	"salesforce_domain": {
 		"message": "Salesforce домен",
@@ -1156,8 +1168,8 @@
 		"description": "[import] омогућите кориснику да изабере које $tabs жели да увезе пре него што их увезе"
 	},
 	"send_tip": {
-		"message": "Пошаљите нам напојницу ❤️",
-		"description": "[popup] наслов за svg за подстицање слања напојнице"
+		"message": "Ако вам $extension_label штеди време, размислите о спонзорисању његовог развоја.\nУнапред вам захваљујемо што га толико волите!",
+		"description": "[захтев] порука која тражи од корисника да спонзорише проширење"
 	},
 	"sessions": {
 		"message": "Sesije",

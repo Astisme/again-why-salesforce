@@ -12,14 +12,11 @@ const FALLBACK_HTML_ELEMENT = class {};
  * @param {{ runtime: { getURL: (path: string) => string } }} options.browser Browser runtime wrapper.
  * @param {string} options.extensionUsageDays Setting key that stores usage-day count.
  * @param {string} options.hiddenClass CSS class used to hide inactive controls.
- * @param {string} options.whatShowReview Review-visible message id.
- * @param {string} options.whatShowSponsor Sponsor-visible message id.
  * @param {(keys: string[]) => Promise<{ enabled?: number } | null | undefined>} options.getSettingsFn Settings reader.
  * @param {(id: string, options: { link: string }) => unknown} options.injectStyleFn Style injector.
  * @param {() => Promise<Array<unknown>>} options.ensureAllTabsAvailabilityFn Tabs resolver.
  * @param {(message: string) => Promise<string>} options.getTranslationsFn Translator helper.
  * @param {(attribute: string) => string | null} options.getTranslatorAttributeFn Translator attribute resolver.
- * @param {(message: Record<string, unknown>) => Promise<unknown> | unknown} options.sendExtensionMessageFn Extension message sender.
  * @param {(options?: { allTabs?: unknown[]; usageDays?: number }) => { review: boolean; sponsor: boolean }} options.shouldShowReviewOrSponsorFn Visibility resolver.
  * @param {() => unknown} options.openCorrectBrowserReviewLinkFn Review link opener.
  * @param {(translatorLanguage?: string | null) => unknown} options.openSponsorLinkFn Sponsor link opener.
@@ -80,14 +77,11 @@ export function createReviewSponsorModule({
 	browser,
 	extensionUsageDays,
 	hiddenClass,
-	whatShowReview,
-	whatShowSponsor,
 	getSettingsFn,
 	injectStyleFn,
 	ensureAllTabsAvailabilityFn,
 	getTranslationsFn,
 	getTranslatorAttributeFn,
-	sendExtensionMessageFn = () => undefined,
 	shouldShowReviewOrSponsorFn,
 	openCorrectBrowserReviewLinkFn,
 	openSponsorLinkFn,
@@ -96,19 +90,6 @@ export function createReviewSponsorModule({
 	HTMLElementRef = globalThis.HTMLElement ?? FALLBACK_HTML_ELEMENT,
 } = {}) {
 	const hiddenClassRuntime = hiddenClass;
-
-	/**
-	 * Sends a background notification when a support control becomes visible.
-	 *
-	 * @param {string} what Message id.
-	 * @return {void}
-	 */
-	function sendVisibilityMessage(what) {
-		if (what == null || what === "") {
-			return;
-		}
-		sendExtensionMessageFn({ what });
-	}
 
 	/**
 	 * Shows review/sponsor controls and binds click listeners.
@@ -158,14 +139,12 @@ export function createReviewSponsorModule({
 				event.preventDefault();
 				openCorrectBrowserReviewLinkFn();
 			});
-			sendVisibilityMessage(whatShowReview);
 		}
 		if (whatToShow.sponsor) {
 			sponsorLink.addEventListener("click", (event) => {
 				event.preventDefault();
 				openSponsorLinkFn(translatorLanguage);
 			});
-			sendVisibilityMessage(whatShowSponsor);
 		}
 	}
 

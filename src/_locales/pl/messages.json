@@ -899,6 +899,10 @@
 		"message": "To nie jest strona konfiguracji $salesforce_lightning",
 		"description": "[notSalesforceSetup] użytkownik nie znajduje się na stronie Salesforce."
 	},
+	"open_github_issue": {
+		"message": "Otwórz zgłoszenie na GitHubie",
+		"description": "[monit o recenzję] etykieta przycisku dla użytkowników, którzy potrzebują pomocy lub chcą zgłosić problem"
+	},
 	"open_here": {
 		"message": "Otwórz w tej Tab.",
 		"description": "[open-other-org-modal] przycisk radiowy pozwalający użytkownikowi otworzyć w tej samej Tab przeglądarki"
@@ -1103,6 +1107,10 @@
 		"message": "Jeśli chcesz możesz wyświetlać ulubione Tabs\nzaraz po przejściu na stronę $salesforce_setup\nbez konieczności klikania tego rozszerzenia za każdym razem",
 		"description": "[req_permission] tekst wyjaśniający, dlaczego wymagane są uprawnienia"
 	},
+	"request_later": {
+		"message": "Zapytaj później",
+		"description": "[monit o recenzję] etykieta przycisku do ponownego zapytania później bez zapisywania monitu jako zakończonego"
+	},
 	"required": {
 		"message": "wymagane",
 		"description": "[wejście] oznacza pole wejściowe jako obowiązkowe"
@@ -1110,6 +1118,10 @@
 	"required_info": {
 		"message": "= Wymagane informacje",
 		"description": "[modal] informuje użytkownika, że niektóre informacje są obowiązkowe"
+	},
+	"review_prompt_body": {
+		"message": "Podoba Ci się $extension_label ? Napisz recenzję.\nNie jesteś zadowolony? Otwórz zgłoszenie na GitHubie, abyśmy mogli pomóc.\nNie chcesz teraz wybierać? Anuluj zatrzymuje to żądanie, Zapytaj później zapyta ponowne następnym razem.",
+		"description": "[monit o recenzję] treść wyjaśniająca opcje recenzji, zgłoszenia, anulowania i późniejszego zapytania"
 	},
 	"salesforce_domain": {
 		"message": "Domena Salesforce",
@@ -1156,8 +1168,8 @@
 		"description": "[import] pozwól użytkownikowi wybrać, które $tabs zaimportować przed ich importowaniem"
 	},
 	"send_tip": {
-		"message": "Wyślij nam napiwek ❤️",
-		"description": "[popup] tytuł svg do prośby o wysłanie napiwku"
+		"message": "Jeśli $extension_label oszczędza Twój czas, rozważ zasponsorowanie jego rozwoju.\nZ góry dziękujemy za tak duże uznanie!",
+		"description": "[monit] wiadomość prosząca użytkownika o zasponsorowanie rozszerzenia"
 	},
 	"sessions": {
 		"message": "Sesje",

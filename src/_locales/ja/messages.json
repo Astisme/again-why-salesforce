@@ -899,6 +899,10 @@
 		"message": "これは $salesforce_lightning の設定ページではありません。",
 		"description": "[notSalesforceSetup] ユーザーはSalesforceページにいません。"
 	},
+	"open_github_issue": {
+		"message": "GitHub で問題を報告",
+		"description": "[レビュープロンプト] ヘルプが必要なユーザーや問題を報告したいユーザー向けのボタンラベル"
+	},
 	"open_here": {
 		"message": "このTabで開く。",
 		"description": "[open-other-org-modal] ユーザーが同じブラウザTabで開くことを許可するラジオボタン"
@@ -1103,6 +1107,10 @@
 		"message": "必要に応じて $salesforce_setup ページに移動するとすぐに\nお気に入りのTabsを表示できます\n毎回この拡張機能をクリックする必要はありません",
 		"description": "[req_permission] 権限が要求される理由を説明するテキスト"
 	},
+	"request_later": {
+		"message": "後で確認",
+		"description": "[レビュープロンプト] プロンプトを完了として保存せずに、後で再確認するためのボタンラベル"
+	},
 	"required": {
 		"message": "必須",
 		"description": "[input] 入力フィールドが必須であることを示します"
@@ -1110,6 +1118,10 @@
 	"required_info": {
 		"message": "= 必要な情報",
 		"description": "[modal] 一部の情報が必須であることを示します"
+	},
+	"review_prompt_body": {
+		"message": "$extension_label をお楽しみいただけていますか？ レビューの執筆をお願いします。\nご満足いただけていませんか？ サポートいたしますので GitHub で問題を報告してください。\n今選択したくないですか？ キャンセルでこのリクエストを停止し、 後で確認で次回再度確認します。",
+		"description": "[レビュープロンプト] レビュー、問題報告、キャンセル、後での選択肢を説明する本文"
 	},
 	"salesforce_domain": {
 		"message": "Salesforceドメイン",
@@ -1156,8 +1168,8 @@
 		"description": "[import] インポートする前に、ユーザーにどの $tabs をインポートするかを選択させます"
 	},
 	"send_tip": {
-		"message": "チップを送る ❤️",
-		"description": "[popup] チップを送るよう促すためのSVGタイトル"
+		"message": "$extension_label によって時間を節約できた場合は、開発へのスポンサーをご検討ください。\nご愛用いただき、心より感謝申し上げます！",
+		"description": "[プロンプト] ユーザーに拡張機能のスポンサーになるよう求めるメッセージ"
 	},
 	"sessions": {
 		"message": "セッション",

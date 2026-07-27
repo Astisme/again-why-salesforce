@@ -899,6 +899,10 @@
 		"message": "Dette er ikke en $salesforce_lightning opsætningsside.",
 		"description": "[notSalesforceSetup] brugeren er ikke på en Salesforce-side."
 	},
+	"open_github_issue": {
+		"message": "Åbn GitHub-problem",
+		"description": "[anmeldelsesanmodning] knaplabel til brugere, der har brug for hjælp eller vil rapportere et problem"
+	},
 	"open_here": {
 		"message": "Åbn i denne Tab.",
 		"description": "[open-other-org-modal] radioknap, der lader brugeren åbne i samme browser-Tab"
@@ -1103,6 +1107,10 @@
 		"message": "Hvis du ønsker det kan du få dine foretrukne Tabs vist\nså snart du navigerer til en $salesforce_setup side\nuden at skulle klikke på denne udvidelse hver gang",
 		"description": "[req_permission] tekst, der forklarer, hvorfor tilladelserne anmodes om"
 	},
+	"request_later": {
+		"message": "Anmod senere",
+		"description": "[anmeldelsesanmodning] knaplabel til at spørge igen senere uden at gemme anmodningen som fuldført"
+	},
 	"required": {
 		"message": "påkrævet",
 		"description": "[input] angiver at et inputfelt er påkrævet"
@@ -1110,6 +1118,10 @@
 	"required_info": {
 		"message": "= Påkrævet information",
 		"description": "[modal] informerer brugeren om, at visse oplysninger er påkrævede"
+	},
+	"review_prompt_body": {
+		"message": "Nyder du $extension_label ? Skriv venligst en anmeldelse.\nIkke tilfreds? Åbn et GitHub-problem, så vi kan hjælpe.\nVil du ikke vælge nu? Annuller stopper denne anmodning, Anmod senere spørger igen næste gang.",
+		"description": "[anmeldelsesanmodning] brødtekst, der forklarer valgmulighederne for anmeldelse, problem, annuller og senere"
 	},
 	"salesforce_domain": {
 		"message": "Salesforce domæne",
@@ -1156,8 +1168,8 @@
 		"description": "[import] lad brugeren vælge hvilke $tabs der skal importeres, før de importeres"
 	},
 	"send_tip": {
-		"message": "Send os et tip ❤️",
-		"description": "[popup] titel for svg for at bede om at sende et tip"
+		"message": "Hvis $extension_label sparer dig tid, kan du overveje at sponsorere udviklingen af den.\nVi takker dig på forhånd, fordi du holder så meget af den!",
+		"description": "[anmodning] meddelelse, der beder brugeren om at sponsorere udvidelsen"
 	},
 	"sessions": {
 		"message": "Sessioner",

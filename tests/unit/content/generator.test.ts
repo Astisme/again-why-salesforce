@@ -354,10 +354,14 @@ type GeneratorModule = {
 	sldsConfirm: (options: {
 		body?: string | string[];
 		cancelLabel?: string;
+		cancelValue?: unknown;
 		closeLabel?: string;
+		closeValue?: unknown;
 		confirmLabel?: string;
+		confirmValue?: unknown;
+		extraButtons?: Array<{ label: string; value: unknown }>;
 		title?: string;
-	}) => Promise<boolean>;
+	}) => Promise<unknown>;
 	wereSettingsUpdated: (settings: StyleSettings) => boolean;
 };
 
@@ -1304,6 +1308,28 @@ Deno.test("generator builds modal shells, prompt modals, and confirm flows", asy
 			new Event("click"),
 		);
 		assertEquals(await multilinePromise, false);
+
+		const choicePromise = fixture.module.sldsConfirm({
+			body: "Body",
+			cancelLabel: "Cancel",
+			closeLabel: "Close",
+			confirmLabel: "Save",
+			extraButtons: [
+				{
+					label: "Other",
+					value: "other",
+				},
+			],
+		});
+		const choiceModal = document.getElementById(
+			"again-why-salesforce-modal-confirm",
+		);
+		const choiceButton = Array.from(
+			choiceModal?.querySelectorAll("button") ?? [],
+		).find((button) => button.textContent === "Other");
+		assertExists(choiceButton);
+		choiceButton.dispatchEvent(new Event("click"));
+		assertEquals(await choicePromise, "other");
 
 		const permissiveConfirm = fixture.module.sldsConfirm as (
 			options?: {

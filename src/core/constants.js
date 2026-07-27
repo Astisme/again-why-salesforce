@@ -94,6 +94,8 @@ if (!MANIFEST.homepage_url?.startsWith("https://github.com/")) {
 }
 /** @type {string} */
 export const EXTENSION_GITHUB_LINK = MANIFEST.homepage_url;
+export const EXTENSION_GITHUB_ISSUES_LINK =
+	`${EXTENSION_GITHUB_LINK}/issues/new/choose`;
 export const EXTENSION_GITHUB_WIKI_LINK = `${EXTENSION_GITHUB_LINK}/wiki`;
 export const EXTENSION_OPTIONAL_HOST_PERM = MANIFEST.optional_host_permissions;
 // SETTINGS

@@ -899,6 +899,10 @@
 		"message": "Ceci n'est pas une page de configuration $salesforce_lightning",
 		"description": "[notSalesforceSetup] l'utilisateur n'est pas sur une page Salesforce."
 	},
+	"open_github_issue": {
+		"message": "Ouvrir un ticket GitHub",
+		"description": "[demande d'avis] libellé du bouton pour les utilisateurs qui ont besoin d'aide ou souhaitent signaler un problème"
+	},
 	"open_here": {
 		"message": "Ouvrir dans cet Tab.",
 		"description": "[open-other-org-modal] bouton radio pour permettre à l'utilisateur d'ouvrir dans le même Tab du navigateur"
@@ -1103,6 +1107,10 @@
 		"message": "Si vous le souhaitez, vous pouvez afficher vos Tabs favoris\ndès que vous accédez à une page $salesforce_setup\nsans avoir à cliquer sur cette extension à chaque fois.",
 		"description": "[req_permission] texte expliquant pourquoi les autorisations sont demandées"
 	},
+	"request_later": {
+		"message": "Demander plus tard",
+		"description": "[demande d'avis] libellé du bouton pour demander à nouveau plus tard sans enregistrer la demande comme terminée"
+	},
 	"required": {
 		"message": "obligatoire",
 		"description": "[input] Marque un champ de saisie comme obligatoire"
@@ -1110,6 +1118,10 @@
 	"required_info": {
 		"message": "= Informations obligatoires",
 		"description": "[modal] Indique à l'utilisateur que certaines informations sont requises"
+	},
+	"review_prompt_body": {
+		"message": "Vous appréciez $extension_label ? Veuillez rédiger un avis.\nPas satisfait ? Ouvrez un ticket GitHub pour que nous puissions vous aider.\nVous ne voulez pas choisir maintenant ? Annuler arrête cette demande, Demander plus tard demandera à nouveau la prochaine fois.",
+		"description": "[demande d'avis] corps expliquant les choix d'avis, de ticket, d'annulation et de demande ultérieure"
 	},
 	"salesforce_domain": {
 		"message": "Domaine Salesforce",
@@ -1156,8 +1168,8 @@
 		"description": "[import] permettre à l'utilisateur de sélectionner quels $tabs importer avant de les importer"
 	},
 	"send_tip": {
-		"message": "Envoyez-nous un pourboire ❤️",
-		"description": "[popup] titre pour svg pour inviter à envoyer un pourboire"
+		"message": "Si $extension_label vous fait gagner du temps, pensez à parrainer son développement.\nNous vous remercions d'avance de l'apprécier autant !",
+		"description": "[invitation] message demandant à l'utilisateur de parrainer l'extension"
 	},
 	"sessions": {
 		"message": "Sessions",

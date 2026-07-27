@@ -899,6 +899,10 @@
 		"message": "Šī nav $salesforce_lightning iestatīšanas lapa.",
 		"description": "[notSalesforceSetup] lietotājs neatrodas Salesforce lapā."
 	},
+	"open_github_issue": {
+		"message": "Atvērt GitHub problēmu",
+		"description": "[atsauksmes vaicājums] pogas etiķete lietotājiem, kuriem nepieciešama palīdzība vai kuri vēlas ziņot par problēmu"
+	},
 	"open_here": {
 		"message": "Atvērt šajā Tab.",
 		"description": "[open-other-org-modal] radiopoga, kas ļauj lietotājam atvērt tajā pašā pārlūkprogrammas Tab"
@@ -1103,6 +1107,10 @@
 		"message": "Ja vēlaties, varat parādīt savas iecienītākās Tabs,\ntiklīdz pārejat uz $salesforce_setup lapu,\nkatru reizi neklikšķinot uz šī paplašinājuma.",
 		"description": "[req_permission] teksts, kas paskaidro, kāpēc tiek pieprasītas atļaujas"
 	},
+	"request_later": {
+		"message": "Pieprasīt vēlāk",
+		"description": "[atsauksmes vaicājums] pogas etiķete, lai jautātu vēlreiz vēlāk, nesaglabājot vaicājumu kā pabeigtu"
+	},
 	"required": {
 		"message": "obligāts",
 		"description": "[ievade] atzīmē ievades lauku kā obligātu"
@@ -1110,6 +1118,10 @@
 	"required_info": {
 		"message": "= Obligātā informācija",
 		"description": "[modal] informē lietotāju, ka daļa informācijas ir obligāta"
+	},
+	"review_prompt_body": {
+		"message": "Vai patīk $extension_label ? Lūdzu, uzrakstiet atsauksmi.\nNeesat apmierināts? Atveriet GitHub problēmu, lai mēs varētu palīdzēt.\nNēgribat izvēlēties tagad? Atcelt aptur šo pieprasījumu, Pieprasīt vēlāk jautās vēlreiz nākamreiz.",
+		"description": "[atsauksmes vaicājums] pamatteksts, kurā paskaidrotas atsauksmes, problēmas, atcelšanas un vēlākās izvēles"
 	},
 	"salesforce_domain": {
 		"message": "Salesforce domēns",
@@ -1156,8 +1168,8 @@
 		"description": "[import] ļaujiet lietotājam izvēlēties, kurus $tabs importēt pirms to importēšanas"
 	},
 	"send_tip": {
-		"message": "Sūtiet mums dzeramnaudu ❤️",
-		"description": "[popup] svg virsraksts, lai mudinātu sūtīt dzeramnaudu"
+		"message": "Ja $extension_label ietaupa jūsu laiku, apsveriet iespēju sponsorēt tā izstrādi.\nJau iepriekš pateicamies par to, ka jums tas tik ļoti patīk!",
+		"description": "[vaicājums] ziņojums, kurā lietotājam lūgts sponsorēt paplašinājumu"
 	},
 	"sessions": {
 		"message": "Sesijas",

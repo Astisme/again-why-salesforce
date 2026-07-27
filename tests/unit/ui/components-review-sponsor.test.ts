@@ -200,8 +200,6 @@ function createReviewSponsorFixture({
 		},
 		extensionUsageDays: "extension_usage_days",
 		hiddenClass: "hidden",
-		whatShowReview: "show-review",
-		whatShowSponsor: "show-sponsor",
 		getSettingsFn: (keys: string[]) => {
 			settingsCalls.push(keys);
 			return Promise.resolve({ enabled: usageDays });
@@ -217,10 +215,6 @@ function createReviewSponsorFixture({
 		},
 		getTranslatorAttributeFn: (attribute: string) =>
 			attribute === "currentLanguage" ? translatorLanguage : null,
-		sendExtensionMessageFn: (message: Record<string, unknown>) => {
-			messages.push(message);
-			return undefined;
-		},
 		shouldShowReviewOrSponsorFn: createShouldShowReviewOrSponsorFn({
 			isSafari,
 		}),
@@ -318,7 +312,7 @@ Deno.test("show review or sponsor block", async (t) => {
 				assertEquals(sponsorLink.tabIndex, -1);
 				reviewLink.click();
 				assertEquals(fixture.openCalls[0], CHROME_REVIEW_LINK);
-				assertEquals(fixture.messages, [{ what: "show-review" }]);
+				assertEquals(fixture.messages, []);
 			},
 		);
 
@@ -340,10 +334,7 @@ Deno.test("show review or sponsor block", async (t) => {
 				assertFalse(sponsorSvg.classList.contains("hidden"));
 				sponsorLink.click();
 				assert(fixture.openCalls[0].includes("/it/"));
-				assertEquals(fixture.messages, [
-					{ what: "show-review" },
-					{ what: "show-sponsor" },
-				]);
+				assertEquals(fixture.messages, []);
 			},
 		);
 
@@ -499,7 +490,6 @@ Deno.test("review-sponsor module defaults stay safe without browser globals", ()
 	const { showReviewOrSponsor } = createReviewSponsorModule({
 		hiddenClass: "hidden",
 		isChrome: true,
-		whatShowReview: "show-review",
 		shouldShowReviewOrSponsorFn: createShouldShowReviewOrSponsorFn(),
 		openCorrectBrowserReviewLinkFn: () => null,
 	} as never);
@@ -520,7 +510,7 @@ Deno.test("review-sponsor module defaults stay safe without browser globals", ()
 	assert(elements.sponsorSvg.classList.contains("hidden"));
 });
 
-Deno.test("review-sponsor runtime wires default message constants", async () => {
+Deno.test("review-sponsor runtime does not notify on support link visibility", async () => {
 	await import("../../mocks.test.ts");
 	const runtime = await import(
 		`../../../src/components/review-sponsor/review-sponsor-runtime.js?${crypto.randomUUID()}`
@@ -547,9 +537,6 @@ Deno.test("review-sponsor runtime wires default message constants", async () => 
 		getTranslatorAttributeFn: () => "en",
 		HTMLElementRef: MockReviewSponsorHTMLElement as never,
 		injectStyleFn: () => new MockElement("link") as never,
-		sendExtensionMessageFn: (message: Record<string, unknown>) => {
-			messages.push(message);
-		},
 	});
 	const elements = {
 		reviewLink: new MockElement("a"),
@@ -571,8 +558,5 @@ Deno.test("review-sponsor runtime wires default message constants", async () => 
 		globalThis.open = originalOpen;
 	}
 
-	assertEquals(messages, [
-		{ what: "show-review" },
-		{ what: "show-sponsor" },
-	]);
+	assertEquals(messages, []);
 });

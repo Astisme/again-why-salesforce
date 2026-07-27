@@ -899,6 +899,10 @@
 		"message": "Ez nem egy $salesforce_lightning beállítási oldal.",
 		"description": "[notSalesforceSetup] a felhasználó nem Salesforce oldalon van."
 	},
+	"open_github_issue": {
+		"message": "GitHub-probléma megnyitása",
+		"description": "[értékelési kérés] gombcímke azon felhasználók számára, akiknek segítségre van szükségük, vagy problémát szeretnének jelenteni"
+	},
 	"open_here": {
 		"message": "Megnyitás ezen a Tab.",
 		"description": "[open-other-org-modal] választógomb, amellyel a felhasználó ugyanabban a böngésző Tab nyithatja meg"
@@ -1103,6 +1107,10 @@
 		"message": "Ha szeretné, megjelenítheti kedvenc Tabs\namint egy $salesforce_setup oldalra navigál,\nanélkül, hogy minden alkalommal erre a bővítményre kellene kattintania.",
 		"description": "[req_permission] szöveg, amely elmagyarázza, miért kérik az engedélyeket"
 	},
+	"request_later": {
+		"message": "Kérés később",
+		"description": "[értékelési kérés] gombcímke az újbóli későbbi rákérdezéshez anélkül, hogy a kérést befejezettként mentené"
+	},
 	"required": {
 		"message": "kötelező",
 		"description": "[input] megjelöl egy kötelező mezőt"
@@ -1110,6 +1118,10 @@
 	"required_info": {
 		"message": "= Kötelező Információk",
 		"description": "[modal] jelzi a felhasználónak, hogy bizonyos adatok megadása kötelező"
+	},
+	"review_prompt_body": {
+		"message": "Tetszik a $extension_label ? Kérjük, írjon egy értékelést.\nNem elégedett? Nyisson meg egy GitHub-problémát, hogy segíthessünk.\nNem szeretne most választani? A Mégse leállítja ezt a kérést, a Kérés később legközelebb újra megkérdezi.",
+		"description": "[értékelési kérés] az értékelési, probléma-, mégse- és későbbi lehetőségeket elmagyarázó szöveg"
 	},
 	"salesforce_domain": {
 		"message": "Salesforce domain",
@@ -1156,8 +1168,8 @@
 		"description": "[import] lehetővé teszi a felhasználó számára, hogy kiválassza, mely $tabs-t importálja az importálás előtt"
 	},
 	"send_tip": {
-		"message": "Küldj nekünk egy tippet ❤️",
-		"description": "[popup] cím svg-hez, hogy küldjön egy tippet"
+		"message": "Ha a $extension_label időt takarít meg Önnek, fontolja meg a fejlesztés támogatását.\nElőre is köszönjük, hogy ennyire szereti!",
+		"description": "[kérés] üzenet, amely arra kéri a felhasználót, hogy támogassa a bővítményt"
 	},
 	"sessions": {
 		"message": "Munkamenetek",

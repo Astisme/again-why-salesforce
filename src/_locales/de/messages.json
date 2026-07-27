@@ -899,6 +899,10 @@
 		"message": "Dies ist keine $salesforce_lightning Setup-Seite.",
 		"description": "[notSalesforceSetup] Der Benutzer befindet sich nicht auf einer Salesforce-Seite."
 	},
+	"open_github_issue": {
+		"message": "GitHub-Issue öffnen",
+		"description": "[Bewertungsaufforderung] Schaltflächenbeschriftung für Benutzer, die Hilfe benötigen oder ein Problem melden möchten"
+	},
 	"open_here": {
 		"message": "In diesem Tab öffnen.",
 		"description": "[open-other-org-modal] Optionsfeld, mit dem der Benutzer im selben Browser-Tab öffnen kann"
@@ -1103,6 +1107,10 @@
 		"message": "Wenn Sie möchten können Ihre bevorzugten Tabs\nangezeigt werden sobald Sie zu einer $salesforce_setup Seite navigieren\nohne jedes Mal auf diese Erweiterung klicken zu müssen",
 		"description": "[req_permission] Text zur Erläuterung, warum die Berechtigungen angefordert werden"
 	},
+	"request_later": {
+		"message": "Später anfragen",
+		"description": "[Bewertungsaufforderung] Schaltflächenbeschriftung, um später erneut zu fragen, ohne die Aufforderung als abgeschlossen zu speichern"
+	},
 	"required": {
 		"message": "erforderlich",
 		"description": "[input] Markiert ein Eingabefeld als erforderlich"
@@ -1110,6 +1118,10 @@
 	"required_info": {
 		"message": "= Erforderliche Informationen",
 		"description": "[modal] Zeigt an, dass bestimmte Informationen notwendig sind"
+	},
+	"review_prompt_body": {
+		"message": "Gefällt Ihnen $extension_label ? Bitte schreiben Sie eine Bewertung.\nNicht zufrieden? Öffnen Sie ein GitHub-Issue, damit wir helfen können.\nMöchten Sie jetzt nicht wählen? Abbrechen stoppt diese Anfrage, Später anfragen fragt beim nächsten Mal erneut.",
+		"description": "[Bewertungsaufforderung] Haupttext, der die Optionen Bewertung, Issue, Abbrechen und Später erklärt"
 	},
 	"salesforce_domain": {
 		"message": "Salesforce-Domäne",
@@ -1156,8 +1168,8 @@
 		"description": "[import] lässt den Benutzer auswählen, welche $tabs importiert werden sollen, bevor sie importiert werden"
 	},
 	"send_tip": {
-		"message": "Senden Sie uns ein Trinkgeld ❤️",
-		"description": "[popup] Titel für SVG, um das Senden eines Trinkgeldes anzufordern"
+		"message": "Wenn $extension_label Ihnen Zeit spart, ziehen Sie bitte in Betracht, die Entwicklung zu sponsern.\nWir danken Ihnen im Voraus dafür, dass Sie sie so sehr schätzen!",
+		"description": "[Aufforderung] Nachricht, die den Benutzer auffordert, die Erweiterung zu sponsern"
 	},
 	"sessions": {
 		"message": "Sitzungen",

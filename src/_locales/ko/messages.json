@@ -899,6 +899,10 @@
 		"message": "이 페이지는 $salesforce_lightning 설정 페이지가 아닙니다.",
 		"description": "[notSalesforceSetup] 사용자가 Salesforce 페이지에 없습니다."
 	},
+	"open_github_issue": {
+		"message": "GitHub 이슈 열기",
+		"description": "[리뷰 프롬프트] 도움이 필요하거나 문제를 신고하려는 사용자를 위한 버튼 레이블"
+	},
 	"open_here": {
 		"message": "이 Tab에서 열기.",
 		"description": "[open-other-org-modal] 사용자가 동일한 브라우저 Tab에서 열 수 있도록 하는 라디오 버튼"
@@ -1103,6 +1107,10 @@
 		"message": "원하는 경우 $salesforce_setup 페이지로 이동하자마자\n즐겨찾는 Tabs가 나타나도록 할 수 있습니다.\n매번 이 확장 프로그램을 클릭할 필요 없이 말입니다.",
 		"description": "[req_permission] 권한을 요청하는 이유를 설명하는 텍스트"
 	},
+	"request_later": {
+		"message": "나중에 요청",
+		"description": "[리뷰 프롬프트] 프롬프트를 완료 상태로 저장하지 않고 나중에 다시 묻기 위한 버튼 레이블"
+	},
 	"required": {
 		"message": "필수",
 		"description": "[입력] 입력 필드를 필수로 표시"
@@ -1110,6 +1118,10 @@
 	"required_info": {
 		"message": "= 필수 정보",
 		"description": "[모달] 일부 정보가 필수임을 사용자에게 알림"
+	},
+	"review_prompt_body": {
+		"message": "$extension_label 을 즐겁게 사용하고 계신가요? 리뷰를 작성해 주세요.\n만족스럽지 않으신가요? 저희가 도와드릴 수 있도록 GitHub 이슈를 열어 주세요.\n지금 선택하고 싶지 않으신가요? 취소는 이 요청을 중단하고, 나중에 요청은 다음번에 다시 묻습니다.",
+		"description": "[리뷰 프롬프트] 리뷰, 이슈, 취소, 나중에 선택지를 설명하는 본문"
 	},
 	"salesforce_domain": {
 		"message": "Salesforce 도메인",
@@ -1156,8 +1168,8 @@
 		"description": "[import] 가져오기 전에 사용자가 어떤 $tabs 를 가져올지 선택할 수 있도록 합니다"
 	},
 	"send_tip": {
-		"message": "팁을 보내주세요 ❤️",
-		"description": "[popup] 팁 전송을 요청하는 svg의 제목"
+		"message": "$extension_label 이 시간을 절약해 준다면 개발 후원을 고려해 주세요.\n많이 아껴주셔서 미리 감사드립니다!",
+		"description": "[프롬프트] 사용자에게 확장 프로그램 후원을 요청하는 메시지"
 	},
 	"sessions": {
 		"message": "세션",

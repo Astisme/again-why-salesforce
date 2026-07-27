@@ -899,6 +899,10 @@
 		"message": "हे $salesforce_lightning सेटअप पृष्ठ नाही.",
 		"description": "[notSalesforceSetup] वापरकर्ता Salesforce पृष्ठावर नाही."
 	},
+	"open_github_issue": {
+		"message": "Buka isu GitHub",
+		"description": "[gesaan ulasan] label butang untuk pengguna yang memerlukan bantuan atau ingin melaporkan masalah"
+	},
 	"open_here": {
 		"message": "या Tab मध्ये उघडा.",
 		"description": "[open-other-org-modal] वापरकर्त्याला त्याच ब्राउझर Tab मध्ये उघडण्याची परवानगी देण्यासाठी रेडिओ बटण"
@@ -1103,6 +1107,10 @@
 		"message": "तुम्हाला हवे असल्यास, तुम्ही $salesforce_setup पृष्ठावर नेव्हिगेट करताच\nतुमचे आवडते Tabs दिसू शकतात\nप्रत्येक वेळी या विस्तारावर क्लिक न करता.",
 		"description": "[req_permission] परवानग्या का मागितल्या जात आहेत हे स्पष्ट करणारा मजकूर"
 	},
+	"request_later": {
+		"message": "Minta kemudian",
+		"description": "[gesaan ulasan] label butang untuk bertanya lagi kemudian tanpa menyimpan gesaan sebagai selesai"
+	},
 	"required": {
 		"message": "diperlukan",
 		"description": "[input] menandakan medan input sebagai wajib"
@@ -1110,6 +1118,10 @@
 	"required_info": {
 		"message": "= Maklumat Diperlukan",
 		"description": "[modal] memberitahu pengguna bahawa sesetengah maklumat adalah wajib"
+	},
+	"review_prompt_body": {
+		"message": "Menikmati $extension_label ? Sila tulis ulasan.\nTidak berpuas hati? Buka isu GitHub supaya kami boleh membantu.\nTidak mahu memilih sekarang? Batal menghentikan permintaan ini, Minta kemudian akan bertanya lagi lain kali.",
+		"description": "[gesaan ulasan] badan yang menerangkan pilihan ulasan, isu, batal, dan kemudian"
 	},
 	"salesforce_domain": {
 		"message": "Domain Salesforce",
@@ -1156,8 +1168,8 @@
 		"description": "[import] benarkan pengguna memilih $tabs mana yang akan diimport sebelum mengimportnya"
 	},
 	"send_tip": {
-		"message": "Hantarkan kami tip ❤️",
-		"description": "[popup] tajuk untuk svg untuk meminta penghantaran tip"
+		"message": "Jika $extension_label menjimatkan masa anda, pertimbangkan untuk menaja pembangunannya.\nKami mengucapkan terima kasih terlebih dahulu kerana sangat menyukainya!",
+		"description": "[gesaan] mesej yang meminta pengguna untuk menaja sambungan"
 	},
 	"sessions": {
 		"message": "Sesi",

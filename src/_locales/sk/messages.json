@@ -899,6 +899,10 @@
 		"message": "Toto nie je stránka nastavenia $salesforce_lightning",
 		"description": "[notSalesforceSetup] používateľ sa nenachádza na stránke Salesforce."
 	},
+	"open_github_issue": {
+		"message": "Otvoriť problém na GitHub-e",
+		"description": "[výzva na recenziu] štítok tlačidla pre používateľov, ktorí potrebujú pomoc alebo chcú nahlásiť problém"
+	},
 	"open_here": {
 		"message": "Otvoriť v tejto Tab.",
 		"description": "[open-other-org-modal] prepínač, ktorý používateľovi umožní otvoriť v tej istej Tab prehliadača"
@@ -1103,6 +1107,10 @@
 		"message": "Ak chcete, môžete si nechať zobraziť svoje obľúbené Tabs\nhneď po prechode na stránku $salesforce_setup\nbez toho, aby ste museli zakaždým klikať na toto rozšírenie.",
 		"description": "[req_permission] text vysvetľujúci, prečo sa požadujú povolenia"
 	},
+	"request_later": {
+		"message": "Požiadať neskôr",
+		"description": "[výzva na recenziu] štítok tlačidla pre opätovné opýtanie sa neskôr bez uloženia výzvy ako dokončenej"
+	},
 	"required": {
 		"message": "povinné",
 		"description": "[input] označuje, že vstupné pole je povinné"
@@ -1110,6 +1118,10 @@
 	"required_info": {
 		"message": "= Povinné informácie",
 		"description": "[modal] informuje používateľa, že niektoré údaje sú povinné"
+	},
+	"review_prompt_body": {
+		"message": "Páči sa vám $extension_label ? Napíšte prosím recenziu.\nNie ste spokojní? Otvorte problém na GitHub-e, aby sme vám mohli pomôcť.\nNechcete si vybrať teraz? Zrušiť zastaví túto žiadosť, Požiadať neskôr sa opýta nabudúce.",
+		"description": "[výzva na recenziu] text vysvetľujúci možnosti recenzie, problému, zrušenia a neskoršej žiadosti"
 	},
 	"salesforce_domain": {
 		"message": "Doména Salesforce",
@@ -1156,8 +1168,8 @@
 		"description": "[import] umožnite používateľovi vybrať, ktoré $tabs sa majú importovať pred ich importovaním"
 	},
 	"send_tip": {
-		"message": "Pošlite nám tip ❤️",
-		"description": "[popup] titul pre svg na podnietenie odoslania tipu"
+		"message": "Ak vám $extension_label šetrí čas, zvážte sponzorovanie jeho vývoja.\nVopred vám ďakujeme, že si ho tak veľmi ceníte!",
+		"description": "[výzva] správa žiadajúca používateľa o sponzorovanie rozšírenia"
 	},
 	"sessions": {
 		"message": "Relácie",

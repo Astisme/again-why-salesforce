@@ -899,6 +899,10 @@
 		"message": "Tai nėra $salesforce_lightning sąrankos puslapis.",
 		"description": "[notSalesforceSetup] vartotojas nėra „Salesforce“ puslapyje."
 	},
+	"open_github_issue": {
+		"message": "Atverti GitHub problemą",
+		"description": "[apžvalgos raginimas] mygtuko etikete vartotojams, kuriems reikia pagalbos arba kurie nori pranešti apie problemą"
+	},
 	"open_here": {
 		"message": "Atidaryti šiame Tab.",
 		"description": "[open-other-org-modal] radijo mygtukas, leidžiantis vartotojui atidaryti tame pačiame naršyklės Tab"
@@ -1103,6 +1107,10 @@
 		"message": "Jei norite, galite rodyti mėgstamiausius Tabs\nkai tik pereisite į $salesforce_setup puslapį,\nkas kartą nespaudžiant šio plėtinio.",
 		"description": "[req_permission] tekstas, paaiškinantis, kodėl prašoma leidimų"
 	},
+	"request_later": {
+		"message": "Prakšyti vėliau",
+		"description": "[apžvalgos raginimas] mygtuko etiketė vėl paklausti vėliau neišsaugant raginimo kaip užbaigto"
+	},
 	"required": {
 		"message": "privaloma",
 		"description": "[įvestis] pažymi įvesties lauką kaip privalomą"
@@ -1110,6 +1118,10 @@
 	"required_info": {
 		"message": "= Privaloma informacija",
 		"description": "[modal] nurodo vartotojui, kad kai kuri informacija yra privaloma"
+	},
+	"review_prompt_body": {
+		"message": "Patinka $extension_label ? Prašome parašyti apžvalgą.\nNepatinka? Atverkite GitHub problemą, kad galėtume padėti.\nNenorite pasirinkti dabar? Atšaukti sustabdo šią užklausą, Prakšyti vėliau paklaus vėl kitą kartą.",
+		"description": "[apžvalgos raginimas] pagrindinis tekstas, paaiškinantis apžvalgos, problemos, atšaukimo ir vėlesnio pasirinkimus"
 	},
 	"salesforce_domain": {
 		"message": "Salesforce domenas",
@@ -1156,8 +1168,8 @@
 		"description": "[import] leisti vartotojui pasirinkti, kuriuos $tabs importuoti prieš juos importuojant"
 	},
 	"send_tip": {
-		"message": "Atsiųskite mums patarimą ❤️",
-		"description": "[popup] svg antraštė, skirta paraginti siųsti patarimą"
+		"message": "Jei $extension_label sutaupo jūsų laiko, apsvarstykite galimybę paremti jo kūrimą.\nIš anksto dėkojame, kad taip stipriai jį mėgstate!",
+		"description": "[raginimas] pranešimas, prašantis vartotojo paremti plėtinį"
 	},
 	"sessions": {
 		"message": "Seansai",

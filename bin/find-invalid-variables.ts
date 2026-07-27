@@ -1,14 +1,9 @@
 #!/usr/bin/env -S deno run --allow-read --allow-write
 
 const LOCALES_DIR = "src/_locales";
+const ENGLISH_LOCALE = "en";
 const OUTPUT_FILE = "invalid-variables-report.json";
-
-// matches $something where either
-// - no space before OR
-// - no space after OR
-// - no double quotes before OR
-// - no double quotes after
-const INVALID_VAR_REGEX = /(?<=[^\s$\w])\$\w+|\$\w+(?=[^\s$\w])/g;
+const VARIABLE_REGEX = /\$[a-zA-Z0-9_]+/g;
 
 interface LocaleMessage {
 	message?: string;
@@ -19,17 +14,26 @@ interface LocaleFile {
 	[key: string]: LocaleMessage;
 }
 
-interface InvalidLocalesReport {
-	[locale: string]: LocaleFile;
+interface InvalidVariableEntry {
+	message: string;
+	unknownVariables: string[];
+}
+
+interface InvalidLocaleReport {
+	[locale: string]: Record<string, InvalidVariableEntry>;
 }
 
 /**
  * Gets all locale directories from the locales directory.
- * @return {Promise<string[]>} Array of locale directory names.
+ *
+ * @param {string} localesDir Locales root directory.
+ * @return {Promise<string[]>} Locale directory names.
  */
-async function getLocales(): Promise<string[]> {
+export async function getLocales(
+	localesDir = LOCALES_DIR,
+): Promise<string[]> {
 	const entries: string[] = [];
-	for await (const entry of Deno.readDir(LOCALES_DIR)) {
+	for await (const entry of Deno.readDir(localesDir)) {
 		if (entry.isDirectory) {
 			entries.push(entry.name);
 		}
@@ -39,10 +43,11 @@ async function getLocales(): Promise<string[]> {
 
 /**
  * Checks if a file exists.
- * @param {string} filePath - Path to check.
+ *
+ * @param {string} filePath Path to check.
  * @return {Promise<boolean>} True if file exists.
  */
-async function fileExists(filePath: string): Promise<boolean> {
+export async function fileExists(filePath: string): Promise<boolean> {
 	try {
 		await Deno.stat(filePath);
 		return true;
@@ -53,115 +58,99 @@ async function fileExists(filePath: string): Promise<boolean> {
 
 /**
  * Reads and parses a locale file.
- * @param {string} filePath - Locale file path.
+ *
+ * @param {string} filePath Locale file path.
  * @return {Promise<LocaleFile>} Parsed locale file.
  */
-async function readLocaleFile(filePath: string): Promise<LocaleFile> {
+export async function readLocaleFile(filePath: string): Promise<LocaleFile> {
 	return JSON.parse(await Deno.readTextFile(filePath));
 }
 
 /**
- * Gets the locale keys whose messages contain invalid variables.
- * @param {LocaleFile} localeFile - Locale file to inspect.
- * @return {string[]} Invalid locale keys.
+ * Extracts placeholder variable names from a localized message.
+ *
+ * @param {string} message Message text.
+ * @return {string[]} Unique variable keys without `$` prefix.
  */
-function getInvalidLocaleKeys(localeFile: LocaleFile): string[] {
-	const invalidKeys: string[] = [];
+export function getMessageVariables(message: string): string[] {
+	return [
+		...new Set(
+			message.match(VARIABLE_REGEX)?.map((variable) =>
+				variable.slice(1)
+			) ??
+				[],
+		),
+	].sort();
+}
+
+/**
+ * Finds message variables that do not reference an English locale key.
+ *
+ * @param {LocaleFile} localeFile Locale file to inspect.
+ * @param {ReadonlySet<string>} allowedVariables English locale keys.
+ * @return {Record<string, InvalidVariableEntry>} Invalid variable report for one locale.
+ */
+export function getInvalidVariableEntries(
+	localeFile: LocaleFile,
+	allowedVariables: ReadonlySet<string>,
+): Record<string, InvalidVariableEntry> {
+	const invalidEntries: Record<string, InvalidVariableEntry> = {};
 	for (const [key, value] of Object.entries(localeFile)) {
-		if (
-			typeof value?.message === "string" &&
-			INVALID_VAR_REGEX.test(value.message)
-		) {
-			invalidKeys.push(key);
+		if (typeof value?.message !== "string") {
+			continue;
 		}
-		INVALID_VAR_REGEX.lastIndex = 0;
-	}
-	return invalidKeys;
-}
-
-/**
- * Builds the report payload for invalid locale keys.
- * @param {LocaleFile} localeFile - Locale file containing invalid keys.
- * @param {string[]} invalidKeys - Keys to include in the report.
- * @return {LocaleFile} Report entry for the locale.
- */
-function buildLocaleReportEntry(
-	localeFile: LocaleFile,
-	invalidKeys: string[],
-): LocaleFile {
-	const reportEntry: LocaleFile = {};
-	for (const key of invalidKeys) {
-		reportEntry[key] = localeFile[key];
-	}
-	return reportEntry;
-}
-
-/**
- * Removes keys from a locale file.
- * @param {LocaleFile} localeFile - Locale file to update.
- * @param {string[]} keysToRemove - Keys to remove.
- * @return {LocaleFile} Locale file without the removed keys.
- */
-function removeLocaleKeys(
-	localeFile: LocaleFile,
-	keysToRemove: string[],
-): LocaleFile {
-	const removedKeys = new Set(keysToRemove);
-	const updatedLocaleFile: LocaleFile = {};
-	for (const [key, value] of Object.entries(localeFile)) {
-		if (!removedKeys.has(key)) {
-			updatedLocaleFile[key] = value;
+		const unknownVariables = getMessageVariables(value.message).filter(
+			(variable) => !allowedVariables.has(variable),
+		);
+		if (unknownVariables.length > 0) {
+			invalidEntries[key] = {
+				message: value.message,
+				unknownVariables,
+			};
 		}
 	}
-	return updatedLocaleFile;
+	return invalidEntries;
 }
 
 /**
- * Writes a locale file back to disk.
- * @param {string} filePath - Locale file path.
- * @param {LocaleFile} localeFile - Locale file contents.
- * @return {Promise<void>}
+ * Builds the invalid variable report for all locales.
+ *
+ * @param {string} [localesDir=LOCALES_DIR] Locales root directory.
+ * @return {Promise<InvalidLocaleReport>} Invalid variable report.
  */
-async function writeLocaleFile(
-	filePath: string,
-	localeFile: LocaleFile,
-): Promise<void> {
-	await Deno.writeTextFile(
-		filePath,
-		`${JSON.stringify(localeFile, null, "\t")}\n`,
+export async function buildInvalidVariablesReport(
+	localesDir = LOCALES_DIR,
+): Promise<InvalidLocaleReport> {
+	const englishFile = await readLocaleFile(
+		`${localesDir}/${ENGLISH_LOCALE}/messages.json`,
 	);
-}
-
-/**
- * Processes all locale files, removes invalid locale keys, and builds a report.
- * @return {Promise<InvalidLocalesReport>} Invalid locale report.
- */
-async function removeInvalidLocales(): Promise<InvalidLocalesReport> {
-	const locales = await getLocales();
-	const report: InvalidLocalesReport = {};
+	const allowedVariables = new Set(Object.keys(englishFile));
+	const locales = await getLocales(localesDir);
+	const report: InvalidLocaleReport = {};
 	for (const locale of locales) {
-		const filePath = `${LOCALES_DIR}/${locale}/messages.json`;
+		const filePath = `${localesDir}/${locale}/messages.json`;
 		if (!await fileExists(filePath)) {
 			continue;
 		}
 		const localeFile = await readLocaleFile(filePath);
-		const invalidKeys = getInvalidLocaleKeys(localeFile);
-		if (invalidKeys.length === 0) {
-			continue;
+		const invalidEntries = getInvalidVariableEntries(
+			localeFile,
+			allowedVariables,
+		);
+		if (Object.keys(invalidEntries).length > 0) {
+			report[locale] = invalidEntries;
 		}
-		report[locale] = buildLocaleReportEntry(localeFile, invalidKeys);
-		const updatedLocaleFile = removeLocaleKeys(localeFile, invalidKeys);
-		await writeLocaleFile(filePath, updatedLocaleFile);
 	}
 	return report;
 }
 
 /**
  * Main execution.
+ *
  * @return {Promise<void>}
  */
-async function main(): Promise<void> {
-	const result = await removeInvalidLocales();
+export async function main(): Promise<void> {
+	const result = await buildInvalidVariablesReport();
 	if (Object.keys(result).length === 0) {
 		return;
 	}
@@ -172,14 +161,21 @@ async function main(): Promise<void> {
 	Deno.exit(1);
 }
 
-async function removeThenMain(): Promise<void> {
+/**
+ * Removes stale report then runs validation.
+ *
+ * @return {Promise<void>}
+ */
+export async function removeThenMain(): Promise<void> {
 	try {
 		await Deno.remove(OUTPUT_FILE);
 	} catch (_e) {
-		// nothing
+		// no stale report
 	} finally {
 		await main();
 	}
 }
 
-await removeThenMain();
+if (import.meta.main) {
+	await removeThenMain();
+}

@@ -899,6 +899,10 @@
 		"message": "Tämä ei ole $salesforce_lightning asennussivu.",
 		"description": "[notSalesforceSetup] käyttäjä ei ole Salesforce-sivulla."
 	},
+	"open_github_issue": {
+		"message": "Avaa GitHub-ongelma",
+		"description": "[arvostelupyyntö] painikkeen teksti käyttäjille, jotka tarvitsevat apua tai haluavat ilmoittaa ongelmasta"
+	},
 	"open_here": {
 		"message": "Avaa tässä Tab.",
 		"description": "[open-other-org-modal] valintanappi, jonka avulla käyttäjä voi avata samassa selaimen Tab"
@@ -1103,6 +1107,10 @@
 		"message": "Jos haluat voit saada suosikki Tabs näkyviin\nheti kun siirryt $salesforce_setup sivulle\nilman että sinun tarvitsee napsauttaa tätä laajennusta joka kerta",
 		"description": "[req_permission] teksti, joka selittää, miksi käyttöoikeuksia pyydetään"
 	},
+	"request_later": {
+		"message": "Pyydä myöhemmin",
+		"description": "[arvostelupyyntö] painikkeen teksti uudelleen kysymiseen myöhemmin tallentamatta pyyntöä valmiiksi"
+	},
 	"required": {
 		"message": "pakollinen",
 		"description": "[input] merkitsee, että syötekenttä on pakollinen"
@@ -1110,6 +1118,10 @@
 	"required_info": {
 		"message": "= Pakolliset tiedot",
 		"description": "[modal] ilmoittaa käyttäjälle, että tietyt tiedot ovat pakollisia"
+	},
+	"review_prompt_body": {
+		"message": "Nautitko $extension_label käytöstä? Kirjoita arvostelu.\nEtkö ole tyytyväinen? Avaa GitHub-ongelma, jotta voimme auttaa.\nEtkö halua valita nyt? Peruuta pysäyttää tämän pyynnön, Pyydä myöhemmin kysyy uudelleen ensi kerralla.",
+		"description": "[arvostelupyyntö] leipäteksti, joka selittää arvostelu-, ongelma-, peruuta- ja myöhemmin-vaihtoehdot"
 	},
 	"salesforce_domain": {
 		"message": "Salesforce-verkkotunnus",
@@ -1156,8 +1168,8 @@
 		"description": "[import] anna käyttäjän valita, mitkä $tabs tuodaan ennen niiden tuomista"
 	},
 	"send_tip": {
-		"message": "Lähetä meille vinkki ❤️",
-		"description": "[popup] otsikko svg:lle pyytää vinkin lähettämistä"
+		"message": "Jos $extension_label säästää aikaasi, harkitse sen kehityksen sponsorointia.\nKiitämme etukäteen siitä, että pidät siitä niin paljon!",
+		"description": "[pyyntö] viesti, jossa pyydetään käyttäjää sponsoroimaan laajennusta"
 	},
 	"sessions": {
 		"message": "Istunnot",

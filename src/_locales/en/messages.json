@@ -899,6 +899,10 @@
 		"message": "This is not a $salesforce_lightning Setup page.",
 		"description": "[notSalesforceSetup] the user is not on a Salesforce page."
 	},
+	"open_github_issue": {
+		"message": "Open GitHub issue",
+		"description": "[review prompt] button label for users who need help or want to report a problem"
+	},
 	"open_here": {
 		"message": "Open in this $tab",
 		"description": "[open-other-org-modal] radio button to let the user open in the same browser $tab"
@@ -1103,6 +1107,10 @@
 		"message": "If you want, you may have your favourite $tabs appear\nas soon as you navigate to a $salesforce_setup page\nwithout having to click this extension every time.",
 		"description": "[req_permission] text to explain why the permissions are being requested"
 	},
+	"request_later": {
+		"message": "Request later",
+		"description": "[review prompt] button label to ask again later without saving the prompt as completed"
+	},
 	"required": {
 		"message": "required",
 		"description": "[input] marks an input field as mandatory"
@@ -1110,6 +1118,10 @@
 	"required_info": {
 		"message": "= Required Information",
 		"description": "[modal] tells the user that some info is mandatory"
+	},
+	"review_prompt_body": {
+		"message": "Enjoying $extension_label? Please write a review.\nNot happy? Open a GitHub issue so we can help.\nDo not want to choose now? Cancel stops this request, Request later asks again next time.",
+		"description": "[review prompt] body explaining review, issue, cancel, and later choices"
 	},
 	"salesforce_domain": {
 		"message": "Salesforce domain",
@@ -1156,8 +1168,8 @@
 		"description": "[import] let the user select which $tabs to import before importing them"
 	},
 	"send_tip": {
-		"message": "Send us a tip ❤️",
-		"description": "[popup] title for svg to prompt sending a tip"
+		"message": "If $extension_label saves you time, consider sponsoring its development.\nWe thank you in advance for loving it so much!",
+		"description": "[prompt] message asking the user to sponsor the extension"
 	},
 	"sessions": {
 		"message": "Sessions",

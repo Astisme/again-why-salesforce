@@ -13,6 +13,7 @@ import {
 	CHROME_LINK,
 	DO_NOT_REQUEST_FRAME_PERMISSION,
 	EDGE_LINK,
+	EXTENSION_GITHUB_ISSUES_LINK,
 	EXTENSION_OPTIONAL_HOST_PERM,
 	FIREFOX_LINK,
 	FRAME_PATTERNS,
@@ -53,6 +54,7 @@ import {
 	isSalesforceHostname,
 	isStyleKey,
 	openCorrectBrowserReviewLink,
+	openGithubIssueLink,
 	openSettingsPage,
 	openSponsorLink,
 	performLightningRedirect,
@@ -943,13 +945,19 @@ Deno.test("review sponsor link openers choose correct destinations", () => {
 
 	try {
 		openCorrectBrowserReviewLink("_self");
+		openGithubIssueLink("_self");
 		openSponsorLink("it");
 		openSponsorLink("unknown");
 		assertEquals(openedLinks.slice(-2), [
 			[SPONSOR_MAP.it, "_blank"],
 			[SPONSOR_MAP.default, "_blank"],
 		]);
-		if (openedLinks.length === 3) {
+		assert(
+			openedLinks.some(([link, target]) =>
+				link === EXTENSION_GITHUB_ISSUES_LINK && target === "_self"
+			),
+		);
+		if (openedLinks.length === 4) {
 			assertEquals(openedLinks[0][1], "_self");
 			assert([
 				CHROME_LINK,

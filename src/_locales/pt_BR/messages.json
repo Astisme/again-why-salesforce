@@ -899,6 +899,10 @@
 		"message": "Esta não é uma página de Configuração do $salesforce_lightning",
 		"description": "[notSalesforceSetup] o usuário não está em uma página do Salesforce."
 	},
+	"open_github_issue": {
+		"message": "Abrir problema no GitHub",
+		"description": "[solicitação de avaliação] rótulo do botão para usuários que precisam de ajuda ou desejam relatar um problema"
+	},
 	"open_here": {
 		"message": "Abrir nesta Tab.",
 		"description": "[open-other-org-modal] botão de opção para permitir que o usuário abra na mesma Tab do navegador"
@@ -1103,6 +1107,10 @@
 		"message": "Se desejar, você pode fazer com que suas Tabs favoritas apareçam\nassim que navegar para uma página $salesforce_setup\nsem precisar clicar nesta extensão todas as vezes.",
 		"description": "[req_permission] texto para explicar por que as permissões estão sendo solicitadas"
 	},
+	"request_later": {
+		"message": "Solicitar mais tarde",
+		"description": "[solicitação de avaliação] rótulo do botão para perguntar novamente mais tarde sem salvar a solicitação como concluída"
+	},
 	"required": {
 		"message": "obrigatório",
 		"description": "[entrada] marca um campo de entrada como obrigatório"
@@ -1110,6 +1118,10 @@
 	"required_info": {
 		"message": "= Informação Obrigatória",
 		"description": "[modal] informa ao usuário que algumas informações são obrigatórias"
+	},
+	"review_prompt_body": {
+		"message": "Gostando do $extension_label ? Por favor, escreva uma avaliação.\nNão está satisfeito? Abra um problema no GitHub para que possamos ajudar.\nNão quer escolher agora? Cancelar interrompe esta solicitação, Solicitar mais tarde perguntará novamente na próxima vez.",
+		"description": "[solicitação de avaliação] corpo explicando as opções de avaliação, problema, cancelar e mais tarde"
 	},
 	"salesforce_domain": {
 		"message": "Domínio do Salesforce",
@@ -1156,8 +1168,8 @@
 		"description": "[import] permite ao usuário selecionar quais $tabs importar antes de importá-los"
 	},
 	"send_tip": {
-		"message": "Envie-nos uma gorjeta ❤️",
-		"description": "[popup] título para svg para solicitar o envio de uma gorjeta"
+		"message": "Se o $extension_label economiza seu tempo, considere patrocinar seu desenvolvimento.\nAgradecemos antecipadamente por gostar tanto dele!",
+		"description": "[solicitação] mensagem pedindo ao usuário para patrocinar a extensão"
 	},
 	"sessions": {
 		"message": "Sessões",

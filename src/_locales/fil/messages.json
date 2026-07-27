@@ -899,6 +899,10 @@
 		"message": "Hindi ito isang $salesforce_lightning Setup page.",
 		"description": "[notSalesforceSetup] wala ang user sa isang Salesforce page."
 	},
+	"open_github_issue": {
+		"message": "Magbukas ng GitHub issue",
+		"description": "[prompt ng pagsusuri] label ng button para sa mga user na nangangailangan ng tulong o gustong mag-report ng problema"
+	},
 	"open_here": {
 		"message": "Buksan sa Tab na ito.",
 		"description": "[open-other-org-modal] radio button para hayaan ang user na magbukas sa parehong browser Tab"
@@ -1103,6 +1107,10 @@
 		"message": "Kung gusto mo, maaari mong ipakita ang iyong mga paboritong Tabs\nsa sandaling mag-navigate ka sa isang $salesforce_setup page\nnang hindi kinakailangang i-click ang extension na ito sa bawat oras.",
 		"description": "[req_permission] text para ipaliwanag kung bakit hinihiling ang mga pahintulot"
 	},
+	"request_later": {
+		"message": "Humingi muli mamaya",
+		"description": "[prompt ng pagsusuri] label ng button para magtanong muli mamaya nang hindi sine-save ang prompt bilang kumpleto"
+	},
 	"required": {
 		"message": "kailangan",
 		"description": "[input] nagmamarka sa isang input field bilang mandatoryo"
@@ -1110,6 +1118,10 @@
 	"required_info": {
 		"message": "= Kinakailangang Impormasyon",
 		"description": "[modal] nagsasabi sa user na ang ilang impormasyon ay mandatoryo"
+	},
+	"review_prompt_body": {
+		"message": "Nasisiyahan sa $extension_label ? Mangyaring sumulat ng review.\nHindi masaya? Magbukas ng GitHub issue para makatulong kami.\nHindi gustong pumili ngayon? Ang Kanser ay ititigil ang kahilingang ito, Ang Humingi muli mamaya ay magtatanong muli sa susunod.",
+		"description": "[prompt ng pagsusuri] katawan na nagpapaliwanag ng mga opsyon sa review, issue, cancel, at later"
 	},
 	"salesforce_domain": {
 		"message": "Salesforce domain",
@@ -1156,8 +1168,8 @@
 		"description": "[import] hayaan ang user na piliin kung aling $tabs ang i-iimport bago i-import ang mga ito"
 	},
 	"send_tip": {
-		"message": "Magpadala sa amin ng tip ❤️",
-		"description": "[popup] pamagat para sa svg upang mag-prompt ng pagpapadala ng isang tip"
+		"message": "Kung ang $extension_label ay nakakatipid sa iyo ng oras, isaalang-alang ang pag-sponsor sa pagbuo nito.\nNagpapasalamat kami nang maaga sa paggusto mo rito nang labis!",
+		"description": "[prompt] mensahe na humihiling sa user na i-sponsor ang extension"
 	},
 	"sessions": {
 		"message": "Mga Session",
