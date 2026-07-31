@@ -22,7 +22,9 @@ function renderInlineMarkdown(value) {
 	return escapeHtml(value)
 		.replaceAll(/!\[([^\]]*)\]\(([^)]+)\)/g, (_match, alt, href) => {
 			const url = normalizeImageUrl(String(href));
-			return `<img src="${escapeHtml(url)}" alt="${escapeHtml(String(alt))}" loading="lazy">`;
+			return `<img src="${escapeHtml(url)}" alt="${
+				escapeHtml(String(alt))
+			}" loading="lazy">`;
 		})
 		.replaceAll(/`([^`]+)`/g, "<code>$1</code>")
 		.replaceAll(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
@@ -31,7 +33,10 @@ function renderInlineMarkdown(value) {
 		.replaceAll("&lt;/u&gt;", "</u>")
 		.replaceAll(/\[([^\]]+)\]\(([^)]+)\)/g, (_match, label, href) => {
 			const url = String(href);
-			if (url.startsWith("http") || url.startsWith("mailto:") || url.startsWith("#")) {
+			if (
+				url.startsWith("http") || url.startsWith("mailto:") ||
+				url.startsWith("#")
+			) {
 				return `<a href="${escapeHtml(url)}">${label}</a>`;
 			}
 			const localDoc = url
@@ -41,7 +46,9 @@ function renderInlineMarkdown(value) {
 				.split("/")
 				.pop() || "Home";
 			const wikiDocuments = globalThis.awsfWikiDocuments || {};
-			const target = wikiDocuments[localDoc] ? `wiki.html?doc=${encodeURIComponent(localDoc)}` : "wiki.html";
+			const target = wikiDocuments[localDoc]
+				? `wiki.html?doc=${encodeURIComponent(localDoc)}`
+				: "wiki.html";
 			return `<a href="${escapeHtml(target)}">${label}</a>`;
 		})
 		.replaceAll(/\*([^*]+)\*/g, "<em>$1</em>")
@@ -69,8 +76,14 @@ function decodeMarkdownEntities(value) {
  */
 function normalizeImageUrl(url) {
 	return url
-		.replace("https://github.com/Astisme/again-why-salesforce/blob/main/", "https://raw.githubusercontent.com/Astisme/again-why-salesforce/main/")
-		.replace("https://github.com/Astisme/again-why-salesforce/raw/main/", "https://raw.githubusercontent.com/Astisme/again-why-salesforce/main/");
+		.replace(
+			"https://github.com/Astisme/again-why-salesforce/blob/main/",
+			"https://raw.githubusercontent.com/Astisme/again-why-salesforce/main/",
+		)
+		.replace(
+			"https://github.com/Astisme/again-why-salesforce/raw/main/",
+			"https://raw.githubusercontent.com/Astisme/again-why-salesforce/main/",
+		);
 }
 
 /**
@@ -97,7 +110,11 @@ function renderMarkdown(markdown) {
 			return;
 		}
 		const items = listItems
-			.map((item) => `<li class="list-level-${Math.min(item.level, 3)}">${item.content}</li>`)
+			.map((item) =>
+				`<li class="list-level-${
+					Math.min(item.level, 3)
+				}">${item.content}</li>`
+			)
 			.join("");
 		blocks.push(`<ul>${items}</ul>`);
 		listItems = [];
@@ -113,17 +130,33 @@ function renderMarkdown(markdown) {
 			return;
 		}
 		const [headerRow, separatorRow, ...bodyRows] = tableRows;
-		const hasSeparator = separatorRow?.every((cell) => /^:?-+:?$/.test(cell.trim()));
+		const hasSeparator = separatorRow?.every((cell) =>
+			/^:?-+:?$/.test(cell.trim())
+		);
 		if (!hasSeparator) {
-			blocks.push(...tableRows.map((row) => `<p>${row.map(renderInlineMarkdown).join(" ")}</p>`));
+			blocks.push(
+				...tableRows.map((row) =>
+					`<p>${row.map(renderInlineMarkdown).join(" ")}</p>`
+				),
+			);
 			tableRows = [];
 			return;
 		}
-		const head = headerRow.map((cell) => `<th>${renderInlineMarkdown(cell.trim())}</th>`).join("");
+		const head = headerRow.map((cell) =>
+			`<th>${renderInlineMarkdown(cell.trim())}</th>`
+		).join("");
 		const body = bodyRows
-			.map((row) => `<tr>${row.map((cell) => `<td>${renderInlineMarkdown(cell.trim())}</td>`).join("")}</tr>`)
+			.map((row) =>
+				`<tr>${
+					row.map((cell) =>
+						`<td>${renderInlineMarkdown(cell.trim())}</td>`
+					).join("")
+				}</tr>`
+			)
 			.join("");
-		blocks.push(`<div class="table-wrap"><table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div>`);
+		blocks.push(
+			`<div class="table-wrap"><table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div>`,
+		);
 		tableRows = [];
 	}
 
@@ -141,8 +174,8 @@ function renderMarkdown(markdown) {
 		const type = lowerText.includes("warning")
 			? "warning"
 			: lowerText.includes("info")
-				? "info"
-				: "note";
+			? "info"
+			: "note";
 		const rendered = text
 			.split(/\n+/)
 			.filter((line) => !/^!\[(info|warning)\]/i.test(line.trim()))
@@ -152,15 +185,22 @@ function renderMarkdown(markdown) {
 			.split(/\n+/)
 			.map((line) => line.trim())
 			.filter(Boolean);
-		if (type === "note" && quoteListLines.length > 0 && quoteListLines.every((line) => line.startsWith("- "))) {
+		if (
+			type === "note" && quoteListLines.length > 0 &&
+			quoteListLines.every((line) => line.startsWith("- "))
+		) {
 			const items = quoteListLines
-				.map((line) => `<li>${renderInlineMarkdown(line.slice(2))}</li>`)
+				.map((line) =>
+					`<li>${renderInlineMarkdown(line.slice(2))}</li>`
+				)
 				.join("");
 			blocks.push(`<ul class="nested-list">${items}</ul>`);
 			quoteLines = [];
 			return;
 		}
-		blocks.push(`<blockquote class="callout ${type}">${rendered}</blockquote>`);
+		blocks.push(
+			`<blockquote class="callout ${type}">${rendered}</blockquote>`,
+		);
 		quoteLines = [];
 	}
 
@@ -179,7 +219,11 @@ function renderMarkdown(markdown) {
 		const line = decodedLine.trim();
 		if (codeLines) {
 			if (line.startsWith("```")) {
-				blocks.push(`<pre><code>${escapeHtml(codeLines.join("\n"))}</code></pre>`);
+				blocks.push(
+					`<pre><code>${
+						escapeHtml(codeLines.join("\n"))
+					}</code></pre>`,
+				);
 				codeLines = null;
 				continue;
 			}
@@ -205,7 +249,10 @@ function renderMarkdown(markdown) {
 			flushQuote();
 			flushTable();
 			const level = treeListMatch[1].length + 1;
-			listItems.push({ content: renderInlineMarkdown(treeListMatch[2]), level });
+			listItems.push({
+				content: renderInlineMarkdown(treeListMatch[2]),
+				level,
+			});
 			continue;
 		}
 		if (line.includes("|") && !line.startsWith("> ")) {
@@ -260,11 +307,17 @@ function renderMarkdown(markdown) {
 			quoteLines.push(line.slice(2));
 			continue;
 		}
-		if (decodedTrimmedLine.startsWith("- ") || decodedTrimmedLine.startsWith("* ") || /^\d+\.\s/.test(decodedTrimmedLine)) {
+		if (
+			decodedTrimmedLine.startsWith("- ") ||
+			decodedTrimmedLine.startsWith("* ") ||
+			/^\d+\.\s/.test(decodedTrimmedLine)
+		) {
 			flushQuote();
 			flushTable();
 			listItems.push({
-				content: renderInlineMarkdown(decodedTrimmedLine.replace(/^(-|\*|\d+\.)\s/, "")),
+				content: renderInlineMarkdown(
+					decodedTrimmedLine.replace(/^(-|\*|\d+\.)\s/, ""),
+				),
 				level: 0,
 			});
 			continue;
@@ -272,10 +325,16 @@ function renderMarkdown(markdown) {
 		flushQuote();
 		flushTable();
 		flushList();
-		blocks.push(`<p>${renderInlineMarkdown(decodedTrimmedLine.replaceAll("\\", ""))}</p>`);
+		blocks.push(
+			`<p>${
+				renderInlineMarkdown(decodedTrimmedLine.replaceAll("\\", ""))
+			}</p>`,
+		);
 	}
 	if (codeLines) {
-		blocks.push(`<pre><code>${escapeHtml(codeLines.join("\n"))}</code></pre>`);
+		blocks.push(
+			`<pre><code>${escapeHtml(codeLines.join("\n"))}</code></pre>`,
+		);
 	}
 	flushQuote();
 	flushTable();
@@ -297,8 +356,13 @@ function renderChangelog(markdown) {
 		.filter((part) => part.trim())
 		.map((part, index) => {
 			const releaseMarkdown = `# ${part.trim()}`;
-			const title = releaseMarkdown.match(/^#\s+(.+)$/m)?.[1] || "Release";
-			return `<details class="release-panel" ${index === 0 ? "open" : ""}><summary>${escapeHtml(title)}</summary>${renderMarkdown(releaseMarkdown.replace(/^#\s+.+\n?/, ""))}</details>`;
+			const title = releaseMarkdown.match(/^#\s+(.+)$/m)?.[1] ||
+				"Release";
+			return `<details class="release-panel" ${
+				index === 0 ? "open" : ""
+			}><summary>${escapeHtml(title)}</summary>${
+				renderMarkdown(releaseMarkdown.replace(/^#\s+.+\n?/, ""))
+			}</details>`;
 		})
 		.join("");
 	return `${intro}${releases}`;

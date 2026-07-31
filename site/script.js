@@ -112,7 +112,10 @@ function detectInstallTarget(userAgent) {
 	if (userAgent.includes("Firefox/")) {
 		return "firefox";
 	}
-	if (userAgent.includes("Safari/") && !userAgent.includes("Chrome/") && !userAgent.includes("Chromium/")) {
+	if (
+		userAgent.includes("Safari/") && !userAgent.includes("Chrome/") &&
+		!userAgent.includes("Chromium/")
+	) {
 		return "safari";
 	}
 	if (userAgent.includes("Chrome/") || userAgent.includes("Chromium/")) {
@@ -144,13 +147,17 @@ function updateInstallLinks() {
  * @returns {Promise<string | null>} Latest release label, or null when unavailable.
  */
 async function getLatestReleaseLabel() {
-	const response = await fetch("https://api.github.com/repos/Astisme/again-why-salesforce/releases/latest");
+	const response = await fetch(
+		"https://api.github.com/repos/Astisme/again-why-salesforce/releases/latest",
+	);
 	if (response.ok) {
 		const release = await response.json();
 		return release.name || release.tag_name || null;
 	}
 
-	const manifestResponse = await fetch("https://raw.githubusercontent.com/Astisme/again-why-salesforce/main/src/manifest/template-manifest.json");
+	const manifestResponse = await fetch(
+		"https://raw.githubusercontent.com/Astisme/again-why-salesforce/main/src/manifest/template-manifest.json",
+	);
 	if (!manifestResponse.ok) {
 		return null;
 	}
@@ -235,7 +242,9 @@ function animateReleaseLabel(label, value) {
 	function tick(frameTime) {
 		const progress = Math.min((frameTime - startTime) / duration, 1);
 		const eased = 1 - ((1 - progress) ** 3);
-		label.textContent = `${prefix}${Math.floor(major * eased)}.${Math.floor(minor * eased)}.${Math.floor(patch * eased)}${suffix}`;
+		label.textContent = `${prefix}${Math.floor(major * eased)}.${
+			Math.floor(minor * eased)
+		}.${Math.floor(patch * eased)}${suffix}`;
 		if (progress < 1) {
 			requestAnimationFrame(tick);
 		}
@@ -308,7 +317,10 @@ function hydrateArticleToc() {
 	}
 	for (const heading of headings) {
 		if (!heading.id) {
-			heading.id = createSlug(heading.textContent || "section", usedSlugs);
+			heading.id = createSlug(
+				heading.textContent || "section",
+				usedSlugs,
+			);
 		}
 		const link = document.createElement("a");
 		link.href = `#${heading.id}`;
@@ -367,16 +379,31 @@ function getMarkdownUrl(target) {
  * @returns {Promise<{ users: number; rating: number | null; }>} Combined public metrics.
  */
 async function getPublicStoreMetrics() {
-	const [chromeResult, edgeResult, firefoxResult, safariResult] = await Promise.allSettled([
-		fetch("https://img.shields.io/chrome-web-store/users/bceeoimjhgjbihanbiifgpndmkklajbi.json?label=Chrome%20Users&color=blue").then((response) => response.json()),
-		fetch("https://img.shields.io/badge/dynamic/json.json?label=Edge%20Users&query=%24.activeInstallCount&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fdfdjpokbfeaamjcomllncennmfhpldmm").then((response) => response.json()),
-		fetch("https://addons.mozilla.org/api/v5/addons/addon/again@why.salesforce/").then((response) => response.json()),
-		fetch("https://simpleanalytics.com/extension.again.whysalesforce.json?version=5&fields=visitors&start=today-7d&info=false&browser_name=Safari").then((response) => response.json()),
-	]);
-	const chrome = chromeResult.status === "fulfilled" ? chromeResult.value : {};
+	const [chromeResult, edgeResult, firefoxResult, safariResult] =
+		await Promise.allSettled([
+			fetch(
+				"https://img.shields.io/chrome-web-store/users/bceeoimjhgjbihanbiifgpndmkklajbi.json?label=Chrome%20Users&color=blue",
+			).then((response) => response.json()),
+			fetch(
+				"https://img.shields.io/badge/dynamic/json.json?label=Edge%20Users&query=%24.activeInstallCount&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fdfdjpokbfeaamjcomllncennmfhpldmm",
+			).then((response) => response.json()),
+			fetch(
+				"https://addons.mozilla.org/api/v5/addons/addon/again@why.salesforce/",
+			).then((response) => response.json()),
+			fetch(
+				"https://simpleanalytics.com/extension.again.whysalesforce.json?version=5&fields=visitors&start=today-7d&info=false&browser_name=Safari",
+			).then((response) => response.json()),
+		]);
+	const chrome = chromeResult.status === "fulfilled"
+		? chromeResult.value
+		: {};
 	const edge = edgeResult.status === "fulfilled" ? edgeResult.value : {};
-	const firefox = firefoxResult.status === "fulfilled" ? firefoxResult.value : {};
-	const safari = safariResult.status === "fulfilled" ? safariResult.value : {};
+	const firefox = firefoxResult.status === "fulfilled"
+		? firefoxResult.value
+		: {};
+	const safari = safariResult.status === "fulfilled"
+		? safariResult.value
+		: {};
 	const users = parseCompactNumber(chrome.value || chrome.message || 0) +
 		parseCompactNumber(edge.value || edge.message || 0) +
 		Number(firefox.average_daily_users || 0) +
@@ -404,8 +431,8 @@ function parseCompactNumber(value) {
 	const multiplier = normalized.endsWith("k")
 		? 1_000
 		: normalized.endsWith("m")
-			? 1_000_000
-			: 1;
+		? 1_000_000
+		: 1;
 	return Number.parseFloat(normalized.replace(/[km]$/, "")) * multiplier || 0;
 }
 
@@ -458,15 +485,19 @@ async function hydrateMarkdown() {
 	if (markdownSource.getAttribute("data-markdown-source") === "wiki") {
 		const doc = new URLSearchParams(location.search).get("doc") || "Home";
 		if (wikiTitleLabel) {
-			wikiTitleLabel.textContent = wikiTitles[doc] || doc.replaceAll("-", " ");
+			wikiTitleLabel.textContent = wikiTitles[doc] ||
+				doc.replaceAll("-", " ");
 		}
 		if (wikiDescriptionLabel) {
-			wikiDescriptionLabel.textContent = `Article from ${wikiDocuments[doc] || wikiDocuments.Home}`;
+			wikiDescriptionLabel.textContent = `Article from ${
+				wikiDocuments[doc] || wikiDocuments.Home
+			}`;
 		}
 	}
-	markdownSource.innerHTML = markdownSource.getAttribute("data-markdown-source") === "changelog"
-		? globalThis.awsfMarkdown.renderChangelog(markdown)
-		: globalThis.awsfMarkdown.renderMarkdown(markdown);
+	markdownSource.innerHTML =
+		markdownSource.getAttribute("data-markdown-source") === "changelog"
+			? globalThis.awsfMarkdown.renderChangelog(markdown)
+			: globalThis.awsfMarkdown.renderMarkdown(markdown);
 	hydrateArticleToc();
 }
 
