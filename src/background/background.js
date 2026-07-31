@@ -6,8 +6,11 @@ import {
 	EXTENSION_GITHUB_LINK,
 	NO_RELEASE_NOTES,
 	PERM_CHECK,
+	PREVENT_ANALYTICS,
 	TOAST_ERROR,
 	TOAST_WARNING,
+	UNINSTALL_SURVEY_LINK_NO_PING,
+	UNINSTALL_SURVEY_LINK_YES_PING,
 	WHAT_ACTIVATE,
 	WHAT_EXPORT,
 	WHAT_EXPORT_CHECK,
@@ -24,6 +27,8 @@ import {
 	WHAT_SET,
 	WHAT_SHOW_EXPORT_MODAL,
 	WHAT_SHOW_IMPORT,
+	WHAT_SHOW_REVIEW,
+	WHAT_SHOW_SPONSOR,
 	WHAT_START_TUTORIAL,
 	WHAT_STARTUP,
 	WHAT_THEME,
@@ -62,6 +67,19 @@ async function bg_isPermissionGranted(contains, callback) {
 }
 
 /**
+ * Check if settings contains PREVENT_ANALYTICS and update uninstallURL accordingly
+ * @param {any[]} [settings=[]] the settings the user wants to set
+ */
+function bg_checkUpdateUninstallURL(settings = []) {
+	const preventAnalytics = settings.find((el) => el.id === PREVENT_ANALYTICS);
+	if (preventAnalytics == null) return;
+	const link = preventAnalytics.enabled
+		? UNINSTALL_SURVEY_LINK_NO_PING // the user has disabled the analytics
+		: UNINSTALL_SURVEY_LINK_YES_PING; // the user has enabled the analytics
+	BROWSER.runtime.setUninstallURL(link);
+}
+
+/**
  * Listens for incoming messages and processes requests to get, set, or bg_notify about storage changes.
  * Also handles theme updates and tab-related messages.
  *
@@ -83,6 +101,7 @@ function listenToExtensionMessages() {
 				break;
 			case WHAT_SET:
 				bg_setStorage(request.set, sendResponse, request.key);
+				bg_checkUpdateUninstallURL(request.set);
 				break;
 			case WHAT_SAVED:
 			case WHAT_SHOW_IMPORT:
@@ -92,6 +111,8 @@ function listenToExtensionMessages() {
 			case WHAT_SHOW_EXPORT_MODAL:
 			case CXM_MANAGE_TABS: // from popup
 			case WHAT_START_TUTORIAL: // from popup
+			case WHAT_SHOW_REVIEW:
+			case WHAT_SHOW_SPONSOR:
 				sendResponse(null);
 				setTimeout(() => bg_notify(request), 250); // delay the notification to prevent accidental removal (for WHAT_SHOW_IMPORT)
 				break;
@@ -212,12 +233,7 @@ function setExtensionBrowserListeners() {
 		refreshContextMenus(WHAT_HIGHLIGHTED);
 	});
 
-	/*
-  // TODO update uninstall url
-  BROWSER.runtime.setUninstallURL("https://www.duckduckgo.com/", () => {
-      removeMenuItems()
-  });
-  */
+	BROWSER.runtime.setUninstallURL(UNINSTALL_SURVEY_LINK_YES_PING);
 }
 
 /**

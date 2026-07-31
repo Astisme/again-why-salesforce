@@ -899,6 +899,10 @@
 		"message": "Dies ist keine $salesforce_lightning Setup-Seite.",
 		"description": "[notSalesforceSetup] Der Benutzer befindet sich nicht auf einer Salesforce-Seite."
 	},
+	"open_github_issue": {
+		"message": "GitHub-Issue öffnen",
+		"description": "[Bewertungsaufforderung] Schaltflächenbeschriftung für Benutzer, die Hilfe benötigen oder ein Problem melden möchten"
+	},
 	"open_here": {
 		"message": "In diesem Tab öffnen.",
 		"description": "[open-other-org-modal] Optionsfeld, mit dem der Benutzer im selben Browser-Tab öffnen kann"
@@ -1103,6 +1107,10 @@
 		"message": "Wenn Sie möchten können Ihre bevorzugten Tabs\nangezeigt werden sobald Sie zu einer $salesforce_setup Seite navigieren\nohne jedes Mal auf diese Erweiterung klicken zu müssen",
 		"description": "[req_permission] Text zur Erläuterung, warum die Berechtigungen angefordert werden"
 	},
+	"request_later": {
+		"message": "Später anfragen",
+		"description": "[Bewertungsaufforderung] Schaltflächenbeschriftung, um später erneut zu fragen, ohne die Aufforderung als abgeschlossen zu speichern"
+	},
 	"required": {
 		"message": "erforderlich",
 		"description": "[input] Markiert ein Eingabefeld als erforderlich"
@@ -1110,6 +1118,10 @@
 	"required_info": {
 		"message": "= Erforderliche Informationen",
 		"description": "[modal] Zeigt an, dass bestimmte Informationen notwendig sind"
+	},
+	"review_prompt_body": {
+		"message": "Gefällt Ihnen $extension_label ? Bitte schreiben Sie eine Bewertung.\nNicht zufrieden? Öffnen Sie ein GitHub-Issue, damit wir helfen können.\nMöchten Sie jetzt nicht wählen? Abbrechen stoppt diese Anfrage, Später anfragen fragt beim nächsten Mal erneut.",
+		"description": "[Bewertungsaufforderung] Haupttext, der die Optionen Bewertung, Issue, Abbrechen und Später erklärt"
 	},
 	"salesforce_domain": {
 		"message": "Salesforce-Domäne",
@@ -1156,8 +1168,8 @@
 		"description": "[import] lässt den Benutzer auswählen, welche $tabs importiert werden sollen, bevor sie importiert werden"
 	},
 	"send_tip": {
-		"message": "Senden Sie uns ein Trinkgeld ❤️",
-		"description": "[popup] Titel für SVG, um das Senden eines Trinkgeldes anzufordern"
+		"message": "Wenn $extension_label Ihnen Zeit spart, ziehen Sie bitte in Betracht, die Entwicklung zu sponsern.\nWir danken Ihnen im Voraus dafür, dass Sie sie so sehr schätzen!",
+		"description": "[Aufforderung] Nachricht, die den Benutzer auffordert, die Erweiterung zu sponsern"
 	},
 	"sessions": {
 		"message": "Sitzungen",
@@ -1564,7 +1576,7 @@
 		"description": "[tutorial] Favorit hinzufügen"
 	},
 	"tutorial_click_highlighted_tab": {
-		"message": "Klicken Sie auf den hervorgehobenen $tab , um zur entsprechenden Seite zu navigieren.",
+		"message": "Klicken Sie auf den hervorgehobenen $tab, um zur entsprechenden Seite zu navigieren.",
 		"description": "[tutorial] auf hervorgehobenen Tab klicken"
 	},
 	"tutorial_continue_prompt_body": {
@@ -1596,7 +1608,7 @@
 		"description": "[tutorial] Tastenkombination"
 	},
 	"tutorial_manage_tabs": {
-		"message": "Klicken Sie mit der rechten Maustaste auf die Seite (nicht auf einen Tab) und wählen Sie $extension_label > $cxm_manage_tabs , um das Verwaltungsmodal zu öffnen.",
+		"message": "Klicken Sie mit der rechten Maustaste auf die Seite (nicht auf einen Tab) und wählen Sie $extension_label > $cxm_manage_tabs, um das Verwaltungsmodal zu öffnen.",
 		"description": "[tutorial] Tab verwalten"
 	},
 	"tutorial_manage_tabs_link": {
@@ -1604,7 +1616,7 @@
 		"description": "[tutorial] Link zum Verwalten von Tab"
 	},
 	"tutorial_pin_tab": {
-		"message": "Klicken Sie mit der rechten Maustaste auf den hervorgehobenen $tab und wählen Sie $extension_label > $cxm_move > $cxm_pin_tab , um ihn anzuheften.",
+		"message": "Klicken Sie mit der rechten Maustaste auf den hervorgehobenen $tab und wählen Sie $extension_label > $cxm_move > $cxm_pin_tab, um ihn anzuheften.",
 		"description": "[tutorial] Tab anheften"
 	},
 	"tutorial_pinned_explanation": {
@@ -1632,7 +1644,7 @@
 		"description": "[tutorial] Aufforderung zum Neustart des Tutorials"
 	},
 	"tutorial_save_modal": {
-		"message": "Klicken Sie auf $save , um die Änderungen zu übernehmen und die Bestätigungsmeldung zu sehen.",
+		"message": "Klicken Sie auf $save, um die Änderungen zu übernehmen und die Bestätigungsmeldung zu sehen.",
 		"description": "[tutorial] Modal speichern"
 	},
 	"tutorial_start_prompt_body": {

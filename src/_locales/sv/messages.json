@@ -800,7 +800,7 @@
 		"description": "[etikett] importera allt som finns i filen under importprocessen"
 	},
 	"import_pinned_tabs": {
-		"message": "Importera antal fästa $tabs .",
+		"message": "Importera antal fästa $tabs.",
 		"description": "[etikett] importera antal fästa $tabs under importprocessen"
 	},
 	"import_successful": {
@@ -898,6 +898,10 @@
 	"nss_not_setup_page": {
 		"message": "Detta är inte en $salesforce_lightning installationssida",
 		"description": "[notSalesforceSetup] användaren är inte på en Salesforce-sida."
+	},
+	"open_github_issue": {
+		"message": "Öppna GitHub-problem",
+		"description": "[recensionsuppmaning] knappetikett för användare som behöver hjälp eller vill rapportera ett problem"
 	},
 	"open_here": {
 		"message": "Öppna i denna Tab.",
@@ -1103,6 +1107,10 @@
 		"message": "Om du vill kan du visa dina favorit Tabs\nså snart du navigerar till en $salesforce_setup sida\nutan att behöva klicka på det här tillägget varje gång",
 		"description": "[req_permission] text som förklarar varför behörigheterna begärs"
 	},
+	"request_later": {
+		"message": "Fråga senare",
+		"description": "[recensionsuppmaning] knappetikett för att fråga igen senare utan att spara uppmaningen som slutförd"
+	},
 	"required": {
 		"message": "obligatoriskt",
 		"description": "[input] markerar att ett inmatningsfält är obligatoriskt"
@@ -1110,6 +1118,10 @@
 	"required_info": {
 		"message": "= Obligatorisk information",
 		"description": "[modal] informerar användaren att viss information är obligatorisk"
+	},
+	"review_prompt_body": {
+		"message": "Gillar du $extension_label ? Skriv gärna en recension.\nInte nöjd? Öppna ett GitHub-problem så att vi kan hjälpa till.\nVill du inte välja nu? Avbryt stoppar denna begäran, Fråga senare frågar igen nästa gång.",
+		"description": "[recensionsuppmaning] brödtext som förklarar valen för recension, problem, avbryt och senare"
 	},
 	"salesforce_domain": {
 		"message": "Salesforce domän",
@@ -1156,8 +1168,8 @@
 		"description": "[import] låt användaren välja vilka $tabs som ska importeras innan de importeras"
 	},
 	"send_tip": {
-		"message": "Skicka oss ett tips ❤️",
-		"description": "[popup] titel för svg för att be om att skicka ett tips"
+		"message": "Om $extension_label sparar tid åt dig, överväg att sponsra dess utveckling.\nVi tackar dig i förväg för att du gillar den så mycket!",
+		"description": "[uppmaning] meddelande som ber användaren att sponsra tillägget"
 	},
 	"sessions": {
 		"message": "Sessioner",

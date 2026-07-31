@@ -899,6 +899,10 @@
 		"message": "Hii si ukurasa wa Mipangilio ya $salesforce_lightning",
 		"description": "[notSalesforceSetup] mtumiaji hayuko kwenye ukurasa wa Salesforce."
 	},
+	"open_github_issue": {
+		"message": "Fungua tatizo la GitHub",
+		"description": "[kikumbusho cha mapitio] lebo ya kitufe kwa watumiaji wanaohitaji usaidizi au wanaotaka kuripoti tatizo"
+	},
 	"open_here": {
 		"message": "Fungua kwenye Tab hii.",
 		"description": "[open-other-org-modal] kitufe cha redio kumruhusu mtumiaji kufungua kwenye Tab moja ya kivinjari"
@@ -1103,6 +1107,10 @@
 		"message": "Ukipenda, unaweza kuwa na Tabs zako uzipendazo zionekane\nmara tu unapovinjari hadi kwenye ukurasa wa $salesforce_setup\nbila kulazimika kubofya kiendelezi hiki kila wakati.",
 		"description": "[req_permission] maandishi ya kueleza kwa nini ruhusa zinaombwa"
 	},
+	"request_later": {
+		"message": "Omba baadaye",
+		"description": "[kikumbusho cha mapitio] lebo ya kitufe cha kuuliza tena baadaye bila kuhifadhi kikumbusho kama kimekamilika"
+	},
 	"required": {
 		"message": "inahitajika",
 		"description": "[ingizo] huweka alama kwenye sehemu ya kuingiza kama ya lazima"
@@ -1110,6 +1118,10 @@
 	"required_info": {
 		"message": "= Taarifa Inayohitajika",
 		"description": "[modal] humwambia mtumiaji kuwa baadhi ya taarifa ni za lazima"
+	},
+	"review_prompt_body": {
+		"message": "Je, unafurahia $extension_label ? Tafadhali andika mapitio.\nHujaridhika? Fungua tatizo la GitHub ili tuweze kusaidia.\nHutaki kuchagua sasa? Ghairi inasimamisha ombi hili, Omba baadaye itauliza tena wakati ujao.",
+		"description": "[kikumbusho cha mapitio] mwili unaoelezea chaguo za mapitio, tatizo, ghairi, na baadaye"
 	},
 	"salesforce_domain": {
 		"message": "Salesforce domain",
@@ -1156,8 +1168,8 @@
 		"description": "[import] ruhusu mtumiaji kuchagua $tabs zipi za kuingiza kabla ya kuziingiza"
 	},
 	"send_tip": {
-		"message": "Tutumie dokezo ❤️",
-		"description": "[popup] kichwa cha svg cha kuhamasisha kutuma dokezo"
+		"message": "Ikiwa $extension_label inakuokolea muda, fikiria kudhamini maendeleo yake.\nTunakushukuru mapema kwa kuipenda sana!",
+		"description": "[kikumbusho] ujumbe unaomwomba mtumiaji kudhamini kiendelezi"
 	},
 	"sessions": {
 		"message": "Vipindi",

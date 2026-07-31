@@ -899,6 +899,10 @@
 		"message": "Dit is geen $salesforce_lightning Setuppagina.",
 		"description": "[notSalesforceSetup] de gebruiker bevindt zich niet op een Salesforce-pagina."
 	},
+	"open_github_issue": {
+		"message": "GitHub-issue openen",
+		"description": "[beoordelingsverzoek] knoplabel voor gebruikers die hulp nodig hebben of een probleem willen melden"
+	},
 	"open_here": {
 		"message": "Open in deze Tab.",
 		"description": "[open-other-org-modal] keuzerondje om de gebruiker in dezelfde browser-Tab te laten openen"
@@ -1103,6 +1107,10 @@
 		"message": "Als u wilt kunt u uw favoriete Tabs laten verschijnen\nzodra u naar een $salesforce_setup pagina navigeert\nzonder elke keer op deze extensie te hoeven klikken",
 		"description": "[req_permission] tekst om uit te leggen waarom de toestemmingen worden gevraagd"
 	},
+	"request_later": {
+		"message": "Later opnieuw vragen",
+		"description": "[beoordelingsverzoek] knoplabel om later opnieuw te vragen zonder het verzoek als voltooid op te slaan"
+	},
 	"required": {
 		"message": "vereist",
 		"description": "[input] markeert een invoerveld als verplicht"
@@ -1110,6 +1118,10 @@
 	"required_info": {
 		"message": "= Vereiste informatie",
 		"description": "[modal] vertelt de gebruiker dat sommige info verplicht is"
+	},
+	"review_prompt_body": {
+		"message": "Geniet u van $extension_label ? Schrijf alstublieft een beoordeling.\nNiet tevreden? Open een GitHub-issue zodat we kunnen helpen.\nWilt u nu niet kiezen? Annuleren stopt dit verzoek, Later opnieuw vragen vraagt het de volgende keer weer.",
+		"description": "[beoordelingsverzoek] hoofdtekst met uitleg over de keuzes beoordeling, issue, annuleren en later"
 	},
 	"salesforce_domain": {
 		"message": "Salesforce-domein",
@@ -1156,8 +1168,8 @@
 		"description": "[import] laat de gebruiker selecteren welke $tabs geïmporteerd moeten worden voordat ze worden geïmporteerd"
 	},
 	"send_tip": {
-		"message": "Stuur ons een fooi ❤️",
-		"description": "[popup] titel voor svg om te vragen om een fooi te sturen"
+		"message": "Als $extension_label u tijd bespaart, overweeg dan om deพัฒนาการ te sponsoren.\nWe danken u bij voorbaat omdat u er zo dol op bent!",
+		"description": "[verzoek] bericht waarin de gebruiker wordt gevraagd de extensie te sponsoren"
 	},
 	"sessions": {
 		"message": "Sessies",

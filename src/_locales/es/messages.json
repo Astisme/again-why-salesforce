@@ -899,6 +899,10 @@
 		"message": "Esta no es una página de Configuración de $salesforce_lightning",
 		"description": "[notSalesforceSetup] el usuario no está en una página de Salesforce."
 	},
+	"open_github_issue": {
+		"message": "Abrir un problema en GitHub",
+		"description": "[solicitud de reseña] etiqueta del botón para usuarios que necesitan ayuda o desean informar de un problema"
+	},
 	"open_here": {
 		"message": "Abrir en esta Tab.",
 		"description": "[open-other-org-modal] botón de opción para permitir al usuario abrir en la misma Tab del navegador"
@@ -1103,6 +1107,10 @@
 		"message": "Si lo desea, puede hacer que sus Tabs favoritas aparezcan\nen cuanto navegue a una página de $salesforce_setup\nsin tener que hacer clic en esta extensión cada vez.",
 		"description": "[req_permission] texto para explicar por qué se solicitan los permisos"
 	},
+	"request_later": {
+		"message": "Solicitar más tarde",
+		"description": "[solicitud de reseña] etiqueta del botón para volver a preguntar más tarde sin guardar la solicitud como completada"
+	},
 	"required": {
 		"message": "requerido",
 		"description": "[input] Marca un campo de entrada como obligatorio"
@@ -1110,6 +1118,10 @@
 	"required_info": {
 		"message": "= Información requerida",
 		"description": "[modal] Indica al usuario que cierta información es obligatoria"
+	},
+	"review_prompt_body": {
+		"message": "¿Disfrutas de $extension_label ? Por favor, escribe una reseña.\n¿No estás satisfecho? Abre un problema en GitHub para que podamos ayudarte.\n¿No quieres elegir ahora? Cancelar detiene esta solicitud, Solicitar más tarde volverá a preguntar la próxima vez.",
+		"description": "[solicitud de reseña] cuerpo que explica las opciones de reseña, problema, cancelar y más tarde"
 	},
 	"salesforce_domain": {
 		"message": "Dominio de Salesforce",
@@ -1148,16 +1160,16 @@
 		"description": "[import] permite al usuario seleccionar qué $tabs importar antes de importarlos"
 	},
 	"select_tabs_export": {
-		"message": "$select_tabs $exportar",
+		"message": "$select_tabs $export",
 		"description": "[import] permite al usuario seleccionar qué $tabs exportar antes de exportarlos"
 	},
 	"select_tabs_import": {
-		"message": "$select_tabs $importar",
+		"message": "$select_tabs $import",
 		"description": "[import] permite al usuario seleccionar qué $tabs importar antes de importarlos"
 	},
 	"send_tip": {
-		"message": "Envíanos una propina ❤️",
-		"description": "[popup] título para svg para solicitar el envío de una propina"
+		"message": "Si $extension_label te ahorra tiempo, considera patrocinar su desarrollo.\n¡Te agradecemos de antemano por valorarlo tanto!",
+		"description": "[solicitud] mensaje pidiendo al usuario que patrocine la extensión"
 	},
 	"sessions": {
 		"message": "Sesiones",

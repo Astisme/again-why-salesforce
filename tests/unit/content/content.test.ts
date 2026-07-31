@@ -90,8 +90,22 @@ type ContentDeps = {
 			selector: string;
 		}) => any;
 		getSettings: (keys?: string[] | string | null) => Promise<any>;
+		getTodayDateKey: () => string;
+		openCorrectBrowserReviewLink: () => void;
+		openGithubIssueLink: () => void;
+		openSponsorLink: (languageCode?: string | null) => void;
+		setSettings: (set: {
+			enabled: unknown;
+			id: string;
+			skipped?: string;
+		}) => Promise<void>;
+		shouldShowReviewOrSponsor: (options?: {
+			allTabs?: unknown[];
+			usageDays?: number;
+		}) => { review: boolean; sponsor: boolean };
 	};
 	ensureTranslatorAvailability: () => Promise<{
+		currentLanguage: string;
 		translate: (
 			message: string | string[],
 			join?: string,
@@ -126,10 +140,14 @@ type ContentDeps = {
 		sldsConfirm: (options?: {
 			body?: string | string[];
 			cancelLabel?: string;
+			cancelValue?: unknown;
 			closeLabel?: string;
+			closeValue?: unknown;
 			confirmLabel?: string;
+			confirmValue?: unknown;
+			extraButtons?: Array<{ label: string; value: unknown }>;
 			title?: string;
-		}) => Promise<boolean>;
+		}) => Promise<unknown>;
 		generateUpdateTabModal: (...args: unknown[]) => Promise<any>;
 	};
 	importModule: {
@@ -387,9 +405,21 @@ function createHarness(url = SETUP_URL) {
 		sldsConfirmCalls: [] as Array<{
 			body?: string | string[];
 			cancelLabel?: string;
+			cancelValue?: unknown;
 			closeLabel?: string;
+			closeValue?: unknown;
 			confirmLabel?: string;
+			confirmValue?: unknown;
+			extraButtons?: Array<{ label: string; value: unknown }>;
 			title?: string;
+		}>,
+		reviewLinkCalls: 0,
+		issueLinkCalls: 0,
+		sponsorLinkCalls: [] as Array<string | null | undefined>,
+		setSettingsCalls: [] as Array<{
+			enabled: unknown;
+			id: string;
+			skipped?: string;
 		}>,
 		replaceTabsCalls: [] as Array<
 			{ tabs: any[]; options: Record<string, unknown> }
@@ -442,6 +472,7 @@ function createHarness(url = SETUP_URL) {
 		createManageTabsModalHook: null as null | (() => void | Promise<void>),
 		confirmResult: true,
 		modalRadioTarget: "_blank",
+		todayKey: "2026-07-27",
 	};
 
 	function createTab(
@@ -886,6 +917,7 @@ function createHarness(url = SETUP_URL) {
 			CXM_TMP_HIDE_ORG: CONSTANTS.CXM_TMP_HIDE_ORG,
 			CXM_UNPIN_TAB: CONSTANTS.CXM_UNPIN_TAB,
 			EXTENSION_NAME: "again-why-salesforce",
+			EXTENSION_USAGE_DAYS: "extension_usage_days",
 			HAS_ORG_TAB: ".has-org-tab",
 			HTTPS: "https://",
 			LIGHTNING_FORCE_COM: ".lightning.force.com",
@@ -913,6 +945,10 @@ function createHarness(url = SETUP_URL) {
 			WHAT_SHOW_EXPORT_MODAL: "show-export-modal",
 			WHAT_SHOW_IMPORT: "show-import",
 			WHAT_SHOW_OPEN_OTHER_ORG: "show-open-other-org",
+			WHAT_DID_REVIEW: "did-review",
+			WHAT_DID_SPONSOR: "did-sponsor",
+			WHAT_SHOW_REVIEW: "show-review",
+			WHAT_SHOW_SPONSOR: "show-sponsor",
 			WHAT_START_TUTORIAL: "start-tutorial",
 			WHAT_STARTUP: "startup",
 			WHAT_THEME: "theme",
@@ -968,12 +1004,34 @@ function createHarness(url = SETUP_URL) {
 				}
 				return [...state.settings.values()];
 			},
+			getTodayDateKey: () => state.todayKey,
+			openCorrectBrowserReviewLink: () => {
+				records.reviewLinkCalls++;
+			},
+			openGithubIssueLink: () => {
+				records.issueLinkCalls++;
+			},
+			openSponsorLink: (languageCode = null) => {
+				records.sponsorLinkCalls.push(languageCode);
+			},
+			setSettings: (set) => {
+				records.setSettingsCalls.push(set);
+				state.settings.set(set.id, set);
+				return Promise.resolve();
+			},
+			shouldShowReviewOrSponsor: (
+				{ allTabs = [], usageDays = 0 } = {},
+			) => ({
+				review: allTabs.length >= 8 || usageDays >= 20,
+				sponsor: allTabs.length >= 16 || usageDays >= 40,
+			}),
 		},
 		ensureTranslatorAvailability: () => ({
+			currentLanguage: "it",
 			translate: (message: string | string[], join = " ") =>
 				Array.isArray(message) ? message.join(join) : message,
 		}),
-		getTranslations: (message: string | string[], join = " ") => {
+		getTranslations: (message: string | string[], join = null) => {
 			if (Array.isArray(message)) {
 				return Promise.resolve(
 					join == null ? message : message.join(join),
@@ -2590,6 +2648,459 @@ Deno.test(
 					},
 				);
 
+				await t.step(
+					"review and sponsor messages show confirms and save flags",
+					async () => {
+						const backgroundListener =
+							harness.browser.runtime._listeners[0];
+						const initialConfirmCalls =
+							harness.records.sldsConfirmCalls.length;
+						harness.state.settings.set("extension_usage_days", {
+							id: "extension_usage_days",
+							enabled: 40,
+						});
+						harness.state.confirmResult = "write_review";
+						await backgroundListener(
+							{ what: "show-review" },
+							{},
+							() => {},
+						);
+						harness.state.confirmResult = "open_sponsor";
+						await backgroundListener(
+							{ what: "show-sponsor" },
+							{},
+							() => {},
+						);
+						const confirmCalls = harness.records.sldsConfirmCalls
+							.slice(initialConfirmCalls)
+							.map((call) => ({
+								body: call.body,
+								confirmLabel: call.confirmLabel,
+								cancelLabel: call.cancelLabel,
+								closeLabel: call.closeLabel,
+							}));
+						assertEquals(
+							confirmCalls,
+							[
+								{
+									body: "review_prompt_body",
+									confirmLabel: "write_review",
+									cancelLabel: "cancel",
+									closeLabel: "cancel_close",
+								},
+								{
+									body: "send_tip",
+									confirmLabel: "open_new_tab",
+									cancelLabel: "cancel",
+									closeLabel: "cancel_close",
+								},
+							],
+						);
+						assertEquals(harness.records.reviewLinkCalls, 1);
+						assertEquals(harness.records.issueLinkCalls, 0);
+						assertEquals(harness.records.sponsorLinkCalls, ["it"]);
+						assertEquals(
+							harness.records.setSettingsCalls.map(({ id }) =>
+								id
+							),
+							["did-review", "did-sponsor"],
+						);
+						await backgroundListener(
+							{ what: "show-review" },
+							{},
+							() => {},
+						);
+						await backgroundListener(
+							{ what: "show-sponsor" },
+							{},
+							() => {},
+						);
+						assertEquals(
+							harness.records.sldsConfirmCalls.length,
+							initialConfirmCalls + 2,
+						);
+					},
+				);
+
+				await t.step(
+					"review and sponsor messages skip when already saved",
+					async () => {
+						const backgroundListener =
+							harness.browser.runtime._listeners[0];
+						const initialConfirmCalls =
+							harness.records.sldsConfirmCalls.length;
+						const initialReviewLinkCalls =
+							harness.records.reviewLinkCalls;
+						const initialSponsorLinkCalls =
+							harness.records.sponsorLinkCalls.length;
+						const initialSetSettingsCalls =
+							harness.records.setSettingsCalls.length;
+						harness.state.settings.set("did-review", {
+							id: "did-review",
+							enabled: 1,
+						});
+						harness.state.settings.set("did-sponsor", {
+							id: "did-sponsor",
+							enabled: 1,
+						});
+						await backgroundListener(
+							{ what: "show-review" },
+							{},
+							() => {},
+						);
+						await backgroundListener(
+							{ what: "show-sponsor" },
+							{},
+							() => {},
+						);
+						assertEquals(
+							harness.records.sldsConfirmCalls.length,
+							initialConfirmCalls,
+						);
+						assertEquals(
+							harness.records.reviewLinkCalls,
+							initialReviewLinkCalls,
+						);
+						assertEquals(
+							harness.records.sponsorLinkCalls.length,
+							initialSponsorLinkCalls,
+						);
+						assertEquals(
+							harness.records.setSettingsCalls.length,
+							initialSetSettingsCalls,
+						);
+					},
+				);
+
+				await t.step(
+					"focus change does not show review or sponsor prompts",
+					async () => {
+						const backgroundListener =
+							harness.browser.runtime._listeners[0];
+						const initialConfirmCalls =
+							harness.records.sldsConfirmCalls.length;
+						const initialReviewLinkCalls =
+							harness.records.reviewLinkCalls;
+						const initialSponsorLinkCalls =
+							harness.records.sponsorLinkCalls.length;
+						harness.state.settings.delete("did-review");
+						harness.state.settings.delete("did-sponsor");
+						harness.state.settings.set("extension_usage_days", {
+							id: "extension_usage_days",
+							enabled: 40,
+						});
+						await backgroundListener(
+							{
+								what: "focuschanged",
+								tabs: [{ label: "Users", url: USERS_URL }],
+							},
+							{},
+							() => {},
+						);
+						assertEquals(
+							harness.records.sldsConfirmCalls.length,
+							initialConfirmCalls,
+						);
+						assertEquals(
+							harness.records.reviewLinkCalls,
+							initialReviewLinkCalls,
+						);
+						assertEquals(
+							harness.records.sponsorLinkCalls.length,
+							initialSponsorLinkCalls,
+						);
+					},
+				);
+
+				await t.step(
+					"sponsor message shows review first when both prompts are eligible",
+					async () => {
+						const backgroundListener =
+							harness.browser.runtime._listeners[0];
+						const initialConfirmCalls =
+							harness.records.sldsConfirmCalls.length;
+						const initialReviewLinkCalls =
+							harness.records.reviewLinkCalls;
+						const initialSponsorLinkCalls =
+							harness.records.sponsorLinkCalls.length;
+						const initialSetSettingsCalls =
+							harness.records.setSettingsCalls.length;
+						harness.state.settings.delete("did-review");
+						harness.state.settings.delete("did-sponsor");
+						harness.state.settings.set("extension_usage_days", {
+							id: "extension_usage_days",
+							enabled: 40,
+						});
+						harness.state.confirmResult = "write_review";
+						await backgroundListener(
+							{ what: "show-sponsor" },
+							{},
+							() => {},
+						);
+						assertEquals(
+							harness.records.sldsConfirmCalls.at(-1)?.body,
+							"review_prompt_body",
+						);
+						assertEquals(
+							harness.records.reviewLinkCalls,
+							initialReviewLinkCalls + 1,
+						);
+						assertEquals(
+							harness.records.sponsorLinkCalls.length,
+							initialSponsorLinkCalls,
+						);
+						assertEquals(
+							harness.records.setSettingsCalls.at(-1)?.id,
+							"did-review",
+						);
+						harness.state.confirmResult = "open_sponsor";
+						await backgroundListener(
+							{ what: "show-sponsor" },
+							{},
+							() => {},
+						);
+						assertEquals(
+							harness.records.sldsConfirmCalls
+								.slice(initialConfirmCalls)
+								.map(({ body }) => body),
+							["review_prompt_body", "send_tip"],
+						);
+						assertEquals(
+							harness.records.sponsorLinkCalls.slice(
+								initialSponsorLinkCalls,
+							),
+							["it"],
+						);
+						assertEquals(
+							harness.records.setSettingsCalls
+								.slice(initialSetSettingsCalls)
+								.map(({ id }) => id),
+							["did-review", "did-sponsor"],
+						);
+					},
+				);
+
+				await t.step(
+					"review and sponsor cancel saves without opening links",
+					async () => {
+						const backgroundListener =
+							harness.browser.runtime._listeners[0];
+						const initialReviewLinkCalls =
+							harness.records.reviewLinkCalls;
+						const initialSponsorLinkCalls =
+							harness.records.sponsorLinkCalls.length;
+						const initialSetSettingsCalls =
+							harness.records.setSettingsCalls.length;
+						harness.state.settings.delete("did-review");
+						harness.state.settings.delete("did-sponsor");
+						harness.state.confirmResult = false;
+						await backgroundListener(
+							{ what: "show-review" },
+							{},
+							() => {},
+						);
+						await backgroundListener(
+							{ what: "show-sponsor" },
+							{},
+							() => {},
+						);
+						harness.state.confirmResult = true;
+						assertEquals(
+							harness.records.reviewLinkCalls,
+							initialReviewLinkCalls,
+						);
+						assertEquals(
+							harness.records.sponsorLinkCalls.length,
+							initialSponsorLinkCalls,
+						);
+						assertEquals(
+							harness.records.setSettingsCalls
+								.slice(initialSetSettingsCalls)
+								.map(({ id }) => id),
+							["did-review", "did-sponsor"],
+						);
+					},
+				);
+
+				await t.step(
+					"review issue choice opens GitHub issue and saves",
+					async () => {
+						const backgroundListener =
+							harness.browser.runtime._listeners[0];
+						const initialIssueLinkCalls =
+							harness.records.issueLinkCalls;
+						const initialReviewLinkCalls =
+							harness.records.reviewLinkCalls;
+						const initialSetSettingsCalls =
+							harness.records.setSettingsCalls.length;
+						harness.state.settings.delete("did-review");
+						harness.state.settings.delete("did-sponsor");
+						harness.state.confirmResult = "open_github_issue";
+						await backgroundListener(
+							{ what: "show-review" },
+							{},
+							() => {},
+						);
+						harness.state.confirmResult = true;
+						assertEquals(
+							harness.records.issueLinkCalls,
+							initialIssueLinkCalls + 1,
+						);
+						assertEquals(
+							harness.records.reviewLinkCalls,
+							initialReviewLinkCalls,
+						);
+						assertEquals(
+							harness.records.setSettingsCalls
+								.slice(initialSetSettingsCalls)
+								.map(({ id }) => id),
+							["did-review"],
+						);
+						assertEquals(
+							harness.records.sldsConfirmCalls.at(-1)
+								?.extraButtons,
+							[
+								{
+									label: "request_later",
+									value: "request_later",
+								},
+								{
+									label: "open_github_issue",
+									value: "open_github_issue",
+								},
+							],
+						);
+					},
+				);
+
+				await t.step(
+					"review request later skips same day and asks next day",
+					async () => {
+						const backgroundListener =
+							harness.browser.runtime._listeners[0];
+						const initialSetSettingsCalls =
+							harness.records.setSettingsCalls.length;
+						const initialConfirmCalls =
+							harness.records.sldsConfirmCalls.length;
+						harness.state.settings.delete("did-review");
+						harness.state.settings.delete("did-sponsor");
+						harness.state.confirmResult = "request_later";
+						await backgroundListener(
+							{ what: "show-review" },
+							{},
+							() => {},
+						);
+						harness.state.todayKey = "2026-07-28";
+						await backgroundListener(
+							{ what: "show-review" },
+							{},
+							() => {},
+						);
+						harness.state.confirmResult = true;
+						assertEquals(
+							harness.records.setSettingsCalls.slice(
+								initialSetSettingsCalls,
+							),
+							[
+								{
+									id: "did-review",
+									enabled: null,
+									skipped: "2026-07-27",
+								},
+								{
+									id: "did-review",
+									enabled: null,
+									skipped: "2026-07-28",
+								},
+							],
+						);
+						assertEquals(
+							harness.records.sldsConfirmCalls.length,
+							initialConfirmCalls + 2,
+						);
+						harness.state.todayKey = "2026-07-27";
+					},
+				);
+
+				await t.step(
+					"sponsor request later skips same day and asks next day",
+					async () => {
+						const backgroundListener =
+							harness.browser.runtime._listeners[0];
+						const initialSetSettingsCalls =
+							harness.records.setSettingsCalls.length;
+						const initialConfirmCalls =
+							harness.records.sldsConfirmCalls.length;
+						const initialSponsorLinkCalls =
+							harness.records.sponsorLinkCalls.length;
+						const initialIssueLinkCalls =
+							harness.records.issueLinkCalls;
+						harness.state.settings.set("did-review", {
+							id: "did-review",
+							enabled: 1,
+						});
+						harness.state.settings.delete("did-sponsor");
+						harness.state.confirmResult = "request_later";
+						await backgroundListener(
+							{ what: "show-sponsor" },
+							{},
+							() => {},
+						);
+						await backgroundListener(
+							{ what: "show-sponsor" },
+							{},
+							() => {},
+						);
+						harness.state.todayKey = "2026-07-28";
+						await backgroundListener(
+							{ what: "show-sponsor" },
+							{},
+							() => {},
+						);
+						harness.state.confirmResult = true;
+						assertEquals(
+							harness.records.setSettingsCalls.slice(
+								initialSetSettingsCalls,
+							),
+							[
+								{
+									id: "did-sponsor",
+									enabled: null,
+									skipped: "2026-07-27",
+								},
+								{
+									id: "did-sponsor",
+									enabled: null,
+									skipped: "2026-07-28",
+								},
+							],
+						);
+						assertEquals(
+							harness.records.sldsConfirmCalls.length,
+							initialConfirmCalls + 2,
+						);
+						assertEquals(
+							harness.records.sponsorLinkCalls.length,
+							initialSponsorLinkCalls,
+						);
+						assertEquals(
+							harness.records.issueLinkCalls,
+							initialIssueLinkCalls,
+						);
+						assertEquals(
+							harness.records.sldsConfirmCalls.at(-1)
+								?.extraButtons,
+							[
+								{
+									label: "request_later",
+									value: "request_later",
+								},
+							],
+						);
+						harness.state.todayKey = "2026-07-27";
+					},
+				);
+
 				await t.step("update prompt and export download", async () => {
 					harness.browser.runtime.triggerMessage({
 						what: "update-extension",
@@ -2604,7 +3115,7 @@ Deno.test(
 					});
 					await harness.flush();
 					assertStringIncludes(
-						String(harness.records.sldsConfirmCalls[0]?.body),
+						String(harness.records.sldsConfirmCalls.at(-1)?.body),
 						"1.0.0",
 					);
 					assertEquals(

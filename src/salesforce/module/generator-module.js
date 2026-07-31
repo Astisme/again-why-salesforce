@@ -1182,7 +1182,7 @@ function getSelectedTabsFromModalSelection({
  *   __awsfCleanupModalShell__?: () => void;
  *   remove: () => void;
  * }} modalParent Prompt root node.
- * @param {(value: boolean) => void} resolve Promise resolver.
+ * @param {(value: unknown) => void} resolve Promise resolver.
  */
 function finishSldsConfirm(value, isResolvedRef, modalParent, resolve) {
 	if (isResolvedRef.value) {
@@ -1191,6 +1191,48 @@ function finishSldsConfirm(value, isResolvedRef, modalParent, resolve) {
 	isResolvedRef.value = true;
 	modalParent.__awsfCleanupModalShell__?.() ?? modalParent.remove();
 	resolve(value);
+}
+
+/**
+ * Creates an SLDS footer button for custom prompt choices.
+ *
+ * @param {Object} options Button options.
+ * @param {HTMLElement} options.buttonContainer Container receiving the button.
+ * @param {string} options.label Already translated button label.
+ * @param {HTMLElement | null} [options.beforeElement=null] Element to insert before.
+ * @return {HTMLButtonElement} Created button.
+ */
+function createSldsPromptChoiceButton({
+	buttonContainer,
+	label,
+	beforeElement = null,
+}) {
+	const button = document.createElement("button");
+	button.classList.add(
+		"slds-button",
+		"slds-button_neutral",
+		"uiButton--neutral",
+		"uiButton",
+		"forceActionButton",
+	);
+	button.setAttribute("aria-live", "off");
+	button.setAttribute("type", "button");
+	button.setAttribute("title", label);
+	button.setAttribute("aria-label", "");
+	button.dataset.auraClass = "uiButton forceActionButton";
+	if (typeof buttonContainer.before === "function") {
+		buttonContainer.before(button, beforeElement);
+	} else if (typeof beforeElement?.before === "function") {
+		beforeElement.before(button);
+	} else {
+		buttonContainer.appendChild(button);
+	}
+	const span = document.createElement("span");
+	span.classList.add("label", "bBody");
+	span.setAttribute("dir", "ltr");
+	span.textContent = label;
+	button.appendChild(span);
+	return button;
 }
 
 /**
@@ -3309,7 +3351,11 @@ export async function generateTutorialElements() {
  * @param {string} options.confirmLabel - Already translated confirm button label.
  * @param {string} options.cancelLabel - Already translated cancel button label.
  * @param {string} options.closeLabel - Already translated close button label.
- * @return {Promise<boolean>} `true` when the user confirms the prompt.
+ * @param {unknown} [options.confirmValue=true] Value returned for confirm.
+ * @param {unknown} [options.cancelValue=false] Value returned for cancel.
+ * @param {unknown} [options.closeValue=false] Value returned for close.
+ * @param {{ label: string; value: unknown }[]} [options.extraButtons=[]] Extra footer choices.
+ * @return {Promise<unknown>} Prompt choice value.
  */
 export function sldsConfirm({
 	title,
@@ -3317,6 +3363,10 @@ export function sldsConfirm({
 	confirmLabel,
 	cancelLabel,
 	closeLabel,
+	confirmValue = true,
+	cancelValue = false,
+	closeValue = false,
+	extraButtons = [],
 } = {}) {
 	document.getElementById(MODAL_CONFIRM_ID)?.remove(); // remove itself
 	if (Array.isArray(body)) body = body.join("\n");
@@ -3325,6 +3375,7 @@ export function sldsConfirm({
 		saveButton,
 		cancelButton,
 		closeButton,
+		buttonContainer,
 	} = generateSldsPromptModal({
 		modalTitle: title,
 		bodyText: body,
@@ -3339,16 +3390,43 @@ export function sldsConfirm({
 		const isResolvedRef = { value: false };
 		saveButton.addEventListener("click", (event) => {
 			event.preventDefault();
-			finishSldsConfirm(true, isResolvedRef, modalParent, resolve);
+			finishSldsConfirm(
+				confirmValue,
+				isResolvedRef,
+				modalParent,
+				resolve,
+			);
 		});
 		cancelButton.addEventListener("click", (event) => {
 			event.preventDefault();
-			finishSldsConfirm(false, isResolvedRef, modalParent, resolve);
+			finishSldsConfirm(
+				cancelValue,
+				isResolvedRef,
+				modalParent,
+				resolve,
+			);
 		});
 		closeButton.addEventListener(
 			"click",
-			() => finishSldsConfirm(false, isResolvedRef, modalParent, resolve),
+			() =>
+				finishSldsConfirm(
+					closeValue,
+					isResolvedRef,
+					modalParent,
+					resolve,
+				),
 		);
+		for (const { label, value } of extraButtons) {
+			const button = createSldsPromptChoiceButton({
+				buttonContainer,
+				label,
+				beforeElement: saveButton,
+			});
+			button.addEventListener("click", (event) => {
+				event.preventDefault();
+				finishSldsConfirm(value, isResolvedRef, modalParent, resolve);
+			});
+		}
 	});
 }
 

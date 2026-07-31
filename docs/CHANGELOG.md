@@ -16,6 +16,20 @@ Please remember that this project is entirely funded by **the support of its use
 ## 🔐 Privacy
 -->
 
+# v2.2.6
+
+## 🚀 Added
+
+1. New popup to request a review when the user has used the extension a little bit (#209)
+2. New popup to request a to sponsor when the user has used the extension a lot (#209)
+3. Added a form to request feedback on extension uninstall (#208)
+4. On uninstall, if simple analytics is enabled, also send a `/uninstall` ping (#208)
+5. Created website to showcase the extension (#213)
+
+## 🔐 Privacy
+
+1. Updated Privacy Policy for #208
+
 # v2.2.5
 
 ## 🛠 Changed

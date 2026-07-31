@@ -899,6 +899,10 @@
 		"message": "Aceasta nu este o pagină de Configurare $salesforce_lightning",
 		"description": "[notSalesforceSetup] utilizatorul nu se află pe o pagină Salesforce."
 	},
+	"open_github_issue": {
+		"message": "Deschide o problemă pe GitHub",
+		"description": "[solicitare de recenzie] eticheta butonului pentru utilizatorii care au nevoie de ajutor sau doresc să raporteze o problemă"
+	},
 	"open_here": {
 		"message": "Deschide în acest Tab.",
 		"description": "[open-other-org-modal] buton radio pentru a permite utilizatorului să deschidă în același Tab de browser"
@@ -1103,6 +1107,10 @@
 		"message": "Dacă doriți, puteți face ca Tabs preferate să apară\nde îndată ce navigați la o pagină $salesforce_setup\nfără a fi nevoie să faceți clic pe această extensie de fiecare dată.",
 		"description": "[req_permission] text pentru a explica de ce sunt solicitate permisiunile"
 	},
+	"request_later": {
+		"message": "Solicită mai târziu",
+		"description": "[solicitare de recenzie] eticheta butonului pentru a întreba din nou mai târziu fără a salva solicitarea ca fiind finalizată"
+	},
 	"required": {
 		"message": "obligatoriu",
 		"description": "[intrare] marchează un câmp de intrare ca fiind obligatoriu"
@@ -1110,6 +1118,10 @@
 	"required_info": {
 		"message": "= Informații obligatorii",
 		"description": "[modal] informează utilizatorul că unele informații sunt obligatorii"
+	},
+	"review_prompt_body": {
+		"message": "Vă place $extension_label ? Vă rugăm să scrieți o recenzie.\nNu sunteți mulțumit? Deschideți o problemă pe GitHub pentru a vă putea ajuta.\nNu doriți să alegeți acum? Anulare oprește această solicitare, Solicită mai târziu va întreba din nou data viitoare.",
+		"description": "[solicitare de recenzie] text explicativ pentru opțiunile de recenzie, problemă, anulare și solicitare ulterioară"
 	},
 	"salesforce_domain": {
 		"message": "Domeniu Salesforce",
@@ -1156,8 +1168,8 @@
 		"description": "[import] permite utilizatorului să selecteze ce $tabs să importe înainte de a le importa"
 	},
 	"send_tip": {
-		"message": "Trimite-ne un pont ❤️",
-		"description": "[popup] titlu pentru svg pentru a solicita trimiterea unui pont"
+		"message": "Dacă $extension_label vă economisește timp, luați în considerare sponsorizarea dezvoltării sale.\nVă mulțumim anticipat pentru că îl apreciați atât de mult!",
+		"description": "[solicitare] mesaj prin care i se cere utilizatorului să sponsorizeze extinderea"
 	},
 	"sessions": {
 		"message": "Sesiuni",

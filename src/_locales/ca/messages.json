@@ -899,6 +899,10 @@
 		"message": "Aquesta no és una pàgina de configuració de $salesforce_lightning",
 		"description": "[notSalesforceSetup] l'usuari no es troba en una pàgina de Salesforce."
 	},
+	"open_github_issue": {
+		"message": "Obrir un problema a GitHub",
+		"description": "[sol·licitud de ressenya] etiqueta del botó per als usuaris que necessiten ajuda o volen informar d'un problema"
+	},
 	"open_here": {
 		"message": "Obre en aquesta Tab.",
 		"description": "[open-other-org-modal] botó d'opció per permetre a l'usuari obrir a la mateixa Tab del navegador"
@@ -1103,6 +1107,10 @@
 		"message": "Si ho desitgeu, podeu fer que les vostres Tabs preferides apareguin\ntan bon punt navegueu a una pàgina de $salesforce_setup\nsense haver de fer clic a aquesta extensió cada vegada.",
 		"description": "[req_permission] text per explicar per què se sol·liciten els permisos"
 	},
+	"request_later": {
+		"message": "Sol·licitar més tard",
+		"description": "[sol·licitud de ressenya] etiqueta del botó per tornar a preguntar més tard sense desar la sol·licitud com a completada"
+	},
 	"required": {
 		"message": "obligatori",
 		"description": "[input] marca un camp d'entrada com a obligatori"
@@ -1110,6 +1118,10 @@
 	"required_info": {
 		"message": "= Informació Obligatòria",
 		"description": "[modal] informa a l'usuari que certa informació és obligatòria"
+	},
+	"review_prompt_body": {
+		"message": "Gaudeixes de $extension_label ? Si us plau, escriu una ressenya.\nNo estàs satisfet? Obre un problema a GitHub perquè puguem ajudar-te.\nNo vols triar ara? Cancel·lar atura aquesta sol·licitud, Sol·licitar més tard ho tornarà a preguntar la pròxima vegada.",
+		"description": "[sol·licitud de ressenya] cos que explica les opcions de ressenya, problema, cancel·lar i més tard"
 	},
 	"salesforce_domain": {
 		"message": "Domini de Salesforce",
@@ -1156,8 +1168,8 @@
 		"description": "[import] permet a l'usuari seleccionar quins $tabs importar abans d'importar-los"
 	},
 	"send_tip": {
-		"message": "Envia'ns una propina ❤️",
-		"description": "[popup] títol per a svg per sol·licitar l'enviament d'una propina"
+		"message": "Si $extension_label et estalvia temps, considera patrocinar el seu desenvolupament.\nT'ho agraïm per endavant per estimar-lo tant!",
+		"description": "[sol·licitud] missatge que demana a l'usuari que mecenegi l'extensió"
 	},
 	"sessions": {
 		"message": "Sessions",

@@ -899,6 +899,10 @@
 		"message": "这不是 $salesforce_lightning 设置页面。",
 		"description": "[notSalesforceSetup] 用户不在 Salesforce 页面上。"
 	},
+	"open_github_issue": {
+		"message": "打开 GitHub issue",
+		"description": "[评价提示] 适用于需要帮助或希望报告问题的用户的按钮标签"
+	},
 	"open_here": {
 		"message": "在此 Tab 中打开。",
 		"description": "[open-other-org-modal] 单选按钮，允许用户在同一浏览器 Tab 中打开"
@@ -1103,6 +1107,10 @@
 		"message": "如果您愿意，您可以在导航到 $salesforce_setup 页面后\n立即显示您最喜欢的 Tabs，\n而无需每次都单击此扩展程序。",
 		"description": "[req_permission] 解释请求权限原因的文本"
 	},
+	"request_later": {
+		"message": "稍后请求",
+		"description": "[评价提示] 适用于稍后再次询问而不将提示保存为已完成的按钮标签"
+	},
 	"required": {
 		"message": "必填",
 		"description": "[输入] 将输入字段标记为必填"
@@ -1110,6 +1118,10 @@
 	"required_info": {
 		"message": "= 必填信息",
 		"description": "[模态框] 告知用户某些信息是强制性的"
+	},
+	"review_prompt_body": {
+		"message": "喜欢使用 $extension_label 吗？请撰写评价。\n不满意？请打开 GitHub issue 以便我们提供帮助。\n现在不想选择？取消将停止此请求，稍后请求将在下次再次询问。",
+		"description": "[评价提示] 解释评价、issue、取消和稍后选项的正文"
 	},
 	"salesforce_domain": {
 		"message": "Salesforce 域名",
@@ -1156,8 +1168,8 @@
 		"description": "[import] 允许用户在导入前选择要导入的 $tabs"
 	},
 	"send_tip": {
-		"message": "发送小费 ❤️",
-		"description": "[popup] 提示发送小费的 svg 标题"
+		"message": "如果 $extension_label 节省了您的时间，请考虑赞助其开发。\n预先感谢您对它的喜爱！",
+		"description": "[提示] 请求用户赞助扩展的信息"
 	},
 	"sessions": {
 		"message": "会话",

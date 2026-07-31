@@ -800,7 +800,7 @@
 		"description": "[oznaka] uvezite sve pronađeno u datoteci tijekom procesa uvoza"
 	},
 	"import_pinned_tabs": {
-		"message": "Uvezi broj prikvačenih $tabs .",
+		"message": "Uvezi broj prikvačenih $tabs.",
 		"description": "[oznaka] uvezi broj prikvačenih $tabs tijekom procesa uvoza"
 	},
 	"import_successful": {
@@ -898,6 +898,10 @@
 	"nss_not_setup_page": {
 		"message": "Ovo nije stranica za postavljanje $salesforce_lightning",
 		"description": "[notSalesforceSetup] korisnik nije na Salesforce stranici."
+	},
+	"open_github_issue": {
+		"message": "Otvori GitHub problem",
+		"description": "[upit za recenziju] oznaka gumba za korisnike kojima je potrebna pomoć ili žele prijaviti problem"
 	},
 	"open_here": {
 		"message": "Otvori u ovom Tab.",
@@ -1103,6 +1107,10 @@
 		"message": "Ako želite, možete prikazati svoje omiljene Tabs\nčim se pomaknete na stranicu $salesforce_setup\nbez potrebe da svaki put kliknete ovo proširenje.",
 		"description": "[req_permission] tekst koji objašnjava zašto se traže dopuštenja"
 	},
+	"request_later": {
+		"message": "Zatraži kasnije",
+		"description": "[upit za recenziju] oznaka gumba za ponovni upit kasnije bez spremanja upita kao završenog"
+	},
 	"required": {
 		"message": "obavezno",
 		"description": "[input] označava polje za unos kao obavezno"
@@ -1110,6 +1118,10 @@
 	"required_info": {
 		"message": "= Obavezne informacije",
 		"description": "[modal] obavještava korisnika da su određene informacije obavezne"
+	},
+	"review_prompt_body": {
+		"message": "Uživate li u $extension_label ? Molimo napišite recenziju.\nNiste zadovoljni? Otvorite GitHub problem kako bismo mogli pomoći.\nNe želite sada odabrati? Odustani zaustavlja ovaj zahtjev, Zatraži kasnije pita ponovno sljedeći put.",
+		"description": "[upit za recenziju] glavni tekst koji objašnjava izbore za recenziju, problem, odustajanje i kasnije"
 	},
 	"salesforce_domain": {
 		"message": "Salesforce domena",
@@ -1156,8 +1168,8 @@
 		"description": "[import] omogućite korisniku da odabere koje $tabs želi uvesti prije uvoza"
 	},
 	"send_tip": {
-		"message": "Pošaljite nam savjet ❤️",
-		"description": "[popup] naslov za svg za poticanje slanja savjeta"
+		"message": "Ako vam $extension_label شштеди vrijeme, razmislite o sponzoriranju njegovog razvoja.\nUnaprijed vam zahvaljujemo što ga toliko volite!",
+		"description": "[upit] poruka koja traži od korisnika da sponzorira proširenje"
 	},
 	"sessions": {
 		"message": "Sesije",
