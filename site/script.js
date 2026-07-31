@@ -135,10 +135,13 @@ function readCache(key) {
  */
 function writeCache(key, value) {
 	try {
-		localStorage.setItem(key, JSON.stringify({
-			savedAt: Date.now(),
-			value,
-		}));
+		localStorage.setItem(
+			key,
+			JSON.stringify({
+				savedAt: Date.now(),
+				value,
+			}),
+		);
 	} catch {
 		// Storage may be unavailable in private browsing or blocked contexts.
 	}

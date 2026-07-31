@@ -114,13 +114,13 @@ img {
 }
 
 .install-hero {
-  display: flex;
-  justify-content: space-between;
-  align-items: anchor-center;
+	display: flex;
+	justify-content: space-between;
+	align-items: anchor-center;
 
-  & > .hero-actions {
-    height: fit-content;
-  }
+	& > .hero-actions {
+		height: fit-content;
+	}
 }
 
 .hero {
