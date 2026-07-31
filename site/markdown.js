@@ -56,6 +56,25 @@ function renderInlineMarkdown(value) {
 }
 
 /**
+ * Removes HTML comments from Markdown text.
+ *
+ * Repeats replacement until stable to avoid incomplete multi-character
+ * sanitization where a new "<!--" can appear after a prior removal.
+ *
+ * @param {string} value Markdown text.
+ * @returns {string} Markdown text without HTML comments.
+ */
+function stripHtmlComments(value) {
+	let previous;
+	let current = value;
+	do {
+		previous = current;
+		current = current.replaceAll(/<!--[\s\S]*?-->/g, "");
+	} while (current !== previous);
+	return current;
+}
+
+/**
  * Decodes selected Markdown-safe HTML entities before block parsing.
  *
  * @param {string} value Markdown text.
@@ -349,7 +368,7 @@ function renderMarkdown(markdown) {
  * @returns {string} Rendered changelog HTML.
  */
 function renderChangelog(markdown) {
-	const visibleMarkdown = markdown.replaceAll(/<!--[\s\S]*?-->/g, "");
+	const visibleMarkdown = stripHtmlComments(markdown);
 	const releaseParts = visibleMarkdown.split(/\n# (?=v\d+\.\d+\.\d+)/);
 	const intro = renderMarkdown(releaseParts.shift() || "");
 	const releases = releaseParts
