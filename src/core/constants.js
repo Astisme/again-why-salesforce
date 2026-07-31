@@ -87,6 +87,7 @@ export const SALESFORCE_LIGHTNING_PATTERN = new RegExp(
 );
 export const SETUP_LIGHTNING_PATTERN = new RegExp(`.*${SETUP_LIGHTNING}.*`);
 const MANIFEST = BROWSER.runtime.getManifest();
+/** @type {string} */
 export const EXTENSION_VERSION = MANIFEST.version;
 // Validate homepage URL (must be GitHub)
 if (!MANIFEST.homepage_url?.startsWith("https://github.com/")) {
