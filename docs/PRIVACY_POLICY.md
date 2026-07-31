@@ -10,7 +10,8 @@ _Last updated: June 2026_
 
 - We rely on [Simple Analytics](https://www.simpleanalytics.com/#why) to estimate user counts and most used extension versions.
 - Only anonymous, non-identifiable "ping" messages are sent. No IP addresses, cookies, or device fingerprints are collected by us.
-- You'll only send 1 ping per day, and a special ping is sent when you install the extension.
+- You'll only send 1 ping per day, and a special ping is sent when you install or uninstall the extension.
+- When you uninstall the extension, you’ll be redirected to a form that will help us better understand your decision. All submitted data is anonymized.
 - On Firefox, analytics also follows Firefox's built-in consent for `technicalAndInteraction` data collection.
 - You can opt out of analytics in the extension's **Settings** at any time; see "Opt-Out" below.
 - All Analytics Data is **automatically deleted** after 30 days and is always available [at this link](https://dashboard.simpleanalytics.com/extension.again.whysalesforce).
