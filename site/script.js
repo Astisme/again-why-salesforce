@@ -8,6 +8,9 @@ const wikiTitleLabel = document.querySelector(".js-wiki-title");
 const wikiDescriptionLabel = document.querySelector(".js-wiki-description");
 const articleToc = document.querySelector(".js-article-toc");
 const wikiSidebar = document.querySelector(".sidebar");
+const cacheTtlMs = 24 * 60 * 60 * 1000;
+const releaseCacheKey = "awsf-site-latest-release";
+const metricsCacheKey = "awsf-site-public-metrics";
 
 navToggle?.addEventListener("click", () => {
 	const isOpen = navToggle.getAttribute("aria-expanded") === "true";
@@ -100,6 +103,48 @@ const wikiTitles = {
 globalThis.awsfWikiDocuments = wikiDocuments;
 
 /**
+ * Reads unexpired JSON data from localStorage.
+ *
+ * @template T
+ * @param {string} key Storage key.
+ * @returns {T | null} Cached value, or null when absent or expired.
+ */
+function readCache(key) {
+	try {
+		const rawValue = localStorage.getItem(key);
+		if (!rawValue) {
+			return null;
+		}
+		const entry = JSON.parse(rawValue);
+		if (!entry || Date.now() - Number(entry.savedAt || 0) > cacheTtlMs) {
+			localStorage.removeItem(key);
+			return null;
+		}
+		return entry.value ?? null;
+	} catch {
+		return null;
+	}
+}
+
+/**
+ * Saves JSON data to localStorage.
+ *
+ * @param {string} key Storage key.
+ * @param {unknown} value Value to cache.
+ * @returns {void}
+ */
+function writeCache(key, value) {
+	try {
+		localStorage.setItem(key, JSON.stringify({
+			savedAt: Date.now(),
+			value,
+		}));
+	} catch {
+		// Storage may be unavailable in private browsing or blocked contexts.
+	}
+}
+
+/**
  * Detects current browser family for extension store routing.
  *
  * @param {string} userAgent Browser user agent string.
@@ -147,12 +192,20 @@ function updateInstallLinks() {
  * @returns {Promise<string | null>} Latest release label, or null when unavailable.
  */
 async function getLatestReleaseLabel() {
+	const cachedRelease = readCache(releaseCacheKey);
+	if (typeof cachedRelease === "string") {
+		return cachedRelease;
+	}
 	const response = await fetch(
 		"https://api.github.com/repos/Astisme/again-why-salesforce/releases/latest",
 	);
 	if (response.ok) {
 		const release = await response.json();
-		return release.name || release.tag_name || null;
+		const releaseLabel = release.name || release.tag_name || null;
+		if (releaseLabel) {
+			writeCache(releaseCacheKey, releaseLabel);
+		}
+		return releaseLabel;
 	}
 
 	const manifestResponse = await fetch(
@@ -162,7 +215,9 @@ async function getLatestReleaseLabel() {
 		return null;
 	}
 	const manifest = await manifestResponse.json();
-	return `v${manifest.version}`;
+	const releaseLabel = `v${manifest.version}`;
+	writeCache(releaseCacheKey, releaseLabel);
+	return releaseLabel;
 }
 
 /**
@@ -379,6 +434,17 @@ function getMarkdownUrl(target) {
  * @returns {Promise<{ users: number; rating: number | null; }>} Combined public metrics.
  */
 async function getPublicStoreMetrics() {
+	const cachedMetrics = readCache(metricsCacheKey);
+	if (
+		cachedMetrics &&
+		typeof cachedMetrics.users === "number" &&
+		(
+			cachedMetrics.rating === null ||
+			typeof cachedMetrics.rating === "number"
+		)
+	) {
+		return cachedMetrics;
+	}
 	const [chromeResult, edgeResult, firefoxResult, safariResult] =
 		await Promise.allSettled([
 			fetch(
@@ -414,7 +480,9 @@ async function getPublicStoreMetrics() {
 		? Number(firefox.ratings?.average || 0)
 		: null;
 
-	return { users, rating };
+	const metrics = { users, rating };
+	writeCache(metricsCacheKey, metrics);
+	return metrics;
 }
 
 /**

@@ -14,7 +14,7 @@
 	</head>
 	<body>
 		<header class="site-header">
-			<a class="brand" href="index.html"
+			<a class="brand" href="./index.html"
 				aria-label="Again, Why Salesforce home">
 				<img
 					src="https://raw.githubusercontent.com/Astisme/again-why-salesforce/main/src/assets/icons/awsf-256.png"
@@ -28,13 +28,13 @@
 				<span></span>
 			</button>
 			<nav id="site-nav" class="site-nav" aria-label="Main navigation">
-				<a href="index.html">Home</a>
-				<a href="features.html">Features</a>
-				<a href="installation.html">Installation</a>
-				<a href="changelog.html">Changelog</a>
-				<a href="wiki.html">Wiki</a>
-				<a href="articles.html">Articles</a>
-				<a href="privacy.html">Privacy Policy</a>
+				<a href="./index.html">Home</a>
+				<a href="./features.html">Features</a>
+				<a href="./installation.html">Installation</a>
+				<a href="./changelog.html">Changelog</a>
+				<a href="./wiki.html">Wiki</a>
+				<a href="./articles.html">Articles</a>
+				<a href="./privacy.html">Privacy Policy</a>
 			</nav>
 		</header>
 
@@ -49,9 +49,9 @@
 					</p>
 					<div class="hero-actions">
 						<a class="button primary"
-							href="installation.html">Install extension</a>
+							href="./installation.html">Install now</a>
 						<a class="button secondary"
-							href="features.html">See features</a>
+							href="./features.html">All features</a>
 					</div>
 				</div>
 				<div class="hero-preview" aria-label="Extension preview">
@@ -62,10 +62,10 @@
 			</section>
 
 			<section class="metric-band" aria-label="Project facts">
-				<div>
+				<a href="./changelog.html">
 					<strong class="js-current-release">0</strong>
 					<span>Current release</span>
-				</div>
+				</a>
 				<div>
 					<strong class="js-total-users">0</strong>
 					<span>Active users</span>
@@ -74,14 +74,14 @@
 					<strong class="js-average-rating">0</strong>
 					<span>Average rating</span>
 				</div>
-				<div>
+				<a href="./changelog.html">
 					<strong>4</strong>
 					<span>Supported browsers</span>
-				</div>
-				<div>
+				</a>
+				<a href="https://github.com/Astisme/again-why-salesforce/blob/main/LICENSE">
 					<strong>GPL-3.0</strong>
 					<span>Open source license</span>
-				</div>
+				</a>
 			</section>
 
 			<section class="section">
@@ -90,26 +90,38 @@
 					<h2>Salesforce Setup tabs, rebuilt for daily work</h2>
 				</div>
 				<div class="feature-grid">
-					<article>
-						<h3>Manage tabs full screen</h3>
-						<p>Add, remove, sort, pin, and update Setup tabs inside a wider Salesforce modal.</p>
-					</article>
-					<article>
-						<h3>Org-specific navigation</h3>
-						<p>Keep tabs global or bind them to one Salesforce org profile when URLs should stay separate.</p>
-					</article>
-					<article>
-						<h3>Keyboard commands</h3>
-						<p>Save, remove, update, import, export, and open tabs in another org from shortcuts.</p>
-					</article>
-					<article>
-						<h3>Context menus</h3>
-						<p>Right-click pages or tabs to move, pin, remove, update, or open current Setup page elsewhere.</p>
-					</article>
+					<a class="card-link" href="./wiki.html?doc=Manage-Tabs-modal">
+						<article>
+							<h3>Manage tabs full screen</h3>
+							<p>Add, remove, sort, pin, and update Setup tabs inside a wider Salesforce modal.</p>
+							<span>Read wiki page</span>
+						</article>
+					</a>
+					<a class="card-link" href="./wiki.html?doc=What-is-a-Tab">
+						<article>
+							<h3>Org-specific navigation</h3>
+							<p>Keep tabs global or bind them to one Salesforce org profile when URLs should stay separate.</p>
+							<span>Read wiki page</span>
+						</article>
+					</a>
+					<a class="card-link" href="./wiki.html?doc=Commands">
+						<article>
+							<h3>Keyboard commands</h3>
+							<p>Save, remove, update, import, export, and open tabs in another org from shortcuts.</p>
+							<span>Read wiki page</span>
+						</article>
+					</a>
+					<a class="card-link" href="./wiki.html?doc=Context-Menu">
+						<article>
+							<h3>Context menus</h3>
+							<p>Right-click pages or tabs to move, pin, remove, update, or open current Setup page elsewhere.</p>
+							<span>Read wiki page</span>
+						</article>
+					</a>
 				</div>
 				<div class="section-actions">
 					<a class="button secondary"
-						href="features.html">All features</a>
+						href="./features.html">All features</a>
 				</div>
 			</section>
 
@@ -122,9 +134,6 @@
 					<p>Salesforce Setup work often means returning to the same pages across several orgs, copying setup URLs, and remembering which tabs matter for each project.</p>
 					<p>Again, Why Salesforce keeps those Setup routes close, organized, styled, and portable without sending data elsewhere.</p>
 				</div>
-				<div class="section-actions">
-					<a class="button secondary" href="wiki.html">Read wiki</a>
-				</div>
 			</section>
 
 			<section class="section">
@@ -133,24 +142,24 @@
 					<h2>Get started in 3 steps</h2>
 				</div>
 				<div class="feature-grid steps-grid">
-					<a href="installation.html">
+					<a class="card-link" href="./installation.html">
 						<article>
 							<h3>1. Install the extension</h3>
 							<p>Use matching browser store link, or latest GitHub release when store install does not apply.</p>
 						</article>
 					</a>
-					<article>
-						<h3>2. Open Salesforce Setup</h3>
-						<p>Go to your Salesforce Setup, where custom tabs should appear.</p>
-					</article>
-					<article>
-						<h3>3. Open the extension popup</h3>
-						<p>Click the extension icon and allow access when your browser asks it, then save your first Setup tab.</p>
-					</article>
+          <article>
+            <h3>2. Open Salesforce Setup</h3>
+            <p>Go to your Salesforce Setup, where custom tabs should appear.</p>
+          </article>
+          <article>
+            <h3>3. Open the extension popup</h3>
+            <p>Click the extension icon and allow access when your browser asks it, then save your first Setup tab.</p>
+          </article>
 				</div>
 				<div class="section-actions">
 					<a class="button secondary"
-						href="installation.html">Installation guide</a>
+						href="./installation.html">Install now</a>
 				</div>
 			</section>
 
@@ -162,13 +171,13 @@
 				</div>
 				<div class="showcase-copy">
 					<p class="eyebrow">About Again, Why Salesforce</p>
-					<h2>Open-source extension for Salesforce admins and developers</h2>
+					<h2>Open-source extension for Salesforce admins</h2>
 					<p>
 						Again, Why Salesforce is maintained by Astisme and built for daily Salesforce Setup work across Chrome, Edge, Firefox, and Safari.
 					</p>
 					<div class="inline-links">
-						<a href="changelog.html">Changelog</a>
-						<a href="articles.html">Articles</a>
+            <a class="button secondary"
+              href="./articles.html">They talk about us</a>
 					</div>
 				</div>
 			</section>
@@ -176,16 +185,16 @@
 			<section class="policy-band">
 				<div>
 					<p class="eyebrow">Privacy</p>
-					<h2>Browser-owned data by design</h2>
+					<h3>Browser-owned data by design</h3>
 				</div>
 				<p>Core data stays in browser storage. Optional downloads and cookies permissions are requested only when related feature flow needs them.</p>
-				<a href="privacy.html">Privacy policy</a>
+				<a class="button secondary" href="./privacy.html">Privacy policy</a>
 			</section>
 		</main>
 
 		<footer class="site-footer">
 			<p>Built by <a href="https://github.com/Astisme">Astisme</a>. Not affiliated with Salesforce, Inc.</p>
-			<a href="https://github.com/Astisme/again-why-salesforce">Source</a>
+			<a class="button primary" href="https://github.com/Astisme/again-why-salesforce">Source</a>
 		</footer>
 	</body>
 </html>
