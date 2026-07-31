@@ -112,7 +112,7 @@ function normalizeImageUrl(url) {
  * @returns {string} Rendered HTML.
  */
 function renderMarkdown(markdown) {
-	const visibleMarkdown = markdown.replaceAll(/<!--[\s\S]*?-->/g, "");
+	const visibleMarkdown = stripHtmlComments(markdown);
 	const blocks = [];
 	let listItems = [];
 	let tableRows = [];
