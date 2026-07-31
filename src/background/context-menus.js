@@ -518,7 +518,7 @@ export function resetContextMenuStateForTests() {
  * @param {boolean} [force=false] - Whether to remove menu items even when the
  * local visibility state says none are currently tracked.
  */
-async function removeMenuItems(force = false) {
+export async function removeMenuItems(force = false) {
 	if (!force && !areMenuItemsVisible) return;
 	try {
 		await BROWSER.contextMenus.removeAll();

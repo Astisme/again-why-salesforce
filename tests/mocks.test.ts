@@ -165,6 +165,14 @@ export const mockBrowser = {
 
 	runtime: {
 		lastError: undefined as any,
+		_mockUninstallUrl: "",
+		setUninstallURL(url: string, callback?: () => void): void {
+			this._mockUninstallUrl = url;
+			callback?.();
+		},
+		getMockUninstallURL(): string {
+			return this._mockUninstallUrl;
+		},
 		sendMessage: (
 			message: InternalMessage,
 			callback?: (response?: any) => void,

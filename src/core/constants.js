@@ -87,6 +87,7 @@ export const SALESFORCE_LIGHTNING_PATTERN = new RegExp(
 );
 export const SETUP_LIGHTNING_PATTERN = new RegExp(`.*${SETUP_LIGHTNING}.*`);
 const MANIFEST = BROWSER.runtime.getManifest();
+/** @type {string} */
 export const EXTENSION_VERSION = MANIFEST.version;
 // Validate homepage URL (must be GitHub)
 if (!MANIFEST.homepage_url?.startsWith("https://github.com/")) {
@@ -366,3 +367,7 @@ export const SPONSOR_MAP = {
 	it: `${SPONSOR_DOMAIN}/it${SPONSOR_PATH}`,
 	default: `${SPONSOR_DOMAIN}/en${SPONSOR_PATH}`,
 };
+export const UNINSTALL_SURVEY_LINK_NO_PING =
+	"https://docs.google.com/forms/d/e/1FAIpQLSe4tGs4gCX04vaFb_MZgN9CbdlYvLTef6HorgyCXZ14XCHxCQ/viewform";
+export const UNINSTALL_SURVEY_LINK_YES_PING =
+	`${SPONSOR_DOMAIN}/en/awsf-uninstall?version=${EXTENSION_VERSION}&browser=${BROWSER_NAME}`;

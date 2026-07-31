@@ -19,10 +19,13 @@ import {
 	NO_RELEASE_NOTES,
 	ORG_TAB_STYLE_KEY,
 	PERM_CHECK,
+	PREVENT_ANALYTICS,
 	SETTINGS_KEY,
 	TAB_ADD_FRONT,
 	TOAST_ERROR,
 	TOAST_WARNING,
+	UNINSTALL_SURVEY_LINK_NO_PING,
+	UNINSTALL_SURVEY_LINK_YES_PING,
 	USER_LANGUAGE,
 	WHAT_EXPORT,
 	WHAT_EXPORT_CHECK,
@@ -417,6 +420,34 @@ await Deno.test("background listeners handle runtime, command, and browser event
 			{ what: WHAT_SET, key: WHY_KEY, set: [{ label: "A", url: "B" }] },
 			"",
 			() => {},
+		);
+		assertEquals(
+			BROWSER.runtime.getMockUninstallURL(),
+			UNINSTALL_SURVEY_LINK_YES_PING,
+		);
+		BROWSER.runtime.onMessage.triggerMessage(
+			{
+				what: WHAT_SET,
+				set: [{ enabled: true, id: PREVENT_ANALYTICS }],
+			},
+			"",
+			() => {},
+		);
+		assertEquals(
+			BROWSER.runtime.getMockUninstallURL(),
+			UNINSTALL_SURVEY_LINK_NO_PING,
+		);
+		BROWSER.runtime.onMessage.triggerMessage(
+			{
+				what: WHAT_SET,
+				set: [{ enabled: false, id: PREVENT_ANALYTICS }],
+			},
+			"",
+			() => {},
+		);
+		assertEquals(
+			BROWSER.runtime.getMockUninstallURL(),
+			UNINSTALL_SURVEY_LINK_YES_PING,
 		);
 		BROWSER.runtime.onMessage.triggerMessage(
 			{ what: WHAT_GET_SETTINGS, keys: USER_LANGUAGE },
