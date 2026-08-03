@@ -98,7 +98,7 @@ async function emptyGeneratedDirectory(url) {
 async function copySite() {
 	await emptyGeneratedDirectory(outputDir);
 	for await (const entry of Deno.readDir(siteDir)) {
-		if (entry.name === "build-static-site.js") {
+		if (entry.name === "build-static-site.js" || entry.name === "markdown.js") {
 			continue;
 		}
 		await Deno.copyFile(
@@ -127,6 +127,19 @@ function readText(url) {
  */
 function writeText(url, content) {
 	return Deno.writeTextFile(url, content);
+}
+
+/**
+ * Removes runtime Markdown parser script from generated static HTML.
+ *
+ * @param {string} html HTML content.
+ * @returns {string} HTML without Markdown parser script.
+ */
+function removeMarkdownScript(html) {
+	return html.replaceAll(
+		/\n?\s*<script src="(?:\.\.\/){0,2}markdown\.js" defer><\/script>/g,
+		"",
+	);
 }
 
 /**
@@ -327,10 +340,12 @@ async function buildMarkdownPages(latestRelease) {
 	);
 	await writeText(
 		new URL("changelog.html", outputDir),
-		rewriteWikiLinks(
-			replaceReleaseLabels(
-				replaceMarkdownArticle(changelogTemplate, changelogHtml),
-				latestRelease,
+		removeMarkdownScript(
+			rewriteWikiLinks(
+				replaceReleaseLabels(
+					replaceMarkdownArticle(changelogTemplate, changelogHtml),
+					latestRelease,
+				),
 			),
 		),
 	);
@@ -341,10 +356,12 @@ async function buildMarkdownPages(latestRelease) {
 	);
 	await writeText(
 		new URL("privacy.html", outputDir),
-		rewriteWikiLinks(
-			replaceMarkdownArticle(
-				privacyTemplate,
-				globalThis.awsfMarkdown.renderMarkdown(privacyMarkdown),
+		removeMarkdownScript(
+			rewriteWikiLinks(
+				replaceMarkdownArticle(
+					privacyTemplate,
+					globalThis.awsfMarkdown.renderMarkdown(privacyMarkdown),
+				),
 			),
 		),
 	);
@@ -379,7 +396,9 @@ function buildWikiPage(template, doc, markdown) {
 			/<nav class="js-article-toc">[\s\S]*?<\/nav>/,
 			`<nav class="js-article-toc">${rendered.toc}</nav>`,
 		);
-	html = rewriteWikiLinks(rewriteWikiShellPaths(html, prefix), linkContext);
+	html = removeMarkdownScript(
+		rewriteWikiLinks(rewriteWikiShellPaths(html, prefix), linkContext),
+	);
 	if (doc !== "Home") {
 		html = html.replaceAll(
 			new RegExp(`href="${getWikiPageName(doc, linkContext)}"`, "g"),
@@ -418,7 +437,12 @@ async function rewriteCopiedPages(latestRelease) {
 		}
 		const url = new URL(entry.name, outputDir);
 		const html = await readText(url);
-		await writeText(url, replaceReleaseLabels(rewriteWikiLinks(html), latestRelease));
+		await writeText(
+			url,
+			removeMarkdownScript(
+				replaceReleaseLabels(rewriteWikiLinks(html), latestRelease),
+			),
+		);
 	}
 }
 
