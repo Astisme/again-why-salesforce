@@ -98,7 +98,10 @@ async function emptyGeneratedDirectory(url) {
 async function copySite() {
 	await emptyGeneratedDirectory(outputDir);
 	for await (const entry of Deno.readDir(siteDir)) {
-		if (entry.name === "build-static-site.js" || entry.name === "markdown.js") {
+		if (
+			entry.name === "build-static-site.js" ||
+			entry.name === "markdown.js"
+		) {
 			continue;
 		}
 		await Deno.copyFile(
@@ -236,7 +239,10 @@ function rewriteWikiLinks(html, context = "root") {
  */
 function rewriteWikiShellPaths(html, prefix) {
 	return html
-		.replaceAll(/href="(index|features|installation|changelog|articles|privacy)\.html"/g, `href="${prefix}$1.html"`)
+		.replaceAll(
+			/href="(index|features|installation|changelog|articles|privacy)\.html"/g,
+			`href="${prefix}$1.html"`,
+		)
 		.replaceAll('href="wiki.css"', `href="${prefix}wiki.css"`)
 		.replaceAll('src="markdown.js"', `src="${prefix}markdown.js"`)
 		.replaceAll('src="script.js"', `src="${prefix}script.js"`);
@@ -330,7 +336,9 @@ function replaceMarkdownArticle(html, articleHtml) {
  * @returns {Promise<void>} Promise resolved after pages are written.
  */
 async function buildMarkdownPages(latestRelease) {
-	const changelogTemplate = await readText(new URL("changelog.html", outputDir));
+	const changelogTemplate = await readText(
+		new URL("changelog.html", outputDir),
+	);
 	const changelogMarkdown = await readText(
 		new URL("docs/CHANGELOG.md", repoDir),
 	);
@@ -376,7 +384,9 @@ async function buildMarkdownPages(latestRelease) {
  * @returns {string} Static page HTML.
  */
 function buildWikiPage(template, doc, markdown) {
-	const rendered = addHeadingIds(globalThis.awsfMarkdown.renderMarkdown(markdown));
+	const rendered = addHeadingIds(
+		globalThis.awsfMarkdown.renderMarkdown(markdown),
+	);
 	const prefix = doc === "Home" ? "../" : "../../";
 	const linkContext = doc === "Home" ? "wiki-home" : "wiki";
 	let html = template
@@ -386,7 +396,9 @@ function buildWikiPage(template, doc, markdown) {
 		)
 		.replace(
 			/<p\s+class="js-wiki-description">[\s\S]*?<\/p>/,
-			`<p class="js-wiki-description">Article from ${wikiDocuments[doc]}</p>`,
+			`<p class="js-wiki-description">Article from ${
+				wikiDocuments[doc]
+			}</p>`,
 		)
 		.replace(
 			/<article class="markdown-body" data-markdown-source="wiki">[\s\S]*?<\/article>/,

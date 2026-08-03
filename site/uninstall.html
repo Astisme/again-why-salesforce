@@ -50,26 +50,26 @@
 		</main>
 
 		<script>
-			const feedbackLink = document.getElementById("awsf-uninstall-feedback-link");
-			const redirectToFeedback = () => {
-				globalThis.location.replace(feedbackLink?.href);
-			};
-			const fallbackRedirect = globalThis.setTimeout(redirectToFeedback, 2500);
-			const finishPing = () => {
-				globalThis.clearTimeout(fallbackRedirect);
-				redirectToFeedback();
-			};
-			const pingUrl = new URL("https://queue.simpleanalyticscdn.com/noscript.gif");
-			pingUrl.searchParams.set("hostname", "extension.again.whysalesforce");
-			pingUrl.searchParams.set("path", "/uninstall");
-			const searchParams = new URLSearchParams(globalThis.location.search);
-			pingUrl.searchParams.set("utm_source", searchParams.get("version") ?? "");
-			pingUrl.searchParams.set("utm_medium", searchParams.get("browser") ?? "");
-			const ping = new Image();
-			ping.onload = finishPing;
-			ping.onerror = finishPing;
-			ping.referrerPolicy = "no-referrer-when-downgrade";
-			ping.src = pingUrl.toString();
+		const feedbackLink = document.getElementById("awsf-uninstall-feedback-link");
+		const redirectToFeedback = () => {
+			globalThis.location.replace(feedbackLink?.href);
+		};
+		const fallbackRedirect = globalThis.setTimeout(redirectToFeedback, 2500);
+		const finishPing = () => {
+			globalThis.clearTimeout(fallbackRedirect);
+			redirectToFeedback();
+		};
+		const pingUrl = new URL("https://queue.simpleanalyticscdn.com/noscript.gif");
+		pingUrl.searchParams.set("hostname", "extension.again.whysalesforce");
+		pingUrl.searchParams.set("path", "/uninstall");
+		const searchParams = new URLSearchParams(globalThis.location.search);
+		pingUrl.searchParams.set("utm_source", searchParams.get("version") ?? "");
+		pingUrl.searchParams.set("utm_medium", searchParams.get("browser") ?? "");
+		const ping = new Image();
+		ping.onload = finishPing;
+		ping.onerror = finishPing;
+		ping.referrerPolicy = "no-referrer-when-downgrade";
+		ping.src = pingUrl.toString();
 		</script>
 	</body>
 </html>

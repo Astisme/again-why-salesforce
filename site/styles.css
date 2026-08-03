@@ -725,9 +725,9 @@ h3 {
 .uninstall-panel {
 	width: min(720px, 100%);
 	text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .uninstall-panel h1 {

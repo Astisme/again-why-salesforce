@@ -385,7 +385,9 @@ function renderChangelog(markdown, latestRelease = null) {
 			const title = `# ${part.trim()}`.match(/^#\s+(.+)$/m)?.[1] ||
 				"";
 			const version = getReleaseVersion(title);
-			return version ? compareVersions(version, latestVersion) <= 0 : true;
+			return version
+				? compareVersions(version, latestVersion) <= 0
+				: true;
 		})
 		.map((part, index) => {
 			const releaseMarkdown = `# ${part.trim()}`;
