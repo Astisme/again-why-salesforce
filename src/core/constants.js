@@ -367,7 +367,8 @@ export const SPONSOR_MAP = {
 	it: `${SPONSOR_DOMAIN}/it${SPONSOR_PATH}`,
 	default: `${SPONSOR_DOMAIN}/en${SPONSOR_PATH}`,
 };
+const GITHUB_IO_LINK = "https://astisme.github.io/again-why-salesforce/";
 export const UNINSTALL_SURVEY_LINK_NO_PING =
 	"https://docs.google.com/forms/d/e/1FAIpQLSe4tGs4gCX04vaFb_MZgN9CbdlYvLTef6HorgyCXZ14XCHxCQ/viewform";
 export const UNINSTALL_SURVEY_LINK_YES_PING =
-	`${SPONSOR_DOMAIN}/en/awsf-uninstall?version=${EXTENSION_VERSION}&browser=${BROWSER_NAME}`;
+	`${GITHUB_IO_LINK}/uninstall?version=${EXTENSION_VERSION}&browser=${BROWSER_NAME}`;
