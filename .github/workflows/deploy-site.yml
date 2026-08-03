@@ -1,11 +1,13 @@
-name: Deploy Site to GitHub Pages
+name: Build and Deploy Site
 
 on:
     push:
         branches:
-            - main
+            - "**"
         paths:
             - site/**
+            - docs/**
+            - src/manifest/template-manifest.json
             - .github/workflows/deploy-site.yml
     workflow_dispatch:
 
@@ -19,23 +21,54 @@ concurrency:
     cancel-in-progress: false
 
 jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Setup repo
+              uses: actions/checkout@v4
+
+            - name: Setup wiki
+              uses: actions/checkout@v4
+              with:
+                  repository: Astisme/again-why-salesforce.wiki
+                  path: wiki.again-why-salesforce
+
+            - name: Setup Deno
+              uses: denoland/setup-deno@v2
+              with:
+                  deno-version: v2.x
+
+            - name: Build static site
+              run: deno run --allow-read --allow-write --allow-net --allow-env site/build-static-site.js
+              env:
+                  AWSF_WIKI_DIR: wiki.again-why-salesforce
+
+            - name: Upload branch artifact
+              if: github.ref != 'refs/heads/main'
+              uses: actions/upload-artifact@v4
+              with:
+                  name: site-dist
+                  path: site-dist
+                  retention-days: 7
+
+            - name: Setup Pages
+              if: github.ref == 'refs/heads/main'
+              uses: actions/configure-pages@v5
+
+            - name: Upload site artifact
+              if: github.ref == 'refs/heads/main'
+              uses: actions/upload-pages-artifact@v3
+              with:
+                  path: site-dist
+
     deploy:
+        if: github.ref == 'refs/heads/main'
+        needs: build
         runs-on: ubuntu-latest
         environment:
             name: github-pages
             url: ${{ steps.deployment.outputs.page_url }}
         steps:
-            - name: Setup repo
-              uses: actions/checkout@v4
-
-            - name: Setup Pages
-              uses: actions/configure-pages@v5
-
-            - name: Upload site artifact
-              uses: actions/upload-pages-artifact@v3
-              with:
-                  path: site
-
             - name: Deploy to GitHub Pages
               id: deployment
               uses: actions/deploy-pages@v4

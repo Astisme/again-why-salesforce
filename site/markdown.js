@@ -45,9 +45,12 @@ function renderInlineMarkdown(value) {
 				.replaceAll(".md", "")
 				.split("/")
 				.pop() || "Home";
+			const [doc, hash] = localDoc.split("#");
 			const wikiDocuments = globalThis.awsfWikiDocuments || {};
-			const target = wikiDocuments[localDoc]
-				? `wiki.html?doc=${encodeURIComponent(localDoc)}`
+			const target = wikiDocuments[doc]
+				? `wiki.html?doc=${encodeURIComponent(doc)}${
+					hash ? `#${encodeURIComponent(hash)}` : ""
+				}`
 				: "wiki.html";
 			return `<a href="${escapeHtml(target)}">${label}</a>`;
 		})
@@ -365,14 +368,27 @@ function renderMarkdown(markdown) {
  * Converts changelog Markdown releases into collapsed detail panels.
  *
  * @param {string} markdown Raw changelog Markdown.
+ * @param {string | null} latestRelease Latest release label.
  * @returns {string} Rendered changelog HTML.
  */
-function renderChangelog(markdown) {
+function renderChangelog(markdown, latestRelease = null) {
 	const visibleMarkdown = stripHtmlComments(markdown);
 	const releaseParts = visibleMarkdown.split(/\n# (?=v\d+\.\d+\.\d+)/);
 	const intro = renderMarkdown(releaseParts.shift() || "");
+	const latestVersion = getReleaseVersion(latestRelease || "");
 	const releases = releaseParts
 		.filter((part) => part.trim())
+		.filter((part) => {
+			if (!latestVersion) {
+				return true;
+			}
+			const title = `# ${part.trim()}`.match(/^#\s+(.+)$/m)?.[1] ||
+				"";
+			const version = getReleaseVersion(title);
+			return version
+				? compareVersions(version, latestVersion) <= 0
+				: true;
+		})
 		.map((part, index) => {
 			const releaseMarkdown = `# ${part.trim()}`;
 			const title = releaseMarkdown.match(/^#\s+(.+)$/m)?.[1] ||
@@ -385,6 +401,37 @@ function renderChangelog(markdown) {
 		})
 		.join("");
 	return `${intro}${releases}`;
+}
+
+/**
+ * Extracts semantic release version from label.
+ *
+ * @param {string} value Release label.
+ * @returns {number[] | null} Version parts.
+ */
+function getReleaseVersion(value) {
+	const match = value.match(/v?(\d+)\.(\d+)\.(\d+)/i);
+	if (!match) {
+		return null;
+	}
+	return [Number(match[1]), Number(match[2]), Number(match[3])];
+}
+
+/**
+ * Compares semantic version arrays.
+ *
+ * @param {number[]} left Left version.
+ * @param {number[]} right Right version.
+ * @returns {number} Negative, zero, or positive comparison result.
+ */
+function compareVersions(left, right) {
+	for (let index = 0; index < 3; index += 1) {
+		const difference = left[index] - right[index];
+		if (difference !== 0) {
+			return difference;
+		}
+	}
+	return 0;
 }
 
 globalThis.awsfMarkdown = {
