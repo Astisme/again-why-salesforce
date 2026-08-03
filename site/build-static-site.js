@@ -289,6 +289,21 @@ function createSlug(value, usedSlugs) {
 }
 
 /**
+ * Escapes text for safe HTML interpolation.
+ *
+ * @param {string} value Raw text.
+ * @returns {string} Escaped text.
+ */
+function escapeHtml(value) {
+	return value
+		.replaceAll("&", "&amp;")
+		.replaceAll("<", "&lt;")
+		.replaceAll(">", "&gt;")
+		.replaceAll('"', "&quot;")
+		.replaceAll("'", "&#39;");
+}
+
+/**
  * Adds heading ids and returns rendered table of contents.
  *
  * @param {string} html Rendered article HTML.
@@ -301,7 +316,7 @@ function addHeadingIds(html) {
 		/<(h[1-4])>([\s\S]*?)<\/\1>/g,
 		(_match, tag, text) => {
 			const slug = createSlug(text, usedSlugs);
-			const label = text.replaceAll(/<[^>]+>/g, "");
+			const label = escapeHtml(text);
 			links.push(
 				`<a href="#${slug}" class="toc-${tag}">${label}</a>`,
 			);
