@@ -11,6 +11,7 @@ const wikiSidebar = document.querySelector(".sidebar");
 const cacheTtlMs = 24 * 60 * 60 * 1000;
 const releaseCacheKey = "awsf-site-latest-release";
 const metricsCacheKey = "awsf-site-public-metrics";
+let latestReleaseRequest = null;
 
 navToggle?.addEventListener("click", () => {
 	const isOpen = navToggle.getAttribute("aria-expanded") === "true";
@@ -194,11 +195,26 @@ function updateInstallLinks() {
  *
  * @returns {Promise<string | null>} Latest release label, or null when unavailable.
  */
-async function getLatestReleaseLabel() {
+function getLatestReleaseLabel() {
 	const cachedRelease = readCache(releaseCacheKey);
 	if (typeof cachedRelease === "string") {
-		return cachedRelease;
+		return Promise.resolve(cachedRelease);
 	}
+	if (latestReleaseRequest) {
+		return latestReleaseRequest;
+	}
+	latestReleaseRequest = fetchLatestReleaseLabel().finally(() => {
+		latestReleaseRequest = null;
+	});
+	return latestReleaseRequest;
+}
+
+/**
+ * Fetches latest release name from GitHub or manifest fallback.
+ *
+ * @returns {Promise<string | null>} Latest release label, or null when unavailable.
+ */
+async function fetchLatestReleaseLabel() {
 	const response = await fetch(
 		"https://api.github.com/repos/Astisme/again-why-salesforce/releases/latest",
 	);
@@ -565,10 +581,13 @@ async function hydrateMarkdown() {
 			}`;
 		}
 	}
-	markdownSource.innerHTML =
-		markdownSource.getAttribute("data-markdown-source") === "changelog"
-			? globalThis.awsfMarkdown.renderChangelog(markdown)
-			: globalThis.awsfMarkdown.renderMarkdown(markdown);
+	const source = markdownSource.getAttribute("data-markdown-source");
+	const latestRelease = source === "changelog"
+		? await getLatestReleaseLabel()
+		: null;
+	markdownSource.innerHTML = source === "changelog"
+		? globalThis.awsfMarkdown.renderChangelog(markdown, latestRelease)
+		: globalThis.awsfMarkdown.renderMarkdown(markdown);
 	hydrateArticleToc();
 }
 

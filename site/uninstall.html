@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description"
+			content="Again, Why Salesforce uninstall feedback.">
+		<title>Again, Why Salesforce Uninstall</title>
+		<link rel="icon"
+			href="https://raw.githubusercontent.com/Astisme/again-why-salesforce/main/src/assets/icons/awsf-256.png">
+		<link rel="stylesheet" href="styles.css">
+	</head>
+	<body>
+		<header class="site-header">
+			<a class="brand" href="index.html"
+				aria-label="Again, Why Salesforce home">
+				<img
+					src="https://raw.githubusercontent.com/Astisme/again-why-salesforce/main/src/assets/icons/awsf-256.png"
+					alt="">
+				<span>Again, Why Salesforce</span>
+			</a>
+			<button class="nav-toggle" type="button" aria-expanded="false"
+				aria-controls="site-nav">
+				<span></span>
+				<span></span>
+				<span></span>
+			</button>
+			<nav id="site-nav" class="site-nav" aria-label="Main navigation">
+				<a href="index.html">Home</a>
+				<a href="features.html">Features</a>
+				<a href="installation.html">Installation</a>
+				<a href="changelog.html">Changelog</a>
+				<a href="wiki.html">Wiki</a>
+				<a href="articles.html">Articles</a>
+				<a href="privacy.html">Privacy Policy</a>
+			</nav>
+		</header>
+
+		<main class="uninstall-page">
+			<section class="uninstall-panel">
+				<p class="eyebrow">Uninstall</p>
+				<h1>Again, Why Salesforce</h1>
+				<p class="lead">Thanks for giving the extension a try.</p>
+				<p>You will be redirected to a short feedback form.</p>
+				<a id="awsf-uninstall-feedback-link" class="button primary"
+					href="https://docs.google.com/forms/d/e/1FAIpQLSe4tGs4gCX04vaFb_MZgN9CbdlYvLTef6HorgyCXZ14XCHxCQ/viewform">
+					Open feedback form manually
+				</a>
+			</section>
+		</main>
+
+		<script>
+			const feedbackLink = document.getElementById("awsf-uninstall-feedback-link");
+			const redirectToFeedback = () => {
+				globalThis.location.replace(feedbackLink?.href);
+			};
+			const fallbackRedirect = globalThis.setTimeout(redirectToFeedback, 2500);
+			const finishPing = () => {
+				globalThis.clearTimeout(fallbackRedirect);
+				redirectToFeedback();
+			};
+			const pingUrl = new URL("https://queue.simpleanalyticscdn.com/noscript.gif");
+			pingUrl.searchParams.set("hostname", "extension.again.whysalesforce");
+			pingUrl.searchParams.set("path", "/uninstall");
+			const searchParams = new URLSearchParams(globalThis.location.search);
+			pingUrl.searchParams.set("utm_source", searchParams.get("version") ?? "");
+			pingUrl.searchParams.set("utm_medium", searchParams.get("browser") ?? "");
+			const ping = new Image();
+			ping.onload = finishPing;
+			ping.onerror = finishPing;
+			ping.referrerPolicy = "no-referrer-when-downgrade";
+			ping.src = pingUrl.toString();
+		</script>
+	</body>
+</html>
