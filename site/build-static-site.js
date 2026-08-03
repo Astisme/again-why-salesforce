@@ -275,7 +275,6 @@ function replaceReleaseLabels(html, latestRelease) {
 function createSlug(value, usedSlugs) {
 	const baseSlug = value
 		.toLowerCase()
-		.replaceAll(/<[^>]+>/g, "")
 		.replaceAll(/[^a-z0-9\s-]/g, "")
 		.trim()
 		.replaceAll(/\s+/g, "-") || "section";
