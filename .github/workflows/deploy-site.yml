@@ -6,8 +6,12 @@ on:
             - main
         paths:
             - site/**
+            - docs/**
+            - src/manifest/template-manifest.json
             - .github/workflows/deploy-site.yml
     workflow_dispatch:
+    schedule:
+        - cron: "17 3 * * *"
 
 permissions:
     contents: read
@@ -28,13 +32,29 @@ jobs:
             - name: Setup repo
               uses: actions/checkout@v4
 
+            - name: Setup wiki
+              uses: actions/checkout@v4
+              with:
+                  repository: Astisme/again-why-salesforce.wiki
+                  path: wiki.again-why-salesforce
+
+            - name: Setup Deno
+              uses: denoland/setup-deno@v2
+              with:
+                  deno-version: v2.x
+
             - name: Setup Pages
               uses: actions/configure-pages@v5
+
+            - name: Build static site
+              run: deno run --allow-read --allow-write --allow-net --allow-env site/build-static-site.js
+              env:
+                  AWSF_WIKI_DIR: wiki.again-why-salesforce
 
             - name: Upload site artifact
               uses: actions/upload-pages-artifact@v3
               with:
-                  path: site
+                  path: site-dist
 
             - name: Deploy to GitHub Pages
               id: deployment

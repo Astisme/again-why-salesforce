@@ -45,9 +45,12 @@ function renderInlineMarkdown(value) {
 				.replaceAll(".md", "")
 				.split("/")
 				.pop() || "Home";
+			const [doc, hash] = localDoc.split("#");
 			const wikiDocuments = globalThis.awsfWikiDocuments || {};
-			const target = wikiDocuments[localDoc]
-				? `wiki.html?doc=${encodeURIComponent(localDoc)}`
+			const target = wikiDocuments[doc]
+				? `wiki.html?doc=${encodeURIComponent(doc)}${
+					hash ? `#${encodeURIComponent(hash)}` : ""
+				}`
 				: "wiki.html";
 			return `<a href="${escapeHtml(target)}">${label}</a>`;
 		})

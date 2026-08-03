@@ -17,6 +17,7 @@ tests/salesforce/browser-endpoint.txt
 tests/salesforce/chrome-profile/
 coverage
 .tmp/
+site-dist/
 
 # Nightshift plan artifacts (keep out of version control)
 .nightshift-plan 

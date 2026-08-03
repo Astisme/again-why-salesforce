@@ -1,6 +1,9 @@
 const navToggle = document.querySelector(".nav-toggle");
 const siteNav = document.querySelector("#site-nav");
 const releaseLabels = document.querySelectorAll(".js-current-release");
+const dynamicReleaseLabels = [...releaseLabels].filter((label) =>
+	!label.hasAttribute("data-static-release")
+);
 const markdownSource = document.querySelector("[data-markdown-source]");
 const totalUserLabels = document.querySelectorAll(".js-total-users");
 const averageRatingLabels = document.querySelectorAll(".js-average-rating");
@@ -333,14 +336,17 @@ function animateReleaseLabel(label, value) {
  * @returns {Promise<void>} Promise resolved after release labels update or fallback.
  */
 async function hydrateReleaseLabels() {
+	if (dynamicReleaseLabels.length === 0) {
+		return;
+	}
 	const latestRelease = await getLatestReleaseLabel();
 	if (!latestRelease) {
-		releaseLabels.forEach((label) => {
+		dynamicReleaseLabels.forEach((label) => {
 			label.textContent = "0";
 		});
 		return;
 	}
-	releaseLabels.forEach((label) => {
+	dynamicReleaseLabels.forEach((label) => {
 		if (!animateReleaseLabel(label, latestRelease)) {
 			label.textContent = latestRelease;
 		}
