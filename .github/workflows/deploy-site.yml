@@ -10,8 +10,6 @@ on:
             - src/manifest/template-manifest.json
             - .github/workflows/deploy-site.yml
     workflow_dispatch:
-    schedule:
-        - cron: "17 3 * * *"
 
 permissions:
     contents: read
