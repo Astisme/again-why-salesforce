@@ -125,7 +125,7 @@ img {
 
 .hero {
 	display: grid;
-	grid-template-columns: minmax(0, 0.78fr) minmax(340px, 1.22fr);
+	grid-template-columns: minmax(440px, 0.9fr) minmax(480px, 1.1fr);
 	gap: clamp(28px, 5vw, 72px);
 	align-items: center;
 	padding: 56px 0;
@@ -159,7 +159,7 @@ h2,
 h3,
 p {
 	margin-top: 0;
-	overflow-wrap: break-word;
+	overflow-wrap: anywhere;
 }
 
 h1 {
@@ -168,6 +168,12 @@ h1 {
 	font-size: clamp(3.2rem, 7vw, 5.6rem);
 	line-height: 0.95;
 	letter-spacing: 0;
+}
+
+.hero h1 {
+	max-width: 580px;
+	font-size: clamp(3.2rem, 6vw, 4.8rem);
+	overflow-wrap: normal;
 }
 
 h2 {
@@ -343,6 +349,11 @@ h3 {
 		ease;
 }
 
+.feature-grid article {
+	display: flex;
+	flex-direction: column;
+}
+
 .feature-grid article:hover,
 .repo-card:hover,
 .docs-grid article:hover,
@@ -491,7 +502,7 @@ h3 {
 .docs-grid article > span,
 .feature-grid article > .no-wiki {
 	display: inline-block;
-	margin-top: 12px;
+	margin-top: auto;
 	font-weight: 800;
 }
 
@@ -642,6 +653,115 @@ h3 {
 	max-width: 210px;
 	max-height: 58px;
 	object-fit: contain;
+}
+
+.sponsor-page {
+	padding-bottom: 48px;
+}
+
+.sponsor-hero {
+	text-align: center;
+}
+
+.sponsor-hero h1 {
+	margin-inline: auto;
+}
+
+.sponsor-hero .text-stack {
+	max-width: 920px;
+	margin-inline: auto;
+}
+
+.sponsor-grid {
+	display: grid;
+	grid-template-columns: repeat(12, minmax(0, 1fr));
+	grid-auto-rows: minmax(126px, auto);
+	gap: 14px;
+	width: min(1180px, calc(100% - 36px));
+	margin: 0 auto 32px;
+}
+
+.sponsor-card {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 126px;
+	padding: clamp(18px, 3vw, 28px);
+	background: var(--panel);
+	border: 1px solid var(--line);
+	border-top: 5px solid var(--blue);
+	border-radius: 8px;
+	box-shadow: 0 10px 30px rgb(16 36 58 / 7%);
+	transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+
+.sponsor-card:hover {
+	transform: translateY(-4px);
+	border-color: #b8c8d6;
+	box-shadow: 0 18px 42px rgb(16 36 58 / 13%);
+}
+
+.sponsor-card img {
+	width: min(100%, 340px);
+	max-height: 86px;
+	object-fit: contain;
+}
+
+.sponsor-card-github,
+.sponsor-card-paypal,
+.sponsor-card-patreon {
+	grid-column: span 4;
+}
+
+.sponsor-card-kofi {
+	grid-column: span 3;
+	border-top-color: #e80038;
+}
+
+.sponsor-card-amazon {
+	grid-column: span 4;
+	border-top-color: #ff9900;
+}
+
+.sponsor-card-coffee {
+	grid-column: span 5;
+	border-top-color: #ffdd00;
+}
+
+.sponsor-card-liberapay {
+	grid-column: span 2;
+	border-top-color: #f6c915;
+}
+
+.sponsor-card-thanks,
+.sponsor-card-revolut {
+	grid-column: span 5;
+}
+
+.sponsor-card-thanks {
+	border-top-color: #3d85c6;
+}
+
+.sponsor-card-revolut {
+	border-top-color: #1326fd;
+}
+
+.sponsor-card-patreon {
+	border-top-color: #f96854;
+}
+
+.sponsor-email-card {
+	grid-column: 4 / 10;
+	flex-direction: column;
+	gap: 8px;
+	color: var(--muted);
+	font-weight: 800;
+	text-align: center;
+}
+
+.email-display a {
+	color: var(--blue);
+	font-weight: 900;
 }
 
 .safari-badge {
@@ -944,7 +1064,6 @@ h3 {
 	.metric-band,
 	.feature-grid,
 	.repo-grid,
-	.installation-steps,
 	.steps-grid,
 	.docs-grid,
 	.feature-media.two-up,
@@ -952,8 +1071,38 @@ h3 {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
 
-	.installation-steps > .card-link:nth-child(n) {
+	.installation-steps {
+		grid-template-columns: 1fr;
+	}
+
+	.installation-steps > :nth-child(n) {
 		grid-column: auto;
+	}
+
+	.install-hero {
+		align-items: stretch;
+		flex-direction: column;
+	}
+
+	.install-hero .hero-actions {
+		width: 100%;
+	}
+
+	.install-hero .button {
+		width: 100%;
+	}
+
+	.sponsor-card-github,
+	.sponsor-card-paypal,
+	.sponsor-card-patreon,
+	.sponsor-card-kofi,
+	.sponsor-card-amazon,
+	.sponsor-card-coffee,
+	.sponsor-card-liberapay,
+	.sponsor-card-thanks,
+	.sponsor-card-revolut,
+	.sponsor-email-card {
+		grid-column: span 6;
 	}
 
 	.policy-band {
@@ -991,6 +1140,19 @@ h3 {
 	.store-badges,
 	.install-grid {
 		grid-template-columns: 1fr;
+	}
+
+	.sponsor-card-github,
+	.sponsor-card-paypal,
+	.sponsor-card-patreon,
+	.sponsor-card-kofi,
+	.sponsor-card-amazon,
+	.sponsor-card-coffee,
+	.sponsor-card-liberapay,
+	.sponsor-card-thanks,
+	.sponsor-card-revolut,
+	.sponsor-email-card {
+		grid-column: auto;
 	}
 
 	.installation-steps > .card-link:nth-child(n) {
