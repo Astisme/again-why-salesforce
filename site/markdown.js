@@ -45,6 +45,17 @@ function renderInlineMarkdown(value) {
 				.replaceAll(".md", "")
 				.split("/")
 				.pop() || "Home";
+			if (url.includes("blob/main/") || url.includes("tree/main/")) {
+				return `<a href="${
+					escapeHtml(
+						`https://github.com/Astisme/again-why-salesforce/${
+							url
+								.replaceAll("../", "")
+								.replaceAll("./", "")
+						}`,
+					)
+				}">${label}</a>`;
+			}
 			const [doc, hash] = localDoc.split("#");
 			const wikiDocuments = globalThis.awsfWikiDocuments || {};
 			const target = wikiDocuments[doc]

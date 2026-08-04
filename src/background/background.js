@@ -3,7 +3,7 @@ import {
 	ALL_WHAT_REASONS,
 	BROWSER,
 	CXM_MANAGE_TABS,
-	EXTENSION_GITHUB_LINK,
+  CHANGELOG_LINK,
 	NO_RELEASE_NOTES,
 	PERM_CHECK,
 	PREVENT_ANALYTICS,
@@ -198,10 +198,9 @@ function setExtensionBrowserListeners() {
 			if (no_release_notes?.enabled === true) {
 				return;
 			}
-			// get the extension version
-			// open github to show the release notes
+			// open changelog to show the release notes
 			BROWSER.tabs.create({
-				url: `${EXTENSION_GITHUB_LINK}/tree/main/docs/CHANGELOG.md`,
+				url: CHANGELOG_LINK,
 			});
 		}
 	});

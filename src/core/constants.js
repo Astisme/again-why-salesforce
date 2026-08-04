@@ -97,7 +97,9 @@ if (!MANIFEST.homepage_url?.startsWith("https://github.com/")) {
 export const EXTENSION_GITHUB_LINK = MANIFEST.homepage_url;
 export const EXTENSION_GITHUB_ISSUES_LINK =
 	`${EXTENSION_GITHUB_LINK}/issues/new/choose`;
-export const EXTENSION_GITHUB_WIKI_LINK = `${EXTENSION_GITHUB_LINK}/wiki`;
+const GITHUB_IO_LINK = "https://astisme.github.io/again-why-salesforce";
+export const WIKI_LINK = `${GITHUB_IO_LINK}/wiki`;
+export const CHANGELOG_LINK = `${GITHUB_IO_LINK}/changelog`;
 export const EXTENSION_OPTIONAL_HOST_PERM = MANIFEST.optional_host_permissions;
 // SETTINGS
 export const TUTORIAL_KEY = "tutorial-progress"; // Added for tutorial progress saving
@@ -367,7 +369,6 @@ export const SPONSOR_MAP = {
 	it: `${SPONSOR_DOMAIN}/it${SPONSOR_PATH}`,
 	default: `${SPONSOR_DOMAIN}/en${SPONSOR_PATH}`,
 };
-const GITHUB_IO_LINK = "https://astisme.github.io/again-why-salesforce/";
 export const UNINSTALL_SURVEY_LINK_NO_PING =
 	"https://docs.google.com/forms/d/e/1FAIpQLSe4tGs4gCX04vaFb_MZgN9CbdlYvLTef6HorgyCXZ14XCHxCQ/viewform";
 export const UNINSTALL_SURVEY_LINK_YES_PING =
