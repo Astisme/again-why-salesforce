@@ -23,7 +23,7 @@ import {
 	ORG_PINNED_TAB_STYLE_KEY,
 	ORG_TAB_STYLE_KEY,
 	SETTINGS_KEY,
-	SPONSOR_MAP,
+	SPONSOR_LINK,
 	TAB_STYLE_BACKGROUND,
 	TAB_STYLE_BOLD,
 	TAB_STYLE_BORDER,
@@ -946,11 +946,11 @@ Deno.test("review sponsor link openers choose correct destinations", () => {
 	try {
 		openCorrectBrowserReviewLink("_self");
 		openGithubIssueLink("_self");
-		openSponsorLink("it");
-		openSponsorLink("unknown");
+		openSponsorLink();
+		openSponsorLink("_self");
 		assertEquals(openedLinks.slice(-2), [
-			[SPONSOR_MAP.it, "_blank"],
-			[SPONSOR_MAP.default, "_blank"],
+			[SPONSOR_LINK, "_blank"],
+			[SPONSOR_LINK, "_self"],
 		]);
 		assert(
 			openedLinks.some(([link, target]) =>

@@ -93,7 +93,7 @@ type ContentDeps = {
 		getTodayDateKey: () => string;
 		openCorrectBrowserReviewLink: () => void;
 		openGithubIssueLink: () => void;
-		openSponsorLink: (languageCode?: string | null) => void;
+		openSponsorLink: () => void;
 		setSettings: (set: {
 			enabled: unknown;
 			id: string;
@@ -415,7 +415,7 @@ function createHarness(url = SETUP_URL) {
 		}>,
 		reviewLinkCalls: 0,
 		issueLinkCalls: 0,
-		sponsorLinkCalls: [] as Array<string | null | undefined>,
+		sponsorLinkCalls: [] as Array<null>,
 		setSettingsCalls: [] as Array<{
 			enabled: unknown;
 			id: string;
@@ -1011,8 +1011,8 @@ function createHarness(url = SETUP_URL) {
 			openGithubIssueLink: () => {
 				records.issueLinkCalls++;
 			},
-			openSponsorLink: (languageCode = null) => {
-				records.sponsorLinkCalls.push(languageCode);
+			openSponsorLink: () => {
+				records.sponsorLinkCalls.push(null);
 			},
 			setSettings: (set) => {
 				records.setSettingsCalls.push(set);
@@ -2698,7 +2698,7 @@ Deno.test(
 						);
 						assertEquals(harness.records.reviewLinkCalls, 1);
 						assertEquals(harness.records.issueLinkCalls, 0);
-						assertEquals(harness.records.sponsorLinkCalls, ["it"]);
+						assertEquals(harness.records.sponsorLinkCalls, [null]);
 						assertEquals(
 							harness.records.setSettingsCalls.map(({ id }) =>
 								id
@@ -2869,7 +2869,7 @@ Deno.test(
 							harness.records.sponsorLinkCalls.slice(
 								initialSponsorLinkCalls,
 							),
-							["it"],
+							[null],
 						);
 						assertEquals(
 							harness.records.setSettingsCalls

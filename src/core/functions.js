@@ -25,7 +25,7 @@ import {
 	SETTINGS_KEY,
 	SETUP_LIGHTNING_PATTERN,
 	SLDS_ACTIVE,
-	SPONSOR_MAP,
+	SPONSOR_LINK,
 	SPONSOR_TAB_THRESHOLD,
 	SPONSOR_USAGE_DAYS_THRESHOLD,
 	SUPPORTED_SALESFORCE_URLS,
@@ -529,18 +529,16 @@ export function openCorrectBrowserReviewLink(
 	open(linkTarget, target);
 }
 /**
- * Opens the sponsor link for the requested language.
+ * Opens the sponsor link.
  *
- * @param {string|null} [languageCode=null] Preferred language code.
  * @param {string} [target="_blank"] Where to open the link
  * @return {unknown} Result of the `open` call.
  */
 export function openSponsorLink(
-	languageCode = null,
 	target = "_blank",
 ) {
 	open(
-		SPONSOR_MAP[languageCode] ?? SPONSOR_MAP.default,
+		SPONSOR_LINK,
 		target,
 	);
 }

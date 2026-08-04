@@ -25,10 +25,9 @@ const FALLBACK_HTML_ELEMENT = class {}; // NOSONAR
  * @param {(id: string, options: { link: string }) => unknown} options.injectStyleFn Style injector.
  * @param {() => Promise<Array<unknown>>} options.ensureAllTabsAvailabilityFn Tabs resolver.
  * @param {(message: string) => Promise<string>} options.getTranslationsFn Translator helper.
- * @param {(attribute: string) => string | null} options.getTranslatorAttributeFn Translator attribute resolver.
  * @param {(options?: { allTabs?: unknown[]; usageDays?: number }) => { review: boolean; sponsor: boolean }} options.shouldShowReviewOrSponsorFn Visibility resolver.
  * @param {() => unknown} options.openCorrectBrowserReviewLinkFn Review link opener.
- * @param {(translatorLanguage?: string | null) => unknown} options.openSponsorLinkFn Sponsor link opener.
+ * @param {() => unknown} options.openSponsorLinkFn Sponsor link opener.
  * @param {() => {
  *   reviewLink: {
  *     addEventListener: (type: string, listener: (event: Event) => void) => void;
@@ -60,7 +59,6 @@ const FALLBACK_HTML_ELEMENT = class {}; // NOSONAR
  *   showReviewOrSponsor: (options?: {
  *     allTabs?: Array<unknown> | null;
  *     usageDays?: number;
- *     translatorLanguage?: string | null;
  *     reviewSvg?: {
  *       classList: { toggle: (name: string, force?: boolean) => void };
  *       setAttribute: (name: string, value: string) => void;
@@ -90,7 +88,6 @@ export function createReviewSponsorModule({
 	injectStyleFn,
 	ensureAllTabsAvailabilityFn,
 	getTranslationsFn,
-	getTranslatorAttributeFn,
 	shouldShowReviewOrSponsorFn,
 	openCorrectBrowserReviewLinkFn,
 	openSponsorLinkFn,
@@ -106,7 +103,6 @@ export function createReviewSponsorModule({
 	 * @param {Object} [param0={}] Input values.
 	 * @param {unknown[] | null} [param0.allTabs=null] Saved tab list.
 	 * @param {number} [param0.usageDays=0] Distinct usage days.
-	 * @param {string | null} [param0.translatorLanguage=null] Preferred language code.
 	 * @param {HTMLElement | null} [param0.reviewSvg=null] Review SVG element.
 	 * @param {HTMLElement | null} [param0.sponsorSvg=null] Sponsor SVG element.
 	 * @param {HTMLAnchorElement | null} [param0.reviewLink=null] Review link.
@@ -116,7 +112,6 @@ export function createReviewSponsorModule({
 	function showReviewOrSponsor({
 		allTabs = null,
 		usageDays = 0,
-		translatorLanguage = null,
 		reviewSvg = null,
 		sponsorSvg = null,
 		reviewLink = null,
@@ -152,7 +147,7 @@ export function createReviewSponsorModule({
 		if (whatToShow.sponsor) {
 			sponsorLink.addEventListener("click", (event) => {
 				event.preventDefault();
-				openSponsorLinkFn(translatorLanguage);
+				openSponsorLinkFn();
 			});
 		}
 	}
@@ -252,12 +247,8 @@ export function createReviewSponsorModule({
 				ensureAllTabsAvailabilityFn(),
 				this._getExtensionUsageDays(),
 			]);
-			const translatorLanguage = getTranslatorAttributeFn(
-				"currentLanguage",
-			);
 			showReviewOrSponsor(Object.assign(result, {
 				allTabs,
-				translatorLanguage,
 				usageDays,
 			}));
 			result.reviewLink.title = reviewMsg;

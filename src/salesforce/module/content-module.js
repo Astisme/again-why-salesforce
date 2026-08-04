@@ -194,12 +194,10 @@ const openCorrectBrowserReviewLink = (...args) =>
 	DEPENDENCIES.openCorrectBrowserReviewLink(...args);
 const openGithubIssueLink = (...args) =>
 	DEPENDENCIES.openGithubIssueLink(...args);
-const openSponsorLink = (...args) => DEPENDENCIES.openSponsorLink(...args);
+const openSponsorLink = () => DEPENDENCIES.openSponsorLink();
 const setSettings = (...args) => DEPENDENCIES.setSettings(...args);
 const ensureAllTabsAvailability = (...args) =>
 	DEPENDENCIES.ensureAllTabsAvailability(...args);
-const ensureTranslatorAvailability = (...args) =>
-	DEPENDENCIES.ensureTranslatorAvailability(...args);
 const setupDragForUl = (...args) => DEPENDENCIES.setupDragForUl(...args);
 const showToast = (...args) => DEPENDENCIES.showToast(...args);
 const generateRowTemplate = (...args) =>
@@ -886,8 +884,7 @@ async function showSponsorPrompt({
 			await skipReviewSponsorPromptToday(CONSTANTS.WHAT_DID_SPONSOR);
 			return;
 		case REVIEW_PROMPT_ACTION_SPONSOR: {
-			const translator = await ensureTranslatorAvailability();
-			openSponsorLink(translator.currentLanguage);
+			openSponsorLink();
 			break;
 		}
 		default:

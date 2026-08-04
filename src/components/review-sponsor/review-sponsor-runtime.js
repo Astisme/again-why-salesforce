@@ -39,7 +39,6 @@ export function getReviewSponsorRuntimeDefaults() {
 		injectStyleFn: injectStyle,
 		ensureAllTabsAvailabilityFn: ensureAllTabsAvailability,
 		getTranslationsFn: TranslationService.getTranslations,
-		getTranslatorAttributeFn: TranslationService.getTranslatorAttribute,
 		shouldShowReviewOrSponsorFn: shouldShowReviewOrSponsor,
 		openCorrectBrowserReviewLinkFn: openCorrectBrowserReviewLink,
 		openSponsorLinkFn: openSponsorLink,

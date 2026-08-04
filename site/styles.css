@@ -692,7 +692,8 @@ h3 {
 	border-top: 5px solid var(--blue);
 	border-radius: 8px;
 	box-shadow: 0 10px 30px rgb(16 36 58 / 7%);
-	transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+	transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms
+		ease;
 }
 
 .sponsor-card:hover {

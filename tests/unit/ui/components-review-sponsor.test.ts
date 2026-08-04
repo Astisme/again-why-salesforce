@@ -139,7 +139,6 @@ function createStoredCustomElementsRegistry() {
  *   isFirefox?: boolean;
  *   isSafari?: boolean;
  *   tabs?: unknown[];
- *   translatorLanguage?: string;
  *   usageDays?: number;
  * }} [options={}] Fixture options.
  * @return {{
@@ -151,7 +150,6 @@ function createStoredCustomElementsRegistry() {
  *   showReviewOrSponsor: (options?: {
  *     allTabs?: unknown[] | null;
  *     usageDays?: number;
- *     translatorLanguage?: string | null;
  *     reviewSvg?: HTMLElement | null;
  *     sponsorSvg?: HTMLElement | null;
  *     reviewLink?: HTMLAnchorElement | null;
@@ -173,7 +171,6 @@ function createReviewSponsorFixture({
 	isFirefox = false,
 	isSafari = false,
 	tabs = [],
-	translatorLanguage = "en",
 	usageDays = 0,
 }: {
 	generated?: ReviewSponsorResult;
@@ -182,7 +179,6 @@ function createReviewSponsorFixture({
 	isFirefox?: boolean;
 	isSafari?: boolean;
 	tabs?: unknown[];
-	translatorLanguage?: string;
 	usageDays?: number;
 } = {}) {
 	const registry = createStoredCustomElementsRegistry();
@@ -213,8 +209,6 @@ function createReviewSponsorFixture({
 			translateCalls.push(message);
 			return Promise.resolve(`translated:${message}`);
 		},
-		getTranslatorAttributeFn: (attribute: string) =>
-			attribute === "currentLanguage" ? translatorLanguage : null,
 		shouldShowReviewOrSponsorFn: createShouldShowReviewOrSponsorFn({
 			isSafari,
 		}),
@@ -233,11 +227,9 @@ function createReviewSponsorFixture({
 			}
 			return undefined;
 		},
-		openSponsorLinkFn: (language: string | null = null) => {
+		openSponsorLinkFn: () => {
 			openCalls.push(
-				language === "it"
-					? "https://alfredoit.dev/it/sponsor/?email=againwhysalesforce@duck.com"
-					: "https://alfredoit.dev/en/sponsor/?email=againwhysalesforce@duck.com",
+				"https://astisme.github.io/again-why-salesforce/sponsor",
 			);
 			return null;
 		},
@@ -317,14 +309,13 @@ Deno.test("show review or sponsor block", async (t) => {
 		);
 
 		await t.step(
-			"shows sponsor and opens locale-aware sponsor link",
+			"shows sponsor and opens shared sponsor link",
 			() => {
 				const fixture = createReviewSponsorFixture();
 				const { reviewSvg, sponsorSvg, reviewLink, sponsorLink } =
 					createElements();
 				fixture.showReviewOrSponsor({
 					allTabs: Array(16),
-					translatorLanguage: "it",
 					reviewSvg,
 					sponsorSvg,
 					reviewLink,
@@ -333,7 +324,10 @@ Deno.test("show review or sponsor block", async (t) => {
 				assertFalse(reviewSvg.classList.contains("hidden"));
 				assertFalse(sponsorSvg.classList.contains("hidden"));
 				sponsorLink.click();
-				assert(fixture.openCalls[0].includes("/it/"));
+				assertEquals(
+					fixture.openCalls[0],
+					"https://astisme.github.io/again-why-salesforce/sponsor",
+				);
 				assertEquals(fixture.messages, []);
 			},
 		);
@@ -396,7 +390,7 @@ Deno.test("show review or sponsor block", async (t) => {
 				assertEquals(firefoxFixture.openCalls[0], FIREFOX_REVIEW_LINK);
 				assertEquals(
 					firefoxFixture.openCalls[1],
-					"https://alfredoit.dev/en/sponsor/?email=againwhysalesforce@duck.com",
+					"https://astisme.github.io/again-why-salesforce/sponsor",
 				);
 
 				const safariFixture = createReviewSponsorFixture({
@@ -432,7 +426,6 @@ Deno.test("ReviewSponsorAws loads async metadata and opens expected links", asyn
 			{ length: 20 },
 			(_value, index) => ({ id: String(index) }),
 		),
-		translatorLanguage: "fr",
 		usageDays: 45,
 	});
 
@@ -470,7 +463,10 @@ Deno.test("ReviewSponsorAws loads async metadata and opens expected links", asyn
 	generated.sponsorLink.click();
 
 	assertEquals(fixture.openCalls[0], CHROME_REVIEW_LINK);
-	assert(fixture.openCalls[1].includes("/en/"));
+	assertEquals(
+		fixture.openCalls[1],
+		"https://astisme.github.io/again-why-salesforce/sponsor",
+	);
 });
 
 Deno.test("review-sponsor module defaults stay safe without browser globals", () => {
@@ -534,7 +530,6 @@ Deno.test("review-sponsor runtime does not notify on support link visibility", a
 		}),
 		getSettingsFn: () => Promise.resolve({ enabled: 0 }),
 		getTranslationsFn: (message: string) => Promise.resolve(message),
-		getTranslatorAttributeFn: () => "en",
 		HTMLElementRef: MockReviewSponsorHTMLElement as never,
 		injectStyleFn: () => new MockElement("link") as never,
 	});

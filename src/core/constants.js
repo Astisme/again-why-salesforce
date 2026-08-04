@@ -363,12 +363,7 @@ export const CHROME_LINK =
 	"https://chromewebstore.google.com/detail/again-why-salesforce/bceeoimjhgjbihanbiifgpndmkklajbi/reviews";
 export const FIREFOX_LINK =
 	"https://addons.mozilla.org/en-US/firefox/addon/again-why-salesforce/";
-const SPONSOR_DOMAIN = "https://alfredoit.dev";
-const SPONSOR_PATH = "/sponsor/?email=againwhysalesforce@duck.com";
-export const SPONSOR_MAP = {
-	it: `${SPONSOR_DOMAIN}/it${SPONSOR_PATH}`,
-	default: `${SPONSOR_DOMAIN}/en${SPONSOR_PATH}`,
-};
+export const SPONSOR_LINK = `${GITHUB_IO_LINK}/sponsor`;
 export const UNINSTALL_SURVEY_LINK_NO_PING =
 	"https://docs.google.com/forms/d/e/1FAIpQLSe4tGs4gCX04vaFb_MZgN9CbdlYvLTef6HorgyCXZ14XCHxCQ/viewform";
 export const UNINSTALL_SURVEY_LINK_YES_PING =
