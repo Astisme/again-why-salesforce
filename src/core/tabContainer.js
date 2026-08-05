@@ -25,6 +25,8 @@ const _tabContainerSecret = Symbol("tabContainerSecret");
 
 /**
  * The class to manage multiple Tabs (through TabContainer.create()).
+ *
+ * @extends {Array<Tab>}
  */
 export class TabContainer extends Array {
 	#isSorted = false;
