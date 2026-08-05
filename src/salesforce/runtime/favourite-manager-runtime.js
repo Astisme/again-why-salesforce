@@ -78,25 +78,25 @@ export function createFavouriteManagerModule(overrides = {}) {
 		whatAdd: overrides.whatAdd ?? WHAT_ADD,
 		whatGetCommands: overrides.whatGetCommands ?? WHAT_GET_COMMANDS,
 		tabRef: overrides.tabRef ?? Tab,
-		ensureAllTabsAvailabilityFn: overrides.ensureAllTabsAvailabilityFn ??
+		ensureAllTabsAvailability: overrides.ensureAllTabsAvailability ??
 			ensureAllTabsAvailability,
-		getTranslationsFn: overrides.getTranslationsFn ??
+		getTranslations: overrides.getTranslations ??
 			TranslationService.getTranslations,
-		getCurrentHrefFn: overrides.getCurrentHrefFn ?? getCurrentHref,
-		getIsCurrentlyOnSavedTabFn: overrides.getIsCurrentlyOnSavedTabFn ??
+		getCurrentHref: overrides.getCurrentHref ?? getCurrentHref,
+		getIsCurrentlyOnSavedTab: overrides.getIsCurrentlyOnSavedTab ??
 			getIsCurrentlyOnSavedTab,
-		getSettingsFn: overrides.getSettingsFn ?? getSettings,
-		getWasOnSavedTabFn: overrides.getWasOnSavedTabFn ??
+		getSettings: overrides.getSettings ?? getSettings,
+		getWasOnSavedTab: overrides.getWasOnSavedTab ??
 			getWasOnSavedTab,
-		injectStyleFn: overrides.injectStyleFn ?? injectStyle,
-		isOnSavedTabFn: overrides.isOnSavedTabFn ?? isOnSavedTab,
-		performActionOnTabsFn: overrides.performActionOnTabsFn ??
+		injectStyle: overrides.injectStyle ?? injectStyle,
+		isOnSavedTab: overrides.isOnSavedTab ?? isOnSavedTab,
+		performActionOnTabs: overrides.performActionOnTabs ??
 			performActionOnTabs,
-		sendExtensionMessageFn: overrides.sendExtensionMessageFn ??
+		sendExtensionMessage: overrides.sendExtensionMessage ??
 			sendExtensionMessage,
-		showToastFn: overrides.showToastFn ?? showToast,
+		showToast: overrides.showToast ?? showToast,
 		documentRef: overrides.documentRef ?? globalThis.document,
-		setTimeoutFn: overrides.setTimeoutFn ?? globalThis.setTimeout,
+		setTimeout: overrides.setTimeout ?? globalThis.setTimeout,
 		customEventCtor: overrides.customEventCtor ?? globalThis.CustomEvent,
 		consoleRef: overrides.consoleRef ?? console,
 	});

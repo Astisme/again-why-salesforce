@@ -71,7 +71,7 @@ function loadToastFixture() {
 
 	const module = createToastModule({
 		allToastTypes: new Set(["success", "info", "warning", "error"]),
-		calculateReadingTimeFn: () => 1,
+		calculateReadingTime: () => 1,
 		consoleRef: {
 			error: (message: string | string[]) =>
 				logs.error.push(String(message)),
@@ -87,13 +87,13 @@ function loadToastFixture() {
 		documentRef: {
 			getElementsByClassName: () => [currentHanger],
 		},
-		generateSldsToastMessageFn: (message: string[] | string) =>
+		generateSldsToastMessage: (message: string[] | string) =>
 			Promise.resolve(
 				new ToastElement(
 					Array.isArray(message) ? message.join("|") : message,
 				),
 			),
-		setTimeoutFn: (callback: () => void) => {
+		setTimeout: (callback: () => void) => {
 			callback();
 			return 1;
 		},
@@ -179,7 +179,7 @@ Deno.test("toast accepts custom statuses present in the allowed status set", asy
 	};
 	const module: ToastShowApi = createToastModule({
 		allToastTypes: new Set(["custom"]),
-		calculateReadingTimeFn: () => 1,
+		calculateReadingTime: () => 1,
 		consoleRef: {
 			error: (message: string | string[]) =>
 				logs.error.push(String(message)),
@@ -193,13 +193,13 @@ Deno.test("toast accepts custom statuses present in the allowed status set", asy
 		documentRef: {
 			getElementsByClassName: () => [hanger],
 		},
-		generateSldsToastMessageFn: (message: string[] | string) =>
+		generateSldsToastMessage: (message: string[] | string) =>
 			Promise.resolve(
 				new ToastElement(
 					Array.isArray(message) ? message.join("|") : message,
 				),
 			),
-		setTimeoutFn: (callback: () => void) => {
+		setTimeout: (callback: () => void) => {
 			callback();
 			return 1;
 		},
@@ -232,13 +232,13 @@ Deno.test("toast supports missing hanger and missing timeout dependencies", asyn
 		documentRef: {
 			getElementsByClassName: () => null,
 		},
-		generateSldsToastMessageFn: () => ({
+		generateSldsToastMessage: () => ({
 			remove: () => {
 				removed = true;
 			},
 			textContent: null,
 		}),
-		setTimeoutFn: undefined,
+		setTimeout: undefined,
 		toastSuccess: "success",
 	});
 

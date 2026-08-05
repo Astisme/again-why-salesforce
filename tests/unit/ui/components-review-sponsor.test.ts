@@ -22,7 +22,7 @@ const FIREFOX_REVIEW_LINK =
  * @param {boolean} [options.isSafari=false] Whether review should be hidden for Safari.
  * @return {(input?: { allTabs?: unknown[]; usageDays?: number }) => { review: boolean; sponsor: boolean }} Visibility helper.
  */
-function createShouldShowReviewOrSponsorFn({ isSafari = false } = {}) {
+function createShouldShowReviewOrSponsor({ isSafari = false } = {}) {
 	return ({
 		allTabs = [],
 		usageDays = 0,
@@ -196,23 +196,23 @@ function createReviewSponsorFixture({
 		},
 		extensionUsageDays: "extension_usage_days",
 		hiddenClass: "hidden",
-		getSettingsFn: (keys: string[]) => {
+		getSettings: (keys: string[]) => {
 			settingsCalls.push(keys);
 			return Promise.resolve({ enabled: usageDays });
 		},
-		injectStyleFn: (id: string, options: { link: string }) => {
+		injectStyle: (id: string, options: { link: string }) => {
 			injectCalls.push({ id, link: options.link });
 			return new MockElement("link") as never;
 		},
-		ensureAllTabsAvailabilityFn: () => Promise.resolve(tabs),
-		getTranslationsFn: (message: string) => {
+		ensureAllTabsAvailability: () => Promise.resolve(tabs),
+		getTranslations: (message: string) => {
 			translateCalls.push(message);
 			return Promise.resolve(`translated:${message}`);
 		},
-		shouldShowReviewOrSponsorFn: createShouldShowReviewOrSponsorFn({
+		shouldShowReviewOrSponsor: createShouldShowReviewOrSponsor({
 			isSafari,
 		}),
-		openCorrectBrowserReviewLinkFn: () => {
+		openCorrectBrowserReviewLink: () => {
 			if (isEdge) {
 				openCalls.push(EDGE_REVIEW_LINK);
 				return null;
@@ -227,13 +227,13 @@ function createReviewSponsorFixture({
 			}
 			return undefined;
 		},
-		openSponsorLinkFn: () => {
+		openSponsorLink: () => {
 			openCalls.push(
 				"https://astisme.github.io/again-why-salesforce/sponsor",
 			);
 			return null;
 		},
-		generateReviewSponsorSvgsFn: () => generated as never,
+		generateReviewSponsorSvgs: () => generated as never,
 		customElementsRef: registry.registry,
 		HTMLElementRef: MockReviewSponsorHTMLElement as never,
 	});
@@ -473,7 +473,7 @@ Deno.test("review-sponsor module defaults stay safe without browser globals", ()
 	const noMessageModule = createReviewSponsorModule({
 		hiddenClass: "hidden",
 		isChrome: true,
-		shouldShowReviewOrSponsorFn: createShouldShowReviewOrSponsorFn(),
+		shouldShowReviewOrSponsor: createShouldShowReviewOrSponsor(),
 	} as never);
 	noMessageModule.showReviewOrSponsor({
 		allTabs: Array(8),
@@ -486,8 +486,8 @@ Deno.test("review-sponsor module defaults stay safe without browser globals", ()
 	const { showReviewOrSponsor } = createReviewSponsorModule({
 		hiddenClass: "hidden",
 		isChrome: true,
-		shouldShowReviewOrSponsorFn: createShouldShowReviewOrSponsorFn(),
-		openCorrectBrowserReviewLinkFn: () => null,
+		shouldShowReviewOrSponsor: createShouldShowReviewOrSponsor(),
+		openCorrectBrowserReviewLink: () => null,
 	} as never);
 	const elements = {
 		reviewLink: new MockElement("a"),
@@ -520,18 +520,18 @@ Deno.test("review-sponsor runtime does not notify on support link visibility", a
 			},
 		},
 		customElementsRef: registry.registry,
-		ensureAllTabsAvailabilityFn: () => Promise.resolve([]),
-		generateReviewSponsorSvgsFn: () => ({
+		ensureAllTabsAvailability: () => Promise.resolve([]),
+		generateReviewSponsorSvgs: () => ({
 			reviewLink: new MockElement("a"),
 			reviewSvg: new MockElement("svg"),
 			root: new MockElement("div"),
 			sponsorLink: new MockElement("a"),
 			sponsorSvg: new MockElement("svg"),
 		}),
-		getSettingsFn: () => Promise.resolve({ enabled: 0 }),
-		getTranslationsFn: (message: string) => Promise.resolve(message),
+		getSettings: () => Promise.resolve({ enabled: 0 }),
+		getTranslations: (message: string) => Promise.resolve(message),
 		HTMLElementRef: MockReviewSponsorHTMLElement as never,
-		injectStyleFn: () => new MockElement("link") as never,
+		injectStyle: () => new MockElement("link") as never,
 	});
 	const elements = {
 		reviewLink: new MockElement("a"),

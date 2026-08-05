@@ -35,14 +35,14 @@ export function getReviewSponsorRuntimeDefaults() {
 		isEdge: ISEDGE,
 		isFirefox: ISFIREFOX,
 		isSafari: ISSAFARI,
-		getSettingsFn: getSettings,
-		injectStyleFn: injectStyle,
-		ensureAllTabsAvailabilityFn: ensureAllTabsAvailability,
-		getTranslationsFn: TranslationService.getTranslations,
-		shouldShowReviewOrSponsorFn: shouldShowReviewOrSponsor,
-		openCorrectBrowserReviewLinkFn: openCorrectBrowserReviewLink,
-		openSponsorLinkFn: openSponsorLink,
-		generateReviewSponsorSvgsFn: generateReviewSponsorSvgs,
+		getSettings: getSettings,
+		injectStyle: injectStyle,
+		ensureAllTabsAvailability: ensureAllTabsAvailability,
+		getTranslations: TranslationService.getTranslations,
+		shouldShowReviewOrSponsor: shouldShowReviewOrSponsor,
+		openCorrectBrowserReviewLink: openCorrectBrowserReviewLink,
+		openSponsorLink: openSponsorLink,
+		generateReviewSponsorSvgs: generateReviewSponsorSvgs,
 	};
 }
 

@@ -35,12 +35,12 @@ const {
 	whatRequestExportPermissionToOpenPopup:
 		WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
 	whatUpdateExtension: WHAT_UPDATE_EXTENSION,
-	isExportAllowedFn: isExportAllowed,
+	isExportAllowed: isExportAllowed,
 	tabContainerRef: TabContainer,
-	bgGetSettingsFn: bg_getSettings,
-	bgGetStorageFn: bg_getStorage,
-	bgSetStorageFn: bg_setStorage,
-	fetchFn: (input) => globalThis.fetch(input),
+	bgGetSettings: bg_getSettings,
+	bgGetStorage: bg_getStorage,
+	bgSetStorage: bg_setStorage,
+	fetch: (input) => globalThis.fetch(input),
 });
 
 export {

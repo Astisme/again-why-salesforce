@@ -125,16 +125,16 @@ export class TranslationService {
 	 * Initializes or returns the singletonTranslator TranslationService instance,
 	 * preloading fallback and active translations, and sets up change listeners.
 	 *
-	 * @param {Function|null} [loadLanguageFn=null] Optional active-language loader.
+	 * @param {Function|null} [loadLanguage=null] Optional active-language loader.
 	 * @return {Promise<TranslationService>}
 	 *   Resolves to the singletonTranslator TranslationService, with fallback and current
 	 *   language files loaded, and page translations applied.
 	 */
-	static async create(loadLanguageFn = null) {
+	static async create(loadLanguage = null) {
 		if (singletonTranslator != null) {
 			await TranslationService.#loadTranslatorLanguage(
 				singletonTranslator,
-				loadLanguageFn,
+				loadLanguage,
 			);
 			return singletonTranslator;
 		}
@@ -150,7 +150,7 @@ export class TranslationService {
 			// load translations for user picked language or salesforce language
 			await TranslationService.#loadTranslatorLanguage(
 				translator,
-				loadLanguageFn,
+				loadLanguage,
 			);
 			if (await translator.updatePageTranslations()) {
 				translator.setListenerForLanguageChange();
@@ -440,12 +440,12 @@ export class TranslationService {
 	 * Loads the active translator language with an optional caller-provided loader.
 	 *
 	 * @param {TranslationService} translator - The translator to load.
-	 * @param {Function|null} [loadLanguageFn=null] Optional active-language loader.
+	 * @param {Function|null} [loadLanguage=null] Optional active-language loader.
 	 * @return {Promise<string|null>} The loaded language code when available.
 	 */
-	static async #loadTranslatorLanguage(translator, loadLanguageFn = null) {
-		if (loadLanguageFn != null) {
-			return await loadLanguageFn(translator);
+	static async #loadTranslatorLanguage(translator, loadLanguage = null) {
+		if (loadLanguage != null) {
+			return await loadLanguage(translator);
 		}
 		return translator.loadLanguageBackground();
 	}
@@ -456,13 +456,13 @@ export class TranslationService {
 	 * If the translator has not been initialized, it creates a new instance.
 	 * If initialization is already in progress (i.e., `singletonTranslator` is a Promise), it waits for it to complete.
 	 *
-	 * @param {Function|null} [loadLanguageFn=null] Optional active-language loader.
+	 * @param {Function|null} [loadLanguage=null] Optional active-language loader.
 	 * @return {Promise<TranslationService>} A promise that resolves to the translator instance.
 	 * @async
 	 */
-	static #getTranslator_async(loadLanguageFn = null) {
+	static #getTranslator_async(loadLanguage = null) {
 		return singletonTranslatorPromise ?? singletonTranslator ??
-			TranslationService.create(loadLanguageFn);
+			TranslationService.create(loadLanguage);
 	}
 
 	/**
@@ -488,21 +488,21 @@ export class TranslationService {
 	 *
 	 * Returns the initialized translator if available, otherwise attempts to initialize and return it.
 	 *
-	 * @param {Function|null} [loadLanguageFn=null] Optional active-language loader.
+	 * @param {Function|null} [loadLanguage=null] Optional active-language loader.
 	 * @return {Promise<TranslationService>} A promise that resolves to the translator instance.
 	 * @async
 	 */
-	static async ensureTranslatorAvailability(loadLanguageFn = null) {
+	static async ensureTranslatorAvailability(loadLanguage = null) {
 		try {
 			const translator = TranslationService.#getTranslator();
 			await TranslationService.#loadTranslatorLanguage(
 				translator,
-				loadLanguageFn,
+				loadLanguage,
 			);
 			return translator;
 		} catch (e) {
 			console.info(e);
-			return TranslationService.#getTranslator_async(loadLanguageFn);
+			return TranslationService.#getTranslator_async(loadLanguage);
 		}
 	}
 

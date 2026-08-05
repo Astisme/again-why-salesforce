@@ -77,7 +77,7 @@ export function buildManifestForBrowser({
  * @param {Object} options Runtime dependencies.
  * @param {string[]} options.argv Process arguments where index 2 is browser.
  * @param {Record<string, unknown>} options.manifest Manifest object to mutate.
- * @param {(path: string, contents: string) => void} options.writeFileSyncFn File writer.
+ * @param {(path: string, contents: string) => void} options.writeFileSync File writer.
  * @param {{ error: (message: string) => void }} [options.logger=console] Logger used for usage output.
  * @param {string} [options.outputPath="./src/manifest.json"] Output file path.
  * @return {Record<string, unknown>} Written manifest object.
@@ -85,7 +85,7 @@ export function buildManifestForBrowser({
 export function runBuildManifest({
 	argv,
 	manifest,
-	writeFileSyncFn,
+	writeFileSync,
 	logger = console,
 	outputPath = "./src/manifest.json",
 } = {}) {
@@ -95,6 +95,6 @@ export function runBuildManifest({
 		logger,
 		manifest,
 	});
-	writeFileSyncFn(outputPath, JSON.stringify(builtManifest, null, 4));
+	writeFileSync(outputPath, JSON.stringify(builtManifest, null, 4));
 	return builtManifest;
 }

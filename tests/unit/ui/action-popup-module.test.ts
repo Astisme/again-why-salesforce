@@ -116,13 +116,13 @@ async function loadPopupModule({
 	const messages: Record<string, unknown>[] = [];
 
 	const popupOptions = {
-		areFramePatternsAllowedFn: () => Promise.resolve(framePatternsAllowed),
+		areFramePatternsAllowed: () => Promise.resolve(framePatternsAllowed),
 		browser: {
 			runtime: {
 				getURL: (path: string) => `chrome-extension://test/${path}`,
 			},
 		},
-		closePopupFn: () => {
+		closePopup: () => {
 			counters.closeCalls++;
 		},
 		cmdExportAll: CMD_EXPORT_ALL,
@@ -130,14 +130,14 @@ async function loadPopupModule({
 		cmdOpenSettings: CMD_OPEN_SETTINGS,
 		cxmManageTabs: CXM_MANAGE_TABS,
 		documentRef: document,
-		getTranslationsFn: (message: string | string[]) =>
+		getTranslations: (message: string | string[]) =>
 			Promise.resolve(message),
-		isOnSalesforceSetupFn: () => Promise.resolve(salesforceState),
+		isOnSalesforceSetup: () => Promise.resolve(salesforceState),
 		locationRef: window.location as URL,
-		openSettingsPageFn: () => {
+		openSettingsPage: () => {
 			counters.openSettingsCalls++;
 		},
-		sendExtensionMessageFn: (
+		sendExtensionMessage: (
 			message: Record<string, unknown>,
 		) => {
 			messages.push(message);
@@ -307,7 +307,7 @@ Deno.test("popup-module exits early when one required popup button is unavailabl
 	const messages: Record<string, unknown>[] = [];
 
 	const result = await runPopupWithModule({
-		areFramePatternsAllowedFn: () => Promise.resolve(true),
+		areFramePatternsAllowed: () => Promise.resolve(true),
 		browser: {
 			runtime: {
 				getURL: (path: string) => `chrome-extension://test/${path}`,
@@ -317,9 +317,9 @@ Deno.test("popup-module exits early when one required popup button is unavailabl
 		cmdImport: CMD_IMPORT,
 		cmdOpenSettings: CMD_OPEN_SETTINGS,
 		documentRef,
-		isOnSalesforceSetupFn: () => Promise.resolve({ ison: true }),
+		isOnSalesforceSetup: () => Promise.resolve({ ison: true }),
 		locationRef: window.location as URL,
-		sendExtensionMessageFn: (message: Record<string, unknown>) => {
+		sendExtensionMessage: (message: Record<string, unknown>) => {
 			messages.push(message);
 			return Promise.resolve([]);
 		},
@@ -346,7 +346,7 @@ Deno.test("popup-module runPopup supports explicit requestedCommands overrides",
 	const messages: Record<string, unknown>[] = [];
 
 	await runPopupWithModule({
-		areFramePatternsAllowedFn: () => Promise.resolve(true),
+		areFramePatternsAllowed: () => Promise.resolve(true),
 		browser: {
 			runtime: {
 				getURL: (path: string) => path,
@@ -356,10 +356,10 @@ Deno.test("popup-module runPopup supports explicit requestedCommands overrides",
 		cmdImport: CMD_IMPORT,
 		cmdOpenSettings: CMD_OPEN_SETTINGS,
 		documentRef: document,
-		isOnSalesforceSetupFn: () => Promise.resolve({ ison: true }),
+		isOnSalesforceSetup: () => Promise.resolve({ ison: true }),
 		locationRef: window.location as URL,
 		requestedCommands: ["one", "two"],
-		sendExtensionMessageFn: (message: Record<string, unknown>) => {
+		sendExtensionMessage: (message: Record<string, unknown>) => {
 			messages.push(message);
 			return Promise.resolve([]);
 		},
@@ -396,9 +396,9 @@ Deno.test("popup-module runPopup default handlers remain safe with partial overr
 
 	await runPopupWithModule({
 		documentRef: document,
-		isOnSalesforceSetupFn: () => Promise.resolve({ ison: true }),
+		isOnSalesforceSetup: () => Promise.resolve({ ison: true }),
 		locationRef: window.location as URL,
-		sendExtensionMessageFn: (message: Record<string, unknown>) => {
+		sendExtensionMessage: (message: Record<string, unknown>) => {
 			messages.push(message);
 			if (message.what === "") {
 				return Promise.resolve([{ name: "", shortcut: "Ctrl+0" }]);
@@ -425,7 +425,7 @@ Deno.test("popup-module runPopup default handlers remain safe with partial overr
 
 Deno.test("popup-module fallback document safely handles setup flow when no buttons are present", async () => {
 	const result = await runPopupWithModule({
-		isOnSalesforceSetupFn: () => Promise.resolve({ ison: true }),
+		isOnSalesforceSetup: () => Promise.resolve({ ison: true }),
 	});
 	assertEquals(result.redirected, false);
 });
@@ -443,7 +443,7 @@ Deno.test("popup-module setup flow can rely on the default message sender", asyn
 
 	const result = await runPopupWithModule({
 		documentRef: document,
-		isOnSalesforceSetupFn: () => Promise.resolve({ ison: true }),
+		isOnSalesforceSetup: () => Promise.resolve({ ison: true }),
 		locationRef: window.location as URL,
 	});
 
@@ -465,14 +465,14 @@ Deno.test("popup-module exported runPopup accepts injected popup options", async
 	appendElement(window.document, "button", "tutorial");
 
 	const result = await runPopup({
-		areFramePatternsAllowedFn: () => Promise.resolve(false),
+		areFramePatternsAllowed: () => Promise.resolve(false),
 		browser: {
 			runtime: {
 				getURL: (path: string) => `runtime://${path}`,
 			},
 		},
 		documentRef: window.document,
-		isOnSalesforceSetupFn: () => Promise.resolve({ ison: true }),
+		isOnSalesforceSetup: () => Promise.resolve({ ison: true }),
 		locationRef: window.location as URL,
 	});
 

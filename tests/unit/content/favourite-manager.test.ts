@@ -197,7 +197,7 @@ function loadFavouriteManagerFixture(
 			extractOrgName: (href: string) => `org:${href}`,
 			minifyURL: (_href: string) => minifiedUrl,
 		},
-		ensureAllTabsAvailabilityFn: () =>
+		ensureAllTabsAvailability: () =>
 			Promise.resolve({
 				existsWithOrWithoutOrg: (tab) => {
 					existsCalls.push(tab);
@@ -215,7 +215,7 @@ function loadFavouriteManagerFixture(
 					};
 				},
 			} as TabList),
-		getTranslationsFn: (
+		getTranslations: (
 			keys: string | string[],
 			connector = " ",
 		) => {
@@ -229,22 +229,22 @@ function loadFavouriteManagerFixture(
 			void connector;
 			return Promise.resolve(`translated:${keys}`);
 		},
-		getCurrentHrefFn: () => currentHref,
-		getIsCurrentlyOnSavedTabFn: () => isCurrentlyOnSavedTab,
-		getSettingsFn: (_keys: string[]) => Promise.resolve(settings),
-		getWasOnSavedTabFn: () => wasOnSavedTab,
-		injectStyleFn: (id: string, options: { css: string }) => {
+		getCurrentHref: () => currentHref,
+		getIsCurrentlyOnSavedTab: () => isCurrentlyOnSavedTab,
+		getSettings: (_keys: string[]) => Promise.resolve(settings),
+		getWasOnSavedTab: () => wasOnSavedTab,
+		injectStyle: (id: string, options: { css: string }) => {
 			injectStyleCalls.push({ css: options.css, id });
 			const style = document.createElement("style");
 			style.id = id;
 			style.textContent = options.css;
 			return style;
 		},
-		isOnSavedTabFn: () => {
+		isOnSavedTab: () => {
 			isOnSavedTabCalls.value++;
 			return Promise.resolve();
 		},
-		performActionOnTabsFn: (
+		performActionOnTabs: (
 			action: string,
 			payload: FavouriteActionPayload,
 			options?: { addInFront: boolean },
@@ -252,18 +252,18 @@ function loadFavouriteManagerFixture(
 			performActionCalls.push({ action, options, payload });
 			return Promise.resolve();
 		},
-		sendExtensionMessageFn: (message: {
+		sendExtensionMessage: (message: {
 			commands: string[];
 			what: string;
 		}) => {
 			sendMessageCalls.push(message);
 			return Promise.resolve(commands);
 		},
-		showToastFn: (message: string, status: string) => {
+		showToast: (message: string, status: string) => {
 			toasts.push({ message, status });
 		},
 		documentRef,
-		setTimeoutFn: (callback: () => void, delay: number) => {
+		setTimeout: (callback: () => void, delay: number) => {
 			timeoutCalls.push({ callback, delay });
 			return timeoutCalls.length;
 		},

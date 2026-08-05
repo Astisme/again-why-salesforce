@@ -17,9 +17,9 @@ import { runNotSalesforceSetup } from "./notSalesforceSetup-runtime.js";
 
 await runNotSalesforceSetup({
 	browser: BROWSER,
-	ensureTranslatorAvailabilityFn:
+	ensureTranslatorAvailability:
 		TranslationService.ensureTranslatorAvailability,
-	getSettingsFn: getSettings,
+	getSettings: getSettings,
 	hiddenClass: HIDDEN_CLASS,
 	popupLoginNewTab: POPUP_LOGIN_NEW_TAB,
 	popupOpenLogin: POPUP_OPEN_LOGIN,
@@ -27,7 +27,7 @@ await runNotSalesforceSetup({
 	popupSetupNewTab: POPUP_SETUP_NEW_TAB,
 	salesforceLightningPattern: SALESFORCE_LIGHTNING_PATTERN,
 	salesforceSetupHomeMini: SALESFORCE_SETUP_HOME_MINI,
-	sendExtensionMessageFn: sendExtensionMessage,
+	sendExtensionMessage: sendExtensionMessage,
 	setupLightning: SETUP_LIGHTNING,
 	whatGetBrowserTab: WHAT_GET_BROWSER_TAB,
 });

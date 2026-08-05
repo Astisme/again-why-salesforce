@@ -30,14 +30,14 @@ type TranslatorModule = {
 	TranslationService: {
 		FALLBACK_LANGUAGE: string;
 		create: (
-			loadLanguageFn?: (
+			loadLanguage?: (
 				translator: TranslatorInstance,
 			) => Promise<string | null>,
 		) => Promise<TranslatorInstance>;
 		new (secret: symbol): unknown;
 	};
 	ensureTranslatorAvailability: (
-		loadLanguageFn?: (
+		loadLanguage?: (
 			translator: TranslatorInstance,
 		) => Promise<string | null>,
 	) => Promise<TranslatorInstance>;

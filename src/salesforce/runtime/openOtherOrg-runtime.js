@@ -8,17 +8,25 @@ import {
 	TOAST_ERROR,
 	TOAST_WARNING,
 } from "../../core/constants.js";
-import { getSettings } from "../../core/functions.js";
+import { getSettings as getSettingsDefault } from "../../core/functions.js";
 import { TranslationService } from "../../core/translator.js";
 import Tab from "../../core/tab.js";
-import { ensureAllTabsAvailability } from "../../core/tabContainer.js";
+import {
+	ensureAllTabsAvailability as ensureAllTabsAvailabilityDefault,
+} from "../../core/tabContainer.js";
 
-import { generateOpenOtherOrgModal, sldsConfirm } from "../generator.js";
+import {
+	generateOpenOtherOrgModal as generateOpenOtherOrgModalDefault,
+	sldsConfirm as sldsConfirmDefault,
+} from "../generator.js";
 import {
 	createOpenOtherOrgModule as createOpenOtherOrgPureModule,
 } from "../module/openOtherOrg-module.js";
-import { getCurrentHref, getModalHanger } from "../sf-elements.js";
-import { showToast } from "../toast.js";
+import {
+	getCurrentHref as getCurrentHrefDefault,
+	getModalHanger as getModalHangerDefault,
+} from "../sf-elements.js";
+import { showToast as showToastDefault } from "../toast.js";
 
 /**
  * Creates the open-other-org runtime module with dependency overrides.
@@ -30,14 +38,14 @@ import { showToast } from "../toast.js";
  * @param {string} [overrides.setupLightning=SETUP_LIGHTNING] Setup path prefix.
  * @param {string} [overrides.toastError=TOAST_ERROR] Error toast status.
  * @param {string} [overrides.toastWarning=TOAST_WARNING] Warning toast status.
- * @param {(keys: string | string[]) => Promise<unknown>} [overrides.getSettingsFn=getSettings] Settings resolver.
- * @param {(message: string | string[] | unknown[], connector?: string) => Promise<string | string[]>} [overrides.getTranslationsFn=TranslationService.getTranslations] Translation resolver.
+ * @param {(keys: string | string[]) => Promise<unknown>} [overrides.getSettings=getSettingsDefault] Settings resolver.
+ * @param {(message: string | string[] | unknown[], connector?: string) => Promise<string | string[]>} [overrides.getTranslations=TranslationService.getTranslations] Translation resolver.
  * @param {{
  *   containsSalesforceId: (url: string | null) => boolean;
  *   extractOrgName: (value: string | null | undefined) => string;
  *   minifyURL: (value: string | null | undefined) => string;
  * }} [overrides.tabRef=Tab] Tab helper object.
- * @param {() => Promise<{ getSingleTabByData: (data: Record<string, unknown>) => { label?: string; url?: string; } }>} [overrides.ensureAllTabsAvailabilityFn=ensureAllTabsAvailability] Saved-tab container resolver.
+ * @param {() => Promise<{ getSingleTabByData: (data: Record<string, unknown>) => { label?: string; url?: string; } }>} [overrides.ensureAllTabsAvailability=ensureAllTabsAvailabilityDefault] Saved-tab container resolver.
  * @param {(options: { label: string | null; org: string | null; url: string | null; }) => Promise<{
  *   closeButton: {
  *     click: () => void | Promise<void>;
@@ -57,11 +65,11 @@ import { showToast } from "../toast.js";
  *       target: { value: string };
  *     }) => void | Promise<void>) => void;
  *   };
- * }>} [overrides.generateOpenOtherOrgModalFn=generateOpenOtherOrgModal] Modal generator.
+ * }>} [overrides.generateOpenOtherOrgModal=generateOpenOtherOrgModalDefault] Modal generator.
  * @param {string} [overrides.modalId=MODAL_ID] Active modal element id.
- * @param {(message: string | string[], status?: string) => Promise<void> | void} [overrides.showToastFn=showToast] Toast function.
- * @param {() => string} [overrides.getCurrentHrefFn=getCurrentHref] Current href resolver.
- * @param {() => { appendChild: (element: unknown) => unknown } | null} [overrides.getModalHangerFn=getModalHanger] Modal hanger resolver.
+ * @param {(message: string | string[], status?: string) => Promise<void> | void} [overrides.showToast=showToastDefault] Toast function.
+ * @param {() => string} [overrides.getCurrentHref=getCurrentHrefDefault] Current href resolver.
+ * @param {() => { appendChild: (element: unknown) => unknown } | null} [overrides.getModalHanger=getModalHangerDefault] Modal hanger resolver.
  * @param {{ getElementById: (id: string) => unknown } | undefined} [overrides.documentRef=globalThis.document] Document-like object.
  * @param {{ href?: string } | undefined} [overrides.locationRef=globalThis.location] Location-like object.
  * @param {{ info: (message: unknown) => void }} [overrides.consoleRef=console] Console-like object.
@@ -70,8 +78,8 @@ import { showToast } from "../toast.js";
  *   cancelLabel?: string;
  *   closeLabel?: string;
  *   confirmLabel?: string;
- * }) => boolean | Promise<boolean>} [overrides.sldsConfirmFn=sldsConfirm] Confirm callback.
- * @param {(url: string | URL, target?: string) => unknown} [overrides.openFn=globalThis.open] Window open callback.
+ * }) => boolean | Promise<boolean>} [overrides.sldsConfirm=sldsConfirmDefault] Confirm callback.
+ * @param {(url: string | URL, target?: string) => unknown} [overrides.open=globalThis.open] Window open callback.
  * @param {{ new(input: string): URL }} [overrides.urlCtor=URL] URL constructor.
  * @return {{
  *   createOpenOtherOrgModal: (options?: { label?: string | null; org?: string | null; url?: string | null; }) => Promise<void>;
@@ -84,20 +92,20 @@ export function createOpenOtherOrgModule({
 	setupLightning = SETUP_LIGHTNING,
 	toastError = TOAST_ERROR,
 	toastWarning = TOAST_WARNING,
-	getSettingsFn = getSettings,
-	getTranslationsFn = TranslationService.getTranslations,
+	getSettings = getSettingsDefault,
+	getTranslations = TranslationService.getTranslations,
 	tabRef = Tab,
-	ensureAllTabsAvailabilityFn = ensureAllTabsAvailability,
-	generateOpenOtherOrgModalFn = generateOpenOtherOrgModal,
+	ensureAllTabsAvailability = ensureAllTabsAvailabilityDefault,
+	generateOpenOtherOrgModal = generateOpenOtherOrgModalDefault,
 	modalId = MODAL_ID,
-	showToastFn = showToast,
-	getCurrentHrefFn = getCurrentHref,
-	getModalHangerFn = getModalHanger,
+	showToast = showToastDefault,
+	getCurrentHref = getCurrentHrefDefault,
+	getModalHanger = getModalHangerDefault,
 	documentRef = globalThis.document,
 	locationRef = globalThis.location,
 	consoleRef = console,
-	sldsConfirmFn = sldsConfirm,
-	openFn = globalThis.open,
+	sldsConfirm = sldsConfirmDefault,
+	open = globalThis.open,
 	urlCtor = URL,
 } = {}) {
 	return createOpenOtherOrgPureModule({
@@ -107,20 +115,20 @@ export function createOpenOtherOrgModule({
 		setupLightning,
 		toastError,
 		toastWarning,
-		getSettingsFn,
-		getTranslationsFn,
+		getSettings,
+		getTranslations,
 		tabRef,
-		ensureAllTabsAvailabilityFn,
-		generateOpenOtherOrgModalFn,
+		ensureAllTabsAvailability,
+		generateOpenOtherOrgModal,
 		modalId,
-		showToastFn,
-		getCurrentHrefFn,
-		getModalHangerFn,
+		showToast,
+		getCurrentHref,
+		getModalHanger,
 		documentRef,
 		locationRef,
 		consoleRef,
-		sldsConfirmFn,
-		openFn,
+		sldsConfirm,
+		open,
 		urlCtor,
 	});
 }

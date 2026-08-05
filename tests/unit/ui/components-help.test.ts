@@ -49,19 +49,19 @@ Deno.test("help component syncs link attributes and accessibility text in isolat
 				registeredConstructor = constructor as HelpComponentClass;
 			},
 		},
-		generateHelpWithPopupFn: () =>
+		generateHelpWithPopup: () =>
 			({
 				anchor: new MockElement("a"),
 				linkTip: new MockElement("span"),
 				root: new MockElement("div"),
 				tooltip: new MockElement("div"),
 			}) as never,
-		getTranslationsFn: () => {
+		getTranslations: () => {
 			translateCalls++;
 			return Promise.resolve("Help");
 		},
 		hiddenClass: "hidden",
-		injectStyleFn: (id: string, options: { link: string }) => {
+		injectStyle: (id: string, options: { link: string }) => {
 			injectCalls.push({ id, link: options.link });
 			return new MockElement("link") as never;
 		},

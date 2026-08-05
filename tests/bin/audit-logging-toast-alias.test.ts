@@ -34,11 +34,11 @@ Deno.test("suppresses trace findings when console warn/error aliases are invoked
 			assertEquals(String(path), "/repo/src/salesforce/toast.js");
 			return Promise.resolve([
 				"function consoleToastedMessage(message, status) {",
-				"\tlet logFn = null;",
+				"\tlet log = null;",
 				"\tif (status === 'error') {",
-				"\t\tlogFn = console.error;",
+				"\t\tlog = console.error;",
 				"\t}",
-				"\tlogFn?.(message);",
+				"\tlog?.(message);",
 				"}",
 			].join("\n"));
 		},
@@ -64,7 +64,7 @@ Deno.test("keeps trace findings when warn/error aliases are never invoked", asyn
 		"readTextFile",
 		(): Promise<string> =>
 			Promise.resolve(
-				"let logFn = null;\nlogFn = console.error;\nlogFn = console.warn;",
+				"let log = null;\nlog = console.error;\nlog = console.warn;",
 			),
 	);
 
@@ -102,7 +102,7 @@ Deno.test("keeps non-trace findings while suppressing trace findings", async () 
 		"readTextFile",
 		(): Promise<string> =>
 			Promise.resolve(
-				"let logFn = null;\nlogFn = console.warn;\nlogFn('x');",
+				"let log = null;\nlog = console.warn;\nlog('x');",
 			),
 	);
 

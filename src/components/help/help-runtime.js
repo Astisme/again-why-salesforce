@@ -4,7 +4,7 @@
  * @param {Object} options Runtime dependencies.
  * @param {{ runtime: { getURL: (path: string) => string } }} options.browser Browser runtime wrapper.
  * @param {string} options.hiddenClass CSS class used to hide the optional link tip.
- * @param {(id: string, options: { link: string }) => unknown} options.injectStyleFn Style injector.
+ * @param {(id: string, options: { link: string }) => unknown} options.injectStyle Style injector.
  * @param {() => {
  *   anchor: {
  *     href: string;
@@ -15,17 +15,17 @@
  *   linkTip: { classList: { toggle: (name: string, force?: boolean) => void } };
  *   root: { appendChild: (child: unknown) => unknown };
  *   tooltip: { dataset: Record<string, string> };
- * }} options.generateHelpWithPopupFn DOM factory for help UI.
- * @param {(message: string) => Promise<string>} options.getTranslationsFn Translation resolver.
+ * }} options.generateHelpWithPopup DOM factory for help UI.
+ * @param {(message: string) => Promise<string>} options.getTranslations Translation resolver.
  * @param {typeof HTMLElement} [options.HTMLElementRef=HTMLElement] Base HTMLElement constructor.
  * @return {typeof HTMLElement} Configured custom-element class.
  */
 export function createHelpAwsClass({
 	browser,
 	hiddenClass,
-	injectStyleFn,
-	generateHelpWithPopupFn,
-	getTranslationsFn,
+	injectStyle,
+	generateHelpWithPopup,
+	getTranslations,
 	HTMLElementRef = HTMLElement,
 } = {}) {
 	/**
@@ -55,12 +55,12 @@ export function createHelpAwsClass({
 			super();
 			const shadow = this.attachShadow({ mode: "open" });
 			const { root, anchor, tooltip, linkTip } =
-				generateHelpWithPopupFn();
+				generateHelpWithPopup();
 			shadow.appendChild(root);
 			this._anchor = anchor;
 			this._tooltip = tooltip;
 			this._linkTip = linkTip;
-			const linkEl = injectStyleFn(
+			const linkEl = injectStyle(
 				"awsf-help",
 				{
 					link: browser.runtime.getURL("/components/help/help.css"),
@@ -128,7 +128,7 @@ export function createHelpAwsClass({
 		 * @return {Promise<void>} Promise fulfilled once the translated label has been applied.
 		 */
 		async _addAssistiveText() {
-			const helpMsg = await getTranslationsFn("help");
+			const helpMsg = await getTranslations("help");
 			this._anchor.title = helpMsg;
 			this._anchor.setAttribute("aria-label", helpMsg);
 		}
@@ -151,28 +151,28 @@ export function createHelpAwsClass({
  *   linkTip: { classList: { toggle: (name: string, force?: boolean) => void } };
  *   root: { appendChild: (child: unknown) => unknown };
  *   tooltip: { dataset: Record<string, string> };
- * }} options.generateHelpWithPopupFn DOM factory for help UI.
- * @param {(message: string) => Promise<string>} options.getTranslationsFn Translation resolver.
+ * }} options.generateHelpWithPopup DOM factory for help UI.
+ * @param {(message: string) => Promise<string>} options.getTranslations Translation resolver.
  * @param {string} options.hiddenClass CSS class used to hide the optional link tip.
- * @param {(id: string, options: { link: string }) => unknown} options.injectStyleFn Style injector.
+ * @param {(id: string, options: { link: string }) => unknown} options.injectStyle Style injector.
  * @param {typeof HTMLElement} [options.HTMLElementRef=HTMLElement] Base HTMLElement constructor.
  * @return {typeof HTMLElement} Registered constructor.
  */
 export function registerHelpComponent({
 	browser,
 	customElementsRef = customElements,
-	generateHelpWithPopupFn,
-	getTranslationsFn,
+	generateHelpWithPopup,
+	getTranslations,
 	hiddenClass,
-	injectStyleFn,
+	injectStyle,
 	HTMLElementRef = HTMLElement,
 } = {}) {
 	const HelpAws = createHelpAwsClass({
 		browser,
-		generateHelpWithPopupFn,
-		getTranslationsFn,
+		generateHelpWithPopup,
+		getTranslations,
 		hiddenClass,
-		injectStyleFn,
+		injectStyle,
 		HTMLElementRef,
 	});
 	customElementsRef.define("help-aws", HelpAws);

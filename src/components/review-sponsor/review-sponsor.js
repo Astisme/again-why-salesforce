@@ -1,5 +1,12 @@
 import { createReviewSponsorModule } from "./review-sponsor-runtime.js";
 
-const { showReviewOrSponsor } = createReviewSponsorModule();
+const reviewSponsorModule = createReviewSponsorModule();
 
-export { showReviewOrSponsor };
+/**
+ * Shows review or sponsor prompt using runtime defaults.
+ *
+ * @return {Promise<void> | void}
+ */
+export function showReviewOrSponsor() {
+	return reviewSponsorModule.showReviewOrSponsor();
+}

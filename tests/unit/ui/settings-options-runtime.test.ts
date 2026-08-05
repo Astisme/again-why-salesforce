@@ -119,7 +119,7 @@ Deno.test("options-runtime forwards runtime options to injected factories", asyn
 		const sentinel = { ok: true };
 
 		const runtime = createOptionsRuntime({
-			createOptionsModuleFn: (
+			createOptionsModule: (
 				overrides?: Record<string, unknown>,
 				options?: { runRestoreOnLoad?: boolean },
 			) => {
@@ -140,7 +140,7 @@ Deno.test("options-runtime forwards runtime options to injected factories", asyn
 		);
 		assertStrictEquals(
 			runOptionsRuntime({
-				createOptionsModuleFn: (
+				createOptionsModule: (
 					overrides?: Record<string, unknown>,
 					options?: { runRestoreOnLoad?: boolean },
 				) => {
@@ -194,7 +194,7 @@ Deno.test("options entrypoint bootstraps only when enabled", async () => {
 		let runs = 0;
 		const skipResult = bootstrapOptions({
 			skipAutoBootstrap: true,
-			runOptionsRuntimeFn: () => {
+			runOptionsRuntime: () => {
 				runs++;
 				return { started: true };
 			},
@@ -204,7 +204,7 @@ Deno.test("options entrypoint bootstraps only when enabled", async () => {
 
 		const runResult = bootstrapOptions({
 			skipAutoBootstrap: false,
-			runOptionsRuntimeFn: () => {
+			runOptionsRuntime: () => {
 				runs++;
 				return { started: true };
 			},

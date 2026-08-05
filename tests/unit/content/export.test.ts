@@ -57,11 +57,11 @@ function loadExportModule({
 			getElementById: () =>
 				hasExistingModal ? new MockElement("div") : null,
 		},
-		ensureAllTabsAvailabilityFn: () =>
+		ensureAllTabsAvailability: () =>
 			Promise.resolve({
 				pinned,
 			}),
-		generateSldsModalWithTabListFn: (_allTabs, options) => {
+		generateSldsModalWithTabList: (_allTabs, options) => {
 			if (generateError != null) {
 				throw generateError;
 			}
@@ -76,7 +76,7 @@ function loadExportModule({
 				saveButton,
 			});
 		},
-		getModalHangerFn: () => modalHanger as never,
+		getModalHanger: () => modalHanger as never,
 		tabContainerRef: {
 			getThrowawayInstance: () => ({
 				pinned: 0,
@@ -91,10 +91,10 @@ function loadExportModule({
 				},
 			}),
 		},
-		sendExtensionMessageFn: (message) => {
+		sendExtensionMessage: (message) => {
 			messages.push(message);
 		},
-		showToastFn: (message, status) => {
+		showToast: (message, status) => {
 			toasts.push({ message, status });
 		},
 	});

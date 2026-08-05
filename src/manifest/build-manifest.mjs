@@ -7,5 +7,5 @@ import { runBuildManifest } from "./build-manifest-runtime.mjs";
 runBuildManifest({
 	argv: process.argv,
 	manifest: structuredClone(templateManifest),
-	writeFileSyncFn: writeFileSync,
+	writeFileSync: writeFileSync,
 });

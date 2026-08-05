@@ -102,25 +102,25 @@ async function loadPermissionsModule(url: string) {
 				getURL: (path: string) => `chrome-extension://test/${path}`,
 			},
 		},
-		closePopupFn: () => {
+		closePopup: () => {
 			counters.closeCalls++;
 		},
 		doNotRequestFramePermissionKey: "no-frame-request",
 		documentRef: document,
-		ensureTranslatorAvailabilityFn: () => {
+		ensureTranslatorAvailability: () => {
 			counters.translatorCalls++;
 			return Promise.resolve();
 		},
 		hiddenClass: "hidden",
 		localStorageRef: localStorage,
 		locationRef: window.location,
-		requestExportPermissionFn: () => {
+		requestExportPermission: () => {
 			counters.exportRequests++;
 		},
-		requestFramePatternsPermissionFn: () => {
+		requestFramePatternsPermission: () => {
 			counters.frameRequests++;
 		},
-		setTimeoutFn: (callback: () => void, delay: number) => {
+		setTimeout: (callback: () => void, delay: number) => {
 			timeoutCalls.push(delay);
 			callback();
 			return timeoutCalls.length;

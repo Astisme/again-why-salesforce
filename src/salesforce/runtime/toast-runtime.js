@@ -7,9 +7,11 @@ import {
 	TOAST_SUCCESS,
 	TOAST_WARNING,
 } from "../../core/constants.js";
-import { calculateReadingTime } from "../../core/functions.js";
+import { calculateReadingTime as calculateReadingTimeDefault } from "../../core/functions.js";
 
-import { generateSldsToastMessage } from "../generator.js";
+import {
+	generateSldsToastMessage as generateSldsToastMessageDefault,
+} from "../generator.js";
 import { createToastModule as createToastPureModule } from "../module/toast-module.js";
 
 /**
@@ -17,14 +19,14 @@ import { createToastModule as createToastPureModule } from "../module/toast-modu
  *
  * @param {Object} [overrides={}] Runtime overrides.
  * @param {Set<string>} [overrides.allToastTypes=ALL_TOAST_TYPES] Allowed toast statuses.
- * @param {(message: string) => number} [overrides.calculateReadingTimeFn=calculateReadingTime] Reading time calculator.
+ * @param {(message: string) => number} [overrides.calculateReadingTime=calculateReadingTimeDefault] Reading time calculator.
  * @param {(message: string[], status: string) => Promise<{
  *   remove: () => void;
  *   textContent?: string | null;
  * }> | {
  *   remove: () => void;
  *   textContent?: string | null;
- * }} [overrides.generateSldsToastMessageFn=generateSldsToastMessage] Toast element generator.
+ * }} [overrides.generateSldsToastMessage=generateSldsToastMessageDefault] Toast element generator.
  * @param {{
  *   getElementsByClassName: (name: string) => ArrayLike<{
  *     appendChild: (element: {
@@ -34,7 +36,7 @@ import { createToastModule as createToastPureModule } from "../module/toast-modu
  *   }> | null;
  * }} [overrides.documentRef=globalThis.document] Document-like object.
  * @param {{ error: (message: string | string[]) => void; info: (message: string | string[]) => void; log: (message: string | string[]) => void; trace: () => void; warn: (message: string | string[]) => void; }} [overrides.consoleRef=console] Console-like object.
- * @param {(callback: () => void, delay?: number) => number} [overrides.setTimeoutFn=globalThis.setTimeout] Timeout scheduler.
+ * @param {(callback: () => void, delay?: number) => number} [overrides.setTimeout=globalThis.setTimeout] Timeout scheduler.
  * @param {string} [overrides.toastError=TOAST_ERROR] Error toast status.
  * @param {string} [overrides.toastInfo=TOAST_INFO] Info toast status.
  * @param {string} [overrides.toastSuccess=TOAST_SUCCESS] Success toast status.
@@ -54,11 +56,11 @@ import { createToastModule as createToastPureModule } from "../module/toast-modu
  */
 export function createToastModule({
 	allToastTypes = ALL_TOAST_TYPES,
-	calculateReadingTimeFn = calculateReadingTime,
-	generateSldsToastMessageFn = generateSldsToastMessage,
+	calculateReadingTime = calculateReadingTimeDefault,
+	generateSldsToastMessage = generateSldsToastMessageDefault,
 	documentRef = globalThis.document,
 	consoleRef = console,
-	setTimeoutFn = globalThis.setTimeout,
+	setTimeout = globalThis.setTimeout,
 	toastError = TOAST_ERROR,
 	toastInfo = TOAST_INFO,
 	toastSuccess = TOAST_SUCCESS,
@@ -66,11 +68,11 @@ export function createToastModule({
 } = {}) {
 	return createToastPureModule({
 		allToastTypes,
-		calculateReadingTimeFn,
-		generateSldsToastMessageFn,
+		calculateReadingTime,
+		generateSldsToastMessage,
 		documentRef,
 		consoleRef,
-		setTimeoutFn,
+		setTimeout,
 		toastError,
 		toastInfo,
 		toastSuccess,

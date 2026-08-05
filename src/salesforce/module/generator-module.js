@@ -133,12 +133,12 @@ let showToast = defaultShowToast;
  *
  * @template T
  * @param {T | null | undefined} nextValue Candidate override value.
- * @param {(value: T) => void} assignFn Setter for the target runtime dependency.
+ * @param {(value: T) => void} assign Setter for the target runtime dependency.
  * @return {void}
  */
-function applyOverride(nextValue, assignFn) {
+function applyOverride(nextValue, assign) {
 	if (nextValue != null) {
-		assignFn(nextValue);
+		assign(nextValue);
 	}
 }
 

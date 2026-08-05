@@ -16,9 +16,9 @@ function handleDragOver(event) {
  * @param {Object} options Runtime dependencies.
  * @param {string} options.extensionName Root UL id used by drag mode.
  * @param {{ keyPinnedTabsNo: string }} options.tabContainerRef TabContainer constants.
- * @param {() => Promise<Record<string, number>>} options.ensureAllTabsAvailabilityFn Tabs resolver.
+ * @param {() => Promise<Record<string, number>>} options.ensureAllTabsAvailability Tabs resolver.
  * @param {{ getElementById: (id: string) => unknown; querySelector: (selector: string) => unknown; }} options.documentRef Document wrapper.
- * @param {(callback: () => void, delay: number) => number} options.setTimeoutFn Timeout scheduler.
+ * @param {(callback: () => void, delay: number) => number} options.setTimeout Timeout scheduler.
  * @return {{
  *   setupDrag: (callback: (payload: { fromIndex: string | null; toIndex: number | string }) => void) => void;
  *   setupDragForTable: (callback: (payload: { fromIndex: string | null; toIndex: number | string }) => void) => void;
@@ -28,15 +28,15 @@ function handleDragOver(event) {
 export function createDragHandlerModule({
 	extensionName,
 	tabContainerRef,
-	ensureAllTabsAvailabilityFn,
+	ensureAllTabsAvailability,
 	documentRef,
-	setTimeoutFn,
+	setTimeout,
 } = {}) {
 	const extensionNameRuntime = extensionName;
 	const tabContainerRuntime = tabContainerRef;
-	const ensureAllTabsAvailabilityRuntime = ensureAllTabsAvailabilityFn;
+	const ensureAllTabsAvailabilityRuntime = ensureAllTabsAvailability;
 	const documentRuntime = documentRef;
-	const setTimeoutRuntime = setTimeoutFn;
+	const setTimeoutRuntime = setTimeout;
 
 	let tableRuntime = null;
 	let ulRuntime = null;

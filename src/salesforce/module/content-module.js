@@ -406,7 +406,7 @@ async function checkAddLightningNavigation() {
  * @param {Array<Tab>|null} [param0.tabs=null] - The tabs to reload. If provided, they are passed to `reloadTabs`.
  * @param {boolean} [param0.shouldReload=true] - If the Tabs should be reloaded from scratch
  */
-function sf_afterSet({
+export function sf_afterSet({
 	what = CONSTANTS.WHAT_SAVED,
 	tabs = null,
 	shouldReload = true,
@@ -645,7 +645,7 @@ function reloadTabs(tabs = null) {
  *
  * @return {Promise<void>} A promise that resolves once the tabs have been reordered and updated in `allTabs`.
  */
-async function reorderTabsUl() {
+export async function reorderTabsUl() {
 	try {
 		const setupTabUl = getSetupTabUl();
 		// Get the list of tabs
@@ -704,7 +704,7 @@ function _toggleWarning(duplicatetabs = []) {
  *
  * @param {string} miniURL - The URL (or part of it) used to identify duplicate tabs.
  */
-function makeDuplicatesBold(miniURL) {
+export function makeDuplicatesBold(miniURL) {
 	const setupTabUl = getSetupTabUl();
 	const duplicatetabs = setupTabUl?.querySelectorAll(`a[title="${miniURL}"]`);
 	if (duplicatetabs == null) {
@@ -1161,7 +1161,7 @@ function executeTabAction({
  * @param {Object} options - Options that influence the behavior of the action (e.g., filters or specific conditions).
  * @return {Promise<void>}
  */
-async function performActionOnTabs(
+export async function performActionOnTabs(
 	action,
 	tab = undefined,
 	options = undefined,
@@ -1802,3 +1802,8 @@ export function createContentModule(overrides = {}) {
 		showToast,
 	};
 }
+
+/**
+ * Default content module singleton.
+ */
+export const contentModule = createContentModule();

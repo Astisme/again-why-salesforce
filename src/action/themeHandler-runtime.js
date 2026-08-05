@@ -4,22 +4,22 @@
  * @param {Object} options Runtime dependencies.
  * @param {{ documentElement: { dataset: Record<string, string | null> } }} options.documentRef Document-like host.
  * @param {{ getItem: (key: string) => string | null; setItem: (key: string, value: string) => void; }} options.localStorageRef Storage implementation.
- * @param {((query: string) => { matches: boolean; addEventListener: (type: "change", listener: (event: { matches: boolean }) => void | Promise<void>) => void; removeEventListener: (type: "change", listener: (event: { matches: boolean }) => void | Promise<void>) => void; }) | undefined} options.matchMediaFn Match-media factory.
- * @param {(message: { what: string; theme: string }) => Promise<unknown> | unknown} options.sendExtensionMessageFn Runtime message sender.
+ * @param {((query: string) => { matches: boolean; addEventListener: (type: "change", listener: (event: { matches: boolean }) => void | Promise<void>) => void; removeEventListener: (type: "change", listener: (event: { matches: boolean }) => void | Promise<void>) => void; }) | undefined} options.matchMedia Match-media factory.
+ * @param {(message: { what: string; theme: string }) => Promise<unknown> | unknown} options.sendExtensionMessage Runtime message sender.
  * @param {string} options.whatTheme Message type used for theme updates.
  * @return {{ handleSwitchColorTheme: () => Promise<unknown> | unknown; initTheme: () => Promise<void> | void; systemColorSchemeListener: (enable?: boolean | null) => Promise<void> | void; }} Theme runtime API.
  */
 export function createThemeHandlerRuntime({
 	documentRef,
 	localStorageRef,
-	matchMediaFn,
-	sendExtensionMessageFn,
+	matchMedia,
+	sendExtensionMessage,
 	whatTheme,
 } = {}) {
 	const html = documentRef?.documentElement ?? null;
 	const localStorageRuntime = localStorageRef;
-	const matchMediaRuntime = matchMediaFn;
-	const sendExtensionMessageRuntime = sendExtensionMessageFn;
+	const matchMediaRuntime = matchMedia;
+	const sendExtensionMessageRuntime = sendExtensionMessage;
 	const whatThemeRuntime = whatTheme;
 	let systemColorListener = null;
 

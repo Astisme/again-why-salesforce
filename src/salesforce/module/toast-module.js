@@ -5,14 +5,14 @@
  *
  * @param {Object} [options={}] Module dependencies.
  * @param {Set<string>} [options.allToastTypes=new Set()] Allowed toast statuses.
- * @param {(message: string) => number} [options.calculateReadingTimeFn] Reading time calculator.
+ * @param {(message: string) => number} [options.calculateReadingTime] Reading time calculator.
  * @param {(message: string[], status: string) => Promise<{
  *   remove: () => void;
  *   textContent?: string | null;
  * }> | {
  *   remove: () => void;
  *   textContent?: string | null;
- * }} [options.generateSldsToastMessageFn] Toast element generator.
+ * }} [options.generateSldsToastMessage] Toast element generator.
  * @param {{
  *   getElementsByClassName: (name: string) => ArrayLike<{
  *     appendChild: (element: {
@@ -22,7 +22,7 @@
  *   }> | null;
  * }} [options.documentRef=document] Document-like object.
  * @param {{ error: (message: string | string[]) => void; info: (message: string | string[]) => void; log: (message: string | string[]) => void; trace: () => void; warn: (message: string | string[]) => void; }} [options.consoleRef=console] Console-like object.
- * @param {(callback: () => void, delay?: number) => number} [options.setTimeoutFn=globalThis.setTimeout] Timeout scheduler.
+ * @param {(callback: () => void, delay?: number) => number} [options.setTimeout=globalThis.setTimeout] Timeout scheduler.
  * @param {string} [options.toastError="error"] Error toast status.
  * @param {string} [options.toastInfo="info"] Info toast status.
  * @param {string} [options.toastSuccess="success"] Success toast status.
@@ -42,11 +42,11 @@
  */
 export function createToastModule({
 	allToastTypes = new Set(),
-	calculateReadingTimeFn,
-	generateSldsToastMessageFn,
+	calculateReadingTime,
+	generateSldsToastMessage,
 	documentRef = globalThis.document,
 	consoleRef = globalThis.console,
-	setTimeoutFn = globalThis.setTimeout,
+	setTimeout = globalThis.setTimeout,
 	toastError = "error",
 	toastInfo = "info",
 	toastSuccess = "success",
@@ -88,26 +88,26 @@ export function createToastModule({
 	 * @return {void}
 	 */
 	function consoleToastedMessage(message, status) {
-		let logFn = null;
+		let log = null;
 		switch (status) {
 			case toastSuccess:
-				logFn = consoleRef.log;
+				log = consoleRef.log;
 				break;
 			case toastInfo:
-				logFn = consoleRef.info;
+				log = consoleRef.info;
 				break;
 			case toastError:
 				consoleRef.trace();
-				logFn = consoleRef.error;
+				log = consoleRef.error;
 				break;
 			case toastWarning:
 				consoleRef.trace();
-				logFn = consoleRef.warn;
+				log = consoleRef.warn;
 				break;
 			default:
 				break;
 		}
-		logFn?.(message);
+		log?.(message);
 	}
 
 	/**
@@ -121,18 +121,18 @@ export function createToastModule({
 		if (!allToastTypes.has(status)) {
 			throw new TypeError("error_unknown_toast_type");
 		}
-		if (typeof generateSldsToastMessageFn !== "function") {
+		if (typeof generateSldsToastMessage !== "function") {
 			throw new TypeError("error_required_params");
 		}
 		const hanger = getToastHanger();
-		const toastElement = await generateSldsToastMessageFn(
+		const toastElement = await generateSldsToastMessage(
 			message,
 			status,
 		);
 		hanger?.appendChild(toastElement);
-		(setTimeoutFn ?? globalThis.setTimeout)?.(() => {
+		(setTimeout ?? globalThis.setTimeout)?.(() => {
 			toastElement.remove();
-		}, calculateReadingTimeFn?.(toastElement.textContent ?? "") ?? 0);
+		}, calculateReadingTime?.(toastElement.textContent ?? "") ?? 0);
 		consoleToastedMessage(message, status);
 	}
 

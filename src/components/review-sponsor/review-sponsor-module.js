@@ -21,13 +21,13 @@ const FALLBACK_HTML_ELEMENT = class {}; // NOSONAR
  * @param {{ runtime: { getURL: (path: string) => string } }} options.browser Browser runtime wrapper.
  * @param {string} options.extensionUsageDays Setting key that stores usage-day count.
  * @param {string} options.hiddenClass CSS class used to hide inactive controls.
- * @param {(keys: string[]) => Promise<{ enabled?: number } | null | undefined>} options.getSettingsFn Settings reader.
- * @param {(id: string, options: { link: string }) => unknown} options.injectStyleFn Style injector.
- * @param {() => Promise<Array<unknown>>} options.ensureAllTabsAvailabilityFn Tabs resolver.
- * @param {(message: string) => Promise<string>} options.getTranslationsFn Translator helper.
- * @param {(options?: { allTabs?: unknown[]; usageDays?: number }) => { review: boolean; sponsor: boolean }} options.shouldShowReviewOrSponsorFn Visibility resolver.
- * @param {() => unknown} options.openCorrectBrowserReviewLinkFn Review link opener.
- * @param {() => unknown} options.openSponsorLinkFn Sponsor link opener.
+ * @param {(keys: string[]) => Promise<{ enabled?: number } | null | undefined>} options.getSettings Settings reader.
+ * @param {(id: string, options: { link: string }) => unknown} options.injectStyle Style injector.
+ * @param {() => Promise<Array<unknown>>} options.ensureAllTabsAvailability Tabs resolver.
+ * @param {(message: string) => Promise<string>} options.getTranslations Translator helper.
+ * @param {(options?: { allTabs?: unknown[]; usageDays?: number }) => { review: boolean; sponsor: boolean }} options.shouldShowReviewOrSponsor Visibility resolver.
+ * @param {() => unknown} options.openCorrectBrowserReviewLink Review link opener.
+ * @param {() => unknown} options.openSponsorLink Sponsor link opener.
  * @param {() => {
  *   reviewLink: {
  *     addEventListener: (type: string, listener: (event: Event) => void) => void;
@@ -50,9 +50,9 @@ const FALLBACK_HTML_ELEMENT = class {}; // NOSONAR
  *     classList: { toggle: (name: string, force?: boolean) => void };
  *     setAttribute: (name: string, value: string) => void;
  *   };
- * }} options.generateReviewSponsorSvgsFn SVG factory.
+ * }} options.generateReviewSponsorSvgs SVG factory.
  * @param {{ define: (name: string, constructor: unknown) => void }} [options.customElementsRef=customElements] Custom-elements registry.
- * @param {(url: string | URL) => unknown} [options.openFn=open] Link opener.
+ * @param {(url: string | URL) => unknown} [options.open=open] Link opener.
  * @param {typeof HTMLElement} [options.HTMLElementRef=HTMLElement] Base HTMLElement constructor.
  * @return {{
  *   ReviewSponsorAws: typeof HTMLElement;
@@ -84,14 +84,14 @@ export function createReviewSponsorModule({
 	browser,
 	extensionUsageDays,
 	hiddenClass,
-	getSettingsFn,
-	injectStyleFn,
-	ensureAllTabsAvailabilityFn,
-	getTranslationsFn,
-	shouldShowReviewOrSponsorFn,
-	openCorrectBrowserReviewLinkFn,
-	openSponsorLinkFn,
-	generateReviewSponsorSvgsFn,
+	getSettings,
+	injectStyle,
+	ensureAllTabsAvailability,
+	getTranslations,
+	shouldShowReviewOrSponsor,
+	openCorrectBrowserReviewLink,
+	openSponsorLink,
+	generateReviewSponsorSvgs,
 	customElementsRef = globalThis.customElements ?? FALLBACK_CUSTOM_ELEMENTS,
 	HTMLElementRef = globalThis.HTMLElement ?? FALLBACK_HTML_ELEMENT,
 } = {}) {
@@ -126,7 +126,7 @@ export function createReviewSponsorModule({
 		) {
 			throw new Error("error_required_params");
 		}
-		const whatToShow = shouldShowReviewOrSponsorFn({
+		const whatToShow = shouldShowReviewOrSponsor({
 			allTabs,
 			usageDays,
 		});
@@ -141,13 +141,13 @@ export function createReviewSponsorModule({
 		if (whatToShow.review) {
 			reviewLink.addEventListener("click", (event) => {
 				event.preventDefault();
-				openCorrectBrowserReviewLinkFn();
+				openCorrectBrowserReviewLink();
 			});
 		}
 		if (whatToShow.sponsor) {
 			sponsorLink.addEventListener("click", (event) => {
 				event.preventDefault();
-				openSponsorLinkFn();
+				openSponsorLink();
 			});
 		}
 	}
@@ -162,9 +162,9 @@ export function createReviewSponsorModule({
 		constructor() {
 			super();
 			const shadow = this.attachShadow({ mode: "open" });
-			const result = generateReviewSponsorSvgsFn();
+			const result = generateReviewSponsorSvgs();
 			shadow.appendChild(result.root);
-			const linkEl = injectStyleFn(
+			const linkEl = injectStyle(
 				"awsf-rev-spons",
 				{
 					link: browser.runtime.getURL(
@@ -213,7 +213,7 @@ export function createReviewSponsorModule({
 		 * @return {Promise<number | undefined>} Usage days.
 		 */
 		async _getExtensionUsageDays() {
-			const usageSettings = await getSettingsFn([
+			const usageSettings = await getSettings([
 				extensionUsageDays,
 			]);
 			return usageSettings?.enabled;
@@ -242,9 +242,9 @@ export function createReviewSponsorModule({
 				allTabs,
 				usageDays,
 			] = await Promise.all([
-				getTranslationsFn("write_review"),
-				getTranslationsFn("send_tip"),
-				ensureAllTabsAvailabilityFn(),
+				getTranslations("write_review"),
+				getTranslations("send_tip"),
+				ensureAllTabsAvailability(),
 				this._getExtensionUsageDays(),
 			]);
 			showReviewOrSponsor(Object.assign(result, {

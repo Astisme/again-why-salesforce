@@ -92,7 +92,7 @@ async function loadNotSalesforceSetupModule({
 				},
 			},
 		},
-		closePopupFn: () => {
+		closePopup: () => {
 			counters.closeCalls++;
 		},
 		consoleRef: {
@@ -101,11 +101,11 @@ async function loadNotSalesforceSetupModule({
 			},
 		},
 		documentRef: document,
-		ensureTranslatorAvailabilityFn: () => {
+		ensureTranslatorAvailability: () => {
 			counters.translatorCalls++;
 			return Promise.resolve();
 		},
-		getSettingsFn: () => Promise.resolve(settings),
+		getSettings: () => Promise.resolve(settings),
 		hiddenClass: "hidden",
 		locationRef: window.location,
 		popupLoginNewTab: "popup_login_new_tab",
@@ -115,11 +115,11 @@ async function loadNotSalesforceSetupModule({
 		salesforceLightningPattern:
 			/^https:\/\/[a-z0-9.-]+\.lightning\.force\.com(?::\d+)?(?:\/|$).*/i,
 		salesforceSetupHomeMini: "SetupOneHome/home",
-		sendExtensionMessageFn: (message: { what: string }) => {
+		sendExtensionMessage: (message: { what: string }) => {
 			sendMessages.push(message);
 			return Promise.resolve(remainingResponses.shift() ?? null);
 		},
-		setTimeoutFn: (callback: () => void) => {
+		setTimeout: (callback: () => void) => {
 			callback();
 			return counters.closeCalls;
 		},

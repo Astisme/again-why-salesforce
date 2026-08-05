@@ -35,7 +35,7 @@ function loadLogoModule() {
 		documentRef: {
 			documentElement: html,
 		},
-		initThemeFn: () => {
+		initTheme: () => {
 			initThemeCalls++;
 		},
 		whatTheme: "theme",

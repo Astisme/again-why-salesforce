@@ -22,14 +22,14 @@ function matchesSalesforceUrlPattern(pattern, value) {
  * @param {string} [options.setupLightning="/lightning/setup/"] Setup path prefix.
  * @param {string} [options.toastError="error"] Error toast status.
  * @param {string} [options.toastWarning="warning"] Warning toast status.
- * @param {(keys: string | string[]) => Promise<unknown>} [options.getSettingsFn] Settings resolver.
- * @param {(message: string | string[] | unknown[], connector?: string) => Promise<string | string[]>} [options.getTranslationsFn] Translation resolver.
+ * @param {(keys: string | string[]) => Promise<unknown>} [options.getSettings] Settings resolver.
+ * @param {(message: string | string[] | unknown[], connector?: string) => Promise<string | string[]>} [options.getTranslations] Translation resolver.
  * @param {{
  *   containsSalesforceId: (url: string | null) => boolean;
  *   extractOrgName: (value: string | null | undefined) => string;
  *   minifyURL: (value: string | null | undefined) => string;
  * }} [options.tabRef] Tab helper object.
- * @param {() => Promise<{ getSingleTabByData: (data: Record<string, unknown>) => { label?: string; url?: string; } }>} [options.ensureAllTabsAvailabilityFn] Saved-tab container resolver.
+ * @param {() => Promise<{ getSingleTabByData: (data: Record<string, unknown>) => { label?: string; url?: string; } }>} [options.ensureAllTabsAvailability] Saved-tab container resolver.
  * @param {(options: { label: string | null; org: string | null; url: string | null; }) => Promise<{
  *   closeButton: {
  *     click: () => void | Promise<void>;
@@ -49,11 +49,11 @@ function matchesSalesforceUrlPattern(pattern, value) {
  *       target: { value: string };
  *     }) => void | Promise<void>) => void;
  *   };
- * }>} [options.generateOpenOtherOrgModalFn] Modal generator.
+ * }>} [options.generateOpenOtherOrgModal] Modal generator.
  * @param {string} [options.modalId=""] Active modal element id.
- * @param {(message: string | string[], status?: string) => Promise<void> | void} [options.showToastFn] Toast function.
- * @param {() => string} [options.getCurrentHrefFn] Current href resolver.
- * @param {() => { appendChild: (element: unknown) => unknown } | null} [options.getModalHangerFn] Modal hanger resolver.
+ * @param {(message: string | string[], status?: string) => Promise<void> | void} [options.showToast] Toast function.
+ * @param {() => string} [options.getCurrentHref] Current href resolver.
+ * @param {() => { appendChild: (element: unknown) => unknown } | null} [options.getModalHanger] Modal hanger resolver.
  * @param {{ getElementById: (id: string) => unknown } | undefined} [options.documentRef=globalThis.document] Document-like object.
  * @param {{ href?: string } | undefined} [options.locationRef=globalThis.location] Location-like object.
  * @param {{ info: (message: unknown) => void }} [options.consoleRef=console] Console-like object.
@@ -62,8 +62,8 @@ function matchesSalesforceUrlPattern(pattern, value) {
  *   cancelLabel?: string;
  *   closeLabel?: string;
  *   confirmLabel?: string;
- * }) => boolean | Promise<boolean>} [options.sldsConfirmFn] Confirm callback.
- * @param {(url: string | URL, target?: string) => unknown} [options.openFn=globalThis.open] Window open callback.
+ * }) => boolean | Promise<boolean>} [options.sldsConfirm] Confirm callback.
+ * @param {(url: string | URL, target?: string) => unknown} [options.open=globalThis.open] Window open callback.
  * @param {{ new(input: string): URL }} [options.urlCtor=URL] URL constructor.
  * @return {{
  *   createOpenOtherOrgModal: (options?: { label?: string | null; org?: string | null; url?: string | null; }) => Promise<void>;
@@ -76,24 +76,24 @@ export function createOpenOtherOrgModule({
 	setupLightning = "/lightning/setup/",
 	toastError = "error",
 	toastWarning = "warning",
-	getSettingsFn,
-	getTranslationsFn,
+	getSettings,
+	getTranslations,
 	tabRef,
-	ensureAllTabsAvailabilityFn,
-	generateOpenOtherOrgModalFn,
+	ensureAllTabsAvailability,
+	generateOpenOtherOrgModal,
 	modalId = "",
-	showToastFn,
-	getCurrentHrefFn,
-	getModalHangerFn,
+	showToast,
+	getCurrentHref,
+	getModalHanger,
 	documentRef = globalThis.document,
 	locationRef = globalThis.location,
 	consoleRef = console,
-	sldsConfirmFn = ({ body } = {}) =>
+	sldsConfirm = ({ body } = {}) =>
 		globalThis.confirm?.(
 			Array.isArray(body) ? body.join("\n") : body ?? "",
 		) ??
 			false,
-	openFn = globalThis.open,
+	open = globalThis.open,
 	urlCtor = URL,
 } = {}) {
 	/**
@@ -109,10 +109,10 @@ export function createOpenOtherOrgModule({
 		{ label = null, url = null, org = null } = {},
 	) {
 		if (
-			typeof getSettingsFn !== "function" ||
-			typeof getTranslationsFn !== "function" ||
-			typeof ensureAllTabsAvailabilityFn !== "function" ||
-			typeof generateOpenOtherOrgModalFn !== "function" ||
+			typeof getSettings !== "function" ||
+			typeof getTranslations !== "function" ||
+			typeof ensureAllTabsAvailability !== "function" ||
+			typeof generateOpenOtherOrgModal !== "function" ||
 			tabRef == null
 		) {
 			throw new Error("error_required_params");
@@ -121,11 +121,11 @@ export function createOpenOtherOrgModule({
 		const resolvedLocationRef = locationRef ?? { href: "" };
 
 		if (resolvedDocumentRef.getElementById?.(modalId) != null) {
-			return showToastFn?.("error_close_other_modal", toastError);
+			return showToast?.("error_close_other_modal", toastError);
 		}
 		const [allTabs, skipLinkDetection] = await Promise.all([
-			ensureAllTabsAvailabilityFn(),
-			getSettingsFn("skip_link_detection"),
+			ensureAllTabsAvailability(),
+			getSettings("skip_link_detection"),
 		]);
 		const href = resolvedLocationRef?.href;
 		if (label == null && url == null) {
@@ -148,7 +148,7 @@ export function createOpenOtherOrgModule({
 			skipLinkDetection != null && !skipLinkDetection.enabled &&
 			tabRef.containsSalesforceId(url)
 		) {
-			showToastFn?.("error_link_with_id", toastWarning);
+			showToast?.("error_link_with_id", toastWarning);
 		}
 		const {
 			modalParent,
@@ -156,12 +156,12 @@ export function createOpenOtherOrgModule({
 			closeButton,
 			inputContainer,
 			getSelectedRadioButtonValue,
-		} = await generateOpenOtherOrgModalFn({
+		} = await generateOpenOtherOrgModal({
 			label,
 			url,
 			org,
 		});
-		getModalHangerFn?.()?.appendChild(modalParent);
+		getModalHanger?.()?.appendChild(modalParent);
 		let lastInput = "";
 		inputContainer.addEventListener("input", (e) => {
 			const target = e.target;
@@ -183,7 +183,7 @@ export function createOpenOtherOrgModule({
 			const linkTarget = getSelectedRadioButtonValue();
 			const inputVal = inputContainer.value;
 			if (inputVal == null || inputVal === "") {
-				return showToastFn?.(
+				return showToast?.(
 					["insert_another", "org_link"],
 					toastWarning,
 				);
@@ -194,7 +194,7 @@ export function createOpenOtherOrgModule({
 			}
 			lastExtracted = newTarget;
 			if (!matchesSalesforceUrlPattern(salesforceUrlPattern, newTarget)) {
-				return showToastFn?.(
+				return showToast?.(
 					["insert_valid_org", newTarget],
 					toastError,
 				);
@@ -202,10 +202,10 @@ export function createOpenOtherOrgModule({
 			if (
 				newTarget ===
 					tabRef.extractOrgName(
-						getCurrentHrefFn?.() ?? resolvedLocationRef?.href ?? "",
+						getCurrentHref?.() ?? resolvedLocationRef?.href ?? "",
 					)
 			) {
-				return showToastFn?.("insert_another_org", toastError);
+				return showToast?.("insert_another_org", toastError);
 			}
 			const targetUrl = new urlCtor(
 				`${https}${newTarget}${lightningForceCom}${
@@ -213,14 +213,14 @@ export function createOpenOtherOrgModule({
 				}${url}`,
 			);
 			const [confirmMsg, confirmLabel, cancelLabel, closeLabel] =
-				await getTranslationsFn([
+				await getTranslations([
 					"confirm_another_org",
 					"confirm",
 					"cancel",
 					"cancel_close",
 				]);
 			if (
-				await sldsConfirmFn?.({
+				await sldsConfirm?.({
 					body: [confirmMsg, String(targetUrl)],
 					confirmLabel,
 					cancelLabel,
@@ -228,7 +228,7 @@ export function createOpenOtherOrgModule({
 				})
 			) {
 				closeButton.click();
-				openFn?.(targetUrl, linkTarget ?? "_blank");
+				open?.(targetUrl, linkTarget ?? "_blank");
 			}
 		});
 	}

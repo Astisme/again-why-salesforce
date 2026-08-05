@@ -188,20 +188,20 @@ function getFilesFromChangeOrDropEvent(event) {
  *     json: string,
  *     config: Record<string, boolean | string | null>,
  *   ) => Promise<number>;
- * }>} [options.ensureAllTabsAvailabilityFn] Saved-tab container resolver.
- * @param {(keys: string | string[]) => Promise<string | string[]>} [options.getTranslationsFn] Translation resolver.
- * @param {(id: string, i18nKey: string, checked: boolean) => Promise<HTMLElement>} [options.generateCheckboxWithLabelFn] Checkbox generator.
- * @param {() => Promise<{ section: HTMLElement; divParent: HTMLElement }>} [options.generateSectionFn] Section generator.
+ * }>} [options.ensureAllTabsAvailability] Saved-tab container resolver.
+ * @param {(keys: string | string[]) => Promise<string | string[]>} [options.getTranslations] Translation resolver.
+ * @param {(id: string, i18nKey: string, checked: boolean) => Promise<HTMLElement>} [options.generateCheckboxWithLabel] Checkbox generator.
+ * @param {() => Promise<{ section: HTMLElement; divParent: HTMLElement }>} [options.generateSection] Section generator.
  * @param {(importId: string, fileInputId: string, accept: string) => Promise<{
  *   fileInputWrapper: HTMLElement;
  *   inputContainer: HTMLInputElement;
- * }>} [options.generateSldsFileInputFn] File input generator.
+ * }>} [options.generateSldsFileInput] File input generator.
  * @param {(options: { modalTitle: string }) => Promise<{
  *   modalParent: HTMLElement | null;
  *   article: HTMLElement;
  *   saveButton: HTMLElement;
  *   closeButton: HTMLElement;
- * }>} [options.generateSldsModalFn] Modal generator.
+ * }>} [options.generateSldsModal] Modal generator.
  * @param {(tabContainer: unknown, options: {
  *   title: string;
  *   saveButtonLabel: string;
@@ -211,13 +211,13 @@ function getFilesFromChangeOrDropEvent(event) {
  *   saveButton: HTMLElement;
  *   closeButton: HTMLElement;
  *   getSelectedTabs: () => { tabs: unknown[]; selectedAll: boolean };
- * }>} [options.generateSldsModalWithTabListFn] Tab-picker modal generator.
- * @param {(id: string, options: { css?: string; link?: string }) => unknown} [options.injectStyleFn] Style injector.
- * @param {(options?: Record<string, unknown>) => void} [options.sfAfterSetFn] Content post-update hook.
- * @param {(message: string | string[] | unknown[], status?: string) => void | Promise<void>} [options.showToastFn] Toast helper.
- * @param {() => string} [options.getCurrentHrefFn] Current href resolver.
- * @param {() => { appendChild: (node: unknown) => unknown } | null} [options.getModalHangerFn] Modal hanger resolver.
- * @param {() => { querySelector: (selector: string) => unknown } | null} [options.getSetupTabUlFn] Setup-tab UL resolver.
+ * }>} [options.generateSldsModalWithTabList] Tab-picker modal generator.
+ * @param {(id: string, options: { css?: string; link?: string }) => unknown} [options.injectStyle] Style injector.
+ * @param {(options?: Record<string, unknown>) => void} [options.sfAfterSet] Content post-update hook.
+ * @param {(message: string | string[] | unknown[], status?: string) => void | Promise<void>} [options.showToast] Toast helper.
+ * @param {() => string} [options.getCurrentHref] Current href resolver.
+ * @param {() => { appendChild: (node: unknown) => unknown } | null} [options.getModalHanger] Modal hanger resolver.
+ * @param {() => { querySelector: (selector: string) => unknown } | null} [options.getSetupTabUl] Setup-tab UL resolver.
  * @param {{
  *   createElement: (tagName: string) => HTMLElement;
  *   getElementById: (id: string) => HTMLElement | null;
@@ -252,19 +252,19 @@ export function createImportPureModule({
 	toastWarning = "warning",
 	tabRef,
 	tabContainerRef,
-	ensureAllTabsAvailabilityFn,
-	getTranslationsFn,
-	generateCheckboxWithLabelFn,
-	generateSectionFn,
-	generateSldsFileInputFn,
-	generateSldsModalFn,
-	generateSldsModalWithTabListFn,
-	injectStyleFn,
-	sfAfterSetFn,
-	showToastFn,
-	getCurrentHrefFn = () => globalThis.location?.href ?? "",
-	getModalHangerFn,
-	getSetupTabUlFn,
+	ensureAllTabsAvailability,
+	getTranslations,
+	generateCheckboxWithLabel,
+	generateSection,
+	generateSldsFileInput,
+	generateSldsModal,
+	generateSldsModalWithTabList,
+	injectStyle,
+	sfAfterSet,
+	showToast,
+	getCurrentHref = () => globalThis.location?.href ?? "",
+	getModalHanger,
+	getSetupTabUl,
 	documentRef = globalThis.document,
 } = {}) {
 	const ids = buildImportIds(extensionName);
@@ -280,28 +280,28 @@ export function createImportPureModule({
 	 * }>} Modal controls.
 	 */
 	async function generateSldsImport() {
-		const [modalTitle, dupDesc0, dupDesc1] = await getTranslationsFn([
+		const [modalTitle, dupDesc0, dupDesc1] = await getTranslations([
 			"import_tabs",
 			"import_duplicate_description_0",
 			"import_duplicate_description_1",
 		]);
 		const { modalParent, article, saveButton, closeButton } =
-			await generateSldsModalFn({
+			await generateSldsModal({
 				modalTitle,
 			});
 		inputModalParent = modalParent;
 		closeButton.id = ids.closeModalId;
-		const { section, divParent } = await generateSectionFn();
+		const { section, divParent } = await generateSection();
 		divParent.id = ids.importContainerId;
 		article.appendChild(section);
 		const { fileInputWrapper, inputContainer } =
-			await generateSldsFileInputFn(
+			await generateSldsFileInput(
 				ids.importId,
 				ids.importFileId,
 				".json,application/json",
 			);
 		divParent.appendChild(fileInputWrapper);
-		injectStyleFn(
+		injectStyle(
 			ids.importCssId,
 			{ link: browserRef.runtime.getURL("/salesforce/css/import.css") },
 		);
@@ -313,31 +313,31 @@ export function createImportPureModule({
 		duplicateWarningPart1.textContent = dupDesc1;
 		duplicateWarningPart1.classList.add(ids.importDuplicateWarningClass);
 		divParent.append(duplicateWarningPart1);
-		const selectTabsCheckbox = await generateCheckboxWithLabelFn(
+		const selectTabsCheckbox = await generateCheckboxWithLabel(
 			ids.selectTabsId,
 			"select_tabs_import",
 			false,
 		);
 		divParent.appendChild(selectTabsCheckbox);
-		const importMetadataCheckbox = await generateCheckboxWithLabelFn(
+		const importMetadataCheckbox = await generateCheckboxWithLabel(
 			ids.metadataId,
 			"import_metadata",
 			false,
 		);
 		divParent.appendChild(importMetadataCheckbox);
-		const importPinnedCheckbox = await generateCheckboxWithLabelFn(
+		const importPinnedCheckbox = await generateCheckboxWithLabel(
 			ids.pinnedId,
 			"import_pinned_tabs",
 			false,
 		);
 		divParent.appendChild(importPinnedCheckbox);
-		const overwriteCheckbox = await generateCheckboxWithLabelFn(
+		const overwriteCheckbox = await generateCheckboxWithLabel(
 			ids.overwriteId,
 			"overwrite_tabs",
 			false,
 		);
 		divParent.appendChild(overwriteCheckbox);
-		const otherOrgCheckbox = await generateCheckboxWithLabelFn(
+		const otherOrgCheckbox = await generateCheckboxWithLabel(
 			ids.otherOrgId,
 			"preserve_org_tabs",
 			true,
@@ -364,7 +364,7 @@ export function createImportPureModule({
 	 * @return {Promise<void>}
 	 */
 	async function launchImport(tabs = [], importConfig = {}) {
-		const allTabs = await ensureAllTabsAvailabilityFn();
+		const allTabs = await ensureAllTabsAvailability();
 		let importedNum = 0;
 		if (tabs instanceof tabContainerRef) {
 			importedNum = await allTabs.importTabs(
@@ -387,8 +387,8 @@ export function createImportPureModule({
 			}
 		}
 		documentRef.getElementById(ids.closeModalId)?.click();
-		showToastFn(["import_successful", importedNum, "tabs"]);
-		sfAfterSetFn({
+		showToast(["import_successful", importedNum, "tabs"]);
+		sfAfterSet({
 			what: "imported",
 			tabs: allTabs,
 		});
@@ -491,7 +491,7 @@ export function createImportPureModule({
 	 * @return {void}
 	 */
 	function showToastBrokenImportFile() {
-		showToastFn("error_unknown_file_structure", toastError);
+		showToast("error_unknown_file_structure", toastError);
 	}
 
 	/**
@@ -529,7 +529,7 @@ export function createImportPureModule({
 			saveButton,
 			closeButton,
 			getSelectedTabs,
-		} = await generateSldsModalWithTabListFn(
+		} = await generateSldsModalWithTabList(
 			importTabs,
 			{
 				title: "import_tabs",
@@ -537,12 +537,12 @@ export function createImportPureModule({
 				explainer: "select_tabs_import",
 			},
 		);
-		getModalHangerFn().appendChild(modalParent);
+		getModalHanger().appendChild(modalParent);
 		saveButton.addEventListener("click", async (event) => {
 			event.preventDefault();
 			const { tabs: pickedTabs, selectedAll } = getSelectedTabs();
 			if (pickedTabs.length === 0) {
-				return showToastFn("error_no_tabs_selected", toastWarning);
+				return showToast("error_no_tabs_selected", toastWarning);
 			}
 			closeButton.click();
 			const selectedTabContainer = tabContainerRef.getThrowawayInstance({
@@ -568,7 +568,7 @@ export function createImportPureModule({
 			if (isJsonFile(file)) {
 				validFileArray.push(file);
 			} else {
-				showToastFn("import_invalid_file", toastError);
+				showToast("import_invalid_file", toastError);
 			}
 		}
 		if (validFileArray.length === 0) {
@@ -595,7 +595,7 @@ export function createImportPureModule({
 				overwritePick && otherOrgPick &&
 				typeof tabRef.extractOrgName === "function"
 			) {
-				const currentOrg = tabRef.extractOrgName(getCurrentHrefFn());
+				const currentOrg = tabRef.extractOrgName(getCurrentHref());
 				if (currentOrg != null) {
 					importConfig.currentOrg = currentOrg;
 				}
@@ -608,7 +608,7 @@ export function createImportPureModule({
 			}
 			return await launchImport(validFileArray, importConfig);
 		} catch (error) {
-			showToastFn(["error_import", error.message], toastError);
+			showToast(["error_import", error.message], toastError);
 		}
 	}
 
@@ -725,17 +725,17 @@ export function createImportPureModule({
 	 */
 	async function showFileImport() {
 		if (
-			getSetupTabUlFn().querySelector(`#${ids.importId}`) != null ||
+			getSetupTabUl().querySelector(`#${ids.importId}`) != null ||
 			documentRef.getElementById(modalId) != null
 		) {
-			return showToastFn("error_close_other_modal", toastError);
+			return showToast("error_close_other_modal", toastError);
 		}
 		const { saveButton } = await generateSldsImport();
 		saveButton.remove();
 		if (inputModalParent == null) {
 			return await showFileImport();
 		}
-		getModalHangerFn().appendChild(inputModalParent);
+		getModalHanger().appendChild(inputModalParent);
 		listenToFileUpload();
 	}
 
@@ -748,7 +748,7 @@ export function createImportPureModule({
 		try {
 			await showFileImport();
 		} catch (error) {
-			showToastFn(error, toastError);
+			showToast(error, toastError);
 		}
 	}
 

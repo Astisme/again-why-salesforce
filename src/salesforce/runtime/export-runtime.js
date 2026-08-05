@@ -9,21 +9,21 @@
  * @param {string} options.toastWarning Warning toast type.
  * @param {string} options.whatExport Message reason for export.
  * @param {{ getElementById: (id: string) => unknown }} options.documentRef Document wrapper.
- * @param {() => Promise<{ pinned: number }>} options.ensureAllTabsAvailabilityFn Tabs resolver.
+ * @param {() => Promise<{ pinned: number }>} options.ensureAllTabsAvailability Tabs resolver.
  * @param {(allTabs: { pinned: number }, options: { title: string; saveButtonLabel: string; explainer: string }) => Promise<{
  *   modalParent: unknown;
  *   saveButton: { addEventListener: (type: string, listener: (event: Event) => void) => void };
  *   closeButton: { click: () => void };
  *   getSelectedTabs: () => { tabs: unknown[]; selectedAll: boolean };
- * }>} options.generateSldsModalWithTabListFn Modal generator.
- * @param {() => { appendChild: (child: unknown) => unknown }} options.getModalHangerFn Modal hanger resolver.
+ * }>} options.generateSldsModalWithTabList Modal generator.
+ * @param {() => { appendChild: (child: unknown) => unknown }} options.getModalHanger Modal hanger resolver.
  * @param {{ getThrowawayInstance: () => {
  *   pinned: number;
  *   push: (tabs: unknown[]) => void;
  *   toJSON: () => unknown;
  * } }} options.tabContainerRef TabContainer wrapper.
- * @param {(message: Record<string, unknown>) => void} options.sendExtensionMessageFn Message sender.
- * @param {(message: string, status?: string) => void} options.showToastFn Toast renderer.
+ * @param {(message: Record<string, unknown>) => void} options.sendExtensionMessage Message sender.
+ * @param {(message: string, status?: string) => void} options.showToast Toast renderer.
  * @return {{ createExportModal: () => Promise<void> }} Export module API.
  */
 export function createExportModule({
@@ -32,24 +32,24 @@ export function createExportModule({
 	toastWarning,
 	whatExport,
 	documentRef,
-	ensureAllTabsAvailabilityFn,
-	generateSldsModalWithTabListFn,
-	getModalHangerFn,
+	ensureAllTabsAvailability,
+	generateSldsModalWithTabList,
+	getModalHanger,
 	tabContainerRef,
-	sendExtensionMessageFn,
-	showToastFn,
+	sendExtensionMessage,
+	showToast,
 } = {}) {
 	const modalIdRuntime = modalId;
 	const toastErrorRuntime = toastError;
 	const toastWarningRuntime = toastWarning;
 	const whatExportRuntime = whatExport;
 	const documentRuntime = documentRef;
-	const ensureAllTabsAvailabilityRuntime = ensureAllTabsAvailabilityFn;
-	const generateSldsModalWithTabListRuntime = generateSldsModalWithTabListFn;
-	const getModalHangerRuntime = getModalHangerFn;
+	const ensureAllTabsAvailabilityRuntime = ensureAllTabsAvailability;
+	const generateSldsModalWithTabListRuntime = generateSldsModalWithTabList;
+	const getModalHangerRuntime = getModalHanger;
 	const tabContainerRuntime = tabContainerRef;
-	const sendExtensionMessageRuntime = sendExtensionMessageFn;
-	const showToastRuntime = showToastFn;
+	const sendExtensionMessageRuntime = sendExtensionMessage;
+	const showToastRuntime = showToast;
 
 	/**
 	 * Displays the export modal when no other modal is open.

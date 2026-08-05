@@ -143,8 +143,8 @@ function loadOpenOtherOrgFixture() {
 
 	const runtimeModule = createOpenOtherOrgModule({
 		documentRef,
-		ensureAllTabsAvailabilityFn: () => Promise.resolve(allTabs),
-		generateOpenOtherOrgModalFn: () =>
+		ensureAllTabsAvailability: () => Promise.resolve(allTabs),
+		generateOpenOtherOrgModal: () =>
 			Promise.resolve({
 				closeButton,
 				getSelectedRadioButtonValue: () => selectedLinkTarget,
@@ -152,12 +152,12 @@ function loadOpenOtherOrgFixture() {
 				modalParent,
 				saveButton,
 			}),
-		getCurrentHrefFn: () =>
+		getCurrentHref: () =>
 			"https://acme.lightning.force.com/lightning/setup/Users/home",
-		getModalHangerFn: () => hanger,
-		getSettingsFn: () =>
+		getModalHanger: () => hanger,
+		getSettings: () =>
 			Promise.resolve([{ enabled: skipLinkDetectionEnabled }]),
-		getTranslationsFn: (payload: string | string[] | unknown[]) => {
+		getTranslations: (payload: string | string[] | unknown[]) => {
 			translations.push(payload);
 			if (Array.isArray(payload)) {
 				return Promise.resolve(payload.map(() => "confirm-msg"));
@@ -170,13 +170,13 @@ function loadOpenOtherOrgFixture() {
 			href: "https://acme.lightning.force.com/lightning/setup/Users/home",
 		},
 		modalId: "awsf-modal",
-		openFn: (url: string | URL, target?: string) => {
+		open: (url: string | URL, target?: string) => {
 			openCalls.push({ target: target ?? "", url: String(url) });
 		},
-		sldsConfirmFn: () => Promise.resolve(confirmResult),
+		sldsConfirm: () => Promise.resolve(confirmResult),
 		salesforceUrlPattern: /^[a-z0-9.-]+$/i,
 		setupLightning: "/lightning/setup/",
-		showToastFn: (message: string | string[], status = "") => {
+		showToast: (message: string | string[], status = "") => {
 			toasts.push({ message, status });
 		},
 		tabRef: {
@@ -327,14 +327,14 @@ Deno.test("openOtherOrg default confirm callback opens when global confirm accep
 			documentRef: {
 				getElementById: () => null,
 			},
-			ensureAllTabsAvailabilityFn: () =>
+			ensureAllTabsAvailability: () =>
 				Promise.resolve({
 					getSingleTabByData: () => ({
 						label: "Users",
 						url: "Users/home",
 					}),
 				}),
-			generateOpenOtherOrgModalFn: () =>
+			generateOpenOtherOrgModal: () =>
 				Promise.resolve({
 					closeButton: fixture.closeButton,
 					getSelectedRadioButtonValue: () => "_self",
@@ -342,11 +342,11 @@ Deno.test("openOtherOrg default confirm callback opens when global confirm accep
 					modalParent: new TestElement(),
 					saveButton: fixture.saveButton,
 				}),
-			getCurrentHrefFn: () =>
+			getCurrentHref: () =>
 				"https://acme.lightning.force.com/lightning/setup/Users/home",
-			getModalHangerFn: () => fixture.hanger,
-			getSettingsFn: () => Promise.resolve({ enabled: true }),
-			getTranslationsFn: (payload: string | string[] | unknown[]) => {
+			getModalHanger: () => fixture.hanger,
+			getSettings: () => Promise.resolve({ enabled: true }),
+			getTranslations: (payload: string | string[] | unknown[]) => {
 				if (Array.isArray(payload)) {
 					return Promise.resolve(payload.map(String));
 				}
@@ -356,14 +356,14 @@ Deno.test("openOtherOrg default confirm callback opens when global confirm accep
 				href:
 					"https://acme.lightning.force.com/lightning/setup/Users/home",
 			},
-			openFn: (url: string | URL, target?: string) => {
+			open: (url: string | URL, target?: string) => {
 				fixture.openCalls.push({
 					target: target ?? "",
 					url: String(url),
 				});
 			},
 			salesforceUrlPattern: /^[a-z0-9.-]+$/i,
-			showToastFn: (message: string | string[], status = "") => {
+			showToast: (message: string | string[], status = "") => {
 				fixture.toasts.push({ message, status });
 			},
 			tabRef: {
@@ -438,14 +438,14 @@ Deno.test(
 			documentRef: {
 				getElementById: () => null,
 			},
-			ensureAllTabsAvailabilityFn: () =>
+			ensureAllTabsAvailability: () =>
 				Promise.resolve({
 					getSingleTabByData: () => ({
 						label: "Users",
 						url: "Users/home",
 					}),
 				}),
-			generateOpenOtherOrgModalFn: () => {
+			generateOpenOtherOrgModal: () => {
 				const session = {
 					closeButton: new TestElement(),
 					input: new TestElement(),
@@ -460,11 +460,11 @@ Deno.test(
 					saveButton: session.saveButton,
 				});
 			},
-			getCurrentHrefFn: () =>
+			getCurrentHref: () =>
 				"https://acme.lightning.force.com/lightning/setup/Users/home",
-			getModalHangerFn: () => new TestElement(),
-			getSettingsFn: () => Promise.resolve([{ enabled: true }]),
-			getTranslationsFn: (payload: string | string[] | unknown[]) =>
+			getModalHanger: () => new TestElement(),
+			getSettings: () => Promise.resolve([{ enabled: true }]),
+			getTranslations: (payload: string | string[] | unknown[]) =>
 				Array.isArray(payload)
 					? Promise.resolve(payload.map(() => "confirm-msg"))
 					: Promise.resolve("confirm-msg"),
@@ -472,12 +472,12 @@ Deno.test(
 				href:
 					"https://acme.lightning.force.com/lightning/setup/Users/home",
 			},
-			openFn: (url: string | URL, target?: string) => {
+			open: (url: string | URL, target?: string) => {
 				openCalls.push({ target: target ?? "", url: String(url) });
 			},
 			salesforceUrlPattern: /^[a-z0-9.-]+$/gi,
-			sldsConfirmFn: () => Promise.resolve(true),
-			showToastFn: () => {},
+			sldsConfirm: () => Promise.resolve(true),
+			showToast: () => {},
 			tabRef: {
 				containsSalesforceId: () => false,
 				extractOrgName: (value: string | null | undefined) => {
@@ -533,14 +533,14 @@ Deno.test(
 			documentRef: {
 				getElementById: () => null,
 			},
-			ensureAllTabsAvailabilityFn: () =>
+			ensureAllTabsAvailability: () =>
 				Promise.resolve({
 					getSingleTabByData: () => ({
 						label: "Users",
 						url: "Users/home",
 					}),
 				}),
-			generateOpenOtherOrgModalFn: () => {
+			generateOpenOtherOrgModal: () => {
 				const session = {
 					closeButton: new TestElement(),
 					input: new TestElement(),
@@ -555,11 +555,11 @@ Deno.test(
 					saveButton: session.saveButton,
 				});
 			},
-			getCurrentHrefFn: () =>
+			getCurrentHref: () =>
 				"https://acme.lightning.force.com/lightning/setup/Users/home",
-			getModalHangerFn: () => new TestElement(),
-			getSettingsFn: () => Promise.resolve([{ enabled: true }]),
-			getTranslationsFn: (payload: string | string[] | unknown[]) =>
+			getModalHanger: () => new TestElement(),
+			getSettings: () => Promise.resolve([{ enabled: true }]),
+			getTranslations: (payload: string | string[] | unknown[]) =>
 				Array.isArray(payload)
 					? Promise.resolve(payload.map(() => "confirm-msg"))
 					: Promise.resolve("confirm-msg"),
@@ -567,12 +567,12 @@ Deno.test(
 				href:
 					"https://acme.lightning.force.com/lightning/setup/Users/home",
 			},
-			openFn: (url: string | URL, target?: string) => {
+			open: (url: string | URL, target?: string) => {
 				openCalls.push({ target: target ?? "", url: String(url) });
 			},
 			salesforceUrlPattern: /^[a-z0-9.-]+$/i,
-			sldsConfirmFn: () => Promise.resolve(true),
-			showToastFn: () => {},
+			sldsConfirm: () => Promise.resolve(true),
+			showToast: () => {},
 			tabRef: {
 				containsSalesforceId: () => false,
 				extractOrgName: (value: string | null | undefined) => {
@@ -951,7 +951,7 @@ Deno.test({
 			const { MODAL_ID } = await import("../../../src/core/constants.js");
 			const openOtherOrgModule = openOtherOrgRuntimeModule
 				.createOpenOtherOrgModule({
-					sldsConfirmFn: () => Promise.resolve(confirmResult),
+					sldsConfirm: () => Promise.resolve(confirmResult),
 				});
 
 			await openOtherOrgModule.createOpenOtherOrgModal({
@@ -1204,7 +1204,7 @@ Deno.test({
 			const generatorExports = await import(
 				"../../../src/salesforce/generator.js"
 			);
-			const generateOpenOtherOrgModalFn = (options: {
+			const generateOpenOtherOrgModal = (options: {
 				label: string | null;
 				org: string | null;
 				url: string | null;
@@ -1235,13 +1235,13 @@ Deno.test({
 						) => void;
 					};
 				}>;
-			const getModalHangerFn = () => ({
+			const getModalHanger = () => ({
 				appendChild: (element: unknown) =>
 					modalHanger.appendChild(
 						element as Node,
 					),
 			});
-			const getTranslationsFn = (
+			const getTranslations = (
 				message: string | string[] | unknown[],
 			) => Promise.resolve(
 				generatorArrayTranslations(
@@ -1250,21 +1250,21 @@ Deno.test({
 			);
 			const openOtherOrgModule = createOpenOtherOrgModule({
 				documentRef: document,
-				ensureAllTabsAvailabilityFn: () =>
+				ensureAllTabsAvailability: () =>
 					Promise.resolve({
 						getSingleTabByData: () => ({
 							label: "Users",
 							url: "Users/home",
 						}),
 					}),
-				generateOpenOtherOrgModalFn,
-				getCurrentHrefFn: () => String(globalThis.location.href),
-				getModalHangerFn,
-				getSettingsFn: () => Promise.resolve([{ enabled: true }]),
-				getTranslationsFn,
+				generateOpenOtherOrgModal,
+				getCurrentHref: () => String(globalThis.location.href),
+				getModalHanger,
+				getSettings: () => Promise.resolve([{ enabled: true }]),
+				getTranslations,
 				locationRef: globalThis.location,
 				modalId: "again-why-salesforce-modal",
-				openFn: (url: string | URL, target?: string) => {
+				open: (url: string | URL, target?: string) => {
 					openCalls.push({
 						target: target ?? "",
 						url: String(url),
@@ -1272,7 +1272,7 @@ Deno.test({
 					return null;
 				},
 				salesforceUrlPattern: /^[a-z0-9.-]+$/i,
-				sldsConfirmFn: () => Promise.resolve(true),
+				sldsConfirm: () => Promise.resolve(true),
 				tabRef: {
 					containsSalesforceId: () => false,
 					extractOrgName: (value: string | null | undefined) => {

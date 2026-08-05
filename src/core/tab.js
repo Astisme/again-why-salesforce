@@ -180,10 +180,10 @@ export default class Tab {
 	) {
 		if (Tab.isTab(labelOrTab)) return labelOrTab;
 		// Check if first argument is an object (for object-style creation)
-		const createFn = labelOrTab && typeof labelOrTab === "object"
+		const create = labelOrTab && typeof labelOrTab === "object"
 			? Tab.#createFromObject
 			: Tab.#createFromPrimitives;
-		return createFn(labelOrTab, url, org, clickCount, clickDate);
+		return create(labelOrTab, url, org, clickCount, clickDate);
 	}
 
 	/**

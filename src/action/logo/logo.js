@@ -5,6 +5,6 @@ import { runLogo } from "./logo-runtime.js";
 
 runLogo({
 	browser: BROWSER,
-	initThemeFn: initTheme,
+	initTheme: initTheme,
 	whatTheme: WHAT_THEME,
 });

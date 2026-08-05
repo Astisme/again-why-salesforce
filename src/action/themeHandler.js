@@ -1,5 +1,5 @@
 import { WHAT_THEME } from "../core/constants.js";
-import { sendExtensionMessage } from "../core/functions.js";
+import { sendExtensionMessage as sendExtensionMessageDefault } from "../core/functions.js";
 import { createThemeHandlerRuntime } from "./themeHandler-runtime.js";
 
 const fallbackDocumentRef = {
@@ -20,8 +20,8 @@ const fallbackStorageRef = {
  * @param {Object} [overrides={}] Dependency overrides used by tests/runtime.
  * @param {Document} [overrides.documentRef=document] Document reference.
  * @param {Storage} [overrides.localStorageRef=localStorage] Storage reference.
- * @param {(query: string) => MediaQueryList | undefined} [overrides.matchMediaFn=globalThis.matchMedia?.bind(globalThis)] Media-query factory.
- * @param {(message: { what: string; theme: string }) => unknown} [overrides.sendExtensionMessageFn=sendExtensionMessage] Message sender.
+ * @param {(query: string) => MediaQueryList | undefined} [overrides.matchMedia=globalThis.matchMedia?.bind(globalThis)] Media-query factory.
+ * @param {(message: { what: string; theme: string }) => unknown} [overrides.sendExtensionMessage=sendExtensionMessageDefault] Message sender.
  * @param {string} [overrides.whatTheme=WHAT_THEME] Theme message key.
  * @return {{
  *   handleSwitchColorTheme: () => Promise<unknown> | unknown;
@@ -33,15 +33,15 @@ const fallbackStorageRef = {
 export function createThemeHandlerModule({
 	documentRef = globalThis.document ?? fallbackDocumentRef,
 	localStorageRef = globalThis.localStorage ?? fallbackStorageRef,
-	matchMediaFn = globalThis.matchMedia?.bind(globalThis),
-	sendExtensionMessageFn = sendExtensionMessage,
+	matchMedia = globalThis.matchMedia?.bind(globalThis),
+	sendExtensionMessage = sendExtensionMessageDefault,
 	whatTheme = WHAT_THEME,
 } = {}) {
 	const themeHandlerRuntime = createThemeHandlerRuntime({
 		documentRef,
 		localStorageRef,
-		matchMediaFn,
-		sendExtensionMessageFn,
+		matchMedia,
+		sendExtensionMessage,
 		whatTheme,
 	});
 	return {

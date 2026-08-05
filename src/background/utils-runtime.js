@@ -42,13 +42,13 @@ function _isNewerVersion(latest, current) {
  * @param {string} options.whatExportFromBg Background export message reason.
  * @param {string} options.whatRequestExportPermissionToOpenPopup Permission-request message reason.
  * @param {string} options.whatUpdateExtension Update notification message reason.
- * @param {() => boolean} options.isExportAllowedFn Download-permission checker.
+ * @param {() => boolean} options.isExportAllowed Download-permission checker.
  * @param {{ keyTabs: string }} options.tabContainerRef TabContainer static helpers.
- * @param {(key: string) => Promise<{ date?: string; enabled?: boolean } | null>} options.bgGetSettingsFn Settings reader.
- * @param {(callback: (tabs: object[]) => void) => Promise<void>} options.bgGetStorageFn Storage reader.
- * @param {(value: object[], other?: null, key?: string) => void} options.bgSetStorageFn Storage writer.
+ * @param {(key: string) => Promise<{ date?: string; enabled?: boolean } | null>} options.bgGetSettings Settings reader.
+ * @param {(callback: (tabs: object[]) => void) => Promise<void>} options.bgGetStorage Storage reader.
+ * @param {(value: object[], other?: null, key?: string) => void} options.bgSetStorage Storage writer.
  * @param {{ downloads?: { download: (details: { filename: string; url: string }) => void } }} [options.chromeRef=chrome] Chrome global wrapper.
- * @param {(input: string) => Promise<{ ok: boolean; status: number; json: () => Promise<{ tag_name?: string } | Array<{ created_at: string; prerelease: boolean; tag_name: string }>> }>} [options.fetchFn=fetch] Fetch implementation.
+ * @param {(input: string) => Promise<{ ok: boolean; status: number; json: () => Promise<{ tag_name?: string } | Array<{ created_at: string; prerelease: boolean; tag_name: string }>> }>} [options.fetch=fetch] Fetch implementation.
  * @param {{ createObjectURL: (blob: Blob) => string; revokeObjectURL: (url: string) => void }} [options.urlCtor=URL] URL wrapper.
  * @param {{ error: (...args: unknown[]) => void }} [options.consoleRef=console] Console wrapper.
  * @return {{
@@ -83,13 +83,13 @@ export function createBackgroundUtilsModule({
 	whatExportFromBg,
 	whatRequestExportPermissionToOpenPopup,
 	whatUpdateExtension,
-	isExportAllowedFn,
+	isExportAllowed,
 	tabContainerRef,
-	bgGetSettingsFn,
-	bgGetStorageFn,
-	bgSetStorageFn,
+	bgGetSettings,
+	bgGetStorage,
+	bgSetStorage,
 	chromeRef = chrome,
-	fetchFn = fetch,
+	fetch = fetch,
 	urlCtor = URL,
 	consoleRef = console,
 } = {}) {
@@ -105,13 +105,13 @@ export function createBackgroundUtilsModule({
 	const whatRequestExportPermissionToOpenPopupRuntime =
 		whatRequestExportPermissionToOpenPopup;
 	const whatUpdateExtensionRuntime = whatUpdateExtension;
-	const isExportAllowedRuntime = isExportAllowedFn;
+	const isExportAllowedRuntime = isExportAllowed;
 	const tabContainerRuntime = tabContainerRef;
-	const bgGetSettingsRuntime = bgGetSettingsFn;
-	const bgGetStorageRuntime = bgGetStorageFn;
-	const bgSetStorageRuntime = bgSetStorageFn;
+	const bgGetSettingsRuntime = bgGetSettings;
+	const bgGetStorageRuntime = bgGetStorage;
+	const bgSetStorageRuntime = bgSetStorage;
 	const chromeRuntime = chromeRef;
-	const fetchRuntime = fetchFn;
+	const fetchRuntime = fetch;
 	const urlRuntime = urlCtor;
 	const consoleRuntime = consoleRef;
 

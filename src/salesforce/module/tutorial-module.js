@@ -30,7 +30,7 @@ import {
 } from "../../core/functions.js";
 import { TranslationService as _TranslationService } from "../../core/translator.js";
 import _Tab from "../../core/tab.js";
-import { performActionOnTabs as _performActionOnTabs } from "../runtime/content-runtime.js";
+import { performActionOnTabs as _performActionOnTabs } from "./content-module.js";
 import { showToast as _showToast } from "../toast.js";
 import {
 	getCurrentHref as _getCurrentHref,

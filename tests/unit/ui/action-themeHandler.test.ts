@@ -129,14 +129,14 @@ async function loadThemeHandler(
 	};
 	const mediaQueryList = new MockMediaQueryList(false);
 	const hasMatchMediaOverride = Object.hasOwn(overrides, "matchMedia");
-	const matchMediaFn = hasMatchMediaOverride
+	const matchMedia = hasMatchMediaOverride
 		? overrides.matchMedia ?? undefined
 		: (_query: string) => mediaQueryList;
 	const runtime = createThemeHandlerRuntime({
 		documentRef: { documentElement },
 		localStorageRef: localStorage,
-		matchMediaFn,
-		sendExtensionMessageFn: (message: { what: string; theme: string }) => {
+		matchMedia,
+		sendExtensionMessage: (message: { what: string; theme: string }) => {
 			sentMessages.push(message);
 		},
 		whatTheme: "theme-message",
@@ -282,8 +282,8 @@ Deno.test("themeHandler direct module coverage", async () => {
 		const module = createThemeHandlerModule({
 			documentRef: document,
 			localStorageRef: localStorage,
-			matchMediaFn: globalThis.matchMedia?.bind(globalThis),
-			sendExtensionMessageFn: (message) => {
+			matchMedia: globalThis.matchMedia?.bind(globalThis),
+			sendExtensionMessage: (message) => {
 				sentMessages.push(message);
 			},
 			whatTheme: "theme-message",

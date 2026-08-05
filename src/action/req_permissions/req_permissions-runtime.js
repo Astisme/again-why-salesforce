@@ -3,32 +3,32 @@
  *
  * @param {Object} options Runtime dependencies.
  * @param {{ action: { setPopup: (options: { popup: string }) => void | Promise<void> }; runtime: { getURL: (path: string) => string; }; }} options.browser Browser API wrapper.
- * @param {() => Promise<void> | void} options.ensureTranslatorAvailabilityFn Translator initializer.
+ * @param {() => Promise<void> | void} options.ensureTranslatorAvailability Translator initializer.
  * @param {string} options.doNotRequestFramePermissionKey Local-storage key used to persist skip choice.
  * @param {string} options.hiddenClass CSS class used to hide/show sections.
  * @param {{ getElementById: (id: string) => any }} [options.documentRef=document] Document-like host.
  * @param {{ href: string }} [options.locationRef=globalThis.location] Mutable location reference.
  * @param {{ setItem: (key: string, value: string) => void }} [options.localStorageRef=localStorage] Local-storage compatible object.
- * @param {() => Promise<void> | void} [options.requestExportPermissionFn] Downloads permission request handler.
- * @param {() => Promise<void> | void} [options.requestFramePatternsPermissionFn] Host-permission request handler.
- * @param {() => void} [options.closePopupFn=close] Close callback.
- * @param {(callback: () => void, delay: number) => unknown} [options.setTimeoutFn=setTimeout] Timeout scheduler.
+ * @param {() => Promise<void> | void} [options.requestExportPermission] Downloads permission request handler.
+ * @param {() => Promise<void> | void} [options.requestFramePatternsPermission] Host-permission request handler.
+ * @param {() => void} [options.closePopup=close] Close callback.
+ * @param {(callback: () => void, delay: number) => unknown} [options.setTimeout=setTimeout] Timeout scheduler.
  * @return {Promise<{ mode: "download" | "hostpermissions"; popupLink: string }>} Setup mode details.
  */
 export async function runReqPermissions({
 	browser,
-	ensureTranslatorAvailabilityFn,
+	ensureTranslatorAvailability,
 	doNotRequestFramePermissionKey,
 	hiddenClass,
 	documentRef = document,
 	locationRef = globalThis.location,
 	localStorageRef = localStorage,
-	requestExportPermissionFn,
-	requestFramePatternsPermissionFn,
-	closePopupFn = close,
-	setTimeoutFn = setTimeout,
+	requestExportPermission,
+	requestFramePatternsPermission,
+	closePopup = close,
+	setTimeout = setTimeout,
 } = {}) {
-	await ensureTranslatorAvailabilityFn();
+	await ensureTranslatorAvailability();
 	const whichPermissions = new URL(locationRef.href).searchParams.get(
 		"whichid",
 	);
@@ -43,8 +43,8 @@ export async function runReqPermissions({
 			"click",
 			(event) => {
 				event.preventDefault();
-				requestFramePatternsPermissionFn?.();
-				setTimeoutFn(closePopupFn, 100);
+				requestFramePatternsPermission?.();
+				setTimeout(closePopup, 100);
 			},
 		);
 		/**
@@ -99,9 +99,9 @@ export async function runReqPermissions({
 			"click",
 			(event) => {
 				event.preventDefault();
-				requestExportPermissionFn?.();
+				requestExportPermission?.();
 				setOriginalPopup();
-				setTimeoutFn(closePopupFn, 100);
+				setTimeout(closePopup, 100);
 			},
 		);
 	}

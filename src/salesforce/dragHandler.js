@@ -8,9 +8,9 @@ import { createDragHandlerModule } from "./runtime/dragHandler-runtime.js";
 const { setupDragForTable, setupDragForUl } = createDragHandlerModule({
 	extensionName: EXTENSION_NAME,
 	tabContainerRef: TabContainer,
-	ensureAllTabsAvailabilityFn: ensureAllTabsAvailability,
+	ensureAllTabsAvailability: ensureAllTabsAvailability,
 	documentRef: document,
-	setTimeoutFn: setTimeout,
+	setTimeout: setTimeout,
 });
 
 export { setupDragForTable, setupDragForUl };

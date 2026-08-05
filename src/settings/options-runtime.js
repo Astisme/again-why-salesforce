@@ -1,14 +1,14 @@
-import { createOptionsModule } from "./options-module.js";
+import { createOptionsModule as createOptionsModuleDefault } from "./options-module.js";
 
 /**
  * Creates a runtime wrapper for options bootstrapping.
  *
  * @param {Object} [options={}] Runtime options.
- * @param {(overrides?: Record<string, unknown>, options?: { runRestoreOnLoad?: boolean }) => unknown} [options.createOptionsModuleFn=createOptionsModule] Module factory override.
+ * @param {(overrides?: Record<string, unknown>, options?: { runRestoreOnLoad?: boolean }) => unknown} [options.createOptionsModule=createOptionsModuleDefault] Module factory override.
  * @return {{ runOptionsRuntime: (options?: { overrides?: Record<string, unknown>; runRestoreOnLoad?: boolean; }) => unknown }} Options runtime API.
  */
 export function createOptionsRuntime({
-	createOptionsModuleFn = createOptionsModule,
+	createOptionsModule = createOptionsModuleDefault,
 } = {}) {
 	/**
 	 * Runs the options-page runtime bootstrap.
@@ -22,7 +22,7 @@ export function createOptionsRuntime({
 		overrides = {},
 		runRestoreOnLoad = true,
 	} = {}) {
-		return createOptionsModuleFn(overrides, { runRestoreOnLoad });
+		return createOptionsModule(overrides, { runRestoreOnLoad });
 	}
 
 	return {
@@ -36,16 +36,16 @@ export function createOptionsRuntime({
  * @param {Object} [options={}] Runtime bootstrap options.
  * @param {Object} [options.overrides={}] Dependency overrides for `createOptionsModule`.
  * @param {boolean} [options.runRestoreOnLoad=true] Whether to run restore-on-load behavior.
- * @param {(overrides?: Record<string, unknown>, options?: { runRestoreOnLoad?: boolean }) => unknown} [options.createOptionsModuleFn=createOptionsModule] Module factory override.
+ * @param {(overrides?: Record<string, unknown>, options?: { runRestoreOnLoad?: boolean }) => unknown} [options.createOptionsModule=createOptionsModuleDefault] Module factory override.
  * @return {unknown} Created options module instance.
  */
 export function runOptionsRuntime({
 	overrides = {},
 	runRestoreOnLoad = true,
-	createOptionsModuleFn = createOptionsModule,
+	createOptionsModule = createOptionsModuleDefault,
 } = {}) {
 	const optionsRuntime = createOptionsRuntime({
-		createOptionsModuleFn,
+		createOptionsModule,
 	});
 	return optionsRuntime.runOptionsRuntime({
 		overrides,

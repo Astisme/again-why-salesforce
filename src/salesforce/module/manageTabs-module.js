@@ -41,7 +41,7 @@ import {
 	makeDuplicatesBold as _makeDuplicatesBold,
 	reorderTabsUl as _reorderTabsUl,
 	sf_afterSet as _sf_afterSet,
-} from "../runtime/content-runtime.js";
+} from "./content-module.js";
 import { showToast as _showToast } from "../toast.js";
 import {
 	getCurrentHref as _getCurrentHref,

@@ -1,26 +1,5 @@
 "use strict";
 
-import {
-	BROWSER as _BROWSER,
-	CMD_EXPORT_ALL as _CMD_EXPORT_ALL,
-	CMD_IMPORT as _CMD_IMPORT,
-	CMD_OPEN_SETTINGS as _CMD_OPEN_SETTINGS,
-	CXM_MANAGE_TABS as _CXM_MANAGE_TABS,
-	WHAT_EXPORT_CHECK as _WHAT_EXPORT_CHECK,
-	WHAT_GET_COMMANDS as _WHAT_GET_COMMANDS,
-	WHAT_SHOW_IMPORT as _WHAT_SHOW_IMPORT,
-	WHAT_START_TUTORIAL as _WHAT_START_TUTORIAL,
-} from "../../core/constants.js";
-import {
-	areFramePatternsAllowed as _areFramePatternsAllowed,
-	isOnSalesforceSetup as _isOnSalesforceSetup,
-	openSettingsPage as _openSettingsPage,
-	sendExtensionMessage as _sendExtensionMessage,
-} from "../../core/functions.js";
-import {
-	TranslationService as _TranslationService,
-} from "../../core/translator.js";
-
 const HOST_PERMISSIONS_REDIRECT =
 	"action/req_permissions/req_permissions.html?whichid=hostpermissions";
 const NOT_SALESFORCE_SETUP_REDIRECT =
@@ -94,18 +73,18 @@ function buildRequestedCommands({
 /**
  * Sends a popup message and closes the popup window.
  *
- * @param {(message: Record<string, unknown>) => Promise<unknown> | unknown} sendExtensionMessageFn Message dispatcher.
- * @param {() => void} closePopupFn Close callback.
+ * @param {(message: Record<string, unknown>) => Promise<unknown> | unknown} sendExtensionMessage Message dispatcher.
+ * @param {() => void} closePopup Close callback.
  * @param {Record<string, unknown>} message Runtime message to send.
  * @return {Promise<void>} Resolves when the message has been sent and popup close has been requested.
  */
 async function sendMessageAndClose(
-	sendExtensionMessageFn,
-	closePopupFn,
+	sendExtensionMessage,
+	closePopup,
 	message,
 ) {
-	await sendExtensionMessageFn(message);
-	closePopupFn();
+	await sendExtensionMessage(message);
+	closePopup();
 }
 
 /**
@@ -113,7 +92,7 @@ async function sendMessageAndClose(
  *
  * @param {{ dataset: Record<string, string> }} button Target button.
  * @param {string} shortcut Shortcut text from command metadata.
- * @param {(message: string | string[], connector?: string) => Promise<string | string[]>} getTranslationsFn Translator function.
+ * @param {(message: string | string[], connector?: string) => Promise<string | string[]>} getTranslations Translator function.
  * @param {string} translationDataset Dataset key that stores translation instructions.
  * @param {string} translationSeparator Separator used in the translation dataset.
  * @return {Promise<string | string[]>} Translated shortcut text.
@@ -121,11 +100,11 @@ async function sendMessageAndClose(
 function addShortcutText(
 	button,
 	shortcut,
-	getTranslationsFn,
+	getTranslations,
 	translationDataset,
 	translationSeparator,
 ) {
-	return getTranslationsFn([
+	return getTranslations([
 		sliceBeforeSeparator(
 			button.dataset[translationDataset],
 			translationSeparator,
@@ -192,18 +171,18 @@ function getPopupButtons(documentRef, popupButtonIds) {
  *
  * @param {Object} [options={}] Runtime overrides used by tests/runtime.
  * @param {{ runtime: { getURL: (path: string) => string } }} [options.browser] Browser API object.
- * @param {() => Promise<boolean>} [options.areFramePatternsAllowedFn] Frame permission checker.
- * @param {() => void} [options.closePopupFn] Popup close callback.
+ * @param {() => Promise<boolean>} [options.areFramePatternsAllowed] Frame permission checker.
+ * @param {() => void} [options.closePopup] Popup close callback.
  * @param {{ getElementById: (id: string) => {
  *   addEventListener: (type: string, listener: () => void | Promise<void>) => void;
  *   dataset: Record<string, string>;
  *   title: string;
  * } | null }} [options.documentRef] Popup document-like object.
- * @param {(message: string | string[], connector?: string) => Promise<string | string[]>} [options.getTranslationsFn] Translation function.
- * @param {() => Promise<{ison: boolean; url?: string | null}>} [options.isOnSalesforceSetupFn] Salesforce setup detector.
+ * @param {(message: string | string[], connector?: string) => Promise<string | string[]>} [options.getTranslations] Translation function.
+ * @param {() => Promise<{ison: boolean; url?: string | null}>} [options.isOnSalesforceSetup] Salesforce setup detector.
  * @param {{ href: string }} [options.locationRef] Mutable location object for redirects.
- * @param {() => void} [options.openSettingsPageFn] Settings opener.
- * @param {(message: Record<string, unknown>) => Promise<unknown> | unknown} [options.sendExtensionMessageFn] Extension message sender.
+ * @param {() => void} [options.openSettingsPage] Settings opener.
+ * @param {(message: Record<string, unknown>) => Promise<unknown> | unknown} [options.sendExtensionMessage] Extension message sender.
  * @param {string} [options.translationDataset="i18n"] Dataset key for translation attributes.
  * @param {string} [options.translationSeparator="+-+"] Separator in translation attributes.
  * @param {string} [options.cmdExportAll=""] Export command id.
@@ -228,14 +207,14 @@ function getPopupButtons(documentRef, popupButtonIds) {
  */
 async function runPopupImpl({
 	browser = FALLBACK_BROWSER,
-	areFramePatternsAllowedFn = () => Promise.resolve(true),
-	closePopupFn = () => {},
+	areFramePatternsAllowed = () => Promise.resolve(true),
+	closePopup = () => {},
 	documentRef = FALLBACK_DOCUMENT_REF,
-	getTranslationsFn = (message) => Promise.resolve(message),
-	isOnSalesforceSetupFn = () => Promise.resolve({ ison: false }),
+	getTranslations = (message) => Promise.resolve(message),
+	isOnSalesforceSetup = () => Promise.resolve({ ison: false }),
 	locationRef = FALLBACK_LOCATION_REF,
-	openSettingsPageFn = () => {},
-	sendExtensionMessageFn = () => Promise.resolve(undefined),
+	openSettingsPage = () => {},
+	sendExtensionMessage = () => Promise.resolve(undefined),
 	translationDataset = "i18n",
 	translationSeparator = "+-+",
 	cmdExportAll = "",
@@ -251,9 +230,9 @@ async function runPopupImpl({
 	popupButtonIds = POPUP_BUTTON_IDS,
 	requestedCommands = null,
 } = {}) {
-	const isOnSalesforceSetupResult = await isOnSalesforceSetupFn();
+	const isOnSalesforceSetupResult = await isOnSalesforceSetup();
 	if (isOnSalesforceSetupResult.ison) {
-		if (!(await areFramePatternsAllowedFn())) {
+		if (!(await areFramePatternsAllowed())) {
 			locationRef.href = browser.runtime.getURL(hostPermissionsRedirect);
 			return { redirected: true };
 		}
@@ -287,8 +266,8 @@ async function runPopupImpl({
 		"click",
 		() =>
 			sendMessageAndClose(
-				sendExtensionMessageFn,
-				closePopupFn,
+				sendExtensionMessage,
+				closePopup,
 				{ what: whatShowImport },
 			),
 	);
@@ -296,18 +275,18 @@ async function runPopupImpl({
 		"click",
 		() =>
 			sendMessageAndClose(
-				sendExtensionMessageFn,
-				closePopupFn,
+				sendExtensionMessage,
+				closePopup,
 				{ what: whatExportCheck },
 			),
 	);
-	settingsBtn.addEventListener("click", openSettingsPageFn);
+	settingsBtn.addEventListener("click", openSettingsPage);
 	manageTabsBtn.addEventListener(
 		"click",
 		() =>
 			sendMessageAndClose(
-				sendExtensionMessageFn,
-				closePopupFn,
+				sendExtensionMessage,
+				closePopup,
 				{ what: cxmManageTabs },
 			),
 	);
@@ -315,12 +294,12 @@ async function runPopupImpl({
 		"click",
 		() =>
 			sendMessageAndClose(
-				sendExtensionMessageFn,
-				closePopupFn,
+				sendExtensionMessage,
+				closePopup,
 				{ what: whatStartTutorial },
 			),
 	);
-	const availableCommands = await sendExtensionMessageFn({
+	const availableCommands = await sendExtensionMessage({
 		what: whatGetCommands,
 		commands: buildRequestedCommands({
 			cmdExportAll,
@@ -338,7 +317,7 @@ async function runPopupImpl({
 				exportBtn.title = await addShortcutText(
 					exportBtn,
 					availableCommand.shortcut,
-					getTranslationsFn,
+					getTranslations,
 					translationDataset,
 					translationSeparator,
 				);
@@ -347,7 +326,7 @@ async function runPopupImpl({
 				importBtn.title = await addShortcutText(
 					importBtn,
 					availableCommand.shortcut,
-					getTranslationsFn,
+					getTranslations,
 					translationDataset,
 					translationSeparator,
 				);
@@ -356,7 +335,7 @@ async function runPopupImpl({
 				settingsBtn.title = await addShortcutText(
 					settingsBtn,
 					availableCommand.shortcut,
-					getTranslationsFn,
+					getTranslations,
 					translationDataset,
 					translationSeparator,
 				);
@@ -369,50 +348,18 @@ async function runPopupImpl({
 }
 
 /**
- * Builds runtime defaults for popup wiring.
- *
- * @return {Object} Runtime popup defaults.
- */
-export function getPopupRuntimeDefaults() {
-	return {
-		browser: _BROWSER,
-		areFramePatternsAllowedFn: _areFramePatternsAllowed,
-		closePopupFn: globalThis.close ?? (() => {}),
-		documentRef: globalThis.document ?? FALLBACK_DOCUMENT_REF,
-		getTranslationsFn: _TranslationService.getTranslations,
-		isOnSalesforceSetupFn: _isOnSalesforceSetup,
-		locationRef: globalThis.location ?? FALLBACK_LOCATION_REF,
-		openSettingsPageFn: _openSettingsPage,
-		sendExtensionMessageFn: _sendExtensionMessage,
-		translationDataset: _TranslationService.TRANSLATE_DATASET,
-		translationSeparator: _TranslationService.TRANSLATE_SEPARATOR,
-		cmdExportAll: _CMD_EXPORT_ALL,
-		cmdImport: _CMD_IMPORT,
-		cmdOpenSettings: _CMD_OPEN_SETTINGS,
-		cxmManageTabs: _CXM_MANAGE_TABS,
-		whatExportCheck: _WHAT_EXPORT_CHECK,
-		whatGetCommands: _WHAT_GET_COMMANDS,
-		whatShowImport: _WHAT_SHOW_IMPORT,
-		whatStartTutorial: _WHAT_START_TUTORIAL,
-		hostPermissionsRedirect: HOST_PERMISSIONS_REDIRECT,
-		notSalesforceSetupRedirect: NOT_SALESFORCE_SETUP_REDIRECT,
-		popupButtonIds: POPUP_BUTTON_IDS,
-	};
-}
-
-/**
  * Creates a popup module that can be executed later.
  *
  * @param {Object} [options={}] Popup runtime options.
  * @param {Object} [options.browser] Browser runtime.
- * @param {(...args: unknown[]) => Promise<boolean>} [options.areFramePatternsAllowedFn] Permission checker for frame patterns.
- * @param {() => void} [options.closePopupFn] Popup close callback.
+ * @param {(...args: unknown[]) => Promise<boolean>} [options.areFramePatternsAllowed] Permission checker for frame patterns.
+ * @param {() => void} [options.closePopup] Popup close callback.
  * @param {{ getElementById?: (id: string) => unknown; querySelector?: (selector: string) => unknown } | null} [options.documentRef] Document reference used by the popup.
- * @param {(messageKey: string | string[]) => Promise<string | string[]>} [options.getTranslationsFn] Translation lookup callback.
- * @param {() => Promise<{ ison: boolean }>} [options.isOnSalesforceSetupFn] Salesforce setup page checker.
+ * @param {(messageKey: string | string[]) => Promise<string | string[]>} [options.getTranslations] Translation lookup callback.
+ * @param {() => Promise<{ ison: boolean }>} [options.isOnSalesforceSetup] Salesforce setup page checker.
  * @param {Location | { href?: string }} [options.locationRef] Location reference used for redirects.
- * @param {() => void} [options.openSettingsPageFn] Settings page opener.
- * @param {(message: Record<string, unknown>) => Promise<unknown>} [options.sendExtensionMessageFn] Extension messaging callback.
+ * @param {() => void} [options.openSettingsPage] Settings page opener.
+ * @param {(message: Record<string, unknown>) => Promise<unknown>} [options.sendExtensionMessage] Extension messaging callback.
  * @param {string} [options.translationDataset] Translation dataset attribute name.
  * @param {string} [options.translationSeparator] Translation key separator.
  * @param {string} [options.cmdExportAll] Export-all command id.
@@ -431,14 +378,14 @@ export function getPopupRuntimeDefaults() {
  */
 export function createPopupModule({
 	browser = FALLBACK_BROWSER,
-	areFramePatternsAllowedFn = () => Promise.resolve(true),
-	closePopupFn = () => {},
+	areFramePatternsAllowed = () => Promise.resolve(true),
+	closePopup = () => {},
 	documentRef = FALLBACK_DOCUMENT_REF,
-	getTranslationsFn = (message) => Promise.resolve(message),
-	isOnSalesforceSetupFn = () => Promise.resolve({ ison: false }),
+	getTranslations = (message) => Promise.resolve(message),
+	isOnSalesforceSetup = () => Promise.resolve({ ison: false }),
 	locationRef = FALLBACK_LOCATION_REF,
-	openSettingsPageFn = () => {},
-	sendExtensionMessageFn = () => Promise.resolve(undefined),
+	openSettingsPage = () => {},
+	sendExtensionMessage = () => Promise.resolve(undefined),
 	translationDataset = "i18n",
 	translationSeparator = "+-+",
 	cmdExportAll = "",
@@ -458,14 +405,14 @@ export function createPopupModule({
 	return {
 		runPopup: runPopupImpl.bind(null, {
 			browser,
-			areFramePatternsAllowedFn,
-			closePopupFn,
+			areFramePatternsAllowed,
+			closePopup,
 			documentRef,
-			getTranslationsFn,
-			isOnSalesforceSetupFn,
+			getTranslations,
+			isOnSalesforceSetup,
 			locationRef,
-			openSettingsPageFn,
-			sendExtensionMessageFn,
+			openSettingsPage,
+			sendExtensionMessage,
 			translationDataset,
 			translationSeparator,
 			cmdExportAll,

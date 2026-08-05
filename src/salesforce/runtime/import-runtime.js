@@ -100,25 +100,25 @@ export function createImportModule(overrides = {}) {
 		toastWarning: overrides.TOAST_WARNING ?? TOAST_WARNING,
 		tabRef: overrides.Tab ?? Tab,
 		tabContainerRef: overrides.TabContainer ?? TabContainer,
-		ensureAllTabsAvailabilityFn: overrides.ensureAllTabsAvailability ??
+		ensureAllTabsAvailability: overrides.ensureAllTabsAvailability ??
 			ensureAllTabsAvailability,
-		getTranslationsFn: overrides.getTranslations ??
+		getTranslations: overrides.getTranslations ??
 			TranslationService.getTranslations,
-		generateCheckboxWithLabelFn: overrides.generateCheckboxWithLabel ??
+		generateCheckboxWithLabel: overrides.generateCheckboxWithLabel ??
 			generateCheckboxWithLabel,
-		generateSectionFn: overrides.generateSection ?? generateSection,
-		generateSldsFileInputFn: overrides.generateSldsFileInput ??
+		generateSection: overrides.generateSection ?? generateSection,
+		generateSldsFileInput: overrides.generateSldsFileInput ??
 			generateSldsFileInput,
-		generateSldsModalFn: overrides.generateSldsModal ?? generateSldsModal,
-		generateSldsModalWithTabListFn:
+		generateSldsModal: overrides.generateSldsModal ?? generateSldsModal,
+		generateSldsModalWithTabList:
 			overrides.generateSldsModalWithTabList ??
 				generateSldsModalWithTabList,
-		injectStyleFn: overrides.injectStyle ?? injectStyle,
-		sfAfterSetFn: overrides.sf_afterSet ?? sf_afterSet,
-		showToastFn: overrides.showToast ?? showToast,
-		getCurrentHrefFn: overrides.getCurrentHref ?? getCurrentHref,
-		getModalHangerFn: overrides.getModalHanger ?? getModalHanger,
-		getSetupTabUlFn: overrides.getSetupTabUl ?? getSetupTabUl,
+		injectStyle: overrides.injectStyle ?? injectStyle,
+		sfAfterSet: overrides.sf_afterSet ?? sf_afterSet,
+		showToast: overrides.showToast ?? showToast,
+		getCurrentHref: overrides.getCurrentHref ?? getCurrentHref,
+		getModalHanger: overrides.getModalHanger ?? getModalHanger,
+		getSetupTabUl: overrides.getSetupTabUl ?? getSetupTabUl,
 		documentRef: overrides.documentRef ?? globalThis.document,
 	});
 }

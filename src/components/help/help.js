@@ -6,8 +6,8 @@ import { registerHelpComponent } from "./help-runtime.js";
 
 registerHelpComponent({
 	browser: BROWSER,
-	generateHelpWithPopupFn: generateHelpWith_i_popup,
-	getTranslationsFn: TranslationService.getTranslations,
+	generateHelpWithPopup: generateHelpWith_i_popup,
+	getTranslations: TranslationService.getTranslations,
 	hiddenClass: HIDDEN_CLASS,
-	injectStyleFn: injectStyle,
+	injectStyle: injectStyle,
 });

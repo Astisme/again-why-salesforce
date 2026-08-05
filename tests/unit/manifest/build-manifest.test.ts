@@ -73,7 +73,7 @@ function runBuild(browserName: string) {
 				},
 			},
 			manifest,
-			writeFileSyncFn: (path: string, contents: string) => {
+			writeFileSync: (path: string, contents: string) => {
 				writes.push({ contents, path });
 			},
 		});

@@ -83,24 +83,24 @@ Deno.test("popup-runtime createPopupModule wires runtime constants through the p
 	const messages: Record<string, unknown>[] = [];
 
 	const popupModule = createPopupModule({
-		areFramePatternsAllowedFn: () => Promise.resolve(true),
+		areFramePatternsAllowed: () => Promise.resolve(true),
 		browser: {
 			runtime: {
 				getURL: (path: string) => `chrome-extension://test/${path}`,
 			},
 		},
-		closePopupFn: () => {
+		closePopup: () => {
 			counters.closeCalls++;
 		},
 		documentRef: document,
-		getTranslationsFn: (message: string | string[]) =>
+		getTranslations: (message: string | string[]) =>
 			Promise.resolve(message),
-		isOnSalesforceSetupFn: () => Promise.resolve({ ison: true }),
+		isOnSalesforceSetup: () => Promise.resolve({ ison: true }),
 		locationRef: window.location as URL,
-		openSettingsPageFn: () => {
+		openSettingsPage: () => {
 			counters.openSettingsCalls++;
 		},
-		sendExtensionMessageFn: (message: Record<string, unknown>) => {
+		sendExtensionMessage: (message: Record<string, unknown>) => {
 			messages.push(message);
 			if (message.what === WHAT_GET_COMMANDS) {
 				return Promise.resolve([
@@ -149,7 +149,7 @@ Deno.test("popup-runtime runPopup keeps runtime redirect behavior for host and n
 			appendPopupButtons(window.document);
 
 			await runPopup({
-				areFramePatternsAllowedFn: () => Promise.resolve(false),
+				areFramePatternsAllowed: () => Promise.resolve(false),
 				browser: {
 					runtime: {
 						getURL: (path: string) =>
@@ -157,7 +157,7 @@ Deno.test("popup-runtime runPopup keeps runtime redirect behavior for host and n
 					},
 				},
 				documentRef: window.document,
-				isOnSalesforceSetupFn: () => Promise.resolve({ ison: true }),
+				isOnSalesforceSetup: () => Promise.resolve({ ison: true }),
 				locationRef: window.location as URL,
 			});
 
@@ -177,7 +177,7 @@ Deno.test("popup-runtime runPopup keeps runtime redirect behavior for host and n
 			appendPopupButtons(window.document);
 
 			await runPopup({
-				areFramePatternsAllowedFn: () => Promise.resolve(true),
+				areFramePatternsAllowed: () => Promise.resolve(true),
 				browser: {
 					runtime: {
 						getURL: (path: string) =>
@@ -185,7 +185,7 @@ Deno.test("popup-runtime runPopup keeps runtime redirect behavior for host and n
 					},
 				},
 				documentRef: window.document,
-				isOnSalesforceSetupFn: () =>
+				isOnSalesforceSetup: () =>
 					Promise.resolve({
 						ison: false,
 						url: "https://example.com/page",
@@ -210,7 +210,7 @@ Deno.test("popup-runtime runPopupWithInjectedOptions bypasses runtime constants 
 	const messages: Record<string, unknown>[] = [];
 
 	await runPopupWithInjectedOptions({
-		areFramePatternsAllowedFn: () => Promise.resolve(true),
+		areFramePatternsAllowed: () => Promise.resolve(true),
 		browser: {
 			runtime: {
 				getURL: (path: string) => path,
@@ -221,9 +221,9 @@ Deno.test("popup-runtime runPopupWithInjectedOptions bypasses runtime constants 
 		cmdOpenSettings: "custom-settings",
 		cxmManageTabs: "custom-manage-tabs",
 		documentRef: document,
-		isOnSalesforceSetupFn: () => Promise.resolve({ ison: true }),
+		isOnSalesforceSetup: () => Promise.resolve({ ison: true }),
 		locationRef: window.location as URL,
-		sendExtensionMessageFn: (message: Record<string, unknown>) => {
+		sendExtensionMessage: (message: Record<string, unknown>) => {
 			messages.push(message);
 			if (message.what === "custom-get-commands") {
 				return Promise.resolve([{

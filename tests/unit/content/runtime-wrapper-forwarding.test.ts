@@ -892,7 +892,7 @@ Deno.test("favourite-manager-runtime wrappers delegate singleton and merge overr
 		const customShowToast = (message: string) => `custom-${message}`;
 		const createdModule = module.createFavouriteManagerModule({
 			extensionName: "custom-name",
-			showToastFn: customShowToast,
+			showToast: customShowToast,
 		});
 		assertStrictEquals(createdModule, explicitModule);
 		assertStrictEquals(module.FAVOURITE_BUTTON_ID, "fav-singleton");
@@ -935,9 +935,9 @@ Deno.test("favourite-manager-runtime wrappers delegate singleton and merge overr
 		assertStrictEquals(factoryInputs.length, 2);
 		assertEquals(factoryInputs[1].cmdRemoveTab, "cmd-remove");
 		assertEquals(factoryInputs[1].extensionName, "custom-name");
-		assertStrictEquals(factoryInputs[1].showToastFn, customShowToast);
+		assertStrictEquals(factoryInputs[1].showToast, customShowToast);
 		assertStrictEquals(
-			(factoryInputs[1].getCurrentHrefFn as () => string)(),
+			(factoryInputs[1].getCurrentHref as () => string)(),
 			"https://example.com/setup",
 		);
 	} finally {

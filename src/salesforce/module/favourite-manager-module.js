@@ -28,19 +28,19 @@
  * @param {() => Promise<{
  *   existsWithOrWithoutOrg: (tab: { org: string; url: string }) => boolean;
  *   getSingleTabByData: (tab: { org: string; url: string }) => { label?: string; org?: string; url: string };
- * }>} options.ensureAllTabsAvailabilityFn Tabs resolver.
- * @param {(keys: string | string[], connector?: string) => Promise<string | string[]>} options.getTranslationsFn Translator helper.
- * @param {() => string} options.getCurrentHrefFn Current URL getter.
- * @param {() => boolean | null} options.getIsCurrentlyOnSavedTabFn Saved-tab state getter.
- * @param {(keys: string[]) => Promise<Array<{ enabled: boolean; id: string }> | null>} options.getSettingsFn Settings getter.
- * @param {() => boolean | null} options.getWasOnSavedTabFn Previous saved-tab state getter.
- * @param {(id: string, options: { css: string }) => HTMLElement} options.injectStyleFn Style injector.
- * @param {() => Promise<void>} options.isOnSavedTabFn Saved-tab resolver.
- * @param {(action: string, payload: { label?: string; org?: string; url: string }, options?: { addInFront: boolean }) => Promise<void>} options.performActionOnTabsFn Tabs action executor.
- * @param {(message: { commands: string[]; what: string }) => Promise<Array<{ name: string; shortcut: string | null }>>} options.sendExtensionMessageFn Command fetcher.
- * @param {(message: string, status: string) => void} options.showToastFn Toast renderer.
+ * }>} options.ensureAllTabsAvailability Tabs resolver.
+ * @param {(keys: string | string[], connector?: string) => Promise<string | string[]>} options.getTranslations Translator helper.
+ * @param {() => string} options.getCurrentHref Current URL getter.
+ * @param {() => boolean | null} options.getIsCurrentlyOnSavedTab Saved-tab state getter.
+ * @param {(keys: string[]) => Promise<Array<{ enabled: boolean; id: string }> | null>} options.getSettings Settings getter.
+ * @param {() => boolean | null} options.getWasOnSavedTab Previous saved-tab state getter.
+ * @param {(id: string, options: { css: string }) => HTMLElement} options.injectStyle Style injector.
+ * @param {() => Promise<void>} options.isOnSavedTab Saved-tab resolver.
+ * @param {(action: string, payload: { label?: string; org?: string; url: string }, options?: { addInFront: boolean }) => Promise<void>} options.performActionOnTabs Tabs action executor.
+ * @param {(message: { commands: string[]; what: string }) => Promise<Array<{ name: string; shortcut: string | null }>>} options.sendExtensionMessage Command fetcher.
+ * @param {(message: string, status: string) => void} options.showToast Toast renderer.
  * @param {{ createElement: (tag: string) => HTMLElement; createElementNS: (ns: string, tag: string) => SVGElement; getElementById: (id: string) => HTMLElement | null; querySelector: (selector: string) => HTMLElement | null; dispatchEvent: (event: Event) => boolean }} options.documentRef Document wrapper.
- * @param {(callback: () => void, delay: number) => number} options.setTimeoutFn Timeout scheduler.
+ * @param {(callback: () => void, delay: number) => number} options.setTimeout Timeout scheduler.
  * @param {new (type: string) => Event} options.customEventCtor Custom event constructor.
  * @param {{ error: (message: string) => void; warn: (message: Error | string) => void }} [options.consoleRef=console] Console wrapper.
  * @return {{
@@ -75,19 +75,19 @@ export function createFavouriteManagerModule({
 	whatAdd,
 	whatGetCommands,
 	tabRef,
-	ensureAllTabsAvailabilityFn,
-	getTranslationsFn,
-	getCurrentHrefFn,
-	getIsCurrentlyOnSavedTabFn,
-	getSettingsFn,
-	getWasOnSavedTabFn,
-	injectStyleFn,
-	isOnSavedTabFn,
-	performActionOnTabsFn,
-	sendExtensionMessageFn,
-	showToastFn,
+	ensureAllTabsAvailability,
+	getTranslations,
+	getCurrentHref,
+	getIsCurrentlyOnSavedTab,
+	getSettings,
+	getWasOnSavedTab,
+	injectStyle,
+	isOnSavedTab,
+	performActionOnTabs,
+	sendExtensionMessage,
+	showToast,
 	documentRef,
-	setTimeoutFn,
+	setTimeout,
 	customEventCtor,
 	consoleRef = console,
 } = {}) {
@@ -109,19 +109,19 @@ export function createFavouriteManagerModule({
 	const whatAddRuntime = whatAdd;
 	const whatGetCommandsRuntime = whatGetCommands;
 	const tabRuntime = tabRef;
-	const ensureAllTabsAvailabilityRuntime = ensureAllTabsAvailabilityFn;
-	const getTranslationsRuntime = getTranslationsFn;
-	const getCurrentHrefRuntime = getCurrentHrefFn;
-	const getIsCurrentlyOnSavedTabRuntime = getIsCurrentlyOnSavedTabFn;
-	const getSettingsRuntime = getSettingsFn;
-	const getWasOnSavedTabRuntime = getWasOnSavedTabFn;
-	const injectStyleRuntime = injectStyleFn;
-	const isOnSavedTabRuntime = isOnSavedTabFn;
-	const performActionOnTabsRuntime = performActionOnTabsFn;
-	const sendExtensionMessageRuntime = sendExtensionMessageFn;
-	const showToastRuntime = showToastFn;
+	const ensureAllTabsAvailabilityRuntime = ensureAllTabsAvailability;
+	const getTranslationsRuntime = getTranslations;
+	const getCurrentHrefRuntime = getCurrentHref;
+	const getIsCurrentlyOnSavedTabRuntime = getIsCurrentlyOnSavedTab;
+	const getSettingsRuntime = getSettings;
+	const getWasOnSavedTabRuntime = getWasOnSavedTab;
+	const injectStyleRuntime = injectStyle;
+	const isOnSavedTabRuntime = isOnSavedTab;
+	const performActionOnTabsRuntime = performActionOnTabs;
+	const sendExtensionMessageRuntime = sendExtensionMessage;
+	const showToastRuntime = showToast;
 	const documentRuntime = documentRef;
-	const setTimeoutRuntime = setTimeoutFn;
+	const setTimeoutRuntime = setTimeout;
 	const customEventRuntime = customEventCtor;
 	const consoleRuntime = consoleRef;
 	let FAVOURITE_BUTTON_ID_RUNTIME;

@@ -2,7 +2,7 @@
  * Handles active-tab lookup and stores the latest result.
  *
  * @param {Object} options Lookup options.
- * @param {(message: { what: string }) => Promise<unknown>} options.sendExtensionMessageFn Message dispatcher.
+ * @param {(message: { what: string }) => Promise<unknown>} options.sendExtensionMessage Message dispatcher.
  * @param {string} options.whatGetBrowserTab Message type used to query the active tab.
  * @param {(url: string) => void | Promise<void>} [options.callback] Callback invoked with the target URL.
  * @param {string} options.url URL passed back to the callback.
@@ -10,13 +10,13 @@
  * @return {Promise<void>} Resolves once lookup and callback handling complete.
  */
 async function nss_getCurrentBrowserTab({
-	sendExtensionMessageFn,
+	sendExtensionMessage,
 	whatGetBrowserTab,
 	callback,
 	url,
 	onTabFound,
 } = {}) {
-	const browserTab = await sendExtensionMessageFn({
+	const browserTab = await sendExtensionMessage({
 		what: whatGetBrowserTab,
 	});
 	onTabFound(browserTab);
@@ -37,13 +37,13 @@ async function nss_getCurrentBrowserTab({
  * @param {string} options.salesforceSetupHomeMini Setup home path suffix.
  * @param {string} options.setupLightning Setup path prefix.
  * @param {string} options.whatGetBrowserTab Message type for active-tab lookup.
- * @param {(keys: string[]) => Promise<Array<{ id: string; enabled: boolean }>>} options.getSettingsFn Settings loader.
- * @param {(message: { what: string }) => Promise<{ id: number; index: number } | null>} options.sendExtensionMessageFn Message dispatcher.
- * @param {() => Promise<void> | void} options.ensureTranslatorAvailabilityFn Translator initializer.
+ * @param {(keys: string[]) => Promise<Array<{ id: string; enabled: boolean }>>} options.getSettings Settings loader.
+ * @param {(message: { what: string }) => Promise<{ id: number; index: number } | null>} options.sendExtensionMessage Message dispatcher.
+ * @param {() => Promise<void> | void} options.ensureTranslatorAvailability Translator initializer.
  * @param {{ getElementById: (id: string) => any }} [options.documentRef=document] Document-like host.
  * @param {{ href: string; search: string }} [options.locationRef=globalThis.location] Mutable location reference.
- * @param {(callback: () => void, delay: number) => unknown} [options.setTimeoutFn=setTimeout] Timeout scheduler.
- * @param {() => void} [options.closePopupFn=close] Popup close callback.
+ * @param {(callback: () => void, delay: number) => unknown} [options.setTimeout=setTimeout] Timeout scheduler.
+ * @param {() => void} [options.closePopup=close] Popup close callback.
  * @param {{ warn: (error: unknown) => void }} [options.consoleRef=console] Console-like logger.
  * @return {Promise<{ willOpenLogin: boolean }>} State describing which redirect button is active.
  */
@@ -58,13 +58,13 @@ export async function runNotSalesforceSetup({
 	salesforceSetupHomeMini,
 	setupLightning,
 	whatGetBrowserTab,
-	getSettingsFn,
-	sendExtensionMessageFn,
-	ensureTranslatorAvailabilityFn,
+	getSettings,
+	sendExtensionMessage,
+	ensureTranslatorAvailability,
 	documentRef = document,
 	locationRef = globalThis.location,
-	setTimeoutFn = setTimeout,
-	closePopupFn = close,
+	setTimeout = setTimeout,
+	closePopup = close,
 	consoleRef = console,
 } = {}) {
 	const sfsetupTextEl = documentRef.getElementById("plain");
@@ -111,7 +111,7 @@ export async function runNotSalesforceSetup({
 		}
 		if (currentTab == null) {
 			await nss_getCurrentBrowserTab({
-				sendExtensionMessageFn,
+				sendExtensionMessage,
 				whatGetBrowserTab,
 				callback: (nextUrl) => void createTab(nextUrl, count + 1),
 				url,
@@ -134,7 +134,7 @@ export async function runNotSalesforceSetup({
 		event.preventDefault();
 		if (currentTab == null && !openPageInSameTab) {
 			await nss_getCurrentBrowserTab({
-				sendExtensionMessageFn,
+				sendExtensionMessage,
 				whatGetBrowserTab,
 				callback: (url) => createTab(url),
 				url: shownRedirectBtn.href,
@@ -145,11 +145,11 @@ export async function runNotSalesforceSetup({
 		} else {
 			await createTab(shownRedirectBtn.href);
 		}
-		setTimeoutFn(closePopupFn, 200);
+		setTimeout(closePopup, 200);
 	});
 	const automaticClick = willOpenLogin ? popupOpenLogin : popupOpenSetup;
 	const useSameTab = willOpenLogin ? popupLoginNewTab : popupSetupNewTab;
-	const settings = await getSettingsFn([automaticClick, useSameTab]);
+	const settings = await getSettings([automaticClick, useSameTab]);
 	openPageInSameTab = settings?.some((setting) =>
 		setting.id === useSameTab && setting.enabled
 	);
@@ -163,7 +163,7 @@ export async function runNotSalesforceSetup({
 			await autoClickResult;
 		}
 	} else {
-		await ensureTranslatorAvailabilityFn();
+		await ensureTranslatorAvailability();
 	}
 	return { willOpenLogin };
 }

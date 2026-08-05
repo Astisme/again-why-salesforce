@@ -239,11 +239,11 @@ function loadDragHandler({
 			getElementById: () => ulContainer,
 			querySelector: () => tableContainer,
 		},
-		ensureAllTabsAvailabilityFn: () =>
+		ensureAllTabsAvailability: () =>
 			Promise.resolve({
 				pinnedTabsNo: pinnedTabs,
 			}),
-		setTimeoutFn: (_callback, delay) => {
+		setTimeout: (_callback, delay) => {
 			timeoutCalls.push(delay);
 			return timeoutCalls.length;
 		},

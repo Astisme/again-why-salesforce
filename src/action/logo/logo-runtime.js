@@ -4,14 +4,14 @@
  * @param {Object} options Runtime dependencies.
  * @param {{ runtime: { onMessage: { addListener: (listener: (message: unknown, sender: unknown, sendResponse: (response: null) => void) => void) => void; }; }; }} options.browser Browser runtime object.
  * @param {string} options.whatTheme Message identifier for theme updates.
- * @param {() => unknown} options.initThemeFn Theme initialization callback.
+ * @param {() => unknown} options.initTheme Theme initialization callback.
  * @param {{ documentElement: { dataset: Record<string, string> } }} [options.documentRef=document] Document-like host.
  * @return {(message: { what?: string; theme?: string | null }, sender: unknown, sendResponse: (response: null) => void) => void} Registered runtime listener.
  */
 export function runLogo({
 	browser,
 	whatTheme,
-	initThemeFn,
+	initTheme,
 	documentRef = document,
 } = {}) {
 	const html = documentRef.documentElement;
@@ -35,7 +35,7 @@ export function runLogo({
 		html.dataset.theme = message.theme;
 	}
 
-	initThemeFn();
+	initTheme();
 	browser.runtime.onMessage.addListener(readThemeMessage);
 	return readThemeMessage;
 }

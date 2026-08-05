@@ -176,16 +176,16 @@ function loadBackgroundUtilsModule(
 		whatExportFromBg: "export-from-bg",
 		whatRequestExportPermissionToOpenPopup: "request-export-permission",
 		whatUpdateExtension: "update-extension",
-		isExportAllowedFn: () => exportAllowed,
+		isExportAllowed: () => exportAllowed,
 		tabContainerRef: {
 			keyTabs: "tabs",
 		},
-		bgGetSettingsFn: () => Promise.resolve(updateSetting),
-		bgGetStorageFn: (callback) => {
+		bgGetSettings: () => Promise.resolve(updateSetting),
+		bgGetStorage: (callback) => {
 			callback([{ url: "/one" }]);
 			return Promise.resolve();
 		},
-		bgSetStorageFn: (value, _other, key) => {
+		bgSetStorage: (value, _other, key) => {
 			storageWrites.push({ key, value });
 		},
 		chromeRef: {
@@ -196,7 +196,7 @@ function loadBackgroundUtilsModule(
 			},
 		},
 		consoleRef: console,
-		fetchFn: (url: string) => {
+		fetch: (url: string) => {
 			requestUrls.push(url);
 			return Promise.resolve({
 				json: () => Promise.resolve(latestRelease),
