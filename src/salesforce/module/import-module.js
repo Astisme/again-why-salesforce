@@ -381,7 +381,7 @@ export function createImportPureModule({
 					resetTabs: false,
 				};
 				importedNum += await allTabs.importTabs(
-					jsonString,
+					normalizeImportJson(jsonString),
 					fileImportConfig,
 				);
 			}
@@ -392,6 +392,41 @@ export function createImportPureModule({
 			what: "imported",
 			tabs: allTabs,
 		});
+	}
+
+	/**
+	 * Returns whether the parsed payload already uses the native import shape.
+	 *
+	 * @param {unknown} parsedFile Parsed JSON payload.
+	 * @return {boolean} Whether the payload can be imported as-is.
+	 */
+	function isNativeImportPayload(parsedFile) {
+		if (Array.isArray(parsedFile)) {
+			return filterForUnexpectedTabKeys(parsedFile).length ===
+				parsedFile.length;
+		}
+		const tabs = parsedFile?.[tabContainerRef.keyTabs];
+		return Array.isArray(tabs) &&
+			filterForUnexpectedTabKeys(tabs).length === tabs.length;
+	}
+
+	/**
+	 * Converts supported external JSON payloads into a native import payload.
+	 *
+	 * @param {string} jsonString Raw JSON payload.
+	 * @return {string} Native or original JSON payload.
+	 */
+	function normalizeImportJson(jsonString) {
+		const parsedFile = JSON.parse(jsonString);
+		const tabs = Array.isArray(parsedFile)
+			? getTabsFromJSON({ [tabContainerRef.keyTabs]: parsedFile })
+			: getTabsFromJSON(parsedFile);
+		if (tabs.length === 0 || isNativeImportPayload(parsedFile)) {
+			return jsonString;
+		}
+		return serializeImportedTabs(tabContainerRef.getThrowawayInstance({
+			tabs,
+		}));
 	}
 
 	/**

@@ -1220,9 +1220,7 @@ function createSldsPromptChoiceButton({
 	button.setAttribute("title", label);
 	button.setAttribute("aria-label", "");
 	button.dataset.auraClass = "uiButton forceActionButton";
-	if (typeof buttonContainer.before === "function") {
-		buttonContainer.before(button, beforeElement);
-	} else if (typeof beforeElement?.before === "function") {
+  if (typeof beforeElement?.before === "function") {
 		beforeElement.before(button);
 	} else {
 		buttonContainer.appendChild(button);

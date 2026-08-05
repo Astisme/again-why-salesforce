@@ -578,6 +578,76 @@ Deno.test("import shows the file modal and imports valid JSON files directly", a
 	}
 });
 
+Deno.test("import maps supported external formats without manual tab selection", async () => {
+	const fixture = await loadImportModule({});
+
+	try {
+		await fixture.module.createImportModal();
+		await fixture.changeTarget.dispatchEvent({
+			preventDefault() {},
+			target: {
+				files: [
+					createFile(
+						"application/json",
+						JSON.stringify({
+							bookmarks: [{
+								title: "Bookmark",
+								url: "/bookmark",
+								org: "org",
+							}],
+						}),
+					),
+					createFile(
+						"application/json",
+						JSON.stringify([{
+							tabTitle: "Why",
+							url: "/why",
+							org: "org",
+							extra: true,
+						}]),
+					),
+				],
+			},
+			type: "change",
+		} as unknown as Event);
+
+		assertEquals(fixture.modalListCalls, []);
+		assertEquals(fixture.importCalls, [
+			{
+				config: {
+					importMetadata: false,
+					importPinnedTabs: false,
+					preserveOtherOrg: false,
+					resetTabs: false,
+				},
+				json: JSON.stringify({
+					pinned: 0,
+					tabs: [{
+						label: "Bookmark",
+						url: "/bookmark",
+						org: "org",
+					}],
+				}),
+			},
+			{
+				config: {
+					currentOrg: null,
+					importMetadata: false,
+					importPinnedTabs: false,
+					preserveOtherOrg: true,
+					resetTabs: false,
+				},
+				json: JSON.stringify({
+					pinned: 0,
+					tabs: [{ label: "Why", url: "/why", org: "org" }],
+				}),
+			},
+		]);
+	} finally {
+		fixture.cleanup();
+	}
+});
+
 Deno.test("import toggles the other-org checkbox visibility when overwrite changes", async () => {
 	const fixture = await loadImportModule({});
 
