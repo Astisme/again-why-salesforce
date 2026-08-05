@@ -3,6 +3,7 @@ import {
 	assertEquals,
 	assertStringIncludes,
 } from "@std/testing/asserts";
+import { stub } from "@std/testing/mock";
 import { dirname, fromFileUrl, join } from "@std/path";
 import {
 	type AuditFinding,
@@ -23,7 +24,7 @@ import {
 	splitTopLevelArgs,
 	summarizeFindings,
 } from "../../bin/audit-logging-lib.ts";
-import { parseArgs } from "../../bin/audit-logging.ts";
+import { main, parseArgs } from "../../bin/audit-logging.ts";
 
 /**
  * Creates a reusable finding object for assertions.
@@ -314,6 +315,84 @@ Deno.test("parseArgs parses known args and rejects invalid ones", () => {
 		"Invalid --fail-severity value",
 	);
 });
+
+Deno.test("main writes report and returns failing exit code for errors", async () => {
+	const srcDir = "virtual-src";
+	const localeFile = "virtual-messages.json";
+	const reportFile = "virtual-report.json";
+	let writtenReport = "";
+	const readDirStub = stub(
+		Deno,
+		"readDir",
+		(): AsyncIterable<Deno.DirEntry> =>
+			createDirEntries([{
+				name: "sample.js",
+				isFile: true,
+				isDirectory: false,
+				isSymlink: false,
+			}]),
+	);
+	const readTextFileStub = stub(
+		Deno,
+		"readTextFile",
+		(path: string | URL): Promise<string> => {
+			if (String(path).endsWith(localeFile)) {
+				return Promise.resolve("{}");
+			}
+			return Promise.resolve([
+				"console.warn('missing.key')",
+				"console.error('plain text', { id: 1 })",
+			].join("\n"));
+		},
+	);
+	const writeTextFileStub = stub(
+		Deno,
+		"writeTextFile",
+		(
+			path: string | URL,
+			data: string | ReadableStream<string>,
+		): Promise<void> => {
+			assertStringIncludes(String(path), reportFile);
+			assert(typeof data === "string");
+			writtenReport = data;
+			return Promise.resolve();
+		},
+	);
+	try {
+		const exitCode = await main([
+			`--src-dir=${srcDir}`,
+			`--locale-file=${localeFile}`,
+			`--report-file=${reportFile}`,
+			"--fail-severity=error",
+		]);
+		const report = JSON.parse(writtenReport) as {
+			findings: AuditFinding[];
+		};
+
+		assertEquals(exitCode, 1);
+		assertEquals(report.findings.length, 2);
+		assertEquals(
+			report.findings.map((finding) => finding.issueCode),
+			["MISSING_LOCALE_KEY", "NON_KEY_LITERAL"],
+		);
+		assertEquals(report.findings[0].file, join(srcDir, "sample.js"));
+	} finally {
+		readDirStub.restore();
+		readTextFileStub.restore();
+		writeTextFileStub.restore();
+	}
+});
+
+/**
+ * Creates async directory entries for virtual filesystem tests.
+ */
+async function* createDirEntries(
+entries: Deno.DirEntry[],
+): AsyncIterableIterator<Deno.DirEntry> {
+	for (const entry of entries) {
+		yield entry;
+	}
+}
 
 /**
  * Asserts that parseArgs throws an Error with a message fragment.

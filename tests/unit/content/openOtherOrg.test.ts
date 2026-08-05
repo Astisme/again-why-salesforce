@@ -264,6 +264,9 @@ Deno.test("openOtherOrg validates inputs and opens a confirmed target org", asyn
 		"https://beta.lightning.force.com/lightning/setup/Flows/home";
 	await fixture.input.dispatch("input");
 	assertEquals(fixture.input.value, "beta");
+	fixture.input.value = "be";
+	await fixture.input.dispatch("input");
+	assertEquals(fixture.input.value, "be");
 
 	fixture.input.value = "";
 	await fixture.saveButton.click();
@@ -305,6 +308,100 @@ Deno.test("openOtherOrg validates inputs and opens a confirmed target org", asyn
 		url: "https://gamma.lightning.force.com/lightning/setup/001ABCDEF123456789/view",
 	}]);
 	assertEquals(fixture.translations.length > 0, true);
+});
+
+Deno.test("openOtherOrg default confirm callback opens when global confirm accepts", async () => {
+	const originalConfirm = globalThis.confirm;
+	const confirmMessages: string[] = [];
+	const fixture = await loadOpenOtherOrgFixture();
+	try {
+		Object.defineProperty(globalThis, "confirm", {
+			configurable: true,
+			value: (message: string) => {
+				confirmMessages.push(message);
+				return true;
+			},
+			writable: true,
+		});
+		const module = createOpenOtherOrgModule({
+			documentRef: {
+				getElementById: () => null,
+			},
+			ensureAllTabsAvailabilityFn: () =>
+				Promise.resolve({
+					getSingleTabByData: () => ({
+						label: "Users",
+						url: "Users/home",
+					}),
+				}),
+			generateOpenOtherOrgModalFn: () =>
+				Promise.resolve({
+					closeButton: fixture.closeButton,
+					getSelectedRadioButtonValue: () => "_self",
+					inputContainer: fixture.input,
+					modalParent: new TestElement(),
+					saveButton: fixture.saveButton,
+				}),
+			getCurrentHrefFn: () =>
+				"https://acme.lightning.force.com/lightning/setup/Users/home",
+			getModalHangerFn: () => fixture.hanger,
+			getSettingsFn: () => Promise.resolve({ enabled: true }),
+			getTranslationsFn: (payload: string | string[] | unknown[]) => {
+				if (Array.isArray(payload)) {
+					return Promise.resolve(payload.map(String));
+				}
+				return Promise.resolve(String(payload));
+			},
+			locationRef: {
+				href:
+					"https://acme.lightning.force.com/lightning/setup/Users/home",
+			},
+			openFn: (url: string | URL, target?: string) => {
+				fixture.openCalls.push({
+					target: target ?? "",
+					url: String(url),
+				});
+			},
+			salesforceUrlPattern: /^[a-z0-9.-]+$/i,
+			showToastFn: (message: string | string[], status = "") => {
+				fixture.toasts.push({ message, status });
+			},
+			tabRef: {
+				containsSalesforceId: () => false,
+				extractOrgName: (value: string | null | undefined) => {
+					if (value == null) {
+						return "acme";
+					}
+					const sanitized = value.replace(/^https?:\/\//, "");
+					const hostname = sanitized.split("/")[0] ?? sanitized;
+					return hostname.replace(/\.lightning\.force\.com$/, "");
+				},
+				minifyURL: () => "Users/home",
+			},
+		});
+
+		await module.createOpenOtherOrgModal({
+			label: "Users",
+			org: "acme",
+			url: "Users/home",
+		});
+		fixture.input.value = "beta";
+		await fixture.saveButton.click();
+
+		assertEquals(confirmMessages, [
+			"confirm_another_org\nhttps://beta.lightning.force.com/lightning/setup/Users/home",
+		]);
+		assertEquals(fixture.openCalls, [{
+			target: "_self",
+			url: "https://beta.lightning.force.com/lightning/setup/Users/home",
+		}]);
+	} finally {
+		Object.defineProperty(globalThis, "confirm", {
+			configurable: true,
+			value: originalConfirm,
+			writable: true,
+		});
+	}
 });
 
 Deno.test("openOtherOrg ignores repeated save clicks for the same extracted org", async () => {

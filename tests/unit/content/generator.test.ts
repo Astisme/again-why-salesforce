@@ -8,7 +8,25 @@ import {
 	assertStringIncludes,
 	assertThrows,
 } from "@std/testing/asserts";
-import { createGeneratorModule } from "../../../src/salesforce/generator.js";
+import {
+	createGeneratorModule,
+	createManageTabRow as createManageTabRowWrapper,
+	generateCheckboxWithLabel as generateCheckboxWithLabelWrapper,
+	generateHelpWith_i_popup as generateHelpWithIPopupWrapper,
+	generateManageTabsModal as generateManageTabsModalWrapper,
+	generateOpenOtherOrgModal as generateOpenOtherOrgModalWrapper,
+	generateRadioButtons as generateRadioButtonsWrapper,
+	generateReviewSponsorSvgs as generateReviewSponsorSvgsWrapper,
+	generateRowTemplate as generateRowTemplateWrapper,
+	generateSection as generateSectionWrapper,
+	generateSldsFileInput as generateSldsFileInputWrapper,
+	generateSldsModal as generateSldsModalWrapper,
+	generateSldsModalWithTabList as generateSldsModalWithTabListWrapper,
+	generateSldsToastMessage as generateSldsToastMessageWrapper,
+	generateTutorialElements as generateTutorialElementsWrapper,
+	generateUpdateTabModal as generateUpdateTabModalWrapper,
+	sldsConfirm as sldsConfirmWrapper,
+} from "../../../src/salesforce/generator.js";
 import { installMockDom } from "../../happydom.test.ts";
 
 type StyleRule = {
@@ -1773,5 +1791,126 @@ Deno.test("generator covers selectable tab-list and manage-tabs modal builders",
 		);
 	} finally {
 		fixture.cleanup();
+	}
+});
+
+Deno.test("generator top-level wrappers exercise singleton exports", async () => {
+	const dom = installMockDom(
+		"https://acme.lightning.force.com/lightning/setup/Users/home",
+	);
+
+	try {
+		const row = await generateRowTemplateWrapper({
+			label: "Accounts",
+			org: null,
+			url: "Accounts/home",
+		}, {
+			isSaved: true,
+		});
+		assertExists(row.querySelector("a"));
+
+		const toast = await generateSldsToastMessageWrapper(
+			"toast_message_key",
+			"warning",
+		);
+		assertStringIncludes(toast.className, "slds-notify_container");
+
+		const section = await generateSectionWrapper("section_title");
+		assertExists(section.divParent);
+		assertExists(section.section);
+
+		const modal = await generateSldsModalWrapper({
+			modalTitle: "modal_title",
+		});
+		assertExists(modal.modalParent);
+		assertExists(modal.saveButton);
+
+		const radios = generateRadioButtonsWrapper(
+			"radio-group",
+			{ checked: true, label: "radio_1", value: "one" },
+			{ label: "radio_2", value: "two" },
+		);
+		assertEquals(radios.getSelectedRadioButtonValue(), "one");
+
+		const openOtherOrgModal = await generateOpenOtherOrgModalWrapper({
+			label: "Setup",
+			org: "acme",
+			url: "Users/home",
+		});
+		assertExists(openOtherOrgModal.modalParent);
+
+		const fileInput = await generateSldsFileInputWrapper(
+			"file-wrapper",
+			"file-input",
+			"application/json",
+			false,
+			false,
+			false,
+			true,
+		);
+		assertEquals(fileInput.inputContainer.id, "file-input");
+
+		const checkbox = await generateCheckboxWithLabelWrapper(
+			"check-id",
+			"checkbox_label",
+			true,
+		);
+		assertEquals(
+			(checkbox.querySelector("input") as HTMLInputElement).checked,
+			true,
+		);
+
+		const updateModal = await generateUpdateTabModalWrapper(
+			"Setup",
+			"Users/home",
+			"acme",
+		);
+		assertExists(updateModal.modalParent);
+
+		const help = generateHelpWithIPopupWrapper({
+			text: "help_text",
+		});
+		assertExists(help.root);
+
+		const tabListModal = await generateSldsModalWithTabListWrapper([
+			{ label: "Accounts", org: null, url: "Accounts/home" },
+		], {
+			title: "modal_title",
+		}) as {
+			getSelectedTabs: () => { tabs: unknown[] };
+		};
+		assertEquals(tabListModal.getSelectedTabs().tabs.length, 1);
+
+		const manageRow = await createManageTabRowWrapper({
+			label: "Accounts",
+			org: null,
+			url: "Accounts/home",
+		});
+		assertExists(manageRow.tr);
+
+		const manageModal = await generateManageTabsModalWrapper([
+			{ label: "Accounts", org: null, url: "Accounts/home" },
+		]);
+		assertExists(manageModal.modalParent);
+
+		const reviewSponsor = generateReviewSponsorSvgsWrapper();
+		assertExists(reviewSponsor.root);
+
+		const tutorialElements = await generateTutorialElementsWrapper();
+		assertExists(tutorialElements.overlay);
+
+		const confirmPromise = sldsConfirmWrapper({
+			body: "Body",
+			cancelLabel: "Cancel",
+			closeLabel: "Close",
+			confirmLabel: "Save",
+			title: "Confirm",
+		});
+		document.getElementById("again-why-salesforce-modal-confirm")
+			?.querySelector("#again-why-salesforce-modal-save-btn")
+			?.dispatchEvent(new Event("click"));
+		assertEquals(await confirmPromise, true);
+	} finally {
+		dom.cleanup();
 	}
 });

@@ -1,6 +1,10 @@
 import "../../mocks.test.ts";
 import { assertEquals } from "@std/testing/asserts";
-import { createPopupModule } from "../../../src/action/popup/popup-module.js";
+import {
+	createPopupModule,
+	runPopup,
+	runPopupWithInjectedOptions,
+} from "../../../src/action/popup/popup-module.js";
 import {
 	createMockWindow,
 	MockDocument,
@@ -444,4 +448,43 @@ Deno.test("popup-module setup flow can rely on the default message sender", asyn
 	});
 
 	assertEquals(result.redirected, false);
+});
+
+Deno.test("popup-module exported runPopup accepts injected popup options", async () => {
+	const fixture = await loadPopupModule({
+		availableCommands: [{ name: CMD_IMPORT, shortcut: "Alt+I" }],
+		salesforceState: { ison: true },
+	});
+	const window = createMockWindow(
+		"https://example.test/action/popup/popup.html",
+	);
+	appendElement(window.document, "button", "import");
+	appendElement(window.document, "button", "export");
+	appendElement(window.document, "button", "open-settings");
+	appendElement(window.document, "button", "manage-tabs");
+	appendElement(window.document, "button", "tutorial");
+
+	const result = await runPopup({
+		areFramePatternsAllowedFn: () => Promise.resolve(false),
+		browser: {
+			runtime: {
+				getURL: (path: string) => `runtime://${path}`,
+			},
+		},
+		documentRef: window.document,
+		isOnSalesforceSetupFn: () => Promise.resolve({ ison: true }),
+		locationRef: window.location as URL,
+	});
+
+	assertEquals(fixture.messages.length, 1);
+	assertEquals(result.redirected, true);
+	assertEquals(
+		window.location.href,
+		"runtime://action/req_permissions/req_permissions.html?whichid=hostpermissions",
+	);
+});
+
+Deno.test("popup-module runPopupWithInjectedOptions uses all defaults safely", async () => {
+	const result = await runPopupWithInjectedOptions();
+	assertEquals(result.redirected, true);
 });

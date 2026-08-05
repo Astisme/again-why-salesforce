@@ -1,7 +1,7 @@
 "use strict";
 import {
 	ALL_WHAT_REASONS,
-  SETTINGS_KEY,
+	SETTINGS_KEY,
 	BROWSER,
 	CHANGELOG_LINK,
 	CXM_MANAGE_TABS,
@@ -102,8 +102,9 @@ function listenToExtensionMessages() {
 				break;
 			case WHAT_SET:
 				bg_setStorage(request.set, sendResponse, request.key);
-        if(request.key === SETTINGS_KEY)
-          bg_checkUpdateUninstallURL(request.set);
+				if (request.key == null || request.key === SETTINGS_KEY) {
+					bg_checkUpdateUninstallURL(request.set);
+				}
 				break;
 			case WHAT_SAVED:
 			case WHAT_SHOW_IMPORT:

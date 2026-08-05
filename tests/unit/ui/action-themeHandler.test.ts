@@ -378,3 +378,48 @@ Deno.test("themeHandler createThemeHandlerModule uses fallback globals when runt
 		});
 	}
 });
+
+Deno.test("themeHandler createThemeHandlerModule uses runtime globals when present", async () => {
+	const originalDocument = globalThis.document;
+	const originalLocalStorage = globalThis.localStorage;
+	const originalMatchMedia = globalThis.matchMedia;
+	const media = new MockMediaQueryList(false);
+	try {
+		Object.defineProperty(globalThis, "document", {
+			configurable: true,
+			value: { documentElement: { dataset: {} } },
+			writable: true,
+		});
+		Object.defineProperty(globalThis, "localStorage", {
+			configurable: true,
+			value: new MemoryStorage(),
+			writable: true,
+		});
+		Object.defineProperty(globalThis, "matchMedia", {
+			configurable: true,
+			value: () => media,
+			writable: true,
+		});
+
+		const module = createThemeHandlerModule();
+		await module.initTheme();
+
+		assertStrictEquals(media.listeners.length, 1);
+	} finally {
+		Object.defineProperty(globalThis, "document", {
+			configurable: true,
+			value: originalDocument,
+			writable: true,
+		});
+		Object.defineProperty(globalThis, "localStorage", {
+			configurable: true,
+			value: originalLocalStorage,
+			writable: true,
+		});
+		Object.defineProperty(globalThis, "matchMedia", {
+			configurable: true,
+			value: originalMatchMedia,
+			writable: true,
+		});
+	}
+});

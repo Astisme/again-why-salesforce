@@ -217,6 +217,53 @@ Deno.test("toast accepts custom statuses present in the allowed status set", asy
 	assertEquals(logs.error.length, 0);
 });
 
+Deno.test("toast supports missing hanger and missing timeout dependencies", async () => {
+	const logs: string[] = [];
+	let removed = false;
+	const module: ToastShowApi = createToastModule({
+		allToastTypes: new Set(["success"]),
+		consoleRef: {
+			error: () => {},
+			info: () => {},
+			log: (message: string | string[]) => logs.push(String(message)),
+			trace: () => {},
+			warn: () => {},
+		},
+		documentRef: {
+			getElementsByClassName: () => null,
+		},
+		generateSldsToastMessageFn: () => ({
+			remove: () => {
+				removed = true;
+			},
+			textContent: null,
+		}),
+		setTimeoutFn: undefined,
+		toastSuccess: "success",
+	});
+
+	await module.showToast("saved", "success");
+
+	assertEquals(logs, ["saved"]);
+	assertEquals(removed, false);
+});
+
+Deno.test("toast rejects when generator dependency is missing", async () => {
+	const module: ToastShowApi = createToastModule({
+		allToastTypes: new Set(["success"]),
+		documentRef: {
+			getElementsByClassName: () => [],
+		},
+		toastSuccess: "success",
+	});
+
+	await assertRejects(
+		() => module.showToast("saved", "success"),
+		TypeError,
+		"error_required_params",
+	);
+});
+
 /**
  * Translates keys by returning plain string values for generator-dependent tests.
  *

@@ -44,6 +44,8 @@ type BackgroundUtilsModule = {
  *   isExportAllowed?: boolean;
  *   isFirefox?: boolean;
  *   latestRelease?: { tag_name?: string };
+ *   managementInstallType?: string | null;
+ *   managementRejects?: boolean;
  *   responseOk?: boolean;
  *   updateSetting?: { date?: string; enabled?: boolean } | null;
  * }} [options={}] Override values for the isolated module.
@@ -67,6 +69,8 @@ function loadBackgroundUtilsModule(
 		isExportAllowed: exportAllowed = true,
 		isFirefox = false,
 		latestRelease = {},
+		managementInstallType = null,
+		managementRejects = false,
 		responseOk = true,
 		updateSetting = null,
 	}: {
@@ -76,6 +80,8 @@ function loadBackgroundUtilsModule(
 		isExportAllowed?: boolean;
 		isFirefox?: boolean;
 		latestRelease?: { tag_name?: string };
+		managementInstallType?: string | null;
+		managementRejects?: boolean;
 		responseOk?: boolean;
 		updateSetting?: { date?: string; enabled?: boolean } | null;
 	} = {},
@@ -95,35 +101,71 @@ function loadBackgroundUtilsModule(
 			revokedUrls.push(url);
 		},
 	});
-	const module = createBackgroundUtilsModule({
-		browser: {
-			action: {
-				setPopup: ({ popup }) => {
-					popups.push(popup);
-				},
+	const browserApi: {
+		action: {
+			setPopup: (details: { popup: string }) => void;
+		};
+		downloads: {
+			download: (details: { filename: string; url: string }) => Promise<number>;
+			onChanged: {
+				addListener: (
+					listener: (event: { state: { current: string } }) => void,
+				) => void;
+			};
+		};
+		management?: {
+			getSelf: () => Promise<{ installType?: string }>;
+		};
+		runtime: {
+			getURL: (path: string) => string | null;
+			lastError: null;
+		};
+		tabs: {
+			query: () => Promise<Array<{ id: number }>>;
+			sendMessage: (_tabId: number, message: object) => void;
+		};
+	} = {
+		action: {
+			setPopup: ({ popup }) => {
+				popups.push(popup);
 			},
-			downloads: {
-				download: (details) => {
-					downloads.push(details);
-					return Promise.resolve(1);
-				},
-				onChanged: {
-					addListener: (listener) => {
-						changedListeners.push(listener);
-					},
-				},
+		},
+		downloads: {
+			download: (details) => {
+				downloads.push(details);
+				return Promise.resolve(1);
 			},
-			runtime: {
-				getURL: getURL ?? (() => null),
-				lastError: null,
-			},
-			tabs: {
-				query: () => Promise.resolve([{ id: 7 }]),
-				sendMessage: (_tabId, message) => {
-					messages.push(message);
+			onChanged: {
+				addListener: (listener) => {
+					changedListeners.push(listener);
 				},
 			},
 		},
+		runtime: {
+			getURL: getURL ?? (() => null),
+			lastError: null,
+		},
+		tabs: {
+			query: () => Promise.resolve([{ id: 7 }]),
+			sendMessage: (_tabId, message) => {
+				messages.push(message);
+			},
+		},
+	};
+	if (managementInstallType != null || managementRejects) {
+		browserApi.management = {
+			getSelf: () => {
+				if (managementRejects) {
+					return Promise.reject(new Error("management-failure"));
+				}
+				return Promise.resolve({
+					installType: managementInstallType ?? undefined,
+				});
+			},
+		};
+	}
+	const module = createBackgroundUtilsModule({
+		browser: browserApi,
 		extensionGithubLink: "https://github.com/acme/again-why-salesforce",
 		extensionName: "again-why-salesforce",
 		extensionVersion,
@@ -528,6 +570,35 @@ Deno.test("background utils isolated branches cover export handlers and update c
 				assertEquals(skippedFixture.messages, []);
 			} finally {
 				skippedFixture.cleanup();
+			}
+
+			const developmentFixture = await loadBackgroundUtilsModule({
+				managementInstallType: "development",
+			});
+			try {
+				await developmentFixture.module.checkForUpdates();
+				assertEquals(developmentFixture.storageWrites.length, 0);
+				assertEquals(developmentFixture.requestUrls, []);
+				assertEquals(developmentFixture.messages, []);
+			} finally {
+				developmentFixture.cleanup();
+			}
+
+			const managementFailureFixture = await loadBackgroundUtilsModule({
+				latestRelease: {
+					tag_name: "release-v1.1.0",
+				},
+				managementRejects: true,
+			});
+			try {
+				await managementFailureFixture.module.checkForUpdates();
+				assertEquals(managementFailureFixture.storageWrites.length, 1);
+				assertEquals(
+					managementFailureFixture.requestUrls[0],
+					"https://api.github.com/repos/acme/again-why-salesforce/releases/latest",
+				);
+			} finally {
+				managementFailureFixture.cleanup();
 			}
 
 			const failedFixture = await loadBackgroundUtilsModule({

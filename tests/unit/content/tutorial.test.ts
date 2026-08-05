@@ -8,6 +8,7 @@ import {
 	assertThrows,
 } from "@std/testing/asserts";
 import { createTutorialModule } from "../../../src/salesforce/tutorial.js";
+import { createTutorialModule as createPureTutorialModule } from "../../../src/salesforce/module/tutorial-module.js";
 import { installMockDom } from "../../happydom.test.ts";
 /**
  * Baseline Salesforce Setup URL used to initialize the DOM harness.
@@ -1408,6 +1409,135 @@ Deno.test(
 				"auto",
 			);
 		} finally {
+			await flush();
+			harness.cleanup();
+		}
+	},
+);
+
+Deno.test(
+	"nextStep ends immediately after final step",
+	async () => {
+		const harness = createHarness();
+		try {
+			const tutorialModule = await harness.load();
+			const tutorial = new tutorialModule.Tutorial();
+			tutorial.spinner = globalThis.document.createElement("div");
+			tutorial.steps = [];
+			let endCalls = 0;
+			tutorial.end = () => {
+				endCalls++;
+			};
+
+			await tutorial.nextStep();
+
+			assertEquals(endCalls, 1);
+			assertEquals(tutorial.currentStep, 0);
+		} finally {
+			await flush();
+			harness.cleanup();
+		}
+	},
+);
+
+Deno.test(
+	"createTutorialModule supports default dependencies when no overrides are passed",
+	() => {
+		const tutorialModule =
+			createPureTutorialModule() as unknown as TutorialModule;
+
+		assertExists(tutorialModule.Tutorial);
+		assertExists(tutorialModule.checkTutorial);
+	},
+);
+
+Deno.test(
+	"showConfirm does not advance when clicking close button or confirm-action step",
+	async () => {
+		const harness = createHarness();
+		try {
+			const tutorialModule = await harness.load();
+			const tutorial = new tutorialModule.Tutorial();
+			tutorial.translator = harness.translator;
+			await tutorial.createOverlay();
+			let confirmCalls = 0;
+			let nextStepCalls = 0;
+			tutorial.currentStep = 0;
+			tutorial.steps = [{
+				action: "confirm",
+				onConfirm: () => {
+					confirmCalls++;
+				},
+			}];
+			tutorial.nextStep = () => {
+				nextStepCalls++;
+			};
+			const closeEvent = new Event("click");
+			Object.defineProperty(closeEvent, "target", {
+				configurable: true,
+				value: tutorial.closeBtn,
+			});
+
+			tutorial.showConfirm();
+			tutorial.messageBox.dispatchEvent(closeEvent);
+			tutorial.showConfirm();
+			tutorial.messageBox.dispatchEvent(new Event("click"));
+
+			assertEquals(confirmCalls, 1);
+			assertEquals(nextStepCalls, 0);
+		} finally {
+			await flush();
+			harness.cleanup();
+		}
+	},
+);
+
+Deno.test(
+	"throwConfetti removes canvas after animation duration",
+	async () => {
+		const harness = createHarness();
+		const originalRequestAnimationFrame = globalThis.requestAnimationFrame;
+		const originalPerformance = globalThis.performance;
+		const originalInnerWidth = globalThis.innerWidth;
+		const originalInnerHeight = globalThis.innerHeight;
+		try {
+			const tutorialModule = await harness.load();
+			const tutorial = new tutorialModule.Tutorial();
+			tutorial.messageBox = globalThis.document.createElement("div");
+			tutorial.messageBox.getBoundingClientRect = () =>
+				({
+					width: 40,
+					height: 20,
+					top: 10,
+					left: 5,
+					right: 45,
+					bottom: 30,
+					x: 5,
+					y: 10,
+					toJSON: () => ({}),
+				}) as DOMRect;
+			globalThis.document.body.appendChild(tutorial.messageBox);
+			setGlobal("innerWidth", 320);
+			setGlobal("innerHeight", 240);
+			setGlobal("performance", {
+				now: () => 0,
+			});
+			setGlobal(
+				"requestAnimationFrame",
+				((callback: FrameRequestCallback) => {
+					callback(3001);
+					return 1;
+				}) as typeof requestAnimationFrame,
+			);
+
+			tutorial.throwConfetti();
+
+			assertEquals(globalThis.document.querySelector("canvas"), null);
+		} finally {
+			setGlobal("requestAnimationFrame", originalRequestAnimationFrame);
+			setGlobal("performance", originalPerformance);
+			setGlobal("innerWidth", originalInnerWidth);
+			setGlobal("innerHeight", originalInnerHeight);
 			await flush();
 			harness.cleanup();
 		}

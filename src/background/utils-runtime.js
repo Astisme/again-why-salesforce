@@ -31,7 +31,7 @@ function _isNewerVersion(latest, current) {
  * Creates background utility handlers with injected runtime dependencies.
  *
  * @param {Object} options Runtime dependencies.
- * @param {{ action: { setPopup: (details: { popup: string }) => void }; downloads?: { download: (details: { filename: string; url: string }) => Promise<number> | number; onChanged: { addListener: (listener: (event: { state: { current: string } }) => void) => void; }; }; runtime: { getURL: (path: string) => string | null; lastError?: Error | null }; tabs: { query: (params: object) => Promise<Array<{ id: number }>>; sendMessage: (tabId: number, message: object) => void; }; }} options.browser Browser API wrapper.
+ * @param {{ action: { setPopup: (details: { popup: string }) => void }; downloads?: { download: (details: { filename: string; url: string }) => Promise<number> | number; onChanged: { addListener: (listener: (event: { state: { current: string } }) => void) => void; }; }; management?: { getSelf: () => Promise<{ installType?: string }> }; runtime: { getURL: (path: string) => string | null; lastError?: Error | null }; tabs: { query: (params: object) => Promise<Array<{ id: number }>>; sendMessage: (tabId: number, message: object) => void; }; }} options.browser Browser API wrapper.
  * @param {string} options.extensionGithubLink Extension GitHub repository URL.
  * @param {string} options.extensionName Extension name.
  * @param {string} options.extensionVersion Extension version string.
@@ -283,11 +283,28 @@ export function createBackgroundUtilsModule({
 	}
 
 	/**
+	 * Checks whether the extension is running from a development install.
+	 *
+	 * @return {Promise<boolean>} True when the browser reports a development install.
+	 */
+	async function isDevelopmentInstall() {
+		try {
+			const selfInfo = await browserRuntime.management?.getSelf?.();
+			return selfInfo?.installType === "development";
+		} catch (_error) {
+			return false;
+		}
+	}
+
+	/**
 	 * Checks GitHub releases and notifies when a newer extension version exists.
 	 *
 	 * @return {Promise<void>}
 	 */
 	async function checkForUpdates() {
+		if (await isDevelopmentInstall()) {
+			return;
+		}
 		const noUpdateSetting = await bgGetSettingsRuntime(
 			noUpdateNotificationRuntime,
 		);
