@@ -590,7 +590,7 @@ function checkAddDuplicateStyle(tabAppendElement) {
 		"awsf-warning",
 		{ css: ".duplicate { background-color: #dd7a01 !important; }" },
 	);
-	tabAppendElement.insertAdjacentElement("afterend", styleEl);
+	tabAppendElement.after(styleEl);
 }
 
 /**
