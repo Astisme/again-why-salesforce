@@ -885,11 +885,11 @@ class Tutorial {
 		if (!this.confirmHandlerAttached) {
 			this.confirmBtn.addEventListener("click", () => {
 				this.confirmHandlerAttached = false;
-			const step = this.steps[this.currentStep];
-			step.onConfirm?.();
-			if (step.action !== ACTION.confirm) {
-				this.nextStep();
-			}
+				const step = this.steps[this.currentStep];
+				step.onConfirm?.();
+				if (step.action !== ACTION.confirm) {
+					this.nextStep();
+				}
 			}, { once: true });
 			this.confirmHandlerAttached = true;
 		}
