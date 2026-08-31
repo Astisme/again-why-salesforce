@@ -28,9 +28,9 @@ import {
 	generateFavouriteButton,
 	getFavouriteImage,
 	pageActionTab,
+	showFavouriteButton,
 	SLASHED_STAR_ID,
 	STAR_ID,
-	showFavouriteButton,
 	toggleFavouriteButton,
 } from "../../../src/salesforce/runtime/favourite-manager-runtime.js";
 import {
@@ -127,11 +127,13 @@ Deno.test("open-other-org runtime singleton wrapper reaches modal generation", a
 	);
 
 	try {
-		await assertRejects(() => createOpenOtherOrgModal({
-			label: "Setup",
-			org: "acme",
-			url: "Users/home",
-		}));
+		await assertRejects(() =>
+			createOpenOtherOrgModal({
+				label: "Setup",
+				org: "acme",
+				url: "Users/home",
+			})
+		);
 	} finally {
 		dom.cleanup();
 	}

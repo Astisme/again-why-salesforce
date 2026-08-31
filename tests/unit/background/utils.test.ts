@@ -106,7 +106,9 @@ function loadBackgroundUtilsModule(
 			setPopup: (details: { popup: string }) => void;
 		};
 		downloads: {
-			download: (details: { filename: string; url: string }) => Promise<number>;
+			download: (
+				details: { filename: string; url: string },
+			) => Promise<number>;
 			onChanged: {
 				addListener: (
 					listener: (event: { state: { current: string } }) => void,

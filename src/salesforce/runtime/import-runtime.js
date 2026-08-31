@@ -110,9 +110,8 @@ export function createImportModule(overrides = {}) {
 		generateSldsFileInput: overrides.generateSldsFileInput ??
 			generateSldsFileInput,
 		generateSldsModal: overrides.generateSldsModal ?? generateSldsModal,
-		generateSldsModalWithTabList:
-			overrides.generateSldsModalWithTabList ??
-				generateSldsModalWithTabList,
+		generateSldsModalWithTabList: overrides.generateSldsModalWithTabList ??
+			generateSldsModalWithTabList,
 		injectStyle: overrides.injectStyle ?? injectStyle,
 		sfAfterSet: overrides.sf_afterSet ?? sf_afterSet,
 		showToast: overrides.showToast ?? showToast,
