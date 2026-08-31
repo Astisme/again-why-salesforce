@@ -118,30 +118,19 @@ async function getLatestReleaseLabel() {
  * Converts wiki doc id to generated page href.
  *
  * @param {string} doc Wiki document id.
- * @param {"root" | "wiki" | "wiki-home"} context Link context.
  * @returns {string} Static page URL.
  */
-function getWikiPageName(doc, context = "root") {
-	if (context === "wiki-home") {
-		return doc === "Home" ? "./" : `./${doc}/`;
-	}
-	if (context === "wiki") {
-		return doc === "Home" ? "../" : `../${doc}/`;
-	}
-	return doc === "Home" ? "wiki/" : `wiki/${doc}/`;
+function getWikiPageName(doc) {
+	return doc === "Home" ? "Wiki/" : `Wiki/${doc}/`;
 }
 
 /**
  * Gets wiki home href for current link context.
  *
- * @param {"root" | "wiki" | "wiki-home"} context Link context.
  * @returns {string} Wiki home href.
  */
-function getWikiHomeHref(context) {
-	if (context === "wiki-home") {
-		return "./";
-	}
-	return context === "wiki" ? "../" : "wiki/";
+function getWikiHomeHref() {
+	return "Wiki/";
 }
 
 /**
@@ -152,50 +141,65 @@ function getWikiHomeHref(context) {
  */
 function getWikiOutputUrl(doc) {
 	return doc === "Home"
-		? new URL("wiki/index.html", outputDir)
-		: new URL(`wiki/${doc}/index.html`, outputDir);
+		? new URL("Wiki/index.html", outputDir)
+		: new URL(`Wiki/${doc}/index.html`, outputDir);
+}
+
+/**
+ * Converts a same-page fragment into a static Wiki URL.
+ *
+ * @param {string} doc Wiki document id.
+ * @param {string} fragment Heading fragment without its hash.
+ * @returns {string} Static Wiki heading URL.
+ */
+function getWikiFragmentHref(doc, fragment) {
+	return `./Wiki/${doc}/#${fragment}`;
+}
+
+/**
+ * Rewrites same-page fragments for a static Wiki page.
+ *
+ * @param {string} html HTML content.
+ * @param {string} doc Wiki document id.
+ * @returns {string} HTML with static Wiki fragment URLs.
+ */
+function rewriteWikiFragments(html, doc) {
+	return html.replaceAll(
+		/href="#([^"]+)"/g,
+		(_match, fragment) => `href="${getWikiFragmentHref(doc, fragment)}"`,
+	);
 }
 
 /**
  * Rewrites runtime wiki query links to static generated links.
  *
  * @param {string} html HTML content.
- * @param {"root" | "wiki" | "wiki-home"} context Link context.
  * @returns {string} HTML content with static wiki links.
  */
-function rewriteWikiLinks(html, context = "root") {
+function rewriteWikiLinks(html) {
 	return html
+		.replaceAll(
+			/href="(?:\.\/)?Wiki\/([^/"#]+)\/?(#[^"]*)?"/g,
+			(_match, encodedDoc, hash = "") => {
+				const doc = decodeURIComponent(encodedDoc);
+				return wikiDocuments[doc]
+					? `href="./${getWikiPageName(doc)}${hash}"`
+					: `href="./${getWikiHomeHref()}"`;
+			},
+		)
 		.replaceAll(
 			/href="(\.?\/?)wiki\.html\?doc=([^"#]+)(#[^"]*)?"/g,
 			(_match, prefix, encodedDoc, hash = "") => {
 				const doc = decodeURIComponent(encodedDoc);
 				return wikiDocuments[doc]
-					? `href="${prefix}${getWikiPageName(doc, context)}${hash}"`
-					: `href="${prefix}${getWikiHomeHref(context)}"`;
+					? `href="${prefix}${getWikiPageName(doc)}${hash}"`
+					: `href="${prefix}${getWikiHomeHref()}"`;
 			},
 		)
 		.replaceAll(
 			/href="(\.?\/?)wiki\.html"/g,
-			(_match, prefix) => `href="${prefix}${getWikiHomeHref(context)}"`,
+			(_match, prefix) => `href="${prefix}${getWikiHomeHref()}"`,
 		);
-}
-
-/**
- * Rewrites wiki shell relative paths for nested generated pages.
- *
- * @param {string} html HTML content.
- * @param {string} prefix Relative prefix back to site root.
- * @returns {string} HTML content with nested-safe paths.
- */
-function rewriteWikiShellPaths(html, prefix) {
-	return html
-		.replaceAll(
-			/href="(index|features|installation|changelog|articles|privacy)\.html"/g,
-			`href="${prefix}$1.html"`,
-		)
-		.replaceAll('href="wiki.css"', `href="${prefix}wiki.css"`)
-		.replaceAll('src="markdown.js"', `src="${prefix}markdown.js"`)
-		.replaceAll('src="script.js"', `src="${prefix}script.js"`);
 }
 
 /**
@@ -351,9 +355,11 @@ function buildWikiPage(template, doc, markdown) {
 	const rendered = addHeadingIds(
 		globalThis.awsfMarkdown.renderMarkdown(markdown),
 	);
-	const prefix = doc === "Home" ? "../" : "../../";
-	const linkContext = doc === "Home" ? "wiki-home" : "wiki";
 	let html = template
+		.replace(
+			"<head>",
+			`<head><base href="${doc === "Home" ? "../" : "../../"}">`,
+		)
 		.replace(
 			/<h1 class="js-wiki-title">[\s\S]*?<\/h1>/,
 			`<h1 class="js-wiki-title">${wikiTitles[doc] || doc}</h1>`,
@@ -366,19 +372,23 @@ function buildWikiPage(template, doc, markdown) {
 		)
 		.replace(
 			/<article class="markdown-body" data-markdown-source="wiki">[\s\S]*?<\/article>/,
-			`<article class="markdown-body">${rendered.html}</article>`,
+			`<article class="markdown-body">${
+				rewriteWikiFragments(rendered.html, doc)
+			}</article>`,
 		)
 		.replace(
 			/<nav class="js-article-toc">[\s\S]*?<\/nav>/,
-			`<nav class="js-article-toc">${rendered.toc}</nav>`,
+			`<nav class="js-article-toc">${
+				rewriteWikiFragments(rendered.toc, doc)
+			}</nav>`,
 		);
 	html = removeMarkdownScript(
-		rewriteWikiLinks(rewriteWikiShellPaths(html, prefix), linkContext),
+		rewriteWikiLinks(html),
 	);
 	if (doc !== "Home") {
 		html = html.replaceAll(
-			new RegExp(`href="${getWikiPageName(doc, linkContext)}"`, "g"),
-			`aria-current="page" href="${getWikiPageName(doc, linkContext)}"`,
+			new RegExp(`href="${getWikiPageName(doc)}"`, "g"),
+			`aria-current="page" href="${getWikiPageName(doc)}"`,
 		);
 	}
 	return html;
