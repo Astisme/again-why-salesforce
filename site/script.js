@@ -1,3 +1,5 @@
+import { wikiDocuments, wikiTitles } from "./wiki-data.js";
+
 const navToggle = document.querySelector(".nav-toggle");
 const siteNav = document.querySelector("#site-nav");
 const releaseLabels = document.querySelectorAll(".js-current-release");
@@ -50,58 +52,6 @@ const installTargets = {
 		label: "Open latest release",
 		url: "https://github.com/Astisme/again-why-salesforce/releases/latest",
 	},
-};
-
-const wikiDocuments = {
-	"Home": "Home.md",
-	"Manage-Tabs": "Manage-Tabs/Manage-Tabs.md",
-	"Manage-Tabs-modal": "Manage-Tabs/Manage-Tabs-modal.md",
-	"Save-a-Tab": "Manage-Tabs/Save-a-Tab.md",
-	"Remove-a-Tab": "Manage-Tabs/Remove-a-Tab.md",
-	"Remove-Multiple-Tabs": "Manage-Tabs/Remove-Multiple-Tabs.md",
-	"Import-Tabs": "Manage-Tabs/Import-Tabs.md",
-	"Export-Tabs": "Manage-Tabs/Export-Tabs.md",
-	"Sort-Tabs": "Manage-Tabs/Sort-Tabs.md",
-	"Context-Menu": "Manage-Tabs/Context-Menu.md",
-	"Commands": "Manage-Tabs/Commands.md",
-	"Settings": "Settings/Settings.md",
-	"Style-your-Tabs": "Settings/Style-your-Tabs.md",
-	"Pick-Language": "Settings/Pick-Language.md",
-	"Optional-Permissions": "Settings/Optional-Permissions.md",
-	"No-Simple-Analytics": "Settings/No-Simple-Analytics.md",
-	"Keep-Tabs-Sorted": "Settings/Keep-Tabs-Sorted.md",
-	"Open-Other-Org": "Open-Other-Org.md",
-	"Tutorial": "Tutorial.md",
-	"Safari-Installation": "Safari-Installation.md",
-	"What-is-a-Tab": "Tab-Info/What-is-a-Tab.md",
-	"Pinned-Tabs": "Tab-Info/Pinned-Tabs.md",
-	"Manual-Sort": "Tab-Info/Manual-Sort.md",
-};
-
-const wikiTitles = {
-	"Home": "Wiki home",
-	"Manage-Tabs": "Manage Tabs",
-	"Manage-Tabs-modal": "Manage Tabs modal",
-	"Save-a-Tab": "Save a Tab",
-	"Remove-a-Tab": "Remove a Tab",
-	"Remove-Multiple-Tabs": "Remove Multiple Tabs",
-	"Import-Tabs": "Import Tabs",
-	"Export-Tabs": "Export Tabs",
-	"Sort-Tabs": "Sort Tabs",
-	"Context-Menu": "Context Menus",
-	"Commands": "Commands / Hot Keys",
-	"Settings": "Settings",
-	"Style-your-Tabs": "Style your Tabs",
-	"Pick-Language": "Pick language",
-	"Optional-Permissions": "Optional permissions",
-	"No-Simple-Analytics": "Disable Simple Analytics",
-	"Keep-Tabs-Sorted": "Keep Tabs sorted",
-	"Open-Other-Org": "Open Other Org",
-	"Tutorial": "Tutorial",
-	"Safari-Installation": "Safari Installation",
-	"What-is-a-Tab": "What is a Tab?",
-	"Pinned-Tabs": "Pinned Tabs",
-	"Manual-Sort": "Manual Sort",
 };
 
 globalThis.awsfWikiDocuments = wikiDocuments;
@@ -419,8 +369,8 @@ function hydrateWikiSidebar() {
 	if (!wikiSidebar) {
 		return;
 	}
-	const doc = new URLSearchParams(location.search).get("doc") || "Home";
-	const currentHref = `wiki.html?doc=${encodeURIComponent(doc)}`;
+	const doc = resolveWikiDocFromLocation();
+	const currentHref = `Wiki/${encodeURIComponent(doc)}`;
 	for (const link of wikiSidebar.querySelectorAll("a")) {
 		if (!(link instanceof HTMLAnchorElement)) {
 			continue;
@@ -448,9 +398,32 @@ function getMarkdownUrl(target) {
 		return "https://raw.githubusercontent.com/Astisme/again-why-salesforce/main/docs/PRIVACY_POLICY.md";
 	}
 
-	const doc = new URLSearchParams(location.search).get("doc") || "Home";
+	const doc = resolveWikiDocFromLocation();
 	const path = wikiDocuments[doc] || wikiDocuments.Home;
 	return `https://raw.githubusercontent.com/wiki/Astisme/again-why-salesforce/${path}`;
+}
+
+/**
+ * Resolves wiki document key from current URL.
+ *
+ * Supports both query route (`wiki.html?doc=...`) and pathname route (`Wiki/...`).
+ *
+ * @returns {string} Wiki document key.
+ */
+function resolveWikiDocFromLocation() {
+	const queryDoc = new URLSearchParams(location.search).get("doc");
+	if (queryDoc) {
+		return queryDoc;
+	}
+	const prefix = "Wiki/";
+	const pathName = location.pathname;
+	const wikiIndex = pathName.indexOf(prefix);
+	if (wikiIndex === -1) {
+		return "Home";
+	}
+	const docPath = pathName.slice(wikiIndex + prefix.length).split("/")[0];
+	const decodedDoc = decodeURIComponent(docPath || "Home");
+	return decodedDoc || "Home";
 }
 
 /**
@@ -576,11 +549,12 @@ async function hydrateMarkdown() {
 	}
 	const markdown = await response.text();
 	if (markdownSource.getAttribute("data-markdown-source") === "wiki") {
-		const doc = new URLSearchParams(location.search).get("doc") || "Home";
+		const doc = resolveWikiDocFromLocation();
 		if (wikiTitleLabel) {
 			wikiTitleLabel.textContent = wikiTitles[doc] ||
 				doc.replaceAll("-", " ");
 		}
+
 		if (wikiDescriptionLabel) {
 			wikiDescriptionLabel.textContent = `Article from ${
 				wikiDocuments[doc] || wikiDocuments.Home

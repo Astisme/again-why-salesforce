@@ -33,10 +33,20 @@ function renderInlineMarkdown(value) {
 		.replaceAll("&lt;/u&gt;", "</u>")
 		.replaceAll(/\[([^\]]+)\]\(([^)]+)\)/g, (_match, label, href) => {
 			const url = String(href);
-			if (
-				url.startsWith("http") || url.startsWith("mailto:") ||
-				url.startsWith("#")
-			) {
+			const siteDocumentHref = getSiteDocumentHref(url);
+			if (siteDocumentHref) {
+				return `<a href="${siteDocumentHref}">${label}</a>`;
+			}
+			if (url.startsWith("#")) {
+				const fragment = url
+					.slice(1)
+					.toLowerCase()
+					.replaceAll(/[^a-z0-9\s-]/g, "")
+					.trim()
+					.replaceAll(/\s+/g, "-");
+				return `<a href="#${escapeHtml(fragment)}">${label}</a>`;
+			}
+			if (url.startsWith("http") || url.startsWith("mailto:")) {
 				return `<a href="${escapeHtml(url)}">${label}</a>`;
 			}
 			const localDoc = url
@@ -59,7 +69,7 @@ function renderInlineMarkdown(value) {
 			const [doc, hash] = localDoc.split("#");
 			const wikiDocuments = globalThis.awsfWikiDocuments || {};
 			const target = wikiDocuments[doc]
-				? `wiki.html?doc=${encodeURIComponent(doc)}${
+				? `Wiki/${encodeURIComponent(doc)}${
 					hash ? `#${encodeURIComponent(hash)}` : ""
 				}`
 				: "wiki.html";
@@ -67,6 +77,22 @@ function renderInlineMarkdown(value) {
 		})
 		.replaceAll(/\*([^*]+)\*/g, "<em>$1</em>")
 		.replaceAll(/(^|[\s(])_([^_\n]+)_([\s).,!?]|$)/g, "$1<em>$2</em>$3");
+}
+
+/**
+ * Maps repository documentation links to their local site pages.
+ *
+ * @param {string} url Markdown link URL.
+ * @returns {string | null} Local site page URL, or null for other URLs.
+ */
+function getSiteDocumentHref(url) {
+	if (url.endsWith("/docs/CHANGELOG.md")) {
+		return "./changelog.html";
+	}
+	if (url.endsWith("/docs/PRIVACY_POLICY.md")) {
+		return "./privacy.html";
+	}
+	return null;
 }
 
 /**
