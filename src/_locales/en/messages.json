@@ -1615,6 +1615,10 @@
 		"message": "You may manage your $tabs from this screen. Click here to get more info.",
 		"description": "[tutorial] manage tabs link"
 	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "Open guide",
+		"description": "[tutorial] button label to open manage tabs guide"
+	},
 	"tutorial_pin_tab": {
 		"message": "Right-click on the highlighted $tab and select $extension_label > $cxm_move > $cxm_pin_tab to pin it.",
 		"description": "[tutorial] pin tab"
