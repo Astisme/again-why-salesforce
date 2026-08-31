@@ -583,14 +583,14 @@ async function removeTr(
 
 /**
  * Adds a style element with a selector for duplicate class (if it does not yet exist)
- * @param {TbodyHTMLElement} tabAppendElement - the tbody element where to append the style
+ * @param {TbodyHTMLElement} tabAppendElement - the tbody element after which to add the style
  */
 function checkAddDuplicateStyle(tabAppendElement) {
 	const styleEl = injectStyle(
 		"awsf-warning",
 		{ css: ".duplicate { background-color: #dd7a01 !important; }" },
 	);
-	tabAppendElement.appendChild(styleEl);
+	tabAppendElement.insertAdjacentElement("afterend", styleEl);
 }
 
 /**
