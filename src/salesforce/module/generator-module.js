@@ -3227,6 +3227,7 @@ export function generateReviewSponsorSvgs() {
  *   messageBox: HTMLDivElement, // the element to add to the document
  *   segments:   HTMLDivElement, // where to put the new textContent
  *   confirmBtn: HTMLButtonElement, // to continue the tutorial
+ *   linkBtn: HTMLAnchorElement, // optional guide link for tutorial steps
  *   btnsParent: HTMLDivElement, // where the buttons are located
  * }>} as described
  */
@@ -3269,6 +3270,15 @@ async function generateMessageBox() {
 	);
 	confirmBtn.textContent = confirmBtnText;
 	actions.append(confirmBtn);
+	const linkBtn = document.createElement("a");
+	linkBtn.classList.add(
+		"slds-button",
+		"slds-button_neutral",
+		HIDDEN_CLASS,
+	);
+	linkBtn.target = "_blank";
+	linkBtn.rel = "noopener noreferrer";
+	actions.append(linkBtn);
 	const closeBtn = document.createElement("button");
 	closeBtn.classList.add(
 		"slds-button",
@@ -3281,6 +3291,7 @@ async function generateMessageBox() {
 		messageBox,
 		segments,
 		confirmBtn,
+		linkBtn,
 		closeBtn,
 		btnsParent: actions,
 	};
@@ -3294,7 +3305,7 @@ async function generateMessageBox() {
  * @return {Promise<Object>} An object containing the generated HTML elements:
  * - {HTMLElement} overlay: A semi-transparent overlay covering the entire viewport
  * - {HTMLElement} messageBox: A positioned box for displaying tutorial messages and buttons
- * - {HTMLElement} highlightBox: A box used to highlight specific elements on the page
+ * - {HTMLAnchorElement} linkBtn: A guide link shown by steps with a link configuration
  */
 export async function generateTutorialElements() {
 	const overlay = document.createElement("div");

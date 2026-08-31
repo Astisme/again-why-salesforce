@@ -38,6 +38,7 @@ export const createManageTabRow = generatorModule.createManageTabRow;
 export const generateManageTabsModal = generatorModule.generateManageTabsModal;
 export const generateReviewSponsorSvgs =
 	generatorModule.generateReviewSponsorSvgs;
+/** Generates tutorial elements, including optional guide link button. */
 export const generateTutorialElements =
 	generatorModule.generateTutorialElements;
 export const sldsConfirm = generatorModule.sldsConfirm;

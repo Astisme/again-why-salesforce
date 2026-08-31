@@ -98,8 +98,8 @@ export const EXTENSION_GITHUB_LINK = MANIFEST.homepage_url;
 export const EXTENSION_GITHUB_ISSUES_LINK =
 	`${EXTENSION_GITHUB_LINK}/issues/new/choose`;
 const GITHUB_IO_LINK = "https://astisme.github.io/again-why-salesforce";
-export const WIKI_LINK = `${GITHUB_IO_LINK}/wiki`;
-export const CHANGELOG_LINK = `${GITHUB_IO_LINK}/changelog`;
+export const WIKI_LINK = `${GITHUB_IO_LINK}/Wiki`;
+export const CHANGELOG_LINK = `${GITHUB_IO_LINK}/Changelog`;
 export const EXTENSION_OPTIONAL_HOST_PERM = MANIFEST.optional_host_permissions;
 // SETTINGS
 export const TUTORIAL_KEY = "tutorial-progress"; // Added for tutorial progress saving
@@ -363,8 +363,8 @@ export const CHROME_LINK =
 	"https://chromewebstore.google.com/detail/again-why-salesforce/bceeoimjhgjbihanbiifgpndmkklajbi/reviews";
 export const FIREFOX_LINK =
 	"https://addons.mozilla.org/en-US/firefox/addon/again-why-salesforce/";
-export const SPONSOR_LINK = `${GITHUB_IO_LINK}/sponsor`;
+export const SPONSOR_LINK = `${GITHUB_IO_LINK}/Sponsor`;
 export const UNINSTALL_SURVEY_LINK_NO_PING =
 	"https://docs.google.com/forms/d/e/1FAIpQLSe4tGs4gCX04vaFb_MZgN9CbdlYvLTef6HorgyCXZ14XCHxCQ/viewform";
 export const UNINSTALL_SURVEY_LINK_YES_PING =
-	`${GITHUB_IO_LINK}/uninstall?version=${EXTENSION_VERSION}&browser=${BROWSER_NAME}`;
+	`${GITHUB_IO_LINK}/Uninstall?version=${EXTENSION_VERSION}&browser=${BROWSER_NAME}`;

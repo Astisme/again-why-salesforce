@@ -16,7 +16,7 @@ export function checkTutorial(fromPopup = false) {
  * Creates tutorial helpers with runtime defaults.
  *
  * @param {Object} [overrides={}] Runtime overrides used by tests.
- * @return {Record<string, unknown>} Tutorial module API.
+ * @return {Record<string, unknown>} Tutorial module API with guide button support.
  */
 export function createTutorialModule(overrides = {}) {
 	return tutorialRuntime.createTutorialModule(overrides);
