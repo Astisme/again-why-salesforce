@@ -508,6 +508,31 @@ class ManageElement {
 	}
 
 	/**
+	 * Inserts an element at the specified adjacent position.
+	 *
+	 * @param {string} position Position relative to this element.
+	 * @param {ManageElement} element Element to insert.
+	 * @return {ManageElement | null} The inserted element.
+	 */
+	insertAdjacentElement(
+		position: "beforebegin" | "afterbegin" | "beforeend" | "afterend",
+		element: ManageElement,
+	): ManageElement | null {
+		if (position === "afterend" && this.parentNode) {
+			const index = this.parentNode.children.indexOf(this);
+			this.parentNode.children.splice(index + 1, 0, element);
+			this.parentNode.childNodes.splice(
+				this.parentNode.childNodes.indexOf(this) + 1,
+				0,
+				element,
+			);
+			element.parentNode = this.parentNode;
+			return element;
+		}
+		return null;
+	}
+
+	/**
 	 * Dispatches a click event on the element.
 	 *
 	 * @return {Promise<void> | void} Listener completion when async handlers are present.
@@ -1067,6 +1092,7 @@ function createArticleFixture(
 	table.clientHeight = 120;
 	table.parentNode = wrapper;
 	table.setQueryResult("tr:nth-child(1)", firstRow);
+	wrapper.appendChild(tbody);
 	article.childNodes = [new ManageElement("div"), wrapper];
 	article.setClosest(
 		".modal-body.scrollable.slds-modal__content.slds-p-around_medium",
@@ -1815,7 +1841,7 @@ Deno.test("manageTabs checks duplicates, updates links, and handles input bookke
 			inputObj: { label: "present", url: "" },
 			tabAppendElement: tbody,
 		});
-		assertEquals(tbody.children.length, 3);
+		assertEquals(tbody.children.length, 2);
 	} finally {
 		fixture.cleanup();
 	}
