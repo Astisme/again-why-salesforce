@@ -18,9 +18,7 @@ import {
 	sendExtensionMessage,
 } from "../../core/functions.js";
 import { TranslationService } from "../../core/translator.js";
-import {
-	createPopupModule as _createPopupModule,
-} from "./popup-module.js";
+import { createPopupModule as _createPopupModule } from "./popup-module.js";
 
 /**
  * Builds runtime defaults for popup wiring.

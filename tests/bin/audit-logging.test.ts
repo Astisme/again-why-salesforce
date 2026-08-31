@@ -387,7 +387,7 @@ Deno.test("main writes report and returns failing exit code for errors", async (
  * Creates async directory entries for virtual filesystem tests.
  */
 async function* createDirEntries(
-entries: Deno.DirEntry[],
+	entries: Deno.DirEntry[],
 ): AsyncIterableIterator<Deno.DirEntry> {
 	for (const entry of entries) {
 		yield entry;

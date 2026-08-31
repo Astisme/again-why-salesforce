@@ -35,8 +35,7 @@ export function showFavouriteButton(count = 0) {
 /**
  * Runtime favourite button id.
  */
-export const FAVOURITE_BUTTON_ID =
-	favouriteManagerRuntime.FAVOURITE_BUTTON_ID;
+export const FAVOURITE_BUTTON_ID = favouriteManagerRuntime.FAVOURITE_BUTTON_ID;
 
 /**
  * Runtime slashed-star id.

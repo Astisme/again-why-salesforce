@@ -54,8 +54,7 @@ export function createHelpAwsClass({
 		constructor() {
 			super();
 			const shadow = this.attachShadow({ mode: "open" });
-			const { root, anchor, tooltip, linkTip } =
-				generateHelpWithPopup();
+			const { root, anchor, tooltip, linkTip } = generateHelpWithPopup();
 			shadow.appendChild(root);
 			this._anchor = anchor;
 			this._tooltip = tooltip;
