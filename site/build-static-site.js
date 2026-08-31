@@ -1,3 +1,5 @@
+import { wikiDocuments, wikiTitles } from "./wiki-data.js";
+
 const siteDir = new URL("./", import.meta.url);
 const repoDir = new URL("../", siteDir);
 const outputDir = new URL("../site-dist/", siteDir);
@@ -7,58 +9,6 @@ const wikiDir = new URL(
 );
 const releaseApiUrl =
 	"https://api.github.com/repos/Astisme/again-why-salesforce/releases/latest";
-
-const wikiDocuments = {
-	"Home": "Home.md",
-	"Manage-Tabs": "Manage-Tabs/Manage-Tabs.md",
-	"Manage-Tabs-modal": "Manage-Tabs/Manage-Tabs-modal.md",
-	"Save-a-Tab": "Manage-Tabs/Save-a-Tab.md",
-	"Remove-a-Tab": "Manage-Tabs/Remove-a-Tab.md",
-	"Remove-Multiple-Tabs": "Manage-Tabs/Remove-Multiple-Tabs.md",
-	"Import-Tabs": "Manage-Tabs/Import-Tabs.md",
-	"Export-Tabs": "Manage-Tabs/Export-Tabs.md",
-	"Sort-Tabs": "Manage-Tabs/Sort-Tabs.md",
-	"Context-Menu": "Manage-Tabs/Context-Menu.md",
-	"Commands": "Manage-Tabs/Commands.md",
-	"Settings": "Settings/Settings.md",
-	"Style-your-Tabs": "Settings/Style-your-Tabs.md",
-	"Pick-Language": "Settings/Pick-Language.md",
-	"Optional-Permissions": "Settings/Optional-Permissions.md",
-	"No-Simple-Analytics": "Settings/No-Simple-Analytics.md",
-	"Keep-Tabs-Sorted": "Settings/Keep-Tabs-Sorted.md",
-	"Open-Other-Org": "Open-Other-Org.md",
-	"Tutorial": "Tutorial.md",
-	"Safari-Installation": "Safari-Installation.md",
-	"What-is-a-Tab": "Tab-Info/What-is-a-Tab.md",
-	"Pinned-Tabs": "Tab-Info/Pinned-Tabs.md",
-	"Manual-Sort": "Tab-Info/Manual-Sort.md",
-};
-
-const wikiTitles = {
-	"Home": "Wiki home",
-	"Manage-Tabs": "Manage Tabs",
-	"Manage-Tabs-modal": "Manage Tabs modal",
-	"Save-a-Tab": "Save a Tab",
-	"Remove-a-Tab": "Remove a Tab",
-	"Remove-Multiple-Tabs": "Remove Multiple Tabs",
-	"Import-Tabs": "Import Tabs",
-	"Export-Tabs": "Export Tabs",
-	"Sort-Tabs": "Sort Tabs",
-	"Context-Menu": "Context Menus",
-	"Commands": "Commands / Hot Keys",
-	"Settings": "Settings",
-	"Style-your-Tabs": "Style your Tabs",
-	"Pick-Language": "Pick language",
-	"Optional-Permissions": "Optional permissions",
-	"No-Simple-Analytics": "Disable Simple Analytics",
-	"Keep-Tabs-Sorted": "Keep Tabs sorted",
-	"Open-Other-Org": "Open Other Org",
-	"Tutorial": "Tutorial",
-	"Safari-Installation": "Safari Installation",
-	"What-is-a-Tab": "What is a Tab?",
-	"Pinned-Tabs": "Pinned Tabs",
-	"Manual-Sort": "Manual Sort",
-};
 
 globalThis.awsfWikiDocuments = wikiDocuments;
 await import("./markdown.js");
