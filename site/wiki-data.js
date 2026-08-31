@@ -20,11 +20,9 @@ export const wikiDocuments = {
 	"No-Lightning-Navigation": "Settings/No-Lightning-Navigation.md",
 	"No-Release-Notes": "Settings/No-Release-Notes.md",
 	"Open-SF-Login-Popup": "Settings/Open-SF-Login-Popup.md",
-	"Open-SF-Login-Popup-Same-Tab":
-		"Settings/Open-SF-Login-Popup-Same-Tab.md",
+	"Open-SF-Login-Popup-Same-Tab": "Settings/Open-SF-Login-Popup-Same-Tab.md",
 	"Open-SF-Setup-Popup": "Settings/Open-SF-Setup-Popup.md",
-	"Open-SF-Setup-Popup-Same-Tab":
-		"Settings/Open-SF-Setup-Popup-Same-Tab.md",
+	"Open-SF-Setup-Popup-Same-Tab": "Settings/Open-SF-Setup-Popup-Same-Tab.md",
 	"Skip-Check-SF-Id": "Settings/Skip-Check-SF-Id.md",
 	"Pick-Language": "Settings/Pick-Language.md",
 	"Optional-Permissions": "Settings/Optional-Permissions.md",
@@ -59,10 +57,12 @@ export const wikiTitles = {
 	"No-Available-Updates": "Do not warn about available updates",
 	"No-Lightning-Navigation": "Prevent use of Lightning Navigation",
 	"No-Release-Notes": "Do not show update release notes",
-	"Open-SF-Login-Popup": "Open Salesforce Login page when clicking on the popup",
+	"Open-SF-Login-Popup":
+		"Open Salesforce Login page when clicking on the popup",
 	"Open-SF-Login-Popup-Same-Tab":
 		"Open Salesforce Login page in the same tab",
-	"Open-SF-Setup-Popup": "Open Salesforce Setup page when clicking on the popup",
+	"Open-SF-Setup-Popup":
+		"Open Salesforce Setup page when clicking on the popup",
 	"Open-SF-Setup-Popup-Same-Tab":
 		"Open Salesforce Setup page in the same tab",
 	"Skip-Check-SF-Id": "Skip automatic check of Salesforce Id",
