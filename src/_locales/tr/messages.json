@@ -1,4 +1,7 @@
-{
+{"open_tutorial_manage_tabs_guide": {
+"message": "Kılavuzu aç",
+"description": "[eğitim] Tab yönetimi kılavuzunu açmak için düğme etiketi"
+},
 	"account": {
 		"message": "Hesap",
 		"description": "ObjectManager/Account/FieldsAndRelationships/view ile ilgili sayfa"

@@ -1,4 +1,7 @@
-{
+{"open_tutorial_manage_tabs_guide": {
+"message": "打开指南",
+"description": "[教程] 用于打开 Tab 管理指南的按钮标签"
+},
 	"account": {
 		"message": "账户",
 		"description": "与 ObjectManager/Account/FieldsAndRelationships/view 相关的页面"

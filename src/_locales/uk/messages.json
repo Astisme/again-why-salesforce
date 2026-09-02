@@ -1,4 +1,7 @@
-{
+{"open_tutorial_manage_tabs_guide": {
+"message": "Відкрити посібник",
+"description": "[навчальний посібник] мітка кнопки для відкриття посібника з керування Tab"
+},
 	"account": {
 		"message": "Обліковий запис",
 		"description": "Сторінка, пов'язана з ObjectManager/Account/FieldsAndRelationships/view"

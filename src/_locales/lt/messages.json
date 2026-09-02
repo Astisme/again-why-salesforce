@@ -1,4 +1,7 @@
-{
+{"open_tutorial_manage_tabs_guide": {
+"message": "Atidaryti vadovą",
+"description": "[pamoka] mygtuko etiketė, skirta atidaryti Tab valdymo vadovą"
+},
 	"account": {
 		"message": "Paskyra",
 		"description": "Puslapis, susijęs su ObjectManager/Account/FieldsAndRelationships/view"

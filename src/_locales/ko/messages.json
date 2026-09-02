@@ -1,4 +1,7 @@
-{
+{"open_tutorial_manage_tabs_guide": {
+"message": "가이드 열기",
+"description": "[튜토리얼] Tab 관리 가이드를 열기 위한 버튼 레이블"
+},
 	"account": {
 		"message": "계정",
 		"description": "ObjectManager/Account/FieldsAndRelationships/view와 관련된 페이지"

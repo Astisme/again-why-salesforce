@@ -1,4 +1,7 @@
-{
+{"open_tutorial_manage_tabs_guide": {
+"message": "Abrir guia",
+"description": "[tutorial] etiqueta do botão para abrir o guia de gestão de Tab"
+},
 	"account": {
 		"message": "Conta",
 		"description": "Página relacionada com ObjectManager/Account/FieldsAndRelationships/view"

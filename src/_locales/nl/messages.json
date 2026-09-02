@@ -1,4 +1,7 @@
-{
+{"open_tutorial_manage_tabs_guide": {
+"message": "Handleiding openen",
+"description": "[handleiding] knoplabel om de gids voor Tab-beheer te openen"
+},
 	"account": {
 		"message": "Account",
 		"description": "Pagina gerelateerd aan ObjectManager/Account/FieldsAndRelationships/view"

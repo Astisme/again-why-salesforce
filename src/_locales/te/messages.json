@@ -1,4 +1,7 @@
-{
+{"open_tutorial_manage_tabs_guide": {
+"message": "మార్గదర్శిని తెరవండి",
+"description": "[ట్యుటోరియల్] Tab నిర్వాహణ మార్గదర్శిని తెరిచే బటన్ లేబుల్"
+},
 	"account": {
 		"message": "ఖాతా",
 		"description": "ObjectManager/Account/FieldsAndRelationships/view కి సంబంధించిన పేజీ"

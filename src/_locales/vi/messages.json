@@ -1,4 +1,7 @@
-{
+{"open_tutorial_manage_tabs_guide": {
+"message": "Mở hướng dẫn",
+"description": "[hướng dẫn] nhãn nút để mở hướng dẫn quản lý Tab"
+},
 	"account": {
 		"message": "Tài khoản",
 		"description": "Trang liên quan đến ObjectManager/Account/FieldsAndRelationships/view"

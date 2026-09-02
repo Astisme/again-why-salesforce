@@ -1,4 +1,7 @@
-{
+{"open_tutorial_manage_tabs_guide": {
+"message": "Anleitung öffnen",
+"description": "[Tutorial] Schaltflächenbeschriftung zum Öffnen der Anleitung zur Tab-Verwaltung"
+},
 	"account": {
 		"message": "Account",
 		"description": "Die Seite bezogen auf ObjectManager/Account/FieldsAndRelationships/view"

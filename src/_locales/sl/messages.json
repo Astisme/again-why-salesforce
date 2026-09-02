@@ -1,4 +1,7 @@
-{
+{"open_tutorial_manage_tabs_guide": {
+"message": "Odpri vodnik",
+"description": "[vadnica] oznaka gumba za odpiranje vodnika za upravljanje Tab"
+},
 	"account": {
 		"message": "Račun",
 		"description": "Stran, povezana z ObjectManager/Account/FieldsAndRelationships/view"

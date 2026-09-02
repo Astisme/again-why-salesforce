@@ -1,4 +1,7 @@
-{
+{"open_tutorial_manage_tabs_guide": {
+"message": "গাইড খুলুন",
+"description": "[টিউটোরিয়াল] Tab পরিচালনা সংক্রান্ত গাইড খোলার জন্য বোতামের লেবেল"
+},
 	"account": {
 		"message": "অ্যাকাউন্ট",
 		"description": "ObjectManager/Account/FieldsAndRelationships/view সংক্রান্ত পাতা"

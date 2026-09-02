@@ -1,4 +1,7 @@
-{
+{"open_tutorial_manage_tabs_guide": {
+"message": "Öppna guide",
+"description": "[handledning] knappetikett för att öppna guiden för Tab-hantering"
+},
 	"account": {
 		"message": "Konto",
 		"description": "Sida relaterad till ObjectManager/Account/FieldsAndRelationships/view"

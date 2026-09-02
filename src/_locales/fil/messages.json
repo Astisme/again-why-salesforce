@@ -1,4 +1,7 @@
-{
+{"open_tutorial_manage_tabs_guide": {
+"message": "Buksan ang gabay",
+"description": "[tutorial] label ng button para buksan ang gabay sa pamamahala ng Tab"
+},
 	"account": {
 		"message": "Account",
 		"description": "Ang pahinang may kaugnayan sa ObjectManager/Account/FieldsAndRelationships/view"

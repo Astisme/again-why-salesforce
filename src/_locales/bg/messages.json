@@ -1,4 +1,7 @@
-{
+{"open_tutorial_manage_tabs_guide": {
+"message": "Отваряне на ръководството",
+"description": "[урок] етикет на бутона за отваряне на ръководството за управление на Tab"
+},
 	"account": {
 		"message": "Акаунт",
 		"description": "Страницата, свързана с ObjectManager/Account/FieldsAndRelationships/view"

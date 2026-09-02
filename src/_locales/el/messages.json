@@ -1,4 +1,7 @@
-{
+{"open_tutorial_manage_tabs_guide": {
+"message": "Άνοιγμα οδηγού",
+"description": "[εκπαιδευτικό σεμινάριο] ετικέτα κουμπιού για το άνοιγμα του οδηγού διαχείρισης Tab"
+},
 	"account": {
 		"message": "Λογαριασμός",
 		"description": "Η σελίδα που σχετίζεται με το ObjectManager/Account/FieldsAndRelationships/view"

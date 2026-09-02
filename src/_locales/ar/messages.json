@@ -1,4 +1,7 @@
-{
+{"open_tutorial_manage_tabs_guide": {
+"message": "فتح الدليل",
+"description": "[برنامج تعليمي] تسمية الزر لفتح دليل إدارة الـ Tab"
+},
 	"account": {
 		"message": "الحساب",
 		"description": "الصفحة المتعلقة بـ ObjectManager/Account/FieldsAndRelationships/view"

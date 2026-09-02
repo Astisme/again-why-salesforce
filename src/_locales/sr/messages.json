@@ -1,4 +1,7 @@
-{
+{"open_tutorial_manage_tabs_guide": {
+"message": "Отвори водич",
+"description": "[туторијал] ознака дугмета за отварање водича за управљање Tab"
+},
 	"account": {
 		"message": "Nalog",
 		"description": "Stranica povezana sa ObjectManager/Account/FieldsAndRelationships/view"

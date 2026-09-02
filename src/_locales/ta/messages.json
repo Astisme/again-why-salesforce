@@ -1,4 +1,7 @@
-{
+{"open_tutorial_manage_tabs_guide": {
+"message": "வழிகாட்டியைத் திற",
+"description": "[பயிற்சி] Tab நிர்வகிக்கும் வழிகாட்டியைத் திறப்பதற்கான பொத்தான் லேபிள்"
+},
 	"account": {
 		"message": "கணக்கு",
 		"description": "ObjectManager/Account/FieldsAndRelationships/view தொடர்புடைய பக்கம்"

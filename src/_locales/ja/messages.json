@@ -1,4 +1,7 @@
-{
+{"open_tutorial_manage_tabs_guide": {
+"message": "ガイドを開く",
+"description": "[チュートリアル] Tab 管理ガイドを開くためのボタンのラベル"
+},
 	"account": {
 		"message": "取引先",
 		"description": "ObjectManager/Account/FieldsAndRelationships/view に関連するページ"

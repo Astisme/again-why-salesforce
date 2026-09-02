@@ -1,4 +1,7 @@
-{
+{"open_tutorial_manage_tabs_guide": {
+"message": "Atvērt pamācību",
+"description": "[pamācība] pogas etiķete, lai atvērtu Tab pārvaldības pamācību"
+},
 	"account": {
 		"message": "Konts",
 		"description": "Lapa, kas saistīta ar ObjectManager/Account/FieldsAndRelationships/view"

@@ -1,4 +1,7 @@
-{
+{"open_tutorial_manage_tabs_guide": {
+"message": "መመሪያን ክፈት",
+"description": "[ትምህርት] Tabዎችን የማስተዳደር መመሪያን ለመክፈት የሚያገለግል የአዝራር ምልክት"
+},
 	"account": {
 		"message": "አካውንት",
 		"description": "ከ ObjectManager/Account/FieldsAndRelationships/view ጋር የተያያዘ ገጽ"

@@ -1,4 +1,7 @@
-{
+{"open_tutorial_manage_tabs_guide": {
+"message": "Fungua mwongozo",
+"description": "[mafunzo] lebo ya kitufe cha kufungua mwongozo wa kusimamia Tab"
+},
 	"account": {
 		"message": "Akaunti",
 		"description": "Ukurasa unaohusiana na ObjectManager/Account/FieldsAndRelationships/view"

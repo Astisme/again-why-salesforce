@@ -1,4 +1,7 @@
-{
+{"open_tutorial_manage_tabs_guide": {
+"message": "मार्गदर्शिका उघडा",
+"description": "[ट्यूटोरियल] Tab व्यवस्थापित करण्याची मार्गदर्शिका उघडण्यासाठी बटण लेबल"
+},
 	"account": {
 		"message": "खाते (Account)",
 		"description": "ObjectManager/Account/FieldsAndRelationships/view शी संबंधित पृष्ठ"

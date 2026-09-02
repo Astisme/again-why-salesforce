@@ -1,4 +1,7 @@
-{
+{"open_tutorial_manage_tabs_guide": {
+"message": "Otvoriť sprievodcu",
+"description": "[návod] štítok tlačidla na otvorenie sprievodcu správou Tab"
+},
 	"account": {
 		"message": "Účet",
 		"description": "Stránka súvisiaca s ObjectManager/Account/FieldsAndRelationships/view"

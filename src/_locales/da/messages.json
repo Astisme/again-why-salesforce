@@ -1,4 +1,7 @@
-{
+{"open_tutorial_manage_tabs_guide": {
+"message": "Åbn vejledning",
+"description": "[vejledning] knapetiket til at åbne vejledningen til administration af Tab"
+},
 	"account": {
 		"message": "Konto",
 		"description": "Siden relateret til ObjectManager/Account/FieldsAndRelationships/view"

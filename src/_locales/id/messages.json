@@ -1,4 +1,7 @@
-{
+{"open_tutorial_manage_tabs_guide": {
+"message": "Buka panduan",
+"description": "[tutorial] label tombol untuk membuka panduan kelola Tab"
+},
 	"account": {
 		"message": "Akun",
 		"description": "Halaman yang terkait dengan ObjectManager/Account/FieldsAndRelationships/view"

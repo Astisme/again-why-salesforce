@@ -1,4 +1,7 @@
-{
+{"open_tutorial_manage_tabs_guide": {
+"message": "Deschide ghidul",
+"description": "[tutorial] eticheta butonului pentru a deschide ghidul de gestionare a Tab"
+},
 	"account": {
 		"message": "Cont",
 		"description": "Pagina legată de ObjectManager/Account/FieldsAndRelationships/view"
