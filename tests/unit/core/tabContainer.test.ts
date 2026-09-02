@@ -192,7 +192,7 @@ await Deno.test("TabContainer - Tab Management", async (t) => {
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 		assert(await container.addTab({ label: "New Tab", url: "new-url" }));
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
-		const lastTab = container.at(-1);
+		const lastTab = container.at(-1)!;
 		assertEquals(lastTab.label, "New Tab");
 		assertEquals(lastTab.url, "new-url");
 		matchStorageToContainer(container);
@@ -204,7 +204,7 @@ await Deno.test("TabContainer - Tab Management", async (t) => {
 			}),
 		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
-		const newLastTab = container.at(-1);
+		const newLastTab = container.at(-1)!;
 		assertEquals(newLastTab.label, "New Tabb");
 		assertEquals(newLastTab.url, "new-urll");
 		assertEquals(newLastTab[Tab.keyClickCount], 9);
@@ -238,17 +238,17 @@ await Deno.test("TabContainer - Tab Management", async (t) => {
 			]),
 		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
-		assertEquals(container.at(-4).label, "Tab1");
-		assertEquals(container.at(-3).label, "Tab2");
-		assertEquals(container.at(-2).label, "Tab3");
-		assertEquals(container.at(-1).label, "Tab4");
-		assertEquals(container.at(-4).url, "url1");
-		assertEquals(container.at(-3).url, "url2");
-		assertEquals(container.at(-2).url, "url3");
-		assertEquals(container.at(-1).url, "url4");
-		assertEquals(container.at(-3).org, "test2");
-		assertEquals(container.at(-2)[Tab.keyClickCount], 2);
-		assertEquals(container.at(-1)[Tab.keyClickDate], currentDate);
+		assertEquals(container.at(-4)!.label, "Tab1");
+		assertEquals(container.at(-3)!.label, "Tab2");
+		assertEquals(container.at(-2)!.label, "Tab3");
+		assertEquals(container.at(-1)!.label, "Tab4");
+		assertEquals(container.at(-4)!.url, "url1");
+		assertEquals(container.at(-3)!.url, "url2");
+		assertEquals(container.at(-2)!.url, "url3");
+		assertEquals(container.at(-1)!.url, "url4");
+		assertEquals(container.at(-3)!.org, "test2");
+		assertEquals(container.at(-2)![Tab.keyClickCount], 2);
+		assertEquals(container.at(-1)![Tab.keyClickDate], currentDate);
 		matchStorageToContainer(container);
 	});
 
@@ -491,7 +491,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 		assertEquals(container.push({ label: "Org Tab", url: "url" }), 4);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 		assertEquals(container.length, 4);
-		assertEquals(container.at(-1).url, "url");
+		assertEquals(container.at(-1)!.url, "url");
 		assertEquals(
 			container.push([
 				{ label: "Normal Tab", url: "normal-url" },
@@ -501,10 +501,10 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 			7,
 		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
-		assertEquals(container.at(-3).url, "normal-url");
-		assertEquals(container.at(-2).url, "urll");
-		assertEquals(container.at(-1).url, "normal-url");
-		assertEquals(container.at(-1).org, "test-org1");
+		assertEquals(container.at(-3)!.url, "normal-url");
+		assertEquals(container.at(-2)!.url, "urll");
+		assertEquals(container.at(-1)!.url, "normal-url");
+		assertEquals(container.at(-1)!.org, "test-org1");
 		assertEquals(
 			container.push(...[
 				{ label: "Normal Tab", url: "normal-url4" },
@@ -514,9 +514,9 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 			10,
 		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
-		assertEquals(container.at(-3).url, "normal-url4");
-		assertEquals(container.at(-2).url, "urll4");
-		assertEquals(container.at(-1).url, "normal4-url");
+		assertEquals(container.at(-3)!.url, "normal-url4");
+		assertEquals(container.at(-2)!.url, "urll4");
+		assertEquals(container.at(-1)!.url, "normal4-url");
 		assertEquals(
 			container.push(
 				{ label: "Normal Tab", url: "normal-url5" },
@@ -525,17 +525,17 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 			12,
 		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
-		assertEquals(container.at(-2).url, "normal-url5");
-		assertEquals(container.at(-1).url, "normal5-url");
+		assertEquals(container.at(-2)!.url, "normal-url5");
+		assertEquals(container.at(-1)!.url, "normal5-url");
 		// check also the ones before
-		assertEquals(container.at(-9).url, "url");
-		assertEquals(container.at(-8).url, "normal-url");
-		assertEquals(container.at(-7).url, "urll");
-		assertEquals(container.at(-6).url, "normal-url");
-		assertEquals(container.at(-6).org, "test-org1");
-		assertEquals(container.at(-5).url, "normal-url4");
-		assertEquals(container.at(-4).url, "urll4");
-		assertEquals(container.at(-3).url, "normal4-url");
+		assertEquals(container.at(-9)!.url, "url");
+		assertEquals(container.at(-8)!.url, "normal-url");
+		assertEquals(container.at(-7)!.url, "urll");
+		assertEquals(container.at(-6)!.url, "normal-url");
+		assertEquals(container.at(-6)!.org, "test-org1");
+		assertEquals(container.at(-5)!.url, "normal-url4");
+		assertEquals(container.at(-4)!.url, "urll4");
+		assertEquals(container.at(-3)!.url, "normal4-url");
 		// does not throw on errored tabs
 		assertEquals(
 			container.push({ label: "notab", what: "idk" }),
@@ -557,7 +557,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 		assertEquals(container.unshift({ label: "Org Tab", url: "url" }), 4);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 		assertEquals(container.length, 4);
-		assertEquals(container.at(0).url, "url");
+		assertEquals(container.at(0)!.url, "url");
 		assertEquals(
 			container.unshift([
 				{ label: "Normal Tab", url: "normal-url" },
@@ -567,10 +567,10 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 			7,
 		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
-		assertEquals(container.at(0).url, "normal-url");
-		assertEquals(container.at(1).url, "urll");
-		assertEquals(container.at(2).url, "normal-url");
-		assertEquals(container.at(2).org, "test-org1");
+		assertEquals(container.at(0)!.url, "normal-url");
+		assertEquals(container.at(1)!.url, "urll");
+		assertEquals(container.at(2)!.url, "normal-url");
+		assertEquals(container.at(2)!.org, "test-org1");
 		assertEquals(
 			container.unshift(...[
 				{ label: "Normal Tab", url: "normal-url4" },
@@ -580,9 +580,9 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 			10,
 		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
-		assertEquals(container.at(0).url, "normal-url4");
-		assertEquals(container.at(1).url, "urll4");
-		assertEquals(container.at(2).url, "normal4-url");
+		assertEquals(container.at(0)!.url, "normal-url4");
+		assertEquals(container.at(1)!.url, "urll4");
+		assertEquals(container.at(2)!.url, "normal4-url");
 		assertEquals(
 			container.unshift(
 				{ label: "Normal Tab", url: "normal-url5" },
@@ -591,17 +591,17 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 			12,
 		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
-		assertEquals(container.at(0).url, "normal-url5");
-		assertEquals(container.at(1).url, "normal5-url");
+		assertEquals(container.at(0)!.url, "normal-url5");
+		assertEquals(container.at(1)!.url, "normal5-url");
 		// check also the ones before
-		assertEquals(container.at(8).url, "url");
-		assertEquals(container.at(7).url, "normal-url");
-		assertEquals(container.at(6).url, "urll");
-		assertEquals(container.at(5).url, "normal-url");
-		assertEquals(container.at(4).url, "normal4-url");
-		assertEquals(container.at(4).org, "test-org1");
-		assertEquals(container.at(3).url, "urll4");
-		assertEquals(container.at(2).url, "normal-url4");
+		assertEquals(container.at(8)!.url, "url");
+		assertEquals(container.at(7)!.url, "normal-url");
+		assertEquals(container.at(6)!.url, "urll");
+		assertEquals(container.at(5)!.url, "normal-url");
+		assertEquals(container.at(4)!.url, "normal4-url");
+		assertEquals(container.at(4)!.org, "test-org1");
+		assertEquals(container.at(3)!.url, "urll4");
+		assertEquals(container.at(2)!.url, "normal-url4");
 		// does not throw on errored tabs
 		assertEquals(
 			container.unshift({ label: "notab", what: "idk" }),
@@ -1446,10 +1446,10 @@ await Deno.test("TabContainer - Import", async (t) => {
 		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 		assertEquals(container.length, 5);
-		assertEquals(container.at(-2)[Tab.keyClickCount], 4);
-		assertEquals(container.at(-2)[Tab.keyClickDate], undefined);
-		assertEquals(container.at(-1)[Tab.keyClickCount], undefined);
-		assertEquals(container.at(-1)[Tab.keyClickDate], currentDate);
+		assertEquals(container.at(-2)![Tab.keyClickCount], 4);
+		assertEquals(container.at(-2)![Tab.keyClickDate], undefined);
+		assertEquals(container.at(-1)![Tab.keyClickCount], undefined);
+		assertEquals(container.at(-1)![Tab.keyClickDate], currentDate);
 		assertEquals(
 			await container.importTabs(
 				`[{"label":"hello","url":"nice-url5","${Tab.keyClickCount}":4,"${Tab.keyClickDate}":${currentDate},"org":"test-org5"}]`,
@@ -1461,11 +1461,11 @@ await Deno.test("TabContainer - Import", async (t) => {
 		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 		assertEquals(container.length, 6);
-		assertEquals(container.at(-1).label, "hello");
-		assertEquals(container.at(-1).url, "nice-url5");
-		assertEquals(container.at(-1).org, "test-org5");
-		assertEquals(container.at(-1)[Tab.keyClickCount], undefined);
-		assertEquals(container.at(-1)[Tab.keyClickDate], undefined);
+		assertEquals(container.at(-1)!.label, "hello");
+		assertEquals(container.at(-1)!.url, "nice-url5");
+		assertEquals(container.at(-1)!.org, "test-org5");
+		assertEquals(container.at(-1)![Tab.keyClickCount], undefined);
+		assertEquals(container.at(-1)![Tab.keyClickDate], undefined);
 	});
 
 	await t.step(
@@ -3176,3 +3176,4 @@ await Deno.test("TabContainer - Sort Tabs", async (t) => {
 	assertEquals(container[1].url, "nice-url3");
 	assertEquals(container[2].url, "aurl");
 });
+
