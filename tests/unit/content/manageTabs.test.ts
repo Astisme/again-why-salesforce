@@ -533,6 +533,25 @@ class ManageElement {
 	}
 
 	/**
+	 * Inserts an element after this node.
+	 *
+	 * @param {ManageElement} node Node to insert.
+	 * @return {void}
+	 */
+	after(node: ManageElement) {
+		const parent = this.parentNode;
+		if (parent == null) {
+			return;
+		}
+		parent.children = parent.children.filter((child) => child !== node);
+		parent.childNodes = parent.childNodes.filter((child) => child !== node);
+		const index = parent.children.indexOf(this);
+		parent.children.splice(index + 1, 0, node);
+		parent.childNodes.splice(index + 1, 0, node);
+		node.parentNode = parent;
+	}
+
+	/**
 	 * Dispatches a click event on the element.
 	 *
 	 * @return {Promise<void> | void} Listener completion when async handlers are present.

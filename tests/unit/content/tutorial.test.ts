@@ -1012,7 +1012,7 @@ Deno.test(
 			);
 			assertEquals(
 				harness.records.latestUi?.linkBtn.href,
-				"https://astisme.github.io/again-why-salesforce/wiki/Manage-Tabs-modal",
+				"https://astisme.github.io/again-why-salesforce/Wiki/Manage-Tabs-modal",
 			);
 			assertEquals(
 				harness.records.latestUi?.linkBtn.textContent,
