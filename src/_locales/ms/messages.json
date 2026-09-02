@@ -1,7 +1,4 @@
-{"open_tutorial_manage_tabs_guide": {
-"message": "Buka panduan",
-"description": "[tutorial] label butang untuk membuka panduan mengurus Tab"
-},
+{
 	"account": {
 		"message": "Akaun",
 		"description": "Halaman yang berkaitan dengan ObjectManager/Account/FieldsAndRelationships/view"
@@ -921,6 +918,10 @@
 	"open_setup": {
 		"message": "Buka Persediaan",
 		"description": "[bukanPersediaanSalesforce] seruan tindak pada butang untuk mengarahkan pengguna ke halaman Persediaan Salesforce"
+	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "Buka panduan",
+		"description": "[tutorial] label butang untuk membuka panduan mengurus Tab"
 	},
 	"opportunity": {
 		"message": "Peluang",

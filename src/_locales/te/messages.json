@@ -1,7 +1,4 @@
-{"open_tutorial_manage_tabs_guide": {
-"message": "మార్గదర్శిని తెరవండి",
-"description": "[ట్యుటోరియల్] Tab నిర్వాహణ మార్గదర్శిని తెరిచే బటన్ లేబుల్"
-},
+{
 	"account": {
 		"message": "ఖాతా",
 		"description": "ObjectManager/Account/FieldsAndRelationships/view కి సంబంధించిన పేజీ"
@@ -921,6 +918,10 @@
 	"open_setup": {
 		"message": "Setupని తెరవండి",
 		"description": "[notSalesforceSetup] Salesforce Setup పేజీకి రీడైరెక్ట్ చేయడానికి కాల్-టు-యాక్షన్"
+	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "మార్గదర్శిని తెరవండి",
+		"description": "[ట్యుటోరియల్] Tab నిర్వాహణ మార్గదర్శిని తెరిచే బటన్ లేబుల్"
 	},
 	"opportunity": {
 		"message": "అవకాశం",

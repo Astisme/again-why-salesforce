@@ -1,7 +1,4 @@
-{"open_tutorial_manage_tabs_guide": {
-"message": "Deschide ghidul",
-"description": "[tutorial] eticheta butonului pentru a deschide ghidul de gestionare a Tab"
-},
+{
 	"account": {
 		"message": "Cont",
 		"description": "Pagina legată de ObjectManager/Account/FieldsAndRelationships/view"
@@ -921,6 +918,10 @@
 	"open_setup": {
 		"message": "Deschideți Configurare",
 		"description": "[nuEsteConfigurareSalesforce] apel la acțiune pe un buton pentru a redirecționa utilizatorul către o pagină de Configurare Salesforce"
+	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "Deschide ghidul",
+		"description": "[tutorial] eticheta butonului pentru a deschide ghidul de gestionare a Tab"
 	},
 	"opportunity": {
 		"message": "Oportunitate",

@@ -1,7 +1,4 @@
-{"open_tutorial_manage_tabs_guide": {
-"message": "ഗൈഡ് തുറക്കുക",
-"description": "[ട്യൂട്ടോറിയൽ] Tab മാനേജ് ചെയ്യുന്നതിനുള്ള ഗൈഡ് തുറക്കാനുള്ള ബട്ടൺ ലേബൽ"
-},
+{
 	"account": {
 		"message": "അക്കൗണ്ട്",
 		"description": "ObjectManager/Account/FieldsAndRelationships/view സംബന്ധിച്ച പേജ്"
@@ -921,6 +918,10 @@
 	"open_setup": {
 		"message": "സെറ്റപ്പ് തുറക്കുക",
 		"description": "[notSalesforceSetup] Salesforce സെറ്റപ്പ് പേജിലേക്ക് തിരിച്ചയക്കാനുള്ള വിളി"
+	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "ഗൈഡ് തുറക്കുക",
+		"description": "[ട്യൂട്ടോറിയൽ] Tab മാനേജ് ചെയ്യുന്നതിനുള്ള ഗൈഡ് തുറക്കാനുള്ള ബട്ടൺ ലേബൽ"
 	},
 	"opportunity": {
 		"message": "അവസരം",

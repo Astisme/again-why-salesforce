@@ -1,7 +1,4 @@
-{"open_tutorial_manage_tabs_guide": {
-"message": "Открыть руководство",
-"description": "[обучение] ярлык кнопки для открытия руководства по управлению Tab"
-},
+{
 	"account": {
 		"message": "Аккаунт",
 		"description": "Страница, связанная с ObjectManager/Account/FieldsAndRelationships/view"
@@ -921,6 +918,10 @@
 	"open_setup": {
 		"message": "Открыть настройку",
 		"description": "[notSalesforceSetup] Призыв к переходу на страницу настройки Salesforce"
+	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "Открыть руководство",
+		"description": "[обучение] ярлык кнопки для открытия руководства по управлению Tab"
 	},
 	"opportunity": {
 		"message": "Возможность",

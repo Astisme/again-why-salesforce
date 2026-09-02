@@ -1,7 +1,4 @@
-{"open_tutorial_manage_tabs_guide": {
-"message": "Apri guida",
-"description": "[tutorial] etichetta del pulsante per aprire la guida alla gestione delle Tab"
-},
+{
 	"account": {
 		"message": "Account",
 		"description": "La pagina relativa a ObjectManager/Account/FieldsAndRelationships/view"
@@ -921,6 +918,10 @@
 	"open_setup": {
 		"message": "Apri Setup",
 		"description": "[notSalesforceSetup] invito all'azione su un pulsante per reindirizzare l'utente a una pagina di Setup di Salesforce"
+	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "Apri guida",
+		"description": "[tutorial] etichetta del pulsante per aprire la guida alla gestione delle Tab"
 	},
 	"opportunity": {
 		"message": "Opportunità",

@@ -1,7 +1,4 @@
-{"open_tutorial_manage_tabs_guide": {
-"message": "打开指南",
-"description": "[教程] 用于打开 Tab 管理指南的按钮标签"
-},
+{
 	"account": {
 		"message": "账户",
 		"description": "与 ObjectManager/Account/FieldsAndRelationships/view 相关的页面"
@@ -921,6 +918,10 @@
 	"open_setup": {
 		"message": "打开设置",
 		"description": "[非 Salesforce 设置页] 按钮上的号召性用语，将用户重定向到 Salesforce 设置页面"
+	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "打开指南",
+		"description": "[教程] 用于打开 Tab 管理指南的按钮标签"
 	},
 	"opportunity": {
 		"message": "业务机会",

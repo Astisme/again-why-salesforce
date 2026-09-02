@@ -1,7 +1,4 @@
-{"open_tutorial_manage_tabs_guide": {
-"message": "Atidaryti vadovą",
-"description": "[pamoka] mygtuko etiketė, skirta atidaryti Tab valdymo vadovą"
-},
+{
 	"account": {
 		"message": "Paskyra",
 		"description": "Puslapis, susijęs su ObjectManager/Account/FieldsAndRelationships/view"
@@ -921,6 +918,10 @@
 	"open_setup": {
 		"message": "Atidaryti Sąranką",
 		"description": "[neSalesforceSąranka] raginimas veikti mygtuke, nukreipiantis vartotoją į Salesforce sąrankos puslapį"
+	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "Atidaryti vadovą",
+		"description": "[pamoka] mygtuko etiketė, skirta atidaryti Tab valdymo vadovą"
 	},
 	"opportunity": {
 		"message": "Galimybė",

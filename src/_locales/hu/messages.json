@@ -1,7 +1,4 @@
-{"open_tutorial_manage_tabs_guide": {
-"message": "Útmutató megnyitása",
-"description": "[útmutató] gombcímke a Tab-kezelési útmutató megnyitásához"
-},
+{
 	"account": {
 		"message": "Fiók",
 		"description": "Az ObjectManager/Account/FieldsAndRelationships/view oldallal kapcsolatos"
@@ -921,6 +918,10 @@
 	"open_setup": {
 		"message": "Setup megnyitása",
 		"description": "[notSalesforceSetup] felhívás gomb a Salesforce Setup oldalára történő átnyomásra"
+	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "Útmutató megnyitása",
+		"description": "[útmutató] gombcímke a Tab-kezelési útmutató megnyitásához"
 	},
 	"opportunity": {
 		"message": "Lehetőség",

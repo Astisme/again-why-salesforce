@@ -1,7 +1,4 @@
-{"open_tutorial_manage_tabs_guide": {
-"message": "Otvori vodič",
-"description": "[vodič] oznaka gumba za otvaranje vodiča za upravljanje Tab"
-},
+{
 	"account": {
 		"message": "Račun",
 		"description": "Stranica koja se odnosi na ObjectManager/Account/FieldsAndRelationships/view"
@@ -921,6 +918,10 @@
 	"open_setup": {
 		"message": "Otvori Setup",
 		"description": "[notSalesforceSetup] poziv na akciju na gumbu za preusmjeravanje korisnika na Salesforce Setup stranicu"
+	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "Otvori vodič",
+		"description": "[vodič] oznaka gumba za otvaranje vodiča za upravljanje Tab"
 	},
 	"opportunity": {
 		"message": "Prilika",

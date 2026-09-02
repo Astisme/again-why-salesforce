@@ -1,7 +1,4 @@
-{"open_tutorial_manage_tabs_guide": {
-"message": "Abrir guía",
-"description": "[tutorial] etiqueta de botón para abrir la guía de gestión de Tab"
-},
+{
 	"account": {
 		"message": "Cuenta",
 		"description": "La página relacionada con ObjectManager/Account/FieldsAndRelationships/view"
@@ -921,6 +918,10 @@
 	"open_setup": {
 		"message": "Abrir Configuración",
 		"description": "[notSalesforceSetup] Llamado a la acción para ir a la página de Configuración de Salesforce"
+	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "Abrir guía",
+		"description": "[tutorial] etiqueta de botón para abrir la guía de gestión de Tab"
 	},
 	"opportunity": {
 		"message": "Oportunidad",

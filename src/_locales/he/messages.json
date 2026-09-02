@@ -1,7 +1,4 @@
-{"open_tutorial_manage_tabs_guide": {
-"message": "פתיחת המדריך",
-"description": "[מדריך] תווית לחצן לפתיחת המדריך לניהול Tab"
-},
+{
 	"account": {
 		"message": "חשבון",
 		"description": "הדף הקשור ל-ObjectManager/Account/FieldsAndRelationships/view"
@@ -921,6 +918,10 @@
 	"open_setup": {
 		"message": "פתח Setup",
 		"description": "[notSalesforceSetup] קריאה לפעולה לכפתור להפניית המשתמש לעמוד Salesforce Setup"
+	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "פתיחת המדריך",
+		"description": "[מדריך] תווית לחצן לפתיחת המדריך לניהול Tab"
 	},
 	"opportunity": {
 		"message": "הזדמנות",

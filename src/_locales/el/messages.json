@@ -1,7 +1,4 @@
-{"open_tutorial_manage_tabs_guide": {
-"message": "Άνοιγμα οδηγού",
-"description": "[εκπαιδευτικό σεμινάριο] ετικέτα κουμπιού για το άνοιγμα του οδηγού διαχείρισης Tab"
-},
+{
 	"account": {
 		"message": "Λογαριασμός",
 		"description": "Η σελίδα που σχετίζεται με το ObjectManager/Account/FieldsAndRelationships/view"
@@ -921,6 +918,10 @@
 	"open_setup": {
 		"message": "Άνοιγμα Setup",
 		"description": "[όχιSalesforceSetup] πρόσκληση σε κουμπί για ανακατεύθυνση του χρήστη σε σελίδα Salesforce Setup"
+	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "Άνοιγμα οδηγού",
+		"description": "[εκπαιδευτικό σεμινάριο] ετικέτα κουμπιού για το άνοιγμα του οδηγού διαχείρισης Tab"
 	},
 	"opportunity": {
 		"message": "Ευκαιρία",

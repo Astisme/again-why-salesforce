@@ -1,7 +1,4 @@
-{"open_tutorial_manage_tabs_guide": {
-"message": "গাইড খুলুন",
-"description": "[টিউটোরিয়াল] Tab পরিচালনা সংক্রান্ত গাইড খোলার জন্য বোতামের লেবেল"
-},
+{
 	"account": {
 		"message": "অ্যাকাউন্ট",
 		"description": "ObjectManager/Account/FieldsAndRelationships/view সংক্রান্ত পাতা"
@@ -921,6 +918,10 @@
 	"open_setup": {
 		"message": "Setup খুলুন",
 		"description": "[notSalesforceSetup] Salesforce Setup পৃষ্ঠায় যাওয়ার জন্য কল-টু-অ্যাকশন"
+	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "গাইড খুলুন",
+		"description": "[টিউটোরিয়াল] Tab পরিচালনা সংক্রান্ত গাইড খোলার জন্য বোতামের লেবেল"
 	},
 	"opportunity": {
 		"message": "সুযোগ",

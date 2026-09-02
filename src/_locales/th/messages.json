@@ -1,7 +1,4 @@
-{"open_tutorial_manage_tabs_guide": {
-"message": "เปิดคู่มือ",
-"description": "[บทเรียน] ป้ายกำกับปุ่มสำหรับเปิดคู่มือจัดการ Tab"
-},
+{
 	"account": {
 		"message": "บัญชี",
 		"description": "หน้าเว็บที่เกี่ยวข้องกับ ObjectManager/Account/FieldsAndRelationships/view"
@@ -921,6 +918,10 @@
 	"open_setup": {
 		"message": "Open Setup",
 		"description": "[notSalesforceSetup] การเรียกร้องให้ดำเนินการผ่านปุ่มเพื่อเปลี่ยนเส้นทางผู้ใช้ไปยังหน้า Salesforce Setup"
+	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "เปิดคู่มือ",
+		"description": "[บทเรียน] ป้ายกำกับปุ่มสำหรับเปิดคู่มือจัดการ Tab"
 	},
 	"opportunity": {
 		"message": "โอกาสการขาย",

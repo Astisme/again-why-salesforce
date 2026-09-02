@@ -1,7 +1,4 @@
-{"open_tutorial_manage_tabs_guide": {
-"message": "Ava opas",
-"description": "[opetusohjelma] painikkeen teksti Tab-hallintaoppaan avaamiseksi"
-},
+{
 	"account": {
 		"message": "Tili",
 		"description": "Sivu, joka liittyy kohteeseen ObjectManager/Account/FieldsAndRelationships/view"
@@ -921,6 +918,10 @@
 	"open_setup": {
 		"message": "Avaa Setup",
 		"description": "[notSalesforceSetup] toimintakehotus painikkeelle, joka ohjaa käyttäjän Salesforce Setup -sivulle"
+	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "Ava opas",
+		"description": "[opetusohjelma] painikkeen teksti Tab-hallintaoppaan avaamiseksi"
 	},
 	"opportunity": {
 		"message": "Mahdollisuus",

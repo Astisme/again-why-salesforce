@@ -1,7 +1,4 @@
-{"open_tutorial_manage_tabs_guide": {
-"message": "Åbn vejledning",
-"description": "[vejledning] knapetiket til at åbne vejledningen til administration af Tab"
-},
+{
 	"account": {
 		"message": "Konto",
 		"description": "Siden relateret til ObjectManager/Account/FieldsAndRelationships/view"
@@ -921,6 +918,10 @@
 	"open_setup": {
 		"message": "Åbn Setup",
 		"description": "[notSalesforceSetup] opfordring på en knap til at omdirigere brugeren til Salesforce Setup-siden"
+	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "Åbn vejledning",
+		"description": "[vejledning] knapetiket til at åbne vejledningen til administration af Tab"
 	},
 	"opportunity": {
 		"message": "Salgsmulighed",
