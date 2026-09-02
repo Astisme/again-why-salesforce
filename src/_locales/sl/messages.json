@@ -919,6 +919,10 @@
 		"message": "Odpri Nastavitev",
 		"description": "[niSalesforceNastavitev] poziv k dejanju na gumbu za preusmeritev uporabnika na stran za nastavitev Salesforce"
 	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "Odpri vodnik",
+		"description": "[vadnica] oznaka gumba za odpiranje vodnika za upravljanje Tab"
+	},
 	"opportunity": {
 		"message": "Priložnost",
 		"description": "Stran, povezana z ObjectManager/Opportunity/FieldsAndRelationships/view"

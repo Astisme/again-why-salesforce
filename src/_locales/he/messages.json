@@ -919,6 +919,10 @@
 		"message": "פתח Setup",
 		"description": "[notSalesforceSetup] קריאה לפעולה לכפתור להפניית המשתמש לעמוד Salesforce Setup"
 	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "פתיחת המדריך",
+		"description": "[מדריך] תווית לחצן לפתיחת המדריך לניהול Tab"
+	},
 	"opportunity": {
 		"message": "הזדמנות",
 		"description": "הדף הקשור ל-ObjectManager/Opportunity/FieldsAndRelationships/view"

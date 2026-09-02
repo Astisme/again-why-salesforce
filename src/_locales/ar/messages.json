@@ -919,6 +919,10 @@
 		"message": "فتح الإعداد",
 		"description": "[notSalesforceSetup] دعوة للذهاب إلى صفحة إعداد Salesforce"
 	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "فتح الدليل",
+		"description": "[برنامج تعليمي] تسمية الزر لفتح دليل إدارة الـ Tab"
+	},
 	"opportunity": {
 		"message": "الفرصة",
 		"description": "الصفحة المتعلقة بـ ObjectManager/Opportunity/FieldsAndRelationships/view"

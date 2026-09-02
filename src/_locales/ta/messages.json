@@ -919,6 +919,10 @@
 		"message": "அமைப்பைத் திற",
 		"description": "[notSalesforceSetup] பயனரை Salesforce அமைப்பு பக்கத்திற்கு திருப்பிவிட ஒரு பொத்தானில் செயல்பாடு அழைப்பு"
 	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "வழிகாட்டியைத் திற",
+		"description": "[பயிற்சி] Tab நிர்வகிக்கும் வழிகாட்டியைத் திறப்பதற்கான பொத்தான் லேபிள்"
+	},
 	"opportunity": {
 		"message": "வாய்ப்பு",
 		"description": "ObjectManager/Opportunity/FieldsAndRelationships/view தொடர்புடைய பக்கம்"

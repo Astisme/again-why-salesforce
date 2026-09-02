@@ -919,6 +919,10 @@
 		"message": "Setup खोलें",
 		"description": "[notSalesforceSetup] Salesforce Setup पृष्ठ पर जाने के लिए कॉल टू एक्शन"
 	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "गाइड खोलें",
+		"description": "[ट्यूटोरियल] Tab प्रबंधित करने की गाइड खोलने के लिए बटन लेबल"
+	},
 	"opportunity": {
 		"message": "अवसर (Opportunity)",
 		"description": "ObjectManager/Opportunity/FieldsAndRelationships/view से संबंधित पृष्ठ"

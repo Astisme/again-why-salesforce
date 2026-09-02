@@ -919,6 +919,10 @@
 		"message": "باز کردن تنظیمات",
 		"description": "[نه_صفحه_تنظیمات_Salesforce] فراخوانی برای اقدام روی دکمه برای هدایت کاربر به صفحه تنظیمات Salesforce"
 	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "باز کردن راهنما",
+		"description": "[آموزش] برچسب دکمه برای باز کردن راهنمای مدیریت Tab"
+	},
 	"opportunity": {
 		"message": "فرصت",
 		"description": "صفحه مربوط به ObjectManager/Opportunity/FieldsAndRelationships/view"

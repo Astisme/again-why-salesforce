@@ -919,6 +919,10 @@
 		"message": "Atvērt iestatīšanu",
 		"description": "[navSalesforceIestatīšana] aicinājums uz darbību uz pogas, lai pārvirzītu lietotāju uz Salesforce iestatīšanas lapu"
 	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "Atvērt pamācību",
+		"description": "[pamācība] pogas etiķete, lai atvērtu Tab pārvaldības pamācību"
+	},
 	"opportunity": {
 		"message": "Iespēja",
 		"description": "Lapa, kas saistīta ar ObjectManager/Opportunity/FieldsAndRelationships/view"

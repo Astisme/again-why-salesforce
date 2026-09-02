@@ -919,6 +919,10 @@
 		"message": "Abrir Configuração",
 		"description": "[naoEhConfigSalesforce] chamada para ação em um botão para redirecionar o usuário para uma página de Configuração do Salesforce"
 	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "Abrir guia",
+		"description": "[tutorial] rótulo do botão para abrir o guia de gerenciamento de Tab"
+	},
 	"opportunity": {
 		"message": "Oportunidade",
 		"description": "Página relacionada a ObjectManager/Opportunity/FieldsAndRelationships/view"

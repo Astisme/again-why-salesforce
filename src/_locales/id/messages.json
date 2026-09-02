@@ -919,6 +919,10 @@
 		"message": "Buka Setup",
 		"description": "[notSalesforceSetup] Ajakan untuk membuka halaman Setup Salesforce"
 	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "Buka panduan",
+		"description": "[tutorial] label tombol untuk membuka panduan kelola Tab"
+	},
 	"opportunity": {
 		"message": "Peluang",
 		"description": "Halaman yang terkait dengan ObjectManager/Opportunity/FieldsAndRelationships/view"

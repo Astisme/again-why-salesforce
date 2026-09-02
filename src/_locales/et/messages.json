@@ -919,6 +919,10 @@
 		"message": "Ava Seadistus",
 		"description": "[poleSalesforceSeadistus] kutse tegevusele nupul kasutaja suunamiseks Salesforce'i seadistuslehele"
 	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "Ava juhend",
+		"description": "[õpetus] nupu silt Tab haldamise juhendi avamiseks"
+	},
 	"opportunity": {
 		"message": "Müügivõimalus",
 		"description": "Leht, mis on seotud ObjectManager/Opportunity/FieldsAndRelationships/view"

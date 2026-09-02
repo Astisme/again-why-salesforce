@@ -919,6 +919,10 @@
 		"message": "Otvori Setup",
 		"description": "[notSalesforceSetup] poziv na akciju na dugmetu za preusmeravanje korisnika na Salesforce Setup stranicu"
 	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "Отвори водич",
+		"description": "[туторијал] ознака дугмета за отварање водича за управљање Tab"
+	},
 	"opportunity": {
 		"message": "Prilika",
 		"description": "Stranica povezana sa ObjectManager/Opportunity/FieldsAndRelationships/view"

@@ -919,6 +919,10 @@
 		"message": "Mở Cài đặt",
 		"description": "[notSalesforceSetup] Lời kêu gọi chuyển hướng đến trang Cài đặt Salesforce"
 	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "Mở hướng dẫn",
+		"description": "[hướng dẫn] nhãn nút để mở hướng dẫn quản lý Tab"
+	},
 	"opportunity": {
 		"message": "Cơ hội",
 		"description": "Trang liên quan đến ObjectManager/Opportunity/FieldsAndRelationships/view"

@@ -919,6 +919,10 @@
 		"message": "Atidaryti Sąranką",
 		"description": "[neSalesforceSąranka] raginimas veikti mygtuke, nukreipiantis vartotoją į Salesforce sąrankos puslapį"
 	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "Atidaryti vadovą",
+		"description": "[pamoka] mygtuko etiketė, skirta atidaryti Tab valdymo vadovą"
+	},
 	"opportunity": {
 		"message": "Galimybė",
 		"description": "Puslapis, susijęs su ObjectManager/Opportunity/FieldsAndRelationships/view"

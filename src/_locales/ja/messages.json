@@ -919,6 +919,10 @@
 		"message": "Setup を開く",
 		"description": "[notSalesforceSetup] Salesforce Setup ページに移動するための呼びかけ"
 	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "ガイドを開く",
+		"description": "[チュートリアル] Tab 管理ガイドを開くためのボタンのラベル"
+	},
 	"opportunity": {
 		"message": "商談",
 		"description": "ObjectManager/Opportunity/FieldsAndRelationships/view に関連するページ"

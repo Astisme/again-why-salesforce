@@ -919,6 +919,10 @@
 		"message": "Avaa Setup",
 		"description": "[notSalesforceSetup] toimintakehotus painikkeelle, joka ohjaa käyttäjän Salesforce Setup -sivulle"
 	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "Ava opas",
+		"description": "[opetusohjelma] painikkeen teksti Tab-hallintaoppaan avaamiseksi"
+	},
 	"opportunity": {
 		"message": "Mahdollisuus",
 		"description": "Sivu, joka liittyy kohteeseen ObjectManager/Opportunity/FieldsAndRelationships/view"

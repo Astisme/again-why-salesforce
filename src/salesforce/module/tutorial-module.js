@@ -2,7 +2,6 @@
 import {
 	CMD_OPEN_SETTINGS as _CMD_OPEN_SETTINGS,
 	CXM_UNPIN_TAB as _CXM_UNPIN_TAB,
-	EXTENSION_GITHUB_LINK as _EXTENSION_GITHUB_LINK,
 	HIDDEN_CLASS as _HIDDEN_CLASS,
 	MODAL_ID as _MODAL_ID,
 	SALESFORCE_SETUP_HOME_MINI as _SALESFORCE_SETUP_HOME_MINI,
@@ -21,6 +20,7 @@ import {
 	WHAT_GET as _WHAT_GET,
 	WHAT_GET_COMMANDS as _WHAT_GET_COMMANDS,
 	WHAT_SET as _WHAT_SET,
+	WIKI_LINK as _WIKI_LINK,
 } from "../../core/constants.js";
 import {
 	applyGlobalOverride as _applyGlobalOverride,
@@ -52,7 +52,6 @@ import { handleActionButtonClick as _handleActionButtonClick } from "../manageTa
 
 let CMD_OPEN_SETTINGS = _CMD_OPEN_SETTINGS;
 let CXM_UNPIN_TAB = _CXM_UNPIN_TAB;
-let EXTENSION_GITHUB_LINK = _EXTENSION_GITHUB_LINK;
 let HIDDEN_CLASS = _HIDDEN_CLASS;
 let SALESFORCE_SETUP_HOME_MINI = _SALESFORCE_SETUP_HOME_MINI;
 let SETUP_LIGHTNING = _SETUP_LIGHTNING;
@@ -66,6 +65,7 @@ let TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL =
 let TUTORIAL_EVENT_PIN_TAB = _TUTORIAL_EVENT_PIN_TAB;
 let TUTORIAL_EVENT_REORDERED_TABS_TABLE = _TUTORIAL_EVENT_REORDERED_TABS_TABLE;
 let TUTORIAL_KEY = _TUTORIAL_KEY;
+let WIKI_LINK = _WIKI_LINK;
 let WHAT_ADD = _WHAT_ADD;
 let WHAT_GET = _WHAT_GET;
 let WHAT_GET_COMMANDS = _WHAT_GET_COMMANDS;
@@ -242,6 +242,7 @@ class Tutorial {
 	 */
 	steps = [];
 	retryCount = 0;
+	confirmHandlerAttached = false;
 
 	/**
 	 * Finds up to two elements whose URLs don't match any saved Tab and sets them up as class elements
@@ -463,7 +464,8 @@ class Tutorial {
 			{
 				message: "tutorial_manage_tabs_link",
 				pageUrl: this.secondRedirectElement.url, // Still on this page
-				link: `${String(EXTENSION_GITHUB_LINK)}/wiki/Manage-Tabs-modal`,
+				link: `${String(WIKI_LINK)}/Manage-Tabs-modal`,
+				buttonLabel: "open_tutorial_manage_tabs_guide",
 			},
 			{
 				message: "tutorial_drag_flows",
@@ -572,6 +574,7 @@ class Tutorial {
 		this.spinner = elements.spinner;
 		this.segments = elements.segments;
 		this.confirmBtn = elements.confirmBtn;
+		this.linkBtn = elements.linkBtn;
 		this.closeBtn = elements.closeBtn;
 		this.closeBtn.addEventListener(
 			"click",
@@ -760,7 +763,8 @@ class Tutorial {
 	 * @param {string} step.action - The type of action (ACTION.highlight, ACTION.confirm).
 	 * @param {string} [step.waitFor] - The type of user action to wait for.
 	 * @param {Function} [step.onConfirm] - Callback function for confirmation steps.
-	 * @param {string} [step.link] - Optional link to append to the message.
+	 * @param {string} [step.link] - Optional guide link shown as a button.
+	 * @param {string} [step.buttonLabel] - i18n key for optional guide button label.
 	 * @param {string} [step.shortcut] - Optional keyboard shortcut to display.
 	 * @return {Promise<void>} Resolves when the step execution is complete.
 	 */
@@ -842,18 +846,25 @@ class Tutorial {
 
 	/**
 	 * Displays the message for the current tutorial step in the message box.
-	 * Translates the message key and appends any additional information like links or shortcuts.
+	 * Translates the message key and configures optional guide link or shortcut.
 	 *
 	 * @param {Object} step - The tutorial step object containing message details.
 	 * @param {string} step.message - The i18n key for the message.
-	 * @param {string} [step.link] - Optional link to append to the message.
+	 * @param {string} [step.link] - Optional guide link shown as a button.
+	 * @param {string} [step.buttonLabel] - i18n key for optional guide button label.
 	 * @param {string} [step.shortcut] - Optional keyboard shortcut to display.
 	 * @return {Promise<void>} Resolves when the message has been translated and displayed.
 	 */
 	async showMessage(step) {
 		let message = await getTranslations(step.message);
-		if (step.link && !message.includes(step.link)) {
-			message += `\n\n${step.link}`;
+		if (step.link && step.buttonLabel) {
+			this.linkBtn.href = step.link;
+			this.linkBtn.textContent = await getTranslations(step.buttonLabel);
+			this.linkBtn.classList.remove(HIDDEN_CLASS);
+		} else {
+			this.linkBtn.href = "";
+			this.linkBtn.textContent = "";
+			this.linkBtn.classList.add(HIDDEN_CLASS);
 		}
 		if (step.shortcut && !message.includes(step.shortcut)) {
 			message += `\n\nShortcut: ${step.shortcut}`;
@@ -871,14 +882,17 @@ class Tutorial {
 	 * @param {Function} [step.onConfirm] - Optional callback to execute on confirmation.
 	 */
 	showConfirm() {
-		this.messageBox.addEventListener("click", (event) => {
-			if (event.target === this.closeBtn) return;
-			const step = this.steps[this.currentStep];
-			step.onConfirm?.();
-			if (step.action !== ACTION.confirm) {
-				this.nextStep();
-			}
-		}, { once: true });
+		if (!this.confirmHandlerAttached) {
+			this.confirmBtn.addEventListener("click", () => {
+				this.confirmHandlerAttached = false;
+				const step = this.steps[this.currentStep];
+				step.onConfirm?.();
+				if (step.action !== ACTION.confirm) {
+					this.nextStep();
+				}
+			}, { once: true });
+			this.confirmHandlerAttached = true;
+		}
 		this.btnsParent.classList.remove(HIDDEN_CLASS);
 		this.confirmBtn.focus();
 	}
@@ -1092,8 +1106,6 @@ export async function checkTutorial(fromPopup = false) {
 export function createTutorialModule(overrides = {}) {
 	CMD_OPEN_SETTINGS = overrides.CMD_OPEN_SETTINGS ?? CMD_OPEN_SETTINGS;
 	CXM_UNPIN_TAB = overrides.CXM_UNPIN_TAB ?? CXM_UNPIN_TAB;
-	EXTENSION_GITHUB_LINK = overrides.EXTENSION_GITHUB_LINK ??
-		EXTENSION_GITHUB_LINK;
 	HIDDEN_CLASS = overrides.HIDDEN_CLASS ?? HIDDEN_CLASS;
 	SALESFORCE_SETUP_HOME_MINI = overrides.SALESFORCE_SETUP_HOME_MINI ??
 		SALESFORCE_SETUP_HOME_MINI;
@@ -1119,6 +1131,7 @@ export function createTutorialModule(overrides = {}) {
 		overrides.TUTORIAL_EVENT_REORDERED_TABS_TABLE ??
 			TUTORIAL_EVENT_REORDERED_TABS_TABLE;
 	TUTORIAL_KEY = overrides.TUTORIAL_KEY ?? TUTORIAL_KEY;
+	WIKI_LINK = overrides.WIKI_LINK ?? WIKI_LINK;
 	WHAT_ADD = overrides.WHAT_ADD ?? WHAT_ADD;
 	WHAT_GET = overrides.WHAT_GET ?? WHAT_GET;
 	WHAT_GET_COMMANDS = overrides.WHAT_GET_COMMANDS ?? WHAT_GET_COMMANDS;

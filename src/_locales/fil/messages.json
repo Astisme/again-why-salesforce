@@ -919,6 +919,10 @@
 		"message": "Buksan ang Setup",
 		"description": "[notSalesforceSetup] call to action sa isang button para i-redirect ang user sa isang Salesforce Setup page"
 	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "Buksan ang gabay",
+		"description": "[tutorial] label ng button para buksan ang gabay sa pamamahala ng Tab"
+	},
 	"opportunity": {
 		"message": "Oportunidad",
 		"description": "Ang pahinang may kaugnayan sa ObjectManager/Opportunity/FieldsAndRelationships/view"

@@ -919,6 +919,10 @@
 		"message": "Setup openen",
 		"description": "[geenSalesforceSetup] call-to-action op een knop om de gebruiker door te sturen naar een Salesforce Setup-pagina"
 	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "Handleiding openen",
+		"description": "[handleiding] knoplabel om de gids voor Tab-beheer te openen"
+	},
 	"opportunity": {
 		"message": "Opportunity",
 		"description": "Pagina gerelateerd aan ObjectManager/Opportunity/FieldsAndRelationships/view"

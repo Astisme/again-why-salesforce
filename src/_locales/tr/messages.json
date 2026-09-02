@@ -919,6 +919,10 @@
 		"message": "Kurulumu Aç",
 		"description": "[SalesforceKurulumuDeğil] kullanıcıyı bir Salesforce Kurulum sayfasına yönlendirmek için bir düğme üzerindeki eylem çağrısı"
 	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "Kılavuzu aç",
+		"description": "[eğitim] Tab yönetimi kılavuzunu açmak için düğme etiketi"
+	},
 	"opportunity": {
 		"message": "Fırsat",
 		"description": "ObjectManager/Opportunity/FieldsAndRelationships/view ile ilgili sayfa"

@@ -919,6 +919,10 @@
 		"message": "Open Setup",
 		"description": "[notSalesforceSetup] call to action on a button to redirect the user to a $salesforce_setup page"
 	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "Open guide",
+		"description": "[tutorial] button label to open manage tabs guide"
+	},
 	"opportunity": {
 		"message": "Opportunity",
 		"description": "The page related to ObjectManager/Opportunity/FieldsAndRelationships/view"

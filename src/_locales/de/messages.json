@@ -919,6 +919,10 @@
 		"message": "Setup öffnen",
 		"description": "[notSalesforceSetup] Aufruf, um zur Salesforce Setup-Seite zu navigieren"
 	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "Anleitung öffnen",
+		"description": "[Tutorial] Schaltflächenbeschriftung zum Öffnen der Anleitung zur Tab-Verwaltung"
+	},
 	"opportunity": {
 		"message": "Opportunity",
 		"description": "Die Seite bezogen auf ObjectManager/Opportunity/FieldsAndRelationships/view"

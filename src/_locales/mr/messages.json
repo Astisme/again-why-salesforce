@@ -919,6 +919,10 @@
 		"message": "Setup उघडा",
 		"description": "[notSalesforceSetup] Salesforce Setup पृष्ठाकडे जाण्यासाठी कॉल टू अॅक्शन"
 	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "मार्गदर्शिका उघडा",
+		"description": "[ट्यूटोरियल] Tab व्यवस्थापित करण्याची मार्गदर्शिका उघडण्यासाठी बटण लेबल"
+	},
 	"opportunity": {
 		"message": "संधी (Opportunity)",
 		"description": "ObjectManager/Opportunity/FieldsAndRelationships/view शी संबंधित पृष्ठ"

@@ -919,6 +919,10 @@
 		"message": "Fungua Usanidi",
 		"description": "[siUsanidiWaSalesforce] wito wa kuchukua hatua kwenye kitufe ili kumwelekeza mtumiaji kwenye ukurasa wa Usanidi wa Salesforce"
 	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "Fungua mwongozo",
+		"description": "[mafunzo] lebo ya kitufe cha kufungua mwongozo wa kusimamia Tab"
+	},
 	"opportunity": {
 		"message": "Fursa",
 		"description": "Ukurasa unaohusiana na ObjectManager/Opportunity/FieldsAndRelationships/view"

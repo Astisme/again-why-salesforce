@@ -919,6 +919,10 @@
 		"message": "Open Setup",
 		"description": "[notSalesforceSetup] વપરાશકર્તાને Salesforce Setup પૃષ્ઠ તરફ રીડાયરેક્ટ કરવા માટેનું કાર્યબાહક સંદેશ"
 	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "માર્ગદર્શિકા ખોલો",
+		"description": "[ટ્યુટોરીયલ] Tab સંચાલિત કરવાની માર્ગદર્શિકા ખોલવા માટેનું બટન લેબલ"
+	},
 	"opportunity": {
 		"message": "તક",
 		"description": "ObjectManager/Opportunity/FieldsAndRelationships/view ને સંબંધિત પૃષ્ઠ"

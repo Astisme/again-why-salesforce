@@ -218,7 +218,7 @@ export function generateReviewSponsorSvgs() {
 /**
  * Generates tutorial overlay elements.
  *
- * @return {Promise<Record<string, unknown>>} Tutorial elements.
+ * @return {Promise<Record<string, unknown>>} Tutorial elements, including guide link button.
  */
 export function generateTutorialElements() {
 	return generatorRuntime.generateTutorialElements();

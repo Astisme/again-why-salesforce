@@ -919,6 +919,10 @@
 		"message": "Otwórz Konfigurację",
 		"description": "[nieKonfiguracjaSalesforce] wezwanie do działania na przycisku, aby przekierować użytkownika na stronę Konfiguracji Salesforce"
 	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "Otwórz przewodnik",
+		"description": "[samouczek] etykieta przycisku do otwierania przewodnika zarządzania Tab"
+	},
 	"opportunity": {
 		"message": "Szansa sprzedaży",
 		"description": "Strona powiązana z ObjectManager/Opportunity/FieldsAndRelationships/view"

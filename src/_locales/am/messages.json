@@ -919,6 +919,10 @@
 		"message": "ማዋቀሪያ (Setup) ክፈት",
 		"description": "[SalesforceSetupአይደለም] ተጠቃሚውን ወደ Salesforce የማዋቀሪያ ገጽ ለማዞር በአዝራር ላይ ያለ የድርጊት ጥሪ"
 	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "መመሪያን ክፈት",
+		"description": "[ትምህርት] Tabዎችን የማስተዳደር መመሪያን ለመክፈት የሚያገለግል የአዝራር ምልክት"
+	},
 	"opportunity": {
 		"message": "አጋጣሚ",
 		"description": "ከ ObjectManager/Opportunity/FieldsAndRelationships/view ጋር የተያያዘ ገጽ"

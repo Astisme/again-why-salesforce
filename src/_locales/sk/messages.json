@@ -919,6 +919,10 @@
 		"message": "Otvoriť Setup",
 		"description": "[notSalesforceSetup] výzva na akciu pre tlačidlo, ktoré presmeruje používateľa na stránku Salesforce Setup"
 	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "Otvoriť sprievodcu",
+		"description": "[návod] štítok tlačidla na otvorenie sprievodcu správou Tab"
+	},
 	"opportunity": {
 		"message": "Príležitosť",
 		"description": "Stránka súvisiaca s ObjectManager/Opportunity/FieldsAndRelationships/view"

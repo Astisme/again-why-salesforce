@@ -919,6 +919,10 @@
 		"message": "Öppna Setup",
 		"description": "[notSalesforceSetup] uppmaning på en knapp för att omdirigera användaren till Salesforce Setup-sidan"
 	},
+	"open_tutorial_manage_tabs_guide": {
+		"message": "Öppna guide",
+		"description": "[handledning] knappetikett för att öppna guiden för Tab-hantering"
+	},
 	"opportunity": {
 		"message": "Affärsmöjlighet",
 		"description": "Sida relaterad till ObjectManager/Opportunity/FieldsAndRelationships/view"
