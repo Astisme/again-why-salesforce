@@ -138,6 +138,7 @@ type TutorialUi = {
 	spinner: HTMLElement;
 	segments: HTMLElement;
 	confirmBtn: HTMLElement;
+	linkBtn: HTMLAnchorElement;
 	closeBtn: HTMLElement;
 	btnsParent: HTMLElement;
 };
@@ -168,6 +169,7 @@ type TutorialStep = {
 	action?: string;
 	awaitsCustomEvent?: string;
 	beginsBlock?: boolean;
+	buttonLabel?: string;
 	element?: () => HTMLElement | Promise<HTMLElement | null> | null;
 	fakeElement?: () => HTMLElement | Promise<HTMLElement | null> | null;
 	isEndingStep?: boolean;
@@ -202,6 +204,7 @@ type TutorialModule = {
 		btnsParent: HTMLElement;
 		closeBtn: HTMLElement;
 		confirmBtn: HTMLElement;
+		linkBtn: HTMLAnchorElement;
 		createOverlay: () => Promise<void>;
 		currentStep: number;
 		end: (options?: {
@@ -748,9 +751,13 @@ function createHarness(options: {
 				btnsParent.classList.add(constants.HIDDEN_CLASS);
 				const confirmBtn = globalThis.document.createElement("button");
 				confirmBtn.textContent = "translated:confirm";
+				const linkBtn = globalThis.document.createElement("a");
+				linkBtn.target = "_blank";
+				linkBtn.rel = "noopener noreferrer";
 				const closeBtn = globalThis.document.createElement("button");
 				closeBtn.textContent = "translated:close";
 				btnsParent.appendChild(confirmBtn);
+				btnsParent.appendChild(linkBtn);
 				btnsParent.appendChild(closeBtn);
 				messageBox.appendChild(segments);
 				messageBox.appendChild(btnsParent);
@@ -762,6 +769,7 @@ function createHarness(options: {
 					spinner,
 					segments,
 					confirmBtn,
+					linkBtn,
 					closeBtn,
 					btnsParent,
 				};
@@ -998,6 +1006,22 @@ Deno.test(
 				harness.constants.TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL,
 			);
 			await harness.waitForMessage("tutorial_manage_tabs_link");
+			assertEquals(
+				harness.records.latestUi?.segments.textContent,
+				"translated:tutorial_manage_tabs_link",
+			);
+			assertEquals(
+				harness.records.latestUi?.linkBtn.href,
+				"https://astisme.github.io/again-why-salesforce/wiki/Manage-Tabs-modal",
+			);
+			assertEquals(
+				harness.records.latestUi?.linkBtn.textContent,
+				"translated:open_tutorial_manage_tabs_guide",
+			);
+			assertEquals(
+				harness.records.latestUi?.linkBtn.target,
+				"_blank",
+			);
 
 			await advanceCurrentStep(tutorial);
 			await harness.waitForMessage("tutorial_drag_flows");
@@ -1183,7 +1207,7 @@ Deno.test(
 );
 
 Deno.test(
-	"showMessage appends link and shortcut only when they are not already present",
+	"showMessage configures guide link button and appends shortcuts",
 	async () => {
 		const harness = createHarness();
 		try {
@@ -1201,12 +1225,15 @@ Deno.test(
 			await tutorial.showMessage({
 				message: "base",
 				link: "https://docs.test",
+				buttonLabel: "open_guide",
 				shortcut: "Alt+K",
 			});
 			assertEquals(
 				tutorial.segments.textContent,
-				"Base message\n\nhttps://docs.test\n\nShortcut: Alt+K",
+				"Base message\n\nShortcut: Alt+K",
 			);
+			assertEquals(tutorial.linkBtn.href, "https://docs.test");
+			assertEquals(tutorial.linkBtn.textContent, "Base message");
 			assert(
 				tutorial.spinner.classList.contains(
 					harness.constants.HIDDEN_CLASS,
@@ -1216,11 +1243,16 @@ Deno.test(
 			await tutorial.showMessage({
 				message: "already_complete",
 				link: "https://docs.test",
+				buttonLabel: "open_guide",
 				shortcut: "Alt+K",
 			});
 			assertEquals(
 				tutorial.segments.textContent,
 				"Message with https://docs.test and Shortcut: Alt+K",
+			);
+			assertEquals(
+				tutorial.linkBtn.textContent,
+				"Base message",
 			);
 		} finally {
 			await flush();
@@ -1472,16 +1504,10 @@ Deno.test(
 			tutorial.nextStep = () => {
 				nextStepCalls++;
 			};
-			const closeEvent = new Event("click");
-			Object.defineProperty(closeEvent, "target", {
-				configurable: true,
-				value: tutorial.closeBtn,
-			});
-
 			tutorial.showConfirm();
-			tutorial.messageBox.dispatchEvent(closeEvent);
+			tutorial.closeBtn.click();
 			tutorial.showConfirm();
-			tutorial.messageBox.dispatchEvent(new Event("click"));
+			tutorial.confirmBtn.click();
 
 			assertEquals(confirmCalls, 1);
 			assertEquals(nextStepCalls, 0);
@@ -1807,7 +1833,7 @@ Deno.test(
 				confirmNextSteps++;
 			};
 			confirmTutorial.showConfirm();
-			confirmTutorial.messageBox.dispatchEvent(new Event("click"));
+			confirmTutorial.confirmBtn.click();
 			assertEquals(confirmCalls, 1);
 			assertEquals(confirmNextSteps, 1);
 		} finally {

@@ -242,6 +242,7 @@ class Tutorial {
 	 */
 	steps = [];
 	retryCount = 0;
+	confirmHandlerAttached = false;
 
 	/**
 	 * Finds up to two elements whose URLs don't match any saved Tab and sets them up as class elements
@@ -573,6 +574,7 @@ class Tutorial {
 		this.spinner = elements.spinner;
 		this.segments = elements.segments;
 		this.confirmBtn = elements.confirmBtn;
+		this.linkBtn = elements.linkBtn;
 		this.closeBtn = elements.closeBtn;
 		this.closeBtn.addEventListener(
 			"click",
@@ -761,7 +763,8 @@ class Tutorial {
 	 * @param {string} step.action - The type of action (ACTION.highlight, ACTION.confirm).
 	 * @param {string} [step.waitFor] - The type of user action to wait for.
 	 * @param {Function} [step.onConfirm] - Callback function for confirmation steps.
-	 * @param {string} [step.link] - Optional link to append to the message.
+	 * @param {string} [step.link] - Optional guide link shown as a button.
+	 * @param {string} [step.buttonLabel] - i18n key for optional guide button label.
 	 * @param {string} [step.shortcut] - Optional keyboard shortcut to display.
 	 * @return {Promise<void>} Resolves when the step execution is complete.
 	 */
@@ -843,18 +846,25 @@ class Tutorial {
 
 	/**
 	 * Displays the message for the current tutorial step in the message box.
-	 * Translates the message key and appends any additional information like links or shortcuts.
+	 * Translates the message key and configures optional guide link or shortcut.
 	 *
 	 * @param {Object} step - The tutorial step object containing message details.
 	 * @param {string} step.message - The i18n key for the message.
-	 * @param {string} [step.link] - Optional link to append to the message.
+	 * @param {string} [step.link] - Optional guide link shown as a button.
+	 * @param {string} [step.buttonLabel] - i18n key for optional guide button label.
 	 * @param {string} [step.shortcut] - Optional keyboard shortcut to display.
 	 * @return {Promise<void>} Resolves when the message has been translated and displayed.
 	 */
 	async showMessage(step) {
 		let message = await getTranslations(step.message);
-		if (step.link && !message.includes(step.link)) {
-			message += `\n\n${step.link}`;
+		if (step.link && step.buttonLabel) {
+			this.linkBtn.href = step.link;
+			this.linkBtn.textContent = await getTranslations(step.buttonLabel);
+			this.linkBtn.classList.remove(HIDDEN_CLASS);
+		} else {
+			this.linkBtn.href = "";
+			this.linkBtn.textContent = "";
+			this.linkBtn.classList.add(HIDDEN_CLASS);
 		}
 		if (step.shortcut && !message.includes(step.shortcut)) {
 			message += `\n\nShortcut: ${step.shortcut}`;
@@ -872,14 +882,17 @@ class Tutorial {
 	 * @param {Function} [step.onConfirm] - Optional callback to execute on confirmation.
 	 */
 	showConfirm() {
-		this.messageBox.addEventListener("click", (event) => {
-			if (event.target === this.closeBtn) return;
-			const step = this.steps[this.currentStep];
-			step.onConfirm?.();
-			if (step.action !== ACTION.confirm) {
-				this.nextStep();
-			}
-		}, { once: true });
+		if (!this.confirmHandlerAttached) {
+			this.confirmBtn.addEventListener("click", () => {
+				this.confirmHandlerAttached = false;
+				const step = this.steps[this.currentStep];
+				step.onConfirm?.();
+				if (step.action !== ACTION.confirm) {
+					this.nextStep();
+				}
+			}, { once: true });
+			this.confirmHandlerAttached = true;
+		}
 		this.btnsParent.classList.remove(HIDDEN_CLASS);
 		this.confirmBtn.focus();
 	}
