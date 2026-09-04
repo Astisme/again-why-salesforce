@@ -10,6 +10,7 @@ import { mockStorage } from "../../mocks.test.ts";
 import { createBackgroundUtilsModule } from "../../../src/background/utils-runtime.js";
 
 import {
+	__testHooks,
 	bg_getCurrentBrowserTab,
 	bg_notify,
 	checkForUpdates,
@@ -25,14 +26,7 @@ import {
 
 const NativeURL = globalThis.URL;
 
-type BackgroundUtilsModule = {
-	_exportHandler: (
-		tabs: object[] | { length?: number; tabs?: object[] },
-	) => void;
-	_isNewerVersion: (latest: string, current: string) => boolean;
-	checkForUpdates: () => Promise<void>;
-	requestExportPermission: () => boolean;
-};
+type BackgroundUtilsModule = ReturnType<typeof createBackgroundUtilsModule>;
 
 /**
  * Loads background/utils.js with explicit browser and update-check stubs.
@@ -625,4 +619,18 @@ Deno.test("background utils isolated branches cover export handlers and update c
 			}
 		},
 	);
+});
+
+Deno.test("background utility wrappers delegate through replaceable lazy module", async () => {
+	const fixture = await loadBackgroundUtilsModule();
+	try {
+		__testHooks.resetModule();
+		__testHooks.setModule(fixture.module);
+		assertEquals(__testHooks.getModule(), fixture.module);
+		await bg_notify({ source: "test-hook" });
+		assertEquals(fixture.messages, [{ source: "test-hook" }]);
+	} finally {
+		__testHooks.resetModule();
+		fixture.cleanup();
+	}
 });
