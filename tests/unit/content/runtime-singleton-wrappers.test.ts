@@ -39,6 +39,23 @@ import {
 } from "../../../src/salesforce/runtime/manageTabs-runtime.js";
 import { createOpenOtherOrgModal } from "../../../src/salesforce/runtime/openOtherOrg-runtime.js";
 import { checkTutorial } from "../../../src/salesforce/runtime/tutorial-runtime.js";
+import {
+	createFavouriteManagerModule,
+	pageActionTab as pageActionTabWrapper,
+} from "../../../src/salesforce/favourite-manager.js";
+import {
+	createImportModule as createImportModuleWrapper,
+} from "../../../src/salesforce/import.js";
+import {
+	createManageTabsModule as createManageTabsModuleWrapper,
+	handleActionButtonClick as handleActionButtonClickWrapper,
+} from "../../../src/salesforce/manageTabs.js";
+import {
+	createOpenOtherOrgModule as createOpenOtherOrgModuleWrapper,
+} from "../../../src/salesforce/openOtherOrg.js";
+import {
+	createTutorialModule as createTutorialModuleWrapper,
+} from "../../../src/salesforce/tutorial.js";
 
 Deno.test("content runtime singleton wrappers delegate through default module", async () => {
 	const dom = installMockDom(
@@ -149,4 +166,23 @@ Deno.test("tutorial runtime singleton wrapper reaches stored-state lookup", asyn
 	} finally {
 		dom.cleanup();
 	}
+});
+
+Deno.test("salesforce wrapper factories hit default-argument branches", () => {
+	const favouriteModule = createFavouriteManagerModule();
+	assertEquals(typeof favouriteModule, "object");
+	assertThrows(() => pageActionTabWrapper(), Error);
+
+	const importModule = createImportModuleWrapper();
+	assertEquals(typeof importModule, "object");
+
+	const manageTabsModule = createManageTabsModuleWrapper();
+	assertEquals(typeof manageTabsModule, "object");
+	assertThrows(() => handleActionButtonClickWrapper(new Event("click")));
+
+	const openOtherOrgModule = createOpenOtherOrgModuleWrapper();
+	assertEquals(typeof openOtherOrgModule, "object");
+
+	const tutorialModule = createTutorialModuleWrapper();
+	assertEquals(typeof tutorialModule, "object");
 });
