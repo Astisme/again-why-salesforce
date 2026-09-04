@@ -1,10 +1,17 @@
-import { assertEquals } from "@std/testing/asserts";
+import "../../mocks.test.ts";
+import { assertEquals, assertStrictEquals } from "@std/testing/asserts";
 import {
 	createMockWindow,
 	MockDocument,
 	MockElement,
 } from "./mock-dom.test.ts";
-import { runNotSalesforceSetup } from "../../../src/action/notSalesforceSetup/notSalesforceSetup-runtime.js";
+import {
+	createNotSalesforceSetupModule,
+} from "../../../src/action/notSalesforceSetup/notSalesforceSetup-module.js";
+import {
+	__testHooks as notSalesforceSetupTestHooks,
+	runNotSalesforceSetup as runNotSalesforceSetupRuntime,
+} from "../../../src/action/notSalesforceSetup/notSalesforceSetup-runtime.js";
 
 type Setting = {
 	enabled: boolean;
@@ -42,16 +49,19 @@ function appendElement(
  * @param {BrowserTab[]} [options.browserTabResponses=[]] Tabs returned by the background lookup.
  * @param {string | null} [options.pageUrl=null] Page URL passed in the popup query string.
  * @param {Setting[]} [options.settings=[]] Popup settings returned by `getSettings`.
+ * @param {boolean} [options.useRuntime=false] Whether to exercise runtime override wiring.
  * @return {Promise<{ counters: { closeCalls: number; translatorCalls: number; }; creates: { index: number; openerTabId: number; url: string; }[]; invalidUrl: MockElement; login: MockElement; plain: MockElement; sendMessages: { what: string; }[]; setup: MockElement; updates: { url: string; }[]; warnings: unknown[]; }>} Loaded popup fixtures.
  */
 async function loadNotSalesforceSetupModule({
 	browserTabResponses = [],
 	pageUrl = null,
 	settings = [],
+	useRuntime = false,
 }: {
 	browserTabResponses?: Array<BrowserTab | null>;
 	pageUrl?: string | null;
 	settings?: Setting[];
+	useRuntime?: boolean;
 }) {
 	const popupUrl = new URL(
 		"https://example.test/action/notSalesforceSetup.html",
@@ -77,7 +87,7 @@ async function loadNotSalesforceSetupModule({
 	const sendMessages: { what: string }[] = [];
 	const remainingResponses = [...browserTabResponses];
 
-	await runNotSalesforceSetup({
+	const options = {
 		browser: {
 			tabs: {
 				create: (details: {
@@ -125,7 +135,12 @@ async function loadNotSalesforceSetupModule({
 		},
 		setupLightning: "/lightning/setup/",
 		whatGetBrowserTab: "get-browser-tab",
-	});
+	};
+	if (useRuntime) {
+		await runNotSalesforceSetupRuntime(options);
+	} else {
+		await createNotSalesforceSetupModule(options).runNotSalesforceSetup();
+	}
 
 	return {
 		counters,
@@ -275,4 +290,56 @@ Deno.test("notSalesforceSetup throws when the browser tab lookup never returns a
 		assertEquals(message, { what: "get-browser-tab" });
 	}
 	assertEquals(fixture.counters.closeCalls, 1);
+});
+
+Deno.test("notSalesforceSetup runtime delegates to its lazy module singleton", async () => {
+	let calls = 0;
+	const result = { willOpenLogin: true };
+	const closeDescriptor = Object.getOwnPropertyDescriptor(globalThis, "close");
+	const module: ReturnType<typeof createNotSalesforceSetupModule> = {
+		runNotSalesforceSetup: () => {
+			calls++;
+			return Promise.resolve(result);
+		},
+	};
+	try {
+		Object.defineProperty(globalThis, "close", {
+			configurable: true,
+			value: undefined,
+			writable: true,
+		});
+		notSalesforceSetupTestHooks.resetModule();
+		const defaultModule = notSalesforceSetupTestHooks.getModule();
+		assertStrictEquals(
+			notSalesforceSetupTestHooks.getModule(),
+			defaultModule,
+		);
+		if (closeDescriptor == null) {
+			Reflect.deleteProperty(globalThis, "close");
+		} else {
+			Object.defineProperty(globalThis, "close", closeDescriptor);
+		}
+		notSalesforceSetupTestHooks.setModule(module);
+
+		assertStrictEquals(notSalesforceSetupTestHooks.getModule(), module);
+		assertStrictEquals(await runNotSalesforceSetupRuntime(), result);
+		assertEquals(calls, 1);
+	} finally {
+		if (closeDescriptor == null) {
+			Reflect.deleteProperty(globalThis, "close");
+		} else {
+			Object.defineProperty(globalThis, "close", closeDescriptor);
+		}
+		notSalesforceSetupTestHooks.resetModule();
+	}
+});
+
+Deno.test("notSalesforceSetup runtime applies explicit overrides without caching them", async () => {
+	const fixture = await loadNotSalesforceSetupModule({
+		pageUrl: "https://example.com/not-salesforce",
+		settings: [],
+		useRuntime: true,
+	});
+
+	assertEquals(fixture.counters.translatorCalls, 1);
 });

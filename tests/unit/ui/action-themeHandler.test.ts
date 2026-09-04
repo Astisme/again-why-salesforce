@@ -1,8 +1,11 @@
 import "../../mocks.test.ts";
 import { assertEquals, assertStrictEquals } from "@std/testing/asserts";
 import { installMockDom } from "../../happydom.test.ts";
-import { createThemeHandlerRuntime } from "../../../src/action/themeHandler-runtime.js";
 import {
+	createThemeHandlerModule as createThemeHandlerPureModule,
+} from "../../../src/action/themeHandler-module.js";
+import {
+	__testHooks as themeHandlerTestHooks,
 	createThemeHandlerModule,
 	handleSwitchColorTheme as handleSwitchColorThemeExport,
 	initTheme as initThemeExport,
@@ -132,7 +135,7 @@ async function loadThemeHandler(
 	const matchMedia = hasMatchMediaOverride
 		? overrides.matchMedia ?? undefined
 		: (_query: string) => mediaQueryList;
-	const runtime = createThemeHandlerRuntime({
+	const runtime = createThemeHandlerPureModule({
 		documentRef: { documentElement },
 		localStorageRef: localStorage,
 		matchMedia,
@@ -328,10 +331,34 @@ Deno.test("themeHandler direct module coverage", async () => {
 
 Deno.test("themeHandler module-level exports proxy to the singleton module", async () => {
 	await initThemePromise;
-	await initThemeExport();
-	await handleSwitchColorThemeExport();
-	await systemColorSchemeListenerExport(false);
-	await systemColorSchemeListenerExport(true);
+	const calls: string[] = [];
+	const module: ThemeHandlerModule = {
+		handleSwitchColorTheme: () => {
+			calls.push("switch");
+			return Promise.resolve();
+		},
+		initTheme: () => {
+			calls.push("init");
+			return Promise.resolve();
+		},
+		systemColorSchemeListener: (enable = true) => {
+			calls.push(`listener-${enable}`);
+			return Promise.resolve();
+		},
+	};
+	try {
+		themeHandlerTestHooks.resetModule();
+		themeHandlerTestHooks.setModule(module);
+
+		assertStrictEquals(themeHandlerTestHooks.getModule(), module);
+		await initThemeExport();
+		await handleSwitchColorThemeExport();
+		await systemColorSchemeListenerExport(false);
+		await systemColorSchemeListenerExport(true);
+		assertEquals(calls, ["init", "switch", "listener-false", "listener-true"]);
+	} finally {
+		themeHandlerTestHooks.resetModule();
+	}
 });
 
 Deno.test("themeHandler createThemeHandlerModule uses fallback globals when runtime globals are unavailable", async () => {
