@@ -25,6 +25,20 @@ Please remember that this project is entirely funded by **the support of its use
 3. Added a form to request feedback on extension uninstall (#208)
 4. On uninstall, if simple analytics is enabled, also send a `/uninstall` ping (#208)
 5. Created website to showcase the extension (#213)
+6. Added an uninstall feedback page. (#219)
+7. Added a guide link button to tutorial steps. (#222)
+8. Added static wiki routes and shared wiki metadata to the website. (#223)
+
+## 🛠 Changed
+
+1. Moved settings, sponsor, changelog, and uninstall pages to GitHub Pages (https://astisme.github.io/again-why-salesforce). (#219)
+2. Added static site generation for website content. (#219)
+
+## 🐛 Fixed
+
+1. Imports now accept supported JSON formats from other extensions even if you do not want to check which Tabs to import.
+2. Fixed Manage Tabs warning styles being inserted inside the table body (which would break row selection). (#221)
+3. Fixed website heading rendering and slug generation for safer HTML output. (#219)
 
 ## 🔐 Privacy
 
