@@ -21,3 +21,8 @@ export function createOpenOtherOrgModal(options = {}) {
 export function createOpenOtherOrgModule(overrides = {}) {
 	return openOtherOrgRuntime.createOpenOtherOrgModule(overrides);
 }
+
+/**
+ * Test-only singleton lifecycle controls from open-other-org runtime.
+ */
+export const __testHooks = openOtherOrgRuntime.__testHooks;

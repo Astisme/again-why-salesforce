@@ -122,7 +122,18 @@ export function createImportModule(overrides = {}) {
 	});
 }
 
-const importModule = createImportModule();
+/** @type {ReturnType<typeof createImportModule> | undefined} */
+let importModule;
+
+/**
+ * Returns lazily created import module singleton.
+ *
+ * @return {ReturnType<typeof createImportModule>} Import module singleton.
+ */
+function getModule() {
+	importModule ??= createImportModule();
+	return importModule;
+}
 
 /**
  * Displays the import modal using runtime defaults.
@@ -130,5 +141,18 @@ const importModule = createImportModule();
  * @return {Promise<void>}
  */
 export function createImportModal() {
-	return importModule.createImportModal();
+	return getModule().createImportModal();
 }
+
+/**
+ * Test-only singleton lifecycle controls.
+ */
+export const __testHooks = {
+	getModule: () => importModule,
+	resetModule: () => {
+		importModule = undefined;
+	},
+	setModule: (module) => {
+		importModule = module;
+	},
+};
