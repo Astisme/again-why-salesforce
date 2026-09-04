@@ -3176,4 +3176,3 @@ await Deno.test("TabContainer - Sort Tabs", async (t) => {
 	assertEquals(container[1].url, "nice-url3");
 	assertEquals(container[2].url, "aurl");
 });
-
