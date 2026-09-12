@@ -21,3 +21,8 @@ export function checkTutorial(fromPopup = false) {
 export function createTutorialModule(overrides = {}) {
 	return tutorialRuntime.createTutorialModule(overrides);
 }
+
+/**
+ * Test-only singleton lifecycle controls from tutorial runtime.
+ */
+export const __testHooks = tutorialRuntime.__testHooks;

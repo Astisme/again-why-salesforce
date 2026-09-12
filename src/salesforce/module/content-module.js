@@ -390,6 +390,7 @@ async function checkAddLightningNavigation() {
 		return;
 	}
 	const script = document.createElement("script");
+	script.type = "module";
 	script.src = CONSTANTS.BROWSER.runtime.getURL(
 		"salesforce/lightning-navigation.js",
 	);

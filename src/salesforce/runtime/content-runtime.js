@@ -26,7 +26,18 @@ export function createContentModule(overrides = {}) {
 	return createContentPureModule(overrides);
 }
 
-const contentModule = createContentModule();
+/** @type {ReturnType<typeof createContentModule> | undefined} */
+let contentModule;
+
+/**
+ * Returns lazily created content module singleton.
+ *
+ * @return {ReturnType<typeof createContentModule>} Content module singleton.
+ */
+function getModule() {
+	contentModule ??= createContentModule();
+	return contentModule;
+}
 
 /**
  * Bootstraps content behavior when the current page is compatible.
@@ -34,7 +45,7 @@ const contentModule = createContentModule();
  * @return {boolean} True when bootstrapping started.
  */
 export function bootstrapIfNeeded() {
-	return contentModule.bootstrapIfNeeded();
+	return getModule().bootstrapIfNeeded();
 }
 
 /**
@@ -43,7 +54,7 @@ export function bootstrapIfNeeded() {
  * @return {string} Current page href.
  */
 export function getCurrentHref() {
-	return contentModule.getCurrentHref();
+	return getModule().getCurrentHref();
 }
 
 /**
@@ -52,7 +63,7 @@ export function getCurrentHref() {
  * @return {boolean | undefined} Saved-tab state.
  */
 export function getIsCurrentlyOnSavedTab() {
-	return contentModule.getIsCurrentlyOnSavedTab();
+	return getModule().getIsCurrentlyOnSavedTab();
 }
 
 /**
@@ -61,7 +72,7 @@ export function getIsCurrentlyOnSavedTab() {
  * @return {HTMLElement | null} Modal hanger.
  */
 export function getModalHanger() {
-	return contentModule.getModalHanger();
+	return getModule().getModalHanger();
 }
 
 /**
@@ -70,7 +81,7 @@ export function getModalHanger() {
  * @return {HTMLElement | null} Setup tab UL.
  */
 export function getSetupTabUl() {
-	return contentModule.getSetupTabUl();
+	return getModule().getSetupTabUl();
 }
 
 /**
@@ -79,7 +90,7 @@ export function getSetupTabUl() {
  * @return {boolean | undefined} Previous saved-tab state.
  */
 export function getWasOnSavedTab() {
-	return contentModule.getWasOnSavedTab();
+	return getModule().getWasOnSavedTab();
 }
 
 /**
@@ -90,7 +101,7 @@ export function getWasOnSavedTab() {
  * @return {Promise<void>} Resolves after checks are complete.
  */
 export function isOnSavedTab(isFromHrefUpdate = false, callback = null) {
-	return contentModule.isOnSavedTab(isFromHrefUpdate, callback);
+	return getModule().isOnSavedTab(isFromHrefUpdate, callback);
 }
 
 /**
@@ -100,7 +111,7 @@ export function isOnSavedTab(isFromHrefUpdate = false, callback = null) {
  * @return {void}
  */
 export function makeDuplicatesBold(miniURL) {
-	return contentModule.makeDuplicatesBold(miniURL);
+	return getModule().makeDuplicatesBold(miniURL);
 }
 
 /**
@@ -116,7 +127,7 @@ export function performActionOnTabs(
 	tab = undefined,
 	options = undefined,
 ) {
-	return contentModule.performActionOnTabs(action, tab, options);
+	return getModule().performActionOnTabs(action, tab, options);
 }
 
 /**
@@ -125,7 +136,7 @@ export function performActionOnTabs(
  * @return {Promise<void>} Resolves when reordering sync completes.
  */
 export function reorderTabsUl() {
-	return contentModule.reorderTabsUl();
+	return getModule().reorderTabsUl();
 }
 
 /**
@@ -135,7 +146,7 @@ export function reorderTabsUl() {
  * @return {void}
  */
 export function sf_afterSet(options = {}) {
-	return contentModule.sf_afterSet(options);
+	return getModule().sf_afterSet(options);
 }
 
 /**
@@ -146,10 +157,28 @@ export function sf_afterSet(options = {}) {
  * @return {Promise<void> | void} Toast side effect.
  */
 export function showToast(message, status = undefined) {
-	return contentModule.showToast(message, status);
+	return getModule().showToast(message, status);
 }
 
 /**
- * Test hooks exposed by the singleton content runtime module.
+ * Test-only singleton lifecycle controls and content-module hooks.
+ *
+ * @type {{
+ *   getModule: () => ReturnType<typeof createContentModule> | undefined;
+ *   resetModule: () => void;
+ *   setModule: (module: ReturnType<typeof createContentModule>) => void;
+ *   [hook: string]: unknown;
+ * }}
  */
-export const __testHooks = contentModule.__testHooks;
+export const __testHooks = new Proxy({
+	getModule: () => contentModule,
+	resetModule: () => {
+		contentModule = undefined;
+	},
+	setModule: (module) => {
+		contentModule = module;
+	},
+}, {
+	get: (target, property, receiver) =>
+		Reflect.get(target, property, receiver) ?? getModule().__testHooks[property],
+});

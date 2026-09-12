@@ -1,10 +1,17 @@
-import { assertEquals } from "@std/testing/asserts";
+import "../../mocks.test.ts";
+import { assertEquals, assertStrictEquals } from "@std/testing/asserts";
 import {
 	createMockWindow,
 	MockDocument,
 	MockElement,
 } from "./mock-dom.test.ts";
-import { runReqPermissions } from "../../../src/action/req_permissions/req_permissions-runtime.js";
+import {
+	createReqPermissionsModule,
+} from "../../../src/action/req_permissions/req_permissions-module.js";
+import {
+	__testHooks as reqPermissionsTestHooks,
+	runReqPermissions as runReqPermissionsRuntime,
+} from "../../../src/action/req_permissions/req_permissions-runtime.js";
 
 /**
  * Simple in-memory storage implementation used by popup tests.
@@ -57,9 +64,10 @@ function appendElement(
  * Loads the permissions popup with the provided query string.
  *
  * @param {string} url Full popup URL.
+ * @param {boolean} [useRuntime=false] Whether to exercise runtime override wiring.
  * @return {Promise<{ allowPermissions: MockElement; allowPermissionsDown: MockElement; counters: { closeCalls: number; exportRequests: number; frameRequests: number; translatorCalls: number; }; download: MockElement; getLocation: () => string | URL; hostPermissions: MockElement; localStorage: MemoryStorage; noPermissions: MockElement; noPermissionsDown: MockElement; popupUpdates: { popup: string; }[]; rememberSkip: MockElement; timeoutCalls: number[]; }>} Loaded popup fixtures.
  */
-async function loadPermissionsModule(url: string) {
+async function loadPermissionsModule(url: string, useRuntime = false) {
 	const window = createMockWindow(url);
 	const document = window.document;
 	const hostPermissions = appendElement(document, "div", "host_permissions");
@@ -91,7 +99,7 @@ async function loadPermissionsModule(url: string) {
 	const timeoutCalls: number[] = [];
 	const popupUpdates: { popup: string }[] = [];
 
-	await runReqPermissions({
+	const options = {
 		browser: {
 			action: {
 				setPopup: (options: { popup: string }) => {
@@ -125,7 +133,12 @@ async function loadPermissionsModule(url: string) {
 			callback();
 			return timeoutCalls.length;
 		},
-	});
+	};
+	if (useRuntime) {
+		await runReqPermissionsRuntime(options);
+	} else {
+		await createReqPermissionsModule(options).runReqPermissions();
+	}
 
 	return {
 		allowPermissions,
@@ -226,4 +239,56 @@ Deno.test("req_permissions treats a missing query value as host permissions and 
 		fixture.noPermissions.href,
 		"chrome-extension://test/action/popup/popup.html?no-frame-request=true",
 	);
+});
+
+Deno.test("req_permissions runtime delegates to its lazy module singleton", async () => {
+	let calls = 0;
+	const closeDescriptor = Object.getOwnPropertyDescriptor(globalThis, "close");
+	const result = {
+		mode: "hostpermissions" as const,
+		popupLink: "popup.html",
+	};
+	const module: ReturnType<typeof createReqPermissionsModule> = {
+		runReqPermissions: () => {
+			calls++;
+			return Promise.resolve(result);
+		},
+	};
+	try {
+		Object.defineProperty(globalThis, "close", {
+			configurable: true,
+			value: undefined,
+			writable: true,
+		});
+		reqPermissionsTestHooks.resetModule();
+		const defaultModule = reqPermissionsTestHooks.getModule();
+		assertStrictEquals(reqPermissionsTestHooks.getModule(), defaultModule);
+		if (closeDescriptor == null) {
+			Reflect.deleteProperty(globalThis, "close");
+		} else {
+			Object.defineProperty(globalThis, "close", closeDescriptor);
+		}
+		reqPermissionsTestHooks.setModule(module);
+
+		assertStrictEquals(reqPermissionsTestHooks.getModule(), module);
+		assertStrictEquals(await runReqPermissionsRuntime(), result);
+		assertEquals(calls, 1);
+	} finally {
+		if (closeDescriptor == null) {
+			Reflect.deleteProperty(globalThis, "close");
+		} else {
+			Object.defineProperty(globalThis, "close", closeDescriptor);
+		}
+		reqPermissionsTestHooks.resetModule();
+	}
+});
+
+Deno.test("req_permissions runtime applies explicit overrides without caching them", async () => {
+	const fixture = await loadPermissionsModule(
+		"https://example.test/action/req_permissions.html?whichid=download",
+		true,
+	);
+
+	assertEquals(fixture.counters.translatorCalls, 1);
+	assertEquals(fixture.download.classList.contains("hidden"), false);
 });

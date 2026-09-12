@@ -102,7 +102,18 @@ export function createFavouriteManagerModule(overrides = {}) {
 	});
 }
 
-const favouriteManagerModule = createFavouriteManagerModule();
+/** @type {ReturnType<typeof createFavouriteManagerModule> | undefined} */
+let favouriteManagerModule;
+
+/**
+ * Returns lazily created favourite-manager module singleton.
+ *
+ * @return {ReturnType<typeof createFavouriteManagerModule>} Favourite-manager module singleton.
+ */
+function getModule() {
+	favouriteManagerModule ??= createFavouriteManagerModule();
+	return favouriteManagerModule;
+}
 
 /**
  * Saves or removes current page as favourite.
@@ -110,7 +121,7 @@ const favouriteManagerModule = createFavouriteManagerModule();
  * @return {Promise<void>}
  */
 export function actionFavourite() {
-	return favouriteManagerModule.actionFavourite();
+	return getModule().actionFavourite();
 }
 
 /**
@@ -120,7 +131,7 @@ export function actionFavourite() {
  * @return {Promise<void>}
  */
 export function addTab(url) {
-	return favouriteManagerModule.addTab(url);
+	return getModule().addTab(url);
 }
 
 /**
@@ -131,7 +142,7 @@ export function addTab(url) {
  * @return {SVGElement} SVG icon.
  */
 export function createStarSvg(options = {}, slashed = false) {
-	return favouriteManagerModule.createStarSvg(options, slashed);
+	return getModule().createStarSvg(options, slashed);
 }
 
 /**
@@ -140,7 +151,7 @@ export function createStarSvg(options = {}, slashed = false) {
  * @return {Promise<HTMLButtonElement>} Created button.
  */
 export function generateFavouriteButton() {
-	return favouriteManagerModule.generateFavouriteButton();
+	return getModule().generateFavouriteButton();
 }
 
 /**
@@ -151,7 +162,7 @@ export function generateFavouriteButton() {
  * @return {HTMLElement | null} Matching element.
  */
 export function getFavouriteImage(favouriteId, button = null) {
-	return favouriteManagerModule.getFavouriteImage(favouriteId, button);
+	return getModule().getFavouriteImage(favouriteId, button);
 }
 
 /**
@@ -161,7 +172,7 @@ export function getFavouriteImage(favouriteId, button = null) {
  * @return {void}
  */
 export function pageActionTab(save = true) {
-	return favouriteManagerModule.pageActionTab(save);
+	return getModule().pageActionTab(save);
 }
 
 /**
@@ -171,7 +182,7 @@ export function pageActionTab(save = true) {
  * @return {Promise<number | void>} Timeout id when retried.
  */
 export function showFavouriteButton(count = 0) {
-	return favouriteManagerModule.showFavouriteButton(count);
+	return getModule().showFavouriteButton(count);
 }
 
 /**
@@ -182,20 +193,33 @@ export function showFavouriteButton(count = 0) {
  * @return {void}
  */
 export function toggleFavouriteButton(isSaved = null, button = null) {
-	return favouriteManagerModule.toggleFavouriteButton(isSaved, button);
+	return getModule().toggleFavouriteButton(isSaved, button);
 }
 
 /**
  * Runtime favourite button id.
  */
-export const FAVOURITE_BUTTON_ID = favouriteManagerModule.FAVOURITE_BUTTON_ID;
+export const FAVOURITE_BUTTON_ID = `${EXTENSION_NAME}-button`;
 
 /**
  * Runtime slashed-star id.
  */
-export const SLASHED_STAR_ID = favouriteManagerModule.SLASHED_STAR_ID;
+export const SLASHED_STAR_ID = `${EXTENSION_NAME}-slashed-star`;
 
 /**
  * Runtime star id.
  */
-export const STAR_ID = favouriteManagerModule.STAR_ID;
+export const STAR_ID = `${EXTENSION_NAME}-star`;
+
+/**
+ * Test-only singleton lifecycle controls.
+ */
+export const __testHooks = {
+	getModule: () => favouriteManagerModule,
+	resetModule: () => {
+		favouriteManagerModule = undefined;
+	},
+	setModule: (module) => {
+		favouriteManagerModule = module;
+	},
+};

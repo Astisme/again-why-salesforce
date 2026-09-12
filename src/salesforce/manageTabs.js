@@ -31,3 +31,8 @@ export function createManageTabsModule(overrides = {}) {
 export function handleActionButtonClick(e, options = {}) {
 	return manageTabsRuntime.handleActionButtonClick(e, options);
 }
+
+/**
+ * Test-only singleton lifecycle controls from manage-tabs runtime.
+ */
+export const __testHooks = manageTabsRuntime.__testHooks;

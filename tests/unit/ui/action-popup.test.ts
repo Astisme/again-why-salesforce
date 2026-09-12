@@ -1,5 +1,5 @@
 import "../../mocks.test.ts";
-import { assertEquals } from "@std/testing/asserts";
+import { assertEquals, assertStrictEquals } from "@std/testing/asserts";
 import {
 	CMD_EXPORT_ALL,
 	CMD_IMPORT,
@@ -12,6 +12,7 @@ import {
 } from "../../../src/core/constants.js";
 import {
 	createPopupModule,
+	getPopupRuntimeDefaults,
 	runPopup,
 } from "../../../src/action/popup/popup-runtime.js";
 import { runPopupWithInjectedOptions } from "../../../src/action/popup/popup-module.js";
@@ -60,6 +61,37 @@ function appendPopupButtons(document: MockDocument) {
 		tutorialButton,
 	};
 }
+
+Deno.test("popup-runtime resolves global popup close defaults lazily", () => {
+	const descriptor = Object.getOwnPropertyDescriptor(globalThis, "close");
+	/**
+	 * Closes popup in runtime-default test fixture.
+	 *
+	 * @return {void}
+	 */
+	function closePopup() {}
+
+	try {
+		Object.defineProperty(globalThis, "close", {
+			configurable: true,
+			value: undefined,
+		});
+		const fallback = getPopupRuntimeDefaults() as { closePopup: () => void };
+		fallback.closePopup();
+		Object.defineProperty(globalThis, "close", {
+			configurable: true,
+			value: closePopup,
+		});
+		const defaults = getPopupRuntimeDefaults() as { closePopup: () => void };
+		assertStrictEquals(defaults.closePopup, closePopup);
+	} finally {
+		if (descriptor) {
+			Object.defineProperty(globalThis, "close", descriptor);
+		} else {
+			Reflect.deleteProperty(globalThis, "close");
+		}
+	}
+});
 
 Deno.test("popup-runtime createPopupModule wires runtime constants through the pure module", async () => {
 	const window = createMockWindow(
