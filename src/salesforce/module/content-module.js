@@ -1634,10 +1634,10 @@ function listenToBackgroundPage() {
  * - Inserts analytics script.
  */
 function main() {
-	trackContentTask(ensureAllTabsAvailability());
+	void trackContentTask(ensureAllTabsAvailability());
 	void trackContentTask(checkAddLightningNavigation());
 	listenToBackgroundPage();
-	trackContentTask(delayLoadSetupTabs());
+	void trackContentTask(delayLoadSetupTabs());
 	void trackContentTask(executeOncePerDay());
 }
 
