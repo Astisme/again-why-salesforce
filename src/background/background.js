@@ -101,10 +101,10 @@ function listenToExtensionMessages() {
 		}
 		switch (request.what) {
 			case WHAT_GET:
-				bg_getStorage(sendResponse, request.key);
+				void bg_getStorage(sendResponse, request.key);
 				break;
 			case WHAT_SET:
-				bg_setStorage(request.set, sendResponse, request.key);
+				void bg_setStorage(request.set, sendResponse, request.key);
 				if (request.key == null || request.key === SETTINGS_KEY) {
 					bg_checkUpdateUninstallURL(request.set);
 				}
@@ -137,22 +137,22 @@ function listenToExtensionMessages() {
 				sendResponse(null);
 				break;
 			case WHAT_GET_BROWSER_TAB:
-				bg_getCurrentBrowserTab(sendResponse);
+				void bg_getCurrentBrowserTab(sendResponse);
 				break;
 			case WHAT_GET_SF_LANG:
-				bg_getSalesforceLanguage(sendResponse);
+				void bg_getSalesforceLanguage(sendResponse);
 				break;
 			case WHAT_GET_SETTINGS:
-				bg_getSettings(request.keys, undefined, sendResponse);
+				void bg_getSettings(request.keys, undefined, sendResponse);
 				break;
 			case WHAT_GET_STYLE_SETTINGS:
-				bg_getStyleSettings(request.key, sendResponse);
+				void bg_getStyleSettings(request.key, sendResponse);
 				break;
 			case WHAT_GET_COMMANDS:
-				bg_getCommandLinks(request.commands, sendResponse);
+				void bg_getCommandLinks(request.commands, sendResponse);
 				break;
 			case PERM_CHECK:
-				bg_isPermissionGranted(request.contains, sendResponse);
+				void bg_isPermissionGranted(request.contains, sendResponse);
 				break;
 			default:
 				if (!ALL_WHAT_REASONS.has(request.what)) {

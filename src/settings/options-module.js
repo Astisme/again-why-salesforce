@@ -1284,20 +1284,25 @@ export function createOptionsModule(
 			/**
 			 * Updates the language used by the whole extension and backups the last language used.
 			 */
-			const sendLanguageMessage = () => {
-				sendExtensionMessage(languageMessage);
+			/**
+			 * Saves selected language and remembers it after message delivery.
+			 *
+			 * @return {Promise<void>}
+			 */
+			const sendLanguageMessage = async () => {
+				await sendExtensionMessage(languageMessage);
 				oldUserLanguage = e.target.value;
 			};
 			if (e.target.value === FOLLOW_SF_LANG) { // the user wants to follow the language on salesforce
 				const resp = await requestCookiesPermission();
 				if (resp) { // the extension now has the cookies permission
-					sendLanguageMessage();
+					await sendLanguageMessage();
 				} else {
 					user_language_select.value = oldUserLanguage;
-					showToast("permission_request_failure", false);
+					await showToast("permission_request_failure", false);
 				}
 			} else {
-				sendLanguageMessage();
+				await sendLanguageMessage();
 			}
 		});
 		allowExport.checked = isExportAllowed();
@@ -1309,7 +1314,7 @@ export function createOptionsModule(
 				return;
 			}
 			const res = await requestExportPermission();
-			showToast(
+			await showToast(
 				res
 					? "permission_request_success"
 					: "permission_request_failure",
@@ -1326,7 +1331,7 @@ export function createOptionsModule(
 				return;
 			}
 			const res = await requestFramePatternsPermission();
-			showToast(
+			await showToast(
 				res
 					? "permission_request_success"
 					: "permission_request_failure",
@@ -1714,24 +1719,24 @@ export function createOptionsModule(
 		for (const prev of allPreviews) {
 			prev?.addEventListener("click", toggleActivePreview);
 		}
-		settings_settings.header?.addEventListener("click", () => {
-			restoreGeneralSettings();
+		settings_settings.header?.addEventListener("click", async () => {
+			await restoreGeneralSettings();
 			showRelevantSettings_HideOthers(settings_settings);
 		});
-		settings_generic.header?.addEventListener("click", () => {
-			restoreTabSettings(GENERIC_TAB_STYLE_KEY);
+		settings_generic.header?.addEventListener("click", async () => {
+			await restoreTabSettings(GENERIC_TAB_STYLE_KEY);
 			showRelevantSettings_HideOthers(settings_generic);
 		});
-		settings_org.header?.addEventListener("click", () => {
-			restoreTabSettings(ORG_TAB_STYLE_KEY);
+		settings_org.header?.addEventListener("click", async () => {
+			await restoreTabSettings(ORG_TAB_STYLE_KEY);
 			showRelevantSettings_HideOthers(settings_org);
 		});
-		settings_pinnedGeneric.header?.addEventListener("click", () => {
-			restoreTabSettings(GENERIC_TAB_STYLE_KEY, { isPinned: true });
+		settings_pinnedGeneric.header?.addEventListener("click", async () => {
+			await restoreTabSettings(GENERIC_TAB_STYLE_KEY, { isPinned: true });
 			showRelevantSettings_HideOthers(settings_pinnedGeneric);
 		});
-		settings_pinnedOrg.header?.addEventListener("click", () => {
-			restoreTabSettings(ORG_TAB_STYLE_KEY, { isPinned: true });
+		settings_pinnedOrg.header?.addEventListener("click", async () => {
+			await restoreTabSettings(ORG_TAB_STYLE_KEY, { isPinned: true });
 			showRelevantSettings_HideOthers(settings_pinnedOrg);
 		});
 		document.querySelector("#save-container > button")?.addEventListener(

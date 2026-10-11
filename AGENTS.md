@@ -14,7 +14,7 @@ test command: deno task test-this {test-file}.
 use replaceAll instead of replace if possible
 use String.raw instead of double escape
 allow changes with deno task dev-firefox
-re exports are not allowed, use `export…from` to re-export functions
+avoid re-exports when possible; otherwise use `export…from`
 to revert whole file, use git commands
 keep functions in the outer scope
 Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator.

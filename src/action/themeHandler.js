@@ -1,10 +1,13 @@
 import {
-	__testHooks as runtimeTestHooks,
 	createThemeHandlerModule as createRuntimeThemeHandlerModule,
 	handleSwitchColorTheme as handleRuntimeSwitchColorTheme,
 	initTheme as initRuntimeTheme,
-	initThemePromise as runtimeInitThemePromise,
 	systemColorSchemeListener as systemRuntimeColorSchemeListener,
+} from "./themeHandler-runtime.js";
+
+export {
+	initThemePromise,
+	__testHooks,
 } from "./themeHandler-runtime.js";
 
 /**
@@ -44,15 +47,3 @@ export function handleSwitchColorTheme() {
 export function initTheme() {
 	return initRuntimeTheme();
 }
-
-/**
- * Legacy initialization export retained for compatibility.
- *
- * @type {undefined}
- */
-export const initThemePromise = runtimeInitThemePromise;
-
-/**
- * Exposes theme-handler runtime module lifecycle controls for tests.
- */
-export const __testHooks = runtimeTestHooks;
