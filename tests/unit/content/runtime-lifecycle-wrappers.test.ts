@@ -43,7 +43,9 @@ function createGeneratorFake() {
 			generateSection: record("generateSection"),
 			generateSldsFileInput: record("generateSldsFileInput"),
 			generateSldsModal: record("generateSldsModal"),
-			generateSldsModalWithTabList: record("generateSldsModalWithTabList"),
+			generateSldsModalWithTabList: record(
+				"generateSldsModalWithTabList",
+			),
 			generateSldsToastMessage: record("generateSldsToastMessage"),
 			generateStyleFromSettings: record("generateStyleFromSettings"),
 			generateTutorialElements: record("generateTutorialElements"),
@@ -61,23 +63,84 @@ Deno.test("generator runtime lifecycle is lazy and generator entrypoint preserve
 
 	try {
 		assertStrictEquals(generatorRuntime.getModule(), fake.module);
-		assertEquals(String(await generator.handleLightningLinkClick(new Event("click"))), "handleLightningLinkClick");
-		assertEquals(String(await generator.generateStyleFromSettings()), "generateStyleFromSettings");
-		assertEquals(String(generator.generateRowTemplate("row", "config")), "generateRowTemplate");
-		assertEquals(String(await generator.generateSldsToastMessage("toast")), "generateSldsToastMessage");
-		assertEquals(String(await generator.generateSection()), "generateSection");
-		assertEquals(String(await generator.generateSldsModal()), "generateSldsModal");
-		assertEquals(String(generator.generateRadioButtons("group")), "generateRadioButtons");
-		assertEquals(String(await generator.generateOpenOtherOrgModal()), "generateOpenOtherOrgModal");
-		assertEquals(String(await generator.generateSldsFileInput("wrapper", "input", "type")), "generateSldsFileInput");
-		assertEquals(String(await generator.generateCheckboxWithLabel("id", "label")), "generateCheckboxWithLabel");
-		assertEquals(String(await generator.generateUpdateTabModal("label", "url", "org")), "generateUpdateTabModal");
-		assertEquals(String(generator.generateHelpWith_i_popup()), "generateHelpWith_i_popup");
-		assertEquals(String(await generator.generateSldsModalWithTabList()), "generateSldsModalWithTabList");
-		assertEquals(String(await generator.createManageTabRow()), "createManageTabRow");
-		assertEquals(String(await generator.generateManageTabsModal()), "generateManageTabsModal");
-		assertEquals(String(generator.generateReviewSponsorSvgs()), "generateReviewSponsorSvgs");
-		assertEquals(String(await generator.generateTutorialElements()), "generateTutorialElements");
+		assertEquals(
+			String(
+				await generator.handleLightningLinkClick(new Event("click")),
+			),
+			"handleLightningLinkClick",
+		);
+		assertEquals(
+			String(await generator.generateStyleFromSettings()),
+			"generateStyleFromSettings",
+		);
+		assertEquals(
+			String(generator.generateRowTemplate("row", "config")),
+			"generateRowTemplate",
+		);
+		assertEquals(
+			String(await generator.generateSldsToastMessage("toast")),
+			"generateSldsToastMessage",
+		);
+		assertEquals(
+			String(await generator.generateSection()),
+			"generateSection",
+		);
+		assertEquals(
+			String(await generator.generateSldsModal()),
+			"generateSldsModal",
+		);
+		assertEquals(
+			String(generator.generateRadioButtons("group")),
+			"generateRadioButtons",
+		);
+		assertEquals(
+			String(await generator.generateOpenOtherOrgModal()),
+			"generateOpenOtherOrgModal",
+		);
+		assertEquals(
+			String(
+				await generator.generateSldsFileInput(
+					"wrapper",
+					"input",
+					"type",
+				),
+			),
+			"generateSldsFileInput",
+		);
+		assertEquals(
+			String(await generator.generateCheckboxWithLabel("id", "label")),
+			"generateCheckboxWithLabel",
+		);
+		assertEquals(
+			String(
+				await generator.generateUpdateTabModal("label", "url", "org"),
+			),
+			"generateUpdateTabModal",
+		);
+		assertEquals(
+			String(generator.generateHelpWith_i_popup()),
+			"generateHelpWith_i_popup",
+		);
+		assertEquals(
+			String(await generator.generateSldsModalWithTabList()),
+			"generateSldsModalWithTabList",
+		);
+		assertEquals(
+			String(await generator.createManageTabRow()),
+			"createManageTabRow",
+		);
+		assertEquals(
+			String(await generator.generateManageTabsModal()),
+			"generateManageTabsModal",
+		);
+		assertEquals(
+			String(generator.generateReviewSponsorSvgs()),
+			"generateReviewSponsorSvgs",
+		);
+		assertEquals(
+			String(await generator.generateTutorialElements()),
+			"generateTutorialElements",
+		);
 		assertEquals(String(await generator.sldsConfirm()), "sldsConfirm");
 		assertEquals(fake.calls.length, 18);
 	} finally {

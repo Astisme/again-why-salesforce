@@ -78,7 +78,9 @@ export function createNotSalesforceSetupModule({
 			try {
 				const domain = new URL(page).origin;
 				if (salesforceLightningPattern.test(page)) {
-					documentRef.getElementById(loginId).classList.add(hiddenClass);
+					documentRef.getElementById(loginId).classList.add(
+						hiddenClass,
+					);
 					const goSetup = documentRef.getElementById(setupId);
 					goSetup.classList.remove(hiddenClass);
 					goSetup.href =

@@ -55,37 +55,38 @@ export const __testHooks = {
 	},
 };
 
-export const handleLightningLinkClick =
-	(...args) => getModule().handleLightningLinkClick(...args);
-export const generateStyleFromSettings =
-	(...args) => getModule().generateStyleFromSettings(...args);
+export const handleLightningLinkClick = (...args) =>
+	getModule().handleLightningLinkClick(...args);
+export const generateStyleFromSettings = (...args) =>
+	getModule().generateStyleFromSettings(...args);
 export const generateRowTemplate = (...args) =>
 	getModule().generateRowTemplate(...args);
-export const generateSldsToastMessage =
-	(...args) => getModule().generateSldsToastMessage(...args);
-export const generateSection = (...args) => getModule().generateSection(...args);
+export const generateSldsToastMessage = (...args) =>
+	getModule().generateSldsToastMessage(...args);
+export const generateSection = (...args) =>
+	getModule().generateSection(...args);
 export const generateSldsModal = (...args) =>
 	getModule().generateSldsModal(...args);
 export const generateRadioButtons = (...args) =>
 	getModule().generateRadioButtons(...args);
-export const generateOpenOtherOrgModal =
-	(...args) => getModule().generateOpenOtherOrgModal(...args);
+export const generateOpenOtherOrgModal = (...args) =>
+	getModule().generateOpenOtherOrgModal(...args);
 export const generateSldsFileInput = (...args) =>
 	getModule().generateSldsFileInput(...args);
-export const generateCheckboxWithLabel =
-	(...args) => getModule().generateCheckboxWithLabel(...args);
+export const generateCheckboxWithLabel = (...args) =>
+	getModule().generateCheckboxWithLabel(...args);
 export const generateUpdateTabModal = (...args) =>
 	getModule().generateUpdateTabModal(...args);
-export const generateHelpWith_i_popup =
-	(...args) => getModule().generateHelpWith_i_popup(...args);
-export const generateSldsModalWithTabList =
-	(...args) => getModule().generateSldsModalWithTabList(...args);
+export const generateHelpWith_i_popup = (...args) =>
+	getModule().generateHelpWith_i_popup(...args);
+export const generateSldsModalWithTabList = (...args) =>
+	getModule().generateSldsModalWithTabList(...args);
 export const createManageTabRow = (...args) =>
 	getModule().createManageTabRow(...args);
 export const generateManageTabsModal = (...args) =>
 	getModule().generateManageTabsModal(...args);
-export const generateReviewSponsorSvgs =
-	(...args) => getModule().generateReviewSponsorSvgs(...args);
-export const generateTutorialElements =
-	(...args) => getModule().generateTutorialElements(...args);
+export const generateReviewSponsorSvgs = (...args) =>
+	getModule().generateReviewSponsorSvgs(...args);
+export const generateTutorialElements = (...args) =>
+	getModule().generateTutorialElements(...args);
 export const sldsConfirm = (...args) => getModule().sldsConfirm(...args);

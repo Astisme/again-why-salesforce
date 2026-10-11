@@ -82,7 +82,9 @@ export function createReqPermissionsModule({
 			documentRef.getElementById("host_permissions").classList.add(
 				hiddenClass,
 			);
-			documentRef.getElementById("download").classList.remove(hiddenClass);
+			documentRef.getElementById("download").classList.remove(
+				hiddenClass,
+			);
 			/**
 			 * Restores standard browser action popup page.
 			 *
@@ -99,15 +101,16 @@ export function createReqPermissionsModule({
 					locationRef.href = popuplink;
 				},
 			);
-			documentRef.getElementById("allow-permissions-down").addEventListener(
-				"click",
-				async (event) => {
-					event.preventDefault();
-					await requestExportPermission();
-					await setOriginalPopup();
-					setTimeout(closePopup, 100);
-				},
-			);
+			documentRef.getElementById("allow-permissions-down")
+				.addEventListener(
+					"click",
+					async (event) => {
+						event.preventDefault();
+						await requestExportPermission();
+						await setOriginalPopup();
+						setTimeout(closePopup, 100);
+					},
+				);
 		}
 		return {
 			mode: "download",

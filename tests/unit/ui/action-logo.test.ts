@@ -4,9 +4,7 @@ import {
 	assertExists,
 	assertStrictEquals,
 } from "@std/testing/asserts";
-import {
-	createLogoModule,
-} from "../../../src/action/logo/logo-module.js";
+import { createLogoModule } from "../../../src/action/logo/logo-module.js";
 import {
 	__testHooks as logoTestHooks,
 	runLogo as runLogoRuntime,

@@ -15,4 +15,7 @@ async function testBackgroundEntrypoint() {
 	assert(BROWSER.runtime.onMessage._listeners.length > 0);
 }
 
-Deno.test("background entrypoint starts extension listeners", testBackgroundEntrypoint);
+Deno.test(
+	"background entrypoint starts extension listeners",
+	testBackgroundEntrypoint,
+);

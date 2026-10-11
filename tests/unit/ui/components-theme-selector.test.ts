@@ -80,7 +80,10 @@ Deno.test("ThemeSelectorAws", async (t) => {
 					CustomElementConstructor
 				>();
 				const registry = {
-					define(name: string, constructor: CustomElementConstructor) {
+					define(
+						name: string,
+						constructor: CustomElementConstructor,
+					) {
 						constructors.set(name, constructor);
 					},
 					get(name: string) {

@@ -76,13 +76,17 @@ Deno.test("popup-runtime resolves global popup close defaults lazily", () => {
 			configurable: true,
 			value: undefined,
 		});
-		const fallback = getPopupRuntimeDefaults() as { closePopup: () => void };
+		const fallback = getPopupRuntimeDefaults() as {
+			closePopup: () => void;
+		};
 		fallback.closePopup();
 		Object.defineProperty(globalThis, "close", {
 			configurable: true,
 			value: closePopup,
 		});
-		const defaults = getPopupRuntimeDefaults() as { closePopup: () => void };
+		const defaults = getPopupRuntimeDefaults() as {
+			closePopup: () => void;
+		};
 		assertStrictEquals(defaults.closePopup, closePopup);
 	} finally {
 		if (descriptor) {

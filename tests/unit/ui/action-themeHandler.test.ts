@@ -355,7 +355,12 @@ Deno.test("themeHandler module-level exports proxy to the singleton module", asy
 		await handleSwitchColorThemeExport();
 		await systemColorSchemeListenerExport(false);
 		await systemColorSchemeListenerExport(true);
-		assertEquals(calls, ["init", "switch", "listener-false", "listener-true"]);
+		assertEquals(calls, [
+			"init",
+			"switch",
+			"listener-false",
+			"listener-true",
+		]);
 	} finally {
 		themeHandlerTestHooks.resetModule();
 	}

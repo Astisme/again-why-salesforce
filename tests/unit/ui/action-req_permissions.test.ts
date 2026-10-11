@@ -243,7 +243,10 @@ Deno.test("req_permissions treats a missing query value as host permissions and 
 
 Deno.test("req_permissions runtime delegates to its lazy module singleton", async () => {
 	let calls = 0;
-	const closeDescriptor = Object.getOwnPropertyDescriptor(globalThis, "close");
+	const closeDescriptor = Object.getOwnPropertyDescriptor(
+		globalThis,
+		"close",
+	);
 	const result = {
 		mode: "hostpermissions" as const,
 		popupLink: "popup.html",

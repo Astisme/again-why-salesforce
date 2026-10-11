@@ -28,7 +28,9 @@ export function registerLightningNavigation({
 	addEventListener = globalThis.addEventListener.bind(globalThis),
 	...overrides
 } = {}) {
-	const lightningNavigationModule = createLightningNavigationModule(overrides);
+	const lightningNavigationModule = createLightningNavigationModule(
+		overrides,
+	);
 	addEventListener("message", lightningNavigationModule.handleMessage);
 	return lightningNavigationModule;
 }

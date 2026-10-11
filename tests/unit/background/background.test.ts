@@ -18,8 +18,8 @@ import {
 	GENERIC_TAB_STYLE_KEY,
 	LOCALE_KEY,
 	NO_RELEASE_NOTES,
-	ORG_TAB_STYLE_KEY,
 	ORG_PINNED_TAB_STYLE_KEY,
+	ORG_TAB_STYLE_KEY,
 	PERM_CHECK,
 	PREVENT_ANALYTICS,
 	SETTINGS_KEY,
@@ -415,9 +415,18 @@ await Deno.test("background listeners handle runtime, command, and browser event
 			startup: BROWSER.runtime.onStartup._listeners.length,
 		};
 		startBackground();
-		assert(listenerCountsAfterStart.commands > listenerCountsBeforeStart.commands);
-		assert(listenerCountsAfterStart.messages > listenerCountsBeforeStart.messages);
-		assert(listenerCountsAfterStart.startup > listenerCountsBeforeStart.startup);
+		assert(
+			listenerCountsAfterStart.commands >
+				listenerCountsBeforeStart.commands,
+		);
+		assert(
+			listenerCountsAfterStart.messages >
+				listenerCountsBeforeStart.messages,
+		);
+		assert(
+			listenerCountsAfterStart.startup >
+				listenerCountsBeforeStart.startup,
+		);
 		assertEquals(
 			BROWSER.commands.onCommand._listeners.length,
 			listenerCountsAfterStart.commands,

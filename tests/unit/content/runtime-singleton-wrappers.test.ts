@@ -42,7 +42,11 @@ type ManageTabsModule = {
 
 type OpenOtherOrgModule = {
 	createOpenOtherOrgModal: (
-		options: { label?: string | null; org?: string | null; url?: string | null },
+		options: {
+			label?: string | null;
+			org?: string | null;
+			url?: string | null;
+		},
 	) => Promise<void>;
 };
 
@@ -55,7 +59,10 @@ type SfElementsModule = {
 };
 
 type ToastModule = {
-	showToast: (message: string | string[], status: string | undefined) => Promise<void>;
+	showToast: (
+		message: string | string[],
+		status: string | undefined,
+	) => Promise<void>;
 };
 
 type TutorialModule = {
@@ -73,7 +80,10 @@ type FavouriteRuntimeModule = ReturnType<
  * @param {Record<string, string>} call Call details.
  * @return {Promise<void>} Resolved recording result.
  */
-function record(calls: Array<Record<string, string>>, call: Record<string, string>) {
+function record(
+	calls: Array<Record<string, string>>,
+	call: Record<string, string>,
+) {
 	calls.push(call);
 	return Promise.resolve();
 }
@@ -85,26 +95,37 @@ function record(calls: Array<Record<string, string>>, call: Record<string, strin
  */
 async function assertCanonicalDelegation() {
 	const calls: Array<Record<string, string>> = [];
-	const favouriteHooks: SingletonHooks<FavouriteModule> = favouriteManager.__testHooks;
+	const favouriteHooks: SingletonHooks<FavouriteModule> =
+		favouriteManager.__testHooks;
 	const importHooks: SingletonHooks<ImportModule> = importFeature.__testHooks;
-	const manageTabsHooks: SingletonHooks<ManageTabsModule> = manageTabs.__testHooks;
-	const openOtherOrgHooks: SingletonHooks<OpenOtherOrgModule> = openOtherOrg.__testHooks;
-	const sfElementsHooks: SingletonHooks<SfElementsModule> = sfElements.__testHooks;
+	const manageTabsHooks: SingletonHooks<ManageTabsModule> =
+		manageTabs.__testHooks;
+	const openOtherOrgHooks: SingletonHooks<OpenOtherOrgModule> =
+		openOtherOrg.__testHooks;
+	const sfElementsHooks: SingletonHooks<SfElementsModule> =
+		sfElements.__testHooks;
 	const toastHooks: SingletonHooks<ToastModule> = toast.__testHooks;
 	const tutorialHooks: SingletonHooks<TutorialModule> = tutorial.__testHooks;
 	const event = new Event("click");
 	const tabUl = "tab-ul";
 
 	favouriteHooks.setModule({
-		pageActionTab: (save) => calls.push({ name: "pageActionTab", save: String(save) }),
+		pageActionTab: (save) =>
+			calls.push({ name: "pageActionTab", save: String(save) }),
 		showFavouriteButton: (count) =>
-			Promise.resolve(calls.push({ name: "showFavouriteButton", count: String(count) })),
+			Promise.resolve(
+				calls.push({
+					name: "showFavouriteButton",
+					count: String(count),
+				}),
+			),
 	});
 	importHooks.setModule({
 		createImportModal: () => record(calls, { name: "createImportModal" }),
 	});
 	manageTabsHooks.setModule({
-		createManageTabsModal: () => record(calls, { name: "createManageTabsModal" }),
+		createManageTabsModal: () =>
+			record(calls, { name: "createManageTabsModal" }),
 		handleActionButtonClick: (passedEvent, options) =>
 			record(calls, {
 				name: "handleActionButtonClick",
@@ -136,10 +157,11 @@ async function assertCanonicalDelegation() {
 			calls.push({ name: "getSetupTabUl" });
 			return undefined;
 		},
-		setSetupTabUl: (element) => calls.push({
-			name: "setSetupTabUl",
-			element: String(element === tabUl),
-		}),
+		setSetupTabUl: (element) =>
+			calls.push({
+				name: "setSetupTabUl",
+				element: String(element === tabUl),
+			}),
 	});
 	toastHooks.setModule({
 		showToast: (message, status) =>
@@ -151,7 +173,10 @@ async function assertCanonicalDelegation() {
 	});
 	tutorialHooks.setModule({
 		checkTutorial: (fromPopup) =>
-			record(calls, { name: "checkTutorial", fromPopup: String(fromPopup) }),
+			record(calls, {
+				name: "checkTutorial",
+				fromPopup: String(fromPopup),
+			}),
 	});
 
 	try {
@@ -175,12 +200,18 @@ async function assertCanonicalDelegation() {
 			sfElements.__testHooks.getModule(),
 			sfElements.__testHooks.getModule(),
 		);
-		assertStrictEquals(toast.__testHooks.getModule(), toast.__testHooks.getModule());
+		assertStrictEquals(
+			toast.__testHooks.getModule(),
+			toast.__testHooks.getModule(),
+		);
 		assertStrictEquals(
 			tutorial.__testHooks.getModule(),
 			tutorial.__testHooks.getModule(),
 		);
-		assertEquals(typeof favouriteManager.createFavouriteManagerModule(), "object");
+		assertEquals(
+			typeof favouriteManager.createFavouriteManagerModule(),
+			"object",
+		);
 		favouriteManager.pageActionTab();
 		await favouriteManager.showFavouriteButton();
 		assertEquals(typeof importFeature.createImportModule(), "object");
@@ -196,7 +227,9 @@ async function assertCanonicalDelegation() {
 		assertStrictEquals(sfElements.getSetupTabUl(), undefined);
 		sfElements.setSetupTabUl(tabUl);
 		assertEquals(
-			typeof sfElements.createSfElementsModule({ documentRef: null as never }),
+			typeof sfElements.createSfElementsModule({
+				documentRef: null as never,
+			}),
 			"object",
 		);
 		assertEquals(typeof toast.createToastModule(), "object");
@@ -230,7 +263,10 @@ async function assertCanonicalDelegation() {
 	}
 }
 
-Deno.test("canonical Salesforce wrappers delegate singleton exports and defaults", assertCanonicalDelegation);
+Deno.test(
+	"canonical Salesforce wrappers delegate singleton exports and defaults",
+	assertCanonicalDelegation,
+);
 
 /**
  * Verifies content-runtime exports delegate through its lazy singleton.
@@ -239,7 +275,8 @@ Deno.test("canonical Salesforce wrappers delegate singleton exports and defaults
  */
 async function assertContentRuntimeDelegation() {
 	const calls: Array<Record<string, string>> = [];
-	const contentHooks: LifecycleHooks<ContentModule> = contentRuntime.__testHooks;
+	const contentHooks: LifecycleHooks<ContentModule> =
+		contentRuntime.__testHooks;
 	const contentModule: ContentModule = {
 		__testHooks: {},
 		bootstrapIfNeeded: () => {
@@ -284,7 +321,10 @@ async function assertContentRuntimeDelegation() {
 			}),
 		reorderTabsUl: () => record(calls, { name: "reorderTabsUl" }),
 		sf_afterSet: (options) => {
-			calls.push({ name: "sf_afterSet", options: JSON.stringify(options) });
+			calls.push({
+				name: "sf_afterSet",
+				options: JSON.stringify(options),
+			});
 		},
 		showToast: (message, status) =>
 			record(calls, {
@@ -364,7 +404,9 @@ Deno.test(
  * @return {Promise<void>} Resolves after runtime delegation assertions.
  */
 async function assertFavouriteRuntimeDelegation() {
-	const dom = installMockDom("https://acme.lightning.force.com/lightning/setup/Users/home");
+	const dom = installMockDom(
+		"https://acme.lightning.force.com/lightning/setup/Users/home",
+	);
 	const calls: string[] = [];
 	const module: FavouriteRuntimeModule = {
 		actionFavourite: () => {
@@ -377,7 +419,10 @@ async function assertFavouriteRuntimeDelegation() {
 		},
 		createStarSvg: () => {
 			calls.push("createStarSvg");
-			return document.createElementNS("http://www.w3.org/2000/svg", "svg");
+			return document.createElementNS(
+				"http://www.w3.org/2000/svg",
+				"svg",
+			);
 		},
 		generateFavouriteButton: () => {
 			calls.push("generateFavouriteButton");

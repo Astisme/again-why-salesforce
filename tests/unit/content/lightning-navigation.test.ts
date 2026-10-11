@@ -49,7 +49,10 @@ type LightningNavigationAuraFactory = (
 function createAuraMock(records: LightningNavigationRecord[]) {
 	return {
 		get(eventName: string) {
-			const record = { eventName, params: [] as LightningNavigationParams[] };
+			const record = {
+				eventName,
+				params: [] as LightningNavigationParams[],
+			};
 			records.push(record);
 			return {
 				fire() {},

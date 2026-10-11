@@ -295,7 +295,10 @@ Deno.test("notSalesforceSetup throws when the browser tab lookup never returns a
 Deno.test("notSalesforceSetup runtime delegates to its lazy module singleton", async () => {
 	let calls = 0;
 	const result = { willOpenLogin: true };
-	const closeDescriptor = Object.getOwnPropertyDescriptor(globalThis, "close");
+	const closeDescriptor = Object.getOwnPropertyDescriptor(
+		globalThis,
+		"close",
+	);
 	const module: ReturnType<typeof createNotSalesforceSetupModule> = {
 		runNotSalesforceSetup: () => {
 			calls++;

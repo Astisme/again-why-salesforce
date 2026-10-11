@@ -180,5 +180,6 @@ export const __testHooks = new Proxy({
 	},
 }, {
 	get: (target, property, receiver) =>
-		Reflect.get(target, property, receiver) ?? getModule().__testHooks[property],
+		Reflect.get(target, property, receiver) ??
+			getModule().__testHooks[property],
 });
