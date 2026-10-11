@@ -5,10 +5,7 @@ import {
 	systemColorSchemeListener as systemRuntimeColorSchemeListener,
 } from "./themeHandler-runtime.js";
 
-export {
-	initThemePromise,
-	__testHooks,
-} from "./themeHandler-runtime.js";
+export { __testHooks, initThemePromise } from "./themeHandler-runtime.js";
 
 /**
  * Creates theme-handler behavior with extension runtime defaults.
