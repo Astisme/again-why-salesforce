@@ -61,6 +61,55 @@ import { bg_getCommandLinks } from "./commands.js";
 import { bg_getSalesforceLanguage } from "./salesforce-language.js";
 
 /**
+ * Loads a preferred translator language from background data sources.
+ *
+ * @param {{
+ *   bgGetSalesforceLanguage: () => Promise<string | null>;
+ *   bgGetSettings: (key: string) => Promise<{ enabled?: string } | null>;
+ *   translator: { currentLanguage: string; loadNewLanguage: (language?: string) => Promise<boolean> };
+ *   userLanguage: string;
+ * }} options Language-loading dependencies.
+ * @return {Promise<string | null>} Loaded language or `null`.
+ */
+async function loadTranslatorLanguageFromBackground({
+	bgGetSalesforceLanguage,
+	bgGetSettings,
+	translator,
+	userLanguage,
+}) {
+	try {
+		const selectedLanguage = await bgGetSettings(userLanguage);
+		if (await translator.loadNewLanguage(selectedLanguage?.enabled)) {
+			return translator.currentLanguage;
+		}
+		const salesforceLanguage = await bgGetSalesforceLanguage();
+		if (await translator.loadNewLanguage(salesforceLanguage)) {
+			return translator.currentLanguage;
+		}
+	} catch {
+		return null;
+	}
+	return null;
+}
+
+/**
+ * Logs a translated context-menu operation error.
+ *
+ * @param {{ error: (message: unknown, ...args: unknown[]) => void; trace: () => void }} consoleRef Logger.
+ * @param {{ getTranslations: (key: string) => Promise<string> }} translator Translator service.
+ * @param {unknown} error Context-menu operation error.
+ * @return {Promise<void>} Resolves after logging.
+ */
+async function logContextMenuError(consoleRef, translator, error) {
+	consoleRef.trace();
+	if (error == null || error.message === "") {
+		return;
+	}
+	const message = await translator.getTranslations("error_cxm_check");
+	consoleRef.error(message, error.message);
+}
+
+/**
  * Creates isolated context-menu behavior and lifecycle state.
  *
  * @return {{ checkAddRemoveContextMenus: (what: string, callback?: function|null) => Promise<void>, refreshContextMenus: (what: string) => Promise<void>, removeMenuItems: (force?: boolean) => Promise<void>, startContextMenus: () => void }} Context-menu API.
@@ -77,29 +126,6 @@ export function createContextMenusModule() {
 	let link_cmd_export_all = null;
 	let pendingContextMenuOperation = null;
 	let hasStarted = false;
-
-/**
- * Loads translator language from background APIs without sending an extension
- * message back to the background worker.
- *
- * @param {Object} translator - The translator service instance.
- * @return {Promise<string|null>} The loaded language code, or null when none loaded.
- */
-async function loadTranslatorLanguageFromBackground(translator) {
-	try {
-		const userLanguage = await bg_getSettings(USER_LANGUAGE);
-		if (await translator.loadNewLanguage(userLanguage?.enabled)) {
-			return translator.currentLanguage;
-		}
-		const sfLanguage = await bg_getSalesforceLanguage();
-		if (await translator.loadNewLanguage(sfLanguage)) {
-			return translator.currentLanguage;
-		}
-	} catch {
-		return null;
-	}
-	return null;
-}
 
 /**
  * Asynchronously retrieves command shortcut links and updates corresponding variables.
@@ -422,8 +448,13 @@ async function createMenuItems(force = false) {
 	if (areMenuItemsVisible && !force) {
 		return;
 	}
-	await TranslationService.ensureTranslatorAvailability(
-		loadTranslatorLanguageFromBackground,
+	await TranslationService.ensureTranslatorAvailability((translator) =>
+		loadTranslatorLanguageFromBackground({
+			bgGetSalesforceLanguage: bg_getSalesforceLanguage,
+			bgGetSettings: bg_getSettings,
+			translator,
+			userLanguage: USER_LANGUAGE,
+		})
 	);
 	try {
 		await Promise.all([
@@ -431,12 +462,15 @@ async function createMenuItems(force = false) {
 			removeMenuItems(true),
 		]);
 		const menuItems = getMenuItemsClone();
-		for (const item of menuItems) {
-			item.title = await TranslationService.getTranslations(item.title);
+		const translatedMenuItems = await Promise.all(menuItems.map(async (item) => {
+			const title = await TranslationService.getTranslations(item.title);
 			const shortcut = item.shortcut ?? null;
 			if (shortcut != null) {
-				item.title = `${item.title} (${shortcut})`;
+				return { ...item, title: `${title} (${shortcut})` };
 			}
+			return { ...item, title };
+		}));
+		for (const item of translatedMenuItems) {
 			delete item.shortcut;
 			BROWSER.contextMenus.create(item);
 			if (BROWSER.runtime.lastError) {
@@ -473,11 +507,11 @@ async function innerContextMenuOperation({
 	try {
 		await createMenuItems(force);
 		if (what != null) {
-			bg_notify({ what });
+			await bg_notify({ what });
 		}
 		callback?.();
 	} catch (error) {
-		await logContextMenuError(error);
+		await logContextMenuError(console, TranslationService, error);
 	}
 }
 
@@ -524,21 +558,6 @@ async function removeMenuItems(force = false) {
 		);
 		console.error(msg, error);
 	}
-}
-
-/**
- * Logs a translated context menu error message.
- *
- * @param {unknown} error - The error thrown while managing context menus.
- * @return {Promise<void>}
- */
-async function logContextMenuError(error) {
-	console.trace();
-	if (error == null || error.message === "") {
-		return;
-	}
-	const msg = await TranslationService.getTranslations("error_cxm_check");
-	console.error(msg, error.message);
 }
 
 /**
@@ -613,15 +632,15 @@ function startContextMenus() {
 			}
 			break;
 	}
-	bg_notify(message);
+	await bg_notify(message);
 });
 
-BROWSER.storage.onChanged.addListener((changes) => {
+BROWSER.storage.onChanged.addListener(async (changes) => {
 		const pickedLanguageObj = changes[SETTINGS_KEY]?.newValue?.filter((el) =>
 			el.id === USER_LANGUAGE
 		);
 		if (pickedLanguageObj != null && pickedLanguageObj.length > 0) {
-			refreshContextMenus();
+			await refreshContextMenus();
 		}
 	});
 }

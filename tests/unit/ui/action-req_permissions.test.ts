@@ -167,7 +167,7 @@ Deno.test("req_permissions handles the host-permission flow in isolation", async
 		"chrome-extension://test/action/popup/popup.html?no-frame-request=true",
 	);
 
-	fixture.allowPermissions.click();
+	await fixture.allowPermissions.click();
 	assertEquals(fixture.counters.frameRequests, 1);
 	assertEquals(fixture.counters.closeCalls, 1);
 	assertEquals(fixture.timeoutCalls, [100]);
@@ -197,7 +197,7 @@ Deno.test("req_permissions handles the download-permission flow in isolation", a
 	);
 	assertEquals(fixture.download.classList.contains("hidden"), false);
 
-	fixture.noPermissionsDown.click();
+	await fixture.noPermissionsDown.click();
 	assertEquals(fixture.popupUpdates, [{
 		popup: "chrome-extension://test/action/popup/popup.html",
 	}]);
@@ -206,7 +206,7 @@ Deno.test("req_permissions handles the download-permission flow in isolation", a
 		"chrome-extension://test/action/popup/popup.html",
 	);
 
-	fixture.allowPermissionsDown.click();
+	await fixture.allowPermissionsDown.click();
 	assertEquals(fixture.counters.exportRequests, 1);
 	assertEquals(fixture.counters.closeCalls, 1);
 	assertEquals(fixture.timeoutCalls, [100]);

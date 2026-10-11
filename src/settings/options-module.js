@@ -40,7 +40,6 @@ import {
 	WHAT_SET as _WHAT_SET,
 } from "../core/constants.js";
 import {
-	applyGlobalOverride as _applyGlobalOverride,
 	areFramePatternsAllowed as _areFramePatternsAllowed,
 	getCssRule as _getCssRule,
 	getCssSelector as _getCssSelector,
@@ -60,17 +59,305 @@ import {
 import { TranslationService as _TranslationService } from "../core/translator.js";
 
 /**
+ * Creates the configuration for the input elements
+ *
+ * @param {string[]} styles - the input element ids
+ * @param {Object} configs - an Object from which to find the necessary information
+ * @param {Object} configs.inactiveGenericUnpinned - the configuration for the inactive, generic, unpinned decorations
+ * @param {Object} configs.inactiveGenericPinned - the configuration for the inactive, generic, pinned decorations
+ * @param {Object} configs.inactiveOrgUnpinned - the configuration for the inactive, org, unpinned decorations
+ * @param {Object} configs.inactiveOrgPinned - the configuration for the inactive, org, pinned decorations
+ * @param {Object} configs.activeGenericUnpinned - the configuration for the active, generic, unpinned decorations
+ * @param {Object} configs.activeGenericPinned - the configuration for the active, generic, pinned decorations
+ * @param {Object} configs.activeOrgUnpinned - the configuration for the active, org, unpinned decorations
+ * @param {Object} configs.activeOrgPinned - the configuration for the active, org, pinned decorations
+ *
+ * @return {Object} an object with all the necessary information for every given style
+ */
+function buildInputConfigs(styles, configs) {
+	const result = {};
+	for (const key of styles) {
+		result[key] = {
+			type: "input",
+			elements: {
+				inactive: {
+					generic: {
+						unpinned: configs.inactiveGenericUnpinned.elements[key],
+						pinned: configs.inactiveGenericPinned.elements[key],
+					},
+					org: {
+						unpinned: configs.inactiveOrgUnpinned.elements[key],
+						pinned: configs.inactiveOrgPinned.elements[key],
+					},
+				},
+				active: {
+					generic: {
+						unpinned: configs.activeGenericUnpinned.elements[key],
+						pinned: configs.activeGenericPinned.elements[key],
+					},
+					org: {
+						unpinned: configs.activeOrgUnpinned.elements[key],
+						pinned: configs.activeOrgPinned.elements[key],
+					},
+				},
+			},
+			styleIds: {
+				inactive: {
+					generic: {
+						unpinned: configs.inactiveGenericUnpinned.styleIds[key],
+						pinned: configs.inactiveGenericPinned.styleIds[key],
+					},
+					org: {
+						unpinned: configs.inactiveOrgUnpinned.styleIds[key],
+						pinned: configs.inactiveOrgPinned.styleIds[key],
+					},
+				},
+				active: {
+					generic: {
+						unpinned: configs.activeGenericUnpinned.styleIds[key],
+						pinned: configs.activeGenericPinned.styleIds[key],
+					},
+					org: {
+						unpinned: configs.activeOrgUnpinned.styleIds[key],
+						pinned: configs.activeOrgPinned.styleIds[key],
+					},
+				},
+			},
+		};
+	}
+	return result;
+}
+
+/**
+ * Creates the configuration for the elements to decorate the text
+ *
+ * @param {string[]} styles - the decoration styles
+ * @param {Object} configs - an Object from which to find the necessary information
+ * @param {Object} configs.inactiveGenericUnpinned - the configuration for the inactive, generic, unpinned decorations
+ * @param {Object} configs.inactiveGenericPinned - the configuration for the inactive, generic, pinned decorations
+ * @param {Object} configs.inactiveOrgUnpinned - the configuration for the inactive, org, unpinned decorations
+ * @param {Object} configs.inactiveOrgPinned - the configuration for the inactive, org, pinned decorations
+ * @param {Object} configs.activeGenericUnpinned - the configuration for the active, generic, unpinned decorations
+ * @param {Object} configs.activeGenericPinned - the configuration for the active, generic, pinned decorations
+ * @param {Object} configs.activeOrgUnpinned - the configuration for the active, org, unpinned decorations
+ * @param {Object} configs.activeOrgPinned - the configuration for the active, org, pinned decorations
+ *
+ * @return {Object} an object with all the necessary information for every given style
+ */
+function buildDecorationConfigs(styles, configs) {
+	const result = {};
+	for (const key of styles) {
+		result[key] = {
+			type: "decoration",
+			chosenUls: {
+				inactive: {
+					generic: {
+						unpinned: configs.inactiveGenericUnpinned.decorationUls
+							.chosen,
+						pinned:
+							configs.inactiveGenericPinned.decorationUls.chosen,
+					},
+					org: {
+						unpinned:
+							configs.inactiveOrgUnpinned.decorationUls.chosen,
+						pinned: configs.inactiveOrgPinned.decorationUls.chosen,
+					},
+				},
+				active: {
+					generic: {
+						unpinned:
+							configs.activeGenericUnpinned.decorationUls.chosen,
+						pinned:
+							configs.activeGenericPinned.decorationUls.chosen,
+					},
+					org: {
+						unpinned:
+							configs.activeOrgUnpinned.decorationUls.chosen,
+						pinned: configs.activeOrgPinned.decorationUls.chosen,
+					},
+				},
+			},
+			availableUls: {
+				inactive: {
+					generic: {
+						unpinned: configs.inactiveGenericUnpinned.decorationUls
+							.available,
+						pinned: configs.inactiveGenericPinned.decorationUls
+							.available,
+					},
+					org: {
+						unpinned:
+							configs.inactiveOrgUnpinned.decorationUls.available,
+						pinned:
+							configs.inactiveOrgPinned.decorationUls.available,
+					},
+				},
+				active: {
+					generic: {
+						unpinned: configs.activeGenericUnpinned.decorationUls
+							.available,
+						pinned:
+							configs.activeGenericPinned.decorationUls.available,
+					},
+					org: {
+						unpinned:
+							configs.activeOrgUnpinned.decorationUls.available,
+						pinned: configs.activeOrgPinned.decorationUls.available,
+					},
+				},
+			},
+		};
+	}
+	return result;
+}
+
+/**
+ * Creates the configuration based on the given configs
+ *
+ * @param {Object} configs - the configuration of the Tab elements
+ * @param {Object} configs.inactive - the configuration for the inactive elements
+ * @param {Object} configs.inactive.unpinned - the configuration for the inactive unpinned elements
+ * @param {Object} configs.inactive.pinned - the configuration for the inactive pinned elements
+ * @param {Object} configs.active - the configuration for the active elements
+ * @param {Object} configs.active.unpinned - the configuration for the active unpinned elements
+ * @param {Object} configs.active.pinned - the configuration for the active pinned elements
+ *
+ * @return {Object} a newly structured configuration
+ * -> unpinned.active
+ * -> unpinned.inactive
+ * -> pinned.active
+ * -> pinned.inactive
+ */
+function buildStructuredConf(configs) {
+	return {
+		unpinned: {
+			active: {
+				decorations: configs.active.unpinned.decorations,
+				decorationUls: configs.active.unpinned.decorationUls,
+				moveBtns: configs.active.unpinned.moveBtns,
+				inputs: Object.values(configs.active.unpinned.elements)
+					.filter(Boolean),
+			},
+			inactive: {
+				decorations: configs.inactive.unpinned.decorations,
+				decorationUls: configs.inactive.unpinned.decorationUls,
+				moveBtns: configs.inactive.unpinned.moveBtns,
+				inputs: Object.values(configs.inactive.unpinned.elements)
+					.filter(Boolean),
+			},
+		},
+		pinned: {
+			active: {
+				decorations: configs.active.pinned.decorations,
+				decorationUls: configs.active.pinned.decorationUls,
+				moveBtns: configs.active.pinned.moveBtns,
+				inputs: Object.values(configs.active.pinned.elements)
+					.filter(Boolean),
+			},
+			inactive: {
+				decorations: configs.inactive.pinned.decorations,
+				decorationUls: configs.inactive.pinned.decorationUls,
+				moveBtns: configs.inactive.pinned.moveBtns,
+				inputs: Object.values(configs.inactive.pinned.elements)
+					.filter(Boolean),
+			},
+		},
+	};
+}
+
+/**
+ * Extracts element references from configuration based on tab state and type.
+ * Handles both input elements and decoration list containers.
+ * @param {Object} config - Style configuration object containing element mappings
+ * @param {boolean} isForInactive - Whether targeting inactive tabs
+ * @param {boolean} isGeneric - Whether targeting generic tabs (vs org-specific)
+ * @param {boolean} wasPicked - Whether the style value is set (affects chosen/available lists)
+ * @return {Object} Object containing input element and decoration list references
+ */
+function _getElementReferences(config, {
+	isForInactive = true,
+	isGeneric = true,
+	wasPicked = false,
+	pinKey = "",
+} = {}) {
+	const state = isForInactive ? "inactive" : "active";
+	const variant = isGeneric ? "generic" : "org";
+	const elements = {
+		input: config.elements?.[state]?.[variant]?.[pinKey],
+	};
+	if (config.type === "decoration") {
+		elements.chosenUl = wasPicked
+			? config.chosenUls?.[state]?.[variant]?.[pinKey]
+			: config.availableUls?.[state]?.[variant]?.[pinKey];
+	}
+	return elements;
+}
+
+/**
+ * Retrieves the appropriate style ID from configuration based on tab state and type.
+ * @param {Object} config - Style configuration object containing styleIds mappings
+ * @param {boolean} isForInactive - Whether targeting inactive tabs
+ * @param {boolean} isGeneric - Whether targeting generic tabs (vs org-specific)
+ * @return {string|undefined} Style ID for CSS rule application, or undefined if not found
+ */
+function _getStyleId(config, {
+	isForInactive = true,
+	isGeneric = true,
+	pinKey = "",
+} = {}) {
+	const state = isForInactive ? "inactive" : "active";
+	const variant = isGeneric ? "generic" : "org";
+	return `${config.styleIds?.[state]?.[variant]?.[pinKey]}`;
+}
+
+/**
+ * Updates DOM elements with new style values and moves decoration elements between lists.
+ * For decoration styles, moves elements between "chosen" and "available" lists based on wasPicked state.
+ * For input styles, sets the input element's value property.
+ * @param {Object} elements - Object containing element references (input, chosenUl)
+ * @param {string|null} value - The style value to set in input elements
+ */
+function _updateUIElements(elements, value) {
+	if (elements.input) {
+		elements.input.value = value;
+		if (elements.chosenUl) {
+			elements.chosenUl.append(
+				elements.input,
+			);
+		}
+	}
+}
+
+/**
+ * Gets element references for organizing available/chosen elements.
+ * @param {Object} [pinConf=null] the configuration from which to find the data
+ * @param {String} [key=null] the key from which to extract the data
+ * @throws Error when the parameters where not specified
+ * @return {Object} Object containing list element references
+ */
+function _getReferencesByKey(pinConf = null, key = null) {
+	if (pinConf == null || key == null) {
+		throw new Error("error_required_params");
+	}
+	return {
+		inactive: {
+			available: pinConf.inactive[key].available,
+			chosen: pinConf.inactive[key].chosen,
+		},
+		active: {
+			available: pinConf.active[key].available,
+			chosen: pinConf.active[key].chosen,
+		},
+	};
+}
+
+/**
  * Creates isolated options-page behavior and optionally restores settings immediately.
  *
- * @param {Object} [overrides={}] Dependency overrides used by tests.
- * @param {Record<string, unknown>} [overrides.constants] Constant overrides.
- * @param {() => Promise<unknown>} [overrides.ensureTranslatorAvailability] Translator setup override.
- * @param {Record<string, unknown>} [overrides.functions] Function overrides.
- * @param {(key: string | string[]) => Promise<string>} [overrides.getTranslations] Translation lookup override.
- * @param {Object} [overrides.globals] Browser-global overrides.
+ * @param {Record<string, unknown>} [overrides] Dependency overrides used by tests.
  * @param {Object} [options={}] Runtime options.
  * @param {boolean} [options.runRestoreOnLoad=true] Whether to call restoreGeneralSettings immediately.
- * @return {{ restoreOnLoadPromise: Promise<void> } & Record<string, unknown>} Options module API.
+ * @return {Record<string, unknown>} Options module API.
  */
 export function createOptionsModule(
 	overrides = {},
@@ -116,7 +403,7 @@ export function createOptionsModule(
 		USE_LIGHTNING_NAVIGATION,
 		USER_LANGUAGE,
 		WHAT_SET,
-	} = { ...{
+	} = {
 		EXTENSION_LAST_ACTIVE_DAY: _EXTENSION_LAST_ACTIVE_DAY,
 		EXTENSION_NAME: _EXTENSION_NAME,
 		EXTENSION_USAGE_DAYS: _EXTENSION_USAGE_DAYS,
@@ -156,7 +443,8 @@ export function createOptionsModule(
 		USE_LIGHTNING_NAVIGATION: _USE_LIGHTNING_NAVIGATION,
 		USER_LANGUAGE: _USER_LANGUAGE,
 		WHAT_SET: _WHAT_SET,
-	}, ...overrides.constants };
+		...overrides.constants,
+	};
 	const {
 		areFramePatternsAllowed,
 		getCssRule,
@@ -173,7 +461,7 @@ export function createOptionsModule(
 		requestExportPermission,
 		requestFramePatternsPermission,
 		sendExtensionMessage,
-	} = { ...{
+	} = {
 		areFramePatternsAllowed: _areFramePatternsAllowed,
 		getCssRule: _getCssRule,
 		getCssSelector: _getCssSelector,
@@ -189,7 +477,8 @@ export function createOptionsModule(
 		requestExportPermission: _requestExportPermission,
 		requestFramePatternsPermission: _requestFramePatternsPermission,
 		sendExtensionMessage: _sendExtensionMessage,
-	}, ...overrides.functions };
+		...overrides.functions,
+	};
 	const {
 		clearTimeout = globalThis.clearTimeout,
 		console = globalThis.console,
@@ -505,158 +794,9 @@ function getPinKey({ isPinned = false }) {
 	return isPinned ? pinned : unpinned;
 }
 
-/**
- * Creates the configuration for the input elements
- *
- * @param {string[]} styles - the input element ids
- * @param {Object} configs - an Object from which to find the necessary information
- * @param {Object} configs.inactiveGenericUnpinned - the configuration for the inactive, generic, unpinned decorations
- * @param {Object} configs.inactiveGenericPinned - the configuration for the inactive, generic, pinned decorations
- * @param {Object} configs.inactiveOrgUnpinned - the configuration for the inactive, org, unpinned decorations
- * @param {Object} configs.inactiveOrgPinned - the configuration for the inactive, org, pinned decorations
- * @param {Object} configs.activeGenericUnpinned - the configuration for the active, generic, unpinned decorations
- * @param {Object} configs.activeGenericPinned - the configuration for the active, generic, pinned decorations
- * @param {Object} configs.activeOrgUnpinned - the configuration for the active, org, unpinned decorations
- * @param {Object} configs.activeOrgPinned - the configuration for the active, org, pinned decorations
- *
- * @return {Object} an object with all the necessary information for every given style
- */
-function buildInputConfigs(styles, configs) {
-	const result = {};
-	for (const key of styles) {
-		result[key] = {
-			type: "input",
-			elements: {
-				inactive: {
-					generic: {
-						unpinned: configs.inactiveGenericUnpinned.elements[key],
-						pinned: configs.inactiveGenericPinned.elements[key],
-					},
-					org: {
-						unpinned: configs.inactiveOrgUnpinned.elements[key],
-						pinned: configs.inactiveOrgPinned.elements[key],
-					},
-				},
-				active: {
-					generic: {
-						unpinned: configs.activeGenericUnpinned.elements[key],
-						pinned: configs.activeGenericPinned.elements[key],
-					},
-					org: {
-						unpinned: configs.activeOrgUnpinned.elements[key],
-						pinned: configs.activeOrgPinned.elements[key],
-					},
-				},
-			},
-			styleIds: {
-				inactive: {
-					generic: {
-						unpinned: configs.inactiveGenericUnpinned.styleIds[key],
-						pinned: configs.inactiveGenericPinned.styleIds[key],
-					},
-					org: {
-						unpinned: configs.inactiveOrgUnpinned.styleIds[key],
-						pinned: configs.inactiveOrgPinned.styleIds[key],
-					},
-				},
-				active: {
-					generic: {
-						unpinned: configs.activeGenericUnpinned.styleIds[key],
-						pinned: configs.activeGenericPinned.styleIds[key],
-					},
-					org: {
-						unpinned: configs.activeOrgUnpinned.styleIds[key],
-						pinned: configs.activeOrgPinned.styleIds[key],
-					},
-				},
-			},
-		};
-	}
-	return result;
-}
 
-/**
- * Creates the configuration for the elements to decorate the text
- *
- * @param {string[]} styles - the decoration styles
- * @param {Object} configs - an Object from which to find the necessary information
- * @param {Object} configs.inactiveGenericUnpinned - the configuration for the inactive, generic, unpinned decorations
- * @param {Object} configs.inactiveGenericPinned - the configuration for the inactive, generic, pinned decorations
- * @param {Object} configs.inactiveOrgUnpinned - the configuration for the inactive, org, unpinned decorations
- * @param {Object} configs.inactiveOrgPinned - the configuration for the inactive, org, pinned decorations
- * @param {Object} configs.activeGenericUnpinned - the configuration for the active, generic, unpinned decorations
- * @param {Object} configs.activeGenericPinned - the configuration for the active, generic, pinned decorations
- * @param {Object} configs.activeOrgUnpinned - the configuration for the active, org, unpinned decorations
- * @param {Object} configs.activeOrgPinned - the configuration for the active, org, pinned decorations
- *
- * @return {Object} an object with all the necessary information for every given style
- */
-function buildDecorationConfigs(styles, configs) {
-	const result = {};
-	for (const key of styles) {
-		result[key] = {
-			type: "decoration",
-			chosenUls: {
-				inactive: {
-					generic: {
-						unpinned: configs.inactiveGenericUnpinned.decorationUls
-							.chosen,
-						pinned:
-							configs.inactiveGenericPinned.decorationUls.chosen,
-					},
-					org: {
-						unpinned:
-							configs.inactiveOrgUnpinned.decorationUls.chosen,
-						pinned: configs.inactiveOrgPinned.decorationUls.chosen,
-					},
-				},
-				active: {
-					generic: {
-						unpinned:
-							configs.activeGenericUnpinned.decorationUls.chosen,
-						pinned:
-							configs.activeGenericPinned.decorationUls.chosen,
-					},
-					org: {
-						unpinned:
-							configs.activeOrgUnpinned.decorationUls.chosen,
-						pinned: configs.activeOrgPinned.decorationUls.chosen,
-					},
-				},
-			},
-			availableUls: {
-				inactive: {
-					generic: {
-						unpinned: configs.inactiveGenericUnpinned.decorationUls
-							.available,
-						pinned: configs.inactiveGenericPinned.decorationUls
-							.available,
-					},
-					org: {
-						unpinned:
-							configs.inactiveOrgUnpinned.decorationUls.available,
-						pinned:
-							configs.inactiveOrgPinned.decorationUls.available,
-					},
-				},
-				active: {
-					generic: {
-						unpinned: configs.activeGenericUnpinned.decorationUls
-							.available,
-						pinned:
-							configs.activeGenericPinned.decorationUls.available,
-					},
-					org: {
-						unpinned:
-							configs.activeOrgUnpinned.decorationUls.available,
-						pinned: configs.activeOrgPinned.decorationUls.available,
-					},
-				},
-			},
-		};
-	}
-	return result;
-}
+
+
 
 /**
  * Creates a configuration for the style decorations
@@ -700,59 +840,7 @@ function buildInputDecorationConfigs(configs) {
 	return inputs;
 }
 
-/**
- * Creates the configuration based on the given configs
- *
- * @param {Object} configs - the configuration of the Tab elements
- * @param {Object} configs.inactive - the configuration for the inactive elements
- * @param {Object} configs.inactive.unpinned - the configuration for the inactive unpinned elements
- * @param {Object} configs.inactive.pinned - the configuration for the inactive pinned elements
- * @param {Object} configs.active - the configuration for the active elements
- * @param {Object} configs.active.unpinned - the configuration for the active unpinned elements
- * @param {Object} configs.active.pinned - the configuration for the active pinned elements
- *
- * @return {Object} a newly structured configuration
- * -> unpinned.active
- * -> unpinned.inactive
- * -> pinned.active
- * -> pinned.inactive
- */
-function buildStructuredConf(configs) {
-	return {
-		unpinned: {
-			active: {
-				decorations: configs.active.unpinned.decorations,
-				decorationUls: configs.active.unpinned.decorationUls,
-				moveBtns: configs.active.unpinned.moveBtns,
-				inputs: Object.values(configs.active.unpinned.elements)
-					.filter(Boolean),
-			},
-			inactive: {
-				decorations: configs.inactive.unpinned.decorations,
-				decorationUls: configs.inactive.unpinned.decorationUls,
-				moveBtns: configs.inactive.unpinned.moveBtns,
-				inputs: Object.values(configs.inactive.unpinned.elements)
-					.filter(Boolean),
-			},
-		},
-		pinned: {
-			active: {
-				decorations: configs.active.pinned.decorations,
-				decorationUls: configs.active.pinned.decorationUls,
-				moveBtns: configs.active.pinned.moveBtns,
-				inputs: Object.values(configs.active.pinned.elements)
-					.filter(Boolean),
-			},
-			inactive: {
-				decorations: configs.inactive.pinned.decorations,
-				decorationUls: configs.inactive.pinned.decorationUls,
-				moveBtns: configs.inactive.pinned.moveBtns,
-				inputs: Object.values(configs.inactive.pinned.elements)
-					.filter(Boolean),
-			},
-		},
-	};
-}
+
 
 const pinnedPrefix = `${pinned}_`;
 /**
@@ -891,49 +979,6 @@ allOrgDecorations = {
 };
 
 /**
- * Extracts element references from configuration based on tab state and type.
- * Handles both input elements and decoration list containers.
- * @param {Object} config - Style configuration object containing element mappings
- * @param {boolean} isForInactive - Whether targeting inactive tabs
- * @param {boolean} isGeneric - Whether targeting generic tabs (vs org-specific)
- * @param {boolean} wasPicked - Whether the style value is set (affects chosen/available lists)
- * @return {Object} Object containing input element and decoration list references
- */
-function _getElementReferences(config, {
-	isForInactive = true,
-	isGeneric = true,
-	wasPicked = false,
-	pinKey = "",
-} = {}) {
-	const state = isForInactive ? "inactive" : "active";
-	const variant = isGeneric ? "generic" : "org";
-	const elements = {
-		input: config.elements?.[state]?.[variant]?.[pinKey],
-	};
-	if (config.type === "decoration") {
-		elements.chosenUl = wasPicked
-			? config.chosenUls?.[state]?.[variant]?.[pinKey]
-			: config.availableUls?.[state]?.[variant]?.[pinKey];
-	}
-	return elements;
-}
-/**
- * Retrieves the appropriate style ID from configuration based on tab state and type.
- * @param {Object} config - Style configuration object containing styleIds mappings
- * @param {boolean} isForInactive - Whether targeting inactive tabs
- * @param {boolean} isGeneric - Whether targeting generic tabs (vs org-specific)
- * @return {string|undefined} Style ID for CSS rule application, or undefined if not found
- */
-function _getStyleId(config, {
-	isForInactive = true,
-	isGeneric = true,
-	pinKey = "",
-} = {}) {
-	const state = isForInactive ? "inactive" : "active";
-	const variant = isGeneric ? "generic" : "org";
-	return `${config.styleIds?.[state]?.[variant]?.[pinKey]}`;
-}
-/**
  * Determines the appropriate CSS pseudo-selector for specific style types.
  * Some styles require pseudo-selectors like :hover or ::before for proper application.
  * @param {string} styleId - The style type identifier (TAB_STYLE_* constant)
@@ -976,23 +1021,7 @@ function _buildCssRule(setting, {
 	const cssRule = getCssRule(setting.id, setting.value);
 	return `${cssSelector}{ ${cssRule} }`;
 }
-/**
- * Updates DOM elements with new style values and moves decoration elements between lists.
- * For decoration styles, moves elements between "chosen" and "available" lists based on wasPicked state.
- * For input styles, sets the input element's value property.
- * @param {Object} elements - Object containing element references (input, chosenUl)
- * @param {string|null} value - The style value to set in input elements
- */
-function _updateUIElements(elements, value) {
-	if (elements.input) {
-		elements.input.value = value;
-		if (elements.chosenUl) {
-			elements.chosenUl.append(
-				elements.input,
-			);
-		}
-	}
-}
+
 
 /**
  * Updates CSS styles of the preview Tab based on provided tab style settings
@@ -1411,28 +1440,7 @@ function moveSelectedDecorationsTo({
 	saveTabDecorations(selectedDecorations, isAdding, key);
 }
 
-/**
- * Gets element references for organizing available/chosen elements.
- * @param {Object} [pinConf=null] the configuration from which to find the data
- * @param {String} [key=null] the key from which to extract the data
- * @throws Error when the parameters where not specified
- * @return {Object} Object containing list element references
- */
-function _getReferencesByKey(pinConf = null, key = null) {
-	if (pinConf == null || key == null) {
-		throw new Error("error_required_params");
-	}
-	return {
-		inactive: {
-			available: pinConf.inactive[key].available,
-			chosen: pinConf.inactive[key].chosen,
-		},
-		active: {
-			available: pinConf.active[key].available,
-			chosen: pinConf.active[key].chosen,
-		},
-	};
-}
+
 
 /**
  * Gathers all UI element references needed for tab styling based on the key type.

@@ -47,9 +47,9 @@ export function createReqPermissionsModule({
 			noPerm.href = `${popuplink}?${doNotRequestFramePermissionKey}=true`;
 			documentRef.getElementById("allow-permissions").addEventListener(
 				"click",
-				(event) => {
+				async (event) => {
 					event.preventDefault();
-					requestFramePatternsPermission();
+					await requestFramePatternsPermission();
 					setTimeout(closePopup, 100);
 				},
 			);
@@ -88,23 +88,23 @@ export function createReqPermissionsModule({
 			 *
 			 * @return {void}
 			 */
-			const setOriginalPopup = () => {
-				browser.action.setPopup({ popup: popuplink });
+			const setOriginalPopup = async () => {
+				await browser.action.setPopup({ popup: popuplink });
 			};
 			documentRef.getElementById("no-permissions-down").addEventListener(
 				"click",
-				(event) => {
+				async (event) => {
 					event.preventDefault();
-					setOriginalPopup();
+					await setOriginalPopup();
 					locationRef.href = popuplink;
 				},
 			);
 			documentRef.getElementById("allow-permissions-down").addEventListener(
 				"click",
-				(event) => {
+				async (event) => {
 					event.preventDefault();
-					requestExportPermission();
-					setOriginalPopup();
+					await requestExportPermission();
+					await setOriginalPopup();
 					setTimeout(closePopup, 100);
 				},
 			);

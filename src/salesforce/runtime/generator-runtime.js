@@ -86,7 +86,6 @@ export const generateManageTabsModal = (...args) =>
 	getModule().generateManageTabsModal(...args);
 export const generateReviewSponsorSvgs =
 	(...args) => getModule().generateReviewSponsorSvgs(...args);
-/** Generates tutorial elements, including optional guide link button. */
 export const generateTutorialElements =
 	(...args) => getModule().generateTutorialElements(...args);
 export const sldsConfirm = (...args) => getModule().sldsConfirm(...args);
