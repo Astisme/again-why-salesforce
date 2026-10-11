@@ -627,6 +627,28 @@ Deno.test("options starts the theme transition and builds checkbox payloads", as
 
 		fixture.module.startThemeTransition();
 		assertEquals(fixture.clearTimeoutCalls, [null, 1]);
+		fixture.scheduledTimeouts.at(-1)?.();
+
+		const currentDocumentElement = new OptionElement("current-html");
+		Object.defineProperty(globalThis, "document", {
+			value: { documentElement: currentDocumentElement },
+			configurable: true,
+			writable: true,
+		});
+		fixture.module.startThemeTransition();
+		assertEquals(
+			fixture.documentElement.classList.contains("theme-transitioning"),
+			true,
+		);
+		assertEquals(
+			currentDocumentElement.classList.contains("theme-transitioning"),
+			false,
+		);
+		fixture.scheduledTimeouts.at(-1)?.();
+		assertEquals(
+			fixture.documentElement.classList.contains("theme-transitioning"),
+			false,
+		);
 
 		assertThrows(
 			() => fixture.module.getObjectToSet(),

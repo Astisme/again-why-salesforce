@@ -60,18 +60,23 @@ import { bg_getSettings } from "./storage.js";
 import { bg_getCommandLinks } from "./commands.js";
 import { bg_getSalesforceLanguage } from "./salesforce-language.js";
 
-let areMenuItemsVisible = false;
-
-let link_cmd_save_as_tab = null;
-let link_cmd_remove_tab = null;
-let link_cmd_toggle_org = null;
-let link_cmd_update_tab = null;
-let link_cmd_open_settings = null;
-let link_cmd_open_other_org = null;
-let link_cmd_import = null;
-let link_cmd_export_all = null;
-// deno-lint-ignore no-var
-var pendingContextMenuOperation = null; // is var for tests
+/**
+ * Creates isolated context-menu behavior and lifecycle state.
+ *
+ * @return {{ checkAddRemoveContextMenus: (what: string, callback?: function|null) => Promise<void>, refreshContextMenus: (what: string) => Promise<void>, removeMenuItems: (force?: boolean) => Promise<void>, startContextMenus: () => void }} Context-menu API.
+ */
+export function createContextMenusModule() {
+	let areMenuItemsVisible = false;
+	let link_cmd_save_as_tab = null;
+	let link_cmd_remove_tab = null;
+	let link_cmd_toggle_org = null;
+	let link_cmd_update_tab = null;
+	let link_cmd_open_settings = null;
+	let link_cmd_open_other_org = null;
+	let link_cmd_import = null;
+	let link_cmd_export_all = null;
+	let pendingContextMenuOperation = null;
+	let hasStarted = false;
 
 /**
  * Loads translator language from background APIs without sending an extension
@@ -503,22 +508,12 @@ function queueContextMenuOperation({
 }
 
 /**
- * Resets in-memory context menu tracking used by this module.
- * This is exported for tests so each case can start from a clean state.
- */
-export function resetContextMenuStateForTests() {
-	areMenuItemsVisible = false;
-	pendingContextMenuOperation = null;
-	resetLinks();
-}
-
-/**
  * Removes existing context menu items.
  *
  * @param {boolean} [force=false] - Whether to remove menu items even when the
  * local visibility state says none are currently tracked.
  */
-export async function removeMenuItems(force = false) {
+async function removeMenuItems(force = false) {
 	if (!force && !areMenuItemsVisible) return;
 	try {
 		await BROWSER.contextMenus.removeAll();
@@ -554,7 +549,7 @@ async function logContextMenuError(error) {
  * @param {function} [callback=null] - A callback to call at the end of the execution
  * @return {Promise} the promise with the queued operation
  */
-export function checkAddRemoveContextMenus(what, callback = null) {
+function checkAddRemoveContextMenus(what, callback = null) {
 	return queueContextMenuOperation({ what, callback });
 }
 
@@ -565,22 +560,19 @@ export function checkAddRemoveContextMenus(what, callback = null) {
  * @param {string} what - A string identifier to specify the action that triggered the context menu refresh.
  * @return {Promise} the promise with the queued operation
  */
-export function refreshContextMenus(what) {
+function refreshContextMenus(what) {
 	return queueContextMenuOperation({ what, force: true });
 }
 
 /**
- * Listener for context menu item clicks, processes actions based on the clicked menu item.
+ * Registers browser listeners once for this context-menu instance.
  *
- * - Listens to `BROWSER.contextMenus.onClicked` events.
- * - Creates a `message` object with details based on the menu item ID.
- *   - Common fields: `what` (menuItemId), `tabUrl`, `url`, and `label` (if applicable).
- *   - Special cases:
- *     - "open-other-org": Adds `pageTabUrl`, `pageUrl`, `linkTabUrl`, `linkUrl`, and `linkTabLabel`.
- *     - "page-save-tab" and "page-remove-tab": Focuses on `pageUrl`.
- * - Calls `bg_notify(message)` to handle further processing or communication.
+ * @return {void}
  */
-BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
+function startContextMenus() {
+	if (hasStarted) return;
+	hasStarted = true;
+	BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
 	const browserTabUrl = (await bg_getCurrentBrowserTab())?.url;
 	const url = info.linkUrl ?? info.pageUrl ?? browserTabUrl;
 	const message = {
@@ -625,10 +617,80 @@ BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
 });
 
 BROWSER.storage.onChanged.addListener((changes) => {
-	const pickedLanguageObj = changes[SETTINGS_KEY]?.newValue?.filter((el) =>
-		el.id === USER_LANGUAGE
-	);
-	if (pickedLanguageObj != null && pickedLanguageObj.length > 0) {
-		refreshContextMenus();
-	}
-});
+		const pickedLanguageObj = changes[SETTINGS_KEY]?.newValue?.filter((el) =>
+			el.id === USER_LANGUAGE
+		);
+		if (pickedLanguageObj != null && pickedLanguageObj.length > 0) {
+			refreshContextMenus();
+		}
+	});
+}
+
+	return {
+		checkAddRemoveContextMenus,
+		refreshContextMenus,
+		removeMenuItems,
+		startContextMenus,
+	};
+}
+
+let contextMenusModule = null;
+
+/**
+ * Gets default context-menu behavior, creating it on first use.
+ *
+ * @return {ReturnType<typeof createContextMenusModule>} Context-menu API.
+ */
+function getContextMenusModule() {
+	contextMenusModule ??= createContextMenusModule();
+	return contextMenusModule;
+}
+
+/**
+ * Registers context-menu browser listeners.
+ *
+ * @return {void}
+ */
+export function startContextMenus() {
+	getContextMenusModule().startContextMenus();
+}
+
+/**
+ * Ensures context menu items are registered in the browser.
+ *
+ * @param {string} what - Identifier for action triggering menu check.
+ * @param {function} [callback=null] - Callback run after menu creation.
+ * @return {Promise<void>} Promise for queued operation.
+ */
+export function checkAddRemoveContextMenus(what, callback = null) {
+	return getContextMenusModule().checkAddRemoveContextMenus(what, callback);
+}
+
+/**
+ * Rebuilds context menu labels and command shortcuts.
+ *
+ * @param {string} what - Identifier for action triggering refresh.
+ * @return {Promise<void>} Promise for queued operation.
+ */
+export function refreshContextMenus(what) {
+	return getContextMenusModule().refreshContextMenus(what);
+}
+
+/**
+ * Removes context menu items.
+ *
+ * @param {boolean} [force=false] - Whether to remove untracked items.
+ * @return {Promise<void>} Promise resolving after removal.
+ */
+export function removeMenuItems(force = false) {
+	return getContextMenusModule().removeMenuItems(force);
+}
+
+/**
+ * Clears cached context-menu behavior for tests.
+ *
+ * @return {void}
+ */
+export function resetContextMenuStateForTests() {
+	contextMenusModule = null;
+}

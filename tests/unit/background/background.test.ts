@@ -2,7 +2,7 @@ import { mockStorage } from "../../mocks.test.ts";
 import { assert, assertEquals, assertFalse } from "@std/testing/asserts";
 import { waitForCondition } from "../../async.test.ts";
 
-import "../../../src/background/background.js";
+import { startBackground } from "../../../src/background/background.js";
 import { bg_getCommandLinks } from "../../../src/background/commands.js";
 import { bg_getSalesforceLanguage } from "../../../src/background/salesforce-language.js";
 import {
@@ -14,10 +14,12 @@ import {
 	BROWSER,
 	CMD_EXPORT_ALL,
 	CXM_MANAGE_TABS,
+	GENERIC_PINNED_TAB_STYLE_KEY,
 	GENERIC_TAB_STYLE_KEY,
 	LOCALE_KEY,
 	NO_RELEASE_NOTES,
 	ORG_TAB_STYLE_KEY,
+	ORG_PINNED_TAB_STYLE_KEY,
 	PERM_CHECK,
 	PREVENT_ANALYTICS,
 	SETTINGS_KEY,
@@ -88,6 +90,20 @@ mockStorage[ORG_TAB_STYLE_KEY] = [{
 	value: "italic",
 }]; // the other ones are inserted by background.js
 
+const listenerCountsBeforeStart = {
+	commands: BROWSER.commands.onCommand._listeners.length,
+	messages: BROWSER.runtime.onMessage._listeners.length,
+	startup: BROWSER.runtime.onStartup._listeners.length,
+};
+
+await Deno.test("background import does not start listeners", () => {
+	assertEquals(listenerCountsBeforeStart, {
+		commands: 0,
+		messages: 0,
+		startup: 0,
+	});
+});
+
 await Deno.test("bg_getStorage behavior", async (t) => {
 	await t.step("get default (all Tabs)", async () => {
 		const tabs = await bg_getStorage();
@@ -130,7 +146,7 @@ await Deno.test("bg_getStorage behavior", async (t) => {
 		const orgtabstyle = await bg_getStorage(undefined, ORG_TAB_STYLE_KEY);
 		assert(orgtabstyle != null);
 		assert(Array.isArray(orgtabstyle));
-		assertEquals(orgtabstyle.length, 3);
+		assertEquals(orgtabstyle.length, 1);
 	});
 });
 
@@ -183,14 +199,14 @@ await Deno.test("bg_getSettings behavior", async (t) => {
 		const orgtabstyle = await bg_getSettings(undefined, ORG_TAB_STYLE_KEY);
 		assert(orgtabstyle != null);
 		assert(Array.isArray(orgtabstyle));
-		assertEquals(orgtabstyle.length, 3);
+		assertEquals(orgtabstyle.length, 1);
 	});
 
 	await t.step("get specific org tab styles", async () => {
 		const boldtabstyle = await bg_getSettings("bold", ORG_TAB_STYLE_KEY);
 		assert(boldtabstyle != null);
 		assert(Array.isArray(boldtabstyle));
-		assertEquals(boldtabstyle.length, 2);
+		assertEquals(boldtabstyle.length, 0);
 		const italictabstyle = await bg_getSettings(
 			"italic",
 			ORG_TAB_STYLE_KEY,
@@ -390,6 +406,23 @@ await Deno.test("background listeners handle runtime, command, and browser event
 	];
 
 	try {
+		mockStorage[GENERIC_PINNED_TAB_STYLE_KEY] = [];
+		mockStorage[ORG_PINNED_TAB_STYLE_KEY] = [];
+		startBackground();
+		const listenerCountsAfterStart = {
+			commands: BROWSER.commands.onCommand._listeners.length,
+			messages: BROWSER.runtime.onMessage._listeners.length,
+			startup: BROWSER.runtime.onStartup._listeners.length,
+		};
+		startBackground();
+		assert(listenerCountsAfterStart.commands > listenerCountsBeforeStart.commands);
+		assert(listenerCountsAfterStart.messages > listenerCountsBeforeStart.messages);
+		assert(listenerCountsAfterStart.startup > listenerCountsBeforeStart.startup);
+		assertEquals(
+			BROWSER.commands.onCommand._listeners.length,
+			listenerCountsAfterStart.commands,
+		);
+
 		let savedResponse: unknown;
 		BROWSER.runtime.onMessage.triggerMessage(
 			{ what: WHAT_SAVED, echo: "saved" },

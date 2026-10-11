@@ -8,8 +8,10 @@ import {
 import { waitForCondition } from "../../async.test.ts";
 import {
 	checkAddRemoveContextMenus,
-	refreshContextMenus,
+	createContextMenusModule,
+	removeMenuItems,
 	resetContextMenuStateForTests,
+	startContextMenus,
 } from "../../../src/background/context-menus.js";
 import {
 	BROWSER,
@@ -55,9 +57,10 @@ Deno.test({
 	sanitizeOps: false,
 	sanitizeResources: false,
 	fn: async () => {
+		const contextMenus = createContextMenusModule();
 		let called = false;
 		await setActiveTab("https://mock1.url");
-		await checkAddRemoveContextMenus("testAction", () => {
+		await contextMenus.checkAddRemoveContextMenus("testAction", () => {
 			called = true;
 		});
 		assert(called, "the callback should be called");
@@ -70,13 +73,14 @@ Deno.test({
 	sanitizeOps: false,
 	sanitizeResources: false,
 	fn: async () => {
+		const contextMenus = createContextMenusModule();
 		await setActiveTab("https://mock1.url");
 		BROWSER.commands.setMockCommands([{
 			name: CMD_SAVE_AS_TAB,
 			shortcut: "Alt+Shift+P",
 		}]);
 
-		await checkAddRemoveContextMenus("create");
+		await contextMenus.checkAddRemoveContextMenus("create");
 
 		const initialMenu = BROWSER.contextMenus._contextMenus.find((menu) =>
 			menu.id === CXM_PAGE_SAVE_TAB
@@ -90,7 +94,7 @@ Deno.test({
 			shortcut: "Ctrl+Shift+P",
 		}]);
 
-		await refreshContextMenus("testRefresh");
+		await contextMenus.refreshContextMenus("testRefresh");
 
 		const refreshedMenu = BROWSER.contextMenus._contextMenus.find((menu) =>
 			menu.id === CXM_PAGE_SAVE_TAB
@@ -112,6 +116,7 @@ Deno.test({
 	sanitizeOps: false,
 	sanitizeResources: false,
 	fn: async () => {
+		const contextMenus = createContextMenusModule();
 		await setActiveTab(
 			"https://mock.my.salesforce-setup.com/lightning/setup/mock",
 		);
@@ -124,7 +129,7 @@ Deno.test({
 			shortcut: "Alt+Shift+P",
 		}]);
 
-		await checkAddRemoveContextMenus("create");
+		await contextMenus.checkAddRemoveContextMenus("create");
 
 		const matchingMenus = BROWSER.contextMenus._contextMenus.filter((
 			menu,
@@ -140,6 +145,7 @@ Deno.test({
 	sanitizeOps: false,
 	sanitizeResources: false,
 	fn: async () => {
+		const contextMenus = createContextMenusModule();
 		await setActiveTab("https://mock1.url");
 		BROWSER.commands.setMockCommands([
 			{ name: CMD_SAVE_AS_TAB, shortcut: "Alt+1" },
@@ -151,7 +157,7 @@ Deno.test({
 			{ name: CMD_IMPORT, shortcut: "Alt+7" },
 			{ name: CMD_EXPORT_ALL, shortcut: "Alt+8" },
 		]);
-		await checkAddRemoveContextMenus("all-shortcuts");
+		await contextMenus.checkAddRemoveContextMenus("all-shortcuts");
 
 		const expectedById = new Map<string, string>([
 			[CXM_PAGE_SAVE_TAB, "Alt+1"],
@@ -180,6 +186,7 @@ Deno.test({
 	sanitizeOps: false,
 	sanitizeResources: false,
 	fn: async () => {
+		const contextMenus = createContextMenusModule();
 		await setActiveTab(
 			"https://acme.lightning.force.com/lightning/setup/SetupOneHome/home",
 		);
@@ -194,6 +201,7 @@ Deno.test({
 		};
 
 		try {
+			contextMenus.startContextMenus();
 			BROWSER.contextMenus.onClicked.triggerClick({
 				menuItemId: CXM_OPEN_OTHER_ORG,
 				linkText: "Open account",
@@ -245,6 +253,21 @@ Deno.test({
 		} finally {
 			BROWSER.tabs.sendMessage = originalSendMessage;
 		}
+	},
+});
+
+Deno.test({
+	name: "should retain singleton context-menu API compatibility",
+	sanitizeOps: false,
+	sanitizeResources: false,
+	fn: async () => {
+		await setActiveTab("https://mock1.url");
+		startContextMenus();
+		startContextMenus();
+		await checkAddRemoveContextMenus("singleton");
+		assert(BROWSER.contextMenus._contextMenus.length > 0);
+		await removeMenuItems();
+		assertEquals(BROWSER.contextMenus._contextMenus.length, 0);
 	},
 });
 

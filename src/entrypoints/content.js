@@ -1,2 +1,4 @@
 "use strict";
-import "../salesforce/content.js";
+import { startContent } from "../salesforce/content.js";
+
+startContent();

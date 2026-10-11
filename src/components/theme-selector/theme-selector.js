@@ -1,34 +1,32 @@
 import { HIDDEN_CLASS } from "../../core/constants.js";
 import { handleSwitchColorTheme } from "../../action/themeHandler.js";
 
-const html = document.documentElement;
 const invisible = "invisible";
-let styleInjected = false;
 
 /**
  * Ensures the theme selector stylesheet is loaded only once.
+ *
+ * @param {Document | null} documentRef Component owner document.
  * @return {void}
  */
-function ensureStyles() {
-	if (styleInjected) {
-		return;
-	}
-	const existing = document.head?.querySelector(
+function ensureStyles(documentRef) {
+	const existing = documentRef?.head?.querySelector(
 		'link[data-awsf-theme-selector="true"]',
 	);
 	if (existing != null) {
-		styleInjected = true;
 		return;
 	}
-	const link = document.createElement("link");
+	const link = documentRef?.createElement("link");
+	if (link == null) {
+		return;
+	}
 	link.rel = "stylesheet";
 	link.href = new URL(
 		"../components/theme-selector/theme-selector.css", // this path takes into consideration that this will be called from ../../generated/
 		import.meta.url,
 	);
 	link.dataset.awsfThemeSelector = "true";
-	document.head?.append(link);
-	styleInjected = true;
+	documentRef.head?.append(link);
 }
 
 /**
@@ -43,15 +41,18 @@ export class ThemeSelectorAws extends HTMLElement {
 	 * @return {void}
 	 */
 	connectedCallback() {
-		ensureStyles();
+		const documentRef = this.ownerDocument;
+		ensureStyles(documentRef);
 		if (!this.querySelector("[data-theme-target]")) {
 			this.render();
 		}
 		this.addEventListener("click", this.handleClick);
-		this.observer.observe(html, {
-			attributes: true,
-			attributeFilter: ["data-theme"],
-		});
+		if (documentRef?.documentElement != null) {
+			this.observer.observe(documentRef.documentElement, {
+				attributes: true,
+				attributeFilter: ["data-theme"],
+			});
+		}
 		this.syncVisibleButton();
 	}
 
@@ -133,7 +134,8 @@ export class ThemeSelectorAws extends HTMLElement {
 	 * @return {string} the active theme name
 	 */
 	getCurrentTheme() {
-		return html.dataset.theme ?? localStorage.getItem("usingTheme") ??
+		return this.ownerDocument?.documentElement.dataset.theme ??
+			globalThis.localStorage?.getItem("usingTheme") ??
 			"light";
 	}
 
@@ -189,7 +191,7 @@ export class ThemeSelectorAws extends HTMLElement {
 /**
  * Registers the theme-selector custom element when a registry is available.
  *
- * @param {CustomElementRegistry | undefined} [customElementsRef=globalThis.customElements] Custom elements registry.
+ * @param {Pick<CustomElementRegistry, "define" | "get"> | undefined} [customElementsRef=globalThis.customElements] Custom elements registry.
  * @return {boolean} `true` when the element is registered or already present.
  */
 export function defineThemeSelector(

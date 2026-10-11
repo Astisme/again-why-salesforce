@@ -43,6 +43,7 @@ import {
 import {
 	checkAddRemoveContextMenus,
 	refreshContextMenus,
+	startContextMenus,
 } from "./context-menus.js";
 import {
 	bg_getSettings,
@@ -53,6 +54,8 @@ import {
 import { bg_getSalesforceLanguage } from "./salesforce-language.js";
 import { bg_getCommandLinks, listenToExtensionCommands } from "./commands.js";
 import { setDefaultOrgStyle } from "./default-styles.js";
+
+let hasStarted = false;
 
 /**
  * Checks whether the object passed as contains is contained in the granted permissions.
@@ -239,15 +242,21 @@ function setExtensionBrowserListeners() {
 }
 
 /**
- * Main entry point to initialize extension listeners, default styles,
+ * Starts extension listeners, default styles,
  * command listeners, message listeners, and context menu checks.
+ *
+ * This function is called by the production entry point after its module graph
+ * has loaded, so importing background behavior has no startup side effects.
+ *
+ * @return {void}
  */
-function main() {
+export function startBackground() {
+	if (hasStarted) return;
+	hasStarted = true;
 	setExtensionBrowserListeners();
 	setDefaultOrgStyle();
 	listenToExtensionMessages();
 	listenToExtensionCommands();
+	startContextMenus();
 	checkAddRemoveContextMenus();
 }
-
-main();

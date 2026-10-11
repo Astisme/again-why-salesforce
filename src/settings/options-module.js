@@ -59,66 +59,146 @@ import {
 } from "../core/functions.js";
 import { TranslationService as _TranslationService } from "../core/translator.js";
 
-let EXTENSION_LAST_ACTIVE_DAY = _EXTENSION_LAST_ACTIVE_DAY;
-let EXTENSION_NAME = _EXTENSION_NAME;
-let EXTENSION_USAGE_DAYS = _EXTENSION_USAGE_DAYS;
-let FOLLOW_SF_LANG = _FOLLOW_SF_LANG;
-let GENERIC_PINNED_TAB_STYLE_KEY = _GENERIC_PINNED_TAB_STYLE_KEY;
-let GENERIC_TAB_STYLE_KEY = _GENERIC_TAB_STYLE_KEY;
-let HIDDEN_CLASS = _HIDDEN_CLASS;
-let LINK_NEW_BROWSER = _LINK_NEW_BROWSER;
-let NO_RELEASE_NOTES = _NO_RELEASE_NOTES;
-let NO_UPDATE_NOTIFICATION = _NO_UPDATE_NOTIFICATION;
-let ORG_PINNED_TAB_STYLE_KEY = _ORG_PINNED_TAB_STYLE_KEY;
-let ORG_TAB_STYLE_KEY = _ORG_TAB_STYLE_KEY;
-let PERSIST_SORT = _PERSIST_SORT;
-let POPUP_LOGIN_NEW_TAB = _POPUP_LOGIN_NEW_TAB;
-let POPUP_OPEN_LOGIN = _POPUP_OPEN_LOGIN;
-let POPUP_OPEN_SETUP = _POPUP_OPEN_SETUP;
-let POPUP_SETUP_NEW_TAB = _POPUP_SETUP_NEW_TAB;
-let PREVENT_ANALYTICS = _PREVENT_ANALYTICS;
-let PREVENT_DEFAULT_OVERRIDE = _PREVENT_DEFAULT_OVERRIDE;
-let SETTINGS_KEY = _SETTINGS_KEY;
-let SKIP_LINK_DETECTION = _SKIP_LINK_DETECTION;
-let SLDS_ACTIVE = _SLDS_ACTIVE;
-let TAB_ADD_FRONT = _TAB_ADD_FRONT;
-let TAB_AS_ORG = _TAB_AS_ORG;
-let TAB_GENERIC_STYLE = _TAB_GENERIC_STYLE;
-let TAB_ON_LEFT = _TAB_ON_LEFT;
-let TAB_ORG_STYLE = _TAB_ORG_STYLE;
-let TAB_STYLE_BACKGROUND = _TAB_STYLE_BACKGROUND;
-let TAB_STYLE_BOLD = _TAB_STYLE_BOLD;
-let TAB_STYLE_BORDER = _TAB_STYLE_BORDER;
-let TAB_STYLE_COLOR = _TAB_STYLE_COLOR;
-let TAB_STYLE_HOVER = _TAB_STYLE_HOVER;
-let TAB_STYLE_ITALIC = _TAB_STYLE_ITALIC;
-let TAB_STYLE_SHADOW = _TAB_STYLE_SHADOW;
-let TAB_STYLE_TOP = _TAB_STYLE_TOP;
-let TAB_STYLE_UNDERLINE = _TAB_STYLE_UNDERLINE;
-let USE_LIGHTNING_NAVIGATION = _USE_LIGHTNING_NAVIGATION;
-let USER_LANGUAGE = _USER_LANGUAGE;
-let WHAT_SET = _WHAT_SET;
-
-let areFramePatternsAllowed = _areFramePatternsAllowed;
-const applyGlobalOverride = _applyGlobalOverride;
-let getCssRule = _getCssRule;
-let getCssSelector = _getCssSelector;
-let getPinnedSpecificKey = _getPinnedSpecificKey;
-let getSettings = _getSettings;
-let getStyleSettings = _getStyleSettings;
-let injectStyle = _injectStyle;
-let isExportAllowed = _isExportAllowed;
-let isGenericKey = _isGenericKey;
-let isPinnedKey = _isPinnedKey;
-let isStyleKey = _isStyleKey;
-let requestCookiesPermission = _requestCookiesPermission;
-let requestExportPermission = _requestExportPermission;
-let requestFramePatternsPermission = _requestFramePatternsPermission;
-let sendExtensionMessage = _sendExtensionMessage;
-let ensureTranslatorAvailability =
-	_TranslationService.ensureTranslatorAvailability;
-let getTranslations = _TranslationService.getTranslations;
-
+/**
+ * Creates isolated options-page behavior and optionally restores settings immediately.
+ *
+ * @param {Object} [overrides={}] Dependency overrides used by tests.
+ * @param {Record<string, unknown>} [overrides.constants] Constant overrides.
+ * @param {() => Promise<unknown>} [overrides.ensureTranslatorAvailability] Translator setup override.
+ * @param {Record<string, unknown>} [overrides.functions] Function overrides.
+ * @param {(key: string | string[]) => Promise<string>} [overrides.getTranslations] Translation lookup override.
+ * @param {Object} [overrides.globals] Browser-global overrides.
+ * @param {Object} [options={}] Runtime options.
+ * @param {boolean} [options.runRestoreOnLoad=true] Whether to call restoreGeneralSettings immediately.
+ * @return {{ restoreOnLoadPromise: Promise<void> } & Record<string, unknown>} Options module API.
+ */
+export function createOptionsModule(
+	overrides = {},
+	{ runRestoreOnLoad = true } = {},
+) {
+	const {
+		EXTENSION_LAST_ACTIVE_DAY,
+		EXTENSION_NAME,
+		EXTENSION_USAGE_DAYS,
+		FOLLOW_SF_LANG,
+		GENERIC_PINNED_TAB_STYLE_KEY,
+		GENERIC_TAB_STYLE_KEY,
+		HIDDEN_CLASS,
+		LINK_NEW_BROWSER,
+		NO_RELEASE_NOTES,
+		NO_UPDATE_NOTIFICATION,
+		ORG_PINNED_TAB_STYLE_KEY,
+		ORG_TAB_STYLE_KEY,
+		PERSIST_SORT,
+		POPUP_LOGIN_NEW_TAB,
+		POPUP_OPEN_LOGIN,
+		POPUP_OPEN_SETUP,
+		POPUP_SETUP_NEW_TAB,
+		PREVENT_ANALYTICS,
+		PREVENT_DEFAULT_OVERRIDE,
+		SETTINGS_KEY,
+		SKIP_LINK_DETECTION,
+		SLDS_ACTIVE,
+		TAB_ADD_FRONT,
+		TAB_AS_ORG,
+		TAB_GENERIC_STYLE,
+		TAB_ON_LEFT,
+		TAB_ORG_STYLE,
+		TAB_STYLE_BACKGROUND,
+		TAB_STYLE_BOLD,
+		TAB_STYLE_BORDER,
+		TAB_STYLE_COLOR,
+		TAB_STYLE_HOVER,
+		TAB_STYLE_ITALIC,
+		TAB_STYLE_SHADOW,
+		TAB_STYLE_TOP,
+		TAB_STYLE_UNDERLINE,
+		USE_LIGHTNING_NAVIGATION,
+		USER_LANGUAGE,
+		WHAT_SET,
+	} = { ...{
+		EXTENSION_LAST_ACTIVE_DAY: _EXTENSION_LAST_ACTIVE_DAY,
+		EXTENSION_NAME: _EXTENSION_NAME,
+		EXTENSION_USAGE_DAYS: _EXTENSION_USAGE_DAYS,
+		FOLLOW_SF_LANG: _FOLLOW_SF_LANG,
+		GENERIC_PINNED_TAB_STYLE_KEY: _GENERIC_PINNED_TAB_STYLE_KEY,
+		GENERIC_TAB_STYLE_KEY: _GENERIC_TAB_STYLE_KEY,
+		HIDDEN_CLASS: _HIDDEN_CLASS,
+		LINK_NEW_BROWSER: _LINK_NEW_BROWSER,
+		NO_RELEASE_NOTES: _NO_RELEASE_NOTES,
+		NO_UPDATE_NOTIFICATION: _NO_UPDATE_NOTIFICATION,
+		ORG_PINNED_TAB_STYLE_KEY: _ORG_PINNED_TAB_STYLE_KEY,
+		ORG_TAB_STYLE_KEY: _ORG_TAB_STYLE_KEY,
+		PERSIST_SORT: _PERSIST_SORT,
+		POPUP_LOGIN_NEW_TAB: _POPUP_LOGIN_NEW_TAB,
+		POPUP_OPEN_LOGIN: _POPUP_OPEN_LOGIN,
+		POPUP_OPEN_SETUP: _POPUP_OPEN_SETUP,
+		POPUP_SETUP_NEW_TAB: _POPUP_SETUP_NEW_TAB,
+		PREVENT_ANALYTICS: _PREVENT_ANALYTICS,
+		PREVENT_DEFAULT_OVERRIDE: _PREVENT_DEFAULT_OVERRIDE,
+		SETTINGS_KEY: _SETTINGS_KEY,
+		SKIP_LINK_DETECTION: _SKIP_LINK_DETECTION,
+		SLDS_ACTIVE: _SLDS_ACTIVE,
+		TAB_ADD_FRONT: _TAB_ADD_FRONT,
+		TAB_AS_ORG: _TAB_AS_ORG,
+		TAB_GENERIC_STYLE: _TAB_GENERIC_STYLE,
+		TAB_ON_LEFT: _TAB_ON_LEFT,
+		TAB_ORG_STYLE: _TAB_ORG_STYLE,
+		TAB_STYLE_BACKGROUND: _TAB_STYLE_BACKGROUND,
+		TAB_STYLE_BOLD: _TAB_STYLE_BOLD,
+		TAB_STYLE_BORDER: _TAB_STYLE_BORDER,
+		TAB_STYLE_COLOR: _TAB_STYLE_COLOR,
+		TAB_STYLE_HOVER: _TAB_STYLE_HOVER,
+		TAB_STYLE_ITALIC: _TAB_STYLE_ITALIC,
+		TAB_STYLE_SHADOW: _TAB_STYLE_SHADOW,
+		TAB_STYLE_TOP: _TAB_STYLE_TOP,
+		TAB_STYLE_UNDERLINE: _TAB_STYLE_UNDERLINE,
+		USE_LIGHTNING_NAVIGATION: _USE_LIGHTNING_NAVIGATION,
+		USER_LANGUAGE: _USER_LANGUAGE,
+		WHAT_SET: _WHAT_SET,
+	}, ...overrides.constants };
+	const {
+		areFramePatternsAllowed,
+		getCssRule,
+		getCssSelector,
+		getPinnedSpecificKey,
+		getSettings,
+		getStyleSettings,
+		injectStyle,
+		isExportAllowed,
+		isGenericKey,
+		isPinnedKey,
+		isStyleKey,
+		requestCookiesPermission,
+		requestExportPermission,
+		requestFramePatternsPermission,
+		sendExtensionMessage,
+	} = { ...{
+		areFramePatternsAllowed: _areFramePatternsAllowed,
+		getCssRule: _getCssRule,
+		getCssSelector: _getCssSelector,
+		getPinnedSpecificKey: _getPinnedSpecificKey,
+		getSettings: _getSettings,
+		getStyleSettings: _getStyleSettings,
+		injectStyle: _injectStyle,
+		isExportAllowed: _isExportAllowed,
+		isGenericKey: _isGenericKey,
+		isPinnedKey: _isPinnedKey,
+		isStyleKey: _isStyleKey,
+		requestCookiesPermission: _requestCookiesPermission,
+		requestExportPermission: _requestExportPermission,
+		requestFramePatternsPermission: _requestFramePatternsPermission,
+		sendExtensionMessage: _sendExtensionMessage,
+	}, ...overrides.functions };
+	const {
+		clearTimeout = globalThis.clearTimeout,
+		console = globalThis.console,
+		document = globalThis.document,
+		setTimeout = globalThis.setTimeout,
+	} = overrides.globals ?? {};
+	const ensureTranslatorAvailability = overrides.ensureTranslatorAvailability ??
+		_TranslationService.ensureTranslatorAvailability;
+	const getTranslations = overrides.getTranslations ?? _TranslationService.getTranslations;
 /**
  * Loads and registers the theme selector component unless tests ask to skip it.
  *
@@ -132,7 +212,6 @@ async function ensureThemeSelectorAvailability() {
 }
 
 const invisible = "invisible";
-let html = document.documentElement;
 const themeTransitionClass = "theme-transitioning";
 const themeTransitionDuration = 500;
 let themeTransitionTimeout = null;
@@ -142,9 +221,9 @@ let themeTransitionTimeout = null;
  */
 function startThemeTransition() {
 	clearTimeout(themeTransitionTimeout);
-	html.classList.add(themeTransitionClass);
+	document.documentElement.classList.add(themeTransitionClass);
 	themeTransitionTimeout = setTimeout(() => {
-		html.classList.remove(themeTransitionClass);
+		document.documentElement.classList.remove(themeTransitionClass);
 	}, themeTransitionDuration);
 }
 
@@ -1654,7 +1733,6 @@ function bindOptionPageListeners() {
  * Recomputes DOM references and style configuration structures.
  */
 function resetOptionsReferences() {
-	html = document.documentElement;
 	themeSelectorElement = document.querySelector("theme-selector-aws");
 	allowExport = document.getElementById("allow-export");
 	allowDomains = document.getElementById("allow-domains");
@@ -1760,208 +1838,6 @@ function resetOptionsReferences() {
 }
 
 /**
- * Applies named overrides using setter callbacks.
- *
- * @param {Record<string, unknown>} source Source override values.
- * @param {Record<string, (value: unknown) => void>} setters Setter callbacks.
- */
-function applyNamedOverrides(source, setters) {
-	for (const [name, setter] of Object.entries(setters)) {
-		const value = source[name];
-		if (value != null) {
-			setter(value);
-		}
-	}
-}
-
-/**
- * Applies dependency and global overrides for tests.
- *
- * @param {Object} [overrides={}] Override object passed by tests.
- */
-function applyOptionsOverrides(overrides = {}) {
-	const constants = overrides.constants ?? {};
-	const functions = overrides.functions ?? {};
-	const globals = overrides.globals ?? {};
-	applyGlobalOverride("document", globals.document);
-	applyGlobalOverride("clearTimeout", globals.clearTimeout);
-	applyGlobalOverride("setTimeout", globals.setTimeout);
-	applyGlobalOverride("console", globals.console);
-
-	applyNamedOverrides(constants, {
-		EXTENSION_LAST_ACTIVE_DAY: (value) => {
-			EXTENSION_LAST_ACTIVE_DAY = value;
-		},
-		EXTENSION_NAME: (value) => {
-			EXTENSION_NAME = value;
-		},
-		EXTENSION_USAGE_DAYS: (value) => {
-			EXTENSION_USAGE_DAYS = value;
-		},
-		FOLLOW_SF_LANG: (value) => {
-			FOLLOW_SF_LANG = value;
-		},
-		GENERIC_PINNED_TAB_STYLE_KEY: (value) => {
-			GENERIC_PINNED_TAB_STYLE_KEY = value;
-		},
-		GENERIC_TAB_STYLE_KEY: (value) => {
-			GENERIC_TAB_STYLE_KEY = value;
-		},
-		HIDDEN_CLASS: (value) => {
-			HIDDEN_CLASS = value;
-		},
-		LINK_NEW_BROWSER: (value) => {
-			LINK_NEW_BROWSER = value;
-		},
-		NO_RELEASE_NOTES: (value) => {
-			NO_RELEASE_NOTES = value;
-		},
-		NO_UPDATE_NOTIFICATION: (value) => {
-			NO_UPDATE_NOTIFICATION = value;
-		},
-		ORG_PINNED_TAB_STYLE_KEY: (value) => {
-			ORG_PINNED_TAB_STYLE_KEY = value;
-		},
-		ORG_TAB_STYLE_KEY: (value) => {
-			ORG_TAB_STYLE_KEY = value;
-		},
-		PERSIST_SORT: (value) => {
-			PERSIST_SORT = value;
-		},
-		POPUP_LOGIN_NEW_TAB: (value) => {
-			POPUP_LOGIN_NEW_TAB = value;
-		},
-		POPUP_OPEN_LOGIN: (value) => {
-			POPUP_OPEN_LOGIN = value;
-		},
-		POPUP_OPEN_SETUP: (value) => {
-			POPUP_OPEN_SETUP = value;
-		},
-		POPUP_SETUP_NEW_TAB: (value) => {
-			POPUP_SETUP_NEW_TAB = value;
-		},
-		PREVENT_ANALYTICS: (value) => {
-			PREVENT_ANALYTICS = value;
-		},
-		PREVENT_DEFAULT_OVERRIDE: (value) => {
-			PREVENT_DEFAULT_OVERRIDE = value;
-		},
-		SETTINGS_KEY: (value) => {
-			SETTINGS_KEY = value;
-		},
-		SKIP_LINK_DETECTION: (value) => {
-			SKIP_LINK_DETECTION = value;
-		},
-		SLDS_ACTIVE: (value) => {
-			SLDS_ACTIVE = value;
-		},
-		TAB_ADD_FRONT: (value) => {
-			TAB_ADD_FRONT = value;
-		},
-		TAB_AS_ORG: (value) => {
-			TAB_AS_ORG = value;
-		},
-		TAB_GENERIC_STYLE: (value) => {
-			TAB_GENERIC_STYLE = value;
-		},
-		TAB_ON_LEFT: (value) => {
-			TAB_ON_LEFT = value;
-		},
-		TAB_ORG_STYLE: (value) => {
-			TAB_ORG_STYLE = value;
-		},
-		TAB_STYLE_BACKGROUND: (value) => {
-			TAB_STYLE_BACKGROUND = value;
-		},
-		TAB_STYLE_BOLD: (value) => {
-			TAB_STYLE_BOLD = value;
-		},
-		TAB_STYLE_BORDER: (value) => {
-			TAB_STYLE_BORDER = value;
-		},
-		TAB_STYLE_COLOR: (value) => {
-			TAB_STYLE_COLOR = value;
-		},
-		TAB_STYLE_HOVER: (value) => {
-			TAB_STYLE_HOVER = value;
-		},
-		TAB_STYLE_ITALIC: (value) => {
-			TAB_STYLE_ITALIC = value;
-		},
-		TAB_STYLE_SHADOW: (value) => {
-			TAB_STYLE_SHADOW = value;
-		},
-		TAB_STYLE_TOP: (value) => {
-			TAB_STYLE_TOP = value;
-		},
-		TAB_STYLE_UNDERLINE: (value) => {
-			TAB_STYLE_UNDERLINE = value;
-		},
-		USE_LIGHTNING_NAVIGATION: (value) => {
-			USE_LIGHTNING_NAVIGATION = value;
-		},
-		USER_LANGUAGE: (value) => {
-			USER_LANGUAGE = value;
-		},
-		WHAT_SET: (value) => {
-			WHAT_SET = value;
-		},
-	});
-
-	applyNamedOverrides(functions, {
-		areFramePatternsAllowed: (value) => {
-			areFramePatternsAllowed = value;
-		},
-		getCssRule: (value) => {
-			getCssRule = value;
-		},
-		getCssSelector: (value) => {
-			getCssSelector = value;
-		},
-		getPinnedSpecificKey: (value) => {
-			getPinnedSpecificKey = value;
-		},
-		getSettings: (value) => {
-			getSettings = value;
-		},
-		getStyleSettings: (value) => {
-			getStyleSettings = value;
-		},
-		injectStyle: (value) => {
-			injectStyle = value;
-		},
-		isExportAllowed: (value) => {
-			isExportAllowed = value;
-		},
-		isGenericKey: (value) => {
-			isGenericKey = value;
-		},
-		isPinnedKey: (value) => {
-			isPinnedKey = value;
-		},
-		isStyleKey: (value) => {
-			isStyleKey = value;
-		},
-		requestCookiesPermission: (value) => {
-			requestCookiesPermission = value;
-		},
-		requestExportPermission: (value) => {
-			requestExportPermission = value;
-		},
-		requestFramePatternsPermission: (value) => {
-			requestFramePatternsPermission = value;
-		},
-		sendExtensionMessage: (value) => {
-			sendExtensionMessage = value;
-		},
-	});
-
-	ensureTranslatorAvailability = overrides.ensureTranslatorAvailability ??
-		ensureTranslatorAvailability;
-	getTranslations = overrides.getTranslations ?? getTranslations;
-}
-
-/**
  * Test helper to mutate local module state.
  *
  * @param {Object} [state={}] state patch.
@@ -1983,19 +1859,6 @@ function __getState() {
 	return { activePreview, listenersSet };
 }
 
-/**
- * Creates the options module API and optionally restores settings immediately.
- *
- * @param {Object} [overrides={}] Dependency overrides used by tests.
- * @param {Object} [options={}] Runtime options.
- * @param {boolean} [options.runRestoreOnLoad=true] Whether to call restoreGeneralSettings immediately.
- * @return {Record<string, unknown>} options module API.
- */
-export function createOptionsModule(
-	overrides = {},
-	{ runRestoreOnLoad = true } = {},
-) {
-	applyOptionsOverrides(overrides);
 	void ensureTranslatorAvailability();
 	void ensureThemeSelectorAvailability();
 	for (const key of Object.keys(listenersSet)) delete listenersSet[key];

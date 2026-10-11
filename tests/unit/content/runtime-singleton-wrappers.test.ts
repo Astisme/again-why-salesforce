@@ -5,6 +5,7 @@ import * as importFeature from "../../../src/salesforce/import.js";
 import * as manageTabs from "../../../src/salesforce/manageTabs.js";
 import * as openOtherOrg from "../../../src/salesforce/openOtherOrg.js";
 import * as contentRuntime from "../../../src/salesforce/runtime/content-runtime.js";
+import { startContent } from "../../../src/salesforce/content.js";
 import * as sfElements from "../../../src/salesforce/sf-elements.js";
 import * as toast from "../../../src/salesforce/toast.js";
 import * as tutorial from "../../../src/salesforce/tutorial.js";
@@ -303,6 +304,7 @@ async function assertContentRuntimeDelegation() {
 	try {
 		assertStrictEquals(contentHooks.getModule(), contentModule);
 		assertStrictEquals(contentRuntime.bootstrapIfNeeded(), true);
+		assertStrictEquals(startContent(), true);
 		assertStrictEquals(contentRuntime.getCurrentHref(), "href");
 		assertStrictEquals(contentRuntime.getIsCurrentlyOnSavedTab(), true);
 		assertStrictEquals(contentRuntime.getModalHanger(), null);
@@ -316,6 +318,7 @@ async function assertContentRuntimeDelegation() {
 		await contentRuntime.showToast("toast_message");
 
 		assertEquals(calls, [
+			{ name: "bootstrapIfNeeded" },
 			{ name: "bootstrapIfNeeded" },
 			{ name: "getCurrentHref" },
 			{ name: "getIsCurrentlyOnSavedTab" },
