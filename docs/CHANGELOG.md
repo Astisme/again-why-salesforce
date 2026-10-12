@@ -33,6 +33,7 @@ Please remember that this project is entirely funded by **the support of its use
 
 1. Moved settings, sponsor, changelog, and uninstall pages to GitHub Pages (https://astisme.github.io/again-why-salesforce). (#219)
 2. Added static site generation for website content. (#219)
+3. Updated Lightning navigation handling.
 
 ## 🐛 Fixed
 
@@ -43,6 +44,14 @@ Please remember that this project is entirely funded by **the support of its use
 ## 🔐 Privacy
 
 1. Updated Privacy Policy for #208
+
+## 🧪 Tests
+
+1. Expanded coverage for runtime delegation, singleton lifecycles, background utilities, and Lightning navigation. (#224, #226)
+
+## 💾 Repository
+
+1. Refactored extension code into runtime and module layers to improve testability.
 
 # v2.2.5
 
