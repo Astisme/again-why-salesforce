@@ -348,7 +348,10 @@ class Tutorial {
 		) {
 			// we could not find 2 links which were not saved by the user...
 			// ask the user to export their Tabs and restart the tutorial with only the default Tabs?
-			await showToast("tutorial_export_and_reset_for_tutorial", TOAST_WARNING);
+			await showToast(
+				"tutorial_export_and_reset_for_tutorial",
+				TOAST_WARNING,
+			);
 			return false;
 		}
 		const [[firstLabel, secondLabel], settingsShortcut] = await Promise.all(

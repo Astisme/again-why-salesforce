@@ -783,8 +783,8 @@ function wasReviewSponsorPromptSkippedToday(
 	setting,
 	today = getTodayDateKey(),
 ) {
-	return (setting?.enabled == null && setting?.skipped === today)
-    || setting?.enabled === today;
+	return (setting?.enabled == null && setting?.skipped === today) ||
+		setting?.enabled === today;
 }
 
 const REVIEW_PROMPT_ACTION_REVIEW = "write_review";

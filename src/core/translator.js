@@ -351,7 +351,8 @@ export class TranslationService {
 			}
 			const innerTranslation = await this.#_translate(part);
 			if (innerTranslation.includes("$")) {
-				return messageTranslated + await this.translate(innerTranslation);
+				return messageTranslated +
+					await this.translate(innerTranslation);
 			}
 			return messageTranslated + innerTranslation;
 		}, Promise.resolve(""));

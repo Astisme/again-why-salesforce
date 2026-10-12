@@ -1825,12 +1825,21 @@ Deno.test("generator creates manage rows concurrently but keeps tab and logger o
 	try {
 		await waitForCondition(() => rowTranslations === 2);
 		firstRow.resolve([
-			"Label", "URL", "Org", "Actions", "Open", "Pin", "Unpin", "Delete",
+			"Label",
+			"URL",
+			"Org",
+			"Actions",
+			"Open",
+			"Pin",
+			"Unpin",
+			"Delete",
 		]);
 		const modal = await pending;
 
 		assertEquals(modal.loggers.map((logger) => logger.label.value), [
-			"First", "Second", "",
+			"First",
+			"Second",
+			"",
 		]);
 		assertEquals(
 			Array.from(modal.tbody.children),

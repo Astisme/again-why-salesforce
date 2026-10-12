@@ -110,7 +110,10 @@ Deno.test("TranslationService - token translation preserves repeated nested toke
 
 	try {
 		await service.loadLanguageFile("token_test");
-		assertEquals(await service.translate("joined"), "[Hello]-Hello\nHello!");
+		assertEquals(
+			await service.translate("joined"),
+			"[Hello]-Hello\nHello!",
+		);
 		assertEquals(await service.translate("$hello"), "Hello");
 	} finally {
 		delete translations.token_test;

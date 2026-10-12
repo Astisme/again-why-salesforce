@@ -960,14 +960,18 @@ Deno.test("import awaits each mutation before reading the next file and reportin
 				type: "application/json",
 				text: () => {
 					events.push("read-first");
-					return Promise.resolve('[{"label":"First","url":"/first"}]');
+					return Promise.resolve(
+						'[{"label":"First","url":"/first"}]',
+					);
 				},
 			},
 			{
 				type: "application/json",
 				text: () => {
 					events.push("read-second");
-					return Promise.resolve('[{"label":"Second","url":"/second"}]');
+					return Promise.resolve(
+						'[{"label":"Second","url":"/second"}]',
+					);
 				},
 			},
 		]);

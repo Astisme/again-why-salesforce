@@ -308,7 +308,8 @@ Deno.test("popup-module propagates rejected shortcut translations", async () => 
 		() =>
 			loadPopupModule({
 				availableCommands: [{ name: CMD_IMPORT, shortcut: "Ctrl+I" }],
-				translate: () => Promise.reject(new Error("translation-failed")),
+				translate: () =>
+					Promise.reject(new Error("translation-failed")),
 			}),
 		Error,
 		"translation-failed",

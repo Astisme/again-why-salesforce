@@ -3085,26 +3085,28 @@ export async function generateManageTabsModal(tabs = [], {
 	const allTrs = [];
 	const pinnedNumber = tabs[TabContainer.keyPinnedTabsNo];
 	let notThisOrgTabs = 0;
-	const rows = await Promise.all(Object.keys(tabs).map(async (i) => {
-		const tab = tabs[i];
-		const isThisOrgTab = tab.org == null ||
-			tab.org === Tab.extractOrgName(getCurrentHref());
-		if (!isThisOrgTab) {
-			notThisOrgTabs++;
-		}
-		const {
-			tr,
-			dropdownMenu,
-			dropdownButton,
-			logger,
-		} = await createManageTabRow(tab, {
-			index: i,
-			pinned: i < pinnedNumber,
-			disabled: false,
-			isThisOrgTab,
-		});
-		return { tr, dropdownMenu, dropdownButton, logger };
-	}));
+	const rows = await Promise.all(
+		Object.keys(tabs).map(async (i) => {
+			const tab = tabs[i];
+			const isThisOrgTab = tab.org == null ||
+				tab.org === Tab.extractOrgName(getCurrentHref());
+			if (!isThisOrgTab) {
+				notThisOrgTabs++;
+			}
+			const {
+				tr,
+				dropdownMenu,
+				dropdownButton,
+				logger,
+			} = await createManageTabRow(tab, {
+				index: i,
+				pinned: i < pinnedNumber,
+				disabled: false,
+				isThisOrgTab,
+			});
+			return { tr, dropdownMenu, dropdownButton, logger };
+		}),
+	);
 	for (const { tr, dropdownMenu, dropdownButton, logger } of rows) {
 		allTrs.push({ tr, button: dropdownButton });
 		allDropMenus.push(dropdownMenu);

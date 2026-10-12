@@ -1,9 +1,5 @@
 import { mockBrowser } from "../../mocks.test.ts";
-import {
-	assertEquals,
-	assertFalse,
-	assertRejects,
-} from "@std/testing/asserts";
+import { assertEquals, assertFalse, assertRejects } from "@std/testing/asserts";
 import { stub } from "@std/testing/mock";
 import { bg_getStorage } from "../../../src/background/storage.js";
 import { bg_getSalesforceLanguage } from "../../../src/background/salesforce-language.js";
