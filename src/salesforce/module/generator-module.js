@@ -195,7 +195,7 @@ export async function handleLightningLinkClick(e) {
 			USE_LIGHTNING_NAVIGATION,
 		]),
 	]);
-	allTabs.handleClickTabByData({ url: Tab.minifyURL(url) });
+	void allTabs.handleClickTabByData({ url: Tab.minifyURL(url) });
 	const linkTarget = currentTarget.target ?? "";
 	const fallbackTarget = linkTarget === ""
 		? _getLinkTarget(metaCtrl, url)
@@ -2233,7 +2233,7 @@ export function generateHelpWith_i_popup({
 	}
 	tooltip.append(slot);
 	tooltip.append(linkTip);
-	(async () => {
+	void (async () => {
 		const [help_assistive, help_link] = await getTranslations([
 			"help",
 			"help_tip_click_link",
@@ -3085,7 +3085,7 @@ export async function generateManageTabsModal(tabs = [], {
 	const allTrs = [];
 	const pinnedNumber = tabs[TabContainer.keyPinnedTabsNo];
 	let notThisOrgTabs = 0;
-	for (const i in tabs) {
+	const rows = await Promise.all(Object.keys(tabs).map(async (i) => {
 		const tab = tabs[i];
 		const isThisOrgTab = tab.org == null ||
 			tab.org === Tab.extractOrgName(getCurrentHref());
@@ -3103,6 +3103,9 @@ export async function generateManageTabsModal(tabs = [], {
 			disabled: false,
 			isThisOrgTab,
 		});
+		return { tr, dropdownMenu, dropdownButton, logger };
+	}));
+	for (const { tr, dropdownMenu, dropdownButton, logger } of rows) {
 		allTrs.push({ tr, button: dropdownButton });
 		allDropMenus.push(dropdownMenu);
 		loggers.push(logger);

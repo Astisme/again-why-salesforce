@@ -148,7 +148,7 @@ export function createOpenOtherOrgModule({
 			skipLinkDetection != null && !skipLinkDetection.enabled &&
 			tabRef.containsSalesforceId(url)
 		) {
-			showToast?.("error_link_with_id", toastWarning);
+			await showToast?.("error_link_with_id", toastWarning);
 		}
 		const {
 			modalParent,
@@ -227,7 +227,7 @@ export function createOpenOtherOrgModule({
 					closeLabel,
 				})
 			) {
-				closeButton.click();
+				void closeButton.click();
 				open?.(targetUrl, linkTarget ?? "_blank");
 			}
 		});

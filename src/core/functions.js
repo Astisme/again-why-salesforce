@@ -105,7 +105,7 @@ export function sendExtensionMessage(message) {
 					resolve(response);
 				}
 			},
-		);
+		)?.catch(reject);
 	});
 }
 /**

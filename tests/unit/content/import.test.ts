@@ -1,5 +1,6 @@
 import "../../mocks.test.ts";
 import { assertEquals } from "@std/testing/asserts";
+import { waitForNextTask } from "../../async.test.ts";
 import { createImportModule } from "../../../src/salesforce/import.js";
 import { MockElement } from "../ui/mock-dom.test.ts";
 
@@ -172,6 +173,7 @@ function createFile(type: string, contents: string, name = ""): FileLike {
  * @param {Error | null} [options.generateModalError=null] Error thrown while creating the input modal.
  * @param {boolean} [options.hasExistingModal=false] Whether another modal is already open.
  * @param {number} [options.importCount=2] Count returned by importTabs.
+ * @param {((json: string) => Promise<number>) | null} [options.importResult=null] Optional asynchronous import result.
  * @param {string} [options.currentHref="https://current-org.lightning.force.com/lightning/setup/SetupOneHome/home"] Current page href.
  * @param {boolean} [options.clearInputModalParentOnRemove=false] Whether removing the save button clears the module modal parent.
  * @param {boolean} [options.missingModalParentOnce=false] Whether the first modal generation returns a null parent.
@@ -187,6 +189,7 @@ function loadImportModule({
 	generateModalError = null,
 	hasExistingModal = false,
 	importCount = 2,
+	importResult = null,
 	missingModalParentOnce = false,
 	selectedAll = false,
 	selectedTabs = [],
@@ -197,6 +200,7 @@ function loadImportModule({
 	generateModalError?: Error | null;
 	hasExistingModal?: boolean;
 	importCount?: number;
+	importResult?: ((json: string) => Promise<number>) | null;
 	missingModalParentOnce?: boolean;
 	selectedAll?: boolean;
 	selectedTabs?: unknown[];
@@ -357,7 +361,7 @@ function loadImportModule({
 					config: Record<string, boolean | string | null>,
 				) => {
 					importCalls.push({ config, json });
-					return Promise.resolve(importCount);
+					return importResult?.(json) ?? Promise.resolve(importCount);
 				},
 			}),
 		getTranslations: (message: string | string[]) =>
@@ -929,6 +933,95 @@ Deno.test("import resets only once across direct multi-file drop imports", async
 				}),
 			},
 		]);
+	} finally {
+		fixture.cleanup();
+	}
+});
+
+Deno.test("import awaits each mutation before reading the next file and reporting success", async () => {
+	const events: string[] = [];
+	const firstImport = Promise.withResolvers<number>();
+	const started = Promise.withResolvers<void>();
+	const fixture = loadImportModule({
+		importResult: () => {
+			events.push("import");
+			started.resolve();
+			return events.length === 2
+				? firstImport.promise
+				: Promise.resolve(3);
+		},
+	});
+	let pending: Promise<void> | null = null;
+
+	try {
+		await fixture.module.createImportModal();
+		pending = fixture.module.readFile([
+			{
+				type: "application/json",
+				text: () => {
+					events.push("read-first");
+					return Promise.resolve('[{"label":"First","url":"/first"}]');
+				},
+			},
+			{
+				type: "application/json",
+				text: () => {
+					events.push("read-second");
+					return Promise.resolve('[{"label":"Second","url":"/second"}]');
+				},
+			},
+		]);
+		await started.promise;
+		await waitForNextTask();
+		assertEquals(events, ["read-first", "import"]);
+		assertEquals(fixture.closeClicks.value, 0);
+		assertEquals(fixture.toasts, []);
+
+		firstImport.resolve(2);
+		await pending;
+
+		assertEquals(events, ["read-first", "import", "read-second", "import"]);
+		assertEquals(fixture.closeClicks.value, 1);
+		assertEquals(fixture.toasts, [{
+			message: ["import_successful", 5, "tabs"],
+			status: undefined,
+		}]);
+		assertEquals(fixture.importCalls[1].config.resetTabs, false);
+		assertEquals(fixture.importCalls[1].config.preserveOtherOrg, true);
+	} finally {
+		firstImport.resolve(2);
+		await pending;
+		fixture.cleanup();
+	}
+});
+
+Deno.test("import stops subsequent reads after a file rejects", async () => {
+	const fixture = loadImportModule({});
+	let secondRead = false;
+
+	try {
+		await fixture.module.createImportModal();
+		await fixture.module.readFile([
+			{
+				type: "application/json",
+				text: () => Promise.reject(new Error("file-read-failed")),
+			},
+			{
+				type: "application/json",
+				text: () => {
+					secondRead = true;
+					return Promise.resolve("[]");
+				},
+			},
+		]);
+
+		assertEquals(secondRead, false);
+		assertEquals(fixture.importCalls, []);
+		assertEquals(fixture.closeClicks.value, 0);
+		assertEquals(fixture.toasts, [{
+			message: ["error_import", "file-read-failed"],
+			status: "error",
+		}]);
 	} finally {
 		fixture.cleanup();
 	}

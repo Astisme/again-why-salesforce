@@ -216,7 +216,7 @@ async function checkOpenAskConfirm(e) {
 			closeLabel,
 		})
 	) {
-		handleLightningLinkClick(e);
+		await handleLightningLinkClick(e);
 		closeButton.click();
 	}
 }
@@ -612,7 +612,7 @@ async function checkDuplicates({
 		return;
 	}
 	// show warning in salesforce
-	showToast("error_tab_url_saved", TOAST_WARNING);
+	await showToast("error_tab_url_saved", TOAST_WARNING);
 	makeDuplicatesBold(url);
 	// highlight all duplicated rows and scroll to the first one
 	checkAddDuplicateStyle(tabAppendElement);
@@ -691,7 +691,7 @@ function performAfterChecks({
 		throw new Error("error_required_params");
 	}
 	// check eventual duplicates
-	checkDuplicates({
+	void checkDuplicates({
 		url: url === "" ? undefined : url,
 		org: org === "" ? undefined : org,
 	}, {
@@ -895,7 +895,7 @@ async function readManagedTabsAndSave({
 			tabs: allTabs,
 		});
 	} else {
-		showToast("error_processing_tabs", TOAST_ERROR);
+		await showToast("error_processing_tabs", TOAST_ERROR);
 	}
 }
 

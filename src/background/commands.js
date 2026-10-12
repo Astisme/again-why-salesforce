@@ -81,6 +81,6 @@ export function listenToExtensionCommands() {
 				}
 				break;
 		}
-		bg_notify(message);
+		await bg_notify(message);
 	});
 }

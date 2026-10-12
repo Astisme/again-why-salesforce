@@ -99,6 +99,26 @@ Deno.test("TranslationService - Japanese locale preserves placeholders and newli
 	);
 });
 
+Deno.test("TranslationService - token translation preserves repeated nested tokens and empty parts", async () => {
+	const service = await TranslationService.ensureTranslatorAvailability();
+	const originalLanguage = service.currentLanguage;
+	translations.token_test = {
+		hello: { message: "Hello" },
+		nested: { message: "$hello" },
+		joined: { message: "[$nested]-$hello\n$nested!" },
+	};
+
+	try {
+		await service.loadLanguageFile("token_test");
+		assertEquals(await service.translate("joined"), "[Hello]-Hello\nHello!");
+		assertEquals(await service.translate("$hello"), "Hello");
+	} finally {
+		delete translations.token_test;
+		delete service.caches.token_test;
+		await service.loadLanguageFile(originalLanguage);
+	}
+});
+
 Deno.test("TranslationService - updatePageTranslations", async (t) => {
 	const service = await TranslationService.ensureTranslatorAvailability();
 	await t.step("translates to french", async () => {

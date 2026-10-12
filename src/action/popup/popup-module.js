@@ -311,7 +311,7 @@ async function runPopupImpl({
 	if (!Array.isArray(availableCommands)) {
 		return { redirected: false };
 	}
-	for (const availableCommand of availableCommands) {
+	await Promise.all(availableCommands.map(async (availableCommand) => {
 		switch (availableCommand.name) {
 			case cmdExportAll:
 				exportBtn.title = await addShortcutText(
@@ -343,7 +343,7 @@ async function runPopupImpl({
 			default:
 				break;
 		}
-	}
+	}));
 	return { redirected: false };
 }
 

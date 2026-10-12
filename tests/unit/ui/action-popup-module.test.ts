@@ -1,5 +1,6 @@
 import "../../mocks.test.ts";
-import { assertEquals } from "@std/testing/asserts";
+import { assertEquals, assertRejects } from "@std/testing/asserts";
+import { waitForCondition } from "../../async.test.ts";
 import {
 	createPopupModule,
 	runPopup,
@@ -67,6 +68,7 @@ function appendElement(
  * @param {string | null} [options.importDataset="popup_import+-+extra"] Import button translation dataset.
  * @param {{ison: boolean; url?: string | null}} [options.salesforceState={ ison: true }] Salesforce setup detection result.
  * @param {string | null} [options.settingsDataset="popup_settings+-+extra"] Settings button translation dataset.
+ * @param {(message: string | string[]) => Promise<string | string[]>} [options.translate] Translation lookup.
  * @param {boolean} [options.useCreatePopupModule=false] Whether to execute via `createPopupModule`.
  * @return {Promise<{ counters: { closeCalls: number; openSettingsCalls: number }; exportButton: MockElement; importButton: MockElement; locationRef: URL; manageTabsButton: MockElement; messages: Record<string, unknown>[]; settingsButton: MockElement; tutorialButton: MockElement; }>} Popup fixture.
  */
@@ -78,6 +80,7 @@ async function loadPopupModule({
 	importDataset = "popup_import+-+extra",
 	salesforceState = { ison: true },
 	settingsDataset = "popup_settings+-+extra",
+	translate = (message: string | string[]) => Promise.resolve(message),
 	useCreatePopupModule = false,
 }: {
 	availableCommands?: Command[];
@@ -87,6 +90,7 @@ async function loadPopupModule({
 	importDataset?: string | null;
 	salesforceState?: { ison: boolean; url?: string | null };
 	settingsDataset?: string | null;
+	translate?: (message: string | string[]) => Promise<string | string[]>;
 	useCreatePopupModule?: boolean;
 }) {
 	const window = createMockWindow(
@@ -130,8 +134,7 @@ async function loadPopupModule({
 		cmdOpenSettings: CMD_OPEN_SETTINGS,
 		cxmManageTabs: CXM_MANAGE_TABS,
 		documentRef: document,
-		getTranslations: (message: string | string[]) =>
-			Promise.resolve(message),
+		getTranslations: translate,
 		isOnSalesforceSetup: () => Promise.resolve(salesforceState),
 		locationRef: window.location as URL,
 		openSettingsPage: () => {
@@ -266,6 +269,49 @@ Deno.test("popup-module keeps shortcut title wiring stable when translation data
 	assertEquals(
 		String(fixture.settingsButton.title),
 		"popup_settings,(Ctrl+S)",
+	);
+});
+
+Deno.test("popup-module starts all shortcut translations before awaiting their results", async () => {
+	const translated = Promise.withResolvers<string>();
+	const calls: string[] = [];
+	const pending = loadPopupModule({
+		availableCommands: [
+			{ name: CMD_EXPORT_ALL, shortcut: "Ctrl+E" },
+			{ name: CMD_IMPORT, shortcut: "Ctrl+I" },
+			{ name: CMD_OPEN_SETTINGS, shortcut: "Ctrl+S" },
+		],
+		translate: (message) => {
+			const key = Array.isArray(message) ? message[0] : message;
+			calls.push(key);
+			return translated.promise.then((suffix) => `${key}:${suffix}`);
+		},
+	});
+
+	try {
+		await waitForCondition(() => calls.length === 3);
+		assertEquals(calls, ["popup_export", "popup_import", "popup_settings"]);
+		translated.resolve("ready");
+		const fixture = await pending;
+
+		assertEquals(fixture.exportButton.title, "popup_export:ready");
+		assertEquals(fixture.importButton.title, "popup_import:ready");
+		assertEquals(fixture.settingsButton.title, "popup_settings:ready");
+	} finally {
+		translated.resolve("ready");
+		await pending;
+	}
+});
+
+Deno.test("popup-module propagates rejected shortcut translations", async () => {
+	await assertRejects(
+		() =>
+			loadPopupModule({
+				availableCommands: [{ name: CMD_IMPORT, shortcut: "Ctrl+I" }],
+				translate: () => Promise.reject(new Error("translation-failed")),
+			}),
+		Error,
+		"translation-failed",
 	);
 });
 

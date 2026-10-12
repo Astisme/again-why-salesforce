@@ -372,7 +372,9 @@ export function createImportPureModule({
 				importConfig,
 			);
 		} else {
-			for (const [index, file] of tabs.entries()) {
+			importedNum = await tabs.reduce(async (previous, file, index) => {
+				// Each import mutates shared tabs; finish it before reading the next file.
+				const count = await previous;
 				const jsonString = await file.text();
 				const fileImportConfig = index === 0 ? importConfig : {
 					...importConfig,
@@ -380,14 +382,14 @@ export function createImportPureModule({
 					preserveOtherOrg: true,
 					resetTabs: false,
 				};
-				importedNum += await allTabs.importTabs(
+				return count + await allTabs.importTabs(
 					normalizeImportJson(jsonString),
 					fileImportConfig,
 				);
-			}
+			}, Promise.resolve(0));
 		}
 		documentRef.getElementById(ids.closeModalId)?.click();
-		showToast(["import_successful", importedNum, "tabs"]);
+		await showToast(["import_successful", importedNum, "tabs"]);
 		sfAfterSet({
 			what: "imported",
 			tabs: allTabs,
@@ -491,7 +493,7 @@ export function createImportPureModule({
 	 * @return {void}
 	 */
 	function showToastBrokenImportFile() {
-		showToast("error_unknown_file_structure", toastError);
+		void showToast("error_unknown_file_structure", toastError);
 	}
 
 	/**
@@ -568,7 +570,7 @@ export function createImportPureModule({
 			if (isJsonFile(file)) {
 				validFileArray.push(file);
 			} else {
-				showToast("import_invalid_file", toastError);
+				void showToast("import_invalid_file", toastError);
 			}
 		}
 		if (validFileArray.length === 0) {
@@ -608,7 +610,7 @@ export function createImportPureModule({
 			}
 			return await launchImport(validFileArray, importConfig);
 		} catch (error) {
-			showToast(["error_import", error.message], toastError);
+			await showToast(["error_import", error.message], toastError);
 		}
 	}
 
@@ -748,7 +750,7 @@ export function createImportPureModule({
 		try {
 			await showFileImport();
 		} catch (error) {
-			showToast(error, toastError);
+			await showToast(error, toastError);
 		}
 	}
 

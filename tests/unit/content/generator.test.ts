@@ -28,6 +28,7 @@ import {
 	sldsConfirm as sldsConfirmWrapper,
 } from "../../../src/salesforce/generator.js";
 import { installMockDom } from "../../happydom.test.ts";
+import { waitForCondition } from "../../async.test.ts";
 
 type StyleRule = {
 	forActive?: boolean;
@@ -475,6 +476,7 @@ type GeneratorFixture = {
  * @param {Array<{ enabled: boolean; id: string; }>} [options.settings=[]] Settings returned by getSettings.
  * @param {StyleSettings | null} [options.styleSettings=null] Style settings returned by getStyleSettings.
  * @param {Record<string, string>} [options.translations={}] Translation overrides.
+ * @param {((key: string | string[]) => Promise<string | string[]>) | null} [options.translate=null] Asynchronous translation override.
  * @return {GeneratorFixture} Loaded fixture.
  */
 function loadGeneratorFixture({
@@ -482,11 +484,13 @@ function loadGeneratorFixture({
 	settings = [],
 	styleSettings = null,
 	translations = {},
+	translate = null,
 }: {
 	currentHref?: string;
 	settings?: Array<{ enabled: boolean; id: string }>;
 	styleSettings?: StyleSettings | null;
 	translations?: Record<string, string>;
+	translate?: ((key: string | string[]) => Promise<string | string[]>) | null;
 } = {}) {
 	const dom = installMockDom(currentHref);
 	if (typeof globalThis.Element.prototype.cloneNode !== "function") {
@@ -643,6 +647,9 @@ function loadGeneratorFixture({
 				},
 			}),
 		getTranslations: (key: string | string[], connector = " ") => {
+			if (translate != null) {
+				return translate(key);
+			}
 			if (Array.isArray(key)) {
 				key.forEach((entry) => translationCalls.push(entry));
 				return Promise.resolve(
@@ -1790,6 +1797,55 @@ Deno.test("generator covers selectable tab-list and manage-tabs modal builders",
 			true,
 		);
 	} finally {
+		fixture.cleanup();
+	}
+});
+
+Deno.test("generator creates manage rows concurrently but keeps tab and logger order", async () => {
+	const firstRow = Promise.withResolvers<string[]>();
+	let rowTranslations = 0;
+	const fixture = loadGeneratorFixture({
+		translate: (key) => {
+			if (Array.isArray(key) && key[3] === "actions") {
+				rowTranslations++;
+				if (rowTranslations === 1) {
+					return firstRow.promise;
+				}
+			}
+			return Promise.resolve(key);
+		},
+	});
+	const tabs: ManageTabsInput = [
+		{ label: "First", url: "first/home" },
+		{ label: "Second", url: "second/home", org: "other-org" },
+	];
+	Object.defineProperty(tabs, "pinnedTabsNo", { value: 1 });
+	const pending = fixture.module.generateManageTabsModal(tabs);
+
+	try {
+		await waitForCondition(() => rowTranslations === 2);
+		firstRow.resolve([
+			"Label", "URL", "Org", "Actions", "Open", "Pin", "Unpin", "Delete",
+		]);
+		const modal = await pending;
+
+		assertEquals(modal.loggers.map((logger) => logger.label.value), [
+			"First", "Second", "",
+		]);
+		assertEquals(
+			Array.from(modal.tbody.children),
+			modal.trsAndButtons.map(({ tr }) => tr),
+		);
+		assertEquals(modal.trsAndButtons[0].tr.dataset.rowIndex, "0");
+		assertEquals(modal.trsAndButtons[1].tr.dataset.rowIndex, "1");
+		assertEquals(
+			modal.trsAndButtons[1].tr.classList.contains("hidden"),
+			true,
+		);
+		assertEquals(rowTranslations, 3);
+	} finally {
+		firstRow.resolve([]);
+		await pending;
 		fixture.cleanup();
 	}
 });
