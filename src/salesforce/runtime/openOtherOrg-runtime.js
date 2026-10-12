@@ -133,7 +133,18 @@ export function createOpenOtherOrgModule({
 	});
 }
 
-const openOtherOrgModule = createOpenOtherOrgModule();
+/** @type {ReturnType<typeof createOpenOtherOrgModule> | undefined} */
+let openOtherOrgModule;
+
+/**
+ * Returns lazily created open-other-org module singleton.
+ *
+ * @return {ReturnType<typeof createOpenOtherOrgModule>} Open-other-org module singleton.
+ */
+function getModule() {
+	openOtherOrgModule ??= createOpenOtherOrgModule();
+	return openOtherOrgModule;
+}
 
 /**
  * Shows the open-other-org modal using runtime defaults.
@@ -145,5 +156,18 @@ const openOtherOrgModule = createOpenOtherOrgModule();
  * @return {Promise<void>} Promise resolved once setup is complete.
  */
 export function createOpenOtherOrgModal(options = {}) {
-	return openOtherOrgModule.createOpenOtherOrgModal(options);
+	return getModule().createOpenOtherOrgModal(options);
 }
+
+/**
+ * Test-only singleton lifecycle controls.
+ */
+export const __testHooks = {
+	getModule: () => openOtherOrgModule,
+	resetModule: () => {
+		openOtherOrgModule = undefined;
+	},
+	setModule: (module) => {
+		openOtherOrgModule = module;
+	},
+};

@@ -4,8 +4,8 @@ import { createOptionsModule as createOptionsModuleDefault } from "./options-mod
  * Creates a runtime wrapper for options bootstrapping.
  *
  * @param {Object} [options={}] Runtime options.
- * @param {(overrides?: Record<string, unknown>, options?: { runRestoreOnLoad?: boolean }) => unknown} [options.createOptionsModule=createOptionsModuleDefault] Module factory override.
- * @return {{ runOptionsRuntime: (options?: { overrides?: Record<string, unknown>; runRestoreOnLoad?: boolean; }) => unknown }} Options runtime API.
+ * @param {typeof createOptionsModuleDefault} [options.createOptionsModule=createOptionsModuleDefault] Module factory override.
+ * @return {{ runOptionsRuntime: (options?: { overrides?: Parameters<typeof createOptionsModuleDefault>[0]; runRestoreOnLoad?: boolean; }) => ReturnType<typeof createOptionsModuleDefault> }} Options runtime API.
  */
 export function createOptionsRuntime({
 	createOptionsModule = createOptionsModuleDefault,
@@ -14,9 +14,9 @@ export function createOptionsRuntime({
 	 * Runs the options-page runtime bootstrap.
 	 *
 	 * @param {Object} [options={}] Runtime bootstrap options.
-	 * @param {Object} [options.overrides={}] Dependency overrides for `createOptionsModule`.
+	 * @param {Parameters<typeof createOptionsModuleDefault>[0]} [options.overrides={}] Dependency overrides for `createOptionsModule`.
 	 * @param {boolean} [options.runRestoreOnLoad=true] Whether to run restore-on-load behavior.
-	 * @return {unknown} Created options module instance.
+	 * @return {ReturnType<typeof createOptionsModuleDefault>} Created options module instance.
 	 */
 	function runOptionsRuntime({
 		overrides = {},
@@ -34,10 +34,10 @@ export function createOptionsRuntime({
  * Runs the options-page runtime bootstrap.
  *
  * @param {Object} [options={}] Runtime bootstrap options.
- * @param {Object} [options.overrides={}] Dependency overrides for `createOptionsModule`.
+ * @param {Parameters<typeof createOptionsModuleDefault>[0]} [options.overrides={}] Dependency overrides for `createOptionsModule`.
  * @param {boolean} [options.runRestoreOnLoad=true] Whether to run restore-on-load behavior.
- * @param {(overrides?: Record<string, unknown>, options?: { runRestoreOnLoad?: boolean }) => unknown} [options.createOptionsModule=createOptionsModuleDefault] Module factory override.
- * @return {unknown} Created options module instance.
+ * @param {typeof createOptionsModuleDefault} [options.createOptionsModule=createOptionsModuleDefault] Module factory override.
+ * @return {ReturnType<typeof createOptionsModuleDefault>} Created options module instance.
  */
 export function runOptionsRuntime({
 	overrides = {},

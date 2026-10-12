@@ -123,7 +123,18 @@ export function createManageTabsModule(overrides = {}) {
 	});
 }
 
-const manageTabsModule = createManageTabsModule();
+/** @type {ReturnType<typeof createManageTabsModule> | undefined} */
+let manageTabsModule;
+
+/**
+ * Returns lazily created manage-tabs module singleton.
+ *
+ * @return {ReturnType<typeof createManageTabsModule>} Manage-tabs module singleton.
+ */
+function getModule() {
+	manageTabsModule ??= createManageTabsModule();
+	return manageTabsModule;
+}
 
 /**
  * Shows the manage-tabs modal using runtime defaults.
@@ -131,7 +142,7 @@ const manageTabsModule = createManageTabsModule();
  * @return {Promise<void>}
  */
 export function createManageTabsModal() {
-	return manageTabsModule.createManageTabsModal();
+	return getModule().createManageTabsModal();
 }
 
 /**
@@ -142,5 +153,18 @@ export function createManageTabsModal() {
  * @return {Promise<void>}
  */
 export function handleActionButtonClick(e, options = {}) {
-	return manageTabsModule.handleActionButtonClick(e, options);
+	return getModule().handleActionButtonClick(e, options);
 }
+
+/**
+ * Test-only singleton lifecycle controls.
+ */
+export const __testHooks = {
+	getModule: () => manageTabsModule,
+	resetModule: () => {
+		manageTabsModule = undefined;
+	},
+	setModule: (module) => {
+		manageTabsModule = module;
+	},
+};

@@ -5,6 +5,7 @@ import {
 	assertEquals,
 	assertExists,
 	assertFalse,
+	assertStrictEquals,
 	assertStringIncludes,
 } from "@std/testing/asserts";
 import { installMockDom } from "../../happydom.test.ts";
@@ -24,7 +25,10 @@ Deno.test("ThemeSelectorAws", async (t) => {
 	globalThis.localStorage = testLocalStorage;
 	installCustomElementsRegistry(document);
 	try {
-		await import(
+		const {
+			defineThemeSelector,
+			ThemeSelectorAws,
+		} = await import(
 			"../../../src/components/theme-selector/theme-selector.js"
 		);
 
@@ -66,6 +70,34 @@ Deno.test("ThemeSelectorAws", async (t) => {
 				writable: true,
 			});
 		};
+
+		await t.step(
+			"registers with an explicit registry without document capture",
+			() => {
+				restoreGlobals();
+				const constructors = new Map<
+					string,
+					CustomElementConstructor
+				>();
+				const registry = {
+					define(
+						name: string,
+						constructor: CustomElementConstructor,
+					) {
+						constructors.set(name, constructor);
+					},
+					get(name: string) {
+						return constructors.get(name);
+					},
+				} satisfies Pick<CustomElementRegistry, "define" | "get">;
+
+				assert(defineThemeSelector(registry));
+				assertStrictEquals(
+					registry.get("theme-selector-aws"),
+					ThemeSelectorAws,
+				);
+			},
+		);
 
 		await t.step(
 			"renders the template when the host starts empty",

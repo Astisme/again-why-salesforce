@@ -20,3 +20,8 @@ export function createImportModal() {
 export function createImportModule(overrides = {}) {
 	return importRuntime.createImportModule(overrides);
 }
+
+/**
+ * Test-only singleton lifecycle controls from import runtime.
+ */
+export const __testHooks = importRuntime.__testHooks;

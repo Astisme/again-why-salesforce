@@ -1,2 +1,4 @@
 "use strict";
-import "../background/background.js";
+import { startBackground } from "../background/background.js";
+
+startBackground();

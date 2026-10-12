@@ -1,127 +1,127 @@
+import { WHAT_THEME } from "../core/constants.js";
+import { sendExtensionMessage as sendExtensionMessageDefault } from "../core/functions.js";
+import {
+	createThemeHandlerModule as createThemeHandlerPureModule,
+} from "./themeHandler-module.js";
+
+const fallbackDocumentRef = {
+	documentElement: {
+		dataset: {},
+	},
+};
+const fallbackStorageRef = {
+	/**
+	 * Returns no stored theme.
+	 *
+	 * @return {null} No stored value.
+	 */
+	getItem() {
+		return null;
+	},
+	/**
+	 * Ignores a stored theme outside browser runtime.
+	 *
+	 * @return {void}
+	 */
+	setItem() {},
+};
+
+let themeHandlerModule = null;
+
 /**
- * Creates a theme-handler runtime with explicit dependencies.
+ * Creates theme-handler behavior with fully injected dependencies.
  *
- * @param {Object} options Runtime dependencies.
- * @param {{ documentElement: { dataset: Record<string, string | null> } }} options.documentRef Document-like host.
- * @param {{ getItem: (key: string) => string | null; setItem: (key: string, value: string) => void; }} options.localStorageRef Storage implementation.
- * @param {((query: string) => { matches: boolean; addEventListener: (type: "change", listener: (event: { matches: boolean }) => void | Promise<void>) => void; removeEventListener: (type: "change", listener: (event: { matches: boolean }) => void | Promise<void>) => void; }) | undefined} options.matchMedia Match-media factory.
- * @param {(message: { what: string; theme: string }) => Promise<unknown> | unknown} options.sendExtensionMessage Runtime message sender.
- * @param {string} options.whatTheme Message type used for theme updates.
- * @return {{ handleSwitchColorTheme: () => Promise<unknown> | unknown; initTheme: () => Promise<void> | void; systemColorSchemeListener: (enable?: boolean | null) => Promise<void> | void; }} Theme runtime API.
+ * @param {Parameters<typeof createThemeHandlerPureModule>[0]} [options={}] Module dependencies.
+ * @return {ReturnType<typeof createThemeHandlerPureModule>} Theme-handler module API.
  */
-export function createThemeHandlerRuntime({
-	documentRef,
-	localStorageRef,
-	matchMedia,
-	sendExtensionMessage,
-	whatTheme,
-} = {}) {
-	const html = documentRef?.documentElement ?? null;
-	const localStorageRuntime = localStorageRef;
-	const matchMediaRuntime = matchMedia;
-	const sendExtensionMessageRuntime = sendExtensionMessage;
-	const whatThemeRuntime = whatTheme;
-	let systemColorListener = null;
-
-	/**
-	 * Updates DOM/storage state and emits the theme message.
-	 *
-	 * @param {string} theme Theme value.
-	 * @param {boolean} [updateUserTheme=false] Whether to persist explicit user theme.
-	 * @return {Promise<unknown> | unknown} Message dispatch result.
-	 */
-	function messageAndUpdateTheme(theme, updateUserTheme = false) {
-		html.dataset.theme = theme;
-		localStorageRuntime.setItem("usingTheme", theme);
-		if (updateUserTheme) {
-			html.dataset.usertheme = theme;
-			localStorageRuntime.setItem("userTheme", theme);
-		}
-		return sendExtensionMessageRuntime({ what: whatThemeRuntime, theme });
-	}
-
-	/**
-	 * Handles system color-scheme updates.
-	 *
-	 * @param {{ matches: boolean }} event Change event.
-	 * @return {Promise<unknown> | unknown | void} Theme update result when a change is required.
-	 */
-	function handleSystemColorSchemeChange(event) {
-		const systemThemeValue = event.matches ? "dark" : "light";
-		const htmlThemeValue = html.dataset.theme;
-		if (systemThemeValue !== htmlThemeValue) {
-			return messageAndUpdateTheme(systemThemeValue);
-		}
-	}
-
-	/**
-	 * Enables or disables the system color listener.
-	 *
-	 * @param {boolean | null} [enable=true] Enable flag.
-	 * @return {Promise<void> | void} Listener update result.
-	 */
-	function systemColorSchemeListener(enable = true) {
-		if (
-			html == null ||
-			matchMediaRuntime == null ||
-			(enable && systemColorListener != null) ||
-			(!enable && systemColorListener == null)
-		) {
-			return;
-		}
-		localStorageRuntime.setItem("userTheme", "system");
-		if (enable) {
-			systemColorListener = matchMediaRuntime(
-				"(prefers-color-scheme: dark)",
-			);
-			systemColorListener.addEventListener(
-				"change",
-				handleSystemColorSchemeChange,
-			);
-			return handleSystemColorSchemeChange(systemColorListener);
-		}
-		systemColorListener.removeEventListener(
-			"change",
-			handleSystemColorSchemeChange,
-		);
-		systemColorListener = null;
-	}
-
-	/**
-	 * Toggles between light and dark user themes.
-	 *
-	 * @return {Promise<unknown> | unknown} Theme update result.
-	 */
-	function handleSwitchColorTheme() {
-		if (html == null) {
-			return;
-		}
-		const newTheme = html.dataset.theme === "light" ? "dark" : "light";
-		return messageAndUpdateTheme(newTheme, true);
-	}
-
-	/**
-	 * Initializes theme state from storage and system preferences.
-	 *
-	 * @return {Promise<void> | void} Initialization result.
-	 */
-	function initTheme() {
-		if (html == null) {
-			return;
-		}
-		html.dataset.usertheme = localStorageRuntime.getItem("userTheme") ??
-			"system";
-		html.dataset.theme = html.dataset.usertheme === "system"
-			? null
-			: html.dataset.usertheme;
-		return systemColorSchemeListener(
-			html.dataset.usertheme === "system",
-		);
-	}
-
-	return {
-		handleSwitchColorTheme,
-		initTheme,
-		systemColorSchemeListener,
-	};
+export function createThemeHandlerRuntime(options = {}) {
+	return createThemeHandlerPureModule(options);
 }
+
+/**
+ * Creates theme-handler behavior with extension runtime defaults.
+ *
+ * @param {Parameters<typeof createThemeHandlerPureModule>[0]} [overrides={}] Runtime overrides.
+ * @return {ReturnType<typeof createThemeHandlerPureModule>} Theme-handler module API.
+ */
+export function createThemeHandlerModule(overrides = {}) {
+	return createThemeHandlerPureModule({
+		documentRef: globalThis.document ?? fallbackDocumentRef,
+		localStorageRef: globalThis.localStorage ?? fallbackStorageRef,
+		matchMedia: globalThis.matchMedia?.bind(globalThis),
+		sendExtensionMessage: sendExtensionMessageDefault,
+		whatTheme: WHAT_THEME,
+		...overrides,
+	});
+}
+
+/**
+ * Gets default theme-handler module, creating it on first use.
+ *
+ * @return {ReturnType<typeof createThemeHandlerPureModule>} Theme-handler module API.
+ */
+function getModule() {
+	themeHandlerModule ??= createThemeHandlerModule();
+	return themeHandlerModule;
+}
+
+/**
+ * Enables or disables system color listener.
+ *
+ * @param {Parameters<ReturnType<typeof createThemeHandlerPureModule>["systemColorSchemeListener"]>[0]} [enable=true] Enable flag.
+ * @return {ReturnType<ReturnType<typeof createThemeHandlerPureModule>["systemColorSchemeListener"]>} Listener update result.
+ */
+export function systemColorSchemeListener(enable = true) {
+	return getModule().systemColorSchemeListener(enable);
+}
+
+/**
+ * Switches between light and dark themes.
+ *
+ * @return {ReturnType<ReturnType<typeof createThemeHandlerPureModule>["handleSwitchColorTheme"]>} Theme update result.
+ */
+export function handleSwitchColorTheme() {
+	return getModule().handleSwitchColorTheme();
+}
+
+/**
+ * Initializes theme state from saved user preference.
+ *
+ * @return {ReturnType<ReturnType<typeof createThemeHandlerPureModule>["initTheme"]>} Initialization result.
+ */
+export function initTheme() {
+	return getModule().initTheme();
+}
+
+/**
+ * Legacy initialization export retained for compatibility.
+ *
+ * Theme initialization now starts when `initTheme` is called.
+ *
+ * @type {undefined}
+ */
+export const initThemePromise = undefined;
+
+/**
+ * Exposes theme-handler module lifecycle controls for tests.
+ */
+export const __testHooks = {
+	getModule,
+	/**
+	 * Clears cached default module.
+	 *
+	 * @return {void}
+	 */
+	resetModule() {
+		themeHandlerModule = null;
+	},
+	/**
+	 * Replaces cached default module.
+	 *
+	 * @param {ReturnType<typeof createThemeHandlerPureModule> | null} module Theme-handler module.
+	 * @return {void}
+	 */
+	setModule(module) {
+		themeHandlerModule = module;
+	},
+};

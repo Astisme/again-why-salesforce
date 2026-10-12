@@ -390,6 +390,7 @@ async function checkAddLightningNavigation() {
 		return;
 	}
 	const script = document.createElement("script");
+	script.type = "module";
 	script.src = CONSTANTS.BROWSER.runtime.getURL(
 		"salesforce/lightning-navigation.js",
 	);
@@ -415,10 +416,10 @@ export function sf_afterSet({
 		return;
 	}
 	if (what === CONSTANTS.WHAT_SAVED) {
-		showToast("tabs_saved");
+		void showToast("tabs_saved");
 	}
 	if (shouldReload) {
-		trackContentTask(reloadTabs(tabs));
+		void trackContentTask(reloadTabs(tabs));
 	}
 }
 
@@ -563,7 +564,7 @@ function onHrefUpdate() {
 		return;
 	}
 	STATE.href = newRef;
-	trackContentTask(isOnSavedTab(true, _afterHrefUpdate));
+	void trackContentTask(isOnSavedTab(true, _afterHrefUpdate));
 }
 
 /**
@@ -597,7 +598,7 @@ async function checkKeepTabsOnLeft() {
 function delayLoadSetupTabs(count = 0) {
 	if (count > 5) {
 		// write error in the console
-		trackContentTask((async () => {
+		void trackContentTask((async () => {
 			const fail = await getTranslations(
 				"error_no_setup_tab",
 			);
@@ -609,7 +610,7 @@ function delayLoadSetupTabs(count = 0) {
 	if (!findSetupTabUlInSalesforcePage()) {
 		return setTimeout(() => delayLoadSetupTabs(count + 1), 500);
 	}
-	trackContentTask(checkKeepTabsOnLeft());
+	void trackContentTask(checkKeepTabsOnLeft());
 	// Start observing changes to the DOM to then check for URL change
 	// when URL changes, show the favourite button
 	new MutationObserver(() => setTimeout(onHrefUpdate, 500))
@@ -619,8 +620,8 @@ function delayLoadSetupTabs(count = 0) {
 		});
 	// initialize
 	setupDragForUl(reorderTabsUl);
-	trackContentTask(reloadTabs());
-	trackContentTask(checkTutorial());
+	void trackContentTask(reloadTabs());
+	void trackContentTask(checkTutorial());
 }
 
 /**
@@ -633,7 +634,7 @@ function delayLoadSetupTabs(count = 0) {
  * @return {Promise<void>} Promise resolved after the latest reload work settles.
  */
 function reloadTabs(tabs = null) {
-	trackContentTask(generateStyleFromSettings());
+	void trackContentTask(generateStyleFromSettings());
 	return trackContentTask(init(tabs, startReloadSignal()));
 }
 
@@ -682,7 +683,7 @@ export async function reorderTabsUl() {
 			shouldReload: false,
 		});
 	} catch (error) {
-		showToast(error.message, CONSTANTS.TOAST_ERROR);
+		void showToast(error.message, CONSTANTS.TOAST_ERROR);
 	}
 }
 
@@ -1184,7 +1185,7 @@ export async function performActionOnTabs(
 		}
 	} catch (error) {
 		console.warn({ action, tab, options });
-		showToast(error.message, CONSTANTS.TOAST_ERROR);
+		void showToast(error.message, CONSTANTS.TOAST_ERROR);
 	}
 }
 
@@ -1259,7 +1260,7 @@ async function showModalUpdateTab(
 				: tab,
 		);
 	} catch (e) {
-		showToast(e.message, CONSTANTS.TOAST_ERROR);
+		void showToast(e.message, CONSTANTS.TOAST_ERROR);
 		return;
 	}
 	const {
@@ -1437,7 +1438,7 @@ async function routeBackgroundMessage(message) {
 				break;
 			case CONSTANTS.TOAST_WARNING:
 			case CONSTANTS.TOAST_ERROR:
-				showToast(message.message, message.what);
+				void showToast(message.message, message.what);
 				break;
 			case CONSTANTS.WHAT_SHOW_IMPORT:
 				await createImportModal();
@@ -1463,11 +1464,11 @@ async function routeBackgroundMessage(message) {
 				break;
 			case CONSTANTS.WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP:
 				if (message.ok) {
-					showToast(
+					void showToast(
 						"req_downloads_open_popup",
 					);
 				} else {
-					showToast(
+					void showToast(
 						"error_req_downloads",
 						CONSTANTS.TOAST_ERROR,
 					);
@@ -1582,7 +1583,7 @@ async function routeBackgroundMessage(message) {
 				break;
 			default:
 				if (message.what !== CONSTANTS.WHAT_THEME) {
-					showToast(
+					void showToast(
 						[
 							"error_unknown_message",
 							message.what,
@@ -1593,7 +1594,7 @@ async function routeBackgroundMessage(message) {
 				break;
 		}
 	} catch (error) {
-		showToast(error.message, CONSTANTS.TOAST_ERROR);
+		void showToast(error.message, CONSTANTS.TOAST_ERROR);
 	}
 }
 
@@ -1633,11 +1634,11 @@ function listenToBackgroundPage() {
  * - Inserts analytics script.
  */
 function main() {
-	trackContentTask(ensureAllTabsAvailability());
-	trackContentTask(checkAddLightningNavigation());
+	void trackContentTask(ensureAllTabsAvailability());
+	void trackContentTask(checkAddLightningNavigation());
 	listenToBackgroundPage();
-	trackContentTask(delayLoadSetupTabs());
-	trackContentTask(executeOncePerDay());
+	void trackContentTask(delayLoadSetupTabs());
+	void trackContentTask(executeOncePerDay());
 }
 
 /**

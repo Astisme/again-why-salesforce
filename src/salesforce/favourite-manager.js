@@ -46,3 +46,8 @@ export const SLASHED_STAR_ID = favouriteManagerRuntime.SLASHED_STAR_ID;
  * Runtime star id.
  */
 export const STAR_ID = favouriteManagerRuntime.STAR_ID;
+
+/**
+ * Test-only singleton lifecycle controls from favourite-manager runtime.
+ */
+export const __testHooks = favouriteManagerRuntime.__testHooks;

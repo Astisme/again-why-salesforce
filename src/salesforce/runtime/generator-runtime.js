@@ -12,33 +12,81 @@ export function createGeneratorModule(overrides = {}) {
 	return createGeneratorPureModule(overrides);
 }
 
-const generatorModule = createGeneratorModule();
+let generatorModule;
 
-export const handleLightningLinkClick =
-	generatorModule.handleLightningLinkClick;
-export const generateStyleFromSettings =
-	generatorModule.generateStyleFromSettings;
-export const generateRowTemplate = generatorModule.generateRowTemplate;
-export const generateSldsToastMessage =
-	generatorModule.generateSldsToastMessage;
-export const generateSection = generatorModule.generateSection;
-export const generateSldsModal = generatorModule.generateSldsModal;
-export const generateRadioButtons = generatorModule.generateRadioButtons;
-export const generateOpenOtherOrgModal =
-	generatorModule.generateOpenOtherOrgModal;
-export const generateSldsFileInput = generatorModule.generateSldsFileInput;
-export const generateCheckboxWithLabel =
-	generatorModule.generateCheckboxWithLabel;
-export const generateUpdateTabModal = generatorModule.generateUpdateTabModal;
-export const generateHelpWith_i_popup =
-	generatorModule.generateHelpWith_i_popup;
-export const generateSldsModalWithTabList =
-	generatorModule.generateSldsModalWithTabList;
-export const createManageTabRow = generatorModule.createManageTabRow;
-export const generateManageTabsModal = generatorModule.generateManageTabsModal;
-export const generateReviewSponsorSvgs =
-	generatorModule.generateReviewSponsorSvgs;
-/** Generates tutorial elements, including optional guide link button. */
-export const generateTutorialElements =
-	generatorModule.generateTutorialElements;
-export const sldsConfirm = generatorModule.sldsConfirm;
+/**
+ * Returns the lazily-created generator module singleton.
+ *
+ * @return {Record<string, unknown>} Generator module API.
+ */
+export function getModule() {
+	generatorModule ??= createGeneratorModule();
+	return generatorModule;
+}
+
+/**
+ * Test-only controls for the generator module lifecycle.
+ */
+export const __testHooks = {
+	/**
+	 * Returns the current generator module singleton.
+	 *
+	 * @return {Record<string, unknown>} Generator module API.
+	 */
+	getModule,
+
+	/**
+	 * Clears the generator module singleton.
+	 *
+	 * @return {void}
+	 */
+	resetModule() {
+		generatorModule = undefined;
+	},
+
+	/**
+	 * Replaces the generator module singleton.
+	 *
+	 * @param {Record<string, unknown>} module Generator module API.
+	 * @return {void}
+	 */
+	setModule(module) {
+		generatorModule = module;
+	},
+};
+
+export const handleLightningLinkClick = (...args) =>
+	getModule().handleLightningLinkClick(...args);
+export const generateStyleFromSettings = (...args) =>
+	getModule().generateStyleFromSettings(...args);
+export const generateRowTemplate = (...args) =>
+	getModule().generateRowTemplate(...args);
+export const generateSldsToastMessage = (...args) =>
+	getModule().generateSldsToastMessage(...args);
+export const generateSection = (...args) =>
+	getModule().generateSection(...args);
+export const generateSldsModal = (...args) =>
+	getModule().generateSldsModal(...args);
+export const generateRadioButtons = (...args) =>
+	getModule().generateRadioButtons(...args);
+export const generateOpenOtherOrgModal = (...args) =>
+	getModule().generateOpenOtherOrgModal(...args);
+export const generateSldsFileInput = (...args) =>
+	getModule().generateSldsFileInput(...args);
+export const generateCheckboxWithLabel = (...args) =>
+	getModule().generateCheckboxWithLabel(...args);
+export const generateUpdateTabModal = (...args) =>
+	getModule().generateUpdateTabModal(...args);
+export const generateHelpWith_i_popup = (...args) =>
+	getModule().generateHelpWith_i_popup(...args);
+export const generateSldsModalWithTabList = (...args) =>
+	getModule().generateSldsModalWithTabList(...args);
+export const createManageTabRow = (...args) =>
+	getModule().createManageTabRow(...args);
+export const generateManageTabsModal = (...args) =>
+	getModule().generateManageTabsModal(...args);
+export const generateReviewSponsorSvgs = (...args) =>
+	getModule().generateReviewSponsorSvgs(...args);
+export const generateTutorialElements = (...args) =>
+	getModule().generateTutorialElements(...args);
+export const sldsConfirm = (...args) => getModule().sldsConfirm(...args);

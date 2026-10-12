@@ -1,41 +1,69 @@
-/**
- * Initializes logo page theme wiring and runtime theme-message handling.
- *
- * @param {Object} options Runtime dependencies.
- * @param {{ runtime: { onMessage: { addListener: (listener: (message: unknown, sender: unknown, sendResponse: (response: null) => void) => void) => void; }; }; }} options.browser Browser runtime object.
- * @param {string} options.whatTheme Message identifier for theme updates.
- * @param {() => unknown} options.initTheme Theme initialization callback.
- * @param {{ documentElement: { dataset: Record<string, string> } }} [options.documentRef=document] Document-like host.
- * @return {(message: { what?: string; theme?: string | null }, sender: unknown, sendResponse: (response: null) => void) => void} Registered runtime listener.
- */
-export function runLogo({
-	browser,
-	whatTheme,
-	initTheme,
-	documentRef = document,
-} = {}) {
-	const html = documentRef.documentElement;
+"use strict";
 
+import { BROWSER, WHAT_THEME } from "../../core/constants.js";
+import { initTheme } from "../themeHandler.js";
+import { createLogoModule as createLogoPureModule } from "./logo-module.js";
+
+let logoModule = null;
+
+/**
+ * Creates logo page behavior with extension runtime defaults.
+ *
+ * @param {Parameters<typeof createLogoPureModule>[0]} [overrides={}] Runtime overrides.
+ * @return {ReturnType<typeof createLogoPureModule>} Logo module API.
+ */
+export function createLogoModule(overrides = {}) {
+	return createLogoPureModule({
+		browser: BROWSER,
+		documentRef: globalThis.document,
+		initTheme,
+		whatTheme: WHAT_THEME,
+		...overrides,
+	});
+}
+
+/**
+ * Gets default logo module, creating it on first use.
+ *
+ * @return {ReturnType<typeof createLogoPureModule>} Logo module API.
+ */
+function getModule() {
+	logoModule ??= createLogoModule();
+	return logoModule;
+}
+
+/**
+ * Initializes logo page behavior.
+ *
+ * @param {Parameters<typeof createLogoModule>[0]} [overrides] Runtime overrides.
+ * @return {ReturnType<ReturnType<typeof createLogoPureModule>["runLogo"]>} Registered runtime listener.
+ */
+export function runLogo(overrides = undefined) {
+	return overrides == null
+		? getModule().runLogo()
+		: createLogoModule(overrides).runLogo();
+}
+
+/**
+ * Exposes logo module lifecycle controls for tests.
+ */
+export const __testHooks = {
+	getModule,
 	/**
-	 * Listener for runtime messages related to theme updates.
+	 * Clears cached default module.
 	 *
-	 * @param {Object} message Incoming runtime message.
-	 * @param {*} _sender Unused sender parameter.
-	 * @param {Function} sendResponse Runtime response callback.
 	 * @return {void}
 	 */
-	function readThemeMessage(message, _sender, sendResponse) {
-		if (
-			message?.what !== whatTheme ||
-			message?.theme == null
-		) {
-			return;
-		}
-		sendResponse(null);
-		html.dataset.theme = message.theme;
-	}
-
-	initTheme();
-	browser.runtime.onMessage.addListener(readThemeMessage);
-	return readThemeMessage;
-}
+	resetModule() {
+		logoModule = null;
+	},
+	/**
+	 * Replaces cached default module.
+	 *
+	 * @param {ReturnType<typeof createLogoPureModule> | null} module Logo module.
+	 * @return {void}
+	 */
+	setModule(module) {
+		logoModule = module;
+	},
+};

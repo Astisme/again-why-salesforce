@@ -80,7 +80,18 @@ export function createToastModule({
 	});
 }
 
-const toastModule = createToastModule();
+/** @type {ReturnType<typeof createToastModule> | undefined} */
+let toastModule;
+
+/**
+ * Returns lazily created toast module singleton.
+ *
+ * @return {ReturnType<typeof createToastModule>} Toast module singleton.
+ */
+function getModule() {
+	toastModule ??= createToastModule();
+	return toastModule;
+}
 
 /**
  * Shows a toast notification using runtime defaults.
@@ -90,10 +101,18 @@ const toastModule = createToastModule();
  * @return {Promise<void>} Promise resolved when toast is appended.
  */
 export function showToast(message, status = TOAST_SUCCESS) {
-	return toastModule.showToast(message, status);
+	return getModule().showToast(message, status);
 }
 
 /**
  * Test hooks exposed by the singleton toast runtime module.
  */
-export const __testHooks = toastModule.__testHooks;
+export const __testHooks = {
+	getModule: () => toastModule,
+	resetModule: () => {
+		toastModule = undefined;
+	},
+	setModule: (module) => {
+		toastModule = module;
+	},
+};

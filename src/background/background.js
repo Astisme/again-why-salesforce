@@ -43,6 +43,7 @@ import {
 import {
 	checkAddRemoveContextMenus,
 	refreshContextMenus,
+	startContextMenus,
 } from "./context-menus.js";
 import {
 	bg_getSettings,
@@ -53,6 +54,8 @@ import {
 import { bg_getSalesforceLanguage } from "./salesforce-language.js";
 import { bg_getCommandLinks, listenToExtensionCommands } from "./commands.js";
 import { setDefaultOrgStyle } from "./default-styles.js";
+
+let hasStarted = false;
 
 /**
  * Checks whether the object passed as contains is contained in the granted permissions.
@@ -98,10 +101,10 @@ function listenToExtensionMessages() {
 		}
 		switch (request.what) {
 			case WHAT_GET:
-				bg_getStorage(sendResponse, request.key);
+				void bg_getStorage(sendResponse, request.key);
 				break;
 			case WHAT_SET:
-				bg_setStorage(request.set, sendResponse, request.key);
+				void bg_setStorage(request.set, sendResponse, request.key);
 				if (request.key == null || request.key === SETTINGS_KEY) {
 					bg_checkUpdateUninstallURL(request.set);
 				}
@@ -117,14 +120,16 @@ function listenToExtensionMessages() {
 			case WHAT_SHOW_REVIEW:
 			case WHAT_SHOW_SPONSOR:
 				sendResponse(null);
-				setTimeout(() => bg_notify(request), 250); // delay the notification to prevent accidental removal (for WHAT_SHOW_IMPORT)
+				setTimeout(() => {
+					void bg_notify(request).catch(console.error);
+				}, 250); // delay the notification to prevent accidental removal (for WHAT_SHOW_IMPORT)
 				break;
 			case WHAT_EXPORT_CHECK:
 				if (checkLaunchExport(undefined, true)) {
 					sendResponse(null);
-					bg_notify({
+					void bg_notify({
 						what: WHAT_SHOW_EXPORT_MODAL,
-					});
+					}).catch(console.error);
 				}
 				break;
 			case WHAT_EXPORT:
@@ -132,22 +137,22 @@ function listenToExtensionMessages() {
 				sendResponse(null);
 				break;
 			case WHAT_GET_BROWSER_TAB:
-				bg_getCurrentBrowserTab(sendResponse);
+				void bg_getCurrentBrowserTab(sendResponse);
 				break;
 			case WHAT_GET_SF_LANG:
-				bg_getSalesforceLanguage(sendResponse);
+				void bg_getSalesforceLanguage(sendResponse);
 				break;
 			case WHAT_GET_SETTINGS:
-				bg_getSettings(request.keys, undefined, sendResponse);
+				void bg_getSettings(request.keys, undefined, sendResponse);
 				break;
 			case WHAT_GET_STYLE_SETTINGS:
-				bg_getStyleSettings(request.key, sendResponse);
+				void bg_getStyleSettings(request.key, sendResponse);
 				break;
 			case WHAT_GET_COMMANDS:
-				bg_getCommandLinks(request.commands, sendResponse);
+				void bg_getCommandLinks(request.commands, sendResponse);
 				break;
 			case PERM_CHECK:
-				bg_isPermissionGranted(request.contains, sendResponse);
+				void bg_isPermissionGranted(request.contains, sendResponse);
 				break;
 			default:
 				if (!ALL_WHAT_REASONS.has(request.what)) {
@@ -172,7 +177,9 @@ function _debounce(fn, delay = 150) {
 	let timeout;
 	return (...args) => {
 		clearTimeout(timeout);
-		timeout = setTimeout(() => fn(...args), delay);
+		timeout = setTimeout(() => {
+			void Promise.resolve(fn(...args)).catch(console.error);
+		}, delay);
 	};
 }
 
@@ -187,13 +194,13 @@ function setExtensionBrowserListeners() {
 	// Debounced version for high-frequency events
 	const debouncedCheckMenus = _debounce(checkAddRemoveContextMenus);
 	// when the browser starts
-	BROWSER.runtime.onStartup.addListener(() =>
-		checkAddRemoveContextMenus(WHAT_STARTUP)
-	);
+	BROWSER.runtime.onStartup.addListener(async () => {
+		await checkAddRemoveContextMenus(WHAT_STARTUP);
+	});
 	// when the extension is installed / updated
 	BROWSER.runtime.onInstalled.addListener(async (details) => {
 		if (details.temporary) return; // skip during development
-		checkAddRemoveContextMenus(WHAT_INSTALLED);
+		await checkAddRemoveContextMenus(WHAT_INSTALLED);
 		if (details.reason === "update") {
 			// the extension has been updated
 			// check user settings
@@ -210,7 +217,9 @@ function setExtensionBrowserListeners() {
 	// when the extension is activated by the BROWSER
 	self.addEventListener(
 		"activate",
-		() => checkAddRemoveContextMenus(WHAT_ACTIVATE),
+		async () => {
+			await checkAddRemoveContextMenus(WHAT_ACTIVATE);
+		},
 	);
 	// when the active tab changes
 	BROWSER.tabs.onActivated.addListener(() => {
@@ -228,26 +237,32 @@ function setExtensionBrowserListeners() {
 		debouncedCheckMenus(WHAT_HIGHLIGHTED);
 	});
 	// when window changes
-	BROWSER.windows.onFocusChanged.addListener(() =>
-		checkAddRemoveContextMenus(WHAT_FOCUS_CHANGED)
-	);
-	BROWSER.commands.onChanged?.addListener(() => {
-		refreshContextMenus(WHAT_HIGHLIGHTED);
+	BROWSER.windows.onFocusChanged.addListener(async () => {
+		await checkAddRemoveContextMenus(WHAT_FOCUS_CHANGED);
+	});
+	BROWSER.commands.onChanged?.addListener(async () => {
+		await refreshContextMenus(WHAT_HIGHLIGHTED);
 	});
 
 	BROWSER.runtime.setUninstallURL(UNINSTALL_SURVEY_LINK_YES_PING);
 }
 
 /**
- * Main entry point to initialize extension listeners, default styles,
+ * Starts extension listeners, default styles,
  * command listeners, message listeners, and context menu checks.
+ *
+ * This function is called by the production entry point after its module graph
+ * has loaded, so importing background behavior has no startup side effects.
+ *
+ * @return {void}
  */
-function main() {
+export function startBackground() {
+	if (hasStarted) return;
+	hasStarted = true;
 	setExtensionBrowserListeners();
-	setDefaultOrgStyle();
+	void setDefaultOrgStyle().catch(console.error);
 	listenToExtensionMessages();
 	listenToExtensionCommands();
-	checkAddRemoveContextMenus();
+	startContextMenus();
+	void checkAddRemoveContextMenus().catch(console.error);
 }
-
-main();

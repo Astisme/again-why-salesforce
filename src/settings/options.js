@@ -5,8 +5,8 @@ import { runOptionsRuntime as runOptionsRuntimeDefault } from "./options-runtime
  *
  * @param {Object} [options={}] Bootstrap options.
  * @param {boolean} [options.skipAutoBootstrap=globalThis.__AWSF_SKIP_OPTIONS_AUTO_BOOTSTRAP__] Auto-bootstrap toggle.
- * @param {() => unknown} [options.runOptionsRuntime=runOptionsRuntimeDefault] Runtime bootstrap callback.
- * @return {unknown | null} Runtime instance when started, otherwise `null`.
+ * @param {typeof runOptionsRuntimeDefault} [options.runOptionsRuntime=runOptionsRuntimeDefault] Runtime bootstrap callback.
+ * @return {ReturnType<typeof runOptionsRuntimeDefault> | null} Runtime instance when started, otherwise `null`.
  */
 export function bootstrapOptions({
 	skipAutoBootstrap = globalThis.__AWSF_SKIP_OPTIONS_AUTO_BOOTSTRAP__,

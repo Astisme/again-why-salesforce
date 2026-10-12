@@ -1,169 +1,101 @@
+"use strict";
+
+import {
+	BROWSER,
+	HIDDEN_CLASS,
+	POPUP_LOGIN_NEW_TAB,
+	POPUP_OPEN_LOGIN,
+	POPUP_OPEN_SETUP,
+	POPUP_SETUP_NEW_TAB,
+	SALESFORCE_LIGHTNING_PATTERN,
+	SALESFORCE_SETUP_HOME_MINI,
+	SETUP_LIGHTNING,
+	WHAT_GET_BROWSER_TAB,
+} from "../../core/constants.js";
+import {
+	getSettings as getSettingsDefault,
+	sendExtensionMessage as sendExtensionMessageDefault,
+} from "../../core/functions.js";
+import { TranslationService } from "../../core/translator.js";
+import {
+	createNotSalesforceSetupModule as createNotSalesforceSetupPureModule,
+} from "./notSalesforceSetup-module.js";
+
+let notSalesforceSetupModule = null;
+
 /**
- * Handles active-tab lookup and stores the latest result.
+ * Creates non-Salesforce setup popup behavior with extension runtime defaults.
  *
- * @param {Object} options Lookup options.
- * @param {(message: { what: string }) => Promise<unknown>} options.sendExtensionMessage Message dispatcher.
- * @param {string} options.whatGetBrowserTab Message type used to query the active tab.
- * @param {(url: string) => void | Promise<void>} [options.callback] Callback invoked with the target URL.
- * @param {string} options.url URL passed back to the callback.
- * @param {(tab: unknown) => void} options.onTabFound Receiver for the fetched tab.
- * @return {Promise<void>} Resolves once lookup and callback handling complete.
+ * @param {Parameters<typeof createNotSalesforceSetupPureModule>[0]} [overrides={}] Runtime overrides.
+ * @return {ReturnType<typeof createNotSalesforceSetupPureModule>} Non-Salesforce setup module API.
  */
-async function nss_getCurrentBrowserTab({
-	sendExtensionMessage,
-	whatGetBrowserTab,
-	callback,
-	url,
-	onTabFound,
-} = {}) {
-	const browserTab = await sendExtensionMessage({
-		what: whatGetBrowserTab,
+export function createNotSalesforceSetupModule(overrides = {}) {
+	return createNotSalesforceSetupPureModule({
+		browser: BROWSER,
+		closePopup: globalThis.close ?? (() => {}),
+		consoleRef: console,
+		documentRef: globalThis.document,
+		ensureTranslatorAvailability:
+			TranslationService.ensureTranslatorAvailability,
+		getSettings: getSettingsDefault,
+		hiddenClass: HIDDEN_CLASS,
+		locationRef: globalThis.location,
+		popupLoginNewTab: POPUP_LOGIN_NEW_TAB,
+		popupOpenLogin: POPUP_OPEN_LOGIN,
+		popupOpenSetup: POPUP_OPEN_SETUP,
+		popupSetupNewTab: POPUP_SETUP_NEW_TAB,
+		salesforceLightningPattern: SALESFORCE_LIGHTNING_PATTERN,
+		salesforceSetupHomeMini: SALESFORCE_SETUP_HOME_MINI,
+		sendExtensionMessage: sendExtensionMessageDefault,
+		setTimeout: globalThis.setTimeout,
+		setupLightning: SETUP_LIGHTNING,
+		whatGetBrowserTab: WHAT_GET_BROWSER_TAB,
+		...overrides,
 	});
-	onTabFound(browserTab);
-	await callback?.(url);
 }
 
 /**
- * Runs the non-Salesforce-setup popup behavior.
+ * Gets default non-Salesforce setup module, creating it on first use.
  *
- * @param {Object} options Runtime dependencies.
- * @param {{ tabs: { create: (details: { url: string; index: number; openerTabId: number }) => void; update: (details: { url: string }) => void; }; }} options.browser Browser tabs API.
- * @param {string} options.hiddenClass CSS class used to hide/show UI sections.
- * @param {string} options.popupLoginNewTab Setting key for login-tab behavior.
- * @param {string} options.popupOpenLogin Setting key for login auto-open.
- * @param {string} options.popupOpenSetup Setting key for setup auto-open.
- * @param {string} options.popupSetupNewTab Setting key for setup-tab behavior.
- * @param {RegExp} options.salesforceLightningPattern Salesforce Lightning URL validator.
- * @param {string} options.salesforceSetupHomeMini Setup home path suffix.
- * @param {string} options.setupLightning Setup path prefix.
- * @param {string} options.whatGetBrowserTab Message type for active-tab lookup.
- * @param {(keys: string[]) => Promise<Array<{ id: string; enabled: boolean }>>} options.getSettings Settings loader.
- * @param {(message: { what: string }) => Promise<{ id: number; index: number } | null>} options.sendExtensionMessage Message dispatcher.
- * @param {() => Promise<void> | void} options.ensureTranslatorAvailability Translator initializer.
- * @param {{ getElementById: (id: string) => any }} [options.documentRef=document] Document-like host.
- * @param {{ href: string; search: string }} [options.locationRef=globalThis.location] Mutable location reference.
- * @param {(callback: () => void, delay: number) => unknown} [options.setTimeout=setTimeout] Timeout scheduler.
- * @param {() => void} [options.closePopup=close] Popup close callback.
- * @param {{ warn: (error: unknown) => void }} [options.consoleRef=console] Console-like logger.
- * @return {Promise<{ willOpenLogin: boolean }>} State describing which redirect button is active.
+ * @return {ReturnType<typeof createNotSalesforceSetupPureModule>} Non-Salesforce setup module API.
  */
-export async function runNotSalesforceSetup({
-	browser,
-	hiddenClass,
-	popupLoginNewTab,
-	popupOpenLogin,
-	popupOpenSetup,
-	popupSetupNewTab,
-	salesforceLightningPattern,
-	salesforceSetupHomeMini,
-	setupLightning,
-	whatGetBrowserTab,
-	getSettings,
-	sendExtensionMessage,
-	ensureTranslatorAvailability,
-	documentRef = document,
-	locationRef = globalThis.location,
-	setTimeout = setTimeout,
-	closePopup = close,
-	consoleRef = console,
-} = {}) {
-	const sfsetupTextEl = documentRef.getElementById("plain");
-	const invalidUrl = documentRef.getElementById("invalid-url");
-	const loginId = "login";
-	const setupId = "go-setup";
-	let willOpenLogin = true;
-	const page = new URLSearchParams(locationRef.search).get("url");
-	if (page != null) {
-		try {
-			const domain = new URL(page).origin;
-			if (salesforceLightningPattern.test(page)) {
-				documentRef.getElementById(loginId).classList.add(hiddenClass);
-				const goSetup = documentRef.getElementById(setupId);
-				goSetup.classList.remove(hiddenClass);
-				goSetup.href =
-					`${domain}${setupLightning}${salesforceSetupHomeMini}`;
-				willOpenLogin = false;
-			}
-		} catch (error) {
-			consoleRef.warn(error);
-			sfsetupTextEl.classList.add(hiddenClass);
-			invalidUrl.classList.remove(hiddenClass);
-		}
-	}
-	let currentTab = null;
-	let openPageInSameTab = false;
-	/**
-	 * Creates a new tab (or updates current tab) for the provided URL.
-	 *
-	 * @param {string} url Target URL to open.
-	 * @param {number} [count=0] Retry count for tab lookup.
-	 * @return {Promise<void>} Resolves once the tab action has been dispatched.
-	 */
-	const createTab = async (url, count = 0) => {
-		if (count > 5) {
-			throw new Error("error_no_browser_tab");
-		}
-		if (openPageInSameTab) {
-			browser.tabs.update({
-				url,
-			});
-			return;
-		}
-		if (currentTab == null) {
-			await nss_getCurrentBrowserTab({
-				sendExtensionMessage,
-				whatGetBrowserTab,
-				callback: (nextUrl) => void createTab(nextUrl, count + 1),
-				url,
-				onTabFound: (tab) => {
-					currentTab = tab;
-				},
-			});
-			return;
-		}
-		browser.tabs.create({
-			url,
-			index: Math.floor(currentTab.index) + 1,
-			openerTabId: currentTab.id,
-		});
-	};
-	const shownRedirectBtn = documentRef.getElementById(
-		willOpenLogin ? loginId : setupId,
-	);
-	shownRedirectBtn.addEventListener("click", async (event) => {
-		event.preventDefault();
-		if (currentTab == null && !openPageInSameTab) {
-			await nss_getCurrentBrowserTab({
-				sendExtensionMessage,
-				whatGetBrowserTab,
-				callback: (url) => createTab(url),
-				url: shownRedirectBtn.href,
-				onTabFound: (tab) => {
-					currentTab = tab;
-				},
-			});
-		} else {
-			await createTab(shownRedirectBtn.href);
-		}
-		setTimeout(closePopup, 200);
-	});
-	const automaticClick = willOpenLogin ? popupOpenLogin : popupOpenSetup;
-	const useSameTab = willOpenLogin ? popupLoginNewTab : popupSetupNewTab;
-	const settings = await getSettings([automaticClick, useSameTab]);
-	openPageInSameTab = settings?.some((setting) =>
-		setting.id === useSameTab && setting.enabled
-	);
-	if (
-		settings?.some((setting) =>
-			setting.id === automaticClick && setting.enabled
-		)
-	) {
-		const autoClickResult = shownRedirectBtn.click();
-		if (autoClickResult instanceof Promise) {
-			await autoClickResult;
-		}
-	} else {
-		await ensureTranslatorAvailability();
-	}
-	return { willOpenLogin };
+function getModule() {
+	notSalesforceSetupModule ??= createNotSalesforceSetupModule();
+	return notSalesforceSetupModule;
 }
+
+/**
+ * Runs non-Salesforce setup popup behavior.
+ *
+ * @param {Parameters<typeof createNotSalesforceSetupModule>[0]} [overrides] Runtime overrides.
+ * @return {ReturnType<ReturnType<typeof createNotSalesforceSetupPureModule>["runNotSalesforceSetup"]>} State describing active redirect button.
+ */
+export function runNotSalesforceSetup(overrides = undefined) {
+	return overrides == null
+		? getModule().runNotSalesforceSetup()
+		: createNotSalesforceSetupModule(overrides).runNotSalesforceSetup();
+}
+
+/**
+ * Exposes non-Salesforce setup module lifecycle controls for tests.
+ */
+export const __testHooks = {
+	getModule,
+	/**
+	 * Clears cached default module.
+	 *
+	 * @return {void}
+	 */
+	resetModule() {
+		notSalesforceSetupModule = null;
+	},
+	/**
+	 * Replaces cached default module.
+	 *
+	 * @param {ReturnType<typeof createNotSalesforceSetupPureModule> | null} module Non-Salesforce setup module.
+	 * @return {void}
+	 */
+	setModule(module) {
+		notSalesforceSetupModule = module;
+	},
+};

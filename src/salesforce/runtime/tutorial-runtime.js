@@ -122,7 +122,18 @@ export function createTutorialModule(overrides = {}) {
 	});
 }
 
-const tutorialModule = createTutorialModule();
+/** @type {ReturnType<typeof createTutorialModule> | undefined} */
+let tutorialModule;
+
+/**
+ * Returns lazily created tutorial module singleton.
+ *
+ * @return {ReturnType<typeof createTutorialModule>} Tutorial module singleton.
+ */
+function getModule() {
+	tutorialModule ??= createTutorialModule();
+	return tutorialModule;
+}
 
 /**
  * Checks if tutorial should run and starts/prompts accordingly.
@@ -131,5 +142,18 @@ const tutorialModule = createTutorialModule();
  * @return {Promise<void>}
  */
 export function checkTutorial(fromPopup = false) {
-	return tutorialModule.checkTutorial(fromPopup);
+	return getModule().checkTutorial(fromPopup);
 }
+
+/**
+ * Test-only singleton lifecycle controls.
+ */
+export const __testHooks = {
+	getModule: () => tutorialModule,
+	resetModule: () => {
+		tutorialModule = undefined;
+	},
+	setModule: (module) => {
+		tutorialModule = module;
+	},
+};

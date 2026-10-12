@@ -39,7 +39,18 @@ export function createSfElementsModule({
 	});
 }
 
-const sfElementsModule = createSfElementsModule();
+/** @type {ReturnType<typeof createSfElementsModule> | undefined} */
+let sfElementsModule;
+
+/**
+ * Returns lazily created Salesforce-element module singleton.
+ *
+ * @return {ReturnType<typeof createSfElementsModule>} Salesforce-element module singleton.
+ */
+function getModule() {
+	sfElementsModule ??= createSfElementsModule();
+	return sfElementsModule;
+}
 
 /**
  * Returns the setup tab UL element.
@@ -47,7 +58,7 @@ const sfElementsModule = createSfElementsModule();
  * @return {unknown} Setup tab UL.
  */
 export function getSetupTabUl() {
-	return sfElementsModule.getSetupTabUl();
+	return getModule().getSetupTabUl();
 }
 
 /**
@@ -57,7 +68,7 @@ export function getSetupTabUl() {
  * @return {void}
  */
 export function setSetupTabUl(newSetupTabUl) {
-	return sfElementsModule.setSetupTabUl(newSetupTabUl);
+	return getModule().setSetupTabUl(newSetupTabUl);
 }
 
 /**
@@ -66,7 +77,7 @@ export function setSetupTabUl(newSetupTabUl) {
  * @return {boolean} True when setup tab UL exists or gets created.
  */
 export function findSetupTabUlInSalesforcePage() {
-	return sfElementsModule.findSetupTabUlInSalesforcePage();
+	return getModule().findSetupTabUlInSalesforcePage();
 }
 
 /**
@@ -75,7 +86,7 @@ export function findSetupTabUlInSalesforcePage() {
  * @return {unknown} Modal hanger.
  */
 export function getModalHanger() {
-	return sfElementsModule.getModalHanger();
+	return getModule().getModalHanger();
 }
 
 /**
@@ -84,10 +95,18 @@ export function getModalHanger() {
  * @return {string} Current href value.
  */
 export function getCurrentHref() {
-	return sfElementsModule.getCurrentHref();
+	return getModule().getCurrentHref();
 }
 
 /**
  * Test hooks exposed by the singleton sf-elements runtime module.
  */
-export const __testHooks = sfElementsModule.__testHooks;
+export const __testHooks = {
+	getModule: () => sfElementsModule,
+	resetModule: () => {
+		sfElementsModule = undefined;
+	},
+	setModule: (module) => {
+		sfElementsModule = module;
+	},
+};
