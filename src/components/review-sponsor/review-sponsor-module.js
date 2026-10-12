@@ -181,7 +181,7 @@ export function createReviewSponsorModule({
 		 * Starts async initialization when connected.
 		 */
 		connectedCallback() {
-			this._ensureReadyPromise();
+			void this._ensureReadyPromise();
 		}
 
 		/**

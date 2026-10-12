@@ -84,12 +84,11 @@ async function getCurrentUserInfo(browserApi, currentUrl) {
 
 /**
  * Retrieves the Salesforce language setting for the current user.
- * Attempts to fetch language info from Salesforce user data and stores it;
+ * Attempts to fetch language info from Salesforce user data and awaits storage;
  * falls back to stored locale if unavailable.
  *
- * @param {Object} browserApi - Browser API reference.
  * @param {Function|null} [callback=null] - Optional callback to receive the language.
- * @return {Promise<string|any>|void} The language code or nothing if callback is provided.
+ * @return {Promise<string|Object>} The language code, or storage items when the fallback invokes a callback.
  */
 export async function bg_getSalesforceLanguage(
 	callback = null,
@@ -100,6 +99,6 @@ export async function bg_getSalesforceLanguage(
 	if (language == null) {
 		return bg_getStorage(callback, LOCALE_KEY);
 	}
-	bg_setStorage(language, callback, LOCALE_KEY);
+	await bg_setStorage(language, callback, LOCALE_KEY);
 	return language;
 }

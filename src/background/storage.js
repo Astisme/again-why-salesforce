@@ -33,7 +33,7 @@ async function _getFromStorage(key, callback) {
  *
  * @param {function} [callback] - Optional callback to handle the retrieved data.
  * @param {string} [key=WHY_KEY] - The storage key to retrieve data from.
- * @return {Promise<any>|void} Returns a Promise if no callback is provided, otherwise void.
+ * @return {Promise<any>} Resolves to the requested data without a callback, or the storage items after invoking the callback.
  */
 export function bg_getStorage(callback, key = WHY_KEY) {
 	if (callback == null) {
@@ -47,10 +47,10 @@ export function bg_getStorage(callback, key = WHY_KEY) {
 						resolve(response);
 					}
 				},
-			);
+			).catch(reject);
 		});
 	}
-	_getFromStorage(key, callback);
+	return _getFromStorage(key, callback);
 }
 
 /**

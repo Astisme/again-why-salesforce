@@ -221,7 +221,7 @@ export function createBackgroundUtilsModule({
 				filename,
 			});
 		} else {
-			bg_notify({
+			void bg_notify({
 				what: whatExportFromBgRuntime,
 				filename,
 				payload: jsonData,
@@ -271,10 +271,10 @@ export function createBackgroundUtilsModule({
 		const isAllowed = isExportAllowedRuntime();
 		if (isAllowed) {
 			if (!checkOnly) {
-				exportHandler(tabs);
+				void exportHandler(tabs);
 			}
 		} else {
-			bg_notify({
+			void bg_notify({
 				what: whatRequestExportPermissionToOpenPopupRuntime,
 				ok: requestExportPermission(),
 			});
@@ -291,7 +291,8 @@ export function createBackgroundUtilsModule({
 		try {
 			const selfInfo = await browserRuntime.management?.getSelf?.();
 			return selfInfo?.installType === "development";
-		} catch (_error) {
+		} catch {
+			// Management API can be denied; continue with production update checks.
 			return false;
 		}
 	}

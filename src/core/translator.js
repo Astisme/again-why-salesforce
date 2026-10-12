@@ -341,25 +341,21 @@ export class TranslationService {
 	 * @param {string} message Message containing `$key` placeholders.
 	 * @return {Promise<string>} Message with placeholders translated.
 	 */
-	async #translateMessageTokens(message) {
-		let messageTranslated = "";
+	#translateMessageTokens(message) {
 		const parts = message.split(/(\$\w+)/);
-		for (const part of parts) {
-			if (part === "") {
-				continue;
-			}
+		return parts.reduce(async (previous, part) => {
+			// Locale fallback mutates language state, so translate tokens in order.
+			const messageTranslated = await previous;
 			if (!part.startsWith("$")) {
-				messageTranslated += part;
-				continue;
+				return messageTranslated + part;
 			}
 			const innerTranslation = await this.#_translate(part);
 			if (innerTranslation.includes("$")) {
-				messageTranslated += await this.translate(innerTranslation);
-			} else {
-				messageTranslated += innerTranslation;
+				return messageTranslated +
+					await this.translate(innerTranslation);
 			}
-		}
-		return messageTranslated;
+			return messageTranslated + innerTranslation;
+		}, Promise.resolve(""));
 	}
 
 	/**

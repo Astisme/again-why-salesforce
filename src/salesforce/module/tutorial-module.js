@@ -304,7 +304,7 @@ class Tutorial {
 	 */
 	#generateExtensionElementWithLinkInSetup() {
 		const redirectElement = this.steps[this.currentStep]?.redirectElement;
-		performActionOnTabs(WHAT_ADD, redirectElement);
+		void performActionOnTabs(WHAT_ADD, redirectElement);
 		return this.#getExtensionElementWithLinkInSetup(redirectElement);
 	}
 
@@ -348,7 +348,10 @@ class Tutorial {
 		) {
 			// we could not find 2 links which were not saved by the user...
 			// ask the user to export their Tabs and restart the tutorial with only the default Tabs?
-			showToast("tutorial_export_and_reset_for_tutorial", TOAST_WARNING);
+			await showToast(
+				"tutorial_export_and_reset_for_tutorial",
+				TOAST_WARNING,
+			);
 			return false;
 		}
 		const [[firstLabel, secondLabel], settingsShortcut] = await Promise.all(
@@ -482,7 +485,7 @@ class Tutorial {
 						// unpin the last 2 Tabs
 						const unpinUpTo = pinnedNumber <= 2 ? 2 : 3;
 						for (let i = 1; i < unpinUpTo; i++) {
-							handleActionButtonClick({
+							void handleActionButtonClick({
 								preventDefault: () => {},
 								stopPropagation: () => {},
 								currentTarget: document.querySelector(
@@ -559,7 +562,7 @@ class Tutorial {
 		if (pageUrl != null) {
 			customLightningRedirect(pageUrl);
 		}
-		this.nextStep();
+		await this.nextStep();
 	}
 
 	/**
@@ -658,7 +661,7 @@ class Tutorial {
 		const step = this.steps[this.currentStep];
 		await this.executeStep(step);
 		if (step.beginsBlock) {
-			this.persistTutorialProgress();
+			await this.persistTutorialProgress();
 			if (step.isEndingStep) {
 				this.confirmBtn.remove();
 				this.throwConfetti();
@@ -708,7 +711,7 @@ class Tutorial {
 				this.showConfirm();
 				const cleanup = this.#listenToLightningNavigation(() => {
 					cleanup();
-					this.nextStep();
+					void this.nextStep();
 				});
 				if (step.action !== ACTION.confirm) {
 					this.btnsParent.classList.add(HIDDEN_CLASS);
@@ -732,7 +735,7 @@ class Tutorial {
 				break;
 			}
 		}
-		this.nextStep();
+		void this.nextStep();
 	}
 
 	/**
@@ -773,7 +776,7 @@ class Tutorial {
 			const el = await this.#getElementFromStep(step);
 			if (el == null) {
 				if (!step.fakeElement) {
-					showToast("tutorial_step_was_missed", TOAST_WARNING);
+					await showToast("tutorial_step_was_missed", TOAST_WARNING);
 					// reset to the beginning of the block
 					this.#resetToCloserBeginBlockAndRestart();
 				}
@@ -888,7 +891,7 @@ class Tutorial {
 				const step = this.steps[this.currentStep];
 				step.onConfirm?.();
 				if (step.action !== ACTION.confirm) {
-					this.nextStep();
+					void this.nextStep();
 				}
 			}, { once: true });
 			this.confirmHandlerAttached = true;
@@ -931,7 +934,7 @@ class Tutorial {
 		this.spinner?.remove();
 		this.highlightedElement?.classList.remove(TUTORIAL_HIGHLIGHT_CLASS);
 		if (shouldSaveProgress) {
-			this.persistTutorialProgress(stepToSave, closedManually);
+			void this.persistTutorialProgress(stepToSave, closedManually);
 		}
 	}
 
@@ -1066,7 +1069,7 @@ export async function checkTutorial(fromPopup = false) {
 			await redirectToHomeAndStart();
 		} else {
 			// set the tutorial as completed
-			Tutorial.setTutorialAsCompleted();
+			await Tutorial.setTutorialAsCompleted();
 		}
 		return;
 	}
@@ -1087,10 +1090,10 @@ export async function checkTutorial(fromPopup = false) {
 		await tutorial.start(tutorialProgress - 1); // because nextStep adds 1 when it starts
 	} else if (fromPopup) {
 		// restart the tutorial from the beginning
-		tutorial.start();
+		await tutorial.start();
 	} else {
 		// set the tutorial as completed
-		Tutorial.setTutorialAsCompleted(tutorial);
+		await Tutorial.setTutorialAsCompleted(tutorial);
 	}
 }
 

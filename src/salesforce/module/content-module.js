@@ -783,8 +783,8 @@ function wasReviewSponsorPromptSkippedToday(
 	setting,
 	today = getTodayDateKey(),
 ) {
-	return (setting?.enabled == null && setting?.skipped === today)
-    || setting?.enabled === today;
+	return (setting?.enabled == null && setting?.skipped === today) ||
+		setting?.enabled === today;
 }
 
 const REVIEW_PROMPT_ACTION_REVIEW = "write_review";
@@ -952,14 +952,14 @@ async function checkShouldShowReviewSponsorToast(messageType) {
 			"request_later",
 		]),
 	]);
-	if (
-		showReview &&
-		wasReviewSponsorPromptSkippedToday(didReview)
-	) {
+	const shouldSkipReview = showReview &&
+		wasReviewSponsorPromptSkippedToday(didReview);
+	if (shouldSkipReview && messageType !== CONSTANTS.WHAT_SHOW_SPONSOR) {
 		return;
 	}
 	if (
 		showReview &&
+		!shouldSkipReview &&
 		didReview?.enabled == null
 	) {
 		await showReviewPrompt({

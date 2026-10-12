@@ -813,7 +813,7 @@ export class TabContainer extends Array {
 		} = getTabContainerFromObj(parsedTabs);
 		if (metadata.isUsingOldVersion) {
 			// tell the user to upgrade their backups
-			sendExtensionMessage({
+			void sendExtensionMessage({
 				what: TOAST_WARNING,
 				message: "warn_upgrade_backup",
 			});
