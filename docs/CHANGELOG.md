@@ -18,6 +18,10 @@ Please remember that this project is entirely funded by **the support of its use
 
 # v2.2.6
 
+To celebrate 500+ users of the extension and 1000+ weekly active users, this release adds a new popup to request a review and a new popup to request to sponsor the project.
+It also adds a form to request feedback on extension uninstall and a website to showcase the extension.
+We hope to get your feedback on the it!
+
 ## 🚀 Added
 
 1. New popup to request a review when the user has used the extension a little bit (#209)
