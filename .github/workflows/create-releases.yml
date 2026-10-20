@@ -10,7 +10,7 @@ permissions:
 
 jobs:
     setup-and-build:
-        runs-on: macos-latest
+        runs-on: macos-15-intel
         defaults:
             run:
                 shell: bash
