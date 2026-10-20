@@ -36,9 +36,7 @@
 	"web_accessible_resources": [
 		{
 			"resources": [
-				"salesforce/lightning-navigation.js",
-				"salesforce/runtime/lightning-navigation-runtime.js",
-				"salesforce/module/lightning-navigation-module.js",
+				"generated/bundledLightningNavigation.js",
 				"assets/svgs/*.svg",
 				"assets/icons/*.png",
 				"_locales/*/messages.json",

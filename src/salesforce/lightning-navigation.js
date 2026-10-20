@@ -23,5 +23,3 @@ export function createLightningNavigationModule(overrides = {}) {
 export function registerLightningNavigation(overrides = {}) {
 	return registerRuntimeLightningNavigation(overrides);
 }
-
-registerLightningNavigation();

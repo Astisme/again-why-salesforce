@@ -21,6 +21,11 @@ const bundleConfigs = [
 		outfile: "./src/generated/bundledOptions.js",
 		format: "esm",
 	},
+	{
+		entryPoint: "./src/entrypoints/lightning-navigation.js",
+		outfile: "./src/generated/bundledLightningNavigation.js",
+		format: "esm",
+	},
 ];
 
 /**
