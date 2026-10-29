@@ -1,8 +1,7 @@
-import { assertEquals, assertExists } from "@std/testing/asserts";
+import { test } from "#test";
+import { assertEquals, assertExists } from "#test";
 import { installMockDom } from "../../happydom.test.ts";
-import {
-	createOpenOtherOrgModule,
-} from "../../../src/salesforce/module/openOtherOrg-module.js";
+import { createOpenOtherOrgModule } from "../../../src/salesforce/module/openOtherOrg-module.js";
 import { type InternalMessage, mockBrowser } from "../../mocks.test.ts";
 
 type Listener = (event: {
@@ -78,13 +77,11 @@ class TestElement {
 }
 
 type OpenOtherOrgModule = {
-	createOpenOtherOrgModal: (
-		options?: {
-			label?: string | null;
-			org?: string | null;
-			url?: string | null;
-		},
-	) => Promise<void>;
+	createOpenOtherOrgModal: (options?: {
+		label?: string | null;
+		org?: string | null;
+		url?: string | null;
+	}) => Promise<void>;
 };
 
 type OpenOtherOrgFixture = {
@@ -235,27 +232,31 @@ function loadOpenOtherOrgFixture() {
 	};
 }
 
-Deno.test("openOtherOrg blocks opening when another modal already exists", async () => {
+test("openOtherOrg blocks opening when another modal already exists", async () => {
 	const fixture = await loadOpenOtherOrgFixture();
 	fixture.setModalPresent(true);
 
 	await fixture.module.createOpenOtherOrgModal();
 
-	assertEquals(fixture.toasts, [{
-		message: "error_close_other_modal",
-		status: "error",
-	}]);
+	assertEquals(fixture.toasts, [
+		{
+			message: "error_close_other_modal",
+			status: "error",
+		},
+	]);
 });
 
-Deno.test("openOtherOrg validates inputs and opens a confirmed target org", async () => {
+test("openOtherOrg validates inputs and opens a confirmed target org", async () => {
 	const fixture = await loadOpenOtherOrgFixture();
 	fixture.setSkipLinkDetection(false);
 
 	await fixture.module.createOpenOtherOrgModal();
 	assertEquals(fixture.hanger.children.length, 1);
 	assertEquals(
-		fixture.toasts.some((toast) =>
-			toast.message === "error_link_with_id" && toast.status === "warning"
+		fixture.toasts.some(
+			(toast) =>
+				toast.message === "error_link_with_id" &&
+				toast.status === "warning",
 		),
 		true,
 	);
@@ -303,14 +304,16 @@ Deno.test("openOtherOrg validates inputs and opens a confirmed target org", asyn
 	fixture.setLinkTarget(null);
 	await fixture.saveButton.click();
 	assertEquals(fixture.closeButton.getClicks(), 1);
-	assertEquals(fixture.openCalls, [{
-		target: "_blank",
-		url: "https://gamma.lightning.force.com/lightning/setup/001ABCDEF123456789/view",
-	}]);
+	assertEquals(fixture.openCalls, [
+		{
+			target: "_blank",
+			url: "https://gamma.lightning.force.com/lightning/setup/001ABCDEF123456789/view",
+		},
+	]);
 	assertEquals(fixture.translations.length > 0, true);
 });
 
-Deno.test("openOtherOrg default confirm callback opens when global confirm accepts", async () => {
+test("openOtherOrg default confirm callback opens when global confirm accepts", async () => {
 	const originalConfirm = globalThis.confirm;
 	const confirmMessages: string[] = [];
 	const fixture = await loadOpenOtherOrgFixture();
@@ -353,8 +356,7 @@ Deno.test("openOtherOrg default confirm callback opens when global confirm accep
 				return Promise.resolve(String(payload));
 			},
 			locationRef: {
-				href:
-					"https://acme.lightning.force.com/lightning/setup/Users/home",
+				href: "https://acme.lightning.force.com/lightning/setup/Users/home",
 			},
 			open: (url: string | URL, target?: string) => {
 				fixture.openCalls.push({
@@ -391,10 +393,12 @@ Deno.test("openOtherOrg default confirm callback opens when global confirm accep
 		assertEquals(confirmMessages, [
 			"confirm_another_org\nhttps://beta.lightning.force.com/lightning/setup/Users/home",
 		]);
-		assertEquals(fixture.openCalls, [{
-			target: "_self",
-			url: "https://beta.lightning.force.com/lightning/setup/Users/home",
-		}]);
+		assertEquals(fixture.openCalls, [
+			{
+				target: "_self",
+				url: "https://beta.lightning.force.com/lightning/setup/Users/home",
+			},
+		]);
 	} finally {
 		Object.defineProperty(globalThis, "confirm", {
 			configurable: true,
@@ -404,7 +408,7 @@ Deno.test("openOtherOrg default confirm callback opens when global confirm accep
 	}
 });
 
-Deno.test("openOtherOrg ignores repeated save clicks for the same extracted org", async () => {
+test("openOtherOrg ignores repeated save clicks for the same extracted org", async () => {
 	const fixture = await loadOpenOtherOrgFixture();
 	fixture.setSkipLinkDetection(true);
 	fixture.setConfirmResult(false);
@@ -424,197 +428,189 @@ Deno.test("openOtherOrg ignores repeated save clicks for the same extracted org"
 	assertEquals(fixture.toasts.length, toastCountAfterFirstClick);
 });
 
-Deno.test(
-	"openOtherOrg reuses stateful validation regex across modal reopens without alternating failures",
-	async () => {
-		const openCalls: Array<{ target: string; url: string }> = [];
-		const modalSessions: Array<{
-			closeButton: TestElement;
-			input: TestElement;
-			saveButton: TestElement;
-		}> = [];
+test("openOtherOrg reuses stateful validation regex across modal reopens without alternating failures", async () => {
+	const openCalls: Array<{ target: string; url: string }> = [];
+	const modalSessions: Array<{
+		closeButton: TestElement;
+		input: TestElement;
+		saveButton: TestElement;
+	}> = [];
 
-		const module = createOpenOtherOrgModule({
-			documentRef: {
-				getElementById: () => null,
-			},
-			ensureAllTabsAvailability: () =>
-				Promise.resolve({
-					getSingleTabByData: () => ({
-						label: "Users",
-						url: "Users/home",
-					}),
+	const module = createOpenOtherOrgModule({
+		documentRef: {
+			getElementById: () => null,
+		},
+		ensureAllTabsAvailability: () =>
+			Promise.resolve({
+				getSingleTabByData: () => ({
+					label: "Users",
+					url: "Users/home",
 				}),
-			generateOpenOtherOrgModal: () => {
-				const session = {
-					closeButton: new TestElement(),
-					input: new TestElement(),
-					saveButton: new TestElement(),
-				};
-				modalSessions.push(session);
-				return Promise.resolve({
-					closeButton: session.closeButton,
-					getSelectedRadioButtonValue: () => "_blank",
-					inputContainer: session.input,
-					modalParent: new TestElement(),
-					saveButton: session.saveButton,
-				});
+			}),
+		generateOpenOtherOrgModal: () => {
+			const session = {
+				closeButton: new TestElement(),
+				input: new TestElement(),
+				saveButton: new TestElement(),
+			};
+			modalSessions.push(session);
+			return Promise.resolve({
+				closeButton: session.closeButton,
+				getSelectedRadioButtonValue: () => "_blank",
+				inputContainer: session.input,
+				modalParent: new TestElement(),
+				saveButton: session.saveButton,
+			});
+		},
+		getCurrentHref: () =>
+			"https://acme.lightning.force.com/lightning/setup/Users/home",
+		getModalHanger: () => new TestElement(),
+		getSettings: () => Promise.resolve([{ enabled: true }]),
+		getTranslations: (payload: string | string[] | unknown[]) =>
+			Array.isArray(payload)
+				? Promise.resolve(payload.map(() => "confirm-msg"))
+				: Promise.resolve("confirm-msg"),
+		locationRef: {
+			href: "https://acme.lightning.force.com/lightning/setup/Users/home",
+		},
+		open: (url: string | URL, target?: string) => {
+			openCalls.push({ target: target ?? "", url: String(url) });
+		},
+		salesforceUrlPattern: /^[a-z0-9.-]+$/gi,
+		sldsConfirm: () => Promise.resolve(true),
+		showToast: () => {},
+		tabRef: {
+			containsSalesforceId: () => false,
+			extractOrgName: (value: string | null | undefined) => {
+				if (value == null) {
+					return "acme";
+				}
+				return value.replace(/\.lightning\.force\.com$/, "");
 			},
-			getCurrentHref: () =>
-				"https://acme.lightning.force.com/lightning/setup/Users/home",
-			getModalHanger: () => new TestElement(),
-			getSettings: () => Promise.resolve([{ enabled: true }]),
-			getTranslations: (payload: string | string[] | unknown[]) =>
-				Array.isArray(payload)
-					? Promise.resolve(payload.map(() => "confirm-msg"))
-					: Promise.resolve("confirm-msg"),
-			locationRef: {
-				href:
-					"https://acme.lightning.force.com/lightning/setup/Users/home",
-			},
-			open: (url: string | URL, target?: string) => {
-				openCalls.push({ target: target ?? "", url: String(url) });
-			},
-			salesforceUrlPattern: /^[a-z0-9.-]+$/gi,
-			sldsConfirm: () => Promise.resolve(true),
-			showToast: () => {},
-			tabRef: {
-				containsSalesforceId: () => false,
-				extractOrgName: (value: string | null | undefined) => {
-					if (value == null) {
-						return "acme";
-					}
-					return value.replace(/\.lightning\.force\.com$/, "");
-				},
-				minifyURL: () => "Users/home",
-			},
-		});
+			minifyURL: () => "Users/home",
+		},
+	});
 
-		await module.createOpenOtherOrgModal({
-			label: "Users",
-			org: "acme",
-			url: "Users/home",
-		});
-		modalSessions[0].input.value = "beta";
-		await modalSessions[0].saveButton.click();
+	await module.createOpenOtherOrgModal({
+		label: "Users",
+		org: "acme",
+		url: "Users/home",
+	});
+	modalSessions[0].input.value = "beta";
+	await modalSessions[0].saveButton.click();
 
-		await module.createOpenOtherOrgModal({
-			label: "Users",
-			org: "acme",
-			url: "Users/home",
-		});
-		modalSessions[1].input.value = "gamma";
-		await modalSessions[1].saveButton.click();
+	await module.createOpenOtherOrgModal({
+		label: "Users",
+		org: "acme",
+		url: "Users/home",
+	});
+	modalSessions[1].input.value = "gamma";
+	await modalSessions[1].saveButton.click();
 
-		assertEquals(openCalls, [
-			{
-				target: "_blank",
-				url: "https://beta.lightning.force.com/lightning/setup/Users/home",
-			},
-			{
-				target: "_blank",
-				url: "https://gamma.lightning.force.com/lightning/setup/Users/home",
-			},
-		]);
-	},
-);
+	assertEquals(openCalls, [
+		{
+			target: "_blank",
+			url: "https://beta.lightning.force.com/lightning/setup/Users/home",
+		},
+		{
+			target: "_blank",
+			url: "https://gamma.lightning.force.com/lightning/setup/Users/home",
+		},
+	]);
+});
 
-Deno.test(
-	"openOtherOrg rebuilt modal controls do not stack listeners across reopens",
-	async () => {
-		const openCalls: Array<{ target: string; url: string }> = [];
-		const modalSessions: Array<{
-			closeButton: TestElement;
-			input: TestElement;
-			saveButton: TestElement;
-		}> = [];
+test("openOtherOrg rebuilt modal controls do not stack listeners across reopens", async () => {
+	const openCalls: Array<{ target: string; url: string }> = [];
+	const modalSessions: Array<{
+		closeButton: TestElement;
+		input: TestElement;
+		saveButton: TestElement;
+	}> = [];
 
-		const module = createOpenOtherOrgModule({
-			documentRef: {
-				getElementById: () => null,
-			},
-			ensureAllTabsAvailability: () =>
-				Promise.resolve({
-					getSingleTabByData: () => ({
-						label: "Users",
-						url: "Users/home",
-					}),
+	const module = createOpenOtherOrgModule({
+		documentRef: {
+			getElementById: () => null,
+		},
+		ensureAllTabsAvailability: () =>
+			Promise.resolve({
+				getSingleTabByData: () => ({
+					label: "Users",
+					url: "Users/home",
 				}),
-			generateOpenOtherOrgModal: () => {
-				const session = {
-					closeButton: new TestElement(),
-					input: new TestElement(),
-					saveButton: new TestElement(),
-				};
-				modalSessions.push(session);
-				return Promise.resolve({
-					closeButton: session.closeButton,
-					getSelectedRadioButtonValue: () => "_blank",
-					inputContainer: session.input,
-					modalParent: new TestElement(),
-					saveButton: session.saveButton,
-				});
+			}),
+		generateOpenOtherOrgModal: () => {
+			const session = {
+				closeButton: new TestElement(),
+				input: new TestElement(),
+				saveButton: new TestElement(),
+			};
+			modalSessions.push(session);
+			return Promise.resolve({
+				closeButton: session.closeButton,
+				getSelectedRadioButtonValue: () => "_blank",
+				inputContainer: session.input,
+				modalParent: new TestElement(),
+				saveButton: session.saveButton,
+			});
+		},
+		getCurrentHref: () =>
+			"https://acme.lightning.force.com/lightning/setup/Users/home",
+		getModalHanger: () => new TestElement(),
+		getSettings: () => Promise.resolve([{ enabled: true }]),
+		getTranslations: (payload: string | string[] | unknown[]) =>
+			Array.isArray(payload)
+				? Promise.resolve(payload.map(() => "confirm-msg"))
+				: Promise.resolve("confirm-msg"),
+		locationRef: {
+			href: "https://acme.lightning.force.com/lightning/setup/Users/home",
+		},
+		open: (url: string | URL, target?: string) => {
+			openCalls.push({ target: target ?? "", url: String(url) });
+		},
+		salesforceUrlPattern: /^[a-z0-9.-]+$/i,
+		sldsConfirm: () => Promise.resolve(true),
+		showToast: () => {},
+		tabRef: {
+			containsSalesforceId: () => false,
+			extractOrgName: (value: string | null | undefined) => {
+				if (value == null) {
+					return "acme";
+				}
+				return value.replace(/\.lightning\.force\.com$/, "");
 			},
-			getCurrentHref: () =>
-				"https://acme.lightning.force.com/lightning/setup/Users/home",
-			getModalHanger: () => new TestElement(),
-			getSettings: () => Promise.resolve([{ enabled: true }]),
-			getTranslations: (payload: string | string[] | unknown[]) =>
-				Array.isArray(payload)
-					? Promise.resolve(payload.map(() => "confirm-msg"))
-					: Promise.resolve("confirm-msg"),
-			locationRef: {
-				href:
-					"https://acme.lightning.force.com/lightning/setup/Users/home",
-			},
-			open: (url: string | URL, target?: string) => {
-				openCalls.push({ target: target ?? "", url: String(url) });
-			},
-			salesforceUrlPattern: /^[a-z0-9.-]+$/i,
-			sldsConfirm: () => Promise.resolve(true),
-			showToast: () => {},
-			tabRef: {
-				containsSalesforceId: () => false,
-				extractOrgName: (value: string | null | undefined) => {
-					if (value == null) {
-						return "acme";
-					}
-					return value.replace(/\.lightning\.force\.com$/, "");
-				},
-				minifyURL: () => "Users/home",
-			},
-		});
+			minifyURL: () => "Users/home",
+		},
+	});
 
-		await module.createOpenOtherOrgModal({
-			label: "Users",
-			org: "acme",
-			url: "Users/home",
-		});
-		modalSessions[0].input.value = "beta";
-		await modalSessions[0].saveButton.click();
+	await module.createOpenOtherOrgModal({
+		label: "Users",
+		org: "acme",
+		url: "Users/home",
+	});
+	modalSessions[0].input.value = "beta";
+	await modalSessions[0].saveButton.click();
 
-		await module.createOpenOtherOrgModal({
-			label: "Users",
-			org: "acme",
-			url: "Users/home",
-		});
-		modalSessions[1].input.value = "gamma";
-		await modalSessions[1].saveButton.click();
+	await module.createOpenOtherOrgModal({
+		label: "Users",
+		org: "acme",
+		url: "Users/home",
+	});
+	modalSessions[1].input.value = "gamma";
+	await modalSessions[1].saveButton.click();
 
-		assertEquals(openCalls, [
-			{
-				target: "_blank",
-				url: "https://beta.lightning.force.com/lightning/setup/Users/home",
-			},
-			{
-				target: "_blank",
-				url: "https://gamma.lightning.force.com/lightning/setup/Users/home",
-			},
-		]);
-	},
-);
+	assertEquals(openCalls, [
+		{
+			target: "_blank",
+			url: "https://beta.lightning.force.com/lightning/setup/Users/home",
+		},
+		{
+			target: "_blank",
+			url: "https://gamma.lightning.force.com/lightning/setup/Users/home",
+		},
+	]);
+});
 
-Deno.test("openOtherOrg falls back to minified href when no saved tab matches", async () => {
+test("openOtherOrg falls back to minified href when no saved tab matches", async () => {
 	const fixture = await loadOpenOtherOrgFixture();
 	fixture.setTabLookupFailure(true);
 	fixture.setSkipLinkDetection(true);
@@ -647,9 +643,9 @@ type RuntimeResponse =
 	| { enabled: string }
 	| { enabled: boolean; id: string }
 	| {
-		pinned: number;
-		tabs: Array<{ label: string; org: string; url: string }>;
-	};
+			pinned: number;
+			tabs: Array<{ label: string; org: string; url: string }>;
+	  };
 
 /**
  * Normalizes values to strings for tests.
@@ -764,7 +760,7 @@ function installCloneNodePolyfill() {
 			if ("value" in source && "value" in cloned) {
 				(cloned as HTMLInputElement | HTMLTextAreaElement).value =
 					(source as HTMLInputElement | HTMLTextAreaElement).value ??
-						"";
+					"";
 			}
 			if (deep) {
 				for (const child of Array.from(source.children)) {
@@ -784,9 +780,8 @@ function installCloneNodePolyfill() {
 	};
 }
 
-Deno.test({
-	name:
-		"openOtherOrg canonical import covers modal guards, input normalization, validation branches, and open flow",
+test({
+	name: "openOtherOrg canonical import covers modal guards, input normalization, validation branches, and open flow",
 	sanitizeOps: false,
 	sanitizeResources: false,
 	fn: async () => {
@@ -875,20 +870,18 @@ Deno.test({
 			toastHanger.className = "oneConsoleTabset navexConsoleTabset";
 			document.body.appendChild(toastHanger);
 
-			const generatorModule = await import(
-				"../../../src/salesforce/generator.js"
-			);
+			const generatorModule =
+				await import("../../../src/salesforce/generator.js");
 			generatorModule.createGeneratorModule({
 				getTranslations: generatorArrayTranslations,
 			});
 
-			const translatorModule = await import(
-				"../../../src/core/translator.js"
-			);
+			const translatorModule =
+				await import("../../../src/core/translator.js");
 			const originalTranslate =
 				translatorModule.TranslationService.prototype.translate;
 			translatorModule.TranslationService.prototype.translate =
-				(async function (
+				async function (
 					this: object,
 					key: string | string[],
 					connector = " ",
@@ -912,9 +905,9 @@ Deno.test({
 						}
 					}
 					return translatedValues.join(connector);
-				}) as typeof originalTranslate;
-			translatorModule.TranslationService.prototype
-				.updatePageTranslations = () => Promise.resolve(false);
+				} as typeof originalTranslate;
+			translatorModule.TranslationService.prototype.updatePageTranslations =
+				() => Promise.resolve(false);
 			translatorModule.createTranslatorModule({
 				BROWSER: mockBrowser,
 				fetch: () =>
@@ -940,17 +933,15 @@ Deno.test({
 				},
 			});
 
-			const tabContainerModule = await import(
-				"../../../src/core/tabContainer.js"
-			);
+			const tabContainerModule =
+				await import("../../../src/core/tabContainer.js");
 			tabContainerModule.TabContainer._clear();
 
-			const openOtherOrgRuntimeModule = await import(
-				"../../../src/salesforce/runtime/openOtherOrg-runtime.js"
-			);
+			const openOtherOrgRuntimeModule =
+				await import("../../../src/salesforce/runtime/openOtherOrg-runtime.js");
 			const { MODAL_ID } = await import("../../../src/core/constants.js");
-			const openOtherOrgModule = openOtherOrgRuntimeModule
-				.createOpenOtherOrgModule({
+			const openOtherOrgModule =
+				openOtherOrgRuntimeModule.createOpenOtherOrgModule({
 					sldsConfirm: () => Promise.resolve(confirmResult),
 				});
 
@@ -1005,9 +996,9 @@ Deno.test({
 			await flushAsyncTasks();
 			assertEquals(openCalls.length, 0);
 
-			const radios = [...document.querySelectorAll(
-				"input[type='radio']",
-			)] as HTMLInputElement[];
+			const radios = [
+				...document.querySelectorAll("input[type='radio']"),
+			] as HTMLInputElement[];
 			for (const radio of radios) {
 				radio.checked = false;
 			}
@@ -1026,12 +1017,12 @@ Deno.test({
 			assertEquals(Array.isArray(openCalls), true);
 		} finally {
 			const restoredConsole = {
-				error: originalConsole.error?.bind(originalConsole) ??
-					(() => {}),
+				error:
+					originalConsole.error?.bind(originalConsole) ?? (() => {}),
 				info: originalConsole.info?.bind(originalConsole) ?? (() => {}),
 				log: originalConsole.log?.bind(originalConsole) ?? (() => {}),
-				trace: originalConsole.trace?.bind(originalConsole) ??
-					(() => {}),
+				trace:
+					originalConsole.trace?.bind(originalConsole) ?? (() => {}),
 				warn: originalConsole.warn?.bind(originalConsole) ?? (() => {}),
 			};
 			Object.defineProperty(globalThis, "console", {
@@ -1057,9 +1048,8 @@ Deno.test({
 	},
 });
 
-Deno.test({
-	name:
-		"openOtherOrg stock modal does not leak Enter key listeners across reopen",
+test({
+	name: "openOtherOrg stock modal does not leak Enter key listeners across reopen",
 	sanitizeOps: false,
 	sanitizeResources: false,
 	fn: async () => {
@@ -1071,9 +1061,8 @@ Deno.test({
 		const restoreCloneNode = installCloneNodePolyfill();
 		const originalConsole = globalThis.console;
 		const originalOpen = globalThis.open;
-		const translatorModule = await import(
-			"../../../src/core/translator.js"
-		);
+		const translatorModule =
+			await import("../../../src/core/translator.js");
 		const originalTranslate =
 			translatorModule.TranslationService.prototype.translate;
 		const originalSendMessage = mockBrowser.runtime.sendMessage.bind(
@@ -1091,11 +1080,13 @@ Deno.test({
 				) {
 					const response = {
 						pinned: 0,
-						tabs: [{
-							label: "Users",
-							org: "acme",
-							url: "Users/home",
-						}],
+						tabs: [
+							{
+								label: "Users",
+								org: "acme",
+								url: "Users/home",
+							},
+						],
 					};
 					callback?.(response);
 					return Promise.resolve(response);
@@ -1144,26 +1135,24 @@ Deno.test({
 			toastHanger.className = "oneConsoleTabset navexConsoleTabset";
 			document.body.appendChild(toastHanger);
 
-			const generatorModule = await import(
-				"../../../src/salesforce/generator.js"
-			);
+			const generatorModule =
+				await import("../../../src/salesforce/generator.js");
 			generatorModule.createGeneratorModule({
 				getTranslations: generatorArrayTranslations,
 			});
 
-			translatorModule.TranslationService.prototype.translate =
-				(function (
-					this: object,
-					key: string | string[],
-					connector = " ",
-				) {
-					if (Array.isArray(key)) {
-						return Promise.resolve(key.join(connector));
-					}
-					return Promise.resolve(key);
-				}) as typeof translatorModule.TranslationService.prototype.translate;
-			translatorModule.TranslationService.prototype
-				.updatePageTranslations = () => Promise.resolve(false);
+			translatorModule.TranslationService.prototype.translate = function (
+				this: object,
+				key: string | string[],
+				connector = " ",
+			) {
+				if (Array.isArray(key)) {
+					return Promise.resolve(key.join(connector));
+				}
+				return Promise.resolve(key);
+			} as typeof translatorModule.TranslationService.prototype.translate;
+			translatorModule.TranslationService.prototype.updatePageTranslations =
+				() => Promise.resolve(false);
 			translatorModule.createTranslatorModule({
 				BROWSER: mockBrowser,
 				fetch: () =>
@@ -1201,9 +1190,8 @@ Deno.test({
 				},
 			});
 
-			const generatorExports = await import(
-				"../../../src/salesforce/generator.js"
-			);
+			const generatorExports =
+				await import("../../../src/salesforce/generator.js");
 			const generateOpenOtherOrgModal = (options: {
 				label: string | null;
 				org: string | null;
@@ -1237,17 +1225,14 @@ Deno.test({
 				}>;
 			const getModalHanger = () => ({
 				appendChild: (element: unknown) =>
-					modalHanger.appendChild(
-						element as Node,
-					),
+					modalHanger.appendChild(element as Node),
 			});
-			const getTranslations = (
-				message: string | string[] | unknown[],
-			) => Promise.resolve(
-				generatorArrayTranslations(
-					message as string | URL | Array<string | URL> | null,
-				) as string | string[],
-			);
+			const getTranslations = (message: string | string[] | unknown[]) =>
+				Promise.resolve(
+					generatorArrayTranslations(
+						message as string | URL | Array<string | URL> | null,
+					) as string | string[],
+				);
 			const openOtherOrgModule = createOpenOtherOrgModule({
 				documentRef: document,
 				ensureAllTabsAvailability: () =>
@@ -1319,10 +1304,12 @@ Deno.test({
 			document.dispatchEvent(enterEvent);
 			await flushAsyncTasks();
 
-			assertEquals(openCalls, [{
-				target: "_blank",
-				url: "https://beta.lightning.force.com/lightning/setup/Users/home",
-			}]);
+			assertEquals(openCalls, [
+				{
+					target: "_blank",
+					url: "https://beta.lightning.force.com/lightning/setup/Users/home",
+				},
+			]);
 		} finally {
 			Object.defineProperty(globalThis, "console", {
 				configurable: true,

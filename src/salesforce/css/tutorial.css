@@ -16,7 +16,9 @@
 	background:
 		radial-gradient(circle, rgba(100, 130, 255, 0.18) 1px, transparent 1px),
 		#eef1ff;
-	background-size: 20px 20px, 100% 100%;
+	background-size:
+		20px 20px,
+		100% 100%;
 	border: 1.5px solid #3355cc;
 	border-radius: 4px;
 	padding: 22px 22px 18px;
@@ -24,7 +26,9 @@
 	width: max-content;
 	z-index: 10001;
 	pointer-events: auto;
-	box-shadow: 0 4px 0 #3355cc, 0 8px 32px rgba(51, 85, 204, 0.2);
+	box-shadow:
+		0 4px 0 #3355cc,
+		0 8px 32px rgba(51, 85, 204, 0.2);
 	animation: tut-v7-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 /* corner brackets via pseudo — applied on the wrapper */

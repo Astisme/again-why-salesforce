@@ -100,17 +100,18 @@ export function createImportModule(overrides = {}) {
 		toastWarning: overrides.TOAST_WARNING ?? TOAST_WARNING,
 		tabRef: overrides.Tab ?? Tab,
 		tabContainerRef: overrides.TabContainer ?? TabContainer,
-		ensureAllTabsAvailability: overrides.ensureAllTabsAvailability ??
-			ensureAllTabsAvailability,
-		getTranslations: overrides.getTranslations ??
-			TranslationService.getTranslations,
-		generateCheckboxWithLabel: overrides.generateCheckboxWithLabel ??
-			generateCheckboxWithLabel,
+		ensureAllTabsAvailability:
+			overrides.ensureAllTabsAvailability ?? ensureAllTabsAvailability,
+		getTranslations:
+			overrides.getTranslations ?? TranslationService.getTranslations,
+		generateCheckboxWithLabel:
+			overrides.generateCheckboxWithLabel ?? generateCheckboxWithLabel,
 		generateSection: overrides.generateSection ?? generateSection,
-		generateSldsFileInput: overrides.generateSldsFileInput ??
-			generateSldsFileInput,
+		generateSldsFileInput:
+			overrides.generateSldsFileInput ?? generateSldsFileInput,
 		generateSldsModal: overrides.generateSldsModal ?? generateSldsModal,
-		generateSldsModalWithTabList: overrides.generateSldsModalWithTabList ??
+		generateSldsModalWithTabList:
+			overrides.generateSldsModalWithTabList ??
 			generateSldsModalWithTabList,
 		injectStyle: overrides.injectStyle ?? injectStyle,
 		sfAfterSet: overrides.sf_afterSet ?? sf_afterSet,

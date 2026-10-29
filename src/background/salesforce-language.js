@@ -31,10 +31,7 @@ async function _getAPIHostAndHeaders(browserApi, currentUrl) {
 	if (url.hostname.endsWith(LIGHTNING_FORCE_COM)) {
 		origin = url.origin.replace(LIGHTNING_FORCE_COM, MY_SALESFORCE_COM);
 	} else if (url.hostname.endsWith(MY_SALESFORCE_SETUP_COM)) {
-		origin = url.origin.replace(
-			MY_SALESFORCE_SETUP_COM,
-			MY_SALESFORCE_COM,
-		);
+		origin = url.origin.replace(MY_SALESFORCE_SETUP_COM, MY_SALESFORCE_COM);
 	}
 	const cookies = await browserApi.cookies?.getAll({
 		domain: origin.replace("https://", ""),
@@ -90,12 +87,9 @@ async function getCurrentUserInfo(browserApi, currentUrl) {
  * @param {Function|null} [callback=null] - Optional callback to receive the language.
  * @return {Promise<string|Object>} The language code, or storage items when the fallback invokes a callback.
  */
-export async function bg_getSalesforceLanguage(
-	callback = null,
-) {
+export async function bg_getSalesforceLanguage(callback = null) {
 	const currentUrl = (await bg_getCurrentBrowserTab())?.url;
-	const language = (await getCurrentUserInfo(BROWSER, currentUrl))
-		?.language;
+	const language = (await getCurrentUserInfo(BROWSER, currentUrl))?.language;
 	if (language == null) {
 		return bg_getStorage(callback, LOCALE_KEY);
 	}

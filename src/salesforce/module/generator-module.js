@@ -157,8 +157,7 @@ function getRng_n_digits(digits = 1) {
 		throw new Error("error_required_params");
 	}
 	const tenToTheDigits = Math.pow(10, digits - 1);
-	return Math.floor(Math.random() * 9 * tenToTheDigits) +
-		tenToTheDigits;
+	return Math.floor(Math.random() * 9 * tenToTheDigits) + tenToTheDigits;
 }
 
 /**
@@ -190,27 +189,24 @@ export async function handleLightningLinkClick(e) {
 	}
 	const [allTabs, settings] = await Promise.all([
 		ensureAllTabsAvailability(),
-		getSettings([
-			LINK_NEW_BROWSER,
-			USE_LIGHTNING_NAVIGATION,
-		]),
+		getSettings([LINK_NEW_BROWSER, USE_LIGHTNING_NAVIGATION]),
 	]);
 	void allTabs.handleClickTabByData({ url: Tab.minifyURL(url) });
 	const linkTarget = currentTarget.target ?? "";
-	const fallbackTarget = linkTarget === ""
-		? _getLinkTarget(metaCtrl, url)
-		: linkTarget;
-	const target =
-		settings?.some((setting) =>
-				setting.id === LINK_NEW_BROWSER && setting.enabled
-			)
-			? "_blank"
-			: fallbackTarget;
+	const fallbackTarget =
+		linkTarget === "" ? _getLinkTarget(metaCtrl, url) : linkTarget;
+	const target = settings?.some(
+		(setting) => setting.id === LINK_NEW_BROWSER && setting.enabled,
+	)
+		? "_blank"
+		: fallbackTarget;
 	// open link into new page when requested or if the user is clicking the favourite tab one more time
 	if (
-		target === "_blank" || url === getCurrentHref() ||
-		settings?.some((setting) =>
-			setting.id === USE_LIGHTNING_NAVIGATION && setting.enabled
+		target === "_blank" ||
+		url === getCurrentHref() ||
+		settings?.some(
+			(setting) =>
+				setting.id === USE_LIGHTNING_NAVIGATION && setting.enabled,
 		)
 	) {
 		open(url, target);
@@ -226,11 +222,11 @@ export async function handleLightningLinkClick(e) {
  * @return {boolean} True if arrays are equal, otherwise false.
  */
 function areArraysEqual(arr1, arr2) {
-	return (arr1 == null && arr2 == null) ||
-		(
-			arr1?.length === arr2?.length &&
-			JSON.stringify(arr1) === JSON.stringify(arr2)
-		);
+	return (
+		(arr1 == null && arr2 == null) ||
+		(arr1?.length === arr2?.length &&
+			JSON.stringify(arr1) === JSON.stringify(arr2))
+	);
 }
 
 const oldSettingsBySurface = new Map();
@@ -242,10 +238,12 @@ const oldSettingsBySurface = new Map();
  */
 function wereSettingsUpdated(settings, surface = "tabs") {
 	const oldSettings = oldSettingsBySurface.get(surface) ?? null;
-	return oldSettings == null ||
-		Object.keys(settings).some((key) =>
-			!areArraysEqual(oldSettings[key], settings[key])
-		);
+	return (
+		oldSettings == null ||
+		Object.keys(settings).some(
+			(key) => !areArraysEqual(oldSettings[key], settings[key]),
+		)
+	);
 }
 
 /**
@@ -314,9 +312,12 @@ function _isPseudoRule(id) {
  * @return {string} Comma-joined selector list.
  */
 function _appendSelectorSuffixes(selector, suffixes) {
-	return selector.split(", ").flatMap((baseSelector) =>
-		suffixes.map((suffix) => `${baseSelector}${suffix}`)
-	).join(", ");
+	return selector
+		.split(", ")
+		.flatMap((baseSelector) =>
+			suffixes.map((suffix) => `${baseSelector}${suffix}`),
+		)
+		.join(", ");
 }
 
 /**
@@ -339,12 +340,7 @@ function _getManageTabsTargetSuffixes(styleId) {
 		case TAB_STYLE_BOLD:
 		case TAB_STYLE_ITALIC:
 		case TAB_STYLE_UNDERLINE:
-			return [
-				" > td",
-				" > td input",
-				" > td button",
-				" > td a",
-			];
+			return [" > td", " > td input", " > td button", " > td a"];
 		default:
 			throw new Error("error_required_params");
 	}
@@ -400,9 +396,10 @@ function _buildManageTabsAppendRowReset({
 	isGeneric = true,
 	isPinned = false,
 } = {}) {
-	const selector = `${
-		_getManageTabsBaseSelector({ isGeneric, isPinned })
-	}[data-draggable=false]:not(:focus-within)`;
+	const selector = `${_getManageTabsBaseSelector({
+		isGeneric,
+		isPinned,
+	})}[data-draggable=false]:not(:focus-within)`;
 	const rowSelector = selector;
 	const cellSelector = _appendSelectorSuffixes(selector, [" > td"]);
 	const contentSelector = _appendSelectorSuffixes(selector, [
@@ -505,15 +502,13 @@ function _buildCssRules({
 		surface,
 	});
 	if (surface === "manage-tabs") {
-		inactiveCss = `${
-			_buildManageTabsAppendRowReset({
-				isGeneric,
-				isPinned,
-			})
-		}${_buildManageTabsSurfaceReset(inactiveSelector)}${inactiveCss}`;
-		activeCss = `${
-			_buildManageTabsSurfaceReset(activeSelector)
-		}${activeCss}`;
+		inactiveCss = `${_buildManageTabsAppendRowReset({
+			isGeneric,
+			isPinned,
+		})}${_buildManageTabsSurfaceReset(inactiveSelector)}${inactiveCss}`;
+		activeCss = `${_buildManageTabsSurfaceReset(
+			activeSelector,
+		)}${activeCss}`;
 	}
 	return { activeCss, inactiveCss, pseudoRules };
 }
@@ -539,18 +534,20 @@ function _processStyleList({
 		isPinned,
 		surface,
 	});
-	const cssRules = `${inactiveCss}${activeCss}${
-		_getPseudoRules({ pseudoRules, isGeneric, isPinned, surface })
-	}`;
-	const styleId = surface === "tabs"
-		? `${EXTENSION_NAME}-${getPinnedSpecificKey({ isGeneric, isPinned })}`
-		: `${EXTENSION_NAME}-${surface}-${
-			getPinnedSpecificKey({ isGeneric, isPinned })
-		}`;
-	injectStyle(
-		styleId,
-		{ css: cssRules },
-	);
+	const cssRules = `${inactiveCss}${activeCss}${_getPseudoRules({
+		pseudoRules,
+		isGeneric,
+		isPinned,
+		surface,
+	})}`;
+	const styleId =
+		surface === "tabs"
+			? `${EXTENSION_NAME}-${getPinnedSpecificKey({ isGeneric, isPinned })}`
+			: `${EXTENSION_NAME}-${surface}-${getPinnedSpecificKey({
+					isGeneric,
+					isPinned,
+				})}`;
+	injectStyle(styleId, { css: cssRules });
 }
 /**
  * Generates and injects CSS rules based on saved tab style settings.
@@ -564,9 +561,7 @@ function _processStyleList({
  * @param {string} [options.surface="tabs"] - UI surface to target.
  * @return {Promise<void>} Resolves once styles are updated.
  */
-export async function generateStyleFromSettings({
-	surface = "tabs",
-} = {}) {
+export async function generateStyleFromSettings({ surface = "tabs" } = {}) {
 	const settings = await getStyleSettings();
 	if (settings == null || !wereSettingsUpdated(settings, surface)) {
 		return;
@@ -618,11 +613,7 @@ export async function generateStyleFromSettings({
  */
 export function generateRowTemplate(
 	{ label = null, url = null, org = null } = {},
-	{
-		hide = false,
-		isPinned = false,
-		index = 0,
-	} = {},
+	{ hide = false, isPinned = false, index = 0 } = {},
 ) {
 	const miniURL = Tab.minifyURL(url);
 	const expURL = Tab.expandURL(url, getCurrentHref());
@@ -764,11 +755,9 @@ export async function generateSldsToastMessage(
 	contentInner.appendChild(extensionNameTitle);
 	const translatedMessage = await getTranslations(message);
 	const isArrayMessage = Array.isArray(translatedMessage);
-	for (
-		const msg_split of isArrayMessage
-			? translatedMessage
-			: translatedMessage.split("\n")
-	) {
+	for (const msg_split of isArrayMessage
+		? translatedMessage
+		: translatedMessage.split("\n")) {
 		const messageSpan = document.createElement(
 			isArrayMessage ? "span" : "div",
 		);
@@ -802,10 +791,7 @@ export async function generateSldsToastMessage(
 async function generateRequired() {
 	const requiredElement = document.createElement("abbr");
 	requiredElement.classList.add("slds-required");
-	requiredElement.setAttribute(
-		"title",
-		await getTranslations("required"),
-	);
+	requiredElement.setAttribute("title", await getTranslations("required"));
 	requiredElement.setAttribute("part", "required");
 	requiredElement.textContent = "*";
 	return requiredElement;
@@ -855,8 +841,8 @@ async function createInputElement(
 		//translateValue = true
 	} = {},
 ) {
-	const [msg_tranLabel, msg_tranPlaceholder, msg_tranTitle] = await Promise
-		.all([
+	const [msg_tranLabel, msg_tranPlaceholder, msg_tranTitle] =
+		await Promise.all([
 			translateLabel ? getTranslations(label) : Promise.resolve(label),
 			translatePlaceholder
 				? getTranslations(placeholder)
@@ -913,23 +899,26 @@ async function createInputElement(
  *   - `inputParent`: The parent `div` containing the entire input structure.
  *   - `inputContainer`: The main input element.
  */
-async function generateInput({
-	label,
-	type = "text",
-	required = false,
-	placeholder = null,
-	prepend = null,
-	append = null,
-	style = null,
-	value = null,
-	title = null,
-	isTextArea = false,
-} = {}, {
-	translateLabel = true,
-	translatePlaceholder = true,
-	translateTitle = true,
-	//translateValue = true
-} = {}) {
+async function generateInput(
+	{
+		label,
+		type = "text",
+		required = false,
+		placeholder = null,
+		prepend = null,
+		append = null,
+		style = null,
+		value = null,
+		title = null,
+		isTextArea = false,
+	} = {},
+	{
+		translateLabel = true,
+		translatePlaceholder = true,
+		translateTitle = true,
+		//translateValue = true
+	} = {},
+) {
 	const options = { translateLabel, translatePlaceholder, translateTitle };
 	const inputParent = document.createElement("div");
 	inputParent.setAttribute("name", "input");
@@ -971,17 +960,20 @@ async function generateInput({
 		const prepChild = await createInputElement(prepend, options);
 		inputWrapper.appendChild(prepChild);
 	}
-	const inputContainer = await createInputElement({
-		id: inputId,
-		label,
-		type,
-		placeholder,
-		required,
-		style,
-		value,
-		title,
-		isTextArea,
-	}, options);
+	const inputContainer = await createInputElement(
+		{
+			id: inputId,
+			label,
+			type,
+			placeholder,
+			required,
+			style,
+			value,
+			title,
+			isTextArea,
+		},
+		options,
+	);
 	inputWrapper.appendChild(inputContainer);
 	if (append != null) {
 		const appChild = await createInputElement(append, options);
@@ -1164,9 +1156,14 @@ function getSelectedTabsFromModalSelection({
 	selectAllButton,
 } = {}) {
 	const selectedAll = selectAllButton.hasAttribute("disabled");
-	const selectedTabs = selectedAll ? tabs : checkboxes
-		.filter((checkbox) => checkbox.checked)
-		.map((checkbox) => tabs[Number.parseInt(checkbox.dataset.tabIndex)]);
+	const selectedTabs = selectedAll
+		? tabs
+		: checkboxes
+				.filter((checkbox) => checkbox.checked)
+				.map(
+					(checkbox) =>
+						tabs[Number.parseInt(checkbox.dataset.tabIndex)],
+				);
 	return {
 		selectedAll,
 		tabs: selectedTabs,
@@ -1267,12 +1264,9 @@ function createSldsModalShell({
 	modalParent.setAttribute("aria-hidden", "false");
 	modalParent.style.display = "block";
 	modalParent.style.zIndex = "9001";
-	const awsfStyle = injectStyle(
-		"awsf-modal-style",
-		{
-			css: `.${HIDDEN_CLASS} { display:none; visibility:hidden; } .${EXTENSION_NAME} :is([disabled=true], td[data-draggable=false]) { cursor: not-allowed !important; pointer-events: painted; }`,
-		},
-	);
+	const awsfStyle = injectStyle("awsf-modal-style", {
+		css: `.${HIDDEN_CLASS} { display:none; visibility:hidden; } .${EXTENSION_NAME} :is([disabled=true], td[data-draggable=false]) { cursor: not-allowed !important; pointer-events: painted; }`,
+	});
 	modalParent.appendChild(awsfStyle);
 	const backdropDiv = document.createElement("div");
 	backdropDiv.setAttribute("tabindex", "-1");
@@ -1436,10 +1430,7 @@ function createSldsModalShell({
 	let legend = null;
 	if (showRequiredInfo) {
 		legend = document.createElement("div");
-		legend.classList.add(
-			"required-legend",
-			"slds-p-top--none",
-		);
+		legend.classList.add("required-legend", "slds-p-top--none");
 		article.appendChild(legend);
 		const abbr = document.createElement("abbr");
 		abbr.classList.add("slds-required");
@@ -1665,17 +1656,22 @@ function generateSldsPromptModal({
  *   - radioGroup: the container <div> element with all radio buttons appended.
  *   - getSelectedRadioButtonValue: a function that returns the value of the currently selected radio button or undefined if none selected.
  */
-export function generateRadioButtons(name, {
-	id: radio0Id = null,
-	value: radio0Value = null,
-	label: radio0Label = null,
-	checked: radio0Checked = false,
-} = {}, {
-	id: radio1Id = null,
-	value: radio1Value = null,
-	label: radio1Label = null,
-	checked: radio1Checked = false,
-} = {}, ...otherRadioDefs) {
+export function generateRadioButtons(
+	name,
+	{
+		id: radio0Id = null,
+		value: radio0Value = null,
+		label: radio0Label = null,
+		checked: radio0Checked = false,
+	} = {},
+	{
+		id: radio1Id = null,
+		value: radio1Value = null,
+		label: radio1Label = null,
+		checked: radio1Checked = false,
+	} = {},
+	...otherRadioDefs
+) {
 	const radio0def = {
 		id: radio0Id,
 		value: radio0Value,
@@ -1728,9 +1724,11 @@ export function generateRadioButtons(name, {
  * - closeButton: The close button element for closing the modal.
  * - inputContainer: The container element for the org link input field.
  */
-export async function generateOpenOtherOrgModal(
-	{ label = null, url = null, org = null } = {},
-) {
+export async function generateOpenOtherOrgModal({
+	label = null,
+	url = null,
+	org = null,
+} = {}) {
 	const [modalTitle, open_here, open_new_tab] = await getTranslations([
 		label ?? "where_to",
 		"open_here",
@@ -1750,8 +1748,7 @@ export async function generateOpenOtherOrgModal(
 			type: "text",
 			required: true,
 			placeholder: "other_org_placeholder",
-			style:
-				"width: 100%; height: 3em; resize: horizontal; word-break: break-all; overflow-y: hidden; white-space: nowrap;",
+			style: "width: 100%; height: 3em; resize: horizontal; word-break: break-all; overflow-y: hidden; white-space: nowrap;",
 			isTextArea: true,
 			value: org,
 		}),
@@ -1834,23 +1831,17 @@ export async function generateSldsFileInput(
 ) {
 	if (
 		(!allowDrop && preventFileSelection) ||
-		(
-			wrapperId == null || wrapperId === "" || inputElementId == null ||
-			inputElementId === "" || acceptedType == null || acceptedType === ""
-		)
+		wrapperId == null ||
+		wrapperId === "" ||
+		inputElementId == null ||
+		inputElementId === "" ||
+		acceptedType == null ||
+		acceptedType === ""
 	) {
-		throw new Error(
-			"error_required_params",
-		);
+		throw new Error("error_required_params");
 	}
 	const [msg_file, msg_files, msg_upload, msg_drop, msg_or_drop] =
-		await getTranslations([
-			"file",
-			"files",
-			"upload",
-			"drop",
-			"or_drop",
-		]);
+		await getTranslations(["file", "files", "upload", "drop", "or_drop"]);
 	const fileInputWrapper = document.createElement("div");
 	fileInputWrapper.id = wrapperId;
 	fileInputWrapper.classList.add(
@@ -2103,39 +2094,48 @@ export async function generateUpdateTabModal(label, url, org) {
 			modalTitle: label,
 		}),
 		generateSection("tab_information"),
-		generateInput({
-			label: "tab_label",
-			type: "text",
-			required: true,
-			placeholder: label ?? "users",
-			style: "width: 100%",
-			value: label,
-			title: "table_row_label",
-		}, {
-			translatePlaceholder: label == null,
-		}),
-		generateInput({
-			label: "tab_url",
-			type: "text",
-			required: true,
-			placeholder: url ?? "ManageUsers/home",
-			style: "width: 100%",
-			value: url,
-			title: "table_row_url",
-		}, {
-			translatePlaceholder: false,
-		}),
-		generateInput({
-			label: "tab_org",
-			type: "text",
-			required: false,
-			placeholder: org ?? "mycustomorg",
-			style: "width: 100%",
-			value: org,
-			title: "table_row_org_name",
-		}, {
-			translatePlaceholder: org == null,
-		}),
+		generateInput(
+			{
+				label: "tab_label",
+				type: "text",
+				required: true,
+				placeholder: label ?? "users",
+				style: "width: 100%",
+				value: label,
+				title: "table_row_label",
+			},
+			{
+				translatePlaceholder: label == null,
+			},
+		),
+		generateInput(
+			{
+				label: "tab_url",
+				type: "text",
+				required: true,
+				placeholder: url ?? "ManageUsers/home",
+				style: "width: 100%",
+				value: url,
+				title: "table_row_url",
+			},
+			{
+				translatePlaceholder: false,
+			},
+		),
+		generateInput(
+			{
+				label: "tab_org",
+				type: "text",
+				required: false,
+				placeholder: org ?? "mycustomorg",
+				style: "width: 100%",
+				value: org,
+				title: "table_row_org_name",
+			},
+			{
+				translatePlaceholder: org == null,
+			},
+		),
 	]);
 	divParent.style.width = "100%";
 	divParent.style.display = "flex";
@@ -2209,8 +2209,8 @@ export function generateHelpWith_i_popup({
 	const linkTip = document.createElement("div");
 	linkTip.classList.add("link-tip");
 	if (wasCalledWithParams) {
-		tooltip.dataset.showTop = showTop ||
-			(!showTop && !showBottom && !showRight && !showLeft);
+		tooltip.dataset.showTop =
+			showTop || (!showTop && !showBottom && !showRight && !showLeft);
 		tooltip.dataset.showBottom = showBottom;
 		tooltip.dataset.showRight = showRight;
 		tooltip.dataset.showLeft = showLeft;
@@ -2221,10 +2221,9 @@ export function generateHelpWith_i_popup({
 			linkTip.classList.add(HIDDEN_CLASS);
 		}
 		// add help.css
-		injectStyle(
-			`${EXTENSION_NAME}-helpcss`,
-			{ link: BROWSER.runtime.getURL("/components/help/help.css") },
-		);
+		injectStyle(`${EXTENSION_NAME}-helpcss`, {
+			link: BROWSER.runtime.getURL("/components/help/help.css"),
+		});
 	} else {
 		slot = document.createElement("slot");
 		slot.name = "text";
@@ -2327,10 +2326,7 @@ function createTable(headers = []) {
  */
 function createCheckboxCell(tabIndex = 0, checked = false, ariaLabel = "") {
 	const td = document.createElement("td");
-	td.classList.add(
-		"visualEditorSelectableTable",
-		"containsSelectionCell",
-	);
+	td.classList.add("visualEditorSelectableTable", "containsSelectionCell");
 	const label = document.createElement("label");
 	td.appendChild(label);
 	label.classList.add("visualEditorTableActionCell");
@@ -2413,10 +2409,7 @@ async function generateTableWithCheckboxes(
 	for (const i in tabs) {
 		const { tr, checkbox } = createTableRow(tabs[i], i, msg_tabLabel);
 		tr.addEventListener("click", (e) => {
-			if (
-				e.target.tagName !== "INPUT" ||
-				e.target.type !== "checkbox"
-			) {
+			if (e.target.tagName !== "INPUT" || e.target.type !== "checkbox") {
 				checkbox.checked = !checkbox.checked;
 				changeListener();
 			}
@@ -2495,11 +2488,14 @@ function createTableCell({
  *  - closeButton: the cancel button which removes the modal,
  *  - getSelectedTabs: function to retrieve all currently selected Tabs,
  */
-export async function generateSldsModalWithTabList(tabs = [], {
-	title = "export_tabs",
-	saveButtonLabel = "export",
-	explainer = "select_tabs_export",
-} = {}) {
+export async function generateSldsModalWithTabList(
+	tabs = [],
+	{
+		title = "export_tabs",
+		saveButtonLabel = "export",
+		explainer = "select_tabs_export",
+	} = {},
+) {
 	const selectionState = {
 		checkboxes: null,
 		tabCounter: null,
@@ -2511,22 +2507,10 @@ export async function generateSldsModalWithTabList(tabs = [], {
 		updateSelectAllButtonTextState(selectionState);
 	const [
 		[select_all, unselect_all],
-		{
-			modalParent,
-			article,
-			saveButton,
-			closeButton,
-			buttonContainer,
-		},
-		{
-			checkboxes,
-			table: tabsListTable,
-		},
+		{ modalParent, article, saveButton, closeButton, buttonContainer },
+		{ checkboxes, table: tabsListTable },
 	] = await Promise.all([
-		getTranslations([
-			"select_all",
-			"unselect_all",
-		]),
+		getTranslations(["select_all", "unselect_all"]),
 		generateSldsModal({
 			modalTitle: await getTranslations(title),
 			saveButtonLabel: await getTranslations(saveButtonLabel),
@@ -2534,12 +2518,9 @@ export async function generateSldsModalWithTabList(tabs = [], {
 		}),
 		generateTableWithCheckboxes(
 			tabs,
-			(await getTranslations([
-				"",
-				"tab_label",
-				"tab_url",
-				"tab_org",
-			])).map((label) => ({ label })),
+			(
+				await getTranslations(["", "tab_label", "tab_url", "tab_org"])
+			).map((label) => ({ label })),
 			updateSelectAllButtonText,
 		),
 	]);
@@ -2732,16 +2713,10 @@ function createStyledButton(
  * @param {boolean} [config.isThisOrgTab=true] whether the tr contains a Tab related to this Org
  * @return {Promise<HTMLTableRowElement>} The created tr element
  */
-export async function createManageTabRow({
-	label = "",
-	url = "",
-	org = null,
-} = {}, {
-	index = 0,
-	pinned = false,
-	disabled = true,
-	isThisOrgTab = true,
-} = {}) {
+export async function createManageTabRow(
+	{ label = "", url = "", org = null } = {},
+	{ index = 0, pinned = false, disabled = true, isThisOrgTab = true } = {},
+) {
 	const [
 		tab_label,
 		tab_url,
@@ -2764,10 +2739,7 @@ export async function createManageTabRow({
 	const draggable = !disabled;
 	const tr = document.createElement("tr");
 	tr.dataset.rowIndex = index;
-	tr.classList.add(
-		"slds-hint-parent",
-		EXTENSION_NAME,
-	);
+	tr.classList.add("slds-hint-parent", EXTENSION_NAME);
 	if (!isThisOrgTab) {
 		tr.classList.add(HIDDEN_CLASS);
 	}
@@ -2837,10 +2809,7 @@ export async function createManageTabRow({
 	// Dropdown menu container
 	const dropdownMenu = document.createElement("div");
 	buttonContainer.appendChild(dropdownMenu);
-	dropdownMenu.classList.add(
-		"actions-dropdown-menu",
-		HIDDEN_CLASS,
-	);
+	dropdownMenu.classList.add("actions-dropdown-menu", HIDDEN_CLASS);
 	dropdownMenu.style.position = "absolute";
 	dropdownMenu.style.top = "100%";
 	dropdownMenu.style.right = "0";
@@ -2854,39 +2823,39 @@ export async function createManageTabRow({
 	dropdownMenu.style.display = "flex";
 	dropdownMenu.style.flexDirection = "column";
 	// Open button
-	const openBtn = createStyledButton(
-		act_open,
-		{ action: "open", tabIndex: index },
-	);
+	const openBtn = createStyledButton(act_open, {
+		action: "open",
+		tabIndex: index,
+	});
 	if (url) {
 		openBtn.href = Tab.expandURL(url, getCurrentHref());
 	}
 	dropdownMenu.appendChild(openBtn);
 	// Pin/Unpin button (toggle - only show one at a time)
-	const pinBtn = createStyledButton(
-		cxm_pin_tab,
-		{ action: CXM_PIN_TAB, tabIndex: index },
-	);
+	const pinBtn = createStyledButton(cxm_pin_tab, {
+		action: CXM_PIN_TAB,
+		tabIndex: index,
+	});
 	pinBtn.classList.add("pin-btn");
 	if (pinned) {
 		dragCell.classList.add(PIN_TAB_CLASS);
 		pinBtn.style.display = "none";
 	}
 	dropdownMenu.appendChild(pinBtn);
-	const unpinBtn = createStyledButton(
-		cxm_unpin_tab,
-		{ action: CXM_UNPIN_TAB, tabIndex: index },
-	);
+	const unpinBtn = createStyledButton(cxm_unpin_tab, {
+		action: CXM_UNPIN_TAB,
+		tabIndex: index,
+	});
 	unpinBtn.classList.add("unpin-btn");
 	if (!pinned) {
 		unpinBtn.style.display = "none";
 	}
 	dropdownMenu.appendChild(unpinBtn);
 	// Delete button
-	const deleteBtn = createStyledButton(
-		act_delete,
-		{ action: CXM_REMOVE_TAB, tabIndex: index },
-	);
+	const deleteBtn = createStyledButton(act_delete, {
+		action: CXM_REMOVE_TAB,
+		tabIndex: index,
+	});
 	deleteBtn.classList.add("delete-btn");
 	if (label === "" && url === "") {
 		deleteBtn.setAttribute("disabled", true); // disabled for empty rows
@@ -2925,11 +2894,14 @@ export async function createManageTabRow({
  * @param {string} [options.explainer="manage_tabs_explainer"] - i18n key for explainer text
  * @return {Promise<Object>} An object containing modalParent, closeButton, tbody (for event listeners), and loggers (for tracking inputs) + deleteAllTabsButton to remove the disabled attribute when needed
  */
-export async function generateManageTabsModal(tabs = [], {
-	title = "manage_tabs",
-	saveButtonLabel = "save",
-	explainer = "manage_tabs_explainer",
-} = {}) {
+export async function generateManageTabsModal(
+	tabs = [],
+	{
+		title = "manage_tabs",
+		saveButtonLabel = "save",
+		explainer = "manage_tabs_explainer",
+	} = {},
+) {
 	const [
 		mod_title,
 		mod_savBtn,
@@ -2961,17 +2933,12 @@ export async function generateManageTabsModal(tabs = [], {
 		"hide_other_org_tabs",
 		"delete_all",
 	]);
-	const {
-		modalParent,
-		article,
-		closeButton,
-		saveButton,
-		buttonContainer,
-	} = await generateSldsModal({
-		modalTitle: mod_title,
-		saveButtonLabel: mod_savBtn,
-		explainer,
-	});
+	const { modalParent, article, closeButton, saveButton, buttonContainer } =
+		await generateSldsModal({
+			modalTitle: mod_title,
+			saveButtonLabel: mod_savBtn,
+			explainer,
+		});
 	// Create a table-like structure for tabs
 	const divParent = createModalContentContainer(article);
 	const wikiLinkTab = `${EXTENSION_GITHUB_LINK}/wiki/What-is-a-Tab`;
@@ -3043,11 +3010,9 @@ export async function generateManageTabsModal(tabs = [], {
 	hideOtherOrgTabsButton.textContent = hide_other_org_tabs;
 	buttonContainer.prepend(hideOtherOrgTabsButton);
 	showAllTabsButton.addEventListener("click", () => {
-		for (
-			const otherOrgTr of tbody.querySelectorAll(
-				"tr[data-is-this-org-tab=false]",
-			)
-		) {
+		for (const otherOrgTr of tbody.querySelectorAll(
+			"tr[data-is-this-org-tab=false]",
+		)) {
 			otherOrgTr.classList.remove(HIDDEN_CLASS);
 		}
 		showAllTabsButton.setAttribute("disabled", true);
@@ -3055,11 +3020,9 @@ export async function generateManageTabsModal(tabs = [], {
 		updateModalBodyOverflow(article);
 	});
 	hideOtherOrgTabsButton.addEventListener("click", () => {
-		for (
-			const otherOrgTr of tbody.querySelectorAll(
-				"tr[data-is-this-org-tab=false]",
-			)
-		) {
+		for (const otherOrgTr of tbody.querySelectorAll(
+			"tr[data-is-this-org-tab=false]",
+		)) {
 			otherOrgTr.classList.add(HIDDEN_CLASS);
 		}
 		hideOtherOrgTabsButton.setAttribute("disabled", true);
@@ -3088,22 +3051,19 @@ export async function generateManageTabsModal(tabs = [], {
 	const rows = await Promise.all(
 		Object.keys(tabs).map(async (i) => {
 			const tab = tabs[i];
-			const isThisOrgTab = tab.org == null ||
+			const isThisOrgTab =
+				tab.org == null ||
 				tab.org === Tab.extractOrgName(getCurrentHref());
 			if (!isThisOrgTab) {
 				notThisOrgTabs++;
 			}
-			const {
-				tr,
-				dropdownMenu,
-				dropdownButton,
-				logger,
-			} = await createManageTabRow(tab, {
-				index: i,
-				pinned: i < pinnedNumber,
-				disabled: false,
-				isThisOrgTab,
-			});
+			const { tr, dropdownMenu, dropdownButton, logger } =
+				await createManageTabRow(tab, {
+					index: i,
+					pinned: i < pinnedNumber,
+					disabled: false,
+					isThisOrgTab,
+				});
 			return { tr, dropdownMenu, dropdownButton, logger };
 		}),
 	);
@@ -3123,9 +3083,12 @@ export async function generateManageTabsModal(tabs = [], {
 		dropdownMenu: lastMenu,
 		dropdownButton: lastButton,
 		logger: lastLogger,
-	} = await createManageTabRow({}, {
-		index: tabs.length,
-	});
+	} = await createManageTabRow(
+		{},
+		{
+			index: tabs.length,
+		},
+	);
 	allTrs.push({ tr: emptyRow, button: lastButton });
 	allDropMenus.push(lastMenu);
 	loggers.push(lastLogger);
@@ -3164,25 +3127,23 @@ export function generateReviewSponsorSvgs() {
 	reviewSvg.id = "review";
 	reviewSvg.classList.add(HIDDEN_CLASS);
 	reviewSvg.dataset.i18n = "write_review+-+alt";
-	for (
-		const attrs of [
-			{
-				opacity: "0.5",
-				d: "M22 10.5V12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2H13.5",
-				"stroke-width": "1.5",
-				"stroke-linecap": "round",
-			},
-			{
-				d: "M17.3009 2.80624L16.652 3.45506L10.6872 9.41993C10.2832 9.82394 10.0812 10.0259 9.90743 10.2487C9.70249 10.5114 9.52679 10.7957 9.38344 11.0965C9.26191 11.3515 9.17157 11.6225 8.99089 12.1646L8.41242 13.9L8.03811 15.0229C7.9492 15.2897 8.01862 15.5837 8.21744 15.7826C8.41626 15.9814 8.71035 16.0508 8.97709 15.9619L10.1 15.5876L11.8354 15.0091C12.3775 14.8284 12.6485 14.7381 12.9035 14.6166C13.2043 14.4732 13.4886 14.2975 13.7513 14.0926C13.9741 13.9188 14.1761 13.7168 14.5801 13.3128L20.5449 7.34795L21.1938 6.69914C22.2687 5.62415 22.2687 3.88124 21.1938 2.80624C20.1188 1.73125 18.3759 1.73125 17.3009 2.80624Z",
-				"stroke-width": "1.5",
-			},
-			{
-				opacity: "0.5",
-				d: "M16.6522 3.45508C16.6522 3.45508 16.7333 4.83381 17.9499 6.05034C19.1664 7.26687 20.5451 7.34797 20.5451 7.34797M10.1002 15.5876L8.4126 13.9",
-				"stroke-width": "1.5",
-			},
-		]
-	) {
+	for (const attrs of [
+		{
+			opacity: "0.5",
+			d: "M22 10.5V12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2H13.5",
+			"stroke-width": "1.5",
+			"stroke-linecap": "round",
+		},
+		{
+			d: "M17.3009 2.80624L16.652 3.45506L10.6872 9.41993C10.2832 9.82394 10.0812 10.0259 9.90743 10.2487C9.70249 10.5114 9.52679 10.7957 9.38344 11.0965C9.26191 11.3515 9.17157 11.6225 8.99089 12.1646L8.41242 13.9L8.03811 15.0229C7.9492 15.2897 8.01862 15.5837 8.21744 15.7826C8.41626 15.9814 8.71035 16.0508 8.97709 15.9619L10.1 15.5876L11.8354 15.0091C12.3775 14.8284 12.6485 14.7381 12.9035 14.6166C13.2043 14.4732 13.4886 14.2975 13.7513 14.0926C13.9741 13.9188 14.1761 13.7168 14.5801 13.3128L20.5449 7.34795L21.1938 6.69914C22.2687 5.62415 22.2687 3.88124 21.1938 2.80624C20.1188 1.73125 18.3759 1.73125 17.3009 2.80624Z",
+			"stroke-width": "1.5",
+		},
+		{
+			opacity: "0.5",
+			d: "M16.6522 3.45508C16.6522 3.45508 16.7333 4.83381 17.9499 6.05034C19.1664 7.26687 20.5451 7.34797 20.5451 7.34797M10.1002 15.5876L8.4126 13.9",
+			"stroke-width": "1.5",
+		},
+	]) {
 		const path = document.createElementNS(
 			"http://www.w3.org/2000/svg",
 			"path",
@@ -3237,19 +3198,15 @@ export function generateReviewSponsorSvgs() {
  * }>} as described
  */
 async function generateMessageBox() {
-	injectStyle(
-		"tut-v7-style",
-		{ link: BROWSER.runtime.getURL("/salesforce/css/tutorial.css") },
-	);
+	injectStyle("tut-v7-style", {
+		link: BROWSER.runtime.getURL("/salesforce/css/tutorial.css"),
+	});
 	const messageBox = document.createElement("div");
 	messageBox.classList.add("tut-v7");
 	messageBox.style.position = "fixed";
 	for (const pos of ["tl", "tr", "bl", "br"]) {
 		const c = document.createElement("div");
-		c.classList.add(
-			"tut-v7-corner",
-			`tut-v7-corner-${pos}`,
-		);
+		c.classList.add("tut-v7-corner", `tut-v7-corner-${pos}`);
 		messageBox.appendChild(c);
 	}
 	const header = document.createElement("div");
@@ -3269,26 +3226,16 @@ async function generateMessageBox() {
 		"close",
 	]);
 	const confirmBtn = document.createElement("button");
-	confirmBtn.classList.add(
-		"slds-button",
-		"slds-button_brand",
-	);
+	confirmBtn.classList.add("slds-button", "slds-button_brand");
 	confirmBtn.textContent = confirmBtnText;
 	actions.append(confirmBtn);
 	const linkBtn = document.createElement("a");
-	linkBtn.classList.add(
-		"slds-button",
-		"slds-button_neutral",
-		HIDDEN_CLASS,
-	);
+	linkBtn.classList.add("slds-button", "slds-button_neutral", HIDDEN_CLASS);
 	linkBtn.target = "_blank";
 	linkBtn.rel = "noopener noreferrer";
 	actions.append(linkBtn);
 	const closeBtn = document.createElement("button");
-	closeBtn.classList.add(
-		"slds-button",
-		"slds-button_neutral",
-	);
+	closeBtn.classList.add("slds-button", "slds-button_neutral");
 	closeBtn.textContent = closeBtnText;
 	actions.append(closeBtn);
 	messageBox.append(header, segments, actions);
@@ -3352,7 +3299,7 @@ export async function generateTutorialElements() {
 	return {
 		overlay,
 		spinner,
-		...await generateMessageBox(),
+		...(await generateMessageBox()),
 	};
 }
 
@@ -3413,22 +3360,10 @@ export function sldsConfirm({
 		});
 		cancelButton.addEventListener("click", (event) => {
 			event.preventDefault();
-			finishSldsConfirm(
-				cancelValue,
-				isResolvedRef,
-				modalParent,
-				resolve,
-			);
+			finishSldsConfirm(cancelValue, isResolvedRef, modalParent, resolve);
 		});
-		closeButton.addEventListener(
-			"click",
-			() =>
-				finishSldsConfirm(
-					closeValue,
-					isResolvedRef,
-					modalParent,
-					resolve,
-				),
+		closeButton.addEventListener("click", () =>
+			finishSldsConfirm(closeValue, isResolvedRef, modalParent, resolve),
 		);
 		for (const { label, value } of extraButtons) {
 			const button = createSldsPromptChoiceButton({

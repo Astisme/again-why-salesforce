@@ -1,7 +1,49 @@
 {
 	"type": "module",
-	"dependencies": {
+	"imports": {
+		"#test": "./tests/test-helpers.ts"
+	},
+	"scripts": {
+		"test": "bun test --parallel --coverage tests",
+		"test-this": "bun test --parallel --coverage",
+		"test-unit": "bun test --parallel --coverage tests/unit",
+		"test-int": "bun test --parallel --coverage tests/integration",
+		"test-bg": "bun test --parallel --coverage tests/unit/background",
+		"test-bd": "bun test --parallel --coverage tests/unit/build",
+		"test-man": "bun test --parallel --coverage tests/unit/manifest",
+		"test-sf": "bun test --parallel --coverage tests/unit/content",
+		"test-core": "bun test --parallel --coverage tests/unit/core",
+		"test-ui": "bun test --parallel --coverage tests/unit/ui",
+		"test-bin": "bun test --parallel --coverage tests/bin",
+		"fmt": "prettier --write .",
+		"fmt-check": "prettier --check .",
+		"lint": "eslint . --ext .js,.ts",
+		"sort": "bun run bin/sort-locales.ts && git add src/_locales/*/messages.json",
+		"locale-check": "bun run bin/find-invalid-variables.ts && bun run bin/missing-locales.ts",
+		"locales": "bun run locale-check && bun run sort",
+		"audit-logging": "bun run bin/audit-logging.ts",
+		"bundle": "bun run bin/build.ts",
+		"checks": "bun run fmt && bun run lint && bun run test && bun run locales && bun run dev-firefox",
+		"locale-translate": "bun run bin/render-locale-message.ts",
+		"dev-firefox": "bun run src/manifest/build-manifest.mjs firefox && bun run bundle",
+		"dev-chrome": "bun run src/manifest/build-manifest.mjs chrome && bun run bundle",
+		"dev-edge": "bun run src/manifest/build-manifest.mjs edge && bun run bundle",
+		"dev-safari": "bun run src/manifest/build-manifest.mjs safari && bun run bundle",
+		"build-firefox": "bun run dev-firefox && bash bin/zip-extension.bash firefox",
+		"build-chrome": "bun run dev-chrome && bash bin/zip-extension.bash chrome",
+		"build-edge": "bun run dev-edge && bash bin/zip-extension.bash edge",
+		"build-safari": "bun run dev-safari && bash bin/zip-extension.bash safari && bash bin/convert-to-safari-app-extension.bash",
+		"build-site": "bun run site/build-static-site.js",
+		"release": "bun run bin/build-releases.ts"
+	},
+	"devDependencies": {
+		"@types/bun": "latest",
+		"@typescript-eslint/parser": "latest",
 		"eslint": "^9.39.5",
-		"eslint-plugin-jsdoc": "^61.7.1"
+		"eslint-plugin-jsdoc": "^61.7.1",
+		"esbuild": "^0.25.0",
+		"happy-dom": "^18.0.1",
+		"prettier": "^3.6.2",
+		"puppeteer": "^24.17.0"
 	}
 }

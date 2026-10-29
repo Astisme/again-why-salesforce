@@ -3,8 +3,8 @@ import { wikiDocuments, wikiTitles } from "./wiki-data.js";
 const navToggle = document.querySelector(".nav-toggle");
 const siteNav = document.querySelector("#site-nav");
 const releaseLabels = document.querySelectorAll(".js-current-release");
-const dynamicReleaseLabels = [...releaseLabels].filter((label) =>
-	!label.hasAttribute("data-static-release")
+const dynamicReleaseLabels = [...releaseLabels].filter(
+	(label) => !label.hasAttribute("data-static-release"),
 );
 const markdownSource = document.querySelector("[data-markdown-source]");
 const totalUserLabels = document.querySelectorAll(".js-total-users");
@@ -115,7 +115,8 @@ function detectInstallTarget(userAgent) {
 		return "firefox";
 	}
 	if (
-		userAgent.includes("Safari/") && !userAgent.includes("Chrome/") &&
+		userAgent.includes("Safari/") &&
+		!userAgent.includes("Chrome/") &&
 		!userAgent.includes("Chromium/")
 	) {
 		return "safari";
@@ -201,12 +202,7 @@ async function fetchLatestReleaseLabel() {
  * @returns {void}
  */
 function animateNumber(label, target, options = {}) {
-	const {
-		prefix = "",
-		suffix = "",
-		decimals = 0,
-		duration = 900,
-	} = options;
+	const { prefix = "", suffix = "", decimals = 0, duration = 900 } = options;
 	const formatter = new Intl.NumberFormat("en", {
 		minimumFractionDigits: decimals,
 		maximumFractionDigits: decimals,
@@ -225,7 +221,7 @@ function animateNumber(label, target, options = {}) {
 	 */
 	function tick(frameTime) {
 		const progress = Math.min((frameTime - startTime) / duration, 1);
-		const eased = 1 - ((1 - progress) ** 3);
+		const eased = 1 - (1 - progress) ** 3;
 		const value = target * eased;
 		label.textContent = `${prefix}${formatter.format(value)}${suffix}`;
 		if (progress < 1) {
@@ -268,10 +264,10 @@ function animateReleaseLabel(label, value) {
 	 */
 	function tick(frameTime) {
 		const progress = Math.min((frameTime - startTime) / duration, 1);
-		const eased = 1 - ((1 - progress) ** 3);
-		label.textContent = `${prefix}${Math.floor(major * eased)}.${
-			Math.floor(minor * eased)
-		}.${Math.floor(patch * eased)}${suffix}`;
+		const eased = 1 - (1 - progress) ** 3;
+		label.textContent = `${prefix}${Math.floor(major * eased)}.${Math.floor(
+			minor * eased,
+		)}.${Math.floor(patch * eased)}${suffix}`;
 		if (progress < 1) {
 			requestAnimationFrame(tick);
 		}
@@ -311,11 +307,12 @@ async function hydrateReleaseLabels() {
  * @returns {string} Unique slug.
  */
 function createSlug(value, usedSlugs) {
-	const baseSlug = value
-		.toLowerCase()
-		.replaceAll(/[^a-z0-9\s-]/g, "")
-		.trim()
-		.replaceAll(/\s+/g, "-") || "section";
+	const baseSlug =
+		value
+			.toLowerCase()
+			.replaceAll(/[^a-z0-9\s-]/g, "")
+			.trim()
+			.replaceAll(/\s+/g, "-") || "section";
 	let slug = baseSlug;
 	let index = 2;
 	while (usedSlugs.has(slug)) {
@@ -436,10 +433,8 @@ async function getPublicStoreMetrics() {
 	if (
 		cachedMetrics &&
 		typeof cachedMetrics.users === "number" &&
-		(
-			cachedMetrics.rating === null ||
-			typeof cachedMetrics.rating === "number"
-		)
+		(cachedMetrics.rating === null ||
+			typeof cachedMetrics.rating === "number")
 	) {
 		return cachedMetrics;
 	}
@@ -458,25 +453,22 @@ async function getPublicStoreMetrics() {
 				"https://simpleanalytics.com/extension.again.whysalesforce.json?version=5&fields=visitors&start=today-7d&info=false&browser_name=Safari",
 			).then((response) => response.json()),
 		]);
-	const chrome = chromeResult.status === "fulfilled"
-		? chromeResult.value
-		: {};
+	const chrome =
+		chromeResult.status === "fulfilled" ? chromeResult.value : {};
 	const edge = edgeResult.status === "fulfilled" ? edgeResult.value : {};
-	const firefox = firefoxResult.status === "fulfilled"
-		? firefoxResult.value
-		: {};
-	const safari = safariResult.status === "fulfilled"
-		? safariResult.value
-		: {};
-	const users = parseCompactNumber(chrome.value || chrome.message || 0) +
+	const firefox =
+		firefoxResult.status === "fulfilled" ? firefoxResult.value : {};
+	const safari =
+		safariResult.status === "fulfilled" ? safariResult.value : {};
+	const users =
+		parseCompactNumber(chrome.value || chrome.message || 0) +
 		parseCompactNumber(edge.value || edge.message || 0) +
 		Number(firefox.average_daily_users || 0) +
 		Number(safari.visitors || 0);
 	const firefoxRatingCount = Number(firefox.ratings?.count || 0);
 	const ratingCount = firefoxRatingCount;
-	const rating = ratingCount > 0
-		? Number(firefox.ratings?.average || 0)
-		: null;
+	const rating =
+		ratingCount > 0 ? Number(firefox.ratings?.average || 0) : null;
 
 	const metrics = { users, rating };
 	writeCache(metricsCacheKey, metrics);
@@ -497,8 +489,8 @@ function parseCompactNumber(value) {
 	const multiplier = normalized.endsWith("k")
 		? 1_000
 		: normalized.endsWith("m")
-		? 1_000_000
-		: 1;
+			? 1_000_000
+			: 1;
 	return Number.parseFloat(normalized.replace(/[km]$/, "")) * multiplier || 0;
 }
 
@@ -551,8 +543,8 @@ async function hydrateMarkdown() {
 	if (markdownSource.getAttribute("data-markdown-source") === "wiki") {
 		const doc = resolveWikiDocFromLocation();
 		if (wikiTitleLabel) {
-			wikiTitleLabel.textContent = wikiTitles[doc] ||
-				doc.replaceAll("-", " ");
+			wikiTitleLabel.textContent =
+				wikiTitles[doc] || doc.replaceAll("-", " ");
 		}
 
 		if (wikiDescriptionLabel) {
@@ -562,12 +554,12 @@ async function hydrateMarkdown() {
 		}
 	}
 	const source = markdownSource.getAttribute("data-markdown-source");
-	const latestRelease = source === "changelog"
-		? await getLatestReleaseLabel()
-		: null;
-	markdownSource.innerHTML = source === "changelog"
-		? globalThis.awsfMarkdown.renderChangelog(markdown, latestRelease)
-		: globalThis.awsfMarkdown.renderMarkdown(markdown);
+	const latestRelease =
+		source === "changelog" ? await getLatestReleaseLabel() : null;
+	markdownSource.innerHTML =
+		source === "changelog"
+			? globalThis.awsfMarkdown.renderChangelog(markdown, latestRelease)
+			: globalThis.awsfMarkdown.renderMarkdown(markdown);
 	hydrateArticleToc();
 }
 

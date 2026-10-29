@@ -26,13 +26,10 @@ import {
  * @param {Function|null} [callback=null] - Optional callback to receive the commands.
  * @return {Promise<Array<Object>>|void} Promise resolving to command objects or void if callback is provided.
  */
-export async function bg_getCommandLinks(
-	commands = null,
-	callback = null,
-) {
+export async function bg_getCommandLinks(commands = null, callback = null) {
 	const allCommands = await BROWSER.commands.getAll();
-	const availableCommands = allCommands.filter((singleCommand) =>
-		singleCommand.shortcut !== ""
+	const availableCommands = allCommands.filter(
+		(singleCommand) => singleCommand.shortcut !== "",
 	);
 	if (commands == null) {
 		callback?.(availableCommands);
@@ -43,7 +40,7 @@ export async function bg_getCommandLinks(
 	}
 	const commandSet = new Set(commands);
 	const requestedCommands = availableCommands.filter((ac) =>
-		commandSet.has(ac.name)
+		commandSet.has(ac.name),
 	);
 	callback?.(requestedCommands);
 	return requestedCommands;
@@ -57,7 +54,8 @@ export function listenToExtensionCommands() {
 	BROWSER.commands.onCommand.addListener(async (command) => {
 		// check the current page is Salesforce Setup
 		const browserTabUrl = (await bg_getCurrentBrowserTab())?.url;
-		if (!browserTabUrl?.match(SETUP_LIGHTNING_PATTERN)) { // we're not in Salesforce Setup
+		if (!browserTabUrl?.match(SETUP_LIGHTNING_PATTERN)) {
+			// we're not in Salesforce Setup
 			return;
 		}
 		const message = {

@@ -11,8 +11,7 @@ import {
 	TUTORIAL_EVENT_ACTION_FAVOURITE as _TUTORIAL_EVENT_ACTION_FAVOURITE,
 	TUTORIAL_EVENT_ACTION_UNFAVOURITE as _TUTORIAL_EVENT_ACTION_UNFAVOURITE,
 	TUTORIAL_EVENT_CLOSE_MANAGE_TABS as _TUTORIAL_EVENT_CLOSE_MANAGE_TABS,
-	TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL
-		as _TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL,
+	TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL as _TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL,
 	TUTORIAL_EVENT_PIN_TAB as _TUTORIAL_EVENT_PIN_TAB,
 	TUTORIAL_EVENT_REORDERED_TABS_TABLE as _TUTORIAL_EVENT_REORDERED_TABS_TABLE,
 	TUTORIAL_KEY as _TUTORIAL_KEY,
@@ -258,9 +257,7 @@ class Tutorial {
 			...usablePages.objectManager,
 			...usablePages.standAlone,
 		];
-		for (
-			const elementIndex in allObjects
-		) {
+		for (const elementIndex in allObjects) {
 			const el = allObjects[elementIndex];
 			if (!usersSavedUrls.has(el.url)) {
 				if (!this.firstRedirectElement) this.firstRedirectElement = el;
@@ -285,16 +282,16 @@ class Tutorial {
 	 * @return HTMLElement the automatically selected `li`
 	 */
 	#getExtensionElementWithLinkInSetup(redirectElement = null) {
-		const goToUrl =
-			(redirectElement ?? this.steps[this.currentStep]?.redirectElement)
-				?.url;
+		const goToUrl = (
+			redirectElement ?? this.steps[this.currentStep]?.redirectElement
+		)?.url;
 		const ul = getSetupTabUl();
-		return ul.querySelector(
-			`a:not([title^="/"]):not([title^="http"]):not([title="${
-				Tab.minifyURL(getCurrentHref())
-			}"])`,
-		) ?? ul.querySelector(
-			`a[title="${goToUrl}"]`,
+		return (
+			ul.querySelector(
+				`a:not([title^="/"]):not([title^="http"]):not([title="${Tab.minifyURL(
+					getCurrentHref(),
+				)}"])`,
+			) ?? ul.querySelector(`a[title="${goToUrl}"]`)
 		);
 	}
 
@@ -314,9 +311,9 @@ class Tutorial {
 	 */
 	#getStarsContainer() {
 		// Salesforce has 2 "pages" for ObjectManager and standard pages so we have 2 buttons actually
-		for (
-			const btn of document.querySelectorAll(`#${FAVOURITE_BUTTON_ID}`)
-		) {
+		for (const btn of document.querySelectorAll(
+			`#${FAVOURITE_BUTTON_ID}`,
+		)) {
 			const bounds = btn.getBoundingClientRect();
 			if (bounds.width !== 0 && bounds.height !== 0) {
 				return btn;
@@ -385,9 +382,7 @@ class Tutorial {
 				redirectElement: this.firstRedirectElement,
 				element: () => this.#getExtensionElementWithLinkInSetup(),
 				fakeElement: () =>
-					(this.#generateExtensionElementWithLinkInSetup.bind(
-						this,
-					))(),
+					this.#generateExtensionElementWithLinkInSetup.bind(this)(),
 				action: ACTION.highlight,
 				waitFor: WAIT_FOR.redirect,
 			},
@@ -396,9 +391,7 @@ class Tutorial {
 				pageUrl: this.firstRedirectElement.url,
 				element: this.#getStarsContainer,
 				fakeElement: () =>
-					(this.#showStarsContainerAndReturnIt.bind(
-						this,
-					))(),
+					this.#showStarsContainerAndReturnIt.bind(this)(),
 				action: ACTION.highlight,
 				waitFor: WAIT_FOR.event,
 				awaitsCustomEvent: TUTORIAL_EVENT_ACTION_UNFAVOURITE,
@@ -409,9 +402,7 @@ class Tutorial {
 				redirectElement: this.secondRedirectElement,
 				action: ACTION.confirm,
 				onConfirm: () => {
-					customLightningRedirect(
-						this.secondRedirectElement.url,
-					);
+					customLightningRedirect(this.secondRedirectElement.url);
 				},
 				waitFor: WAIT_FOR.redirect,
 			},
@@ -421,9 +412,7 @@ class Tutorial {
 				beginsBlock: true,
 				element: this.#getStarsContainer,
 				fakeElement: () =>
-					(this.#showStarsContainerAndReturnIt.bind(
-						this,
-					))(),
+					this.#showStarsContainerAndReturnIt.bind(this)(),
 				action: ACTION.highlight,
 				waitFor: WAIT_FOR.event,
 				awaitsCustomEvent: TUTORIAL_EVENT_ACTION_FAVOURITE,
@@ -439,9 +428,9 @@ class Tutorial {
 					);
 				},
 				fakeElement: () =>
-					(this.#generateExtensionElementWithLinkInSetup.bind(
-						this,
-					))()?.closest("li"),
+					this.#generateExtensionElementWithLinkInSetup
+						.bind(this)()
+						?.closest("li"),
 				action: ACTION.highlight,
 				waitFor: WAIT_FOR.event,
 				awaitsCustomEvent: TUTORIAL_EVENT_PIN_TAB,
@@ -452,9 +441,7 @@ class Tutorial {
 				redirectElement: this.secondRedirectElement,
 				element: () => this.#getExtensionElementWithLinkInSetup(),
 				fakeElement: () =>
-					(this.#generateExtensionElementWithLinkInSetup.bind(
-						this,
-					))(),
+					this.#generateExtensionElementWithLinkInSetup.bind(this)(),
 				action: ACTION.highlight,
 			},
 			{
@@ -485,15 +472,18 @@ class Tutorial {
 						// unpin the last 2 Tabs
 						const unpinUpTo = pinnedNumber <= 2 ? 2 : 3;
 						for (let i = 1; i < unpinUpTo; i++) {
-							void handleActionButtonClick({
-								preventDefault: () => {},
-								stopPropagation: () => {},
-								currentTarget: document.querySelector(
-									`#sortable-table tbody tr:nth-child(${
-										tabsLen - i
-									}) [data-action="${CXM_UNPIN_TAB}"]`,
-								),
-							}, { allTabs });
+							void handleActionButtonClick(
+								{
+									preventDefault: () => {},
+									stopPropagation: () => {},
+									currentTarget: document.querySelector(
+										`#sortable-table tbody tr:nth-child(${
+											tabsLen - i
+										}) [data-action="${CXM_UNPIN_TAB}"]`,
+									),
+								},
+								{ allTabs },
+							);
 						}
 						nthChild = tabsLen;
 					}
@@ -622,10 +612,7 @@ class Tutorial {
 	 * @throws TypeError if stepNo is not a number
 	 * @return {Promise<void>} the promise from sendExtensionMessage
 	 */
-	persistTutorialProgress(
-		stepNo = this.currentStep,
-		closedManually = false,
-	) {
+	persistTutorialProgress(stepNo = this.currentStep, closedManually = false) {
 		if (typeof stepNo !== "number") {
 			throw new TypeError("stepNo should be a number");
 		}
@@ -633,9 +620,8 @@ class Tutorial {
 			{
 				what: WHAT_SET,
 				key: TUTORIAL_KEY,
-				set: stepNo < this.steps.length - 1
-					? stepNo
-					: this.steps.length, // if the user got to the last step, save it as soon as they get to it (without waiting for the confirmation)
+				set:
+					stepNo < this.steps.length - 1 ? stepNo : this.steps.length, // if the user got to the last step, save it as soon as they get to it (without waiting for the confirmation)
 			},
 			{
 				what: WHAT_SET,
@@ -687,10 +673,7 @@ class Tutorial {
 				return fakeEl;
 			}
 		}
-		setTimeout(
-			() => callback(step),
-			1000,
-		);
+		setTimeout(() => callback(step), 1000);
 	}
 
 	/**
@@ -748,10 +731,7 @@ class Tutorial {
 	 */
 	#getElementFromStep(step) {
 		return step.fakeElement
-			? this.getElementNowOrLater(
-				step,
-				this.executeStep.bind(this),
-			)
+			? this.getElementNowOrLater(step, this.executeStep.bind(this))
 			: step.element();
 	}
 
@@ -886,14 +866,18 @@ class Tutorial {
 	 */
 	showConfirm() {
 		if (!this.confirmHandlerAttached) {
-			this.confirmBtn.addEventListener("click", () => {
-				this.confirmHandlerAttached = false;
-				const step = this.steps[this.currentStep];
-				step.onConfirm?.();
-				if (step.action !== ACTION.confirm) {
-					void this.nextStep();
-				}
-			}, { once: true });
+			this.confirmBtn.addEventListener(
+				"click",
+				() => {
+					this.confirmHandlerAttached = false;
+					const step = this.steps[this.currentStep];
+					step.onConfirm?.();
+					if (step.action !== ACTION.confirm) {
+						void this.nextStep();
+					}
+				},
+				{ once: true },
+			);
 			this.confirmHandlerAttached = true;
 		}
 		this.btnsParent.classList.remove(HIDDEN_CLASS);
@@ -1074,18 +1058,19 @@ export async function checkTutorial(fromPopup = false) {
 		return;
 	}
 	const tutorial = new Tutorial();
-	if (!await tutorial.initSteps()) { // Initialize steps to get their properties
+	if (!(await tutorial.initSteps())) {
+		// Initialize steps to get their properties
 		throw new Error("error_tutorial_not_initialized");
 	}
 	if (
 		tutorialProgress < tutorial.steps.length &&
-		await sldsConfirm({
+		(await sldsConfirm({
 			title: continue_title,
 			body: continue_body,
 			confirmLabel,
 			cancelLabel,
 			closeLabel,
-		})
+		}))
 	) {
 		await tutorial.start(tutorialProgress - 1); // because nextStep adds 1 when it starts
 	} else if (fromPopup) {
@@ -1110,41 +1095,41 @@ export function createTutorialModule(overrides = {}) {
 	CMD_OPEN_SETTINGS = overrides.CMD_OPEN_SETTINGS ?? CMD_OPEN_SETTINGS;
 	CXM_UNPIN_TAB = overrides.CXM_UNPIN_TAB ?? CXM_UNPIN_TAB;
 	HIDDEN_CLASS = overrides.HIDDEN_CLASS ?? HIDDEN_CLASS;
-	SALESFORCE_SETUP_HOME_MINI = overrides.SALESFORCE_SETUP_HOME_MINI ??
-		SALESFORCE_SETUP_HOME_MINI;
+	SALESFORCE_SETUP_HOME_MINI =
+		overrides.SALESFORCE_SETUP_HOME_MINI ?? SALESFORCE_SETUP_HOME_MINI;
 	SETUP_LIGHTNING = overrides.SETUP_LIGHTNING ?? SETUP_LIGHTNING;
 	TOAST_WARNING = overrides.TOAST_WARNING ?? TOAST_WARNING;
-	TUTORIAL_CLOSE_EVENT = overrides.TUTORIAL_CLOSE_EVENT ??
-		TUTORIAL_CLOSE_EVENT;
+	TUTORIAL_CLOSE_EVENT =
+		overrides.TUTORIAL_CLOSE_EVENT ?? TUTORIAL_CLOSE_EVENT;
 	TUTORIAL_EVENT_ACTION_FAVOURITE =
 		overrides.TUTORIAL_EVENT_ACTION_FAVOURITE ??
-			TUTORIAL_EVENT_ACTION_FAVOURITE;
+		TUTORIAL_EVENT_ACTION_FAVOURITE;
 	TUTORIAL_EVENT_ACTION_UNFAVOURITE =
 		overrides.TUTORIAL_EVENT_ACTION_UNFAVOURITE ??
-			TUTORIAL_EVENT_ACTION_UNFAVOURITE;
+		TUTORIAL_EVENT_ACTION_UNFAVOURITE;
 	TUTORIAL_EVENT_CLOSE_MANAGE_TABS =
 		overrides.TUTORIAL_EVENT_CLOSE_MANAGE_TABS ??
-			TUTORIAL_EVENT_CLOSE_MANAGE_TABS;
+		TUTORIAL_EVENT_CLOSE_MANAGE_TABS;
 	TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL =
 		overrides.TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL ??
-			TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL;
-	TUTORIAL_EVENT_PIN_TAB = overrides.TUTORIAL_EVENT_PIN_TAB ??
-		TUTORIAL_EVENT_PIN_TAB;
+		TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL;
+	TUTORIAL_EVENT_PIN_TAB =
+		overrides.TUTORIAL_EVENT_PIN_TAB ?? TUTORIAL_EVENT_PIN_TAB;
 	TUTORIAL_EVENT_REORDERED_TABS_TABLE =
 		overrides.TUTORIAL_EVENT_REORDERED_TABS_TABLE ??
-			TUTORIAL_EVENT_REORDERED_TABS_TABLE;
+		TUTORIAL_EVENT_REORDERED_TABS_TABLE;
 	TUTORIAL_KEY = overrides.TUTORIAL_KEY ?? TUTORIAL_KEY;
 	WIKI_LINK = overrides.WIKI_LINK ?? WIKI_LINK;
 	WHAT_ADD = overrides.WHAT_ADD ?? WHAT_ADD;
 	WHAT_GET = overrides.WHAT_GET ?? WHAT_GET;
 	WHAT_GET_COMMANDS = overrides.WHAT_GET_COMMANDS ?? WHAT_GET_COMMANDS;
 	WHAT_SET = overrides.WHAT_SET ?? WHAT_SET;
-	performLightningRedirect = overrides.performLightningRedirect ??
-		performLightningRedirect;
-	sendExtensionMessage = overrides.sendExtensionMessage ??
-		sendExtensionMessage;
-	sendExtensionMessages = overrides.sendExtensionMessages ??
-		sendExtensionMessages;
+	performLightningRedirect =
+		overrides.performLightningRedirect ?? performLightningRedirect;
+	sendExtensionMessage =
+		overrides.sendExtensionMessage ?? sendExtensionMessage;
+	sendExtensionMessages =
+		overrides.sendExtensionMessages ?? sendExtensionMessages;
 	getTranslations = overrides.getTranslations ?? getTranslations;
 	Tab = overrides.Tab ?? Tab;
 	performActionOnTabs = overrides.performActionOnTabs ?? performActionOnTabs;
@@ -1153,15 +1138,15 @@ export function createTutorialModule(overrides = {}) {
 	getSetupTabUl = overrides.getSetupTabUl ?? getSetupTabUl;
 	FAVOURITE_BUTTON_ID = overrides.FAVOURITE_BUTTON_ID ?? FAVOURITE_BUTTON_ID;
 	showFavouriteButton = overrides.showFavouriteButton ?? showFavouriteButton;
-	generateTutorialElements = overrides.generateTutorialElements ??
-		generateTutorialElements;
+	generateTutorialElements =
+		overrides.generateTutorialElements ?? generateTutorialElements;
 	MODAL_ID = overrides.MODAL_ID ?? MODAL_ID;
 	sldsConfirm = overrides.sldsConfirm ?? sldsConfirm;
-	ensureAllTabsAvailability = overrides.ensureAllTabsAvailability ??
-		ensureAllTabsAvailability;
+	ensureAllTabsAvailability =
+		overrides.ensureAllTabsAvailability ?? ensureAllTabsAvailability;
 	TabContainer = overrides.TabContainer ?? TabContainer;
-	handleActionButtonClick = overrides.handleActionButtonClick ??
-		handleActionButtonClick;
+	handleActionButtonClick =
+		overrides.handleActionButtonClick ?? handleActionButtonClick;
 	applyGlobalOverride("document", overrides.document);
 	applyGlobalOverride("window", overrides.window);
 	applyGlobalOverride("fetch", overrides.fetch);

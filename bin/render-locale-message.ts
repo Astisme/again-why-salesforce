@@ -1,4 +1,6 @@
-#!/usr/bin/env -S deno run --allow-read
+#!/usr/bin/env -S bun run
+
+import fs from "node:fs/promises";
 
 const DEFAULT_LOCALES_DIR = "src/_locales";
 const PARAMETER_REGEX = /\$([A-Za-z0-9_]+)/g;
@@ -36,7 +38,7 @@ export async function readLocaleFile(
 	localesDir = DEFAULT_LOCALES_DIR,
 ): Promise<LocaleFile> {
 	return JSON.parse(
-		await Deno.readTextFile(getMessagesFilePath(language, localesDir)),
+		await fs.readFile(getMessagesFilePath(language, localesDir), "utf8"),
 	);
 }
 
@@ -117,14 +119,14 @@ export function formatLocaleMessageResult(
  * @return {Promise<number>} Process exit code.
  */
 export async function main(
-	args = Deno.args,
+	args = process.argv.slice(2),
 	log = console.log,
 	logError = console.error,
 ): Promise<number> {
 	const [language, key] = args;
 	if (language == null || key == null || args.length !== 2) {
 		logError(
-			"Usage: deno run --allow-read bin/render-locale-message.ts <language> <key>",
+			"Usage: bun run bin/render-locale-message.ts <language> <key>",
 		);
 		return 1;
 	}
@@ -133,8 +135,6 @@ export async function main(
 	return 0;
 }
 
-// deno-coverage-ignore-start
 if (import.meta.main) {
-	Deno.exit(await main());
+	process.exitCode = await main();
 }
-// deno-coverage-ignore-stop

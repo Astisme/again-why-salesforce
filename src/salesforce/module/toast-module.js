@@ -74,9 +74,10 @@ export function createToastModule({
 		if (toastHanger != null) {
 			return toastHanger;
 		}
-		toastHanger = documentRef.getElementsByClassName(
-			"oneConsoleTabset navexConsoleTabset",
-		)?.[0] ?? null;
+		toastHanger =
+			documentRef.getElementsByClassName(
+				"oneConsoleTabset navexConsoleTabset",
+			)?.[0] ?? null;
 		return toastHanger;
 	}
 
@@ -125,14 +126,14 @@ export function createToastModule({
 			throw new TypeError("error_required_params");
 		}
 		const hanger = getToastHanger();
-		const toastElement = await generateSldsToastMessage(
-			message,
-			status,
-		);
+		const toastElement = await generateSldsToastMessage(message, status);
 		hanger?.appendChild(toastElement);
-		(setTimeout ?? globalThis.setTimeout)?.(() => {
-			toastElement.remove();
-		}, calculateReadingTime?.(toastElement.textContent ?? "") ?? 0);
+		(setTimeout ?? globalThis.setTimeout)?.(
+			() => {
+				toastElement.remove();
+			},
+			calculateReadingTime?.(toastElement.textContent ?? "") ?? 0,
+		);
 		consoleToastedMessage(message, status);
 	}
 

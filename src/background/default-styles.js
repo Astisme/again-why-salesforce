@@ -18,11 +18,7 @@ import { bg_getStyleSettings, bg_setStorage } from "./storage.js";
  * @return {Promise<Array<Object>>} the created styles.
  */
 async function _createDefaultStyle(key = ORG_TAB_STYLE_KEY, ...styles) {
-	await bg_setStorage(
-		styles.filter(Boolean),
-		undefined,
-		key,
-	);
+	await bg_setStorage(styles.filter(Boolean), undefined, key);
 	return styles;
 }
 
@@ -41,17 +37,14 @@ async function _createDefaultStyleWrapper(
 	newKey = ORG_PINNED_TAB_STYLE_KEY,
 	...styles
 ) {
-	const filteredStyles = availableStyles[key]
-		?.filter((el) =>
-			el.id !== PREVENT_DEFAULT_OVERRIDE &&
-			// override user-set background
-			el.id !== TAB_STYLE_BACKGROUND
+	const filteredStyles =
+		availableStyles[key]?.filter(
+			(el) =>
+				el.id !== PREVENT_DEFAULT_OVERRIDE &&
+				// override user-set background
+				el.id !== TAB_STYLE_BACKGROUND,
 		) ?? [];
-	return await _createDefaultStyle(
-		newKey,
-		...filteredStyles,
-		...styles,
-	);
+	return await _createDefaultStyle(newKey, ...filteredStyles, ...styles);
 }
 
 /**

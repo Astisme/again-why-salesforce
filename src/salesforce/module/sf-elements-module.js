@@ -113,11 +113,10 @@ export function createSfElementsModule({
 	 * @return {boolean} True when setup tab UL exists or gets created.
 	 */
 	function findSetupTabUlInSalesforcePage() {
-		const parentOfSetupTabUl =
-			(documentRef.querySelector("ul.pinnedItems.slds-grid") ??
-				documentRef.getElementsByClassName("pinnedItems slds-grid")
-					?.[0])
-				?.parentElement;
+		const parentOfSetupTabUl = (
+			documentRef.querySelector("ul.pinnedItems.slds-grid") ??
+			documentRef.getElementsByClassName("pinnedItems slds-grid")?.[0]
+		)?.parentElement;
 		if (parentOfSetupTabUl == null) {
 			return false;
 		}

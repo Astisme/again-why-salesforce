@@ -17,9 +17,7 @@ import {
 	sendExtensionMessage as sendExtensionMessageDefault,
 } from "../../core/functions.js";
 import { TranslationService } from "../../core/translator.js";
-import {
-	createNotSalesforceSetupModule as createNotSalesforceSetupPureModule,
-} from "./notSalesforceSetup-module.js";
+import { createNotSalesforceSetupModule as createNotSalesforceSetupPureModule } from "./notSalesforceSetup-module.js";
 
 let notSalesforceSetupModule = null;
 

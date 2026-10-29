@@ -1,4 +1,5 @@
-import { join } from "@std/path";
+import fs from "node:fs/promises";
+import { join } from "node:path";
 import {
 	type AuditFinding,
 	type AuditReport,
@@ -95,7 +96,8 @@ export function parseArgs(args: string[], projectRoot: string): CliOptions {
 		if (arg.startsWith("--fail-severity=")) {
 			const severity = arg.slice("--fail-severity=".length);
 			if (
-				severity === "info" || severity === "warn" ||
+				severity === "info" ||
+				severity === "warn" ||
 				severity === "error"
 			) {
 				parsed.failSeverity = severity;
@@ -132,7 +134,7 @@ function normalizePathSeparators(pathValue: string): string {
  * Writes pretty JSON output with a trailing newline.
  */
 async function writeJson(path: string, data: unknown): Promise<void> {
-	await Deno.writeTextFile(path, `${JSON.stringify(data, null, "\t")}\n`);
+	await fs.writeFile(path, `${JSON.stringify(data, null, "\t")}\n`);
 }
 
 /**
@@ -162,8 +164,9 @@ export async function suppressTraceFindingsForConsoleAliases(
 	}
 	return {
 		...report,
-		findings: report.findings.filter((finding) =>
-			!isSuppressedTraceFinding(finding, filesWithConsoleAliases)
+		findings: report.findings.filter(
+			(finding) =>
+				!isSuppressedTraceFinding(finding, filesWithConsoleAliases),
 		),
 	};
 }
@@ -194,7 +197,7 @@ async function findFilesWithConsoleAliases(
 			join(projectRoot, relativePath),
 		);
 		try {
-			const fileContent = await Deno.readTextFile(absolutePath);
+			const fileContent = await fs.readFile(absolutePath, "utf8");
 			if (containsCalledWarnOrErrorAlias(fileContent)) {
 				filesWithAliases.add(relativePath);
 			}
@@ -227,9 +230,7 @@ function containsCalledWarnOrErrorAlias(content: string): boolean {
  */
 function collectWarnOrErrorAliases(content: string): Set<string> {
 	const aliases = new Set<string>();
-	for (
-		const match of content.matchAll(CONSOLE_LEVEL_REFERENCE_PATTERN)
-	) {
+	for (const match of content.matchAll(CONSOLE_LEVEL_REFERENCE_PATTERN)) {
 		const aliasName = match.at(1);
 		const level = match.at(2);
 		if (
@@ -266,11 +267,12 @@ function isSuppressedTraceFinding(
 	finding: AuditFinding,
 	filesWithConsoleAliases: Set<string>,
 ): boolean {
-	return finding.issueCode === TRACE_WITHOUT_WARN_OR_ERROR_CODE &&
-		filesWithConsoleAliases.has(finding.file);
+	return (
+		finding.issueCode === TRACE_WITHOUT_WARN_OR_ERROR_CODE &&
+		filesWithConsoleAliases.has(finding.file)
+	);
 }
 
 if (import.meta.main) {
-	const exitCode = await main(Deno.args);
-	Deno.exit(exitCode);
+	process.exitCode = await main(process.argv.slice(2));
 }

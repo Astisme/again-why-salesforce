@@ -10,8 +10,7 @@ import {
 	TOAST_ERROR as _TOAST_ERROR,
 	TOAST_WARNING as _TOAST_WARNING,
 	TUTORIAL_EVENT_CLOSE_MANAGE_TABS as _TUTORIAL_EVENT_CLOSE_MANAGE_TABS,
-	TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL
-		as _TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL,
+	TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL as _TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL,
 	TUTORIAL_EVENT_REORDERED_TABS_TABLE as _TUTORIAL_EVENT_REORDERED_TABS_TABLE,
 } from "../../core/constants.js";
 import {
@@ -103,24 +102,18 @@ function updateIndexesOnTrsAfterIndex(fromIndex = 0) {
 	// update indexes of loggers and elements
 	for (let i = fromIndex; i < managedLoggers.length; i++) {
 		const logger = managedLoggers[i];
-		const tr = logger.label
-			.closest("tr");
-		const buttons = tr
-			.querySelectorAll(
-				"a.awsf-td-button",
-			);
-		for (
-			const el of [
-				{ element: logger.label, where: "element_index" },
-				{ element: logger.url, where: "element_index" },
-				{ element: logger.org, where: "element_index" },
-				{ element: tr, where: "rowIndex" },
-				...Array.from(buttons).map((btn) => ({
-					element: btn,
-					where: "tabIndex",
-				})),
-			]
-		) {
+		const tr = logger.label.closest("tr");
+		const buttons = tr.querySelectorAll("a.awsf-td-button");
+		for (const el of [
+			{ element: logger.label, where: "element_index" },
+			{ element: logger.url, where: "element_index" },
+			{ element: logger.org, where: "element_index" },
+			{ element: tr, where: "rowIndex" },
+			...Array.from(buttons).map((btn) => ({
+				element: btn,
+				where: "tabIndex",
+			})),
+		]) {
 			el.element.dataset[el.where] = i;
 		}
 	}
@@ -161,10 +154,7 @@ function moveTrToGivenIndex({
 	currentlyPinnedNo = null,
 	isPinning = true,
 } = {}) {
-	if (
-		currentIndex == null ||
-		currentlyPinnedNo == null
-	) {
+	if (currentIndex == null || currentlyPinnedNo == null) {
 		throw new Error("error_required_params");
 	}
 	if (
@@ -173,10 +163,7 @@ function moveTrToGivenIndex({
 	) {
 		return; // the tr does not need to be moved.
 	}
-	if (
-		tabAppendElement == null ||
-		trToMove == null
-	) {
+	if (tabAppendElement == null || trToMove == null) {
 		throw new Error("error_required_params");
 	}
 	const targetTr = tabAppendElement.querySelector(
@@ -188,10 +175,7 @@ function moveTrToGivenIndex({
 		0,
 	);
 	updateLoggerIndex(currentIndex, minIndex);
-	updateIndexesOnTrsAfterIndex(Math.min(
-		currentlyPinnedNo,
-		currentIndex,
-	));
+	updateIndexesOnTrsAfterIndex(Math.min(currentlyPinnedNo, currentIndex));
 }
 
 /**
@@ -200,21 +184,16 @@ function moveTrToGivenIndex({
  */
 async function checkOpenAskConfirm(e) {
 	const [body, confirmLabel, cancelLabel, closeLabel] = await getTranslations(
-		[
-			"unsaved_changes_confirm",
-			"confirm",
-			"cancel",
-			"cancel_close",
-		],
+		["unsaved_changes_confirm", "confirm", "cancel", "cancel_close"],
 	);
 	if (
 		!wasSomethingUpdated ||
-		await sldsConfirm({
+		(await sldsConfirm({
 			body,
 			confirmLabel,
 			cancelLabel,
 			closeLabel,
-		})
+		}))
 	) {
 		await handleLightningLinkClick(e);
 		closeButton.click();
@@ -256,9 +235,7 @@ function syncOrgCellClass(input = null) {
  * @return {Promise} fulfilled when checkOpenAskConfirm is completed
  * @async
  */
-export function handleActionButtonClick(e, {
-	allTabs,
-} = {}) {
+export function handleActionButtonClick(e, { allTabs } = {}) {
 	e.preventDefault();
 	e.stopPropagation();
 	const btn = e.currentTarget;
@@ -313,10 +290,7 @@ export function handleActionButtonClick(e, {
 		}
 		case CXM_REMOVE_TAB: {
 			// Remove the row from the table if it is NOT the last one
-			if (
-				getLastTr(tbody)?.dataset.rowIndex !==
-					tabIndex
-			) {
+			if (getLastTr(tbody)?.dataset.rowIndex !== tabIndex) {
 				row.remove();
 			}
 			// if there is only the empty tr, disable deleteAllButton
@@ -411,9 +385,9 @@ function setInfoForDrag(element, listener, index) {
 	element.addEventListener(
 		"focusin",
 		(e) =>
-			focusedIndex = Number.parseInt(
+			(focusedIndex = Number.parseInt(
 				e.currentTarget.dataset.element_index,
-			),
+			)),
 	);
 	element.addEventListener("focusout", checkRemoveTr);
 }
@@ -425,17 +399,12 @@ function setInfoForDrag(element, listener, index) {
  * @return {void} - nothing
  */
 function closeDropdownOnTrClick(e, button) {
-	if (
-		e.target === button ||
-		!["TD", "INPUT"].includes(e.target.tagName)
-	) {
+	if (e.target === button || !["TD", "INPUT"].includes(e.target.tagName)) {
 		return;
 	}
-	for (
-		const menu of dropdownMenus.filter((m) =>
-			!m.className.includes(HIDDEN_CLASS)
-		)
-	) {
+	for (const menu of dropdownMenus.filter(
+		(m) => !m.className.includes(HIDDEN_CLASS),
+	)) {
 		menu.classList.add(HIDDEN_CLASS);
 	}
 }
@@ -451,11 +420,9 @@ function closeDropdownOnBtnClick(e, button) {
 	if (e.target.tagName !== "BUTTON") {
 		return;
 	}
-	for (
-		const menu of dropdownMenus.filter((m) =>
-			!m.className.includes(HIDDEN_CLASS)
-		)
-	) {
+	for (const menu of dropdownMenus.filter(
+		(m) => !m.className.includes(HIDDEN_CLASS),
+	)) {
 		const dropBtn = menu.parentNode?.querySelector(
 			"[data-name=dropdownButton]",
 		);
@@ -480,31 +447,32 @@ async function addTr(tabAppendElement = null) {
 	}
 	deleteAllButton.removeAttribute("disabled");
 	// add a new empty element
-	const {
-		tr,
-		dropdownMenu,
-		dropdownButton,
-		logger,
-	} = await createManageTabRow({}, {
-		index: tabAppendElement.childElementCount,
-	});
+	const { tr, dropdownMenu, dropdownButton, logger } =
+		await createManageTabRow(
+			{},
+			{
+				index: tabAppendElement.childElementCount,
+			},
+		);
 	tabAppendElement.append(tr);
 	updateModalBodyOverflow(tabAppendElement.closest("article"));
 	// update loggers
 	const index = managedLoggers.length;
 	managedLoggers.push(logger);
-	for (
-		const el of [
-			{ element: logger.label, type: "label", index },
-			{ element: logger.url, type: "url", index },
-			{ element: logger.org, type: "org", index },
-		]
-	) {
-		setInfoForDrag(el.element, () =>
-			trInputListener({
-				tabAppendElement,
-				type: el.type,
-			}), el.index);
+	for (const el of [
+		{ element: logger.label, type: "label", index },
+		{ element: logger.url, type: "url", index },
+		{ element: logger.org, type: "org", index },
+	]) {
+		setInfoForDrag(
+			el.element,
+			() =>
+				trInputListener({
+					tabAppendElement,
+					type: el.type,
+				}),
+			el.index,
+		);
 	}
 	// update trsAndButtons + dropdownMenus + actionButtons
 	const previousTr = trsAndButtons.at(-1);
@@ -516,28 +484,21 @@ async function addTr(tabAppendElement = null) {
 	);
 	trsAndButtons.push({ tr, button: dropdownButton });
 	dropdownMenus.push(dropdownMenu);
-	actionButtons.push(
-		...newActionButtons,
-	);
+	actionButtons.push(...newActionButtons);
 	// add event listeners on previous tr
-	previousTr.tr.addEventListener(
-		"click",
-		(e) => closeDropdownOnTrClick(e, previousTr.button),
+	previousTr.tr.addEventListener("click", (e) =>
+		closeDropdownOnTrClick(e, previousTr.button),
 	);
-	previousTr.button.addEventListener(
-		"click",
-		(e) => closeDropdownOnBtnClick(e, previousTr.button),
+	previousTr.button.addEventListener("click", (e) =>
+		closeDropdownOnBtnClick(e, previousTr.button),
 	);
 	for (const btn of previousActionBtns) {
-		btn.addEventListener(
-			"click",
-			async (e) => {
-				e.preventDefault();
-				await handleActionButtonClick(e, {
-					allTabs: await ensureAllTabsAvailability(),
-				});
-			},
-		);
+		btn.addEventListener("click", async (e) => {
+			e.preventDefault();
+			await handleActionButtonClick(e, {
+				allTabs: await ensureAllTabsAvailability(),
+			});
+		});
 	}
 }
 
@@ -586,10 +547,9 @@ async function removeTr(
  * @param {TbodyHTMLElement} tabAppendElement - the tbody element after which to add the style
  */
 function checkAddDuplicateStyle(tabAppendElement) {
-	const styleEl = injectStyle(
-		"awsf-warning",
-		{ css: ".duplicate { background-color: #dd7a01 !important; }" },
-	);
+	const styleEl = injectStyle("awsf-warning", {
+		css: ".duplicate { background-color: #dd7a01 !important; }",
+	});
 	tabAppendElement.after(styleEl);
 }
 
@@ -601,12 +561,10 @@ function checkAddDuplicateStyle(tabAppendElement) {
  * @param {Object} [param1={}] an object with the following keys
  * @param {TbodyHTMLElement} param1.tabAppendElement - the tbody to which the trs are appended to
  */
-async function checkDuplicates({
-	url = null,
-	org = null,
-} = {}, {
-	tabAppendElement,
-} = {}) {
+async function checkDuplicates(
+	{ url = null, org = null } = {},
+	{ tabAppendElement } = {},
+) {
 	const allTabs = await ensureAllTabsAvailability();
 	if (!allTabs.exists({ url, org }, true)) {
 		return;
@@ -616,9 +574,7 @@ async function checkDuplicates({
 	makeDuplicatesBold(url);
 	// highlight all duplicated rows and scroll to the first one
 	checkAddDuplicateStyle(tabAppendElement);
-	const trs = Array.from(
-		tabAppendElement.querySelectorAll("tr input.url"),
-	)
+	const trs = Array.from(tabAppendElement.querySelectorAll("tr input.url"))
 		.filter((input) => input.value === url)
 		.map((input) => {
 			const tr = input.closest("tr");
@@ -629,14 +585,11 @@ async function checkDuplicates({
 		behavior: "smooth",
 		block: "center",
 	});
-	setTimeout(
-		() => {
-			for (const tr of trs) {
-				tr.classList.remove("duplicate");
-			}
-		},
-		4000,
-	);
+	setTimeout(() => {
+		for (const tr of trs) {
+			tr.classList.remove("duplicate");
+		}
+	}, 4000);
 }
 
 /**
@@ -657,13 +610,14 @@ function checkAddRemoveLastTr({
 	}
 	// if the user is on the last td, add a new tab if both fields are non-empty.
 	if (
-		focusedIndex === (managedLoggers.length - 1) &&
-		(inputObj.label && inputObj.url)
+		focusedIndex === managedLoggers.length - 1 &&
+		inputObj.label &&
+		inputObj.url
 	) {
 		return addTr(tabAppendElement);
 	} // if the user is on the previous-to-last td, remove the last tab if either one of the fields are empty
 	else if (
-		focusedIndex === (managedLoggers.length - 2) &&
+		focusedIndex === managedLoggers.length - 2 &&
 		(!inputObj.label || !inputObj.url)
 	) {
 		return removeTr(tabAppendElement);
@@ -680,31 +634,28 @@ function checkAddRemoveLastTr({
  * @param {TrHTMLElement} [param1.tr=null] - the tr where the Tab is shown
  * @throws Error when tabAppendElement == null or tr == null
  */
-function performAfterChecks({
-	url = null,
-	org = null,
-} = {}, {
-	tabAppendElement = null,
-	tr = null,
-} = {}) {
+function performAfterChecks(
+	{ url = null, org = null } = {},
+	{ tabAppendElement = null, tr = null } = {},
+) {
 	if (tabAppendElement == null || tr == null) {
 		throw new Error("error_required_params");
 	}
 	// check eventual duplicates
-	void checkDuplicates({
-		url: url === "" ? undefined : url,
-		org: org === "" ? undefined : org,
-	}, {
-		tabAppendElement,
-	});
+	void checkDuplicates(
+		{
+			url: url === "" ? undefined : url,
+			org: org === "" ? undefined : org,
+		},
+		{
+			tabAppendElement,
+		},
+	);
 	// update the "open" button href
-	tr.querySelector("[data-action=open]").href = url == null || url === ""
-		? "#"
-		: Tab.expandURL(
-			url,
-			getCurrentHref(),
-			org,
-		);
+	tr.querySelector("[data-action=open]").href =
+		url == null || url === ""
+			? "#"
+			: Tab.expandURL(url, getCurrentHref(), org);
 }
 
 /**
@@ -717,10 +668,7 @@ function performAfterChecks({
  * @return {Promise<void>} fulfilled when the checkAddRemoveLastTr is completed
  * @async
  */
-function trInputListener({
-	tabAppendElement = null,
-	type = "label",
-} = {}) {
+function trInputListener({ tabAppendElement = null, type = "label" } = {}) {
 	if (tabAppendElement == null) {
 		throw new Error("error_required_params");
 	}
@@ -755,8 +703,7 @@ function trInputListener({
 			}
 			syncOrgCellClass(element);
 			const thisUrlOrg = Tab.extractOrgName(getCurrentHref());
-			const isThisOrgTab = org === "" ||
-				org === thisUrlOrg;
+			const isThisOrgTab = org === "" || org === thisUrlOrg;
 			const wasThisOrgTab = tr.dataset.isThisOrgTab === "true";
 			tr.dataset.isThisOrgTab = isThisOrgTab;
 			if (wasThisOrgTab && !isThisOrgTab) {
@@ -769,10 +716,13 @@ function trInputListener({
 			break;
 	}
 	if (typeMatched) {
-		performAfterChecks({ url, org }, {
-			tabAppendElement,
-			tr,
-		});
+		performAfterChecks(
+			{ url, org },
+			{
+				tabAppendElement,
+				tr,
+			},
+		);
 	}
 	inputObj[type] = element.value;
 	return checkAddRemoveLastTr({
@@ -803,14 +753,9 @@ function reduceLoggersToElements() {
  * @param {number} [param0.fromIndex=0] - the original index of the tr
  * @param {number} [param0.toIndex=0] - the new index of the tr
  */
-function reorderTabsTable({
-	fromIndex = 0,
-	toIndex = 0,
-} = {}) {
+function reorderTabsTable({ fromIndex = 0, toIndex = 0 } = {}) {
 	updateLoggerIndex(fromIndex, toIndex);
-	updateIndexesOnTrsAfterIndex(
-		Math.min(fromIndex, toIndex),
-	);
+	updateIndexesOnTrsAfterIndex(Math.min(fromIndex, toIndex));
 	manage_InvalidateSort = true;
 	wasSomethingUpdated = true;
 	document.dispatchEvent(
@@ -836,9 +781,9 @@ function countPinnedRows(tbody = null) {
 			continue;
 		}
 		if (
-			tr.querySelector("td.slds-cell-wrap")?.classList.contains(
-				PIN_TAB_CLASS,
-			)
+			tr
+				.querySelector("td.slds-cell-wrap")
+				?.classList.contains(PIN_TAB_CLASS)
 		) {
 			pinnedRows++;
 		}
@@ -860,27 +805,30 @@ async function readManagedTabsAndSave({
 	const tableTabs = [];
 	const lastTr = getLastTr(tbody);
 	for (const tr of tbody.querySelectorAll("tr")) {
-		if (tr !== lastTr) { // lastChild is always empty
-			tableTabs.push(Tab.create({
-				label: getInnerElementFieldBySelector({
-					parentElement: tr,
-					field: "value",
-					selector: "input.label",
+		if (tr !== lastTr) {
+			// lastChild is always empty
+			tableTabs.push(
+				Tab.create({
+					label: getInnerElementFieldBySelector({
+						parentElement: tr,
+						field: "value",
+						selector: "input.label",
+					}),
+					url: getInnerElementFieldBySelector({
+						parentElement: tr,
+						field: "value",
+						selector: "input.url",
+					}),
+					org: getInnerElementFieldBySelector({
+						parentElement: tr,
+						field: "value",
+						selector: "input.org",
+					}),
 				}),
-				url: getInnerElementFieldBySelector({
-					parentElement: tr,
-					field: "value",
-					selector: "input.url",
-				}),
-				org: getInnerElementFieldBySelector({
-					parentElement: tr,
-					field: "value",
-					selector: "input.org",
-				}),
-			}));
+			);
 		}
 	}
-	allTabs = allTabs ?? await ensureAllTabsAvailability();
+	allTabs = allTabs ?? (await ensureAllTabsAvailability());
 	allTabs[TabContainer.keyPinnedTabsNo] = countPinnedRows(tbody);
 	// send message to save the Tabs as they were read
 	if (
@@ -956,23 +904,24 @@ export async function createManageTabsModal() {
 		...modalParent.querySelectorAll("[data-action]"),
 	);
 	for (const btn of actionButtons) {
-		btn.addEventListener(
-			"click",
-			async (e) => {
-				e.preventDefault();
-				await handleActionButtonClick(e, {
-					allTabs,
-				});
-			},
-		);
+		btn.addEventListener("click", async (e) => {
+			e.preventDefault();
+			await handleActionButtonClick(e, {
+				allTabs,
+			});
+		});
 	}
 	// Listen when the last row is filled in to add a new empty row
 	for (const el of reduceLoggersToElements()) {
-		setInfoForDrag(el.element, () =>
-			trInputListener({
-				tabAppendElement: tbody,
-				type: el.type,
-			}), el.index);
+		setInfoForDrag(
+			el.element,
+			() =>
+				trInputListener({
+					tabAppendElement: tbody,
+					type: el.type,
+				}),
+			el.index,
+		);
 	}
 	// Close dropdown when clicking outside
 	for (const { tr, button } of trsAndButtons) {
@@ -985,9 +934,8 @@ export async function createManageTabsModal() {
 	for (const button of allDropButtons) {
 		// Prevent dropdown from closing when clicking inside
 		// and close all other Btns
-		button.addEventListener(
-			"click",
-			(e) => closeDropdownOnBtnClick(e, button),
+		button.addEventListener("click", (e) =>
+			closeDropdownOnBtnClick(e, button),
 		);
 	}
 	// enable the deleteAllButton to be clicked
@@ -1057,30 +1005,31 @@ export function createManageTabsModule(overrides = {}) {
 	TOAST_WARNING = overrides.TOAST_WARNING ?? TOAST_WARNING;
 	TUTORIAL_EVENT_CLOSE_MANAGE_TABS =
 		overrides.TUTORIAL_EVENT_CLOSE_MANAGE_TABS ??
-			TUTORIAL_EVENT_CLOSE_MANAGE_TABS;
+		TUTORIAL_EVENT_CLOSE_MANAGE_TABS;
 	TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL =
 		overrides.TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL ??
-			TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL;
+		TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL;
 	TUTORIAL_EVENT_REORDERED_TABS_TABLE =
 		overrides.TUTORIAL_EVENT_REORDERED_TABS_TABLE ??
-			TUTORIAL_EVENT_REORDERED_TABS_TABLE;
+		TUTORIAL_EVENT_REORDERED_TABS_TABLE;
 	MODAL_ID = overrides.MODAL_ID ?? MODAL_ID;
 	Tab = overrides.Tab ?? Tab;
 	TabContainer = overrides.TabContainer ?? TabContainer;
 	createManageTabRow = overrides.createManageTabRow ?? createManageTabRow;
-	generateStyleFromSettings = overrides.generateStyleFromSettings ??
-		generateStyleFromSettings;
-	ensureAllTabsAvailability = overrides.ensureAllTabsAvailability ??
-		ensureAllTabsAvailability;
-	generateManageTabsModal = overrides.generateManageTabsModal ??
-		generateManageTabsModal;
+	generateStyleFromSettings =
+		overrides.generateStyleFromSettings ?? generateStyleFromSettings;
+	ensureAllTabsAvailability =
+		overrides.ensureAllTabsAvailability ?? ensureAllTabsAvailability;
+	generateManageTabsModal =
+		overrides.generateManageTabsModal ?? generateManageTabsModal;
 	getCurrentHref = overrides.getCurrentHref ?? getCurrentHref;
-	getInnerElementFieldBySelector = overrides.getInnerElementFieldBySelector ??
+	getInnerElementFieldBySelector =
+		overrides.getInnerElementFieldBySelector ??
 		getInnerElementFieldBySelector;
 	getModalHanger = overrides.getModalHanger ?? getModalHanger;
 	getTranslations = overrides.getTranslations ?? getTranslations;
-	handleLightningLinkClick = overrides.handleLightningLinkClick ??
-		handleLightningLinkClick;
+	handleLightningLinkClick =
+		overrides.handleLightningLinkClick ?? handleLightningLinkClick;
 	sldsConfirm = overrides.sldsConfirm ?? sldsConfirm;
 	injectStyle = overrides.injectStyle ?? injectStyle;
 	makeDuplicatesBold = overrides.makeDuplicatesBold ?? makeDuplicatesBold;
@@ -1089,8 +1038,8 @@ export function createManageTabsModule(overrides = {}) {
 	setupDragForUl = overrides.setupDragForUl ?? setupDragForUl;
 	sf_afterSet = overrides.sf_afterSet ?? sf_afterSet;
 	showToast = overrides.showToast ?? showToast;
-	updateModalBodyOverflow = overrides.updateModalBodyOverflow ??
-		updateModalBodyOverflow;
+	updateModalBodyOverflow =
+		overrides.updateModalBodyOverflow ?? updateModalBodyOverflow;
 	applyGlobalOverride("CustomEvent", overrides.CustomEvent);
 	applyGlobalOverride("confirm", overrides.confirm);
 	applyGlobalOverride("document", overrides.document);

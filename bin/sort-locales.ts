@@ -1,5 +1,6 @@
-#!/usr/bin/env -S deno run --allow-read --allow-write
-// deno-lint-ignore-file no-explicit-any
+#!/usr/bin/env -S bun run
+
+import fs from "node:fs/promises";
 
 /**
  * Recursively sorts an object’s keys alphabetically.
@@ -10,17 +11,14 @@ function sortObjectKeys<T>(obj: T): T {
 		return obj.map((item) =>
 			item !== null && typeof item === "object"
 				? sortObjectKeys(item)
-				: item
+				: item,
 		) as unknown as T;
 	} else if (obj !== null && typeof obj === "object") {
 		const entries = Object.keys(obj)
 			.sort((a, b) => a.localeCompare(b))
 			.map((key) => {
 				const val = (obj as any)[key];
-				return [
-					key,
-					val,
-				] as [string, any];
+				return [key, val] as [string, any];
 			});
 		return Object.fromEntries(entries) as T;
 	}
@@ -33,11 +31,13 @@ function sortObjectKeys<T>(obj: T): T {
 async function* findLocaleMessageFiles(
 	basePath: string,
 ): AsyncGenerator<string> {
-	for await (const dirEntry of Deno.readDir(basePath)) {
+	for (const dirEntry of await fs.readdir(basePath, {
+		withFileTypes: true,
+	})) {
 		const entryPath = `${basePath}/${dirEntry.name}`;
-		if (dirEntry.isDirectory) {
+		if (dirEntry.isDirectory()) {
 			yield* findLocaleMessageFiles(entryPath);
-		} else if (dirEntry.isFile && dirEntry.name === "messages.json") {
+		} else if (dirEntry.isFile() && dirEntry.name === "messages.json") {
 			yield entryPath;
 		}
 	}
@@ -57,10 +57,10 @@ async function main() {
 		let failedOnce = false;
 		for await (const filePath of findLocaleMessageFiles(baseDir)) {
 			try {
-				const raw = await Deno.readTextFile(filePath);
+				const raw = await fs.readFile(filePath, "utf8");
 				const data = JSON.parse(raw);
 				const sorted = sortObjectKeys(data);
-				await Deno.writeTextFile(
+				await fs.writeFile(
 					filePath,
 					`${JSON.stringify(sorted, null, "\t")}\n`,
 				);
@@ -70,12 +70,14 @@ async function main() {
 			}
 		}
 		if (failedOnce) {
-			Deno.exit(1);
+			process.exitCode = 1;
 		}
 	} catch (err) {
 		console.error(`Error traversing ${baseDir}: ${err.message}`);
-		Deno.exit(1);
+		process.exitCode = 1;
 	}
 }
 
-await main();
+if (import.meta.main) {
+	await main();
+}

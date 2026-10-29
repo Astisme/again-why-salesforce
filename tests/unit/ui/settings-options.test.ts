@@ -1,8 +1,5 @@
-import {
-	assertEquals,
-	assertRejects,
-	assertThrows,
-} from "@std/testing/asserts";
+import { test } from "#test";
+import { assertEquals, assertRejects, assertThrows } from "#test";
 
 type OptionsModule = {
 	buildDecorationConfigs: (
@@ -116,10 +113,7 @@ type OptionsModule = {
 			pinKey: string;
 		},
 	) => string | null;
-	_getTabResources: (options: {
-		isGeneric: boolean;
-		isPinned: boolean;
-	}) => {
+	_getTabResources: (options: { isGeneric: boolean; isPinned: boolean }) => {
 		inputs: { active: OptionElement[]; inactive: OptionElement[] };
 		decorations: { active: OptionElement[]; inactive: OptionElement[] };
 		active: {
@@ -260,8 +254,10 @@ class OptionElement {
 	append(...elements: OptionElement[]) {
 		for (const element of elements) {
 			if (element.parentNode != null) {
-				element.parentNode.children = element.parentNode.children
-					.filter((child) => child !== element);
+				element.parentNode.children =
+					element.parentNode.children.filter(
+						(child) => child !== element,
+					);
 			}
 			element.parentNode = this;
 			this.children.push(element);
@@ -343,10 +339,7 @@ type OptionsFixture = {
 	styleSettings: Map<string, unknown>;
 };
 
-function getOrCreateElement(
-	elements: Map<string, OptionElement>,
-	id: string,
-) {
+function getOrCreateElement(elements: Map<string, OptionElement>, id: string) {
 	const existing = elements.get(id);
 	if (existing != null) {
 		return existing;
@@ -362,9 +355,9 @@ function createListItem(id: string, styleKey: string) {
 	return element;
 }
 
-async function loadOptions(
-	{ runRestoreOnLoad = false }: { runRestoreOnLoad?: boolean } = {},
-) {
+async function loadOptions({
+	runRestoreOnLoad = false,
+}: { runRestoreOnLoad?: boolean } = {}) {
 	const areFramePatternsAllowedResult = { value: true };
 	const clearTimeoutCalls: Array<number | null> = [];
 	const consoleErrors: string[] = [];
@@ -431,7 +424,7 @@ async function loadOptions(
 		getElementById: (id: string) => getOrCreateElement(elements, id),
 		querySelector: (selector: string) =>
 			querySelectorMap.get(selector) ??
-				getOrCreateElement(elements, selector),
+			getOrCreateElement(elements, selector),
 	};
 	const browserMock = {
 		i18n: {
@@ -458,9 +451,8 @@ async function loadOptions(
 	setGlobal("chrome", browserMock);
 	setGlobal("document", documentMock);
 
-	const optionsModule = await import(
-		"../../../src/settings/options-module.js"
-	);
+	const optionsModule =
+		await import("../../../src/settings/options-module.js");
 	const module = optionsModule.createOptionsModule(
 		{
 			constants: {
@@ -519,14 +511,16 @@ async function loadOptions(
 					cssSelectorCalls.push(options);
 					return `.selector-${cssSelectorCalls.length}`;
 				},
-				getPinnedSpecificKey: (
-					{ isGeneric, isPinned }: {
-						isGeneric: boolean;
-						isPinned: boolean;
-					},
-				) => `${isGeneric ? "generic" : "org"}-${
-					isPinned ? "pinned" : "unpinned"
-				}`,
+				getPinnedSpecificKey: ({
+					isGeneric,
+					isPinned,
+				}: {
+					isGeneric: boolean;
+					isPinned: boolean;
+				}) =>
+					`${isGeneric ? "generic" : "org"}-${
+						isPinned ? "pinned" : "unpinned"
+					}`,
 				getSettings: () => Promise.resolve(settingsResult.value),
 				getStyleSettings: (key: string) =>
 					Promise.resolve(styleSettings.get(key) ?? null),
@@ -604,7 +598,7 @@ async function loadOptions(
 	};
 }
 
-Deno.test("options starts the theme transition and builds checkbox payloads", async () => {
+test("options starts the theme transition and builds checkbox payloads", async () => {
 	const fixture = await loadOptions();
 	const dependentCheckbox = new OptionElement("dependent");
 	dependentCheckbox.checked = true;
@@ -685,17 +679,18 @@ Deno.test("options starts the theme transition and builds checkbox payloads", as
 
 		const noUpdateCheckbox = new OptionElement("no-update-notification");
 		noUpdateCheckbox.checked = true;
-		fixture.module.saveCheckboxOptions.call(
-			noUpdateCheckbox,
-			{ target: noUpdateCheckbox },
-		);
+		fixture.module.saveCheckboxOptions.call(noUpdateCheckbox, {
+			target: noUpdateCheckbox,
+		});
 		assertEquals(fixture.sendMessages[1], {
 			key: "settings-key",
-			set: [{
-				date: undefined,
-				enabled: true,
-				id: "no-update-notification",
-			}],
+			set: [
+				{
+					date: undefined,
+					enabled: true,
+					id: "no-update-notification",
+				},
+			],
 			what: "what-set",
 		});
 	} finally {
@@ -703,7 +698,7 @@ Deno.test("options starts the theme transition and builds checkbox payloads", as
 	}
 });
 
-Deno.test("options resolves tab element ids and tab element groups", async () => {
+test("options resolves tab element ids and tab element groups", async () => {
 	const fixture = await loadOptions();
 
 	try {
@@ -818,7 +813,7 @@ Deno.test("options resolves tab element ids and tab element groups", async () =>
 	}
 });
 
-Deno.test("options builds structured style configuration maps", async () => {
+test("options builds structured style configuration maps", async () => {
 	const fixture = await loadOptions();
 	type NestedValueConfig = Record<
 		string,
@@ -840,10 +835,7 @@ Deno.test("options builds structured style configuration maps", async () => {
 		inputs: string[];
 		moveBtns: Record<string, string>;
 	};
-	type StructuredConfig = Record<
-		string,
-		Record<string, StructuredConfEntry>
-	>;
+	type StructuredConfig = Record<string, Record<string, StructuredConfEntry>>;
 	const makeConfig = (prefix: string) => ({
 		decorations: [prefix],
 		decorationUls: {
@@ -907,10 +899,7 @@ Deno.test("options builds structured style configuration maps", async () => {
 			configs,
 		) as Record<string, MergedConfigEntry>;
 		assertEquals(mergedConfigs.bold.type, "decoration");
-		assertEquals(
-			mergedConfigs.background.type,
-			"input",
-		);
+		assertEquals(mergedConfigs.background.type, "input");
 		assertEquals(
 			mergedConfigs.bold.availableUls.active.org.unpinned,
 			"active-org-unpinned-available",
@@ -940,7 +929,7 @@ Deno.test("options builds structured style configuration maps", async () => {
 	}
 });
 
-Deno.test("options builds preview css rules and updates preview inputs", async () => {
+test("options builds preview css rules and updates preview inputs", async () => {
 	const fixture = await loadOptions();
 	const decorationInput = new OptionElement("decoration-input", "li");
 	const chosenUl = new OptionElement("chosen-ul", "ul");
@@ -1035,10 +1024,13 @@ Deno.test("options builds preview css rules and updates preview inputs", async (
 			".selector-1{ hover:red; }",
 		);
 
-		fixture.module._updateUIElements({
-			chosenUl,
-			input: decorationInput,
-		}, "blue");
+		fixture.module._updateUIElements(
+			{
+				chosenUl,
+				input: decorationInput,
+			},
+			"blue",
+		);
 		assertEquals(decorationInput.value, "blue");
 		assertEquals(chosenUl.children[0], decorationInput);
 
@@ -1076,13 +1068,10 @@ Deno.test("options builds preview css rules and updates preview inputs", async (
 			fixture.elements.get("generic-background-active")?.value,
 			"salmon",
 		);
-		assertEquals(
-			fixture.injectStyleCalls.at(-1),
-			{
-				css: ".selector-2{ background:salmon; }",
-				id: "awsf-background-style-generic-active",
-			},
-		);
+		assertEquals(fixture.injectStyleCalls.at(-1), {
+			css: ".selector-2{ background:salmon; }",
+			id: "awsf-background-style-generic-active",
+		});
 
 		fixture.module.setPreviewAndInputValue({
 			forActive: true,
@@ -1099,7 +1088,7 @@ Deno.test("options builds preview css rules and updates preview inputs", async (
 	}
 });
 
-Deno.test("options applies current choices, sort settings, and toast helpers", async () => {
+test("options applies current choices, sort settings, and toast helpers", async () => {
 	const fixture = await loadOptions();
 	const sortWrapper = fixture.elements.get("sort-wrapper")!;
 	sortWrapper.classList.add("invisible");
@@ -1122,10 +1111,7 @@ Deno.test("options applies current choices, sort settings, and toast helpers", a
 			enabled: "recent",
 			id: "persist-sort",
 		});
-		assertEquals(
-			fixture.elements.get("keep_sorted")?.checked,
-			"recent",
-		);
+		assertEquals(fixture.elements.get("keep_sorted")?.checked, "recent");
 		assertEquals(fixture.elements.get("picked-sort")?.value, "recent");
 		assertEquals(
 			fixture.elements.get("picked-sort-direction")?.value,
@@ -1144,11 +1130,13 @@ Deno.test("options applies current choices, sort settings, and toast helpers", a
 
 		fixture.module.setCurrentChoice({
 			id: "generic-style",
-			value: [{
-				forActive: true,
-				id: "color",
-				value: "gold",
-			}],
+			value: [
+				{
+					forActive: true,
+					id: "color",
+					value: "gold",
+				},
+			],
 		});
 		assertEquals(
 			fixture.elements.get("generic-color-active")?.value,
@@ -1198,9 +1186,11 @@ Deno.test("options applies current choices, sort settings, and toast helpers", a
 
 		await fixture.module.showToast("translated-message", false);
 		assertEquals(
-			fixture.elements.get("toast-display-error")?.querySelector(
-				"div.toastMessage.slds-text-heading--small.forceActionsText",
-			)?.innerText,
+			fixture.elements
+				.get("toast-display-error")
+				?.querySelector(
+					"div.toastMessage.slds-text-heading--small.forceActionsText",
+				)?.innerText,
 			"translated-message",
 		);
 	} finally {
@@ -1208,7 +1198,7 @@ Deno.test("options applies current choices, sort settings, and toast helpers", a
 	}
 });
 
-Deno.test("options restores general settings and handles general setting listeners", async () => {
+test("options restores general settings and handles general setting listeners", async () => {
 	const fixture = await loadOptions();
 	const allowDomains = fixture.elements.get("allow-domains")!;
 	const allowExport = fixture.elements.get("allow-export")!;
@@ -1277,9 +1267,11 @@ Deno.test("options restores general settings and handles general setting listene
 		await userLanguage.dispatch("change");
 		assertEquals(userLanguage.value, "it");
 		assertEquals(
-			fixture.elements.get("toast-display-error")?.querySelector(
-				"div.toastMessage.slds-text-heading--small.forceActionsText",
-			)?.innerText,
+			fixture.elements
+				.get("toast-display-error")
+				?.querySelector(
+					"div.toastMessage.slds-text-heading--small.forceActionsText",
+				)?.innerText,
 			"permission_request_failure",
 		);
 
@@ -1305,9 +1297,11 @@ Deno.test("options restores general settings and handles general setting listene
 		await allowExport.dispatch("change");
 		assertEquals(allowExport.checked, false);
 		assertEquals(
-			fixture.elements.get("toast-display-error")?.querySelector(
-				"div.toastMessage.slds-text-heading--small.forceActionsText",
-			)?.innerText,
+			fixture.elements
+				.get("toast-display-error")
+				?.querySelector(
+					"div.toastMessage.slds-text-heading--small.forceActionsText",
+				)?.innerText,
 			"permission_request_failure",
 		);
 
@@ -1330,9 +1324,11 @@ Deno.test("options restores general settings and handles general setting listene
 		await allowDomains.dispatch("change");
 		assertEquals(allowDomains.checked, true);
 		assertEquals(
-			fixture.elements.get("toast-display-success")?.querySelector(
-				"div.toastMessage.slds-text-heading--small.forceActionsText",
-			)?.innerText,
+			fixture.elements
+				.get("toast-display-success")
+				?.querySelector(
+					"div.toastMessage.slds-text-heading--small.forceActionsText",
+				)?.innerText,
 			"permission_request_success",
 		);
 
@@ -1346,7 +1342,7 @@ Deno.test("options restores general settings and handles general setting listene
 	}
 });
 
-Deno.test("options can trigger general settings restoration on module load", async () => {
+test("options can trigger general settings restoration on module load", async () => {
 	const fixture = await loadOptions({ runRestoreOnLoad: true });
 
 	try {
@@ -1357,7 +1353,7 @@ Deno.test("options can trigger general settings restoration on module load", asy
 	}
 });
 
-Deno.test("options saves tab style inputs and decoration selections", async () => {
+test("options saves tab style inputs and decoration selections", async () => {
 	const fixture = await loadOptions();
 	const activeInput = fixture.elements.get("generic-border-active")!;
 	activeInput.dataset.styleKey = "border";
@@ -1435,14 +1431,17 @@ Deno.test("options saves tab style inputs and decoration selections", async () =
 			Error,
 			"error_required_params",
 		);
-		const references = fixture.module._getReferencesByKey({
-			active: {
-				moveBtns: { available: "aa", chosen: "ab" },
+		const references = fixture.module._getReferencesByKey(
+			{
+				active: {
+					moveBtns: { available: "aa", chosen: "ab" },
+				},
+				inactive: {
+					moveBtns: { available: "ia", chosen: "ib" },
+				},
 			},
-			inactive: {
-				moveBtns: { available: "ia", chosen: "ib" },
-			},
-		}, "moveBtns");
+			"moveBtns",
+		);
 		assertEquals(references.active.available, "aa");
 		assertEquals(references.inactive.chosen, "ib");
 
@@ -1469,7 +1468,7 @@ Deno.test("options saves tab style inputs and decoration selections", async () =
 	}
 });
 
-Deno.test("options restores tab settings and wires tab, header, and save listeners", async () => {
+test("options restores tab settings and wires tab, header, and save listeners", async () => {
 	const fixture = await loadOptions();
 	const inactiveInput = fixture.elements.get("generic-background-inactive")!;
 	const activeInput = fixture.elements.get("generic-background-active")!;
@@ -1519,16 +1518,16 @@ Deno.test("options restores tab settings and wires tab, header, and save listene
 		});
 		await inactiveInput.dispatch("click");
 		assertEquals(
-			fixture.elements.get("generic-preview")?.classList.contains(
-				"slds-active",
-			),
+			fixture.elements
+				.get("generic-preview")
+				?.classList.contains("slds-active"),
 			false,
 		);
 		await activeInput.dispatch("click");
 		assertEquals(
-			fixture.elements.get("generic-preview")?.classList.contains(
-				"slds-active",
-			),
+			fixture.elements
+				.get("generic-preview")
+				?.classList.contains("slds-active"),
 			true,
 		);
 
@@ -1610,9 +1609,9 @@ Deno.test("options restores tab settings and wires tab, header, and save listene
 			preview: fixture.elements.get("org-preview"),
 		});
 		assertEquals(
-			fixture.elements.get("org-settings")?.classList.contains(
-				"slds-active",
-			),
+			fixture.elements
+				.get("org-settings")
+				?.classList.contains("slds-active"),
 			true,
 		);
 		assertEquals(
@@ -1623,9 +1622,9 @@ Deno.test("options restores tab settings and wires tab, header, and save listene
 		await fixture.elements.get("general-settings")!.dispatch("click");
 		await fixture.elements.get("generic-settings")!.dispatch("click");
 		await fixture.elements.get("org-settings")!.dispatch("click");
-		await fixture.elements.get("pinned_generic-settings")!.dispatch(
-			"click",
-		);
+		await fixture.elements
+			.get("pinned_generic-settings")!
+			.dispatch("click");
 		await fixture.elements.get("pinned_org-settings")!.dispatch("click");
 		assertEquals(
 			fixture.module.__getState().listenersSet["org-pinned"],
@@ -1635,9 +1634,9 @@ Deno.test("options restores tab settings and wires tab, header, and save listene
 		fixture.elements.get("keep_sorted")!.checked = true;
 		fixture.elements.get("picked-sort")!.value = "alpha";
 		fixture.elements.get("picked-sort-direction")!.value = "ascending";
-		await fixture.querySelectors.get("#save-container > button")!.dispatch(
-			"click",
-		);
+		await fixture.querySelectors
+			.get("#save-container > button")!
+			.dispatch("click");
 		assertEquals(fixture.sendMessages.at(-1), {
 			key: "settings-key",
 			set: [
@@ -1647,9 +1646,9 @@ Deno.test("options restores tab settings and wires tab, header, and save listene
 			what: "what-set",
 		});
 		assertEquals(
-			fixture.elements.get("save-confirm")?.classList.contains(
-				"invisible",
-			),
+			fixture.elements
+				.get("save-confirm")
+				?.classList.contains("invisible"),
 			false,
 		);
 	} finally {

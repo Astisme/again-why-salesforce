@@ -1,4 +1,5 @@
-import { assertEquals } from "@std/testing/asserts";
+import { test } from "#test";
+import { assertEquals } from "#test";
 import { createDragHandlerModule } from "../../../src/salesforce/runtime/dragHandler-runtime.js";
 
 type DragCallbackPayload = {
@@ -138,10 +139,13 @@ class DragContainer {
 			/^(li|tr)\[data-row-index="([^"]+)"\]$/,
 		);
 		if (rowIndexMatch != null) {
-			return this.children.find((row) =>
-				row.tagName.toLowerCase() === rowIndexMatch[1] &&
-				row.dataset.rowIndex === rowIndexMatch[2]
-			) ?? null;
+			return (
+				this.children.find(
+					(row) =>
+						row.tagName.toLowerCase() === rowIndexMatch[1] &&
+						row.dataset.rowIndex === rowIndexMatch[2],
+				) ?? null
+			);
 		}
 		const nthChildMatch = selector.match(/^(li|tr):nth-child\((\d+)\)$/);
 		if (nthChildMatch != null) {
@@ -252,7 +256,7 @@ function loadDragHandler({
 	return { cleanup: () => {}, module, timeoutCalls };
 }
 
-Deno.test("dragHandler wires UL drag listeners and reorders rows within the same pinned section", async () => {
+test("dragHandler wires UL drag listeners and reorders rows within the same pinned section", async () => {
 	const rows = [
 		new DragRow("li", 0),
 		new DragRow("li", 1),
@@ -289,21 +293,22 @@ Deno.test("dragHandler wires UL drag listeners and reorders rows within the same
 		assertEquals(dropEvent.prevented.value, true);
 		assertEquals(dropEvent.stopped.value, true);
 		assertEquals(rows[1].style.cursor, "grab");
-		assertEquals(container.children.map((row) => row.dataset.rowIndex), [
-			"1",
-			"0",
-			"2",
+		assertEquals(
+			container.children.map((row) => row.dataset.rowIndex),
+			["1", "0", "2"],
+		);
+		assertEquals(callbacks, [
+			{
+				fromIndex: "0",
+				toIndex: "1",
+			},
 		]);
-		assertEquals(callbacks, [{
-			fromIndex: "0",
-			toIndex: "1",
-		}]);
 	} finally {
 		cleanup();
 	}
 });
 
-Deno.test("dragHandler blocks illegal pinned-to-unpinned moves by clamping the target row", async () => {
+test("dragHandler blocks illegal pinned-to-unpinned moves by clamping the target row", async () => {
 	const rows = [
 		new DragRow("li", 0),
 		new DragRow("li", 1),
@@ -324,21 +329,22 @@ Deno.test("dragHandler blocks illegal pinned-to-unpinned moves by clamping the t
 		await container.dispatch("dragstart", createDragEvent(rows[2]).event);
 		await container.dispatch("drop", createDragEvent(rows[0]).event);
 
-		assertEquals(container.children.map((row) => row.dataset.rowIndex), [
-			"0",
-			"2",
-			"1",
+		assertEquals(
+			container.children.map((row) => row.dataset.rowIndex),
+			["0", "2", "1"],
+		);
+		assertEquals(callbacks, [
+			{
+				fromIndex: "2",
+				toIndex: 1,
+			},
 		]);
-		assertEquals(callbacks, [{
-			fromIndex: "2",
-			toIndex: 1,
-		}]);
 	} finally {
 		cleanup();
 	}
 });
 
-Deno.test("dragHandler ignores invalid drops and schedules a retry when no UL container exists", async () => {
+test("dragHandler ignores invalid drops and schedules a retry when no UL container exists", async () => {
 	const rows = [new DragRow("li", 0), new DragRow("li", 1)];
 	rows[1].draggable = false;
 	const container = new DragContainer(rows);
@@ -372,7 +378,7 @@ Deno.test("dragHandler ignores invalid drops and schedules a retry when no UL co
 	}
 });
 
-Deno.test("dragHandler can attach listeners to the sortable table body", async () => {
+test("dragHandler can attach listeners to the sortable table body", async () => {
 	const rows = [new DragRow("tr", 0), new DragRow("tr", 1)];
 	const container = new DragContainer(rows);
 	const callbacks: DragCallbackPayload[] = [];
@@ -387,20 +393,22 @@ Deno.test("dragHandler can attach listeners to the sortable table body", async (
 		await container.dispatch("dragstart", createDragEvent(rows[0]).event);
 		await container.dispatch("drop", createDragEvent(rows[1]).event);
 
-		assertEquals(container.children.map((row) => row.dataset.rowIndex), [
-			"1",
-			"0",
+		assertEquals(
+			container.children.map((row) => row.dataset.rowIndex),
+			["1", "0"],
+		);
+		assertEquals(callbacks, [
+			{
+				fromIndex: "0",
+				toIndex: "1",
+			},
 		]);
-		assertEquals(callbacks, [{
-			fromIndex: "0",
-			toIndex: "1",
-		}]);
 	} finally {
 		cleanup();
 	}
 });
 
-Deno.test("dragHandler prevents invalid drag starts and accepts the explicit draggable string branch", async () => {
+test("dragHandler prevents invalid drag starts and accepts the explicit draggable string branch", async () => {
 	const rows = [new DragRow("li", 0), new DragRow("li", 1)];
 	const container = new DragContainer(rows);
 	rows[0].draggable = "true" as unknown as boolean;

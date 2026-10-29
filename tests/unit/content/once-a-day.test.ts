@@ -1,4 +1,5 @@
-import { assert, assertEquals } from "@std/testing/asserts";
+import { test } from "#test";
+import { assert, assertEquals } from "#test";
 import { mockStorage } from "../../mocks.test.ts";
 import {
 	EXTENSION_LAST_ACTIVE_DAY,
@@ -80,7 +81,7 @@ function setGlobalSessionStorage(storage: Storage) {
 	});
 }
 
-Deno.test("executeOncePerDay runs the first time but not the second", async () => {
+test("executeOncePerDay runs the first time but not the second", async () => {
 	const originalSettings = structuredClone(mockStorage[SETTINGS_KEY]);
 	const originalSessionStorage = globalThis.sessionStorage;
 	const sessionStorageMock = createSessionStorageMock();
@@ -88,10 +89,12 @@ Deno.test("executeOncePerDay runs the first time but not the second", async () =
 	const today = getTodayDateKey();
 	try {
 		setGlobalSessionStorage(sessionStorageMock as Storage);
-		mockStorage[SETTINGS_KEY] = [{
-			id: PREVENT_ANALYTICS,
-			enabled: true,
-		}];
+		mockStorage[SETTINGS_KEY] = [
+			{
+				id: PREVENT_ANALYTICS,
+				enabled: true,
+			},
+		];
 
 		await executeOncePerDay();
 		await flushAsyncWork();
@@ -104,8 +107,8 @@ Deno.test("executeOncePerDay runs the first time but not the second", async () =
 		assertEquals(secondCallMessageCount, firstCallMessageCount);
 		assertEquals(sessionStorageMock.getItem(todayStorageKey), today);
 		assertEquals(
-			mockStorage[SETTINGS_KEY].find((setting) =>
-				setting.id === EXTENSION_LAST_ACTIVE_DAY
+			mockStorage[SETTINGS_KEY].find(
+				(setting) => setting.id === EXTENSION_LAST_ACTIVE_DAY,
 			)?.enabled,
 			today,
 		);
@@ -116,7 +119,7 @@ Deno.test("executeOncePerDay runs the first time but not the second", async () =
 	}
 });
 
-Deno.test("executeOncePerDay skips persisted same-day calls and backfills sessionStorage", async () => {
+test("executeOncePerDay skips persisted same-day calls and backfills sessionStorage", async () => {
 	const originalSettings = structuredClone(mockStorage[SETTINGS_KEY]);
 	const originalSessionStorage = globalThis.sessionStorage;
 	const sessionStorageMock = createSessionStorageMock();

@@ -40,8 +40,7 @@ export class TranslationService {
 	get translateAttributeDataset() {
 		return TranslationService.TRANSLATE_DATASET;
 	}
-	static TRANSLATE_ELEMENT_ATTRIBUTE =
-		`data-${TranslationService.TRANSLATE_DATASET}`;
+	static TRANSLATE_ELEMENT_ATTRIBUTE = `data-${TranslationService.TRANSLATE_DATASET}`;
 	static TRANSLATE_SEPARATOR = "+-+";
 	/**
 	 * Retrieves the separator string used to split translation keys
@@ -66,9 +65,7 @@ export class TranslationService {
 	 */
 	constructor(secret) {
 		if (secret !== _translationSecret) {
-			throw new Error(
-				"error_translationservice_constructor",
-			);
+			throw new Error("error_translationservice_constructor");
 		}
 	}
 
@@ -82,10 +79,7 @@ export class TranslationService {
 	 *   `false` if no loading was necessary or the language was null or FOLLOW_SF_LANG.
 	 */
 	async loadNewLanguage(language = null) {
-		if (
-			language == null ||
-			language === FOLLOW_SF_LANG
-		) {
+		if (language == null || language === FOLLOW_SF_LANG) {
 			return false;
 		}
 		await this.loadLanguageFile(language);
@@ -101,14 +95,14 @@ export class TranslationService {
 	 *   or `null` if neither the user’s preference nor Salesforce language could be loaded.
 	 */
 	async loadLanguageBackground() {
-		const userLanguage = (await sendExtensionMessage({
-			what: WHAT_GET_SETTINGS,
-			keys: USER_LANGUAGE,
-		}))?.enabled;
+		const userLanguage = (
+			await sendExtensionMessage({
+				what: WHAT_GET_SETTINGS,
+				keys: USER_LANGUAGE,
+			})
+		)?.enabled;
 		// load the user picked language
-		if (
-			await this.loadNewLanguage(userLanguage)
-		) {
+		if (await this.loadNewLanguage(userLanguage)) {
 			return this.currentLanguage;
 		}
 		// load the language in which salesforce is currently set
@@ -230,10 +224,7 @@ export class TranslationService {
 	 * @throws {Error} If the key is missing in all locale caches, throws an Error with a translated error message prefix.
 	 */
 	async #_translate(key, connector = " ", isError = false) {
-		if (
-			key.includes(" ") &&
-			this.#getMessageFromCache(key) == null
-		) {
+		if (key.includes(" ") && this.#getMessageFromCache(key) == null) {
 			return key;
 		}
 		if (key.startsWith("$")) {
@@ -255,17 +246,14 @@ export class TranslationService {
 			);
 		}
 		// Get translation or fallback to region agnostic or fallback to default language
-		const translation = loadedLanguage?.[key]?.message ??
+		const translation =
+			loadedLanguage?.[key]?.message ??
 			regionAgnosticLanguage?.[key]?.message ??
 			this.caches[TranslationService.FALLBACK_LANGUAGE]?.[key]?.message;
 		if (translation == null) {
 			let errorMsg = "error_missing_key"; // fallback
 			if (isError === false) {
-				errorMsg = await this.#_translate(
-					errorMsg,
-					connector,
-					true,
-				);
+				errorMsg = await this.#_translate(errorMsg, connector, true);
 			}
 			throw new Error(`${errorMsg}: ${key}`);
 		}
@@ -286,16 +274,10 @@ export class TranslationService {
 		if (key == null) return null;
 		// get all inner translations
 		const cacheMessage = this.#getMessageFromCache(key);
-		if (
-			cacheMessage != null &&
-			!cacheMessage.includes("$")
-		) {
+		if (cacheMessage != null && !cacheMessage.includes("$")) {
 			return cacheMessage;
 		}
-		if (
-			key.includes(connector) &&
-			cacheMessage == null
-		) {
+		if (key.includes(connector) && cacheMessage == null) {
 			const translation = await this.translate(key.split(/\s+/));
 			this.#addTranslationToCache(key, translation);
 			return translation;
@@ -306,17 +288,15 @@ export class TranslationService {
 			/^\$\w.*$/.exec(key) &&
 			this.#getMessageFromCache(key) == null
 		) {
-			const translatedPlaceholder = await this.#translateMessageTokens(
-				key,
-			);
+			const translatedPlaceholder =
+				await this.#translateMessageTokens(key);
 			this.#addTranslationToCache(key, translatedPlaceholder);
 			return translatedPlaceholder;
 		}
 		if (Array.isArray(key)) {
-			return (await Promise.all(
-				key.map((k) => this.translate(k)),
-			))
-				.join(connector);
+			return (await Promise.all(key.map((k) => this.translate(k)))).join(
+				connector,
+			);
 		}
 		// key is not an Array
 		try {
@@ -324,9 +304,8 @@ export class TranslationService {
 			if (!keyTranslate.includes("$")) {
 				return keyTranslate;
 			}
-			const finalTranslation = await this.#translateMessageTokens(
-				keyTranslate,
-			);
+			const finalTranslation =
+				await this.#translateMessageTokens(keyTranslate);
 			this.#addTranslationToCache(key, finalTranslation);
 			return finalTranslation;
 		} catch (e) {
@@ -351,8 +330,9 @@ export class TranslationService {
 			}
 			const innerTranslation = await this.#_translate(part);
 			if (innerTranslation.includes("$")) {
-				return messageTranslated +
-					await this.translate(innerTranslation);
+				return (
+					messageTranslated + (await this.translate(innerTranslation))
+				);
 			}
 			return messageTranslated + innerTranslation;
 		}, Promise.resolve(""));
@@ -402,9 +382,10 @@ export class TranslationService {
 			const [key, ...attributes] = toTranslateKey.split(
 				TranslationService.TRANSLATE_SEPARATOR,
 			);
-			const translation = (await this.translate(
-				key,
-			)).replaceAll("\n", "<br />");
+			const translation = (await this.translate(key)).replaceAll(
+				"\n",
+				"<br />",
+			);
 			if (attributes == null) continue;
 			if (attributes.length === 0) {
 				attributes.push("textContent");
@@ -457,8 +438,11 @@ export class TranslationService {
 	 * @async
 	 */
 	static #getTranslator_async(loadLanguage = null) {
-		return singletonTranslatorPromise ?? singletonTranslator ??
-			TranslationService.create(loadLanguage);
+		return (
+			singletonTranslatorPromise ??
+			singletonTranslator ??
+			TranslationService.create(loadLanguage)
+		);
 	}
 
 	/**
@@ -470,10 +454,7 @@ export class TranslationService {
 	 * @return {TranslationService} The initialized translator instance.
 	 */
 	static #getTranslator() {
-		if (
-			singletonTranslator == null ||
-			singletonTranslatorPromise != null
-		) {
+		if (singletonTranslator == null || singletonTranslatorPromise != null) {
 			throw new Error("error_translator_not_initialized");
 		}
 		return singletonTranslator;
@@ -518,11 +499,11 @@ export class TranslationService {
 		if (translationKeys.length === 0) {
 			return translations;
 		}
-		const translator = await TranslationService
-			.ensureTranslatorAvailability();
+		const translator =
+			await TranslationService.ensureTranslatorAvailability();
 		const translated = await Promise.all(
 			translationKeys.map((item) =>
-				translator.translate(item, connector)
+				translator.translate(item, connector),
 			),
 		);
 		return isArrayInput ? translated : translated[0];
@@ -536,8 +517,8 @@ export class TranslationService {
 	 */
 	static async getTranslatorAttribute(attribute = null) {
 		if (attribute == null) return null;
-		const translator = await TranslationService
-			.ensureTranslatorAvailability();
+		const translator =
+			await TranslationService.ensureTranslatorAvailability();
 		return translator?.[attribute] ?? null;
 	}
 }

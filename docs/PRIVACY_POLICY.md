@@ -36,8 +36,8 @@ No personal data or browsing history is stored in `localStorage`. You can clear 
 
 - All data you create in the extension (Tabs, settings, decorations) is saved via the browser's **sync storage** API for a seamless experience across devices.
 - You can view or edit this directly via your browser's developer tools:
-  - Chrome/Edge: DevTools > Application > Storage > Extension Storage
-  - Firefox: DevTools > Storage Inspector
+    - Chrome/Edge: DevTools > Application > Storage > Extension Storage
+    - Firefox: DevTools > Storage Inspector
 - To view or edit the data without relying on the extension, please look at [the official documentation](https://developer.chrome.com/docs/devtools/storage/extensionstorage).
 - For more information about how your data is stored and synced, please see [the official documentation](https://developer.chrome.com/docs/extensions/reference/api/storage#property-sync).
 
@@ -98,9 +98,9 @@ Even though we don't collect personal data, you may disable analytics at any tim
 ## 9. Third-Party Disclosures
 
 - **Simple Analytics**
-  - Provides fully anonymous usage counts with no identifiers shared.
+    - Provides fully anonymous usage counts with no identifiers shared.
 - **Browser Vendors (Chrome, Firefox, Edge, Safari)**
-  - Manage storage and browser-level permissions under their respective privacy policies.
+    - Manage storage and browser-level permissions under their respective privacy policies.
 
 ---
 

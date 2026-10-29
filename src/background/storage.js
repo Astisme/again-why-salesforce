@@ -20,9 +20,7 @@ import cssColorNames from "./css-color-names.json" with { type: "json" };
  */
 async function _getFromStorage(key, callback) {
 	const isArrayKey = Array.isArray(key);
-	const items = await BROWSER.storage.sync.get(
-		isArrayKey ? key : [key],
-	);
+	const items = await BROWSER.storage.sync.get(isArrayKey ? key : [key]);
 	callback?.(isArrayKey ? items : items[key]);
 	return items;
 }
@@ -38,16 +36,13 @@ async function _getFromStorage(key, callback) {
 export function bg_getStorage(callback, key = WHY_KEY) {
 	if (callback == null) {
 		return new Promise((resolve, reject) => {
-			_getFromStorage(
-				key,
-				(response) => {
-					if (BROWSER.runtime.lastError) {
-						reject(BROWSER.runtime.lastError);
-					} else {
-						resolve(response);
-					}
-				},
-			).catch(reject);
+			_getFromStorage(key, (response) => {
+				if (BROWSER.runtime.lastError) {
+					reject(BROWSER.runtime.lastError);
+				} else {
+					resolve(response);
+				}
+			}).catch(reject);
 		});
 	}
 	return _getFromStorage(key, callback);
@@ -77,11 +72,12 @@ export async function bg_getSettings(
 		settingKeys = [settingKeys];
 	}
 	const requestedSettings = settings.filter((setting) =>
-		settingKeys.includes(setting.id)
+		settingKeys.includes(setting.id),
 	);
-	const response = settingKeys.length === 1 && key === SETTINGS_KEY
-		? requestedSettings[0]
-		: requestedSettings;
+	const response =
+		settingKeys.length === 1 && key === SETTINGS_KEY
+			? requestedSettings[0]
+			: requestedSettings;
 	callback?.(response);
 	return response;
 }
@@ -104,20 +100,16 @@ async function checkStyleSettingsHex(styleKey, styleSettings) {
 	const wasArray = Array.isArray(styleSettings);
 	if (wasArray) {
 		styleSettings = Object.fromEntries(
-			styleKey.map(
-				(key) => [key, styleSettings],
-			),
+			styleKey.map((key) => [key, styleSettings]),
 		);
 	}
 	const updateKeys = new Map();
 	for (const [key, styleArray] of Object.entries(styleSettings)) {
-		for (
-			const styleByKey of styleArray
-				.filter(({ id, value }) =>
-					DECORATION_COLORS.has(id) &&
-					cssColorNames[value.toLowerCase()] != null
-				)
-		) {
+		for (const styleByKey of styleArray.filter(
+			({ id, value }) =>
+				DECORATION_COLORS.has(id) &&
+				cssColorNames[value.toLowerCase()] != null,
+		)) {
 			styleByKey.value = cssColorNames[styleByKey.value.toLowerCase()];
 			if (!updateKeys.has(key)) {
 				updateKeys.set(key, []);
@@ -127,9 +119,8 @@ async function checkStyleSettingsHex(styleKey, styleSettings) {
 	}
 	if (updateKeys.size > 0) {
 		await Promise.all(
-			Array.from(
-				updateKeys,
-				([key, value]) => bg_setStorage(value, undefined, key),
+			Array.from(updateKeys, ([key, value]) =>
+				bg_setStorage(value, undefined, key),
 			),
 		);
 	}
@@ -143,25 +134,15 @@ async function checkStyleSettingsHex(styleKey, styleSettings) {
  * @param {Function} [callback=null] - a callback to call when the styles have been retrieved.
  * @return {Promise<Object>} the style settings for the requested key.
  */
-export async function bg_getStyleSettings(
-	key = null,
-	callback = null,
-) {
+export async function bg_getStyleSettings(key = null, callback = null) {
 	if (key == null) {
-		key = [
-			...STYLE_KEYS,
-		];
+		key = [...STYLE_KEYS];
 	}
-	let settings = await bg_getSettings(
-		undefined,
-		key,
-	);
+	let settings = await bg_getSettings(undefined, key);
 	if (
 		settings == null ||
 		Object.values(settings).every(
-			(sett) =>
-				sett == null ||
-				!Object.values(sett).some(Boolean),
+			(sett) => sett == null || !Object.values(sett).some(Boolean),
 		)
 	) {
 		settings = null;
@@ -180,15 +161,13 @@ export async function bg_getStyleSettings(
  * @return {boolean} whether setting and item are equal
  */
 function isSameItem(setting, item, isStyleKey) {
-	return setting.id === item.id &&
-		(
-			!isStyleKey ||
-			(
-				setting.forActive == null ||
-				item.forActive == null ||
-				setting.forActive === item.forActive
-			)
-		);
+	return (
+		setting.id === item.id &&
+		(!isStyleKey ||
+			setting.forActive == null ||
+			item.forActive == null ||
+			setting.forActive === item.forActive)
+	);
 }
 
 /**
@@ -235,7 +214,7 @@ async function mergeSettings(newsettings, key = SETTINGS_KEY) {
 	for (const item of newsettings) {
 		// check if the item.id is already present
 		const existingItems = settingsArray.filter((s) =>
-			isSameItem(s, item, isStyleKey)
+			isSameItem(s, item, isStyleKey),
 		);
 		if (existingItems.length <= 0) {
 			// add the new setting

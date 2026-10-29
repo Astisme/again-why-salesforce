@@ -51,8 +51,7 @@ function sendPingToAnalytics(isNewUser = false) {
 		const currentCSP = cspMeta.getAttribute("content");
 		cspMeta.setAttribute(
 			"content",
-			currentCSP +
-				` ${queueanalytics} ${analyticscdn}`,
+			currentCSP + ` ${queueanalytics} ${analyticscdn}`,
 		);
 	} else {
 		const meta = document.createElement("meta");
@@ -66,10 +65,7 @@ function sendPingToAnalytics(isNewUser = false) {
 	const img = document.createElement("img");
 	const apiUrl = new URL(`${queueanalytics}/noscript.gif`);
 	apiUrl.searchParams.set("hostname", "extension.again.whysalesforce");
-	apiUrl.searchParams.set(
-		"path",
-		isNewUser ? "/new-user" : "/",
-	);
+	apiUrl.searchParams.set("path", isNewUser ? "/new-user" : "/");
 	apiUrl.searchParams.set("utm_source", EXTENSION_VERSION);
 	img.src = apiUrl;
 	img.alt = "";
@@ -87,18 +83,15 @@ function sendPingToAnalytics(isNewUser = false) {
  * @param {boolean} [param0.isNewUser=false] - whether the user has no persisted active day yet
  * @return {Promise<void>} Resolves once analytics insertion is completed or skipped.
  */
-export async function checkInsertAnalytics({
-	isNewUser = false,
-} = {}) {
-	const [preventAnalytics, consentGranted] = await Promise.all(
-		[
-			getSettings(PREVENT_ANALYTICS),
-			getTechnicalAndInteractionConsent(),
-		],
-	);
-	const shouldPreventAnalytics = consentGranted == null
-		? preventAnalytics?.enabled === true // the user does not want to send analytics call
-		: !consentGranted;
+export async function checkInsertAnalytics({ isNewUser = false } = {}) {
+	const [preventAnalytics, consentGranted] = await Promise.all([
+		getSettings(PREVENT_ANALYTICS),
+		getTechnicalAndInteractionConsent(),
+	]);
+	const shouldPreventAnalytics =
+		consentGranted == null
+			? preventAnalytics?.enabled === true // the user does not want to send analytics call
+			: !consentGranted;
 	if (
 		ISFIREFOX &&
 		consentGranted != null &&

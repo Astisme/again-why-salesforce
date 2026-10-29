@@ -1,7 +1,5 @@
 import * as esbuild from "esbuild";
-import { denoPlugins } from "@luca/esbuild-deno-loader";
 
-const plugins = [...denoPlugins()];
 const bundleConfigs = [
 	{
 		entryPoint: "./src/entrypoints/content.js",
@@ -42,7 +40,6 @@ async function buildBundle(
 	format?: esbuild.Format,
 ) {
 	await esbuild.build({
-		plugins,
 		entryPoints: [entryPoint],
 		outfile,
 		format,

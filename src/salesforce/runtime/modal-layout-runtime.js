@@ -24,9 +24,7 @@ const FIRST_ROW_SELECTOR = "tr:nth-child(1)";
  *   } | null) => void;
  * }} Modal-layout API.
  */
-export function createModalLayoutModule({
-	hiddenClass,
-} = {}) {
+export function createModalLayoutModule({ hiddenClass } = {}) {
 	const hiddenClassRuntime = hiddenClass;
 
 	/**
@@ -49,7 +47,8 @@ export function createModalLayoutModule({
 			}
 		}
 		const tr = table.querySelector(FIRST_ROW_SELECTOR);
-		const hasOverflow = modalBody.clientHeight -
+		const hasOverflow =
+			modalBody.clientHeight -
 				table.clientHeight -
 				otherElementsInArticleHeight <=
 			tr.clientHeight / 2;

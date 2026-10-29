@@ -1,26 +1,26 @@
 #!/usr/bin/env bash
 #
 # Usage:
-#   ./format-and-push.sh <deno-task> [<log-file>] [<commit-message>]
+#   ./format-and-push.sh <bun-script> [<log-file>] [<commit-message>]
 #
 # Example:
-#   ./format-and-push.sh fmt mylog.log "chore: apply deno fmt"
+#   ./format-and-push.sh fmt mylog.log "chore: apply formatting"
 
 set -eox pipefail
 
-TASK="$1" # the Deno task to run (e.g. "fmt", "lint")
+TASK="$1" # the Bun script to run (e.g. "fmt", "lint")
 LOG_FILE="${2:-stdout.log}"
-COMMIT_MSG="${3:-"chore: auto-run deno $TASK"}"
+COMMIT_MSG="${3:-"chore: auto-run bun $TASK"}"
 
 if [[ -z "$TASK" ]]; then
-  echo "❌  Missing <deno-task> argument"
-  echo "Usage: $0 <deno-task> [<log-file>] [<commit-message>]"
+  echo "❌  Missing <bun-script> argument"
+  echo "Usage: $0 <bun-script> [<log-file>] [<commit-message>]"
   exit 1
 fi
 
-echo "▶  Running deno task: $TASK"
+echo "▶  Running bun script: $TASK"
 # If LOG_FILE is empty, output to stdout, otherwise to the specified file
-deno task "$TASK" > "$LOG_FILE" 2>&1 || true
+bun run "$TASK" > "$LOG_FILE" 2>&1 || true
 
 echo "▶  Checking for changes…"
 DIFF_FILE=$(mktemp)
@@ -33,7 +33,7 @@ SIZE=$(stat --format=%s "$DIFF_FILE" 2>/dev/null || stat -f%z "$DIFF_FILE")
 
 rm -f "$DIFF_FILE"
 if [[ "$SIZE" -eq 0 ]]; then
-  echo "✅  No changes from 'deno task $TASK'"
+  echo "✅  No changes from 'bun run $TASK'"
   #rm -f "$LOG_FILE"
   exit 0
 fi

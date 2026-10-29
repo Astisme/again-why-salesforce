@@ -1,5 +1,6 @@
+import { test } from "#test";
 import "../../mocks.test.ts";
-import { assertEquals, assertRejects } from "@std/testing/asserts";
+import { assertEquals, assertRejects } from "#test";
 import { waitForCondition } from "../../async.test.ts";
 import {
 	createPopupModule,
@@ -32,9 +33,7 @@ type Command = {
  * @param {Record<string, unknown>} [popupOptions={}] Popup options.
  * @return {Promise<{ redirected: boolean }>} Redirect status.
  */
-function runPopupWithModule(
-	popupOptions: Record<string, unknown> = {},
-) {
+function runPopupWithModule(popupOptions: Record<string, unknown> = {}) {
 	return createPopupModule(popupOptions).runPopup();
 }
 
@@ -140,9 +139,7 @@ async function loadPopupModule({
 		openSettingsPage: () => {
 			counters.openSettingsCalls++;
 		},
-		sendExtensionMessage: (
-			message: Record<string, unknown>,
-		) => {
+		sendExtensionMessage: (message: Record<string, unknown>) => {
 			messages.push(message);
 			if (message.what === WHAT_GET_COMMANDS) {
 				return Promise.resolve(commandResponse);
@@ -176,7 +173,7 @@ async function loadPopupModule({
 	};
 }
 
-Deno.test("popup-module redirects to host permissions when setup frame patterns are blocked", async () => {
+test("popup-module redirects to host permissions when setup frame patterns are blocked", async () => {
 	const fixture = await loadPopupModule({
 		framePatternsAllowed: false,
 		salesforceState: { ison: true },
@@ -188,7 +185,7 @@ Deno.test("popup-module redirects to host permissions when setup frame patterns 
 	);
 });
 
-Deno.test("popup-module redirects to notSalesforceSetup with url when the current tab is outside setup", async () => {
+test("popup-module redirects to notSalesforceSetup with url when the current tab is outside setup", async () => {
 	const fixture = await loadPopupModule({
 		salesforceState: {
 			ison: false,
@@ -202,7 +199,7 @@ Deno.test("popup-module redirects to notSalesforceSetup with url when the curren
 	);
 });
 
-Deno.test("popup-module omits the notSalesforceSetup url query when no url is available", async () => {
+test("popup-module omits the notSalesforceSetup url query when no url is available", async () => {
 	const fixture = await loadPopupModule({
 		salesforceState: {
 			ison: false,
@@ -216,7 +213,7 @@ Deno.test("popup-module omits the notSalesforceSetup url query when no url is av
 	);
 });
 
-Deno.test("popup-module createPopupModule wrapper wires command titles and action buttons", async () => {
+test("popup-module createPopupModule wrapper wires command titles and action buttons", async () => {
 	const fixture = await loadPopupModule({
 		availableCommands: [
 			{ name: CMD_IMPORT, shortcut: "Ctrl+I" },
@@ -255,7 +252,7 @@ Deno.test("popup-module createPopupModule wrapper wires command titles and actio
 	assertEquals(fixture.counters.openSettingsCalls, 1);
 });
 
-Deno.test("popup-module keeps shortcut title wiring stable when translation datasets are incomplete", async () => {
+test("popup-module keeps shortcut title wiring stable when translation datasets are incomplete", async () => {
 	const fixture = await loadPopupModule({
 		availableCommands: [
 			{ name: CMD_IMPORT, shortcut: "Ctrl+I" },
@@ -272,7 +269,7 @@ Deno.test("popup-module keeps shortcut title wiring stable when translation data
 	);
 });
 
-Deno.test("popup-module starts all shortcut translations before awaiting their results", async () => {
+test("popup-module starts all shortcut translations before awaiting their results", async () => {
 	const translated = Promise.withResolvers<string>();
 	const calls: string[] = [];
 	const pending = loadPopupModule({
@@ -303,7 +300,7 @@ Deno.test("popup-module starts all shortcut translations before awaiting their r
 	}
 });
 
-Deno.test("popup-module propagates rejected shortcut translations", async () => {
+test("popup-module propagates rejected shortcut translations", async () => {
 	await assertRejects(
 		() =>
 			loadPopupModule({
@@ -316,7 +313,7 @@ Deno.test("popup-module propagates rejected shortcut translations", async () => 
 	);
 });
 
-Deno.test("popup-module skips command-title updates when the command response is invalid", async () => {
+test("popup-module skips command-title updates when the command response is invalid", async () => {
 	const fixture = await loadPopupModule({
 		commandResponse: null,
 	});
@@ -334,7 +331,7 @@ Deno.test("popup-module skips command-title updates when the command response is
 	assertEquals(fixture.counters.closeCalls, 1);
 });
 
-Deno.test("popup-module exits early when one required popup button is unavailable", async () => {
+test("popup-module exits early when one required popup button is unavailable", async () => {
 	const window = createMockWindow(
 		"https://example.test/action/popup/popup.html",
 	);
@@ -380,7 +377,7 @@ Deno.test("popup-module exits early when one required popup button is unavailabl
 	assertEquals(messages.length, 0);
 });
 
-Deno.test("popup-module runPopup supports explicit requestedCommands overrides", async () => {
+test("popup-module runPopup supports explicit requestedCommands overrides", async () => {
 	const window = createMockWindow(
 		"https://example.test/action/popup/popup.html",
 	);
@@ -416,18 +413,20 @@ Deno.test("popup-module runPopup supports explicit requestedCommands overrides",
 		whatStartTutorial: WHAT_START_TUTORIAL,
 	});
 
-	assertEquals(messages, [{
-		what: WHAT_GET_COMMANDS,
-		commands: ["one", "two"],
-	}]);
+	assertEquals(messages, [
+		{
+			what: WHAT_GET_COMMANDS,
+			commands: ["one", "two"],
+		},
+	]);
 });
 
-Deno.test("popup-module runPopup default fallbacks redirect safely with no overrides", async () => {
+test("popup-module runPopup default fallbacks redirect safely with no overrides", async () => {
 	const result = await runPopupWithModule();
 	assertEquals(result.redirected, true);
 });
 
-Deno.test("popup-module runPopup default handlers remain safe with partial overrides", async () => {
+test("popup-module runPopup default handlers remain safe with partial overrides", async () => {
 	const window = createMockWindow(
 		"https://example.test/action/popup/popup.html",
 	);
@@ -470,14 +469,14 @@ Deno.test("popup-module runPopup default handlers remain safe with partial overr
 	]);
 });
 
-Deno.test("popup-module fallback document safely handles setup flow when no buttons are present", async () => {
+test("popup-module fallback document safely handles setup flow when no buttons are present", async () => {
 	const result = await runPopupWithModule({
 		isOnSalesforceSetup: () => Promise.resolve({ ison: true }),
 	});
 	assertEquals(result.redirected, false);
 });
 
-Deno.test("popup-module setup flow can rely on the default message sender", async () => {
+test("popup-module setup flow can rely on the default message sender", async () => {
 	const window = createMockWindow(
 		"https://example.test/action/popup/popup.html",
 	);
@@ -497,7 +496,7 @@ Deno.test("popup-module setup flow can rely on the default message sender", asyn
 	assertEquals(result.redirected, false);
 });
 
-Deno.test("popup-module exported runPopup accepts injected popup options", async () => {
+test("popup-module exported runPopup accepts injected popup options", async () => {
 	const fixture = await loadPopupModule({
 		availableCommands: [{ name: CMD_IMPORT, shortcut: "Alt+I" }],
 		salesforceState: { ison: true },
@@ -531,7 +530,7 @@ Deno.test("popup-module exported runPopup accepts injected popup options", async
 	);
 });
 
-Deno.test("popup-module runPopupWithInjectedOptions uses all defaults safely", async () => {
+test("popup-module runPopupWithInjectedOptions uses all defaults safely", async () => {
 	const result = await runPopupWithInjectedOptions();
 	assertEquals(result.redirected, true);
 });

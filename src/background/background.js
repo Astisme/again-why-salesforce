@@ -215,12 +215,9 @@ function setExtensionBrowserListeners() {
 		}
 	});
 	// when the extension is activated by the BROWSER
-	self.addEventListener(
-		"activate",
-		async () => {
-			await checkAddRemoveContextMenus(WHAT_ACTIVATE);
-		},
-	);
+	self.addEventListener("activate", async () => {
+		await checkAddRemoveContextMenus(WHAT_ACTIVATE);
+	});
 	// when the active tab changes
 	BROWSER.tabs.onActivated.addListener(() => {
 		debouncedCheckMenus(WHAT_HIGHLIGHTED, checkForUpdates);

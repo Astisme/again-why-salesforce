@@ -1,28 +1,25 @@
+import { test } from "#test";
 import { mockBrowser } from "../../mocks.test.ts";
-import { assertEquals, assertFalse, assertRejects } from "@std/testing/asserts";
-import { stub } from "@std/testing/mock";
+import { assertEquals, assertFalse, assertRejects } from "#test";
+import { stub } from "#test";
 import { bg_getStorage } from "../../../src/background/storage.js";
 import { bg_getSalesforceLanguage } from "../../../src/background/salesforce-language.js";
 import { LOCALE_KEY } from "../../../src/core/constants.js";
 import { sendExtensionMessage } from "../../../src/core/functions.js";
 import { waitForNextTask } from "../../async.test.ts";
 
-Deno.test("storage bridge propagates rejected browser reads", async () => {
-	using get = stub(
-		mockBrowser.storage.sync,
-		"get",
-		() => Promise.reject(new Error("storage-read-failed")),
+test("storage bridge propagates rejected browser reads", async () => {
+	using get = stub(mockBrowser.storage.sync, "get", () =>
+		Promise.reject(new Error("storage-read-failed")),
 	);
 
 	await assertRejects(() => bg_getStorage(), Error, "storage-read-failed");
 	assertEquals(get.calls.length, 1);
 });
 
-Deno.test("storage callback bridge returns an awaitable result", async () => {
-	using get = stub(
-		mockBrowser.storage.sync,
-		"get",
-		() => Promise.resolve({ [LOCALE_KEY]: "en" }),
+test("storage callback bridge returns an awaitable result", async () => {
+	using get = stub(mockBrowser.storage.sync, "get", () =>
+		Promise.resolve({ [LOCALE_KEY]: "en" }),
 	);
 	let callbackLanguage = "";
 
@@ -35,11 +32,9 @@ Deno.test("storage callback bridge returns an awaitable result", async () => {
 	assertEquals(get.calls.length, 1);
 });
 
-Deno.test("storage callback bridge propagates callback failures", async () => {
-	using get = stub(
-		mockBrowser.storage.sync,
-		"get",
-		() => Promise.resolve({ [LOCALE_KEY]: "en" }),
+test("storage callback bridge propagates callback failures", async () => {
+	using get = stub(mockBrowser.storage.sync, "get", () =>
+		Promise.resolve({ [LOCALE_KEY]: "en" }),
 	);
 
 	await assertRejects(
@@ -53,11 +48,9 @@ Deno.test("storage callback bridge propagates callback failures", async () => {
 	assertEquals(get.calls.length, 1);
 });
 
-Deno.test("message bridge propagates rejected browser sends without a callback", async () => {
-	using send = stub(
-		mockBrowser.runtime,
-		"sendMessage",
-		() => Promise.reject(new Error("message-send-failed")),
+test("message bridge propagates rejected browser sends without a callback", async () => {
+	using send = stub(mockBrowser.runtime, "sendMessage", () =>
+		Promise.reject(new Error("message-send-failed")),
 	);
 
 	await assertRejects(
@@ -68,18 +61,22 @@ Deno.test("message bridge propagates rejected browser sends without a callback",
 	assertEquals(send.calls.length, 1);
 });
 
-Deno.test("Salesforce language waits for persistence and callback completion", async () => {
-	mockBrowser.tabs.setMockBrowserTabs([{
-		id: 0,
-		url: "https://mycustomorg--sandbox.lightning.force.com",
-		active: true,
-		currentWindow: true,
-	}]);
-	mockBrowser.cookies.setMockCookies([{
-		domain: "mycustomorg--sandbox.my.salesforce.com",
-		name: "sid",
-		value: "test-session",
-	}]);
+test("Salesforce language waits for persistence and callback completion", async () => {
+	mockBrowser.tabs.setMockBrowserTabs([
+		{
+			id: 0,
+			url: "https://mycustomorg--sandbox.lightning.force.com",
+			active: true,
+			currentWindow: true,
+		},
+	]);
+	mockBrowser.cookies.setMockCookies([
+		{
+			domain: "mycustomorg--sandbox.my.salesforce.com",
+			name: "sid",
+			value: "test-session",
+		},
+	]);
 	const stored = Promise.withResolvers<boolean>();
 	const started = Promise.withResolvers<void>();
 	using set = stub(mockBrowser.storage.sync, "set", () => {
@@ -90,12 +87,15 @@ Deno.test("Salesforce language waits for persistence and callback completion", a
 	let settled = false;
 	const pending = bg_getSalesforceLanguage((language: string) => {
 		callbackLanguage = language;
-	}).then((language) => {
-		settled = true;
-		return language;
-	}, (error: Error) => {
-		throw error;
-	});
+	}).then(
+		(language) => {
+			settled = true;
+			return language;
+		},
+		(error: Error) => {
+			throw error;
+		},
+	);
 
 	try {
 		await started.promise;

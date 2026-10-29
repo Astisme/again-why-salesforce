@@ -18,34 +18,28 @@ jobs:
             - name: Setup repo
               uses: actions/checkout@v4
 
-            - name: Setup Deno
-              uses: denoland/setup-deno@v2
+            - name: Setup Bun
+              uses: oven-sh/setup-bun@v2
               with:
-                  deno-version: v2.9.5 #2.9.6 fails jobs
+                  bun-version: latest
 
-            - name: Setup Node
-              uses: actions/setup-node@v3
+            - name: Install dependencies
+              run: bun install --frozen-lockfile
 
-            - name: Install eslint
-              run: npm install eslint eslint-plugin-jsdoc
-
-            - name: Run Deno linter
-              run: deno task lint
-
-            - name: Run eslint (check JSDocs)
-              run: npx eslint
+            - name: Run linter
+              run: bun run lint
 
             - name: Run Tests
-              run: deno task test
+              run: bun run test
 
             - name: Verify formatting
-              run: deno task fmt
+              run: bun run fmt
 
             - name: Ensure Changes Exist
               continue-on-error: true
               run: |
-                git diff --output differ
-                echo "no_changes=$(ls -l differ | awk '{print $5}')" >> $GITHUB_ENV
+                  git diff --output differ
+                  echo "no_changes=$(ls -l differ | awk '{print $5}')" >> $GITHUB_ENV
 
             - name: Set up Git user
               if: env.no_changes != '0'
@@ -64,7 +58,7 @@ jobs:
             - name: Push changes
               if: env.no_changes != '0'
               run: |
-                  git commit -am "deno formatting"
+                  git commit -am "bun formatting"
                   git push https://x-access-token:${{ github.token }}@github.com/${{ github.repository }} "${{ env.BRANCH_NAME }}"
 
             - name: Authenticate GitHub CLI
@@ -75,12 +69,12 @@ jobs:
               if: env.no_changes != '0'
               id: make_pr
               run: |
-                gh pr create \
-                    --head "fmt/${{ github.sha }}" \
-                    --base "main" \
-                    --title "Deno formatting changes" \
-                    --body "This PR includes formatting updates made by the workflow."
-                echo "PR_URL=$(gh pr view --json url -q ".url")" >> $GITHUB_OUTPUT
+                  gh pr create \
+                      --head "fmt/${{ github.sha }}" \
+                      --base "main" \
+                      --title "Bun formatting changes" \
+                      --body "This PR includes formatting updates made by the workflow."
+                  echo "PR_URL=$(gh pr view --json url -q ".url")" >> $GITHUB_OUTPUT
 
     merge-pr:
         runs-on: ubuntu-latest

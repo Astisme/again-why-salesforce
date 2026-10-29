@@ -1,4 +1,5 @@
-import { assertEquals } from "@std/testing/asserts";
+import { test } from "#test";
+import { assertEquals } from "#test";
 import type { AuditReport } from "../../bin/audit-logging-lib.ts";
 import { shouldWriteReport } from "../../bin/audit-logging.ts";
 
@@ -23,14 +24,14 @@ function createReport(findingsCount: number): AuditReport {
 	};
 }
 
-Deno.test("shouldWriteReport returns false when there are no findings", () => {
+test("shouldWriteReport returns false when there are no findings", () => {
 	assertEquals(shouldWriteReport(createReport(0)), false);
 });
 
-Deno.test("shouldWriteReport returns false when there is one finding", () => {
+test("shouldWriteReport returns false when there is one finding", () => {
 	assertEquals(shouldWriteReport(createReport(1)), false);
 });
 
-Deno.test("shouldWriteReport returns true when there are more than one findings", () => {
+test("shouldWriteReport returns true when there are more than one findings", () => {
 	assertEquals(shouldWriteReport(createReport(2)), true);
 });

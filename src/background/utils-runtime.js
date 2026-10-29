@@ -134,8 +134,10 @@ export function createBackgroundUtilsModule({
 		}
 		const browserTabs = await browserRuntime.tabs.query(queryParams);
 		if (
-			browserRuntime.runtime.lastError || browserTabs == null ||
-			browserTabs.length === 0 || browserTabs[0] == null
+			browserRuntime.runtime.lastError ||
+			browserTabs == null ||
+			browserTabs.length === 0 ||
+			browserTabs[0] == null
 		) {
 			if (count > 5) {
 				throw new Error("error_no_browser_tab");
@@ -203,18 +205,21 @@ export function createBackgroundUtilsModule({
 		if (isFirefoxRuntime) {
 			const blob = new Blob([jsonData], { type: "application/json" });
 			const url = urlRuntime.createObjectURL(blob);
-			browserRuntime.downloads.download({
-				url,
-				filename,
-			}).then(() => {
-				browserRuntime.downloads.onChanged.addListener((event) => {
-					if (event.state.current === "complete") {
-						urlRuntime.revokeObjectURL(url);
-					}
+			browserRuntime.downloads
+				.download({
+					url,
+					filename,
+				})
+				.then(() => {
+					browserRuntime.downloads.onChanged.addListener((event) => {
+						if (event.state.current === "complete") {
+							urlRuntime.revokeObjectURL(url);
+						}
+					});
 				});
-			});
 		} else if (isChromeRuntime) {
-			const dataStr = "data:application/json;charset=utf-8," +
+			const dataStr =
+				"data:application/json;charset=utf-8," +
 				encodeURIComponent(jsonData);
 			chromeRuntime.downloads.download({
 				url: dataStr,
@@ -311,16 +316,12 @@ export function createBackgroundUtilsModule({
 		);
 		if (
 			noUpdateSetting != null &&
-			(
-				noUpdateSetting.enabled === true ||
-				(
-					noUpdateSetting.date != null &&
+			(noUpdateSetting.enabled === true ||
+				(noUpdateSetting.date != null &&
 					Math.floor(
-							(Date.now() - new Date(noUpdateSetting.date)) /
-								(1000 * 60 * 60 * 24),
-						) <= 7
-				)
-			)
+						(Date.now() - new Date(noUpdateSetting.date)) /
+							(1000 * 60 * 60 * 24),
+					) <= 7))
 		) {
 			return;
 		}

@@ -1,4 +1,6 @@
-import { assertEquals, assertStringIncludes } from "@std/testing/asserts";
+import { test } from "#test";
+import fs from "node:fs/promises";
+import { assertEquals, assertStringIncludes } from "#test";
 
 /**
  * Reads a repository file using a URL resolved from this test file.
@@ -7,8 +9,9 @@ import { assertEquals, assertStringIncludes } from "@std/testing/asserts";
  * @return {Promise<string>} File contents.
  */
 function readRepoFile(relativePath: string) {
-	return Deno.readTextFile(
+	return fs.readFile(
 		new URL(`../../../${relativePath}`, import.meta.url),
+		"utf8",
 	);
 }
 
@@ -18,14 +21,11 @@ function readRepoFile(relativePath: string) {
  * @param {string} value - Full text to inspect.
  * @param {string} disallowedSubstring - Substring that must not be present.
  */
-function assertStringNotIncludes(
-	value: string,
-	disallowedSubstring: string,
-) {
+function assertStringNotIncludes(value: string, disallowedSubstring: string) {
 	assertEquals(value.includes(disallowedSubstring), false);
 }
 
-Deno.test("build script bundles popup and options into generated outputs", async () => {
+test("build script bundles popup and options into generated outputs", async () => {
 	const buildScript = await readRepoFile("bin/build.ts");
 	assertStringIncludes(buildScript, "./src/entrypoints/popup.js");
 	assertStringIncludes(buildScript, "./src/generated/bundledPopup.js");
@@ -33,14 +33,11 @@ Deno.test("build script bundles popup and options into generated outputs", async
 	assertStringIncludes(buildScript, "./src/generated/bundledOptions.js");
 });
 
-Deno.test("popup and options entrypoints import required UI modules", async () => {
+test("popup and options entrypoints import required UI modules", async () => {
 	const popupEntrypoint = await readRepoFile("src/entrypoints/popup.js");
 	const optionsEntrypoint = await readRepoFile("src/entrypoints/options.js");
 
-	assertStringIncludes(
-		popupEntrypoint,
-		"../action/popup/popup-runtime.js",
-	);
+	assertStringIncludes(popupEntrypoint, "../action/popup/popup-runtime.js");
 	assertStringIncludes(
 		popupEntrypoint,
 		"../components/theme-selector/theme-selector.js",
@@ -58,7 +55,7 @@ Deno.test("popup and options entrypoints import required UI modules", async () =
 	);
 });
 
-Deno.test("theme selector stylesheet path resolves from generated bundles", async () => {
+test("theme selector stylesheet path resolves from generated bundles", async () => {
 	const themeSelectorComponent = await readRepoFile(
 		"src/components/theme-selector/theme-selector.js",
 	);
@@ -69,7 +66,7 @@ Deno.test("theme selector stylesheet path resolves from generated bundles", asyn
 	assertStringIncludes(themeSelectorComponent, "import.meta.url");
 });
 
-Deno.test("popup and options html load generated bundles instead of unbundled scripts", async () => {
+test("popup and options html load generated bundles instead of unbundled scripts", async () => {
 	const popupHtml = await readRepoFile("src/action/popup/popup.html");
 	const optionsHtml = await readRepoFile("src/settings/options.html");
 
@@ -88,7 +85,7 @@ Deno.test("popup and options html load generated bundles instead of unbundled sc
 	);
 });
 
-Deno.test("zip script includes generated popup and options bundles", async () => {
+test("zip script includes generated popup and options bundles", async () => {
 	const zipScript = await readRepoFile("bin/zip-extension.bash");
 	assertStringIncludes(zipScript, "generated/bundled*.js");
 	assertStringIncludes(zipScript, "action/popup/popup.js");

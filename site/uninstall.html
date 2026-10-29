@@ -1,26 +1,38 @@
 <!doctype html>
 <html lang="en">
 	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="description"
-			content="Again, Why Salesforce uninstall feedback.">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta
+			name="description"
+			content="Again, Why Salesforce uninstall feedback."
+		/>
 		<title>Again, Why Salesforce Uninstall</title>
-		<link rel="icon"
-			href="https://raw.githubusercontent.com/Astisme/again-why-salesforce/main/src/assets/icons/awsf-256.png">
-		<link rel="stylesheet" href="styles.css">
+		<link
+			rel="icon"
+			href="https://raw.githubusercontent.com/Astisme/again-why-salesforce/main/src/assets/icons/awsf-256.png"
+		/>
+		<link rel="stylesheet" href="styles.css" />
 	</head>
 	<body>
 		<header class="site-header">
-			<a class="brand" href="index.html"
-				aria-label="Again, Why Salesforce home">
+			<a
+				class="brand"
+				href="index.html"
+				aria-label="Again, Why Salesforce home"
+			>
 				<img
 					src="https://raw.githubusercontent.com/Astisme/again-why-salesforce/main/src/assets/icons/awsf-256.png"
-					alt="">
+					alt=""
+				/>
 				<span>Again, Why Salesforce</span>
 			</a>
-			<button class="nav-toggle" type="button" aria-expanded="false"
-				aria-controls="site-nav">
+			<button
+				class="nav-toggle"
+				type="button"
+				aria-expanded="false"
+				aria-controls="site-nav"
+			>
 				<span></span>
 				<span></span>
 				<span></span>
@@ -42,34 +54,55 @@
 				<h1>Again, Why Salesforce</h1>
 				<p class="lead">Thanks for giving the extension a try.</p>
 				<p>You will be redirected to a short feedback form.</p>
-				<a id="awsf-uninstall-feedback-link" class="button primary"
-					href="https://docs.google.com/forms/d/e/1FAIpQLSe4tGs4gCX04vaFb_MZgN9CbdlYvLTef6HorgyCXZ14XCHxCQ/viewform">
+				<a
+					id="awsf-uninstall-feedback-link"
+					class="button primary"
+					href="https://docs.google.com/forms/d/e/1FAIpQLSe4tGs4gCX04vaFb_MZgN9CbdlYvLTef6HorgyCXZ14XCHxCQ/viewform"
+				>
 					Open feedback form manually
 				</a>
 			</section>
 		</main>
 
 		<script>
-		const feedbackLink = document.getElementById("awsf-uninstall-feedback-link");
-		const redirectToFeedback = () => {
-			globalThis.location.replace(feedbackLink?.href);
-		};
-		const fallbackRedirect = globalThis.setTimeout(redirectToFeedback, 2500);
-		const finishPing = () => {
-			globalThis.clearTimeout(fallbackRedirect);
-			redirectToFeedback();
-		};
-		const pingUrl = new URL("https://queue.simpleanalyticscdn.com/noscript.gif");
-		pingUrl.searchParams.set("hostname", "extension.again.whysalesforce");
-		pingUrl.searchParams.set("path", "/uninstall");
-		const searchParams = new URLSearchParams(globalThis.location.search);
-		pingUrl.searchParams.set("utm_source", searchParams.get("version") ?? "");
-		pingUrl.searchParams.set("utm_medium", searchParams.get("browser") ?? "");
-		const ping = new Image();
-		ping.onload = finishPing;
-		ping.onerror = finishPing;
-		ping.referrerPolicy = "no-referrer-when-downgrade";
-		ping.src = pingUrl.toString();
+			const feedbackLink = document.getElementById(
+				"awsf-uninstall-feedback-link",
+			);
+			const redirectToFeedback = () => {
+				globalThis.location.replace(feedbackLink?.href);
+			};
+			const fallbackRedirect = globalThis.setTimeout(
+				redirectToFeedback,
+				2500,
+			);
+			const finishPing = () => {
+				globalThis.clearTimeout(fallbackRedirect);
+				redirectToFeedback();
+			};
+			const pingUrl = new URL(
+				"https://queue.simpleanalyticscdn.com/noscript.gif",
+			);
+			pingUrl.searchParams.set(
+				"hostname",
+				"extension.again.whysalesforce",
+			);
+			pingUrl.searchParams.set("path", "/uninstall");
+			const searchParams = new URLSearchParams(
+				globalThis.location.search,
+			);
+			pingUrl.searchParams.set(
+				"utm_source",
+				searchParams.get("version") ?? "",
+			);
+			pingUrl.searchParams.set(
+				"utm_medium",
+				searchParams.get("browser") ?? "",
+			);
+			const ping = new Image();
+			ping.onload = finishPing;
+			ping.onerror = finishPing;
+			ping.referrerPolicy = "no-referrer-when-downgrade";
+			ping.src = pingUrl.toString();
 		</script>
 	</body>
 </html>

@@ -9,9 +9,7 @@ import {
 } from "../../core/constants.js";
 import { calculateReadingTime as calculateReadingTimeDefault } from "../../core/functions.js";
 
-import {
-	generateSldsToastMessage as generateSldsToastMessageDefault,
-} from "../generator.js";
+import { generateSldsToastMessage as generateSldsToastMessageDefault } from "../generator.js";
 import { createToastModule as createToastPureModule } from "../module/toast-module.js";
 
 /**

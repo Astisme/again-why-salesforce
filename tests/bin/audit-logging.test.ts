@@ -1,10 +1,9 @@
-import {
-	assert,
-	assertEquals,
-	assertStringIncludes,
-} from "@std/testing/asserts";
-import { stub } from "@std/testing/mock";
-import { dirname, fromFileUrl, join } from "@std/path";
+import { test } from "#test";
+import fs from "node:fs/promises";
+import { assert, assertEquals, assertStringIncludes } from "#test";
+import { stub } from "#test";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import {
 	type AuditFinding,
 	buildFindings,
@@ -44,7 +43,7 @@ function createFinding(overrides: Partial<AuditFinding> = {}): AuditFinding {
 	};
 }
 
-Deno.test("splitTopLevelArgs handles nested values and strings", () => {
+test("splitTopLevelArgs handles nested values and strings", () => {
 	const args = splitTopLevelArgs(
 		`"a", fn(1, 2), { b: [1, 2] }, 'c,d', ` + "`x,y`",
 	);
@@ -56,7 +55,7 @@ Deno.test("splitTopLevelArgs handles nested values and strings", () => {
 	assertEquals(splitTopLevelArgs(""), []);
 });
 
-Deno.test("findClosingParenIndex and computeLineNumber work for escaped strings", () => {
+test("findClosingParenIndex and computeLineNumber work for escaped strings", () => {
 	const source = 'line1\nconsole.log("x\\"y", fn(1, 2))\nline3';
 	const start = source.indexOf("console.log(") + "console.log(".length;
 	const end = findClosingParenIndex(source, start);
@@ -69,7 +68,7 @@ Deno.test("findClosingParenIndex and computeLineNumber work for escaped strings"
 	);
 });
 
-Deno.test("findConsoleCallSites returns sorted callsites with parsed args", () => {
+test("findConsoleCallSites returns sorted callsites with parsed args", () => {
 	const content = [
 		"console.warn('missing.key')",
 		"console.error('log.error', err)",
@@ -86,12 +85,14 @@ Deno.test("findConsoleCallSites returns sorted callsites with parsed args", () =
 		"src/file.js",
 		"console.warn('a');console.error('b');console.error('a')",
 	);
-	assertEquals(sameLine.map((site) => site.logLevel), [
-		"error",
-		"error",
-		"warn",
-	]);
-	assertEquals(sameLine.map((site) => site.argsText), ["'a'", "'b'", "'a'"]);
+	assertEquals(
+		sameLine.map((site) => site.logLevel),
+		["error", "error", "warn"],
+	);
+	assertEquals(
+		sameLine.map((site) => site.argsText),
+		["'a'", "'b'", "'a'"],
+	);
 
 	const incomplete = findConsoleCallSites(
 		"src/file.js",
@@ -100,7 +101,7 @@ Deno.test("findConsoleCallSites returns sorted callsites with parsed args", () =
 	assertEquals(incomplete.length, 0);
 });
 
-Deno.test("literal helpers classify keys and noise", () => {
+test("literal helpers classify keys and noise", () => {
 	assertEquals(extractLiteralString("'a.b'"), "a.b");
 	assertEquals(extractLiteralString('"abc"'), "abc");
 	assertEquals(extractLiteralString("value"), null);
@@ -110,7 +111,7 @@ Deno.test("literal helpers classify keys and noise", () => {
 	assertEquals(isNoisyLiteral(" useful "), false);
 });
 
-Deno.test("hasContextPayload detects object, errors, and context-like identifiers", () => {
+test("hasContextPayload detects object, errors, and context-like identifiers", () => {
 	assertEquals(hasContextPayload(["'key'", "{ id: 1 }"]), true);
 	assertEquals(hasContextPayload(["'key'", "new Error('x')"]), true);
 	assertEquals(hasContextPayload(["'key'", "error"]), true);
@@ -119,7 +120,7 @@ Deno.test("hasContextPayload detects object, errors, and context-like identifier
 	assertEquals(hasContextPayload(["'key'"]), false);
 });
 
-Deno.test("buildFindings emits issue coverage including trace pairing logic", () => {
+test("buildFindings emits issue coverage including trace pairing logic", () => {
 	const localeKeys = new Set(["log.good", "log.error"]);
 	const callSites = [
 		{
@@ -201,15 +202,16 @@ Deno.test("buildFindings emits issue coverage including trace pairing logic", ()
 	assert(codes.has("NON_KEY_LITERAL"));
 	assert(codes.has("MISSING_LOCALE_KEY"));
 	assertEquals(
-		findings.some((finding) =>
-			finding.file === "src/trace-paired.js" &&
-			finding.issueCode === "TRACE_WITHOUT_WARN_OR_ERROR"
+		findings.some(
+			(finding) =>
+				finding.file === "src/trace-paired.js" &&
+				finding.issueCode === "TRACE_WITHOUT_WARN_OR_ERROR",
 		),
 		false,
 	);
 });
 
-Deno.test("sortFindings and summarizeFindings produce deterministic counts", () => {
+test("sortFindings and summarizeFindings produce deterministic counts", () => {
 	const unsorted = [
 		createFinding({
 			file: "src/z.js",
@@ -249,13 +251,10 @@ Deno.test("sortFindings and summarizeFindings produce deterministic counts", () 
 		}),
 	];
 	const sorted = sortFindings(unsorted);
-	assertEquals(sorted.map((finding) => finding.fingerprint), [
-		"a3",
-		"a0",
-		"a2",
-		"a1",
-		"z2",
-	]);
+	assertEquals(
+		sorted.map((finding) => finding.fingerprint),
+		["a3", "a0", "a2", "a1", "z2"],
+	);
 	const summary = summarizeFindings(sorted);
 	assertEquals(summary.totalFindings, 5);
 	assertEquals(summary.bySeverity.error, 1);
@@ -266,7 +265,7 @@ Deno.test("sortFindings and summarizeFindings produce deterministic counts", () 
 	assertEquals(summary.byIssueCode.NOISY_LOG, 1);
 });
 
-Deno.test("severity and fail gating follow threshold behavior", () => {
+test("severity and fail gating follow threshold behavior", () => {
 	assertEquals(severityRank("error"), 3);
 	assertEquals(severityRank("warn"), 2);
 	assertEquals(severityRank("info"), 1);
@@ -280,10 +279,10 @@ Deno.test("severity and fail gating follow threshold behavior", () => {
 	assertEquals(shouldFail(findings, "info"), true);
 });
 
-Deno.test("defaultProjectRoot and listFilesRecursive return expected values", async () => {
+test("defaultProjectRoot and listFilesRecursive return expected values", async () => {
 	const root = defaultProjectRoot();
 	const expectedRoot = join(
-		dirname(fromFileUrl(import.meta.url)),
+		dirname(fileURLToPath(import.meta.url)),
 		"..",
 		"..",
 	);
@@ -293,14 +292,17 @@ Deno.test("defaultProjectRoot and listFilesRecursive return expected values", as
 	assert(files.every((file) => file.endsWith(".js")));
 });
 
-Deno.test("parseArgs parses known args and rejects invalid ones", () => {
+test("parseArgs parses known args and rejects invalid ones", () => {
 	const projectRoot = "/repo";
-	const parsed = parseArgs([
-		"--src-dir=src",
-		"--locale-file=src/_locales/en/messages.json",
-		"--report-file=out.json",
-		"--fail-severity=error",
-	], projectRoot);
+	const parsed = parseArgs(
+		[
+			"--src-dir=src",
+			"--locale-file=src/_locales/en/messages.json",
+			"--report-file=out.json",
+			"--fail-severity=error",
+		],
+		projectRoot,
+	);
 	assertEquals(parsed.srcDir, "/repo/src");
 	assertEquals(parsed.localeFile, "/repo/src/_locales/en/messages.json");
 	assertEquals(parsed.reportFile, "/repo/out.json");
@@ -316,42 +318,38 @@ Deno.test("parseArgs parses known args and rejects invalid ones", () => {
 	);
 });
 
-Deno.test("main writes report and returns failing exit code for errors", async () => {
+test("main writes report and returns failing exit code for errors", async () => {
 	const srcDir = "virtual-src";
 	const localeFile = "virtual-messages.json";
 	const reportFile = "virtual-report.json";
 	let writtenReport = "";
-	const readDirStub = stub(
-		Deno,
-		"readDir",
-		(): AsyncIterable<Deno.DirEntry> =>
-			createDirEntries([{
-				name: "sample.js",
-				isFile: true,
-				isDirectory: false,
-				isSymlink: false,
-			}]),
-	);
+	const readDirStub = stub(fs, "readdir", async () => [
+		{
+			name: "sample.js",
+			isFile: () => true,
+			isDirectory: () => false,
+			isSymbolicLink: () => false,
+		},
+	]);
 	const readTextFileStub = stub(
-		Deno,
-		"readTextFile",
+		fs,
+		"readFile",
 		(path: string | URL): Promise<string> => {
 			if (String(path).endsWith(localeFile)) {
 				return Promise.resolve("{}");
 			}
-			return Promise.resolve([
-				"console.warn('missing.key')",
-				"console.error('plain text', { id: 1 })",
-			].join("\n"));
+			return Promise.resolve(
+				[
+					"console.warn('missing.key')",
+					"console.error('plain text', { id: 1 })",
+				].join("\n"),
+			);
 		},
 	);
 	const writeTextFileStub = stub(
-		Deno,
-		"writeTextFile",
-		(
-			path: string | URL,
-			data: string | ReadableStream<string>,
-		): Promise<void> => {
+		fs,
+		"writeFile",
+		(path: string | URL, data: string): Promise<void> => {
 			assertStringIncludes(String(path), reportFile);
 			assert(typeof data === "string");
 			writtenReport = data;
@@ -382,17 +380,6 @@ Deno.test("main writes report and returns failing exit code for errors", async (
 		writeTextFileStub.restore();
 	}
 });
-
-/**
- * Creates async directory entries for virtual filesystem tests.
- */
-async function* createDirEntries(
-	entries: Deno.DirEntry[],
-): AsyncIterableIterator<Deno.DirEntry> {
-	for (const entry of entries) {
-		yield entry;
-	}
-}
 
 /**
  * Asserts that parseArgs throws an Error with a message fragment.

@@ -1,9 +1,10 @@
+import { test } from "#test";
 import {
 	type InternalMessage,
 	mockBrowser,
 	mockStorage,
 } from "../mocks.test.ts";
-import { assert, assertEquals } from "@std/testing/asserts";
+import { assert, assertEquals } from "#test";
 import { WHY_KEY } from "../../src/core/constants.js";
 import {
 	ensureAllTabsAvailability,
@@ -17,7 +18,7 @@ interface GetMessage {
 	key: string;
 }
 
-Deno.test("TabContainer - Concurrency Race", async (t) => {
+test("TabContainer - Concurrency Race", async (t) => {
 	await t.step("multiple simultaneous create() calls", async () => {
 		mockStorage[WHY_KEY] = [
 			{ label: "Tab 1", url: "url1" },
@@ -60,14 +61,12 @@ Deno.test("TabContainer - Concurrency Race", async (t) => {
 	await t.step(
 		"ensureAllTabsAvailability during initialization",
 		async () => {
-			mockStorage[WHY_KEY] = [
-				{ label: "Tab 1", url: "url1" },
-			];
+			mockStorage[WHY_KEY] = [{ label: "Tab 1", url: "url1" }];
 			TabContainer._clear();
 			const originalSendMessage = mockBrowser.runtime.sendMessage;
 			let resolveStorage!: () => void;
-			const storagePromise = new Promise<void>((res) =>
-				resolveStorage = res
+			const storagePromise = new Promise<void>(
+				(res) => (resolveStorage = res),
 			);
 			mockBrowser.runtime.sendMessage = (
 				message: InternalMessage,

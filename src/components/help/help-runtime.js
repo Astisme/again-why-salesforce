@@ -59,17 +59,14 @@ export function createHelpAwsClass({
 			this._anchor = anchor;
 			this._tooltip = tooltip;
 			this._linkTip = linkTip;
-			const linkEl = injectStyle(
-				"awsf-help",
-				{
-					link: browser.runtime.getURL("/components/help/help.css"),
-				},
-			);
+			const linkEl = injectStyle("awsf-help", {
+				link: browser.runtime.getURL("/components/help/help.css"),
+			});
 			this.shadowRoot.appendChild(linkEl);
 			this._tooltip.dataset.showRight = this.dataset.showRight ?? "false";
 			this._tooltip.dataset.showLeft = this.dataset.showLeft ?? "false";
-			this._tooltip.dataset.showBottom = this.dataset.showBottom ??
-				"false";
+			this._tooltip.dataset.showBottom =
+				this.dataset.showBottom ?? "false";
 			this._tooltip.dataset.showTop = this.dataset.showTop ?? "false";
 			if (
 				this._tooltip.dataset.showRight === "false" &&

@@ -1,5 +1,7 @@
-import { assertEquals } from "@std/testing/asserts";
-import { stub } from "@std/testing/mock";
+import { test } from "#test";
+import fs from "node:fs/promises";
+import { assertEquals } from "#test";
+import { stub } from "#test";
 import type { AuditFinding, AuditReport } from "../../bin/audit-logging-lib.ts";
 import { suppressTraceFindingsForConsoleAliases } from "../../bin/audit-logging.ts";
 
@@ -23,24 +25,26 @@ function createFinding(overrides: Partial<AuditFinding> = {}): AuditFinding {
 	};
 }
 
-Deno.test("suppresses trace findings when console warn/error aliases are invoked", async () => {
+test("suppresses trace findings when console warn/error aliases are invoked", async () => {
 	const report: AuditReport = {
 		findings: [createFinding()],
 	};
 	const readTextFileStub = stub(
-		Deno,
-		"readTextFile",
+		fs,
+		"readFile",
 		(path: string | URL): Promise<string> => {
 			assertEquals(String(path), "/repo/src/salesforce/toast.js");
-			return Promise.resolve([
-				"function consoleToastedMessage(message, status) {",
-				"\tlet log = null;",
-				"\tif (status === 'error') {",
-				"\t\tlog = console.error;",
-				"\t}",
-				"\tlog?.(message);",
-				"}",
-			].join("\n"));
+			return Promise.resolve(
+				[
+					"function consoleToastedMessage(message, status) {",
+					"\tlet log = null;",
+					"\tif (status === 'error') {",
+					"\t\tlog = console.error;",
+					"\t}",
+					"\tlog?.(message);",
+					"}",
+				].join("\n"),
+			);
 		},
 	);
 
@@ -55,17 +59,14 @@ Deno.test("suppresses trace findings when console warn/error aliases are invoked
 	}
 });
 
-Deno.test("keeps trace findings when warn/error aliases are never invoked", async () => {
+test("keeps trace findings when warn/error aliases are never invoked", async () => {
 	const report: AuditReport = {
 		findings: [createFinding()],
 	};
-	const readTextFileStub = stub(
-		Deno,
-		"readTextFile",
-		(): Promise<string> =>
-			Promise.resolve(
-				"let log = null;\nlog = console.error;\nlog = console.warn;",
-			),
+	const readTextFileStub = stub(fs, "readFile", (): Promise<string> =>
+		Promise.resolve(
+			"let log = null;\nlog = console.error;\nlog = console.warn;",
+		),
 	);
 
 	try {
@@ -83,7 +84,7 @@ Deno.test("keeps trace findings when warn/error aliases are never invoked", asyn
 	}
 });
 
-Deno.test("keeps non-trace findings while suppressing trace findings", async () => {
+test("keeps non-trace findings while suppressing trace findings", async () => {
 	const report: AuditReport = {
 		findings: [
 			createFinding(),
@@ -97,13 +98,8 @@ Deno.test("keeps non-trace findings while suppressing trace findings", async () 
 			}),
 		],
 	};
-	const readTextFileStub = stub(
-		Deno,
-		"readTextFile",
-		(): Promise<string> =>
-			Promise.resolve(
-				"let log = null;\nlog = console.warn;\nlog('x');",
-			),
+	const readTextFileStub = stub(fs, "readFile", (): Promise<string> =>
+		Promise.resolve("let log = null;\nlog = console.warn;\nlog('x');"),
 	);
 
 	try {

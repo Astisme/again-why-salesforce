@@ -22,9 +22,9 @@ function renderInlineMarkdown(value) {
 	return escapeHtml(value)
 		.replaceAll(/!\[([^\]]*)\]\(([^)]+)\)/g, (_match, alt, href) => {
 			const url = normalizeImageUrl(String(href));
-			return `<img src="${escapeHtml(url)}" alt="${
-				escapeHtml(String(alt))
-			}" loading="lazy">`;
+			return `<img src="${escapeHtml(url)}" alt="${escapeHtml(
+				String(alt),
+			)}" loading="lazy">`;
 		})
 		.replaceAll(/`([^`]+)`/g, "<code>$1</code>")
 		.replaceAll(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
@@ -49,29 +49,26 @@ function renderInlineMarkdown(value) {
 			if (url.startsWith("http") || url.startsWith("mailto:")) {
 				return `<a href="${escapeHtml(url)}">${label}</a>`;
 			}
-			const localDoc = url
-				.replaceAll("../", "")
-				.replaceAll("./", "")
-				.replaceAll(".md", "")
-				.split("/")
-				.pop() || "Home";
+			const localDoc =
+				url
+					.replaceAll("../", "")
+					.replaceAll("./", "")
+					.replaceAll(".md", "")
+					.split("/")
+					.pop() || "Home";
 			if (url.includes("blob/main/") || url.includes("tree/main/")) {
-				return `<a href="${
-					escapeHtml(
-						`https://github.com/Astisme/again-why-salesforce/${
-							url
-								.replaceAll("../", "")
-								.replaceAll("./", "")
-						}`,
-					)
-				}">${label}</a>`;
+				return `<a href="${escapeHtml(
+					`https://github.com/Astisme/again-why-salesforce/${url
+						.replaceAll("../", "")
+						.replaceAll("./", "")}`,
+				)}">${label}</a>`;
 			}
 			const [doc, hash] = localDoc.split("#");
 			const wikiDocuments = globalThis.awsfWikiDocuments || {};
 			const target = wikiDocuments[doc]
 				? `Wiki/${encodeURIComponent(doc)}${
-					hash ? `#${encodeURIComponent(hash)}` : ""
-				}`
+						hash ? `#${encodeURIComponent(hash)}` : ""
+					}`
 				: "wiki.html";
 			return `<a href="${escapeHtml(target)}">${label}</a>`;
 		})
@@ -169,10 +166,12 @@ function renderMarkdown(markdown) {
 			return;
 		}
 		const items = listItems
-			.map((item) =>
-				`<li class="list-level-${
-					Math.min(item.level, 3)
-				}">${item.content}</li>`
+			.map(
+				(item) =>
+					`<li class="list-level-${Math.min(
+						item.level,
+						3,
+					)}">${item.content}</li>`,
 			)
 			.join("");
 		blocks.push(`<ul>${items}</ul>`);
@@ -190,27 +189,30 @@ function renderMarkdown(markdown) {
 		}
 		const [headerRow, separatorRow, ...bodyRows] = tableRows;
 		const hasSeparator = separatorRow?.every((cell) =>
-			/^:?-+:?$/.test(cell.trim())
+			/^:?-+:?$/.test(cell.trim()),
 		);
 		if (!hasSeparator) {
 			blocks.push(
-				...tableRows.map((row) =>
-					`<p>${row.map(renderInlineMarkdown).join(" ")}</p>`
+				...tableRows.map(
+					(row) =>
+						`<p>${row.map(renderInlineMarkdown).join(" ")}</p>`,
 				),
 			);
 			tableRows = [];
 			return;
 		}
-		const head = headerRow.map((cell) =>
-			`<th>${renderInlineMarkdown(cell.trim())}</th>`
-		).join("");
+		const head = headerRow
+			.map((cell) => `<th>${renderInlineMarkdown(cell.trim())}</th>`)
+			.join("");
 		const body = bodyRows
-			.map((row) =>
-				`<tr>${
-					row.map((cell) =>
-						`<td>${renderInlineMarkdown(cell.trim())}</td>`
-					).join("")
-				}</tr>`
+			.map(
+				(row) =>
+					`<tr>${row
+						.map(
+							(cell) =>
+								`<td>${renderInlineMarkdown(cell.trim())}</td>`,
+						)
+						.join("")}</tr>`,
 			)
 			.join("");
 		blocks.push(
@@ -233,8 +235,8 @@ function renderMarkdown(markdown) {
 		const type = lowerText.includes("warning")
 			? "warning"
 			: lowerText.includes("info")
-			? "info"
-			: "note";
+				? "info"
+				: "note";
 		const rendered = text
 			.split(/\n+/)
 			.filter((line) => !/^!\[(info|warning)\]/i.test(line.trim()))
@@ -245,12 +247,13 @@ function renderMarkdown(markdown) {
 			.map((line) => line.trim())
 			.filter(Boolean);
 		if (
-			type === "note" && quoteListLines.length > 0 &&
+			type === "note" &&
+			quoteListLines.length > 0 &&
 			quoteListLines.every((line) => line.startsWith("- "))
 		) {
 			const items = quoteListLines
-				.map((line) =>
-					`<li>${renderInlineMarkdown(line.slice(2))}</li>`
+				.map(
+					(line) => `<li>${renderInlineMarkdown(line.slice(2))}</li>`,
 				)
 				.join("");
 			blocks.push(`<ul class="nested-list">${items}</ul>`);
@@ -279,9 +282,9 @@ function renderMarkdown(markdown) {
 		if (codeLines) {
 			if (line.startsWith("```")) {
 				blocks.push(
-					`<pre><code>${
-						escapeHtml(codeLines.join("\n"))
-					}</code></pre>`,
+					`<pre><code>${escapeHtml(
+						codeLines.join("\n"),
+					)}</code></pre>`,
 				);
 				codeLines = null;
 				continue;
@@ -385,9 +388,9 @@ function renderMarkdown(markdown) {
 		flushTable();
 		flushList();
 		blocks.push(
-			`<p>${
-				renderInlineMarkdown(decodedTrimmedLine.replaceAll("\\", ""))
-			}</p>`,
+			`<p>${renderInlineMarkdown(
+				decodedTrimmedLine.replaceAll("\\", ""),
+			)}</p>`,
 		);
 	}
 	if (codeLines) {
@@ -419,8 +422,7 @@ function renderChangelog(markdown, latestRelease = null) {
 			if (!latestVersion) {
 				return true;
 			}
-			const title = `# ${part.trim()}`.match(/^#\s+(.+)$/m)?.[1] ||
-				"";
+			const title = `# ${part.trim()}`.match(/^#\s+(.+)$/m)?.[1] || "";
 			const version = getReleaseVersion(title);
 			return version
 				? compareVersions(version, latestVersion) <= 0
@@ -428,13 +430,13 @@ function renderChangelog(markdown, latestRelease = null) {
 		})
 		.map((part, index) => {
 			const releaseMarkdown = `# ${part.trim()}`;
-			const title = releaseMarkdown.match(/^#\s+(.+)$/m)?.[1] ||
-				"Release";
+			const title =
+				releaseMarkdown.match(/^#\s+(.+)$/m)?.[1] || "Release";
 			return `<details class="release-panel" ${
 				index === 0 ? "open" : ""
-			}><summary>${escapeHtml(title)}</summary>${
-				renderMarkdown(releaseMarkdown.replace(/^#\s+.+\n?/, ""))
-			}</details>`;
+			}><summary>${escapeHtml(title)}</summary>${renderMarkdown(
+				releaseMarkdown.replace(/^#\s+.+\n?/, ""),
+			)}</details>`;
 		})
 		.join("");
 	return `${intro}${releases}`;

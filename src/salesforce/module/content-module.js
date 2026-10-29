@@ -47,8 +47,7 @@ import {
 	WHAT_INSTALLED as _WHAT_INSTALLED,
 	WHAT_PAGE_REMOVE_TAB as _WHAT_PAGE_REMOVE_TAB,
 	WHAT_PAGE_SAVE_TAB as _WHAT_PAGE_SAVE_TAB,
-	WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP
-		as _WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
+	WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP as _WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
 	WHAT_SAVED as _WHAT_SAVED,
 	WHAT_SHOW_EXPORT_MODAL as _WHAT_SHOW_EXPORT_MODAL,
 	WHAT_SHOW_IMPORT as _WHAT_SHOW_IMPORT,
@@ -217,11 +216,14 @@ const getModalHanger = (...args) => DEPENDENCIES.getModalHanger(...args);
 const getSetupTabUl = (...args) => DEPENDENCIES.getSetupTabUl(...args);
 const shouldShowReviewOrSponsor = (...args) =>
 	DEPENDENCIES.shouldShowReviewOrSponsor(...args);
-const Tab = new Proxy({}, {
-	get(_target, property) {
-		return DEPENDENCIES.Tab[property];
+const Tab = new Proxy(
+	{},
+	{
+		get(_target, property) {
+			return DEPENDENCIES.Tab[property];
+		},
 	},
-});
+);
 
 /**
  * Returns the modal id used by the update-tab modal.
@@ -384,9 +386,7 @@ async function checkAddLightningNavigation() {
 		CONSTANTS.LINK_NEW_BROWSER,
 		CONSTANTS.USE_LIGHTNING_NAVIGATION,
 	]);
-	if (
-		settings?.some((setting) => setting.enabled)
-	) {
+	if (settings?.some((setting) => setting.enabled)) {
 		return;
 	}
 	const script = document.createElement("script");
@@ -467,14 +467,11 @@ async function init(tabs = null, signal = null) {
 			const row = allTabs[i];
 			// hide not-this-org tabs
 			frag.appendChild(
-				generateRowTemplate(
-					row,
-					{
-						hide: !(row.org == null || row.org === orgName),
-						isPinned: i < pinnedItems,
-						index: i,
-					},
-				),
+				generateRowTemplate(row, {
+					hide: !(row.org == null || row.org === orgName),
+					isPinned: i < pinnedItems,
+					index: i,
+				}),
 			);
 		}
 	}
@@ -580,10 +577,7 @@ async function checkKeepTabsOnLeft() {
 		? "afterbegin"
 		: "beforeend";
 	const setupTabUl = getSetupTabUl();
-	setupTabUl.parentElement.insertAdjacentElement(
-		beforeOrAfter,
-		setupTabUl,
-	);
+	setupTabUl.parentElement.insertAdjacentElement(beforeOrAfter, setupTabUl);
 }
 
 /**
@@ -598,13 +592,13 @@ async function checkKeepTabsOnLeft() {
 function delayLoadSetupTabs(count = 0) {
 	if (count > 5) {
 		// write error in the console
-		void trackContentTask((async () => {
-			const fail = await getTranslations(
-				"error_no_setup_tab",
-			);
-			console.error(fail);
-			setTimeout(delayLoadSetupTabs, 5000);
-		})());
+		void trackContentTask(
+			(async () => {
+				const fail = await getTranslations("error_no_setup_tab");
+				console.error(fail);
+				setTimeout(delayLoadSetupTabs, 5000);
+			})(),
+		);
 		return;
 	}
 	if (!findSetupTabUlInSalesforcePage()) {
@@ -613,11 +607,13 @@ function delayLoadSetupTabs(count = 0) {
 	void trackContentTask(checkKeepTabsOnLeft());
 	// Start observing changes to the DOM to then check for URL change
 	// when URL changes, show the favourite button
-	new MutationObserver(() => setTimeout(onHrefUpdate, 500))
-		.observe(document.querySelector(".tabsetBody"), {
+	new MutationObserver(() => setTimeout(onHrefUpdate, 500)).observe(
+		document.querySelector(".tabsetBody"),
+		{
 			childList: true,
 			subtree: true,
-		});
+		},
+	);
 	// initialize
 	setupDragForUl(reorderTabsUl);
 	void trackContentTask(reloadTabs());
@@ -652,23 +648,25 @@ export async function reorderTabsUl() {
 		// Get the list of tabs
 		const tabs = [];
 		for (const li of setupTabUl?.querySelectorAll("li") ?? []) {
-			tabs.push(Tab.create({
-				label: getInnerElementFieldBySelector({
-					parentElement: li,
-					field: "innerText",
-					selector: "a > span",
+			tabs.push(
+				Tab.create({
+					label: getInnerElementFieldBySelector({
+						parentElement: li,
+						field: "innerText",
+						selector: "a > span",
+					}),
+					url: getInnerElementFieldBySelector({
+						parentElement: li,
+						field: "href",
+						selector: "a",
+					}),
+					org: getInnerElementFieldBySelector({
+						parentElement: li,
+						field: "dataset.org",
+						selector: "a > span",
+					}),
 				}),
-				url: getInnerElementFieldBySelector({
-					parentElement: li,
-					field: "href",
-					selector: "a",
-				}),
-				org: getInnerElementFieldBySelector({
-					parentElement: li,
-					field: "dataset.org",
-					selector: "a > span",
-				}),
-			}));
+			);
 		}
 		// persist the Tabs
 		const allTabs = await ensureAllTabsAvailability();
@@ -712,10 +710,7 @@ export function makeDuplicatesBold(miniURL) {
 		return;
 	}
 	_toggleWarning(duplicatetabs);
-	setTimeout(
-		() => _toggleWarning(duplicatetabs),
-		4000,
-	);
+	setTimeout(() => _toggleWarning(duplicatetabs), 4000);
 }
 
 const ACTION_MOVE = "move";
@@ -783,8 +778,10 @@ function wasReviewSponsorPromptSkippedToday(
 	setting,
 	today = getTodayDateKey(),
 ) {
-	return (setting?.enabled == null && setting?.skipped === today) ||
-		setting?.enabled === today;
+	return (
+		(setting?.enabled == null && setting?.skipped === today) ||
+		setting?.enabled === today
+	);
 }
 
 const REVIEW_PROMPT_ACTION_REVIEW = "write_review";
@@ -902,10 +899,7 @@ async function showSponsorPrompt({
  * @return {Promise<void>} Resolves after visibility check completes.
  */
 async function checkShouldShowReviewSponsorToast(messageType) {
-	const [
-		allTabs,
-		usageSettings,
-	] = await Promise.all([
+	const [allTabs, usageSettings] = await Promise.all([
 		ensureAllTabsAvailability(),
 		getSettings(CONSTANTS.EXTENSION_USAGE_DAYS),
 	]);
@@ -914,18 +908,15 @@ async function checkShouldShowReviewSponsorToast(messageType) {
 		allTabs,
 		usageDays,
 	});
-	const showReview = messageType === CONSTANTS.WHAT_SHOW_REVIEW ||
-		whatToShow.review;
-	const showSponsor = messageType === CONSTANTS.WHAT_SHOW_SPONSOR ||
-		whatToShow.sponsor;
+	const showReview =
+		messageType === CONSTANTS.WHAT_SHOW_REVIEW || whatToShow.review;
+	const showSponsor =
+		messageType === CONSTANTS.WHAT_SHOW_SPONSOR || whatToShow.sponsor;
 	if (!showReview && !showSponsor) {
 		return;
 	}
 	const [
-		[
-			didReview,
-			didSponsor,
-		],
+		[didReview, didSponsor],
 		[
 			confirmLabel,
 			cancelLabel,
@@ -937,10 +928,7 @@ async function checkShouldShowReviewSponsorToast(messageType) {
 			laterLabel,
 		],
 	] = await Promise.all([
-		getSettings([
-			CONSTANTS.WHAT_DID_REVIEW,
-			CONSTANTS.WHAT_DID_SPONSOR,
-		]),
+		getSettings([CONSTANTS.WHAT_DID_REVIEW, CONSTANTS.WHAT_DID_SPONSOR]),
 		getTranslations([
 			"open_new_tab",
 			"cancel",
@@ -952,16 +940,12 @@ async function checkShouldShowReviewSponsorToast(messageType) {
 			"request_later",
 		]),
 	]);
-	const shouldSkipReview = showReview &&
-		wasReviewSponsorPromptSkippedToday(didReview);
+	const shouldSkipReview =
+		showReview && wasReviewSponsorPromptSkippedToday(didReview);
 	if (shouldSkipReview && messageType !== CONSTANTS.WHAT_SHOW_SPONSOR) {
 		return;
 	}
-	if (
-		showReview &&
-		!shouldSkipReview &&
-		didReview?.enabled == null
-	) {
+	if (showReview && !shouldSkipReview && didReview?.enabled == null) {
 		await showReviewPrompt({
 			cancelLabel,
 			closeLabel,
@@ -972,16 +956,10 @@ async function checkShouldShowReviewSponsorToast(messageType) {
 		});
 		return;
 	}
-	if (
-		showSponsor &&
-		wasReviewSponsorPromptSkippedToday(didSponsor)
-	) {
+	if (showSponsor && wasReviewSponsorPromptSkippedToday(didSponsor)) {
 		return;
 	}
-	if (
-		showSponsor &&
-		didSponsor?.enabled == null
-	) {
+	if (showSponsor && didSponsor?.enabled == null) {
 		await showSponsorPrompt({
 			cancelLabel,
 			closeLabel,
@@ -1013,12 +991,7 @@ async function checkShouldShowReviewSponsorToast(messageType) {
  * }} options Action context.
  * @return {Promise<string | null>} Sync flag (`null` means no action matched).
  */
-function executeTabAction({
-	action,
-	allTabs,
-	tab,
-	options,
-} = {}) {
+function executeTabAction({ action, allTabs, tab, options } = {}) {
 	/** @type {Record<string, () => Promise<boolean>>} */
 	const actionHandlers = {
 		[ACTION_MOVE]: async () => {
@@ -1041,12 +1014,9 @@ function executeTabAction({
 		},
 		[CONSTANTS.WHAT_ADD]: async () => {
 			assertActionResult(
-				await allTabs.addTab(
-					tab,
-					{
-						addInFront: options?.addInFront,
-					},
-				),
+				await allTabs.addTab(tab, {
+					addInFront: options?.addInFront,
+				}),
 				"error_adding_tab",
 			);
 			await checkShouldShowReviewSponsorToast();
@@ -1227,7 +1197,7 @@ async function toggleOrg({ label = null, url = null, org = null } = {}) {
 	matchingTab.update({
 		org: matchingTab.org == null ? currentHref : "",
 	});
-	if (!await allTabs.syncTabs()) {
+	if (!(await allTabs.syncTabs())) {
 		throw new Error("error_failed_sync");
 	}
 }
@@ -1240,9 +1210,11 @@ async function toggleOrg({ label = null, url = null, org = null } = {}) {
  * @param {string} tab.org - The Org of the Tab to update
  * @return {Promise<void>}
  */
-async function showModalUpdateTab(
-	{ label = null, url = null, org = null } = {},
-) {
+async function showModalUpdateTab({
+	label = null,
+	url = null,
+	org = null,
+} = {}) {
 	if (document.getElementById(getModalId()) != null) {
 		return showToast("error_close_other_modal", CONSTANTS.TOAST_ERROR);
 	}
@@ -1255,9 +1227,9 @@ async function showModalUpdateTab(
 		matchingTab = allTabs.getSingleTabByData(
 			tabIsEmpty
 				? {
-					url: Tab.minifyURL(currentHref),
-					org: Tab.extractOrgName(currentHref),
-				}
+						url: Tab.minifyURL(currentHref),
+						org: Tab.extractOrgName(currentHref),
+					}
 				: tab,
 		);
 	} catch (e) {
@@ -1314,18 +1286,17 @@ async function showModalUpdateTab(
  * @return {Promise<void>} Resolves after the prompt and possible navigation.
  */
 async function promptUpdateExtension({ version, link, oldversion } = {}) {
-	const [confirm_msg, [confirmLabel, cancelLabel, closeLabel]] = await Promise
-		.all([
-			getTranslations([
-				`${oldversion} → ${version}`,
-				"confirm_update_extension",
-				link,
-			], "\n"),
-			getTranslations([
-				"open_new_tab",
-				"cancel",
-				"cancel_close",
-			]),
+	const [confirm_msg, [confirmLabel, cancelLabel, closeLabel]] =
+		await Promise.all([
+			getTranslations(
+				[
+					`${oldversion} → ${version}`,
+					"confirm_update_extension",
+					link,
+				],
+				"\n",
+			),
+			getTranslations(["open_new_tab", "cancel", "cancel_close"]),
 		]);
 	if (
 		await sldsConfirm({
@@ -1465,9 +1436,7 @@ async function routeBackgroundMessage(message) {
 				break;
 			case CONSTANTS.WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP:
 				if (message.ok) {
-					void showToast(
-						"req_downloads_open_popup",
-					);
+					void showToast("req_downloads_open_popup");
 				} else {
 					void showToast(
 						"error_req_downloads",
@@ -1585,10 +1554,7 @@ async function routeBackgroundMessage(message) {
 			default:
 				if (message.what !== CONSTANTS.WHAT_THEME) {
 					void showToast(
-						[
-							"error_unknown_message",
-							message.what,
-						],
+						["error_unknown_message", message.what],
 						CONSTANTS.TOAST_WARNING,
 					);
 				}
@@ -1613,7 +1579,7 @@ function listenToBackgroundPage() {
 			sendResponse(null);
 			if (shouldQueueBackgroundMessage(message.what)) {
 				return enqueueBackgroundMessageTask(() =>
-					routeBackgroundMessage(message)
+					routeBackgroundMessage(message),
 				);
 			}
 			// this will ensure that new messages which need to be queued (above) will wait for this task to complete (less parallelism and speed)

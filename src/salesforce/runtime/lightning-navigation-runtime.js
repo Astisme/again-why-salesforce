@@ -1,6 +1,4 @@
-import {
-	createLightningNavigationModule as createLightningNavigationPureModule,
-} from "../module/lightning-navigation-module.js";
+import { createLightningNavigationModule as createLightningNavigationPureModule } from "../module/lightning-navigation-module.js";
 
 /**
  * Creates Salesforce Lightning navigation handlers with page-context defaults.
@@ -28,9 +26,8 @@ export function registerLightningNavigation({
 	addEventListener = globalThis.addEventListener.bind(globalThis),
 	...overrides
 } = {}) {
-	const lightningNavigationModule = createLightningNavigationModule(
-		overrides,
-	);
+	const lightningNavigationModule =
+		createLightningNavigationModule(overrides);
 	addEventListener("message", lightningNavigationModule.handleMessage);
 	return lightningNavigationModule;
 }

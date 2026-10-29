@@ -1,6 +1,5 @@
 manifest.json
 .vscode
-deno.lock
 bin/*.zip
 bin/*.dmg
 src/generated/*

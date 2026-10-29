@@ -1,5 +1,6 @@
+import { test } from "#test";
 import "../../mocks.test.ts";
-import { assertEquals } from "@std/testing/asserts";
+import { assertEquals } from "#test";
 import { waitForNextTask } from "../../async.test.ts";
 import { createImportModule } from "../../../src/salesforce/import.js";
 import { MockElement } from "../ui/mock-dom.test.ts";
@@ -95,9 +96,10 @@ class MockTabContainer {
 	 *
 	 * @param {{ pinned?: number; tabs?: unknown[]; }} [options={}] Initial state.
 	 */
-	constructor(
-		{ pinned = 0, tabs = [] }: { pinned?: number; tabs?: unknown[] } = {},
-	) {
+	constructor({
+		pinned = 0,
+		tabs = [],
+	}: { pinned?: number; tabs?: unknown[] } = {}) {
 		this.pinned = pinned;
 		this.#tabs = [...tabs];
 	}
@@ -135,7 +137,7 @@ class MockTabContainer {
 		this.#tabs = [...this.#tabs].sort((a, b) =>
 			String((a as Record<string, unknown>).url ?? "").localeCompare(
 				String((b as Record<string, unknown>).url ?? ""),
-			)
+			),
 		);
 	}
 
@@ -184,8 +186,7 @@ function createFile(type: string, contents: string, name = ""): FileLike {
 function loadImportModule({
 	checkboxState = {},
 	clearInputModalParentOnRemove = false,
-	currentHref =
-		"https://current-org.lightning.force.com/lightning/setup/SetupOneHome/home",
+	currentHref = "https://current-org.lightning.force.com/lightning/setup/SetupOneHome/home",
 	generateModalError = null,
 	hasExistingModal = false,
 	importCount = 2,
@@ -269,22 +270,19 @@ function loadImportModule({
 		hangerChildren.push(child);
 		return child;
 	};
-	changeTarget.addEventListener = MockElement.prototype.addEventListener.bind(
-		changeTarget,
-	);
+	changeTarget.addEventListener =
+		MockElement.prototype.addEventListener.bind(changeTarget);
 	modalParent.querySelector = (selector: string) => {
 		const id = selector.slice(1);
 		return fileCheckboxes[id] ?? null;
 	};
-	for (
-		const [id, checked] of Object.entries({
-			[selectTabsId]: false,
-			[metadataId]: false,
-			[overwriteId]: false,
-			[otherOrgId]: false,
-			...checkboxState,
-		})
-	) {
+	for (const [id, checked] of Object.entries({
+		[selectTabsId]: false,
+		[metadataId]: false,
+		[overwriteId]: false,
+		[otherOrgId]: false,
+		...checkboxState,
+	})) {
 		const checkbox = new MockElement("input");
 		checkbox.id = id;
 		checkbox.checked = checked;
@@ -347,10 +345,11 @@ function loadImportModule({
 			extractOrgName: (url: string) =>
 				new URL(url).hostname.split(".")[0],
 			hasUnexpectedKeys: (tab: Record<string, unknown>) =>
-				Object.keys(tab).some((key) =>
-					!["label", "url", "org", "tabTitle", "title"].includes(
-						key,
-					)
+				Object.keys(tab).some(
+					(key) =>
+						!["label", "url", "org", "tabTitle", "title"].includes(
+							key,
+						),
 				),
 		},
 		TabContainer: MockTabContainer,
@@ -397,9 +396,11 @@ function loadImportModule({
 			}),
 		generateSldsModal: () =>
 			Promise.resolve({
-				...(generateModalError == null ? {} : (() => {
-					throw generateModalError;
-				})()),
+				...(generateModalError == null
+					? {}
+					: (() => {
+							throw generateModalError;
+						})()),
 				article,
 				closeButton,
 				modalParent: (() => {
@@ -407,11 +408,11 @@ function loadImportModule({
 					modalBuildCount += 1;
 					modalPresent = true;
 					return missingModalParentOnce && currentBuildCount === 0
-						? null as unknown as MockElement & {
-							querySelector: (
-								selector: string,
-							) => MockElement | null;
-						}
+						? (null as unknown as MockElement & {
+								querySelector: (
+									selector: string,
+								) => MockElement | null;
+							})
 						: modalParent;
 				})(),
 				saveButton,
@@ -437,10 +438,7 @@ function loadImportModule({
 			querySelector: () =>
 				setupImportPresent ? new MockElement("div") : null,
 		}),
-		injectStyle: (
-			id: string,
-			options: { css?: string; link?: string },
-		) => {
+		injectStyle: (id: string, options: { css?: string; link?: string }) => {
 			injectStyleCalls.push({ id, options });
 			return new MockElement("style");
 		},
@@ -500,39 +498,43 @@ function loadImportModule({
 	};
 }
 
-Deno.test("import blocks opening a second modal", async () => {
+test("import blocks opening a second modal", async () => {
 	const fixture = await loadImportModule({});
 	try {
 		fixture.setSetupImportPresent(true);
 
 		await fixture.module.createImportModal();
 
-		assertEquals(fixture.toasts, [{
-			message: "error_close_other_modal",
-			status: "error",
-		}]);
+		assertEquals(fixture.toasts, [
+			{
+				message: "error_close_other_modal",
+				status: "error",
+			},
+		]);
 	} finally {
 		fixture.cleanup();
 	}
 });
 
-Deno.test("import blocks opening when another modal element is already present", async () => {
+test("import blocks opening when another modal element is already present", async () => {
 	const fixture = await loadImportModule({
 		hasExistingModal: true,
 	});
 	try {
 		await fixture.module.createImportModal();
 
-		assertEquals(fixture.toasts, [{
-			message: "error_close_other_modal",
-			status: "error",
-		}]);
+		assertEquals(fixture.toasts, [
+			{
+				message: "error_close_other_modal",
+				status: "error",
+			},
+		]);
 	} finally {
 		fixture.cleanup();
 	}
 });
 
-Deno.test("import shows the file modal and imports valid JSON files directly", async () => {
+test("import shows the file modal and imports valid JSON files directly", async () => {
 	const fixture = await loadImportModule({
 		checkboxState: {
 			"again-why-salesforce-import-metadata": true,
@@ -563,26 +565,30 @@ Deno.test("import shows the file modal and imports valid JSON files directly", a
 			type: "change",
 		} as unknown as Event);
 
-		assertEquals(fixture.importCalls, [{
-			config: {
-				importMetadata: true,
-				importPinnedTabs: false,
-				preserveOtherOrg: false,
-				resetTabs: false,
+		assertEquals(fixture.importCalls, [
+			{
+				config: {
+					importMetadata: true,
+					importPinnedTabs: false,
+					preserveOtherOrg: false,
+					resetTabs: false,
+				},
+				json: JSON.stringify([{ label: "A", url: "/a", org: "org" }]),
 			},
-			json: JSON.stringify([{ label: "A", url: "/a", org: "org" }]),
-		}]);
+		]);
 		assertEquals(fixture.closeClicks.value, 1);
-		assertEquals(fixture.toasts, [{
-			message: ["import_successful", 3, "tabs"],
-			status: undefined,
-		}]);
+		assertEquals(fixture.toasts, [
+			{
+				message: ["import_successful", 3, "tabs"],
+				status: undefined,
+			},
+		]);
 	} finally {
 		fixture.cleanup();
 	}
 });
 
-Deno.test("import maps supported external formats without manual tab selection", async () => {
+test("import maps supported external formats without manual tab selection", async () => {
 	const fixture = await loadImportModule({});
 
 	try {
@@ -594,21 +600,25 @@ Deno.test("import maps supported external formats without manual tab selection",
 					createFile(
 						"application/json",
 						JSON.stringify({
-							bookmarks: [{
-								title: "Bookmark",
-								url: "/bookmark",
-								org: "org",
-							}],
+							bookmarks: [
+								{
+									title: "Bookmark",
+									url: "/bookmark",
+									org: "org",
+								},
+							],
 						}),
 					),
 					createFile(
 						"application/json",
-						JSON.stringify([{
-							tabTitle: "Why",
-							url: "/why",
-							org: "org",
-							extra: true,
-						}]),
+						JSON.stringify([
+							{
+								tabTitle: "Why",
+								url: "/why",
+								org: "org",
+								extra: true,
+							},
+						]),
 					),
 				],
 			},
@@ -626,11 +636,13 @@ Deno.test("import maps supported external formats without manual tab selection",
 				},
 				json: JSON.stringify({
 					pinned: 0,
-					tabs: [{
-						label: "Bookmark",
-						url: "/bookmark",
-						org: "org",
-					}],
+					tabs: [
+						{
+							label: "Bookmark",
+							url: "/bookmark",
+							org: "org",
+						},
+					],
 				}),
 			},
 			{
@@ -652,17 +664,15 @@ Deno.test("import maps supported external formats without manual tab selection",
 	}
 });
 
-Deno.test("import toggles the other-org checkbox visibility when overwrite changes", async () => {
+test("import toggles the other-org checkbox visibility when overwrite changes", async () => {
 	const fixture = await loadImportModule({});
 
 	try {
 		await fixture.module.generateSldsImport();
-		const overwriteCheckbox = fixture.fileCheckboxes[
-			"again-why-salesforce-import-overwrite"
-		];
-		const otherOrgCheckbox = fixture.fileCheckboxes[
-			"again-why-salesforce-import-other-org"
-		];
+		const overwriteCheckbox =
+			fixture.fileCheckboxes["again-why-salesforce-import-overwrite"];
+		const otherOrgCheckbox =
+			fixture.fileCheckboxes["again-why-salesforce-import-other-org"];
 
 		assertEquals(otherOrgCheckbox.classList.contains("hidden"), true);
 		overwriteCheckbox.dispatchEvent(new Event("change"));
@@ -674,17 +684,15 @@ Deno.test("import toggles the other-org checkbox visibility when overwrite chang
 	}
 });
 
-Deno.test("import pinned checkbox shows only when metadata import is unchecked", async () => {
+test("import pinned checkbox shows only when metadata import is unchecked", async () => {
 	const fixture = await loadImportModule({});
 
 	try {
 		await fixture.module.generateSldsImport();
-		const metadataCheckbox = fixture.fileCheckboxes[
-			"again-why-salesforce-import-metadata"
-		];
-		const pinnedCheckbox = fixture.fileCheckboxes[
-			"again-why-salesforce-import-pinned"
-		];
+		const metadataCheckbox =
+			fixture.fileCheckboxes["again-why-salesforce-import-metadata"];
+		const pinnedCheckbox =
+			fixture.fileCheckboxes["again-why-salesforce-import-pinned"];
 
 		assertEquals(pinnedCheckbox.checked, false);
 		assertEquals(pinnedCheckbox.classList.contains("hidden"), false);
@@ -699,7 +707,7 @@ Deno.test("import pinned checkbox shows only when metadata import is unchecked",
 	}
 });
 
-Deno.test("import passes current org when preserving other orgs during overwrite", async () => {
+test("import passes current org when preserving other orgs during overwrite", async () => {
 	const fixture = await loadImportModule({
 		checkboxState: {
 			"again-why-salesforce-import-overwrite": true,
@@ -724,22 +732,24 @@ Deno.test("import passes current org when preserving other orgs during overwrite
 			type: "change",
 		} as unknown as Event);
 
-		assertEquals(fixture.importCalls, [{
-			config: {
-				currentOrg: "current-org",
-				importMetadata: false,
-				importPinnedTabs: false,
-				preserveOtherOrg: true,
-				resetTabs: true,
+		assertEquals(fixture.importCalls, [
+			{
+				config: {
+					currentOrg: "current-org",
+					importMetadata: false,
+					importPinnedTabs: false,
+					preserveOtherOrg: true,
+					resetTabs: true,
+				},
+				json: JSON.stringify([{ label: "A", url: "/a" }]),
 			},
-			json: JSON.stringify([{ label: "A", url: "/a" }]),
-		}]);
+		]);
 	} finally {
 		fixture.cleanup();
 	}
 });
 
-Deno.test("import can opt out of pinned count while metadata is unchecked", async () => {
+test("import can opt out of pinned count while metadata is unchecked", async () => {
 	const fixture = await loadImportModule({
 		checkboxState: {
 			"again-why-salesforce-import-pinned": false,
@@ -770,7 +780,7 @@ Deno.test("import can opt out of pinned count while metadata is unchecked", asyn
 	}
 });
 
-Deno.test("import exposes the current file-modal parent for isolated state checks", async () => {
+test("import exposes the current file-modal parent for isolated state checks", async () => {
 	const fixture = await loadImportModule({});
 
 	try {
@@ -784,7 +794,7 @@ Deno.test("import exposes the current file-modal parent for isolated state check
 	}
 });
 
-Deno.test("import rejects non-JSON files and surfaces the validation toast", async () => {
+test("import rejects non-JSON files and surfaces the validation toast", async () => {
 	const fixture = await loadImportModule({});
 
 	try {
@@ -792,9 +802,7 @@ Deno.test("import rejects non-JSON files and surfaces the validation toast", asy
 		await fixture.changeTarget.dispatchEvent({
 			preventDefault() {},
 			target: {
-				files: [
-					createFile("text/plain", "not-json"),
-				],
+				files: [createFile("text/plain", "not-json")],
 			},
 			type: "change",
 		} as unknown as Event);
@@ -810,7 +818,7 @@ Deno.test("import rejects non-JSON files and surfaces the validation toast", asy
 	}
 });
 
-Deno.test("import reads dropped files from dataTransfer.items when files is empty", async () => {
+test("import reads dropped files from dataTransfer.items when files is empty", async () => {
 	const fixture = await loadImportModule({});
 
 	try {
@@ -823,11 +831,13 @@ Deno.test("import reads dropped files from dataTransfer.items when files is empt
 						getAsFile: () =>
 							createFile(
 								"",
-								JSON.stringify([{
-									label: "ItemDrop",
-									url: "/item",
-									org: "org",
-								}]),
+								JSON.stringify([
+									{
+										label: "ItemDrop",
+										url: "/item",
+										org: "org",
+									},
+								]),
 								"item-drop.json",
 							),
 					},
@@ -836,25 +846,29 @@ Deno.test("import reads dropped files from dataTransfer.items when files is empt
 			preventDefault() {},
 		});
 
-		assertEquals(fixture.importCalls, [{
-			config: {
-				importMetadata: false,
-				importPinnedTabs: false,
-				preserveOtherOrg: false,
-				resetTabs: false,
+		assertEquals(fixture.importCalls, [
+			{
+				config: {
+					importMetadata: false,
+					importPinnedTabs: false,
+					preserveOtherOrg: false,
+					resetTabs: false,
+				},
+				json: JSON.stringify([
+					{
+						label: "ItemDrop",
+						url: "/item",
+						org: "org",
+					},
+				]),
 			},
-			json: JSON.stringify([{
-				label: "ItemDrop",
-				url: "/item",
-				org: "org",
-			}]),
-		}]);
+		]);
 	} finally {
 		fixture.cleanup();
 	}
 });
 
-Deno.test("import resets only once across direct multi-file drop imports", async () => {
+test("import resets only once across direct multi-file drop imports", async () => {
 	const fixture = await loadImportModule({
 		checkboxState: {
 			"again-why-salesforce-import-overwrite": true,
@@ -872,11 +886,13 @@ Deno.test("import resets only once across direct multi-file drop imports", async
 						"application/json",
 						JSON.stringify({
 							pinned: 1,
-							tabs: [{
-								label: "First",
-								url: "/first",
-								org: "org-a",
-							}],
+							tabs: [
+								{
+									label: "First",
+									url: "/first",
+									org: "org-a",
+								},
+							],
 						}),
 						"first.json",
 					),
@@ -884,11 +900,13 @@ Deno.test("import resets only once across direct multi-file drop imports", async
 						"application/json",
 						JSON.stringify({
 							pinned: 1,
-							tabs: [{
-								label: "Second",
-								url: "/second",
-								org: "org-b",
-							}],
+							tabs: [
+								{
+									label: "Second",
+									url: "/second",
+									org: "org-b",
+								},
+							],
 						}),
 						"second.json",
 					),
@@ -938,7 +956,7 @@ Deno.test("import resets only once across direct multi-file drop imports", async
 	}
 });
 
-Deno.test("import awaits each mutation before reading the next file and reporting success", async () => {
+test("import awaits each mutation before reading the next file and reporting success", async () => {
 	const events: string[] = [];
 	const firstImport = Promise.withResolvers<number>();
 	const started = Promise.withResolvers<void>();
@@ -986,10 +1004,12 @@ Deno.test("import awaits each mutation before reading the next file and reportin
 
 		assertEquals(events, ["read-first", "import", "read-second", "import"]);
 		assertEquals(fixture.closeClicks.value, 1);
-		assertEquals(fixture.toasts, [{
-			message: ["import_successful", 5, "tabs"],
-			status: undefined,
-		}]);
+		assertEquals(fixture.toasts, [
+			{
+				message: ["import_successful", 5, "tabs"],
+				status: undefined,
+			},
+		]);
 		assertEquals(fixture.importCalls[1].config.resetTabs, false);
 		assertEquals(fixture.importCalls[1].config.preserveOtherOrg, true);
 	} finally {
@@ -999,7 +1019,7 @@ Deno.test("import awaits each mutation before reading the next file and reportin
 	}
 });
 
-Deno.test("import stops subsequent reads after a file rejects", async () => {
+test("import stops subsequent reads after a file rejects", async () => {
 	const fixture = loadImportModule({});
 	let secondRead = false;
 
@@ -1022,16 +1042,18 @@ Deno.test("import stops subsequent reads after a file rejects", async () => {
 		assertEquals(secondRead, false);
 		assertEquals(fixture.importCalls, []);
 		assertEquals(fixture.closeClicks.value, 0);
-		assertEquals(fixture.toasts, [{
-			message: ["error_import", "file-read-failed"],
-			status: "error",
-		}]);
+		assertEquals(fixture.toasts, [
+			{
+				message: ["error_import", "file-read-failed"],
+				status: "error",
+			},
+		]);
 	} finally {
 		fixture.cleanup();
 	}
 });
 
-Deno.test("import reads single Firefox drop item with overwrite and pinned import", async () => {
+test("import reads single Firefox drop item with overwrite and pinned import", async () => {
 	const fixture = await loadImportModule({
 		checkboxState: {
 			"again-why-salesforce-import-overwrite": true,
@@ -1052,11 +1074,13 @@ Deno.test("import reads single Firefox drop item with overwrite and pinned impor
 								"",
 								JSON.stringify({
 									pinnedTabsNo: 1,
-									tabs: [{
-										label: "ItemDrop",
-										url: "/item",
-										org: "org",
-									}],
+									tabs: [
+										{
+											label: "ItemDrop",
+											url: "/item",
+											org: "org",
+										},
+									],
 								}),
 								"item-drop.json",
 							),
@@ -1066,25 +1090,27 @@ Deno.test("import reads single Firefox drop item with overwrite and pinned impor
 			preventDefault() {},
 		});
 
-		assertEquals(fixture.importCalls, [{
-			config: {
-				currentOrg: "current-org",
-				importMetadata: false,
-				importPinnedTabs: true,
-				preserveOtherOrg: true,
-				resetTabs: true,
+		assertEquals(fixture.importCalls, [
+			{
+				config: {
+					currentOrg: "current-org",
+					importMetadata: false,
+					importPinnedTabs: true,
+					preserveOtherOrg: true,
+					resetTabs: true,
+				},
+				json: JSON.stringify({
+					pinnedTabsNo: 1,
+					tabs: [{ label: "ItemDrop", url: "/item", org: "org" }],
+				}),
 			},
-			json: JSON.stringify({
-				pinnedTabsNo: 1,
-				tabs: [{ label: "ItemDrop", url: "/item", org: "org" }],
-			}),
-		}]);
+		]);
 	} finally {
 		fixture.cleanup();
 	}
 });
 
-Deno.test("import lets the user pick tabs before importing and warns on empty selection", async () => {
+test("import lets the user pick tabs before importing and warns on empty selection", async () => {
 	const fixture = await loadImportModule({
 		checkboxState: {
 			"again-why-salesforce-import-select-tabs": true,
@@ -1113,11 +1139,13 @@ Deno.test("import lets the user pick tabs before importing and warns on empty se
 		} as unknown as Event);
 		await fixture.selectedSaveButton.click();
 
-		assertEquals(fixture.modalListCalls, [{
-			explainer: "select_tabs_import",
-			saveButtonLabel: "import",
-			title: "import_tabs",
-		}]);
+		assertEquals(fixture.modalListCalls, [
+			{
+				explainer: "select_tabs_import",
+				saveButtonLabel: "import",
+				title: "import_tabs",
+			},
+		]);
 		assertEquals(fixture.toasts.at(-1), {
 			message: "error_no_tabs_selected",
 			status: "warning",
@@ -1128,7 +1156,7 @@ Deno.test("import lets the user pick tabs before importing and warns on empty se
 	}
 });
 
-Deno.test("import maps supported external formats and imports the selected tabs", async () => {
+test("import maps supported external formats and imports the selected tabs", async () => {
 	const fixture = await loadImportModule({
 		checkboxState: {
 			"again-why-salesforce-import-select-tabs": true,
@@ -1146,11 +1174,13 @@ Deno.test("import maps supported external formats and imports the selected tabs"
 					createFile(
 						"application/json",
 						JSON.stringify({
-							bookmarks: [{
-								title: "Mapped",
-								url: "/mapped",
-								org: "org",
-							}],
+							bookmarks: [
+								{
+									title: "Mapped",
+									url: "/mapped",
+									org: "org",
+								},
+							],
 							pinnedTabsNo: 1,
 						}),
 					),
@@ -1161,24 +1191,26 @@ Deno.test("import maps supported external formats and imports the selected tabs"
 		await fixture.selectedSaveButton.click();
 
 		assertEquals(fixture.closeClicks.value, 3);
-		assertEquals(fixture.importCalls, [{
-			config: {
-				importMetadata: false,
-				importPinnedTabs: false,
-				preserveOtherOrg: false,
-				resetTabs: false,
+		assertEquals(fixture.importCalls, [
+			{
+				config: {
+					importMetadata: false,
+					importPinnedTabs: false,
+					preserveOtherOrg: false,
+					resetTabs: false,
+				},
+				json: JSON.stringify({
+					pinned: 1,
+					tabs: [{ label: "Mapped", url: "/mapped", org: "org" }],
+				}),
 			},
-			json: JSON.stringify({
-				pinned: 1,
-				tabs: [{ label: "Mapped", url: "/mapped", org: "org" }],
-			}),
-		}]);
+		]);
 	} finally {
 		fixture.cleanup();
 	}
 });
 
-Deno.test("import maps WhySalesforce tab arrays through the select flow", async () => {
+test("import maps WhySalesforce tab arrays through the select flow", async () => {
 	const fixture = await loadImportModule({
 		checkboxState: {
 			"again-why-salesforce-import-select-tabs": true,
@@ -1210,24 +1242,26 @@ Deno.test("import maps WhySalesforce tab arrays through the select flow", async 
 		} as unknown as Event);
 		await fixture.selectedSaveButton.click();
 
-		assertEquals(fixture.importCalls, [{
-			config: {
-				importMetadata: false,
-				importPinnedTabs: false,
-				preserveOtherOrg: false,
-				resetTabs: false,
+		assertEquals(fixture.importCalls, [
+			{
+				config: {
+					importMetadata: false,
+					importPinnedTabs: false,
+					preserveOtherOrg: false,
+					resetTabs: false,
+				},
+				json: JSON.stringify({
+					pinned: 0,
+					tabs: [{ label: "Mapped", url: "/mapped", org: "org" }],
+				}),
 			},
-			json: JSON.stringify({
-				pinned: 0,
-				tabs: [{ label: "Mapped", url: "/mapped", org: "org" }],
-			}),
-		}]);
+		]);
 	} finally {
 		fixture.cleanup();
 	}
 });
 
-Deno.test("import closes the open file modal before showing the tab picker", async () => {
+test("import closes the open file modal before showing the tab picker", async () => {
 	const fixture = await loadImportModule({
 		checkboxState: {
 			"again-why-salesforce-import-select-tabs": true,
@@ -1246,11 +1280,13 @@ Deno.test("import closes the open file modal before showing the tab picker", asy
 						"application/json",
 						JSON.stringify({
 							pinnedTabsNo: 1,
-							tabs: [{
-								label: "Mapped",
-								url: "/mapped",
-								org: "org",
-							}],
+							tabs: [
+								{
+									label: "Mapped",
+									url: "/mapped",
+									org: "org",
+								},
+							],
 						}),
 					),
 				],
@@ -1265,7 +1301,7 @@ Deno.test("import closes the open file modal before showing the tab picker", asy
 	}
 });
 
-Deno.test("import surfaces unknown file structures through the drop handler", async () => {
+test("import surfaces unknown file structures through the drop handler", async () => {
 	const fixture = await loadImportModule({
 		checkboxState: {
 			"again-why-salesforce-import-select-tabs": true,
@@ -1291,17 +1327,19 @@ Deno.test("import surfaces unknown file structures through the drop handler", as
 			message: "error_unknown_file_structure",
 			status: "error",
 		});
-		assertEquals(fixture.modalListCalls, [{
-			explainer: "select_tabs_import",
-			saveButtonLabel: "import",
-			title: "import_tabs",
-		}]);
+		assertEquals(fixture.modalListCalls, [
+			{
+				explainer: "select_tabs_import",
+				saveButtonLabel: "import",
+				title: "import_tabs",
+			},
+		]);
 	} finally {
 		fixture.cleanup();
 	}
 });
 
-Deno.test("import rejects null and unsupported bookmark payloads through getTabsFromJSON", async () => {
+test("import rejects null and unsupported bookmark payloads through getTabsFromJSON", async () => {
 	const fixture = await loadImportModule({
 		checkboxState: {
 			"again-why-salesforce-import-select-tabs": true,
@@ -1321,7 +1359,7 @@ Deno.test("import rejects null and unsupported bookmark payloads through getTabs
 	}
 });
 
-Deno.test("import maps WhySalesforce fallback tabs through getTabsFromJSON", async () => {
+test("import maps WhySalesforce fallback tabs through getTabsFromJSON", async () => {
 	const fixture = await loadImportModule({
 		checkboxState: {
 			"again-why-salesforce-import-select-tabs": true,
@@ -1347,7 +1385,7 @@ Deno.test("import maps WhySalesforce fallback tabs through getTabsFromJSON", asy
 	}
 });
 
-Deno.test("import returns empty arrays for null tab collections and preserves mapped fields", async () => {
+test("import returns empty arrays for null tab collections and preserves mapped fields", async () => {
 	const fixture = await loadImportModule({});
 
 	try {
@@ -1365,7 +1403,7 @@ Deno.test("import returns empty arrays for null tab collections and preserves ma
 	}
 });
 
-Deno.test("import closes the existing modal inside showTabSelectThenImport", async () => {
+test("import closes the existing modal inside showTabSelectThenImport", async () => {
 	const fixture = await loadImportModule({});
 
 	try {
@@ -1390,7 +1428,7 @@ Deno.test("import closes the existing modal inside showTabSelectThenImport", asy
 	}
 });
 
-Deno.test("import attaches the drop reader directly", async () => {
+test("import attaches the drop reader directly", async () => {
 	const fixture = await loadImportModule({});
 
 	try {
@@ -1400,32 +1438,38 @@ Deno.test("import attaches the drop reader directly", async () => {
 				files: [
 					createFile(
 						"application/json",
-						JSON.stringify([{
-							label: "Drop",
-							url: "/drop",
-							org: "org",
-						}]),
+						JSON.stringify([
+							{
+								label: "Drop",
+								url: "/drop",
+								org: "org",
+							},
+						]),
 					),
 				],
 			},
 			preventDefault() {},
 		});
 
-		assertEquals(fixture.importCalls, [{
-			config: {
-				importMetadata: false,
-				importPinnedTabs: false,
-				preserveOtherOrg: false,
-				resetTabs: false,
+		assertEquals(fixture.importCalls, [
+			{
+				config: {
+					importMetadata: false,
+					importPinnedTabs: false,
+					preserveOtherOrg: false,
+					resetTabs: false,
+				},
+				json: JSON.stringify([
+					{ label: "Drop", url: "/drop", org: "org" },
+				]),
 			},
-			json: JSON.stringify([{ label: "Drop", url: "/drop", org: "org" }]),
-		}]);
+		]);
 	} finally {
 		fixture.cleanup();
 	}
 });
 
-Deno.test("import prevents default drag behavior over the drop area", async () => {
+test("import prevents default drag behavior over the drop area", async () => {
 	const fixture = await loadImportModule({});
 
 	try {
@@ -1467,7 +1511,7 @@ Deno.test("import prevents default drag behavior over the drop area", async () =
 	}
 });
 
-Deno.test("import reads a single file object directly and surfaces read failures", async () => {
+test("import reads a single file object directly and surfaces read failures", async () => {
 	const fixture = await loadImportModule({});
 
 	try {
@@ -1475,11 +1519,13 @@ Deno.test("import reads a single file object directly and surfaces read failures
 		await fixture.module.readFile(
 			createFile(
 				"application/json",
-				JSON.stringify([{
-					label: "Single",
-					url: "/single",
-					org: "org",
-				}]),
+				JSON.stringify([
+					{
+						label: "Single",
+						url: "/single",
+						org: "org",
+					},
+				]),
 			),
 		);
 		await fixture.module.readFile({
@@ -1494,11 +1540,13 @@ Deno.test("import reads a single file object directly and surfaces read failures
 				preserveOtherOrg: false,
 				resetTabs: false,
 			},
-			json: JSON.stringify([{
-				label: "Single",
-				url: "/single",
-				org: "org",
-			}]),
+			json: JSON.stringify([
+				{
+					label: "Single",
+					url: "/single",
+					org: "org",
+				},
+			]),
 		});
 		assertEquals(fixture.toasts.at(-1), {
 			message: ["error_import", "broken-file"],
@@ -1509,7 +1557,7 @@ Deno.test("import reads a single file object directly and surfaces read failures
 	}
 });
 
-Deno.test("import retries file-modal rendering when the modal parent is cleared after generation", async () => {
+test("import retries file-modal rendering when the modal parent is cleared after generation", async () => {
 	const fixture = await loadImportModule({
 		clearInputModalParentOnRemove: true,
 	});
@@ -1524,7 +1572,7 @@ Deno.test("import retries file-modal rendering when the modal parent is cleared 
 	}
 });
 
-Deno.test("import surfaces modal creation failures", async () => {
+test("import surfaces modal creation failures", async () => {
 	const fixture = await loadImportModule({
 		generateModalError: new Error("boom"),
 	});

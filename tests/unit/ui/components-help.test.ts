@@ -1,4 +1,5 @@
-import { assertEquals, assertExists } from "@std/testing/asserts";
+import { test } from "#test";
+import { assertEquals, assertExists } from "#test";
 import { MockElement } from "./mock-dom.test.ts";
 import { registerHelpComponent } from "../../../src/components/help/help-runtime.js";
 
@@ -31,7 +32,7 @@ class MockHelpHTMLElement extends MockElement {
 	}
 }
 
-Deno.test("help component syncs link attributes and accessibility text in isolation", async () => {
+test("help component syncs link attributes and accessibility text in isolation", async () => {
 	let registeredName = "";
 	let registeredConstructor: HelpComponentClass | null = null;
 	const injectCalls: { id: string; link: string }[] = [];
@@ -69,9 +70,7 @@ Deno.test("help component syncs link attributes and accessibility text in isolat
 	});
 
 	assertEquals(registeredName, "help-aws");
-	const HelpConstructor = registeredConstructor as
-		| HelpComponentClass
-		| null;
+	const HelpConstructor = registeredConstructor as HelpComponentClass | null;
 	assertExists(HelpConstructor);
 	assertEquals(HelpConstructor.observedAttributes, [
 		"href",
@@ -90,10 +89,12 @@ Deno.test("help component syncs link attributes and accessibility text in isolat
 
 	await component.connectedCallback();
 
-	assertEquals(injectCalls, [{
-		id: "awsf-help",
-		link: "chrome-extension://test/components/help/help.css",
-	}]);
+	assertEquals(injectCalls, [
+		{
+			id: "awsf-help",
+			link: "chrome-extension://test/components/help/help.css",
+		},
+	]);
 	assertEquals(component._tooltip.dataset.showRight, "true");
 	assertEquals(component._anchor.href, "https://docs.example.com/help");
 	assertEquals(component._anchor.getAttribute("target"), "_blank");

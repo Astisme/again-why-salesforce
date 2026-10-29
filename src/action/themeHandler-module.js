@@ -103,11 +103,10 @@ export function createThemeHandlerModule({
 		if (html == null) {
 			return;
 		}
-		html.dataset.usertheme = localStorageRef.getItem("userTheme") ??
-			"system";
-		html.dataset.theme = html.dataset.usertheme === "system"
-			? null
-			: html.dataset.usertheme;
+		html.dataset.usertheme =
+			localStorageRef.getItem("userTheme") ?? "system";
+		html.dataset.theme =
+			html.dataset.usertheme === "system" ? null : html.dataset.usertheme;
 		return systemColorSchemeListener(html.dataset.usertheme === "system");
 	}
 

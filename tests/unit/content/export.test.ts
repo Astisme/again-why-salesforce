@@ -1,4 +1,5 @@
-import { assertEquals } from "@std/testing/asserts";
+import { test } from "#test";
+import { assertEquals } from "#test";
 import { MockElement } from "../ui/mock-dom.test.ts";
 import { createExportModule } from "../../../src/salesforce/runtime/export-runtime.js";
 
@@ -105,28 +106,29 @@ function loadExportModule({
 		messages,
 		modalOptions,
 		module,
-		saveButton: generateError == null && !hasExistingModal
-			? saveButton
-			: null,
+		saveButton:
+			generateError == null && !hasExistingModal ? saveButton : null,
 		toasts,
 	};
 }
 
-Deno.test("export blocks opening a second modal and shows an error toast", async () => {
+test("export blocks opening a second modal and shows an error toast", async () => {
 	const fixture = loadExportModule({
 		hasExistingModal: true,
 	});
 	await fixture.module.createExportModal();
 
-	assertEquals(fixture.toasts, [{
-		message: "error_close_other_modal",
-		status: "error",
-	}]);
+	assertEquals(fixture.toasts, [
+		{
+			message: "error_close_other_modal",
+			status: "error",
+		},
+	]);
 	assertEquals(fixture.messages, []);
 	assertEquals(fixture.appended, []);
 });
 
-Deno.test("export warns when the user tries to export with no tabs selected", async () => {
+test("export warns when the user tries to export with no tabs selected", async () => {
 	const fixture = loadExportModule({
 		selectedAll: false,
 		selectedTabs: [],
@@ -134,20 +136,24 @@ Deno.test("export warns when the user tries to export with no tabs selected", as
 	await fixture.module.createExportModal();
 	fixture.saveButton?.click();
 
-	assertEquals(fixture.modalOptions, [{
-		explainer: "select_tabs_export",
-		saveButtonLabel: "export",
-		title: "export_tabs",
-	}]);
+	assertEquals(fixture.modalOptions, [
+		{
+			explainer: "select_tabs_export",
+			saveButtonLabel: "export",
+			title: "export_tabs",
+		},
+	]);
 	assertEquals(fixture.appended.length, 1);
-	assertEquals(fixture.toasts, [{
-		message: "error_no_tabs_selected",
-		status: "warning",
-	}]);
+	assertEquals(fixture.toasts, [
+		{
+			message: "error_no_tabs_selected",
+			status: "warning",
+		},
+	]);
 	assertEquals(fixture.messages, []);
 });
 
-Deno.test("export sends the selected tabs to the background script", async () => {
+test("export sends the selected tabs to the background script", async () => {
 	const fixture = loadExportModule({
 		pinned: 2,
 		selectedAll: true,
@@ -157,17 +163,19 @@ Deno.test("export sends the selected tabs to the background script", async () =>
 	fixture.saveButton?.click();
 
 	assertEquals(fixture.closeClicks.value, 1);
-	assertEquals(fixture.messages, [{
-		tabs: {
-			pinned: 2,
-			tabs: [{ label: "Accounts", url: "/setup" }],
+	assertEquals(fixture.messages, [
+		{
+			tabs: {
+				pinned: 2,
+				tabs: [{ label: "Accounts", url: "/setup" }],
+			},
+			what: "export",
 		},
-		what: "export",
-	}]);
+	]);
 	assertEquals(fixture.toasts, []);
 });
 
-Deno.test("export resets pinned count when only part of the tab list is exported", async () => {
+test("export resets pinned count when only part of the tab list is exported", async () => {
 	const fixture = loadExportModule({
 		pinned: 2,
 		selectedAll: false,
@@ -176,36 +184,42 @@ Deno.test("export resets pinned count when only part of the tab list is exported
 	await fixture.module.createExportModal();
 	fixture.saveButton?.click();
 
-	assertEquals(fixture.messages, [{
-		tabs: {
-			pinned: 0,
-			tabs: [{ label: "Contacts", url: "/contacts" }],
+	assertEquals(fixture.messages, [
+		{
+			tabs: {
+				pinned: 0,
+				tabs: [{ label: "Contacts", url: "/contacts" }],
+			},
+			what: "export",
 		},
-		what: "export",
-	}]);
+	]);
 });
 
-Deno.test("export surfaces modal-generation errors as toast messages", async () => {
+test("export surfaces modal-generation errors as toast messages", async () => {
 	const fixture = loadExportModule({
 		generateError: new Error("boom"),
 	});
 	await fixture.module.createExportModal();
 
-	assertEquals(fixture.toasts, [{
-		message: "boom",
-		status: "error",
-	}]);
+	assertEquals(fixture.toasts, [
+		{
+			message: "boom",
+			status: "error",
+		},
+	]);
 });
 
-Deno.test("export stringifies non-error failures before showing error toast", async () => {
+test("export stringifies non-error failures before showing error toast", async () => {
 	const fixture = loadExportModule({
 		generateError: "boom-string",
 	});
 
 	await fixture.module.createExportModal();
 
-	assertEquals(fixture.toasts, [{
-		message: "boom-string",
-		status: "error",
-	}]);
+	assertEquals(fixture.toasts, [
+		{
+			message: "boom-string",
+			status: "error",
+		},
+	]);
 });

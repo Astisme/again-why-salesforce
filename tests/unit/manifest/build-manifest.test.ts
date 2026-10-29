@@ -1,8 +1,5 @@
-import {
-	assertEquals,
-	assertExists,
-	assertStringIncludes,
-} from "@std/testing/asserts";
+import { test } from "#test";
+import { assertEquals, assertExists, assertStringIncludes } from "#test";
 import {
 	buildManifestForBrowser,
 	runBuildManifest,
@@ -66,7 +63,7 @@ function runBuild(browserName: string) {
 
 	try {
 		runBuildManifest({
-			argv: ["deno", "build-manifest.mjs", browserName],
+			argv: ["bun", "build-manifest.mjs", browserName],
 			logger: {
 				error: (message: string) => {
 					errors.push(message);
@@ -84,7 +81,7 @@ function runBuild(browserName: string) {
 	return { errors, manifest, thrown, writes };
 }
 
-Deno.test("build-manifest keeps Chromium-only command shortcuts and writes the file", async () => {
+test("build-manifest keeps Chromium-only command shortcuts and writes the file", async () => {
 	const { manifest, thrown, writes } = await runBuild("chrome");
 
 	assertEquals(thrown, null);
@@ -98,19 +95,17 @@ Deno.test("build-manifest keeps Chromium-only command shortcuts and writes the f
 	assertExists(
 		(manifest.commands as Record<string, Record<string, unknown>>)[
 			"cmd-save-as-tab"
-		]
-			.suggested_key,
+		].suggested_key,
 	);
 	assertEquals(
 		(manifest.commands as Record<string, Record<string, unknown>>)[
 			"cmd-export-all"
-		]
-			.suggested_key,
+		].suggested_key,
 		undefined,
 	);
 });
 
-Deno.test("build-manifest treats Edge like Chromium and strips Firefox-specific fields", async () => {
+test("build-manifest treats Edge like Chromium and strips Firefox-specific fields", async () => {
 	const { manifest, thrown, writes } = await runBuild("edge");
 
 	assertEquals(thrown, null);
@@ -122,7 +117,7 @@ Deno.test("build-manifest treats Edge like Chromium and strips Firefox-specific 
 	assertEquals(manifest.browser_specific_settings, undefined);
 });
 
-Deno.test("build-manifest removes Firefox-incompatible fields", async () => {
+test("build-manifest removes Firefox-incompatible fields", async () => {
 	const { manifest, thrown, writes } = await runBuild("firefox");
 
 	assertEquals(thrown, null);
@@ -138,7 +133,7 @@ Deno.test("build-manifest removes Firefox-incompatible fields", async () => {
 	);
 });
 
-Deno.test("build-manifest removes Safari-incompatible permissions and background fields", async () => {
+test("build-manifest removes Safari-incompatible permissions and background fields", async () => {
 	const { manifest, thrown, writes } = await runBuild("safari");
 
 	assertEquals(thrown, null);
@@ -169,7 +164,7 @@ Deno.test("build-manifest removes Safari-incompatible permissions and background
 	);
 });
 
-Deno.test("build-manifest reports invalid browser arguments", async () => {
+test("build-manifest reports invalid browser arguments", async () => {
 	const { errors, thrown, writes } = await runBuild("opera");
 
 	assertEquals(writes.length, 0);
@@ -179,7 +174,7 @@ Deno.test("build-manifest reports invalid browser arguments", async () => {
 	assertStringIncludes(errors[0], "Usage:");
 });
 
-Deno.test("build-manifest reports invalid browser arguments even with missing argv labels", () => {
+test("build-manifest reports invalid browser arguments even with missing argv labels", () => {
 	const errors: string[] = [];
 	const manifest = createManifestFixture();
 

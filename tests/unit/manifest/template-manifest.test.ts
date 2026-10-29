@@ -1,7 +1,6 @@
-import { assertEquals } from "@std/testing/asserts";
-import manifestJson from "../../../src/manifest/template-manifest.json" with {
-	type: "json",
-};
+import { test } from "#test";
+import { assertEquals } from "#test";
+import manifestJson from "../../../src/manifest/template-manifest.json" with { type: "json" };
 
 type TemplateManifest = {
 	background: {
@@ -18,7 +17,7 @@ type TemplateManifest = {
 	}>;
 };
 
-Deno.test("template-manifest points content and background bundles to generated", () => {
+test("template-manifest points content and background bundles to generated", () => {
 	const manifest = manifestJson as TemplateManifest;
 	assertEquals(
 		manifest.content_scripts[0].js[0],
@@ -34,7 +33,7 @@ Deno.test("template-manifest points content and background bundles to generated"
 	);
 });
 
-Deno.test("template-manifest requires Safari 15.4 for manifest v3", () => {
+test("template-manifest requires Safari 15.4 for manifest v3", () => {
 	const manifest = manifestJson as TemplateManifest;
 
 	assertEquals(

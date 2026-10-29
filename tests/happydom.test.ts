@@ -73,9 +73,7 @@ class MockClassList {
 	 * @return {void}
 	 */
 	setFromString(value: string) {
-		this.#classes = new Set(
-			value.split(/\s+/).filter(Boolean),
-		);
+		this.#classes = new Set(value.split(/\s+/).filter(Boolean));
 	}
 }
 
@@ -183,8 +181,10 @@ class MockElement extends EventTarget {
 	 */
 	get textContent() {
 		if (this.children.length > 0) {
-			return this.children.map((child) => child.textContent).join("") ||
-				this.#textContent;
+			return (
+				this.children.map((child) => child.textContent).join("") ||
+				this.#textContent
+			);
 		}
 		return this.#textContent;
 	}
@@ -289,7 +289,8 @@ class MockElement extends EventTarget {
 	append(...nodes: Array<MockElement | string>) {
 		for (const node of nodes) {
 			if (typeof node === "string") {
-				const textNode = this.ownerDocument?.createElement("span") ??
+				const textNode =
+					this.ownerDocument?.createElement("span") ??
 					new MockElement("span");
 				textNode.textContent = node;
 				this.appendChild(textNode);
@@ -308,9 +309,9 @@ class MockElement extends EventTarget {
 		if (this.parentElement == null) {
 			return;
 		}
-		this.parentElement.children = this.parentElement.children.filter((
-			child,
-		) => child !== this);
+		this.parentElement.children = this.parentElement.children.filter(
+			(child) => child !== this,
+		);
 		this.parentElement = null;
 	}
 
@@ -331,10 +332,9 @@ class MockElement extends EventTarget {
 			this.classList.setFromString(stringValue);
 		}
 		if (name.startsWith("data-")) {
-			const key = name.slice(5).replace(
-				/-([a-z])/g,
-				(_, letter) => letter.toUpperCase(),
-			);
+			const key = name
+				.slice(5)
+				.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
 			this.dataset[key] = stringValue;
 		}
 	}
@@ -394,19 +394,17 @@ class MockElement extends EventTarget {
 				const equalsIndex = content.indexOf("=");
 				if (startsWithIndex > -1) {
 					const attr = content.slice(0, startsWithIndex);
-					const value = content.slice(startsWithIndex + 2).replaceAll(
-						`"`,
-						"",
-					);
+					const value = content
+						.slice(startsWithIndex + 2)
+						.replaceAll(`"`, "");
 					if (!(this.getAttribute(attr) ?? "").startsWith(value)) {
 						return false;
 					}
 				} else if (equalsIndex > -1) {
 					const attr = content.slice(0, equalsIndex);
-					const value = content.slice(equalsIndex + 1).replaceAll(
-						`"`,
-						"",
-					);
+					const value = content
+						.slice(equalsIndex + 1)
+						.replaceAll(`"`, "");
 					if ((this.getAttribute(attr) ?? "") !== value) {
 						return false;
 					}
@@ -418,8 +416,8 @@ class MockElement extends EventTarget {
 			}
 			if (remaining.startsWith(":nth-child(")) {
 				const match = remaining.match(/^:nth-child\((\d+)\)/);
-				const childIndex = this.parentElement?.children.indexOf(this) ??
-					-1;
+				const childIndex =
+					this.parentElement?.children.indexOf(this) ?? -1;
 				if (match == null || childIndex !== Number(match[1]) - 1) {
 					return false;
 				}
@@ -693,7 +691,6 @@ export function createMockElement() {
 				}
 			},
 		},
-		// deno-lint-ignore ban-types
 		events: {} as Record<string, Function>,
 		/**
 		 * Records attached listeners by event name.
@@ -702,7 +699,6 @@ export function createMockElement() {
 		 * @param cb Listener callback.
 		 * @return {void}
 		 */
-		// deno-lint-ignore ban-types
 		addEventListener(event: string, cb: Function) {
 			this.events[event] = cb;
 		},
@@ -871,30 +867,28 @@ export function installMockDom(url = "https://example.test/") {
 		},
 	};
 	const previousGlobals = new Map<string, unknown>();
-	for (
-		const [name, value] of Object.entries({
-			window,
-			document,
-			location: currentUrl,
-			history,
-			navigator: window.navigator,
-			HTMLElement: MockElement,
-			Element: MockElement,
-			Node: MockElement,
-			Event,
-			CustomEvent,
-			MutationObserver: MockMutationObserver,
-			HTMLCanvasElement: MockElement,
-			HTMLInputElement: MockElement,
-			getComputedStyle: window.getComputedStyle,
-			requestAnimationFrame,
-			cancelAnimationFrame,
-			performance: performanceMock,
-			addEventListener: window.addEventListener.bind(window),
-			removeEventListener: window.removeEventListener.bind(window),
-			dispatchEvent: window.dispatchEvent.bind(window),
-		})
-	) {
+	for (const [name, value] of Object.entries({
+		window,
+		document,
+		location: currentUrl,
+		history,
+		navigator: window.navigator,
+		HTMLElement: MockElement,
+		Element: MockElement,
+		Node: MockElement,
+		Event,
+		CustomEvent,
+		MutationObserver: MockMutationObserver,
+		HTMLCanvasElement: MockElement,
+		HTMLInputElement: MockElement,
+		getComputedStyle: window.getComputedStyle,
+		requestAnimationFrame,
+		cancelAnimationFrame,
+		performance: performanceMock,
+		addEventListener: window.addEventListener.bind(window),
+		removeEventListener: window.removeEventListener.bind(window),
+		dispatchEvent: window.dispatchEvent.bind(window),
+	})) {
 		previousGlobals.set(
 			name,
 			(globalThis as Record<string, unknown>)[name],

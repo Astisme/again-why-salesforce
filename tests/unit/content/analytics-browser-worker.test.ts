@@ -1,4 +1,3 @@
-// deno-lint-ignore-file no-explicit-any
 import { mockStorage } from "../../mocks.test.ts";
 
 const SETTINGS_KEY = "settings";
@@ -68,9 +67,13 @@ function installDocument(
 			if (selector !== 'meta[http-equiv="Content-Security-Policy"]') {
 				return null;
 			}
-			return appendTarget.children.find((child) =>
-				child.getAttribute?.("http-equiv") === "Content-Security-Policy"
-			) ?? null;
+			return (
+				appendTarget.children.find(
+					(child) =>
+						child.getAttribute?.("http-equiv") ===
+						"Content-Security-Policy",
+				) ?? null
+			);
 		},
 	};
 	globalThis.document = documentMock as any;
@@ -109,7 +112,7 @@ function installRuntime({
 			}
 			if (
 				message.contains?.data_collection?.[0] !==
-					TECHNICAL_AND_INTERACTION
+				TECHNICAL_AND_INTERACTION
 			) {
 				runtime.lastError = new Error("Unexpected permission payload");
 				callback?.(undefined);
@@ -180,12 +183,12 @@ self.onmessage = async (event: MessageEvent<WorkerRequest>) => {
 	setSettings(initialSettings);
 
 	try {
-		const { checkInsertAnalytics } = await import(
-			"../../../src/salesforce/analytics.js"
-		);
-		const checkInsertAnalyticsWithNullableParam = checkInsertAnalytics as (
-			options?: { isNewUser?: boolean | null },
-		) => Promise<void>;
+		const { checkInsertAnalytics } =
+			await import("../../../src/salesforce/analytics.js");
+		const checkInsertAnalyticsWithNullableParam =
+			checkInsertAnalytics as (options?: {
+				isNewUser?: boolean | null;
+			}) => Promise<void>;
 		const results = [];
 
 		for (const step of steps) {
@@ -196,8 +199,8 @@ self.onmessage = async (event: MessageEvent<WorkerRequest>) => {
 				step.existingCspContent,
 				step.useDocumentElementOnly === true,
 			);
-			const appendTarget = documentMock.head ??
-				documentMock.documentElement;
+			const appendTarget =
+				documentMock.head ?? documentMock.documentElement;
 			const originalInfo = console.info;
 			if (step.silenceInfo) {
 				console.info = () => {};
@@ -212,9 +215,12 @@ self.onmessage = async (event: MessageEvent<WorkerRequest>) => {
 			const beacon = getBeaconImage(documentMock);
 			results.push({
 				headChildrenCount: appendTarget.children.length,
-				cspContent: documentMock.querySelector(
-					'meta[http-equiv="Content-Security-Policy"]',
-				)?.getAttribute("content") ?? null,
+				cspContent:
+					documentMock
+						.querySelector(
+							'meta[http-equiv="Content-Security-Policy"]',
+						)
+						?.getAttribute("content") ?? null,
 				beaconPath: beacon
 					? new URL(String(beacon.src)).searchParams.get("path")
 					: null,

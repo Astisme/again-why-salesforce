@@ -134,9 +134,11 @@ export class ThemeSelectorAws extends HTMLElement {
 	 * @return {string} the active theme name
 	 */
 	getCurrentTheme() {
-		return this.ownerDocument?.documentElement.dataset.theme ??
+		return (
+			this.ownerDocument?.documentElement.dataset.theme ??
 			globalThis.localStorage?.getItem("usingTheme") ??
-			"light";
+			"light"
+		);
 	}
 
 	/**
@@ -146,12 +148,10 @@ export class ThemeSelectorAws extends HTMLElement {
 	syncVisibleButton() {
 		const lightButton = this.querySelector('[data-theme-target="light"]');
 		const darkButton = this.querySelector('[data-theme-target="dark"]');
-		const buttonToShow = this.getCurrentTheme() === "light"
-			? darkButton
-			: lightButton;
-		const buttonToHide = buttonToShow === lightButton
-			? darkButton
-			: lightButton;
+		const buttonToShow =
+			this.getCurrentTheme() === "light" ? darkButton : lightButton;
+		const buttonToHide =
+			buttonToShow === lightButton ? darkButton : lightButton;
 		buttonToShow?.classList.remove(invisible, HIDDEN_CLASS);
 		buttonToHide?.classList.add(invisible, HIDDEN_CLASS);
 	}
@@ -167,12 +167,10 @@ export class ThemeSelectorAws extends HTMLElement {
 		}
 		const lightButton = this.querySelector('[data-theme-target="light"]');
 		const darkButton = this.querySelector('[data-theme-target="dark"]');
-		const buttonToShow = this.getCurrentTheme() === "light"
-			? lightButton
-			: darkButton;
-		const buttonToHide = buttonToShow === lightButton
-			? darkButton
-			: lightButton;
+		const buttonToShow =
+			this.getCurrentTheme() === "light" ? lightButton : darkButton;
+		const buttonToHide =
+			buttonToShow === lightButton ? darkButton : lightButton;
 		buttonToHide?.classList.add(invisible, HIDDEN_CLASS);
 		buttonToShow?.classList.remove(HIDDEN_CLASS);
 		setTimeout(() => {
