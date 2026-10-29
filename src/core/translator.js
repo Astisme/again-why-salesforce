@@ -375,25 +375,26 @@ export class TranslationService {
 		const elements = globalThis.document.querySelectorAll(
 			`[${TranslationService.TRANSLATE_ELEMENT_ATTRIBUTE}]:not([${TranslationService.ATTRIBUTE_EXCLUDE}="true"])`,
 		);
-		for (const element of elements) {
-			const toTranslateKey = element.getAttribute(
-				TranslationService.TRANSLATE_ELEMENT_ATTRIBUTE,
-			);
-			const [key, ...attributes] = toTranslateKey.split(
-				TranslationService.TRANSLATE_SEPARATOR,
-			);
-			const translation = (await this.translate(key)).replaceAll(
-				"\n",
-				"<br />",
-			);
-			if (attributes == null) continue;
-			if (attributes.length === 0) {
-				attributes.push("textContent");
-			}
-			for (const attribute of attributes) {
-				element[attribute] = translation;
-			}
-		}
+		await Promise.all(
+			Array.from(elements, async (element) => {
+				const toTranslateKey = element.getAttribute(
+					TranslationService.TRANSLATE_ELEMENT_ATTRIBUTE,
+				);
+				const [key, ...attributes] = toTranslateKey.split(
+					TranslationService.TRANSLATE_SEPARATOR,
+				);
+				const translation = (await this.translate(key)).replaceAll(
+					"\n",
+					"<br />",
+				);
+				if (attributes.length === 0) {
+					attributes.push("textContent");
+				}
+				for (const attribute of attributes) {
+					element[attribute] = translation;
+				}
+			}),
+		);
 	}
 
 	/**

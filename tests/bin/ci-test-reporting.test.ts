@@ -24,3 +24,32 @@ test("aggregate checks retain formatting and expose a non-mutating format check"
 	assertEquals(packageJson.scripts.checks.startsWith("bun run fmt &&"), true);
 	assertEquals(packageJson.scripts["fmt-check"], "prettier --check .");
 });
+
+test("locale reporting ignores Bun command banners but keeps diagnostics", async () => {
+	const workflow = await readFile(
+		new URL("../../.github/workflows/pr-tests.yml", import.meta.url),
+		"utf8",
+	);
+	const pattern = workflow.match(
+		/title:\s+"These Locale Translation are missing \(not blocking\)",\s+stripPatterns:\s+\[\s+\/(.+)\/gm,/,
+	);
+	assertExists(pattern);
+	const banner =
+		"$ bun run bin/find-invalid-variables.ts && bun run bin/missing-locales.ts";
+	for (const newline of ["\n", "\r\n"]) {
+		const matcher = new RegExp(pattern[1], "gm");
+		assertEquals(`${banner}${newline}`.replaceAll(matcher, "").trim(), "");
+		assertEquals(
+			`${banner}${newline}Error: invalid locale${newline}`
+				.replaceAll(matcher, "")
+				.trim(),
+			"Error: invalid locale",
+		);
+		assertEquals(
+			`{"0":{"locales":["fr"],"missingKeys":["example"]}}${newline}`
+				.replaceAll(matcher, "")
+				.trim(),
+			'{"0":{"locales":["fr"],"missingKeys":["example"]}}',
+		);
+	}
+});

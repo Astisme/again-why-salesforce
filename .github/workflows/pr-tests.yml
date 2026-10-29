@@ -103,6 +103,9 @@ jobs:
                         core,
                         logFile: "missing-locales.log",
                         title:   "These Locale Translation are missing (not blocking)",
+                        stripPatterns: [
+                          /^\$ bun run .+\r?$/gm,
+                        ],
                       });
 
             - name: Sort locales

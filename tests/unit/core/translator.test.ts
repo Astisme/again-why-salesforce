@@ -1,7 +1,7 @@
 import { test } from "#test";
 /// <reference lib="dom" />
 import * as fs from "node:fs/promises";
-import { assertEquals } from "#test";
+import { assertEquals, assertRejects, stub } from "#test";
 import { translations } from "../../mocks.test.ts";
 import { TranslationService } from "../../../src/core/translator.js";
 const translate_element_attribute = "data-i18n";
@@ -262,4 +262,64 @@ test("TranslationService - public translator helpers", async () => {
 		null,
 	);
 	assertEquals(await TranslationService.getTranslatorAttribute(null), null);
+});
+
+test("TranslationService - page translations start together and await all updates", async () => {
+	const service = await TranslationService.ensureTranslatorAvailability();
+	const originalDocument = globalThis.document;
+	const elements = [
+		{ getAttribute: () => "first", textContent: "" },
+		{
+			getAttribute: () => "second+-+title+-+textContent",
+			textContent: "",
+			title: "",
+		},
+	];
+	const pending = new Map<string, (translation: string) => void>();
+	using translateStub = stub(
+		service,
+		"translate",
+		(key: string) =>
+			new Promise<string>((resolve) => {
+				pending.set(key, resolve);
+			}),
+	);
+	Reflect.set(globalThis, "document", { querySelectorAll: () => elements });
+	try {
+		const update = service.updatePageTranslations("en");
+		assertEquals(Array.from(pending.keys()), ["first", "second"]);
+		assertEquals(translateStub.calls.length, 2);
+		pending.get("second")?.("Second\nline");
+		pending.get("first")?.("First");
+		assertEquals(await update, undefined);
+		assertEquals(elements[0].textContent, "First");
+		assertEquals(elements[1].textContent, "Second<br />line");
+		assertEquals(elements[1].title, "Second<br />line");
+		assertEquals(service.currentLanguage, "en");
+	} finally {
+		Reflect.set(globalThis, "document", originalDocument);
+	}
+});
+
+test("TranslationService - page translations propagate errors and accept empty pages", async () => {
+	const service = await TranslationService.ensureTranslatorAvailability();
+	const originalDocument = globalThis.document;
+	try {
+		Reflect.set(globalThis, "document", { querySelectorAll: () => [] });
+		assertEquals(await service.updatePageTranslations(), undefined);
+		Reflect.set(globalThis, "document", {
+			querySelectorAll: () => [{ getAttribute: () => "first" }],
+		});
+		using translateStub = stub(service, "translate", () =>
+			Promise.reject(new Error("translation_failed")),
+		);
+		await assertRejects(
+			() => service.updatePageTranslations(),
+			Error,
+			"translation_failed",
+		);
+		assertEquals(translateStub.calls.length, 1);
+	} finally {
+		Reflect.set(globalThis, "document", originalDocument);
+	}
 });

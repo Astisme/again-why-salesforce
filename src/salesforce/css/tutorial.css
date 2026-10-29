@@ -31,6 +31,11 @@
 		0 8px 32px rgba(51, 85, 204, 0.2);
 	animation: tut-v7-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
+@media (prefers-reduced-motion: reduce) {
+	.tut-v7 {
+		animation: none;
+	}
+}
 /* corner brackets via pseudo — applied on the wrapper */
 .tut-v7-corner {
 	position: absolute;
