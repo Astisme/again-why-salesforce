@@ -1,13 +1,12 @@
+import { test } from "#test";
 import "../../mocks.test.ts";
-import { assertEquals, assertStrictEquals } from "@std/testing/asserts";
+import { assertEquals, assertRejects, assertStrictEquals } from "#test";
 import {
 	createMockWindow,
 	MockDocument,
 	MockElement,
 } from "./mock-dom.test.ts";
-import {
-	createNotSalesforceSetupModule,
-} from "../../../src/action/notSalesforceSetup/notSalesforceSetup-module.js";
+import { createNotSalesforceSetupModule } from "../../../src/action/notSalesforceSetup/notSalesforceSetup-module.js";
 import {
 	__testHooks as notSalesforceSetupTestHooks,
 	runNotSalesforceSetup as runNotSalesforceSetupRuntime,
@@ -155,7 +154,7 @@ async function loadNotSalesforceSetupModule({
 	};
 }
 
-Deno.test("notSalesforceSetup auto-opens Salesforce setup in a new tab", async () => {
+test("notSalesforceSetup auto-opens Salesforce setup in a new tab", async () => {
 	const fixture = await loadNotSalesforceSetupModule({
 		browserTabResponses: [{ id: 7, index: 2 }],
 		pageUrl: "https://acme.lightning.force.com/lightning/page/home",
@@ -171,19 +170,23 @@ Deno.test("notSalesforceSetup auto-opens Salesforce setup in a new tab", async (
 		fixture.setup.href,
 		"https://acme.lightning.force.com/lightning/setup/SetupOneHome/home",
 	);
-	assertEquals(fixture.creates, [{
-		index: 3,
-		openerTabId: 7,
-		url: "https://acme.lightning.force.com/lightning/setup/SetupOneHome/home",
-	}]);
-	assertEquals(fixture.sendMessages, [{
-		what: "get-browser-tab",
-	}]);
+	assertEquals(fixture.creates, [
+		{
+			index: 3,
+			openerTabId: 7,
+			url: "https://acme.lightning.force.com/lightning/setup/SetupOneHome/home",
+		},
+	]);
+	assertEquals(fixture.sendMessages, [
+		{
+			what: "get-browser-tab",
+		},
+	]);
 	assertEquals(fixture.counters.closeCalls, 1);
 	assertEquals(fixture.counters.translatorCalls, 0);
 });
 
-Deno.test("notSalesforceSetup updates the current tab when configured to reuse it", async () => {
+test("notSalesforceSetup updates the current tab when configured to reuse it", async () => {
 	const fixture = await loadNotSalesforceSetupModule({
 		pageUrl: "https://example.com/not-salesforce",
 		settings: [
@@ -194,15 +197,17 @@ Deno.test("notSalesforceSetup updates the current tab when configured to reuse i
 
 	assertEquals(fixture.counters.translatorCalls, 1);
 	await fixture.login.click();
-	assertEquals(fixture.updates, [{
-		url: "https://login.salesforce.com/",
-	}]);
+	assertEquals(fixture.updates, [
+		{
+			url: "https://login.salesforce.com/",
+		},
+	]);
 	assertEquals(fixture.creates, []);
 	assertEquals(fixture.sendMessages, []);
 	assertEquals(fixture.counters.closeCalls, 1);
 });
 
-Deno.test("notSalesforceSetup keeps login flow for lightning.force.com lookalike domains", async () => {
+test("notSalesforceSetup keeps login flow for lightning.force.com lookalike domains", async () => {
 	const fixture = await loadNotSalesforceSetupModule({
 		pageUrl:
 			"https://acme.lightning.force.com.attacker.test/lightning/page/home",
@@ -214,7 +219,7 @@ Deno.test("notSalesforceSetup keeps login flow for lightning.force.com lookalike
 	assertEquals(fixture.counters.translatorCalls, 1);
 });
 
-Deno.test("notSalesforceSetup shows the invalid URL state when the query URL cannot be parsed", async () => {
+test("notSalesforceSetup shows the invalid URL state when the query URL cannot be parsed", async () => {
 	const fixture = await loadNotSalesforceSetupModule({
 		pageUrl: "not-a-valid-url",
 		settings: [],
@@ -226,7 +231,7 @@ Deno.test("notSalesforceSetup shows the invalid URL state when the query URL can
 	assertEquals(fixture.counters.translatorCalls, 1);
 });
 
-Deno.test("notSalesforceSetup retries browser tab lookup until a tab is available", async () => {
+test("notSalesforceSetup retries browser tab lookup until a tab is available", async () => {
 	const fixture = await loadNotSalesforceSetupModule({
 		browserTabResponses: [null, null, { id: 9, index: 1 }],
 		settings: [
@@ -240,59 +245,35 @@ Deno.test("notSalesforceSetup retries browser tab lookup until a tab is availabl
 		{ what: "get-browser-tab" },
 		{ what: "get-browser-tab" },
 	]);
-	assertEquals(fixture.creates, [{
-		index: 2,
-		openerTabId: 9,
-		url: "https://login.salesforce.com/",
-	}]);
+	assertEquals(fixture.creates, [
+		{
+			index: 2,
+			openerTabId: 9,
+			url: "https://login.salesforce.com/",
+		},
+	]);
 	assertEquals(fixture.counters.closeCalls, 1);
 	assertEquals(fixture.counters.translatorCalls, 0);
 });
 
-Deno.test("notSalesforceSetup throws when the browser tab lookup never returns a tab", async () => {
-	const errorPromise = new Promise<Error>((resolve, reject) => {
-		const timeoutId = setTimeout(() => {
-			globalThis.removeEventListener(
-				"unhandledrejection",
-				onUnhandledRejection,
-			);
-			reject(new Error("expected_unhandled_rejection"));
-		}, 1000);
-		function onUnhandledRejection(event: PromiseRejectionEvent) {
-			if (
-				event.reason instanceof Error &&
-				event.reason.message === "error_no_browser_tab"
-			) {
-				event.preventDefault();
-				clearTimeout(timeoutId);
-				globalThis.removeEventListener(
-					"unhandledrejection",
-					onUnhandledRejection,
-				);
-				resolve(event.reason);
-			}
-		}
-		globalThis.addEventListener("unhandledrejection", onUnhandledRejection);
-	});
-
+test("notSalesforceSetup throws when the browser tab lookup never returns a tab", async () => {
 	const fixture = await loadNotSalesforceSetupModule({
 		browserTabResponses: [null, null, null, null, null, null],
-		settings: [
-			{ enabled: true, id: "popup_open_login" },
-			{ enabled: false, id: "popup_login_new_tab" },
-		],
 	});
 
-	const thrownError = await errorPromise;
-	assertEquals(thrownError.message, "error_no_browser_tab");
+	await assertRejects(
+		() => fixture.login.click(),
+		Error,
+		"error_no_browser_tab",
+	);
 	assertEquals(fixture.sendMessages.length, 7);
 	for (const message of fixture.sendMessages) {
 		assertEquals(message, { what: "get-browser-tab" });
 	}
-	assertEquals(fixture.counters.closeCalls, 1);
+	assertEquals(fixture.counters.closeCalls, 0);
 });
 
-Deno.test("notSalesforceSetup runtime delegates to its lazy module singleton", async () => {
+test("notSalesforceSetup runtime delegates to its lazy module singleton", async () => {
 	let calls = 0;
 	const result = { willOpenLogin: true };
 	const closeDescriptor = Object.getOwnPropertyDescriptor(
@@ -337,7 +318,7 @@ Deno.test("notSalesforceSetup runtime delegates to its lazy module singleton", a
 	}
 });
 
-Deno.test("notSalesforceSetup runtime applies explicit overrides without caching them", async () => {
+test("notSalesforceSetup runtime applies explicit overrides without caching them", async () => {
 	const fixture = await loadNotSalesforceSetupModule({
 		pageUrl: "https://example.com/not-salesforce",
 		settings: [],

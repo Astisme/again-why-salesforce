@@ -1,4 +1,5 @@
-import { assert, assertEquals, assertThrows } from "@std/testing/asserts";
+import { test } from "#test";
+import { assert, assertEquals, assertThrows } from "#test";
 import { installMockDom } from "../../happydom.test.ts";
 import { createFavouriteManagerModule } from "../../../src/salesforce/module/favourite-manager-module.js";
 const HEADER_SELECTOR_BASE =
@@ -53,9 +54,10 @@ type SettingsEntry = {
 
 type TabList = {
 	existsWithOrWithoutOrg: (tab: { org: string; url: string }) => boolean;
-	getSingleTabByData: (
-		tab: { org: string; url: string },
-	) => FavouriteActionPayload;
+	getSingleTabByData: (tab: {
+		org: string;
+		url: string;
+	}) => FavouriteActionPayload;
 };
 
 type LoadFavouriteManagerOptions = {
@@ -119,21 +121,18 @@ function createHeaderSelector(innerElement: string) {
  * @param {LoadFavouriteManagerOptions} [options={}] Fixture configuration.
  * @return {Promise<FavouriteManagerFixture>} Loaded fixture.
  */
-function loadFavouriteManagerFixture(
-	{
-		commands = [],
-		currentHref =
-			"https://acme.lightning.force.com/lightning/setup/Users/home",
-		existsWithOrWithoutOrg = false,
-		getSingleTabByDataError = null,
-		headerPresent = true,
-		isCurrentlyOnSavedTab = false,
-		minifiedUrl = "Users/home",
-		settings = [],
-		tabContainsSalesforceId = true,
-		wasOnSavedTab = false,
-	}: LoadFavouriteManagerOptions = {},
-) {
+function loadFavouriteManagerFixture({
+	commands = [],
+	currentHref = "https://acme.lightning.force.com/lightning/setup/Users/home",
+	existsWithOrWithoutOrg = false,
+	getSingleTabByDataError = null,
+	headerPresent = true,
+	isCurrentlyOnSavedTab = false,
+	minifiedUrl = "Users/home",
+	settings = [],
+	tabContainsSalesforceId = true,
+	wasOnSavedTab = false,
+}: LoadFavouriteManagerOptions = {}) {
 	const dom = installMockDom(currentHref);
 	const { document } = globalThis;
 	const header = document.createElement("div");
@@ -215,15 +214,10 @@ function loadFavouriteManagerFixture(
 					};
 				},
 			} as TabList),
-		getTranslations: (
-			keys: string | string[],
-			connector = " ",
-		) => {
+		getTranslations: (keys: string | string[], connector = " ") => {
 			if (Array.isArray(keys)) {
 				keys.forEach((key) => translationCalls.push(key));
-				return Promise.resolve(
-					keys.map((key) => `translated:${key}`),
-				);
+				return Promise.resolve(keys.map((key) => `translated:${key}`));
 			}
 			translationCalls.push(keys);
 			void connector;
@@ -335,7 +329,7 @@ async function invokeEventListener(
 	await listener.handleEvent(event);
 }
 
-Deno.test("favourite-manager creates regular and slashed star svgs", async () => {
+test("favourite-manager creates regular and slashed star svgs", async () => {
 	const fixture = await loadFavouriteManagerFixture();
 
 	try {
@@ -344,43 +338,28 @@ Deno.test("favourite-manager creates regular and slashed star svgs", async () =>
 			{ alt: "label", id: "star-id" },
 			true,
 		);
-		const regularPath = regularStar.querySelector("path") as
-			| StyledElement
-			| null;
-		const slashedPath = slashedStar.querySelector("path") as
-			| StyledElement
-			| null;
+		const regularPath = regularStar.querySelector(
+			"path",
+		) as StyledElement | null;
+		const slashedPath = slashedStar.querySelector(
+			"path",
+		) as StyledElement | null;
 
 		assertEquals(regularStar.getAttribute("viewBox"), "0 0 24 24");
 		assertEquals(regularStar.getAttribute("id"), null);
-		assertEquals(
-			regularPath?.style.stroke,
-			"#00a1e0",
-		);
-		assertEquals(
-			regularPath?.style.fill,
-			"transparent",
-		);
-		assertEquals(
-			regularPath?.getAttribute("stroke-linecap"),
-			"round",
-		);
+		assertEquals(regularPath?.style.stroke, "#00a1e0");
+		assertEquals(regularPath?.style.fill, "transparent");
+		assertEquals(regularPath?.getAttribute("stroke-linecap"), "round");
 		assertEquals(slashedStar.id, "star-id");
-		assertEquals(
-			(slashedStar as unknown as { alt?: string }).alt,
-			"label",
-		);
+		assertEquals((slashedStar as unknown as { alt?: string }).alt, "label");
 		assertEquals(slashedStar.getAttribute("viewBox"), "0 0 56 56");
-		assertEquals(
-			slashedPath?.style.fill,
-			"#00a1e0",
-		);
+		assertEquals(slashedPath?.style.fill, "#00a1e0");
 	} finally {
 		fixture.cleanup();
 	}
 });
 
-Deno.test("favourite-manager generates the button markup with shortcut labels", async () => {
+test("favourite-manager generates the button markup with shortcut labels", async () => {
 	const fixture = await loadFavouriteManagerFixture({
 		commands: [
 			{ name: "cmd_save_as_tab", shortcut: "Ctrl+S" },
@@ -397,10 +376,12 @@ Deno.test("favourite-manager generates the button markup with shortcut labels", 
 			`#${fixture.module.SLASHED_STAR_ID}`,
 		);
 
-		assertEquals(fixture.sendMessageCalls, [{
-			commands: ["cmd_save_as_tab", "cmd_remove_tab"],
-			what: "get_commands",
-		}]);
+		assertEquals(fixture.sendMessageCalls, [
+			{
+				commands: ["cmd_save_as_tab", "cmd_remove_tab"],
+				what: "get_commands",
+			},
+		]);
 		assertEquals(fixture.translationCalls, ["save_tab", "remove_tab"]);
 		assertEquals(button.id, fixture.module.FAVOURITE_BUTTON_ID);
 		assertEquals(button.getAttribute("aria-live"), "off");
@@ -423,16 +404,18 @@ Deno.test("favourite-manager generates the button markup with shortcut labels", 
 		assert(star != null);
 		assert(slashedStar != null);
 		assert(slashedStar.classList.contains("hidden"));
-		assertEquals(fixture.injectStyleCalls, [{
-			css: ".hidden { display: none; }",
-			id: "awsf-hidden-favman",
-		}]);
+		assertEquals(fixture.injectStyleCalls, [
+			{
+				css: ".hidden { display: none; }",
+				id: "awsf-hidden-favman",
+			},
+		]);
 	} finally {
 		fixture.cleanup();
 	}
 });
 
-Deno.test("favourite-manager omits shortcut suffixes when commands are unavailable", async () => {
+test("favourite-manager omits shortcut suffixes when commands are unavailable", async () => {
 	const fixture = await loadFavouriteManagerFixture({
 		commands: [],
 	});
@@ -450,7 +433,7 @@ Deno.test("favourite-manager omits shortcut suffixes when commands are unavailab
 	}
 });
 
-Deno.test("favourite-manager resolves favourite images from the button or the document", async () => {
+test("favourite-manager resolves favourite images from the button or the document", async () => {
 	const fixture = await loadFavouriteManagerFixture();
 
 	try {
@@ -475,7 +458,7 @@ Deno.test("favourite-manager resolves favourite images from the button or the do
 	}
 });
 
-Deno.test("favourite-manager toggles button icons and assistive text", async () => {
+test("favourite-manager toggles button icons and assistive text", async () => {
 	const fixture = await loadFavouriteManagerFixture();
 
 	try {
@@ -502,22 +485,22 @@ Deno.test("favourite-manager toggles button icons and assistive text", async () 
 		assert(!star?.classList.contains("hidden"));
 		assert(slashedStar?.classList.contains("hidden"));
 		assertEquals(button.getAttribute("aria-pressed"), "false");
-		assertEquals(
-			button.getAttribute("aria-label"),
-			"translated:save_tab",
-		);
+		assertEquals(button.getAttribute("aria-label"), "translated:save_tab");
 	} finally {
 		fixture.cleanup();
 	}
 });
 
-Deno.test("favourite-manager tolerates missing favourite buttons and assistive text", async () => {
+test("favourite-manager tolerates missing favourite buttons and assistive text", async () => {
 	const fixture = await loadFavouriteManagerFixture();
 
 	try {
-		const star = fixture.module.createStarSvg({
-			id: fixture.module.STAR_ID,
-		}, false);
+		const star = fixture.module.createStarSvg(
+			{
+				id: fixture.module.STAR_ID,
+			},
+			false,
+		);
 		const slashedStar = fixture.module.createStarSvg(
 			{ id: fixture.module.SLASHED_STAR_ID },
 			true,
@@ -544,7 +527,7 @@ Deno.test("favourite-manager tolerates missing favourite buttons and assistive t
 	}
 });
 
-Deno.test("favourite-manager adds a tab with org data when link detection applies", async () => {
+test("favourite-manager adds a tab with org data when link detection applies", async () => {
 	const fixture = await loadFavouriteManagerFixture({
 		currentHref:
 			"https://acme.lightning.force.com/lightning/setup/Users/home?id=001",
@@ -555,21 +538,23 @@ Deno.test("favourite-manager adds a tab with org data when link detection applie
 	try {
 		await fixture.module.addTab("Users/home");
 
-		assertEquals(fixture.performActionCalls, [{
-			action: "add",
-			options: { addInFront: false },
-			payload: {
-				label: "Users",
-				org: "org:https://acme.lightning.force.com/lightning/setup/Users/home?id=001",
-				url: "Users/home",
+		assertEquals(fixture.performActionCalls, [
+			{
+				action: "add",
+				options: { addInFront: false },
+				payload: {
+					label: "Users",
+					org: "org:https://acme.lightning.force.com/lightning/setup/Users/home?id=001",
+					url: "Users/home",
+				},
 			},
-		}]);
+		]);
 	} finally {
 		fixture.cleanup();
 	}
 });
 
-Deno.test("favourite-manager skips org extraction when tab-as-org is off and link detection is disabled", async () => {
+test("favourite-manager skips org extraction when tab-as-org is off and link detection is disabled", async () => {
 	const fixture = await loadFavouriteManagerFixture({
 		settings: [
 			{ enabled: true, id: "skip_link_detection" },
@@ -582,21 +567,23 @@ Deno.test("favourite-manager skips org extraction when tab-as-org is off and lin
 	try {
 		await fixture.module.addTab("Users/home");
 
-		assertEquals(fixture.performActionCalls, [{
-			action: "add",
-			options: { addInFront: true },
-			payload: {
-				label: "Users",
-				org: undefined,
-				url: "Users/home",
+		assertEquals(fixture.performActionCalls, [
+			{
+				action: "add",
+				options: { addInFront: true },
+				payload: {
+					label: "Users",
+					org: undefined,
+					url: "Users/home",
+				},
 			},
-		}]);
+		]);
 	} finally {
 		fixture.cleanup();
 	}
 });
 
-Deno.test("favourite-manager removes a saved favourite and dispatches the unfavourite event", async () => {
+test("favourite-manager removes a saved favourite and dispatches the unfavourite event", async () => {
 	const fixture = await loadFavouriteManagerFixture({
 		currentHref:
 			"https://acme.lightning.force.com/lightning/setup/Users/home?id=001",
@@ -611,19 +598,23 @@ Deno.test("favourite-manager removes a saved favourite and dispatches the unfavo
 	try {
 		await fixture.module.actionFavourite();
 
-		assertEquals(fixture.getSingleTabByDataCalls, [{
-			org: "org:https://acme.lightning.force.com/lightning/setup/Users/home?id=001",
-			url: "Users/home",
-		}]);
-		assertEquals(fixture.performActionCalls, [{
-			action: "cxm_remove_tab",
-			options: undefined,
-			payload: {
-				label: "Saved Tab",
+		assertEquals(fixture.getSingleTabByDataCalls, [
+			{
 				org: "org:https://acme.lightning.force.com/lightning/setup/Users/home?id=001",
 				url: "Users/home",
 			},
-		}]);
+		]);
+		assertEquals(fixture.performActionCalls, [
+			{
+				action: "cxm_remove_tab",
+				options: undefined,
+				payload: {
+					label: "Saved Tab",
+					org: "org:https://acme.lightning.force.com/lightning/setup/Users/home?id=001",
+					url: "Users/home",
+				},
+			},
+		]);
 		assertEquals(dispatchedEvents, ["tutorial:unfavourite"]);
 		assertEquals(fixture.toasts, []);
 	} finally {
@@ -631,7 +622,7 @@ Deno.test("favourite-manager removes a saved favourite and dispatches the unfavo
 	}
 });
 
-Deno.test("favourite-manager warns when removing a missing favourite fails", async () => {
+test("favourite-manager warns when removing a missing favourite fails", async () => {
 	const fixture = await loadFavouriteManagerFixture({
 		getSingleTabByDataError: new Error("missing"),
 		isCurrentlyOnSavedTab: true,
@@ -645,17 +636,19 @@ Deno.test("favourite-manager warns when removing a missing favourite fails", asy
 		await fixture.module.actionFavourite();
 
 		assertEquals(fixture.warnCalls, ["Error: missing"]);
-		assertEquals(fixture.toasts, [{
-			message: "error_remove_not_favourite",
-			status: "warning",
-		}]);
+		assertEquals(fixture.toasts, [
+			{
+				message: "error_remove_not_favourite",
+				status: "warning",
+			},
+		]);
 		assertEquals(dispatchedEvents, ["tutorial:unfavourite"]);
 	} finally {
 		fixture.cleanup();
 	}
 });
 
-Deno.test("favourite-manager adds a new favourite and dispatches the favourite event", async () => {
+test("favourite-manager adds a new favourite and dispatches the favourite event", async () => {
 	const fixture = await loadFavouriteManagerFixture({
 		currentHref:
 			"https://acme.lightning.force.com/lightning/setup/Users/home?id=001",
@@ -671,22 +664,24 @@ Deno.test("favourite-manager adds a new favourite and dispatches the favourite e
 	try {
 		await fixture.module.actionFavourite();
 
-		assertEquals(fixture.performActionCalls, [{
-			action: "add",
-			options: { addInFront: true },
-			payload: {
-				label: "Users",
-				org: "org:https://acme.lightning.force.com/lightning/setup/Users/home?id=001",
-				url: "Users/home",
+		assertEquals(fixture.performActionCalls, [
+			{
+				action: "add",
+				options: { addInFront: true },
+				payload: {
+					label: "Users",
+					org: "org:https://acme.lightning.force.com/lightning/setup/Users/home?id=001",
+					url: "Users/home",
+				},
 			},
-		}]);
+		]);
 		assertEquals(dispatchedEvents, ["tutorial:favourite"]);
 	} finally {
 		fixture.cleanup();
 	}
 });
 
-Deno.test("favourite-manager schedules retries for missing headers and logs hard failures", async () => {
+test("favourite-manager schedules retries for missing headers and logs hard failures", async () => {
 	const retryFixture = await loadFavouriteManagerFixture({
 		headerPresent: false,
 	});
@@ -718,7 +713,7 @@ Deno.test("favourite-manager schedules retries for missing headers and logs hard
 	}
 });
 
-Deno.test("favourite-manager skips unsupported setup pages", async () => {
+test("favourite-manager skips unsupported setup pages", async () => {
 	const homeFixture = await loadFavouriteManagerFixture({
 		minifiedUrl: "SetupOneHome/home",
 	});
@@ -745,7 +740,7 @@ Deno.test("favourite-manager skips unsupported setup pages", async () => {
 	}
 });
 
-Deno.test("favourite-manager refreshes an existing button from the current saved state", async () => {
+test("favourite-manager refreshes an existing button from the current saved state", async () => {
 	const fixture = await loadFavouriteManagerFixture({
 		existsWithOrWithoutOrg: true,
 		isCurrentlyOnSavedTab: null,
@@ -758,26 +753,27 @@ Deno.test("favourite-manager refreshes an existing button from the current saved
 		await fixture.module.showFavouriteButton();
 
 		assertEquals(fixture.isOnSavedTabCalls.value, 1);
-		assertEquals(fixture.existsCalls, [{
-			org: "org:https://acme.lightning.force.com/lightning/setup/Users/home",
-			url: "Users/home",
-		}]);
+		assertEquals(fixture.existsCalls, [
+			{
+				org: "org:https://acme.lightning.force.com/lightning/setup/Users/home",
+				url: "Users/home",
+			},
+		]);
 		assertEquals(
 			button.getAttribute("aria-label"),
 			"translated:remove_tab",
 		);
 		assert(
-			button.querySelector(`#${fixture.module.STAR_ID}`)?.classList
-				.contains(
-					"hidden",
-				),
+			button
+				.querySelector(`#${fixture.module.STAR_ID}`)
+				?.classList.contains("hidden"),
 		);
 	} finally {
 		fixture.cleanup();
 	}
 });
 
-Deno.test("favourite-manager inserts a new button and initializes its saved state", async () => {
+test("favourite-manager inserts a new button and initializes its saved state", async () => {
 	const fixture = await loadFavouriteManagerFixture({
 		commands: [{ name: "cmd_save_as_tab", shortcut: "Ctrl+S" }],
 		isCurrentlyOnSavedTab: true,
@@ -804,7 +800,7 @@ Deno.test("favourite-manager inserts a new button and initializes its saved stat
 	}
 });
 
-Deno.test("favourite-manager page actions show info toasts or click the matching button", async () => {
+test("favourite-manager page actions show info toasts or click the matching button", async () => {
 	const fixture = await loadFavouriteManagerFixture();
 
 	try {
@@ -821,10 +817,12 @@ Deno.test("favourite-manager page actions show info toasts or click the matching
 		uselessSaveStar?.classList.add("hidden");
 
 		fixture.module.pageActionTab(true);
-		assertEquals(fixture.toasts, [{
-			message: "error_useless_save",
-			status: "info",
-		}]);
+		assertEquals(fixture.toasts, [
+			{
+				message: "error_useless_save",
+				status: "info",
+			},
+		]);
 
 		fixture.module.pageActionTab(false);
 		assertEquals(fixture.toasts, [
@@ -851,7 +849,7 @@ Deno.test("favourite-manager page actions show info toasts or click the matching
 	}
 });
 
-Deno.test("favourite-manager button click handlers invoke the favourite action flow", async () => {
+test("favourite-manager button click handlers invoke the favourite action flow", async () => {
 	const fixture = await loadFavouriteManagerFixture({
 		currentHref:
 			"https://acme.lightning.force.com/lightning/setup/Users/home?id=001",
@@ -882,15 +880,17 @@ Deno.test("favourite-manager button click handlers invoke the favourite action f
 		assert(clickListener != null);
 		await invokeEventListener(clickListener, button);
 
-		assertEquals(fixture.performActionCalls, [{
-			action: "add",
-			options: { addInFront: false },
-			payload: {
-				label: "Users",
-				org: "org:https://acme.lightning.force.com/lightning/setup/Users/home?id=001",
-				url: "Users/home",
+		assertEquals(fixture.performActionCalls, [
+			{
+				action: "add",
+				options: { addInFront: false },
+				payload: {
+					label: "Users",
+					org: "org:https://acme.lightning.force.com/lightning/setup/Users/home?id=001",
+					url: "Users/home",
+				},
 			},
-		}]);
+		]);
 	} finally {
 		EventTarget.prototype.addEventListener = originalAddEventListener;
 		fixture.cleanup();

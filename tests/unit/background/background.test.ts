@@ -1,5 +1,6 @@
+import { test } from "#test";
 import { mockStorage } from "../../mocks.test.ts";
-import { assert, assertEquals, assertFalse } from "@std/testing/asserts";
+import { assert, assertEquals, assertFalse } from "#test";
 import { waitForCondition } from "../../async.test.ts";
 
 import { startBackground } from "../../../src/background/background.js";
@@ -84,11 +85,13 @@ mockStorage[SETTINGS_KEY] = [
 	{ enabled: true, id: NO_RELEASE_NOTES },
 	{ enabled: false, id: TAB_ADD_FRONT },
 ];
-mockStorage[ORG_TAB_STYLE_KEY] = [{
-	id: "italic",
-	forActive: true,
-	value: "italic",
-}]; // the other ones are inserted by background.js
+mockStorage[ORG_TAB_STYLE_KEY] = [
+	{
+		id: "italic",
+		forActive: true,
+		value: "italic",
+	},
+]; // the other ones are inserted by background.js
 
 const listenerCountsBeforeStart = {
 	commands: BROWSER.commands.onCommand._listeners.length,
@@ -96,7 +99,7 @@ const listenerCountsBeforeStart = {
 	startup: BROWSER.runtime.onStartup._listeners.length,
 };
 
-await Deno.test("background import does not start listeners", () => {
+await test("background import does not start listeners", () => {
 	assertEquals(listenerCountsBeforeStart, {
 		commands: 0,
 		messages: 0,
@@ -104,7 +107,7 @@ await Deno.test("background import does not start listeners", () => {
 	});
 });
 
-await Deno.test("bg_getStorage behavior", async (t) => {
+await test("bg_getStorage behavior", async (t) => {
 	await t.step("get default (all Tabs)", async () => {
 		const tabs = await bg_getStorage();
 		assert(tabs != null);
@@ -150,7 +153,7 @@ await Deno.test("bg_getStorage behavior", async (t) => {
 	});
 });
 
-await Deno.test("bg_getSettings behavior", async (t) => {
+await test("bg_getSettings behavior", async (t) => {
 	await t.step("get all settings", async () => {
 		const settings = await bg_getSettings();
 		assert(settings != null);
@@ -160,10 +163,8 @@ await Deno.test("bg_getSettings behavior", async (t) => {
 		assertFalse(settings.find((s) => s.id === TAB_ADD_FRONT).enabled);
 		const newsettings = await bg_getSettings(undefined, SETTINGS_KEY);
 		assertEquals(newsettings, settings);
-		bg_getSettings(
-			undefined,
-			SETTINGS_KEY,
-			(calledsettings: unknown) => assertEquals(calledsettings, settings),
+		bg_getSettings(undefined, SETTINGS_KEY, (calledsettings: unknown) =>
+			assertEquals(calledsettings, settings),
 		);
 	});
 
@@ -181,15 +182,13 @@ await Deno.test("bg_getSettings behavior", async (t) => {
 		assert(relatedsettings != null);
 		assert(Array.isArray(relatedsettings));
 		assertEquals(relatedsettings.length, 2);
-		assert(
-			relatedsettings.find((s) => s.id === NO_RELEASE_NOTES).enabled,
-		);
+		assert(relatedsettings.find((s) => s.id === NO_RELEASE_NOTES).enabled);
 		assertFalse(
 			relatedsettings.find((s) => s.id === TAB_ADD_FRONT).enabled,
 		);
 		assertEquals(
-			relatedsettings.filter((s) =>
-				s.id !== NO_RELEASE_NOTES && s.id !== TAB_ADD_FRONT
+			relatedsettings.filter(
+				(s) => s.id !== NO_RELEASE_NOTES && s.id !== TAB_ADD_FRONT,
 			).length,
 			0,
 		);
@@ -217,7 +216,7 @@ await Deno.test("bg_getSettings behavior", async (t) => {
 	});
 });
 
-await Deno.test("bg_setStorage behavior", async (t) => {
+await test("bg_setStorage behavior", async (t) => {
 	await t.step("set with WHY_KEY", async () => {
 		await bg_setStorage([{ label: "t", url: "n" }]);
 		const tabs = await bg_getStorage();
@@ -227,9 +226,13 @@ await Deno.test("bg_setStorage behavior", async (t) => {
 		await bg_setStorage([oldtabs[0]], undefined, WHY_KEY);
 		const newtabs = await bg_getStorage();
 		assertEquals(newtabs, [oldtabs[0]]);
-		bg_setStorage(oldtabs, (calledtabs: unknown) => {
-			assertEquals(calledtabs, oldtabs);
-		}, WHY_KEY);
+		bg_setStorage(
+			oldtabs,
+			(calledtabs: unknown) => {
+				assertEquals(calledtabs, oldtabs);
+			},
+			WHY_KEY,
+		);
 	});
 
 	await t.step("set with SETTINGS_KEY", async () => {
@@ -287,42 +290,50 @@ await Deno.test("bg_setStorage behavior", async (t) => {
 	});
 });
 
-await Deno.test("bg_getSalesforceLanguage behavior", async () => {
-	BROWSER.tabs.setMockBrowserTabs([{
-		id: 0,
-		url: "https://mycustomorg--sandbox.lightning.force.com",
-		active: true,
-		currentWindow: true,
-	}]);
-	BROWSER.cookies.setMockCookies([{
-		domain: "mycustomorg--sandbox.my.salesforce.com",
-		name: "sid",
-		value: "bearer value", // only for tests
-	}]);
+await test("bg_getSalesforceLanguage behavior", async () => {
+	BROWSER.tabs.setMockBrowserTabs([
+		{
+			id: 0,
+			url: "https://mycustomorg--sandbox.lightning.force.com",
+			active: true,
+			currentWindow: true,
+		},
+	]);
+	BROWSER.cookies.setMockCookies([
+		{
+			domain: "mycustomorg--sandbox.my.salesforce.com",
+			name: "sid",
+			value: "bearer value", // only for tests
+		},
+	]);
 	const sflang = await bg_getSalesforceLanguage();
 	assert(sflang != null);
 	assert(typeof sflang === "string");
 	assertEquals(sflang, "sf-lang-en"); // only for tests, from Salesforce, we'll get the correct language
 });
 
-await Deno.test("bg_getSalesforceLanguage ignores lookalike non-Salesforce hosts", async () => {
+await test("bg_getSalesforceLanguage ignores lookalike non-Salesforce hosts", async () => {
 	mockStorage[LOCALE_KEY] = "fallback-locale";
-	BROWSER.tabs.setMockBrowserTabs([{
-		id: 0,
-		url: "https://mycustomorg.lightning.force.com.attacker.test",
-		active: true,
-		currentWindow: true,
-	}]);
-	BROWSER.cookies.setMockCookies([{
-		domain: "mycustomorg.my.salesforce.com.attacker.test",
-		name: "sid",
-		value: "bearer value",
-	}]);
+	BROWSER.tabs.setMockBrowserTabs([
+		{
+			id: 0,
+			url: "https://mycustomorg.lightning.force.com.attacker.test",
+			active: true,
+			currentWindow: true,
+		},
+	]);
+	BROWSER.cookies.setMockCookies([
+		{
+			domain: "mycustomorg.my.salesforce.com.attacker.test",
+			name: "sid",
+			value: "bearer value",
+		},
+	]);
 	const sflang = await bg_getSalesforceLanguage();
 	assertEquals(sflang, "fallback-locale");
 });
 
-await Deno.test("bg_getCommandLinks behavior", async (t) => {
+await test("bg_getCommandLinks behavior", async (t) => {
 	BROWSER.commands.setMockCommands([
 		{ shortcut: "a", name: "l" },
 		{ shortcut: ".", name: "m" },
@@ -375,7 +386,7 @@ await Deno.test("bg_getCommandLinks behavior", async (t) => {
 	});
 });
 
-await Deno.test("background listeners handle runtime, command, and browser events", async () => {
+await test("background listeners handle runtime, command, and browser events", async () => {
 	const originalSetTimeout = globalThis.setTimeout;
 	const originalSendMessage = BROWSER.tabs.sendMessage;
 	const originalContains = BROWSER.permissions.contains;
@@ -392,12 +403,14 @@ await Deno.test("background listeners handle runtime, command, and browser event
 		return Promise.resolve(true);
 	};
 	BROWSER.permissions.contains = () => Promise.resolve(true);
-	BROWSER.tabs.setMockBrowserTabs([{
-		id: 1,
-		url: "https://acme.lightning.force.com/lightning/setup/SetupOneHome/home",
-		active: true,
-		currentWindow: true,
-	}]);
+	BROWSER.tabs.setMockBrowserTabs([
+		{
+			id: 1,
+			url: "https://acme.lightning.force.com/lightning/setup/SetupOneHome/home",
+			active: true,
+			currentWindow: true,
+		},
+	]);
 	mockStorage[NO_RELEASE_NOTES] = undefined;
 	mockStorage[SETTINGS_KEY] = [
 		{ enabled: "fr", id: USER_LANGUAGE },
@@ -526,17 +539,15 @@ await Deno.test("background listeners handle runtime, command, and browser event
 			"",
 			() => {},
 		);
-		for (
-			const what of [
-				WHAT_SHOW_IMPORT,
-				WHAT_THEME,
-				TOAST_ERROR,
-				TOAST_WARNING,
-				WHAT_SHOW_EXPORT_MODAL,
-				CXM_MANAGE_TABS,
-				WHAT_START_TUTORIAL,
-			]
-		) {
+		for (const what of [
+			WHAT_SHOW_IMPORT,
+			WHAT_THEME,
+			TOAST_ERROR,
+			TOAST_WARNING,
+			WHAT_SHOW_EXPORT_MODAL,
+			CXM_MANAGE_TABS,
+			WHAT_START_TUTORIAL,
+		]) {
 			BROWSER.runtime.onMessage.triggerMessage({ what }, "", () => {});
 		}
 		BROWSER.runtime.onMessage.triggerMessage(
@@ -577,7 +588,7 @@ await Deno.test("background listeners handle runtime, command, and browser event
 	}
 });
 
-await Deno.test("background skips update checks on tab activation for development installs", async () => {
+await test("background skips update checks on tab activation for development installs", async () => {
 	const originalSetTimeout = globalThis.setTimeout;
 	const originalFetch = globalThis.fetch;
 	const originalSendMessage = BROWSER.tabs.sendMessage;
@@ -607,12 +618,14 @@ await Deno.test("background skips update checks on tab activation for developmen
 	browserWithManagement.management = {
 		getSelf: () => Promise.resolve({ installType: "development" }),
 	};
-	BROWSER.tabs.setMockBrowserTabs([{
-		id: 1,
-		url: "https://acme.lightning.force.com/lightning/setup/SetupOneHome/home",
-		active: true,
-		currentWindow: true,
-	}]);
+	BROWSER.tabs.setMockBrowserTabs([
+		{
+			id: 1,
+			url: "https://acme.lightning.force.com/lightning/setup/SetupOneHome/home",
+			active: true,
+			currentWindow: true,
+		},
+	]);
 
 	try {
 		BROWSER.tabs.onActivated.triggerActivated({ tabId: 1, windowId: 1 });

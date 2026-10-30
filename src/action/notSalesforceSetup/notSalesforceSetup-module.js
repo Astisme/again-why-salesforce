@@ -50,11 +50,7 @@ export function createNotSalesforceSetupModule({
 	 * @param {(tab: { id: number; index: number } | null) => void} onTabFound Receiver for fetched tab.
 	 * @return {Promise<void>} Resolves after lookup and callback handling complete.
 	 */
-	async function getCurrentBrowserTab({
-		callback,
-		url,
-		onTabFound,
-	} = {}) {
+	async function getCurrentBrowserTab({ callback, url, onTabFound } = {}) {
 		const browserTab = await sendExtensionMessage({
 			what: whatGetBrowserTab,
 		});
@@ -78,13 +74,12 @@ export function createNotSalesforceSetupModule({
 			try {
 				const domain = new URL(page).origin;
 				if (salesforceLightningPattern.test(page)) {
-					documentRef.getElementById(loginId).classList.add(
-						hiddenClass,
-					);
+					documentRef
+						.getElementById(loginId)
+						.classList.add(hiddenClass);
 					const goSetup = documentRef.getElementById(setupId);
 					goSetup.classList.remove(hiddenClass);
-					goSetup.href =
-						`${domain}${setupLightning}${salesforceSetupHomeMini}`;
+					goSetup.href = `${domain}${setupLightning}${salesforceSetupHomeMini}`;
 					willOpenLogin = false;
 				}
 			} catch (error) {
@@ -114,7 +109,7 @@ export function createNotSalesforceSetupModule({
 				await getCurrentBrowserTab({
 					sendExtensionMessage,
 					whatGetBrowserTab,
-					callback: (nextUrl) => void createTab(nextUrl, count + 1),
+					callback: (nextUrl) => createTab(nextUrl, count + 1),
 					url,
 					onTabFound: (tab) => {
 						currentTab = tab;
@@ -149,12 +144,12 @@ export function createNotSalesforceSetupModule({
 		const automaticClick = willOpenLogin ? popupOpenLogin : popupOpenSetup;
 		const useSameTab = willOpenLogin ? popupLoginNewTab : popupSetupNewTab;
 		const settings = await getSettings([automaticClick, useSameTab]);
-		openPageInSameTab = settings?.some((setting) =>
-			setting.id === useSameTab && setting.enabled
+		openPageInSameTab = settings?.some(
+			(setting) => setting.id === useSameTab && setting.enabled,
 		);
 		if (
-			settings?.some((setting) =>
-				setting.id === automaticClick && setting.enabled
+			settings?.some(
+				(setting) => setting.id === automaticClick && setting.enabled,
 			)
 		) {
 			const autoClickResult = shownRedirectBtn.click();

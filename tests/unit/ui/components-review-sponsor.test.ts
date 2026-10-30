@@ -1,9 +1,5 @@
-import {
-	assert,
-	assertEquals,
-	assertFalse,
-	assertThrows,
-} from "@std/testing/asserts";
+import { test } from "#test";
+import { assert, assertEquals, assertFalse, assertThrows } from "#test";
 import { MockElement } from "./mock-dom.test.ts";
 import { installMockDom } from "../../happydom.test.ts";
 import { createReviewSponsorModule } from "../../../src/components/review-sponsor/review-sponsor-module.js";
@@ -249,7 +245,7 @@ function createReviewSponsorFixture({
 	};
 }
 
-Deno.test("show review or sponsor block", async (t) => {
+test("show review or sponsor block", async (t) => {
 	const { cleanup } = installMockDom();
 
 	try {
@@ -285,52 +281,46 @@ Deno.test("show review or sponsor block", async (t) => {
 			},
 		);
 
-		await t.step(
-			"shows review and opens the chrome link",
-			() => {
-				const fixture = createReviewSponsorFixture({ isChrome: true });
-				const { reviewSvg, sponsorSvg, reviewLink, sponsorLink } =
-					createElements();
-				fixture.showReviewOrSponsor({
-					allTabs: Array(8),
-					reviewSvg,
-					sponsorSvg,
-					reviewLink,
-					sponsorLink,
-				});
-				assertFalse(reviewSvg.classList.contains("hidden"));
-				assert(sponsorSvg.classList.contains("hidden"));
-				assertEquals(reviewLink.tabIndex, 0);
-				assertEquals(sponsorLink.tabIndex, -1);
-				reviewLink.click();
-				assertEquals(fixture.openCalls[0], CHROME_REVIEW_LINK);
-				assertEquals(fixture.messages, []);
-			},
-		);
+		await t.step("shows review and opens the chrome link", () => {
+			const fixture = createReviewSponsorFixture({ isChrome: true });
+			const { reviewSvg, sponsorSvg, reviewLink, sponsorLink } =
+				createElements();
+			fixture.showReviewOrSponsor({
+				allTabs: Array(8),
+				reviewSvg,
+				sponsorSvg,
+				reviewLink,
+				sponsorLink,
+			});
+			assertFalse(reviewSvg.classList.contains("hidden"));
+			assert(sponsorSvg.classList.contains("hidden"));
+			assertEquals(reviewLink.tabIndex, 0);
+			assertEquals(sponsorLink.tabIndex, -1);
+			reviewLink.click();
+			assertEquals(fixture.openCalls[0], CHROME_REVIEW_LINK);
+			assertEquals(fixture.messages, []);
+		});
 
-		await t.step(
-			"shows sponsor and opens shared sponsor link",
-			() => {
-				const fixture = createReviewSponsorFixture();
-				const { reviewSvg, sponsorSvg, reviewLink, sponsorLink } =
-					createElements();
-				fixture.showReviewOrSponsor({
-					allTabs: Array(16),
-					reviewSvg,
-					sponsorSvg,
-					reviewLink,
-					sponsorLink,
-				});
-				assertFalse(reviewSvg.classList.contains("hidden"));
-				assertFalse(sponsorSvg.classList.contains("hidden"));
-				sponsorLink.click();
-				assertEquals(
-					fixture.openCalls[0],
-					"https://astisme.github.io/again-why-salesforce/sponsor",
-				);
-				assertEquals(fixture.messages, []);
-			},
-		);
+		await t.step("shows sponsor and opens shared sponsor link", () => {
+			const fixture = createReviewSponsorFixture();
+			const { reviewSvg, sponsorSvg, reviewLink, sponsorLink } =
+				createElements();
+			fixture.showReviewOrSponsor({
+				allTabs: Array(16),
+				reviewSvg,
+				sponsorSvg,
+				reviewLink,
+				sponsorLink,
+			});
+			assertFalse(reviewSvg.classList.contains("hidden"));
+			assertFalse(sponsorSvg.classList.contains("hidden"));
+			sponsorLink.click();
+			assertEquals(
+				fixture.openCalls[0],
+				"https://astisme.github.io/again-why-salesforce/sponsor",
+			);
+			assertEquals(fixture.messages, []);
+		});
 
 		await t.step(
 			"uses usage-day thresholds when there are few tabs",
@@ -410,7 +400,7 @@ Deno.test("show review or sponsor block", async (t) => {
 	}
 });
 
-Deno.test("ReviewSponsorAws loads async metadata and opens expected links", async () => {
+test("ReviewSponsorAws loads async metadata and opens expected links", async () => {
 	const generated = {
 		reviewLink: new MockElement("a"),
 		reviewSvg: new MockElement("svg"),
@@ -422,10 +412,9 @@ Deno.test("ReviewSponsorAws loads async metadata and opens expected links", asyn
 	const fixture = createReviewSponsorFixture({
 		generated,
 		isChrome: true,
-		tabs: Array.from(
-			{ length: 20 },
-			(_value, index) => ({ id: String(index) }),
-		),
+		tabs: Array.from({ length: 20 }, (_value, index) => ({
+			id: String(index),
+		})),
 		usageDays: 45,
 	});
 
@@ -438,11 +427,12 @@ Deno.test("ReviewSponsorAws loads async metadata and opens expected links", asyn
 	await component.whenReady();
 
 	assertEquals(fixture.settingsCalls, [["extension_usage_days"]]);
-	assertEquals(fixture.injectCalls, [{
-		id: "awsf-rev-spons",
-		link:
-			"chrome-extension://test/components/review-sponsor/review-sponsor.css",
-	}]);
+	assertEquals(fixture.injectCalls, [
+		{
+			id: "awsf-rev-spons",
+			link: "chrome-extension://test/components/review-sponsor/review-sponsor.css",
+		},
+	]);
 	assertEquals(fixture.translateCalls, ["write_review", "send_tip"]);
 	assertEquals(component.shadowRoot?.children.length, 2);
 	assertEquals(await component._getExtensionUsageDays(), 45);
@@ -469,7 +459,7 @@ Deno.test("ReviewSponsorAws loads async metadata and opens expected links", asyn
 	);
 });
 
-Deno.test("review-sponsor module defaults stay safe without browser globals", () => {
+test("review-sponsor module defaults stay safe without browser globals", () => {
 	const noMessageModule = createReviewSponsorModule({
 		hiddenClass: "hidden",
 		isChrome: true,
@@ -506,7 +496,7 @@ Deno.test("review-sponsor module defaults stay safe without browser globals", ()
 	assert(elements.sponsorSvg.classList.contains("hidden"));
 });
 
-Deno.test("review-sponsor runtime does not notify on support link visibility", async () => {
+test("review-sponsor runtime does not notify on support link visibility", async () => {
 	await import("../../mocks.test.ts");
 	const runtime = await import(
 		`../../../src/components/review-sponsor/review-sponsor-runtime.js?${crypto.randomUUID()}`

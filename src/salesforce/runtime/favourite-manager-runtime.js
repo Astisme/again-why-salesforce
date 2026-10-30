@@ -25,9 +25,7 @@ import {
 import Tab from "../../core/tab.js";
 import { ensureAllTabsAvailability } from "../../core/tabContainer.js";
 import { TranslationService } from "../../core/translator.js";
-import {
-	createFavouriteManagerModule as createFavouriteManagerPureModule,
-} from "../module/favourite-manager-module.js";
+import { createFavouriteManagerModule as createFavouriteManagerPureModule } from "../module/favourite-manager-module.js";
 import {
 	getIsCurrentlyOnSavedTab,
 	getWasOnSavedTab,
@@ -63,37 +61,37 @@ export function createFavouriteManagerModule(overrides = {}) {
 		extensionLabel: overrides.extensionLabel ?? EXTENSION_LABEL,
 		extensionName: overrides.extensionName ?? EXTENSION_NAME,
 		hiddenClass: overrides.hiddenClass ?? HIDDEN_CLASS,
-		salesforceSetupHomeMini: overrides.salesforceSetupHomeMini ??
-			SALESFORCE_SETUP_HOME_MINI,
+		salesforceSetupHomeMini:
+			overrides.salesforceSetupHomeMini ?? SALESFORCE_SETUP_HOME_MINI,
 		skipLinkDetection: overrides.skipLinkDetection ?? SKIP_LINK_DETECTION,
 		tabAddFront: overrides.tabAddFront ?? TAB_ADD_FRONT,
 		tabAsOrg: overrides.tabAsOrg ?? TAB_AS_ORG,
 		toastInfo: overrides.toastInfo ?? TOAST_INFO,
 		toastWarning: overrides.toastWarning ?? TOAST_WARNING,
-		tutorialEventActionFavourite: overrides.tutorialEventActionFavourite ??
+		tutorialEventActionFavourite:
+			overrides.tutorialEventActionFavourite ??
 			TUTORIAL_EVENT_ACTION_FAVOURITE,
 		tutorialEventActionUnfavourite:
 			overrides.tutorialEventActionUnfavourite ??
-				TUTORIAL_EVENT_ACTION_UNFAVOURITE,
+			TUTORIAL_EVENT_ACTION_UNFAVOURITE,
 		whatAdd: overrides.whatAdd ?? WHAT_ADD,
 		whatGetCommands: overrides.whatGetCommands ?? WHAT_GET_COMMANDS,
 		tabRef: overrides.tabRef ?? Tab,
-		ensureAllTabsAvailability: overrides.ensureAllTabsAvailability ??
-			ensureAllTabsAvailability,
-		getTranslations: overrides.getTranslations ??
-			TranslationService.getTranslations,
+		ensureAllTabsAvailability:
+			overrides.ensureAllTabsAvailability ?? ensureAllTabsAvailability,
+		getTranslations:
+			overrides.getTranslations ?? TranslationService.getTranslations,
 		getCurrentHref: overrides.getCurrentHref ?? getCurrentHref,
-		getIsCurrentlyOnSavedTab: overrides.getIsCurrentlyOnSavedTab ??
-			getIsCurrentlyOnSavedTab,
+		getIsCurrentlyOnSavedTab:
+			overrides.getIsCurrentlyOnSavedTab ?? getIsCurrentlyOnSavedTab,
 		getSettings: overrides.getSettings ?? getSettings,
-		getWasOnSavedTab: overrides.getWasOnSavedTab ??
-			getWasOnSavedTab,
+		getWasOnSavedTab: overrides.getWasOnSavedTab ?? getWasOnSavedTab,
 		injectStyle: overrides.injectStyle ?? injectStyle,
 		isOnSavedTab: overrides.isOnSavedTab ?? isOnSavedTab,
-		performActionOnTabs: overrides.performActionOnTabs ??
-			performActionOnTabs,
-		sendExtensionMessage: overrides.sendExtensionMessage ??
-			sendExtensionMessage,
+		performActionOnTabs:
+			overrides.performActionOnTabs ?? performActionOnTabs,
+		sendExtensionMessage:
+			overrides.sendExtensionMessage ?? sendExtensionMessage,
 		showToast: overrides.showToast ?? showToast,
 		documentRef: overrides.documentRef ?? globalThis.document,
 		setTimeout: overrides.setTimeout ?? globalThis.setTimeout,

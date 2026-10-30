@@ -1,3 +1,4 @@
+import { test } from "#test";
 import { mockStorage } from "../../mocks.test.ts";
 import {
 	assert,
@@ -5,7 +6,7 @@ import {
 	assertFalse,
 	assertRejects,
 	assertThrows,
-} from "@std/testing/asserts";
+} from "#test";
 import { PERSIST_SORT, WHY_KEY } from "../../../src/core/constants.js";
 import Tab from "../../../src/core/tab.js";
 import {
@@ -29,8 +30,7 @@ type TabInput = {
  */
 function getStoredTabs() {
 	const whyEntry = mockStorage[WHY_KEY] as
-		| TabInput[]
-		| { [TabContainer.keyTabs]: TabInput[] };
+		TabInput[] | { [TabContainer.keyTabs]: TabInput[] };
 	if (Array.isArray(whyEntry)) {
 		return whyEntry;
 	}
@@ -39,14 +39,8 @@ function getStoredTabs() {
 
 function matchStorageToContainer(container: TabContainer) {
 	const storedTabs = getStoredTabs();
-	if (
-		storedTabs.length !== container.length
-	) {
-		console.log(
-			"match",
-			storedTabs,
-			container,
-		);
+	if (storedTabs.length !== container.length) {
+		console.log("match", storedTabs, container);
 	}
 	assertEquals(
 		storedTabs.length,
@@ -70,9 +64,7 @@ async function resetToUnsortedContainer(container: TabContainer) {
 	assertEquals(container[1].label, "flows");
 	assertEquals(container[2].label, "users");
 	assert(container.isSorted, "should detect is alredy sorted");
-	assert(
-		container.isSortedBy === "label" || container.isSortedBy === "url",
-	);
+	assert(container.isSortedBy === "label" || container.isSortedBy === "url");
 	assert(container.isSortedAsc);
 	assertFalse(container.isSortedDesc);
 	// update to invalidate sort
@@ -97,7 +89,7 @@ async function resetToUnsortedContainer(container: TabContainer) {
 
 const container = await ensureAllTabsAvailability();
 
-await Deno.test("TabContainer - Initialization", async (t) => {
+await test("TabContainer - Initialization", async (t) => {
 	await t.step("singleton test", async () => {
 		const containerfirst = await ensureAllTabsAvailability();
 		const containersecond = await ensureAllTabsAvailability();
@@ -178,15 +170,15 @@ await Deno.test("TabContainer - Initialization", async (t) => {
 			assertEquals(container[2].label, "users");
 			// reset container
 			mockStorage[WHY_KEY] = [{}];
-			assertRejects(async () => await TabContainer._reset());
+			await assertRejects(async () => await TabContainer._reset());
 			// reset container
 			mockStorage[WHY_KEY] = [{ label: "missing-url" }];
-			assertRejects(async () => await TabContainer._reset());
+			await assertRejects(async () => await TabContainer._reset());
 		},
 	);
 });
 
-await Deno.test("TabContainer - Tab Management", async (t) => {
+await test("TabContainer - Tab Management", async (t) => {
 	await t.step("addTab", async () => {
 		await container.setDefaultTabs();
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
@@ -210,13 +202,16 @@ await Deno.test("TabContainer - Tab Management", async (t) => {
 		assertEquals(newLastTab[Tab.keyClickCount], 9);
 		matchStorageToContainer(container);
 		assert(
-			await container.addTab({
-				label: "New first",
-				url: "new-first",
-				[Tab.keyClickCount]: 5,
-			}, {
-				addInFront: true,
-			}),
+			await container.addTab(
+				{
+					label: "New first",
+					url: "new-first",
+					[Tab.keyClickCount]: 5,
+				},
+				{
+					addInFront: true,
+				},
+			),
 		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 		const newFirstTab = container[0];
@@ -280,7 +275,7 @@ await Deno.test("TabContainer - Tab Management", async (t) => {
 	});
 });
 
-await Deno.test("TabContainer - Organization Filtering", async (t) => {
+await test("TabContainer - Organization Filtering", async (t) => {
 	await t.step("filters tabs by organization", async () => {
 		await container.setDefaultTabs();
 		assert(
@@ -312,7 +307,7 @@ await Deno.test("TabContainer - Organization Filtering", async (t) => {
 	});
 });
 
-await Deno.test("TabContainer - replaceTabs edge cases", async (t) => {
+await test("TabContainer - replaceTabs edge cases", async (t) => {
 	async function setupContainer() {
 		container.length = 0;
 		container[TabContainer.keyPinnedTabsNo] = 0;
@@ -432,18 +427,19 @@ await Deno.test("TabContainer - replaceTabs edge cases", async (t) => {
 	// resetTabs = false, removeOrgTabs = false, keepTabsNotThisOrg = anything
 	await t.step("adds tabs without removing any", async () => {
 		const container = await setupContainer();
-		await container.replaceTabs([
-			Tab.create({ label: "Tab B", url: "url2", org: "test-org" }),
-		], {
-			resetTabs: false,
-			removeOrgTabs: false,
-		});
+		await container.replaceTabs(
+			[Tab.create({ label: "Tab B", url: "url2", org: "test-org" })],
+			{
+				resetTabs: false,
+				removeOrgTabs: false,
+			},
+		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 		assertEquals(container.length, 5);
 	});
 });
 
-await Deno.test("TabContainer - Utility functions", async (t) => {
+await test("TabContainer - Utility functions", async (t) => {
 	await t.step("slice", async () => {
 		await container.setDefaultTabs();
 		assertEquals(container.length, 3);
@@ -506,11 +502,13 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 		assertEquals(container.at(-1)!.url, "normal-url");
 		assertEquals(container.at(-1)!.org, "test-org1");
 		assertEquals(
-			container.push(...[
-				{ label: "Normal Tab", url: "normal-url4" },
-				{ label: "Org Tab2", url: "urll4", org: "test-org1" },
-				{ label: "Org Tab3", url: "normal4-url", org: "test-org1" },
-			]),
+			container.push(
+				...[
+					{ label: "Normal Tab", url: "normal-url4" },
+					{ label: "Org Tab2", url: "urll4", org: "test-org1" },
+					{ label: "Org Tab3", url: "normal4-url", org: "test-org1" },
+				],
+			),
 			10,
 		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
@@ -537,16 +535,10 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 		assertEquals(container.at(-4)!.url, "urll4");
 		assertEquals(container.at(-3)!.url, "normal4-url");
 		// does not throw on errored tabs
-		assertEquals(
-			container.push({ label: "notab", what: "idk" }),
-			12,
-		);
+		assertEquals(container.push({ label: "notab", what: "idk" }), 12);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 		// does not throw on duplicated tabs
-		assertEquals(
-			container.push({ label: "Org Tab", url: "url" }),
-			12,
-		);
+		assertEquals(container.push({ label: "Org Tab", url: "url" }), 12);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 	});
 
@@ -572,11 +564,13 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 		assertEquals(container.at(2)!.url, "normal-url");
 		assertEquals(container.at(2)!.org, "test-org1");
 		assertEquals(
-			container.unshift(...[
-				{ label: "Normal Tab", url: "normal-url4" },
-				{ label: "Org Tab2", url: "urll4", org: "test-org1" },
-				{ label: "Org Tab3", url: "normal4-url", org: "test-org1" },
-			]),
+			container.unshift(
+				...[
+					{ label: "Normal Tab", url: "normal-url4" },
+					{ label: "Org Tab2", url: "urll4", org: "test-org1" },
+					{ label: "Org Tab3", url: "normal4-url", org: "test-org1" },
+				],
+			),
 			10,
 		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
@@ -603,16 +597,10 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 		assertEquals(container.at(3)!.url, "urll4");
 		assertEquals(container.at(2)!.url, "normal-url4");
 		// does not throw on errored tabs
-		assertEquals(
-			container.unshift({ label: "notab", what: "idk" }),
-			12,
-		);
+		assertEquals(container.unshift({ label: "notab", what: "idk" }), 12);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 		// does not throw on duplicated tabs
-		assertEquals(
-			container.unshift({ label: "Org Tab", url: "url" }),
-			12,
-		);
+		assertEquals(container.unshift({ label: "Org Tab", url: "url" }), 12);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 	});
 
@@ -909,10 +897,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 		assertThrows(
-			() =>
-				container.getSingleTabByData(
-					{ label: "Org Tab3" },
-				),
+			() => container.getSingleTabByData({ label: "Org Tab3" }),
 			Error,
 			"error_many_tabs_found",
 		);
@@ -934,11 +919,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 			]),
 		);
 		assertEquals(container.length, 8);
-		assertThrows(
-			() => container.getTabIndex(),
-			Error,
-			"error_no_data",
-		);
+		assertThrows(() => container.getTabIndex(), Error, "error_no_data");
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 		assertThrows(
 			() => container.getTabIndex({ org: "not-present" }),
@@ -1019,9 +1000,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 		assertEquals(container.length, 8);
-		assert(
-			container.exists({ org: "test-org" }, false),
-		);
+		assert(container.exists({ org: "test-org" }, false));
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 		assert(container.exists({ url: "url", org: "test-org" }, false));
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
@@ -1029,13 +1008,9 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 		assertFalse(container.exists({ label: "Org Tab" }, false));
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
-		assertFalse(
-			container.exists({ url: "urll" }, false),
-		);
+		assertFalse(container.exists({ url: "urll" }, false));
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
-		assert(
-			container.exists({ url: "urll", org: "test-org1" }, false),
-		);
+		assert(container.exists({ url: "urll", org: "test-org1" }, false));
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 		assert(container.exists({ url: "urll", org: "test-org1" }, false));
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
@@ -1130,13 +1105,10 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 			container.getSortOptions({ sortBy: "notafield" });
 		});
 		// standart sort = true
-		assertEquals(
-			container.getSortOptions(),
-			{
-				sortBy: "label",
-				sortAsc: true,
-			},
-		);
+		assertEquals(container.getSortOptions(), {
+			sortBy: "label",
+			sortAsc: true,
+		});
 		assertEquals(
 			container.getSortOptions({
 				sortBy: "url",
@@ -1328,7 +1300,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 	});
 });
 
-await Deno.test("TabContainer - Synchronization", async (t) => {
+await test("TabContainer - Synchronization", async (t) => {
 	await t.step("syncs tabs with storage", async () => {
 		await container.setDefaultTabs();
 		assertEquals(container.length, 3);
@@ -1352,8 +1324,8 @@ await Deno.test("TabContainer - Synchronization", async (t) => {
 		const originalSettings = structuredClone(mockStorage.settings);
 		try {
 			mockStorage.settings = [
-				...originalSettings.filter((setting) =>
-					setting.id !== PERSIST_SORT
+				...originalSettings.filter(
+					(setting) => setting.id !== PERSIST_SORT,
 				),
 				{
 					id: PERSIST_SORT,
@@ -1386,7 +1358,7 @@ await Deno.test("TabContainer - Synchronization", async (t) => {
 	});
 });
 
-await Deno.test("TabContainer - Import", async (t) => {
+await test("TabContainer - Import", async (t) => {
 	await t.step("import tabs from JSON string", async () => {
 		await container.setDefaultTabs();
 		assertEquals(container.length, 3);
@@ -1874,13 +1846,12 @@ await Deno.test("TabContainer - Import", async (t) => {
 	await t.step("does not import tabs from wrong JSON string", async () => {
 		await container.setDefaultTabs();
 		assertEquals(container.length, 3);
-		assertRejects(
+		await assertRejects(
 			async () =>
 				await container.importTabs(
 					`{"label":"hello","url":"nice-url"},{"label":"orglabel","url":"orgurl","org":"orgorg"}`,
 				),
 			Error,
-			"Unexpected non-whitespace character after JSON",
 		);
 		assertEquals(container.length, 3);
 		await assertRejects(
@@ -1897,16 +1868,15 @@ await Deno.test("TabContainer - Import", async (t) => {
 			//"error_tabcont_invalid_tabs"
 		);
 		assertEquals(container.length, 3);
-		assertRejects(
+		await assertRejects(
 			async () =>
 				await container.importTabs(`a simple string`, {
 					resetTabs: true,
 				}),
 			Error,
-			"is not valid JSON",
 		);
 		assertEquals(container.length, 3);
-		assertRejects(
+		await assertRejects(
 			async () =>
 				await container.importTabs(
 					`[{"label":"hello","url":"nice-url","whoopsie":{"label":"hello","url":"nice-url"}}`,
@@ -1915,13 +1885,12 @@ await Deno.test("TabContainer - Import", async (t) => {
 					},
 				),
 			Error,
-			"Expected ',' or ']' after array element in JSON",
 		);
 		assertEquals(container.length, 3);
 	});
 });
 
-await Deno.test("TabContainer - Move Tab", async (t) => {
+await test("TabContainer - Move Tab", async (t) => {
 	await t.step("make a tab be the first of the array", async () => {
 		await container.setDefaultTabs();
 		assertEquals(container.length, 3);
@@ -1940,17 +1909,23 @@ await Deno.test("TabContainer - Move Tab", async (t) => {
 		);
 		assertEquals(container.length, 7);
 		assertEquals(
-			await container.moveTab({ url: "ManageUsers/home" }, {
-				fullMovement: true,
-			}),
+			await container.moveTab(
+				{ url: "ManageUsers/home" },
+				{
+					fullMovement: true,
+				},
+			),
 			0,
 		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
-		assertRejects(
+		await assertRejects(
 			async () =>
-				await container.moveTab({ url: "ManageUsers/home" }, {
-					fullMovement: true,
-				}),
+				await container.moveTab(
+					{ url: "ManageUsers/home" },
+					{
+						fullMovement: true,
+					},
+				),
 			Error,
 			"error_cannot_move_dir",
 		);
@@ -1964,30 +1939,44 @@ await Deno.test("TabContainer - Move Tab", async (t) => {
 		assertEquals(container[5].url, "urll");
 		assertEquals(container[6].url, "url3");
 		matchStorageToContainer(container);
-		await container.replaceTabs([
-			Tab.create({ label: "Org Tab", url: "url", org: "test-org1" }),
-			Tab.create({ label: "Org Tab2", url: "urll", org: "test-org1" }),
-			Tab.create({ label: "Org Tab3", url: "url3", org: "test-org1" }),
-			Tab.create({ label: "Normal Tab", url: "normal-url" }),
-		], {
-			resetTabs: true,
-			removeOrgTabs: true,
-		});
+		await container.replaceTabs(
+			[
+				Tab.create({ label: "Org Tab", url: "url", org: "test-org1" }),
+				Tab.create({
+					label: "Org Tab2",
+					url: "urll",
+					org: "test-org1",
+				}),
+				Tab.create({
+					label: "Org Tab3",
+					url: "url3",
+					org: "test-org1",
+				}),
+				Tab.create({ label: "Normal Tab", url: "normal-url" }),
+			],
+			{
+				resetTabs: true,
+				removeOrgTabs: true,
+			},
+		);
 		assertEquals(container.length, 4);
 		assertEquals(container[0].url, "url");
 		assertEquals(container[1].url, "urll");
 		assertEquals(container[2].url, "url3");
 		assertEquals(container[3].url, "normal-url");
 		assertEquals(
-			await container.moveTab({ url: "normal-url", org: "test-org" }, {
-				moveBefore: true,
-				fullMovement: false,
-			}),
+			await container.moveTab(
+				{ url: "normal-url", org: "test-org" },
+				{
+					moveBefore: true,
+					fullMovement: false,
+				},
+			),
 			0,
 			"performs full movement and is set as first Tab",
 		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
-		assertRejects(
+		await assertRejects(
 			async () =>
 				await container.moveTab(
 					{ url: "normal-url", org: "test-org" },
@@ -2016,19 +2005,25 @@ await Deno.test("TabContainer - Move Tab", async (t) => {
 		assertEquals(container[2].url, "ManageUsers/home");
 		matchStorageToContainer(container);
 		assertEquals(
-			await container.moveTab({ url: "/lightning" }, {
-				moveBefore: false,
-				fullMovement: true,
-			}),
+			await container.moveTab(
+				{ url: "/lightning" },
+				{
+					moveBefore: false,
+					fullMovement: true,
+				},
+			),
 			2,
 		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
-		assertRejects(
+		await assertRejects(
 			async () =>
-				await container.moveTab({ url: "/lightning" }, {
-					moveBefore: false,
-					fullMovement: true,
-				}),
+				await container.moveTab(
+					{ url: "/lightning" },
+					{
+						moveBefore: false,
+						fullMovement: true,
+					},
+				),
 			Error,
 			"error_cannot_move_dir",
 		);
@@ -2066,9 +2061,12 @@ await Deno.test("TabContainer - Move Tab", async (t) => {
 		assertEquals(container[2].url, "ManageUsers/home");
 		matchStorageToContainer(container);
 		assertEquals(
-			await container.moveTab({
-				url: "/lightning/app/standard__FlowsApp",
-			}, { moveBefore: false }),
+			await container.moveTab(
+				{
+					url: "/lightning/app/standard__FlowsApp",
+				},
+				{ moveBefore: false },
+			),
 			2,
 		);
 		assertEquals(container.length, 3);
@@ -2098,18 +2096,24 @@ await Deno.test("TabContainer - Move Tab", async (t) => {
 		assertEquals(container.length, 7);
 		console.log("aehtisrahetihaeinsrh");
 		assertEquals(
-			await container.moveTab({ url: "url", org: "test-org" }, {
-				moveBefore: false,
-			}),
+			await container.moveTab(
+				{ url: "url", org: "test-org" },
+				{
+					moveBefore: false,
+				},
+			),
 			6,
 			"performs full movement and is set as last Tab",
 		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
-		assertRejects(
+		await assertRejects(
 			async () =>
-				await container.moveTab({ url: "url", org: "test-org" }, {
-					moveBefore: false,
-				}),
+				await container.moveTab(
+					{ url: "url", org: "test-org" },
+					{
+						moveBefore: false,
+					},
+				),
 			Error,
 			"error_cannot_move_dir",
 		);
@@ -2123,12 +2127,15 @@ await Deno.test("TabContainer - Move Tab", async (t) => {
 		assertEquals(container[5].url, "url3");
 		assertEquals(container[6].url, "url");
 		assertEquals(
-			await container.moveTab({
-				url: "ManageUsers/home",
-				org: "test-org",
-			}, {
-				moveBefore: false,
-			}),
+			await container.moveTab(
+				{
+					url: "ManageUsers/home",
+					org: "test-org",
+				},
+				{
+					moveBefore: false,
+				},
+			),
 			3,
 			"is moved after undefined org Tabs",
 		);
@@ -2142,12 +2149,15 @@ await Deno.test("TabContainer - Move Tab", async (t) => {
 		assertEquals(container[5].url, "url3");
 		assertEquals(container[6].url, "url");
 		assertEquals(
-			await container.moveTab({
-				url: "ManageUsers/home",
-				org: "test-org",
-			}, {
-				moveBefore: false,
-			}),
+			await container.moveTab(
+				{
+					url: "ManageUsers/home",
+					org: "test-org",
+				},
+				{
+					moveBefore: false,
+				},
+			),
 			6,
 			"is moved after other org Tabs + 1 same org Tab",
 		);
@@ -2184,9 +2194,12 @@ await Deno.test("TabContainer - Move Tab", async (t) => {
 		assertEquals(container[5].url, "url");
 		assertEquals(container[6].url, "url3");
 		assertEquals(
-			await container.moveTab({ url: "urll", org: "test-org1" }, {
-				moveBefore: true,
-			}),
+			await container.moveTab(
+				{ url: "urll", org: "test-org1" },
+				{
+					moveBefore: true,
+				},
+			),
 			3,
 			"is moved before undefined org Tabs",
 		);
@@ -2200,9 +2213,12 @@ await Deno.test("TabContainer - Move Tab", async (t) => {
 		assertEquals(container[5].url, "url");
 		assertEquals(container[6].url, "url3");
 		assertEquals(
-			await container.moveTab({ url: "normal-url", org: "test-org" }, {
-				moveBefore: true,
-			}),
+			await container.moveTab(
+				{ url: "normal-url", org: "test-org" },
+				{
+					moveBefore: true,
+				},
+			),
 			2,
 			"is moved before other org Tabs + 1 same org Tab",
 		);
@@ -2218,7 +2234,7 @@ await Deno.test("TabContainer - Move Tab", async (t) => {
 	});
 });
 
-await Deno.test("TabContainer - Remove Tab(s)", async (t) => {
+await test("TabContainer - Remove Tab(s)", async (t) => {
 	await t.step("remove this tab", async () => {
 		await container.setDefaultTabs();
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
@@ -2227,33 +2243,29 @@ await Deno.test("TabContainer - Remove Tab(s)", async (t) => {
 		assertEquals(container[1].url, "/lightning/app/standard__FlowsApp");
 		assertEquals(container[2].url, "ManageUsers/home");
 		assert(
-			await container.remove(
-				{ label: "users", url: "ManageUsers/home" } as {
-					label: string;
-					org: string;
-					url: string;
-				},
-			),
+			await container.remove({
+				label: "users",
+				url: "ManageUsers/home",
+			} as {
+				label: string;
+				org: string;
+				url: string;
+			}),
 		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 		assertEquals(container.length, 2);
 		assertEquals(container[0].url, "/lightning");
 		assertEquals(container[1].url, "/lightning/app/standard__FlowsApp");
 		matchStorageToContainer(container);
-		assertRejects(
-			async () => await container.remove(),
-			Error,
-		);
+		await assertRejects(async () => await container.remove(), Error);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
-		assertRejects(
+		await assertRejects(
 			async () =>
-				await container.remove(
-					{ org: "test-org" } as {
-						label: string;
-						org: string;
-						url: string;
-					},
-				),
+				await container.remove({ org: "test-org" } as {
+					label: string;
+					org: string;
+					url: string;
+				}),
 			Error,
 		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
@@ -2285,13 +2297,11 @@ await Deno.test("TabContainer - Remove Tab(s)", async (t) => {
 		assertEquals(container.length, 1);
 		assertEquals(container[0].url, "nice-url6");
 		assert(
-			await container.remove(
-				{ label: "hello", url: "nice-url6" } as {
-					label: string;
-					org: string;
-					url: string;
-				},
-			),
+			await container.remove({ label: "hello", url: "nice-url6" } as {
+				label: string;
+				org: string;
+				url: string;
+			}),
 		);
 		assertEquals(
 			container[TabContainer.keyPinnedTabsNo],
@@ -2354,25 +2364,35 @@ await Deno.test("TabContainer - Remove Tab(s)", async (t) => {
 		assertEquals(container[1].url, "/lightning/app/standard__FlowsApp");
 		assertEquals(container[2].url, "ManageUsers/home");
 		assert(
-			await container.removeOtherTabs({
-				url: "/lightning/app/standard__FlowsApp",
-			}, { removeBefore: true }),
+			await container.removeOtherTabs(
+				{
+					url: "/lightning/app/standard__FlowsApp",
+				},
+				{ removeBefore: true },
+			),
 		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 		assertEquals(container.length, 2);
 		assertEquals(container[0].url, "/lightning/app/standard__FlowsApp");
 		assertEquals(container[1].url, "ManageUsers/home");
-		await container.replaceTabs([
-			Tab.create({ label: "Org Tab2", url: "url3" }),
-			Tab.create({ label: "Org Tab", url: "url", org: "test-org1" }),
-			Tab.create({ label: "Org Tab2", url: "urll", org: "test-org" }),
-			Tab.create({ label: "Org Tab3", url: "urll", org: "test-org1" }),
-			Tab.create({ label: "Normal Tab", url: "normal-url" }),
-			Tab.create({ label: "Org Tab2", url: "url3", org: "test-org" }),
-		], {
-			resetTabs: true,
-			removeOrgTabs: true,
-		});
+		await container.replaceTabs(
+			[
+				Tab.create({ label: "Org Tab2", url: "url3" }),
+				Tab.create({ label: "Org Tab", url: "url", org: "test-org1" }),
+				Tab.create({ label: "Org Tab2", url: "urll", org: "test-org" }),
+				Tab.create({
+					label: "Org Tab3",
+					url: "urll",
+					org: "test-org1",
+				}),
+				Tab.create({ label: "Normal Tab", url: "normal-url" }),
+				Tab.create({ label: "Org Tab2", url: "url3", org: "test-org" }),
+			],
+			{
+				resetTabs: true,
+				removeOrgTabs: true,
+			},
+		);
 		assertEquals(container.length, 6);
 		assertEquals(container[0].url, "url3");
 		assertEquals(container[1].url, "url");
@@ -2381,10 +2401,13 @@ await Deno.test("TabContainer - Remove Tab(s)", async (t) => {
 		assertEquals(container[4].url, "normal-url");
 		assertEquals(container[5].url, "url3");
 		assert(
-			await container.removeOtherTabs({
-				url: "normal-url",
-				org: "test-org",
-			}, { removeBefore: true }),
+			await container.removeOtherTabs(
+				{
+					url: "normal-url",
+					org: "test-org",
+				},
+				{ removeBefore: true },
+			),
 			"removes all other Tabs with the same/undefined Org which are before the selected Tab",
 		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
@@ -2407,9 +2430,12 @@ await Deno.test("TabContainer - Remove Tab(s)", async (t) => {
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 2);
 		assertEquals(container.length, 6);
 		assert(
-			await container.removeOtherTabs({
-				url: "nice-url3",
-			}, { removeBefore: true }),
+			await container.removeOtherTabs(
+				{
+					url: "nice-url3",
+				},
+				{ removeBefore: true },
+			),
 			"removes from within pinned Tabs",
 		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 1);
@@ -2432,9 +2458,12 @@ await Deno.test("TabContainer - Remove Tab(s)", async (t) => {
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 2);
 		assertEquals(container.length, 6);
 		assert(
-			await container.removeOtherTabs({
-				url: "urll",
-			}, { removeBefore: true }),
+			await container.removeOtherTabs(
+				{
+					url: "urll",
+				},
+				{ removeBefore: true },
+			),
 			"removes from after pinned Tabs",
 		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
@@ -2453,25 +2482,35 @@ await Deno.test("TabContainer - Remove Tab(s)", async (t) => {
 		assertEquals(container[1].url, "/lightning/app/standard__FlowsApp");
 		assertEquals(container[2].url, "ManageUsers/home");
 		assert(
-			await container.removeOtherTabs({
-				url: "/lightning/app/standard__FlowsApp",
-			}, { removeBefore: false }),
+			await container.removeOtherTabs(
+				{
+					url: "/lightning/app/standard__FlowsApp",
+				},
+				{ removeBefore: false },
+			),
 		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 		assertEquals(container.length, 2);
 		assertEquals(container[0].url, "/lightning");
 		assertEquals(container[1].url, "/lightning/app/standard__FlowsApp");
-		await container.replaceTabs([
-			Tab.create({ label: "Org Tab2", url: "url3" }),
-			Tab.create({ label: "Org Tab", url: "url", org: "test-org1" }),
-			Tab.create({ label: "Org Tab2", url: "urll", org: "test-org" }),
-			Tab.create({ label: "Org Tab3", url: "urll", org: "test-org1" }),
-			Tab.create({ label: "Normal Tab", url: "normal-url" }),
-			Tab.create({ label: "Org Tab2", url: "url3", org: "test-org" }),
-		], {
-			resetTabs: true,
-			removeOrgTabs: true,
-		});
+		await container.replaceTabs(
+			[
+				Tab.create({ label: "Org Tab2", url: "url3" }),
+				Tab.create({ label: "Org Tab", url: "url", org: "test-org1" }),
+				Tab.create({ label: "Org Tab2", url: "urll", org: "test-org" }),
+				Tab.create({
+					label: "Org Tab3",
+					url: "urll",
+					org: "test-org1",
+				}),
+				Tab.create({ label: "Normal Tab", url: "normal-url" }),
+				Tab.create({ label: "Org Tab2", url: "url3", org: "test-org" }),
+			],
+			{
+				resetTabs: true,
+				removeOrgTabs: true,
+			},
+		);
 		assertEquals(container.length, 6);
 		assertEquals(container[0].url, "url3");
 		assertEquals(container[1].url, "url");
@@ -2480,10 +2519,13 @@ await Deno.test("TabContainer - Remove Tab(s)", async (t) => {
 		assertEquals(container[4].url, "normal-url");
 		assertEquals(container[5].url, "url3");
 		assert(
-			await container.removeOtherTabs({
-				url: "url",
-				org: "test-org1",
-			}, { removeBefore: false }),
+			await container.removeOtherTabs(
+				{
+					url: "url",
+					org: "test-org1",
+				},
+				{ removeBefore: false },
+			),
 			"removes all other Tabs with the same/undefined Org which are after the selected Tab",
 		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
@@ -2506,10 +2548,13 @@ await Deno.test("TabContainer - Remove Tab(s)", async (t) => {
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 1);
 		assertEquals(container.length, 5);
 		assert(
-			await container.removeOtherTabs({
-				url: "urll",
-				org: "test-org",
-			}, { removeBefore: false }),
+			await container.removeOtherTabs(
+				{
+					url: "urll",
+					org: "test-org",
+				},
+				{ removeBefore: false },
+			),
 			"removes after pinned Tabs",
 		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 1);
@@ -2531,9 +2576,12 @@ await Deno.test("TabContainer - Remove Tab(s)", async (t) => {
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 3);
 		assertEquals(container.length, 6);
 		assert(
-			await container.removeOtherTabs({
-				url: "pin-url2",
-			}, { removeBefore: false }),
+			await container.removeOtherTabs(
+				{
+					url: "pin-url2",
+				},
+				{ removeBefore: false },
+			),
 			"remove before end of pinned Tabs",
 		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 2);
@@ -2543,7 +2591,7 @@ await Deno.test("TabContainer - Remove Tab(s)", async (t) => {
 	});
 });
 
-await Deno.test("TabContainer - Update Tab", async () => {
+await test("TabContainer - Update Tab", async () => {
 	await container.setDefaultTabs();
 	assertEquals(container.length, 3);
 	assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
@@ -2551,9 +2599,12 @@ await Deno.test("TabContainer - Update Tab", async () => {
 	assertEquals(container[1].url, "/lightning/app/standard__FlowsApp");
 	assertEquals(container[2].url, "ManageUsers/home");
 	assert(
-		await container.updateTab({ url: "/lightning" }, {
-			url: "/lightning/test",
-		}),
+		await container.updateTab(
+			{ url: "/lightning" },
+			{
+				url: "/lightning/test",
+			},
+		),
 	);
 	assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 	assertEquals(container[0].url, "/lightning/test");
@@ -2573,20 +2624,26 @@ await Deno.test("TabContainer - Update Tab", async () => {
 	assertEquals(container[2].url, "ManageUsers/home");
 	matchStorageToContainer(container);
 	assert(
-		await container.updateTab({ url: "ManageUsers/home" }, {
-			[Tab.keyClickCount]: 1,
-			[Tab.keyClickDate]: currentDate,
-		}),
+		await container.updateTab(
+			{ url: "ManageUsers/home" },
+			{
+				[Tab.keyClickCount]: 1,
+				[Tab.keyClickDate]: currentDate,
+			},
+		),
 	);
 	assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 	assertEquals(container[2][Tab.keyClickCount], 1);
 	assertEquals(container[2][Tab.keyClickDate], currentDate);
 	assert(
-		await container.updateTab({ url: "ManageUsers/home" }, {
-			org: "",
-			url: "",
-			label: "",
-		}),
+		await container.updateTab(
+			{ url: "ManageUsers/home" },
+			{
+				org: "",
+				url: "",
+				label: "",
+			},
+		),
 	);
 	assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 	assertEquals(container[0].org, undefined);
@@ -2609,18 +2666,21 @@ await Deno.test("TabContainer - Update Tab", async () => {
 	assertEquals(container.length, 5);
 	assertEquals(container[0].url, "pin-url");
 	assert(
-		await container.updateTab({ url: "pin-url" }, {
-			org: "",
-			url: "noo",
-			label: "bye",
-		}),
+		await container.updateTab(
+			{ url: "pin-url" },
+			{
+				org: "",
+				url: "noo",
+				label: "bye",
+			},
+		),
 	);
 	assertEquals(container[TabContainer.keyPinnedTabsNo], 2);
 	assertEquals(container.length, 5);
 	assertEquals(container[0].url, "noo");
 });
 
-await Deno.test("TabContainer - Sort Tabs", async (t) => {
+await test("TabContainer - Sort Tabs", async (t) => {
 	await t.step(
 		"invalid sort key throws translatable error message",
 		async () => {

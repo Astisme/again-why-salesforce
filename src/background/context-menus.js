@@ -454,13 +454,10 @@ export function createContextMenusModule() {
 				bgGetSettings: bg_getSettings,
 				translator,
 				userLanguage: USER_LANGUAGE,
-			})
+			}),
 		);
 		try {
-			await Promise.all([
-				updateCommandLinks(),
-				removeMenuItems(true),
-			]);
+			await Promise.all([updateCommandLinks(), removeMenuItems(true)]);
 			const menuItems = getMenuItemsClone();
 			const translatedMenuItems = await Promise.all(
 				menuItems.map(async (item) => {
@@ -485,9 +482,8 @@ export function createContextMenusModule() {
 			areMenuItemsVisible = true;
 		} catch (error) {
 			areMenuItemsVisible = false;
-			const msg = await TranslationService.getTranslations(
-				"error_cxm_create",
-			);
+			const msg =
+				await TranslationService.getTranslations("error_cxm_create");
 			console.error(msg, error);
 			await removeMenuItems(true);
 		}
@@ -540,7 +536,7 @@ export function createContextMenusModule() {
 					what,
 					callback,
 					force,
-				})
+				}),
 			);
 		return pendingContextMenuOperation;
 	}
@@ -557,9 +553,8 @@ export function createContextMenusModule() {
 			await BROWSER.contextMenus.removeAll();
 			areMenuItemsVisible = false;
 		} catch (error) {
-			const msg = await TranslationService.getTranslations(
-				"error_cxm_remove",
-			);
+			const msg =
+				await TranslationService.getTranslations("error_cxm_remove");
 			console.error(msg, error);
 		}
 	}
@@ -599,14 +594,11 @@ export function createContextMenusModule() {
 			const browserTabUrl = (await bg_getCurrentBrowserTab())?.url;
 			const url = info.linkUrl ?? info.pageUrl ?? browserTabUrl;
 			const message = {
-				what: CMD_AND_CXM_MAP_TO_WHAT[info.menuItemId] ??
-					info.menuItemId,
+				what:
+					CMD_AND_CXM_MAP_TO_WHAT[info.menuItemId] ?? info.menuItemId,
 				tabUrl: Tab.minifyURL(url),
 				label: info.linkText,
-				url: Tab.expandURL(
-					url,
-					browserTabUrl,
-				),
+				url: Tab.expandURL(url, browserTabUrl),
 				org: Tab.extractOrgName(url),
 			};
 			switch (info.menuItemId) {
@@ -638,8 +630,7 @@ export function createContextMenusModule() {
 				default:
 					if (!ALL_CXM_KEYS.has(info.menuItemId)) {
 						message.what = TOAST_WARNING;
-						message.message =
-							`Received unknown context menu: ${info.menuItemId}`;
+						message.message = `Received unknown context menu: ${info.menuItemId}`;
 					}
 					break;
 			}
@@ -647,9 +638,9 @@ export function createContextMenusModule() {
 		});
 
 		BROWSER.storage.onChanged.addListener(async (changes) => {
-			const pickedLanguageObj = changes[SETTINGS_KEY]?.newValue?.filter((
-				el,
-			) => el.id === USER_LANGUAGE);
+			const pickedLanguageObj = changes[SETTINGS_KEY]?.newValue?.filter(
+				(el) => el.id === USER_LANGUAGE,
+			);
 			if (pickedLanguageObj != null && pickedLanguageObj.length > 0) {
 				await refreshContextMenus();
 			}

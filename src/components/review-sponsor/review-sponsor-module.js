@@ -164,14 +164,11 @@ export function createReviewSponsorModule({
 			const shadow = this.attachShadow({ mode: "open" });
 			const result = generateReviewSponsorSvgs();
 			shadow.appendChild(result.root);
-			const linkEl = injectStyle(
-				"awsf-rev-spons",
-				{
-					link: browser.runtime.getURL(
-						"/components/review-sponsor/review-sponsor.css",
-					),
-				},
-			);
+			const linkEl = injectStyle("awsf-rev-spons", {
+				link: browser.runtime.getURL(
+					"/components/review-sponsor/review-sponsor.css",
+				),
+			});
 			this.shadowRoot.appendChild(linkEl);
 			this._reviewSponsorResult = result;
 			this._readyPromise = null;
@@ -213,9 +210,7 @@ export function createReviewSponsorModule({
 		 * @return {Promise<number | undefined>} Usage days.
 		 */
 		async _getExtensionUsageDays() {
-			const usageSettings = await getSettings([
-				extensionUsageDays,
-			]);
+			const usageSettings = await getSettings([extensionUsageDays]);
 			return usageSettings?.enabled;
 		}
 
@@ -236,21 +231,19 @@ export function createReviewSponsorModule({
 		 * }} result Rendered element references.
 		 */
 		async _showReviewOrSponsor(result) {
-			const [
-				reviewMsg,
-				sponsorMsg,
-				allTabs,
-				usageDays,
-			] = await Promise.all([
-				getTranslations("write_review"),
-				getTranslations("send_tip"),
-				ensureAllTabsAvailability(),
-				this._getExtensionUsageDays(),
-			]);
-			showReviewOrSponsor(Object.assign(result, {
-				allTabs,
-				usageDays,
-			}));
+			const [reviewMsg, sponsorMsg, allTabs, usageDays] =
+				await Promise.all([
+					getTranslations("write_review"),
+					getTranslations("send_tip"),
+					ensureAllTabsAvailability(),
+					this._getExtensionUsageDays(),
+				]);
+			showReviewOrSponsor(
+				Object.assign(result, {
+					allTabs,
+					usageDays,
+				}),
+			);
 			result.reviewLink.title = reviewMsg;
 			result.reviewLink.setAttribute("aria-label", reviewMsg);
 			result.reviewSvg.setAttribute("focusable", "false");

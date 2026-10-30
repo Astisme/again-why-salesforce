@@ -1,9 +1,6 @@
+import { test } from "#test";
 import "../../mocks.test.ts";
-import {
-	assertEquals,
-	assertRejects,
-	assertThrows,
-} from "@std/testing/asserts";
+import { assertEquals, assertRejects, assertThrows } from "#test";
 import { createTranslatorModule } from "../../../src/core/translator.js";
 
 type TranslatorInstance = {
@@ -16,14 +13,9 @@ type TranslatorInstance = {
 	loadNewLanguage: (language?: string | null) => Promise<boolean>;
 	separator: string;
 	setListenerForLanguageChange: () => void;
-	translate: (
-		key: string | string[],
-		connector?: string,
-	) => Promise<string>;
+	translate: (key: string | string[], connector?: string) => Promise<string>;
 	translateAttributeDataset: string;
-	updatePageTranslations: (
-		language?: string | null,
-	) => Promise<boolean>;
+	updatePageTranslations: (language?: string | null) => Promise<boolean>;
 };
 
 type TranslatorModule = {
@@ -59,21 +51,25 @@ function loadTranslatorFixture() {
 	let sfLanguage: string | null = "en";
 	const changeListeners: Array<(changes: Record<string, unknown>) => void> =
 		[];
-	const localeMessages: Record<string, Record<string, { message: string }>> =
-		{
-			en: {
-				hello: { message: "Hello" },
-				error_missing_key: { message: "Missing key" },
-			},
-			fr: {
-				hello: { message: "Bonjour" },
-			},
-		};
+	const localeMessages: Record<
+		string,
+		Record<string, { message: string }>
+	> = {
+		en: {
+			hello: { message: "Hello" },
+			error_missing_key: { message: "Missing key" },
+		},
+		fr: {
+			hello: { message: "Bonjour" },
+		},
+	};
 	const mockDocument = {
-		querySelectorAll: () => [{
-			getAttribute: () => "hello",
-			textContent: "",
-		}],
+		querySelectorAll: () => [
+			{
+				getAttribute: () => "hello",
+				textContent: "",
+			},
+		],
 	};
 	const hadBrowser = "browser" in globalThis;
 	const originalBrowser = (globalThis as { browser?: unknown }).browser;
@@ -89,8 +85,7 @@ function loadTranslatorFixture() {
 			json: () => {
 				const language = path.match(
 					/\/_locales\/([^/]+)\/messages\.json$/,
-				)
-					?.[1];
+				)?.[1];
 				if (language == null) {
 					throw new Error("error_missing_language");
 				}
@@ -141,9 +136,7 @@ function loadTranslatorFixture() {
 		USER_LANGUAGE: "picked-language",
 		WHAT_GET_SETTINGS: "get-settings",
 		WHAT_GET_SF_LANG: "get-sf-language",
-		sendExtensionMessage: (
-			{ what }: { what: string; keys?: string },
-		) => {
+		sendExtensionMessage: ({ what }: { what: string; keys?: string }) => {
 			messageCalls.push(what);
 			if (what === "get-settings") {
 				return Promise.resolve(
@@ -194,7 +187,7 @@ function loadTranslatorFixture() {
 	};
 }
 
-Deno.test("translator isolated coverage hits constructor, fallback, and listener branches", async () => {
+test("translator isolated coverage hits constructor, fallback, and listener branches", async () => {
 	const fixture = await loadTranslatorFixture();
 	try {
 		assertThrows(
@@ -228,8 +221,8 @@ Deno.test("translator isolated coverage hits constructor, fallback, and listener
 		assertEquals(await translator.translate("missing key"), "missing key");
 
 		assertEquals(await translator.updatePageTranslations(null), undefined);
-		const originalDocument =
-			(globalThis as { document?: unknown }).document;
+		const originalDocument = (globalThis as { document?: unknown })
+			.document;
 		Reflect.set(globalThis, "document", undefined);
 		assertEquals(await translator.updatePageTranslations("en"), false);
 		Reflect.set(globalThis, "document", originalDocument);
@@ -245,7 +238,7 @@ Deno.test("translator isolated coverage hits constructor, fallback, and listener
 	}
 });
 
-Deno.test("translator isolated avoids repeated fetches for missing locale after fallback", async () => {
+test("translator isolated avoids repeated fetches for missing locale after fallback", async () => {
 	const fixture = await loadTranslatorFixture();
 	try {
 		fixture.setLanguageResponse("pt_BR", null);
@@ -254,7 +247,7 @@ Deno.test("translator isolated avoids repeated fetches for missing locale after 
 		assertEquals(await translator.translate("hello"), "Hello");
 		assertEquals(await translator.translate("hello"), "Hello");
 		const ptBrFetches = fixture.fetchCalls.filter((path) =>
-			path.includes("/_locales/pt_BR/messages.json")
+			path.includes("/_locales/pt_BR/messages.json"),
 		);
 		assertEquals(ptBrFetches.length, 1);
 	} finally {
@@ -262,7 +255,7 @@ Deno.test("translator isolated avoids repeated fetches for missing locale after 
 	}
 });
 
-Deno.test("translator isolated uses caller language loader without extension messages", async () => {
+test("translator isolated uses caller language loader without extension messages", async () => {
 	const fixture = await loadTranslatorFixture();
 	try {
 		const translator = await fixture.module.TranslationService.create(
@@ -274,8 +267,8 @@ Deno.test("translator isolated uses caller language loader without extension mes
 		assertEquals(translator.currentLanguage, "fr");
 		assertEquals(fixture.messageCalls, []);
 
-		const reloadedTranslator = await fixture.module
-			.ensureTranslatorAvailability(
+		const reloadedTranslator =
+			await fixture.module.ensureTranslatorAvailability(
 				async (service) => {
 					await service.loadNewLanguage("en");
 					return service.currentLanguage;

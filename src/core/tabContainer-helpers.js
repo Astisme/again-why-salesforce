@@ -62,9 +62,7 @@ export function getMoveIndex({
 			break;
 		}
 		const targetTab = tabs[candidateIndex];
-		if (
-			org == null || targetTab?.org == null || targetTab.org === org
-		) {
+		if (org == null || targetTab?.org == null || targetTab.org === org) {
 			return candidateIndex;
 		}
 		lastIndex = candidateIndex;
@@ -82,13 +80,9 @@ export function getMoveIndex({
 export function sortFunction(a, b) {
 	a = a == null ? "" : String(a);
 	b = b == null ? "" : String(b);
-	return String(a).localeCompare(
-		String(b),
-		undefined,
-		{
-			sensitivity: "base",
-		},
-	);
+	return String(a).localeCompare(String(b), undefined, {
+		sensitivity: "base",
+	});
 }
 
 /**
@@ -119,15 +113,8 @@ export function checkSortOrderForKey({
 } = {}) {
 	let asc = true;
 	let desc = true;
-	for (
-		let i = pinnedTabsNo + 1;
-		i < tabs.length && (asc || desc);
-		i++
-	) {
-		const comparison = sortFunction(
-			tabs[i - 1][key],
-			tabs[i][key],
-		);
+	for (let i = pinnedTabsNo + 1; i < tabs.length && (asc || desc); i++) {
+		const comparison = sortFunction(tabs[i - 1][key], tabs[i][key]);
 		if (comparison === 0) continue;
 		if (comparison > 0) asc = false;
 		if (comparison < 0) desc = false;
@@ -149,34 +136,34 @@ export function checkSortOrderForKey({
  * @param {string|null} [param1.removeThisOrgTabs=null] - Org to remove.
  * @return {boolean} Whether tab survives.
  */
-function shouldKeepTabForReplace(tab, {
-	resetTabs = true,
-	removeOrgTabs = false,
-	keepTabsNotThisOrg = null,
-	removeThisOrgTabs = null,
-} = {}) {
+function shouldKeepTabForReplace(
+	tab,
+	{
+		resetTabs = true,
+		removeOrgTabs = false,
+		keepTabsNotThisOrg = null,
+		removeThisOrgTabs = null,
+	} = {},
+) {
 	if (resetTabs) {
 		if (!removeOrgTabs) {
 			return tab.org != null;
 		}
 		if (keepTabsNotThisOrg != null || removeThisOrgTabs != null) {
-			return tab.org != null &&
+			return (
+				tab.org != null &&
 				(keepTabsNotThisOrg == null ||
 					tab.org !== keepTabsNotThisOrg) &&
-				(removeThisOrgTabs == null ||
-					tab.org !== removeThisOrgTabs);
+				(removeThisOrgTabs == null || tab.org !== removeThisOrgTabs)
+			);
 		}
 		return false;
 	}
-	return tab.org == null ||
-		(
-			keepTabsNotThisOrg != null &&
-			tab.org === keepTabsNotThisOrg
-		) ||
-		(
-			removeThisOrgTabs != null &&
-			tab.org !== removeThisOrgTabs
-		);
+	return (
+		tab.org == null ||
+		(keepTabsNotThisOrg != null && tab.org === keepTabsNotThisOrg) ||
+		(removeThisOrgTabs != null && tab.org !== removeThisOrgTabs)
+	);
 }
 
 /**
@@ -200,7 +187,9 @@ export function getFilteredReplaceState({
 	removeThisOrgTabs = null,
 } = {}) {
 	if (
-		resetTabs && removeOrgTabs && keepTabsNotThisOrg == null &&
+		resetTabs &&
+		removeOrgTabs &&
+		keepTabsNotThisOrg == null &&
 		removeThisOrgTabs == null
 	) {
 		return {
@@ -220,12 +209,12 @@ export function getFilteredReplaceState({
 		keepTabsNotThisOrg,
 		removeThisOrgTabs,
 	};
-	const pinnedTabs = currentTabs.slice(0, pinnedTabsNo).filter((tab) =>
-		shouldKeepTabForReplace(tab, conf)
-	);
-	const otherTabs = currentTabs.slice(pinnedTabsNo).filter((tab) =>
-		shouldKeepTabForReplace(tab, conf)
-	);
+	const pinnedTabs = currentTabs
+		.slice(0, pinnedTabsNo)
+		.filter((tab) => shouldKeepTabForReplace(tab, conf));
+	const otherTabs = currentTabs
+		.slice(pinnedTabsNo)
+		.filter((tab) => shouldKeepTabForReplace(tab, conf));
 	return {
 		tabs: [...pinnedTabs, ...otherTabs],
 		pinnedTabsNo: pinnedTabs.length,
@@ -243,7 +232,7 @@ export function stripImportedTabMetadata(tabs = []) {
 	return tabs.map((tab) =>
 		Object.fromEntries(
 			Object.entries(tab).filter(([key]) => !metadataKeys.has(key)),
-		)
+		),
 	);
 }
 
@@ -265,10 +254,7 @@ export function prepareImportedPinnedTabs({
 } = {}) {
 	const clampedPinnedTabsNo = Math.max(
 		0,
-		Math.min(
-			pinnedTabsNo ?? 0,
-			importedArr.length,
-		),
+		Math.min(pinnedTabsNo ?? 0, importedArr.length),
 	);
 	if (clampedPinnedTabsNo <= 0) {
 		return {
@@ -292,22 +278,20 @@ export function prepareImportedPinnedTabs({
 		existingPinnedTabs.map((tab) => `${tab?.url}|${tab?.org}`),
 	);
 	const seenImportedPinnedTabs = new Set();
-	const importedPinnedTabs = requestedPinnedTabs.filter(
-		(tab, index, arr) => {
-			const tabKey = `${tab?.url}|${tab?.org}`;
-			// Keep first imported copy only, and skip tabs already present in pinned segment.
-			if (
-				arr.findIndex((item) => item.equals?.(tab) || item === tab) !==
-					index ||
-				existingPinnedTabKeys.has(tabKey) ||
-				seenImportedPinnedTabs.has(tabKey)
-			) {
-				return false;
-			}
-			seenImportedPinnedTabs.add(tabKey);
-			return true;
-		},
-	);
+	const importedPinnedTabs = requestedPinnedTabs.filter((tab, index, arr) => {
+		const tabKey = `${tab?.url}|${tab?.org}`;
+		// Keep first imported copy only, and skip tabs already present in pinned segment.
+		if (
+			arr.findIndex((item) => item.equals?.(tab) || item === tab) !==
+				index ||
+			existingPinnedTabKeys.has(tabKey) ||
+			seenImportedPinnedTabs.has(tabKey)
+		) {
+			return false;
+		}
+		seenImportedPinnedTabs.add(tabKey);
+		return true;
+	});
 	return {
 		importedPinnedTabs,
 		remainingImportedTabs,

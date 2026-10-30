@@ -45,14 +45,13 @@ export function createReqPermissionsModule({
 		) {
 			const noPerm = documentRef.getElementById("no-permissions");
 			noPerm.href = `${popuplink}?${doNotRequestFramePermissionKey}=true`;
-			documentRef.getElementById("allow-permissions").addEventListener(
-				"click",
-				async (event) => {
+			documentRef
+				.getElementById("allow-permissions")
+				.addEventListener("click", async (event) => {
 					event.preventDefault();
 					await requestFramePatternsPermission();
 					setTimeout(closePopup, 100);
-				},
-			);
+				});
 			/**
 			 * Persists skip flag and redirects to popup.
 			 *
@@ -79,12 +78,12 @@ export function createReqPermissionsModule({
 			};
 		}
 		if (whichPermissions === "download") {
-			documentRef.getElementById("host_permissions").classList.add(
-				hiddenClass,
-			);
-			documentRef.getElementById("download").classList.remove(
-				hiddenClass,
-			);
+			documentRef
+				.getElementById("host_permissions")
+				.classList.add(hiddenClass);
+			documentRef
+				.getElementById("download")
+				.classList.remove(hiddenClass);
 			/**
 			 * Restores standard browser action popup page.
 			 *
@@ -93,24 +92,21 @@ export function createReqPermissionsModule({
 			const setOriginalPopup = async () => {
 				await browser.action.setPopup({ popup: popuplink });
 			};
-			documentRef.getElementById("no-permissions-down").addEventListener(
-				"click",
-				async (event) => {
+			documentRef
+				.getElementById("no-permissions-down")
+				.addEventListener("click", async (event) => {
 					event.preventDefault();
 					await setOriginalPopup();
 					locationRef.href = popuplink;
-				},
-			);
-			documentRef.getElementById("allow-permissions-down")
-				.addEventListener(
-					"click",
-					async (event) => {
-						event.preventDefault();
-						await requestExportPermission();
-						await setOriginalPopup();
-						setTimeout(closePopup, 100);
-					},
-				);
+				});
+			documentRef
+				.getElementById("allow-permissions-down")
+				.addEventListener("click", async (event) => {
+					event.preventDefault();
+					await requestExportPermission();
+					await setOriginalPopup();
+					setTimeout(closePopup, 100);
+				});
 		}
 		return {
 			mode: "download",

@@ -31,10 +31,7 @@ export function createLogoModule({
 		 * @return {void}
 		 */
 		function readThemeMessage(message, _sender, sendResponse) {
-			if (
-				message?.what !== whatTheme ||
-				message?.theme == null
-			) {
+			if (message?.what !== whatTheme || message?.theme == null) {
 				return;
 			}
 			sendResponse(null);

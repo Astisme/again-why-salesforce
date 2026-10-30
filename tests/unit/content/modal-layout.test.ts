@@ -1,4 +1,5 @@
-import { assertEquals, assertThrows } from "@std/testing/asserts";
+import { test } from "#test";
+import { assertEquals, assertThrows } from "#test";
 import { createModalLayoutModule } from "../../../src/salesforce/runtime/modal-layout-runtime.js";
 
 type ModalLayoutModule = {
@@ -76,7 +77,7 @@ const fixture = {
 	}) as ModalLayoutModule,
 };
 
-Deno.test("modal-layout validates required article parameter", () => {
+test("modal-layout validates required article parameter", () => {
 	assertThrows(
 		() => fixture.module.updateModalBodyOverflow(),
 		Error,
@@ -84,7 +85,7 @@ Deno.test("modal-layout validates required article parameter", () => {
 	);
 });
 
-Deno.test("modal-layout toggles overflow and scrolls when content fits", () => {
+test("modal-layout toggles overflow and scrolls when content fits", () => {
 	const article = new LayoutElement();
 	const modalBody = new LayoutElement();
 	const wrapper = new LayoutElement();

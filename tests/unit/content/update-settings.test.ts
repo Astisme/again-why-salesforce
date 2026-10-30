@@ -1,5 +1,6 @@
+import { test } from "#test";
 import "../../mocks.test.ts";
-import { assertEquals } from "@std/testing/asserts";
+import { assertEquals } from "#test";
 import { SETTINGS_KEY } from "../../../src/core/constants.js";
 import { getTodayDateKey } from "../../../src/core/functions.js";
 import {
@@ -20,26 +21,26 @@ function cloneSettings() {
 	return structuredClone(mockStorage[SETTINGS_KEY]);
 }
 
-Deno.test("getUsageDaysUpdate initializes missing usage tracking at zero", () => {
-	assertEquals(
-		getUsageDaysUpdate([], today),
-		{
-			lastActiveDay: null,
-			usageDays: 0,
-			set: [
-				{ id: "extension_usage_days", enabled: 0 },
-				{ id: "extension_last_active_day", enabled: today },
-			],
-		},
-	);
+test("getUsageDaysUpdate initializes missing usage tracking at zero", () => {
+	assertEquals(getUsageDaysUpdate([], today), {
+		lastActiveDay: null,
+		usageDays: 0,
+		set: [
+			{ id: "extension_usage_days", enabled: 0 },
+			{ id: "extension_last_active_day", enabled: today },
+		],
+	});
 });
 
-Deno.test("getUsageDaysUpdate does not increment twice on the same day", () => {
+test("getUsageDaysUpdate does not increment twice on the same day", () => {
 	assertEquals(
-		getUsageDaysUpdate([
-			{ id: "extension_usage_days", enabled: 7 },
-			{ id: "extension_last_active_day", enabled: today },
-		], today),
+		getUsageDaysUpdate(
+			[
+				{ id: "extension_usage_days", enabled: 7 },
+				{ id: "extension_last_active_day", enabled: today },
+			],
+			today,
+		),
 		{
 			lastActiveDay: today,
 			usageDays: 7,
@@ -48,12 +49,15 @@ Deno.test("getUsageDaysUpdate does not increment twice on the same day", () => {
 	);
 });
 
-Deno.test("getUsageDaysUpdate increments usage days on a new day", () => {
+test("getUsageDaysUpdate increments usage days on a new day", () => {
 	assertEquals(
-		getUsageDaysUpdate([
-			{ id: "extension_usage_days", enabled: 7 },
-			{ id: "extension_last_active_day", enabled: yesterday },
-		], today),
+		getUsageDaysUpdate(
+			[
+				{ id: "extension_usage_days", enabled: 7 },
+				{ id: "extension_last_active_day", enabled: yesterday },
+			],
+			today,
+		),
 		{
 			lastActiveDay: yesterday,
 			usageDays: 8,
@@ -65,12 +69,9 @@ Deno.test("getUsageDaysUpdate increments usage days on a new day", () => {
 	);
 });
 
-Deno.test("getUsageDaysUpdate normalizes non-array settings input", () => {
+test("getUsageDaysUpdate normalizes non-array settings input", () => {
 	assertEquals(
-		getUsageDaysUpdate(
-			{ id: "extension_usage_days", enabled: 2 },
-			today,
-		),
+		getUsageDaysUpdate({ id: "extension_usage_days", enabled: 2 }, today),
 		{
 			lastActiveDay: null,
 			usageDays: 2,
@@ -82,21 +83,18 @@ Deno.test("getUsageDaysUpdate normalizes non-array settings input", () => {
 	);
 });
 
-Deno.test("getUsageDaysUpdate handles null settings input", () => {
-	assertEquals(
-		getUsageDaysUpdate(null, today),
-		{
-			lastActiveDay: null,
-			usageDays: 0,
-			set: [
-				{ id: "extension_usage_days", enabled: 0 },
-				{ id: "extension_last_active_day", enabled: today },
-			],
-		},
-	);
+test("getUsageDaysUpdate handles null settings input", () => {
+	assertEquals(getUsageDaysUpdate(null, today), {
+		lastActiveDay: null,
+		usageDays: 0,
+		set: [
+			{ id: "extension_usage_days", enabled: 0 },
+			{ id: "extension_last_active_day", enabled: today },
+		],
+	});
 });
 
-Deno.test("updateExtensionUsageDays persists the usage settings", async () => {
+test("updateExtensionUsageDays persists the usage settings", async () => {
 	const originalSettings = cloneSettings();
 	try {
 		mockStorage[SETTINGS_KEY] = [];

@@ -64,16 +64,12 @@ export function createExportModule({
 			);
 		}
 		const allTabs = await ensureAllTabsAvailabilityRuntime();
-		const {
-			modalParent,
-			saveButton,
-			closeButton,
-			getSelectedTabs,
-		} = await generateSldsModalWithTabListRuntime(allTabs, {
-			title: "export_tabs",
-			saveButtonLabel: "export",
-			explainer: "select_tabs_export",
-		});
+		const { modalParent, saveButton, closeButton, getSelectedTabs } =
+			await generateSldsModalWithTabListRuntime(allTabs, {
+				title: "export_tabs",
+				saveButtonLabel: "export",
+				explainer: "select_tabs_export",
+			});
 		getModalHangerRuntime().appendChild(modalParent);
 		saveButton.addEventListener("click", (e) => {
 			e.preventDefault();
@@ -104,9 +100,8 @@ export function createExportModule({
 		try {
 			await showExportModal();
 		} catch (error) {
-			const message = error instanceof Error
-				? error.message
-				: String(error);
+			const message =
+				error instanceof Error ? error.message : String(error);
 			showToastRuntime(message, toastErrorRuntime);
 		}
 	}

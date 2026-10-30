@@ -1,4 +1,6 @@
-#!/usr/bin/env -S deno run --allow-read --allow-write
+#!/usr/bin/env -S bun run
+
+import fs from "node:fs/promises";
 
 const LOCALES_DIR = "src/_locales";
 const ENGLISH_LOCALE = "en";
@@ -29,12 +31,10 @@ interface InvalidLocaleReport {
  * @param {string} localesDir Locales root directory.
  * @return {Promise<string[]>} Locale directory names.
  */
-export async function getLocales(
-	localesDir = LOCALES_DIR,
-): Promise<string[]> {
+export async function getLocales(localesDir = LOCALES_DIR): Promise<string[]> {
 	const entries: string[] = [];
-	for await (const entry of Deno.readDir(localesDir)) {
-		if (entry.isDirectory) {
+	for (const entry of await fs.readdir(localesDir, { withFileTypes: true })) {
+		if (entry.isDirectory()) {
 			entries.push(entry.name);
 		}
 	}
@@ -49,7 +49,7 @@ export async function getLocales(
  */
 export async function fileExists(filePath: string): Promise<boolean> {
 	try {
-		await Deno.stat(filePath);
+		await fs.stat(filePath);
 		return true;
 	} catch {
 		return false;
@@ -63,7 +63,7 @@ export async function fileExists(filePath: string): Promise<boolean> {
  * @return {Promise<LocaleFile>} Parsed locale file.
  */
 export async function readLocaleFile(filePath: string): Promise<LocaleFile> {
-	return JSON.parse(await Deno.readTextFile(filePath));
+	return JSON.parse(await fs.readFile(filePath, "utf8"));
 }
 
 /**
@@ -75,10 +75,9 @@ export async function readLocaleFile(filePath: string): Promise<LocaleFile> {
 export function getMessageVariables(message: string): string[] {
 	return [
 		...new Set(
-			message.match(VARIABLE_REGEX)?.map((variable) =>
-				variable.slice(1)
-			) ??
-				[],
+			message
+				.match(VARIABLE_REGEX)
+				?.map((variable) => variable.slice(1)) ?? [],
 		),
 	].sort();
 }
@@ -129,7 +128,7 @@ export async function buildInvalidVariablesReport(
 	const report: InvalidLocaleReport = {};
 	for (const locale of locales) {
 		const filePath = `${localesDir}/${locale}/messages.json`;
-		if (!await fileExists(filePath)) {
+		if (!(await fileExists(filePath))) {
 			continue;
 		}
 		const localeFile = await readLocaleFile(filePath);
@@ -147,28 +146,25 @@ export async function buildInvalidVariablesReport(
 /**
  * Main execution.
  *
- * @return {Promise<void>}
+ * @return {Promise<number>} Process exit code.
  */
-export async function main(): Promise<void> {
+export async function main(): Promise<number> {
 	const result = await buildInvalidVariablesReport();
 	if (Object.keys(result).length === 0) {
-		return;
+		return 0;
 	}
-	await Deno.writeTextFile(
-		OUTPUT_FILE,
-		`${JSON.stringify(result, null, 2)}\n`,
-	);
-	Deno.exit(1);
+	await fs.writeFile(OUTPUT_FILE, `${JSON.stringify(result, null, 2)}\n`);
+	return 1;
 }
 
 /**
  * Removes stale report then runs validation.
  *
- * @return {Promise<void>}
+ * @return {Promise<number>} Process exit code.
  */
 export async function removeThenMain(): Promise<void> {
 	try {
-		await Deno.remove(OUTPUT_FILE);
+		await fs.rm(OUTPUT_FILE);
 	} catch (_e) {
 		// no stale report
 	} finally {
@@ -177,5 +173,5 @@ export async function removeThenMain(): Promise<void> {
 }
 
 if (import.meta.main) {
-	await removeThenMain();
+	process.exitCode = await removeThenMain();
 }

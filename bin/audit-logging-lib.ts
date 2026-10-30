@@ -1,4 +1,6 @@
-import { dirname, fromFileUrl, join, relative } from "@std/path";
+import fs from "node:fs/promises";
+import { dirname, join, relative } from "node:path";
+import { fileURLToPath } from "node:url";
 
 /**
  * Supported console logging levels.
@@ -99,13 +101,13 @@ function isJavaScriptFile(path: string): boolean {
  */
 export async function listFilesRecursive(directory: string): Promise<string[]> {
 	const discovered: string[] = [];
-	for await (const entry of Deno.readDir(directory)) {
+	for (const entry of await fs.readdir(directory, { withFileTypes: true })) {
 		const fullPath = join(directory, entry.name);
-		if (entry.isDirectory) {
-			discovered.push(...await listFilesRecursive(fullPath));
+		if (entry.isDirectory()) {
+			discovered.push(...(await listFilesRecursive(fullPath)));
 			continue;
 		}
-		if (entry.isFile && isJavaScriptFile(fullPath)) {
+		if (entry.isFile() && isJavaScriptFile(fullPath)) {
 			discovered.push(fullPath);
 		}
 	}
@@ -117,7 +119,7 @@ export async function listFilesRecursive(directory: string): Promise<string[]> {
  * Loads English locale keys from messages.json.
  */
 export async function loadLocaleKeys(localeFile: string): Promise<Set<string>> {
-	const rawContent = await Deno.readTextFile(localeFile);
+	const rawContent = await fs.readFile(localeFile, "utf8");
 	const parsed = JSON.parse(rawContent) as Record<
 		string,
 		{ message?: string }
@@ -336,7 +338,9 @@ export function splitTopLevelArgs(argsText: string): string[] {
 			continue;
 		}
 		if (
-			char === "," && parenDepth === 0 && braceDepth === 0 &&
+			char === "," &&
+			parenDepth === 0 &&
+			braceDepth === 0 &&
 			bracketDepth === 0
 		) {
 			const trimmed = buffer.trim();
@@ -368,8 +372,9 @@ export async function runAudit(
 		if (
 			file.endsWith("lightning-navigation.js") ||
 			file.includes("generated")
-		) continue;
-		const content = await Deno.readTextFile(file);
+		)
+			continue;
+		const content = await fs.readFile(file, "utf8");
 		const callSites = findConsoleCallSites(
 			relative(options.projectRoot, file),
 			content,
@@ -463,10 +468,10 @@ export function extractLiteralString(arg: string): string | null {
 	if (trimmed.length < 2) {
 		return null;
 	}
-	const startsWithSingleQuote = trimmed.startsWith("'") &&
-		trimmed.endsWith("'");
-	const startsWithDoubleQuote = trimmed.startsWith('"') &&
-		trimmed.endsWith('"');
+	const startsWithSingleQuote =
+		trimmed.startsWith("'") && trimmed.endsWith("'");
+	const startsWithDoubleQuote =
+		trimmed.startsWith('"') && trimmed.endsWith('"');
 	if (!startsWithSingleQuote && !startsWithDoubleQuote) {
 		return null;
 	}
@@ -544,7 +549,7 @@ export function summarizeFindings(findings: AuditFinding[]): AuditSummary {
  * Resolves the default project root path from this module location.
  */
 export function defaultProjectRoot(): string {
-	return join(dirname(fromFileUrl(import.meta.url)), "..");
+	return join(dirname(fileURLToPath(import.meta.url)), "..");
 }
 
 /**
@@ -555,8 +560,8 @@ export function shouldFail(
 	minimumSeverity: FindingSeverity,
 ): boolean {
 	const minimumRank = severityRank(minimumSeverity);
-	return findings.some((finding) =>
-		severityRank(finding.severity) >= minimumRank
+	return findings.some(
+		(finding) => severityRank(finding.severity) >= minimumRank,
 	);
 }
 

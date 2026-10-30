@@ -1,8 +1,5 @@
-import {
-	assertEquals,
-	assertExists,
-	assertStringIncludes,
-} from "@std/testing/asserts";
+import { test } from "#test";
+import { assertEquals, assertExists, assertStringIncludes } from "#test";
 
 const EXTENSION_LAST_ACTIVE_DAY = "extension_last_active_day";
 const PREVENT_ANALYTICS = "prevent_analytics";
@@ -66,16 +63,15 @@ async function runAnalyticsWorker(scenario: {
 	);
 
 	try {
-		const resultPromise = new Promise<AnalyticsWorkerResult>((
-			resolve,
-			reject,
-		) => {
-			worker.onmessage = (event) => resolve(event.data);
-			worker.onerror = (event) => {
-				event.preventDefault();
-				reject(event.error ?? new Error(event.message));
-			};
-		});
+		const resultPromise = new Promise<AnalyticsWorkerResult>(
+			(resolve, reject) => {
+				worker.onmessage = (event) => resolve(event.data);
+				worker.onerror = (event) => {
+					event.preventDefault();
+					reject(event.error ?? new Error(event.message));
+				};
+			},
+		);
 		worker.postMessage(scenario);
 		return await resultPromise;
 	} finally {
@@ -83,7 +79,7 @@ async function runAnalyticsWorker(scenario: {
 	}
 }
 
-Deno.test("checkInsertAnalytics syncs opt-out on Firefox consent denial", async () => {
+test("checkInsertAnalytics syncs opt-out on Firefox consent denial", async () => {
 	const result = await runAnalyticsWorker({
 		browserName: "firefox",
 		consent: false,
@@ -92,18 +88,19 @@ Deno.test("checkInsertAnalytics syncs opt-out on Firefox consent denial", async 
 	});
 
 	assertEquals(result.results[0].headChildrenCount, 0);
-	assertEquals(result.finalSettings, [{
-		id: PREVENT_ANALYTICS,
-		enabled: true,
-	}]);
-	assertEquals(result.messages.map((message) => message.what), [
-		"get-settings",
-		"check-permission-granted",
-		"set",
+	assertEquals(result.finalSettings, [
+		{
+			id: PREVENT_ANALYTICS,
+			enabled: true,
+		},
 	]);
+	assertEquals(
+		result.messages.map((message) => message.what),
+		["get-settings", "check-permission-granted", "set"],
+	);
 });
 
-Deno.test("checkInsertAnalytics inserts a new-user beacon on Firefox when no active day exists", async () => {
+test("checkInsertAnalytics inserts a new-user beacon on Firefox when no active day exists", async () => {
 	const result = await runAnalyticsWorker({
 		browserName: "firefox",
 		consent: true,
@@ -128,18 +125,19 @@ Deno.test("checkInsertAnalytics inserts a new-user beacon on Firefox when no act
 			.map((message) => message.set[0].enabled),
 		[false],
 	);
-	assertEquals(result.finalSettings, [{
-		id: PREVENT_ANALYTICS,
-		enabled: false,
-	}]);
-	assertEquals(result.messages.map((message) => message.what), [
-		"get-settings",
-		"check-permission-granted",
-		"set",
+	assertEquals(result.finalSettings, [
+		{
+			id: PREVENT_ANALYTICS,
+			enabled: false,
+		},
 	]);
+	assertEquals(
+		result.messages.map((message) => message.what),
+		["get-settings", "check-permission-granted", "set"],
+	);
 });
 
-Deno.test("checkInsertAnalytics appends analytics domains to an existing CSP for returning users", async () => {
+test("checkInsertAnalytics appends analytics domains to an existing CSP for returning users", async () => {
 	const result = await runAnalyticsWorker({
 		browserName: "firefox",
 		consent: true,
@@ -147,43 +145,49 @@ Deno.test("checkInsertAnalytics appends analytics domains to an existing CSP for
 			{ id: PREVENT_ANALYTICS, enabled: false },
 			{ id: EXTENSION_LAST_ACTIVE_DAY, enabled: "2026-03-24" },
 		],
-		steps: [{
-			existingCspContent: "default-src 'self'; img-src 'self';",
-		}],
+		steps: [
+			{
+				existingCspContent: "default-src 'self'; img-src 'self';",
+			},
+		],
 	});
 
 	assertExists(result.results[0].cspContent);
 	assertStringIncludes(result.results[0].cspContent, QUEUE_ANALYTICS);
 	assertStringIncludes(result.results[0].cspContent, ANALYTICS_CDN);
 	assertEquals(result.results[0].beaconPath, "/");
-	assertEquals(result.messages.map((message) => message.what), [
-		"get-settings",
-		"check-permission-granted",
-	]);
+	assertEquals(
+		result.messages.map((message) => message.what),
+		["get-settings", "check-permission-granted"],
+	);
 });
 
-Deno.test("checkInsertAnalytics falls back to the local opt-out if Firefox consent check fails", async () => {
+test("checkInsertAnalytics falls back to the local opt-out if Firefox consent check fails", async () => {
 	const result = await runAnalyticsWorker({
 		browserName: "firefox",
 		consentError: true,
 		initialSettings: [{ id: PREVENT_ANALYTICS, enabled: true }],
-		steps: [{
-			silenceInfo: true,
-		}],
+		steps: [
+			{
+				silenceInfo: true,
+			},
+		],
 	});
 
 	assertEquals(result.results[0].headChildrenCount, 0);
-	assertEquals(result.messages.map((message) => message.what), [
-		"get-settings",
-		"check-permission-granted",
+	assertEquals(
+		result.messages.map((message) => message.what),
+		["get-settings", "check-permission-granted"],
+	);
+	assertEquals(result.finalSettings, [
+		{
+			id: PREVENT_ANALYTICS,
+			enabled: true,
+		},
 	]);
-	assertEquals(result.finalSettings, [{
-		id: PREVENT_ANALYTICS,
-		enabled: true,
-	}]);
 });
 
-Deno.test("checkInsertAnalytics on Chrome skips Firefox consent checks", async () => {
+test("checkInsertAnalytics on Chrome skips Firefox consent checks", async () => {
 	const result = await runAnalyticsWorker({
 		browserName: "chrome",
 		consent: true,
@@ -191,45 +195,54 @@ Deno.test("checkInsertAnalytics on Chrome skips Firefox consent checks", async (
 		steps: [{ isNewUser: true }],
 	});
 
-	assertEquals(result.messages.map((message) => message.what), [
-		"get-settings",
-	]);
+	assertEquals(
+		result.messages.map((message) => message.what),
+		["get-settings"],
+	);
 	assertEquals(result.results[0].headChildrenCount, 2);
 	assertEquals(result.results[0].beaconPath, "/new-user");
 });
 
-Deno.test("checkInsertAnalytics infers returning users from EXTENSION_LAST_ACTIVE_DAY on Chrome", async () => {
+test("checkInsertAnalytics infers returning users from EXTENSION_LAST_ACTIVE_DAY on Chrome", async () => {
 	const result = await runAnalyticsWorker({
 		browserName: "chrome",
 		consent: true,
-		initialSettings: [{
-			id: EXTENSION_LAST_ACTIVE_DAY,
-			enabled: "2026-03-24",
-		}],
+		initialSettings: [
+			{
+				id: EXTENSION_LAST_ACTIVE_DAY,
+				enabled: "2026-03-24",
+			},
+		],
 		steps: [{}],
 	});
 
-	assertEquals(result.results.map((step) => step.beaconPath), ["/"]);
-	assertEquals(result.messages.map((message) => message.what), [
-		"get-settings",
-	]);
+	assertEquals(
+		result.results.map((step) => step.beaconPath),
+		["/"],
+	);
+	assertEquals(
+		result.messages.map((message) => message.what),
+		["get-settings"],
+	);
 });
 
-Deno.test("checkInsertAnalytics appends analytics tags when document.head is unavailable", async () => {
+test("checkInsertAnalytics appends analytics tags when document.head is unavailable", async () => {
 	const result = await runAnalyticsWorker({
 		browserName: "chrome",
 		initialSettings: [],
-		steps: [{
-			isNewUser: true,
-			useDocumentElementOnly: true,
-		}],
+		steps: [
+			{
+				isNewUser: true,
+				useDocumentElementOnly: true,
+			},
+		],
 	});
 
 	assertEquals(result.results[0].headChildrenCount, 2);
 	assertEquals(result.results[0].beaconPath, "/new-user");
 });
 
-Deno.test("checkInsertAnalytics uses returning-user beacon when isNewUser is false", async () => {
+test("checkInsertAnalytics uses returning-user beacon when isNewUser is false", async () => {
 	const result = await runAnalyticsWorker({
 		browserName: "chrome",
 		initialSettings: [],
@@ -238,12 +251,13 @@ Deno.test("checkInsertAnalytics uses returning-user beacon when isNewUser is fal
 
 	assertEquals(result.results[0].headChildrenCount, 2);
 	assertEquals(result.results[0].beaconPath, "/");
-	assertEquals(result.messages.map((message) => message.what), [
-		"get-settings",
-	]);
+	assertEquals(
+		result.messages.map((message) => message.what),
+		["get-settings"],
+	);
 });
 
-Deno.test("checkInsertAnalytics treats null isNewUser as returning-user beacon", async () => {
+test("checkInsertAnalytics treats null isNewUser as returning-user beacon", async () => {
 	const result = await runAnalyticsWorker({
 		browserName: "chrome",
 		initialSettings: [],
@@ -252,7 +266,8 @@ Deno.test("checkInsertAnalytics treats null isNewUser as returning-user beacon",
 
 	assertEquals(result.results[0].headChildrenCount, 2);
 	assertEquals(result.results[0].beaconPath, "/");
-	assertEquals(result.messages.map((message) => message.what), [
-		"get-settings",
-	]);
+	assertEquals(
+		result.messages.map((message) => message.what),
+		["get-settings"],
+	);
 });

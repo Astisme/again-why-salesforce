@@ -1,6 +1,7 @@
+import { test } from "#test";
 /// <reference lib="dom" />
 import "../../mocks.test.ts";
-import { assertEquals } from "@std/testing/asserts";
+import { assertEquals } from "#test";
 import { installMockDom } from "../../happydom.test.ts";
 import {
 	appendThemeButtons,
@@ -9,7 +10,7 @@ import {
 	type ThemeSelectorElement,
 } from "./theme-selector-test-helpers.test.ts";
 
-Deno.test("ThemeSelectorAws reuses an existing stylesheet link", async () => {
+test("ThemeSelectorAws reuses an existing stylesheet link", async () => {
 	const { cleanup } = installMockDom();
 	const originalLocalStorage = globalThis.localStorage;
 	const testLocalStorage = createLocalStorageMock();
@@ -21,9 +22,7 @@ Deno.test("ThemeSelectorAws reuses an existing stylesheet link", async () => {
 		existingLink.setAttribute("data-awsf-theme-selector", "true");
 		document.head.append(existingLink);
 
-		await import(
-			"../../../src/components/theme-selector/theme-selector.js"
-		);
+		await import("../../../src/components/theme-selector/theme-selector.js");
 
 		const component = document.createElement(
 			"theme-selector-aws",

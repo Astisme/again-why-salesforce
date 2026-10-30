@@ -1,8 +1,6 @@
 import { WHAT_THEME } from "../core/constants.js";
 import { sendExtensionMessage as sendExtensionMessageDefault } from "../core/functions.js";
-import {
-	createThemeHandlerModule as createThemeHandlerPureModule,
-} from "./themeHandler-module.js";
+import { createThemeHandlerModule as createThemeHandlerPureModule } from "./themeHandler-module.js";
 
 const fallbackDocumentRef = {
 	documentElement: {

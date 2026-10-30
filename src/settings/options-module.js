@@ -152,10 +152,11 @@ function buildDecorationConfigs(styles, configs) {
 			chosenUls: {
 				inactive: {
 					generic: {
-						unpinned: configs.inactiveGenericUnpinned.decorationUls
+						unpinned:
+							configs.inactiveGenericUnpinned.decorationUls
+								.chosen,
+						pinned: configs.inactiveGenericPinned.decorationUls
 							.chosen,
-						pinned:
-							configs.inactiveGenericPinned.decorationUls.chosen,
 					},
 					org: {
 						unpinned:
@@ -167,8 +168,8 @@ function buildDecorationConfigs(styles, configs) {
 					generic: {
 						unpinned:
 							configs.activeGenericUnpinned.decorationUls.chosen,
-						pinned:
-							configs.activeGenericPinned.decorationUls.chosen,
+						pinned: configs.activeGenericPinned.decorationUls
+							.chosen,
 					},
 					org: {
 						unpinned:
@@ -180,24 +181,26 @@ function buildDecorationConfigs(styles, configs) {
 			availableUls: {
 				inactive: {
 					generic: {
-						unpinned: configs.inactiveGenericUnpinned.decorationUls
-							.available,
+						unpinned:
+							configs.inactiveGenericUnpinned.decorationUls
+								.available,
 						pinned: configs.inactiveGenericPinned.decorationUls
 							.available,
 					},
 					org: {
 						unpinned:
 							configs.inactiveOrgUnpinned.decorationUls.available,
-						pinned:
-							configs.inactiveOrgPinned.decorationUls.available,
+						pinned: configs.inactiveOrgPinned.decorationUls
+							.available,
 					},
 				},
 				active: {
 					generic: {
-						unpinned: configs.activeGenericUnpinned.decorationUls
+						unpinned:
+							configs.activeGenericUnpinned.decorationUls
+								.available,
+						pinned: configs.activeGenericPinned.decorationUls
 							.available,
-						pinned:
-							configs.activeGenericPinned.decorationUls.available,
 					},
 					org: {
 						unpinned:
@@ -235,15 +238,17 @@ function buildStructuredConf(configs) {
 				decorations: configs.active.unpinned.decorations,
 				decorationUls: configs.active.unpinned.decorationUls,
 				moveBtns: configs.active.unpinned.moveBtns,
-				inputs: Object.values(configs.active.unpinned.elements)
-					.filter(Boolean),
+				inputs: Object.values(configs.active.unpinned.elements).filter(
+					Boolean,
+				),
 			},
 			inactive: {
 				decorations: configs.inactive.unpinned.decorations,
 				decorationUls: configs.inactive.unpinned.decorationUls,
 				moveBtns: configs.inactive.unpinned.moveBtns,
-				inputs: Object.values(configs.inactive.unpinned.elements)
-					.filter(Boolean),
+				inputs: Object.values(
+					configs.inactive.unpinned.elements,
+				).filter(Boolean),
 			},
 		},
 		pinned: {
@@ -251,15 +256,17 @@ function buildStructuredConf(configs) {
 				decorations: configs.active.pinned.decorations,
 				decorationUls: configs.active.pinned.decorationUls,
 				moveBtns: configs.active.pinned.moveBtns,
-				inputs: Object.values(configs.active.pinned.elements)
-					.filter(Boolean),
+				inputs: Object.values(configs.active.pinned.elements).filter(
+					Boolean,
+				),
 			},
 			inactive: {
 				decorations: configs.inactive.pinned.decorations,
 				decorationUls: configs.inactive.pinned.decorationUls,
 				moveBtns: configs.inactive.pinned.moveBtns,
-				inputs: Object.values(configs.inactive.pinned.elements)
-					.filter(Boolean),
+				inputs: Object.values(configs.inactive.pinned.elements).filter(
+					Boolean,
+				),
 			},
 		},
 	};
@@ -274,12 +281,15 @@ function buildStructuredConf(configs) {
  * @param {boolean} wasPicked - Whether the style value is set (affects chosen/available lists)
  * @return {Object} Object containing input element and decoration list references
  */
-function _getElementReferences(config, {
-	isForInactive = true,
-	isGeneric = true,
-	wasPicked = false,
-	pinKey = "",
-} = {}) {
+function _getElementReferences(
+	config,
+	{
+		isForInactive = true,
+		isGeneric = true,
+		wasPicked = false,
+		pinKey = "",
+	} = {},
+) {
 	const state = isForInactive ? "inactive" : "active";
 	const variant = isGeneric ? "generic" : "org";
 	const elements = {
@@ -300,11 +310,10 @@ function _getElementReferences(config, {
  * @param {boolean} isGeneric - Whether targeting generic tabs (vs org-specific)
  * @return {string|undefined} Style ID for CSS rule application, or undefined if not found
  */
-function _getStyleId(config, {
-	isForInactive = true,
-	isGeneric = true,
-	pinKey = "",
-} = {}) {
+function _getStyleId(
+	config,
+	{ isForInactive = true, isGeneric = true, pinKey = "" } = {},
+) {
 	const state = isForInactive ? "inactive" : "active";
 	const variant = isGeneric ? "generic" : "org";
 	return `${config.styleIds?.[state]?.[variant]?.[pinKey]}`;
@@ -321,9 +330,7 @@ function _updateUIElements(elements, value) {
 	if (elements.input) {
 		elements.input.value = value;
 		if (elements.chosenUl) {
-			elements.chosenUl.append(
-				elements.input,
-			);
+			elements.chosenUl.append(elements.input);
 		}
 	}
 }
@@ -487,9 +494,9 @@ export function createOptionsModule(
 	} = overrides.globals ?? {};
 	const ensureTranslatorAvailability =
 		overrides.ensureTranslatorAvailability ??
-			_TranslationService.ensureTranslatorAvailability;
-	const getTranslations = overrides.getTranslations ??
-		_TranslationService.getTranslations;
+		_TranslationService.ensureTranslatorAvailability;
+	const getTranslations =
+		overrides.getTranslations ?? _TranslationService.getTranslations;
 	/**
 	 * Loads and registers the theme selector component unless tests ask to skip it.
 	 *
@@ -529,10 +536,7 @@ export function createOptionsModule(
 	 * @throws Error when key was not set
 	 * @return {Object} the object used to update the settings
 	 */
-	function getObjectToSet({
-		key = null,
-		set = [],
-	} = {}) {
+	function getObjectToSet({ key = null, set = [] } = {}) {
 		if (key == null) {
 			throw new Error("error_required_params");
 		}
@@ -601,9 +605,7 @@ export function createOptionsModule(
 	let sortContainer = document.getElementById("sort-wrapper");
 	let picked_sort = {
 		select: document.getElementById("picked-sort"),
-		direction: document.getElementById(
-			"picked-sort-direction",
-		),
+		direction: document.getElementById("picked-sort-direction"),
 	};
 
 	const inactive = "inactive";
@@ -619,12 +621,10 @@ export function createOptionsModule(
 	 * @throws Error when tabType and state where not set
 	 * @return {HTMLElement|null} the element found by its id
 	 */
-	function getTabElement(styleType, {
-		tabType = null,
-		state = null,
-		prefix = "",
-		postfix = "",
-	} = {}) {
+	function getTabElement(
+		styleType,
+		{ tabType = null, state = null, prefix = "", postfix = "" } = {},
+	) {
 		if (tabType == null || styleType == null || state == null) {
 			throw new Error("error_required_params");
 		}
@@ -685,12 +685,10 @@ export function createOptionsModule(
 		if (tabType == null || state == null) {
 			throw new Error("error_required_params");
 		}
-		const styleType = tabType === TAB_GENERIC_STYLE
-			? styleGeneric
-			: styleOrg;
-		const newPre = prefix === ""
-			? EXTENSION_NAME
-			: `${EXTENSION_NAME}-${prefix}`;
+		const styleType =
+			tabType === TAB_GENERIC_STYLE ? styleGeneric : styleOrg;
+		const newPre =
+			prefix === "" ? EXTENSION_NAME : `${EXTENSION_NAME}-${prefix}`;
 		const suffix = `${styleType}-${state}${postfix}`;
 		return {
 			background: `${newPre}-${TAB_STYLE_BACKGROUND}-${suffix}`,
@@ -698,9 +696,10 @@ export function createOptionsModule(
 			border: `${newPre}-${TAB_STYLE_BORDER}-${suffix}`,
 			shadow: `${newPre}-${TAB_STYLE_SHADOW}-${suffix}`,
 			hover: `${newPre}-${TAB_STYLE_HOVER}-${suffix}`,
-			top: state === active
-				? `${newPre}-${TAB_STYLE_TOP}-${suffix}`
-				: undefined,
+			top:
+				state === active
+					? `${newPre}-${TAB_STYLE_TOP}-${suffix}`
+					: undefined,
 			bold: `${newPre}-${TAB_STYLE_BOLD}-${suffix}`,
 			italic: `${newPre}-${TAB_STYLE_ITALIC}-${suffix}`,
 			underline: `${newPre}-${TAB_STYLE_UNDERLINE}-${suffix}`,
@@ -769,9 +768,8 @@ export function createOptionsModule(
 			[TAB_STYLE_BORDER]: getTabElement(TAB_STYLE_BORDER, conf),
 			[TAB_STYLE_SHADOW]: getTabElement(TAB_STYLE_SHADOW, conf),
 			[TAB_STYLE_HOVER]: getTabElement(TAB_STYLE_HOVER, conf),
-			[TAB_STYLE_TOP]: state === active
-				? getTabElement(TAB_STYLE_TOP, conf)
-				: null,
+			[TAB_STYLE_TOP]:
+				state === active ? getTabElement(TAB_STYLE_TOP, conf) : null,
 			[TAB_STYLE_BOLD]: getTabElement(TAB_STYLE_BOLD, conf),
 			[TAB_STYLE_ITALIC]: getTabElement(TAB_STYLE_ITALIC, conf),
 			[TAB_STYLE_UNDERLINE]: getTabElement(TAB_STYLE_UNDERLINE, conf),
@@ -1004,12 +1002,15 @@ export function createOptionsModule(
 	 * @param {boolean} isPinned - Whether targeting pinned Tabs (vs org-specific)
 	 * @return {string|null} Complete CSS rule string, or null if no value set
 	 */
-	function _buildCssRule(setting, {
-		isForInactive = true,
-		isGeneric = true,
-		wasPicked = false,
-		isPinned = false,
-	} = {}) {
+	function _buildCssRule(
+		setting,
+		{
+			isForInactive = true,
+			isGeneric = true,
+			wasPicked = false,
+			isPinned = false,
+		} = {},
+	) {
 		if (!wasPicked) return null;
 		const pseudoSelector = _getPseudoSelector(setting.id);
 		const cssSelector = getCssSelector({
@@ -1034,11 +1035,7 @@ export function createOptionsModule(
 	 */
 	function setPreviewAndInputValue(
 		setting,
-		{
-			updateViews = true,
-			isGeneric = true,
-			isPinned = false,
-		} = {},
+		{ updateViews = true, isGeneric = true, isPinned = false } = {},
 	) {
 		const isForInactive = !setting.forActive;
 		// Handle special case for TAB_STYLE_TOP (active only)
@@ -1057,15 +1054,12 @@ export function createOptionsModule(
 		}
 		// Get element references and style ID for current configuration
 		const pinKey = getPinKey({ isPinned });
-		const elements = _getElementReferences(
-			config,
-			{
-				isForInactive,
-				isGeneric,
-				wasPicked,
-				pinKey,
-			},
-		);
+		const elements = _getElementReferences(config, {
+			isForInactive,
+			isGeneric,
+			wasPicked,
+			pinKey,
+		});
 		const styleId = _getStyleId(config, {
 			isForInactive,
 			isGeneric,
@@ -1160,11 +1154,13 @@ export function createOptionsModule(
 	 * @see Tab.allowedKeys for enabled
 	 */
 	function savePickedSort(enabled = null, direction = null) {
-		const set = [{
-			id: PERSIST_SORT,
-			enabled,
-			ascending: direction == null ? null : direction === "ascending",
-		}];
+		const set = [
+			{
+				id: PERSIST_SORT,
+				enabled,
+				ascending: direction == null ? null : direction === "ascending",
+			},
+		];
 		if (enabled) {
 			// TAB_ADD_FRONT cannot be set
 			set.push({
@@ -1173,10 +1169,12 @@ export function createOptionsModule(
 			});
 			allCheckboxes[TAB_ADD_FRONT].checked = false;
 		}
-		sendExtensionMessage(getObjectToSet({
-			key: SETTINGS_KEY,
-			set,
-		}));
+		sendExtensionMessage(
+			getObjectToSet({
+				key: SETTINGS_KEY,
+				set,
+			}),
+		);
 	}
 
 	/**
@@ -1276,10 +1274,12 @@ export function createOptionsModule(
 		user_language_select.addEventListener("change", async (e) => {
 			const languageMessage = getObjectToSet({
 				key: SETTINGS_KEY,
-				set: [{
-					id: USER_LANGUAGE,
-					enabled: e.target.value,
-				}],
+				set: [
+					{
+						id: USER_LANGUAGE,
+						enabled: e.target.value,
+					},
+				],
 			});
 			/**
 			 * Updates the language used by the whole extension and backups the last language used.
@@ -1293,9 +1293,11 @@ export function createOptionsModule(
 				await sendExtensionMessage(languageMessage);
 				oldUserLanguage = e.target.value;
 			};
-			if (e.target.value === FOLLOW_SF_LANG) { // the user wants to follow the language on salesforce
+			if (e.target.value === FOLLOW_SF_LANG) {
+				// the user wants to follow the language on salesforce
 				const resp = await requestCookiesPermission();
-				if (resp) { // the extension now has the cookies permission
+				if (resp) {
+					// the extension now has the cookies permission
 					await sendLanguageMessage();
 				} else {
 					user_language_select.value = oldUserLanguage;
@@ -1357,10 +1359,12 @@ export function createOptionsModule(
 			isGeneric: isGenericKey(key),
 			isPinned: isPinnedKey(key),
 		});
-		sendExtensionMessage(getObjectToSet({
-			key,
-			set: [setting],
-		}));
+		sendExtensionMessage(
+			getObjectToSet({
+				key,
+				set: [setting],
+			}),
+		);
 	}
 
 	/**
@@ -1376,10 +1380,12 @@ export function createOptionsModule(
 	) {
 		const set_msg = getObjectToSet({
 			key,
-			set: [{
-				id: PREVENT_DEFAULT_OVERRIDE,
-				value: "no-default",
-			}],
+			set: [
+				{
+					id: PREVENT_DEFAULT_OVERRIDE,
+					value: "no-default",
+				},
+			],
 		});
 		for (const li of selectedLis) {
 			const styleKey = li.dataset.styleKey;
@@ -1445,8 +1451,9 @@ export function createOptionsModule(
 				allMovableDecorations,
 			);
 		}
-		const selectedDecorations = allMovableDecorations
-			.filter((el) => el.ariaSelected === "true");
+		const selectedDecorations = allMovableDecorations.filter(
+			(el) => el.ariaSelected === "true",
+		);
 		for (const el of allDecorations) {
 			el.ariaSelected = false;
 		}
@@ -1462,10 +1469,7 @@ export function createOptionsModule(
 	 * @param {boolean} isPinned - Whether to get pinned or unpinned list references
 	 * @return {Object} Object containing all necessary UI element references
 	 */
-	function _getTabResources({
-		isGeneric = true,
-		isPinned = false,
-	} = {}) {
+	function _getTabResources({ isGeneric = true, isPinned = false } = {}) {
 		const pinKey = getPinKey({ isPinned });
 		const pinConf = isGeneric ? genericTabConf[pinKey] : orgTabConf[pinKey];
 		const buttons = _getReferencesByKey(pinConf, "moveBtns");
@@ -1528,50 +1532,42 @@ export function createOptionsModule(
 			...allInactiveDecorations,
 			...allActiveDecorations,
 		];
-		inactiveMoveBtns.available.addEventListener(
-			"click",
-			() =>
-				moveSelectedDecorationsTo({
-					moveHereElement: inactiveUls.available,
-					allMovableDecorations: allInactiveDecorations,
-					isAdding: false,
-					key,
-					allDecorations,
-				}),
+		inactiveMoveBtns.available.addEventListener("click", () =>
+			moveSelectedDecorationsTo({
+				moveHereElement: inactiveUls.available,
+				allMovableDecorations: allInactiveDecorations,
+				isAdding: false,
+				key,
+				allDecorations,
+			}),
 		);
-		activeMoveBtns.available.addEventListener(
-			"click",
-			() =>
-				moveSelectedDecorationsTo({
-					moveHereElement: activeUls.available,
-					allMovableDecorations: allActiveDecorations,
-					isAdding: false,
-					key,
-					allDecorations,
-				}),
+		activeMoveBtns.available.addEventListener("click", () =>
+			moveSelectedDecorationsTo({
+				moveHereElement: activeUls.available,
+				allMovableDecorations: allActiveDecorations,
+				isAdding: false,
+				key,
+				allDecorations,
+			}),
 		);
 		// Move to chosen buttons
-		inactiveMoveBtns.chosen.addEventListener(
-			"click",
-			() =>
-				moveSelectedDecorationsTo({
-					moveHereElement: inactiveUls.chosen,
-					allMovableDecorations: allInactiveDecorations,
-					isAdding: true,
-					key,
-					allDecorations,
-				}),
+		inactiveMoveBtns.chosen.addEventListener("click", () =>
+			moveSelectedDecorationsTo({
+				moveHereElement: inactiveUls.chosen,
+				allMovableDecorations: allInactiveDecorations,
+				isAdding: true,
+				key,
+				allDecorations,
+			}),
 		);
-		activeMoveBtns.chosen.addEventListener(
-			"click",
-			() =>
-				moveSelectedDecorationsTo({
-					moveHereElement: activeUls.chosen,
-					allMovableDecorations: allActiveDecorations,
-					isAdding: true,
-					key,
-					allDecorations,
-				}),
+		activeMoveBtns.chosen.addEventListener("click", () =>
+			moveSelectedDecorationsTo({
+				moveHereElement: activeUls.chosen,
+				allMovableDecorations: allActiveDecorations,
+				isAdding: true,
+				key,
+				allDecorations,
+			}),
 		);
 	}
 	/**
@@ -1584,16 +1580,14 @@ export function createOptionsModule(
 		// Input change listeners
 		for (const el of resources.inputs.inactive) {
 			el?.addEventListener("change", (e) => saveTabOptions(e, key));
-			el?.addEventListener(
-				"click",
-				() => setActivePreview({ isActive: false }),
+			el?.addEventListener("click", () =>
+				setActivePreview({ isActive: false }),
 			);
 		}
 		for (const el of resources.inputs.active) {
 			el?.addEventListener("change", (e) => saveTabOptions(e, key));
-			el?.addEventListener(
-				"click",
-				() => setActivePreview({ isActive: true }),
+			el?.addEventListener("click", () =>
+				setActivePreview({ isActive: true }),
 			);
 		}
 		// Decoration selection listeners
@@ -1613,9 +1607,10 @@ export function createOptionsModule(
 	 * @return {Promise<void>}
 	 * @throws {Error} If `key` is not a style key
 	 */
-	async function restoreTabSettings(key = GENERIC_TAB_STYLE_KEY, {
-		isPinned = false,
-	} = {}) {
+	async function restoreTabSettings(
+		key = GENERIC_TAB_STYLE_KEY,
+		{ isPinned = false } = {},
+	) {
 		if (!isStyleKey(key)) {
 			throw new Error("error_invalid_key");
 		}
@@ -1739,16 +1734,15 @@ export function createOptionsModule(
 			await restoreTabSettings(ORG_TAB_STYLE_KEY, { isPinned: true });
 			showRelevantSettings_HideOthers(settings_pinnedOrg);
 		});
-		document.querySelector("#save-container > button")?.addEventListener(
-			"click",
-			() => {
+		document
+			.querySelector("#save-container > button")
+			?.addEventListener("click", () => {
 				savePickedSort(
 					keep_sorted_el.checked && picked_sort.select.value,
 					picked_sort.direction.value,
 				);
 				showThenHideToast(saveToast);
-			},
-		);
+			});
 	}
 
 	/**

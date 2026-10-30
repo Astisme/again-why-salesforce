@@ -1,10 +1,11 @@
+import { test } from "#test";
 import "../../mocks.test.ts";
 import {
 	assert,
 	assertEquals,
 	assertExists,
 	assertStringIncludes,
-} from "@std/testing/asserts";
+} from "#test";
 import { waitForCondition } from "../../async.test.ts";
 import {
 	checkAddRemoveContextMenus,
@@ -39,20 +40,23 @@ import {
  * @return {Promise<void>}
  */
 function setActiveTab(url: string) {
-	BROWSER.tabs.setMockBrowserTabs([{
-		id: 0,
-		url,
-		active: true,
-		currentWindow: true,
-	}, {
-		id: 1,
-		url: "https://mock1.url",
-		active: false,
-		currentWindow: true,
-	}]);
+	BROWSER.tabs.setMockBrowserTabs([
+		{
+			id: 0,
+			url,
+			active: true,
+			currentWindow: true,
+		},
+		{
+			id: 1,
+			url: "https://mock1.url",
+			active: false,
+			currentWindow: true,
+		},
+	]);
 }
 
-Deno.test({
+test({
 	name: "should create and notify without depending on the active tab",
 	sanitizeOps: false,
 	sanitizeResources: false,
@@ -68,50 +72,54 @@ Deno.test({
 	},
 });
 
-Deno.test({
+test({
 	name: "should refresh shortcut labels without waiting for tab activation",
 	sanitizeOps: false,
 	sanitizeResources: false,
 	fn: async () => {
 		const contextMenus = createContextMenusModule();
 		await setActiveTab("https://mock1.url");
-		BROWSER.commands.setMockCommands([{
-			name: CMD_SAVE_AS_TAB,
-			shortcut: "Alt+Shift+P",
-		}]);
+		BROWSER.commands.setMockCommands([
+			{
+				name: CMD_SAVE_AS_TAB,
+				shortcut: "Alt+Shift+P",
+			},
+		]);
 
 		await contextMenus.checkAddRemoveContextMenus("create");
 
-		const initialMenu = BROWSER.contextMenus._contextMenus.find((menu) =>
-			menu.id === CXM_PAGE_SAVE_TAB
+		const initialMenu = BROWSER.contextMenus._contextMenus.find(
+			(menu) => menu.id === CXM_PAGE_SAVE_TAB,
 		);
 		assert(initialMenu != null);
 		assertExists(initialMenu.title);
 		assertStringIncludes(initialMenu.title, "(Alt+Shift+P)");
 
-		BROWSER.commands.setMockCommands([{
-			name: CMD_SAVE_AS_TAB,
-			shortcut: "Ctrl+Shift+P",
-		}]);
+		BROWSER.commands.setMockCommands([
+			{
+				name: CMD_SAVE_AS_TAB,
+				shortcut: "Ctrl+Shift+P",
+			},
+		]);
 
 		await contextMenus.refreshContextMenus("testRefresh");
 
-		const refreshedMenu = BROWSER.contextMenus._contextMenus.find((menu) =>
-			menu.id === CXM_PAGE_SAVE_TAB
+		const refreshedMenu = BROWSER.contextMenus._contextMenus.find(
+			(menu) => menu.id === CXM_PAGE_SAVE_TAB,
 		);
 		assert(refreshedMenu != null);
 		assertExists(refreshedMenu.title);
 		assertStringIncludes(refreshedMenu.title, "(Ctrl+Shift+P)");
 		assertEquals(
-			BROWSER.contextMenus._contextMenus.filter((menu) =>
-				menu.id === CXM_PAGE_SAVE_TAB
+			BROWSER.contextMenus._contextMenus.filter(
+				(menu) => menu.id === CXM_PAGE_SAVE_TAB,
 			).length,
 			1,
 		);
 	},
 });
 
-Deno.test({
+test({
 	name: "should replace stale browser menu entries before creating new ones",
 	sanitizeOps: false,
 	sanitizeResources: false,
@@ -124,23 +132,25 @@ Deno.test({
 			id: CXM_PAGE_SAVE_TAB,
 			title: "stale",
 		});
-		BROWSER.commands.setMockCommands([{
-			name: CMD_SAVE_AS_TAB,
-			shortcut: "Alt+Shift+P",
-		}]);
+		BROWSER.commands.setMockCommands([
+			{
+				name: CMD_SAVE_AS_TAB,
+				shortcut: "Alt+Shift+P",
+			},
+		]);
 
 		await contextMenus.checkAddRemoveContextMenus("create");
 
-		const matchingMenus = BROWSER.contextMenus._contextMenus.filter((
-			menu,
-		) => menu.id === CXM_PAGE_SAVE_TAB);
+		const matchingMenus = BROWSER.contextMenus._contextMenus.filter(
+			(menu) => menu.id === CXM_PAGE_SAVE_TAB,
+		);
 		assertEquals(matchingMenus.length, 1);
 		assertExists(matchingMenus[0].title);
 		assertStringIncludes(matchingMenus[0].title, "(Alt+Shift+P)");
 	},
 });
 
-Deno.test({
+test({
 	name: "should append shortcut labels to all supported context menu entries",
 	sanitizeOps: false,
 	sanitizeResources: false,
@@ -170,8 +180,8 @@ Deno.test({
 			[CXM_EXPORT_TABS, "Alt+8"],
 		]);
 		for (const [id, shortcut] of expectedById.entries()) {
-			const entry = BROWSER.contextMenus._contextMenus.find((menu) =>
-				menu.id === id
+			const entry = BROWSER.contextMenus._contextMenus.find(
+				(menu) => menu.id === id,
 			);
 			assertExists(entry);
 			assertExists(entry.title);
@@ -180,9 +190,8 @@ Deno.test({
 	},
 });
 
-Deno.test({
-	name:
-		"should route context-menu click variants to their expected behaviors",
+test({
+	name: "should route context-menu click variants to their expected behaviors",
 	sanitizeOps: false,
 	sanitizeResources: false,
 	fn: async () => {
@@ -202,52 +211,61 @@ Deno.test({
 
 		try {
 			contextMenus.startContextMenus();
-			BROWSER.contextMenus.onClicked.triggerClick({
-				menuItemId: CXM_OPEN_OTHER_ORG,
-				linkText: "Open account",
-				pageUrl:
-					"https://acme.lightning.force.com/lightning/setup/SetupOneHome/home",
-				linkUrl:
-					"https://acme.lightning.force.com/lightning/setup/ObjectManager/home",
-			}, {
-				id: 1,
-				url: "https://acme.lightning.force.com/lightning/setup/SetupOneHome/home",
-				active: true,
-				currentWindow: true,
-			});
+			BROWSER.contextMenus.onClicked.triggerClick(
+				{
+					menuItemId: CXM_OPEN_OTHER_ORG,
+					linkText: "Open account",
+					pageUrl:
+						"https://acme.lightning.force.com/lightning/setup/SetupOneHome/home",
+					linkUrl:
+						"https://acme.lightning.force.com/lightning/setup/ObjectManager/home",
+				},
+				{
+					id: 1,
+					url: "https://acme.lightning.force.com/lightning/setup/SetupOneHome/home",
+					active: true,
+					currentWindow: true,
+				},
+			);
 
-			BROWSER.contextMenus.onClicked.triggerClick({
-				menuItemId: "unknown-context-menu",
-				linkText: "Unknown",
-				pageUrl:
-					"https://acme.lightning.force.com/lightning/setup/SetupOneHome/home",
-			}, {
-				id: 1,
-				url: "https://acme.lightning.force.com/lightning/setup/SetupOneHome/home",
-				active: true,
-				currentWindow: true,
-			});
+			BROWSER.contextMenus.onClicked.triggerClick(
+				{
+					menuItemId: "unknown-context-menu",
+					linkText: "Unknown",
+					pageUrl:
+						"https://acme.lightning.force.com/lightning/setup/SetupOneHome/home",
+				},
+				{
+					id: 1,
+					url: "https://acme.lightning.force.com/lightning/setup/SetupOneHome/home",
+					active: true,
+					currentWindow: true,
+				},
+			);
 
-			BROWSER.contextMenus.onClicked.triggerClick({
-				menuItemId: CXM_EXPORT_TABS,
-				pageUrl:
-					"https://acme.lightning.force.com/lightning/setup/SetupOneHome/home",
-			}, {
-				id: 1,
-				url: "https://acme.lightning.force.com/lightning/setup/SetupOneHome/home",
-				active: true,
-				currentWindow: true,
-			});
+			BROWSER.contextMenus.onClicked.triggerClick(
+				{
+					menuItemId: CXM_EXPORT_TABS,
+					pageUrl:
+						"https://acme.lightning.force.com/lightning/setup/SetupOneHome/home",
+				},
+				{
+					id: 1,
+					url: "https://acme.lightning.force.com/lightning/setup/SetupOneHome/home",
+					active: true,
+					currentWindow: true,
+				},
+			);
 
 			await waitForCondition(() => sentMessages.length >= 2);
 			assert(
-				sentMessages.some((message) =>
-					message.linkTabLabel === "Open account"
+				sentMessages.some(
+					(message) => message.linkTabLabel === "Open account",
 				),
 			);
 			assert(
 				sentMessages.some((message) =>
-					`${message.message ?? ""}`.includes("unknown context menu")
+					`${message.message ?? ""}`.includes("unknown context menu"),
 				),
 			);
 		} finally {
@@ -256,7 +274,7 @@ Deno.test({
 	},
 });
 
-Deno.test({
+test({
 	name: "should retain singleton context-menu API compatibility",
 	sanitizeOps: false,
 	sanitizeResources: false,
@@ -271,7 +289,7 @@ Deno.test({
 	},
 });
 
-Deno.test.afterEach(async () => {
+test.afterEach(async () => {
 	await setActiveTab("https://mock1.url");
 	await BROWSER.contextMenus.removeAll();
 	resetContextMenuStateForTests();

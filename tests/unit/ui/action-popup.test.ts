@@ -1,5 +1,6 @@
+import { test } from "#test";
 import "../../mocks.test.ts";
-import { assertEquals, assertStrictEquals } from "@std/testing/asserts";
+import { assertEquals, assertStrictEquals } from "#test";
 import {
 	CMD_EXPORT_ALL,
 	CMD_IMPORT,
@@ -62,7 +63,7 @@ function appendPopupButtons(document: MockDocument) {
 	};
 }
 
-Deno.test("popup-runtime resolves global popup close defaults lazily", () => {
+test("popup-runtime resolves global popup close defaults lazily", () => {
 	const descriptor = Object.getOwnPropertyDescriptor(globalThis, "close");
 	/**
 	 * Closes popup in runtime-default test fixture.
@@ -97,7 +98,7 @@ Deno.test("popup-runtime resolves global popup close defaults lazily", () => {
 	}
 });
 
-Deno.test("popup-runtime createPopupModule wires runtime constants through the pure module", async () => {
+test("popup-runtime createPopupModule wires runtime constants through the pure module", async () => {
 	const window = createMockWindow(
 		"https://example.test/action/popup/popup.html",
 	);
@@ -175,7 +176,7 @@ Deno.test("popup-runtime createPopupModule wires runtime constants through the p
 	assertEquals(String(settingsButton.title), "popup_settings,(Ctrl+S)");
 });
 
-Deno.test("popup-runtime runPopup keeps runtime redirect behavior for host and non-setup tabs", async (t) => {
+test("popup-runtime runPopup keeps runtime redirect behavior for host and non-setup tabs", async (t) => {
 	await t.step(
 		"redirects to host permissions when setup frame patterns are blocked",
 		async () => {
@@ -237,7 +238,7 @@ Deno.test("popup-runtime runPopup keeps runtime redirect behavior for host and n
 	);
 });
 
-Deno.test("popup-runtime runPopupWithInjectedOptions bypasses runtime constants and uses explicit injected values", async () => {
+test("popup-runtime runPopupWithInjectedOptions bypasses runtime constants and uses explicit injected values", async () => {
 	const window = createMockWindow(
 		"https://example.test/action/popup/popup.html",
 	);
@@ -262,10 +263,12 @@ Deno.test("popup-runtime runPopupWithInjectedOptions bypasses runtime constants 
 		sendExtensionMessage: (message: Record<string, unknown>) => {
 			messages.push(message);
 			if (message.what === "custom-get-commands") {
-				return Promise.resolve([{
-					name: "custom-import",
-					shortcut: "I",
-				}]);
+				return Promise.resolve([
+					{
+						name: "custom-import",
+						shortcut: "I",
+					},
+				]);
 			}
 			return Promise.resolve(undefined);
 		},

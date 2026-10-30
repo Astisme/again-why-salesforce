@@ -1,4 +1,5 @@
-import { assertEquals, assertRejects } from "@std/testing/asserts";
+import { test } from "#test";
+import { assertEquals, assertRejects } from "#test";
 import { installMockDom } from "../../happydom.test.ts";
 import { createToastModule } from "../../../src/salesforce/module/toast-module.js";
 import "../../mocks.test.ts";
@@ -114,7 +115,7 @@ function loadToastFixture() {
 	};
 }
 
-Deno.test("toast rejects unknown statuses", async () => {
+test("toast rejects unknown statuses", async () => {
 	const fixture = await loadToastFixture();
 	await assertRejects(
 		() => fixture.module.showToast("bad", "custom"),
@@ -123,7 +124,7 @@ Deno.test("toast rejects unknown statuses", async () => {
 	);
 });
 
-Deno.test("toast appends and logs toasts for all known statuses", async () => {
+test("toast appends and logs toasts for all known statuses", async () => {
 	const fixture = await loadToastFixture();
 
 	await fixture.module.showToast(["saved", "ok"], "success");
@@ -137,10 +138,13 @@ Deno.test("toast appends and logs toasts for all known statuses", async () => {
 	assertEquals(fixture.logs.warn, ["be careful"]);
 	assertEquals(fixture.logs.error, ["broken"]);
 	assertEquals(fixture.traces.value, 2);
-	assertEquals(fixture.appended.every((toast) => toast.removed), true);
+	assertEquals(
+		fixture.appended.every((toast) => toast.removed),
+		true,
+	);
 });
 
-Deno.test("toast reuses the cached hanger after the first lookup", async () => {
+test("toast reuses the cached hanger after the first lookup", async () => {
 	const fixture = await loadToastFixture();
 	const secondAppend: ToastElement[] = [];
 
@@ -160,7 +164,7 @@ Deno.test("toast reuses the cached hanger after the first lookup", async () => {
 	assertEquals(fixture.appended.length, 2);
 });
 
-Deno.test("toast accepts custom statuses present in the allowed status set", async () => {
+test("toast accepts custom statuses present in the allowed status set", async () => {
 	const appended: ToastElement[] = [];
 	const logs = {
 		error: [] as string[],
@@ -217,7 +221,7 @@ Deno.test("toast accepts custom statuses present in the allowed status set", asy
 	assertEquals(logs.error.length, 0);
 });
 
-Deno.test("toast supports missing hanger and missing timeout dependencies", async () => {
+test("toast supports missing hanger and missing timeout dependencies", async () => {
 	const logs: string[] = [];
 	let removed = false;
 	const module: ToastShowApi = createToastModule({
@@ -248,7 +252,7 @@ Deno.test("toast supports missing hanger and missing timeout dependencies", asyn
 	assertEquals(removed, false);
 });
 
-Deno.test("toast rejects when generator dependency is missing", async () => {
+test("toast rejects when generator dependency is missing", async () => {
 	const module: ToastShowApi = createToastModule({
 		allToastTypes: new Set(["success"]),
 		documentRef: {
@@ -312,7 +316,7 @@ function installGetElementsByClassNamePolyfill() {
 	};
 }
 
-Deno.test("toast canonical import validates status handling, logging branches, and cached hanger reuse", async () => {
+test("toast canonical import validates status handling, logging branches, and cached hanger reuse", async () => {
 	const dom = installMockDom(
 		"https://acme.lightning.force.com/lightning/setup/Users/home",
 	);
@@ -352,9 +356,8 @@ Deno.test("toast canonical import validates status handling, logging branches, a
 			writable: true,
 		});
 
-		const generatorModule = await import(
-			"../../../src/salesforce/generator.js"
-		);
+		const generatorModule =
+			await import("../../../src/salesforce/generator.js");
 		generatorModule.createGeneratorModule({
 			getTranslations: passthroughTranslations,
 		});
@@ -370,9 +373,8 @@ Deno.test("toast canonical import validates status handling, logging branches, a
 
 		const secondHanger = document.createElement("div");
 		secondHanger.className = "oneConsoleTabset navexConsoleTabset";
-		const originalSecondAppend = secondHanger.appendChild.bind(
-			secondHanger,
-		);
+		const originalSecondAppend =
+			secondHanger.appendChild.bind(secondHanger);
 		secondHanger.appendChild = ((node: Node) => {
 			appendedSecond.push(node as HTMLElement);
 			return originalSecondAppend(node);

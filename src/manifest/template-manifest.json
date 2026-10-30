@@ -4,21 +4,13 @@
 	"version": "2.2.6",
 	"default_locale": "en",
 	"description": "__MSG_extension_description__",
-	"permissions": [
-		"storage",
-		"contextMenus"
-	],
+	"permissions": ["storage", "contextMenus"],
 	"host_permissions": [
 		"*://*.my.salesforce-setup.com/lightning/setup/*",
 		"*://*.lightning.force.com/lightning/setup/*"
 	],
-	"optional_permissions": [
-		"downloads",
-		"cookies"
-	],
-	"optional_host_permissions": [
-		"*://*.my.salesforce.com/*"
-	],
+	"optional_permissions": ["downloads", "cookies"],
+	"optional_host_permissions": ["*://*.my.salesforce.com/*"],
 	"homepage_url": "https://github.com/Astisme/again-why-salesforce",
 	"content_scripts": [
 		{
@@ -26,9 +18,7 @@
 				"*://*.my.salesforce-setup.com/lightning/setup/*",
 				"*://*.lightning.force.com/lightning/setup/*"
 			],
-			"js": [
-				"generated/bundledContent.js"
-			],
+			"js": ["generated/bundledContent.js"],
 			"run_at": "document_start",
 			"all_frames": false
 		}
@@ -68,9 +58,7 @@
 	},
 	"background": {
 		"service_worker": "generated/bundledBackground.js",
-		"scripts": [
-			"generated/bundledBackground.js"
-		],
+		"scripts": ["generated/bundledBackground.js"],
 		"type": "module"
 	},
 	"minimum_chrome_version": "120.0.0",
@@ -79,12 +67,8 @@
 			"id": "again@why.salesforce",
 			"strict_min_version": "140.0",
 			"data_collection_permissions": {
-				"required": [
-					"none"
-				],
-				"optional": [
-					"technicalAndInteraction"
-				]
+				"required": ["none"],
+				"optional": ["technicalAndInteraction"]
 			}
 		},
 		"safari": {

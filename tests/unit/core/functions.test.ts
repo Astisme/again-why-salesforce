@@ -1,3 +1,4 @@
+import { test } from "#test";
 // @ts-nocheck: legacy mixed global mocks in this file are not fully typed yet.
 import "../../mocks.test.ts";
 import {
@@ -6,7 +7,7 @@ import {
 	assertFalse,
 	assertRejects,
 	assertThrows,
-} from "@std/testing/asserts";
+} from "#test";
 
 import {
 	BROWSER,
@@ -66,12 +67,12 @@ import {
 } from "../../../src/core/functions.js";
 import { installMockDom } from "../../happydom.test.ts";
 
-Deno.test("sendExtensionMessage returns promise if no callback", async () => {
+test("sendExtensionMessage returns promise if no callback", async () => {
 	const result = await sendExtensionMessage({ what: "echo", echo: "bar" });
 	assertEquals(result, "bar");
 });
 
-Deno.test("applyGlobalOverride handles configurable and non-configurable globals", () => {
+test("applyGlobalOverride handles configurable and non-configurable globals", () => {
 	const propName = "__test_apply_global_override__";
 	Object.defineProperty(globalThis, propName, {
 		configurable: true,
@@ -90,24 +91,24 @@ Deno.test("applyGlobalOverride handles configurable and non-configurable globals
 	assertEquals(Infinity, infinityBefore);
 });
 
-Deno.test("sendExtensionMessage ignores null messages", () => {
+test("sendExtensionMessage ignores null messages", () => {
 	assertEquals(sendExtensionMessage(null), undefined);
 });
 
-Deno.test("sendExtensionMessage ignores null what", () => {
+test("sendExtensionMessage ignores null what", () => {
 	assertEquals(sendExtensionMessage({ what: null }), undefined);
 });
 
-Deno.test("sendExtensionMessage rejects on runtime error", async () => {
+test("sendExtensionMessage rejects on runtime error", async () => {
 	const originalError = BROWSER.runtime.lastError;
 	BROWSER.runtime.lastError = new Error("fail");
 	await assertRejects(() =>
-		sendExtensionMessage({ what: "eco", echo: "bar" })
+		sendExtensionMessage({ what: "eco", echo: "bar" }),
 	);
 	BROWSER.runtime.lastError = originalError;
 });
 
-Deno.test("sendExtensionMessages resolves batched responses", async () => {
+test("sendExtensionMessages resolves batched responses", async () => {
 	const responses = await sendExtensionMessages([
 		{ what: "echo", echo: "first" },
 		{ what: "echo", echo: "second" },
@@ -116,7 +117,7 @@ Deno.test("sendExtensionMessages resolves batched responses", async () => {
 	assertEquals(responses, ["first", "second"]);
 });
 
-Deno.test("getSettings", async (t) => {
+test("getSettings", async (t) => {
 	await t.step(
 		"getSettings equals sendExtensionMessage in specific case",
 		async () => {
@@ -181,7 +182,7 @@ Deno.test("getSettings", async (t) => {
 	);
 });
 
-Deno.test("getStyleSettings sends correct message", async (t) => {
+test("getStyleSettings sends correct message", async (t) => {
 	await t.step("getAllStyleSettings returns null if no styles", async () => {
 		const result = await getStyleSettings();
 		assertEquals(result, null);
@@ -201,9 +202,8 @@ Deno.test("getStyleSettings sends correct message", async (t) => {
 				resultWithGetStyleSettings,
 				resultWithSendExtensionMessage,
 			);
-			resultWithGetStyleSettings = await getStyleSettings(
-				ORG_TAB_STYLE_KEY,
-			);
+			resultWithGetStyleSettings =
+				await getStyleSettings(ORG_TAB_STYLE_KEY);
 			resultWithSendExtensionMessage = await sendExtensionMessage({
 				what: "get-style-settings",
 				key: ORG_TAB_STYLE_KEY,
@@ -352,7 +352,7 @@ Deno.test("getStyleSettings sends correct message", async (t) => {
 	});
 });
 
-Deno.test("getCssSelector builds correct selector", () => {
+test("getCssSelector builds correct selector", () => {
 	const extensionNameClass = ".again-why-salesforce";
 	const isActive = ".slds-is-active";
 	const hasOrgTab = ":has(.is-org-tab)";
@@ -524,7 +524,7 @@ Deno.test("getCssSelector builds correct selector", () => {
 	);
 });
 
-Deno.test("getCssRule generates correct CSS rules", async (t) => {
+test("getCssRule generates correct CSS rules", async (t) => {
 	await t.step("test happy path when inputs are correct", () => {
 		assertEquals(
 			getCssRule(TAB_STYLE_BACKGROUND, "#fff"),
@@ -538,10 +538,7 @@ Deno.test("getCssRule generates correct CSS rules", async (t) => {
 			getCssRule(TAB_STYLE_TOP, "#faf"),
 			"background-color: #faf !important;",
 		);
-		assertEquals(
-			getCssRule(TAB_STYLE_COLOR, "#000"),
-			"color: #000;",
-		);
+		assertEquals(getCssRule(TAB_STYLE_COLOR, "#000"), "color: #000;");
 		assertEquals(
 			getCssRule(TAB_STYLE_BORDER, "red"),
 			"border: 2px solid red;",
@@ -550,30 +547,18 @@ Deno.test("getCssRule generates correct CSS rules", async (t) => {
 			getCssRule(TAB_STYLE_SHADOW, "#f1f1f1"),
 			"text-shadow: 0px 0px 3px #f1f1f1;",
 		);
-		assertEquals(
-			getCssRule(TAB_STYLE_BOLD),
-			"font-weight: bold;",
-		);
-		assertEquals(
-			getCssRule(TAB_STYLE_ITALIC),
-			"font-style: italic;",
-		);
+		assertEquals(getCssRule(TAB_STYLE_BOLD), "font-weight: bold;");
+		assertEquals(getCssRule(TAB_STYLE_ITALIC), "font-style: italic;");
 		assertEquals(
 			getCssRule(TAB_STYLE_UNDERLINE),
 			"text-decoration: underline;",
 		);
-		assertEquals(
-			getCssRule("user-set"),
-			"",
-		);
-		assertEquals(
-			getCssRule(),
-			"",
-		);
+		assertEquals(getCssRule("user-set"), "");
+		assertEquals(getCssRule(), "");
 	});
 });
 
-Deno.test("functions helper exports cover style keys, settings page, redirects, and style injection", async (t) => {
+test("functions helper exports cover style keys, settings page, redirects, and style injection", async (t) => {
 	await t.step("style key helpers return the expected mappings", () => {
 		assert(isGenericKey(GENERIC_TAB_STYLE_KEY));
 		assertFalse(isGenericKey(ORG_TAB_STYLE_KEY));
@@ -645,15 +630,17 @@ Deno.test("functions helper exports cover style keys, settings page, redirects, 
 			};
 			try {
 				performLightningRedirect("/lightning/page");
-				assertEquals(messages, [{
-					message: {
-						what: "lightningNavigation",
-						navigationType: "url",
-						url: "/lightning/page",
-						fallbackURL: "/lightning/page",
+				assertEquals(messages, [
+					{
+						message: {
+							what: "lightningNavigation",
+							navigationType: "url",
+							url: "/lightning/page",
+							fallbackURL: "/lightning/page",
+						},
+						targetOrigin: "*",
 					},
-					targetOrigin: "*",
-				}]);
+				]);
 			} finally {
 				globalThis.postMessage = originalPostMessage;
 			}
@@ -708,7 +695,7 @@ Deno.test("functions helper exports cover style keys, settings page, redirects, 
 	);
 });
 
-Deno.test("requestPermissions", async (t) => {
+test("requestPermissions", async (t) => {
 	await t.step("request export permissions", async () => {
 		const exportPermObj = {
 			permissions: ["downloads"],
@@ -742,8 +729,7 @@ Deno.test("requestPermissions", async (t) => {
 		async () => {
 			localStorage.setItem(DO_NOT_REQUEST_FRAME_PERMISSION, "false");
 			globalThis.location = {
-				href:
-					`https://example.test/?${DO_NOT_REQUEST_FRAME_PERMISSION}=true`,
+				href: `https://example.test/?${DO_NOT_REQUEST_FRAME_PERMISSION}=true`,
 			};
 			assert(await areFramePatternsAllowed());
 		},
@@ -759,7 +745,7 @@ Deno.test("requestPermissions", async (t) => {
 	});
 });
 
-Deno.test("checks for extensionsion functionality", async (t) => {
+test("checks for extensionsion functionality", async (t) => {
 	await t.step("is on salesforce setup", async () => {
 		const isonSFsetup = await isOnSalesforceSetup();
 		assert(isonSFsetup.ison);
@@ -797,7 +783,7 @@ Deno.test("checks for extensionsion functionality", async (t) => {
 	);
 });
 
-Deno.test("isSalesforceHostname matches only supported Salesforce hostnames", () => {
+test("isSalesforceHostname matches only supported Salesforce hostnames", () => {
 	assert(
 		isSalesforceHostname(
 			new URL("https://acme.my.salesforce-setup.com/lightning/setup"),
@@ -822,7 +808,7 @@ class MockElement {
 	}
 }
 
-Deno.test("test inner element field by selector", async (t) => {
+test("test inner element field by selector", async (t) => {
 	await t.step("nothing passed should return undefined and not fail", () => {
 		assertEquals(getInnerElementFieldBySelector(), undefined);
 		assertEquals(
@@ -924,7 +910,7 @@ Deno.test("test inner element field by selector", async (t) => {
 	});
 });
 
-Deno.test("getTodayDateKey formats the local calendar day", () => {
+test("getTodayDateKey formats the local calendar day", () => {
 	assertEquals(
 		getTodayDateKey(new Date(2026, 2, 12, 0, 30, 0, 0)),
 		"2026-03-12",
@@ -935,7 +921,7 @@ Deno.test("getTodayDateKey formats the local calendar day", () => {
 	);
 });
 
-Deno.test("review sponsor link openers choose correct destinations", () => {
+test("review sponsor link openers choose correct destinations", () => {
 	const openedLinks = [];
 	const originalOpen = globalThis.open;
 	globalThis.open = (url, target) => {
@@ -953,17 +939,18 @@ Deno.test("review sponsor link openers choose correct destinations", () => {
 			[SPONSOR_LINK, "_self"],
 		]);
 		assert(
-			openedLinks.some(([link, target]) =>
-				link === EXTENSION_GITHUB_ISSUES_LINK && target === "_self"
+			openedLinks.some(
+				([link, target]) =>
+					link === EXTENSION_GITHUB_ISSUES_LINK && target === "_self",
 			),
 		);
 		if (openedLinks.length === 4) {
 			assertEquals(openedLinks[0][1], "_self");
-			assert([
-				CHROME_LINK,
-				EDGE_LINK,
-				FIREFOX_LINK,
-			].includes(openedLinks[0][0]));
+			assert(
+				[CHROME_LINK, EDGE_LINK, FIREFOX_LINK].includes(
+					openedLinks[0][0],
+				),
+			);
 		}
 	} finally {
 		globalThis.open = originalOpen;

@@ -70,7 +70,8 @@ export class TabContainer extends Array {
 	 * Getter for #pinnedTabs
 	 * @return {number} - the positive integer representing how many pinned Tabs are present
 	 */
-	get pinned() { // function name same as TabContainer.keyPinnedTabsNo
+	get pinned() {
+		// function name same as TabContainer.keyPinnedTabsNo
 		return this.#pinnedTabs;
 	}
 	/**
@@ -78,7 +79,8 @@ export class TabContainer extends Array {
 	 * @param {number} pinnedTabs - the positive integer which will become the currently pinned Tabs
 	 * @throws TypeError when passing a value that is not a number
 	 */
-	set pinned(pinnedTabs = 0) { // function name same as TabContainer.keyPinnedTabsNo
+	set pinned(pinnedTabs = 0) {
+		// function name same as TabContainer.keyPinnedTabsNo
 		pinnedTabs = pinnedTabs ?? 0; // takes care of null and undefined
 		if (typeof pinnedTabs !== "number") {
 			throw new TypeError("error_required_params");
@@ -93,9 +95,7 @@ export class TabContainer extends Array {
 	/**
 	 * All the keys which express data about a TabContainer.
 	 */
-	static metadataKeys = new Set([
-		TabContainer.keyPinnedTabsNo,
-	]);
+	static metadataKeys = new Set([TabContainer.keyPinnedTabsNo]);
 
 	/**
 	 * Sets the sort state properties based on detected sorting
@@ -122,9 +122,7 @@ export class TabContainer extends Array {
 	 */
 	constructor(secret) {
 		if (secret !== _tabContainerSecret) {
-			throw new Error(
-				"error_tabcontainer_constructor",
-			);
+			throw new Error("error_tabcontainer_constructor");
 		}
 		super();
 	}
@@ -150,11 +148,12 @@ export class TabContainer extends Array {
 			return true;
 		};
 		return (
-			Array.isArray(savedTabs) &&
-			savedTabs.length > 0 &&
-			await (instance.addTabs(savedTabs, false)) &&
-			setPinned(pinnedTabs)
-		) || await instance.setDefaultTabs();
+			(Array.isArray(savedTabs) &&
+				savedTabs.length > 0 &&
+				(await instance.addTabs(savedTabs, false)) &&
+				setPinned(pinnedTabs)) ||
+			(await instance.setDefaultTabs())
+		);
 	}
 
 	/**
@@ -164,10 +163,7 @@ export class TabContainer extends Array {
 	 * @param {number} [param0.pinned=0] the number of pinned Tabs which should be set
 	 * @return a brand-new non-initialized TabContainer
 	 */
-	static getThrowawayInstance({
-		tabs = [],
-		pinned = 0,
-	} = {}) {
+	static getThrowawayInstance({ tabs = [], pinned = 0 } = {}) {
 		const res = new TabContainer(_tabContainerSecret);
 		res.push(tabs);
 		res[TabContainer.keyPinnedTabsNo] = pinned;
@@ -186,7 +182,7 @@ export class TabContainer extends Array {
 		}
 		singletonAllTabs = (async () => {
 			const instance = new TabContainer(_tabContainerSecret);
-			if (!await TabContainer.#initialize(instance)) {
+			if (!(await TabContainer.#initialize(instance))) {
 				throw new Error(
 					await TranslationService.getTranslations(
 						"error_tabcont_not_initialized",
@@ -320,12 +316,14 @@ export class TabContainer extends Array {
 	 */
 	slice(start = 0, end = this.length) {
 		// Convert negative indices to positive
-		start = start < 0
-			? Math.max(this.length + start, 0)
-			: Math.min(start, this.length);
-		end = end < 0
-			? Math.max(this.length + end, 0)
-			: Math.min(end, this.length);
+		start =
+			start < 0
+				? Math.max(this.length + start, 0)
+				: Math.min(start, this.length);
+		end =
+			end < 0
+				? Math.max(this.length + end, 0)
+				: Math.min(end, this.length);
 		// Ensure start is not greater than end
 		const sliced = TabContainer.getThrowawayInstance();
 		if (start >= end) {
@@ -423,10 +421,7 @@ export class TabContainer extends Array {
 	 * @throws {Error} - Throws an error if the tab object is invalid or if the tab already exists.
 	 * @return {Promise<boolean>} - A promise that resolves to `true` if the tab is added and synchronized (if `sync` is `true`), otherwise `true` if not synchronized.
 	 */
-	async addTab(tab, {
-		sync = true,
-		addInFront = false,
-	} = {}) {
+	async addTab(tab, { sync = true, addInFront = false } = {}) {
 		const initialLength = this.length;
 		if (addInFront) {
 			// add in front but after the pinned Tabs
@@ -438,9 +433,11 @@ export class TabContainer extends Array {
 		if (this.length <= initialLength) {
 			// nothing was added
 			const { msg } = this.#validateItem(tab);
-			throw new Error(`${await TranslationService.getTranslations(
-				msg,
-			)} ${JSON.stringify(tab)}`);
+			throw new Error(
+				`${await TranslationService.getTranslations(
+					msg,
+				)} ${JSON.stringify(tab)}`,
+			);
 		}
 		return sync ? this.syncTabs() : this.checkSetSorted();
 	}
@@ -456,9 +453,7 @@ export class TabContainer extends Array {
 	 * @return {Promise<boolean>} - A promise that resolves to `true` if all Tabs were added successfully (excluding duplicates), otherwise `false` if any Tab could not be added.
 	 * @async
 	 */
-	addTabs(tabs, sync = true, {
-		invalidateSort = false,
-	} = {}) {
+	addTabs(tabs, sync = true, { invalidateSort = false } = {}) {
 		if (tabs == null || (tabs.length === 0 && !sync)) {
 			return true;
 		}
@@ -501,9 +496,8 @@ export class TabContainer extends Array {
 		if (org == null) {
 			throw new Error("error_get_with_no_org");
 		}
-		return this.filter((tab) =>
-			tab.org != null &&
-			match === (tab.org === org)
+		return this.filter(
+			(tab) => tab.org != null && match === (tab.org === org),
 		);
 	}
 
@@ -530,12 +524,17 @@ export class TabContainer extends Array {
 				return this.getTabsByOrg(org, match);
 			}
 		}
-		return this.filter((tb) =>
-			match === tb.equals({
-				label,
-				url,
-				org,
-			}, strict)
+		return this.filter(
+			(tb) =>
+				match ===
+				tb.equals(
+					{
+						label,
+						url,
+						org,
+					},
+					strict,
+				),
 		);
 	}
 
@@ -571,14 +570,15 @@ export class TabContainer extends Array {
 			return matchingTabs[0];
 		}
 		if (
-			!match || (tab.url == null && tab.org == null) ||
+			!match ||
+			(tab.url == null && tab.org == null) ||
 			(tab.url == null && tab.org != null)
 		) {
 			throw new Error("error_many_tabs_found");
 		}
 		// try to filter by org
-		const filteredTabs = matchingTabs.filter((tb) =>
-			tb.org == null || tb.org === tab.org
+		const filteredTabs = matchingTabs.filter(
+			(tb) => tb.org == null || tb.org === tab.org,
 		);
 		if (filteredTabs.length === 0) {
 			throw new Error("error_tab_not_found");
@@ -625,7 +625,7 @@ export class TabContainer extends Array {
 				label,
 				url,
 				org,
-			})
+			}),
 		);
 		if (index < 0) {
 			throw new Error("error_tab_not_found");
@@ -657,13 +657,13 @@ export class TabContainer extends Array {
 		return this.some((tb) =>
 			checkDuplicate
 				? tb.isDuplicate({
-					url,
-					org,
-				})
+						url,
+						org,
+					})
 				: tb.equals({
-					url,
-					org,
-				})
+						url,
+						org,
+					}),
 		);
 	}
 
@@ -736,15 +736,18 @@ export class TabContainer extends Array {
 	 * // Remove org-specific tabs and add new ones
 	 * replaceTabs([{ label: "a", url: "a", org: "OrgA" }], false, true);
 	 */
-	replaceTabs(newTabs = [], {
-		resetTabs = true,
-		removeOrgTabs = false,
-		sync = true,
-		keepTabsNotThisOrg = null,
-		removeThisOrgTabs = null,
-		updatePinnedTabs = true,
-		invalidateSort = false,
-	} = {}) {
+	replaceTabs(
+		newTabs = [],
+		{
+			resetTabs = true,
+			removeOrgTabs = false,
+			sync = true,
+			keepTabsNotThisOrg = null,
+			removeThisOrgTabs = null,
+			updatePinnedTabs = true,
+			invalidateSort = false,
+		} = {},
+	) {
 		if (newTabs === this) {
 			return true;
 		}
@@ -799,18 +802,19 @@ export class TabContainer extends Array {
 	 * @param {string|null} [param1.currentOrg=null] - The current org when preserving other-org tabs during overwrite.
 	 * @return {Promise<number>} - Number of tabs successfully imported
 	 */
-	async importTabs(jsonString, {
-		resetTabs = false,
-		preserveOtherOrg = true,
-		importMetadata = false,
-		importPinnedTabs = false,
-		currentOrg = null,
-	} = {}) {
+	async importTabs(
+		jsonString,
+		{
+			resetTabs = false,
+			preserveOtherOrg = true,
+			importMetadata = false,
+			importPinnedTabs = false,
+			currentOrg = null,
+		} = {},
+	) {
 		const parsedTabs = JSON.parse(jsonString);
-		const {
-			[TabContainer.keyTabs]: normalizedImported = [],
-			...metadata
-		} = getTabContainerFromObj(parsedTabs);
+		const { [TabContainer.keyTabs]: normalizedImported = [], ...metadata } =
+			getTabContainerFromObj(parsedTabs);
 		if (metadata.isUsingOldVersion) {
 			// tell the user to upgrade their backups
 			void sendExtensionMessage({
@@ -826,36 +830,38 @@ export class TabContainer extends Array {
 		try {
 			// Keep old overwrite semantics: pinned overwrite without org-preserve context starts from empty state.
 			const shouldKeepExistingTabs = !(
-				resetTabs && importPinnedTabs && currentOrg == null
+				resetTabs &&
+				importPinnedTabs &&
+				currentOrg == null
 			);
 			const baseState = shouldKeepExistingTabs
 				? getFilteredReplaceState({
-					currentTabs: this,
-					pinnedTabsNo: this[TabContainer.keyPinnedTabsNo],
-					resetTabs,
-					removeOrgTabs: !preserveOtherOrg || currentOrg != null,
-					removeThisOrgTabs: preserveOtherOrg ? currentOrg : null,
-				})
+						currentTabs: this,
+						pinnedTabsNo: this[TabContainer.keyPinnedTabsNo],
+						resetTabs,
+						removeOrgTabs: !preserveOtherOrg || currentOrg != null,
+						removeThisOrgTabs: preserveOtherOrg ? currentOrg : null,
+					})
 				: {
-					tabs: [],
-					pinnedTabsNo: 0,
-				};
+						tabs: [],
+						pinnedTabsNo: 0,
+					};
 			const pinnedState = importPinnedTabs
 				? prepareImportedPinnedTabs({
-					pinnedTabsNo: metadata?.[TabContainer.keyPinnedTabsNo],
-					importedArr: imported,
-					existingPinnedTabs: baseState.tabs.slice(
-						0,
-						baseState.pinnedTabsNo,
-					),
-					resetTabs,
-				})
+						pinnedTabsNo: metadata?.[TabContainer.keyPinnedTabsNo],
+						importedArr: imported,
+						existingPinnedTabs: baseState.tabs.slice(
+							0,
+							baseState.pinnedTabsNo,
+						),
+						resetTabs,
+					})
 				: {
-					importedPinnedTabs: [],
-					remainingImportedTabs: Array.from(imported),
-					pinnedTabsNo: 0,
-					importedTabs: 0,
-				};
+						importedPinnedTabs: [],
+						remainingImportedTabs: Array.from(imported),
+						pinnedTabsNo: 0,
+						importedTabs: 0,
+					};
 			for (const tab of pinnedState.importedPinnedTabs) {
 				if (!Tab.isValid(tab)) {
 					throw new Error(`error_invalid_tab ${JSON.stringify(tab)}`);
@@ -866,8 +872,8 @@ export class TabContainer extends Array {
 				...pinnedState.importedPinnedTabs,
 				...baseState.tabs.slice(baseState.pinnedTabsNo),
 			];
-			const nextPinnedTabsNo = baseState.pinnedTabsNo +
-				pinnedState.pinnedTabsNo;
+			const nextPinnedTabsNo =
+				baseState.pinnedTabsNo + pinnedState.pinnedTabsNo;
 			// Stage full next container first so validation errors can roll back cleanly.
 			const nextState = TabContainer.getThrowawayInstance();
 			nextState.push(nextTabs);
@@ -877,8 +883,9 @@ export class TabContainer extends Array {
 			this.splice(0, this.length, ...nextState);
 			this[TabContainer.keyPinnedTabsNo] = nextPinnedTabsNo;
 			await this.syncTabs();
-			return pinnedState.importedTabs +
-				(nextState.length - nextStateLength);
+			return (
+				pinnedState.importedTabs + (nextState.length - nextStateLength)
+			);
 		} catch (error) {
 			console.info(error);
 			this.length = 0;
@@ -898,12 +905,10 @@ export class TabContainer extends Array {
 	 * @param {boolean} [fromInvalidateSortFunction=false] - Whether the function was called from a user action which invalidates the sorting function (like the moveTab function).
 	 * @return {Promise<boolean>} - A promise that resolves to `true` if the synchronization is successful, otherwise `false`.
 	 */
-	async syncTabs(
-		{
-			fromSortFunction = false,
-			fromInvalidateSortFunction = false,
-		} = {},
-	) {
+	async syncTabs({
+		fromSortFunction = false,
+		fromInvalidateSortFunction = false,
+	} = {}) {
 		// Always compute the final tab order before serializing and persisting.
 		await this.checkSetSorted(fromSortFunction, fromInvalidateSortFunction);
 		await sendExtensionMessage({
@@ -978,7 +983,8 @@ export class TabContainer extends Array {
 				throw new Error("error_already_pinned");
 			}
 			if (
-				!pinMovement && newIndex >= this[TabContainer.keyPinnedTabsNo]
+				!pinMovement &&
+				newIndex >= this[TabContainer.keyPinnedTabsNo]
 			) {
 				throw new Error("error_already_unpinned");
 			}
@@ -1005,9 +1011,8 @@ export class TabContainer extends Array {
 	async remove({ label = null, url = null, org = null } = {}) {
 		const tab = { label, url, org };
 		if (tab.label == null && tab.url == null && tab.org == null) {
-			const msg = await TranslationService.getTranslations(
-				"error_no_data",
-			);
+			const msg =
+				await TranslationService.getTranslations("error_no_data");
 			throw new Error(msg);
 		}
 		const index = this.getTabIndex(this.getSingleTabByData(tab));
@@ -1089,9 +1094,7 @@ export class TabContainer extends Array {
 	 */
 	removeOtherTabs(
 		{ label = null, url = null, org = null } = {},
-		{
-			removeBefore = null,
-		} = {},
+		{ removeBefore = null } = {},
 	) {
 		const tab = { label, url, org };
 		const matchTab = this.getSingleTabByData(tab);
@@ -1128,8 +1131,7 @@ export class TabContainer extends Array {
 		this.splice(
 			whereIndex,
 			0,
-			...this
-				.splice(minIndex, deleteCount)
+			...this.splice(minIndex, deleteCount)
 				// prevent org tabs which are not for this org to be deleted unwillingly
 				.filter((t) => this.getTabsNotThisOrg(t, tab)),
 		);
@@ -1158,9 +1160,7 @@ export class TabContainer extends Array {
 	sort({ sortBy = "label", sortAsc = true } = {}, sync = true) {
 		// Check for unexpected keys
 		if (!Tab.allowedKeys.has(sortBy)) {
-			throw new Error(
-				`error_tab_unexpected_keys ${sortBy}`,
-			);
+			throw new Error(`error_tab_unexpected_keys ${sortBy}`);
 		}
 		// backup pinned Tabs (do not sort them)
 		const pinnedTabsList = this.splice(
@@ -1251,10 +1251,13 @@ export class TabContainer extends Array {
 			return false; // not set or esplicitly set as not enabled
 		}
 		// Tabs should be kept sorted by persistSort.enabled
-		return this.sort({
-			sortBy: persistSort.enabled,
-			sortAsc: persistSort.ascending ?? true,
-		}, false);
+		return this.sort(
+			{
+				sortBy: persistSort.enabled,
+				sortAsc: persistSort.ascending ?? true,
+			},
+			false,
+		);
 	}
 
 	/**
@@ -1321,8 +1324,7 @@ export class TabContainer extends Array {
 	 */
 	handleClickTabByData(tabData = {}) {
 		try {
-			this.getSingleTabByData(tabData)
-				?.handleClick();
+			this.getSingleTabByData(tabData)?.handleClick();
 			return this.syncTabs();
 		} catch (e) {
 			console.warn(e);
@@ -1375,19 +1377,18 @@ export class TabContainer extends Array {
 	 * @throws Error when sortBy is not a key allowed by Tab
 	 * @return {Object} ready to be used by the TabContainer
 	 */
-	getSortOptions({
-		sortBy = "label",
-		standardSort = true,
-	} = {}) {
+	getSortOptions({ sortBy = "label", standardSort = true } = {}) {
 		if (!Tab.allowedKeys.has(sortBy)) {
 			throw new Error("error_tab_unexpected_keys");
 		}
 		return {
 			sortBy,
-			sortAsc: (standardSort &&
-				(this.isSortedBy !== sortBy || !this.isSortedAsc)) ||
+			sortAsc:
+				(standardSort &&
+					(this.isSortedBy !== sortBy || !this.isSortedAsc)) ||
 				(!standardSort &&
-					(this.isSortedBy === sortBy && !this.isSortedAsc)),
+					this.isSortedBy === sortBy &&
+					!this.isSortedAsc),
 		};
 	}
 }
@@ -1422,9 +1423,7 @@ function getAllTabs() {
  * @param {boolean} [param0.reset=false] - whether to reset the singleton to get fresh data
  * @return {Promise<TabContainer>} The TabContainer instance representing all tabs.
  */
-export async function ensureAllTabsAvailability({
-	reset = false,
-} = {}) {
+export async function ensureAllTabsAvailability({ reset = false } = {}) {
 	try {
 		if (reset) {
 			return await TabContainer._reset();

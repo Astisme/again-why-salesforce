@@ -160,10 +160,7 @@ export function createFavouriteManagerModule({
 	 * @param {boolean} [slashed=false] Whether to create slashed star.
 	 * @return {SVGElement} Created SVG icon.
 	 */
-	function createStarSvg({
-		id = null,
-		alt = null,
-	} = {}, slashed = false) {
+	function createStarSvg({ id = null, alt = null } = {}, slashed = false) {
 		const svg = documentRuntime.createElementNS(
 			"http://www.w3.org/2000/svg",
 			"svg",
@@ -223,10 +220,7 @@ export function createFavouriteManagerModule({
 				what: whatGetCommandsRuntime,
 				commands: [cmdSaveAsTabRuntime, cmdRemoveTabRuntime],
 			}),
-			getTranslationsRuntime([
-				"save_tab",
-				"remove_tab",
-			]),
+			getTranslationsRuntime(["save_tab", "remove_tab"]),
 		]);
 		let starCmd = null;
 		let slashedStarCmd = null;
@@ -256,21 +250,26 @@ export function createFavouriteManagerModule({
 		assistiveText.classList.add("slds-assistive-text");
 		assistiveText.textContent = saveTabAssistive;
 		button.appendChild(assistiveText);
-		const star = createStarSvg({
-			id: STAR_ID_RUNTIME,
-			alt: saveTabAssistive,
-		}, false);
+		const star = createStarSvg(
+			{
+				id: STAR_ID_RUNTIME,
+				alt: saveTabAssistive,
+			},
+			false,
+		);
 		span.appendChild(star);
-		const slashedStar = createStarSvg({
-			id: SLASHED_STAR_ID_RUNTIME,
-			alt: removeTabAssistive,
-		}, true);
+		const slashedStar = createStarSvg(
+			{
+				id: SLASHED_STAR_ID_RUNTIME,
+				alt: removeTabAssistive,
+			},
+			true,
+		);
 		slashedStar.classList.add(hiddenClassRuntime);
 		span.appendChild(slashedStar);
-		const style = injectStyleRuntime(
-			"awsf-hidden-favman",
-			{ css: `.${hiddenClassRuntime} { display: none; }` },
-		);
+		const style = injectStyleRuntime("awsf-hidden-favman", {
+			css: `.${hiddenClassRuntime} { display: none; }`,
+		});
 		span.appendChild(style);
 		return button;
 	}
@@ -287,8 +286,10 @@ export function createFavouriteManagerModule({
 		if (favouriteId == null) {
 			throw new Error("error_missing_favourite_id");
 		}
-		return button?.querySelector(`#${favouriteId}`) ??
-			documentRuntime.getElementById(favouriteId);
+		return (
+			button?.querySelector(`#${favouriteId}`) ??
+			documentRuntime.getElementById(favouriteId)
+		);
 	}
 
 	/**
@@ -302,7 +303,8 @@ export function createFavouriteManagerModule({
 		if (isSaved == null) {
 			return;
 		}
-		const favouriteButton = button ??
+		const favouriteButton =
+			button ??
 			documentRuntime.getElementById(FAVOURITE_BUTTON_ID_RUNTIME);
 		const star = getFavouriteImage(STAR_ID_RUNTIME, button);
 		const slashedStar = getFavouriteImage(SLASHED_STAR_ID_RUNTIME, button);
@@ -344,23 +346,21 @@ export function createFavouriteManagerModule({
 		]);
 		const href = getCurrentHrefRuntime();
 		let org;
-		const isTabAsOrgEnabled = Array.isArray(settings) &&
-			!settings.some((setting) =>
-				setting.id === tabAsOrgRuntime && !setting.enabled
+		const isTabAsOrgEnabled =
+			Array.isArray(settings) &&
+			!settings.some(
+				(setting) => setting.id === tabAsOrgRuntime && !setting.enabled,
 			);
-		const isLinkDetectionEnabled = Array.isArray(settings) &&
-			!settings.some((setting) =>
-				setting.id === skipLinkDetectionRuntime && setting.enabled
+		const isLinkDetectionEnabled =
+			Array.isArray(settings) &&
+			!settings.some(
+				(setting) =>
+					setting.id === skipLinkDetectionRuntime && setting.enabled,
 			);
 		if (
 			isTabAsOrgEnabled ||
-			(
-				(
-					settings == null ||
-					isLinkDetectionEnabled
-				) &&
-				tabRuntime.containsSalesforceId(href)
-			)
+			((settings == null || isLinkDetectionEnabled) &&
+				tabRuntime.containsSalesforceId(href))
 		) {
 			org = tabRuntime.extractOrgName(href);
 		}
@@ -368,9 +368,12 @@ export function createFavouriteManagerModule({
 			whatAddRuntime,
 			{ label, url, org },
 			{
-				addInFront: Array.isArray(settings) &&
-					settings.some((setting) =>
-						setting.id === tabAddFrontRuntime && setting.enabled
+				addInFront:
+					Array.isArray(settings) &&
+					settings.some(
+						(setting) =>
+							setting.id === tabAddFrontRuntime &&
+							setting.enabled,
 					),
 			},
 		);
@@ -439,7 +442,8 @@ export function createFavouriteManagerModule({
 		}
 		const isCurrentlyOnSavedTab = getIsCurrentlyOnSavedTabRuntime();
 		if (
-			getWasOnSavedTabRuntime() == null && isCurrentlyOnSavedTab == null
+			getWasOnSavedTabRuntime() == null &&
+			isCurrentlyOnSavedTab == null
 		) {
 			await isOnSavedTabRuntime();
 		}

@@ -203,10 +203,11 @@ export class MockElement {
 			this.href = value;
 		}
 		if (name.startsWith("data-")) {
-			const datasetKey = name.slice(5).replace(
-				/-([a-z])/g,
-				(_, character: string) => character.toUpperCase(),
-			);
+			const datasetKey = name
+				.slice(5)
+				.replace(/-([a-z])/g, (_, character: string) =>
+					character.toUpperCase(),
+				);
 			this.dataset[datasetKey] = value;
 		}
 	}
@@ -230,10 +231,11 @@ export class MockElement {
 	removeAttribute(name: string) {
 		this.attributes.delete(name);
 		if (name.startsWith("data-")) {
-			const datasetKey = name.slice(5).replace(
-				/-([a-z])/g,
-				(_, character: string) => character.toUpperCase(),
-			);
+			const datasetKey = name
+				.slice(5)
+				.replace(/-([a-z])/g, (_, character: string) =>
+					character.toUpperCase(),
+				);
 			delete this.dataset[datasetKey];
 		}
 	}

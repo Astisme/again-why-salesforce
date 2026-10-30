@@ -23,8 +23,14 @@ body {
 	margin: 0;
 	background: var(--bg);
 	color: var(--ink);
-	font-family: Inter, ui-sans-serif, system-ui, -apple-system,
-		BlinkMacSystemFont, "Segoe UI", sans-serif;
+	font-family:
+		Inter,
+		ui-sans-serif,
+		system-ui,
+		-apple-system,
+		BlinkMacSystemFont,
+		"Segoe UI",
+		sans-serif;
 	line-height: 1.5;
 	overflow-x: hidden;
 }
@@ -345,8 +351,10 @@ h3 {
 	border-top: 5px solid var(--blue);
 	border-radius: 8px;
 	box-shadow: 0 10px 30px rgb(16 36 58 / 7%);
-	transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms
-		ease;
+	transition:
+		transform 160ms ease,
+		box-shadow 160ms ease,
+		border-color 160ms ease;
 }
 
 .feature-grid article {
@@ -619,8 +627,10 @@ h3 {
 	border-radius: 8px;
 	font-size: 1.2rem;
 	font-weight: 900;
-	transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms
-		ease;
+	transition:
+		transform 160ms ease,
+		box-shadow 160ms ease,
+		border-color 160ms ease;
 }
 
 .install-section > img {
@@ -645,8 +655,10 @@ h3 {
 	border: 1px solid var(--line);
 	border-radius: 8px;
 	box-shadow: 0 10px 30px rgb(16 36 58 / 7%);
-	transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms
-		ease;
+	transition:
+		transform 160ms ease,
+		box-shadow 160ms ease,
+		border-color 160ms ease;
 }
 
 .store-badges img {
@@ -692,8 +704,10 @@ h3 {
 	border-top: 5px solid var(--blue);
 	border-radius: 8px;
 	box-shadow: 0 10px 30px rgb(16 36 58 / 7%);
-	transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms
-		ease;
+	transition:
+		transform 160ms ease,
+		box-shadow 160ms ease,
+		border-color 160ms ease;
 }
 
 .sponsor-card:hover {
@@ -806,8 +820,10 @@ h3 {
 	border-top: 5px solid var(--blue);
 	border-radius: 8px;
 	box-shadow: 0 10px 30px rgb(16 36 58 / 7%);
-	transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms
-		ease;
+	transition:
+		transform 160ms ease,
+		box-shadow 160ms ease,
+		border-color 160ms ease;
 }
 
 .docs-grid article:nth-child(2) {

@@ -65,8 +65,8 @@ function buildRequestedCommands({
 	if (Array.isArray(requestedCommands)) {
 		return requestedCommands;
 	}
-	return [cmdExportAll, cmdImport, cmdOpenSettings].filter((commandId) =>
-		typeof commandId === "string" && commandId !== ""
+	return [cmdExportAll, cmdImport, cmdOpenSettings].filter(
+		(commandId) => typeof commandId === "string" && commandId !== "",
 	);
 }
 
@@ -78,11 +78,7 @@ function buildRequestedCommands({
  * @param {Record<string, unknown>} message Runtime message to send.
  * @return {Promise<void>} Resolves when the message has been sent and popup close has been requested.
  */
-async function sendMessageAndClose(
-	sendExtensionMessage,
-	closePopup,
-	message,
-) {
+async function sendMessageAndClose(sendExtensionMessage, closePopup, message) {
 	await sendExtensionMessage(message);
 	closePopup();
 }
@@ -246,13 +242,8 @@ async function runPopupImpl({
 		);
 		return { redirected: true };
 	}
-	const {
-		exportBtn,
-		importBtn,
-		manageTabsBtn,
-		settingsBtn,
-		tutorialBtn,
-	} = getPopupButtons(documentRef, popupButtonIds);
+	const { exportBtn, importBtn, manageTabsBtn, settingsBtn, tutorialBtn } =
+		getPopupButtons(documentRef, popupButtonIds);
 	if (
 		importBtn == null ||
 		exportBtn == null ||
@@ -262,42 +253,26 @@ async function runPopupImpl({
 	) {
 		return { redirected: false };
 	}
-	importBtn.addEventListener(
-		"click",
-		() =>
-			sendMessageAndClose(
-				sendExtensionMessage,
-				closePopup,
-				{ what: whatShowImport },
-			),
+	importBtn.addEventListener("click", () =>
+		sendMessageAndClose(sendExtensionMessage, closePopup, {
+			what: whatShowImport,
+		}),
 	);
-	exportBtn.addEventListener(
-		"click",
-		() =>
-			sendMessageAndClose(
-				sendExtensionMessage,
-				closePopup,
-				{ what: whatExportCheck },
-			),
+	exportBtn.addEventListener("click", () =>
+		sendMessageAndClose(sendExtensionMessage, closePopup, {
+			what: whatExportCheck,
+		}),
 	);
 	settingsBtn.addEventListener("click", openSettingsPage);
-	manageTabsBtn.addEventListener(
-		"click",
-		() =>
-			sendMessageAndClose(
-				sendExtensionMessage,
-				closePopup,
-				{ what: cxmManageTabs },
-			),
+	manageTabsBtn.addEventListener("click", () =>
+		sendMessageAndClose(sendExtensionMessage, closePopup, {
+			what: cxmManageTabs,
+		}),
 	);
-	tutorialBtn.addEventListener(
-		"click",
-		() =>
-			sendMessageAndClose(
-				sendExtensionMessage,
-				closePopup,
-				{ what: whatStartTutorial },
-			),
+	tutorialBtn.addEventListener("click", () =>
+		sendMessageAndClose(sendExtensionMessage, closePopup, {
+			what: whatStartTutorial,
+		}),
 	);
 	const availableCommands = await sendExtensionMessage({
 		what: whatGetCommands,
@@ -311,39 +286,41 @@ async function runPopupImpl({
 	if (!Array.isArray(availableCommands)) {
 		return { redirected: false };
 	}
-	await Promise.all(availableCommands.map(async (availableCommand) => {
-		switch (availableCommand.name) {
-			case cmdExportAll:
-				exportBtn.title = await addShortcutText(
-					exportBtn,
-					availableCommand.shortcut,
-					getTranslations,
-					translationDataset,
-					translationSeparator,
-				);
-				break;
-			case cmdImport:
-				importBtn.title = await addShortcutText(
-					importBtn,
-					availableCommand.shortcut,
-					getTranslations,
-					translationDataset,
-					translationSeparator,
-				);
-				break;
-			case cmdOpenSettings:
-				settingsBtn.title = await addShortcutText(
-					settingsBtn,
-					availableCommand.shortcut,
-					getTranslations,
-					translationDataset,
-					translationSeparator,
-				);
-				break;
-			default:
-				break;
-		}
-	}));
+	await Promise.all(
+		availableCommands.map(async (availableCommand) => {
+			switch (availableCommand.name) {
+				case cmdExportAll:
+					exportBtn.title = await addShortcutText(
+						exportBtn,
+						availableCommand.shortcut,
+						getTranslations,
+						translationDataset,
+						translationSeparator,
+					);
+					break;
+				case cmdImport:
+					importBtn.title = await addShortcutText(
+						importBtn,
+						availableCommand.shortcut,
+						getTranslations,
+						translationDataset,
+						translationSeparator,
+					);
+					break;
+				case cmdOpenSettings:
+					settingsBtn.title = await addShortcutText(
+						settingsBtn,
+						availableCommand.shortcut,
+						getTranslations,
+						translationDataset,
+						translationSeparator,
+					);
+					break;
+				default:
+					break;
+			}
+		}),
+	);
 	return { redirected: false };
 }
 

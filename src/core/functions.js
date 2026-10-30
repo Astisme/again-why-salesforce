@@ -96,16 +96,13 @@ export function sendExtensionMessage(message) {
 		return;
 	}
 	return new Promise((resolve, reject) => {
-		sendMessage(
-			message,
-			(response) => {
-				if (BROWSER.runtime.lastError) {
-					reject(BROWSER.runtime.lastError);
-				} else {
-					resolve(response);
-				}
-			},
-		)?.catch(reject);
+		sendMessage(message, (response) => {
+			if (BROWSER.runtime.lastError) {
+				reject(BROWSER.runtime.lastError);
+			} else {
+				resolve(response);
+			}
+		})?.catch(reject);
 	});
 }
 /**
@@ -117,9 +114,7 @@ export function sendExtensionMessage(message) {
  * @async
  */
 export function sendExtensionMessages(messages = []) {
-	return Promise.all(messages.map(
-		(mess) => sendExtensionMessage(mess),
-	));
+	return Promise.all(messages.map((mess) => sendExtensionMessage(mess)));
 }
 /**
  * Retrieves extension settings for the specified keys.
@@ -374,11 +369,13 @@ export async function areFramePatternsAllowed() {
 	const permissionsAvailable = await BROWSER.permissions.contains({
 		origins: FRAME_PATTERNS,
 	});
-	return permissionsAvailable ||
+	return (
+		permissionsAvailable ||
 		localStorage.getItem(DO_NOT_REQUEST_FRAME_PERMISSION) === "true" ||
 		new URL(globalThis.location.href).searchParams.get(
-				DO_NOT_REQUEST_FRAME_PERMISSION,
-			) === "true";
+			DO_NOT_REQUEST_FRAME_PERMISSION,
+		) === "true"
+	);
 }
 /**
  * Calculates the estimated time (in milliseconds) it takes to read a given message.
@@ -398,12 +395,15 @@ export function calculateReadingTime(message) {
  * @param {string} [url=""] where you'll get redirected to
  */
 export function performLightningRedirect(url = "") {
-	postMessage({
-		what: "lightningNavigation",
-		navigationType: "url",
-		url,
-		fallbackURL: url,
-	}, globalThis.location?.origin ?? "*");
+	postMessage(
+		{
+			what: "lightningNavigation",
+			navigationType: "url",
+			url,
+			fallbackURL: url,
+		},
+		globalThis.location?.origin ?? "*",
+	);
 }
 /**
  * Returns the value from the given selector
@@ -434,15 +434,9 @@ export function getInnerElementFieldBySelector({
  * @throws Error if the id was not passed or if both css and link are != null
  * @return {HTMLLinkElement} the existing/created style/link element
  */
-export function injectStyle(id, {
-	css = null,
-	link = null,
-} = {}) {
+export function injectStyle(id, { css = null, link = null } = {}) {
 	const workingWithCss = css != null;
-	if (
-		(id == null || id === "") ||
-		(workingWithCss && link != null)
-	) {
+	if (id == null || id === "" || (workingWithCss && link != null)) {
 		throw new Error("error_required_params");
 	}
 	const existingStyle = document.getElementById(id);
@@ -472,7 +466,7 @@ export function injectStyle(id, {
  */
 export function isSalesforceHostname(url = new URL()) {
 	return SUPPORTED_SALESFORCE_URLS.some((pattern) =>
-		url.hostname.endsWith(pattern)
+		url.hostname.endsWith(pattern),
 	);
 }
 /**
@@ -501,12 +495,12 @@ export function shouldShowReviewOrSponsor({
 	usageDays = 0,
 } = {}) {
 	return {
-		review: !ISSAFARI &&
-			(
-				allTabs.length >= REVIEW_TAB_THRESHOLD ||
-				usageDays >= REVIEW_USAGE_DAYS_THRESHOLD
-			),
-		sponsor: allTabs.length >= SPONSOR_TAB_THRESHOLD ||
+		review:
+			!ISSAFARI &&
+			(allTabs.length >= REVIEW_TAB_THRESHOLD ||
+				usageDays >= REVIEW_USAGE_DAYS_THRESHOLD),
+		sponsor:
+			allTabs.length >= SPONSOR_TAB_THRESHOLD ||
 			usageDays >= SPONSOR_USAGE_DAYS_THRESHOLD,
 	};
 }
@@ -516,9 +510,7 @@ export function shouldShowReviewOrSponsor({
  * @param {string} [target="_blank"] Where to open the link
  * @return {unknown | undefined} Result of the `open` call for the detected browser.
  */
-export function openCorrectBrowserReviewLink(
-	target = "_blank",
-) {
+export function openCorrectBrowserReviewLink(target = "_blank") {
 	let linkTarget = EDGE_LINK;
 	if (ISCHROME && !ISEDGE) {
 		linkTarget = CHROME_LINK;
@@ -534,13 +526,8 @@ export function openCorrectBrowserReviewLink(
  * @param {string} [target="_blank"] Where to open the link
  * @return {unknown} Result of the `open` call.
  */
-export function openSponsorLink(
-	target = "_blank",
-) {
-	open(
-		SPONSOR_LINK,
-		target,
-	);
+export function openSponsorLink(target = "_blank") {
+	open(SPONSOR_LINK, target);
 }
 
 /**

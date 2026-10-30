@@ -22,19 +22,11 @@ export default class Tab {
 	/**
 	 * All the keys which express data about a Tab.
 	 */
-	static metadataKeys = new Set([
-		Tab.keyClickCount,
-		Tab.keyClickDate,
-	]);
+	static metadataKeys = new Set([Tab.keyClickCount, Tab.keyClickDate]);
 	/**
 	 * All the keys which are available inside a Tab.
 	 */
-	static allowedKeys = new Set([
-		"label",
-		"url",
-		"org",
-		...Tab.metadataKeys,
-	]);
+	static allowedKeys = new Set(["label", "url", "org", ...Tab.metadataKeys]);
 
 	/**
 	 * Creates a new instance of a `Tab` with the specified label, URL, and optional organization.
@@ -73,9 +65,10 @@ export default class Tab {
 	 * @return {boolean} false if the Tab contains only supported keys
 	 */
 	static hasUnexpectedKeys(tab) {
-		return tab != null &&
-			Object.keys(tab)
-				.some((key) => !Tab.allowedKeys.has(key));
+		return (
+			tab != null &&
+			Object.keys(tab).some((key) => !Tab.allowedKeys.has(key))
+		);
 	}
 
 	/**
@@ -100,11 +93,13 @@ export default class Tab {
 		if (
 			clickCount != null &&
 			(typeof clickCount !== "number" || clickCount < 0)
-		) throw new Error("error_tab_click_count");
+		)
+			throw new Error("error_tab_click_count");
 		if (
 			clickDate != null &&
 			(typeof clickDate !== "number" || clickDate > Date.now())
-		) throw new Error("error_tab_click_date");
+		)
+			throw new Error("error_tab_click_date");
 	}
 
 	/**
@@ -180,9 +175,10 @@ export default class Tab {
 	) {
 		if (Tab.isTab(labelOrTab)) return labelOrTab;
 		// Check if first argument is an object (for object-style creation)
-		const create = labelOrTab && typeof labelOrTab === "object"
-			? Tab.#createFromObject
-			: Tab.#createFromPrimitives;
+		const create =
+			labelOrTab && typeof labelOrTab === "object"
+				? Tab.#createFromObject
+				: Tab.#createFromPrimitives;
 		return create(labelOrTab, url, org, clickCount, clickDate);
 	}
 
@@ -216,8 +212,7 @@ export default class Tab {
 		// remove org-specific url
 		if (url.includes(LIGHTNING_FORCE_COM)) {
 			url = url.slice(
-				url.indexOf(LIGHTNING_FORCE_COM) +
-					LIGHTNING_FORCE_COM.length,
+				url.indexOf(LIGHTNING_FORCE_COM) + LIGHTNING_FORCE_COM.length,
 			);
 		} else if (url.includes(MY_SALESFORCE_SETUP_COM)) {
 			url = url.slice(
@@ -231,8 +226,7 @@ export default class Tab {
 		);
 		if (url.includes(SETUP_LIGHTNING)) {
 			url = url.slice(
-				url.indexOf(SETUP_LIGHTNING) +
-					SETUP_LIGHTNING.length,
+				url.indexOf(SETUP_LIGHTNING) + SETUP_LIGHTNING.length,
 			);
 		} else if (url.includes(setupLightningNoBeginSlash)) {
 			url = url.slice(
@@ -319,9 +313,7 @@ export default class Tab {
 		if (url == null) {
 			throw new Error("error_extract_empty_url");
 		}
-		let host = new URL(
-			url.startsWith(HTTPS) ? url : `${HTTPS}${url}`,
-		).host;
+		let host = new URL(url.startsWith(HTTPS) ? url : `${HTTPS}${url}`).host;
 		if (host.endsWith(LIGHTNING_FORCE_COM)) {
 			host = host.slice(0, host.indexOf(LIGHTNING_FORCE_COM));
 		}
@@ -412,14 +404,14 @@ export default class Tab {
 	 * @return {boolean} - Returns `true` if the `Tab` is equal to the provided object based on the specified properties, otherwise `false`.
 	 */
 	equals({ label = null, url = null, org = null } = {}, strict = true) {
-		return !(label == null && url == null && org == null) &&
+		return (
+			!(label == null && url == null && org == null) &&
 			(label == null || label === this.label) &&
 			(url == null || url === this.url) &&
-			(
-				(strict &&
-					((org == null && this.org == null) || org === this.org)) ||
-				(!strict && (org == null || org === this.org))
-			);
+			((strict &&
+				((org == null && this.org == null) || org === this.org)) ||
+				(!strict && (org == null || org === this.org)))
+		);
 	}
 
 	/**
@@ -434,15 +426,11 @@ export default class Tab {
 	 * @return {boolean} - Returns `true` if the `Tab` is duplicate to the provided object based on the specified properties, otherwise `false`.
 	 */
 	isDuplicate({ url = null, org = null } = {}) {
-		return url != null &&
-			url === this.url &&
-			(
-				( // could be passed one as null and the other one as undefined
-					org == null &&
-					this.org == null
-				) ||
-				org === this.org
-			);
+		return (
+			url != null &&
+			url === this.url && // could be passed one as null and the other one as undefined
+			((org == null && this.org == null) || org === this.org)
+		);
 	}
 
 	/**
@@ -453,15 +441,13 @@ export default class Tab {
 	 * @param {*} [tab.org] - the new org for the Tab
 	 * @return {Tab} The updated Tab
 	 */
-	update(
-		{
-			label,
-			url,
-			org,
-			[Tab.keyClickCount]: clickCount,
-			[Tab.keyClickDate]: clickDate,
-		} = {},
-	) {
+	update({
+		label,
+		url,
+		org,
+		[Tab.keyClickCount]: clickCount,
+		[Tab.keyClickDate]: clickDate,
+	} = {}) {
 		if (
 			label == null &&
 			url == null &&
@@ -481,9 +467,8 @@ export default class Tab {
 			this.org = org === "" ? undefined : Tab.extractOrgName(org);
 		}
 		if (clickCount != null) {
-			this[Tab.keyClickCount] = clickCount === ""
-				? undefined
-				: clickCount;
+			this[Tab.keyClickCount] =
+				clickCount === "" ? undefined : clickCount;
 		}
 		if (clickDate != null) {
 			this[Tab.keyClickDate] = clickDate === "" ? undefined : clickDate;

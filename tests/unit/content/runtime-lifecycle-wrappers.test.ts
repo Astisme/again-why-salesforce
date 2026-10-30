@@ -1,6 +1,7 @@
+import { test } from "#test";
 /// <reference lib="dom" />
 import "../../mocks.test.ts";
-import { assertEquals, assertStrictEquals } from "@std/testing/asserts";
+import { assertEquals, assertStrictEquals } from "#test";
 import * as generatorRuntime from "../../../src/salesforce/runtime/generator-runtime.js";
 import * as generator from "../../../src/salesforce/generator.js";
 import * as dragHandler from "../../../src/salesforce/dragHandler.js";
@@ -56,7 +57,7 @@ function createGeneratorFake() {
 	};
 }
 
-Deno.test("generator runtime lifecycle is lazy and generator entrypoint preserves defaults", async () => {
+test("generator runtime lifecycle is lazy and generator entrypoint preserves defaults", async () => {
 	const fake = createGeneratorFake();
 	generatorRuntime.__testHooks.resetModule();
 	generatorRuntime.__testHooks.setModule(fake.module);
@@ -148,7 +149,7 @@ Deno.test("generator runtime lifecycle is lazy and generator entrypoint preserve
 	}
 });
 
-Deno.test("lazy entrypoint wrappers delegate through replaceable module singletons", async () => {
+test("lazy entrypoint wrappers delegate through replaceable module singletons", async () => {
 	const calls: string[] = [];
 	const callback = () => calls.push("callback");
 	const dragModule = {

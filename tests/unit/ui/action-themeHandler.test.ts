@@ -1,9 +1,8 @@
+import { test } from "#test";
 import "../../mocks.test.ts";
-import { assertEquals, assertStrictEquals } from "@std/testing/asserts";
+import { assertEquals, assertStrictEquals } from "#test";
 import { installMockDom } from "../../happydom.test.ts";
-import {
-	createThemeHandlerModule as createThemeHandlerPureModule,
-} from "../../../src/action/themeHandler-module.js";
+import { createThemeHandlerModule as createThemeHandlerPureModule } from "../../../src/action/themeHandler-module.js";
 import {
 	__testHooks as themeHandlerTestHooks,
 	createThemeHandlerModule,
@@ -133,7 +132,7 @@ async function loadThemeHandler(
 	const mediaQueryList = new MockMediaQueryList(false);
 	const hasMatchMediaOverride = Object.hasOwn(overrides, "matchMedia");
 	const matchMedia = hasMatchMediaOverride
-		? overrides.matchMedia ?? undefined
+		? (overrides.matchMedia ?? undefined)
 		: (_query: string) => mediaQueryList;
 	const runtime = createThemeHandlerPureModule({
 		documentRef: { documentElement },
@@ -151,15 +150,15 @@ async function loadThemeHandler(
 		localStorage,
 		module: runtime,
 		sentMessages,
-		mediaQueryList: !hasMatchMediaOverride ? mediaQueryList : (
-			typeof overrides.matchMedia === "function"
+		mediaQueryList: !hasMatchMediaOverride
+			? mediaQueryList
+			: typeof overrides.matchMedia === "function"
 				? overrides.matchMedia("(prefers-color-scheme: dark)")
-				: null
-		),
+				: null,
 	};
 }
 
-Deno.test("themeHandler initializes and updates theme state in isolation", async () => {
+test("themeHandler initializes and updates theme state in isolation", async () => {
 	const storage = new MemoryStorage();
 	storage.setItem("userTheme", "dark");
 	const { document, localStorage, module, sentMessages } =
@@ -168,18 +167,17 @@ Deno.test("themeHandler initializes and updates theme state in isolation", async
 			matchMedia: null,
 		});
 
-	assertEquals(
-		document.documentElement.dataset.usertheme,
-		"dark",
-	);
+	assertEquals(document.documentElement.dataset.usertheme, "dark");
 	assertEquals(document.documentElement.dataset.theme, "dark");
 
 	await module.handleSwitchColorTheme();
 
-	assertEquals(sentMessages, [{
-		theme: "light",
-		what: "theme-message",
-	}]);
+	assertEquals(sentMessages, [
+		{
+			theme: "light",
+			what: "theme-message",
+		},
+	]);
 	assertEquals(document.documentElement.dataset.theme, "light");
 	assertEquals(document.documentElement.dataset.usertheme, "light");
 	assertEquals(localStorage.getItem("usingTheme"), "light");
@@ -194,16 +192,11 @@ Deno.test("themeHandler initializes and updates theme state in isolation", async
 	assertEquals(document.documentElement.dataset.usertheme, "dark");
 });
 
-Deno.test("themeHandler attaches and detaches the system color listener", async () => {
-	const {
-		document,
-		localStorage,
-		module,
-		mediaQueryList,
-		sentMessages,
-	} = await loadThemeHandler({
-		localStorage: new MemoryStorage(),
-	});
+test("themeHandler attaches and detaches the system color listener", async () => {
+	const { document, localStorage, module, mediaQueryList, sentMessages } =
+		await loadThemeHandler({
+			localStorage: new MemoryStorage(),
+		});
 	assertStrictEquals(mediaQueryList?.listeners.length, 1);
 	assertEquals(sentMessages[0], {
 		theme: "light",
@@ -240,7 +233,7 @@ Deno.test("themeHandler attaches and detaches the system color listener", async 
 	assertStrictEquals(mediaQueryList?.listeners.length, 0);
 });
 
-Deno.test("themeHandler ignores enabling the system listener when matchMedia is unavailable", async () => {
+test("themeHandler ignores enabling the system listener when matchMedia is unavailable", async () => {
 	const storage = new MemoryStorage();
 	storage.setItem("userTheme", "light");
 	const { localStorage, module } = await loadThemeHandler({
@@ -252,7 +245,7 @@ Deno.test("themeHandler ignores enabling the system listener when matchMedia is 
 	assertEquals(localStorage.getItem("userTheme"), "light");
 });
 
-Deno.test("themeHandler re-initializes both stored and default user themes", async () => {
+test("themeHandler re-initializes both stored and default user themes", async () => {
 	const storage = new MemoryStorage();
 	const { document, localStorage, module } = await loadThemeHandler({
 		localStorage: storage,
@@ -273,7 +266,7 @@ Deno.test("themeHandler re-initializes both stored and default user themes", asy
 	assertEquals(document.documentElement.dataset.theme, null);
 });
 
-Deno.test("themeHandler direct module coverage", async () => {
+test("themeHandler direct module coverage", async () => {
 	const dom = installMockDom(
 		"https://example.lightning.force.com/lightning/setup/",
 	);
@@ -310,9 +303,11 @@ Deno.test("themeHandler direct module coverage", async () => {
 
 		await module.systemColorSchemeListener(false);
 		await module.systemColorSchemeListener(false);
-		await (module.systemColorSchemeListener as (
-			enable?: boolean | null,
-		) => Promise<void>)(null);
+		await (
+			module.systemColorSchemeListener as (
+				enable?: boolean | null,
+			) => Promise<void>
+		)(null);
 		await module.systemColorSchemeListener(true);
 		await module.systemColorSchemeListener(true);
 
@@ -329,7 +324,7 @@ Deno.test("themeHandler direct module coverage", async () => {
 	}
 });
 
-Deno.test("themeHandler module-level exports proxy to the singleton module", async () => {
+test("themeHandler module-level exports proxy to the singleton module", async () => {
 	await initThemePromise;
 	const calls: string[] = [];
 	const module: ThemeHandlerModule = {
@@ -366,7 +361,7 @@ Deno.test("themeHandler module-level exports proxy to the singleton module", asy
 	}
 });
 
-Deno.test("themeHandler createThemeHandlerModule uses fallback globals when runtime globals are unavailable", async () => {
+test("themeHandler createThemeHandlerModule uses fallback globals when runtime globals are unavailable", async () => {
 	const originalDocument = globalThis.document;
 	const originalLocalStorage = globalThis.localStorage;
 	const originalMatchMedia = globalThis.matchMedia;
@@ -411,7 +406,7 @@ Deno.test("themeHandler createThemeHandlerModule uses fallback globals when runt
 	}
 });
 
-Deno.test("themeHandler createThemeHandlerModule uses runtime globals when present", async () => {
+test("themeHandler createThemeHandlerModule uses runtime globals when present", async () => {
 	const originalDocument = globalThis.document;
 	const originalLocalStorage = globalThis.localStorage;
 	const originalMatchMedia = globalThis.matchMedia;

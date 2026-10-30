@@ -1,8 +1,5 @@
-import {
-	assertEquals,
-	assertExists,
-	assertStrictEquals,
-} from "@std/testing/asserts";
+import { test } from "#test";
+import { assertEquals, assertExists, assertStrictEquals } from "#test";
 import {
 	createLightningNavigationModule,
 	registerLightningNavigation,
@@ -109,7 +106,7 @@ function createLightningNavigationHarness(
 
 	return { errors, module, opens, records };
 }
-Deno.test("lightning-navigation handles record and URL navigation messages", () => {
+test("lightning-navigation handles record and URL navigation messages", () => {
 	const { module, records } = createLightningNavigationHarness();
 
 	module.handleMessage({
@@ -141,7 +138,7 @@ Deno.test("lightning-navigation handles record and URL navigation messages", () 
 	]);
 });
 
-Deno.test("lightning-navigation ignores foreign sources and reports invalid types", () => {
+test("lightning-navigation ignores foreign sources and reports invalid types", () => {
 	const { errors, module, records } = createLightningNavigationHarness();
 
 	module.handleMessage({
@@ -172,7 +169,7 @@ Deno.test("lightning-navigation ignores foreign sources and reports invalid type
 	assertEquals(errors, ["Invalid navigation type"]);
 });
 
-Deno.test("lightning-navigation falls back to open when the Salesforce event API throws", () => {
+test("lightning-navigation falls back to open when the Salesforce event API throws", () => {
 	const { errors, module, opens } = createLightningNavigationHarness(
 		createFailingAuraMock,
 	);
@@ -187,14 +184,16 @@ Deno.test("lightning-navigation falls back to open when the Salesforce event API
 		source: globalThis,
 	});
 
-	assertEquals(opens, [{
-		target: "_top",
-		url: "https://example.com/fallback",
-	}]);
+	assertEquals(opens, [
+		{
+			target: "_top",
+			url: "https://example.com/fallback",
+		},
+	]);
 	assertEquals(errors, ["Navigation failed: boom"]);
 });
 
-Deno.test("lightning-navigation registers a typed page-message listener", () => {
+test("lightning-navigation registers a typed page-message listener", () => {
 	const records: LightningNavigationRecord[] = [];
 	let listener: LightningNavigationListener | undefined;
 	const module = registerLightningNavigation({

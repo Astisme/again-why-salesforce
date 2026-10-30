@@ -1,13 +1,13 @@
-const process = require('node:process');
+const process = require("node:process");
 
-const COMMENT_MARKER = '<!-- pr-tests-comment -->';
-const OUTDATED_MARKER = '<!-- pr-tests-outdated -->';
+const COMMENT_MARKER = "<!-- pr-tests-comment -->";
+const OUTDATED_MARKER = "<!-- pr-tests-outdated -->";
 const LEGACY_TITLES = [
-	'Linter Failed',
-	'JSDocs Missing',
-	'Tests Failed',
-	'These Locale Translation are missing (not blocking)',
-	'Locale Sorter Failed',
+	"Linter Failed",
+	"JSDocs Missing",
+	"Tests Failed",
+	"These Locale Translation are missing (not blocking)",
+	"Locale Sorter Failed",
 ];
 const COMMENT_STATE_QUERY = `
 	query CommentStates($ids: [ID!]!) {
@@ -55,10 +55,7 @@ function chunk(items, size) {
  * @param {string[]} params.nodeIds
  * @returns {Promise<Map<string, boolean>>}
  */
-async function getCommentMinimizedState({
-	github,
-	nodeIds,
-}) {
+async function getCommentMinimizedState({ github, nodeIds }) {
 	const states = new Map();
 
 	for (const ids of chunk(nodeIds, 100)) {
@@ -85,13 +82,10 @@ async function getCommentMinimizedState({
  * @param {string} params.subjectId
  * @returns {Promise<void>}
  */
-async function minimizeCommentAsOutdated({
-	github,
-	subjectId,
-}) {
+async function minimizeCommentAsOutdated({ github, subjectId }) {
 	await github.graphql(MINIMIZE_COMMENT_MUTATION, {
 		subjectId,
-		classifier: 'OUTDATED',
+		classifier: "OUTDATED",
 	});
 }
 
@@ -110,7 +104,9 @@ module.exports = async function markPrCommentsOutdated({
 	core,
 } = {}) {
 	if (!context?.issue?.number) {
-		core.info('No pull request context detected; skipping outdated comment handling.');
+		core.info(
+			"No pull request context detected; skipping outdated comment handling.",
+		);
 		return;
 	}
 
@@ -126,12 +122,14 @@ module.exports = async function markPrCommentsOutdated({
 	const outdatedNotice = [
 		OUTDATED_MARKER,
 		`> Outdated: superseded by CI run [#${runNumber}](${runUrl}).`,
-	].join('\n');
+	].join("\n");
 	const candidates = comments.filter((comment) => {
-		const body = comment.body || '';
-		const isGithubActionsComment = comment.user?.login === 'github-actions[bot]';
-		const isManagedComment = body.includes(COMMENT_MARKER)
-			|| LEGACY_TITLES.some((title) => body.startsWith(`## ${title}:`));
+		const body = comment.body || "";
+		const isGithubActionsComment =
+			comment.user?.login === "github-actions[bot]";
+		const isManagedComment =
+			body.includes(COMMENT_MARKER) ||
+			LEGACY_TITLES.some((title) => body.startsWith(`## ${title}:`));
 
 		return isGithubActionsComment && isManagedComment;
 	});
@@ -144,7 +142,7 @@ module.exports = async function markPrCommentsOutdated({
 	let minimizedCount = 0;
 
 	for (const comment of candidates) {
-		const body = comment.body || '';
+		const body = comment.body || "";
 		const isAlreadyOutdated = body.includes(OUTDATED_MARKER);
 		const isMinimized = minimizedState.get(comment.node_id) === true;
 
@@ -168,5 +166,7 @@ module.exports = async function markPrCommentsOutdated({
 		}
 	}
 
-	core.info(`Minimized ${minimizedCount} PR comment(s) and marked ${updatedCount} PR comment(s) as outdated.`);
+	core.info(
+		`Minimized ${minimizedCount} PR comment(s) and marked ${updatedCount} PR comment(s) as outdated.`,
+	);
 };

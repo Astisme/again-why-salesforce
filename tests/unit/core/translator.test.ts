@@ -1,10 +1,12 @@
+import { test } from "#test";
 /// <reference lib="dom" />
-import { assertEquals } from "@std/testing/asserts";
+import * as fs from "node:fs/promises";
+import { assertEquals, assertRejects, stub } from "#test";
 import { translations } from "../../mocks.test.ts";
 import { TranslationService } from "../../../src/core/translator.js";
 const translate_element_attribute = "data-i18n";
 
-Deno.test("TranslationService - load user preference", async () => {
+test("TranslationService - load user preference", async () => {
 	const service = await TranslationService.ensureTranslatorAvailability();
 	assertEquals(
 		service.currentLanguage,
@@ -15,7 +17,7 @@ Deno.test("TranslationService - load user preference", async () => {
 	assertEquals(service.separator, "+-+");
 });
 
-Deno.test("TranslationService - translate method", async () => {
+test("TranslationService - translate method", async () => {
 	const service = await TranslationService.ensureTranslatorAvailability();
 	// Test available translation
 	assertEquals(
@@ -44,10 +46,7 @@ Deno.test("TranslationService - translate method", async () => {
 	// change lang to en
 	service.loadLanguageFile("en");
 	// check concatenated translations
-	assertEquals(
-		await service.translate("salesforce"),
-		"Salesforce",
-	);
+	assertEquals(await service.translate("salesforce"), "Salesforce");
 	assertEquals(
 		await service.translate("sf_login"),
 		"Salesforce Login",
@@ -70,10 +69,10 @@ Deno.test("TranslationService - translate method", async () => {
 	);
 });
 
-Deno.test("TranslationService - Japanese locale preserves placeholders and newlines", async () => {
+test("TranslationService - Japanese locale preserves placeholders and newlines", async () => {
 	const service = await TranslationService.ensureTranslatorAvailability();
 	translations.ja = JSON.parse(
-		await Deno.readTextFile("src/_locales/ja/messages.json"),
+		await fs.readFile("src/_locales/ja/messages.json"),
 	) as Record<string, { message: string }>;
 	await service.loadLanguageFile("ja");
 
@@ -89,17 +88,14 @@ Deno.test("TranslationService - Japanese locale preserves placeholders and newli
 		await service.translate("$extension_label?"),
 		"Again, Why Salesforce?",
 	);
-	assertEquals(
-		await service.translate("$account,"),
-		"取引先,",
-	);
+	assertEquals(await service.translate("$account,"), "取引先,");
 	assertEquals(
 		await service.translate("req_permissions_header"),
 		"Salesforce Setup ページへの\n自動アクセスを許可してください",
 	);
 });
 
-Deno.test("TranslationService - token translation preserves repeated nested tokens and empty parts", async () => {
+test("TranslationService - token translation preserves repeated nested tokens and empty parts", async () => {
 	const service = await TranslationService.ensureTranslatorAvailability();
 	const originalLanguage = service.currentLanguage;
 	translations.token_test = {
@@ -122,14 +118,14 @@ Deno.test("TranslationService - token translation preserves repeated nested toke
 	}
 });
 
-Deno.test("TranslationService - updatePageTranslations", async (t) => {
+test("TranslationService - updatePageTranslations", async (t) => {
 	const service = await TranslationService.ensureTranslatorAvailability();
 	await t.step("translates to french", async () => {
 		// Mock DOM elements
 		await service.updatePageTranslations("fr");
-		const mockEle = Array.from(document.querySelectorAll(
-			`[${translate_element_attribute}]`,
-		)) as HTMLElement[];
+		const mockEle = Array.from(
+			document.querySelectorAll(`[${translate_element_attribute}]`),
+		) as HTMLElement[];
 		assertEquals(
 			mockEle[0].textContent,
 			"Bonjour",
@@ -160,9 +156,9 @@ Deno.test("TranslationService - updatePageTranslations", async (t) => {
 	await t.step("translates to english", async () => {
 		// Mock DOM elements
 		await service.updatePageTranslations("en");
-		const mockEle = Array.from(document.querySelectorAll(
-			`[${translate_element_attribute}]`,
-		)) as HTMLElement[];
+		const mockEle = Array.from(
+			document.querySelectorAll(`[${translate_element_attribute}]`),
+		) as HTMLElement[];
 		assertEquals(
 			mockEle[0].textContent,
 			"Hello",
@@ -191,12 +187,12 @@ Deno.test("TranslationService - updatePageTranslations", async (t) => {
 	});
 });
 
-Deno.test("TranslationService - loadLanguageFile", async () => {
+test("TranslationService - loadLanguageFile", async () => {
 	const service = await TranslationService.ensureTranslatorAvailability();
 	// Test loading a new language
 	// Add mock de to translations
 	const mockJson: Record<string, { message: string }> = {
-		"test": { message: "Test de" },
+		test: { message: "Test de" },
 	};
 	translations.de = mockJson;
 	const result = await service.loadLanguageFile("de");
@@ -226,7 +222,7 @@ Deno.test("TranslationService - loadLanguageFile", async () => {
 	await service.loadLanguageFile("pt_BR");
 });
 
-Deno.test("TranslationService - edge cases", async () => {
+test("TranslationService - edge cases", async () => {
 	const service = await TranslationService.ensureTranslatorAvailability();
 	assertEquals(
 		await service.translate("plain sentence key"),
@@ -244,7 +240,7 @@ Deno.test("TranslationService - edge cases", async () => {
 	Reflect.set(globalThis, "document", originalDocument);
 });
 
-Deno.test("TranslationService - public translator helpers", async () => {
+test("TranslationService - public translator helpers", async () => {
 	const service = await TranslationService.ensureTranslatorAvailability();
 	await service.loadLanguageFile("fr");
 
@@ -266,4 +262,64 @@ Deno.test("TranslationService - public translator helpers", async () => {
 		null,
 	);
 	assertEquals(await TranslationService.getTranslatorAttribute(null), null);
+});
+
+test("TranslationService - page translations start together and await all updates", async () => {
+	const service = await TranslationService.ensureTranslatorAvailability();
+	const originalDocument = globalThis.document;
+	const elements = [
+		{ getAttribute: () => "first", textContent: "" },
+		{
+			getAttribute: () => "second+-+title+-+textContent",
+			textContent: "",
+			title: "",
+		},
+	];
+	const pending = new Map<string, (translation: string) => void>();
+	using translateStub = stub(
+		service,
+		"translate",
+		(key: string) =>
+			new Promise<string>((resolve) => {
+				pending.set(key, resolve);
+			}),
+	);
+	Reflect.set(globalThis, "document", { querySelectorAll: () => elements });
+	try {
+		const update = service.updatePageTranslations("en");
+		assertEquals(Array.from(pending.keys()), ["first", "second"]);
+		assertEquals(translateStub.calls.length, 2);
+		pending.get("second")?.("Second\nline");
+		pending.get("first")?.("First");
+		assertEquals(await update, undefined);
+		assertEquals(elements[0].textContent, "First");
+		assertEquals(elements[1].textContent, "Second<br />line");
+		assertEquals(elements[1].title, "Second<br />line");
+		assertEquals(service.currentLanguage, "en");
+	} finally {
+		Reflect.set(globalThis, "document", originalDocument);
+	}
+});
+
+test("TranslationService - page translations propagate errors and accept empty pages", async () => {
+	const service = await TranslationService.ensureTranslatorAvailability();
+	const originalDocument = globalThis.document;
+	try {
+		Reflect.set(globalThis, "document", { querySelectorAll: () => [] });
+		assertEquals(await service.updatePageTranslations(), undefined);
+		Reflect.set(globalThis, "document", {
+			querySelectorAll: () => [{ getAttribute: () => "first" }],
+		});
+		using translateStub = stub(service, "translate", () =>
+			Promise.reject(new Error("translation_failed")),
+		);
+		await assertRejects(
+			() => service.updatePageTranslations(),
+			Error,
+			"translation_failed",
+		);
+		assertEquals(translateStub.calls.length, 1);
+	} finally {
+		Reflect.set(globalThis, "document", originalDocument);
+	}
 });

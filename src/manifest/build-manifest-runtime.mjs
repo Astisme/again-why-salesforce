@@ -48,16 +48,15 @@ export function buildManifestForBrowser({
 			delete manifest.background.scripts;
 			delete manifest.incognito;
 			delete manifest.options_ui.open_in_tab;
-			const notAllowedPermissions = new Set([
-				"downloads",
-			]);
-			manifest.permissions = manifest.permissions.filter((perm) =>
-				!notAllowedPermissions.has(perm)
+			const notAllowedPermissions = new Set(["downloads"]);
+			manifest.permissions = manifest.permissions.filter(
+				(perm) => !notAllowedPermissions.has(perm),
 			);
-			manifest.optional_permissions = manifest.optional_permissions
-				.filter((
-					optionalPermission,
-				) => !notAllowedPermissions.has(optionalPermission));
+			manifest.optional_permissions =
+				manifest.optional_permissions.filter(
+					(optionalPermission) =>
+						!notAllowedPermissions.has(optionalPermission),
+				);
 			break;
 		}
 		default:

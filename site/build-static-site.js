@@ -1,10 +1,11 @@
 import { wikiDocuments, wikiTitles } from "./wiki-data.js";
+import fs from "node:fs/promises";
 
 const siteDir = new URL("./", import.meta.url);
 const repoDir = new URL("../", siteDir);
 const outputDir = new URL("../site-dist/", siteDir);
 const wikiDir = new URL(
-	`${Deno.env.get("AWSF_WIKI_DIR") || "../wiki.again-why-salesforce"}/`,
+	`${process.env.AWSF_WIKI_DIR || "../wiki.again-why-salesforce"}/`,
 	repoDir,
 );
 const releaseApiUrl =
@@ -20,15 +21,20 @@ await import("./markdown.js");
  * @returns {Promise<void>} Promise resolved after removal.
  */
 async function emptyGeneratedDirectory(url) {
-	await Deno.mkdir(url, { recursive: true });
-	for await (const entry of Deno.readDir(url)) {
+	await fs.mkdir(url, { recursive: true });
+	for (const entry of await fs.readdir(url, { withFileTypes: true })) {
 		const entryUrl = new URL(entry.name, url);
 		for (let attempt = 0; attempt < 5; attempt += 1) {
 			try {
-				await Deno.remove(entryUrl, { recursive: true });
+				await fs.rm(entryUrl, { recursive: true });
 				break;
 			} catch (error) {
-				if (error instanceof Deno.errors.NotFound) {
+				if (
+					error != null &&
+					typeof error === "object" &&
+					"code" in error &&
+					error.code === "ENOENT"
+				) {
 					break;
 				}
 				if (attempt === 4) {
@@ -47,14 +53,14 @@ async function emptyGeneratedDirectory(url) {
  */
 async function copySite() {
 	await emptyGeneratedDirectory(outputDir);
-	for await (const entry of Deno.readDir(siteDir)) {
+	for (const entry of await fs.readdir(siteDir, { withFileTypes: true })) {
 		if (
 			entry.name === "build-static-site.js" ||
 			entry.name === "markdown.js"
 		) {
 			continue;
 		}
-		await Deno.copyFile(
+		await fs.copyFile(
 			new URL(entry.name, siteDir),
 			new URL(entry.name, outputDir),
 		);
@@ -68,7 +74,7 @@ async function copySite() {
  * @returns {Promise<string>} File content.
  */
 function readText(url) {
-	return Deno.readTextFile(url);
+	return fs.readFile(url, "utf8");
 }
 
 /**
@@ -79,7 +85,7 @@ function readText(url) {
  * @returns {Promise<void>} Promise resolved after write.
  */
 function writeText(url, content) {
-	return Deno.writeTextFile(url, content);
+	return fs.writeFile(url, content);
 }
 
 /**
@@ -107,9 +113,7 @@ async function getLatestReleaseLabel() {
 		return release.name || release.tag_name || null;
 	}
 	const manifest = JSON.parse(
-		await readText(
-			new URL("src/manifest/template-manifest.json", repoDir),
-		),
+		await readText(new URL("src/manifest/template-manifest.json", repoDir)),
 	);
 	return `v${manifest.version}`;
 }
@@ -227,11 +231,12 @@ function replaceReleaseLabels(html, latestRelease) {
  * @returns {string} Unique slug.
  */
 function createSlug(value, usedSlugs) {
-	const baseSlug = value
-		.toLowerCase()
-		.replaceAll(/[^a-z0-9\s-]/g, "")
-		.trim()
-		.replaceAll(/\s+/g, "-") || "section";
+	const baseSlug =
+		value
+			.toLowerCase()
+			.replaceAll(/[^a-z0-9\s-]/g, "")
+			.trim()
+			.replaceAll(/\s+/g, "-") || "section";
 	let slug = baseSlug;
 	let index = 2;
 	while (usedSlugs.has(slug)) {
@@ -271,9 +276,7 @@ function addHeadingIds(html) {
 		(_match, tag, text) => {
 			const slug = createSlug(text, usedSlugs);
 			const label = escapeHtml(text);
-			links.push(
-				`<a href="#${slug}" class="toc-${tag}">${label}</a>`,
-			);
+			links.push(`<a href="#${slug}" class="toc-${tag}">${label}</a>`);
 			return `<${tag} id="${slug}">${text}</${tag}>`;
 		},
 	);
@@ -372,19 +375,19 @@ function buildWikiPage(template, doc, markdown) {
 		)
 		.replace(
 			/<article class="markdown-body" data-markdown-source="wiki">[\s\S]*?<\/article>/,
-			`<article class="markdown-body">${
-				rewriteWikiFragments(rendered.html, doc)
-			}</article>`,
+			`<article class="markdown-body">${rewriteWikiFragments(
+				rendered.html,
+				doc,
+			)}</article>`,
 		)
 		.replace(
 			/<nav class="js-article-toc">[\s\S]*?<\/nav>/,
-			`<nav class="js-article-toc">${
-				rewriteWikiFragments(rendered.toc, doc)
-			}</nav>`,
+			`<nav class="js-article-toc">${rewriteWikiFragments(
+				rendered.toc,
+				doc,
+			)}</nav>`,
 		);
-	html = removeMarkdownScript(
-		rewriteWikiLinks(html),
-	);
+	html = removeMarkdownScript(rewriteWikiLinks(html));
 	if (doc !== "Home") {
 		html = html.replaceAll(
 			new RegExp(`href="${getWikiPageName(doc)}"`, "g"),
@@ -404,10 +407,10 @@ async function buildWikiPages() {
 	for (const [doc, path] of Object.entries(wikiDocuments)) {
 		const markdown = await readText(new URL(path, wikiDir));
 		const outputUrl = getWikiOutputUrl(doc);
-		await Deno.mkdir(new URL("./", outputUrl), { recursive: true });
+		await fs.mkdir(new URL("./", outputUrl), { recursive: true });
 		await writeText(outputUrl, buildWikiPage(template, doc, markdown));
 	}
-	await Deno.remove(new URL("wiki.html", outputDir));
+	await fs.rm(new URL("wiki.html", outputDir));
 }
 
 /**
@@ -417,8 +420,8 @@ async function buildWikiPages() {
  * @returns {Promise<void>} Promise resolved after page writes.
  */
 async function rewriteCopiedPages(latestRelease) {
-	for await (const entry of Deno.readDir(outputDir)) {
-		if (!entry.isFile || !entry.name.endsWith(".html")) {
+	for (const entry of await fs.readdir(outputDir, { withFileTypes: true })) {
+		if (!entry.isFile() || !entry.name.endsWith(".html")) {
 			continue;
 		}
 		const url = new URL(entry.name, outputDir);

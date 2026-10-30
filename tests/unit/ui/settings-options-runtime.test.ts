@@ -1,4 +1,5 @@
-import { assertEquals, assertStrictEquals } from "@std/testing/asserts";
+import { test } from "#test";
+import { assertEquals, assertStrictEquals } from "#test";
 
 /**
  * Installs minimal browser globals required by modules that import constants.
@@ -69,11 +70,12 @@ function installBrowserGlobals() {
 	};
 	for (const key of keys) {
 		Object.defineProperty(globalThis, key, {
-			value: key === "document"
-				? documentMock
-				: key === "localStorage"
-				? localStorageMock
-				: browserMock,
+			value:
+				key === "document"
+					? documentMock
+					: key === "localStorage"
+						? localStorageMock
+						: browserMock,
 			configurable: true,
 			writable: true,
 		});
@@ -107,7 +109,7 @@ async function importOptionsEntrypointModule() {
 	return await import("../../../src/settings/options.js");
 }
 
-Deno.test("options-runtime forwards runtime options to injected factories", async () => {
+test("options-runtime forwards runtime options to injected factories", async () => {
 	const restoreBrowserGlobals = installBrowserGlobals();
 	try {
 		const { createOptionsRuntime, runOptionsRuntime } =
@@ -155,19 +157,22 @@ Deno.test("options-runtime forwards runtime options to injected factories", asyn
 			}),
 			sentinel,
 		);
-		assertEquals(calls, [{
-			overrides: { key: "value" },
-			runRestoreOnLoad: true,
-		}, {
-			overrides: { another: "value" },
-			runRestoreOnLoad: false,
-		}]);
+		assertEquals(calls, [
+			{
+				overrides: { key: "value" },
+				runRestoreOnLoad: true,
+			},
+			{
+				overrides: { another: "value" },
+				runRestoreOnLoad: false,
+			},
+		]);
 	} finally {
 		restoreBrowserGlobals();
 	}
 });
 
-Deno.test("options-runtime can be created without an override factory", async () => {
+test("options-runtime can be created without an override factory", async () => {
 	const restoreBrowserGlobals = installBrowserGlobals();
 	try {
 		const { createOptionsRuntime } = await importOptionsRuntimeModule();
@@ -178,7 +183,7 @@ Deno.test("options-runtime can be created without an override factory", async ()
 	}
 });
 
-Deno.test("options entrypoint bootstraps only when enabled", async () => {
+test("options entrypoint bootstraps only when enabled", async () => {
 	const restoreBrowserGlobals = installBrowserGlobals();
 	const skipDescriptor = Object.getOwnPropertyDescriptor(
 		globalThis,

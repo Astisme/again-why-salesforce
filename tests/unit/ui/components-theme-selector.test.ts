@@ -1,3 +1,4 @@
+import { test } from "#test";
 /// <reference lib="dom" />
 import "../../mocks.test.ts";
 import {
@@ -7,7 +8,7 @@ import {
 	assertFalse,
 	assertStrictEquals,
 	assertStringIncludes,
-} from "@std/testing/asserts";
+} from "#test";
 import { installMockDom } from "../../happydom.test.ts";
 import {
 	appendThemeButtons,
@@ -16,7 +17,7 @@ import {
 	type ThemeSelectorElement,
 } from "./theme-selector-test-helpers.test.ts";
 
-Deno.test("ThemeSelectorAws", async (t) => {
+test("ThemeSelectorAws", async (t) => {
 	const { cleanup } = installMockDom();
 	const originalSetTimeout = globalThis.setTimeout;
 	const originalClearTimeout = globalThis.clearTimeout;
@@ -25,12 +26,8 @@ Deno.test("ThemeSelectorAws", async (t) => {
 	globalThis.localStorage = testLocalStorage;
 	installCustomElementsRegistry(document);
 	try {
-		const {
-			defineThemeSelector,
-			ThemeSelectorAws,
-		} = await import(
-			"../../../src/components/theme-selector/theme-selector.js"
-		);
+		const { defineThemeSelector, ThemeSelectorAws } =
+			await import("../../../src/components/theme-selector/theme-selector.js");
 
 		/**
 		 * Resets mutable globals and document state before each sub-test.
@@ -41,7 +38,8 @@ Deno.test("ThemeSelectorAws", async (t) => {
 			globalThis.setTimeout = originalSetTimeout;
 			globalThis.clearTimeout = originalClearTimeout;
 			document.body.innerHTML = "";
-			document.head.querySelector('[data-awsf-theme-selector="true"]')
+			document.head
+				.querySelector('[data-awsf-theme-selector="true"]')
 				?.remove();
 			Reflect.deleteProperty(document.documentElement.dataset, "theme");
 			testLocalStorage.clear();
@@ -99,28 +97,25 @@ Deno.test("ThemeSelectorAws", async (t) => {
 			},
 		);
 
-		await t.step(
-			"renders the template when the host starts empty",
-			() => {
-				restoreGlobals();
-				document.documentElement.dataset.theme = "light";
-				const component = document.createElement(
-					"theme-selector-aws",
-				) as ThemeSelectorElement;
-				document.body.append(component);
-				component.connectedCallback?.();
+		await t.step("renders the template when the host starts empty", () => {
+			restoreGlobals();
+			document.documentElement.dataset.theme = "light";
+			const component = document.createElement(
+				"theme-selector-aws",
+			) as ThemeSelectorElement;
+			document.body.append(component);
+			component.connectedCallback?.();
 
-				assertStringIncludes(
-					component.innerHTML,
-					`data-theme-target="light"`,
-				);
-				const injectedLink = document.head.firstElementChild;
-				assertExists(injectedLink);
-				assert(injectedLink instanceof HTMLElement);
-				assertEquals(injectedLink.tagName, "LINK");
-				assertEquals(injectedLink.dataset.awsfThemeSelector, "true");
-			},
-		);
+			assertStringIncludes(
+				component.innerHTML,
+				`data-theme-target="light"`,
+			);
+			const injectedLink = document.head.firstElementChild;
+			assertExists(injectedLink);
+			assert(injectedLink instanceof HTMLElement);
+			assertEquals(injectedLink.tagName, "LINK");
+			assertEquals(injectedLink.dataset.awsfThemeSelector, "true");
+		});
 
 		await t.step(
 			"renders both theme buttons and shows the dark toggle in light mode",
@@ -216,11 +211,9 @@ Deno.test("ThemeSelectorAws", async (t) => {
 				document.documentElement.dataset.theme = "light";
 				const component = document.createElement(
 					"theme-selector-aws",
-				) as
-					& ThemeSelectorElement
-					& {
-						observer: MutationObserver;
-					};
+				) as ThemeSelectorElement & {
+					observer: MutationObserver;
+				};
 				appendThemeButtons(component);
 				document.body.append(component);
 				component.connectedCallback?.();

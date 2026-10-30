@@ -34,29 +34,21 @@ function getSetArrayForUsageDays({
  * @return {{lastActiveDay: string|null, usageDays: number, set: Object[]|null}} the effective usage-day count and pending settings updates
  * @exports for tests
  */
-export function getUsageDaysUpdate(
-	settings = [],
-	today = getTodayDateKey(),
-) {
+export function getUsageDaysUpdate(settings = [], today = getTodayDateKey()) {
 	if (!Array.isArray(settings)) {
 		settings = settings == null ? [] : [settings];
 	}
 	const settingsMap = new Map(
-		settings
-			.filter(Boolean)
-			.map((setting) => [setting.id, setting]),
+		settings.filter(Boolean).map((setting) => [setting.id, setting]),
 	);
 	const usageDays = Number(
 		settingsMap.get(EXTENSION_USAGE_DAYS)?.enabled ?? 0,
 	);
-	const lastActiveDay = settingsMap.get(EXTENSION_LAST_ACTIVE_DAY)
-		?.enabled ?? null;
+	const lastActiveDay =
+		settingsMap.get(EXTENSION_LAST_ACTIVE_DAY)?.enabled ?? null;
 	let updatedUsageDays = usageDays;
 	let set = null;
-	if (
-		!settingsMap.has(EXTENSION_USAGE_DAYS) ||
-		lastActiveDay == null
-	) {
+	if (!settingsMap.has(EXTENSION_USAGE_DAYS) || lastActiveDay == null) {
 		set = getSetArrayForUsageDays({ usageDays, today });
 	} else if (lastActiveDay !== today) {
 		updatedUsageDays += 1;

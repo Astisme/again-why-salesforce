@@ -1,4 +1,5 @@
-import { assertEquals, assertStrictEquals } from "@std/testing/asserts";
+import { test } from "#test";
+import { assertEquals, assertStrictEquals } from "#test";
 import "../../mocks.test.ts";
 import * as favouriteManager from "../../../src/salesforce/favourite-manager.js";
 import * as importFeature from "../../../src/salesforce/import.js";
@@ -41,13 +42,11 @@ type ManageTabsModule = {
 };
 
 type OpenOtherOrgModule = {
-	createOpenOtherOrgModal: (
-		options: {
-			label?: string | null;
-			org?: string | null;
-			url?: string | null;
-		},
-	) => Promise<void>;
+	createOpenOtherOrgModal: (options: {
+		label?: string | null;
+		org?: string | null;
+		url?: string | null;
+	}) => Promise<void>;
 };
 
 type SfElementsModule = {
@@ -263,7 +262,7 @@ async function assertCanonicalDelegation() {
 	}
 }
 
-Deno.test(
+test(
 	"canonical Salesforce wrappers delegate singleton exports and defaults",
 	assertCanonicalDelegation,
 );
@@ -392,7 +391,7 @@ async function assertContentRuntimeDelegation() {
 	assertStrictEquals(contentHooks.getModule(), undefined);
 }
 
-Deno.test(
+test(
 	"content runtime singleton wrappers delegate every export and defaults",
 	assertContentRuntimeDelegation,
 );
@@ -476,7 +475,7 @@ async function assertFavouriteRuntimeDelegation() {
 	}
 }
 
-Deno.test(
+test(
 	"favourite runtime singleton delegates every export and defaults",
 	assertFavouriteRuntimeDelegation,
 );

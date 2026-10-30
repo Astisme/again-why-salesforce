@@ -1,5 +1,6 @@
+import { test } from "#test";
 import "../../mocks.test.ts";
-import { assert } from "@std/testing/asserts";
+import { assert } from "#test";
 import { BROWSER } from "../../../src/core/constants.js";
 
 /**
@@ -15,7 +16,7 @@ async function testBackgroundEntrypoint() {
 	assert(BROWSER.runtime.onMessage._listeners.length > 0);
 }
 
-Deno.test(
+test(
 	"background entrypoint starts extension listeners",
 	testBackgroundEntrypoint,
 );

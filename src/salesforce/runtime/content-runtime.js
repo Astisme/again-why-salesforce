@@ -170,16 +170,19 @@ export function showToast(message, status = undefined) {
  *   [hook: string]: unknown;
  * }}
  */
-export const __testHooks = new Proxy({
-	getModule: () => contentModule,
-	resetModule: () => {
-		contentModule = undefined;
+export const __testHooks = new Proxy(
+	{
+		getModule: () => contentModule,
+		resetModule: () => {
+			contentModule = undefined;
+		},
+		setModule: (module) => {
+			contentModule = module;
+		},
 	},
-	setModule: (module) => {
-		contentModule = module;
-	},
-}, {
-	get: (target, property, receiver) =>
-		Reflect.get(target, property, receiver) ??
+	{
+		get: (target, property, receiver) =>
+			Reflect.get(target, property, receiver) ??
 			getModule().__testHooks[property],
-});
+	},
+);

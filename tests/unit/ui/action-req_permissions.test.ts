@@ -1,13 +1,12 @@
+import { test } from "#test";
 import "../../mocks.test.ts";
-import { assertEquals, assertStrictEquals } from "@std/testing/asserts";
+import { assertEquals, assertStrictEquals } from "#test";
 import {
 	createMockWindow,
 	MockDocument,
 	MockElement,
 } from "./mock-dom.test.ts";
-import {
-	createReqPermissionsModule,
-} from "../../../src/action/req_permissions/req_permissions-module.js";
+import { createReqPermissionsModule } from "../../../src/action/req_permissions/req_permissions-module.js";
 import {
 	__testHooks as reqPermissionsTestHooks,
 	runReqPermissions as runReqPermissionsRuntime,
@@ -156,7 +155,7 @@ async function loadPermissionsModule(url: string, useRuntime = false) {
 	};
 }
 
-Deno.test("req_permissions handles the host-permission flow in isolation", async () => {
+test("req_permissions handles the host-permission flow in isolation", async () => {
 	const fixture = await loadPermissionsModule(
 		"https://example.test/action/req_permissions.html?whichid=hostpermissions",
 	);
@@ -175,32 +174,28 @@ Deno.test("req_permissions handles the host-permission flow in isolation", async
 	fixture.rememberSkip.checked = true;
 	fixture.rememberSkip.click();
 	fixture.noPermissions.click();
-	assertEquals(
-		fixture.localStorage.getItem("no-frame-request"),
-		"true",
-	);
+	assertEquals(fixture.localStorage.getItem("no-frame-request"), "true");
 	assertEquals(
 		fixture.getLocation(),
 		"chrome-extension://test/action/popup/popup.html?no-frame-request=true",
 	);
 });
 
-Deno.test("req_permissions handles the download-permission flow in isolation", async () => {
+test("req_permissions handles the download-permission flow in isolation", async () => {
 	const fixture = await loadPermissionsModule(
 		"https://example.test/action/req_permissions.html?whichid=download",
 	);
 
 	assertEquals(fixture.counters.translatorCalls, 1);
-	assertEquals(
-		fixture.hostPermissions.classList.contains("hidden"),
-		true,
-	);
+	assertEquals(fixture.hostPermissions.classList.contains("hidden"), true);
 	assertEquals(fixture.download.classList.contains("hidden"), false);
 
 	await fixture.noPermissionsDown.click();
-	assertEquals(fixture.popupUpdates, [{
-		popup: "chrome-extension://test/action/popup/popup.html",
-	}]);
+	assertEquals(fixture.popupUpdates, [
+		{
+			popup: "chrome-extension://test/action/popup/popup.html",
+		},
+	]);
 	assertEquals(
 		fixture.getLocation(),
 		"chrome-extension://test/action/popup/popup.html",
@@ -216,7 +211,7 @@ Deno.test("req_permissions handles the download-permission flow in isolation", a
 	]);
 });
 
-Deno.test("req_permissions treats a missing query value as host permissions and can remove the skip handler", async () => {
+test("req_permissions treats a missing query value as host permissions and can remove the skip handler", async () => {
 	const fixture = await loadPermissionsModule(
 		"https://example.test/action/req_permissions.html",
 	);
@@ -227,10 +222,7 @@ Deno.test("req_permissions treats a missing query value as host permissions and 
 	fixture.rememberSkip.click();
 	fixture.noPermissions.click();
 
-	assertEquals(
-		fixture.localStorage.getItem("no-frame-request"),
-		null,
-	);
+	assertEquals(fixture.localStorage.getItem("no-frame-request"), null);
 	assertEquals(
 		fixture.getLocation(),
 		"https://example.test/action/req_permissions.html",
@@ -241,7 +233,7 @@ Deno.test("req_permissions treats a missing query value as host permissions and 
 	);
 });
 
-Deno.test("req_permissions runtime delegates to its lazy module singleton", async () => {
+test("req_permissions runtime delegates to its lazy module singleton", async () => {
 	let calls = 0;
 	const closeDescriptor = Object.getOwnPropertyDescriptor(
 		globalThis,
@@ -286,7 +278,7 @@ Deno.test("req_permissions runtime delegates to its lazy module singleton", asyn
 	}
 });
 
-Deno.test("req_permissions runtime applies explicit overrides without caching them", async () => {
+test("req_permissions runtime applies explicit overrides without caching them", async () => {
 	const fixture = await loadPermissionsModule(
 		"https://example.test/action/req_permissions.html?whichid=download",
 		true,

@@ -10,9 +10,7 @@ import {
 	requestFramePatternsPermission as requestFramePatternsPermissionDefault,
 } from "../../core/functions.js";
 import { TranslationService } from "../../core/translator.js";
-import {
-	createReqPermissionsModule as createReqPermissionsPureModule,
-} from "./req_permissions-module.js";
+import { createReqPermissionsModule as createReqPermissionsPureModule } from "./req_permissions-module.js";
 
 let reqPermissionsModule = null;
 

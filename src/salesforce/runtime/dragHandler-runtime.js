@@ -57,8 +57,7 @@ export function createDragHandlerModule({
 		) {
 			event.target.style.cursor = "grabbing";
 			dragSrcIndexRuntime =
-				event.target.closest(closestTagRuntime).dataset
-					.rowIndex;
+				event.target.closest(closestTagRuntime).dataset.rowIndex;
 			event.dataTransfer.effectAllowed = "move";
 		} else {
 			event.preventDefault();
@@ -93,14 +92,9 @@ export function createDragHandlerModule({
 		];
 		const isMovingRight = targetIndex > dragSrcIndexRuntime;
 		if (
-			(
-				dragSrcIndexRuntime < pinnedNumber &&
-				pinnedNumber <= targetIndex
-			) ||
-			(
-				targetIndex < pinnedNumber &&
-				pinnedNumber <= dragSrcIndexRuntime
-			)
+			(dragSrcIndexRuntime < pinnedNumber &&
+				pinnedNumber <= targetIndex) ||
+			(targetIndex < pinnedNumber && pinnedNumber <= dragSrcIndexRuntime)
 		) {
 			targetRow = containerRuntime.querySelector(
 				`${closestTagRuntime}:nth-child(${

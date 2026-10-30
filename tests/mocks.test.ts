@@ -1,8 +1,5 @@
 /// <reference lib="dom" />
-// deno-lint-ignore-file no-explicit-any
-import manifest from "../src/manifest/template-manifest.json" with {
-	type: "json",
-};
+import manifest from "../src/manifest/template-manifest.json" with { type: "json" };
 enum StorageKeys {
 	WHY_KEY = "againWhySalesforce",
 	LOCALE_KEY = "_locale",
@@ -15,21 +12,15 @@ enum StorageKeys {
 
 export interface MockStorage {
 	[StorageKeys.WHY_KEY]:
-		| Array<Record<string, unknown>>
-		| Record<string, unknown>;
+		Array<Record<string, unknown>> | Record<string, unknown>;
 	[StorageKeys.SETTINGS_KEY]: Array<Record<string, unknown>>;
 	[StorageKeys.GENERIC_TAB_STYLE_KEY]:
-		| Array<Record<string, unknown>>
-		| undefined;
-	[StorageKeys.ORG_TAB_STYLE_KEY]:
-		| Array<Record<string, unknown>>
-		| undefined;
+		Array<Record<string, unknown>> | undefined;
+	[StorageKeys.ORG_TAB_STYLE_KEY]: Array<Record<string, unknown>> | undefined;
 	[StorageKeys.GENERIC_PINNED_TAB_STYLE_KEY]:
-		| Array<Record<string, unknown>>
-		| undefined;
+		Array<Record<string, unknown>> | undefined;
 	[StorageKeys.ORG_PINNED_TAB_STYLE_KEY]:
-		| Array<Record<string, unknown>>
-		| undefined;
+		Array<Record<string, unknown>> | undefined;
 	[StorageKeys.LOCALE_KEY]: string;
 	[key: string]: unknown;
 }
@@ -95,12 +86,14 @@ type Cookie = {
 
 type OnClickedCallback = (info: ContextMenuClickInfo, tab: BrowserTab) => void;
 type OnStartupCallback = () => void;
-type OnInstalledCallback = (
-	details: { reason: string; [key: string]: any },
-) => void;
-type OnActivatedCallback = (
-	activeInfo: { tabId: number; windowId: number },
-) => void;
+type OnInstalledCallback = (details: {
+	reason: string;
+	[key: string]: any;
+}) => void;
+type OnActivatedCallback = (activeInfo: {
+	tabId: number;
+	windowId: number;
+}) => void;
 type OnUpdatedCallback = (
 	tabId: number,
 	changeInfo: { status?: string; url?: string; [key: string]: any },
@@ -144,7 +137,6 @@ export const mockBrowser = {
 				}
 				return Promise.resolve(callback(response));
 			},
-			// deno-lint-ignore require-await
 			set: async (
 				data: Record<string, unknown>,
 				callback?: () => void,
@@ -180,7 +172,7 @@ export const mockBrowser = {
 			// Clear any previous errors
 			delete (chrome.runtime as any).lastError;
 			const setError = (message: string) =>
-				(chrome.runtime as any).lastError = message;
+				((chrome.runtime as any).lastError = message);
 			let response: any;
 			switch (message.what) {
 				case "get":
@@ -208,12 +200,12 @@ export const mockBrowser = {
 						: [message.keys];
 					for (const key of keys) {
 						if (typeof key === "string") {
-							const foundSetting =
-								mockStorage[StorageKeys.SETTINGS_KEY].filter(
-									(s) => s.id === key,
-								);
+							const foundSetting = mockStorage[
+								StorageKeys.SETTINGS_KEY
+							].filter((s) => s.id === key);
 							if (
-								foundSetting != null && foundSetting.length > 0
+								foundSetting != null &&
+								foundSetting.length > 0
 							) {
 								response.push(...foundSetting);
 							} else {
@@ -224,9 +216,7 @@ export const mockBrowser = {
 							response = mockStorage[StorageKeys.SETTINGS_KEY];
 						} else {
 							response = undefined;
-							setError(
-								`Unknown message key: ${key}`,
-							);
+							setError(`Unknown message key: ${key}`);
 						}
 					}
 					if (Array.isArray(response) && response.length === 1) {
@@ -246,16 +236,16 @@ export const mockBrowser = {
 					}
 					const settings = Array.isArray(message.key)
 						? Object.fromEntries(
-							Object.entries(mockStorage).filter(([key]) =>
-								(message.key as string[]).includes(key)
-							),
-						)
+								Object.entries(mockStorage).filter(([key]) =>
+									(message.key as string[]).includes(key),
+								),
+							)
 						: mockStorageMap[message.key as string];
 					if (
 						updatedKey &&
-						Object.values(settings as Record<string, any>).every((
-							s,
-						) => s?.[1] == null)
+						Object.values(settings as Record<string, any>).every(
+							(s) => s?.[1] == null,
+						)
 					) {
 						response = null;
 					} else if (message.keys == null || settings == null) {
@@ -264,12 +254,14 @@ export const mockBrowser = {
 						if (!Array.isArray(message.keys)) {
 							message.keys = [message.keys];
 						}
-						const requestedSettings = (settings as any[]).filter((
-							setting: any,
-						) => (message.keys as string[]).includes(setting.id));
-						response = message.keys.length > 1
-							? requestedSettings
-							: requestedSettings[0];
+						const requestedSettings = (settings as any[]).filter(
+							(setting: any) =>
+								(message.keys as string[]).includes(setting.id),
+						);
+						response =
+							message.keys.length > 1
+								? requestedSettings
+								: requestedSettings[0];
 					}
 					break;
 				}
@@ -330,9 +322,10 @@ export const mockBrowser = {
 			addListener(callback: OnInstalledCallback): void {
 				this._listeners.push(callback);
 			},
-			triggerInstalled(
-				details: { reason: string; [key: string]: any },
-			): void {
+			triggerInstalled(details: {
+				reason: string;
+				[key: string]: any;
+			}): void {
 				for (const listener of this._listeners) {
 					listener(details);
 				}
@@ -374,9 +367,10 @@ export const mockBrowser = {
 			addListener(callback: OnActivatedCallback): void {
 				this._listeners.push(callback);
 			},
-			triggerActivated(
-				activeInfo: { tabId: number; windowId: number },
-			): void {
+			triggerActivated(activeInfo: {
+				tabId: number;
+				windowId: number;
+			}): void {
 				for (const listener of this._listeners) {
 					listener(activeInfo);
 				}
@@ -408,8 +402,8 @@ export const mockBrowser = {
 		},
 		query(queryInfo: Partial<BrowserTab>): Promise<BrowserTab[]> {
 			const result = this._mockBrowserTabs.filter((tab) => {
-				return Object.entries(queryInfo).every(([key, value]) =>
-					tab[key as keyof BrowserTab] === value
+				return Object.entries(queryInfo).every(
+					([key, value]) => tab[key as keyof BrowserTab] === value,
 				);
 			});
 			return Promise.resolve(result);
@@ -488,8 +482,9 @@ export const mockBrowser = {
 		_cookies: [] as Cookie[],
 		getAll(which: Cookie): Promise<Cookie[]> {
 			return Promise.resolve(
-				this._cookies.filter((c: Cookie) =>
-					c.domain === which.domain && c.name === which.name
+				this._cookies.filter(
+					(c: Cookie) =>
+						c.domain === which.domain && c.name === which.name,
 				),
 			);
 		},
@@ -551,9 +546,41 @@ declare global {
 	var BROWSER: typeof mockBrowser;
 }
 
+class TestLocalStorage {
+	#values = new Map<string, string>();
+
+	/**
+	 * Returns the stored value for the provided key.
+	 *
+	 * @param {string} key Storage key.
+	 * @return {string | null} Stored value or `null`.
+	 */
+	getItem(key: string) {
+		return this.#values.get(key) ?? null;
+	}
+
+	/**
+	 * Stores a string value.
+	 *
+	 * @param {string} key Storage key.
+	 * @param {string} value Value to store.
+	 * @return {void}
+	 */
+	setItem(key: string, value: string) {
+		this.#values.set(key, value);
+	}
+}
+
 // Setup global objects that extension code expects
 globalThis.chrome = mockBrowser as any;
 globalThis.browser = mockBrowser as any;
+if (globalThis.localStorage == null) {
+	Object.defineProperty(globalThis, "localStorage", {
+		configurable: true,
+		value: new TestLocalStorage(),
+		writable: true,
+	});
+}
 
 const mockElements = [
 	{ getAttribute: () => "hello", textContent: "thiswillbeoverwritten" },
@@ -579,51 +606,51 @@ export const translations: Record<
 	string,
 	Record<string, { message: string }>
 > = {
-	"en": {
-		"hello": {
-			"message": "Hello",
+	en: {
+		hello: {
+			message: "Hello",
 		},
-		"goodbye": {
-			"message": "Goodbye",
+		goodbye: {
+			message: "Goodbye",
 		},
-		"weather": {
-			"message": "Weather",
+		weather: {
+			message: "Weather",
 		},
-		"world": {
-			"message": "$hello World",
+		world: {
+			message: "$hello World",
 		},
-		"salesforce": {
-			"message": "Salesforce",
+		salesforce: {
+			message: "Salesforce",
 		},
-		"sf_login": {
-			"message": "$salesforce Login",
+		sf_login: {
+			message: "$salesforce Login",
 		},
-		"use_sf_login": {
-			"message": "Use $sf_login",
+		use_sf_login: {
+			message: "Use $sf_login",
 		},
-		"you_should": {
-			"message": "You should",
+		you_should: {
+			message: "You should",
 		},
-		"plz_use_sf_login": {
-			"message": "$you_should $use_sf_login please!",
+		plz_use_sf_login: {
+			message: "$you_should $use_sf_login please!",
 		},
-		"prompt_with_newline": {
-			"message": "Enjoying $sf_login?\nPlease continue.",
+		prompt_with_newline: {
+			message: "Enjoying $sf_login?\nPlease continue.",
 		},
-		"error_missing_key": {
-			"message": "Key not found anywhere",
+		error_missing_key: {
+			message: "Key not found anywhere",
 		},
 	},
-	"fr": {
-		"hello": {
-			"message": "Bonjour",
+	fr: {
+		hello: {
+			message: "Bonjour",
 		},
 		// goodbye is missing to test missing key default to english
-		"weather": {
-			"message": "Météo",
+		weather: {
+			message: "Météo",
 		},
-		"world": {
-			"message": "$hello Monde",
+		world: {
+			message: "$hello Monde",
 		},
 	},
 };
@@ -641,8 +668,7 @@ globalThis.fetch = ((path: string) => ({
 			if (language != null && language !== "") {
 				return translations[language];
 			} else {
-				return og_fetch(path)
-					.then((res) => res.json());
+				return og_fetch(path).then((res) => res.json());
 			}
 		} else if (path.includes("oauth2/userinfo")) {
 			return { language: "sf-lang-en" };

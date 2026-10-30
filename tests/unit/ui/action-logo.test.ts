@@ -1,9 +1,6 @@
+import { test } from "#test";
 import "../../mocks.test.ts";
-import {
-	assertEquals,
-	assertExists,
-	assertStrictEquals,
-} from "@std/testing/asserts";
+import { assertEquals, assertExists, assertStrictEquals } from "#test";
 import { createLogoModule } from "../../../src/action/logo/logo-module.js";
 import {
 	__testHooks as logoTestHooks,
@@ -59,7 +56,7 @@ function loadLogoModule(useRuntime = false) {
 	return { html, initThemeCalls, listener, responses };
 }
 
-Deno.test("logo initializes theme handling and reacts only to theme messages", () => {
+test("logo initializes theme handling and reacts only to theme messages", () => {
 	const { html, initThemeCalls, listener, responses } = loadLogoModule();
 	const registeredListener = listener as RuntimeListener | null;
 	assertEquals(initThemeCalls, 1);
@@ -105,7 +102,7 @@ Deno.test("logo initializes theme handling and reacts only to theme messages", (
 	assertEquals(responses, [null]);
 });
 
-Deno.test("logo runtime delegates to its lazy module singleton", () => {
+test("logo runtime delegates to its lazy module singleton", () => {
 	let calls = 0;
 	const listener: RuntimeListener = () => {};
 	const module: ReturnType<typeof createLogoModule> = {
@@ -128,7 +125,7 @@ Deno.test("logo runtime delegates to its lazy module singleton", () => {
 	}
 });
 
-Deno.test("logo runtime applies explicit overrides without caching them", () => {
+test("logo runtime applies explicit overrides without caching them", () => {
 	const { initThemeCalls, listener } = loadLogoModule(true);
 
 	assertEquals(initThemeCalls, 1);

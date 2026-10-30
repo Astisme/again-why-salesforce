@@ -38,9 +38,7 @@ import {
 import { showToast } from "../toast.js";
 import { getCurrentHref, getModalHanger } from "../sf-elements.js";
 import { updateModalBodyOverflow } from "../modal-layout.js";
-import {
-	createManageTabsModule as createManageTabsPureModule,
-} from "../module/manageTabs-module.js";
+import { createManageTabsModule as createManageTabsPureModule } from "../module/manageTabs-module.js";
 
 /**
  * Creates manage-tabs helpers with runtime defaults and optional overrides.
@@ -84,31 +82,31 @@ export function createManageTabsModule(overrides = {}) {
 		TOAST_WARNING: overrides.TOAST_WARNING ?? TOAST_WARNING,
 		TUTORIAL_EVENT_CLOSE_MANAGE_TABS:
 			overrides.TUTORIAL_EVENT_CLOSE_MANAGE_TABS ??
-				TUTORIAL_EVENT_CLOSE_MANAGE_TABS,
+			TUTORIAL_EVENT_CLOSE_MANAGE_TABS,
 		TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL:
 			overrides.TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL ??
-				TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL,
+			TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL,
 		TUTORIAL_EVENT_REORDERED_TABS_TABLE:
 			overrides.TUTORIAL_EVENT_REORDERED_TABS_TABLE ??
-				TUTORIAL_EVENT_REORDERED_TABS_TABLE,
+			TUTORIAL_EVENT_REORDERED_TABS_TABLE,
 		CustomEvent: overrides.CustomEvent ?? globalThis.CustomEvent,
 		Tab: overrides.Tab ?? Tab,
 		TabContainer: overrides.TabContainer ?? TabContainer,
 		createManageTabRow: overrides.createManageTabRow ?? createManageTabRow,
 		document: overrides.document ?? globalThis.document,
-		ensureAllTabsAvailability: overrides.ensureAllTabsAvailability ??
-			ensureAllTabsAvailability,
-		generateManageTabsModal: overrides.generateManageTabsModal ??
-			generateManageTabsModal,
+		ensureAllTabsAvailability:
+			overrides.ensureAllTabsAvailability ?? ensureAllTabsAvailability,
+		generateManageTabsModal:
+			overrides.generateManageTabsModal ?? generateManageTabsModal,
 		getCurrentHref: overrides.getCurrentHref ?? getCurrentHref,
 		getInnerElementFieldBySelector:
 			overrides.getInnerElementFieldBySelector ??
-				getInnerElementFieldBySelector,
+			getInnerElementFieldBySelector,
 		getModalHanger: overrides.getModalHanger ?? getModalHanger,
-		getTranslations: overrides.getTranslations ??
-			TranslationService.getTranslations,
-		handleLightningLinkClick: overrides.handleLightningLinkClick ??
-			handleLightningLinkClick,
+		getTranslations:
+			overrides.getTranslations ?? TranslationService.getTranslations,
+		handleLightningLinkClick:
+			overrides.handleLightningLinkClick ?? handleLightningLinkClick,
 		injectStyle: overrides.injectStyle ?? injectStyle,
 		makeDuplicatesBold: overrides.makeDuplicatesBold ?? makeDuplicatesBold,
 		reorderTabsUl: overrides.reorderTabsUl ?? reorderTabsUl,
@@ -118,8 +116,8 @@ export function createManageTabsModule(overrides = {}) {
 		setupDragForUl: overrides.setupDragForUl ?? setupDragForUl,
 		sf_afterSet: overrides.sf_afterSet ?? sf_afterSet,
 		showToast: overrides.showToast ?? showToast,
-		updateModalBodyOverflow: overrides.updateModalBodyOverflow ??
-			updateModalBodyOverflow,
+		updateModalBodyOverflow:
+			overrides.updateModalBodyOverflow ?? updateModalBodyOverflow,
 	});
 }
 

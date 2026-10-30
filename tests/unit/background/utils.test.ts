@@ -1,10 +1,6 @@
+import { test } from "#test";
 import "../../mocks.test.ts";
-import {
-	assert,
-	assertEquals,
-	assertFalse,
-	assertRejects,
-} from "@std/testing/asserts";
+import { assert, assertEquals, assertFalse, assertRejects } from "#test";
 import { waitForCondition, waitForNextTask } from "../../async.test.ts";
 import { mockStorage } from "../../mocks.test.ts";
 import { createBackgroundUtilsModule } from "../../../src/background/utils-runtime.js";
@@ -55,31 +51,29 @@ type BackgroundUtilsModule = ReturnType<typeof createBackgroundUtilsModule>;
  *   triggerDownloadComplete: () => void;
  * }>} Loaded module and captured side effects.
  */
-function loadBackgroundUtilsModule(
-	{
-		extensionVersion = "1.0.0",
-		getURL = (path: string) => path,
-		isChrome = false,
-		isExportAllowed: exportAllowed = true,
-		isFirefox = false,
-		latestRelease = {},
-		managementInstallType = null,
-		managementRejects = false,
-		responseOk = true,
-		updateSetting = null,
-	}: {
-		extensionVersion?: string;
-		getURL?: ((path: string) => string | null) | null;
-		isChrome?: boolean;
-		isExportAllowed?: boolean;
-		isFirefox?: boolean;
-		latestRelease?: { tag_name?: string };
-		managementInstallType?: string | null;
-		managementRejects?: boolean;
-		responseOk?: boolean;
-		updateSetting?: { date?: string; enabled?: boolean } | null;
-	} = {},
-) {
+function loadBackgroundUtilsModule({
+	extensionVersion = "1.0.0",
+	getURL = (path: string) => path,
+	isChrome = false,
+	isExportAllowed: exportAllowed = true,
+	isFirefox = false,
+	latestRelease = {},
+	managementInstallType = null,
+	managementRejects = false,
+	responseOk = true,
+	updateSetting = null,
+}: {
+	extensionVersion?: string;
+	getURL?: ((path: string) => string | null) | null;
+	isChrome?: boolean;
+	isExportAllowed?: boolean;
+	isFirefox?: boolean;
+	latestRelease?: { tag_name?: string };
+	managementInstallType?: string | null;
+	managementRejects?: boolean;
+	responseOk?: boolean;
+	updateSetting?: { date?: string; enabled?: boolean } | null;
+} = {}) {
 	const downloads: Array<{ filename: string; url: string }> = [];
 	const messages: object[] = [];
 	const popups: string[] = [];
@@ -100,9 +94,10 @@ function loadBackgroundUtilsModule(
 			setPopup: (details: { popup: string }) => void;
 		};
 		downloads: {
-			download: (
-				details: { filename: string; url: string },
-			) => Promise<number>;
+			download: (details: {
+				filename: string;
+				url: string;
+			}) => Promise<number>;
 			onChanged: {
 				addListener: (
 					listener: (event: { state: { current: string } }) => void,
@@ -218,7 +213,7 @@ function loadBackgroundUtilsModule(
 	};
 }
 
-Deno.test("bg_getCurrentBrowserTab behavior", async (t) => {
+test("bg_getCurrentBrowserTab behavior", async (t) => {
 	await t.step("rejects if no tab found after retries", async () => {
 		await assertRejects(
 			async () => await bg_getCurrentBrowserTab(),
@@ -227,20 +222,23 @@ Deno.test("bg_getCurrentBrowserTab behavior", async (t) => {
 		);
 	});
 
-	BROWSER.tabs.setMockBrowserTabs([{
-		id: 0,
-		url: "https://mock0.url",
-		active: true,
-		currentWindow: true,
-	}, {
-		id: 1,
-		url: "https://mock1.url",
-		active: false,
-		currentWindow: true,
-	}]);
+	BROWSER.tabs.setMockBrowserTabs([
+		{
+			id: 0,
+			url: "https://mock0.url",
+			active: true,
+			currentWindow: true,
+		},
+		{
+			id: 1,
+			url: "https://mock1.url",
+			active: false,
+			currentWindow: true,
+		},
+	]);
 
 	await t.step("resolves with active tab (promise)", async () => {
-		const tab = await bg_getCurrentBrowserTab() as {
+		const tab = (await bg_getCurrentBrowserTab()) as {
 			active: boolean;
 			currentWindow: boolean;
 			id: number;
@@ -267,7 +265,7 @@ Deno.test("bg_getCurrentBrowserTab behavior", async (t) => {
 	});
 });
 
-Deno.test("bg_notify behavior", async (t) => {
+test("bg_notify behavior", async (t) => {
 	await t.step("sends message to current tab without throwing", async () => {
 		await bg_notify({ test: true });
 	});
@@ -281,7 +279,7 @@ Deno.test("bg_notify behavior", async (t) => {
 	});
 });
 
-Deno.test("checkLaunchExport behavior", async (t) => {
+test("checkLaunchExport behavior", async (t) => {
 	await t.step("returns false when downloads NOT available", () => {
 		assert(!checkLaunchExport(), "default params");
 		assert(!checkLaunchExport(undefined, false), "checkOnly = false");
@@ -323,7 +321,7 @@ Deno.test("checkLaunchExport behavior", async (t) => {
 	});
 });
 
-Deno.test("checkForUpdates idempotency", async (t) => {
+test("checkForUpdates idempotency", async (t) => {
 	await t.step("completes gracefully on first run", async () => {
 		await checkForUpdates();
 	});
@@ -333,7 +331,7 @@ Deno.test("checkForUpdates idempotency", async (t) => {
 	});
 });
 
-Deno.test("checkForUpdates and export-permission direct branches", async (t) => {
+test("checkForUpdates and export-permission direct branches", async (t) => {
 	await t.step(
 		"checkLaunchExport handles unavailable permission url directly",
 		() => {
@@ -363,12 +361,14 @@ Deno.test("checkForUpdates and export-permission direct branches", async (t) => 
 			const sentMessages: Array<{ what?: string; version?: string }> = [];
 			const fetchedUrls: string[] = [];
 			mockStorage[SETTINGS_KEY] = [];
-			BROWSER.tabs.setMockBrowserTabs([{
-				id: 0,
-				url: "https://mock0.url",
-				active: true,
-				currentWindow: true,
-			}]);
+			BROWSER.tabs.setMockBrowserTabs([
+				{
+					id: 0,
+					url: "https://mock0.url",
+					active: true,
+					currentWindow: true,
+				},
+			]);
 			BROWSER.tabs.sendMessage = (_tabId: number, message: object) => {
 				sentMessages.push(
 					message as { what?: string; version?: string },
@@ -389,16 +389,16 @@ Deno.test("checkForUpdates and export-permission direct branches", async (t) => 
 			try {
 				await checkForUpdates();
 				assert(
-					mockStorage[SETTINGS_KEY].some((setting) =>
-						setting.id === NO_UPDATE_NOTIFICATION
+					mockStorage[SETTINGS_KEY].some(
+						(setting) => setting.id === NO_UPDATE_NOTIFICATION,
 					),
 				);
 				assert(
 					fetchedUrls.some((url) => url.endsWith("/releases/latest")),
 				);
 				assert(
-					sentMessages.some((message) =>
-						message.version === "999.0.0"
+					sentMessages.some(
+						(message) => message.version === "999.0.0",
 					),
 				);
 			} finally {
@@ -419,12 +419,14 @@ Deno.test("checkForUpdates and export-permission direct branches", async (t) => 
 			);
 			const sentMessages: Array<{ what?: string; version?: string }> = [];
 			mockStorage[SETTINGS_KEY] = [];
-			BROWSER.tabs.setMockBrowserTabs([{
-				id: 0,
-				url: "https://mock0.url",
-				active: true,
-				currentWindow: true,
-			}]);
+			BROWSER.tabs.setMockBrowserTabs([
+				{
+					id: 0,
+					url: "https://mock0.url",
+					active: true,
+					currentWindow: true,
+				},
+			]);
 			BROWSER.tabs.sendMessage = (_tabId: number, message: object) => {
 				sentMessages.push(
 					message as { what?: string; version?: string },
@@ -456,7 +458,7 @@ Deno.test("checkForUpdates and export-permission direct branches", async (t) => 
 	);
 });
 
-Deno.test("background utils isolated branches cover export handlers and update checks", async (t) => {
+test("background utils isolated branches cover export handlers and update checks", async (t) => {
 	await t.step(
 		"export handler covers Firefox, Chrome, and fallback notification paths",
 		async () => {
@@ -476,9 +478,11 @@ Deno.test("background utils isolated branches cover export handlers and update c
 			const chrome = await loadBackgroundUtilsModule({ isChrome: true });
 			try {
 				chrome.module._exportHandler([{ url: "/chrome" }]);
-				assert(chrome.downloads[0].url.startsWith(
-					"data:application/json;charset=utf-8,",
-				));
+				assert(
+					chrome.downloads[0].url.startsWith(
+						"data:application/json;charset=utf-8,",
+					),
+				);
 			} finally {
 				chrome.cleanup();
 			}
@@ -490,11 +494,13 @@ Deno.test("background utils isolated branches cover export handlers and update c
 			try {
 				fallback.module._exportHandler([{ url: "/safari" }]);
 				await waitForCondition(() => fallback.messages.length === 1);
-				assertEquals(fallback.messages, [{
-					what: "export-from-bg",
-					filename: "again-why-salesforce_1-Tabs.json",
-					payload: JSON.stringify([{ url: "/safari" }]),
-				}]);
+				assertEquals(fallback.messages, [
+					{
+						what: "export-from-bg",
+						filename: "again-why-salesforce_1-Tabs.json",
+						payload: JSON.stringify([{ url: "/safari" }]),
+					},
+				]);
 			} finally {
 				fallback.cleanup();
 			}
@@ -546,13 +552,14 @@ Deno.test("background utils isolated branches cover export handlers and update c
 					updateFixture.requestUrls[0],
 					"https://api.github.com/repos/acme/again-why-salesforce/releases/latest",
 				);
-				assertEquals(updateFixture.messages, [{
-					what: "update-extension",
-					oldversion: "1.0.0",
-					version: "1.1.0",
-					link:
-						"https://github.com/acme/again-why-salesforce/releases/latest",
-				}]);
+				assertEquals(updateFixture.messages, [
+					{
+						what: "update-extension",
+						oldversion: "1.0.0",
+						version: "1.1.0",
+						link: "https://github.com/acme/again-why-salesforce/releases/latest",
+					},
+				]);
 			} finally {
 				updateFixture.cleanup();
 			}
@@ -621,7 +628,7 @@ Deno.test("background utils isolated branches cover export handlers and update c
 	);
 });
 
-Deno.test("background utility wrappers delegate through replaceable lazy module", async () => {
+test("background utility wrappers delegate through replaceable lazy module", async () => {
 	const fixture = await loadBackgroundUtilsModule();
 	try {
 		__testHooks.resetModule();

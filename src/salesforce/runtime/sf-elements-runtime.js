@@ -1,9 +1,7 @@
 "use strict";
 
 import { EXTENSION_NAME } from "../../core/constants.js";
-import {
-	createSfElementsModule as createSfElementsPureModule,
-} from "../module/sf-elements-module.js";
+import { createSfElementsModule as createSfElementsPureModule } from "../module/sf-elements-module.js";
 
 /**
  * Creates Salesforce element helpers with runtime defaults.

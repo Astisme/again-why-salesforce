@@ -1,14 +1,8 @@
+import { test } from "#test";
 import "../../mocks.test.ts";
-import {
-	assert,
-	assertEquals,
-	assertRejects,
-	assertThrows,
-} from "@std/testing/asserts";
+import { assert, assertEquals, assertRejects, assertThrows } from "#test";
 import { createManageTabsModule } from "../../../src/salesforce/manageTabs.js";
-import {
-	createManageTabsModule as createManageTabsPureModule,
-} from "../../../src/salesforce/module/manageTabs-module.js";
+import { createManageTabsModule as createManageTabsPureModule } from "../../../src/salesforce/module/manageTabs-module.js";
 
 type ManageTabsModule = {
 	__getState: () => {
@@ -85,9 +79,10 @@ type ManageTabsModule = {
 		trToRemove?: ManageElement | null,
 		removeIndex?: number,
 	) => Promise<void>;
-	reorderTabsTable: (
-		options?: { fromIndex?: number; toIndex?: number },
-	) => void;
+	reorderTabsTable: (options?: {
+		fromIndex?: number;
+		toIndex?: number;
+	}) => void;
 	setInfoForDrag: (
 		element: ManageElement,
 		listener: () => void,
@@ -198,9 +193,9 @@ type ManageTabsDependencies = {
 		tbody: ManageElement;
 		trsAndButtons: { button: ManageElement; tr: ManageElement }[];
 	}>;
-	generateStyleFromSettings: (
-		options?: { surface?: string },
-	) => Promise<void>;
+	generateStyleFromSettings: (options?: {
+		surface?: string;
+	}) => Promise<void>;
 	getCurrentHref: () => string;
 	getInnerElementFieldBySelector: (options: {
 		field: string;
@@ -456,12 +451,12 @@ class ManageElement {
 		if (this.parentNode == null) {
 			return;
 		}
-		this.parentNode.children = this.parentNode.children.filter((child) =>
-			child !== this
+		this.parentNode.children = this.parentNode.children.filter(
+			(child) => child !== this,
 		);
-		this.parentNode.childNodes = this.parentNode.childNodes.filter((
-			child,
-		) => child !== this);
+		this.parentNode.childNodes = this.parentNode.childNodes.filter(
+			(child) => child !== this,
+		);
 		this.parentNode = null;
 	}
 
@@ -647,9 +642,10 @@ type ManageTabsFixture = {
 	injectStyleCalls: Array<{ css?: string; id: string; link?: string }>;
 	lightningClicks: { value: number };
 	module: ManageTabsModule;
-	replaceTabsCalls: Array<
-		{ options: Record<string, unknown>; tabs: unknown[] }
-	>;
+	replaceTabsCalls: Array<{
+		options: Record<string, unknown>;
+		tabs: unknown[];
+	}>;
 	replacedTabsResult: { value: boolean };
 	reorderTabsUlCalls: { value: number };
 	setupDragForTableCallbacks: Array<
@@ -746,9 +742,8 @@ function createManagedLoggers(rows: ManageElement[]) {
  */
 function createManagedTable(savedRows: number, pinnedRows: number) {
 	const tbody = new ManageTbody();
-	const rowParts = Array.from(
-		{ length: savedRows + 1 },
-		(_, index) => createRow(index),
+	const rowParts = Array.from({ length: savedRows + 1 }, (_, index) =>
+		createRow(index),
 	);
 	for (const rowPart of rowParts) {
 		tbody.appendChild(rowPart.row);
@@ -835,9 +830,10 @@ function loadManageTabs() {
 	const injectStyleCalls: Array<{ css?: string; id: string; link?: string }> =
 		[];
 	const lightningClicks = { value: 0 };
-	const replaceTabsCalls: Array<
-		{ options: Record<string, unknown>; tabs: unknown[] }
-	> = [];
+	const replaceTabsCalls: Array<{
+		options: Record<string, unknown>;
+		tabs: unknown[];
+	}> = [];
 	const replacedTabsResult = { value: true };
 	const reorderTabsUlCalls = { value: 0 };
 	const setupDragForTableCallbacks: Array<
@@ -863,11 +859,11 @@ function loadManageTabs() {
 	const hadConfirm = "confirm" in globalThis;
 	const originalConfirm = (globalThis as { confirm?: unknown }).confirm;
 	const hadTimeout = "setTimeout" in globalThis;
-	const originalSetTimeout =
-		(globalThis as { setTimeout?: unknown }).setTimeout;
+	const originalSetTimeout = (globalThis as { setTimeout?: unknown })
+		.setTimeout;
 	const hadCustomEvent = "CustomEvent" in globalThis;
-	const originalCustomEvent =
-		(globalThis as { CustomEvent?: unknown }).CustomEvent;
+	const originalCustomEvent = (globalThis as { CustomEvent?: unknown })
+		.CustomEvent;
 
 	Object.defineProperty(globalThis, "browser", {
 		configurable: true,
@@ -942,15 +938,21 @@ function loadManageTabs() {
 			return Promise.resolve();
 		},
 		getCurrentHref: () => currentHref.value,
-		getInnerElementFieldBySelector: (
-			{ field, parentElement, selector }: {
-				field: string;
-				parentElement: ManageElement;
-				selector: string;
-			},
-		) => (parentElement.querySelector(selector) as
-			| Record<string, unknown>
-			| null)?.[field] ?? null,
+		getInnerElementFieldBySelector: ({
+			field,
+			parentElement,
+			selector,
+		}: {
+			field: string;
+			parentElement: ManageElement;
+			selector: string;
+		}) =>
+			(
+				parentElement.querySelector(selector) as Record<
+					string,
+					unknown
+				> | null
+			)?.[field] ?? null,
 		getModalHanger: () => hanger,
 		handleLightningLinkClick: () => {
 			lightningClicks.value++;
@@ -966,9 +968,10 @@ function loadManageTabs() {
 			reorderTabsUlCalls.value++;
 		},
 		setupDragForTable: (
-			callback: (
-				options?: { fromIndex?: number; toIndex?: number },
-			) => void,
+			callback: (options?: {
+				fromIndex?: number;
+				toIndex?: number;
+			}) => void,
 		) => {
 			setupDragForTableCallbacks.push(callback);
 		},
@@ -1122,7 +1125,7 @@ function createArticleFixture(
 	return { article, modalBody, table };
 }
 
-Deno.test("manageTabs reorders logger state and validates required indices", async () => {
+test("manageTabs reorders logger state and validates required indices", async () => {
 	const fixture = await loadManageTabs();
 	const rows = [createRow(0).row, createRow(1).row, createRow(2).row];
 	const managedLoggers = createManagedLoggers(rows);
@@ -1139,10 +1142,7 @@ Deno.test("manageTabs reorders logger state and validates required indices", asy
 
 		fixture.module.updateLoggerIndex(2, 0);
 
-		assertEquals(
-			fixture.module.getLastTr(null),
-			undefined,
-		);
+		assertEquals(fixture.module.getLastTr(null), undefined);
 		assertEquals(
 			fixture.module.__getState().managedLoggers[0].label.closest("tr"),
 			rows[2],
@@ -1152,7 +1152,7 @@ Deno.test("manageTabs reorders logger state and validates required indices", asy
 	}
 });
 
-Deno.test("manageTabs moves rows to the pinned boundary and refreshes row indexes", async () => {
+test("manageTabs moves rows to the pinned boundary and refreshes row indexes", async () => {
 	const fixture = await loadManageTabs();
 	const tbody = new ManageTbody();
 	const row0 = createRow(0).row;
@@ -1219,7 +1219,7 @@ Deno.test("manageTabs moves rows to the pinned boundary and refreshes row indexe
 	}
 });
 
-Deno.test("manageTabs updates action attributes", async () => {
+test("manageTabs updates action attributes", async () => {
 	const fixture = await loadManageTabs();
 	const { dragIconCell, dropdownButton, row } = createRow(0);
 	const actionButton0 = new ManageElement("a");
@@ -1257,7 +1257,7 @@ Deno.test("manageTabs updates action attributes", async () => {
 	}
 });
 
-Deno.test("manageTabs handles open, pin, unpin, remove, and unknown row actions", async () => {
+test("manageTabs handles open, pin, unpin, remove, and unknown row actions", async () => {
 	const fixture = await loadManageTabs();
 	const tbody = new ManageTbody();
 	const row0Parts = createRow(0);
@@ -1318,10 +1318,9 @@ Deno.test("manageTabs handles open, pin, unpin, remove, and unknown row actions"
 		unpinButton.dataset.action = "unpin";
 		unpinButton.dataset.tabIndex = "1";
 		unpinButton.setClosest("tr", row2Parts.row);
-		fixture.module.handleActionButtonClick(
-			createEvent(unpinButton),
-			{ allTabs },
-		);
+		fixture.module.handleActionButtonClick(createEvent(unpinButton), {
+			allTabs,
+		});
 		assertEquals(row2Parts.pinButton.style.display, "inline-block");
 		assertEquals(row2Parts.unpinButton.style.display, "none");
 		assertEquals(
@@ -1334,10 +1333,9 @@ Deno.test("manageTabs handles open, pin, unpin, remove, and unknown row actions"
 		removeButton.dataset.action = "remove";
 		removeButton.dataset.tabIndex = "0";
 		removeButton.setClosest("tr", row0Parts.row);
-		fixture.module.handleActionButtonClick(
-			createEvent(removeButton),
-			{ allTabs },
-		);
+		fixture.module.handleActionButtonClick(createEvent(removeButton), {
+			allTabs,
+		});
 		assertEquals(tbody.children.length, 2);
 		assertEquals(deleteAllButton.attributes.has("disabled"), false);
 
@@ -1345,10 +1343,9 @@ Deno.test("manageTabs handles open, pin, unpin, remove, and unknown row actions"
 		removeLastButton.dataset.action = "remove";
 		removeLastButton.dataset.tabIndex = "1";
 		removeLastButton.setClosest("tr", row1Parts.row);
-		fixture.module.handleActionButtonClick(
-			createEvent(removeLastButton),
-			{ allTabs },
-		);
+		fixture.module.handleActionButtonClick(createEvent(removeLastButton), {
+			allTabs,
+		});
 		assertEquals(
 			deleteAllButton.attributes.get("disabled"),
 			true as unknown as string,
@@ -1358,17 +1355,16 @@ Deno.test("manageTabs handles open, pin, unpin, remove, and unknown row actions"
 		unknownButton.dataset.action = "unknown";
 		unknownButton.dataset.tabIndex = "0";
 		unknownButton.setClosest("tr", row2Parts.row);
-		fixture.module.handleActionButtonClick(
-			createEvent(unknownButton),
-			{ allTabs },
-		);
+		fixture.module.handleActionButtonClick(createEvent(unknownButton), {
+			allTabs,
+		});
 		assertEquals(row2Parts.dropdownMenu.classList.contains("hidden"), true);
 	} finally {
 		fixture.cleanup();
 	}
 });
 
-Deno.test("manageTabs confirms unsaved opens, falls back to the last row, and moves unpinned rows", async () => {
+test("manageTabs confirms unsaved opens, falls back to the last row, and moves unpinned rows", async () => {
 	const fixture = await loadManageTabs();
 	const closeButton = new ManageElement("button");
 	let closeClicks = 0;
@@ -1434,7 +1430,7 @@ Deno.test("manageTabs confirms unsaved opens, falls back to the last row, and mo
 	}
 });
 
-Deno.test("manageTabs closes dropdowns and removes empty rows from drag listeners", async () => {
+test("manageTabs closes dropdowns and removes empty rows from drag listeners", async () => {
 	const fixture = await loadManageTabs();
 	const visibleMenu = new ManageElement("div");
 	const otherMenu = new ManageElement("div");
@@ -1499,9 +1495,13 @@ Deno.test("manageTabs closes dropdowns and removes empty rows from drag listener
 		assertEquals(fixture.module.__getState().focusedIndex, 4);
 
 		let inputCalls = 0;
-		fixture.module.setInfoForDrag(managedLoggers[0].label, () => {
-			inputCalls++;
-		}, 0);
+		fixture.module.setInfoForDrag(
+			managedLoggers[0].label,
+			() => {
+				inputCalls++;
+			},
+			0,
+		);
 		managedLoggers[0].label.dispatchEvent(
 			createEvent(
 				managedLoggers[0].label,
@@ -1556,7 +1556,7 @@ Deno.test("manageTabs closes dropdowns and removes empty rows from drag listener
 	}
 });
 
-Deno.test("manageTabs adds and removes rows through internal helpers", async () => {
+test("manageTabs adds and removes rows through internal helpers", async () => {
 	const fixture = await loadManageTabs();
 	const tbody = new ManageTbody();
 	const row0Parts = createRow(0);
@@ -1572,10 +1572,12 @@ Deno.test("manageTabs adds and removes rows through internal helpers", async () 
 		deleteAllButton,
 		dropdownMenus: [row0Parts.dropdownMenu],
 		managedLoggers,
-		trsAndButtons: [{
-			button: row0Parts.dropdownButton,
-			tr: row0Parts.row,
-		}],
+		trsAndButtons: [
+			{
+				button: row0Parts.dropdownButton,
+				tr: row0Parts.row,
+			},
+		],
 	});
 	createArticleFixture(tbody, row0Parts.row);
 
@@ -1647,7 +1649,7 @@ Deno.test("manageTabs adds and removes rows through internal helpers", async () 
 	}
 });
 
-Deno.test("manageTabs checks duplicates, updates links, and handles input bookkeeping", async () => {
+test("manageTabs checks duplicates, updates links, and handles input bookkeeping", async () => {
 	const fixture = await loadManageTabs();
 	const tbody = new ManageTbody();
 	const row0Parts = createRow(0);
@@ -1669,10 +1671,12 @@ Deno.test("manageTabs checks duplicates, updates links, and handles input bookke
 		focusedIndex: 0,
 		manageTabsButtons: { hide: hideButton },
 		managedLoggers,
-		trsAndButtons: [{
-			button: row0Parts.dropdownButton,
-			tr: row0Parts.row,
-		}],
+		trsAndButtons: [
+			{
+				button: row0Parts.dropdownButton,
+				tr: row0Parts.row,
+			},
+		],
 	});
 	createArticleFixture(tbody, row0Parts.row);
 	tbody.setQueryResults("tr input.url", [
@@ -1727,9 +1731,11 @@ Deno.test("manageTabs checks duplicates, updates links, and handles input bookke
 			{ tabAppendElement: tbody, tr: row0Parts.row },
 		);
 		assertEquals(
-			(row0Parts.row.querySelector("[data-action=open]") as
-				& ManageElement
-				& { href?: string }).href,
+			(
+				row0Parts.row.querySelector(
+					"[data-action=open]",
+				) as ManageElement & { href?: string }
+			).href,
 			"#",
 		);
 
@@ -1739,9 +1745,11 @@ Deno.test("manageTabs checks duplicates, updates links, and handles input bookke
 			{ tabAppendElement: tbody, tr: row0Parts.row },
 		);
 		assertEquals(
-			(row0Parts.row.querySelector("[data-action=open]") as
-				& ManageElement
-				& { href?: string }).href,
+			(
+				row0Parts.row.querySelector(
+					"[data-action=open]",
+				) as ManageElement & { href?: string }
+			).href,
 			"current-org::saved-url::saved-org",
 		);
 
@@ -1834,10 +1842,12 @@ Deno.test("manageTabs checks duplicates, updates links, and handles input bookke
 			dropdownMenus: [],
 			focusedIndex: 0,
 			managedLoggers: [managedLoggers[0]],
-			trsAndButtons: [{
-				button: previousRowParts.dropdownButton,
-				tr: previousRowParts.row,
-			}],
+			trsAndButtons: [
+				{
+					button: previousRowParts.dropdownButton,
+					tr: previousRowParts.row,
+				},
+			],
 		});
 		await fixture.module.checkAddRemoveLastTr({
 			inputObj: { label: "new", url: "url" },
@@ -1848,10 +1858,12 @@ Deno.test("manageTabs checks duplicates, updates links, and handles input bookke
 		fixture.module.__setState({
 			focusedIndex: 2,
 			managedLoggers,
-			trsAndButtons: [{
-				button: row2Parts.dropdownButton,
-				tr: row2Parts.row,
-			}],
+			trsAndButtons: [
+				{
+					button: row2Parts.dropdownButton,
+					tr: row2Parts.row,
+				},
+			],
 		});
 		fixture.module.__setState({
 			focusedIndex: 1,
@@ -1866,7 +1878,7 @@ Deno.test("manageTabs checks duplicates, updates links, and handles input bookke
 	}
 });
 
-Deno.test("manageTabs reduces loggers, reorders rows, and saves managed tabs", async () => {
+test("manageTabs reduces loggers, reorders rows, and saves managed tabs", async () => {
 	const fixture = await loadManageTabs();
 	const { managedLoggers, tbody } = createManagedTable(2, 1);
 	const rows = tbody.querySelectorAll("tr");
@@ -1913,7 +1925,7 @@ Deno.test("manageTabs reduces loggers, reorders rows, and saves managed tabs", a
 	}
 });
 
-Deno.test("manageTabs saves requested pinned count transitions", async () => {
+test("manageTabs saves requested pinned count transitions", async () => {
 	const scenarios = [
 		{ from: 0, to: 1 },
 		{ from: 0, to: 3 },
@@ -1956,7 +1968,7 @@ Deno.test("manageTabs saves requested pinned count transitions", async () => {
 	}
 });
 
-Deno.test("manageTabs creates the modal and wires its listeners", async () => {
+test("manageTabs creates the modal and wires its listeners", async () => {
 	const fixture = await loadManageTabs();
 	const row0Parts = createRow(0);
 	const row1Parts = createRow(1);
@@ -2088,7 +2100,7 @@ Deno.test("manageTabs creates the modal and wires its listeners", async () => {
 	}
 });
 
-Deno.test("manageTabs covers default override fallbacks and state reset branches", async () => {
+test("manageTabs covers default override fallbacks and state reset branches", async () => {
 	const fixture = await loadManageTabs();
 
 	try {

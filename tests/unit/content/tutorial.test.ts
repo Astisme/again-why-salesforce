@@ -1,3 +1,4 @@
+import { test } from "#test";
 /// <reference lib="dom" />
 import "../../mocks.test.ts";
 import {
@@ -6,7 +7,7 @@ import {
 	assertExists,
 	assertRejects,
 	assertThrows,
-} from "@std/testing/asserts";
+} from "#test";
 import { createTutorialModule } from "../../../src/salesforce/tutorial.js";
 import { createTutorialModule as createPureTutorialModule } from "../../../src/salesforce/module/tutorial-module.js";
 import { installMockDom } from "../../happydom.test.ts";
@@ -50,9 +51,7 @@ type Translator = {
 
 type TutorialMessageValue = boolean | number | string | null | undefined;
 
-type TutorialStorageValue =
-	| Array<{ shortcut: string }>
-	| TutorialMessageValue;
+type TutorialStorageValue = Array<{ shortcut: string }> | TutorialMessageValue;
 
 /**
  * Dependency bundle injected into the tutorial module for browserless tests.
@@ -292,9 +291,11 @@ function setGlobal<T>(name: string, value: T) {
  */
 async function flush() {
 	await new Promise((resolve) => setTimeout(resolve, 0));
-	await (globalThis.window as {
-		happyDOM?: { waitUntilComplete?: () => Promise<void> };
-	}).happyDOM?.waitUntilComplete?.();
+	await (
+		globalThis.window as {
+			happyDOM?: { waitUntilComplete?: () => Promise<void> };
+		}
+	).happyDOM?.waitUntilComplete?.();
 }
 
 /**
@@ -331,12 +332,14 @@ function installDom(url = DEFAULT_URL) {
  * @param options Initial storage, navigation, and tab state for the tutorial.
  * @return Harness helpers, dependency doubles, and captured side effects.
  */
-function createHarness(options: {
-	tutorialProgress?: number | null;
-	savedTabUrls?: string[];
-	url?: string;
-	pinnedTabsNo?: number;
-} = {}) {
+function createHarness(
+	options: {
+		tutorialProgress?: number | null;
+		savedTabUrls?: string[];
+		url?: string;
+		pinnedTabsNo?: number;
+	} = {},
+) {
 	const dom = installDom(options.url);
 	const setupTabUl = globalThis.document.createElement("ul");
 	globalThis.document.body.appendChild(setupTabUl);
@@ -399,9 +402,11 @@ function createHarness(options: {
 		switch (message.what) {
 			case constants.WHAT_GET:
 				if (Array.isArray(message.key)) {
-					return Promise.resolve(Object.fromEntries(
-						message.key.map((key) => [key, storage[key]]),
-					));
+					return Promise.resolve(
+						Object.fromEntries(
+							message.key.map((key) => [key, storage[key]]),
+						),
+					);
 				}
 				return Promise.resolve(storage[message.key as string]);
 			case constants.WHAT_GET_COMMANDS:
@@ -518,7 +523,8 @@ function createHarness(options: {
 	 * @return Root modal element.
 	 */
 	function createManageTabsModal(rows = state.savedTabUrls.length) {
-		globalThis.document.getElementById("again-why-salesforce-modal")
+		globalThis.document
+			.getElementById("again-why-salesforce-modal")
 			?.remove();
 		const modal = globalThis.document.createElement("div");
 		modal.id = "again-why-salesforce-modal";
@@ -569,8 +575,8 @@ function createHarness(options: {
 			}
 			case constants.TUTORIAL_EVENT_ACTION_UNFAVOURITE: {
 				const miniUrl = currentMiniUrl();
-				state.savedTabUrls = state.savedTabUrls.filter((url) =>
-					url !== miniUrl
+				state.savedTabUrls = state.savedTabUrls.filter(
+					(url) => url !== miniUrl,
 				);
 				renderSetupTabs();
 				break;
@@ -588,10 +594,11 @@ function createHarness(options: {
 	 * @return Resolves once the message box shows the requested step.
 	 */
 	async function waitForMessage(key: string) {
-		await waitFor(() =>
-			records.latestUi?.segments.textContent?.startsWith(
-				`translated:${key}`,
-			) === true
+		await waitFor(
+			() =>
+				records.latestUi?.segments.textContent?.startsWith(
+					`translated:${key}`,
+				) === true,
 		);
 	}
 
@@ -650,18 +657,14 @@ function createHarness(options: {
 				cancelLabel,
 				closeLabel,
 			}) => {
-				const {
-					modalParent,
-					saveButton,
-					cancelButton,
-					closeButton,
-				} = deps.generator.generateSldsPromptModal({
-					modalTitle: title,
-					bodyText: body,
-					confirmButtonLabel: confirmLabel,
-					cancelButtonLabel: cancelLabel,
-					closeButtonLabel: closeLabel,
-				});
+				const { modalParent, saveButton, cancelButton, closeButton } =
+					deps.generator.generateSldsPromptModal({
+						modalTitle: title,
+						bodyText: body,
+						confirmButtonLabel: confirmLabel,
+						cancelButtonLabel: cancelLabel,
+						closeButtonLabel: closeLabel,
+					});
 				modalParent.id = "again-why-salesforce-confirm-modal";
 				globalThis.document.body.appendChild(modalParent);
 				records.latestPrompt = {
@@ -719,9 +722,8 @@ function createHarness(options: {
 				const saveButton = globalThis.document.createElement("button");
 				saveButton.textContent = confirmButtonLabel;
 				modalParent.appendChild(saveButton);
-				const cancelButton = globalThis.document.createElement(
-					"button",
-				);
+				const cancelButton =
+					globalThis.document.createElement("button");
 				cancelButton.textContent = cancelButtonLabel;
 				modalParent.appendChild(cancelButton);
 				const closeButton = globalThis.document.createElement("button");
@@ -836,40 +838,37 @@ function createHarness(options: {
 	};
 }
 
-Deno.test(
-	"checkTutorial starts the tutorial without a browser",
-	async () => {
-		const harness = createHarness({ tutorialProgress: null });
-		try {
-			const tutorialModule = await harness.load();
-			const checkPromise = tutorialModule.checkTutorial();
-			await waitFor(() => harness.records.latestPrompt != null);
-			harness.records.latestPrompt?.saveButton.click();
-			await checkPromise;
-			await harness.waitForMessage("tutorial_restart");
+test("checkTutorial starts the tutorial without a browser", async () => {
+	const harness = createHarness({ tutorialProgress: null });
+	try {
+		const tutorialModule = await harness.load();
+		const checkPromise = tutorialModule.checkTutorial();
+		await waitFor(() => harness.records.latestPrompt != null);
+		harness.records.latestPrompt?.saveButton.click();
+		await checkPromise;
+		await harness.waitForMessage("tutorial_restart");
 
-			assertEquals(harness.records.redirects, [
-				"/lightning/setup/SetupOneHome/home",
-			]);
-			assertExists(globalThis.document.querySelector(".tut-v7"));
-			assertEquals(
-				harness.records.latestUi?.segments.textContent,
-				"translated:tutorial_restart",
-			);
-			assertEquals(harness.storage["tutorial-progress"], 0);
-			assert(
-				harness.records.messages.some((message) =>
-					message.what === "get-commands"
-				),
-			);
-		} finally {
-			await flush();
-			harness.cleanup();
-		}
-	},
-);
+		assertEquals(harness.records.redirects, [
+			"/lightning/setup/SetupOneHome/home",
+		]);
+		assertExists(globalThis.document.querySelector(".tut-v7"));
+		assertEquals(
+			harness.records.latestUi?.segments.textContent,
+			"translated:tutorial_restart",
+		);
+		assertEquals(harness.storage["tutorial-progress"], 0);
+		assert(
+			harness.records.messages.some(
+				(message) => message.what === "get-commands",
+			),
+		);
+	} finally {
+		await flush();
+		harness.cleanup();
+	}
+});
 
-Deno.test("executeStep advances on tutorial custom events", async () => {
+test("executeStep advances on tutorial custom events", async () => {
 	const harness = createHarness();
 	try {
 		const tutorialModule = await harness.load();
@@ -912,1093 +911,1000 @@ Deno.test("executeStep advances on tutorial custom events", async () => {
 	}
 });
 
-Deno.test(
-	"executeStep listens for Lightning navigation without a browser",
-	async () => {
-		const harness = createHarness();
-		try {
-			const tutorialModule = await harness.load();
-			const tutorial = new tutorialModule.Tutorial();
-			tutorial.translator = harness.translator;
-			await tutorial.createOverlay();
+test("executeStep listens for Lightning navigation without a browser", async () => {
+	const harness = createHarness();
+	try {
+		const tutorialModule = await harness.load();
+		const tutorial = new tutorialModule.Tutorial();
+		tutorial.translator = harness.translator;
+		await tutorial.createOverlay();
 
-			const target = globalThis.document.createElement("div");
-			globalThis.document.body.appendChild(target);
+		const target = globalThis.document.createElement("div");
+		globalThis.document.body.appendChild(target);
 
-			let nextStepCalls = 0;
-			tutorial.nextStep = () => {
-				nextStepCalls++;
-			};
+		let nextStepCalls = 0;
+		tutorial.nextStep = () => {
+			nextStepCalls++;
+		};
 
-			await tutorial.executeStep({
-				message: "tutorial_click_highlighted_tab",
-				element: () => target,
-				action: "highlight",
-				waitFor: "redirect",
-			});
+		await tutorial.executeStep({
+			message: "tutorial_click_highlighted_tab",
+			element: () => target,
+			action: "highlight",
+			waitFor: "redirect",
+		});
 
-			assert(target.classList.contains("awsf-tutorial-highlight"));
-			assert(
-				tutorial.btnsParent.classList.contains(
-					harness.constants.HIDDEN_CLASS,
-				),
-			);
+		assert(target.classList.contains("awsf-tutorial-highlight"));
+		assert(
+			tutorial.btnsParent.classList.contains(
+				harness.constants.HIDDEN_CLASS,
+			),
+		);
 
-			harness.navigateTo(
-				"ObjectManager/Account/FieldsAndRelationships/view",
-			);
-			await flush();
+		harness.navigateTo("ObjectManager/Account/FieldsAndRelationships/view");
+		await flush();
 
-			assertEquals(nextStepCalls, 1);
-		} finally {
-			await flush();
-			harness.cleanup();
-		}
-	},
-);
+		assertEquals(nextStepCalls, 1);
+	} finally {
+		await flush();
+		harness.cleanup();
+	}
+});
 
-Deno.test(
-	"tutorial runs end to end and persists completion without a browser",
-	async () => {
-		const harness = createHarness();
-		try {
-			const tutorialModule = await harness.load();
-			const tutorial = new tutorialModule.Tutorial();
-			await tutorial.start();
-			await harness.waitForMessage("tutorial_restart");
-			assertEquals(tutorial.currentStep, 0);
-			assertEquals(harness.storage["tutorial-progress"], 0);
+test("tutorial runs end to end and persists completion without a browser", async () => {
+	const harness = createHarness();
+	try {
+		const tutorialModule = await harness.load();
+		const tutorial = new tutorialModule.Tutorial();
+		await tutorial.start();
+		await harness.waitForMessage("tutorial_restart");
+		assertEquals(tutorial.currentStep, 0);
+		assertEquals(harness.storage["tutorial-progress"], 0);
 
-			await advanceCurrentStep(tutorial);
-			await harness.waitForMessage("tutorial_favourite_tabs");
+		await advanceCurrentStep(tutorial);
+		await harness.waitForMessage("tutorial_favourite_tabs");
 
-			await advanceCurrentStep(tutorial);
-			await harness.waitForMessage("tutorial_click_highlighted_tab");
+		await advanceCurrentStep(tutorial);
+		await harness.waitForMessage("tutorial_click_highlighted_tab");
 
-			harness.navigateTo(
-				"ObjectManager/Account/FieldsAndRelationships/view",
-			);
-			await harness.waitForMessage("tutorial_remove_favourite");
+		harness.navigateTo("ObjectManager/Account/FieldsAndRelationships/view");
+		await harness.waitForMessage("tutorial_remove_favourite");
 
-			harness.dispatchTutorialEvent(
-				harness.constants.TUTORIAL_EVENT_ACTION_UNFAVOURITE,
-			);
-			await harness.waitForMessage("tutorial_redirect_account");
+		harness.dispatchTutorialEvent(
+			harness.constants.TUTORIAL_EVENT_ACTION_UNFAVOURITE,
+		);
+		await harness.waitForMessage("tutorial_redirect_account");
 
-			await advanceCurrentStep(tutorial);
-			await harness.waitForMessage("tutorial_add_favourite");
+		await advanceCurrentStep(tutorial);
+		await harness.waitForMessage("tutorial_add_favourite");
 
-			harness.dispatchTutorialEvent(
-				harness.constants.TUTORIAL_EVENT_ACTION_FAVOURITE,
-			);
-			await harness.waitForMessage("tutorial_pin_tab");
+		harness.dispatchTutorialEvent(
+			harness.constants.TUTORIAL_EVENT_ACTION_FAVOURITE,
+		);
+		await harness.waitForMessage("tutorial_pin_tab");
 
-			harness.dispatchTutorialEvent(
-				harness.constants.TUTORIAL_EVENT_PIN_TAB,
-			);
-			await harness.waitForMessage("tutorial_pinned_tab");
+		harness.dispatchTutorialEvent(harness.constants.TUTORIAL_EVENT_PIN_TAB);
+		await harness.waitForMessage("tutorial_pinned_tab");
 
-			await advanceCurrentStep(tutorial);
-			await harness.waitForMessage("tutorial_manage_tabs");
+		await advanceCurrentStep(tutorial);
+		await harness.waitForMessage("tutorial_manage_tabs");
 
-			harness.createManageTabsModal();
-			harness.dispatchTutorialEvent(
-				harness.constants.TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL,
-			);
-			await harness.waitForMessage("tutorial_manage_tabs_link");
-			assertEquals(
-				harness.records.latestUi?.segments.textContent,
-				"translated:tutorial_manage_tabs_link",
-			);
-			assertEquals(
-				harness.records.latestUi?.linkBtn.href,
-				"https://astisme.github.io/again-why-salesforce/Wiki/Manage-Tabs-modal",
-			);
-			assertEquals(
-				harness.records.latestUi?.linkBtn.textContent,
-				"translated:open_tutorial_manage_tabs_guide",
-			);
-			assertEquals(
-				harness.records.latestUi?.linkBtn.target,
-				"_blank",
-			);
+		harness.createManageTabsModal();
+		harness.dispatchTutorialEvent(
+			harness.constants.TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL,
+		);
+		await harness.waitForMessage("tutorial_manage_tabs_link");
+		assertEquals(
+			harness.records.latestUi?.segments.textContent,
+			"translated:tutorial_manage_tabs_link",
+		);
+		assertEquals(
+			harness.records.latestUi?.linkBtn.href,
+			"https://astisme.github.io/again-why-salesforce/Wiki/Manage-Tabs-modal",
+		);
+		assertEquals(
+			harness.records.latestUi?.linkBtn.textContent,
+			"translated:open_tutorial_manage_tabs_guide",
+		);
+		assertEquals(harness.records.latestUi?.linkBtn.target, "_blank");
 
-			await advanceCurrentStep(tutorial);
-			await harness.waitForMessage("tutorial_drag_flows");
+		await advanceCurrentStep(tutorial);
+		await harness.waitForMessage("tutorial_drag_flows");
 
-			harness.dispatchTutorialEvent(
-				harness.constants.TUTORIAL_EVENT_REORDERED_TABS_TABLE,
-			);
-			await harness.waitForMessage("tutorial_pinned_explanation");
+		harness.dispatchTutorialEvent(
+			harness.constants.TUTORIAL_EVENT_REORDERED_TABS_TABLE,
+		);
+		await harness.waitForMessage("tutorial_pinned_explanation");
 
-			await advanceCurrentStep(tutorial);
-			await harness.waitForMessage("tutorial_save_modal");
+		await advanceCurrentStep(tutorial);
+		await harness.waitForMessage("tutorial_save_modal");
 
-			harness.dispatchTutorialEvent(
-				harness.constants.TUTORIAL_EVENT_CLOSE_MANAGE_TABS,
-			);
-			await harness.waitForMessage("tutorial_keyboard_shortcut");
-			assert(
-				harness.records.latestUi?.segments.textContent?.includes(
-					"Shortcut: Ctrl+Shift+Y",
-				),
-			);
+		harness.dispatchTutorialEvent(
+			harness.constants.TUTORIAL_EVENT_CLOSE_MANAGE_TABS,
+		);
+		await harness.waitForMessage("tutorial_keyboard_shortcut");
+		assert(
+			harness.records.latestUi?.segments.textContent?.includes(
+				"Shortcut: Ctrl+Shift+Y",
+			),
+		);
 
-			await advanceCurrentStep(tutorial);
-			await harness.waitForMessage("tutorial_end");
-			assertEquals(
-				harness.records.latestUi?.closeBtn.textContent,
-				"translated:close",
-			);
-			assertEquals(
-				harness.records.latestUi?.confirmBtn.parentElement,
-				null,
-			);
+		await advanceCurrentStep(tutorial);
+		await harness.waitForMessage("tutorial_end");
+		assertEquals(
+			harness.records.latestUi?.closeBtn.textContent,
+			"translated:close",
+		);
+		assertEquals(harness.records.latestUi?.confirmBtn.parentElement, null);
 
-			await advanceCurrentStep(tutorial);
-			await waitFor(() => !tutorial.isActive);
+		await advanceCurrentStep(tutorial);
+		await waitFor(() => !tutorial.isActive);
 
-			assertEquals(
-				harness.storage["tutorial-progress"],
-				tutorial.steps.length,
-			);
-			assertEquals(globalThis.document.querySelector(".tut-v7"), null);
-			assert(
-				harness.records.redirects.includes(
-					"/lightning/setup/PermSets/home",
-				),
-			);
-			assertEquals(harness.state.pinnedTabsNo, 1);
-		} finally {
-			await flush();
-			harness.cleanup();
-		}
-	},
-);
+		assertEquals(
+			harness.storage["tutorial-progress"],
+			tutorial.steps.length,
+		);
+		assertEquals(globalThis.document.querySelector(".tut-v7"), null);
+		assert(
+			harness.records.redirects.includes(
+				"/lightning/setup/PermSets/home",
+			),
+		);
+		assertEquals(harness.state.pinnedTabsNo, 1);
+	} finally {
+		await flush();
+		harness.cleanup();
+	}
+});
 
-Deno.test(
-	"checkTutorial resumes from stored progress without a browser",
-	async () => {
-		const harness = createHarness({ tutorialProgress: 6 });
-		try {
-			const tutorialModule = await harness.load();
-			const checkPromise = tutorialModule.checkTutorial();
-			await waitFor(() => harness.records.latestPrompt != null);
-			harness.records.latestPrompt?.saveButton.click();
-			await checkPromise;
-			await harness.waitForMessage("tutorial_add_favourite");
+test("checkTutorial resumes from stored progress without a browser", async () => {
+	const harness = createHarness({ tutorialProgress: 6 });
+	try {
+		const tutorialModule = await harness.load();
+		const checkPromise = tutorialModule.checkTutorial();
+		await waitFor(() => harness.records.latestPrompt != null);
+		harness.records.latestPrompt?.saveButton.click();
+		await checkPromise;
+		await harness.waitForMessage("tutorial_add_favourite");
 
-			assertEquals(harness.records.redirects, [
-				"/lightning/setup/ObjectManager/Account/FieldsAndRelationships/view",
-			]);
-			assertEquals(harness.storage["tutorial-progress"], 5);
-			assert(
-				harness.records.latestUi?.segments.textContent?.includes(
-					"translated:tutorial_add_favourite",
-				),
-			);
-		} finally {
-			await flush();
-			harness.cleanup();
-		}
-	},
-);
+		assertEquals(harness.records.redirects, [
+			"/lightning/setup/ObjectManager/Account/FieldsAndRelationships/view",
+		]);
+		assertEquals(harness.storage["tutorial-progress"], 5);
+		assert(
+			harness.records.latestUi?.segments.textContent?.includes(
+				"translated:tutorial_add_favourite",
+			),
+		);
+	} finally {
+		await flush();
+		harness.cleanup();
+	}
+});
 
-Deno.test(
-	"executeStep resets to the nearest starting block when a required element is missing",
-	async () => {
-		const harness = createHarness();
-		try {
-			const tutorialModule = await harness.load();
-			const tutorial = new tutorialModule.Tutorial();
-			tutorial.translator = harness.translator;
-			await tutorial.createOverlay();
-			tutorial.steps = [
-				{ message: "block_zero", beginsBlock: true },
-				{ message: "inside_zero" },
-				{ message: "block_two", beginsBlock: true },
-				{ message: "inside_two" },
-				{ message: "current_step" },
-			];
-			tutorial.currentStep = 4;
+test("executeStep resets to the nearest starting block when a required element is missing", async () => {
+	const harness = createHarness();
+	try {
+		const tutorialModule = await harness.load();
+		const tutorial = new tutorialModule.Tutorial();
+		tutorial.translator = harness.translator;
+		await tutorial.createOverlay();
+		tutorial.steps = [
+			{ message: "block_zero", beginsBlock: true },
+			{ message: "inside_zero" },
+			{ message: "block_two", beginsBlock: true },
+			{ message: "inside_two" },
+			{ message: "current_step" },
+		];
+		tutorial.currentStep = 4;
 
-			let restartFromStep: number | null = null;
-			tutorial.nextStep = () => {
-				tutorial.currentStep++;
-				restartFromStep = tutorial.currentStep;
-			};
+		let restartFromStep: number | null = null;
+		tutorial.nextStep = () => {
+			tutorial.currentStep++;
+			restartFromStep = tutorial.currentStep;
+		};
 
-			await tutorial.executeStep({
-				message: "missing_element_step",
-				element: () => null,
-			});
+		await tutorial.executeStep({
+			message: "missing_element_step",
+			element: () => null,
+		});
 
-			assertEquals(harness.records.toasts, [{
+		assertEquals(harness.records.toasts, [
+			{
 				message: "tutorial_step_was_missed",
 				status: "warning",
-			}]);
-			assertEquals(restartFromStep, 2);
-			assertEquals(tutorial.currentStep, 2);
-		} finally {
-			await flush();
-			harness.cleanup();
-		}
-	},
-);
+			},
+		]);
+		assertEquals(restartFromStep, 2);
+		assertEquals(tutorial.currentStep, 2);
+	} finally {
+		await flush();
+		harness.cleanup();
+	}
+});
 
-Deno.test(
-	"initSteps returns false and shows a toast when no redirect links are available",
-	async () => {
-		const harness = createHarness({
-			savedTabUrls: ALL_USABLE_PAGE_URLS,
-		});
-		try {
-			const tutorialModule = await harness.load();
-			const tutorial = new tutorialModule.Tutorial();
+test("initSteps returns false and shows a toast when no redirect links are available", async () => {
+	const harness = createHarness({
+		savedTabUrls: ALL_USABLE_PAGE_URLS,
+	});
+	try {
+		const tutorialModule = await harness.load();
+		const tutorial = new tutorialModule.Tutorial();
 
-			const initialized = await tutorial.initSteps();
+		const initialized = await tutorial.initSteps();
 
-			assertEquals(initialized, false);
-			assertEquals(harness.records.toasts, [{
+		assertEquals(initialized, false);
+		assertEquals(harness.records.toasts, [
+			{
 				message: "tutorial_export_and_reset_for_tutorial",
 				status: "warning",
-			}]);
-		} finally {
-			await flush();
-			harness.cleanup();
-		}
-	},
-);
+			},
+		]);
+	} finally {
+		await flush();
+		harness.cleanup();
+	}
+});
 
-Deno.test(
-	"persistTutorialProgress validates input and clamps the last step to completion",
-	async () => {
-		const harness = createHarness();
-		try {
-			const tutorialModule = await harness.load();
-			const tutorial = new tutorialModule.Tutorial();
-			tutorial.steps = [{}, {}, {}];
-			tutorial.currentStep = 2;
+test("persistTutorialProgress validates input and clamps the last step to completion", async () => {
+	const harness = createHarness();
+	try {
+		const tutorialModule = await harness.load();
+		const tutorial = new tutorialModule.Tutorial();
+		tutorial.steps = [{}, {}, {}];
+		tutorial.currentStep = 2;
 
-			assertThrows(
-				() => tutorial.persistTutorialProgress("bad"),
-				TypeError,
-				"stepNo should be a number",
-			);
+		assertThrows(
+			() => tutorial.persistTutorialProgress("bad"),
+			TypeError,
+			"stepNo should be a number",
+		);
 
-			await tutorial.persistTutorialProgress();
-			assertEquals(harness.storage["tutorial-progress"], 3);
-			assertEquals(
-				harness.storage[harness.constants.TUTORIAL_CLOSE_EVENT],
-				"auto",
-			);
+		await tutorial.persistTutorialProgress();
+		assertEquals(harness.storage["tutorial-progress"], 3);
+		assertEquals(
+			harness.storage[harness.constants.TUTORIAL_CLOSE_EVENT],
+			"auto",
+		);
 
-			await tutorial.persistTutorialProgress(1, true);
-			assertEquals(harness.storage["tutorial-progress"], 1);
-			assertEquals(
-				harness.storage[harness.constants.TUTORIAL_CLOSE_EVENT],
-				"user",
-			);
-		} finally {
-			await flush();
-			harness.cleanup();
-		}
-	},
-);
+		await tutorial.persistTutorialProgress(1, true);
+		assertEquals(harness.storage["tutorial-progress"], 1);
+		assertEquals(
+			harness.storage[harness.constants.TUTORIAL_CLOSE_EVENT],
+			"user",
+		);
+	} finally {
+		await flush();
+		harness.cleanup();
+	}
+});
 
-Deno.test(
-	"showMessage configures guide link button and appends shortcuts",
-	async () => {
-		const harness = createHarness();
-		try {
-			const tutorialModule = await harness.load();
-			const tutorial = new tutorialModule.Tutorial();
-			await tutorial.createOverlay();
-			harness.translator.translate = (key: string) => {
-				if (key === "already_complete") {
-					return "Message with https://docs.test and Shortcut: Alt+K";
-				}
-				return "Base message";
-			};
+test("showMessage configures guide link button and appends shortcuts", async () => {
+	const harness = createHarness();
+	try {
+		const tutorialModule = await harness.load();
+		const tutorial = new tutorialModule.Tutorial();
+		await tutorial.createOverlay();
+		harness.translator.translate = (key: string) => {
+			if (key === "already_complete") {
+				return "Message with https://docs.test and Shortcut: Alt+K";
+			}
+			return "Base message";
+		};
 
-			tutorial.showSpinner();
-			await tutorial.showMessage({
-				message: "base",
-				link: "https://docs.test",
-				buttonLabel: "open_guide",
-				shortcut: "Alt+K",
-			});
-			assertEquals(
-				tutorial.segments.textContent,
-				"Base message\n\nShortcut: Alt+K",
-			);
-			assertEquals(tutorial.linkBtn.href, "https://docs.test");
-			assertEquals(tutorial.linkBtn.textContent, "Base message");
-			assert(
-				tutorial.spinner.classList.contains(
-					harness.constants.HIDDEN_CLASS,
-				),
-			);
+		tutorial.showSpinner();
+		await tutorial.showMessage({
+			message: "base",
+			link: "https://docs.test",
+			buttonLabel: "open_guide",
+			shortcut: "Alt+K",
+		});
+		assertEquals(
+			tutorial.segments.textContent,
+			"Base message\n\nShortcut: Alt+K",
+		);
+		assertEquals(tutorial.linkBtn.href, "https://docs.test");
+		assertEquals(tutorial.linkBtn.textContent, "Base message");
+		assert(
+			tutorial.spinner.classList.contains(harness.constants.HIDDEN_CLASS),
+		);
 
-			await tutorial.showMessage({
-				message: "already_complete",
-				link: "https://docs.test",
-				buttonLabel: "open_guide",
-				shortcut: "Alt+K",
-			});
-			assertEquals(
-				tutorial.segments.textContent,
-				"Message with https://docs.test and Shortcut: Alt+K",
-			);
-			assertEquals(
-				tutorial.linkBtn.textContent,
-				"Base message",
-			);
-		} finally {
-			await flush();
-			harness.cleanup();
-		}
-	},
-);
+		await tutorial.showMessage({
+			message: "already_complete",
+			link: "https://docs.test",
+			buttonLabel: "open_guide",
+			shortcut: "Alt+K",
+		});
+		assertEquals(
+			tutorial.segments.textContent,
+			"Message with https://docs.test and Shortcut: Alt+K",
+		);
+		assertEquals(tutorial.linkBtn.textContent, "Base message");
+	} finally {
+		await flush();
+		harness.cleanup();
+	}
+});
 
-Deno.test(
-	"getElementNowOrLater creates a fake element after enough retries",
-	async () => {
-		const harness = createHarness();
-		try {
-			const tutorialModule = await harness.load();
-			const tutorial = new tutorialModule.Tutorial();
-			const fakeEl = globalThis.document.createElement("div");
-			let callbackCalls = 0;
-			tutorial.retryCount = 5;
+test("getElementNowOrLater creates a fake element after enough retries", async () => {
+	const harness = createHarness();
+	try {
+		const tutorialModule = await harness.load();
+		const tutorial = new tutorialModule.Tutorial();
+		const fakeEl = globalThis.document.createElement("div");
+		let callbackCalls = 0;
+		tutorial.retryCount = 5;
 
-			const result = await tutorial.getElementNowOrLater({
+		const result = await tutorial.getElementNowOrLater(
+			{
 				element: () => null,
 				fakeElement: () => fakeEl,
-			}, () => {
+			},
+			() => {
 				callbackCalls++;
-			});
+			},
+		);
 
-			assertEquals(result, fakeEl);
-			assertEquals(tutorial.retryCount, 6);
-			assertEquals(callbackCalls, 0);
-		} finally {
-			await flush();
-			harness.cleanup();
-		}
-	},
-);
+		assertEquals(result, fakeEl);
+		assertEquals(tutorial.retryCount, 6);
+		assertEquals(callbackCalls, 0);
+	} finally {
+		await flush();
+		harness.cleanup();
+	}
+});
 
-Deno.test(
-	"getElementNowOrLater schedules a retry when the element is still missing",
-	async () => {
-		const harness = createHarness();
-		const originalSetTimeout = globalThis.setTimeout;
-		try {
-			const tutorialModule = await harness.load();
-			const tutorial = new tutorialModule.Tutorial();
-			const scheduled = [] as Array<
-				{ delay: number; callback: () => void }
-			>;
-			setGlobal(
-				"setTimeout",
-				((callback: () => void, delay: number) => {
-					scheduled.push({ delay, callback });
-					return 1;
-				}) as typeof setTimeout,
-			);
+test("getElementNowOrLater schedules a retry when the element is still missing", async () => {
+	const harness = createHarness();
+	const originalSetTimeout = globalThis.setTimeout;
+	try {
+		const tutorialModule = await harness.load();
+		const tutorial = new tutorialModule.Tutorial();
+		const scheduled = [] as Array<{ delay: number; callback: () => void }>;
+		setGlobal("setTimeout", ((callback: () => void, delay: number) => {
+			scheduled.push({ delay, callback });
+			return 1;
+		}) as typeof setTimeout);
 
-			let callbackCalls = 0;
-			const step = {
-				element: () => null,
-				fakeElement: () => null,
-			};
+		let callbackCalls = 0;
+		const step = {
+			element: () => null,
+			fakeElement: () => null,
+		};
 
-			const result = await tutorial.getElementNowOrLater(
-				step,
-				(receivedStep) => {
-					assertEquals(receivedStep, step);
-					callbackCalls++;
-				},
-			);
+		const result = await tutorial.getElementNowOrLater(
+			step,
+			(receivedStep) => {
+				assertEquals(receivedStep, step);
+				callbackCalls++;
+			},
+		);
 
-			assertEquals(result, undefined);
-			assertEquals(tutorial.retryCount, 1);
-			assertEquals(scheduled.length, 1);
-			assertEquals(scheduled[0].delay, 1000);
+		assertEquals(result, undefined);
+		assertEquals(tutorial.retryCount, 1);
+		assertEquals(scheduled.length, 1);
+		assertEquals(scheduled[0].delay, 1000);
 
-			scheduled[0].callback();
-			assertEquals(callbackCalls, 1);
-		} finally {
-			setGlobal("setTimeout", originalSetTimeout);
-			await flush();
-			harness.cleanup();
-		}
-	},
-);
+		scheduled[0].callback();
+		assertEquals(callbackCalls, 1);
+	} finally {
+		setGlobal("setTimeout", originalSetTimeout);
+		await flush();
+		harness.cleanup();
+	}
+});
 
-Deno.test(
-	"end(false) cleans up the UI without overwriting stored progress",
-	async () => {
-		const harness = createHarness({ tutorialProgress: 4 });
-		try {
-			const tutorialModule = await harness.load();
-			const tutorial = new tutorialModule.Tutorial();
-			tutorial.steps = [{}, {}, {}];
-			tutorial.isActive = true;
-			await tutorial.createOverlay();
-			const highlighted = globalThis.document.createElement("div");
-			globalThis.document.body.appendChild(highlighted);
-			tutorial.highlightElement(highlighted);
+test("end(false) cleans up the UI without overwriting stored progress", async () => {
+	const harness = createHarness({ tutorialProgress: 4 });
+	try {
+		const tutorialModule = await harness.load();
+		const tutorial = new tutorialModule.Tutorial();
+		tutorial.steps = [{}, {}, {}];
+		tutorial.isActive = true;
+		await tutorial.createOverlay();
+		const highlighted = globalThis.document.createElement("div");
+		globalThis.document.body.appendChild(highlighted);
+		tutorial.highlightElement(highlighted);
 
-			tutorial.end({ shouldSaveProgress: false });
+		tutorial.end({ shouldSaveProgress: false });
 
-			assertEquals(tutorial.isActive, false);
-			assertEquals(globalThis.document.querySelector(".tut-v7"), null);
-			assert(!highlighted.classList.contains("awsf-tutorial-highlight"));
-			assertEquals(harness.storage["tutorial-progress"], 4);
-		} finally {
-			await flush();
-			harness.cleanup();
-		}
-	},
-);
+		assertEquals(tutorial.isActive, false);
+		assertEquals(globalThis.document.querySelector(".tut-v7"), null);
+		assert(!highlighted.classList.contains("awsf-tutorial-highlight"));
+		assertEquals(harness.storage["tutorial-progress"], 4);
+	} finally {
+		await flush();
+		harness.cleanup();
+	}
+});
 
-Deno.test(
-	"checkTutorial marks the tutorial completed when the user declines the first prompt",
-	async () => {
-		const harness = createHarness({ tutorialProgress: null });
-		try {
-			const tutorialModule = await harness.load();
-			const checkPromise = tutorialModule.checkTutorial();
-			await waitFor(() => harness.records.latestPrompt != null);
-			harness.records.latestPrompt?.cancelButton.click();
-			await checkPromise;
-			await waitFor(() => harness.storage["tutorial-progress"] != null);
+test("checkTutorial marks the tutorial completed when the user declines the first prompt", async () => {
+	const harness = createHarness({ tutorialProgress: null });
+	try {
+		const tutorialModule = await harness.load();
+		const checkPromise = tutorialModule.checkTutorial();
+		await waitFor(() => harness.records.latestPrompt != null);
+		harness.records.latestPrompt?.cancelButton.click();
+		await checkPromise;
+		await waitFor(() => harness.storage["tutorial-progress"] != null);
 
-			assertEquals(harness.storage["tutorial-progress"], 15);
-			assertEquals(harness.records.redirects, []);
-			assertEquals(globalThis.document.querySelector(".tut-v7"), null);
-		} finally {
-			await flush();
-			harness.cleanup();
-		}
-	},
-);
+		assertEquals(harness.storage["tutorial-progress"], 15);
+		assertEquals(harness.records.redirects, []);
+		assertEquals(globalThis.document.querySelector(".tut-v7"), null);
+	} finally {
+		await flush();
+		harness.cleanup();
+	}
+});
 
-Deno.test(
-	"checkTutorial marks the tutorial completed when the user declines to continue",
-	async () => {
-		const harness = createHarness({ tutorialProgress: 3 });
-		try {
-			const tutorialModule = await harness.load();
-			const checkPromise = tutorialModule.checkTutorial();
-			await waitFor(() => harness.records.latestPrompt != null);
-			harness.records.latestPrompt?.cancelButton.click();
-			await checkPromise;
-			await waitFor(() => harness.storage["tutorial-progress"] === 15);
+test("checkTutorial marks the tutorial completed when the user declines to continue", async () => {
+	const harness = createHarness({ tutorialProgress: 3 });
+	try {
+		const tutorialModule = await harness.load();
+		const checkPromise = tutorialModule.checkTutorial();
+		await waitFor(() => harness.records.latestPrompt != null);
+		harness.records.latestPrompt?.cancelButton.click();
+		await checkPromise;
+		await waitFor(() => harness.storage["tutorial-progress"] === 15);
 
-			assertEquals(harness.records.redirects, []);
-			assertEquals(globalThis.document.querySelector(".tut-v7"), null);
-		} finally {
-			await flush();
-			harness.cleanup();
-		}
-	},
-);
+		assertEquals(harness.records.redirects, []);
+		assertEquals(globalThis.document.querySelector(".tut-v7"), null);
+	} finally {
+		await flush();
+		harness.cleanup();
+	}
+});
 
-Deno.test(
-	"nextStep configures the ending step and triggers confetti",
-	async () => {
-		const harness = createHarness();
-		try {
-			const tutorialModule = await harness.load();
-			const tutorial = new tutorialModule.Tutorial();
-			tutorial.translator = harness.translator;
-			await tutorial.createOverlay();
-			tutorial.steps = [{
+test("nextStep configures the ending step and triggers confetti", async () => {
+	const harness = createHarness();
+	try {
+		const tutorialModule = await harness.load();
+		const tutorial = new tutorialModule.Tutorial();
+		tutorial.translator = harness.translator;
+		await tutorial.createOverlay();
+		tutorial.steps = [
+			{
 				message: "tutorial_end",
 				beginsBlock: true,
 				isEndingStep: true,
 				waitFor: "confirm",
-			}];
-			tutorial.currentStep = -1;
+			},
+		];
+		tutorial.currentStep = -1;
 
-			let confettiCalls = 0;
-			tutorial.throwConfetti = () => {
-				confettiCalls++;
-			};
+		let confettiCalls = 0;
+		tutorial.throwConfetti = () => {
+			confettiCalls++;
+		};
 
-			await tutorial.nextStep();
+		await tutorial.nextStep();
 
-			assertEquals(tutorial.currentStep, 0);
-			assertEquals(tutorial.closeBtn.textContent, "translated:close");
-			assertEquals(tutorial.confirmBtn.parentElement, null);
-			assertEquals(confettiCalls, 1);
-			assertEquals(harness.storage["tutorial-progress"], 1);
-			assertEquals(
-				harness.storage[harness.constants.TUTORIAL_CLOSE_EVENT],
-				"auto",
-			);
-		} finally {
-			await flush();
-			harness.cleanup();
-		}
-	},
-);
+		assertEquals(tutorial.currentStep, 0);
+		assertEquals(tutorial.closeBtn.textContent, "translated:close");
+		assertEquals(tutorial.confirmBtn.parentElement, null);
+		assertEquals(confettiCalls, 1);
+		assertEquals(harness.storage["tutorial-progress"], 1);
+		assertEquals(
+			harness.storage[harness.constants.TUTORIAL_CLOSE_EVENT],
+			"auto",
+		);
+	} finally {
+		await flush();
+		harness.cleanup();
+	}
+});
 
-Deno.test(
-	"nextStep ends immediately after final step",
-	async () => {
-		const harness = createHarness();
-		try {
-			const tutorialModule = await harness.load();
-			const tutorial = new tutorialModule.Tutorial();
-			tutorial.spinner = globalThis.document.createElement("div");
-			tutorial.steps = [];
-			let endCalls = 0;
-			tutorial.end = () => {
-				endCalls++;
-			};
+test("nextStep ends immediately after final step", async () => {
+	const harness = createHarness();
+	try {
+		const tutorialModule = await harness.load();
+		const tutorial = new tutorialModule.Tutorial();
+		tutorial.spinner = globalThis.document.createElement("div");
+		tutorial.steps = [];
+		let endCalls = 0;
+		tutorial.end = () => {
+			endCalls++;
+		};
 
-			await tutorial.nextStep();
+		await tutorial.nextStep();
 
-			assertEquals(endCalls, 1);
-			assertEquals(tutorial.currentStep, 0);
-		} finally {
-			await flush();
-			harness.cleanup();
-		}
-	},
-);
+		assertEquals(endCalls, 1);
+		assertEquals(tutorial.currentStep, 0);
+	} finally {
+		await flush();
+		harness.cleanup();
+	}
+});
 
-Deno.test(
-	"createTutorialModule supports default dependencies when no overrides are passed",
-	() => {
-		const tutorialModule =
-			createPureTutorialModule() as unknown as TutorialModule;
+test("createTutorialModule supports default dependencies when no overrides are passed", () => {
+	const tutorialModule =
+		createPureTutorialModule() as unknown as TutorialModule;
 
-		assertExists(tutorialModule.Tutorial);
-		assertExists(tutorialModule.checkTutorial);
-	},
-);
+	assertExists(tutorialModule.Tutorial);
+	assertExists(tutorialModule.checkTutorial);
+});
 
-Deno.test(
-	"showConfirm does not advance when clicking close button or confirm-action step",
-	async () => {
-		const harness = createHarness();
-		try {
-			const tutorialModule = await harness.load();
-			const tutorial = new tutorialModule.Tutorial();
-			tutorial.translator = harness.translator;
-			await tutorial.createOverlay();
-			let confirmCalls = 0;
-			let nextStepCalls = 0;
-			tutorial.currentStep = 0;
-			tutorial.steps = [{
+test("showConfirm does not advance when clicking close button or confirm-action step", async () => {
+	const harness = createHarness();
+	try {
+		const tutorialModule = await harness.load();
+		const tutorial = new tutorialModule.Tutorial();
+		tutorial.translator = harness.translator;
+		await tutorial.createOverlay();
+		let confirmCalls = 0;
+		let nextStepCalls = 0;
+		tutorial.currentStep = 0;
+		tutorial.steps = [
+			{
 				action: "confirm",
 				onConfirm: () => {
 					confirmCalls++;
 				},
-			}];
-			tutorial.nextStep = () => {
-				nextStepCalls++;
-			};
-			tutorial.showConfirm();
-			tutorial.closeBtn.click();
-			tutorial.showConfirm();
-			tutorial.confirmBtn.click();
+			},
+		];
+		tutorial.nextStep = () => {
+			nextStepCalls++;
+		};
+		tutorial.showConfirm();
+		tutorial.closeBtn.click();
+		tutorial.showConfirm();
+		tutorial.confirmBtn.click();
 
-			assertEquals(confirmCalls, 1);
-			assertEquals(nextStepCalls, 0);
-		} finally {
-			await flush();
-			harness.cleanup();
-		}
-	},
-);
+		assertEquals(confirmCalls, 1);
+		assertEquals(nextStepCalls, 0);
+	} finally {
+		await flush();
+		harness.cleanup();
+	}
+});
 
-Deno.test(
-	"throwConfetti removes canvas after animation duration",
-	async () => {
-		const harness = createHarness();
-		const originalRequestAnimationFrame = globalThis.requestAnimationFrame;
-		const originalPerformance = globalThis.performance;
-		const originalInnerWidth = globalThis.innerWidth;
-		const originalInnerHeight = globalThis.innerHeight;
-		try {
-			const tutorialModule = await harness.load();
-			const tutorial = new tutorialModule.Tutorial();
-			tutorial.messageBox = globalThis.document.createElement("div");
-			tutorial.messageBox.getBoundingClientRect = () =>
-				({
-					width: 40,
-					height: 20,
-					top: 10,
-					left: 5,
-					right: 45,
-					bottom: 30,
-					x: 5,
-					y: 10,
-					toJSON: () => ({}),
-				}) as DOMRect;
-			globalThis.document.body.appendChild(tutorial.messageBox);
-			setGlobal("innerWidth", 320);
-			setGlobal("innerHeight", 240);
-			setGlobal("performance", {
-				now: () => 0,
-			});
-			setGlobal(
-				"requestAnimationFrame",
-				((callback: FrameRequestCallback) => {
-					callback(3001);
-					return 1;
-				}) as typeof requestAnimationFrame,
-			);
-
-			tutorial.throwConfetti();
-
-			assertEquals(globalThis.document.querySelector("canvas"), null);
-		} finally {
-			setGlobal("requestAnimationFrame", originalRequestAnimationFrame);
-			setGlobal("performance", originalPerformance);
-			setGlobal("innerWidth", originalInnerWidth);
-			setGlobal("innerHeight", originalInnerHeight);
-			await flush();
-			harness.cleanup();
-		}
-	},
-);
-
-Deno.test(
-	"tutorial initSteps covers fallback redirect elements and fake-element helpers",
-	async () => {
-		const harness = createHarness({
-			savedTabUrls: ALL_USABLE_PAGE_URLS.slice(2),
+test("throwConfetti removes canvas after animation duration", async () => {
+	const harness = createHarness();
+	const originalRequestAnimationFrame = globalThis.requestAnimationFrame;
+	const originalPerformance = globalThis.performance;
+	const originalInnerWidth = globalThis.innerWidth;
+	const originalInnerHeight = globalThis.innerHeight;
+	try {
+		const tutorialModule = await harness.load();
+		const tutorial = new tutorialModule.Tutorial();
+		tutorial.messageBox = globalThis.document.createElement("div");
+		tutorial.messageBox.getBoundingClientRect = () =>
+			({
+				width: 40,
+				height: 20,
+				top: 10,
+				left: 5,
+				right: 45,
+				bottom: 30,
+				x: 5,
+				y: 10,
+				toJSON: () => ({}),
+			}) as DOMRect;
+		globalThis.document.body.appendChild(tutorial.messageBox);
+		setGlobal("innerWidth", 320);
+		setGlobal("innerHeight", 240);
+		setGlobal("performance", {
+			now: () => 0,
 		});
-		try {
-			const tutorialModule = await harness.load();
-			const tutorial = new tutorialModule.Tutorial();
+		setGlobal("requestAnimationFrame", ((
+			callback: FrameRequestCallback,
+		) => {
+			callback(3001);
+			return 1;
+		}) as typeof requestAnimationFrame);
 
-			assertEquals(await tutorial.initSteps(), true);
-			assertEquals(
-				tutorial.steps[4]?.redirectElement?.url,
-				"ObjectManager/Case/FieldsAndRelationships/view",
-			);
+		tutorial.throwConfetti();
 
-			harness.state.savedTabUrls = [
-				"ObjectManager/Account/FieldsAndRelationships/view",
-			];
-			harness.navigateTo(
-				"ObjectManager/Account/FieldsAndRelationships/view",
-			);
-			const fallbackTitle =
-				"ObjectManager/Account/FieldsAndRelationships/view";
-			const originalQuerySelector = harness.setupTabUl.querySelector.bind(
-				harness.setupTabUl,
-			);
-			const matchingLink = harness.setupTabUl.firstElementChild
-				?.firstElementChild as HTMLAnchorElement;
-			let selectorCalls = 0;
-			harness.setupTabUl.querySelector = ((selector: string) => {
-				selectorCalls++;
-				if (selectorCalls === 1) {
-					return null;
+		assertEquals(globalThis.document.querySelector("canvas"), null);
+	} finally {
+		setGlobal("requestAnimationFrame", originalRequestAnimationFrame);
+		setGlobal("performance", originalPerformance);
+		setGlobal("innerWidth", originalInnerWidth);
+		setGlobal("innerHeight", originalInnerHeight);
+		await flush();
+		harness.cleanup();
+	}
+});
+
+test("tutorial initSteps covers fallback redirect elements and fake-element helpers", async () => {
+	const harness = createHarness({
+		savedTabUrls: ALL_USABLE_PAGE_URLS.slice(2),
+	});
+	try {
+		const tutorialModule = await harness.load();
+		const tutorial = new tutorialModule.Tutorial();
+
+		assertEquals(await tutorial.initSteps(), true);
+		assertEquals(
+			tutorial.steps[4]?.redirectElement?.url,
+			"ObjectManager/Case/FieldsAndRelationships/view",
+		);
+
+		harness.state.savedTabUrls = [
+			"ObjectManager/Account/FieldsAndRelationships/view",
+		];
+		harness.navigateTo("ObjectManager/Account/FieldsAndRelationships/view");
+		const fallbackTitle =
+			"ObjectManager/Account/FieldsAndRelationships/view";
+		const originalQuerySelector = harness.setupTabUl.querySelector.bind(
+			harness.setupTabUl,
+		);
+		const matchingLink = harness.setupTabUl.firstElementChild
+			?.firstElementChild as HTMLAnchorElement;
+		let selectorCalls = 0;
+		harness.setupTabUl.querySelector = ((selector: string) => {
+			selectorCalls++;
+			if (selectorCalls === 1) {
+				return null;
+			}
+			if (selector === `a[title="${fallbackTitle}"]`) {
+				return matchingLink;
+			}
+			return originalQuerySelector(selector);
+		}) as typeof harness.setupTabUl.querySelector;
+		tutorial.currentStep = 2;
+		const fallbackSetupLink = await tutorial.steps[2]?.element?.();
+		assertEquals(
+			(fallbackSetupLink as HTMLAnchorElement | null)?.title,
+			fallbackTitle,
+		);
+		harness.setupTabUl.querySelector = originalQuerySelector;
+
+		harness.state.savedTabUrls = [];
+		harness.navigateTo(harness.constants.SALESFORCE_SETUP_HOME_MINI);
+		tutorial.currentStep = 2;
+		const generatedSetupLink = await tutorial.steps[2]?.fakeElement?.();
+		assertEquals(
+			(generatedSetupLink as HTMLAnchorElement | null)?.title,
+			"ObjectManager/Account/FieldsAndRelationships/view",
+		);
+
+		harness.navigateTo("ObjectManager/Account/FieldsAndRelationships/view");
+		tutorial.currentStep = 3;
+		const shownStar = await tutorial.steps[3]?.fakeElement?.();
+		assertExists(shownStar);
+
+		harness.navigateTo("ObjectManager/Case/FieldsAndRelationships/view");
+		tutorial.currentStep = 5;
+		const secondShownStar = await tutorial.steps[5]?.fakeElement?.();
+		assertExists(secondShownStar);
+
+		harness.state.savedTabUrls = [];
+		harness.navigateTo("ObjectManager/Case/FieldsAndRelationships/view");
+		tutorial.currentStep = 6;
+		const generatedPinnedTab = await tutorial.steps[6]?.fakeElement?.();
+		assertEquals(
+			(generatedPinnedTab as HTMLLIElement | null)?.tagName,
+			"LI",
+		);
+
+		tutorial.currentStep = 7;
+		const generatedPinnedLink = await tutorial.steps[7]?.fakeElement?.();
+		assertEquals(
+			(generatedPinnedLink as HTMLAnchorElement | null)?.title,
+			"ObjectManager/Case/FieldsAndRelationships/view",
+		);
+
+		harness.createManageTabsModal(harness.state.savedTabUrls.length);
+		harness.state.pinnedTabsNo = harness.state.savedTabUrls.length;
+		const dragElement = await tutorial.steps[10]?.element?.();
+		assertExists(dragElement);
+		assertEquals(harness.records.actionButtonClicks > 0, true);
+
+		harness.state.savedTabUrls = [
+			"ObjectManager/Case/FieldsAndRelationships/view",
+			"ObjectManager/Lead/FieldsAndRelationships/view",
+			"ObjectManager/Task/FieldsAndRelationships/view",
+		];
+		harness.createManageTabsModal(3);
+		harness.state.pinnedTabsNo = 3;
+		const fallbackDragElement = await tutorial.steps[10]?.element?.();
+		assertExists(fallbackDragElement);
+		assertEquals(harness.records.actionButtonClicks >= 3, true);
+	} finally {
+		await flush();
+		harness.cleanup();
+	}
+});
+
+test("tutorial fake favourite lookup can return undefined when no visible star exists", async () => {
+	const harness = createHarness();
+	try {
+		harness.deps.favouriteManager.showFavouriteButton = () =>
+			Promise.resolve();
+		const tutorialModule = await harness.load();
+		const tutorial = new tutorialModule.Tutorial();
+
+		assertEquals(await tutorial.initSteps(), true);
+		globalThis.history.pushState(
+			{},
+			"",
+			`${harness.constants.SETUP_LIGHTNING}ObjectManager/Account/FieldsAndRelationships/view`,
+		);
+		tutorial.currentStep = 3;
+
+		assertEquals(await tutorial.steps[3]?.fakeElement?.(), undefined);
+	} finally {
+		await flush();
+		harness.cleanup();
+	}
+});
+
+test("tutorial overlay handlers cover close button, escape, default event waiters, and popstate redirects", async () => {
+	const harness = createHarness();
+	const originalMutationObserver = globalThis.MutationObserver;
+	try {
+		const tutorialModule = await harness.load();
+
+		const closeTutorial = new tutorialModule.Tutorial();
+		closeTutorial.translator = harness.translator;
+		closeTutorial.steps = [{ message: "tutorial_restart" }];
+		closeTutorial.currentStep = 0;
+		let savedStep: number | null = null;
+		let closeWasManual: boolean | null = null;
+		closeTutorial.persistTutorialProgress = (
+			stepNo?: number | string,
+			closedManually?: boolean,
+		) => {
+			savedStep = Number(stepNo);
+			closeWasManual = closedManually ?? false;
+		};
+		await closeTutorial.createOverlay();
+		closeTutorial.closeBtn.click();
+		assertEquals(savedStep, 1);
+		assertEquals(closeWasManual, true);
+
+		const escapeTutorial = new tutorialModule.Tutorial();
+		escapeTutorial.translator = harness.translator;
+		escapeTutorial.steps = [{ message: "tutorial_restart" }];
+		escapeTutorial.currentStep = 0;
+		let escapeSavedStep: number | null = null;
+		let escapeWasManual: boolean | null = null;
+		escapeTutorial.persistTutorialProgress = (
+			stepNo?: number | string,
+			closedManually?: boolean,
+		) => {
+			escapeSavedStep = Number(stepNo);
+			escapeWasManual = closedManually ?? false;
+		};
+		await escapeTutorial.createOverlay();
+		const escapeEvent = new Event("keydown");
+		Object.defineProperty(escapeEvent, "key", { value: "Escape" });
+		document.dispatchEvent(escapeEvent);
+		assertEquals(escapeSavedStep, 0);
+		assertEquals(escapeWasManual, false);
+
+		const clickTutorial = new tutorialModule.Tutorial();
+		clickTutorial.translator = harness.translator;
+		await clickTutorial.createOverlay();
+		let nextStepCalls = 0;
+		clickTutorial.nextStep = () => {
+			nextStepCalls++;
+		};
+		await clickTutorial.executeStep({
+			message: "tutorial_manage_tabs",
+			waitFor: "event",
+		});
+		document.dispatchEvent(new Event("click"));
+		assertEquals(nextStepCalls, 1);
+
+		const popstateTutorial = new tutorialModule.Tutorial();
+		popstateTutorial.translator = harness.translator;
+		await popstateTutorial.createOverlay();
+		let popstateNextSteps = 0;
+		popstateTutorial.nextStep = () => {
+			popstateNextSteps++;
+		};
+		await popstateTutorial.executeStep({
+			action: "highlight",
+			message: "tutorial_redirect_account",
+			waitFor: "redirect",
+		});
+		globalThis.dispatchEvent(new Event("popstate"));
+		assertEquals(popstateNextSteps, 1);
+
+		const observerTutorial = new tutorialModule.Tutorial();
+		observerTutorial.translator = harness.translator;
+		let triggerMutationObserver = () => {};
+		setGlobal(
+			"MutationObserver",
+			class {
+				constructor(callback: () => void) {
+					triggerMutationObserver = callback;
 				}
-				if (selector === `a[title="${fallbackTitle}"]`) {
-					return matchingLink;
-				}
-				return originalQuerySelector(selector);
-			}) as typeof harness.setupTabUl.querySelector;
-			tutorial.currentStep = 2;
-			const fallbackSetupLink = await tutorial.steps[2]?.element?.();
-			assertEquals(
-				(fallbackSetupLink as HTMLAnchorElement | null)?.title,
-				fallbackTitle,
-			);
-			harness.setupTabUl.querySelector = originalQuerySelector;
+				disconnect() {}
+				observe() {}
+			},
+		);
+		await observerTutorial.createOverlay();
+		let observerNextSteps = 0;
+		observerTutorial.nextStep = () => {
+			observerNextSteps++;
+		};
+		await observerTutorial.executeStep({
+			action: "highlight",
+			message: "tutorial_redirect_account",
+			waitFor: "redirect",
+		});
+		globalThis.history.pushState(
+			{},
+			"",
+			"/lightning/setup/ObjectManager/Case/FieldsAndRelationships/view",
+		);
+		triggerMutationObserver();
+		assertEquals(observerNextSteps, 2);
+		setGlobal("MutationObserver", originalMutationObserver);
 
-			harness.state.savedTabUrls = [];
-			harness.navigateTo(harness.constants.SALESFORCE_SETUP_HOME_MINI);
-			tutorial.currentStep = 2;
-			const generatedSetupLink = await tutorial.steps[2]?.fakeElement?.();
-			assertEquals(
-				(generatedSetupLink as HTMLAnchorElement | null)?.title,
-				"ObjectManager/Account/FieldsAndRelationships/view",
-			);
-
-			harness.navigateTo(
-				"ObjectManager/Account/FieldsAndRelationships/view",
-			);
-			tutorial.currentStep = 3;
-			const shownStar = await tutorial.steps[3]?.fakeElement?.();
-			assertExists(shownStar);
-
-			harness.navigateTo(
-				"ObjectManager/Case/FieldsAndRelationships/view",
-			);
-			tutorial.currentStep = 5;
-			const secondShownStar = await tutorial.steps[5]?.fakeElement?.();
-			assertExists(secondShownStar);
-
-			harness.state.savedTabUrls = [];
-			harness.navigateTo(
-				"ObjectManager/Case/FieldsAndRelationships/view",
-			);
-			tutorial.currentStep = 6;
-			const generatedPinnedTab = await tutorial.steps[6]?.fakeElement?.();
-			assertEquals(
-				(generatedPinnedTab as HTMLLIElement | null)?.tagName,
-				"LI",
-			);
-
-			tutorial.currentStep = 7;
-			const generatedPinnedLink = await tutorial.steps[7]
-				?.fakeElement?.();
-			assertEquals(
-				(generatedPinnedLink as HTMLAnchorElement | null)?.title,
-				"ObjectManager/Case/FieldsAndRelationships/view",
-			);
-
-			harness.createManageTabsModal(harness.state.savedTabUrls.length);
-			harness.state.pinnedTabsNo = harness.state.savedTabUrls.length;
-			const dragElement = await tutorial.steps[10]?.element?.();
-			assertExists(dragElement);
-			assertEquals(harness.records.actionButtonClicks > 0, true);
-
-			harness.state.savedTabUrls = [
-				"ObjectManager/Case/FieldsAndRelationships/view",
-				"ObjectManager/Lead/FieldsAndRelationships/view",
-				"ObjectManager/Task/FieldsAndRelationships/view",
-			];
-			harness.createManageTabsModal(3);
-			harness.state.pinnedTabsNo = 3;
-			const fallbackDragElement = await tutorial.steps[10]?.element?.();
-			assertExists(fallbackDragElement);
-			assertEquals(harness.records.actionButtonClicks >= 3, true);
-		} finally {
-			await flush();
-			harness.cleanup();
-		}
-	},
-);
-
-Deno.test(
-	"tutorial fake favourite lookup can return undefined when no visible star exists",
-	async () => {
-		const harness = createHarness();
-		try {
-			harness.deps.favouriteManager.showFavouriteButton = () =>
-				Promise.resolve();
-			const tutorialModule = await harness.load();
-			const tutorial = new tutorialModule.Tutorial();
-
-			assertEquals(await tutorial.initSteps(), true);
-			globalThis.history.pushState(
-				{},
-				"",
-				`${harness.constants.SETUP_LIGHTNING}ObjectManager/Account/FieldsAndRelationships/view`,
-			);
-			tutorial.currentStep = 3;
-
-			assertEquals(await tutorial.steps[3]?.fakeElement?.(), undefined);
-		} finally {
-			await flush();
-			harness.cleanup();
-		}
-	},
-);
-
-Deno.test(
-	"tutorial overlay handlers cover close button, escape, default event waiters, and popstate redirects",
-	async () => {
-		const harness = createHarness();
-		const originalMutationObserver = globalThis.MutationObserver;
-		try {
-			const tutorialModule = await harness.load();
-
-			const closeTutorial = new tutorialModule.Tutorial();
-			closeTutorial.translator = harness.translator;
-			closeTutorial.steps = [{ message: "tutorial_restart" }];
-			closeTutorial.currentStep = 0;
-			let savedStep: number | null = null;
-			let closeWasManual: boolean | null = null;
-			closeTutorial.persistTutorialProgress = (
-				stepNo?: number | string,
-				closedManually?: boolean,
-			) => {
-				savedStep = Number(stepNo);
-				closeWasManual = closedManually ?? false;
-			};
-			await closeTutorial.createOverlay();
-			closeTutorial.closeBtn.click();
-			assertEquals(savedStep, 1);
-			assertEquals(closeWasManual, true);
-
-			const escapeTutorial = new tutorialModule.Tutorial();
-			escapeTutorial.translator = harness.translator;
-			escapeTutorial.steps = [{ message: "tutorial_restart" }];
-			escapeTutorial.currentStep = 0;
-			let escapeSavedStep: number | null = null;
-			let escapeWasManual: boolean | null = null;
-			escapeTutorial.persistTutorialProgress = (
-				stepNo?: number | string,
-				closedManually?: boolean,
-			) => {
-				escapeSavedStep = Number(stepNo);
-				escapeWasManual = closedManually ?? false;
-			};
-			await escapeTutorial.createOverlay();
-			const escapeEvent = new Event("keydown");
-			Object.defineProperty(escapeEvent, "key", { value: "Escape" });
-			document.dispatchEvent(escapeEvent);
-			assertEquals(escapeSavedStep, 0);
-			assertEquals(escapeWasManual, false);
-
-			const clickTutorial = new tutorialModule.Tutorial();
-			clickTutorial.translator = harness.translator;
-			await clickTutorial.createOverlay();
-			let nextStepCalls = 0;
-			clickTutorial.nextStep = () => {
-				nextStepCalls++;
-			};
-			await clickTutorial.executeStep({
-				message: "tutorial_manage_tabs",
-				waitFor: "event",
-			});
-			document.dispatchEvent(new Event("click"));
-			assertEquals(nextStepCalls, 1);
-
-			const popstateTutorial = new tutorialModule.Tutorial();
-			popstateTutorial.translator = harness.translator;
-			await popstateTutorial.createOverlay();
-			let popstateNextSteps = 0;
-			popstateTutorial.nextStep = () => {
-				popstateNextSteps++;
-			};
-			await popstateTutorial.executeStep({
-				action: "highlight",
-				message: "tutorial_redirect_account",
-				waitFor: "redirect",
-			});
-			globalThis.dispatchEvent(new Event("popstate"));
-			assertEquals(popstateNextSteps, 1);
-
-			const observerTutorial = new tutorialModule.Tutorial();
-			observerTutorial.translator = harness.translator;
-			let triggerMutationObserver = () => {};
-			setGlobal(
-				"MutationObserver",
-				class {
-					constructor(callback: () => void) {
-						triggerMutationObserver = callback;
-					}
-					disconnect() {}
-					observe() {}
-				},
-			);
-			await observerTutorial.createOverlay();
-			let observerNextSteps = 0;
-			observerTutorial.nextStep = () => {
-				observerNextSteps++;
-			};
-			await observerTutorial.executeStep({
-				action: "highlight",
-				message: "tutorial_redirect_account",
-				waitFor: "redirect",
-			});
-			globalThis.history.pushState(
-				{},
-				"",
-				"/lightning/setup/ObjectManager/Case/FieldsAndRelationships/view",
-			);
-			triggerMutationObserver();
-			assertEquals(observerNextSteps, 2);
-			setGlobal("MutationObserver", originalMutationObserver);
-
-			const confirmTutorial = new tutorialModule.Tutorial();
-			confirmTutorial.translator = harness.translator;
-			await confirmTutorial.createOverlay();
-			let confirmCalls = 0;
-			let confirmNextSteps = 0;
-			confirmTutorial.currentStep = 0;
-			confirmTutorial.steps = [{
+		const confirmTutorial = new tutorialModule.Tutorial();
+		confirmTutorial.translator = harness.translator;
+		await confirmTutorial.createOverlay();
+		let confirmCalls = 0;
+		let confirmNextSteps = 0;
+		confirmTutorial.currentStep = 0;
+		confirmTutorial.steps = [
+			{
 				action: "highlight",
 				message: "tutorial_restart",
 				onConfirm: () => {
 					confirmCalls++;
 				},
-			}];
-			confirmTutorial.nextStep = () => {
-				confirmNextSteps++;
-			};
-			confirmTutorial.showConfirm();
-			confirmTutorial.confirmBtn.click();
-			assertEquals(confirmCalls, 1);
-			assertEquals(confirmNextSteps, 1);
-		} finally {
-			setGlobal("MutationObserver", originalMutationObserver);
-			await flush();
-			harness.cleanup();
-		}
-	},
-);
-
-Deno.test(
-	"tutorial start branches cover failed initialization, invalid start steps, manual start, and failed resume",
-	async () => {
-		const harness = createHarness({ tutorialProgress: 2 });
-		const originalConsoleError = console.error;
-		const errorCalls: string[] = [];
-		console.error = (message?: string | number | boolean | null) => {
-			errorCalls.push(String(message));
+			},
+		];
+		confirmTutorial.nextStep = () => {
+			confirmNextSteps++;
 		};
+		confirmTutorial.showConfirm();
+		confirmTutorial.confirmBtn.click();
+		assertEquals(confirmCalls, 1);
+		assertEquals(confirmNextSteps, 1);
+	} finally {
+		setGlobal("MutationObserver", originalMutationObserver);
+		await flush();
+		harness.cleanup();
+	}
+});
 
+test("tutorial start branches cover failed initialization, invalid start steps, manual start, and failed resume", async () => {
+	const harness = createHarness({ tutorialProgress: 2 });
+	const originalConsoleError = console.error;
+	const errorCalls: string[] = [];
+	console.error = (message?: string | number | boolean | null) => {
+		errorCalls.push(String(message));
+	};
+
+	try {
+		const tutorialModule = await harness.load();
+
+		const failedStartTutorial = new tutorialModule.Tutorial();
+		failedStartTutorial.initSteps = () => Promise.resolve(false);
+		await assertRejects(
+			() => failedStartTutorial.start(),
+			Error,
+			"error_tutorial_not_initialized",
+		);
+
+		const invalidStartTutorial = new tutorialModule.Tutorial();
+		invalidStartTutorial.steps = [
+			{
+				message: "tutorial_restart",
+				pageUrl: harness.constants.SALESFORCE_SETUP_HOME_MINI,
+			},
+		];
+		invalidStartTutorial.createOverlay = () => Promise.resolve();
+		invalidStartTutorial.nextStep = () => {};
+		await invalidStartTutorial.start(999);
+		assertEquals(invalidStartTutorial.currentStep, -1);
+
+		const activeTutorial = new tutorialModule.Tutorial();
+		activeTutorial.isActive = true;
+		let activeOverlayCalls = 0;
+		activeTutorial.createOverlay = () => {
+			activeOverlayCalls++;
+			return Promise.resolve();
+		};
+		await activeTutorial.start();
+		assertEquals(activeOverlayCalls, 0);
+
+		const popupStartPromise = tutorialModule.checkTutorial(true);
+		await waitFor(() => harness.records.latestPrompt != null);
+		harness.records.latestPrompt?.cancelButton.click();
+		await popupStartPromise;
+		await harness.waitForMessage("tutorial_restart");
+		assertEquals(
+			harness.records.latestUi?.segments.textContent?.startsWith(
+				"translated:tutorial_restart",
+			) === true,
+			true,
+		);
+
+		const originalInitSteps = tutorialModule.Tutorial.prototype.initSteps;
 		try {
-			const tutorialModule = await harness.load();
-
-			const failedStartTutorial = new tutorialModule.Tutorial();
-			failedStartTutorial.initSteps = () => Promise.resolve(false);
+			tutorialModule.Tutorial.prototype.initSteps = () =>
+				Promise.resolve(false);
 			await assertRejects(
-				() => failedStartTutorial.start(),
+				() => tutorialModule.checkTutorial(),
 				Error,
 				"error_tutorial_not_initialized",
 			);
-
-			const invalidStartTutorial = new tutorialModule.Tutorial();
-			invalidStartTutorial.steps = [{
-				message: "tutorial_restart",
-				pageUrl: harness.constants.SALESFORCE_SETUP_HOME_MINI,
-			}];
-			invalidStartTutorial.createOverlay = () => Promise.resolve();
-			invalidStartTutorial.nextStep = () => {};
-			await invalidStartTutorial.start(999);
-			assertEquals(invalidStartTutorial.currentStep, -1);
-
-			const activeTutorial = new tutorialModule.Tutorial();
-			activeTutorial.isActive = true;
-			let activeOverlayCalls = 0;
-			activeTutorial.createOverlay = () => {
-				activeOverlayCalls++;
-				return Promise.resolve();
-			};
-			await activeTutorial.start();
-			assertEquals(activeOverlayCalls, 0);
-
-			const popupStartPromise = tutorialModule.checkTutorial(true);
-			await waitFor(() => harness.records.latestPrompt != null);
-			harness.records.latestPrompt?.cancelButton.click();
-			await popupStartPromise;
-			await harness.waitForMessage("tutorial_restart");
-			assertEquals(
-				harness.records.latestUi?.segments.textContent?.startsWith(
-					"translated:tutorial_restart",
-				) === true,
-				true,
-			);
-
-			const originalInitSteps =
-				tutorialModule.Tutorial.prototype.initSteps;
-			try {
-				tutorialModule.Tutorial.prototype.initSteps = () =>
-					Promise.resolve(false);
-				await assertRejects(
-					() => tutorialModule.checkTutorial(),
-					Error,
-					"error_tutorial_not_initialized",
-				);
-			} finally {
-				tutorialModule.Tutorial.prototype.initSteps = originalInitSteps;
-			}
 		} finally {
-			console.error = originalConsoleError;
-			await flush();
-			harness.cleanup();
+			tutorialModule.Tutorial.prototype.initSteps = originalInitSteps;
 		}
-	},
-);
+	} finally {
+		console.error = originalConsoleError;
+		await flush();
+		harness.cleanup();
+	}
+});
 
-Deno.test(
-	"checkTutorial does not prompt again after a manual close outside the popup",
-	async () => {
-		const harness = createHarness({ tutorialProgress: 3 });
-		harness.storage[harness.constants.TUTORIAL_CLOSE_EVENT] = "user";
-		try {
-			const tutorialModule = await harness.load();
+test("checkTutorial does not prompt again after a manual close outside the popup", async () => {
+	const harness = createHarness({ tutorialProgress: 3 });
+	harness.storage[harness.constants.TUTORIAL_CLOSE_EVENT] = "user";
+	try {
+		const tutorialModule = await harness.load();
 
-			await tutorialModule.checkTutorial();
+		await tutorialModule.checkTutorial();
 
-			assertEquals(harness.records.latestPrompt, null);
-			assertEquals(harness.records.redirects, []);
-			assertEquals(globalThis.document.querySelector(".tut-v7"), null);
-		} finally {
-			await flush();
-			harness.cleanup();
-		}
-	},
-);
+		assertEquals(harness.records.latestPrompt, null);
+		assertEquals(harness.records.redirects, []);
+		assertEquals(globalThis.document.querySelector(".tut-v7"), null);
+	} finally {
+		await flush();
+		harness.cleanup();
+	}
+});
 
-Deno.test(
-	"checkTutorial from the popup still prompts after a manual close and can continue",
-	async () => {
-		const harness = createHarness({ tutorialProgress: 3 });
-		harness.storage[harness.constants.TUTORIAL_CLOSE_EVENT] = "user";
-		try {
-			const tutorialModule = await harness.load();
-			const checkPromise = tutorialModule.checkTutorial(true);
+test("checkTutorial from the popup still prompts after a manual close and can continue", async () => {
+	const harness = createHarness({ tutorialProgress: 3 });
+	harness.storage[harness.constants.TUTORIAL_CLOSE_EVENT] = "user";
+	try {
+		const tutorialModule = await harness.load();
+		const checkPromise = tutorialModule.checkTutorial(true);
 
-			await waitFor(() => harness.records.latestPrompt != null);
-			harness.records.latestPrompt?.saveButton.click();
-			await checkPromise;
-			await harness.waitForMessage("tutorial_click_highlighted_tab");
+		await waitFor(() => harness.records.latestPrompt != null);
+		harness.records.latestPrompt?.saveButton.click();
+		await checkPromise;
+		await harness.waitForMessage("tutorial_click_highlighted_tab");
 
-			assertEquals(
-				harness.records.latestUi?.segments.textContent?.startsWith(
-					"translated:tutorial_click_highlighted_tab",
-				) === true,
-				true,
-			);
-			assertEquals(
-				harness.records.redirects.includes(
-					"/lightning/setup/SetupOneHome/home",
-				),
-				true,
-			);
-			assertEquals(harness.storage["tutorial-progress"], 2);
-		} finally {
-			await flush();
-			harness.cleanup();
-		}
-	},
-);
+		assertEquals(
+			harness.records.latestUi?.segments.textContent?.startsWith(
+				"translated:tutorial_click_highlighted_tab",
+			) === true,
+			true,
+		);
+		assertEquals(
+			harness.records.redirects.includes(
+				"/lightning/setup/SetupOneHome/home",
+			),
+			true,
+		);
+		assertEquals(harness.storage["tutorial-progress"], 2);
+	} finally {
+		await flush();
+		harness.cleanup();
+	}
+});
 
-Deno.test(
-	"checkTutorial from the popup restarts from the beginning when the user declines to continue",
-	async () => {
-		const harness = createHarness({ tutorialProgress: 3 });
-		harness.storage[harness.constants.TUTORIAL_CLOSE_EVENT] = "user";
-		try {
-			const tutorialModule = await harness.load();
-			const checkPromise = tutorialModule.checkTutorial(true);
+test("checkTutorial from the popup restarts from the beginning when the user declines to continue", async () => {
+	const harness = createHarness({ tutorialProgress: 3 });
+	harness.storage[harness.constants.TUTORIAL_CLOSE_EVENT] = "user";
+	try {
+		const tutorialModule = await harness.load();
+		const checkPromise = tutorialModule.checkTutorial(true);
 
-			await waitFor(() => harness.records.latestPrompt != null);
-			harness.records.latestPrompt?.cancelButton.click();
-			await checkPromise;
-			await harness.waitForMessage("tutorial_restart");
+		await waitFor(() => harness.records.latestPrompt != null);
+		harness.records.latestPrompt?.cancelButton.click();
+		await checkPromise;
+		await harness.waitForMessage("tutorial_restart");
 
-			assertEquals(
-				harness.records.latestUi?.segments.textContent?.startsWith(
-					"translated:tutorial_restart",
-				) === true,
-				true,
-			);
-			assertEquals(
-				harness.records.redirects,
-				[],
-			);
-		} finally {
-			await flush();
-			harness.cleanup();
-		}
-	},
-);
+		assertEquals(
+			harness.records.latestUi?.segments.textContent?.startsWith(
+				"translated:tutorial_restart",
+			) === true,
+			true,
+		);
+		assertEquals(harness.records.redirects, []);
+	} finally {
+		await flush();
+		harness.cleanup();
+	}
+});

@@ -47,16 +47,17 @@ function buildImportIds(extensionName) {
  * @param {string} [mapping.org="org"] Org key.
  * @return {Array<Record<string, unknown>>} Mapped tabs.
  */
-function makeValidTabs(tabs = [], {
-	label = "label",
-	url = "url",
-	org = "org",
-} = {}) {
-	return tabs?.map((tab) => ({
-		label: tab[label],
-		url: tab[url],
-		org: tab[org],
-	})) ?? [];
+function makeValidTabs(
+	tabs = [],
+	{ label = "label", url = "url", org = "org" } = {},
+) {
+	return (
+		tabs?.map((tab) => ({
+			label: tab[label],
+			url: tab[url],
+			org: tab[org],
+		})) ?? []
+	);
 }
 
 /**
@@ -301,10 +302,9 @@ export function createImportPureModule({
 				".json,application/json",
 			);
 		divParent.appendChild(fileInputWrapper);
-		injectStyle(
-			ids.importCssId,
-			{ link: browserRef.runtime.getURL("/salesforce/css/import.css") },
-		);
+		injectStyle(ids.importCssId, {
+			link: browserRef.runtime.getURL("/salesforce/css/import.css"),
+		});
 		const duplicateWarningPart0 = documentRef.createElement("div");
 		duplicateWarningPart0.textContent = dupDesc0;
 		duplicateWarningPart0.classList.add(ids.importDuplicateWarningClass);
@@ -344,9 +344,8 @@ export function createImportPureModule({
 		);
 		otherOrgCheckbox.classList.add(hiddenClass);
 		divParent.appendChild(otherOrgCheckbox);
-		overwriteCheckbox.addEventListener(
-			"change",
-			() => otherOrgCheckbox.classList.toggle(hiddenClass),
+		overwriteCheckbox.addEventListener("change", () =>
+			otherOrgCheckbox.classList.toggle(hiddenClass),
 		);
 		return { saveButton, closeButton, inputContainer };
 	}
@@ -376,15 +375,21 @@ export function createImportPureModule({
 				// Each import mutates shared tabs; finish it before reading the next file.
 				const count = await previous;
 				const jsonString = await file.text();
-				const fileImportConfig = index === 0 ? importConfig : {
-					...importConfig,
-					currentOrg: null,
-					preserveOtherOrg: true,
-					resetTabs: false,
-				};
-				return count + await allTabs.importTabs(
-					normalizeImportJson(jsonString),
-					fileImportConfig,
+				const fileImportConfig =
+					index === 0
+						? importConfig
+						: {
+								...importConfig,
+								currentOrg: null,
+								preserveOtherOrg: true,
+								resetTabs: false,
+							};
+				return (
+					count +
+					(await allTabs.importTabs(
+						normalizeImportJson(jsonString),
+						fileImportConfig,
+					))
 				);
 			}, Promise.resolve(0));
 		}
@@ -404,12 +409,16 @@ export function createImportPureModule({
 	 */
 	function isNativeImportPayload(parsedFile) {
 		if (Array.isArray(parsedFile)) {
-			return filterForUnexpectedTabKeys(parsedFile).length ===
-				parsedFile.length;
+			return (
+				filterForUnexpectedTabKeys(parsedFile).length ===
+				parsedFile.length
+			);
 		}
 		const tabs = parsedFile?.[tabContainerRef.keyTabs];
-		return Array.isArray(tabs) &&
-			filterForUnexpectedTabKeys(tabs).length === tabs.length;
+		return (
+			Array.isArray(tabs) &&
+			filterForUnexpectedTabKeys(tabs).length === tabs.length
+		);
 	}
 
 	/**
@@ -426,9 +435,11 @@ export function createImportPureModule({
 		if (tabs.length === 0 || isNativeImportPayload(parsedFile)) {
 			return jsonString;
 		}
-		return serializeImportedTabs(tabContainerRef.getThrowawayInstance({
-			tabs,
-		}));
+		return serializeImportedTabs(
+			tabContainerRef.getThrowawayInstance({
+				tabs,
+			}),
+		);
 	}
 
 	/**
@@ -452,9 +463,7 @@ export function createImportPureModule({
 	 * @return {Array<Record<string, unknown>>} Filtered tabs.
 	 */
 	function filterForUnexpectedTabKeys(tabs = null) {
-		return tabs
-			?.filter((tab) => !tabRef.hasUnexpectedKeys(tab)) ??
-			[];
+		return tabs?.filter((tab) => !tabRef.hasUnexpectedKeys(tab)) ?? [];
 	}
 
 	/**
@@ -473,8 +482,8 @@ export function createImportPureModule({
 			return validTabs.length === tabs.length
 				? validTabs
 				: getTabsFromExtensions(tabs, isWhySalesforceTab, {
-					label: "tabTitle",
-				});
+						label: "tabTitle",
+					});
 		}
 		const bookmarks = jsonWithTabs.bookmarks;
 		if (bookmarks != null) {
@@ -526,19 +535,12 @@ export function createImportPureModule({
 			tabs: availableTabs,
 		});
 		importTabs.sort({ sortBy: "url" }, false);
-		const {
-			modalParent,
-			saveButton,
-			closeButton,
-			getSelectedTabs,
-		} = await generateSldsModalWithTabList(
-			importTabs,
-			{
+		const { modalParent, saveButton, closeButton, getSelectedTabs } =
+			await generateSldsModalWithTabList(importTabs, {
 				title: "import_tabs",
 				saveButtonLabel: "import",
 				explainer: "select_tabs_import",
-			},
-		);
+			});
 		getModalHanger().appendChild(modalParent);
 		saveButton.addEventListener("click", async (event) => {
 			event.preventDefault();
@@ -549,9 +551,10 @@ export function createImportPureModule({
 			closeButton.click();
 			const selectedTabContainer = tabContainerRef.getThrowawayInstance({
 				tabs: pickedTabs,
-				pinned: fileTabsIsArray || !selectedAll
-					? 0
-					: fileTabs[0][tabContainerRef.keyPinnedTabsNo],
+				pinned:
+					fileTabsIsArray || !selectedAll
+						? 0
+						: fileTabs[0][tabContainerRef.keyPinnedTabsNo],
 			});
 			await launchImport(selectedTabContainer, importConfig);
 		});
@@ -577,16 +580,21 @@ export function createImportPureModule({
 			return;
 		}
 		try {
-			const selectTabsPick =
-				inputModalParent.querySelector(`#${ids.selectTabsId}`).checked;
-			const metadataPick =
-				inputModalParent.querySelector(`#${ids.metadataId}`).checked;
-			const pinnedPick =
-				inputModalParent.querySelector(`#${ids.pinnedId}`).checked;
-			const overwritePick =
-				inputModalParent.querySelector(`#${ids.overwriteId}`).checked;
-			const otherOrgPick =
-				inputModalParent.querySelector(`#${ids.otherOrgId}`).checked;
+			const selectTabsPick = inputModalParent.querySelector(
+				`#${ids.selectTabsId}`,
+			).checked;
+			const metadataPick = inputModalParent.querySelector(
+				`#${ids.metadataId}`,
+			).checked;
+			const pinnedPick = inputModalParent.querySelector(
+				`#${ids.pinnedId}`,
+			).checked;
+			const overwritePick = inputModalParent.querySelector(
+				`#${ids.overwriteId}`,
+			).checked;
+			const otherOrgPick = inputModalParent.querySelector(
+				`#${ids.otherOrgId}`,
+			).checked;
 			const importConfig = {
 				resetTabs: overwritePick,
 				preserveOtherOrg: otherOrgPick,
@@ -594,7 +602,8 @@ export function createImportPureModule({
 				importPinnedTabs: pinnedPick,
 			};
 			if (
-				overwritePick && otherOrgPick &&
+				overwritePick &&
+				otherOrgPick &&
 				typeof tabRef.extractOrgName === "function"
 			) {
 				const currentOrg = tabRef.extractOrgName(getCurrentHref());
@@ -702,21 +711,17 @@ export function createImportPureModule({
 	function listenToFileUpload() {
 		const dropArea = documentRef.getElementById(ids.importId);
 		dropArea.addEventListener("change", readChangeOrDropFiles);
-		dropArea.addEventListener(
-			"dragenter",
-			(event) => handleDropAreaDragEnter(event, dropArea),
+		dropArea.addEventListener("dragenter", (event) =>
+			handleDropAreaDragEnter(event, dropArea),
 		);
-		dropArea.addEventListener(
-			"dragover",
-			(event) => handleDropAreaDragOver(event, dropArea),
+		dropArea.addEventListener("dragover", (event) =>
+			handleDropAreaDragOver(event, dropArea),
 		);
-		dropArea.addEventListener(
-			"dragleave",
-			(event) => handleDropAreaDragLeave(event, dropArea),
+		dropArea.addEventListener("dragleave", (event) =>
+			handleDropAreaDragLeave(event, dropArea),
 		);
-		dropArea.addEventListener(
-			"drop",
-			(event) => handleDropAreaDrop(event, dropArea),
+		dropArea.addEventListener("drop", (event) =>
+			handleDropAreaDrop(event, dropArea),
 		);
 	}
 

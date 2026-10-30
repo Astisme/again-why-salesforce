@@ -11,17 +11,13 @@ import {
 import { getSettings as getSettingsDefault } from "../../core/functions.js";
 import { TranslationService } from "../../core/translator.js";
 import Tab from "../../core/tab.js";
-import {
-	ensureAllTabsAvailability as ensureAllTabsAvailabilityDefault,
-} from "../../core/tabContainer.js";
+import { ensureAllTabsAvailability as ensureAllTabsAvailabilityDefault } from "../../core/tabContainer.js";
 
 import {
 	generateOpenOtherOrgModal as generateOpenOtherOrgModalDefault,
 	sldsConfirm as sldsConfirmDefault,
 } from "../generator.js";
-import {
-	createOpenOtherOrgModule as createOpenOtherOrgPureModule,
-} from "../module/openOtherOrg-module.js";
+import { createOpenOtherOrgModule as createOpenOtherOrgPureModule } from "../module/openOtherOrg-module.js";
 import {
 	getCurrentHref as getCurrentHrefDefault,
 	getModalHanger as getModalHangerDefault,

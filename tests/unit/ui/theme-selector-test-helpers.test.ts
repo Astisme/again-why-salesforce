@@ -59,9 +59,10 @@ export function installCustomElementsRegistry(document: Document) {
 			return constructors.get(name);
 		},
 		getName(constructor: CustomElementConstructor) {
-			for (
-				const [name, registeredConstructor] of constructors.entries()
-			) {
+			for (const [
+				name,
+				registeredConstructor,
+			] of constructors.entries()) {
 				if (registeredConstructor === constructor) {
 					return name;
 				}
@@ -72,9 +73,7 @@ export function installCustomElementsRegistry(document: Document) {
 		upgrade(_root: Node) {},
 		whenDefined(name: string) {
 			const constructor = constructors.get(name);
-			return Promise.resolve(
-				constructor ?? class extends HTMLElement {},
-			);
+			return Promise.resolve(constructor ?? class extends HTMLElement {});
 		},
 	} satisfies CustomElementRegistry;
 	const originalCreateElement = document.createElement.bind(document);

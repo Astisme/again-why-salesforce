@@ -1,4 +1,5 @@
-import { assertEquals } from "@std/testing/asserts";
+import { test } from "#test";
+import { assertEquals } from "#test";
 
 type ConstantsWorkerResult = {
 	browserMessage?: string;
@@ -63,7 +64,7 @@ async function runConstantsWorker({
 	}
 }
 
-Deno.test("constants prefer browser API for Firefox and expose manifest data", async () => {
+test("constants prefer browser API for Firefox and expose manifest data", async () => {
 	const result = await runConstantsWorker({
 		userAgent: "Mozilla/5.0 Firefox/140.0",
 	});
@@ -75,9 +76,7 @@ Deno.test("constants prefer browser API for Firefox and expose manifest data", a
 	assertEquals(result.extensionLabel, "browser:extension_label");
 	assertEquals(result.extensionVersion, "1.2.3");
 	assertEquals(result.extensionGithubLink, "https://github.com/acme/repo");
-	assertEquals(result.extensionOptionalHostPerm, [
-		"https://*.example.com/*",
-	]);
+	assertEquals(result.extensionOptionalHostPerm, ["https://*.example.com/*"]);
 	assertEquals(result.contextMenuPatterns, [
 		"https://*.my.salesforce-setup.com/lightning/setup/*",
 		"https://*.lightning.force.com/lightning/setup/*",
@@ -88,7 +87,7 @@ Deno.test("constants prefer browser API for Firefox and expose manifest data", a
 	]);
 });
 
-Deno.test("constants detect Edge and still use the chrome API", async () => {
+test("constants detect Edge and still use the chrome API", async () => {
 	const result = await runConstantsWorker({
 		userAgent: "Mozilla/5.0 Edg/120.0",
 	});
@@ -101,7 +100,7 @@ Deno.test("constants detect Edge and still use the chrome API", async () => {
 	assertEquals(result.browserMessage, "chrome:extension_label");
 });
 
-Deno.test("constants detect Chrome", async () => {
+test("constants detect Chrome", async () => {
 	const result = await runConstantsWorker({
 		userAgent: "Mozilla/5.0 Chrome/120.0 Safari/537.36",
 	});
@@ -112,7 +111,7 @@ Deno.test("constants detect Chrome", async () => {
 	assertEquals(result.isEdge, false);
 });
 
-Deno.test("constants detect Safari", async () => {
+test("constants detect Safari", async () => {
 	const result = await runConstantsWorker({
 		userAgent: "Mozilla/5.0 Version/17.0 Safari/605.1.15",
 	});
@@ -123,7 +122,7 @@ Deno.test("constants detect Safari", async () => {
 	assertEquals(result.isChrome, false);
 });
 
-Deno.test("constants fall back to browser API when user-agent browser cannot be detected", async () => {
+test("constants fall back to browser API when user-agent browser cannot be detected", async () => {
 	const result = await runConstantsWorker({
 		userAgent: "CustomAgent/1.0",
 	});
@@ -133,7 +132,7 @@ Deno.test("constants fall back to browser API when user-agent browser cannot be 
 	assertEquals(result.extensionLabel, "browser:extension_label");
 });
 
-Deno.test("constants reject non-GitHub homepages", async () => {
+test("constants reject non-GitHub homepages", async () => {
 	const result = await runConstantsWorker({
 		homepageUrl: "https://example.com/not-github",
 		userAgent: "Mozilla/5.0 Firefox/140.0",
@@ -142,7 +141,7 @@ Deno.test("constants reject non-GitHub homepages", async () => {
 	assertEquals(result.errorMessage, "no_manifest_github");
 });
 
-Deno.test("constants expose escaped Salesforce host patterns and reject lookalike lightning domains", async () => {
+test("constants expose escaped Salesforce host patterns and reject lookalike lightning domains", async () => {
 	const result = await runConstantsWorker({
 		userAgent: "Mozilla/5.0 Firefox/140.0",
 	});
@@ -165,9 +164,7 @@ Deno.test("constants expose escaped Salesforce host patterns and reject lookalik
 		false,
 	);
 	assertEquals(
-		pattern?.test(
-			"https://acme.lightning-force.com/lightning/page/home",
-		),
+		pattern?.test("https://acme.lightning-force.com/lightning/page/home"),
 		false,
 	);
 });

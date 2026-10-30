@@ -1,4 +1,4 @@
-// deno-lint-ignore-file no-explicit-any
+import fs from "node:fs/promises";
 const LOCALES_DIR = "src/_locales";
 const OUTPUT_FILE = "missing-keys-report.json";
 
@@ -71,7 +71,7 @@ async function removeKeysFromLocaleFile(
 	}
 	// Write the updated file
 	try {
-		await Deno.writeTextFile(
+		await fs.writeFile(
 			filePath,
 			JSON.stringify(updatedLocaleFile, null, "\t"),
 		);
@@ -93,9 +93,11 @@ function createKeySignature(keys: string[]): string {
  */
 async function getLocaleDirectories() {
 	const entries = [];
-	for await (const entry of Deno.readDir(LOCALES_DIR)) {
+	for (const entry of await fs.readdir(LOCALES_DIR, {
+		withFileTypes: true,
+	})) {
 		if (
-			entry.isDirectory &&
+			entry.isDirectory() &&
 			!entry.name.startsWith("en") &&
 			entry.name !== "es_419"
 		) {
@@ -111,16 +113,17 @@ async function getLocaleDirectories() {
 async function processLocaleFile(
 	localeFilePath: string,
 	englishFile: any,
-): Promise<
-	{ status: "success" | "missing" | "error"; missingKeys?: string[] }
-> {
+): Promise<{
+	status: "success" | "missing" | "error";
+	missingKeys?: string[];
+}> {
 	try {
-		await Deno.stat(localeFilePath);
+		await fs.stat(localeFilePath);
 	} catch {
 		return { status: "missing" };
 	}
 	try {
-		const localeContent = await Deno.readTextFile(localeFilePath);
+		const localeContent = await fs.readFile(localeFilePath, "utf8");
 		const localeFile = JSON.parse(localeContent);
 		const { missingKeys, removedKeys } = compareLocaleKeys(
 			englishFile,
@@ -213,13 +216,13 @@ async function checkLocaleFiles(): Promise<GroupedMissingKeys> {
 	// Read the English reference file
 	const englishFilePath = `${LOCALES_DIR}/en/messages.json`;
 	try {
-		await Deno.stat(englishFilePath);
+		await fs.stat(englishFilePath);
 	} catch {
 		throw new Error(
 			"English reference file not found at: " + englishFilePath,
 		);
 	}
-	const englishContent = await Deno.readTextFile(englishFilePath);
+	const englishContent = await fs.readFile(englishFilePath, "utf8");
 	const englishFile = JSON.parse(englishContent);
 	// Get filtered locale directories
 	const localeDirs = await getLocaleDirectories();
@@ -260,14 +263,16 @@ async function checkLocaleFiles(): Promise<GroupedMissingKeys> {
 }
 
 /**
- * Main execution
+ * Generates report of untranslated keys.
+ *
+ * @return {Promise<number>} Process exit code.
  */
-async function main() {
+async function main(): Promise<number> {
 	try {
-		await Deno.stat(LOCALES_DIR);
+		await fs.stat(LOCALES_DIR);
 	} catch {
 		console.error(`${LOCALES_DIR} directory not found!`);
-		Deno.exit(1);
+		return 1;
 	}
 	try {
 		const groupedReport = await checkLocaleFiles(); // Calculate total missing keys and locales with missing translations
@@ -282,27 +287,28 @@ async function main() {
 		}
 		// If no missing keys were found, close with success
 		if (!someMissingKeys) {
-			Deno.exit(0);
+			return 0;
 		}
 		// Write the grouped report to a JSON file
-		await Deno.writeTextFile(
+		await fs.writeFile(
 			OUTPUT_FILE,
 			JSON.stringify(groupedReport, null, "\t"),
 		);
 	} catch (error) {
 		console.error("Error generating report:", error);
 	}
-	Deno.exit(1);
+	return 1;
 }
 
-async function removeThenMain(): Promise<void> {
+async function removeThenMain(): Promise<number> {
 	try {
-		await Deno.remove(OUTPUT_FILE);
+		await fs.rm(OUTPUT_FILE);
 	} catch (_e) {
 		// nothing
-	} finally {
-		await main();
 	}
+	return await main();
 }
 
-await removeThenMain();
+if (import.meta.main) {
+	process.exitCode = await removeThenMain();
+}

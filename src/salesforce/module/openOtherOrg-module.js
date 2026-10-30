@@ -8,8 +8,10 @@
  * @return {boolean} True when candidate matches pattern.
  */
 function matchesSalesforceUrlPattern(pattern, value) {
-	return new RegExp(pattern.source, pattern.flags.replaceAll(/[gy]/g, ""))
-		.test(value);
+	return new RegExp(
+		pattern.source,
+		pattern.flags.replaceAll(/[gy]/g, ""),
+	).test(value);
 }
 
 /**
@@ -90,9 +92,8 @@ export function createOpenOtherOrgModule({
 	consoleRef = console,
 	sldsConfirm = ({ body } = {}) =>
 		globalThis.confirm?.(
-			Array.isArray(body) ? body.join("\n") : body ?? "",
-		) ??
-			false,
+			Array.isArray(body) ? body.join("\n") : (body ?? ""),
+		) ?? false,
 	open = globalThis.open,
 	urlCtor = URL,
 } = {}) {
@@ -105,9 +106,11 @@ export function createOpenOtherOrgModule({
 	 * @param {string|null} [options.org=null] Current org name.
 	 * @return {Promise<void>} Promise resolved once setup is complete.
 	 */
-	async function createOpenOtherOrgModal(
-		{ label = null, url = null, org = null } = {},
-	) {
+	async function createOpenOtherOrgModal({
+		label = null,
+		url = null,
+		org = null,
+	} = {}) {
 		if (
 			typeof getSettings !== "function" ||
 			typeof getTranslations !== "function" ||
@@ -145,7 +148,8 @@ export function createOpenOtherOrgModule({
 			org = tabRef.extractOrgName(href);
 		}
 		if (
-			skipLinkDetection != null && !skipLinkDetection.enabled &&
+			skipLinkDetection != null &&
+			!skipLinkDetection.enabled &&
 			tabRef.containsSalesforceId(url)
 		) {
 			await showToast?.("error_link_with_id", toastWarning);
@@ -194,16 +198,13 @@ export function createOpenOtherOrgModule({
 			}
 			lastExtracted = newTarget;
 			if (!matchesSalesforceUrlPattern(salesforceUrlPattern, newTarget)) {
-				return showToast?.(
-					["insert_valid_org", newTarget],
-					toastError,
-				);
+				return showToast?.(["insert_valid_org", newTarget], toastError);
 			}
 			if (
 				newTarget ===
-					tabRef.extractOrgName(
-						getCurrentHref?.() ?? resolvedLocationRef?.href ?? "",
-					)
+				tabRef.extractOrgName(
+					getCurrentHref?.() ?? resolvedLocationRef?.href ?? "",
+				)
 			) {
 				return showToast?.("insert_another_org", toastError);
 			}

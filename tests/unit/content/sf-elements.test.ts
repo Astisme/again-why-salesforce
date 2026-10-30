@@ -1,13 +1,13 @@
-import { assertEquals } from "@std/testing/asserts";
+import { test } from "#test";
+import { assertEquals } from "#test";
 import { installMockDom } from "../../happydom.test.ts";
-import {
-	createSfElementsModule,
-} from "../../../src/salesforce/module/sf-elements-module.js";
+import { createSfElementsModule } from "../../../src/salesforce/module/sf-elements-module.js";
 import "../../mocks.test.ts";
 
-type WheelListener = (
-	event: { deltaY: number; preventDefault: () => void },
-) => void;
+type WheelListener = (event: {
+	deltaY: number;
+	preventDefault: () => void;
+}) => void;
 
 /**
  * Minimal classList for sf-elements tests.
@@ -155,12 +155,13 @@ type SfElementsRuntimeModule = {
  * @param {SfElement | null} [options.parent=null] Parent of the setup list.
  * @return {{ module: SfElementsModule; created: SfElement[]; parent: SfElement | null; setModal: (element: SfElement | null) => void; setParent: (element: SfElement | null) => void; }} Loaded fixture.
  */
-function loadSfElementsFixture(
-	{ modalHanger = null, parent = null }: {
-		modalHanger?: SfElement | null;
-		parent?: SfElement | null;
-	} = {},
-) {
+function loadSfElementsFixture({
+	modalHanger = null,
+	parent = null,
+}: {
+	modalHanger?: SfElement | null;
+	parent?: SfElement | null;
+} = {}) {
 	let currentModal = modalHanger;
 	let currentParent = parent;
 	const created: SfElement[] = [];
@@ -209,7 +210,7 @@ function loadSfElementsFixture(
 	};
 }
 
-Deno.test("sf-elements can set/read setup ul and returns false when setup page structure is missing", async () => {
+test("sf-elements can set/read setup ul and returns false when setup page structure is missing", async () => {
 	const fixture = await loadSfElementsFixture();
 	const standalone = new SfElement();
 
@@ -224,7 +225,7 @@ Deno.test("sf-elements can set/read setup ul and returns false when setup page s
 	assertEquals(fixture.module.findSetupTabUlInSalesforcePage(), false);
 });
 
-Deno.test("sf-elements finds existing setup ul, applies listeners, and reuses cached modal hanger", async () => {
+test("sf-elements finds existing setup ul, applies listeners, and reuses cached modal hanger", async () => {
 	const parent = new SfElement();
 	const existing = new SfElement();
 	existing.id = "again-why-salesforce";
@@ -249,7 +250,7 @@ Deno.test("sf-elements finds existing setup ul, applies listeners, and reuses ca
 	assertEquals(fixture.module.getModalHanger(), modalA);
 });
 
-Deno.test("sf-elements creates a setup ul when missing and applies setup classes", async () => {
+test("sf-elements creates a setup ul when missing and applies setup classes", async () => {
 	const parent = new SfElement();
 	const fixture = await loadSfElementsFixture({ parent });
 
@@ -305,7 +306,7 @@ function installGetElementsByClassNamePolyfill() {
 	};
 }
 
-Deno.test("sf-elements canonical import covers setup discovery, wheel behavior, and modal caching", async () => {
+test("sf-elements canonical import covers setup discovery, wheel behavior, and modal caching", async () => {
 	const dom = installMockDom(
 		"https://acme.lightning.force.com/lightning/setup/Users/home",
 	);
@@ -315,17 +316,13 @@ Deno.test("sf-elements canonical import covers setup discovery, wheel behavior, 
 	try {
 		document.createElement = ((tagName: string) => {
 			const element = originalCreateElement(tagName);
-			if (
-				"style" in element &&
-				element.style.overflowX == null
-			) {
+			if ("style" in element && element.style.overflowX == null) {
 				element.style.overflowX = "";
 			}
 			return element;
 		}) as Document["createElement"];
-		const sfElements = await import(
-			"../../../src/salesforce/sf-elements.js"
-		) as SfElementsRuntimeModule;
+		const sfElements =
+			(await import("../../../src/salesforce/sf-elements.js")) as SfElementsRuntimeModule;
 		const {
 			findSetupTabUlInSalesforcePage,
 			getCurrentHref,
