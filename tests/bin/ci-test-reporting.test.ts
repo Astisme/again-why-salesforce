@@ -53,3 +53,18 @@ test("locale reporting ignores Bun command banners but keeps diagnostics", async
 		);
 	}
 });
+
+test("PR failure comments cap output and warn when more failures are omitted", async () => {
+	const reporter = await readFile(
+		new URL("../../.github/scripts/comment-on-pr.cjs", import.meta.url),
+		"utf8",
+	);
+	assertEquals(reporter.includes("const MAX_OUTPUT_LENGTH = 65_000;"), true);
+	assertEquals(reporter.includes("clean = clean.slice(0, MAX_OUTPUT_LENGTH);"), true);
+	assertEquals(
+		reporter.includes(
+			"There are more test failures than shown below. Output truncated at 65,000 characters.",
+		),
+		true,
+	);
+});
