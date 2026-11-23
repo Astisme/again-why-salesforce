@@ -2,6 +2,7 @@ const process = require("node:process");
 const fs = require("fs");
 
 const COMMENT_MARKER = "<!-- pr-tests-comment -->";
+const MAX_OUTPUT_LENGTH = 65_000;
 
 function slugify(value) {
 	return String(value)
@@ -98,6 +99,15 @@ module.exports = async function commentOnPr({
 		return;
 	}
 
+	const isTruncated = clean.length > MAX_OUTPUT_LENGTH;
+	if (isTruncated) {
+		clean = clean.slice(0, MAX_OUTPUT_LENGTH);
+	}
+
+	const truncationNotice = isTruncated
+		? "⚠️ There are more test failures than shown below. Output truncated at 65,000 characters.\n\n"
+		: "";
+
 	// post the comment
 	await github.rest.issues.createComment({
 		owner: context.repo.owner,
@@ -106,7 +116,7 @@ module.exports = async function commentOnPr({
 		body: `${COMMENT_MARKER}
 <!-- pr-tests-title:${slugify(title)} -->
 ## ${title}:
-\`\`\`
+${truncationNotice}\`\`\`
 ${clean}
 \`\`\``,
 	});
