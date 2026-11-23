@@ -126,7 +126,9 @@ export function createSfElementsModule({
 		if (newSetupTabUl == null) {
 			newSetupTabUl = documentRef.createElement("ul");
 			newSetupTabUl.id = extensionName;
-			newSetupTabUl.classList.add("tabBarItems", "slds-grid");
+			// Do not reuse Salesforce's tabBarItems class: Lightning can treat this
+			// extension-owned list as part of its native Setup tab bar.
+			newSetupTabUl.classList.add("slds-grid");
 			parentOfSetupTabUl.appendChild(newSetupTabUl);
 		}
 		setSetupTabUl(newSetupTabUl);
