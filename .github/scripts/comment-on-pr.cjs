@@ -118,7 +118,7 @@ module.exports = async function commentOnPr({
 ## ${title}:
 ${truncationNotice}\`\`\`
 ${clean}
-\`\`\`,
+\`\`\``,
 	});
 
 	// fail the job
